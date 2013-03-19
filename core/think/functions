@@ -1,0 +1,9 @@
+GRAPHICS
+	grid_gestion (create, )
+
+
+MAIN_ENGINE
+	grid is a static graph
+
+INIT
+	calc grid epsilon-closure forall unit_type

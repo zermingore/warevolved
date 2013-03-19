@@ -1,0 +1,15 @@
+|-- AUTHORS
+|-- Makefile
+|-- core
+|   |-- main.c
+|-- headers
+|   |-- headers.h
+|-- libs
+|   |-- libfiles.c
+|-- graphics
+|   |-- engine.c
+|   |-- resources
+|   |   |-- sprites
+|   |   |-- models
+|   |   |-- textures
+|-- editor
