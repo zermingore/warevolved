@@ -1,0 +1,19 @@
+#		-*- mode:sh -*-			#
+
+*.o
+*.in
+
+# Autotools output
+.dirstamp
+Makefile
+aclocal.m4
+autom4te.cache/
+build-aux/
+config.log
+config.status
+src/.deps/
+
+src/tst.png
+
+# binary
+we

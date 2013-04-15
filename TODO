@@ -1,0 +1,8 @@
+-*- mode:org -*-
+
+* keys
+  make the cursor move
+
+* Graphics
+** make the cursor pulse (each 1/10e sec, rescale, .5 sec, then decrease)
+** implement scrolling

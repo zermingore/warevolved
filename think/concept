@@ -9,6 +9,7 @@
 * GRAPHICS
 ** realist / dark
 ** 2D / 3D / Mixx ? (2D maps with 3D units? xD)
+** use of Strategy Design Pattern (3D, 2D, Ascii-Art) with templates (compile-time)
 
 
 * GAMEPLAY
