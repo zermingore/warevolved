@@ -13,14 +13,5 @@ int main(int ac, char **av)
   Game* game = new Game(context->init());
   game->run();
 
-  // load a sprite to display
-  // sf::Texture texture;
-  // if (!texture.loadFromFile("tst.png"))
-  // 	return EXIT_FAILURE;
-
-  // sf::Sprite sprite(texture);
-  //  sf::Text text; text.setString("Hello SFML");
-  //	_window.draw(text);
-
   return EXIT_SUCCESS;
 }

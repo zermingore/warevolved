@@ -18,6 +18,12 @@ public:
 
   void setFilename(std::string);
 
+  // Cursor Motion
+  void moveUp();
+  void moveDown();
+  void moveLeft();
+  void moveRight();
+
 
 private:
   unsigned int _x;

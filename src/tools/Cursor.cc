@@ -37,7 +37,29 @@ void Cursor::setX(unsigned int x)
   _x = x;
 }
 
-void  Cursor::setY(unsigned int y)
+void Cursor::setY(unsigned int y)
 {
   _y = y;
+}
+
+
+// Cursor Motion
+void Cursor::moveUp()
+{
+  _y = std::max(_y + 1, g_gridSizeX);
+}
+
+void Cursor::moveDown()
+{
+  _y = std::min(_y - 1, (unsigned int) 0);
+}
+
+void Cursor::moveLeft()
+{
+  _x = std::min(_x - 1, (unsigned int) 0);
+}
+
+void Cursor::moveRight()
+{
+  _x = std::max(_x + 1, g_gridSizeY);
 }

@@ -2,6 +2,7 @@
 # define GAME_HH_
 
 # include <common/include.hh>
+# include <input/Event.hh>
 
 class Game
 {
@@ -11,13 +12,14 @@ public:
   Game(sf::RenderWindow* window);
   ~Game();
 
-  void drawLine(sf::Vector2f a, sf::Vector2f b);
+  //void drawLine(sf::Vector2f a, sf::Vector2f b);
   int run();
-  void manageEvents();
 
 
 private:
   sf::RenderWindow* _window;
+  Event* _event;
+  Cursor* _cursor;
 };
 
 #endif /* !GAME_HH_ */

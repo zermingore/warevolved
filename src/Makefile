@@ -70,9 +70,11 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-GraphicEngine.$(OBJEXT) \
 	__top_srcdir__we-System.$(OBJEXT) \
 	__top_srcdir__we-Settings.$(OBJEXT) \
-	__top_srcdir__we-Cursor.$(OBJEXT)
+	__top_srcdir__we-Cursor.$(OBJEXT) \
+	__top_srcdir__we-KeyManager.$(OBJEXT) \
+	__top_srcdir__we-Event.$(OBJEXT)
 __top_srcdir__we_OBJECTS = $(am___top_srcdir__we_OBJECTS)
-__top_srcdir__we_DEPENDENCIES =
+__top_srcdir__we_LDADD = $(LDADD)
 am__dirstamp = $(am__leading_dot)dirstamp
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
@@ -201,6 +203,12 @@ top_builddir = ..
 top_srcdir = ..
 
 # Use right g++ flags.
+__top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
+-Wfloat-equal -Wcast-qual -Wcast-align -Wunreachable-code -Wundef		\
+-Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses 		\
+-O0 -DDEBUG -g \
+-Wformat -Wwrite-strings # check printf args && const strings
+
 
 # release:
 #  -s -02
@@ -208,13 +216,9 @@ top_srcdir = ..
 # -Wshadow
 
 # -Wwrite-strings (check const strings)
-__top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic -Wfloat-equal \
-	-Wcast-qual -Wcast-align -Wunreachable-code -Wundef \
-	-Wpointer-arith -Wmissing-declarations -Wmissing-braces \
-	-Wparentheses -O0 -DDEBUG -g -Wformat -Wwrite-strings \
-	${libglfw_CFLAGS} ${GLEW_CFLAGS} ${OPENAL_CFLAGS} \
-	${IMAGE_MAGICK_CFLAGS}
-__top_srcdir__we_LDADD = ${libglfw_LIBS} ${GLEW_LIBS} ${OPENAL_LIBS} ${LIBPQXX_LIBS} ${IMAGE_MAGICK_LIBS}
+
+#__top_srcdir__we_CPPFLAGS += ${libglfw_CFLAGS} ${GLEW_CFLAGS} ${OPENAL_CFLAGS} ${IMAGE_MAGICK_CFLAGS}
+#__top_srcdir__we_LDADD = ${libglfw_LIBS} ${GLEW_LIBS} ${OPENAL_LIBS} ${LIBPQXX_LIBS} ${IMAGE_MAGICK_LIBS}
 __top_srcdir__we_SOURCES = \
 main.cc					\
 \
@@ -225,7 +229,10 @@ core/GraphicEngine.cc	\
 common/System.cc		\
 common/Settings.cc		\
 \
-tools/Cursor.cc			#\
+tools/Cursor.cc			\
+\
+input/KeyManager.cc		\
+input/Event.cc			#\
 \
 graphics/Texture.cc		\
 graphics/TextureManager.cc	\
@@ -345,8 +352,10 @@ distclean-compile:
 
 include ./$(DEPDIR)/__top_srcdir__we-Context.Po
 include ./$(DEPDIR)/__top_srcdir__we-Cursor.Po
+include ./$(DEPDIR)/__top_srcdir__we-Event.Po
 include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
+include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
 include ./$(DEPDIR)/__top_srcdir__we-System.Po
 include ./$(DEPDIR)/__top_srcdir__we-main.Po
@@ -462,6 +471,34 @@ __top_srcdir__we-Cursor.obj: tools/Cursor.cc
 #	$(AM_V_CXX)source='tools/Cursor.cc' object='__top_srcdir__we-Cursor.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cursor.obj `if test -f 'tools/Cursor.cc'; then $(CYGPATH_W) 'tools/Cursor.cc'; else $(CYGPATH_W) '$(srcdir)/tools/Cursor.cc'; fi`
+
+__top_srcdir__we-KeyManager.o: input/KeyManager.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-KeyManager.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo -c -o __top_srcdir__we-KeyManager.o `test -f 'input/KeyManager.cc' || echo '$(srcdir)/'`input/KeyManager.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo $(DEPDIR)/__top_srcdir__we-KeyManager.Po
+#	$(AM_V_CXX)source='input/KeyManager.cc' object='__top_srcdir__we-KeyManager.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-KeyManager.o `test -f 'input/KeyManager.cc' || echo '$(srcdir)/'`input/KeyManager.cc
+
+__top_srcdir__we-KeyManager.obj: input/KeyManager.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-KeyManager.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo -c -o __top_srcdir__we-KeyManager.obj `if test -f 'input/KeyManager.cc'; then $(CYGPATH_W) 'input/KeyManager.cc'; else $(CYGPATH_W) '$(srcdir)/input/KeyManager.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo $(DEPDIR)/__top_srcdir__we-KeyManager.Po
+#	$(AM_V_CXX)source='input/KeyManager.cc' object='__top_srcdir__we-KeyManager.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-KeyManager.obj `if test -f 'input/KeyManager.cc'; then $(CYGPATH_W) 'input/KeyManager.cc'; else $(CYGPATH_W) '$(srcdir)/input/KeyManager.cc'; fi`
+
+__top_srcdir__we-Event.o: input/Event.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Event.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Event.Tpo -c -o __top_srcdir__we-Event.o `test -f 'input/Event.cc' || echo '$(srcdir)/'`input/Event.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Event.Tpo $(DEPDIR)/__top_srcdir__we-Event.Po
+#	$(AM_V_CXX)source='input/Event.cc' object='__top_srcdir__we-Event.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Event.o `test -f 'input/Event.cc' || echo '$(srcdir)/'`input/Event.cc
+
+__top_srcdir__we-Event.obj: input/Event.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Event.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Event.Tpo -c -o __top_srcdir__we-Event.obj `if test -f 'input/Event.cc'; then $(CYGPATH_W) 'input/Event.cc'; else $(CYGPATH_W) '$(srcdir)/input/Event.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Event.Tpo $(DEPDIR)/__top_srcdir__we-Event.Po
+#	$(AM_V_CXX)source='input/Event.cc' object='__top_srcdir__we-Event.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Event.obj `if test -f 'input/Event.cc'; then $(CYGPATH_W) 'input/Event.cc'; else $(CYGPATH_W) '$(srcdir)/input/Event.cc'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

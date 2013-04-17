@@ -1,6 +1,10 @@
 #include <core/Game.hh>
 #include <core/GraphicEngine.hh>
 #include <tools/Cursor.hh>
+#include <input/Event.hh>
+
+unsigned int g_gridSizeX;
+unsigned int g_gridSizeY;
 
 
 Game::Game()
@@ -18,20 +22,18 @@ Game::~Game()
 }
 
 
-void Game::drawLine(sf::Vector2f a, sf::Vector2f b)
-{
-  sf::Vertex line[2] = {a, b};
-  _window->draw(line, 2, sf::Lines);
-}
-
 int Game::run()
 {
-  GraphicEngine* graphics = new GraphicEngine(_window, new Cursor());
+  _cursor = new Cursor();
+  GraphicEngine* graphics = new GraphicEngine(_window, _cursor);
+
+  KeyManager* k = new KeyManager();
+  _event = new Event(_window, k, _cursor);
 
   // Start the game loop
   while (_window->isOpen())
   {
-	this->manageEvents();
+	_event->process(); // should be the first task of the game loop
 
 	graphics->drawGrid(5, 5);
 
@@ -40,23 +42,4 @@ int Game::run()
   }
 
   return 0;
-}
-
-
-void Game::manageEvents()
-{
-  sf::Event event;
-
-  while (_window->pollEvent(event))
-  {
-	// Close window : exit
-	if (event.type == sf::Event::Closed)
-	{
-	  _window->close();
-	}
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-  {
-	_window->close();
-  }
 }

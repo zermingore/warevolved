@@ -20,8 +20,8 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 # -Wwrite-strings (check const strings)
 
 
-__top_srcdir__we_CPPFLAGS += ${libglfw_CFLAGS} ${GLEW_CFLAGS} ${OPENAL_CFLAGS} ${IMAGE_MAGICK_CFLAGS}
-__top_srcdir__we_LDADD = ${libglfw_LIBS} ${GLEW_LIBS} ${OPENAL_LIBS} ${LIBPQXX_LIBS} ${IMAGE_MAGICK_LIBS}
+#__top_srcdir__we_CPPFLAGS += ${libglfw_CFLAGS} ${GLEW_CFLAGS} ${OPENAL_CFLAGS} ${IMAGE_MAGICK_CFLAGS}
+#__top_srcdir__we_LDADD = ${libglfw_LIBS} ${GLEW_LIBS} ${OPENAL_LIBS} ${LIBPQXX_LIBS} ${IMAGE_MAGICK_LIBS}
 
 __top_srcdir__we_SOURCES =	\
 main.cc					\
@@ -33,7 +33,10 @@ core/GraphicEngine.cc	\
 common/System.cc		\
 common/Settings.cc		\
 \
-tools/Cursor.cc			#\
+tools/Cursor.cc			\
+\
+input/KeyManager.cc		\
+input/Event.cc			#\
 \
 graphics/Texture.cc		\
 graphics/TextureManager.cc	\
