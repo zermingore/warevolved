@@ -1,8 +1,23 @@
 -*- mode:org -*-
 
-* keys
-  make the cursor move
+* TODO keys
+** DONE make the cursor move
+   CLOSED: [2013-04-17 Wed 16:41]
+** TODO use the mouse to make it move
 
-* Graphics
-** make the cursor pulse (each 1/10e sec, rescale, .5 sec, then decrease)
-** implement scrolling
+
+* TODO Graphics
+** TODO make the cursor pulse (each 1/10e sec, rescale, .5 sec, then decrease)
+** TODO implement scrolling
+** TODO Apply a background to the main window
+
+* TODO Various
+** TODO Informations Window (cell type, ...)
+
+
+* TODO network
+** TODO Chat
+
+* TODO Graphic Engine Libraries
+** TODO switch 'on demand' (at compilation time)
+   use SFML if available, else SDL, OpenGL, ASCII, ...

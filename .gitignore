@@ -15,5 +15,8 @@ src/.deps/
 
 src/tst.png
 
+# Emacs TAGS
+TAGS
+
 # binary
 we
