@@ -7,11 +7,11 @@ extern unsigned int g_cell_size; // in px
 // cell delimiter thickness
 extern unsigned int g_grid_thickness; // in px
 
-
 // game board size
 extern unsigned int g_gridSizeX;
 extern unsigned int g_gridSizeY;
 
+// required time to consider a "second pressure"
 extern int g_key_repeat_delay; // in milliseconds, must be > 0 to avoid locking keyboard; timers are signed int though
 
 
