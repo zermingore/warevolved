@@ -2,7 +2,9 @@
 #include <common/globals.hh>
 
 
-Cursor::Cursor()
+Cursor::Cursor() :
+  _x (0),
+  _y (0)
 {
   if (!_texture.loadFromFile("cursor.png"))
   {
@@ -26,7 +28,8 @@ Cursor::~Cursor()
 
 sf::Sprite Cursor::getSprite()
 {
-  _sprite->setPosition(g_cell_size / 2, g_cell_size / 2);
+  // we're also adding offset (a semi cell)
+  _sprite->setPosition((_x + 0.5) * g_cell_size, (_y + 0.5) * g_cell_size);
 
   return *_sprite;
 }
@@ -46,20 +49,20 @@ void Cursor::setY(unsigned int y)
 // Cursor Motion
 void Cursor::moveUp()
 {
-  _y = std::max(_y + 1, g_gridSizeX);
+  _y = std::min(_y - 1, _y);
 }
 
 void Cursor::moveDown()
 {
-  _y = std::min(_y - 1, (unsigned int) 0);
+  _y = std::min(_y + 1, g_gridSizeY - 1);
 }
 
 void Cursor::moveLeft()
 {
-  _x = std::min(_x - 1, (unsigned int) 0);
+  _x = std::min(_x, _x - 1); // we're in unsigned so MIN
 }
 
 void Cursor::moveRight()
 {
-  _x = std::max(_x + 1, g_gridSizeY);
+  _x = std::min(_x + 1, g_gridSizeX - 1);
 }

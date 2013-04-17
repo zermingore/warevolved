@@ -31,12 +31,8 @@ Context::~Context()
 sf::RenderWindow* Context::init()
 {
 #ifdef DEBUG
-  std::cout << _settings->getDepth() << " "
-			<< _settings->getStencil() << " "
-			<< _settings->getAntialiasing() << " "
-			<< _system->getSfmlMajor() << " "
-			<< _system->getSfmlMinor()
-			<< std::endl;
+  if (_system->getSfmlMajor() < 2)
+	std::cerr << "SFML version not officially supported" << std::endl;
 #endif
 
   sf::ContextSettings contextSettings(_settings->getDepth(),

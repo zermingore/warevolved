@@ -8,6 +8,7 @@
 class Event
 {
 public:
+  Event();
   Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor);
   ~Event();
 

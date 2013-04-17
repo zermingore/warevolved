@@ -4,6 +4,9 @@
 
 int g_key_repeat_delay;
 
+Event::Event()
+{
+}
 
 Event::Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor)
 {
@@ -15,7 +18,7 @@ Event::Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor)
   for (int i = 0; i < nb_timer; ++i)
   	_km->restartTimer((e_timer) i);
 
-  g_key_repeat_delay = 500;
+  g_key_repeat_delay = 150;
 }
 
 Event::~Event()
@@ -52,25 +55,28 @@ void Event::game()
   // ---------- Cursor Motion ---------- //
   if (_km->up() && _km->getTimer(move_up) > g_key_repeat_delay)
   {
-	std::cout << "tick" << std::endl;
 	_km->restartTimer(move_up);
 	_cursor->moveUp();
   }
 
   if (_km->down() && _km->getTimer(move_down) > g_key_repeat_delay)
+  {
+	_km->restartTimer(move_down);
 	_cursor->moveDown();
-
+  }
 
   if (_km->left() && _km->getTimer(move_left) > g_key_repeat_delay)
+  {
+	_km->restartTimer(move_left);
 	_cursor->moveLeft();
+  }
 
   if (_km->right() && _km->getTimer(move_right) > g_key_repeat_delay)
+  {
+	_km->restartTimer(move_right);
 	_cursor->moveRight();
+  }
   // ----------------------------------- //
-
-
-  if ((_km->up()) || (_km->down()) || (_km->left()) || (_km->right()))
-	std::cout << _km->getTimer(move_up) << std::endl;
 }
 
 

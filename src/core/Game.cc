@@ -36,6 +36,8 @@ int Game::run()
 	_event->process(); // should be the first task of the game loop
 
 	graphics->drawGrid(5, 5);
+	g_gridSizeX = 5;
+	g_gridSizeY = 5;
 
 	// Update the window
 	_window->display();
