@@ -21,3 +21,6 @@
 * TODO Graphic Engine Libraries
 ** TODO switch 'on demand' (at compilation time)
    use SFML if available, else SDL, OpenGL, ASCII, ...
+
+* TODO menu
+** TODO Stack implementation

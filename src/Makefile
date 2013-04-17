@@ -15,9 +15,6 @@
 
 
 
-# TODO multi-folders ?
-# SUBDIRS = core common media tools entities/character/ entities/bodyparts/ items items/clothes db input globals tools
-
 
 am__make_dryrun = \
   { \
@@ -70,6 +67,7 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-GraphicEngine.$(OBJEXT) \
 	__top_srcdir__we-System.$(OBJEXT) \
 	__top_srcdir__we-Settings.$(OBJEXT) \
+	__top_srcdir__we-Status.$(OBJEXT) \
 	__top_srcdir__we-Cursor.$(OBJEXT) \
 	__top_srcdir__we-KeyManager.$(OBJEXT) \
 	__top_srcdir__we-Event.$(OBJEXT)
@@ -228,6 +226,7 @@ core/GraphicEngine.cc	\
 \
 common/System.cc		\
 common/Settings.cc		\
+common/Status.cc			\
 \
 tools/Cursor.cc			\
 \
@@ -357,6 +356,7 @@ include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
 include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
+include ./$(DEPDIR)/__top_srcdir__we-Status.Po
 include ./$(DEPDIR)/__top_srcdir__we-System.Po
 include ./$(DEPDIR)/__top_srcdir__we-main.Po
 
@@ -457,6 +457,20 @@ __top_srcdir__we-Settings.obj: common/Settings.cc
 #	$(AM_V_CXX)source='common/Settings.cc' object='__top_srcdir__we-Settings.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Settings.obj `if test -f 'common/Settings.cc'; then $(CYGPATH_W) 'common/Settings.cc'; else $(CYGPATH_W) '$(srcdir)/common/Settings.cc'; fi`
+
+__top_srcdir__we-Status.o: common/Status.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Status.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Status.Tpo -c -o __top_srcdir__we-Status.o `test -f 'common/Status.cc' || echo '$(srcdir)/'`common/Status.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Status.Tpo $(DEPDIR)/__top_srcdir__we-Status.Po
+#	$(AM_V_CXX)source='common/Status.cc' object='__top_srcdir__we-Status.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Status.o `test -f 'common/Status.cc' || echo '$(srcdir)/'`common/Status.cc
+
+__top_srcdir__we-Status.obj: common/Status.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Status.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Status.Tpo -c -o __top_srcdir__we-Status.obj `if test -f 'common/Status.cc'; then $(CYGPATH_W) 'common/Status.cc'; else $(CYGPATH_W) '$(srcdir)/common/Status.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Status.Tpo $(DEPDIR)/__top_srcdir__we-Status.Po
+#	$(AM_V_CXX)source='common/Status.cc' object='__top_srcdir__we-Status.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Status.obj `if test -f 'common/Status.cc'; then $(CYGPATH_W) 'common/Status.cc'; else $(CYGPATH_W) '$(srcdir)/common/Status.cc'; fi`
 
 __top_srcdir__we-Cursor.o: tools/Cursor.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cursor.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cursor.Tpo -c -o __top_srcdir__we-Cursor.o `test -f 'tools/Cursor.cc' || echo '$(srcdir)/'`tools/Cursor.cc

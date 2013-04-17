@@ -11,6 +11,8 @@ public:
   ~Cursor();
 
   sf::Sprite getSprite();
+  sf::Sprite getSprite(int offset_x, int offset_y);
+
   std::string getFilename();
 
   void setX(unsigned int x);

@@ -23,13 +23,14 @@ Cursor::~Cursor()
 {
 }
 
-// void changeOffset();
-
-
 sf::Sprite Cursor::getSprite()
 {
-  // we're also adding offset (a semi cell)
-  _sprite->setPosition((_x + 0.5) * g_cell_size, (_y + 0.5) * g_cell_size);
+  return *_sprite;
+}
+
+sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
+{
+  _sprite->setPosition(_x * g_cell_size + offset_x, _y * g_cell_size + offset_y);
 
   return *_sprite;
 }
@@ -59,7 +60,7 @@ void Cursor::moveDown()
 
 void Cursor::moveLeft()
 {
-  _x = std::min(_x, _x - 1); // we're in unsigned so MIN
+  _x = std::min(_x, _x - 1);
 }
 
 void Cursor::moveRight()

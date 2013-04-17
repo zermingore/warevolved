@@ -1,7 +1,3 @@
-# TODO multi-folders ?
-# SUBDIRS = core common media tools entities/character/ entities/bodyparts/ items items/clothes db input globals tools
-
-
 bin_PROGRAMS = $(top_srcdir)/we
 
 # Use right g++ flags.
@@ -32,6 +28,7 @@ core/GraphicEngine.cc	\
 \
 common/System.cc		\
 common/Settings.cc		\
+common/Status.cc			\
 \
 tools/Cursor.cc			\
 \
