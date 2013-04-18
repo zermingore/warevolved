@@ -34,6 +34,11 @@ private:
   sf::Sprite* _sprite;
   sf::Texture _texture;
   std::string _filename;
+
+  sf::Clock _timer;
+
+  // store the middle of the sprite coordinates
+  sf::Vector2f _middle; // do not compute its value each frame
 };
 
 #endif /* !CURSOR_HH_ */

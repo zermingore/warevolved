@@ -6,11 +6,11 @@ Settings::Settings()
 
 Settings::Settings(unsigned int depth,
 				   unsigned int stencil,
-				   unsigned int antialiasing)
+				   unsigned int antiAliasing)
 {
   _depth = depth;
   _stencil = stencil;
-  _antialiasing = antialiasing;
+  _antiAliasing = antiAliasing;
 }
 
 Settings::~Settings()
@@ -28,14 +28,14 @@ unsigned int Settings::getStencil()
   return _stencil;
 }
 
-unsigned int Settings::getAntialiasing()
+unsigned int Settings::getAntiAliasing()
 {
-  return _antialiasing;
+  return _antiAliasing;
 }
 
-bool Settings::getFullscreen()
+bool Settings::getFullScreen()
 {
-  return _fullscreen;
+  return _fullScreen;
 }
 
 
@@ -49,13 +49,13 @@ void Settings::setStencil(unsigned int stencil)
   _stencil = stencil;
 }
 
-void Settings::setAntialiasing(unsigned int antialiasing)
+void Settings::setAntiAliasing(unsigned int antiAliasing)
 {
-  _antialiasing = antialiasing;
+  _antiAliasing = antiAliasing;
 }
 
 /// generic settings
-void Settings::setFullscreen(bool fullscreen)
+void Settings::setFullScreen(bool fullScreen)
 {
-  _fullscreen = fullscreen;
+  _fullScreen = fullScreen;
 }

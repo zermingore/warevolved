@@ -16,7 +16,10 @@ Context::Context()
 Context::Context(bool fullscreen)
 {
   if (fullscreen)
+  {
 	_settings = new Settings(24, 8, 4);
+	_settings->setFullScreen(true);
+  }
   else
 	_settings = new Settings(0, 0, 0); // more or less debug
 
@@ -37,12 +40,12 @@ sf::RenderWindow* Context::init()
 
   sf::ContextSettings contextSettings(_settings->getDepth(),
   									  _settings->getStencil(),
-  									  _settings->getAntialiasing(),
+  									  _settings->getAntiAliasing(),
   									  _system->getSfmlMajor(),
   									  _system->getSfmlMinor());
 
   // getting right resolution, from desktop
-  if (_settings->getFullscreen())
+  if (_settings->getFullScreen())
   {
 	_window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
 								   "War Evolved",
@@ -69,9 +72,6 @@ sf::RenderWindow* Context::init()
 
   _window->setFramerateLimit(60);
   //_window->setIcon(64, 64, "icon");
-
-  // sf::Window w(sf::VideoMode(video_mode), "WE", sf::Style::Fullscreen);
-  // w.Create(sf::VideoMode(800, 600, 32), "SFML Window", sf::Style::Fullscreen, 4);
 
   return _window;
 }

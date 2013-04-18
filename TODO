@@ -7,20 +7,28 @@
 
 
 * TODO Graphics
-** TODO make the cursor pulse (each 1/10e sec, rescale, .5 sec, then decrease)
+** DONE make the cursor pulse (each 1/10e sec, rescale, .5 sec, then decrease)
+   CLOSED: [2013-04-18 Thu 14:47]
+   for now: rotation && resizing (linked together)
 ** TODO implement scrolling
 ** TODO Apply a background to the main window
 
-* TODO Various
-** TODO Informations Window (cell type, ...)
+* TODO Interface
+** TODO Informations Panel (cell type, ...)
 
 
-* TODO network
+* TODO Network
 ** TODO Chat
+
+* TODO Multi-Plateforms
+** TODO Linux (current ref: Ubntu)
+** TODO Unix
+** TODO Windows
+** TODO Mac OS
 
 * TODO Graphic Engine Libraries
 ** TODO switch 'on demand' (at compilation time)
-   use SFML if available, else SDL, OpenGL, ASCII, ...
+   use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 
-* TODO menu
+* TODO Menu
 ** TODO Stack implementation

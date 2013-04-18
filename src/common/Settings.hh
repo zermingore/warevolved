@@ -8,35 +8,35 @@ public:
   Settings();
   Settings(unsigned int depth,
 		   unsigned int stencil,
-		   unsigned int antialiasing);
+		   unsigned int antiAliasing);
 
   ~Settings();
 
   /// SFML settings getters
   unsigned int getDepth();
   unsigned int getStencil();
-  unsigned int getAntialiasing();
+  unsigned int getAntiAliasing();
 
-  bool getFullscreen();
+  bool getFullScreen();
 
 
   /// SFML settings setters
   void setDepth(unsigned int depth);
   void setStencil(unsigned int stencil);
-  void setAntialiasing(unsigned int antialiasing);
+  void setAntiAliasing(unsigned int antiAliasing);
 
   /// generic settings
-  void setFullscreen(bool fullscreen);
+  void setFullScreen(bool fullScreen);
 
 
 private:
   /// SFML settings
   unsigned int _depth;
   unsigned int _stencil;
-  unsigned int _antialiasing;
+  unsigned int _antiAliasing;
 
   /// generic settings
-  bool _fullscreen;
+  bool _fullScreen;
 };
 
 #endif /* !SETTINGS_HH_ */
