@@ -23,46 +23,18 @@ __top_srcdir__we_SOURCES =	\
 main.cc					\
 \
 core/Context.cc			\
-core/Game.cc			\
 core/GraphicEngine.cc	\
 \
 common/System.cc		\
 common/Settings.cc		\
-common/Status.cc			\
-\
-tools/Cursor.cc			\
+common/Status.cc		\
 \
 input/KeyManager.cc		\
-input/Event.cc			#\
+input/Event.cc			\
 \
-graphics/Texture.cc		\
-graphics/TextureManager.cc	\
-graphics/Skybox.cc		\
-graphics/Light.cc		\
-graphics/DirectionalLight.cc	\
-\
-db/DBManager.cc			\
-db/DBInventory.cc		\
-\
-entities/character/Character.cc	\
-entities/bodyparts/BodyPart.cc	\
-\
-globals/keys.c			\
-globals/engines.cc		\
-\
-input/Input.cc			\
-input/InputCharacter.cc		\
-\
-items/Item.cc			\
-items/clothes/Cloth.cc		\
-\
-media/Shader.cc			\
-media/Sound.cc			\
-\
-tools/Vector.cc			\
-tools/Matrix.cc			\
-\
-tools/debug_funs.cc
+game/Game.cc			\
+game/Map.cc				\
+game/Cursor.cc
 
 
 # if -DDEBUG __top_srcdir__we_SOURCES += tools/debug_funs

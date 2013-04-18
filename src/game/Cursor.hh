@@ -8,6 +8,7 @@ class Cursor
 {
 public:
   Cursor();
+  Cursor(unsigned int nbColumns, unsigned int nbLines);
   ~Cursor();
 
   sf::Sprite getSprite();
@@ -28,6 +29,11 @@ public:
 
 
 private:
+  // map attributes
+  unsigned int _nbColumns;
+  unsigned int _nbLines;
+
+  // Cursor specific
   unsigned int _x;
   unsigned int _y;
 

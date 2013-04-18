@@ -1,5 +1,5 @@
 #include <input/Event.hh>
-#include <tools/Cursor.hh>
+#include <game/Cursor.hh>
 
 
 int g_key_repeat_delay;
@@ -8,13 +8,11 @@ Event::Event()
 {
 }
 
-Event::Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor)
+Event::Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor) :
+  _window (window),
+  _km (km),
+  _cursor (cursor)
 {
-  _window = window;
-  _km = km;
-  _cursor = cursor;
-
-  // resetting all timers // TODO FIXME
   for (int i = 0; i < nb_timer; ++i)
   	_km->restartTimer((e_timer) i);
 
@@ -33,9 +31,7 @@ void Event::process()
   {
 	// Close window : exit
 	if (_event.type == sf::Event::Closed)
-	{
 	  _window->close();
-	}
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	_window->close(); // TODO call menu
@@ -49,32 +45,48 @@ void Event::process()
 
 void Event::game()
 {
-  // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+  // if (_km->selection())
   // 	GameEngine::selectCell();
 
   // ---------- Cursor Motion ---------- //
-  if (_km->up() && _km->getTimer(move_up) > g_key_repeat_delay)
+  if (_km->up())
   {
-	_km->restartTimer(move_up);
+	if (!_km->ready(move_up))
+	  return;
+
 	_cursor->moveUp();
+
+	// the timer will not be ready until
+	//   g_key_repeat_delay passed or
+	//   we release the key pressed
+	_km->setReady(move_up, false);
   }
 
-  if (_km->down() && _km->getTimer(move_down) > g_key_repeat_delay)
+  if (_km->down())
   {
-	_km->restartTimer(move_down);
+	if (!_km->ready(move_down))
+	  return;
+
 	_cursor->moveDown();
+	_km->setReady(move_down, false);
   }
 
-  if (_km->left() && _km->getTimer(move_left) > g_key_repeat_delay)
+  if (_km->left())
   {
-	_km->restartTimer(move_left);
+	if (!_km->ready(move_left))
+	  return;
+
 	_cursor->moveLeft();
+	_km->setReady(move_left, false);
   }
 
-  if (_km->right() && _km->getTimer(move_right) > g_key_repeat_delay)
+  if (_km->right())
   {
-	_km->restartTimer(move_right);
+	if (!_km->ready(move_right))
+	  return;
+
 	_cursor->moveRight();
+	_km->setReady(move_right, false);
   }
   // ----------------------------------- //
 }
@@ -82,5 +94,18 @@ void Event::game()
 
 void Event::resetTimer()
 {
-  _km->restartTimer(move_up);
+  // The timer we want to reset must not match a pressed key
+  // (in case 2 keys are pressed simultaneously)
+
+  if (!_km->up())
+	_km->restartTimer(move_up);
+
+  if (!_km->down())
+	_km->restartTimer(move_down);
+
+  if (!_km->left())
+	_km->restartTimer(move_left);
+
+  if (!_km->right())
+	_km->restartTimer(move_right);
 }

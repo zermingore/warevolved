@@ -1,10 +1,7 @@
-#include <core/Game.hh>
+#include <game/Game.hh>
 #include <core/GraphicEngine.hh>
-#include <tools/Cursor.hh>
+#include <game/Cursor.hh>
 #include <input/Event.hh>
-
-unsigned int g_gridSizeX;
-unsigned int g_gridSizeY;
 
 
 Game::Game()
@@ -12,9 +9,10 @@ Game::Game()
   std::cerr << "Must specify a window" << std::endl;
 }
 
-Game::Game(sf::RenderWindow* window)
+Game::Game(sf::RenderWindow* window) :
+  _window (window)
 {
-  _window = window;
+  _map = new Map(8, 8);
 }
 
 Game::~Game()
@@ -24,8 +22,8 @@ Game::~Game()
 
 int Game::run()
 {
-  _cursor = new Cursor();
-  GraphicEngine* graphics = new GraphicEngine(_window, _cursor);
+  _cursor = new Cursor(_map->getNbColumns(), _map->getNbLines());
+  GraphicEngine* graphics = new GraphicEngine(_window, _map, _cursor);
 
   KeyManager* k = new KeyManager();
   _event = new Event(_window, k, _cursor);
@@ -34,9 +32,6 @@ int Game::run()
   while (_window->isOpen())
   {
 	_event->process(); // should be the first task of the game loop
-
-	g_gridSizeX = 5;
-	g_gridSizeY = 5;
 
 	graphics->drawScene();
 

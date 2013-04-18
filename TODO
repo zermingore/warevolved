@@ -5,6 +5,9 @@
    CLOSED: [2013-04-17 Wed 16:41]
 ** TODO use the mouse to make it move
 
+* TODO Game
+** TODO Selection (drag and drop units)
+** TODO pathfinding
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, rescale, .5 sec, then decrease)
@@ -15,7 +18,8 @@
 
 * TODO Interface
 ** TODO Informations Panel (cell type, ...)
-
+** TODO Menu Bar
+** TODO Configuration file
 
 * TODO Network
 ** TODO Chat
@@ -32,3 +36,11 @@
 
 * TODO Menu
 ** TODO Stack implementation
+
+
+* TODO Bugs / Features
+** TODO [#B] Add Doxygen Comments in headers
+** DONE [#B] Allow Manual Key Repetition
+   CLOSED: [2013-04-19 Fri 01:32]
+** DONE [#A] More than one key pressed and reset timer trouble
+   CLOSED: [2013-04-19 Fri 01:33]

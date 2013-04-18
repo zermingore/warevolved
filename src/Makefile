@@ -63,14 +63,14 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Context.$(OBJEXT) \
-	__top_srcdir__we-Game.$(OBJEXT) \
 	__top_srcdir__we-GraphicEngine.$(OBJEXT) \
 	__top_srcdir__we-System.$(OBJEXT) \
 	__top_srcdir__we-Settings.$(OBJEXT) \
 	__top_srcdir__we-Status.$(OBJEXT) \
-	__top_srcdir__we-Cursor.$(OBJEXT) \
 	__top_srcdir__we-KeyManager.$(OBJEXT) \
-	__top_srcdir__we-Event.$(OBJEXT)
+	__top_srcdir__we-Event.$(OBJEXT) \
+	__top_srcdir__we-Game.$(OBJEXT) __top_srcdir__we-Map.$(OBJEXT) \
+	__top_srcdir__we-Cursor.$(OBJEXT)
 __top_srcdir__we_OBJECTS = $(am___top_srcdir__we_OBJECTS)
 __top_srcdir__we_LDADD = $(LDADD)
 am__dirstamp = $(am__leading_dot)dirstamp
@@ -221,46 +221,18 @@ __top_srcdir__we_SOURCES = \
 main.cc					\
 \
 core/Context.cc			\
-core/Game.cc			\
 core/GraphicEngine.cc	\
 \
 common/System.cc		\
 common/Settings.cc		\
-common/Status.cc			\
-\
-tools/Cursor.cc			\
+common/Status.cc		\
 \
 input/KeyManager.cc		\
-input/Event.cc			#\
+input/Event.cc			\
 \
-graphics/Texture.cc		\
-graphics/TextureManager.cc	\
-graphics/Skybox.cc		\
-graphics/Light.cc		\
-graphics/DirectionalLight.cc	\
-\
-db/DBManager.cc			\
-db/DBInventory.cc		\
-\
-entities/character/Character.cc	\
-entities/bodyparts/BodyPart.cc	\
-\
-globals/keys.c			\
-globals/engines.cc		\
-\
-input/Input.cc			\
-input/InputCharacter.cc		\
-\
-items/Item.cc			\
-items/clothes/Cloth.cc		\
-\
-media/Shader.cc			\
-media/Sound.cc			\
-\
-tools/Vector.cc			\
-tools/Matrix.cc			\
-\
-tools/debug_funs.cc
+game/Game.cc			\
+game/Map.cc				\
+game/Cursor.cc
 
 all: all-am
 
@@ -355,6 +327,7 @@ include ./$(DEPDIR)/__top_srcdir__we-Event.Po
 include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
 include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
+include ./$(DEPDIR)/__top_srcdir__we-Map.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
 include ./$(DEPDIR)/__top_srcdir__we-Status.Po
 include ./$(DEPDIR)/__top_srcdir__we-System.Po
@@ -401,20 +374,6 @@ __top_srcdir__we-Context.obj: core/Context.cc
 #	$(AM_V_CXX)source='core/Context.cc' object='__top_srcdir__we-Context.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Context.obj `if test -f 'core/Context.cc'; then $(CYGPATH_W) 'core/Context.cc'; else $(CYGPATH_W) '$(srcdir)/core/Context.cc'; fi`
-
-__top_srcdir__we-Game.o: core/Game.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Game.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Game.Tpo -c -o __top_srcdir__we-Game.o `test -f 'core/Game.cc' || echo '$(srcdir)/'`core/Game.cc
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Game.Tpo $(DEPDIR)/__top_srcdir__we-Game.Po
-#	$(AM_V_CXX)source='core/Game.cc' object='__top_srcdir__we-Game.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Game.o `test -f 'core/Game.cc' || echo '$(srcdir)/'`core/Game.cc
-
-__top_srcdir__we-Game.obj: core/Game.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Game.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Game.Tpo -c -o __top_srcdir__we-Game.obj `if test -f 'core/Game.cc'; then $(CYGPATH_W) 'core/Game.cc'; else $(CYGPATH_W) '$(srcdir)/core/Game.cc'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Game.Tpo $(DEPDIR)/__top_srcdir__we-Game.Po
-#	$(AM_V_CXX)source='core/Game.cc' object='__top_srcdir__we-Game.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Game.obj `if test -f 'core/Game.cc'; then $(CYGPATH_W) 'core/Game.cc'; else $(CYGPATH_W) '$(srcdir)/core/Game.cc'; fi`
 
 __top_srcdir__we-GraphicEngine.o: core/GraphicEngine.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-GraphicEngine.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-GraphicEngine.Tpo -c -o __top_srcdir__we-GraphicEngine.o `test -f 'core/GraphicEngine.cc' || echo '$(srcdir)/'`core/GraphicEngine.cc
@@ -472,20 +431,6 @@ __top_srcdir__we-Status.obj: common/Status.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Status.obj `if test -f 'common/Status.cc'; then $(CYGPATH_W) 'common/Status.cc'; else $(CYGPATH_W) '$(srcdir)/common/Status.cc'; fi`
 
-__top_srcdir__we-Cursor.o: tools/Cursor.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cursor.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cursor.Tpo -c -o __top_srcdir__we-Cursor.o `test -f 'tools/Cursor.cc' || echo '$(srcdir)/'`tools/Cursor.cc
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Cursor.Tpo $(DEPDIR)/__top_srcdir__we-Cursor.Po
-#	$(AM_V_CXX)source='tools/Cursor.cc' object='__top_srcdir__we-Cursor.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cursor.o `test -f 'tools/Cursor.cc' || echo '$(srcdir)/'`tools/Cursor.cc
-
-__top_srcdir__we-Cursor.obj: tools/Cursor.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cursor.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cursor.Tpo -c -o __top_srcdir__we-Cursor.obj `if test -f 'tools/Cursor.cc'; then $(CYGPATH_W) 'tools/Cursor.cc'; else $(CYGPATH_W) '$(srcdir)/tools/Cursor.cc'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Cursor.Tpo $(DEPDIR)/__top_srcdir__we-Cursor.Po
-#	$(AM_V_CXX)source='tools/Cursor.cc' object='__top_srcdir__we-Cursor.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cursor.obj `if test -f 'tools/Cursor.cc'; then $(CYGPATH_W) 'tools/Cursor.cc'; else $(CYGPATH_W) '$(srcdir)/tools/Cursor.cc'; fi`
-
 __top_srcdir__we-KeyManager.o: input/KeyManager.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-KeyManager.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo -c -o __top_srcdir__we-KeyManager.o `test -f 'input/KeyManager.cc' || echo '$(srcdir)/'`input/KeyManager.cc
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo $(DEPDIR)/__top_srcdir__we-KeyManager.Po
@@ -513,6 +458,48 @@ __top_srcdir__we-Event.obj: input/Event.cc
 #	$(AM_V_CXX)source='input/Event.cc' object='__top_srcdir__we-Event.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Event.obj `if test -f 'input/Event.cc'; then $(CYGPATH_W) 'input/Event.cc'; else $(CYGPATH_W) '$(srcdir)/input/Event.cc'; fi`
+
+__top_srcdir__we-Game.o: game/Game.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Game.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Game.Tpo -c -o __top_srcdir__we-Game.o `test -f 'game/Game.cc' || echo '$(srcdir)/'`game/Game.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Game.Tpo $(DEPDIR)/__top_srcdir__we-Game.Po
+#	$(AM_V_CXX)source='game/Game.cc' object='__top_srcdir__we-Game.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Game.o `test -f 'game/Game.cc' || echo '$(srcdir)/'`game/Game.cc
+
+__top_srcdir__we-Game.obj: game/Game.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Game.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Game.Tpo -c -o __top_srcdir__we-Game.obj `if test -f 'game/Game.cc'; then $(CYGPATH_W) 'game/Game.cc'; else $(CYGPATH_W) '$(srcdir)/game/Game.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Game.Tpo $(DEPDIR)/__top_srcdir__we-Game.Po
+#	$(AM_V_CXX)source='game/Game.cc' object='__top_srcdir__we-Game.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Game.obj `if test -f 'game/Game.cc'; then $(CYGPATH_W) 'game/Game.cc'; else $(CYGPATH_W) '$(srcdir)/game/Game.cc'; fi`
+
+__top_srcdir__we-Map.o: game/Map.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Map.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Map.Tpo -c -o __top_srcdir__we-Map.o `test -f 'game/Map.cc' || echo '$(srcdir)/'`game/Map.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Map.Tpo $(DEPDIR)/__top_srcdir__we-Map.Po
+#	$(AM_V_CXX)source='game/Map.cc' object='__top_srcdir__we-Map.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Map.o `test -f 'game/Map.cc' || echo '$(srcdir)/'`game/Map.cc
+
+__top_srcdir__we-Map.obj: game/Map.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Map.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Map.Tpo -c -o __top_srcdir__we-Map.obj `if test -f 'game/Map.cc'; then $(CYGPATH_W) 'game/Map.cc'; else $(CYGPATH_W) '$(srcdir)/game/Map.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Map.Tpo $(DEPDIR)/__top_srcdir__we-Map.Po
+#	$(AM_V_CXX)source='game/Map.cc' object='__top_srcdir__we-Map.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Map.obj `if test -f 'game/Map.cc'; then $(CYGPATH_W) 'game/Map.cc'; else $(CYGPATH_W) '$(srcdir)/game/Map.cc'; fi`
+
+__top_srcdir__we-Cursor.o: game/Cursor.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cursor.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cursor.Tpo -c -o __top_srcdir__we-Cursor.o `test -f 'game/Cursor.cc' || echo '$(srcdir)/'`game/Cursor.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Cursor.Tpo $(DEPDIR)/__top_srcdir__we-Cursor.Po
+#	$(AM_V_CXX)source='game/Cursor.cc' object='__top_srcdir__we-Cursor.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cursor.o `test -f 'game/Cursor.cc' || echo '$(srcdir)/'`game/Cursor.cc
+
+__top_srcdir__we-Cursor.obj: game/Cursor.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cursor.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cursor.Tpo -c -o __top_srcdir__we-Cursor.obj `if test -f 'game/Cursor.cc'; then $(CYGPATH_W) 'game/Cursor.cc'; else $(CYGPATH_W) '$(srcdir)/game/Cursor.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Cursor.Tpo $(DEPDIR)/__top_srcdir__we-Cursor.Po
+#	$(AM_V_CXX)source='game/Cursor.cc' object='__top_srcdir__we-Cursor.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cursor.obj `if test -f 'game/Cursor.cc'; then $(CYGPATH_W) 'game/Cursor.cc'; else $(CYGPATH_W) '$(srcdir)/game/Cursor.cc'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

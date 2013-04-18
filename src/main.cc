@@ -1,6 +1,6 @@
 #include <common/include.hh>
 #include <core/Context.hh>
-#include <core/Game.hh>
+#include <game/Game.hh>
 
 
 int main(int ac, char **av)

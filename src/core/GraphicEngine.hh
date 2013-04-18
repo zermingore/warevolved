@@ -3,14 +3,15 @@
 
 # include <common/include.hh>
 # include <common/Settings.hh>
-# include <tools/Cursor.hh>
+# include <game/Map.hh>
+# include <game/Cursor.hh>
 
 
 class GraphicEngine
 {
 public:
   GraphicEngine();
-  GraphicEngine(sf::RenderWindow* window, Cursor* cursor);
+  GraphicEngine(sf::RenderWindow* window, Map* map, Cursor* cursor);
   ~GraphicEngine();
 
   void drawScene();
@@ -31,6 +32,7 @@ private:
   void drawCursor();
 
   sf::RenderWindow* _window;
+  Map* _map;
   Cursor* _cursor;
 
   // space left for rendering

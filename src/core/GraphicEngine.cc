@@ -3,14 +3,16 @@
 #include <core/GraphicEngine.hh>
 #include <common/globals.hh>
 #include <common/Status.hh>
-#include <tools/Cursor.hh>
+#include <game/Cursor.hh>
+#include <game/Map.hh>
 
 
 GraphicEngine::GraphicEngine()
 {
 }
 
-GraphicEngine::GraphicEngine(sf::RenderWindow* window, Cursor* cursor)
+GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Cursor* cursor) :
+  _map (map)
 {
   _window = window;
   _cursor = cursor;
@@ -44,7 +46,7 @@ void GraphicEngine::drawScene()
 }
 
 
-void GraphicEngine::drawMap()
+void GraphicEngine::drawMap() // TODO
 {
   return;
 }
@@ -75,6 +77,21 @@ void GraphicEngine::drawMenuBar()
 
 void GraphicEngine::drawCells()
 {
+  sf::Texture* texture = new sf::Texture;
+  texture->loadFromFile("forest.png"); // TODO hard-coded
+
+  sf::RectangleShape rectangle;
+  rectangle.setSize(sf::Vector2f(g_cell_size, g_cell_size));
+  rectangle.setTexture(texture);
+
+  for (unsigned int i = 0; i < _map->getNbColumns(); ++i)
+	for (unsigned int j = 0; j < _map->getNbLines(); ++j)
+  	{
+  	  rectangle.setPosition(i * g_cell_size + g_grid_thickness + _gridOffsetX,
+  							j * g_cell_size + g_grid_thickness + _gridOffsetY);
+  	  _window->draw(rectangle);
+  	}
+
   return;
 }
 
@@ -82,30 +99,25 @@ void GraphicEngine::drawCells()
 
 void GraphicEngine::drawGrid()
 {
-  this->drawGrid(5, 5);
-  return;
-}
-
-void GraphicEngine::drawGrid(unsigned int nb_line, unsigned int nb_column)
-{
   sf::Color grid_color(202, 124, 0);
 
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(g_cell_size, g_cell_size));
+  rectangle.setFillColor(sf::Color::Transparent);
   rectangle.setOutlineColor(grid_color);
   rectangle.setOutlineThickness(5);
 
   // = scroll ? 0 : g_cell_size / 2;
   _gridOffsetX = 0;
   _gridOffsetY = 0;
-  if (1) // !scroll // split offset bottom, ...
+  if (1) // !scroll // TODO FIXME split offset bottom, ...
   {
-	_gridOffsetX = (_renderX - g_cell_size * nb_column) / 2;
-	_gridOffsetY = (_renderY - g_cell_size * nb_line) / 2;
+	_gridOffsetX = (_renderX - g_cell_size * _map->getNbColumns()) / 2;
+	_gridOffsetY = (_renderY - g_cell_size * _map->getNbLines()) / 2;
   }
 
-  for (unsigned int i = 0; i < nb_line; ++i)
-  	for (unsigned int j = 0; j < nb_column; ++j)
+  for (unsigned int i = 0; i < _map->getNbColumns(); ++i)
+  	for (unsigned int j = 0; j < _map->getNbLines(); ++j)
 	{
 	  rectangle.setPosition(i * g_cell_size + g_grid_thickness + _gridOffsetX,
 							j * g_cell_size + g_grid_thickness + _gridOffsetY);
@@ -119,3 +131,11 @@ void GraphicEngine::drawCursor()
   // printing Cursor
   _window->draw(_cursor->getSprite(_gridOffsetX, _gridOffsetY));
 }
+
+
+// void GraphicEngine::drawSelectionMenu(Cell* cell)
+// {
+//   // for (unsigned int i = 0; i < nb_sections; ++i)
+
+//   _window->draw
+// }

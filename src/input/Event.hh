@@ -2,7 +2,7 @@
 # define EVENT_HH_
 
 # include <input/KeyManager.hh>
-# include <tools/Cursor.hh>
+# include <game/Cursor.hh>
 
 
 class Event

@@ -1,8 +1,14 @@
-#include <tools/Cursor.hh>
+#include <game/Cursor.hh>
 #include <common/globals.hh>
 
 
-Cursor::Cursor() :
+Cursor::Cursor()
+{
+}
+
+Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
+  _nbColumns (nbColumns),
+  _nbLines (nbLines),
   _x (0),
   _y (0)
 {
@@ -71,7 +77,7 @@ void Cursor::moveUp()
 
 void Cursor::moveDown()
 {
-  _y = std::min(_y + 1, g_gridSizeY - 1);
+  _y = std::min(_y + 1, _nbLines - 1);
 }
 
 void Cursor::moveLeft()
@@ -81,5 +87,5 @@ void Cursor::moveLeft()
 
 void Cursor::moveRight()
 {
-  _x = std::min(_x + 1, g_gridSizeX - 1);
+  _x = std::min(_x + 1, _nbColumns - 1);
 }
