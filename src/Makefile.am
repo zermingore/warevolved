@@ -4,7 +4,7 @@ bin_PROGRAMS = $(top_srcdir)/we
 __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 -Wfloat-equal -Wcast-qual -Wcast-align -Wunreachable-code -Wundef		\
 -Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses 		\
--O0 -DDEBUG -g \
+-O0 -g -DDEBUG -DDEBUG_LEAKS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
 
@@ -34,10 +34,8 @@ input/Event.cc			\
 \
 game/Game.cc			\
 game/Map.cc				\
+game/Cell.cc			\
 game/Cursor.cc
 
 
 # if -DDEBUG __top_srcdir__we_SOURCES += tools/debug_funs
-
-# models/Cube.cc
-# models/Shape2D.cc

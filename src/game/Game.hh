@@ -9,12 +9,12 @@
 class Game
 {
 public:
-  /// Ctor - Dtor
+  /** \
+   */
   Game();
-  Game(sf::RenderWindow* window);
+  explicit Game(sf::RenderWindow* window);
   ~Game();
 
-  //void drawLine(sf::Vector2f a, sf::Vector2f b);
   int run();
 
 

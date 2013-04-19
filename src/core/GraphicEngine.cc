@@ -1,37 +1,70 @@
 #include <common/include.hh>
 #include <SFML/Graphics/Color.hpp>
 #include <core/GraphicEngine.hh>
+#include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/Status.hh>
+#include <common/units.hh>
+#include <common/terrains.hh>
 #include <game/Cursor.hh>
 #include <game/Map.hh>
-
-
-GraphicEngine::GraphicEngine()
-{
-}
-
-GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Cursor* cursor) :
-  _map (map)
-{
-  _window = window;
-  _cursor = cursor;
-}
-
-GraphicEngine::~GraphicEngine()
-{
-}
 
 int Status::_panel = 0;
 int Status::_menuBar = 0;
 
+std::string g_filenames_terrains[E_NB_TERRAINS] = {
+  "forest"
+};
 
-void GraphicEngine::drawScene()
+std::string g_filenames_units[E_NB_UNITS] = {
+  "soldiers"
+};
+
+
+GraphicEngine::GraphicEngine() {
+}
+
+GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Cursor* cursor) :
+  _window (window),
+  _map (map),
+  _cursor (cursor)
 {
-  // initialize render room, update it if there's a new panel, ...
+  // initialize render room
   _renderX = _window->getSize().x;
   _renderY = _window->getSize().y;
 
+  // deducing grid position
+  _gridOffsetX = (_renderX - g_cell_size * _map->getNbColumns()) / 2;
+  _gridOffsetY = (_renderY - g_cell_size * _map->getNbLines()) / 2;
+
+  this->initSprites();
+}
+
+GraphicEngine::~GraphicEngine()
+{
+  // delete[] _spritesTerrains;
+  // delete[] _spritesUnits;
+}
+
+
+void GraphicEngine::initSprites()
+{
+  for (unsigned int i = 0; i < E_NB_TERRAINS; ++i)
+  {
+	_spritesTerrains[i] = new sf::Texture();
+	_spritesTerrains[i]->loadFromFile(TERRAINS_FOLDER + g_filenames_terrains[i] + ".png");
+  }
+
+  for (unsigned int i = 0; i < E_NB_UNITS; ++i)
+  {
+	_spritesUnits[i] = new sf::Texture();
+	_spritesUnits[i]->loadFromFile(UNITS_FOLDER + g_filenames_units[i] + ".png");
+  }
+}
+
+
+void GraphicEngine::drawScene()
+{
   this->drawMap();
 
   if (Status::_panel)
@@ -53,46 +86,51 @@ void GraphicEngine::drawMap() // TODO
 
 void GraphicEngine::drawPanel()
 {
+  // TODO manage removal
+  // TODO update render zone size if there's a new panel
+
   // for mow, drawing a line to delimit the panel zone
   sf::Vertex line[2] = {
 	sf::Vector2f (0.66f * _window->getSize().x, 0),
 	sf::Vector2f (0.66f * _window->getSize().x, _window->getSize().y)
   };
   _window->draw(line, 2, sf::Lines);
-
-  return;
 }
 
 void GraphicEngine::drawMenuBar()
 {
-  // manage removal
+  // TODO manage removal
+  // TODO update render zone size if there's a new bar
 
   // for mow, drawing a line to delimit the menu zone
   sf::Vertex line[2] = {sf::Vector2f (0, g_cell_size / 2),
 						sf::Vector2f (_window->getSize().x, g_cell_size / 2)};
   _window->draw(line, 2, sf::Lines);
-
-  return;
 }
+
 
 void GraphicEngine::drawCells()
 {
-  sf::Texture* texture = new sf::Texture;
-  texture->loadFromFile("forest.png"); // TODO hard-coded
-
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(g_cell_size, g_cell_size));
-  rectangle.setTexture(texture);
 
   for (unsigned int i = 0; i < _map->getNbColumns(); ++i)
 	for (unsigned int j = 0; j < _map->getNbLines(); ++j)
   	{
+	  e_terrains terrain = _map->getTerrain(i, j);
+	  rectangle.setTexture(_spritesTerrains[terrain]);
+
   	  rectangle.setPosition(i * g_cell_size + g_grid_thickness + _gridOffsetX,
   							j * g_cell_size + g_grid_thickness + _gridOffsetY);
   	  _window->draw(rectangle);
-  	}
 
-  return;
+	  e_units unit  = _map->getUnit(i, j);
+	  if (unit != E_UNIT_NONE)
+	  {
+		rectangle.setTexture(_spritesUnits[unit]);
+		_window->draw(rectangle);
+	  }
+  	}
 }
 
 // refreshCell // allow to refresh only the needed cell (mouse motion)

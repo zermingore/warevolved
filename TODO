@@ -6,26 +6,38 @@
 ** TODO use the mouse to make it move
 
 * TODO Game
-** TODO Selection (drag and drop units)
-** TODO pathfinding
+** TODO [#A] Selection (drag and drop units)
+** TODO path-finding
 
 * TODO Graphics
-** DONE make the cursor pulse (each 1/10e sec, rescale, .5 sec, then decrease)
+** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
    CLOSED: [2013-04-18 Thu 14:47]
-   for now: rotation && resizing (linked together)
+   for now: rotation && re-sizing (linked together)
 ** TODO implement scrolling
 ** TODO Apply a background to the main window
+
+* TODO Gameplay
+** TODO Meteo
+*** TODO Graphics: add a snowy transparent sprite
+** TODO Fog of War
+** TODO more than one unit per cell (helicopter / soldier)
+   could use more than one plan (one for ground units, one for air units)
+   could use different levels of zoom (micro-ing a soldier, macro-ing a tank)
+** TODO save / load from file (XML / own ?)
+** TODO dual windows (main window / infos panel)
 
 * TODO Interface
 ** TODO Informations Panel (cell type, ...)
 ** TODO Menu Bar
 ** TODO Configuration file
+** TODO Mini-map
+** TODO select between satellite or schematic view
 
 * TODO Network
 ** TODO Chat
 
-* TODO Multi-Plateforms
-** TODO Linux (current ref: Ubntu)
+* TODO Multi-Platforms
+** TODO Linux (current ref: Ubuntu)
 ** TODO Unix
 ** TODO Windows
 ** TODO Mac OS
@@ -39,8 +51,15 @@
 
 
 * TODO Bugs / Features
-** TODO [#B] Add Doxygen Comments in headers
+** DONE [#B] Add Doxygen Comments in headers
+   CLOSED: [2013-04-19 Fri 16:33]
+   not perfect but does the job for now
 ** DONE [#B] Allow Manual Key Repetition
    CLOSED: [2013-04-19 Fri 01:32]
 ** DONE [#A] More than one key pressed and reset timer trouble
    CLOSED: [2013-04-19 Fri 01:33]
+** DONE map initialisation failure
+   CLOSED: [2013-04-19 Fri 16:33]
+   was a rendering zone room trouble
+** TODO [#A] really use Settings class (key repeat delay, ...) should be in it
+** TODO Memory Leaks

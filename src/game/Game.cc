@@ -17,6 +17,9 @@ Game::Game(sf::RenderWindow* window) :
 
 Game::~Game()
 {
+  delete _map;
+  delete _cursor;
+  delete _event;
 }
 
 
@@ -38,6 +41,11 @@ int Game::run()
 	// Update the window
 	_window->display();
   }
+
+# ifdef DEBUG_LEAKS
+  delete k;
+  delete graphics;
+# endif
 
   return 0;
 }

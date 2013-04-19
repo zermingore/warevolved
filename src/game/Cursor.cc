@@ -1,9 +1,9 @@
 #include <game/Cursor.hh>
 #include <common/globals.hh>
+#include <common/Settings.hh>
 
 
-Cursor::Cursor()
-{
+Cursor::Cursor() {
 }
 
 Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
@@ -12,14 +12,7 @@ Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
   _x (0),
   _y (0)
 {
-  if (!_texture.loadFromFile("cursor.png"))
-  {
-	#ifdef DEBUG
-	std::exit(EXIT_FAILURE);
-	#endif
-
-	// TODO in release, load with a default sprite and report this in a log
-  }
+  _texture.loadFromFile(g_player_settings->getCursorFileName());
 
   _sprite = new sf::Sprite(_texture);
   _timer.restart();
@@ -28,21 +21,20 @@ Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
   _middle.y = _texture.getSize().y / 2;
 }
 
-Cursor::~Cursor()
-{
+Cursor::~Cursor() {
+  delete _sprite;
 }
 
-sf::Sprite Cursor::getSprite()
-{
+
+sf::Sprite Cursor::getSprite() {
   return *_sprite;
 }
 
 sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
 {
   static int angle = 0;
-  // setRotation(): auto-frame limit (<> rotate())
   _sprite->setOrigin(_middle);
-  _sprite->setRotation(angle++); // Origin: top left => draw a nice target :)
+  _sprite->setRotation(angle++);
 
   // scale is function of rotation
   // TODO setup a timer to dissociate rotation and scale
@@ -58,34 +50,28 @@ sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
 }
 
 
-void Cursor::setX(unsigned int x)
-{
+void Cursor::setX(unsigned int x) {
   _x = x;
 }
 
-void Cursor::setY(unsigned int y)
-{
+void Cursor::setY(unsigned int y) {
   _y = y;
 }
 
 
 // Cursor Motion
-void Cursor::moveUp()
-{
+void Cursor::moveUp() {
   _y = std::min(_y - 1, _y);
 }
 
-void Cursor::moveDown()
-{
+void Cursor::moveDown() {
   _y = std::min(_y + 1, _nbLines - 1);
 }
 
-void Cursor::moveLeft()
-{
+void Cursor::moveLeft() {
   _x = std::min(_x, _x - 1);
 }
 
-void Cursor::moveRight()
-{
+void Cursor::moveRight() {
   _x = std::min(_x + 1, _nbColumns - 1);
 }

@@ -4,8 +4,7 @@
 
 int g_key_repeat_delay;
 
-Event::Event()
-{
+Event::Event() {
 }
 
 Event::Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor) :
@@ -19,12 +18,10 @@ Event::Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor) :
   g_key_repeat_delay = 150;
 }
 
-Event::~Event()
-{
+Event::~Event() {
 }
 
 
-/* cd need to use callbacks */
 void Event::process()
 {
   while (_window->pollEvent(_event))
@@ -34,7 +31,7 @@ void Event::process()
 	  _window->close();
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	_window->close(); // TODO call menu
+	_window->close(); // TODO call menu instead of quitting
 
   if (_event.type == sf::Event::KeyReleased)
   	this->resetTimer();

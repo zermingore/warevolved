@@ -10,8 +10,7 @@ KeyManager::KeyManager()
   this->mapKeys();
 }
 
-KeyManager::~KeyManager()
-{
+KeyManager::~KeyManager() {
 }
 
 void KeyManager::mapKeys()

@@ -70,6 +70,7 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-KeyManager.$(OBJEXT) \
 	__top_srcdir__we-Event.$(OBJEXT) \
 	__top_srcdir__we-Game.$(OBJEXT) __top_srcdir__we-Map.$(OBJEXT) \
+	__top_srcdir__we-Cell.$(OBJEXT) \
 	__top_srcdir__we-Cursor.$(OBJEXT)
 __top_srcdir__we_OBJECTS = $(am___top_srcdir__we_OBJECTS)
 __top_srcdir__we_LDADD = $(LDADD)
@@ -204,7 +205,7 @@ top_srcdir = ..
 __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 -Wfloat-equal -Wcast-qual -Wcast-align -Wunreachable-code -Wundef		\
 -Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses 		\
--O0 -DDEBUG -g \
+-O0 -g -DDEBUG -DDEBUG_LEAKS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
 
@@ -232,6 +233,7 @@ input/Event.cc			\
 \
 game/Game.cc			\
 game/Map.cc				\
+game/Cell.cc			\
 game/Cursor.cc
 
 all: all-am
@@ -321,6 +323,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/__top_srcdir__we-Cell.Po
 include ./$(DEPDIR)/__top_srcdir__we-Context.Po
 include ./$(DEPDIR)/__top_srcdir__we-Cursor.Po
 include ./$(DEPDIR)/__top_srcdir__we-Event.Po
@@ -486,6 +489,20 @@ __top_srcdir__we-Map.obj: game/Map.cc
 #	$(AM_V_CXX)source='game/Map.cc' object='__top_srcdir__we-Map.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Map.obj `if test -f 'game/Map.cc'; then $(CYGPATH_W) 'game/Map.cc'; else $(CYGPATH_W) '$(srcdir)/game/Map.cc'; fi`
+
+__top_srcdir__we-Cell.o: game/Cell.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cell.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cell.Tpo -c -o __top_srcdir__we-Cell.o `test -f 'game/Cell.cc' || echo '$(srcdir)/'`game/Cell.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Cell.Tpo $(DEPDIR)/__top_srcdir__we-Cell.Po
+#	$(AM_V_CXX)source='game/Cell.cc' object='__top_srcdir__we-Cell.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cell.o `test -f 'game/Cell.cc' || echo '$(srcdir)/'`game/Cell.cc
+
+__top_srcdir__we-Cell.obj: game/Cell.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cell.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cell.Tpo -c -o __top_srcdir__we-Cell.obj `if test -f 'game/Cell.cc'; then $(CYGPATH_W) 'game/Cell.cc'; else $(CYGPATH_W) '$(srcdir)/game/Cell.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Cell.Tpo $(DEPDIR)/__top_srcdir__we-Cell.Po
+#	$(AM_V_CXX)source='game/Cell.cc' object='__top_srcdir__we-Cell.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cell.obj `if test -f 'game/Cell.cc'; then $(CYGPATH_W) 'game/Cell.cc'; else $(CYGPATH_W) '$(srcdir)/game/Cell.cc'; fi`
 
 __top_srcdir__we-Cursor.o: game/Cursor.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cursor.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cursor.Tpo -c -o __top_srcdir__we-Cursor.o `test -f 'game/Cursor.cc' || echo '$(srcdir)/'`game/Cursor.cc
@@ -707,9 +724,6 @@ uninstall-am: uninstall-binPROGRAMS
 
 
 # if -DDEBUG __top_srcdir__we_SOURCES += tools/debug_funs
-
-# models/Cube.cc
-# models/Shape2D.cc
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

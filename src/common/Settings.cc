@@ -1,7 +1,8 @@
 #include <common/Settings.hh>
+#include <common/constants.hh>
 
-Settings::Settings()
-{
+
+Settings::Settings() {
 }
 
 Settings::Settings(unsigned int depth,
@@ -11,51 +12,47 @@ Settings::Settings(unsigned int depth,
   _depth = depth;
   _stencil = stencil;
   _antiAliasing = antiAliasing;
+  _cursorFileName = "cursor.png";
 }
 
-Settings::~Settings()
-{
+Settings::~Settings() {
 }
 
-
-unsigned int Settings::getDepth()
-{
+// _________________________ GETTERS _________________________ //
+unsigned int Settings::getDepth() {
   return _depth;
 }
 
-unsigned int Settings::getStencil()
-{
+unsigned int Settings::getStencil() {
   return _stencil;
 }
 
-unsigned int Settings::getAntiAliasing()
-{
+unsigned int Settings::getAntiAliasing() {
   return _antiAliasing;
 }
 
-bool Settings::getFullScreen()
-{
+bool Settings::getFullScreen() {
   return _fullScreen;
 }
 
+const std::string Settings::getCursorFileName() {
+  return (CURSORS_FOLDER + _cursorFileName);
+}
 
-void Settings::setDepth(unsigned int depth)
-{
+
+// _________________________ SETTERS _________________________ //
+void Settings::setDepth(unsigned int depth) {
   _depth = depth;
 }
 
-void Settings::setStencil(unsigned int stencil)
-{
+void Settings::setStencil(unsigned int stencil) {
   _stencil = stencil;
 }
 
-void Settings::setAntiAliasing(unsigned int antiAliasing)
-{
+void Settings::setAntiAliasing(unsigned int antiAliasing) {
   _antiAliasing = antiAliasing;
 }
 
-/// generic settings
-void Settings::setFullScreen(bool fullScreen)
-{
+void Settings::setFullScreen(bool fullScreen) {
   _fullScreen = fullScreen;
 }

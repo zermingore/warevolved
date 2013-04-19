@@ -4,22 +4,26 @@
 # include <common/include.hh>
 # include <common/System.hh>
 # include <common/Settings.hh>
-
+# include <common/globals.hh>
 
 class Context
 {
 public:
-  /// Create the main window
+  /** \brief default Constructor;
+   */
   Context();
-  Context(bool fullscreen);
+  explicit Context(bool fullscreen);
   ~Context();
 
+  /** \brief Builds and returns the main window
+   ** \return Main rendering window
+   */
   sf::RenderWindow* init();
 
 private:
-  sf::RenderWindow* _window;
-  Settings* _settings;
-  System* _system;
+  sf::RenderWindow* _window; ///< main rendering window
+  Settings* _settings; ///< user's settings (full-screen, anti-aliasing, ...)
+  System* _system; ///< System settings (SFML version, ...)
 };
 
 #endif /* !CONTEXT_HH_ */

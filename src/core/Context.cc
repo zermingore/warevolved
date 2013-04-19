@@ -5,6 +5,7 @@
 
 unsigned int g_cell_size = 64; // > arbitrary value, in px <
 unsigned int g_grid_thickness = 5;
+Settings* g_player_settings;
 
 
 Context::Context()
@@ -21,13 +22,16 @@ Context::Context(bool fullscreen)
 	_settings->setFullScreen(true);
   }
   else
-	_settings = new Settings(0, 0, 0); // more or less debug
+	_settings = new Settings(0, 0, 0); // vanilla (debug) mode
 
   _system = new System(2, 0);
 }
 
 Context::~Context()
 {
+  delete _settings;
+  delete _system;
+  delete _window;
 }
 
 
@@ -72,6 +76,8 @@ sf::RenderWindow* Context::init()
 
   _window->setFramerateLimit(60);
   //_window->setIcon(64, 64, "icon");
+
+  g_player_settings = _settings;
 
   return _window;
 }

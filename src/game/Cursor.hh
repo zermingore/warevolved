@@ -22,9 +22,20 @@ public:
   void setFilename(std::string);
 
   // Cursor Motion
+  /** \brief Move the cursor up
+   */
   void moveUp();
+
+  /** \brief Move the cursor down
+   */
   void moveDown();
+
+  /** \brief Move the cursor left
+   */
   void moveLeft();
+
+  /** \brief Move the cursor right
+   */
   void moveRight();
 
 
@@ -34,8 +45,8 @@ private:
   unsigned int _nbLines;
 
   // Cursor specific
-  unsigned int _x;
-  unsigned int _y;
+  unsigned int _x; ///< Cursor x (column) position
+  unsigned int _y; ///< Cursor y (line) position
 
   sf::Sprite* _sprite;
   sf::Texture _texture;
@@ -43,8 +54,8 @@ private:
 
   sf::Clock _timer;
 
-  // store the middle of the sprite coordinates
-  sf::Vector2f _middle; // do not compute its value each frame
+  // middle of the SPRITE coordinates, avoid computing its value each frame
+  sf::Vector2f _middle; ///< middle of the Cursor sprite
 };
 
 #endif /* !CURSOR_HH_ */

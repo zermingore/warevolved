@@ -1,6 +1,8 @@
 #ifndef STATUS_HH_
 # define STATUS_HH_
 
+// TODO should be Setting's daughter ?
+
 class Status
 {
 public:
