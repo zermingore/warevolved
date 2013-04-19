@@ -20,21 +20,22 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 #__top_srcdir__we_LDADD = ${libglfw_LIBS} ${GLEW_LIBS} ${OPENAL_LIBS} ${LIBPQXX_LIBS} ${IMAGE_MAGICK_LIBS}
 
 __top_srcdir__we_SOURCES =	\
-main.cc					\
+main.cc						\
 \
-core/Context.cc			\
-core/GraphicEngine.cc	\
+core/Context.cc				\
 \
-common/System.cc		\
-common/Settings.cc		\
-common/Status.cc		\
+graphics/GraphicEngine.cc	\
 \
-input/KeyManager.cc		\
-input/Event.cc			\
+common/System.cc			\
+common/Settings.cc			\
+common/Status.cc			\
 \
-game/Game.cc			\
-game/Map.cc				\
-game/Cell.cc			\
+input/KeyManager.cc			\
+input/Event.cc				\
+\
+game/Game.cc				\
+game/Map.cc					\
+game/Cell.cc				\
 game/Cursor.cc
 
 

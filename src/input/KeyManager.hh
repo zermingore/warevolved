@@ -3,13 +3,17 @@
 
 # include <common/include.hh>
 
-// timer index
+/** \brief timer index list
+ */
 enum e_timer
 {
   move_up = 0,
   move_down,
   move_left,
   move_right,
+
+  selection,
+
   nb_timer
 };
 
@@ -39,37 +43,45 @@ enum e_keys
 };
 
 
-
 class KeyManager
 {
 public:
+  /** \brief Default Constructor
+   */
   KeyManager();
+  /** \brief Destructor
+   */
   ~KeyManager();
 
   bool up();
   bool down();
   bool left();
   bool right();
-
   bool selection();
 
+  /** \brief Maps keyboard keys to function
+   */
   void mapKeys();
 
-  /// returns the timer number index value (in ms)
+  /** \brief timer value getter
+   ** \param function Function associated to the the timer we're looking for
+   ** \return Timer number index value (in ms)
+   */
   int getTime(e_timer function);
 
   bool ready(e_timer index);
 
   void setReady(e_timer index, bool state);
 
-  /// restarts the clock \param index and sets _timers[index] to 0
+  /** \brief restarts the clock \param index and sets _timers[index] to 0
+   */
   void restartTimer(e_timer index);
 
 
 private:
   sf::Keyboard::Key _keys[nb_keys];
-  sf::Clock _clocks[8];
-  bool _ready[8];
+  sf::Clock _clocks[nb_keys / 2];
+  bool _ready[nb_keys / 2];
 };
 
 #endif /* !KEYMANAGER_HH_ */

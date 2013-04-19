@@ -16,7 +16,18 @@ public:
 
   std::string getFilename();
 
+  /** \brief X (column) coordinate getter
+   */
+  unsigned int getX();
+  /** \brief Y (line) coordinate getter
+   */
+  unsigned int getY();
+
+  /** \brief X (column) coordinate setter
+   */
   void setX(unsigned int x);
+  /** \brief Y (line) coordinate setter
+   */
   void setY(unsigned int y);
 
   void setFilename(std::string);
@@ -25,15 +36,12 @@ public:
   /** \brief Move the cursor up
    */
   void moveUp();
-
   /** \brief Move the cursor down
    */
   void moveDown();
-
   /** \brief Move the cursor left
    */
   void moveLeft();
-
   /** \brief Move the cursor right
    */
   void moveRight();
@@ -51,8 +59,6 @@ private:
   sf::Sprite* _sprite;
   sf::Texture _texture;
   std::string _filename;
-
-  sf::Clock _timer;
 
   // middle of the SPRITE coordinates, avoid computing its value each frame
   sf::Vector2f _middle; ///< middle of the Cursor sprite

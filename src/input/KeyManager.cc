@@ -82,7 +82,6 @@ bool KeyManager::right()
 		  sf::Keyboard::isKeyPressed(_keys[move_right_2]));
 }
 
-
 bool KeyManager::selection()
 {
   return (sf::Keyboard::isKeyPressed(_keys[selection_1]) ||

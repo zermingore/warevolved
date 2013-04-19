@@ -15,8 +15,6 @@ Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
   _texture.loadFromFile(g_player_settings->getCursorFileName());
 
   _sprite = new sf::Sprite(_texture);
-  _timer.restart();
-
   _middle.x = _texture.getSize().x / 2;
   _middle.y = _texture.getSize().y / 2;
 }
@@ -25,6 +23,14 @@ Cursor::~Cursor() {
   delete _sprite;
 }
 
+
+unsigned int Cursor::getX() {
+  return _x;
+}
+
+unsigned int Cursor::getY() {
+  return _y;
+}
 
 sf::Sprite Cursor::getSprite() {
   return *_sprite;

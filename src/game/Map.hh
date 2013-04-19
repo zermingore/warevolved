@@ -23,7 +23,7 @@ public:
    */
   Map(unsigned int nbColumns, unsigned int nbLines);
 
-  /** \brief Default Destructor
+  /** \brief Destructor
    */
   ~Map();
 
@@ -57,11 +57,12 @@ public:
    */
   e_terrains getTerrain(unsigned int x, unsigned int y);
 
+
 private:
   unsigned int _nbColumns; ///< number of columns (x coordinate)
   unsigned int _nbLines; ///< number of lines (y coordinate)
 
-  Cell* _cells;
+  Cell* _cells; ///< Array which contains every cells of the map
 };
 
 #endif /* !MAP_HH_ */

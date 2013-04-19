@@ -1,19 +1,22 @@
 #include <input/Event.hh>
-#include <game/Cursor.hh>
-
+#include <common/Status.hh>
 
 int g_key_repeat_delay;
 
 Event::Event() {
 }
 
-Event::Event(sf::RenderWindow* window, KeyManager* km, Cursor* cursor) :
+Event::Event(sf::RenderWindow* window,
+			 KeyManager* km,
+			 GraphicEngine* ge,
+			 Status* status) :
   _window (window),
   _km (km),
-  _cursor (cursor)
+  _ge (ge),
+  _status (status)
 {
   for (int i = 0; i < nb_timer; ++i)
-  	_km->restartTimer((e_timer) i);
+  	_km->restartTimer(static_cast<e_timer>(i));
 
   g_key_repeat_delay = 150;
 }
@@ -42,8 +45,16 @@ void Event::process()
 
 void Event::game()
 {
-  // if (_km->selection())
-  // 	GameEngine::selectCell();
+  if (_km->selection())
+  {
+	if (!_km->ready(selection))
+	  return;
+
+	_status->cellSelection();
+	// the timer will not be ready until
+	//   g_key_repeat_delay passed OR we release the key pressed
+	_km->setReady(selection, false);
+  }
 
   // ---------- Cursor Motion ---------- //
   if (_km->up())
@@ -51,11 +62,7 @@ void Event::game()
 	if (!_km->ready(move_up))
 	  return;
 
-	_cursor->moveUp();
-
-	// the timer will not be ready until
-	//   g_key_repeat_delay passed or
-	//   we release the key pressed
+	_status->getCursor()->moveUp();
 	_km->setReady(move_up, false);
   }
 
@@ -64,7 +71,7 @@ void Event::game()
 	if (!_km->ready(move_down))
 	  return;
 
-	_cursor->moveDown();
+	_status->getCursor()->moveDown();
 	_km->setReady(move_down, false);
   }
 
@@ -73,7 +80,7 @@ void Event::game()
 	if (!_km->ready(move_left))
 	  return;
 
-	_cursor->moveLeft();
+	_status->getCursor()->moveLeft();
 	_km->setReady(move_left, false);
   }
 
@@ -82,7 +89,7 @@ void Event::game()
 	if (!_km->ready(move_right))
 	  return;
 
-	_cursor->moveRight();
+	_status->getCursor()->moveRight();
 	_km->setReady(move_right, false);
   }
   // ----------------------------------- //
@@ -105,4 +112,7 @@ void Event::resetTimer()
 
   if (!_km->right())
 	_km->restartTimer(move_right);
+
+  if (!_km->selection())
+	_km->restartTimer(selection);
 }

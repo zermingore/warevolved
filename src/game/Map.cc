@@ -3,6 +3,7 @@
 
 
 Map::Map() {
+  // TODO generate a random Map, read one from a file, ...
 }
 
 Map::Map(unsigned int nbColumns, unsigned int nbLines) :

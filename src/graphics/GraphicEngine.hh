@@ -2,11 +2,11 @@
 # define GRAPHICENGINE_HH_
 
 # include <common/include.hh>
+# include <common/Settings.hh>
+# include <common/Status.hh>
 # include <common/units.hh>
 # include <common/terrains.hh>
-# include <common/Settings.hh>
 # include <game/Map.hh>
-# include <game/Cursor.hh>
 
 
 class GraphicEngine
@@ -15,9 +15,9 @@ public:
   /** \brief Default Constructor
    */
   GraphicEngine();
-  GraphicEngine(sf::RenderWindow* window, Map* map, Cursor* cursor);
+  GraphicEngine(sf::RenderWindow* window, Map* map, Status* status);
 
-  /** \brief Default Destructor
+  /** \brief Destructor
    */
   ~GraphicEngine();
 
@@ -56,10 +56,23 @@ private:
    */
   void drawCursor();
 
+  /** \brief Draw Selection Menu
+   ** selection menu pop when you select something
+   **
+   ** \param cell The Cell on which the cursor is
+   */
+  void drawSelectionMenu(Cell* cell);
+
+  /** \brief Draw Selection Menu
+   ** selection menu pop when you select something
+   ** fetches automatically cell on which the cursor is
+   */
+  void drawSelectionMenu();
+
 
   sf::RenderWindow* _window; ///< main rendering window
   Map* _map; ///< pointer on the global map
-  Cursor* _cursor; ///< map Cursor
+  Status* _status;
 
   // space left for rendering
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)

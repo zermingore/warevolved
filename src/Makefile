@@ -219,21 +219,22 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 #__top_srcdir__we_CPPFLAGS += ${libglfw_CFLAGS} ${GLEW_CFLAGS} ${OPENAL_CFLAGS} ${IMAGE_MAGICK_CFLAGS}
 #__top_srcdir__we_LDADD = ${libglfw_LIBS} ${GLEW_LIBS} ${OPENAL_LIBS} ${LIBPQXX_LIBS} ${IMAGE_MAGICK_LIBS}
 __top_srcdir__we_SOURCES = \
-main.cc					\
+main.cc						\
 \
-core/Context.cc			\
-core/GraphicEngine.cc	\
+core/Context.cc				\
 \
-common/System.cc		\
-common/Settings.cc		\
-common/Status.cc		\
+graphics/GraphicEngine.cc	\
 \
-input/KeyManager.cc		\
-input/Event.cc			\
+common/System.cc			\
+common/Settings.cc			\
+common/Status.cc			\
 \
-game/Game.cc			\
-game/Map.cc				\
-game/Cell.cc			\
+input/KeyManager.cc			\
+input/Event.cc				\
+\
+game/Game.cc				\
+game/Map.cc					\
+game/Cell.cc				\
 game/Cursor.cc
 
 all: all-am
@@ -378,19 +379,19 @@ __top_srcdir__we-Context.obj: core/Context.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Context.obj `if test -f 'core/Context.cc'; then $(CYGPATH_W) 'core/Context.cc'; else $(CYGPATH_W) '$(srcdir)/core/Context.cc'; fi`
 
-__top_srcdir__we-GraphicEngine.o: core/GraphicEngine.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-GraphicEngine.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-GraphicEngine.Tpo -c -o __top_srcdir__we-GraphicEngine.o `test -f 'core/GraphicEngine.cc' || echo '$(srcdir)/'`core/GraphicEngine.cc
+__top_srcdir__we-GraphicEngine.o: graphics/GraphicEngine.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-GraphicEngine.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-GraphicEngine.Tpo -c -o __top_srcdir__we-GraphicEngine.o `test -f 'graphics/GraphicEngine.cc' || echo '$(srcdir)/'`graphics/GraphicEngine.cc
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-GraphicEngine.Tpo $(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
-#	$(AM_V_CXX)source='core/GraphicEngine.cc' object='__top_srcdir__we-GraphicEngine.o' libtool=no \
+#	$(AM_V_CXX)source='graphics/GraphicEngine.cc' object='__top_srcdir__we-GraphicEngine.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-GraphicEngine.o `test -f 'core/GraphicEngine.cc' || echo '$(srcdir)/'`core/GraphicEngine.cc
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-GraphicEngine.o `test -f 'graphics/GraphicEngine.cc' || echo '$(srcdir)/'`graphics/GraphicEngine.cc
 
-__top_srcdir__we-GraphicEngine.obj: core/GraphicEngine.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-GraphicEngine.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-GraphicEngine.Tpo -c -o __top_srcdir__we-GraphicEngine.obj `if test -f 'core/GraphicEngine.cc'; then $(CYGPATH_W) 'core/GraphicEngine.cc'; else $(CYGPATH_W) '$(srcdir)/core/GraphicEngine.cc'; fi`
+__top_srcdir__we-GraphicEngine.obj: graphics/GraphicEngine.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-GraphicEngine.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-GraphicEngine.Tpo -c -o __top_srcdir__we-GraphicEngine.obj `if test -f 'graphics/GraphicEngine.cc'; then $(CYGPATH_W) 'graphics/GraphicEngine.cc'; else $(CYGPATH_W) '$(srcdir)/graphics/GraphicEngine.cc'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-GraphicEngine.Tpo $(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
-#	$(AM_V_CXX)source='core/GraphicEngine.cc' object='__top_srcdir__we-GraphicEngine.obj' libtool=no \
+#	$(AM_V_CXX)source='graphics/GraphicEngine.cc' object='__top_srcdir__we-GraphicEngine.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-GraphicEngine.obj `if test -f 'core/GraphicEngine.cc'; then $(CYGPATH_W) 'core/GraphicEngine.cc'; else $(CYGPATH_W) '$(srcdir)/core/GraphicEngine.cc'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-GraphicEngine.obj `if test -f 'graphics/GraphicEngine.cc'; then $(CYGPATH_W) 'graphics/GraphicEngine.cc'; else $(CYGPATH_W) '$(srcdir)/graphics/GraphicEngine.cc'; fi`
 
 __top_srcdir__we-System.o: common/System.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-System.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-System.Tpo -c -o __top_srcdir__we-System.o `test -f 'common/System.cc' || echo '$(srcdir)/'`common/System.cc

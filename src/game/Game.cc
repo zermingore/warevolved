@@ -1,41 +1,37 @@
 #include <game/Game.hh>
-#include <core/GraphicEngine.hh>
-#include <game/Cursor.hh>
+#include <graphics/GraphicEngine.hh>
 #include <input/Event.hh>
 
 
-Game::Game()
-{
+Game::Game() {
   std::cerr << "Must specify a window" << std::endl;
 }
 
 Game::Game(sf::RenderWindow* window) :
   _window (window)
 {
+  // build map
   _map = new Map(8, 8);
 }
 
 Game::~Game()
 {
   delete _map;
-  delete _cursor;
   delete _event;
 }
 
 
-int Game::run()
+void Game::run()
 {
-  _cursor = new Cursor(_map->getNbColumns(), _map->getNbLines());
-  GraphicEngine* graphics = new GraphicEngine(_window, _map, _cursor);
-
-  KeyManager* k = new KeyManager();
-  _event = new Event(_window, k, _cursor);
+  Status* status = new Status(_map);
+  GraphicEngine* graphics = new GraphicEngine(_window, _map, status);
+  KeyManager* km = new KeyManager();
+  _event = new Event(_window, km, graphics, status);
 
   // Start the game loop
   while (_window->isOpen())
   {
 	_event->process(); // should be the first task of the game loop
-
 	graphics->drawScene();
 
 	// Update the window
@@ -43,9 +39,8 @@ int Game::run()
   }
 
 # ifdef DEBUG_LEAKS
-  delete k;
+  delete km;
   delete graphics;
+  delete status;
 # endif
-
-  return 0;
 }

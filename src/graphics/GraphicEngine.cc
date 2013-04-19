@@ -1,16 +1,13 @@
 #include <common/include.hh>
-#include <SFML/Graphics/Color.hpp>
-#include <core/GraphicEngine.hh>
+//#include <SFML/Graphics/Color.hpp>
+#include <graphics/GraphicEngine.hh>
 #include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/Status.hh>
 #include <common/units.hh>
 #include <common/terrains.hh>
-#include <game/Cursor.hh>
 #include <game/Map.hh>
 
-int Status::_panel = 0;
-int Status::_menuBar = 0;
 
 std::string g_filenames_terrains[E_NB_TERRAINS] = {
   "forest"
@@ -24,10 +21,10 @@ std::string g_filenames_units[E_NB_UNITS] = {
 GraphicEngine::GraphicEngine() {
 }
 
-GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Cursor* cursor) :
+GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Status* status) :
   _window (window),
   _map (map),
-  _cursor (cursor)
+  _status (status)
 {
   // initialize render room
   _renderX = _window->getSize().x;
@@ -67,15 +64,14 @@ void GraphicEngine::drawScene()
 {
   this->drawMap();
 
-  if (Status::_panel)
-  	this->drawPanel();
-
-  if (Status::_menuBar)
-  	this->drawMenuBar();
+  this->drawPanel();
+  this->drawMenuBar();
 
   this->drawCells();
   this->drawGrid();
   this->drawCursor();
+
+  this->drawSelectionMenu();
 }
 
 
@@ -86,6 +82,9 @@ void GraphicEngine::drawMap() // TODO
 
 void GraphicEngine::drawPanel()
 {
+  if (_status->getPanelPosition() == E_PANEL_DEACTIVATED)
+	return;
+
   // TODO manage removal
   // TODO update render zone size if there's a new panel
 
@@ -99,6 +98,9 @@ void GraphicEngine::drawPanel()
 
 void GraphicEngine::drawMenuBar()
 {
+  if (_status->getMenuBarPosition() == E_MENU_BAR_DEACTIVATED)
+	return;
+
   // TODO manage removal
   // TODO update render zone size if there's a new bar
 
@@ -166,14 +168,27 @@ void GraphicEngine::drawGrid()
 
 void GraphicEngine::drawCursor()
 {
-  // printing Cursor
-  _window->draw(_cursor->getSprite(_gridOffsetX, _gridOffsetY));
+  _window->draw(_status->getCursor()->getSprite(_gridOffsetX, _gridOffsetY));
 }
 
 
-// void GraphicEngine::drawSelectionMenu(Cell* cell)
-// {
-//   // for (unsigned int i = 0; i < nb_sections; ++i)
+void GraphicEngine::drawSelectionMenu()
+{
+  // draw this menu only if requested
+  if (!_status->getSelectionActive())
+	return;
 
-//   _window->draw
-// }
+
+  //std::cout << _status->getCursor()->getX() << ", " << _status->getCursor()->getY() << std::endl;
+
+  // did not click on an unit
+  if (_map->getUnit(_status->getCursor()->getX(), _status->getCursor()->getY()) == E_UNIT_NONE)
+  {
+	// display next turn panel
+#   ifdef DEBUG
+	std::cout << "NO UNIT" << std::endl;
+#   endif
+	return;
+  }
+
+}
