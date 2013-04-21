@@ -6,6 +6,7 @@
 # include <common/Status.hh>
 # include <common/units.hh>
 # include <common/terrains.hh>
+# include <common/interface.hh>
 # include <game/Map.hh>
 
 
@@ -81,8 +82,11 @@ private:
   int _gridOffsetX; ///< From where we start drawing horizontally (in px)
   int _gridOffsetY; ///< From where we start drawing vertically (in px)
 
-  sf::Texture* _spritesUnits[E_NB_UNITS]; ///< units sprites
-  sf::Texture* _spritesTerrains[E_NB_TERRAINS]; ///< terrains sprites
+  sf::Texture* _spritesUnits[E_UNITS_NB_UNITS]; ///< units sprites
+  sf::Texture* _spritesTerrains[E_TERRAINS_NB_TERRAINS]; ///< terrains sprites
+  sf::Texture* _spritesInterface[E_INTERFACE_NB_INTERFACE]; ///< interface sprites
+
+  sf::Font _fontArmy; ///< menu font (US Army design)
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

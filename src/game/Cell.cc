@@ -4,8 +4,8 @@
 #include <common/include.hh>
 
 Cell::Cell() :
-  _terrain (E_FOREST), // we put a default terrain
-  _unit (E_UNIT_NONE)
+  _terrain (E_TERRAINS_FOREST), // we put a default terrain
+  _unit (E_UNITS_NONE)
 {
 }
 

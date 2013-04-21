@@ -4,10 +4,11 @@
 
 int main(int ac, char **av)
 {
+  bool fullscreen = false;
   if (ac > 1) // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
-	std::cout << av[0] << " does not support arguments, for now" << std::endl;
+	fullscreen = true;
 
-  Context* context = new Context(false); // bool: no full-screen
+  Context* context = new Context(fullscreen);
   Game* game = new Game(context->init());
   game->run();
 

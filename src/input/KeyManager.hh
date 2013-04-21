@@ -8,12 +8,12 @@
  */
 enum e_timer
 {
-  E_MOVE_UP = 0,
-  E_MOVE_DOWN,
-  E_MOVE_LEFT,
-  E_MOVE_RIGHT,
+  E_TIMER_MOVE_UP = 0,
+  E_TIMER_MOVE_DOWN,
+  E_TIMER_MOVE_LEFT,
+  E_TIMER_MOVE_RIGHT,
 
-  E_NB_TIMERS
+  E_TIMER_NB_TIMERS
 };
 
 
@@ -22,9 +22,9 @@ enum e_timer
  */
 enum e_switch
 {
-  E_SELECTION = 0,
+  E_SWITCH_SELECTION = 0,
 
-  E_NB_SWITCHES
+  E_SWITCH_NB_SWITCHES
 };
 
 
@@ -32,24 +32,26 @@ enum e_switch
 enum e_key
 {
   // motion keys
-  E_MOVE_UP_1 = 0,
-  E_MOVE_UP_2,
-  E_MOVE_DOWN_1,
-  E_MOVE_DOWN_2,
-  E_MOVE_LEFT_1,
-  E_MOVE_LEFT_2,
-  E_MOVE_RIGHT_1,
-  E_MOVE_RIGHT_2,
+  E_KEY_MOVE_UP_1 = 0,
+  E_KEY_MOVE_UP_2,
+  E_KEY_MOVE_DOWN_1,
+  E_KEY_MOVE_DOWN_2,
+  E_KEY_MOVE_LEFT_1,
+  E_KEY_MOVE_LEFT_2,
+  E_KEY_MOVE_RIGHT_1,
+  E_KEY_MOVE_RIGHT_2,
 
   // action keys
-  E_SELECTION_1,
-  E_SELECTION_2,
+  E_KEY_SELECTION_1,
+  E_KEY_SELECTION_2,
 
-  // interface keys
-  E_MENUBAR,
-  E_PANEL,
+  // menu keys
+  E_KEY_MENUBAR_1,
+  E_KEY_MENUBAR_2,
+  E_KEY_PANEL_1,
+  E_KEY_PANEL_2,
 
-  E_NB_KEYS
+  E_KEY_NB_KEYS
 };
 
 
@@ -101,10 +103,10 @@ public:
 
 
 private:
-  sf::Keyboard::Key _keys[E_NB_KEYS];
-  sf::Clock _clocks[E_NB_TIMERS];
-  bool _ready[E_NB_TIMERS];
-  bool _switches[E_NB_SWITCHES];
+  sf::Keyboard::Key _keys[E_KEY_NB_KEYS];
+  sf::Clock _clocks[E_TIMER_NB_TIMERS];
+  bool _ready[E_TIMER_NB_TIMERS];
+  bool _switches[E_SWITCH_NB_SWITCHES];
 };
 
 #endif /* !KEYMANAGER_HH_ */

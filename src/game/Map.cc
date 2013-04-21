@@ -13,7 +13,7 @@ Map::Map(unsigned int nbColumns, unsigned int nbLines) :
   _cells = new Cell[nbColumns * nbLines];
 
   // TODO read informations from a map file
-  _cells[12].setUnit(E_SOLDIERS);
+  _cells[12].setUnit(E_UNITS_SOLDIERS);
 }
 
 Map::~Map() {

@@ -4,7 +4,8 @@
 ** DONE make the cursor move
    CLOSED: [2013-04-17 Wed 16:41]
 ** TODO use the mouse to make it move
-** TODO selection, pop panel / bar: no key repeat allowed
+** DONE selection, pop panel / bar: no key repeat allowed
+   CLOSED: [2013-04-21 Sun 21:56]
    set a boolean when pressed OR released
 
 * TODO Game
@@ -14,6 +15,7 @@
 * TODO Code Design
 ** TODO [#A] really use Settings class (key repeat delay, ...) should be in it
 ** TODO make an Event Manager test with boost signals (emulate callbacks)
+** TODO Resources Manager
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
@@ -21,9 +23,13 @@
    for now: rotation && re-sizing (linked together)
 ** TODO implement scrolling
 ** TODO Apply a background to the main window
-** TODO selection menu
-*** TODO add texture to buttons
-*** TODO add text to buttons
+** DONE selection menu
+   CLOSED: [2013-04-21 Sun 21:50]
+*** DONE add texture to buttons
+	 CLOSED: [2013-04-21 Sun 21:50]
+*** DONE add text to buttons
+	 CLOSED: [2013-04-21 Sun 21:50]
+
 
 * TODO Gameplay
 ** TODO Meteo
@@ -56,6 +62,7 @@
 
 * TODO Graphic Engine
 ** TODO Units orientation
+   only graphic attribute ?
 ** TODO Libraries
 *** TODO switch 'on demand' (at compilation time)
 	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
@@ -79,4 +86,6 @@
    CLOSED: [2013-04-19 Fri 16:33]
    was a rendering zone room trouble
 ** TODO Memory Leaks
-   current ref: 64B definitely lost
+*** TODO Definitely Lost
+	current ref: 64B definitely lost
+	failure 21 april: 96B

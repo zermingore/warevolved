@@ -1,5 +1,4 @@
 #include <common/include.hh>
-//#include <SFML/Graphics/Color.hpp>
 #include <graphics/GraphicEngine.hh>
 #include <common/constants.hh>
 #include <common/globals.hh>
@@ -9,12 +8,16 @@
 #include <game/Map.hh>
 
 
-std::string g_filenames_terrains[E_NB_TERRAINS] = {
+std::string g_filenames_terrains[E_TERRAINS_NB_TERRAINS] = {
   "forest"
 };
 
-std::string g_filenames_units[E_NB_UNITS] = {
+std::string g_filenames_units[E_UNITS_NB_UNITS] = {
   "soldiers"
+};
+
+std::string g_filenames_interface[E_INTERFACE_NB_INTERFACE] = {
+  "selection_menu_button"
 };
 
 
@@ -34,6 +37,8 @@ GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Status* status)
   _gridOffsetX = (_renderX - g_cell_size * _map->getNbColumns()) / 2;
   _gridOffsetY = (_renderY - g_cell_size * _map->getNbLines()) / 2;
 
+  _fontArmy.loadFromFile(static_cast<std::string>(FONTS_FOLDER) + "army.ttf");
+
   this->initSprites();
 }
 
@@ -46,16 +51,22 @@ GraphicEngine::~GraphicEngine()
 
 void GraphicEngine::initSprites()
 {
-  for (unsigned int i = 0; i < E_NB_TERRAINS; ++i)
+  for (unsigned int i = 0; i < E_TERRAINS_NB_TERRAINS; ++i)
   {
 	_spritesTerrains[i] = new sf::Texture();
 	_spritesTerrains[i]->loadFromFile(TERRAINS_FOLDER + g_filenames_terrains[i] + ".png");
   }
 
-  for (unsigned int i = 0; i < E_NB_UNITS; ++i)
+  for (unsigned int i = 0; i < E_UNITS_NB_UNITS; ++i)
   {
 	_spritesUnits[i] = new sf::Texture();
 	_spritesUnits[i]->loadFromFile(UNITS_FOLDER + g_filenames_units[i] + ".png");
+  }
+
+  for (unsigned int i = 0; i < E_INTERFACE_NB_INTERFACE; ++i)
+  {
+	_spritesInterface[i] = new sf::Texture();
+	_spritesInterface[i]->loadFromFile(INTERFACE_IN_GAME_MENU_FOLDER + g_filenames_interface[i] + ".png");
   }
 }
 
@@ -127,7 +138,7 @@ void GraphicEngine::drawCells()
   	  _window->draw(rectangle);
 
 	  e_units unit  = _map->getUnit(i, j);
-	  if (unit != E_UNIT_NONE)
+	  if (unit != E_UNITS_NONE)
 	  {
 		rectangle.setTexture(_spritesUnits[unit]);
 		_window->draw(rectangle);
@@ -181,7 +192,7 @@ void GraphicEngine::drawSelectionMenu()
 
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(2 * g_cell_size, g_cell_size));
-  // TODO rectangle.setTexture(_spritesInterface[menu_button]);
+  rectangle.setTexture(_spritesInterface[E_INTERFACE_IN_GAME_MENU_SELECTION_MENU_BUTTON]);
 
   unsigned int curs_x = _status->getCursor()->getX();
   unsigned int curs_y = _status->getCursor()->getY();
@@ -193,14 +204,25 @@ void GraphicEngine::drawSelectionMenu()
   // show unit section only if we selected a unit
   // TODO check if we can control it
   // here, we cannot use cursor's position, we could have move the unit
-  if (_map->getUnit(_status->getSelectedCell()) != E_UNIT_NONE)
+  if (_map->getUnit(_status->getSelectedCell()) != E_UNITS_NONE)
   {
 	rectangle.setPosition(v_rect);
 	_window->draw(rectangle);
 	v_rect -= sf::Vector2f(0, g_cell_size);
+
+	// adding text on the button
+	sf::Text label("Move", _fontArmy); // TODO hard-coded
+	label.setCharacterSize(g_cell_size / 2);
+	label.setPosition(rectangle.getPosition());
+	_window->draw(label);
   }
 
   // next turn button
   rectangle.setPosition(v_rect);
   _window->draw(rectangle);
+
+  sf::Text label("Next\n\tTurn", _fontArmy); // TODO hard-coded
+  label.setCharacterSize(g_cell_size / 2);
+  label.setPosition(rectangle.getPosition());
+  _window->draw(label);
 }

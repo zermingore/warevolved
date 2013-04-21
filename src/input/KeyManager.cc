@@ -4,7 +4,7 @@
 
 KeyManager::KeyManager()
 {
-  for (unsigned int i = 0; i < E_NB_TIMERS; ++i)
+  for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
 	_ready[i] = true;
 
   this->mapKeys();
@@ -17,18 +17,24 @@ void KeyManager::mapKeys()
 {
   // read configuration file to retrieve these values
   // use Settings Class
-  _keys[E_MOVE_UP_1] = sf::Keyboard::Up;
-  _keys[E_MOVE_UP_2] = sf::Keyboard::W;
-  _keys[E_MOVE_DOWN_1] = sf::Keyboard::Down;
-  _keys[E_MOVE_DOWN_2] = sf::Keyboard::S;
-  _keys[E_MOVE_LEFT_1] = sf::Keyboard::Left;
-  _keys[E_MOVE_LEFT_2] = sf::Keyboard::A;
-  _keys[E_MOVE_RIGHT_1] = sf::Keyboard::Right;
-  _keys[E_MOVE_RIGHT_2] = sf::Keyboard::D;
+  _keys[E_KEY_MOVE_UP_1] = sf::Keyboard::Up;
+  _keys[E_KEY_MOVE_UP_2] = sf::Keyboard::W;
+  _keys[E_KEY_MOVE_DOWN_1] = sf::Keyboard::Down;
+  _keys[E_KEY_MOVE_DOWN_2] = sf::Keyboard::S;
+  _keys[E_KEY_MOVE_LEFT_1] = sf::Keyboard::Left;
+  _keys[E_KEY_MOVE_LEFT_2] = sf::Keyboard::A;
+  _keys[E_KEY_MOVE_RIGHT_1] = sf::Keyboard::Right;
+  _keys[E_KEY_MOVE_RIGHT_2] = sf::Keyboard::D;
 
   // action keys
-  _keys[E_SELECTION_1] = sf::Keyboard::Space;
-  _keys[E_SELECTION_2] = sf::Keyboard::Return;
+  _keys[E_KEY_SELECTION_1] = sf::Keyboard::Space;
+  _keys[E_KEY_SELECTION_2] = sf::Keyboard::Return;
+
+  // menu keys
+  _keys[E_KEY_MENUBAR_1] = sf::Keyboard::F3;
+  _keys[E_KEY_MENUBAR_2] = sf::Keyboard::F3;
+  _keys[E_KEY_PANEL_1] = sf::Keyboard::F2;
+  _keys[E_KEY_PANEL_2] = sf::Keyboard::F2;
 }
 
 int KeyManager::getTime(e_timer function) {
@@ -65,30 +71,30 @@ void KeyManager::restartTimer(e_timer index)
 
 bool KeyManager::up()
 {
-  return (sf::Keyboard::isKeyPressed(_keys[E_MOVE_UP_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_MOVE_UP_2]));
+  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_UP_1]) ||
+		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_UP_2]));
 }
 
 bool KeyManager::down()
 {
-  return (sf::Keyboard::isKeyPressed(_keys[E_MOVE_DOWN_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_MOVE_DOWN_2]));
+  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_DOWN_1]) ||
+		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_DOWN_2]));
 }
 
 bool KeyManager::left()
 {
-  return (sf::Keyboard::isKeyPressed(_keys[E_MOVE_LEFT_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_MOVE_LEFT_2]));
+  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_LEFT_1]) ||
+		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_LEFT_2]));
 }
 
 bool KeyManager::right()
 {
-  return (sf::Keyboard::isKeyPressed(_keys[E_MOVE_RIGHT_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_MOVE_RIGHT_2]));
+  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_RIGHT_1]) ||
+		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_RIGHT_2]));
 }
 
 bool KeyManager::selection()
 {
-  return (sf::Keyboard::isKeyPressed(_keys[E_SELECTION_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_SELECTION_2]));
+  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_SELECTION_1]) ||
+		  sf::Keyboard::isKeyPressed(_keys[E_KEY_SELECTION_2]));
 }

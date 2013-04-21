@@ -15,7 +15,7 @@ Event::Event(sf::RenderWindow* window,
   _ge (ge),
   _status (status)
 {
-  for (int i = 0; i < E_NB_TIMERS; ++i)
+  for (int i = 0; i < E_TIMER_NB_TIMERS; ++i)
   	_km->restartTimer(static_cast<e_timer>(i));
 
   g_key_repeat_delay = 150;
@@ -59,47 +59,47 @@ void Event::panel()
 
 void Event::menu()
 {
-  if (_km->selection() && _km->getSwitchStatus(E_SELECTION) == OFF)
+  if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
-	_km->setSwitchStatus(E_SELECTION, ON);
+	_km->setSwitchStatus(E_SWITCH_SELECTION, ON);
 	_status->setSelectionMode(false);
   }
 }
 
 void Event::game()
 {
-  if (_km->selection() && _km->getSwitchStatus(E_SELECTION) == OFF)
+  if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
 	_status->cellSelection();
-	_km->setSwitchStatus(E_SELECTION, ON);
+	_km->setSwitchStatus(E_SWITCH_SELECTION, ON);
 	_status->setSelectionMode(true);
   }
 
   // ---------- Cursor Motion ---------- //
-  if (_km->up() && _km->ready(E_MOVE_UP))
+  if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
 	_status->getCursor()->moveUp();
 	// the timer will not be ready until
 	//   g_key_repeat_delay passed OR we release the key pressed
-	_km->setReady(E_MOVE_UP, false);
+	_km->setReady(E_TIMER_MOVE_UP, false);
   }
 
-  if (_km->down() && _km->ready(E_MOVE_DOWN))
+  if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
   {
 	_status->getCursor()->moveDown();
-	_km->setReady(E_MOVE_DOWN, false);
+	_km->setReady(E_TIMER_MOVE_DOWN, false);
   }
 
-  if (_km->left() && _km->ready(E_MOVE_LEFT))
+  if (_km->left() && _km->ready(E_TIMER_MOVE_LEFT))
   {
 	_status->getCursor()->moveLeft();
-	_km->setReady(E_MOVE_LEFT, false);
+	_km->setReady(E_TIMER_MOVE_LEFT, false);
   }
 
-  if (_km->right() && _km->ready(E_MOVE_RIGHT))
+  if (_km->right() && _km->ready(E_TIMER_MOVE_RIGHT))
   {
 	_status->getCursor()->moveRight();
-	_km->setReady(E_MOVE_RIGHT, false);
+	_km->setReady(E_TIMER_MOVE_RIGHT, false);
   }
   // ----------------------------------- //
 }
@@ -111,17 +111,20 @@ void Event::releasedKeys()
   // (in case 2 keys are pressed simultaneously)
 
   if (!_km->up())
-	_km->restartTimer(E_MOVE_UP);
+	_km->restartTimer(E_TIMER_MOVE_UP);
 
   if (!_km->down())
-	_km->restartTimer(E_MOVE_DOWN);
+	_km->restartTimer(E_TIMER_MOVE_DOWN);
 
   if (!_km->left())
-	_km->restartTimer(E_MOVE_LEFT);
+	_km->restartTimer(E_TIMER_MOVE_LEFT);
 
   if (!_km->right())
-	_km->restartTimer(E_MOVE_RIGHT);
+	_km->restartTimer(E_TIMER_MOVE_RIGHT);
 
-  if (!_km->selection() && _km->getSwitchStatus(E_SELECTION) == ON)
-	_km->setSwitchStatus(E_SELECTION, OFF);
+  if (!_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == ON)
+	_km->setSwitchStatus(E_SWITCH_SELECTION, OFF);
+
+  if (!_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == ON)
+	_km->setSwitchStatus(E_SWITCH_SELECTION, OFF);
 }

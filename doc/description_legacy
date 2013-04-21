@@ -1,0 +1,5 @@
+A tactical RPG game, originally built in C/SDL, now writing it in C++, using<br/>
+SFML (http://www.sfml-dev.org/)<br/>
+autotools (http://www.lrde.epita.fr/~adl/autotools.html)<br/>
+<br/>
+Game Concept is still under study though...

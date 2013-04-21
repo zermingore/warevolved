@@ -7,13 +7,13 @@
  */
 enum e_terrains
 {
-  E_FOREST = 0,
+  E_TERRAINS_FOREST = 0,
 
-  E_NB_TERRAINS,
-  E_TERRAIN_NONE
+  E_TERRAINS_NB_TERRAINS,
+  E_TERRAINS_TERRAIN_NONE
 };
 
 // array which contents all terrains file names (filled by the GraphicEngine)
-extern std::string g_filenames_terrains[E_NB_TERRAINS];
+extern std::string g_filenames_terrains[E_TERRAINS_NB_TERRAINS];
 
 #endif /* !TERRAINS_HH_ */

@@ -3,7 +3,7 @@
 #include <common/Settings.hh>
 #include <common/globals.hh>
 
-unsigned int g_cell_size = 64; // > arbitrary value, in px <
+unsigned int g_cell_size = 64; // TODO change dynamically (in px)
 unsigned int g_grid_thickness = 5;
 Settings* g_player_settings;
 

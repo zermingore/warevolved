@@ -5,12 +5,12 @@
 
 enum e_units
 {
-  E_SOLDIERS = 0,
+  E_UNITS_SOLDIERS = 0,
 
-  E_NB_UNITS,
-  E_UNIT_NONE
+  E_UNITS_NB_UNITS,
+  E_UNITS_NONE
 };
 
-extern std::string g_filenames_units[E_NB_UNITS];
+extern std::string g_filenames_units[E_UNITS_NB_UNITS];
 
 #endif /* !UNITS_HH_ */
