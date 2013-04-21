@@ -10,7 +10,8 @@ Status::Status(Map* map) :
   _map (map),
   _panelPosition (E_PANEL_DEACTIVATED),
   _menuBarPosition (E_MENU_BAR_DEACTIVATED),
-  _selectionActive (false)
+  _eventMode (E_EVENT_IN_GAME), // TODO
+  _selectionMode (false)
 {
   _cursor = new Cursor(_map->getNbColumns(), _map->getNbLines());
 }
@@ -23,7 +24,6 @@ Cursor* Status::getCursor() {
   return _cursor;
 }
 
-
 e_panel_position Status::getPanelPosition() {
   return _panelPosition;
 }
@@ -32,23 +32,30 @@ e_menu_bar_position Status::getMenuBarPosition() {
   return _menuBarPosition;
 }
 
+bool Status::getSelectionMode() {
+  return _selectionMode;
+}
 
-bool Status::getSelectionActive() {
-  return _selectionActive;
+e_event_mode Status::getEventMode() {
+  return _eventMode;
 }
 
 sf::Vector2f Status::getSelectedCell() {
   return _selectedCell;
 }
 
+void Status::setSelectionMode(bool selection_mode) {
+  _selectionMode = selection_mode;
+}
+
 void Status::cellSelection()
 {
-  if (!_selectionActive)
+  if (!_selectionMode)
   {
 	_selectedCell.x = _cursor->getX();
 	_selectedCell.y = _cursor->getY();
   }
 
   // updating selection state
-  _selectionActive = !_selectionActive;
+  _selectionMode = !_selectionMode;
 }

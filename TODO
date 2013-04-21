@@ -11,12 +11,19 @@
 ** TODO [#A] Selection (drag and drop units)
 ** TODO path-finding
 
+* TODO Code Design
+** TODO [#A] really use Settings class (key repeat delay, ...) should be in it
+** TODO make an Event Manager test with boost signals (emulate callbacks)
+
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
    CLOSED: [2013-04-18 Thu 14:47]
    for now: rotation && re-sizing (linked together)
 ** TODO implement scrolling
 ** TODO Apply a background to the main window
+** TODO selection menu
+*** TODO add texture to buttons
+*** TODO add text to buttons
 
 * TODO Gameplay
 ** TODO Meteo
@@ -29,7 +36,8 @@
 ** TODO dual windows (main window / infos panel)
 
 * TODO Interface
-** TODO draw selection menu
+** DONE draw selection menu
+   CLOSED: [2013-04-21 Sun 11:17]
    position = f(selectedCell)
 ** TODO Informations Panel (cell type, ...)
 ** TODO Menu Bar
@@ -55,6 +63,9 @@
 * TODO Menu
 ** TODO Stack implementation
 
+* TODO Tools
+** TODO memory leaks checker before commit
+** TODO non-regression tests
 
 * TODO Bugs / Features
 ** DONE [#B] Add Doxygen Comments in headers
@@ -67,6 +78,5 @@
 ** DONE map initialisation failure
    CLOSED: [2013-04-19 Fri 16:33]
    was a rendering zone room trouble
-** TODO [#A] really use Settings class (key repeat delay, ...) should be in it
 ** TODO Memory Leaks
    current ref: 64B definitely lost

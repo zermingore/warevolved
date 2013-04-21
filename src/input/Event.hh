@@ -12,6 +12,7 @@ class Event
 {
 public:
   /** \brief Default Constructor
+   **   processes input events
    */
   Event();
   Event(sf::RenderWindow* window,
@@ -30,7 +31,16 @@ public:
 
 
 private:
-  /** \brief processes all game events
+  /** Processes events relative to panel requests (show, save game, ...)
+   */
+  void panel();
+
+  /** \brief Processes events while we're in a menu
+   **   (for example arrows do not move game cursor but menu cursor)
+   */
+  void menu();
+
+  /** \brief Processes all game events
    */
   void game();
 

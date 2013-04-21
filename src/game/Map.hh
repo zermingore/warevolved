@@ -46,6 +46,15 @@ public:
    */
   e_units getUnit(unsigned int x, unsigned int y);
 
+  /** \brief gets the unit at v's coordinates
+   **
+   ** \param v targeted cell's coordinates
+   **
+   ** \return the enum index in e_unit matching the unit
+   **   located at coordinates (v.x, v.y)
+   */
+  e_units getUnit(sf::Vector2f v);
+
 
   /** \brief gets the terrain at coordinates (x, y)
    **

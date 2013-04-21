@@ -168,6 +168,7 @@ void GraphicEngine::drawGrid()
 
 void GraphicEngine::drawCursor()
 {
+  //if (_status->getCursor->getVisible())
   _window->draw(_status->getCursor()->getSprite(_gridOffsetX, _gridOffsetY));
 }
 
@@ -175,26 +176,31 @@ void GraphicEngine::drawCursor()
 void GraphicEngine::drawSelectionMenu()
 {
   // draw this menu only if requested
-  if (!_status->getSelectionActive())
+  if (!_status->getSelectionMode())
 	return;
 
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(2 * g_cell_size, g_cell_size));
-  //rectangle.setTexture(_spritesTerrains[terrain]);
+  // TODO rectangle.setTexture(_spritesInterface[menu_button]);
 
-  rectangle.setPosition(_status->getCursor()->getX() + _gridOffsetX, _status->getCursor()->getY() + _gridOffsetY);
+  unsigned int curs_x = _status->getCursor()->getX();
+  unsigned int curs_y = _status->getCursor()->getY();
+
+  // TODO sets the menu at right (cursor-relative) position
+  sf::Vector2f v_rect = sf::Vector2f((curs_x + 1) * g_cell_size + _gridOffsetX,
+									 curs_y * g_cell_size + _gridOffsetY);
+
+  // show unit section only if we selected a unit
+  // TODO check if we can control it
+  // here, we cannot use cursor's position, we could have move the unit
+  if (_map->getUnit(_status->getSelectedCell()) != E_UNIT_NONE)
+  {
+	rectangle.setPosition(v_rect);
+	_window->draw(rectangle);
+	v_rect -= sf::Vector2f(0, g_cell_size);
+  }
+
+  // next turn button
+  rectangle.setPosition(v_rect);
   _window->draw(rectangle);
-
-
-  //std::cout << _status->getCursor()->getX() << ", " << _status->getCursor()->getY() << std::endl;
-
-  // did not click on an unit
-//   if (_map->getUnit(_status->getCursor()->getX(), _status->getCursor()->getY()) == E_UNIT_NONE)
-//   {
-// 	// display next turn panel
-// #   ifdef DEBUG
-// 	std::cout << "NO UNIT" << std::endl;
-// #   endif
-// 	return;
-//   }
 }
