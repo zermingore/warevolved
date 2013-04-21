@@ -2,44 +2,54 @@
 # define KEYMANAGER_HH_
 
 # include <common/include.hh>
+# include <common/constants.hh>
 
 /** \brief timer index list
  */
 enum e_timer
 {
-  move_up = 0,
-  move_down,
-  move_left,
-  move_right,
+  E_MOVE_UP = 0,
+  E_MOVE_DOWN,
+  E_MOVE_LEFT,
+  E_MOVE_RIGHT,
 
-  selection,
+  E_NB_TIMERS
+};
 
-  nb_timer
+
+/** \brief switches (on /off) keys
+ ** they don't allow key-repeating
+ */
+enum e_switch
+{
+  E_SELECTION = 0,
+
+  E_NB_SWITCHES
 };
 
 
 // keys index
-enum e_keys
+enum e_key
 {
   // motion keys
-  move_up_1 = 0,
-  move_up_2,
-  move_down_1,
-  move_down_2,
-  move_left_1,
-  move_left_2,
-  move_right_1,
-  move_right_2,
+  E_MOVE_UP_1 = 0,
+  E_MOVE_UP_2,
+  E_MOVE_DOWN_1,
+  E_MOVE_DOWN_2,
+  E_MOVE_LEFT_1,
+  E_MOVE_LEFT_2,
+  E_MOVE_RIGHT_1,
+  E_MOVE_RIGHT_2,
 
   // action keys
-  selection_1,
-  selection_2,
+  E_SELECTION_1,
+  E_SELECTION_2,
 
   // interface keys
-  menubar,
-  panel,
+  E_MENUBAR,
+  E_PANEL,
 
-  nb_keys
+  E_NB_KEYS
 };
 
 
@@ -69,6 +79,18 @@ public:
    */
   int getTime(e_timer function);
 
+  /** \brief switch getter
+   ** \param index _switches index to retrieve
+   ** \return switch status
+   */
+  bool getSwitchStatus(e_switch index);
+
+  /** \brief switch getter
+   ** \param s Switch to retrieve
+   ** \return switch status
+   */
+  void setSwitchStatus(e_switch index, bool status);
+
   bool ready(e_timer index);
 
   void setReady(e_timer index, bool state);
@@ -79,9 +101,10 @@ public:
 
 
 private:
-  sf::Keyboard::Key _keys[nb_keys];
-  sf::Clock _clocks[nb_keys / 2];
-  bool _ready[nb_keys / 2];
+  sf::Keyboard::Key _keys[E_NB_KEYS];
+  sf::Clock _clocks[E_NB_TIMERS];
+  bool _ready[E_NB_TIMERS];
+  bool _switches[E_NB_SWITCHES];
 };
 
 #endif /* !KEYMANAGER_HH_ */

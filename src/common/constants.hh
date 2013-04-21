@@ -6,4 +6,7 @@
 # define TERRAINS_FOLDER "resources/terrains/"
 # define UNITS_FOLDER "resources/units/"
 
+# define ON true
+# define OFF false
+
 #endif /* !CONSTANTS_HH_ */

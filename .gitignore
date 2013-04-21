@@ -15,7 +15,9 @@ src/.deps/
 
 src/tst.png
 
+# personal files
 valgrind_log*
+commit
 
 # Emacs TAGS
 TAGS

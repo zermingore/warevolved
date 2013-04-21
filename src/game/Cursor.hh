@@ -7,6 +7,8 @@
 class Cursor
 {
 public:
+  /** Default Constructor
+   */
   Cursor();
   Cursor(unsigned int nbColumns, unsigned int nbLines);
   ~Cursor();

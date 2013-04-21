@@ -49,6 +49,10 @@ public:
    */
   bool getSelectionActive();
 
+  /** \brief returns selected cell's coordinates
+   */
+  sf::Vector2f getSelectedCell();
+
   /** \brief notify the Status that a cell was clicked
    ** it sets up _selectionActive to
    **   true if we're now in selection mode

@@ -9,7 +9,8 @@ Status::Status() {
 Status::Status(Map* map) :
   _map (map),
   _panelPosition (E_PANEL_DEACTIVATED),
-  _menuBarPosition (E_MENU_BAR_DEACTIVATED)
+  _menuBarPosition (E_MENU_BAR_DEACTIVATED),
+  _selectionActive (false)
 {
   _cursor = new Cursor(_map->getNbColumns(), _map->getNbLines());
 }
@@ -36,6 +37,9 @@ bool Status::getSelectionActive() {
   return _selectionActive;
 }
 
+sf::Vector2f Status::getSelectedCell() {
+  return _selectedCell;
+}
 
 void Status::cellSelection()
 {

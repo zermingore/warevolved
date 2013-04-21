@@ -4,6 +4,8 @@
 ** DONE make the cursor move
    CLOSED: [2013-04-17 Wed 16:41]
 ** TODO use the mouse to make it move
+** TODO selection, pop panel / bar: no key repeat allowed
+   set a boolean when pressed OR released
 
 * TODO Game
 ** TODO [#A] Selection (drag and drop units)
@@ -27,6 +29,8 @@
 ** TODO dual windows (main window / infos panel)
 
 * TODO Interface
+** TODO draw selection menu
+   position = f(selectedCell)
 ** TODO Informations Panel (cell type, ...)
 ** TODO Menu Bar
 ** TODO Configuration file
@@ -42,9 +46,11 @@
 ** TODO Windows
 ** TODO Mac OS
 
-* TODO Graphic Engine Libraries
-** TODO switch 'on demand' (at compilation time)
-   use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
+* TODO Graphic Engine
+** TODO Units orientation
+** TODO Libraries
+*** TODO switch 'on demand' (at compilation time)
+	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 
 * TODO Menu
 ** TODO Stack implementation
@@ -63,3 +69,4 @@
    was a rendering zone room trouble
 ** TODO [#A] really use Settings class (key repeat delay, ...) should be in it
 ** TODO Memory Leaks
+   current ref: 64B definitely lost

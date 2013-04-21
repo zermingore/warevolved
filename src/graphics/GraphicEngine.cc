@@ -178,17 +178,23 @@ void GraphicEngine::drawSelectionMenu()
   if (!_status->getSelectionActive())
 	return;
 
+  sf::RectangleShape rectangle;
+  rectangle.setSize(sf::Vector2f(2 * g_cell_size, g_cell_size));
+  //rectangle.setTexture(_spritesTerrains[terrain]);
+
+  rectangle.setPosition(_status->getCursor()->getX() + _gridOffsetX, _status->getCursor()->getY() + _gridOffsetY);
+  _window->draw(rectangle);
+
 
   //std::cout << _status->getCursor()->getX() << ", " << _status->getCursor()->getY() << std::endl;
 
   // did not click on an unit
-  if (_map->getUnit(_status->getCursor()->getX(), _status->getCursor()->getY()) == E_UNIT_NONE)
-  {
-	// display next turn panel
-#   ifdef DEBUG
-	std::cout << "NO UNIT" << std::endl;
-#   endif
-	return;
-  }
-
+//   if (_map->getUnit(_status->getCursor()->getX(), _status->getCursor()->getY()) == E_UNIT_NONE)
+//   {
+// 	// display next turn panel
+// #   ifdef DEBUG
+// 	std::cout << "NO UNIT" << std::endl;
+// #   endif
+// 	return;
+//   }
 }

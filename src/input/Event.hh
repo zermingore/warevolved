@@ -30,13 +30,15 @@ public:
 
 
 private:
-  /** \brief process all game events
+  /** \brief processes all game events
    */
   void game();
 
-  /** \brief reset the key timer matching the released key
+  /** \brief Looks for any released key.
+   **   Reset the key timer matching the released key (if any)
+   **   Reset switches if needed
    */
-  void resetTimer();
+  void releasedKeys();
 
   sf::RenderWindow* _window; ///< main rendering window
   sf::Event _event; ///< Event Manager
