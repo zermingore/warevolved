@@ -17,7 +17,8 @@ std::string g_filenames_units[E_UNITS_NB_UNITS] = {
 };
 
 std::string g_filenames_interface[E_INTERFACE_NB_INTERFACE] = {
-  "selection_menu_button"
+  "selection_menu_button",
+  "selection_menu_selection"
 };
 
 
@@ -27,7 +28,8 @@ GraphicEngine::GraphicEngine() {
 GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Status* status) :
   _window (window),
   _map (map),
-  _status (status)
+  _status (status),
+  _selectedEntry (1)
 {
   // initialize render room
   _renderX = _window->getSize().x;
@@ -44,8 +46,13 @@ GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Status* status)
 
 GraphicEngine::~GraphicEngine()
 {
-  // delete[] _spritesTerrains;
-  // delete[] _spritesUnits;
+  delete[] _spritesTerrains;
+  delete[] _spritesUnits;
+  delete[] _spritesInterface;
+
+  // delete[] g_filenames_terrains;
+  // delete[] g_filenames_units;
+  // delete[] g_filenames_interface;
 }
 
 
@@ -99,7 +106,7 @@ void GraphicEngine::drawPanel()
   // TODO manage removal
   // TODO update render zone size if there's a new panel
 
-  // for mow, drawing a line to delimit the panel zone
+  // for now, drawing a line to delimit the panel zone
   sf::Vertex line[2] = {
 	sf::Vector2f (0.66f * _window->getSize().x, 0),
 	sf::Vector2f (0.66f * _window->getSize().x, _window->getSize().y)
@@ -115,7 +122,7 @@ void GraphicEngine::drawMenuBar()
   // TODO manage removal
   // TODO update render zone size if there's a new bar
 
-  // for mow, drawing a line to delimit the menu zone
+  // for now, drawing a line to delimit the menu zone
   sf::Vertex line[2] = {sf::Vector2f (0, g_cell_size / 2),
 						sf::Vector2f (_window->getSize().x, g_cell_size / 2)};
   _window->draw(line, 2, sf::Lines);
@@ -146,7 +153,7 @@ void GraphicEngine::drawCells()
   	}
 }
 
-// refreshCell // allow to refresh only the needed cell (mouse motion)
+// refreshCell // allow to refresh only needed cells (mouse motion)
 
 void GraphicEngine::drawGrid()
 {
@@ -188,7 +195,12 @@ void GraphicEngine::drawSelectionMenu()
 {
   // draw this menu only if requested
   if (!_status->getSelectionMode())
+  {
+	_selectedEntry = 0;
 	return;
+  }
+
+  _nbEntries = 1;
 
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(2 * g_cell_size, g_cell_size));
@@ -200,6 +212,8 @@ void GraphicEngine::drawSelectionMenu()
   // TODO sets the menu at right (cursor-relative) position
   sf::Vector2f v_rect = sf::Vector2f((curs_x + 1) * g_cell_size + _gridOffsetX,
 									 curs_y * g_cell_size + _gridOffsetY);
+
+  sf::Vector2f origin_menu = v_rect;
 
   // show unit section only if we selected a unit
   // TODO check if we can control it
@@ -215,6 +229,8 @@ void GraphicEngine::drawSelectionMenu()
 	label.setCharacterSize(g_cell_size / 2);
 	label.setPosition(rectangle.getPosition());
 	_window->draw(label);
+
+	++_nbEntries;
   }
 
   // next turn button
@@ -225,4 +241,20 @@ void GraphicEngine::drawSelectionMenu()
   label.setCharacterSize(g_cell_size / 2);
   label.setPosition(rectangle.getPosition());
   _window->draw(label);
+
+  // showing selection rectangle
+  rectangle.setPosition(origin_menu - sf::Vector2f(0, g_cell_size * _selectedEntry));
+  rectangle.setTexture(_spritesInterface[E_INTERFACE_IN_GAME_MENU_SELECTION_MENU_SELECTION]);
+  _window->draw(rectangle);
+}
+
+
+void GraphicEngine::incrementSelectedEntry()
+{
+  _selectedEntry = (_selectedEntry + 1) % _nbEntries;
+}
+
+void GraphicEngine::decrementSelectedEntry()
+{
+  _selectedEntry = (_selectedEntry - 1) % _nbEntries;
 }

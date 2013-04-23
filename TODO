@@ -87,5 +87,4 @@
    was a rendering zone room trouble
 ** TODO Memory Leaks
 *** TODO Definitely Lost
-	current ref: 64B definitely lost
-	failure 21 april: 96B
+	comming from extern arrays (will create a Resources Manager though)

@@ -64,6 +64,18 @@ void Event::menu()
 	_km->setSwitchStatus(E_SWITCH_SELECTION, ON);
 	_status->setSelectionMode(false);
   }
+
+  if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
+  {
+	_ge->incrementSelectedEntry();
+	_km->setReady(E_TIMER_MOVE_UP, false);
+  }
+
+  if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
+  {
+	_ge->decrementSelectedEntry();
+	_km->setReady(E_TIMER_MOVE_DOWN, false);
+  }
 }
 
 void Event::game()

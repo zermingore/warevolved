@@ -28,12 +28,18 @@ public:
   void drawScene();
 
 
+  // TODO move in a Menu (or sumthin) class
+  // should merge and use a single function for all (4) directions
+  void incrementSelectedEntry();
+  void decrementSelectedEntry();
+
+
 private:
   /** \brief Sets up textures arrays, loading them only one time
    */
   void initSprites();
 
-  /** \brief Draw map global background
+  /** \brief Draw map: global background
    */
   void drawMap();
 
@@ -86,7 +92,10 @@ private:
   sf::Texture* _spritesTerrains[E_TERRAINS_NB_TERRAINS]; ///< terrains sprites
   sf::Texture* _spritesInterface[E_INTERFACE_NB_INTERFACE]; ///< interface sprites
 
+  // TODO move in a Menu class
   sf::Font _fontArmy; ///< menu font (US Army design)
+  unsigned int _selectedEntry;
+  unsigned int _nbEntries;
 };
 
 #endif /* !GRAPHICENGINE_HH_ */
