@@ -18,6 +18,18 @@
 	  </file>
 	</folder>
   </images>
+
+  <fonts>
+	<folder path='RESOURCES/CURSORS/'>
+	  <file filename='FOANFN.png'>
+		<name>TST</name>
+	  </file>
+	  <file filename='SC2'>
+		<name>TST2</name>
+	  </file>
+	</folder>
+  </fonts>
+
   <sounds>
 	<folder path='resources/cursors/'>
 	  <file filename='cursor.png'>
@@ -25,6 +37,5 @@
 	  </file>
 	</folder>
   </sounds>
-  <fonts>
-  </fonts>
+
 </resources>

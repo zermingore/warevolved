@@ -1,6 +1,12 @@
 #ifndef CONSTANTS_HH_
 # define CONSTANTS_HH_
 
+# ifdef __unix__
+#   define FOLDER_DELIMITER '/'
+# else
+#   define FOLDER_DELIMITER '\\'
+# endif
+
 // file paths
 # define CURSORS_FOLDER "resources/cursors/"
 # define TERRAINS_FOLDER "resources/terrains/"

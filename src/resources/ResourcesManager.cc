@@ -1,6 +1,6 @@
 #include <resources/ResourcesManager.hh>
-#include <fstream>
-#include <ios>
+#include <common/constants.hh>
+
 
 ResourcesManager::ResourcesManager()
 {
@@ -14,8 +14,14 @@ ResourcesManager::ResourcesManager(std::string file_name)
   buildFromXML();
 }
 
-ResourcesManager::~ResourcesManager()
+ResourcesManager::~ResourcesManager() {
+}
+
+void ResourcesManager::initTypeNames()
 {
+  _typeNames[E_RESOURCE_TYPE_IMAGE] = "images";
+  _typeNames[E_RESOURCE_TYPE_FONT] = "fonts";
+  _typeNames[E_RESOURCE_TYPE_SOUND] = "sounds";
 }
 
 
@@ -61,9 +67,12 @@ bool ResourcesManager::parseXML(std::string file_name)
 
 int ResourcesManager::buildFromXML()
 {
+  this->initTypeNames(); // building _typeNames
+
+  e_resource_type current_type = static_cast<e_resource_type>(E_RESOURCE_TYPE_NONE + 1);
   rapidxml::xml_node<>* resources = _xml->first_node("resources");
-  rapidxml::xml_node<>* images = resources->first_node("images");
-  rapidxml::xml_node<>* folder = images->first_node("folder");
+  rapidxml::xml_node<>* type = resources->first_node(_typeNames[current_type].c_str());
+  rapidxml::xml_node<>* folder = type->first_node("folder");
 
 #ifdef DEBUG
   if (!folder)
@@ -72,43 +81,55 @@ int ResourcesManager::buildFromXML()
 
   rapidxml::xml_node<>* file;
   rapidxml::xml_node<>* name;
-  rapidxml::xml_node<>* type;
   rapidxml::xml_attribute<>* filename;
   rapidxml::xml_attribute<>* path;
 
-  std::cout << "info" << std::endl;
 
-  int current_id = 0;
-  while (folder)
+  while (current_type < E_RESOURCE_TYPE_NB) // for all categories
   {
-	path = folder->first_attribute();
-	file = folder->first_node("file");
+	int current_id = 0;
+	type = resources->first_node(_typeNames[current_type].c_str());
+	folder = type->first_node("folder");
+
+	while (folder)
+	{
+	  path = folder->first_attribute();
+	  file = folder->first_node("file");
 
 #   ifdef DEBUG // UNIX Specific bunch of code (folder separator)
-	// testing last char is effectively a '/'
-//	if (std::string (path)).
+	  // testing last char is effectively a '/'
+	  std::string str = path->value();
+	  if (*(str.end() - 1) != FOLDER_DELIMITER)
+	  {
+		std::cerr << "XML file: possible folder error:" << std::endl
+				  << "missing trailing folder delimiter in " << str << std::endl;
+	  }
 #   endif
 
-	while (file)
-	{
-	  filename = file->first_attribute();
+	  while (file)
+	  {
+		filename = file->first_attribute();
 
-	  std::string tst = std::string(path->value()) + std::string(filename->value());
-	  std::cout << ">>>>> " << tst << std::endl;
+		std::string tst = std::string(path->value()) + std::string(filename->value());
+		std::cout << ">> " << tst << std::endl;
 
-	  name = file->first_node("name");
-	  std::cout << name->value() << std::endl;
+		name = file->first_node("name");
+		std::cout << name->value() << std::endl;
 
-	  _mapping[name->value()] = current_id++;
+		_mapping[name->value()] = current_id++;
 
-	  file = file->next_sibling("file");
+		file = file->next_sibling("file");
+	  }
+
+	  folder = folder->next_sibling("folder");
 	}
 
-	folder = folder->next_sibling("folder");
+	current_type = static_cast<e_resource_type>(current_type + 1);
   }
 
-  std::cout << _mapping.size() << std::endl;
+  folder = type->first_node("folder");
 
+  std::cout << _mapping.size() << std::endl;
   std::cout << _mapping["TST"] << std::endl;
 
   return 0;

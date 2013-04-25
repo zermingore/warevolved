@@ -11,10 +11,12 @@
  */
 enum e_resource_type
 {
-  E_RESOURCE_TYPE_NONE, // FIXME rm ?
+  E_RESOURCE_TYPE_NONE = 0, // FIXME rm ?
 
   E_RESOURCE_TYPE_IMAGE,
   E_RESOURCE_TYPE_FONT,
+
+  E_RESOURCE_TYPE_SOUND,
 
   E_RESOURCE_TYPE_NB
 };
@@ -32,6 +34,8 @@ public:
    */
   explicit ResourcesManager(std::string file_name);
 
+  /** \brief Destructor
+   */
   ~ResourcesManager();
 
 
@@ -42,6 +46,10 @@ public:
 
 
 private:
+  /** \brief initializes _typeNames array
+   */
+  void initTypeNames();
+
   /** \brief parses XML file
    ** \param file_name file to parse
    **
@@ -68,6 +76,7 @@ private:
   std::map<std::string, unsigned int> _mapping; ///< getting resource id by it's name
 
   rapidxml::xml_document<>* _xml; ///< pointer over XML file
+  std::map<e_resource_type, std::string> _typeNames; ///< map categories names with e_resource_type
 };
 
 #endif /* !RESOURCESMANAGER_HH_ */

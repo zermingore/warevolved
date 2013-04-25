@@ -8,5 +8,6 @@
 # include <string>
 # include <list>
 # include <iostream>
+# include <fstream>
 
 #endif /* !INCLUDE_HH_ */
