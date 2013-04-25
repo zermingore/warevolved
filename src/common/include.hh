@@ -6,6 +6,7 @@
 # include <SFML/Graphics/Color.hpp>
 
 # include <string>
+# include <list>
 # include <iostream>
 
 #endif /* !INCLUDE_HH_ */

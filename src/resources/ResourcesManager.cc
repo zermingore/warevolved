@@ -1,0 +1,115 @@
+#include <resources/ResourcesManager.hh>
+#include <fstream>
+#include <ios>
+
+ResourcesManager::ResourcesManager()
+{
+  this->parseXML("tst.xml");
+  buildFromXML();
+}
+
+ResourcesManager::ResourcesManager(std::string file_name)
+{
+  this->parseXML(file_name);
+  buildFromXML();
+}
+
+ResourcesManager::~ResourcesManager()
+{
+}
+
+
+Resource* ResourcesManager::getResource(unsigned int id) const
+{
+  //return _resources[id];
+}
+
+
+bool ResourcesManager::parseXML(std::string file_name)
+{
+  // Open stream
+  std::basic_ifstream<char> stream(file_name);
+  if (!stream)
+  {
+	std::cerr << "XML: input error" << std::endl;
+  	return false;
+  }
+  stream.unsetf(std::ios::skipws); // skip white spaces
+
+  // get stream size
+  stream.seekg(0, std::ios::end);
+  size_t size = stream.tellg();
+  stream.seekg(0);
+
+  // Load data and add terminating 0
+  std::vector<char> xml_data;
+  xml_data.resize(size + 1);
+  stream.read(&xml_data.front(), static_cast<unsigned int>(size));
+  xml_data[size] = 0;
+
+#ifdef DEBUG_XML
+  for(std::vector<char>::const_iterator i = xml_data.begin(); i != xml_data.end(); ++i)
+	std::cout << *i;
+#endif
+
+  _xml = new (rapidxml::xml_document<>);
+  _xml->parse<0>(&xml_data[0]);
+
+  return true;
+}
+
+
+int ResourcesManager::buildFromXML()
+{
+  rapidxml::xml_node<>* resources = _xml->first_node("resources");
+  rapidxml::xml_node<>* images = resources->first_node("images");
+  rapidxml::xml_node<>* folder = images->first_node("folder");
+
+#ifdef DEBUG
+  if (!folder)
+  	std::cerr << "empty folder" << std::endl;
+#endif
+
+  rapidxml::xml_node<>* file;
+  rapidxml::xml_node<>* name;
+  rapidxml::xml_node<>* type;
+  rapidxml::xml_attribute<>* filename;
+  rapidxml::xml_attribute<>* path;
+
+  std::cout << "info" << std::endl;
+
+  int current_id = 0;
+  while (folder)
+  {
+	path = folder->first_attribute();
+	file = folder->first_node("file");
+
+#   ifdef DEBUG // UNIX Specific bunch of code (folder separator)
+	// testing last char is effectively a '/'
+//	if (std::string (path)).
+#   endif
+
+	while (file)
+	{
+	  filename = file->first_attribute();
+
+	  std::string tst = std::string(path->value()) + std::string(filename->value());
+	  std::cout << ">>>>> " << tst << std::endl;
+
+	  name = file->first_node("name");
+	  std::cout << name->value() << std::endl;
+
+	  _mapping[name->value()] = current_id++;
+
+	  file = file->next_sibling("file");
+	}
+
+	folder = folder->next_sibling("folder");
+  }
+
+  std::cout << _mapping.size() << std::endl;
+
+  std::cout << _mapping["TST"] << std::endl;
+
+  return 0;
+}

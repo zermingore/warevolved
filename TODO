@@ -16,6 +16,13 @@
 ** TODO [#A] really use Settings class (key repeat delay, ...) should be in it
 ** TODO make an Event Manager test with boost signals (emulate callbacks)
 ** TODO Resources Manager
+** TODO use size_t
+** TODO use const
+** TODO auto-generate XML
+*** TODO OS-dependant in script language
+**** TODO Shell Script
+**** TODO [#C] .bat
+*** TODO non-OS dependant (in C++)
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)

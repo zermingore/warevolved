@@ -46,9 +46,9 @@ GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Status* status)
 
 GraphicEngine::~GraphicEngine()
 {
-  delete[] _spritesTerrains;
-  delete[] _spritesUnits;
-  delete[] _spritesInterface;
+  // delete[] _spritesTerrains;
+  // delete[] _spritesUnits;
+  // delete[] _spritesInterface;
 
   // delete[] g_filenames_terrains;
   // delete[] g_filenames_units;

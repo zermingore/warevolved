@@ -64,6 +64,9 @@ PROGRAMS = $(bin_PROGRAMS)
 am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Context.$(OBJEXT) \
 	__top_srcdir__we-GraphicEngine.$(OBJEXT) \
+	__top_srcdir__we-ResourcesManager.$(OBJEXT) \
+	__top_srcdir__we-Resource.$(OBJEXT) \
+	__top_srcdir__we-Image.$(OBJEXT) \
 	__top_srcdir__we-System.$(OBJEXT) \
 	__top_srcdir__we-Settings.$(OBJEXT) \
 	__top_srcdir__we-Status.$(OBJEXT) \
@@ -219,22 +222,26 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 #__top_srcdir__we_CPPFLAGS += ${libglfw_CFLAGS} ${GLEW_CFLAGS} ${OPENAL_CFLAGS} ${IMAGE_MAGICK_CFLAGS}
 #__top_srcdir__we_LDADD = ${libglfw_LIBS} ${GLEW_LIBS} ${OPENAL_LIBS} ${LIBPQXX_LIBS} ${IMAGE_MAGICK_LIBS}
 __top_srcdir__we_SOURCES = \
-main.cc						\
+main.cc							\
 \
-core/Context.cc				\
+core/Context.cc					\
 \
-graphics/GraphicEngine.cc	\
+graphics/GraphicEngine.cc		\
 \
-common/System.cc			\
-common/Settings.cc			\
-common/Status.cc			\
+resources/ResourcesManager.cc	\
+resources/Resource.cc			\
+resources/Image.cc				\
 \
-input/KeyManager.cc			\
-input/Event.cc				\
+common/System.cc				\
+common/Settings.cc				\
+common/Status.cc				\
 \
-game/Game.cc				\
-game/Map.cc					\
-game/Cell.cc				\
+input/KeyManager.cc				\
+input/Event.cc					\
+\
+game/Game.cc					\
+game/Map.cc						\
+game/Cell.cc					\
 game/Cursor.cc
 
 all: all-am
@@ -330,8 +337,11 @@ include ./$(DEPDIR)/__top_srcdir__we-Cursor.Po
 include ./$(DEPDIR)/__top_srcdir__we-Event.Po
 include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
+include ./$(DEPDIR)/__top_srcdir__we-Image.Po
 include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Map.Po
+include ./$(DEPDIR)/__top_srcdir__we-Resource.Po
+include ./$(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
 include ./$(DEPDIR)/__top_srcdir__we-Status.Po
 include ./$(DEPDIR)/__top_srcdir__we-System.Po
@@ -392,6 +402,48 @@ __top_srcdir__we-GraphicEngine.obj: graphics/GraphicEngine.cc
 #	$(AM_V_CXX)source='graphics/GraphicEngine.cc' object='__top_srcdir__we-GraphicEngine.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-GraphicEngine.obj `if test -f 'graphics/GraphicEngine.cc'; then $(CYGPATH_W) 'graphics/GraphicEngine.cc'; else $(CYGPATH_W) '$(srcdir)/graphics/GraphicEngine.cc'; fi`
+
+__top_srcdir__we-ResourcesManager.o: resources/ResourcesManager.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-ResourcesManager.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-ResourcesManager.Tpo -c -o __top_srcdir__we-ResourcesManager.o `test -f 'resources/ResourcesManager.cc' || echo '$(srcdir)/'`resources/ResourcesManager.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-ResourcesManager.Tpo $(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
+#	$(AM_V_CXX)source='resources/ResourcesManager.cc' object='__top_srcdir__we-ResourcesManager.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-ResourcesManager.o `test -f 'resources/ResourcesManager.cc' || echo '$(srcdir)/'`resources/ResourcesManager.cc
+
+__top_srcdir__we-ResourcesManager.obj: resources/ResourcesManager.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-ResourcesManager.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-ResourcesManager.Tpo -c -o __top_srcdir__we-ResourcesManager.obj `if test -f 'resources/ResourcesManager.cc'; then $(CYGPATH_W) 'resources/ResourcesManager.cc'; else $(CYGPATH_W) '$(srcdir)/resources/ResourcesManager.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-ResourcesManager.Tpo $(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
+#	$(AM_V_CXX)source='resources/ResourcesManager.cc' object='__top_srcdir__we-ResourcesManager.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-ResourcesManager.obj `if test -f 'resources/ResourcesManager.cc'; then $(CYGPATH_W) 'resources/ResourcesManager.cc'; else $(CYGPATH_W) '$(srcdir)/resources/ResourcesManager.cc'; fi`
+
+__top_srcdir__we-Resource.o: resources/Resource.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Resource.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Resource.Tpo -c -o __top_srcdir__we-Resource.o `test -f 'resources/Resource.cc' || echo '$(srcdir)/'`resources/Resource.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Resource.Tpo $(DEPDIR)/__top_srcdir__we-Resource.Po
+#	$(AM_V_CXX)source='resources/Resource.cc' object='__top_srcdir__we-Resource.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Resource.o `test -f 'resources/Resource.cc' || echo '$(srcdir)/'`resources/Resource.cc
+
+__top_srcdir__we-Resource.obj: resources/Resource.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Resource.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Resource.Tpo -c -o __top_srcdir__we-Resource.obj `if test -f 'resources/Resource.cc'; then $(CYGPATH_W) 'resources/Resource.cc'; else $(CYGPATH_W) '$(srcdir)/resources/Resource.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Resource.Tpo $(DEPDIR)/__top_srcdir__we-Resource.Po
+#	$(AM_V_CXX)source='resources/Resource.cc' object='__top_srcdir__we-Resource.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Resource.obj `if test -f 'resources/Resource.cc'; then $(CYGPATH_W) 'resources/Resource.cc'; else $(CYGPATH_W) '$(srcdir)/resources/Resource.cc'; fi`
+
+__top_srcdir__we-Image.o: resources/Image.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Image.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Image.Tpo -c -o __top_srcdir__we-Image.o `test -f 'resources/Image.cc' || echo '$(srcdir)/'`resources/Image.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Image.Tpo $(DEPDIR)/__top_srcdir__we-Image.Po
+#	$(AM_V_CXX)source='resources/Image.cc' object='__top_srcdir__we-Image.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Image.o `test -f 'resources/Image.cc' || echo '$(srcdir)/'`resources/Image.cc
+
+__top_srcdir__we-Image.obj: resources/Image.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Image.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Image.Tpo -c -o __top_srcdir__we-Image.obj `if test -f 'resources/Image.cc'; then $(CYGPATH_W) 'resources/Image.cc'; else $(CYGPATH_W) '$(srcdir)/resources/Image.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Image.Tpo $(DEPDIR)/__top_srcdir__we-Image.Po
+#	$(AM_V_CXX)source='resources/Image.cc' object='__top_srcdir__we-Image.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Image.obj `if test -f 'resources/Image.cc'; then $(CYGPATH_W) 'resources/Image.cc'; else $(CYGPATH_W) '$(srcdir)/resources/Image.cc'; fi`
 
 __top_srcdir__we-System.o: common/System.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-System.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-System.Tpo -c -o __top_srcdir__we-System.o `test -f 'common/System.cc' || echo '$(srcdir)/'`common/System.cc

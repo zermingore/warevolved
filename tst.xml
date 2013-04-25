@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <images>
+	<folder path='resources/cursors/'>
+	  <file filename='cursor.png'>
+		<name>TST</name>
+	  </file>
+	  <file filename='SC2'>
+		<name>TST2</name>
+	  </file>
+	</folder>
+	<folder path='LOL/wAR 11 :/'>
+	  <file filename='cng'>
+		<name>TST3</name>
+	  </file>
+	  <file filename='Amon'>
+		<name>TST4</name>
+	  </file>
+	</folder>
+  </images>
+  <sounds>
+	<folder path='resources/cursors/'>
+	  <file filename='cursor.png'>
+		<name>TST</name>
+	  </file>
+	</folder>
+  </sounds>
+  <fonts>
+  </fonts>
+</resources>

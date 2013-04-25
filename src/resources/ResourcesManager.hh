@@ -1,0 +1,73 @@
+#ifndef RESOURCESMANAGER_HH_
+# define RESOURCESMANAGER_HH_
+
+# include <rapidxml/rapidxml.hpp>
+
+# include <common/include.hh>
+# include <resources/Resource.hh>
+
+
+/** \brief enum matching every resource types
+ */
+enum e_resource_type
+{
+  E_RESOURCE_TYPE_NONE, // FIXME rm ?
+
+  E_RESOURCE_TYPE_IMAGE,
+  E_RESOURCE_TYPE_FONT,
+
+  E_RESOURCE_TYPE_NB
+};
+
+
+class ResourcesManager
+{
+public:
+  /** \brief default constructor
+   ** initializes resources mapping, calling calls buildFromXML();
+   */
+  ResourcesManager();
+
+  /** Calls buildFromXML()
+   */
+  explicit ResourcesManager(std::string file_name);
+
+  ~ResourcesManager();
+
+
+  /** \brief resource getter
+   ** \param id resource identifier to retrieve
+   */
+  Resource* getResource(unsigned int id) const;
+
+
+private:
+  /** \brief parses XML file
+   ** \param file_name file to parse
+   **
+   ** \return true if the file was successfully parsed
+   **   false otherwise (prints an error message on std::err)
+   */
+  bool parseXML(std::string file_name);
+
+  /** \brief builds the global std::map containing all resources
+   ** \return 0 on success
+   **   -1 on failure
+   **   a strictly positive value corresponding to the number of unmatched files
+   ** should be called only one time (when launching the game)
+   ** very long execution time [function of number of resources]
+   ** adds every XML entry to the std::map _resources
+   */
+  int buildFromXML();
+
+
+  std::map<e_resource_type, std::list<Resource*>> _resources; ///< a resources list per type
+  // TODO FIXME think about a list per scope
+  e_scope _currentScope; ///< actual context
+
+  std::map<std::string, unsigned int> _mapping; ///< getting resource id by it's name
+
+  rapidxml::xml_document<>* _xml; ///< pointer over XML file
+};
+
+#endif /* !RESOURCESMANAGER_HH_ */

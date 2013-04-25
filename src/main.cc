@@ -3,8 +3,16 @@
 #include <game/Game.hh>
 
 
+#include <resources/ResourcesManager.hh>
+
+
 int main(int ac, char **av)
 {
+  ResourcesManager* lol = new ResourcesManager("tst.xml"); // FIXME
+  lol = lol;
+
+
+
   av = av; // FIXME
 
   bool fullscreen = false;
