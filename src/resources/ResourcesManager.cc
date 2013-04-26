@@ -1,6 +1,9 @@
 #include <resources/ResourcesManager.hh>
 #include <common/constants.hh>
+#include <resources/Image.hh>
 
+
+// #include <unistd.h>
 
 ResourcesManager::ResourcesManager()
 {
@@ -27,7 +30,43 @@ void ResourcesManager::initTypeNames()
 
 Resource* ResourcesManager::getResource(unsigned int id) const
 {
-  //return _resources[id];
+  for (unsigned int i = 0; i < E_RESOURCE_TYPE_NB; ++i)
+  {
+	std::map<int, std::string> m;
+	m[0] = "lol";
+
+	std::map<int, std::list<int> > ml;
+	ml[0].push_back(2);
+
+	std::list<int> ll;
+	ml[0] = ll;
+	ll.push_back(42);
+	ml[0] = ll;
+
+
+	std::list<Resource*> lr;
+	id = id;
+
+//	std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
+
+//	lr = _resources[E_RESOURCE_TYPE_NB];
+
+
+	//std::list<Resource*> l = _resources[0];
+
+	// for (std::list<Resource*>::iterator it = std::find(ll.begin(), ll.end(), 1))
+	//   return it;
+
+	// return _resources[i];
+
+	// std::map<e_resource_type, std::list<Resource*>> _resources; ///< a resources list per type
+  }
+
+# ifdef DEBUG
+  std::cerr << "unable to find resource of id :" << id << std::endl;
+# endif
+
+  return NULL;
 }
 
 
@@ -70,53 +109,67 @@ int ResourcesManager::buildFromXML()
   this->initTypeNames(); // building _typeNames
 
   e_resource_type current_type = static_cast<e_resource_type>(E_RESOURCE_TYPE_NONE + 1);
-  rapidxml::xml_node<>* resources = _xml->first_node("resources");
-  rapidxml::xml_node<>* type = resources->first_node(_typeNames[current_type].c_str());
-  rapidxml::xml_node<>* folder = type->first_node("folder");
+  rapidxml::xml_node<> *resources = _xml->first_node("resources");
+  rapidxml::xml_node<> *type; // XML tag: images, fonts, sounds, ...
+  rapidxml::xml_node<> *folder, *file, *name;
+  rapidxml::xml_attribute<> *path;
 
-#ifdef DEBUG
-  if (!folder)
-  	std::cerr << "empty folder" << std::endl;
-#endif
-
-  rapidxml::xml_node<>* file;
-  rapidxml::xml_node<>* name;
-  rapidxml::xml_attribute<>* filename;
-  rapidxml::xml_attribute<>* path;
-
-
+  int current_id = 0;
+  type = resources->first_node(_typeNames[current_type].c_str());
   while (current_type < E_RESOURCE_TYPE_NB) // for all categories
   {
-	int current_id = 0;
-	type = resources->first_node(_typeNames[current_type].c_str());
-	folder = type->first_node("folder");
+#   ifdef DEBUG
+	if (!type)
+	{
+	  std::cerr << "type is NULL" << std::endl <<
+		"tried to match>" << _typeNames[current_type].c_str() << std::endl;
+	  return -1;
+	}
+#   endif
 
+	folder = type->first_node("folder");
 	while (folder)
 	{
 	  path = folder->first_attribute();
 	  file = folder->first_node("file");
 
-#   ifdef DEBUG // UNIX Specific bunch of code (folder separator)
-	  // testing last char is effectively a '/'
-	  std::string str = path->value();
+	  const std::string str = std::string(path->value());
+
+#    ifdef DEBUG
+	  // testing last char is effectively a FOLDER_SEPARATOR
 	  if (*(str.end() - 1) != FOLDER_DELIMITER)
 	  {
-		std::cerr << "XML file: possible folder error:" << std::endl
-				  << "missing trailing folder delimiter in " << str << std::endl;
+		std::cerr << "XML file: folder name error:" << std::endl <<
+		  "Missing trailing folder delimiter in " << str << std::endl;
 	  }
+
+	  if (!path)
+	  {
+		std::cerr << "XML file: Missing path" << std::endl;
+		return -1;
+	  }
+
+	  if (!file)
+		std::cerr << ">Warning< XML file: empty folder " << str << std::endl;
 #   endif
 
 	  while (file)
 	  {
-		filename = file->first_attribute();
+		std::string filename = file->first_attribute()->value();
+		std::string tst = str + filename;
+		std::cout << ">>" << tst << std::endl;
 
-		std::string tst = std::string(path->value()) + std::string(filename->value());
-		std::cout << ">> " << tst << std::endl;
+		// void *mtst = malloc(256);
 
-		name = file->first_node("name");
-		std::cout << name->value() << std::endl;
+ 		// sf::Texture* ztst;
+		// ztst = new sf::Texture;
 
-		_mapping[name->value()] = current_id++;
+		// Resource* res = new Image(tst, 1);
+		// delete res;
+
+
+		if ((name = file->first_node("name")))
+		  _mapping[name->value()] = current_id++;
 
 		file = file->next_sibling("file");
 	  }
@@ -125,9 +178,8 @@ int ResourcesManager::buildFromXML()
 	}
 
 	current_type = static_cast<e_resource_type>(current_type + 1);
+	type = type->next_sibling();
   }
-
-  folder = type->first_node("folder");
 
   std::cout << _mapping.size() << std::endl;
   std::cout << _mapping["TST"] << std::endl;

@@ -1,8 +1,6 @@
 #ifndef RESOURCESMANAGER_HH_
 # define RESOURCESMANAGER_HH_
 
-# include <rapidxml/rapidxml.hpp>
-
 # include <common/include.hh>
 # include <resources/Resource.hh>
 
@@ -69,7 +67,7 @@ private:
   int buildFromXML();
 
 
-  std::map<e_resource_type, std::list<Resource*>> _resources; ///< a resources list per type
+  std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
   // TODO FIXME think about a list per scope
   e_scope _currentScope; ///< actual context
 

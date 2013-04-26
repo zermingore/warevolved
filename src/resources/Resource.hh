@@ -18,10 +18,15 @@ enum e_scope
 };
 
 
+/** \brief generic Resource class
+ ** Resource is an abstract class
+ ** Its daughters are Image, Sound, ...
+ */
 class Resource
 {
 public:
   Resource();
+  Resource(std::string file_name, unsigned int id);
   virtual ~Resource();
 
   virtual bool load() = 0;
@@ -32,9 +37,8 @@ public:
 
 
 protected:
-  unsigned int _id;
-  std::string _fileName;
-
+  unsigned int _id; ///< unique Resource identifier
+  std::string _fileName; ///< Resource file name (without full path, with extension)
   bool _loaded; ///< is the resource already in RAM ?
   e_scope _scope; ///< resource scope (the context it belongs to)
 };

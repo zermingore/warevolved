@@ -5,34 +5,34 @@
 	  <file filename='cursor.png'>
 		<name>TST</name>
 	  </file>
-	  <file filename='SC2'>
+	  <file filename='cursor.png'>
 		<name>TST2</name>
 	  </file>
 	</folder>
-	<folder path='LOL/wAR 11 :/'>
-	  <file filename='cng'>
+	<folder path='resources/sprites/'>
+	  <file filename='lol.jppf'>
 		<name>TST3</name>
 	  </file>
-	  <file filename='Amon'>
+	  <file filename='mppng'>
 		<name>TST4</name>
 	  </file>
 	</folder>
   </images>
 
   <fonts>
-	<folder path='RESOURCES/CURSORS/'>
-	  <file filename='FOANFN.png'>
+	<folder path='          read_me/cursors/'>
+	  <file filename='cursor.png'>
 		<name>TST</name>
 	  </file>
-	  <file filename='SC2'>
+	  <file filename='2.png'>
 		<name>TST2</name>
 	  </file>
 	</folder>
   </fonts>
 
   <sounds>
-	<folder path='resources/cursors/'>
-	  <file filename='cursor.png'>
+	<folder path='resources/          no/'>
+	  <file filename='sound.mplol'>
 		<name>TST</name>
 	  </file>
 	</folder>

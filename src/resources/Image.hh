@@ -9,6 +9,8 @@ class Image : public Resource
 {
 public:
   Image();
+  Image(const std::string file_name, unsigned int id);
+
   ~Image();
 
   bool load();
