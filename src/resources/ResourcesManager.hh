@@ -48,6 +48,22 @@ private:
    */
   void initTypeNames();
 
+  /** \brief adds resource to the _resources map
+   **   adds it in the right list, according to type
+   **
+   ** \param type Resource media type (image, sound, ...)
+   ** \param name Resource name (more or less an alias)
+   ** \param file_name Complete file name (including path and extension)
+   ** \param id Unique resource id
+   **
+   ** \return true on success
+   **   false otherwise
+   */
+  bool addResource(e_resource_type type,
+				   std::string name,
+				   std::string file_name,
+				   unsigned int id);
+
   /** \brief parses XML file
    ** \param file_name file to parse
    **

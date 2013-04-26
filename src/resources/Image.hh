@@ -5,11 +5,15 @@
 # include <common/include.hh>
 
 
+/** \brief Image Resource type
+ ** Derived from Resource
+ */
+
 class Image : public Resource
 {
 public:
   Image();
-  Image(const std::string file_name, unsigned int id);
+  Image(const std::string file_name, std::string name, unsigned int id);
 
   ~Image();
 

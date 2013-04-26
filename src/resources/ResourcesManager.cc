@@ -3,8 +3,6 @@
 #include <resources/Image.hh>
 
 
-// #include <unistd.h>
-
 ResourcesManager::ResourcesManager()
 {
   this->parseXML("tst.xml");
@@ -14,7 +12,8 @@ ResourcesManager::ResourcesManager()
 ResourcesManager::ResourcesManager(std::string file_name)
 {
   this->parseXML(file_name);
-  buildFromXML();
+  if (buildFromXML() == -1)
+	std::cerr << "FAILURE" << std::endl;
 }
 
 ResourcesManager::~ResourcesManager() {
@@ -26,6 +25,31 @@ void ResourcesManager::initTypeNames()
   _typeNames[E_RESOURCE_TYPE_FONT] = "fonts";
   _typeNames[E_RESOURCE_TYPE_SOUND] = "sounds";
 }
+
+
+bool ResourcesManager::addResource(e_resource_type type,
+								   std::string name,
+								   std::string file_name,
+								   unsigned int id)
+{
+  switch (type)
+  {
+	case E_RESOURCE_TYPE_IMAGE:
+	  _resources[type].push_back(new Image(file_name, name, id));
+	  return true;
+	// case E_RESOURCE_TYPE_FONT:
+	//   _resources[current_type].push_back(new Font(file_name, name, id));
+	// case E_RESOURCE_TYPE_SOUND:
+	//   _resources[current_type].push_back(new Sound(file_name, name, id));
+	default:
+	  std::cerr << "Unable to match resource type for " <<
+		file_name << std::endl;
+	  return false;
+  }
+
+  return false;
+}
+
 
 
 Resource* ResourcesManager::getResource(unsigned int id) const
@@ -133,14 +157,15 @@ int ResourcesManager::buildFromXML()
 	  path = folder->first_attribute();
 	  file = folder->first_node("file");
 
-	  const std::string str = std::string(path->value());
+	  const std::string str_path = std::string(path->value());
+	  std::cout << ">" << str_path << "<" << std::endl;
 
 #    ifdef DEBUG
-	  // testing last char is effectively a FOLDER_SEPARATOR
-	  if (*(str.end() - 1) != FOLDER_DELIMITER)
+	  // testing if last char is effectively a FOLDER_SEPARATOR
+	  if (*(str_path.end() - 1) != FOLDER_DELIMITER)
 	  {
-		std::cerr << "XML file: folder name error:" << std::endl <<
-		  "Missing trailing folder delimiter in " << str << std::endl;
+		std::cerr << ">>ERROR<< XML file:" << std::endl <<
+		  "-- Missing trailing folder delimiter in " << str_path << std::endl;
 	  }
 
 	  if (!path)
@@ -150,26 +175,24 @@ int ResourcesManager::buildFromXML()
 	  }
 
 	  if (!file)
-		std::cerr << ">Warning< XML file: empty folder " << str << std::endl;
+		std::cerr << ">Warning< XML file: empty folder " << str_path << std::endl;
 #   endif
 
 	  while (file)
 	  {
-		std::string filename = file->first_attribute()->value();
-		std::string tst = str + filename;
-		std::cout << ">>" << tst << std::endl;
+		std::string filename = std::string(file->first_attribute()->value());
+		name = file->first_node("name");
 
-		// void *mtst = malloc(256);
+		std::cout << current_type << std::endl;
+		std::cout << str_path << "---" << filename << std::endl;
+		std::cout << name->value() << std::endl;
+		std::cout << current_id << std::endl << std::endl;
 
- 		// sf::Texture* ztst;
-		// ztst = new sf::Texture;
-
-		// Resource* res = new Image(tst, 1);
-		// delete res;
-
-
-		if ((name = file->first_node("name")))
-		  _mapping[name->value()] = current_id++;
+		current_id++;
+		// this->addResource(current_type,
+		// 				  str_path + filename,
+		// 				  std::string(name->value()),
+		// 				  current_id);
 
 		file = file->next_sibling("file");
 	  }

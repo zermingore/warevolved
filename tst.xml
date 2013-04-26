@@ -18,7 +18,6 @@
 	  </file>
 	</folder>
   </images>
-
   <fonts>
 	<folder path='          read_me/cursors/'>
 	  <file filename='cursor.png'>
@@ -29,7 +28,6 @@
 	  </file>
 	</folder>
   </fonts>
-
   <sounds>
 	<folder path='resources/          no/'>
 	  <file filename='sound.mplol'>
@@ -37,5 +35,4 @@
 	  </file>
 	</folder>
   </sounds>
-
 </resources>

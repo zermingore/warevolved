@@ -3,7 +3,6 @@
 
 # include <common/include.hh>
 
-
 // should split scopes ?
 // (menu_scopes) with main, end game, network
 enum e_scope
@@ -27,7 +26,7 @@ class Resource
 public:
   Resource();
   Resource(std::string file_name, unsigned int id);
-  virtual ~Resource();
+  ~Resource();
 
   virtual bool load() = 0;
   virtual bool unload() = 0;
@@ -38,7 +37,8 @@ public:
 
 protected:
   unsigned int _id; ///< unique Resource identifier
-  std::string _fileName; ///< Resource file name (without full path, with extension)
+  std::string _fileName; ///< Resource file name (with full path and extension)
+  std::string _name; ///< Resource name
   bool _loaded; ///< is the resource already in RAM ?
   e_scope _scope; ///< resource scope (the context it belongs to)
 };
