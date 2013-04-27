@@ -8,10 +8,7 @@
 
 int main(int ac, char **av)
 {
-  ResourcesManager* lol = new ResourcesManager("tst.xml"); // FIXME
-  lol = lol;
-
-
+  //  return -1; // FIXME
 
   av = av; // FIXME
 
@@ -20,8 +17,14 @@ int main(int ac, char **av)
 	fullscreen = true;
 
   Context* context = new Context(fullscreen);
-  Game* game = new Game(context->init());
-  game->run();
+
+   Game* game = new Game(context->init());
+   game->run();
+
+   // must be after Game Ctor
+  ResourcesManager* lol = new ResourcesManager("tst.xml"); // FIXME
+  lol = lol;
+
 
 # ifdef DEBUG_LEAKS
   delete context;

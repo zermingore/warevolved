@@ -67,6 +67,7 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-ResourcesManager.$(OBJEXT) \
 	__top_srcdir__we-Resource.$(OBJEXT) \
 	__top_srcdir__we-Image.$(OBJEXT) \
+	__top_srcdir__we-Font.$(OBJEXT) \
 	__top_srcdir__we-System.$(OBJEXT) \
 	__top_srcdir__we-Settings.$(OBJEXT) \
 	__top_srcdir__we-Status.$(OBJEXT) \
@@ -231,6 +232,7 @@ graphics/GraphicEngine.cc		\
 resources/ResourcesManager.cc	\
 resources/Resource.cc			\
 resources/Image.cc				\
+resources/Font.cc				\
 \
 common/System.cc				\
 common/Settings.cc				\
@@ -335,6 +337,7 @@ include ./$(DEPDIR)/__top_srcdir__we-Cell.Po
 include ./$(DEPDIR)/__top_srcdir__we-Context.Po
 include ./$(DEPDIR)/__top_srcdir__we-Cursor.Po
 include ./$(DEPDIR)/__top_srcdir__we-Event.Po
+include ./$(DEPDIR)/__top_srcdir__we-Font.Po
 include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
 include ./$(DEPDIR)/__top_srcdir__we-Image.Po
@@ -444,6 +447,20 @@ __top_srcdir__we-Image.obj: resources/Image.cc
 #	$(AM_V_CXX)source='resources/Image.cc' object='__top_srcdir__we-Image.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Image.obj `if test -f 'resources/Image.cc'; then $(CYGPATH_W) 'resources/Image.cc'; else $(CYGPATH_W) '$(srcdir)/resources/Image.cc'; fi`
+
+__top_srcdir__we-Font.o: resources/Font.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Font.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Font.Tpo -c -o __top_srcdir__we-Font.o `test -f 'resources/Font.cc' || echo '$(srcdir)/'`resources/Font.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Font.Tpo $(DEPDIR)/__top_srcdir__we-Font.Po
+#	$(AM_V_CXX)source='resources/Font.cc' object='__top_srcdir__we-Font.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Font.o `test -f 'resources/Font.cc' || echo '$(srcdir)/'`resources/Font.cc
+
+__top_srcdir__we-Font.obj: resources/Font.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Font.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Font.Tpo -c -o __top_srcdir__we-Font.obj `if test -f 'resources/Font.cc'; then $(CYGPATH_W) 'resources/Font.cc'; else $(CYGPATH_W) '$(srcdir)/resources/Font.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Font.Tpo $(DEPDIR)/__top_srcdir__we-Font.Po
+#	$(AM_V_CXX)source='resources/Font.cc' object='__top_srcdir__we-Font.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Font.obj `if test -f 'resources/Font.cc'; then $(CYGPATH_W) 'resources/Font.cc'; else $(CYGPATH_W) '$(srcdir)/resources/Font.cc'; fi`
 
 __top_srcdir__we-System.o: common/System.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-System.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-System.Tpo -c -o __top_srcdir__we-System.o `test -f 'common/System.cc' || echo '$(srcdir)/'`common/System.cc

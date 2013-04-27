@@ -30,7 +30,7 @@ public:
 
   /** Calls buildFromXML()
    */
-  explicit ResourcesManager(std::string file_name);
+  explicit ResourcesManager(const std::string file_name);
 
   /** \brief Destructor
    */
@@ -40,7 +40,7 @@ public:
   /** \brief resource getter
    ** \param id resource identifier to retrieve
    */
-  Resource* getResource(unsigned int id) const;
+  Resource* getResource(unsigned int id);
 
 
 private:
@@ -60,8 +60,8 @@ private:
    **   false otherwise
    */
   bool addResource(e_resource_type type,
-				   std::string name,
-				   std::string file_name,
+				   const std::string name,
+				   const std::string file_name,
 				   unsigned int id);
 
   /** \brief parses XML file
@@ -70,7 +70,7 @@ private:
    ** \return true if the file was successfully parsed
    **   false otherwise (prints an error message on std::err)
    */
-  bool parseXML(std::string file_name);
+  bool parseXML(const std::string file_name);
 
   /** \brief builds the global std::map containing all resources
    ** \return 0 on success
@@ -82,6 +82,13 @@ private:
    */
   int buildFromXML();
 
+
+# ifdef DEBUG
+  /** \brief list all available Resources
+   ** it displays resources lists, by categories
+   */
+  void listResources();
+# endif
 
   std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
   // TODO FIXME think about a list per scope

@@ -1,6 +1,7 @@
 #include <resources/ResourcesManager.hh>
 #include <common/constants.hh>
 #include <resources/Image.hh>
+#include <resources/Font.hh>
 
 
 ResourcesManager::ResourcesManager()
@@ -9,11 +10,15 @@ ResourcesManager::ResourcesManager()
   buildFromXML();
 }
 
-ResourcesManager::ResourcesManager(std::string file_name)
+ResourcesManager::ResourcesManager(const std::string file_name)
 {
   this->parseXML(file_name);
   if (buildFromXML() == -1)
 	std::cerr << "FAILURE" << std::endl;
+
+#ifdef DEBUG
+  this->listResources();
+#endif
 }
 
 ResourcesManager::~ResourcesManager() {
@@ -28,8 +33,8 @@ void ResourcesManager::initTypeNames()
 
 
 bool ResourcesManager::addResource(e_resource_type type,
-								   std::string name,
-								   std::string file_name,
+								   const std::string name,
+								   const std::string file_name,
 								   unsigned int id)
 {
   switch (type)
@@ -37,13 +42,15 @@ bool ResourcesManager::addResource(e_resource_type type,
 	case E_RESOURCE_TYPE_IMAGE:
 	  _resources[type].push_back(new Image(file_name, name, id));
 	  return true;
-	// case E_RESOURCE_TYPE_FONT:
-	//   _resources[current_type].push_back(new Font(file_name, name, id));
+	case E_RESOURCE_TYPE_FONT:
+	  _resources[type].push_back(new Font(file_name, name, id));
+	  return true;
 	// case E_RESOURCE_TYPE_SOUND:
-	//   _resources[current_type].push_back(new Sound(file_name, name, id));
+	//   _resources[type].push_back(new Sound(file_name, name, id));
+	// return true;
+
 	default:
-	  std::cerr << "Unable to match resource type for " <<
-		file_name << std::endl;
+	  std::cerr << file_name << ": Unknown resource type" << std::endl;
 	  return false;
   }
 
@@ -52,39 +59,20 @@ bool ResourcesManager::addResource(e_resource_type type,
 
 
 
-Resource* ResourcesManager::getResource(unsigned int id) const
+Resource* ResourcesManager::getResource(unsigned int id)
 {
-  for (unsigned int i = 0; i < E_RESOURCE_TYPE_NB; ++i)
-  {
-	std::map<int, std::string> m;
-	m[0] = "lol";
-
-	std::map<int, std::list<int> > ml;
-	ml[0].push_back(2);
-
-	std::list<int> ll;
-	ml[0] = ll;
-	ll.push_back(42);
-	ml[0] = ll;
+  return NULL; // FIXME
 
 
-	std::list<Resource*> lr;
-	id = id;
-
-//	std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
-
-//	lr = _resources[E_RESOURCE_TYPE_NB];
-
-
-	//std::list<Resource*> l = _resources[0];
-
-	// for (std::list<Resource*>::iterator it = std::find(ll.begin(), ll.end(), 1))
-	//   return it;
-
-	// return _resources[i];
-
-	// std::map<e_resource_type, std::list<Resource*>> _resources; ///< a resources list per type
-  }
+  // for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
+  // {
+  // 	//for (auto it = std::find(_resources[e_resource_type(i)].begin(), _resources[e_resource_type(i)].end(), 1))
+  // 	for (auto it = _resources[e_resource_type(i)].begin(); it != _resources[e_resource_type(i)].end(); ++it)
+  // 	{
+  // 	  if (*it)
+  // 		return *it;
+  // 	}
+  // }
 
 # ifdef DEBUG
   std::cerr << "unable to find resource of id :" << id << std::endl;
@@ -94,7 +82,7 @@ Resource* ResourcesManager::getResource(unsigned int id) const
 }
 
 
-bool ResourcesManager::parseXML(std::string file_name)
+bool ResourcesManager::parseXML(const std::string file_name)
 {
   // Open stream
   std::basic_ifstream<char> stream(file_name);
@@ -156,9 +144,7 @@ int ResourcesManager::buildFromXML()
 	{
 	  path = folder->first_attribute();
 	  file = folder->first_node("file");
-
 	  const std::string str_path = std::string(path->value());
-	  std::cout << ">" << str_path << "<" << std::endl;
 
 #    ifdef DEBUG
 	  // testing if last char is effectively a FOLDER_SEPARATOR
@@ -183,16 +169,17 @@ int ResourcesManager::buildFromXML()
 		std::string filename = std::string(file->first_attribute()->value());
 		name = file->first_node("name");
 
+#   ifdef DEBUG_XML
 		std::cout << current_type << std::endl;
-		std::cout << str_path << "---" << filename << std::endl;
+		std::cout << str_path << filename << std::endl;
 		std::cout << name->value() << std::endl;
 		std::cout << current_id << std::endl << std::endl;
+#   endif
 
-		current_id++;
-		// this->addResource(current_type,
-		// 				  str_path + filename,
-		// 				  std::string(name->value()),
-		// 				  current_id);
+		this->addResource(current_type,
+						  name->value(),
+						  str_path + filename,
+						  current_id++);
 
 		file = file->next_sibling("file");
 	  }
@@ -204,8 +191,20 @@ int ResourcesManager::buildFromXML()
 	type = type->next_sibling();
   }
 
-  std::cout << _mapping.size() << std::endl;
-  std::cout << _mapping["TST"] << std::endl;
-
   return 0;
 }
+
+
+#ifdef DEBUG
+void ResourcesManager::listResources()
+{
+  for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
+  {
+	std::cout << "Category: " << _typeNames[e_resource_type(i)] << std::endl;
+	for (auto it = _resources[e_resource_type(i)].begin(); it != _resources[e_resource_type(i)].end(); ++it)
+	{
+	  std::cout << (*it)->getFileName() << std::endl;
+	}
+  }
+}
+#endif

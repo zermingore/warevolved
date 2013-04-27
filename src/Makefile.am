@@ -29,6 +29,7 @@ graphics/GraphicEngine.cc		\
 resources/ResourcesManager.cc	\
 resources/Resource.cc			\
 resources/Image.cc				\
+resources/Font.cc				\
 \
 common/System.cc				\
 common/Settings.cc				\
