@@ -46,7 +46,8 @@ GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Status* status)
   //_fontArmy.loadFromFile(_rm->getFont["font_army"]);
   _fontArmy.loadFromFile(static_cast<std::string>(FONTS_FOLDER) + "army.ttf");
 
-  _map->init(_rm);
+  _map->init();
+  //_map->init(_rm);
 
   this->initSprites();
 }
@@ -139,40 +140,18 @@ void GraphicEngine::drawMenuBar()
 
 void GraphicEngine::drawCells()
 {
-  sf::RectangleShape rectangle;
-  rectangle.setSize(sf::Vector2f(g_cell_size, g_cell_size));
-
   for (unsigned int i = 0; i < _map->getNbColumns(); ++i)
 	for (unsigned int j = 0; j < _map->getNbLines(); ++j)
   	{
 	  e_terrains terrain = _map->getTerrain(i, j);
-	  rectangle.setTexture(_spritesTerrains[terrain]);
-
-	  //rectangle.setTexture(_rm->getImage(_map->getTerrainId())->getTexture());
-
 	  // _rm->getImage(_map->getTerrainId())->display());
 	  // _rm->getImage(E_TYPES_TERRAIN, [_map->getTerrain(i, j)])->draw()
 
-
-  	  rectangle.setPosition(i * g_cell_size + g_grid_thickness + _gridOffsetX,
-  							j * g_cell_size + g_grid_thickness + _gridOffsetY);
-  	  _window->draw(rectangle);
-
-
-
-	  // _rm->getImage(_map->getTerrainId())->draw(
-	  // 	i * g_cell_size + g_grid_thickness + _gridOffsetX,
-	  // 	j * g_cell_size + g_grid_thickness + _gridOffsetY,
-	  // 	g_cell_size, g_cell_size);
+	  //_rm->getImage(_map->getTerrainId())->draw(i, j);
 
 	  e_units unit  = _map->getUnit(i, j);
-	  if (unit != E_UNITS_NONE)
-	  {
-		rectangle.setTexture(_rm->getImage(g_units_names[unit])->getTexture());
-
-		//rectangle.setTexture(_spritesUnits[unit]);
-		_window->draw(rectangle);
-	  }
+	  // if (unit != E_UNITS_NONE)
+	  // 	_rm->getImage(g_units_names[unit])->draw(i, j);
   	}
 }
 

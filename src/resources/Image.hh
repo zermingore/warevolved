@@ -62,7 +62,7 @@ public:
   void reload(std::string file_name);
 
 
-  /** \brief draws the Image designed by image_name at coordinates x, y
+  /** \brief draws the Image at coordinates pos_x, pos_y
    ** \param pos_x x coordinate to display the image (in px)
    ** \param pos_y y coordinate to display the image (in px)
    ** \param width image width
@@ -70,6 +70,13 @@ public:
    */
   void draw(unsigned int pos_x, unsigned int pos_y,
 			unsigned int width, unsigned int height);
+
+
+  /** \brief draws the Image in the cell i, j
+   ** \param i x cell's coordinate to display the image (column)
+   ** \param j y cell's coordinate to display the image (row)
+   */
+  void draw(unsigned int i, unsigned int j);
 
 
 private:

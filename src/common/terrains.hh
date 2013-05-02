@@ -11,7 +11,7 @@ enum e_terrains
   E_TERRAINS_FOREST = 0,
 
   E_TERRAINS_NB_TERRAINS,
-  E_TERRAINS_TERRAIN_NONE
+  E_TERRAINS_NONE
 };
 
 // array which contents all terrains file names (filled by the GraphicEngine)

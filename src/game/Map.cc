@@ -20,21 +20,19 @@ Map::~Map() {
 }
 
 
-void Map::init(ResourcesManager *rm)
+void Map::init()
 {
   // TODO read informations from a map file
 
-  Terrain *forest = new Terrain(E_TERRAINS_FOREST, rm);
+  Terrain *forest = new Terrain(E_TERRAINS_FOREST);
 
   for (unsigned int i = 0; i < _nbColumns; ++i)
+  {
 	for (unsigned int j = 0; j < _nbLines; ++j)
-	{
-	  _cells[i * _nbLines + j].setTerrain(forest->getTextureId());
-	}
+	  _cells[i * _nbLines + j].setTerrain(E_TERRAINS_FOREST);
+  }
 
   _cells[12].setUnit(E_UNITS_SOLDIERS);
-
-  // rm->
 }
 
 
@@ -59,14 +57,14 @@ e_terrains Map::getTerrain(unsigned int x, unsigned int y) {
 }
 
 
-e_units Map::getUnitId(unsigned int x, unsigned int y) {
-  return _cells[x * _nbLines + y].getUnitId();
-}
+// e_units Map::getUnitId(unsigned int x, unsigned int y) {
+//   return _cells[x * _nbLines + y].getUnitId();
+// }
 
-e_units Map::getUnitId(sf::Vector2f v) {
-  return _cells[static_cast<unsigned int>(v.x * _nbLines + v.y)].getUnitId();
-}
+// e_units Map::getUnitId(sf::Vector2f v) {
+//   return _cells[static_cast<unsigned int>(v.x * _nbLines + v.y)].getUnitId();
+// }
 
-e_terrains Map::getTerrainId(unsigned int x, unsigned int y) {
-  return _cells[x * _nbLines + y].getTerrainId();
-}
+// e_terrains Map::getTerrainId(unsigned int x, unsigned int y) {
+//   return _cells[x * _nbLines + y].getTerrainId();
+// }

@@ -1,5 +1,7 @@
 #include <resources/Image.hh>
 
+#include <common/globals.hh>
+
 
 Image::Image() {
   std::cerr << "Invalid Default Ctor for now" << std::endl;
@@ -13,6 +15,8 @@ Image::Image(const std::string file_name,
   _width (0),
   _height (0)
 {
+  _rectangle = new sf::RectangleShape();
+
   _rectangle->setPosition(sf::Vector2f(0, 0));
   _rectangle->setSize(sf::Vector2f(0, 0));
 
@@ -110,11 +114,24 @@ void Image::reload(std::string file_name)
 
 
 void Image::draw(unsigned int pos_x, unsigned int pos_y,
-				 unsigned int size_x, unsigned int size_y);
+				 unsigned int size_x, unsigned int size_y)
 {
   _rectangle->setPosition(sf::Vector2f(pos_x, pos_y));
   _rectangle->setSize(sf::Vector2f(size_x, size_y));
 
   this->load();
-  _window->draw(&_rectangle);
+  //_window->draw(&_rectangle);
+}
+
+
+void Image::draw(unsigned int i, unsigned int j)
+{
+  // _rectangle->setPosition(
+  // 	sf::Vector2f(i * g_cell_size + g_grid_thickness + _gridOffsetX,
+  // 				 j * g_cell_size + g_grid_thickness + _gridOffsetY));
+
+  _rectangle->setSize(sf::Vector2f(g_cell_size, g_cell_size));
+
+  this->load();
+//  _window->draw(&_rectangle);
 }

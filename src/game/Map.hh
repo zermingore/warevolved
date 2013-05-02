@@ -34,10 +34,8 @@ public:
    **   Puts units where needed;
    **   Sets right Terrains;
    **   Asks ResourcesManager to loads needed Resources
-   **
-   ** \param rm Resources Manager pointer, to load needed sprites
    */
-  void init(ResourcesManager *rm);
+  void init();
 
   /** \brief getter for _nbColumns
    */

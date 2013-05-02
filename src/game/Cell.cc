@@ -1,5 +1,6 @@
 #include <game/Cell.hh>
 #include <common/terrains.hh>
+#include <common/terrains.hh>
 #include <common/units.hh>
 #include <common/include.hh>
 

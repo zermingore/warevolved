@@ -109,7 +109,7 @@ private:
 # endif
 
   std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
-	,   // TODO FIXME think about a list per scope
+  // TODO FIXME think about a list per scope
   e_scope _currentScope; ///< actual context
 
   std::map<std::string, unsigned int> _mapping; ///< getting resource id by it's name
