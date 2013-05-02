@@ -7,6 +7,7 @@
 # include <input/Event.hh>
 
 /** \brief Game is designed to hold the whole Game and not a single game
+ **   This way the Game class launches the main menu when needed
  */
 
 class Game
@@ -29,9 +30,12 @@ public:
 
 
 private:
-  sf::RenderWindow* _window;
-  Event* _event;
-  Map* _map;
+  // TODO use a union with sfml, opengl, dx, ascii windows, ...
+  sf::RenderWindow* _window; ///< SFML Rendering Window
+  Event* _event; ///< Events management
+  Map* _map; ///< global map
+
+  // TODO add global stack (menu, game, ...)
 };
 
 #endif /* !GAME_HH_ */

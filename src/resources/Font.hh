@@ -20,7 +20,7 @@ public:
   ~Font();
 
   bool load();
-  bool unload();
+  void unload();
 
 
 private:

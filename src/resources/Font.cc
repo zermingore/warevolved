@@ -1,8 +1,7 @@
 #include <resources/Font.hh>
 #include <common/constants.hh>
 
-Font::Font()
-{
+Font::Font() {
 }
 
 
@@ -19,8 +18,7 @@ Font::Font(const std::string file_name,
 }
 
 
-Font::~Font()
-{
+Font::~Font() {
 }
 
 bool Font::load()
@@ -31,7 +29,7 @@ bool Font::load()
 }
 
 
-bool Font::unload()
+void Font::unload()
 {
-  return false;
+  return;
 }

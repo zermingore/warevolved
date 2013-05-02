@@ -9,9 +9,9 @@
 		<name>TST2</name>
 	  </file>
 	</folder>
-	<folder path='resources/sprites/'>
-	  <file filename='lol.jppf'>
-		<name>TST3</name>
+	<folder path='resources/units/'>
+	  <file filename='soldiers.png'>
+		<name>soldiers</name>
 	  </file>
 	  <file filename='mppng'>
 		<name>TST4</name>

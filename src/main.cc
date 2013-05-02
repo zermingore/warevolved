@@ -3,13 +3,8 @@
 #include <game/Game.hh>
 
 
-#include <resources/ResourcesManager.hh>
-
-
 int main(int ac, char **av)
 {
-  //  return -1; // FIXME
-
   av = av; // FIXME
 
   bool fullscreen = false;
@@ -17,19 +12,17 @@ int main(int ac, char **av)
 	fullscreen = true;
 
   Context* context = new Context(fullscreen);
+  Game* game = new Game(context->init());
 
-   Game* game = new Game(context->init());
-   game->run();
-
-   // must be after Game Ctor
-  ResourcesManager* lol = new ResourcesManager("tst.xml"); // FIXME
-  lol = lol;
+  game->run();
 
 
 # ifdef DEBUG_LEAKS
   delete context;
   delete game;
 # endif
+
+  //delete[] g_filenames_units;
 
   return EXIT_SUCCESS;
 }

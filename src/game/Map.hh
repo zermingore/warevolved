@@ -5,6 +5,8 @@
 # include <common/units.hh>
 # include <common/terrains.hh>
 # include <game/Cell.hh>
+# include <game/Unit.hh>
+# include <resources/ResourcesManager.hh>
 
 
 /** \brief class which represents the game map
@@ -20,6 +22,7 @@ public:
   /** \brief Constructs a map of nbColumns x nbLines
    ** \param nbColumns Number of columns required
    ** \param nbLines Number of lines required
+   ** calls this->init() to initialize a fresh Map
    */
   Map(unsigned int nbColumns, unsigned int nbLines);
 
@@ -27,6 +30,14 @@ public:
    */
   ~Map();
 
+  /** \brief Initializes the map
+   **   Puts units where needed;
+   **   Sets right Terrains;
+   **   Asks ResourcesManager to loads needed Resources
+   **
+   ** \param rm Resources Manager pointer, to load needed sprites
+   */
+  void init(ResourcesManager *rm);
 
   /** \brief getter for _nbColumns
    */
@@ -55,6 +66,25 @@ public:
    */
   e_units getUnit(sf::Vector2f v);
 
+  /** \brief gets the Unit Texture id at x, y coordinates
+   **
+   ** \param x Coordinates according to columns
+   ** \param y Coordinates according to lines
+   **
+   ** \return the id in the std::map stored in the Resources Manager matching the unit
+   **   located at coordinates (v.x, v.y)
+   */
+  unsigned int getUnitTextureId(unsigned int x, unsigned int y);
+
+  /** \brief gets the unit at v's coordinates
+   **
+   ** \param v targeted Cell's coordinates
+   **
+   ** \return the enum index in e_unit matching the unit
+   **   located at coordinates (v.x, v.y)
+   */
+  unsigned int getUnitTextureId(sf::Vector2f v);
+
 
   /** \brief gets the terrain at coordinates (x, y)
    **
@@ -66,12 +96,23 @@ public:
    */
   e_terrains getTerrain(unsigned int x, unsigned int y);
 
+  /** \brief gets the terrain texture id at coordinates (x, y)
+   **
+   ** \param x Coordinates according to columns
+   ** \param y Coordinates according to lines
+   **
+   ** \return the enum index in e_terrain matching the terrain
+   **   located at coordinates (x, y)
+   */
+  unsigned int getTerrainTextureId(unsigned int x, unsigned int y);
+
 
 private:
   unsigned int _nbColumns; ///< number of columns (x coordinate)
   unsigned int _nbLines; ///< number of lines (y coordinate)
 
-  Cell* _cells; ///< Array which contains every cells of the map
+  Cell *_cells; ///< Array which contains every cells of the map
+  Unit *_units;
 };
 
 #endif /* !MAP_HH_ */

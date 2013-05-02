@@ -4,7 +4,7 @@ bin_PROGRAMS = $(top_srcdir)/we
 __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 -Wfloat-equal -Wcast-qual -Wcast-align -Wunreachable-code -Wundef		\
 -Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses 		\
--O0 -g -DDEBUG -DDEBUG_LEAKS \
+-O0 -g -DDEBUG -DDEBUG_XML -DDEBUG_LEAKS -DDEBUG_PERFS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
 
@@ -41,7 +41,10 @@ input/Event.cc					\
 game/Game.cc					\
 game/Map.cc						\
 game/Cell.cc					\
-game/Cursor.cc
+game/Cursor.cc					\
+game/Unit.cc					\
+game/Terrain.cc
+
 
 
 # if -DDEBUG __top_srcdir__we_SOURCES += tools/debug_funs

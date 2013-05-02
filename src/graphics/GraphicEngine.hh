@@ -4,11 +4,16 @@
 # include <common/include.hh>
 # include <common/Settings.hh>
 # include <common/Status.hh>
+# include <resources/ResourcesManager.hh>
 # include <common/units.hh>
 # include <common/terrains.hh>
 # include <common/interface.hh>
 # include <game/Map.hh>
 
+
+
+
+// refreshCell // allow to refresh only needed cells (mouse motion)
 
 class GraphicEngine
 {
@@ -39,7 +44,7 @@ private:
    */
   void initSprites();
 
-  /** \brief Draw map: global background
+  /** \brief Draws the map (global background)
    */
   void drawMap();
 
@@ -77,9 +82,11 @@ private:
   void drawSelectionMenu();
 
 
-  sf::RenderWindow* _window; ///< main rendering window
-  Map* _map; ///< pointer on the global map
-  Status* _status;
+  sf::RenderWindow *_window; ///< main rendering window
+  Map *_map; ///< pointer on the global map
+  Status *_status;
+
+  ResourcesManager *_rm; ///< Resources Manager, useful for all bindings
 
   // space left for rendering
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
@@ -94,8 +101,8 @@ private:
 
   // TODO move in a Menu class
   sf::Font _fontArmy; ///< menu font (US Army design)
-  unsigned int _selectedEntry;
-  unsigned int _nbEntries;
+  unsigned int _selectedEntry; ///< which entry is currently selected (highlighted)
+  unsigned int _nbEntries; ///< total number of entries in the menu
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

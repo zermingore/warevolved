@@ -3,6 +3,7 @@
 
 # include <string>
 
+// TODO move in Terain.hh class file
 /** \brief listing of all terrains
  */
 enum e_terrains
@@ -14,6 +15,6 @@ enum e_terrains
 };
 
 // array which contents all terrains file names (filled by the GraphicEngine)
-extern std::string g_filenames_terrains[E_TERRAINS_NB_TERRAINS];
+extern std::string g_terrains_name[E_TERRAINS_NB_TERRAINS];
 
 #endif /* !TERRAINS_HH_ */

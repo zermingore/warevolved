@@ -1,22 +1,24 @@
 #include <common/include.hh>
 #include <graphics/GraphicEngine.hh>
+#include <resources/ResourcesManager.hh>
 #include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/Status.hh>
 #include <common/units.hh>
 #include <common/terrains.hh>
 #include <game/Map.hh>
+#include <common/types.hh>
 
 
-std::string g_filenames_terrains[E_TERRAINS_NB_TERRAINS] = {
+const std::string g_terrains_names[E_TERRAINS_NB_TERRAINS] = {
   "forest"
 };
 
-std::string g_filenames_units[E_UNITS_NB_UNITS] = {
+const std::string g_units_names[E_UNITS_NB_UNITS] = {
   "soldiers"
 };
 
-std::string g_filenames_interface[E_INTERFACE_NB_INTERFACE] = {
+const std::string g_interface_names[E_INTERFACE_NB_INTERFACE] = {
   "selection_menu_button",
   "selection_menu_selection"
 };
@@ -39,13 +41,20 @@ GraphicEngine::GraphicEngine(sf::RenderWindow* window, Map* map, Status* status)
   _gridOffsetX = (_renderX - g_cell_size * _map->getNbColumns()) / 2;
   _gridOffsetY = (_renderY - g_cell_size * _map->getNbLines()) / 2;
 
+  _rm = new ResourcesManager("tst.xml");
+
+  //_fontArmy.loadFromFile(_rm->getFont["font_army"]);
   _fontArmy.loadFromFile(static_cast<std::string>(FONTS_FOLDER) + "army.ttf");
+
+  _map->init(_rm);
 
   this->initSprites();
 }
 
 GraphicEngine::~GraphicEngine()
 {
+  delete _rm;
+
   // delete[] _spritesTerrains;
   // delete[] _spritesUnits;
   // delete[] _spritesInterface;
@@ -61,19 +70,19 @@ void GraphicEngine::initSprites()
   for (unsigned int i = 0; i < E_TERRAINS_NB_TERRAINS; ++i)
   {
 	_spritesTerrains[i] = new sf::Texture();
-	_spritesTerrains[i]->loadFromFile(TERRAINS_FOLDER + g_filenames_terrains[i] + ".png");
+	_spritesTerrains[i]->loadFromFile(TERRAINS_FOLDER + g_terrains_names[i] + ".png");
   }
 
   for (unsigned int i = 0; i < E_UNITS_NB_UNITS; ++i)
   {
 	_spritesUnits[i] = new sf::Texture();
-	_spritesUnits[i]->loadFromFile(UNITS_FOLDER + g_filenames_units[i] + ".png");
+	_spritesUnits[i]->loadFromFile(UNITS_FOLDER + g_units_names[i] + ".png");
   }
 
   for (unsigned int i = 0; i < E_INTERFACE_NB_INTERFACE; ++i)
   {
 	_spritesInterface[i] = new sf::Texture();
-	_spritesInterface[i]->loadFromFile(INTERFACE_IN_GAME_MENU_FOLDER + g_filenames_interface[i] + ".png");
+	_spritesInterface[i]->loadFromFile(INTERFACE_IN_GAME_MENU_FOLDER + g_interface_names[i] + ".png");
   }
 }
 
@@ -92,8 +101,7 @@ void GraphicEngine::drawScene()
   this->drawSelectionMenu();
 }
 
-
-void GraphicEngine::drawMap() // TODO
+void GraphicEngine::drawMap() // TODO (map background)
 {
   return;
 }
@@ -140,20 +148,34 @@ void GraphicEngine::drawCells()
 	  e_terrains terrain = _map->getTerrain(i, j);
 	  rectangle.setTexture(_spritesTerrains[terrain]);
 
+	  //rectangle.setTexture(_rm->getImage(_map->getTerrainId())->getTexture());
+
+	  // _rm->getImage(_map->getTerrainId())->display());
+	  // _rm->getImage(E_TYPES_TERRAIN, [_map->getTerrain(i, j)])->draw()
+
+
   	  rectangle.setPosition(i * g_cell_size + g_grid_thickness + _gridOffsetX,
   							j * g_cell_size + g_grid_thickness + _gridOffsetY);
   	  _window->draw(rectangle);
 
+
+
+	  // _rm->getImage(_map->getTerrainId())->draw(
+	  // 	i * g_cell_size + g_grid_thickness + _gridOffsetX,
+	  // 	j * g_cell_size + g_grid_thickness + _gridOffsetY,
+	  // 	g_cell_size, g_cell_size);
+
 	  e_units unit  = _map->getUnit(i, j);
 	  if (unit != E_UNITS_NONE)
 	  {
-		rectangle.setTexture(_spritesUnits[unit]);
+		rectangle.setTexture(_rm->getImage(g_units_names[unit])->getTexture());
+
+		//rectangle.setTexture(_spritesUnits[unit]);
 		_window->draw(rectangle);
 	  }
   	}
 }
 
-// refreshCell // allow to refresh only needed cells (mouse motion)
 
 void GraphicEngine::drawGrid()
 {
@@ -186,7 +208,7 @@ void GraphicEngine::drawGrid()
 
 void GraphicEngine::drawCursor()
 {
-  //if (_status->getCursor->getVisible())
+  // if (_status->getCursor->getVisible())
   _window->draw(_status->getCursor()->getSprite(_gridOffsetX, _gridOffsetY));
 }
 
@@ -249,12 +271,10 @@ void GraphicEngine::drawSelectionMenu()
 }
 
 
-void GraphicEngine::incrementSelectedEntry()
-{
+void GraphicEngine::incrementSelectedEntry() {
   _selectedEntry = (_selectedEntry + 1) % _nbEntries;
 }
 
-void GraphicEngine::decrementSelectedEntry()
-{
+void GraphicEngine::decrementSelectedEntry() {
   _selectedEntry = (_selectedEntry - 1) % _nbEntries;
 }

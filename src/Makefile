@@ -75,7 +75,9 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Event.$(OBJEXT) \
 	__top_srcdir__we-Game.$(OBJEXT) __top_srcdir__we-Map.$(OBJEXT) \
 	__top_srcdir__we-Cell.$(OBJEXT) \
-	__top_srcdir__we-Cursor.$(OBJEXT)
+	__top_srcdir__we-Cursor.$(OBJEXT) \
+	__top_srcdir__we-Unit.$(OBJEXT) \
+	__top_srcdir__we-Terrain.$(OBJEXT)
 __top_srcdir__we_OBJECTS = $(am___top_srcdir__we_OBJECTS)
 __top_srcdir__we_LDADD = $(LDADD)
 am__dirstamp = $(am__leading_dot)dirstamp
@@ -209,7 +211,7 @@ top_srcdir = ..
 __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
 -Wfloat-equal -Wcast-qual -Wcast-align -Wunreachable-code -Wundef		\
 -Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses 		\
--O0 -g -DDEBUG -DDEBUG_LEAKS \
+-O0 -g -DDEBUG -DDEBUG_XML -DDEBUG_LEAKS -DDEBUG_PERFS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
 
@@ -244,7 +246,9 @@ input/Event.cc					\
 game/Game.cc					\
 game/Map.cc						\
 game/Cell.cc					\
-game/Cursor.cc
+game/Cursor.cc					\
+game/Unit.cc					\
+game/Terrain.cc
 
 all: all-am
 
@@ -348,6 +352,8 @@ include ./$(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
 include ./$(DEPDIR)/__top_srcdir__we-Status.Po
 include ./$(DEPDIR)/__top_srcdir__we-System.Po
+include ./$(DEPDIR)/__top_srcdir__we-Terrain.Po
+include ./$(DEPDIR)/__top_srcdir__we-Unit.Po
 include ./$(DEPDIR)/__top_srcdir__we-main.Po
 
 .cc.o:
@@ -587,6 +593,34 @@ __top_srcdir__we-Cursor.obj: game/Cursor.cc
 #	$(AM_V_CXX)source='game/Cursor.cc' object='__top_srcdir__we-Cursor.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cursor.obj `if test -f 'game/Cursor.cc'; then $(CYGPATH_W) 'game/Cursor.cc'; else $(CYGPATH_W) '$(srcdir)/game/Cursor.cc'; fi`
+
+__top_srcdir__we-Unit.o: game/Unit.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Unit.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Unit.Tpo -c -o __top_srcdir__we-Unit.o `test -f 'game/Unit.cc' || echo '$(srcdir)/'`game/Unit.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Unit.Tpo $(DEPDIR)/__top_srcdir__we-Unit.Po
+#	$(AM_V_CXX)source='game/Unit.cc' object='__top_srcdir__we-Unit.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Unit.o `test -f 'game/Unit.cc' || echo '$(srcdir)/'`game/Unit.cc
+
+__top_srcdir__we-Unit.obj: game/Unit.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Unit.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Unit.Tpo -c -o __top_srcdir__we-Unit.obj `if test -f 'game/Unit.cc'; then $(CYGPATH_W) 'game/Unit.cc'; else $(CYGPATH_W) '$(srcdir)/game/Unit.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Unit.Tpo $(DEPDIR)/__top_srcdir__we-Unit.Po
+#	$(AM_V_CXX)source='game/Unit.cc' object='__top_srcdir__we-Unit.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Unit.obj `if test -f 'game/Unit.cc'; then $(CYGPATH_W) 'game/Unit.cc'; else $(CYGPATH_W) '$(srcdir)/game/Unit.cc'; fi`
+
+__top_srcdir__we-Terrain.o: game/Terrain.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Terrain.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Terrain.Tpo -c -o __top_srcdir__we-Terrain.o `test -f 'game/Terrain.cc' || echo '$(srcdir)/'`game/Terrain.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Terrain.Tpo $(DEPDIR)/__top_srcdir__we-Terrain.Po
+#	$(AM_V_CXX)source='game/Terrain.cc' object='__top_srcdir__we-Terrain.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Terrain.o `test -f 'game/Terrain.cc' || echo '$(srcdir)/'`game/Terrain.cc
+
+__top_srcdir__we-Terrain.obj: game/Terrain.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Terrain.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Terrain.Tpo -c -o __top_srcdir__we-Terrain.obj `if test -f 'game/Terrain.cc'; then $(CYGPATH_W) 'game/Terrain.cc'; else $(CYGPATH_W) '$(srcdir)/game/Terrain.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Terrain.Tpo $(DEPDIR)/__top_srcdir__we-Terrain.Po
+#	$(AM_V_CXX)source='game/Terrain.cc' object='__top_srcdir__we-Terrain.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Terrain.obj `if test -f 'game/Terrain.cc'; then $(CYGPATH_W) 'game/Terrain.cc'; else $(CYGPATH_W) '$(srcdir)/game/Terrain.cc'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

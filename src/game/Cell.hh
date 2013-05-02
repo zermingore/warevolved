@@ -16,6 +16,8 @@ class Cell
 {
 public:
   /** \brief Default Constructor creates an empty Cell
+   **   without any Terrain (so no Texture either)
+   **   without any Unit
    */
   Cell();
 
@@ -33,7 +35,20 @@ public:
    */
   e_terrains getTerrain();
 
-  // _________________________ SETTERS _________________________ //
+
+  /** \brief _unitTextureId getter
+   ** \return cell's terrain texture id
+   **   (in Resources Manager std::map)
+   */
+  unsigned int getUnitTextureId(); // TODO move in a Unit class
+
+  /** \brief _terrainTextureId getter
+   ** \return cell's terrain texture id
+   **   (in Resources Manager std::map)
+   */
+  unsigned int getTerrainTextureId(); // TODO move in a Terrain class
+
+
   /** \brief _unit setter
    ** setts the unit \param unit in the cell
    **
@@ -52,6 +67,8 @@ public:
 private:
   e_terrains _terrain; ///< Terrain type index (matching e_terrains)
   e_units _unit; ///< Unit type index (matching e_terrains)
+  unsigned int _terrainTextureId; ///< Terrain Texture id in the Resources Manager
+  unsigned int _unitTextureId; ///< Unit Texture id in the Resources Manager
 };
 
 #endif /* !CELL_HH_ */

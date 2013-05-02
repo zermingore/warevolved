@@ -28,7 +28,12 @@ void Game::run()
   KeyManager* km = new KeyManager();
   _event = new Event(_window, km, graphics, status);
 
-  // Start the game loop
+# ifdef DEBUG_PERFS
+  _window->setFramerateLimit(0);
+  sf::Clock timer;
+# endif
+
+  // Game loop
   while (_window->isOpen())
   {
 	_event->process(); // should be the first task of the game loop
@@ -36,6 +41,13 @@ void Game::run()
 
 	// Update the window
 	_window->display();
+
+#   ifdef DEBUG_PERFS // TODO do not use syscalls
+	std::cout << "frame generation: " << timer.getElapsedTime().asMicroseconds()
+			  << "\tFPS: " << 1000000 / timer.getElapsedTime().asMicroseconds()
+			  << std::endl;
+	timer.restart();
+#   endif
   }
 
 # ifdef DEBUG_LEAKS

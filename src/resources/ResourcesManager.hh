@@ -4,6 +4,9 @@
 # include <common/include.hh>
 # include <resources/Resource.hh>
 
+# include <resources/Font.hh>
+# include <resources/Image.hh>
+
 
 /** \brief enum matching every resource types
  */
@@ -14,11 +17,13 @@ enum e_resource_type
   E_RESOURCE_TYPE_IMAGE,
   E_RESOURCE_TYPE_FONT,
 
-  E_RESOURCE_TYPE_SOUND,
+  E_RESOURCE_TYPE_SOUND, // TODO
 
   E_RESOURCE_TYPE_NB
 };
 
+
+// add getImageId()
 
 class ResourcesManager
 {
@@ -40,7 +45,20 @@ public:
   /** \brief resource getter
    ** \param id resource identifier to retrieve
    */
-  Resource* getResource(unsigned int id);
+  Resource *getResource(unsigned int id);
+  Resource *getResource(const std::string name);
+
+  /** \brief Retrieve an Image from its name (alias)
+   ** it the Image wasn't loaded
+   */
+  Image *getImage(const std::string image_name);
+  Font *getFont(const std::string font_name);
+
+
+  /** \brief Retrieve a Resource id from it's name
+   */
+  // unsigned int getResourceId(std::string resource_name);
+
 
 
 private:
@@ -91,7 +109,7 @@ private:
 # endif
 
   std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
-  // TODO FIXME think about a list per scope
+	,   // TODO FIXME think about a list per scope
   e_scope _currentScope; ///< actual context
 
   std::map<std::string, unsigned int> _mapping; ///< getting resource id by it's name
