@@ -130,7 +130,7 @@ void Image::draw(unsigned int i, unsigned int j)
   // 	sf::Vector2f(i * g_cell_size + g_grid_thickness + _gridOffsetX,
   // 				 j * g_cell_size + g_grid_thickness + _gridOffsetY));
 
-  _rectangle->setSize(sf::Vector2f(g_cell_size, g_cell_size));
+  _rectangle->setSize(sf::Vector2f(g_status->getCellWidth(), g_status->getCellHeight()));
 
   this->load();
 //  _window->draw(&_rectangle);

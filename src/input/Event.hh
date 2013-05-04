@@ -3,7 +3,6 @@
 
 # include <input/KeyManager.hh>
 # include <graphics/GraphicEngine.hh>
-# include <common/Status.hh>
 
 /** \brief Event processing class
  */
@@ -15,10 +14,8 @@ public:
    **   processes input events
    */
   Event();
-  Event(sf::RenderWindow* window,
-		KeyManager* km,
-		GraphicEngine* ge,
-		Status* status);
+  Event(KeyManager* km,
+		GraphicEngine* ge);
 
   /** \brief Destructor
    */
@@ -50,11 +47,9 @@ private:
    */
   void releasedKeys();
 
-  sf::RenderWindow* _window; ///< main rendering window
   sf::Event _event; ///< Event Manager
   KeyManager* _km; ///< KeyManager instance
   GraphicEngine* _ge; ///< GraphicEngine instance
-  Status* _status; ///< global game Status
 };
 
 #endif /* !EVENT_HH_ */

@@ -1,5 +1,8 @@
 -*- mode:org -*-
 
+* TODO Git
+** TODO Merge ResourcesManager branch
+
 * TODO keys
 ** DONE make the cursor move
    CLOSED: [2013-04-17 Wed 16:41]
@@ -42,6 +45,12 @@
 ** TODO Meteo
 *** TODO Graphics: add a snowy transparent sprite
 ** TODO Fog of War
+*** TODO Vision
+*** TODO Field of View ?
+	Sniper: very good vision, poor field of view (angle)
+*** TODO field of hearing
+	know there's a unit nearby
+	avoid embushes
 ** TODO more than one unit per cell (helicopter / soldier)
    could use more than one plan (one for ground units, one for air units)
    could use different levels of zoom (micro-ing a soldier, macro-ing a tank)

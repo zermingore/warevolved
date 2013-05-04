@@ -41,26 +41,40 @@ public:
   const std::string getCursorFileName();
 
 
-  /// SFML settings setters
+  /** \brief _keyRepeatDelay getter
+   ** \return the required time to consider a "second pressure" (in ms)
+   */
+  unsigned int getKeyRepeatDelay();
+
+  /** \brief _keyRepeatDelay setter
+   */
+  void setKeyRepeatDelay(unsigned int key_repeat_delay);
+
+
+  // SFML settings setters
   void setDepth(unsigned int depth);
   void setStencil(unsigned int stencil);
   void setAntiAliasing(unsigned int antiAliasing);
 
-  /// generic settings
+  // generic settings
   void setFullScreen(bool fullScreen);
 
 
 private:
-  /// SFML settings
+  // SFML settings
   unsigned int _depth; ///< depth buffer size
   unsigned int _stencil; ///< stencil buffer size
   unsigned int _antiAliasing; ///< anti aliasing level
 
-  /// generic settings
+  // generic settings
   bool _fullScreen; ///< notify if we're running in full screen
 
+  // required time to consider a "second pressure"
+  unsigned int _keyRepeatDelay; // in ms, must be > 0 to avoid locking keyboard
+
+
 public:
-  std::string _cursorFileName; ///< cursor's sprite file name
+  std::string _cursorFileName; ///< cursor's sprite file name // TODO remove
 };
 
 #endif /* !SETTINGS_HH_ */

@@ -82,6 +82,7 @@ public:
 private:
   sf::Texture *_texture; ///< texture data pointer
   sf::RectangleShape *_rectangle;
+
   unsigned int _width; ///< image width
   unsigned int _height; ///< image height
 };

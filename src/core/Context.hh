@@ -21,9 +21,8 @@ public:
   sf::RenderWindow* init();
 
 private:
-  sf::RenderWindow* _window; ///< main rendering window
-  Settings* _settings; ///< user's settings (full-screen, anti-aliasing, ...)
   System* _system; ///< System settings (SFML version, ...)
+  sf::RenderWindow *_window;
 };
 
 #endif /* !CONTEXT_HH_ */

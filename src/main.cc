@@ -3,6 +3,9 @@
 #include <game/Game.hh>
 
 
+Status *g_status = new Status();
+
+
 int main(int ac, char **av)
 {
   av = av; // FIXME
@@ -12,7 +15,9 @@ int main(int ac, char **av)
 	fullscreen = true;
 
   Context* context = new Context(fullscreen);
-  Game* game = new Game(context->init());
+
+  g_status->setWindow(context->init());
+  Game* game = new Game();
 
   game->run();
 

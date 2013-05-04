@@ -39,6 +39,10 @@ const std::string Settings::getCursorFileName() {
   return (CURSORS_FOLDER + _cursorFileName);
 }
 
+unsigned int Settings::getKeyRepeatDelay() {
+  return _keyRepeatDelay;
+}
+
 
 // _________________________ SETTERS _________________________ //
 void Settings::setDepth(unsigned int depth) {
@@ -55,4 +59,8 @@ void Settings::setAntiAliasing(unsigned int antiAliasing) {
 
 void Settings::setFullScreen(bool fullScreen) {
   _fullScreen = fullScreen;
+}
+
+void Settings::setKeyRepeatDelay(unsigned int key_repeat_delay) {
+  _keyRepeatDelay = key_repeat_delay;
 }

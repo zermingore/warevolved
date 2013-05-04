@@ -55,7 +55,7 @@ void KeyManager::setReady(e_timer index, bool state) {
 
 bool KeyManager::ready(e_timer index)
 {
-  if (_clocks[index].getElapsedTime().asMilliseconds() > g_key_repeat_delay)
+  if (_clocks[index].getElapsedTime().asMilliseconds() > g_settings->getKeyRepeatDelay())
 	this->restartTimer(index);
 
   return (_ready[index]);

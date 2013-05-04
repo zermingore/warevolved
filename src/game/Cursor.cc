@@ -12,7 +12,7 @@ Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
   _x (0),
   _y (0)
 {
-  _texture.loadFromFile(g_player_settings->getCursorFileName());
+  _texture.loadFromFile("g_settings->getCursorFileName()");
 
   _sprite = new sf::Sprite(_texture);
   _middle.x = _texture.getSize().x / 2;
@@ -49,8 +49,8 @@ sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
   _sprite->setScale(scale_factor, scale_factor);
 
   // finally, replace the cursor at it's true position before returning it
-  _sprite->setPosition(_x * g_cell_size + offset_x + _middle.x,
-					   _y * g_cell_size + offset_y + _middle.y);
+  _sprite->setPosition(_x * g_status->getCellWidth() + offset_x + _middle.x,
+					   _y * g_status->getCellHeight() + offset_y + _middle.y);
 
   return *_sprite;
 }

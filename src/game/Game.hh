@@ -30,8 +30,6 @@ public:
 
 
 private:
-  // TODO use a union with sfml, opengl, dx, ascii windows, ...
-  sf::RenderWindow* _window; ///< SFML Rendering Window
   Event* _event; ///< Events management
   Map* _map; ///< global map
 

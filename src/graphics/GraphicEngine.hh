@@ -11,8 +11,6 @@
 # include <game/Map.hh>
 
 
-
-
 // refreshCell // allow to refresh only needed cells (mouse motion)
 
 class GraphicEngine
@@ -21,7 +19,6 @@ public:
   /** \brief Default Constructor
    */
   GraphicEngine();
-  GraphicEngine(sf::RenderWindow* window, Map* map, Status* status);
 
   /** \brief Destructor
    */
@@ -82,18 +79,18 @@ private:
   void drawSelectionMenu();
 
 
-  sf::RenderWindow *_window; ///< main rendering window
-  Map *_map; ///< pointer on the global map
-  Status *_status;
+  // sf::RenderWindow *_window; ///< main rendering window
+  // Map *_map; ///< pointer on the global map
+  //Status *_status;
 
-  ResourcesManager *_rm; ///< Resources Manager, useful for all bindings
+  // ResourcesManager *_rm; ///< Resources Manager, useful for all bindings
 
   // space left for rendering
-  unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
-  unsigned int _renderY; ///< Drawable zone room left vertically (in px)
+  // unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
+  // unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 
-  int _gridOffsetX; ///< From where we start drawing horizontally (in px)
-  int _gridOffsetY; ///< From where we start drawing vertically (in px)
+  // int _gridOffsetX; ///< From where we start drawing horizontally (in px)
+  // int _gridOffsetY; ///< From where we start drawing vertically (in px)
 
   sf::Texture* _spritesUnits[E_UNITS_NB_UNITS]; ///< units sprites
   sf::Texture* _spritesTerrains[E_TERRAINS_NB_TERRAINS]; ///< terrains sprites

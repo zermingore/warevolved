@@ -51,7 +51,7 @@ public:
   /** \brief Default Constructor
    */
   Status();
-  explicit Status(Map* map);
+  // explicit Status(Map* map);
 
   /** \brief Destructor
    */
@@ -90,9 +90,44 @@ public:
   void cellSelection();
 
 
+  sf::RenderWindow * getWindow();
+  Map *getMap();
+  ResourcesManager *getRM();
+  float getCurrentFPS();
+  unsigned int getCellWidth();
+  unsigned int getCellHeight();
+  unsigned int getGridThickness();
+  unsigned int getRenderX();
+  unsigned int getRenderY();
+  unsigned int getGridOffsetX();
+  unsigned int getGridOffsetY();
+
+
+  /** \brief _window setter
+   **   updates _renderX and _renderY
+   */
+  void setWindow(sf::RenderWindow *window);
+  void setCursor(Cursor *cursor);
+  void setMap(Map *map);
+  void setRM(ResourcesManager *rm);
+  void setEventMode(e_event_mode event_mode);
+  void setSelectedCell(sf::Vector2f selected_cell);
+  void setCurrentFPS(float current_fps);
+  void setCellWidth(unsigned int cell_width);
+  void setCellHeight(unsigned int cell_height);
+  void setGridThickness(unsigned int grid_thickness);
+  void setRenderX(unsigned int render_x);
+  void setRenderY(unsigned int render_y);
+  void setGridOffsetX(unsigned int grid_offset_x);
+  void setGridOffsetY(unsigned int grid_offset_y);
+
+
 private:
-  Cursor* _cursor; ///< map Cursor
-  Map* _map; ///< storing map
+  // TODO use a union with sfml, opengl, dx, ascii windows, ...
+  sf::RenderWindow *_window; ///< main Rendering Window
+  Cursor *_cursor; ///< map Cursor
+  Map *_map; ///< storing map
+  ResourcesManager *_rm;
 
   // Interface Status
   e_panel_position _panelPosition; ///< Side panel position (if any)
@@ -100,6 +135,20 @@ private:
   e_event_mode _eventMode; ///< Remember the event mode we're in
   bool _selectionMode; ///< True if we're in selection mode
   sf::Vector2f _selectedCell; ///< coordinates of the selected cell
+  float _currentFPS; ///< current number of generated frame per second
+
+  // Cells Size
+  unsigned int _cellWidth; ///< cells width (in px)
+  unsigned int _cellHeight; ///< cells height (in px)
+
+  // Graphic: space left for rendering
+  unsigned int _gridThickness; ///< cells delimiter thickness (in px)
+
+  unsigned int _gridOffsetX;
+  unsigned int _gridOffsetY;
+
+  unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
+  unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 };
 
 #endif /* !STATUS_HH_ */
