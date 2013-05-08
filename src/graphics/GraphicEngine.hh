@@ -37,10 +37,6 @@ public:
 
 
 private:
-  /** \brief Sets up textures arrays, loading them only one time
-   */
-  void initSprites();
-
   /** \brief Draws the map (global background)
    */
   void drawMap();
@@ -100,6 +96,8 @@ private:
   sf::Font _fontArmy; ///< menu font (US Army design)
   unsigned int _selectedEntry; ///< which entry is currently selected (highlighted)
   unsigned int _nbEntries; ///< total number of entries in the menu
+
+  unsigned int _IDTST; // rm
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

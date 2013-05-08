@@ -30,7 +30,8 @@ public:
   /** \brief Default Constructor
    */
   Resource();
-  Resource(std::string file_name, unsigned int id);
+  explicit Resource(std::string name);
+  Resource(std::string name, unsigned int id);
   virtual ~Resource();
 
   /** \brief virtual method: resource loading

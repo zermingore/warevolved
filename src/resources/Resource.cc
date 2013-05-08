@@ -9,9 +9,18 @@ Resource::Resource() :
 {
 }
 
-Resource::Resource(std::string file_name, unsigned int id) :
+Resource::Resource(std::string name) :
+  _id (0),
+  _fileName (""),
+  _name (name),
+  _loaded (false),
+  _scope (E_SCOPE_ALL)
+{
+}
+
+Resource::Resource(std::string name, unsigned int id) :
   _id (id),
-  _fileName (file_name),
+  _name (name),
   _loaded (false),
   _scope (E_SCOPE_ALL)
 {

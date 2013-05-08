@@ -62,14 +62,14 @@ public:
   void reload(std::string file_name);
 
 
-  /** \brief draws the Image at coordinates pos_x, pos_y
-   ** \param pos_x x coordinate to display the image (in px)
-   ** \param pos_y y coordinate to display the image (in px)
-   ** \param width image width
-   ** \param height image height
-   */
-  void draw(unsigned int pos_x, unsigned int pos_y,
-			unsigned int width, unsigned int height);
+  // /** \brief draws the Image at coordinates pos_x, pos_y
+  //  ** \param pos_x x coordinate to display the image (in px)
+  //  ** \param pos_y y coordinate to display the image (in px)
+  //  ** \param width image width
+  //  ** \param height image height
+  //  */
+  // void draw(unsigned int pos_x, unsigned int pos_y,
+  // 			unsigned int width, unsigned int height);
 
 
   /** \brief draws the Image in the cell i, j
@@ -81,7 +81,8 @@ public:
 
 private:
   sf::Texture *_texture; ///< texture data pointer
-  sf::RectangleShape *_rectangle;
+  sf::Sprite *_sprite; ///< Image sprite, allowing transformations
+  sf::RectangleShape *_rectangle; ///< image position
 
   unsigned int _width; ///< image width
   unsigned int _height; ///< image height

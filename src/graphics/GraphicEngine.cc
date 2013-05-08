@@ -33,6 +33,8 @@ GraphicEngine::GraphicEngine()
   //g_status->getMap()->init(_rm);
 
   //this->initSprites();
+
+  _IDTST = 0;
 }
 
 GraphicEngine::~GraphicEngine()
@@ -45,16 +47,6 @@ GraphicEngine::~GraphicEngine()
   // delete[] g_filenames_units;
   // delete[] g_filenames_interface;
 }
-
-
-// void GraphicEngine::initSprites()
-// {
-  // for (unsigned int i = 0; i < E_TERRAINS_NB_TERRAINS; ++i)
-  // {
-  // 	_spritesTerrains[i] = new sf::Texture();
-  // 	_spritesTerrains[i]->loadFromFile(TERRAINS_FOLDER + g_terrains_names[i] + ".png");
-  // }
-//}
 
 
 void GraphicEngine::drawScene()
@@ -112,13 +104,14 @@ void GraphicEngine::drawCells()
   for (unsigned int i = 0; i < g_status->getMap()->getNbColumns(); ++i)
 	for (unsigned int j = 0; j < g_status->getMap()->getNbLines(); ++j)
   	{
-	  e_terrains terrain = g_status->getMap()->getTerrain(i, j);
-	  // _rm->getImage(g_status->getMap()->getTerrainId())->display());
+	  //e_terrains terrain = g_status->getMap()->getTerrain(i, j);
+	  g_status->getRM()->getImage(&_IDTST, std::string("forest"))->draw(i, j);
+
 	  // _rm->getImage(E_TYPES_TERRAIN, [g_status->getMap()->getTerrain(i, j)])->draw()
 
-	  //_rm->getImage(g_status->getMap()->getTerrainId())->draw(i, j);
+	  // g_status->getRM()->getImage(g_status->getMap()->getTerrainId())->draw(i, j);
 
-	  e_units unit  = g_status->getMap()->getUnit(i, j);
+	  //e_units unit  = g_status->getMap()->getUnit(i, j);
 	  // if (unit != E_UNITS_NONE)
 	  // 	_rm->getImage(g_units_names[unit])->draw(i, j);
   	}

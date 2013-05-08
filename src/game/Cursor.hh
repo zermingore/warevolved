@@ -59,7 +59,7 @@ private:
   unsigned int _y; ///< Cursor y (line) position
 
   sf::Sprite* _sprite;
-  sf::Texture _texture;
+  sf::Texture* _texture;
   std::string _filename;
 
   // middle of the SPRITE coordinates, avoid computing its value each frame

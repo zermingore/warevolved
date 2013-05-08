@@ -3,11 +3,16 @@
 #include <game/Game.hh>
 
 
+#include <resources/ID.hh>
+
 Status *g_status = new Status();
+
+unsigned int ID::tst = 0;
 
 
 int main(int ac, char **av)
 {
+
   av = av; // FIXME
 
   bool fullscreen = false;

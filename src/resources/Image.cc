@@ -12,13 +12,16 @@ Image::Image(const std::string file_name,
 			 const std::string name,
 			 unsigned int id) :
   _texture (NULL),
+  _sprite (NULL),
   _width (0),
   _height (0)
 {
-  _rectangle = new sf::RectangleShape();
-
+  _rectangle = new sf::RectangleShape(); // TODO allocation only if needed
   _rectangle->setPosition(sf::Vector2f(0, 0));
   _rectangle->setSize(sf::Vector2f(0, 0));
+
+  _sprite = new sf::Sprite();
+
 
   // in debug, load an ugly texture to help noticing it
 # ifdef DEBUG
@@ -43,6 +46,9 @@ Image::~Image()
 
   if (_texture)
 	delete _texture;
+
+  if (_sprite)
+	delete _sprite;
 
   delete _rectangle;
 }
@@ -108,30 +114,33 @@ void Image::reload(std::string file_name)
   _texture->loadFromFile(file_name);
   _rectangle->setTexture(_texture);
   _loaded = true;
-
-  return;
 }
 
 
-void Image::draw(unsigned int pos_x, unsigned int pos_y,
-				 unsigned int size_x, unsigned int size_y)
-{
-  _rectangle->setPosition(sf::Vector2f(pos_x, pos_y));
-  _rectangle->setSize(sf::Vector2f(size_x, size_y));
+// void Image::draw(unsigned int pos_x, unsigned int pos_y,
+// 				 unsigned int size_x, unsigned int size_y)
+// {
+//   _rectangle->setPosition(sf::Vector2f(pos_x, pos_y));
+//   _rectangle->setSize(sf::Vector2f(size_x, size_y));
 
-  this->load();
-  //_window->draw(&_rectangle);
-}
+//   this->load();
+//   //_window->draw(&_rectangle);
+// }
 
 
 void Image::draw(unsigned int i, unsigned int j)
 {
-  // _rectangle->setPosition(
-  // 	sf::Vector2f(i * g_cell_size + g_grid_thickness + _gridOffsetX,
-  // 				 j * g_cell_size + g_grid_thickness + _gridOffsetY));
+  _rectangle->setPosition(
+  	sf::Vector2f(i * g_status->getCellWidth()
+				 + g_status->getGridThickness()
+				 + g_status->getGridOffsetX(),
+
+  				 j * g_status->getCellHeight()
+				 + g_status->getGridThickness()
+				 + g_status->getGridOffsetY()));
 
   _rectangle->setSize(sf::Vector2f(g_status->getCellWidth(), g_status->getCellHeight()));
 
-  this->load();
-//  _window->draw(&_rectangle);
+  if (this->load())
+	g_status->getWindow()->draw(*_rectangle);
 }

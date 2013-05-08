@@ -23,9 +23,6 @@ Map::~Map() {
 void Map::init()
 {
   // TODO read informations from a map file
-
-  Terrain *forest = new Terrain(E_TERRAINS_FOREST);
-
   for (unsigned int i = 0; i < _nbColumns; ++i)
   {
 	for (unsigned int j = 0; j < _nbLines; ++j)

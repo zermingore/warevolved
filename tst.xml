@@ -3,7 +3,7 @@
   <images>
 	<folder path='resources/cursors/'>
 	  <file filename='cursor.png'>
-		<name>TST</name>
+		<name>cursor</name>
 	  </file>
 	  <file filename='cursor.png'>
 		<name>TST2</name>
@@ -15,6 +15,11 @@
 	  </file>
 	  <file filename='mppng'>
 		<name>TST4</name>
+	  </file>
+	</folder>
+	<folder path='resources/terrains/'>
+	  <file filename='forest.png'>
+		<name>forest</name>
 	  </file>
 	</folder>
   </images>

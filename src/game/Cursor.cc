@@ -12,11 +12,17 @@ Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
   _x (0),
   _y (0)
 {
-  _texture.loadFromFile("g_settings->getCursorFileName()");
+  _texture = new sf::Texture();
 
-  _sprite = new sf::Sprite(_texture);
-  _middle.x = _texture.getSize().x / 2;
-  _middle.y = _texture.getSize().y / 2;
+  //unsigned int tst = 0;
+  // ResourcesManager* rm = g_status->getRM();
+  // _texture = g_status->getRM()->getImage(&tst, std::string("cursor"))->getTexture();
+
+  _texture->loadFromFile("g_settings->getCursorFileName()");
+
+  _sprite = new sf::Sprite(*_texture);
+  _middle.x = _texture->getSize().x / 2;
+  _middle.y = _texture->getSize().y / 2;
 }
 
 Cursor::~Cursor() {

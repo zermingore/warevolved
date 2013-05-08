@@ -23,8 +23,6 @@ enum e_resource_type
 };
 
 
-// add getImageId()
-
 class ResourcesManager
 {
 public:
@@ -41,17 +39,11 @@ public:
    */
   ~ResourcesManager();
 
-
-  /** \brief resource getter
-   ** \param id resource identifier to retrieve
-   */
-  Resource *getResource(unsigned int id);
-  Resource *getResource(const std::string name);
-
   /** \brief Retrieve an Image from its name (alias)
    ** it the Image wasn't loaded
    */
-  Image *getImage(const std::string image_name);
+  Image *getImage(unsigned int *id, const std::string image_name);
+
   Font *getFont(const std::string font_name);
 
 
@@ -109,7 +101,10 @@ private:
 # endif
 
   std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
-  // TODO FIXME think about a list per scope
+
+  std::map<unsigned int, Image*> _images; ///< a resources list per type
+
+  // NOTE think about a list per scope
   e_scope _currentScope; ///< actual context
 
   std::map<std::string, unsigned int> _mapping; ///< getting resource id by it's name

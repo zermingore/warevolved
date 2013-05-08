@@ -44,11 +44,11 @@ public:
   /** \brief _keyRepeatDelay getter
    ** \return the required time to consider a "second pressure" (in ms)
    */
-  unsigned int getKeyRepeatDelay();
+  int getKeyRepeatDelay();
 
   /** \brief _keyRepeatDelay setter
    */
-  void setKeyRepeatDelay(unsigned int key_repeat_delay);
+  void setKeyRepeatDelay(int key_repeat_delay);
 
 
   // SFML settings setters
@@ -70,7 +70,7 @@ private:
   bool _fullScreen; ///< notify if we're running in full screen
 
   // required time to consider a "second pressure"
-  unsigned int _keyRepeatDelay; // in ms, must be > 0 to avoid locking keyboard
+  int _keyRepeatDelay; // in ms, must be > 0 to avoid locking keyboard
 
 
 public:

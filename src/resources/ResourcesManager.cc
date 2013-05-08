@@ -46,7 +46,8 @@ bool ResourcesManager::addResource(e_resource_type type,
   switch (type)
   {
 	case E_RESOURCE_TYPE_IMAGE:
-	  _resources[type].push_back(new Image(file_name, name, id));
+	  _images[id] = new Image(file_name, name, id);
+	  _resources[type].push_back(_images[id]);
 	  return true;
 	case E_RESOURCE_TYPE_FONT:
 	  _resources[type].push_back(new Font(file_name, name, id));
@@ -64,39 +65,19 @@ bool ResourcesManager::addResource(e_resource_type type,
 }
 
 
-
-Resource *ResourcesManager::getResource(unsigned int id)
+Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name)
 {
-  // return NULL; // FIXME
+  if (*id)
+	return _images[*id];
 
-
-  for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
-  {
-  	//for (auto it = std::find(_resources[e_resource_type(i)].begin(), _resources[e_resource_type(i)].end(), 1))
-  	for (auto it = _resources[e_resource_type(i)].begin(); it != _resources[e_resource_type(i)].end(); ++it)
-  	{
-  	  if (*it)
-  		return *it;
-  	}
-  }
-
-# ifdef DEBUG
-  std::cerr << "unable to find resource of id :" << id << std::endl;
-# endif
-
-  return NULL;
-}
-
-
-
-Image *ResourcesManager::getImage(const std::string image_name)
-{
   for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
   {
 	if ((*it)->getName() == image_name)
 	{
 	  if (!(*it)->getLoaded())
 		(*it)->load();
+
+	  *id = ((*it)->getId());
 
 	  return dynamic_cast <Image*> (*it);
 	}
@@ -106,19 +87,30 @@ Image *ResourcesManager::getImage(const std::string image_name)
   std::cerr << "Unable to find image " << image_name << std::endl;
 # endif
 
-  return NULL; // NOTE return a default image ?
+  return NULL; // NOTE return a default image
 }
 
 
-Font *ResourcesManager::getFont(const std::string font_name) {
-  //return _mapping[font_name];
+
+Font *ResourcesManager::getFont(const std::string font_name)
+{
+  for (auto it = _resources[E_RESOURCE_TYPE_FONT].begin(); it != _resources[E_RESOURCE_TYPE_FONT].end(); ++it)
+  {
+	if ((*it)->getName() == font_name)
+	{
+	  if (!(*it)->getLoaded())
+		(*it)->load();
+
+	  return dynamic_cast <Font*> (*it);
+	}
+  }
+
+# ifdef DEBUG
+  std::cerr << "Unable to find font " << font_name << std::endl;
+# endif
+
+  return NULL; // NOTE return a default font ?
 }
-
-
-Resource *ResourcesManager::getResource(const std::string name) {
-  //return _mapping[name];
-}
-
 
 
 // unsigned int ResourcesManager::getResourceId(std::string resource_name)
