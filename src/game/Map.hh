@@ -94,6 +94,17 @@ public:
    */
   e_terrains getTerrain(unsigned int x, unsigned int y);
 
+
+  /** \brief gets the terrain image at coordinates (x, y)
+   **
+   ** \param x Coordinates according to columns
+   ** \param y Coordinates according to lines
+   **
+   ** \return the Image matching the terrain
+   **   located at coordinates (x, y)
+   */
+  Image* getTerrainImage(unsigned int x, unsigned int y);
+
   /** \brief gets the terrain texture id at coordinates (x, y)
    **
    ** \param x Coordinates according to columns

@@ -1,6 +1,9 @@
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/Terrain.hh>
+#include <common/terrains.hh>
+#include <resources/ResourcesManager.hh>
+#include <common/globals.hh>
 
 
 Map::Map() {
@@ -52,6 +55,20 @@ e_units Map::getUnit(sf::Vector2f v) {
 e_terrains Map::getTerrain(unsigned int x, unsigned int y) {
   return _cells[x * _nbLines + y].getTerrain();
 }
+
+
+Image* Map::getTerrainImage(unsigned int x, unsigned int y) {
+  e_terrains terrain = _cells[x * _nbLines + y].getTerrain();
+
+  switch (terrain)
+  {
+	case E_TERRAINS_FOREST:
+	  return GETIMAGE("forest");
+	default:
+	  return NULL;
+  }
+}
+
 
 
 // e_units Map::getUnitId(unsigned int x, unsigned int y) {

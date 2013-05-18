@@ -10,8 +10,7 @@ Status::Status() :
 {
   //_window = new sf::RenderWindow();
   _map = new Map();
-  _rm = new ResourcesManager("tst.xml");
-  _cursor = new Cursor(_map->getNbColumns(), _map->getNbLines());
+  //_cursor = new Cursor(_map->getNbColumns(), _map->getNbLines());
 
   // deducing grid position
   _gridOffsetX = (_renderX - _cellWidth * _map->getNbColumns()) / 2;
@@ -21,8 +20,7 @@ Status::Status() :
 
 Status::~Status()
 {
-  delete _rm;
-  delete _cursor;
+//  delete _cursor;
 }
 
 Cursor* Status::getCursor() {
@@ -75,10 +73,6 @@ Map *Status::getMap() {
  return _map;
 }
 
-ResourcesManager *Status::getRM() {
- return _rm;
-}
-
 float Status::getCurrentFPS() {
   return _currentFPS;
 }
@@ -112,7 +106,6 @@ unsigned int Status::getGridOffsetY() {
 }
 
 
-
 void Status::setWindow(sf::RenderWindow *window)
 {
   _window = window;
@@ -128,10 +121,6 @@ void Status::setCursor(Cursor *cursor) {
 
 void Status::setMap(Map *map) {
   _map = map;
-}
-
-void Status::setRM(ResourcesManager *rm) {
-  _rm = rm;
 }
 
 void Status::setEventMode(e_event_mode event_mode) {

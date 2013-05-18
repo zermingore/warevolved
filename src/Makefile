@@ -64,6 +64,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Context.$(OBJEXT) \
 	__top_srcdir__we-GraphicEngine.$(OBJEXT) \
+	__top_srcdir__we-SelectionMenu.$(OBJEXT) \
 	__top_srcdir__we-ResourcesManager.$(OBJEXT) \
 	__top_srcdir__we-Resource.$(OBJEXT) \
 	__top_srcdir__we-Image.$(OBJEXT) \
@@ -230,6 +231,7 @@ main.cc							\
 core/Context.cc					\
 \
 graphics/GraphicEngine.cc		\
+graphics/SelectionMenu.cc		\
 \
 resources/ResourcesManager.cc	\
 resources/Resource.cc			\
@@ -349,6 +351,7 @@ include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Map.Po
 include ./$(DEPDIR)/__top_srcdir__we-Resource.Po
 include ./$(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
+include ./$(DEPDIR)/__top_srcdir__we-SelectionMenu.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
 include ./$(DEPDIR)/__top_srcdir__we-Status.Po
 include ./$(DEPDIR)/__top_srcdir__we-System.Po
@@ -411,6 +414,20 @@ __top_srcdir__we-GraphicEngine.obj: graphics/GraphicEngine.cc
 #	$(AM_V_CXX)source='graphics/GraphicEngine.cc' object='__top_srcdir__we-GraphicEngine.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-GraphicEngine.obj `if test -f 'graphics/GraphicEngine.cc'; then $(CYGPATH_W) 'graphics/GraphicEngine.cc'; else $(CYGPATH_W) '$(srcdir)/graphics/GraphicEngine.cc'; fi`
+
+__top_srcdir__we-SelectionMenu.o: graphics/SelectionMenu.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-SelectionMenu.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo -c -o __top_srcdir__we-SelectionMenu.o `test -f 'graphics/SelectionMenu.cc' || echo '$(srcdir)/'`graphics/SelectionMenu.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo $(DEPDIR)/__top_srcdir__we-SelectionMenu.Po
+#	$(AM_V_CXX)source='graphics/SelectionMenu.cc' object='__top_srcdir__we-SelectionMenu.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-SelectionMenu.o `test -f 'graphics/SelectionMenu.cc' || echo '$(srcdir)/'`graphics/SelectionMenu.cc
+
+__top_srcdir__we-SelectionMenu.obj: graphics/SelectionMenu.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-SelectionMenu.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo -c -o __top_srcdir__we-SelectionMenu.obj `if test -f 'graphics/SelectionMenu.cc'; then $(CYGPATH_W) 'graphics/SelectionMenu.cc'; else $(CYGPATH_W) '$(srcdir)/graphics/SelectionMenu.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo $(DEPDIR)/__top_srcdir__we-SelectionMenu.Po
+#	$(AM_V_CXX)source='graphics/SelectionMenu.cc' object='__top_srcdir__we-SelectionMenu.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-SelectionMenu.obj `if test -f 'graphics/SelectionMenu.cc'; then $(CYGPATH_W) 'graphics/SelectionMenu.cc'; else $(CYGPATH_W) '$(srcdir)/graphics/SelectionMenu.cc'; fi`
 
 __top_srcdir__we-ResourcesManager.o: resources/ResourcesManager.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-ResourcesManager.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-ResourcesManager.Tpo -c -o __top_srcdir__we-ResourcesManager.o `test -f 'resources/ResourcesManager.cc' || echo '$(srcdir)/'`resources/ResourcesManager.cc

@@ -27,8 +27,8 @@ Context::Context(bool fullscreen)
 
 Context::~Context()
 {
-  // delete g_settings;
-  // delete g_system;
+  delete g_settings;
+  delete _system;
 }
 
 

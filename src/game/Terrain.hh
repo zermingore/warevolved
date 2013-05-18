@@ -2,9 +2,8 @@
 # define TERRAIN_HH_
 
 # include <game/Cell.hh>
+# include <resources/Image.hh>
 
-
-# include <resources/ResourcesManager.hh>
 
 /** \brief Terrain
  */
@@ -19,33 +18,37 @@ public:
    */
   Terrain();
 
-  Terrain(e_terrains terrain);
-
   /** \brief Terrain Constructor
    **   builds a Terrain of type terrain
    */
-  Terrain(e_terrains terrain, ResourcesManager *rm);
-
+  Terrain(e_terrains terrain);
 
   /** \brief Destructor
    */
   ~Terrain();
 
-  /** \brief _textureId getter
-   ** \return Terrain Texture id
-   **   matching the one in the Resources Manager std::map
+  /** \brief _imageName getter
+   ** \return Image name (alias)
    */
-  unsigned int getTextureId();
+  std::string getImageName();
 
-  /** \brief _textureId setter
+  /** \brief _image getter
+   */
+  Image *getImage();
+
+
+  /** \brief _image setter
    */
   void setTextureId(unsigned int texture_id);
+  /** \brief _imageName setter
+   */
+  void setImageName(std::string image_name);
 
 
 private:
-  e_terrains _terrain;
-  unsigned int _textureId; ///< current Texture id
-  ResourcesManager *_rm; ///< contains the Texture matching _textureId
+  e_terrains _terrain; ///< terrain id matching e_types_terrain
+  std::string _imageName; ///< image name (alias)
+  Image* _image; ///< current Image
 };
 
 #endif /* !TERRAIN_HH_ */

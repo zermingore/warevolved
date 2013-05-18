@@ -41,10 +41,36 @@ public:
    */
   sf::Texture *getTexture();
 
+  /** \brief _sprite getter
+   ** loads the texture if needed
+   ** allocates _sprites if needed
+   */
+  sf::Sprite *getSprite();
+
+  /** \brief sets _rectangle size
+   */
+  void setSize(sf::Vector2f size);
+
+
+  /** \brief sets _rectangle size
+   **   builds a sf::Vector2f
+   ** \param width: image width
+   ** \param height: image height
+   */
+  void setSize(float width, float height);
+
+
   /** \brief sets _fileName to file_name
    **   sets _loaded to false
    */
   void setFileName(std::string file_name);
+
+
+  /** _sprite setter
+   ** \param sprite _sprite value
+   */
+  void setSprite(sf::Sprite *sprite);
+
 
   /** \brief load Image texture to (V)RAM if necessary
    ** sets _rectangle->texture to the new _texture
@@ -76,7 +102,13 @@ public:
    ** \param i x cell's coordinate to display the image (column)
    ** \param j y cell's coordinate to display the image (row)
    */
-  void draw(unsigned int i, unsigned int j);
+  void drawAtCell(unsigned int i, unsigned int j);
+
+
+  /** \brief draws the Image at _sprite's position
+   */
+  void draw();
+
 
 
 private:

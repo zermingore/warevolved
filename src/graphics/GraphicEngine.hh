@@ -9,6 +9,9 @@
 # include <common/terrains.hh>
 # include <common/interface.hh>
 # include <game/Map.hh>
+# include <game/Cursor.hh>
+# include <graphics/SelectionMenu.hh>
+
 
 
 // refreshCell // allow to refresh only needed cells (mouse motion)
@@ -79,8 +82,6 @@ private:
   // Map *_map; ///< pointer on the global map
   //Status *_status;
 
-  // ResourcesManager *_rm; ///< Resources Manager, useful for all bindings
-
   // space left for rendering
   // unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   // unsigned int _renderY; ///< Drawable zone room left vertically (in px)
@@ -88,16 +89,20 @@ private:
   // int _gridOffsetX; ///< From where we start drawing horizontally (in px)
   // int _gridOffsetY; ///< From where we start drawing vertically (in px)
 
-  sf::Texture* _spritesUnits[E_UNITS_NB_UNITS]; ///< units sprites
-  sf::Texture* _spritesTerrains[E_TERRAINS_NB_TERRAINS]; ///< terrains sprites
-  sf::Texture* _spritesInterface[E_INTERFACE_NB_INTERFACE]; ///< interface sprites
+  sf::Texture *_spritesUnits[E_UNITS_NB_UNITS]; ///< units sprites
+  sf::Texture *_spritesTerrains[E_TERRAINS_NB_TERRAINS]; ///< terrains sprites
+  sf::Texture *_spritesInterface[E_INTERFACE_NB_INTERFACE]; ///< interface sprites
 
   // TODO move in a Menu class
-  sf::Font _fontArmy; ///< menu font (US Army design)
-  unsigned int _selectedEntry; ///< which entry is currently selected (highlighted)
-  unsigned int _nbEntries; ///< total number of entries in the menu
+  //sf::Font _fontArmy; ///< menu font (US Army design)
+  //unsigned int _selectedEntry; ///< which entry is currently selected (highlighted)
+  //unsigned int _nbEntries; ///< total number of entries in the menu
 
   unsigned int _IDTST; // rm
+
+  Cursor *_cursor;
+
+  SelectionMenu *_selectionMenu;
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

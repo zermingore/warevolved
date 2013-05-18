@@ -1,5 +1,4 @@
 #include <resources/Image.hh>
-
 #include <common/globals.hh>
 
 
@@ -19,9 +18,6 @@ Image::Image(const std::string file_name,
   _rectangle = new sf::RectangleShape(); // TODO allocation only if needed
   _rectangle->setPosition(sf::Vector2f(0, 0));
   _rectangle->setSize(sf::Vector2f(0, 0));
-
-  _sprite = new sf::Sprite();
-
 
   // in debug, load an ugly texture to help noticing it
 # ifdef DEBUG
@@ -43,14 +39,14 @@ Image::~Image()
 # ifdef DEBUG
   std::cout << "Image Dtor" << std::endl;
 # endif
+  if (_rectangle)
+	delete _rectangle;
 
   if (_texture)
 	delete _texture;
 
   if (_sprite)
 	delete _sprite;
-
-  delete _rectangle;
 }
 
 
@@ -67,11 +63,43 @@ sf::Texture *Image::getTexture()
   return _texture;
 }
 
+sf::Sprite *Image::getSprite()
+{
+  if (!_texture)
+  {
+	_texture = new sf::Texture();
+	_texture->loadFromFile(_fileName);
+	_rectangle->setTexture(_texture);
+	_loaded = true;
+  }
+
+  if (!_sprite)
+  {
+	_sprite = new sf::Sprite(*_texture);
+	_loaded = true;
+  }
+
+  return _sprite;
+}
+
 
 void Image::setFileName(std::string file_name)
 {
   _fileName = file_name;
   _loaded = false;
+}
+
+
+void Image::setSprite(sf::Sprite *sprite) {
+  _sprite = sprite;
+}
+
+void Image::setSize(sf::Vector2f size) {
+  _rectangle->setSize(size);
+}
+
+void Image::setSize(float width, float height) {
+  _rectangle->setSize(sf::Vector2f(width, height));
 }
 
 
@@ -128,7 +156,7 @@ void Image::reload(std::string file_name)
 // }
 
 
-void Image::draw(unsigned int i, unsigned int j)
+void Image::drawAtCell(unsigned int i, unsigned int j)
 {
   _rectangle->setPosition(
   	sf::Vector2f(i * g_status->getCellWidth()
@@ -143,4 +171,14 @@ void Image::draw(unsigned int i, unsigned int j)
 
   if (this->load())
 	g_status->getWindow()->draw(*_rectangle);
+}
+
+
+void Image::draw()
+{
+  // _rectangle->setPosition(_sprite->position);
+  // _rectangle->setSize(_sprite->position);
+
+  if (this->load())
+	g_status->getWindow()->draw(*_sprite);
 }

@@ -1,46 +1,57 @@
 #include <game/Terrain.hh>
-#include <iostream>
-
+#include <common/globals.hh>
 
 
 Terrain::Terrain() {
 }
 
-
-Terrain::Terrain(e_terrains terrain, ResourcesManager *rm) :
-  _terrain (terrain),
-  _textureId (0),
-  _rm (rm)
-{
-}
-
 Terrain::Terrain(e_terrains terrain) :
-  _terrain (terrain),
-  _textureId (0)
+  _terrain (terrain)
 {
+  switch (_terrain)
+  {
+	case E_TERRAINS_FOREST:
+	  _imageName = "forest";
+	  break;
+
+	default:
+	  std::cerr <<
+		"Unable to find Terrain Texture with name: " <<
+		_imageName << std::endl;
+  }
 }
 
 Terrain::~Terrain() {
 }
 
-unsigned int Terrain::getTextureId()
+Image *Terrain::getImage()
 {
-  if (_textureId)
-	return _textureId;
+  if (_image)
+	return _image;
 
   // we never fetched it, let's do it now
   switch (_terrain)
   {
-	// case E_TERRAINS_FOREST:
-	//   _textureId = _rm->getResourceId("texture_terrain_forest"); // TODO getImageId()
+	case E_TERRAINS_FOREST:
+	  _image = GETIMAGE("forest");
+	  break;
 
 	default:
 	  std::cerr <<
-		"Unable to find Terrain Texture with id: " <<
-		_textureId << std::endl;
+		"Unable to find Terrain Texture with name: " <<
+		_imageName << std::endl;
+	  break;
   }
+
+  return _image;
 }
 
-void Terrain::setTextureId(unsigned int texture_id) {
-  _textureId = texture_id;
+
+std::string Terrain::getImageName() {
+  return _imageName;
+}
+
+void Terrain::setImageName(std::string image_name) {
+  _imageName = image_name;
+  _image = GETIMAGE(image_name);
 }

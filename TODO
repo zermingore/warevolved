@@ -106,3 +106,10 @@
 ** TODO Memory Leaks
 *** TODO Definitely Lost
 	comming from extern arrays (will create a Resources Manager though)
+
+* TODO Optimization
+** retreive a Resource
+   benchmark between
+     manually store an ID,
+	 use a std::map <const char*, unsigned int>
+	 use a std::map <std::string, unsigned int>

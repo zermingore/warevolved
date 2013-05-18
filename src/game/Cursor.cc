@@ -1,9 +1,19 @@
 #include <game/Cursor.hh>
 #include <common/globals.hh>
-#include <common/Settings.hh>
 
 
-Cursor::Cursor() {
+Cursor::Cursor() :
+  _nbColumns (0),
+  _nbLines (0),
+  _x (0),
+  _y (0)
+{
+  _image = GETIMAGE("cursor");
+  _sprite = _image->getSprite();
+  _texture = _image->getTexture();
+
+  _middle.x = _texture->getSize().x / 2;
+  _middle.y = _texture->getSize().y / 2;
 }
 
 Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
@@ -12,21 +22,18 @@ Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
   _x (0),
   _y (0)
 {
-  _texture = new sf::Texture();
+  _image = GETIMAGE("cursor");
+  _sprite = _image->getSprite();
+  _texture = _image->getTexture();
 
-  //unsigned int tst = 0;
-  // ResourcesManager* rm = g_status->getRM();
-  // _texture = g_status->getRM()->getImage(&tst, std::string("cursor"))->getTexture();
-
-  _texture->loadFromFile("g_settings->getCursorFileName()");
-
-  _sprite = new sf::Sprite(*_texture);
   _middle.x = _texture->getSize().x / 2;
   _middle.y = _texture->getSize().y / 2;
 }
 
 Cursor::~Cursor() {
-  delete _sprite;
+# ifdef DEBUG
+  std::cout << "Cursor Dtor" << std::endl;
+# endif
 }
 
 
@@ -86,4 +93,8 @@ void Cursor::moveLeft() {
 
 void Cursor::moveRight() {
   _x = std::min(_x + 1, _nbColumns - 1);
+}
+
+void Cursor::draw() {
+  _image->draw();
 }

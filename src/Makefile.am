@@ -25,6 +25,7 @@ main.cc							\
 core/Context.cc					\
 \
 graphics/GraphicEngine.cc		\
+graphics/SelectionMenu.cc		\
 \
 resources/ResourcesManager.cc	\
 resources/Resource.cc			\

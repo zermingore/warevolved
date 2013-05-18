@@ -26,26 +26,18 @@ const std::string g_interface_names[E_INTERFACE_NB_INTERFACE] = {
 
 GraphicEngine::GraphicEngine()
 {
-  //_fontArmy.loadFromFile(_rm->getFont["font_army"]);
-  _fontArmy.loadFromFile(static_cast<std::string>(FONTS_FOLDER) + "army.ttf");
-
   g_status->getMap()->init(); // TODO move
-  //g_status->getMap()->init(_rm);
+  _cursor = new Cursor(8, 8);
+  g_status->setCursor(_cursor);
 
-  //this->initSprites();
+  _selectionMenu = new SelectionMenu();
 
   _IDTST = 0;
 }
 
-GraphicEngine::~GraphicEngine()
-{
-  // delete[] _spritesTerrains;
-  // delete[] _spritesUnits;
-  // delete[] _spritesInterface;
-
-  // delete[] g_filenames_terrains;
-  // delete[] g_filenames_units;
-  // delete[] g_filenames_interface;
+GraphicEngine::~GraphicEngine() {
+  delete _cursor;
+  delete _selectionMenu;
 }
 
 
@@ -105,15 +97,17 @@ void GraphicEngine::drawCells()
 	for (unsigned int j = 0; j < g_status->getMap()->getNbLines(); ++j)
   	{
 	  //e_terrains terrain = g_status->getMap()->getTerrain(i, j);
-	  g_status->getRM()->getImage(&_IDTST, std::string("forest"))->draw(i, j);
+	  GETIMAGE(&_IDTST, std::string("forest"))->drawAtCell(i, j);
+
+	  g_status->getMap()->getTerrainImage(i, j)->drawAtCell(i, j);
 
 	  // _rm->getImage(E_TYPES_TERRAIN, [g_status->getMap()->getTerrain(i, j)])->draw()
 
 	  // g_status->getRM()->getImage(g_status->getMap()->getTerrainId())->draw(i, j);
 
-	  //e_units unit  = g_status->getMap()->getUnit(i, j);
+	  // e_units unit  = g_status->getMap()->getUnit(i, j);
 	  // if (unit != E_UNITS_NONE)
-	  // 	_rm->getImage(g_units_names[unit])->draw(i, j);
+	  //  	_rm->getImage(g_units_names[unit])->draw(i, j);
   	}
 }
 
@@ -150,7 +144,8 @@ void GraphicEngine::drawGrid()
 void GraphicEngine::drawCursor()
 {
   // if (_status->getCursor->getVisible())
-  g_status->getWindow()->draw(g_status->getCursor()->getSprite(g_status->getGridOffsetX(), g_status->getGridOffsetY()));
+  _cursor->getSprite(g_status->getGridOffsetX(), g_status->getGridOffsetY());
+  _cursor->draw();
 }
 
 
@@ -158,64 +153,16 @@ void GraphicEngine::drawSelectionMenu()
 {
   // draw this menu only if requested
   if (!g_status->getSelectionMode())
-  {
-	_selectedEntry = 0;
 	return;
-  }
 
-  _nbEntries = 1;
-
-  sf::RectangleShape rectangle;
-  rectangle.setSize(sf::Vector2f(2 * g_status->getCellWidth(), g_status->getCellHeight()));
-  rectangle.setTexture(_spritesInterface[E_INTERFACE_IN_GAME_MENU_SELECTION_MENU_BUTTON]);
-
-  unsigned int curs_x = g_status->getCursor()->getX();
-  unsigned int curs_y = g_status->getCursor()->getY();
-
-  // TODO sets the menu at right (cursor-relative) position
-  sf::Vector2f v_rect = sf::Vector2f((curs_x + 1) * g_status->getCellWidth() + g_status->getGridOffsetX(),
-									 curs_y * g_status->getCellHeight() + g_status->getGridOffsetY());
-
-  sf::Vector2f origin_menu = v_rect;
-
-  // show unit section only if we selected a unit
-  // TODO check if we can control it
-  // here, we cannot use cursor's position, we could have move the unit
-  if (g_status->getMap()->getUnit(g_status->getSelectedCell()) != E_UNITS_NONE)
-  {
-	rectangle.setPosition(v_rect);
-	g_status->getWindow()->draw(rectangle);
-	v_rect -= sf::Vector2f(0, g_status->getCellWidth());
-
-	// adding text on the button
-	sf::Text label("Move", _fontArmy); // TODO hard-coded
-	label.setCharacterSize((g_status->getCellWidth() + g_status->getCellHeight()) / 4);
-	label.setPosition(rectangle.getPosition());
-	g_status->getWindow()->draw(label);
-
-	++_nbEntries;
-  }
-
-  // next turn button
-  rectangle.setPosition(v_rect);
-  g_status->getWindow()->draw(rectangle);
-
-  sf::Text label("Next\n\tTurn", _fontArmy); // TODO hard-coded
-  label.setCharacterSize((g_status->getCellWidth() + g_status->getCellHeight()) / 4);
-  label.setPosition(rectangle.getPosition());
-  g_status->getWindow()->draw(label);
-
-  // showing selection rectangle
-  rectangle.setPosition(origin_menu - sf::Vector2f(0, g_status->getCellWidth() * _selectedEntry));
-  rectangle.setTexture(_spritesInterface[E_INTERFACE_IN_GAME_MENU_SELECTION_MENU_SELECTION]);
-  g_status->getWindow()->draw(rectangle);
+  _selectionMenu->draw();
 }
 
 
 void GraphicEngine::incrementSelectedEntry() {
-  _selectedEntry = (_selectedEntry + 1) % _nbEntries;
+  _selectionMenu->incrementSelectedEntry();
 }
 
 void GraphicEngine::decrementSelectedEntry() {
-  _selectedEntry = (_selectedEntry - 1) % _nbEntries;
+  _selectionMenu->decrementSelectedEntry();
 }

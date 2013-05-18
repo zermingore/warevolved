@@ -91,6 +91,64 @@ Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name
 }
 
 
+Image *ResourcesManager::getImage(const char *image_name)
+{
+  std::string str = std::string(image_name);
+
+  unsigned int id = 0;
+  if ((id = _mapping[str]))
+	return _images[id];
+
+  for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
+  {
+	if ((*it)->getName() == str)
+	{
+	  if (!(*it)->getLoaded())
+		(*it)->load();
+
+	  _mapping[str] = ((*it)->getId());
+
+	  return dynamic_cast <Image*> (*it);
+	}
+  }
+
+# ifdef DEBUG
+  std::cerr << "Unable to find image " << image_name << std::endl;
+# endif
+
+  return NULL; // NOTE return a default image
+}
+
+
+Image *ResourcesManager::getImage(const std::string image_name)
+{
+  std::string str = std::string(image_name);
+
+  unsigned int id = 0;
+  if ((id = _mapping[str]))
+	return _images[id];
+
+  for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
+  {
+	if ((*it)->getName() == str)
+	{
+	  if (!(*it)->getLoaded())
+		(*it)->load();
+
+	  _mapping[str] = ((*it)->getId());
+
+	  return dynamic_cast <Image*> (*it);
+	}
+  }
+
+# ifdef DEBUG
+  std::cerr << "Unable to find image " << image_name << std::endl;
+# endif
+
+  return NULL; // NOTE return a default image
+}
+
+
 
 Font *ResourcesManager::getFont(const std::string font_name)
 {
@@ -111,18 +169,6 @@ Font *ResourcesManager::getFont(const std::string font_name)
 
   return NULL; // NOTE return a default font ?
 }
-
-
-// unsigned int ResourcesManager::getResourceId(std::string resource_name)
-// {
-//   // TODO split Image, Sound, ...
-
-//   std::cout << "shd NOT call" << std::endl;
-
-//   // if ()
-
-//   return _mapping[resource_name];
-// }
 
 
 bool ResourcesManager::parseXML(const std::string file_name)

@@ -22,16 +22,26 @@ enum e_resource_type
   E_RESOURCE_TYPE_NB
 };
 
+# define GETIMAGE g_rm->getImage
 
+/** \brief ResourcesManager class
+ ** uses a XML file, containing all resources data:
+ **   their path, name and specific attributes
+ ** it manages:
+ **   Images
+ **   Fonts
+ **   Sounds
+ */
 class ResourcesManager
 {
 public:
   /** \brief default constructor
-   ** initializes resources mapping, calling calls buildFromXML();
+   ** initializes resources mapping, calling buildFromXML();
    */
   ResourcesManager();
 
-  /** Calls buildFromXML()
+  /** \brief Constructor, parses the XML, calling buildFromXML()
+   ** \param file_name XML file name to parse
    */
   explicit ResourcesManager(const std::string file_name);
 
@@ -39,18 +49,16 @@ public:
    */
   ~ResourcesManager();
 
+  // TODO templates
   /** \brief Retrieve an Image from its name (alias)
-   ** it the Image wasn't loaded
+   ** if the Image wasn't loaded, loads it
    */
   Image *getImage(unsigned int *id, const std::string image_name);
 
+  Image *getImage(const char *image_name);
+  Image *getImage(const std::string image_name);
+
   Font *getFont(const std::string font_name);
-
-
-  /** \brief Retrieve a Resource id from it's name
-   */
-  // unsigned int getResourceId(std::string resource_name);
-
 
 
 private:
@@ -100,10 +108,12 @@ private:
   void listResources();
 # endif
 
-  std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
 
+  std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
   std::map<unsigned int, Image*> _images; ///< a resources list per type
 
+
+private:
   // NOTE think about a list per scope
   e_scope _currentScope; ///< actual context
 

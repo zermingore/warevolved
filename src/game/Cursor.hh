@@ -2,7 +2,12 @@
 # define CURSOR_HH_
 
 # include <common/include.hh>
+# include <resources/Image.hh>
 
+
+/** \ brief in-game Cursor class
+ ** Manages cursor shape, animation
+ */
 
 class Cursor
 {
@@ -10,13 +15,19 @@ public:
   /** Default Constructor
    */
   Cursor();
+
+  /** \brief Constructor which sets cursor, in function of map size
+   ** \param nbColumns number of columns in map (in cells)
+   ** \param nbLines number of lines in map (in cells)
+   */
   Cursor(unsigned int nbColumns, unsigned int nbLines);
+
+  /** \brief Destructor
+   */
   ~Cursor();
 
   sf::Sprite getSprite();
   sf::Sprite getSprite(int offset_x, int offset_y);
-
-  std::string getFilename();
 
   /** \brief X (column) coordinate getter
    */
@@ -32,8 +43,6 @@ public:
    */
   void setY(unsigned int y);
 
-  void setFilename(std::string);
-
   // Cursor Motion
   /** \brief Move the cursor up
    */
@@ -48,6 +57,8 @@ public:
    */
   void moveRight();
 
+  void draw();
+
 
 private:
   // map attributes
@@ -58,9 +69,10 @@ private:
   unsigned int _x; ///< Cursor x (column) position
   unsigned int _y; ///< Cursor y (line) position
 
+  Image* _image;
+
   sf::Sprite* _sprite;
   sf::Texture* _texture;
-  std::string _filename;
 
   // middle of the SPRITE coordinates, avoid computing its value each frame
   sf::Vector2f _middle; ///< middle of the Cursor sprite

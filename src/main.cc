@@ -2,17 +2,12 @@
 #include <core/Context.hh>
 #include <game/Game.hh>
 
-
-#include <resources/ID.hh>
-
 Status *g_status = new Status();
+ResourcesManager* g_rm = new ResourcesManager("tst.xml");
 
-unsigned int ID::tst = 0;
 
-
-int main(int ac, char **av)
+int main(int ac, const char **av)
 {
-
   av = av; // FIXME
 
   bool fullscreen = false;
@@ -30,6 +25,8 @@ int main(int ac, char **av)
 # ifdef DEBUG_LEAKS
   delete context;
   delete game;
+  delete g_status;
+  delete g_rm;
 # endif
 
   //delete[] g_filenames_units;

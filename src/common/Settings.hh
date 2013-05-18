@@ -33,14 +33,6 @@ public:
 
   bool getFullScreen();
 
-  /** \brief returns cursor's file name
-   **   (with complete path and extension)
-   **
-   ** \return cursor file name in use
-   */
-  const std::string getCursorFileName();
-
-
   /** \brief _keyRepeatDelay getter
    ** \return the required time to consider a "second pressure" (in ms)
    */
@@ -71,10 +63,6 @@ private:
 
   // required time to consider a "second pressure"
   int _keyRepeatDelay; // in ms, must be > 0 to avoid locking keyboard
-
-
-public:
-  std::string _cursorFileName; ///< cursor's sprite file name // TODO remove
 };
 
 #endif /* !SETTINGS_HH_ */

@@ -7,12 +7,11 @@ Settings::Settings() {
 
 Settings::Settings(unsigned int depth,
 				   unsigned int stencil,
-				   unsigned int antiAliasing)
+				   unsigned int antiAliasing) :
+  _depth (depth),
+  _stencil (stencil),
+  _antiAliasing (antiAliasing)
 {
-  _depth = depth;
-  _stencil = stencil;
-  _antiAliasing = antiAliasing;
-  _cursorFileName = "cursor.png";
 }
 
 Settings::~Settings() {
@@ -35,14 +34,9 @@ bool Settings::getFullScreen() {
   return _fullScreen;
 }
 
-const std::string Settings::getCursorFileName() {
-  return (CURSORS_FOLDER + _cursorFileName);
-}
-
 int Settings::getKeyRepeatDelay() {
   return _keyRepeatDelay;
 }
-
 
 // _________________________ SETTERS _________________________ //
 void Settings::setDepth(unsigned int depth) {

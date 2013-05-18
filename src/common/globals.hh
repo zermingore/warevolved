@@ -11,4 +11,7 @@ extern Settings *g_settings;
 // keeping all game status (map attributes, menu status, ...)
 extern Status *g_status;
 
+// ResourceManager keeper
+extern ResourcesManager* g_rm;
+
 #endif /* !GLOBALS_HH_ */

@@ -5,6 +5,11 @@
 # include <game/Map.hh>
 # include <game/Cursor.hh>
 
+
+# define CELL_WIDTH g_status->getCellWidth()
+# define CELL_HEIGHT g_status->getCellHeight()
+
+
 /** \brief Side Panel possible positions
  */
 enum e_panel_position
@@ -92,8 +97,7 @@ public:
 
   sf::RenderWindow * getWindow();
   Map *getMap();
-  ResourcesManager *getRM();
-  float getCurrentFPS();
+   float getCurrentFPS();
   unsigned int getCellWidth();
   unsigned int getCellHeight();
   unsigned int getGridThickness();
@@ -109,7 +113,7 @@ public:
   void setWindow(sf::RenderWindow *window);
   void setCursor(Cursor *cursor);
   void setMap(Map *map);
-  void setRM(ResourcesManager *rm);
+  //void setRM(ResourcesManager *rm);
   void setEventMode(e_event_mode event_mode);
   void setSelectedCell(sf::Vector2f selected_cell);
   void setCurrentFPS(float current_fps);
@@ -127,7 +131,7 @@ private:
   sf::RenderWindow *_window; ///< main Rendering Window
   Cursor *_cursor; ///< map Cursor
   Map *_map; ///< storing map
-  ResourcesManager *_rm;
+  //ResourcesManager *_rm;
 
   // Interface Status
   e_panel_position _panelPosition; ///< Side panel position (if any)
