@@ -1,6 +1,8 @@
 #ifndef RESOURCESMANAGER_HH_
 # define RESOURCESMANAGER_HH_
 
+# include <rapidxml/rapidxml.hpp>
+
 # include <common/include.hh>
 # include <resources/Resource.hh>
 
@@ -101,7 +103,7 @@ private:
   int buildFromXML();
 
 
-# ifdef DEBUG
+# ifdef DEBUG_XML
   /** \brief list all available Resources
    ** it displays resources lists, by categories
    */

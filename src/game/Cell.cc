@@ -1,13 +1,13 @@
 #include <game/Cell.hh>
-#include <common/terrains.hh>
-#include <common/terrains.hh>
-#include <common/units.hh>
 #include <common/include.hh>
+#include <common/terrains.hh>
+
+#include <common/units.hh>
 
 
 Cell::Cell() :
   _terrain (E_TERRAINS_NONE),
-  _unit (E_UNITS_NONE),
+  _unit (NULL),
   _terrainTextureId (0),
   _unitTextureId (0)
 {
@@ -17,7 +17,7 @@ Cell::~Cell() {
 }
 
 // _________________________ GETTERS _________________________ //
-e_units Cell::getUnit() {
+Unit *Cell::getUnit() {
   return _unit;
 }
 
@@ -35,7 +35,7 @@ unsigned int Cell::getTerrainTextureId() {
 }
 
 // _________________________ SETTERS _________________________ //
-void Cell::setUnit(e_units unit) {
+void Cell::setUnit(Unit *unit) {
   _unit = unit;
 }
 

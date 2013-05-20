@@ -14,10 +14,10 @@ int main(int ac, const char **av)
   if (ac > 1) // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
 	fullscreen = true;
 
-  Context* context = new Context(fullscreen);
+  Context *context = new Context(fullscreen);
 
   g_status->setWindow(context->init());
-  Game* game = new Game();
+  Game *game = new Game();
 
   game->run();
 
@@ -28,8 +28,6 @@ int main(int ac, const char **av)
   delete g_status;
   delete g_rm;
 # endif
-
-  //delete[] g_filenames_units;
 
   return EXIT_SUCCESS;
 }

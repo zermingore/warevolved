@@ -1,9 +1,10 @@
 #include <resources/Font.hh>
 #include <common/constants.hh>
 
-Font::Font() {
-}
 
+Font::Font() {
+  _loaded = false;
+}
 
 Font::Font(const std::string file_name,
 		   const std::string name,
@@ -13,23 +14,39 @@ Font::Font(const std::string file_name,
   _fileName = file_name;
   _name = name;
   _loaded = false;
-
-//  this->load();
 }
 
 
-Font::~Font() {
+Font::~Font()
+{
+  if (_font)
+	delete _font;
 }
 
 bool Font::load()
 {
-  _font->loadFromFile(_fileName); // static_cast<std::string>(FONTS_FOLDER) + _fileName
+  if (_loaded)
+	return true;
 
-  return true;
+  if (!_font)
+	_font = new sf::Font();
+
+  _font->loadFromFile(_fileName);
+  _loaded = true;
+
+  return false;
 }
-
 
 void Font::unload()
 {
   return;
+}
+
+
+sf::Font *Font::getFont()
+{
+  if (!_loaded)
+	this->load();
+
+  return _font;
 }

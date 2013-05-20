@@ -15,14 +15,12 @@ Context::Context()
 Context::Context(bool fullscreen)
 {
   if (fullscreen)
-  {
 	g_settings = new Settings(24, 8, 4);
-	g_settings->setFullScreen(true);
-  }
   else
 	g_settings = new Settings(0, 0, 0); // vanilla (debug) mode
 
-  _system = new System(2, 0);
+  g_settings->setFullScreen(fullscreen);
+  _system = new System(2, 0); // SFML version: 2.0
 }
 
 Context::~Context()
@@ -55,7 +53,6 @@ sf::RenderWindow* Context::init()
   else
   {
 	sf::VideoMode video_mode;
-
 	video_mode.width = 800;
 	video_mode.height = 600;
 	video_mode.bitsPerPixel = 32;
@@ -71,7 +68,11 @@ sf::RenderWindow* Context::init()
 	_window = new sf::RenderWindow(video_mode, "War Evolved");
   }
 
+# ifndef DEBUG_PERFS
   _window->setFramerateLimit(60);
+# else
+  _window->setFramerateLimit(0);
+#endif
   //_window->setIcon(64, 64, "icon");
 
   // Deducing some Status

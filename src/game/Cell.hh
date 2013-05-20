@@ -1,6 +1,8 @@
 #ifndef CELL_HH_
 # define CELL_HH_
 
+# include <game/Unit.hh>
+
 # include <common/units.hh>
 # include <common/terrains.hh>
 
@@ -28,7 +30,7 @@ public:
   /** \brief _unit getter
    ** \return cell's unit
    */
-  e_units getUnit();
+  Unit *getUnit();
 
   /** \brief _terrain getter
    ** \return cell's terrain
@@ -54,7 +56,7 @@ public:
    **
    ** \param unit The unit to be set in the cell
    */
-  void setUnit(e_units unit);
+  void setUnit(Unit *unit);
 
   /** \brief _terrain setter
    ** setts the terrain \param terrain in the cell
@@ -66,7 +68,7 @@ public:
 
 private:
   e_terrains _terrain; ///< Terrain type index (matching e_terrains)
-  e_units _unit; ///< Unit type index (matching e_terrains)
+  Unit *_unit; ///< Unit type index (matching e_terrains)
   unsigned int _terrainTextureId; ///< Terrain Texture id in the Resources Manager
   unsigned int _unitTextureId; ///< Unit Texture id in the Resources Manager
 };

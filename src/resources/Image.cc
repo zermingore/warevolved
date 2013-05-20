@@ -169,6 +169,9 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
 
   _rectangle->setSize(sf::Vector2f(g_status->getCellWidth(), g_status->getCellHeight()));
 
+  if (!_sprite)
+	this->getSprite();
+
   if (this->load())
 	g_status->getWindow()->draw(*_rectangle);
 }
@@ -178,6 +181,9 @@ void Image::draw()
 {
   // _rectangle->setPosition(_sprite->position);
   // _rectangle->setSize(_sprite->position);
+
+  if (!_sprite)
+	this->getSprite();
 
   if (this->load())
 	g_status->getWindow()->draw(*_sprite);

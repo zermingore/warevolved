@@ -53,7 +53,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (x, y)
    */
-  e_units getUnit(unsigned int x, unsigned int y);
+  Unit *getUnit(unsigned int x, unsigned int y);
 
   /** \brief gets the unit at v's coordinates
    **
@@ -62,7 +62,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (v.x, v.y)
    */
-  e_units getUnit(sf::Vector2f v);
+  Unit *getUnit(sf::Vector2f v);
 
   /** \brief gets the Unit Texture id at x, y coordinates
    **

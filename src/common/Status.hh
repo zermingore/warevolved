@@ -3,7 +3,7 @@
 
 # include <common/include.hh>
 # include <game/Map.hh>
-# include <game/Cursor.hh>
+# include <interface/Cursor.hh>
 
 
 # define CELL_WIDTH g_status->getCellWidth()
@@ -97,7 +97,7 @@ public:
 
   sf::RenderWindow * getWindow();
   Map *getMap();
-   float getCurrentFPS();
+  float getCurrentFPS();
   unsigned int getCellWidth();
   unsigned int getCellHeight();
   unsigned int getGridThickness();
@@ -106,6 +106,7 @@ public:
   unsigned int getGridOffsetX();
   unsigned int getGridOffsetY();
 
+  unsigned int getSelectionMenuSelectedEntry();
 
   /** \brief _window setter
    **   updates _renderX and _renderY
@@ -124,6 +125,7 @@ public:
   void setRenderY(unsigned int render_y);
   void setGridOffsetX(unsigned int grid_offset_x);
   void setGridOffsetY(unsigned int grid_offset_y);
+  void setSelectionMenuSelectedEntry(unsigned int selected_entry);
 
 
 private:
@@ -131,13 +133,14 @@ private:
   sf::RenderWindow *_window; ///< main Rendering Window
   Cursor *_cursor; ///< map Cursor
   Map *_map; ///< storing map
-  //ResourcesManager *_rm;
 
   // Interface Status
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   e_event_mode _eventMode; ///< Remember the event mode we're in
   bool _selectionMode; ///< True if we're in selection mode
+  unsigned int _selectionMenuSelectedEntry; ///< selected entry index
+
   sf::Vector2f _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
 

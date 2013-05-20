@@ -10,7 +10,4 @@
 # include <iostream>
 # include <fstream>
 
-# include <rapidxml/rapidxml.hpp>
-
-
 #endif /* !INCLUDE_HH_ */

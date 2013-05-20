@@ -47,8 +47,18 @@ sf::Vector2f Status::getSelectedCell() {
   return _selectedCell;
 }
 
+unsigned int Status::getSelectionMenuSelectedEntry() {
+  return _selectionMenuSelectedEntry;
+}
+
+
 void Status::setSelectionMode(bool selection_mode) {
+  _selectionMenuSelectedEntry = 0;
   _selectionMode = selection_mode;
+}
+
+void Status::setSelectionMenuSelectedEntry(unsigned int selected_entry) {
+  _selectionMenuSelectedEntry = selected_entry;
 }
 
 void Status::cellSelection()
@@ -62,7 +72,6 @@ void Status::cellSelection()
   // updating selection state
   _selectionMode = !_selectionMode;
 }
-
 
 
 sf::RenderWindow *Status::getWindow() {

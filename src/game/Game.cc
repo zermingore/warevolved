@@ -25,8 +25,8 @@ void Game::run()
   _event = new Event(km, graphics);
 
 # ifdef DEBUG_PERFS
-  g_status->getWindow()->setFramerateLimit(0);
   sf::Clock timer;
+  std::vector<sf::Int64> frame_generation;
 # endif
 
   // Game loop
@@ -38,19 +38,28 @@ void Game::run()
 	// Update the window
 	g_status->getWindow()->display();
 
-#   ifdef DEBUG_PERFS // TODO do not use syscalls
+#   ifdef DEBUG_PERFS
 	g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
-
-	std::cout << "frame generation: " << timer.getElapsedTime().asMicroseconds()
-			  << "\tFPS: " << g_status->getCurrentFPS()
-			  << std::endl;
+	// storing all values, avoiding syscalls
+	frame_generation.push_back(timer.getElapsedTime().asMicroseconds());
 	timer.restart();
 #   endif
   }
 
+
+// finished the main loop, displaying performances
+# ifdef DEBUG_PERFS
+  for (unsigned int i = 0; i < frame_generation.size(); ++i)
+  {
+	std::cout << "frame generation: " << frame_generation[i]
+			  << "\tFPS: " << 1000000 / frame_generation[i]
+			  << std::endl;
+  }
+# endif
+
+
 # ifdef DEBUG_LEAKS
   //delete km;
   //delete graphics;
-//  delete status;
 # endif
 }

@@ -1,31 +1,72 @@
 #include <game/Unit.hh>
+#include <common/include.hh>
+#include <common/globals.hh>
 
-Unit::Unit() {
+Unit::Unit() :
+  _imageId (0),
+  _name (""),
+  _posX (0),
+  _posY (0),
+  _cellX (1),
+  _cellY (1)
+{
 }
 
-Unit::Unit(Cell* cell) {
-  _cell = cell;
+// Unit::Unit(Cell* cell)
+// {
+//   _cell = cell;
+//   _name = "soldiers";
+// }
+
+Unit::Unit(std::string name) :
+  _imageId (0),
+  _name (name),
+  _posX (0),
+  _posY (0),
+  _cellX (1),
+  _cellY (1)
+{
 }
 
 Unit::~Unit() {
 }
 
 
-unsigned int Unit::getX() {
-  return _x;
+unsigned int Unit::getPosX() {
+  return _posX;
 }
 
-
-unsigned int Unit::getY() {
-  return _y;
+unsigned int Unit::getPosY() {
+  return _posY;
 }
 
+unsigned int Unit::getCellX() {
+  return _cellX;
+}
+
+unsigned int Unit::getCellY() {
+  return _cellY;
+}
+
+void Unit::setCellCoordinates(unsigned int cell_x, unsigned int cell_y)
+{
+  _cellX = cell_x;
+  _cellY = cell_y;
+}
 
 unsigned int Unit::getTextureId() {
   return _textureId;
 }
 
-
 void Unit::setTextureId(unsigned int texture_id) {
   _textureId = texture_id;
+}
+
+void Unit::draw()
+{
+  // if (_posX && _posY)
+  // 	_image->drawAt(_posX, _posY);
+
+  _image = GETIMAGE(_name);
+  _image->drawAtCell(_cellX, _cellY);
 }

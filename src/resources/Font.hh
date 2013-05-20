@@ -12,6 +12,8 @@
 class Font : public Resource
 {
 public:
+  /** \brief default Constructor
+   */
   Font();
   Font(const std::string file_name,
 		const std::string name,
@@ -21,6 +23,7 @@ public:
 
   bool load();
   void unload();
+  sf::Font *getFont();
 
 
 private:

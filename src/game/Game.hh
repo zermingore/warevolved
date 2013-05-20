@@ -3,7 +3,7 @@
 
 # include <common/include.hh>
 # include <game/Map.hh>
-# include <game/Cursor.hh>
+# include <interface/Cursor.hh>
 # include <input/Event.hh>
 
 /** \brief Game is designed to hold the whole Game and not a single game

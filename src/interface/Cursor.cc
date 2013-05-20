@@ -1,4 +1,4 @@
-#include <game/Cursor.hh>
+#include <interface/Cursor.hh>
 #include <common/globals.hh>
 
 

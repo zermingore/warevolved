@@ -71,9 +71,6 @@ private:
   Image* _imageBackground; ///< background image (entry)
   sf::Sprite *_sprite;
   sf::Texture *_texture;
-
-  sf::Text* _label; ///< button label text
-  sf::Font _fontArmy; ///< button label font
 };
 
 #endif /* !SELECTIONMENU_HH_ */

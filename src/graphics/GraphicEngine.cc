@@ -43,7 +43,7 @@ GraphicEngine::~GraphicEngine() {
 
 void GraphicEngine::drawScene()
 {
-  this->drawMap();
+  this->drawBackground();
 
   this->drawPanel();
   this->drawMenuBar();
@@ -55,7 +55,7 @@ void GraphicEngine::drawScene()
   this->drawSelectionMenu();
 }
 
-void GraphicEngine::drawMap() // TODO (map background)
+void GraphicEngine::drawBackground() // TODO (map background)
 {
   return;
 }
@@ -102,12 +102,11 @@ void GraphicEngine::drawCells()
 	  g_status->getMap()->getTerrainImage(i, j)->drawAtCell(i, j);
 
 	  // _rm->getImage(E_TYPES_TERRAIN, [g_status->getMap()->getTerrain(i, j)])->draw()
-
 	  // g_status->getRM()->getImage(g_status->getMap()->getTerrainId())->draw(i, j);
 
-	  // e_units unit  = g_status->getMap()->getUnit(i, j);
-	  // if (unit != E_UNITS_NONE)
-	  //  	_rm->getImage(g_units_names[unit])->draw(i, j);
+	  Unit *unit = g_status->getMap()->getUnit(i, j);
+	  if (unit)
+		unit->draw();
   	}
 }
 

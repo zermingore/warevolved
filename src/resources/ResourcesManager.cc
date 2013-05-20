@@ -122,20 +122,18 @@ Image *ResourcesManager::getImage(const char *image_name)
 
 Image *ResourcesManager::getImage(const std::string image_name)
 {
-  std::string str = std::string(image_name);
-
   unsigned int id = 0;
-  if ((id = _mapping[str]))
+  if ((id = _mapping[image_name]))
 	return _images[id];
 
   for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
   {
-	if ((*it)->getName() == str)
+	if ((*it)->getName() == image_name)
 	{
 	  if (!(*it)->getLoaded())
 		(*it)->load();
 
-	  _mapping[str] = ((*it)->getId());
+	  _mapping[image_name] = ((*it)->getId());
 
 	  return dynamic_cast <Image*> (*it);
 	}
@@ -147,7 +145,6 @@ Image *ResourcesManager::getImage(const std::string image_name)
 
   return NULL; // NOTE return a default image
 }
-
 
 
 Font *ResourcesManager::getFont(const std::string font_name)
@@ -273,7 +270,7 @@ int ResourcesManager::buildFromXML()
 }
 
 
-#ifdef DEBUG
+#ifdef DEBUG_XML
 void ResourcesManager::listResources()
 {
   std::cout << "\t\tResources List" << std::endl;

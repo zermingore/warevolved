@@ -32,7 +32,9 @@ void Map::init()
 	  _cells[i * _nbLines + j].setTerrain(E_TERRAINS_FOREST);
   }
 
-  _cells[12].setUnit(E_UNITS_SOLDIERS);
+  Unit* soldier = new Unit("soldiers");
+  soldier->setCellCoordinates(1, 4);
+  _cells[12].setUnit(soldier); // 8 + 4
 }
 
 
@@ -44,11 +46,11 @@ unsigned int Map::getNbColumns() {
   return _nbColumns;
 }
 
-e_units Map::getUnit(unsigned int x, unsigned int y) {
+Unit *Map::getUnit(unsigned int x, unsigned int y) {
   return _cells[x * _nbLines + y].getUnit();
 }
 
-e_units Map::getUnit(sf::Vector2f v) {
+Unit *Map::getUnit(sf::Vector2f v) {
   return _cells[static_cast<unsigned int>(v.x * _nbLines + v.y)].getUnit();
 }
 

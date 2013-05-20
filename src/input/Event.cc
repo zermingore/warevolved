@@ -62,6 +62,7 @@ void Event::menu()
 
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
+	//_selectionMenu->incrementSelectedEntry();
 	_ge->incrementSelectedEntry();
 	_km->setReady(E_TIMER_MOVE_UP, false);
   }
@@ -128,9 +129,6 @@ void Event::releasedKeys()
 
   if (!_km->right())
 	_km->restartTimer(E_TIMER_MOVE_RIGHT);
-
-  if (!_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == ON)
-	_km->setSwitchStatus(E_SWITCH_SELECTION, OFF);
 
   if (!_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == ON)
 	_km->setSwitchStatus(E_SWITCH_SELECTION, OFF);
