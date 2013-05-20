@@ -55,20 +55,17 @@ public:
 
 
 private:
-  // map attributes
-  // unsigned int _nbColumns;
-  // unsigned int _nbLines;
-
   // SelectionMenu specific
   unsigned int _x; ///< SelectionMenu x (column) position
   unsigned int _y; ///< SelectionMenu y (line) position
 
-  unsigned short _selectedEntry; ///< Current selected entry
-  unsigned short _nbEntries; ///< total number of entries in the menu
+  unsigned int _selectedEntry; ///< Current selected entry
+  // the first entry, at bottom has the index 0
+  unsigned int _nbEntries; ///< total number of entries in the menu
 
   sf::Vector2f _origin; ///< Origin position of the menu
 
-  Image* _imageBackground; ///< background image (entry)
+  Image* _imageSelection; ///< background image (entry)
   sf::Sprite *_sprite;
   sf::Texture *_texture;
 };

@@ -33,13 +33,11 @@ void SelectionMenu::draw()
   unsigned int curs_x = g_status->getCursor()->getX();
   unsigned int curs_y = g_status->getCursor()->getY();
 
-  _nbEntries = 1;
-  //_selectedEntry = 0;
-
   // TODO sets the menu at right (cursor-relative) position
   sf::Vector2f v_rect((curs_x + 1) * CELL_WIDTH + g_status->getGridOffsetX(),
 					  curs_y * CELL_HEIGHT + g_status->getGridOffsetY());
 
+  _nbEntries = 1;
   sf::Vector2f origin_menu(v_rect);
 
   // show unit section only if we selected a unit
@@ -47,7 +45,7 @@ void SelectionMenu::draw()
   // here, we cannot use cursor's position, we could have move the unit
   if (g_status->getMap()->getUnit(g_status->getSelectedCell()))
   {
-	MenuEntry move("move");
+	MenuEntry move("move"); // FIXME hard-coded
 	move.draw(v_rect);
 	v_rect -= sf::Vector2f(0, CELL_WIDTH);
 
@@ -60,16 +58,10 @@ void SelectionMenu::draw()
   v_rect -= sf::Vector2f(0, CELL_WIDTH);
 
   // showing selection rectangle
-  _imageBackground = GETIMAGE("selection_menu_selection");
-  _imageBackground->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-  _sprite = _imageBackground->getSprite();
-  //_sprite->setPosition(v_rect);
-
-
-  //std::cout << _selectedEntry << std::endl;
-
+  _imageSelection = GETIMAGE("selection_menu_selection");
+  _imageSelection->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
+  _sprite = _imageSelection->getSprite();
+  _selectedEntry = std::min(_selectedEntry, (_nbEntries - 1));
   _sprite->setPosition(origin_menu - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
-
-  // _sprite->setTexture(_spritesInterface[E_INTERFACE_IN_GAME_MENU_SELECTION_MENU_SELECTION]);
-  _imageBackground->draw();
+  _imageSelection->draw();
 }
