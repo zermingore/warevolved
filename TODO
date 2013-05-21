@@ -91,6 +91,8 @@
 * TODO Tools
 ** TODO memory leaks checker before commit
 ** TODO non-regression tests
+** TODO helper
+   header guards with same name
 
 * TODO Bugs / Features
 ** DONE [#B] Add Doxygen Comments in headers

@@ -5,22 +5,12 @@
 Status::Status() :
   _panelPosition (E_PANEL_DEACTIVATED),
   _menuBarPosition (E_MENU_BAR_DEACTIVATED),
-  _eventMode (E_EVENT_IN_GAME), // TODO
+  _eventMode (E_EVENT_IN_GAME),
   _selectionMode (false)
 {
-  //_window = new sf::RenderWindow();
-  _map = new Map();
-  //_cursor = new Cursor(_map->getNbColumns(), _map->getNbLines());
-
-  // deducing grid position
-  _gridOffsetX = (_renderX - _cellWidth * _map->getNbColumns()) / 2;
-  _gridOffsetY = (_renderY - _cellHeight * _map->getNbLines()) / 2;
 }
 
-
-Status::~Status()
-{
-//  delete _cursor;
+Status::~Status() {
 }
 
 Cursor* Status::getCursor() {

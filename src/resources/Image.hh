@@ -35,6 +35,16 @@ public:
    */
   ~Image();
 
+  /** \brief initializes _texture
+   **   sets _loaded to true
+   */
+  void initTexture();
+
+  /** \brief initializes _sprite
+   **   sets _loaded to true
+   */
+  void initSprite();
+
   /** \brief _texture getter
    ** loads the texture (and sets _loaded flag) if _loaded was false
    ** \return _texture
@@ -42,8 +52,8 @@ public:
   sf::Texture *getTexture();
 
   /** \brief _sprite getter
-   ** loads the texture if needed
-   ** allocates _sprites if needed
+   ** loads the texture if needed (through initTexture)
+   ** allocates _sprites if needed (through initSprite)
    */
   sf::Sprite *getSprite();
 
@@ -58,6 +68,11 @@ public:
    ** \param height: image height
    */
   void setSize(float width, float height);
+
+  /** \brief sets _sprite position
+   ** \param position: _sprite vector position
+   */
+  void setPosition(sf::Vector2f position);
 
 
   /** \brief sets _fileName to file_name

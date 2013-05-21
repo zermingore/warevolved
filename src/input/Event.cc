@@ -1,6 +1,7 @@
 #include <input/Event.hh>
 #include <common/Status.hh>
 #include <common/globals.hh>
+#include <interface/Interface.hh>
 
 Event::Event() {
 }
@@ -14,6 +15,7 @@ Event::Event(KeyManager* km,
   	_km->restartTimer(static_cast<e_timer>(i));
 
   g_settings->setKeyRepeatDelay(150);
+  _selectionMenu = g_interface->getSelectionMenu();
 }
 
 Event::~Event() {
@@ -54,28 +56,32 @@ void Event::panel()
 
 void Event::menu()
 {
+  // made a choice in selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
+	_selectionMenu->executeEntry();
+	g_status->cellSelection();
+
 	_km->setSwitchStatus(E_SWITCH_SELECTION, ON);
 	g_status->setSelectionMode(false);
   }
 
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
-	//_selectionMenu->incrementSelectedEntry();
-	_ge->incrementSelectedEntry();
+	_selectionMenu->incrementSelectedEntry();
 	_km->setReady(E_TIMER_MOVE_UP, false);
   }
 
   if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
   {
-	_ge->decrementSelectedEntry();
+	_selectionMenu->decrementSelectedEntry();
 	_km->setReady(E_TIMER_MOVE_DOWN, false);
   }
 }
 
 void Event::game()
 {
+  // opened selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
 	g_status->cellSelection();

@@ -14,7 +14,4 @@ enum e_terrains
   E_TERRAINS_NONE
 };
 
-// array which contents all terrains file names (filled by the GraphicEngine)
-extern std::string g_terrains_name[E_TERRAINS_NB_TERRAINS];
-
 #endif /* !TERRAINS_HH_ */

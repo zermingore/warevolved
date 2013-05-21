@@ -3,6 +3,8 @@
 
 # include <input/KeyManager.hh>
 # include <graphics/GraphicEngine.hh>
+# include <interface/SelectionMenu.hh>
+
 
 /** \brief Event processing class
  */
@@ -48,8 +50,9 @@ private:
   void releasedKeys();
 
   sf::Event _event; ///< Event Manager
-  KeyManager* _km; ///< KeyManager instance
-  GraphicEngine* _ge; ///< GraphicEngine instance
+  KeyManager *_km; ///< KeyManager instance
+  GraphicEngine *_ge; ///< GraphicEngine instance
+  SelectionMenu *_selectionMenu; ///< in-game selection menu
 };
 
 #endif /* !EVENT_HH_ */

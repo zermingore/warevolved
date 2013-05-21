@@ -7,7 +7,6 @@
 # include <resources/ResourcesManager.hh>
 # include <common/units.hh>
 # include <common/terrains.hh>
-# include <common/interface.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
 # include <interface/SelectionMenu.hh>
@@ -30,12 +29,6 @@ public:
    **   calls others drawing functions
    */
   void drawScene();
-
-
-  // TODO move in a Menu (or sumthin) class
-  // should merge and use a single function for all (4) directions
-  void incrementSelectedEntry();
-  void decrementSelectedEntry();
 
 
 private:
@@ -80,10 +73,6 @@ private:
   // space left for rendering
   // unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   // unsigned int _renderY; ///< Drawable zone room left vertically (in px)
-
-  sf::Texture *_spritesUnits[E_UNITS_NB_UNITS]; ///< units sprites
-  sf::Texture *_spritesTerrains[E_TERRAINS_NB_TERRAINS]; ///< terrains sprites
-  sf::Texture *_spritesInterface[E_INTERFACE_NB_INTERFACE]; ///< interface sprites
 
   unsigned int _IDTST; // rm
 

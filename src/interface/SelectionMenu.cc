@@ -1,19 +1,19 @@
 #include <interface/SelectionMenu.hh>
 #include <interface/MenuEntry.hh>
 #include <common/globals.hh>
+#include <common/macros.hh>
 
 
 SelectionMenu::SelectionMenu() :
+  _x (0),
+  _y (0),
   _selectedEntry (0),
   _nbEntries (1)
 {
-  _sprite = new sf::Sprite();
 }
 
 SelectionMenu::~SelectionMenu()
 {
-  delete _sprite;
-
 # ifdef DEBUG_LEAKS
   std::cout << "Selection Menu Dtor" << std::endl;
 # endif
@@ -30,14 +30,14 @@ void SelectionMenu::decrementSelectedEntry() {
 
 void SelectionMenu::draw()
 {
-  unsigned int curs_x = g_status->getCursor()->getX();
-  unsigned int curs_y = g_status->getCursor()->getY();
+  _nbEntries = 1;
+  unsigned int _x = g_status->getCursor()->getX();
+  unsigned int _y = g_status->getCursor()->getY();
 
   // TODO sets the menu at right (cursor-relative) position
-  sf::Vector2f v_rect((curs_x + 1) * CELL_WIDTH + g_status->getGridOffsetX(),
-					  curs_y * CELL_HEIGHT + g_status->getGridOffsetY());
+  sf::Vector2f v_rect((_x + 1) * CELL_WIDTH + g_status->getGridOffsetX(),
+					  _y * CELL_HEIGHT + g_status->getGridOffsetY());
 
-  _nbEntries = 1;
   sf::Vector2f origin_menu(v_rect);
 
   // show unit section only if we selected a unit
@@ -60,8 +60,20 @@ void SelectionMenu::draw()
   // showing selection rectangle
   _imageSelection = GETIMAGE("selection_menu_selection");
   _imageSelection->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-  _sprite = _imageSelection->getSprite();
-  _selectedEntry = std::min(_selectedEntry, (_nbEntries - 1));
-  _sprite->setPosition(origin_menu - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
+  _selectedEntry = std::min(_selectedEntry, _nbEntries - 1);
+  _imageSelection->setPosition(
+	origin_menu - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
   _imageSelection->draw();
+}
+
+
+void SelectionMenu::executeEntry()
+{
+  switch (_selectedEntry)
+  {
+	// case E_MOVE:
+	// case E_NEXT_TURN:
+	default:
+	  std::cerr << "unable to match selection menu entry" << std::endl;
+  }
 }

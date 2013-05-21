@@ -29,12 +29,9 @@ public:
 
 
 private:
-  Image* _background; ///< background image
-  sf::Sprite *_sprite;
-  sf::Texture *_texture;
-
+  Image *_background; ///< background image
   sf::Text* _label; ///< button label text
-  Font* _font; ///< button label font
+  Font *_font; ///< button label font
 };
 
 #endif /* !MENUENTRY_HH_ */

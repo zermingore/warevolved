@@ -1,20 +1,19 @@
 #ifndef RESOURCESMANAGER_HH_
 # define RESOURCESMANAGER_HH_
 
-# include <rapidxml/rapidxml.hpp>
-
 # include <common/include.hh>
-# include <resources/Resource.hh>
+# include <common/macros.hh>
 
+# include <rapidxml/rapidxml.hpp>
+# include <resources/Resource.hh>
 # include <resources/Font.hh>
 # include <resources/Image.hh>
-
 
 /** \brief enum matching every resource types
  */
 enum e_resource_type
 {
-  E_RESOURCE_TYPE_NONE = 0, // FIXME rm ?
+  E_RESOURCE_TYPE_NONE = 0,
 
   E_RESOURCE_TYPE_IMAGE,
   E_RESOURCE_TYPE_FONT,
@@ -24,7 +23,6 @@ enum e_resource_type
   E_RESOURCE_TYPE_NB
 };
 
-# define GETIMAGE g_rm->getImage
 
 /** \brief ResourcesManager class
  ** uses a XML file, containing all resources data:

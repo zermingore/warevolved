@@ -63,21 +63,27 @@ sf::Texture *Image::getTexture()
   return _texture;
 }
 
+void Image::initTexture()
+{
+  _texture = new sf::Texture();
+  _texture->loadFromFile(_fileName);
+  _rectangle->setTexture(_texture);
+  _loaded = true;
+}
+
+void Image::initSprite()
+{
+  _sprite = new sf::Sprite(*_texture);
+  _loaded = true;
+}
+
 sf::Sprite *Image::getSprite()
 {
   if (!_texture)
-  {
-	_texture = new sf::Texture();
-	_texture->loadFromFile(_fileName);
-	_rectangle->setTexture(_texture);
-	_loaded = true;
-  }
+	this->initTexture();
 
   if (!_sprite)
-  {
-	_sprite = new sf::Sprite(*_texture);
-	_loaded = true;
-  }
+	this->initSprite();
 
   return _sprite;
 }
@@ -96,6 +102,13 @@ void Image::setSprite(sf::Sprite *sprite) {
 
 void Image::setSize(sf::Vector2f size) {
   _rectangle->setSize(size);
+}
+
+void Image::setPosition(sf::Vector2f position)
+{
+  if (!_sprite)
+	this->initSprite();
+  _sprite->setPosition(position);
 }
 
 void Image::setSize(float width, float height) {

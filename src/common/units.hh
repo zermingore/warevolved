@@ -11,7 +11,4 @@ enum e_units
   E_UNITS_NONE
 };
 
-
-static const std::string g_units_name[E_UNITS_NB_UNITS] = {"soldiers"};
-
 #endif /* !UNITS_HH_ */

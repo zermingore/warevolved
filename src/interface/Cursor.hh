@@ -26,6 +26,8 @@ public:
    */
   ~Cursor();
 
+  /** _sprite getter
+   */
   sf::Sprite getSprite();
   sf::Sprite getSprite(int offset_x, int offset_y);
 

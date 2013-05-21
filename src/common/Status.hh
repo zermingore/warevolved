@@ -6,10 +6,6 @@
 # include <interface/Cursor.hh>
 
 
-# define CELL_WIDTH g_status->getCellWidth()
-# define CELL_HEIGHT g_status->getCellHeight()
-
-
 /** \brief Side Panel possible positions
  */
 enum e_panel_position
@@ -95,7 +91,7 @@ public:
   void cellSelection();
 
 
-  sf::RenderWindow * getWindow();
+  sf::RenderWindow *getWindow();
   Map *getMap();
   float getCurrentFPS();
   unsigned int getCellWidth();
@@ -105,7 +101,6 @@ public:
   unsigned int getRenderY();
   unsigned int getGridOffsetX();
   unsigned int getGridOffsetY();
-
   unsigned int getSelectionMenuSelectedEntry();
 
   /** \brief _window setter
@@ -114,7 +109,6 @@ public:
   void setWindow(sf::RenderWindow *window);
   void setCursor(Cursor *cursor);
   void setMap(Map *map);
-  //void setRM(ResourcesManager *rm);
   void setEventMode(e_event_mode event_mode);
   void setSelectedCell(sf::Vector2f selected_cell);
   void setCurrentFPS(float current_fps);
@@ -151,8 +145,8 @@ private:
   // Graphic: space left for rendering
   unsigned int _gridThickness; ///< cells delimiter thickness (in px)
 
-  unsigned int _gridOffsetX;
-  unsigned int _gridOffsetY;
+  unsigned int _gridOffsetX; ///< x position from where we start drawing the grid
+  unsigned int _gridOffsetY; ///< y position from where we start drawing the grid
 
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)

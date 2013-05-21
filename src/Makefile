@@ -77,6 +77,7 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Cell.$(OBJEXT) \
 	__top_srcdir__we-Unit.$(OBJEXT) \
 	__top_srcdir__we-Terrain.$(OBJEXT) \
+	__top_srcdir__we-Interface.$(OBJEXT) \
 	__top_srcdir__we-Cursor.$(OBJEXT) \
 	__top_srcdir__we-SelectionMenu.$(OBJEXT) \
 	__top_srcdir__we-MenuEntry.$(OBJEXT)
@@ -251,6 +252,7 @@ game/Cell.cc					\
 game/Unit.cc					\
 game/Terrain.cc					\
 \
+interface/Interface.cc			\
 interface/Cursor.cc				\
 interface/SelectionMenu.cc		\
 interface/MenuEntry.cc
@@ -350,6 +352,7 @@ include ./$(DEPDIR)/__top_srcdir__we-Font.Po
 include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
 include ./$(DEPDIR)/__top_srcdir__we-Image.Po
+include ./$(DEPDIR)/__top_srcdir__we-Interface.Po
 include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Map.Po
 include ./$(DEPDIR)/__top_srcdir__we-MenuEntry.Po
@@ -614,6 +617,20 @@ __top_srcdir__we-Terrain.obj: game/Terrain.cc
 #	$(AM_V_CXX)source='game/Terrain.cc' object='__top_srcdir__we-Terrain.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Terrain.obj `if test -f 'game/Terrain.cc'; then $(CYGPATH_W) 'game/Terrain.cc'; else $(CYGPATH_W) '$(srcdir)/game/Terrain.cc'; fi`
+
+__top_srcdir__we-Interface.o: interface/Interface.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Interface.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Interface.Tpo -c -o __top_srcdir__we-Interface.o `test -f 'interface/Interface.cc' || echo '$(srcdir)/'`interface/Interface.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Interface.Tpo $(DEPDIR)/__top_srcdir__we-Interface.Po
+#	$(AM_V_CXX)source='interface/Interface.cc' object='__top_srcdir__we-Interface.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Interface.o `test -f 'interface/Interface.cc' || echo '$(srcdir)/'`interface/Interface.cc
+
+__top_srcdir__we-Interface.obj: interface/Interface.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Interface.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Interface.Tpo -c -o __top_srcdir__we-Interface.obj `if test -f 'interface/Interface.cc'; then $(CYGPATH_W) 'interface/Interface.cc'; else $(CYGPATH_W) '$(srcdir)/interface/Interface.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Interface.Tpo $(DEPDIR)/__top_srcdir__we-Interface.Po
+#	$(AM_V_CXX)source='interface/Interface.cc' object='__top_srcdir__we-Interface.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Interface.obj `if test -f 'interface/Interface.cc'; then $(CYGPATH_W) 'interface/Interface.cc'; else $(CYGPATH_W) '$(srcdir)/interface/Interface.cc'; fi`
 
 __top_srcdir__we-Cursor.o: interface/Cursor.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Cursor.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Cursor.Tpo -c -o __top_srcdir__we-Cursor.o `test -f 'interface/Cursor.cc' || echo '$(srcdir)/'`interface/Cursor.cc

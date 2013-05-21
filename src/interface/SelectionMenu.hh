@@ -2,12 +2,10 @@
 # define SELECTIONMENU_HH_
 
 # include <common/include.hh>
-# include <common/Status.hh>
 # include <resources/Image.hh>
 
 
-/** \ brief in-game SelectionMenu class
- ** Manages cursor shape, animation
+/** \brief in-game SelectionMenu class
  */
 
 class SelectionMenu
@@ -21,8 +19,6 @@ public:
   /** \brief Destructor
    */
   ~SelectionMenu();
-
-  sf::Sprite getSprite();
 
   /** \brief X (column) coordinate getter
    */
@@ -38,11 +34,12 @@ public:
    */
   void setY(unsigned int y);
 
+
+  // TODO: merge and use a single function for all (4) directions
   /** \brief increments _selectedEntry modulo _nbEntries
    **  allowing cycling
    */
   void incrementSelectedEntry();
-
   /** \brief decrements _selectedEntry modulo _nbEntries
    **  allowing cycling
    */
@@ -53,21 +50,22 @@ public:
    */
   void draw();
 
+  /** \brief executes action matching _selectedEntry
+   */
+  void executeEntry();
+
 
 private:
-  // SelectionMenu specific
-  unsigned int _x; ///< SelectionMenu x (column) position
-  unsigned int _y; ///< SelectionMenu y (line) position
+  unsigned int _x; ///< SelectionMenu related selected cell x (column) position
+  unsigned int _y; ///< SelectionMenu related selected cell y (line) position
 
   unsigned int _selectedEntry; ///< Current selected entry
-  // the first entry, at bottom has the index 0
+  // the first entry, at the bottom, has the index 0
   unsigned int _nbEntries; ///< total number of entries in the menu
 
   sf::Vector2f _origin; ///< Origin position of the menu
 
   Image* _imageSelection; ///< background image (entry)
-  sf::Sprite *_sprite;
-  sf::Texture *_texture;
 };
 
 #endif /* !SELECTIONMENU_HH_ */

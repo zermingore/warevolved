@@ -16,7 +16,6 @@ Font::Font(const std::string file_name,
   _loaded = false;
 }
 
-
 Font::~Font()
 {
   if (_font)

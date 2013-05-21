@@ -44,6 +44,7 @@ game/Cell.cc					\
 game/Unit.cc					\
 game/Terrain.cc					\
 \
+interface/Interface.cc			\
 interface/Cursor.cc				\
 interface/SelectionMenu.cc		\
 interface/MenuEntry.cc
