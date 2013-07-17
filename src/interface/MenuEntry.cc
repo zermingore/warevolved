@@ -11,7 +11,13 @@ MenuEntry::MenuEntry() {
 MenuEntry::~MenuEntry() {
 }
 
-MenuEntry::MenuEntry(std::string label_name)
+MenuEntry::MenuEntry(e_entries entry) :
+  _id (entry)
+{
+}
+
+
+MenuEntry::MenuEntry(std::string label_name, e_entries entry)
 {
   _background = GETIMAGE("selection_menu_button");
   _background->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
@@ -24,6 +30,12 @@ MenuEntry::MenuEntry(std::string label_name)
   _font = g_rm->getFont("font_army");
   _label->setFont(*(_font->getFont()));
   _label->setString(label_name);
+
+  _id = entry;
+}
+
+e_entries MenuEntry::getId() {
+  return _id;
 }
 
 void MenuEntry::draw(sf::Vector2f position)

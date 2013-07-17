@@ -3,6 +3,7 @@
 
 # include <common/include.hh>
 # include <resources/Image.hh>
+# include <interface/MenuEntry.hh>
 
 
 /** \brief in-game SelectionMenu class
@@ -45,6 +46,10 @@ public:
    */
   void decrementSelectedEntry();
 
+  /** \brief builds the selection menu, filling _entries
+   */
+  void build();
+
   /** \brief draws the menu
    ** with its entries and the current entry highlighter
    */
@@ -61,11 +66,11 @@ private:
 
   unsigned int _selectedEntry; ///< Current selected entry
   // the first entry, at the bottom, has the index 0
-  unsigned int _nbEntries; ///< total number of entries in the menu
-
+  unsigned int _nbEntries; ///< Total number of entries in the menu
+  std::vector<MenuEntry> _entries; ///< Entries list
   sf::Vector2f _origin; ///< Origin position of the menu
 
-  Image* _imageSelection; ///< background image (entry)
+  Image *_imageSelection; ///< Background image (entry)
 };
 
 #endif /* !SELECTIONMENU_HH_ */

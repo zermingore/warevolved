@@ -1,7 +1,9 @@
 -*- mode:org -*-
 
-* TODO Git
-** TODO Merge ResourcesManager branch
+* Git
+
+** DONE Merge ResourcesManager branch
+   CLOSED: [2013-06-07 Fri 17:58]
 
 * TODO keys
 ** DONE make the cursor move

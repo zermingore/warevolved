@@ -86,6 +86,7 @@ void Event::game()
   {
 	g_status->cellSelection();
 	_km->setSwitchStatus(E_SWITCH_SELECTION, ON);
+	_selectionMenu->build();
 	g_status->setSelectionMode(true);
   }
 

@@ -8,7 +8,8 @@ SelectionMenu::SelectionMenu() :
   _x (0),
   _y (0),
   _selectedEntry (0),
-  _nbEntries (1)
+  _nbEntries (0),
+  _imageSelection (NULL)
 {
 }
 
@@ -20,60 +21,96 @@ SelectionMenu::~SelectionMenu()
 }
 
 void SelectionMenu::incrementSelectedEntry() {
-  _selectedEntry = (_selectedEntry + 1) % _nbEntries;
+  ++_selectedEntry %= _nbEntries;
 }
 
-void SelectionMenu::decrementSelectedEntry() {
-  _selectedEntry ? _selectedEntry = (_selectedEntry - 1) % _nbEntries : _selectedEntry = _nbEntries - 1;
-}
-
-
-void SelectionMenu::draw()
+void SelectionMenu::decrementSelectedEntry()
 {
-  _nbEntries = 1;
-  unsigned int _x = g_status->getCursor()->getX();
-  unsigned int _y = g_status->getCursor()->getY();
+  if (_selectedEntry)
+	_selectedEntry = (_selectedEntry - 1) % (_nbEntries - 1);
+  else
+	 _selectedEntry = (_nbEntries - 1);
+}
 
+
+void SelectionMenu::build()
+{
+  _selectedEntry = 0;
+  _entries.clear();
+
+  unsigned int x = g_status->getCursor()->getX();
+  unsigned int y = g_status->getCursor()->getY();
   // TODO sets the menu at right (cursor-relative) position
-  sf::Vector2f v_rect((_x + 1) * CELL_WIDTH + g_status->getGridOffsetX(),
-					  _y * CELL_HEIGHT + g_status->getGridOffsetY());
-
-  sf::Vector2f origin_menu(v_rect);
+  _origin.x = (x + 1) * CELL_WIDTH + g_status->getGridOffsetX();
+  _origin.y = y * CELL_HEIGHT + g_status->getGridOffsetY();
 
   // show unit section only if we selected a unit
   // TODO check if we can control it
   // here, we cannot use cursor's position, we could have move the unit
   if (g_status->getMap()->getUnit(g_status->getSelectedCell()))
   {
-	MenuEntry move("move"); // FIXME hard-coded
-	move.draw(v_rect);
-	v_rect -= sf::Vector2f(0, CELL_WIDTH);
-
-	++_nbEntries;
+	  MenuEntry move("Move", E_ENTRIES_MOVE); // FIXME hard-coded
+	  _entries.push_back(move);
   }
 
+  MenuEntry void1("void 1", E_ENTRIES_VOID1); // FIXME hard-coded
+  _entries.push_back(void1);
+
   // next turn button
-  MenuEntry move("Next\n\tTurn"); // FIXME hard-coded
-  move.draw(v_rect);
-  v_rect -= sf::Vector2f(0, CELL_WIDTH);
+  MenuEntry next_turn("Next\n\tTurn", E_ENTRIES_NEXT_TURN); // FIXME hard-coded
+  _entries.push_back(next_turn);
+
+  MenuEntry void2("void 2", E_ENTRIES_VOID2); // FIXME hard-coded
+  _entries.push_back(void2);
+
+  _nbEntries = _entries.size();
+}
+
+
+void SelectionMenu::draw()
+{
+  sf::Vector2f v_rect(_origin);
+
+  for (auto it = _entries.begin(); it != _entries.end(); ++it)
+  {
+	  it->draw(v_rect);
+	  v_rect -= sf::Vector2f(0, CELL_HEIGHT);
+  }
 
   // showing selection rectangle
   _imageSelection = GETIMAGE("selection_menu_selection");
   _imageSelection->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-  _selectedEntry = std::min(_selectedEntry, _nbEntries - 1);
+  _selectedEntry = std::min(_selectedEntry, (unsigned int) _entries.size() - 1);
+  _selectedEntry = std::max(_selectedEntry, (unsigned int) 0);
   _imageSelection->setPosition(
-	origin_menu - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
+	_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
   _imageSelection->draw();
 }
 
 
 void SelectionMenu::executeEntry()
 {
-  switch (_selectedEntry)
+  std::cout << "Selected Entry: " << _selectedEntry << std::endl;
+
+  switch (_entries[_selectedEntry].getId())
   {
-	// case E_MOVE:
-	// case E_NEXT_TURN:
+	case E_ENTRIES_MOVE:
+		std::cout << "move" << std::endl;
+		break;
+	case E_ENTRIES_NEXT_TURN:
+		std::cout << "next turn" << std::endl;
+		break;
+
+	case E_ENTRIES_VOID1:
+		std::cout << "void 1" << std::endl;
+		break;
+
+	case E_ENTRIES_VOID2:
+		std::cout << "void 2" << std::endl;
+		break;
 	default:
 	  std::cerr << "unable to match selection menu entry" << std::endl;
   }
+
+  //_entries[_selectedEntry]->execute();
 }
