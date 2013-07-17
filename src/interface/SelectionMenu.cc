@@ -5,8 +5,6 @@
 
 
 SelectionMenu::SelectionMenu() :
-  _x (0),
-  _y (0),
   _selectedEntry (0),
   _nbEntries (0),
   _imageSelection (NULL)
@@ -49,7 +47,7 @@ void SelectionMenu::build()
   // here, we cannot use cursor's position, we could have move the unit
   if (g_status->getMap()->getUnit(g_status->getSelectedCell()))
   {
-	  MenuEntry move("Move", E_ENTRIES_MOVE); // FIXME hard-coded
+	  MenuEntry move("Move", E_ENTRIES_MOVE); // FIXME remove
 	  _entries.push_back(move);
   }
 
@@ -60,7 +58,7 @@ void SelectionMenu::build()
   MenuEntry next_turn("Next\n\tTurn", E_ENTRIES_NEXT_TURN); // FIXME hard-coded
   _entries.push_back(next_turn);
 
-  MenuEntry void2("void 2", E_ENTRIES_VOID2); // FIXME hard-coded
+  MenuEntry void2("void 2", E_ENTRIES_VOID2); // FIXME remove
   _entries.push_back(void2);
 
   _nbEntries = _entries.size();
@@ -80,8 +78,6 @@ void SelectionMenu::draw()
   // showing selection rectangle
   _imageSelection = GETIMAGE("selection_menu_selection");
   _imageSelection->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-  _selectedEntry = std::min(_selectedEntry, (unsigned int) _entries.size() - 1);
-  _selectedEntry = std::max(_selectedEntry, (unsigned int) 0);
   _imageSelection->setPosition(
 	_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
   _imageSelection->draw();
@@ -95,6 +91,7 @@ void SelectionMenu::executeEntry()
   switch (_entries[_selectedEntry].getId())
   {
 	case E_ENTRIES_MOVE:
+		g_status->pushMode(E_MODE_MOVING_UNIT);
 		std::cout << "move" << std::endl;
 		break;
 	case E_ENTRIES_NEXT_TURN:

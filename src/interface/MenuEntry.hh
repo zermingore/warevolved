@@ -35,6 +35,7 @@ public:
   explicit MenuEntry(e_entries entry);
 
   /** \brief Constructor
+   ** \deprecated use MenuEntry(e_entries entry); with auto label completion
    */
   MenuEntry(std::string label_name, e_entries entry);
 

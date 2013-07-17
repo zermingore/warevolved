@@ -39,6 +39,11 @@ private:
    */
   void menu();
 
+  /** \brief Processes events while moving a unit
+   */
+  void moveUnit();
+
+
   /** \brief Processes all game events
    */
   void game();

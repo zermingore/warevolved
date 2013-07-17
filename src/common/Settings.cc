@@ -2,12 +2,9 @@
 #include <common/constants.hh>
 
 
-Settings::Settings() {
-}
-
 Settings::Settings(unsigned int depth,
-				   unsigned int stencil,
-				   unsigned int antiAliasing) :
+                   unsigned int stencil,
+                   unsigned int antiAliasing) :
   _depth (depth),
   _stencil (stencil),
   _antiAliasing (antiAliasing)

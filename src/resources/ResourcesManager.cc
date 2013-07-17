@@ -4,9 +4,6 @@
 #include <resources/Font.hh>
 
 
-ResourcesManager::ResourcesManager() {
-}
-
 ResourcesManager::ResourcesManager(const std::string file_name)
 {
   this->parseXML(file_name);

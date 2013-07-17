@@ -61,11 +61,8 @@ public:
 
 
 private:
-  unsigned int _x; ///< SelectionMenu related selected cell x (column) position
-  unsigned int _y; ///< SelectionMenu related selected cell y (line) position
-
-  unsigned int _selectedEntry; ///< Current selected entry
   // the first entry, at the bottom, has the index 0
+  unsigned int _selectedEntry; ///< Current selected entry
   unsigned int _nbEntries; ///< Total number of entries in the menu
   std::vector<MenuEntry> _entries; ///< Entries list
   sf::Vector2f _origin; ///< Origin position of the menu

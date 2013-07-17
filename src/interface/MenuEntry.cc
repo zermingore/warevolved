@@ -5,12 +5,6 @@
 #include <common/macros.hh>
 
 
-MenuEntry::MenuEntry() {
-}
-
-MenuEntry::~MenuEntry() {
-}
-
 MenuEntry::MenuEntry(e_entries entry) :
   _id (entry)
 {
@@ -33,6 +27,11 @@ MenuEntry::MenuEntry(std::string label_name, e_entries entry)
 
   _id = entry;
 }
+
+
+MenuEntry::~MenuEntry() {
+}
+
 
 e_entries MenuEntry::getId() {
   return _id;

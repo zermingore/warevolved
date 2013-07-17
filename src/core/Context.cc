@@ -3,7 +3,7 @@
 #include <common/Settings.hh>
 #include <common/globals.hh>
 
-Settings *g_settings = new Settings();
+Settings *g_settings;
 
 
 Context::Context()
@@ -15,9 +15,9 @@ Context::Context()
 Context::Context(bool fullscreen)
 {
   if (fullscreen)
-	g_settings = new Settings(24, 8, 4);
+    g_settings = new Settings(24, 8, 4);
   else
-	g_settings = new Settings(0, 0, 0); // vanilla (debug) mode
+    g_settings = new Settings(0, 0, 0); // vanilla (debug) mode
 
   g_settings->setFullScreen(fullscreen);
   _system = new System(2, 0); // SFML version: 2.0
@@ -34,38 +34,38 @@ sf::RenderWindow* Context::init()
 {
 #ifdef DEBUG
   if (_system->getSfmlMajor() < 2)
-	std::cerr << "SFML version not officially supported" << std::endl;
+    std::cerr << "SFML version not officially supported" << std::endl;
 #endif
 
   sf::ContextSettings contextSettings(g_settings->getDepth(),
-  									  g_settings->getStencil(),
-  									  g_settings->getAntiAliasing(),
-  									  _system->getSfmlMajor(),
-  									  _system->getSfmlMinor());
+                                      g_settings->getStencil(),
+                                      g_settings->getAntiAliasing(),
+                                      _system->getSfmlMajor(),
+                                      _system->getSfmlMinor());
 
   // getting right resolution, from desktop
   if (g_settings->getFullScreen())
   {
-	_window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
-								   "War Evolved",
-								   sf::Style::Fullscreen);
+    _window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
+                                   "War Evolved",
+                                   sf::Style::Fullscreen);
   }
   else
   {
-	sf::VideoMode video_mode;
-	video_mode.width = 800;
-	video_mode.height = 600;
-	video_mode.bitsPerPixel = 32;
+    sf::VideoMode video_mode;
+    video_mode.width = 800;
+    video_mode.height = 600;
+    video_mode.bitsPerPixel = 32;
 
-	if (!video_mode.isValid())
-	{
-	  std::cerr << "Unsupported Video Mode, falling back" << std::endl;
-	  video_mode = sf::VideoMode::getDesktopMode(); // falling back to desktop mode
-	  if (!video_mode.isValid())
-		std::exit(-1); // This time we quit // TODO browse all supported modes
-	}
+    if (!video_mode.isValid())
+    {
+      std::cerr << "Unsupported Video Mode, falling back" << std::endl;
+      video_mode = sf::VideoMode::getDesktopMode(); // falling back to desktop mode
+      if (!video_mode.isValid())
+        std::exit(-1); // This time we quit // TODO browse all supported modes
+    }
 
-	_window = new sf::RenderWindow(video_mode, "War Evolved");
+    _window = new sf::RenderWindow(video_mode, "War Evolved");
   }
 
 # ifndef DEBUG_PERFS

@@ -4,7 +4,7 @@
 # include <common/include.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
-
+# include <stack>
 
 /** \brief Side Panel possible positions
  */
@@ -29,30 +29,51 @@ enum e_menu_bar_position
  **   if (mode >= E_IN_GAME) do_something
  ** order more or less matches number of used keys
  */
-enum e_event_mode
+//enum e_event_mode
+//{
+//  E_EVENT_NONE = 0x00000000,
+//
+//  E_EVENT_MAIN_MENU = 0x00000001,
+//
+//  E_EVENT_IN_GAME = 0x00000010,
+//  E_EVENT_MAP_PLAYING = 0x00000011,
+//  E_EVENT_MENU_SELECTION = 0x00000012,
+//  E_EVENT_USER_INPUT
+//};
+
+
+/** \brief various menu mode values
+ ** use this to notify the mode stack
+ */
+enum e_mode
 {
-  E_EVENT_NONE = 0x00000000,
+  E_MODE_NONE = 0, // we should never be in this mode
 
-  E_EVENT_MAIN_MENU = 0x00000001,
+  E_MODE_MAIN_MENU,
 
-  E_EVENT_IN_GAME = 0x00000010,
-  E_EVENT_MAP_PLAYING = 0x00000011,
-  E_EVENT_MENU_SELECTION = 0x00000012,
-  E_EVENT_USER_INPUT
+  E_MODE_IN_GAME,
+  E_MODE_PLAYING,
+  E_MODE_LOADING,
+  E_MODE_SAVING,
+
+  E_MODE_SELECTION_MENU,
+  E_MODE_MOVING_UNIT,
+  E_MODE_ANIMATION_ATTACK,
+
+  E_MODE_READ_TEXTBOX,
+  E_MODE_WRITE_MESSAGE,
 };
 
 
 /** \brief stores game status information such as
  **   last cell selected, current player, ...
  */
-
 class Status
 {
 public:
   /** \brief Default Constructor
    */
   Status();
-  // explicit Status(Map* map);
 
   /** \brief Destructor
    */
@@ -64,23 +85,9 @@ public:
   e_panel_position getPanelPosition();
   e_menu_bar_position getMenuBarPosition();
 
-  /** \brief _selectionMode getter
-   ** \return true if we're in selection mode, false otherwise
-   */
-  bool getSelectionMode();
-
-  /** \brief Event mode getter
-   ** \return Current event mode (in e_event_mode)
-   */
-  e_event_mode getEventMode();
-
   /** \brief returns selected cell's coordinates
    */
   sf::Vector2f getSelectedCell();
-
-  /** \brief _selectionMode setter
-   */
-  void setSelectionMode(bool selection_mode);
 
   /** \brief notify the Status that a cell was clicked
    ** it sets up _selectionActive to
@@ -103,13 +110,28 @@ public:
   unsigned int getGridOffsetY();
   unsigned int getSelectionMenuSelectedEntry();
 
+
+  /** \brief pops _modes summit
+   ** exits the game if the stack is empty
+   */
+  void exitCurrentMode();
+
+  /** \brief \return current mode
+   ** meaning, the summit of _modes stack
+   */
+  e_mode getCurrentMode();
+
+  /** \brief \return the whole stack modes
+   */
+  std::stack<e_mode> getModes();
+
   /** \brief _window setter
    **   updates _renderX and _renderY
    */
   void setWindow(sf::RenderWindow *window);
   void setCursor(Cursor *cursor);
   void setMap(Map *map);
-  void setEventMode(e_event_mode event_mode);
+  void pushMode(e_mode mode); ///< stacks a new mode on _modes
   void setSelectedCell(sf::Vector2f selected_cell);
   void setCurrentFPS(float current_fps);
   void setCellWidth(unsigned int cell_width);
@@ -119,7 +141,6 @@ public:
   void setRenderY(unsigned int render_y);
   void setGridOffsetX(unsigned int grid_offset_x);
   void setGridOffsetY(unsigned int grid_offset_y);
-  void setSelectionMenuSelectedEntry(unsigned int selected_entry);
 
 
 private:
@@ -131,9 +152,7 @@ private:
   // Interface Status
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
-  e_event_mode _eventMode; ///< Remember the event mode we're in
-  bool _selectionMode; ///< True if we're in selection mode
-  unsigned int _selectionMenuSelectedEntry; ///< selected entry index
+  std::stack<e_mode> _modes; ///< Current mode
 
   sf::Vector2f _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second

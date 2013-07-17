@@ -62,8 +62,8 @@ sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
   _sprite->setScale(scale_factor, scale_factor);
 
   // finally, replace the cursor at it's true position before returning it
-  _sprite->setPosition(_x * g_status->getCellWidth() + offset_x + _middle.x,
-					   _y * g_status->getCellHeight() + offset_y + _middle.y);
+  _sprite->setPosition(_x * CELL_WIDTH + offset_x + _middle.x,
+					   _y * CELL_HEIGHT + offset_y + _middle.y);
 
   return *_sprite;
 }

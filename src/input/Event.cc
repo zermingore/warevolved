@@ -3,16 +3,13 @@
 #include <common/globals.hh>
 #include <interface/Interface.hh>
 
-Event::Event() {
-}
 
-Event::Event(KeyManager* km,
-			 GraphicEngine* ge) :
-  _km (km),
-  _ge (ge)
+Event::Event(KeyManager* km, GraphicEngine* ge) :
+    _km(km),
+    _ge(ge)
 {
-  for (int i = 0; i < E_TIMER_NB_TIMERS; ++i)
-  	_km->restartTimer(static_cast<e_timer>(i));
+  for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
+    _km->restartTimer(static_cast<e_timer>(i));
 
   g_settings->setKeyRepeatDelay(150);
   _selectionMenu = g_interface->getSelectionMenu();
@@ -21,61 +18,105 @@ Event::Event(KeyManager* km,
 Event::~Event() {
 }
 
-
 void Event::process()
 {
   while (g_status->getWindow()->pollEvent(_event))
   {
-	// Close window : exit
-	if (_event.type == sf::Event::Closed)
-	  g_status->getWindow()->close();
+    // Close window : exit
+    if (_event.type == sf::Event::Closed)
+      g_status->getWindow()->close();
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	g_status->getWindow()->close(); // TODO call menu instead of quitting
+    g_status->getWindow()->close(); // TODO call menu instead of quitting
 
   if (_event.type == sf::Event::KeyReleased)
-  	this->releasedKeys();
+    this->releasedKeys();
 
-  e_event_mode mode = g_status->getEventMode();
-  if (mode >= E_EVENT_IN_GAME)
+  //e_event_mode mode = g_status->getEventMode();
+  //if (mode >= E_EVENT_IN_GAME)
   {
-	this->panel();
-	if (g_status->getSelectionMode()) // mode == E_EVENT_MENU_SELECTION)
-	  this->menu();
-	else
-	  this->game();
+    this->panel();
+
+    switch (g_status->getCurrentMode())
+    {
+      case E_MODE_SELECTION_MENU:
+        this->menu();
+        break;
+
+      case E_MODE_MOVING_UNIT:
+        this->moveUnit();
+        break;
+
+      default:
+        this->game();
+        break;
+    }
+
+//    if (g_status->getSelectionMode()) // mode == E_EVENT_MENU_SELECTION)
+//      this->menu();
+//    else
+//      this->game();
   }
 }
-
 
 void Event::panel()
 {
 
 }
 
+void Event::moveUnit()
+{
+  std::cout << "moving unit" << std::endl;
+
+  if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
+  {
+    g_status->getCursor()->moveUp();
+    // the timer will not be ready until
+    //   key_repeat_delay passed OR we release the key pressed
+    _km->setReady(E_TIMER_MOVE_UP, false);
+  }
+
+  if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
+  {
+    g_status->getCursor()->moveDown();
+    _km->setReady(E_TIMER_MOVE_DOWN, false);
+  }
+
+  if (_km->left() && _km->ready(E_TIMER_MOVE_LEFT))
+  {
+    g_status->getCursor()->moveLeft();
+    _km->setReady(E_TIMER_MOVE_LEFT, false);
+  }
+
+  if (_km->right() && _km->ready(E_TIMER_MOVE_RIGHT))
+  {
+    g_status->getCursor()->moveRight();
+    _km->setReady(E_TIMER_MOVE_RIGHT, false);
+  }
+}
 
 void Event::menu()
 {
   // made a choice in selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
-	_selectionMenu->executeEntry();
-	g_status->cellSelection();
+    _selectionMenu->executeEntry();
+    //g_status->cellSelection();
 
-	_km->setSwitchStatus(E_SWITCH_SELECTION, ON);
-	g_status->setSelectionMode(false);
+    _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
+    g_status->exitCurrentMode();    // setSelectionMode(false);
   }
 
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
-	_selectionMenu->incrementSelectedEntry();
-	_km->setReady(E_TIMER_MOVE_UP, false);
+    _selectionMenu->incrementSelectedEntry();
+    _km->setReady(E_TIMER_MOVE_UP, false);
   }
 
   if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
   {
-	_selectionMenu->decrementSelectedEntry();
-	_km->setReady(E_TIMER_MOVE_DOWN, false);
+    _selectionMenu->decrementSelectedEntry();
+    _km->setReady(E_TIMER_MOVE_DOWN, false);
   }
 }
 
@@ -84,41 +125,40 @@ void Event::game()
   // opened selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
-	g_status->cellSelection();
-	_km->setSwitchStatus(E_SWITCH_SELECTION, ON);
-	_selectionMenu->build();
-	g_status->setSelectionMode(true);
+    g_status->cellSelection();
+    _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
+    _selectionMenu->build();
+    g_status->pushMode(E_MODE_SELECTION_MENU); //setSelectionMode(true);
   }
 
   // ---------- Cursor Motion ---------- //
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
-	g_status->getCursor()->moveUp();
-	// the timer will not be ready until
-	//   key_repeat_delay passed OR we release the key pressed
-	_km->setReady(E_TIMER_MOVE_UP, false);
+    g_status->getCursor()->moveUp();
+    // the timer will not be ready until
+    //   key_repeat_delay passed OR we release the key pressed
+    _km->setReady(E_TIMER_MOVE_UP, false);
   }
 
   if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
   {
-	g_status->getCursor()->moveDown();
-	_km->setReady(E_TIMER_MOVE_DOWN, false);
+    g_status->getCursor()->moveDown();
+    _km->setReady(E_TIMER_MOVE_DOWN, false);
   }
 
   if (_km->left() && _km->ready(E_TIMER_MOVE_LEFT))
   {
-	g_status->getCursor()->moveLeft();
-	_km->setReady(E_TIMER_MOVE_LEFT, false);
+    g_status->getCursor()->moveLeft();
+    _km->setReady(E_TIMER_MOVE_LEFT, false);
   }
 
   if (_km->right() && _km->ready(E_TIMER_MOVE_RIGHT))
   {
-	g_status->getCursor()->moveRight();
-	_km->setReady(E_TIMER_MOVE_RIGHT, false);
+    g_status->getCursor()->moveRight();
+    _km->setReady(E_TIMER_MOVE_RIGHT, false);
   }
   // ----------------------------------- //
 }
-
 
 void Event::releasedKeys()
 {
@@ -126,17 +166,17 @@ void Event::releasedKeys()
   // (in case 2 keys are pressed simultaneously)
 
   if (!_km->up())
-	_km->restartTimer(E_TIMER_MOVE_UP);
+    _km->restartTimer(E_TIMER_MOVE_UP);
 
   if (!_km->down())
-	_km->restartTimer(E_TIMER_MOVE_DOWN);
+    _km->restartTimer(E_TIMER_MOVE_DOWN);
 
   if (!_km->left())
-	_km->restartTimer(E_TIMER_MOVE_LEFT);
+    _km->restartTimer(E_TIMER_MOVE_LEFT);
 
   if (!_km->right())
-	_km->restartTimer(E_TIMER_MOVE_RIGHT);
+    _km->restartTimer(E_TIMER_MOVE_RIGHT);
 
   if (!_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == ON)
-	_km->setSwitchStatus(E_SWITCH_SELECTION, OFF);
+    _km->setSwitchStatus(E_SWITCH_SELECTION, OFF);
 }

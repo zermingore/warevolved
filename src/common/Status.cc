@@ -4,9 +4,7 @@
 
 Status::Status() :
   _panelPosition (E_PANEL_DEACTIVATED),
-  _menuBarPosition (E_MENU_BAR_DEACTIVATED),
-  _eventMode (E_EVENT_IN_GAME),
-  _selectionMode (false)
+  _menuBarPosition (E_MENU_BAR_DEACTIVATED)
 {
 }
 
@@ -25,42 +23,38 @@ e_menu_bar_position Status::getMenuBarPosition() {
   return _menuBarPosition;
 }
 
-bool Status::getSelectionMode() {
-  return _selectionMode;
+e_mode Status::getCurrentMode()
+{
+	if (_modes.empty())
+	{
+		std::cerr << "_modes stack is empty" << std::endl;
+		return E_MODE_NONE;
+	}
+
+	return _modes.top();
 }
 
-e_event_mode Status::getEventMode() {
-  return _eventMode;
+void Status::pushMode(e_mode mode) {
+	_modes.push(mode);
 }
+
+void Status::exitCurrentMode()
+{
+	if (_modes.empty())
+		std::exit(0); // TODO exit properly (at least with debug_leaks flag)
+
+	_modes.pop();
+}
+
 
 sf::Vector2f Status::getSelectedCell() {
   return _selectedCell;
 }
 
-unsigned int Status::getSelectionMenuSelectedEntry() {
-  return _selectionMenuSelectedEntry;
-}
-
-
-void Status::setSelectionMode(bool selection_mode) {
-  _selectionMenuSelectedEntry = 0;
-  _selectionMode = selection_mode;
-}
-
-void Status::setSelectionMenuSelectedEntry(unsigned int selected_entry) {
-  _selectionMenuSelectedEntry = selected_entry;
-}
-
 void Status::cellSelection()
 {
-  if (!_selectionMode)
-  {
 	_selectedCell.x = _cursor->getX();
 	_selectedCell.y = _cursor->getY();
-  }
-
-  // updating selection state
-  _selectionMode = !_selectionMode;
 }
 
 
@@ -120,10 +114,6 @@ void Status::setCursor(Cursor *cursor) {
 
 void Status::setMap(Map *map) {
   _map = map;
-}
-
-void Status::setEventMode(e_event_mode event_mode) {
-  _eventMode = event_mode;
 }
 
 void Status::setSelectedCell(sf::Vector2f selected_cell) {

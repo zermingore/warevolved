@@ -14,10 +14,11 @@ int main(int ac, const char **av)
 
   bool fullscreen = false;
   if (ac > 1) // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
-	fullscreen = true;
+    fullscreen = true;
 
   Context *context = new Context(fullscreen);
   g_status->setWindow(context->init());
+  g_status->pushMode(E_MODE_MAIN_MENU);
   Game *game = new Game();
   game->run();
 

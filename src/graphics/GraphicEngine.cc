@@ -133,8 +133,6 @@ void GraphicEngine::drawCursor()
 void GraphicEngine::drawSelectionMenu()
 {
   // draw this menu only if requested
-  if (!g_status->getSelectionMode())
-	return;
-
-  _selectionMenu->draw();
+  if (g_status->getCurrentMode() == E_MODE_SELECTION_MENU)
+    _selectionMenu->draw();
 }

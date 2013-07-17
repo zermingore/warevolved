@@ -83,6 +83,7 @@
 * TODO Graphic Engine
 ** TODO Units orientation
    only graphic attribute ?
+   use while moving a unit (default: loo ahead, can check a side)
 ** TODO Libraries
 *** TODO switch 'on demand' (at compilation time)
 	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
@@ -109,7 +110,9 @@
    was a rendering zone room trouble
 ** TODO Memory Leaks
 *** TODO Definitely Lost
-	comming from extern arrays (will create a Resources Manager though)
+
+* TODO Suppress Warnings
+** TODO incomplete Ctors initialisation
 
 * TODO Optimization
 ** retreive a Resource
