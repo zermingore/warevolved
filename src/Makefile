@@ -77,6 +77,7 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Cell.$(OBJEXT) \
 	__top_srcdir__we-Unit.$(OBJEXT) \
 	__top_srcdir__we-Terrain.$(OBJEXT) \
+	__top_srcdir__we-PathFinding.$(OBJEXT) \
 	__top_srcdir__we-Interface.$(OBJEXT) \
 	__top_srcdir__we-Cursor.$(OBJEXT) \
 	__top_srcdir__we-SelectionMenu.$(OBJEXT) \
@@ -118,12 +119,12 @@ am__can_run_installinfo = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/zermingore/Documents/proj/warevolved/build-aux/missing --run aclocal-1.11
+ACLOCAL = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run aclocal-1.11
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /home/zermingore/Documents/proj/warevolved/build-aux/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/zermingore/Documents/proj/warevolved/build-aux/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/zermingore/Documents/proj/warevolved/build-aux/missing --run automake-1.11
+AUTOCONF = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run automake-1.11
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -151,7 +152,7 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/zermingore/Documents/proj/warevolved/build-aux/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
 PACKAGE = ms
@@ -166,10 +167,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 1.0
-abs_builddir = /home/zermingore/Documents/proj/warevolved/src
-abs_srcdir = /home/zermingore/Documents/proj/warevolved/src
-abs_top_builddir = /home/zermingore/Documents/proj/warevolved
-abs_top_srcdir = /home/zermingore/Documents/proj/warevolved
+abs_builddir = /home/zermingore/Documents/workspace/warevolved/src
+abs_srcdir = /home/zermingore/Documents/workspace/warevolved/src
+abs_top_builddir = /home/zermingore/Documents/workspace/warevolved
+abs_top_srcdir = /home/zermingore/Documents/workspace/warevolved
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
@@ -189,7 +190,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/zermingore/Documents/proj/warevolved/build-aux/install-sh
+install_sh = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -251,6 +252,7 @@ game/Map.cc						\
 game/Cell.cc					\
 game/Unit.cc					\
 game/Terrain.cc					\
+game/PathFinding.cc				\
 \
 interface/Interface.cc			\
 interface/Cursor.cc				\
@@ -356,6 +358,7 @@ include ./$(DEPDIR)/__top_srcdir__we-Interface.Po
 include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Map.Po
 include ./$(DEPDIR)/__top_srcdir__we-MenuEntry.Po
+include ./$(DEPDIR)/__top_srcdir__we-PathFinding.Po
 include ./$(DEPDIR)/__top_srcdir__we-Resource.Po
 include ./$(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-SelectionMenu.Po
@@ -617,6 +620,20 @@ __top_srcdir__we-Terrain.obj: game/Terrain.cc
 #	$(AM_V_CXX)source='game/Terrain.cc' object='__top_srcdir__we-Terrain.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Terrain.obj `if test -f 'game/Terrain.cc'; then $(CYGPATH_W) 'game/Terrain.cc'; else $(CYGPATH_W) '$(srcdir)/game/Terrain.cc'; fi`
+
+__top_srcdir__we-PathFinding.o: game/PathFinding.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-PathFinding.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-PathFinding.Tpo -c -o __top_srcdir__we-PathFinding.o `test -f 'game/PathFinding.cc' || echo '$(srcdir)/'`game/PathFinding.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-PathFinding.Tpo $(DEPDIR)/__top_srcdir__we-PathFinding.Po
+#	$(AM_V_CXX)source='game/PathFinding.cc' object='__top_srcdir__we-PathFinding.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-PathFinding.o `test -f 'game/PathFinding.cc' || echo '$(srcdir)/'`game/PathFinding.cc
+
+__top_srcdir__we-PathFinding.obj: game/PathFinding.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-PathFinding.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-PathFinding.Tpo -c -o __top_srcdir__we-PathFinding.obj `if test -f 'game/PathFinding.cc'; then $(CYGPATH_W) 'game/PathFinding.cc'; else $(CYGPATH_W) '$(srcdir)/game/PathFinding.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-PathFinding.Tpo $(DEPDIR)/__top_srcdir__we-PathFinding.Po
+#	$(AM_V_CXX)source='game/PathFinding.cc' object='__top_srcdir__we-PathFinding.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-PathFinding.obj `if test -f 'game/PathFinding.cc'; then $(CYGPATH_W) 'game/PathFinding.cc'; else $(CYGPATH_W) '$(srcdir)/game/PathFinding.cc'; fi`
 
 __top_srcdir__we-Interface.o: interface/Interface.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Interface.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Interface.Tpo -c -o __top_srcdir__we-Interface.o `test -f 'interface/Interface.cc' || echo '$(srcdir)/'`interface/Interface.cc

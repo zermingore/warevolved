@@ -21,9 +21,9 @@ ResourcesManager::~ResourcesManager()
 
   for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
   {
-	e_resource_type type = static_cast<e_resource_type>(i);
-	for (auto it = _resources[type].begin(); it != _resources[type].end(); ++it)
-	  delete *it;
+    e_resource_type type = static_cast<e_resource_type>(i);
+    for (auto it = _resources[type].begin(); it != _resources[type].end(); ++it)
+      delete *it;
   }
 }
 
@@ -42,20 +42,20 @@ bool ResourcesManager::addResource(e_resource_type type,
 {
   switch (type)
   {
-	case E_RESOURCE_TYPE_IMAGE:
-	  _images[id] = new Image(file_name, name, id);
-	  _resources[type].push_back(_images[id]);
-	  return true;
-	case E_RESOURCE_TYPE_FONT:
-	  _resources[type].push_back(new Font(file_name, name, id));
-	  return true;
-	// case E_RESOURCE_TYPE_SOUND:
-	//   _resources[type].push_back(new Sound(file_name, name, id));
-	// return true;
+    case E_RESOURCE_TYPE_IMAGE:
+      _images[id] = new Image(file_name, name, id);
+      _resources[type].push_back(_images[id]);
+      return true;
+    case E_RESOURCE_TYPE_FONT:
+      _resources[type].push_back(new Font(file_name, name, id));
+      return true;
+    // case E_RESOURCE_TYPE_SOUND:
+    //   _resources[type].push_back(new Sound(file_name, name, id));
+    // return true;
 
-	default:
-	  std::cerr << file_name << ": Unknown resource type" << std::endl;
-	  return false;
+    default:
+      std::cerr << file_name << ": Unknown resource type" << std::endl;
+      return false;
   }
 
   return false;
@@ -94,19 +94,19 @@ Image *ResourcesManager::getImage(const char *image_name)
 
   unsigned int id = 0;
   if ((id = _mapping[str]))
-	return _images[id];
+    return _images[id];
 
   for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
   {
-	if ((*it)->getName() == str)
-	{
-	  if (!(*it)->getLoaded())
-		(*it)->load();
+    if ((*it)->getName() == str)
+    {
+      if (!(*it)->getLoaded())
+      (*it)->load();
 
-	  _mapping[str] = ((*it)->getId());
+      _mapping[str] = ((*it)->getId());
 
-	  return dynamic_cast <Image*> (*it);
-	}
+      return dynamic_cast <Image*> (*it);
+    }
   }
 
 # ifdef DEBUG

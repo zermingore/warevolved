@@ -8,6 +8,10 @@
 MenuEntry::MenuEntry(e_entries entry) :
   _id (entry)
 {
+  _background = GETIMAGE("selection_menu_button");
+  _background->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
+
+  // TODO set font and label using a DB
 }
 
 

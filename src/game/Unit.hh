@@ -8,7 +8,8 @@
 /** \brief Unit abstract class
  ** defines a generic unit
  */
-
+// TODO daughter classes
+// (each have its own sprite [for rotation], but shared texture)
 class Unit
 {
 public:
@@ -85,7 +86,6 @@ private:
 
   unsigned int _cellX; ///< x coordinate (column) on the map
   unsigned int _cellY; ///< y coordinate (row) on the map
-
 
   //Cell *_cell;
 };

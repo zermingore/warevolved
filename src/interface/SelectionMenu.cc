@@ -39,8 +39,8 @@ void SelectionMenu::build()
   unsigned int x = g_status->getCursor()->getX();
   unsigned int y = g_status->getCursor()->getY();
   // TODO sets the menu at right (cursor-relative) position
-  _origin.x = (x + 1) * CELL_WIDTH + g_status->getGridOffsetX();
-  _origin.y = y * CELL_HEIGHT + g_status->getGridOffsetY();
+  _origin.x = (x + 1) * CELL_WIDTH + GRID_OFFSET_X;
+  _origin.y = y * CELL_HEIGHT + GRID_OFFSET_Y;
 
   // show unit section only if we selected a unit
   // TODO check if we can control it
@@ -78,8 +78,7 @@ void SelectionMenu::draw()
   // showing selection rectangle
   _imageSelection = GETIMAGE("selection_menu_selection");
   _imageSelection->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-  _imageSelection->setPosition(
-	_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
+  _imageSelection->setPosition(_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
   _imageSelection->draw();
 }
 

@@ -32,17 +32,17 @@ void Game::run()
   // Game loop
   while (g_status->getWindow()->isOpen())
   {
-	_event->process(); // should be the first task of the game loop
-	graphics->drawScene();
+    _event->process(); // should be the first task of the game loop
+    graphics->drawScene();
 
-	// Update the window
-	g_status->getWindow()->display();
+    // Update the window
+    g_status->getWindow()->display();
 
 #   ifdef DEBUG_PERFS
-	g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
-	// storing all values, avoiding syscalls
-	frame_generation.push_back(timer.getElapsedTime().asMicroseconds());
-	timer.restart();
+    g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
+    // storing all values, avoiding syscalls
+    frame_generation.push_back(timer.getElapsedTime().asMicroseconds());
+    timer.restart();
 #   endif
   }
 
@@ -51,9 +51,9 @@ void Game::run()
 # ifdef DEBUG_PERFS
   for (unsigned int i = 0; i < frame_generation.size(); ++i)
   {
-	std::cout << "frame generation: " << frame_generation[i]
-			  << "\tFPS: " << 1000000 / frame_generation[i]
-			  << std::endl;
+    std::cout << "frame generation: " << frame_generation[i]
+          << "\tFPS: " << 1000000 / frame_generation[i]
+          << std::endl;
   }
 # endif
 

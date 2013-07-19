@@ -3,8 +3,19 @@
 
 
 Status::Status() :
+  _window (NULL),
+  _cursor (NULL),
+  _map (NULL),
   _panelPosition (E_PANEL_DEACTIVATED),
-  _menuBarPosition (E_MENU_BAR_DEACTIVATED)
+  _menuBarPosition (E_MENU_BAR_DEACTIVATED),
+  _currentFPS (0),
+  _cellWidth (0),
+  _cellHeight (0),
+  _gridThickness (0),
+  _gridOffsetX (0),
+  _gridOffsetY (0),
+  _renderX (0),
+  _renderY (0)
 {
 }
 

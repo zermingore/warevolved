@@ -51,7 +51,7 @@ sf::Sprite Cursor::getSprite() {
 
 sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
 {
-  static int angle = 0;
+  static unsigned int angle = 0;
   _sprite->setOrigin(_middle);
   _sprite->setRotation(angle++);
 

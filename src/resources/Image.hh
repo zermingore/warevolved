@@ -27,8 +27,8 @@ public:
    ** _loaded to false
    */
   Image(const std::string file_name,
-		const std::string name,
-		unsigned int id);
+        const std::string name,
+        unsigned int id);
 
   /** \brief Destructor
    ** deletes the texture
@@ -74,18 +74,15 @@ public:
    */
   void setPosition(sf::Vector2f position);
 
-
   /** \brief sets _fileName to file_name
    **   sets _loaded to false
    */
   void setFileName(std::string file_name);
 
-
   /** _sprite setter
    ** \param sprite _sprite value
    */
   void setSprite(sf::Sprite *sprite);
-
 
   /** \brief load Image texture to (V)RAM if necessary
    ** sets _rectangle->texture to the new _texture
@@ -102,28 +99,15 @@ public:
    */
   void reload(std::string file_name);
 
-
-  // /** \brief draws the Image at coordinates pos_x, pos_y
-  //  ** \param pos_x x coordinate to display the image (in px)
-  //  ** \param pos_y y coordinate to display the image (in px)
-  //  ** \param width image width
-  //  ** \param height image height
-  //  */
-  // void draw(unsigned int pos_x, unsigned int pos_y,
-  // 			unsigned int width, unsigned int height);
-
-
   /** \brief draws the Image in the cell i, j
    ** \param i x cell's coordinate to display the image (column)
    ** \param j y cell's coordinate to display the image (row)
    */
   void drawAtCell(unsigned int i, unsigned int j);
 
-
   /** \brief draws the Image at _sprite's position
    */
   void draw();
-
 
 
 private:

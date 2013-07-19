@@ -43,6 +43,7 @@ game/Map.cc						\
 game/Cell.cc					\
 game/Unit.cc					\
 game/Terrain.cc					\
+game/PathFinding.cc				\
 \
 interface/Interface.cc			\
 interface/Cursor.cc				\

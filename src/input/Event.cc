@@ -32,30 +32,21 @@ void Event::process()
   if (_event.type == sf::Event::KeyReleased)
     this->releasedKeys();
 
-  //e_event_mode mode = g_status->getEventMode();
-  //if (mode >= E_EVENT_IN_GAME)
+  this->panel();
+
+  switch (g_status->getCurrentMode())
   {
-    this->panel();
+    case E_MODE_SELECTION_MENU:
+      this->menu();
+      break;
 
-    switch (g_status->getCurrentMode())
-    {
-      case E_MODE_SELECTION_MENU:
-        this->menu();
-        break;
+    case E_MODE_MOVING_UNIT:
+      this->moveUnit();
+      break;
 
-      case E_MODE_MOVING_UNIT:
-        this->moveUnit();
-        break;
-
-      default:
-        this->game();
-        break;
-    }
-
-//    if (g_status->getSelectionMode()) // mode == E_EVENT_MENU_SELECTION)
-//      this->menu();
-//    else
-//      this->game();
+    default:
+      this->game();
+      break;
   }
 }
 

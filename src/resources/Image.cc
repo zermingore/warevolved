@@ -2,14 +2,9 @@
 #include <common/globals.hh>
 
 
-Image::Image() {
-  std::cerr << "Invalid Default Ctor for now" << std::endl;
-}
-
-
 Image::Image(const std::string file_name,
-			 const std::string name,
-			 unsigned int id) :
+             const std::string name,
+             unsigned int id) :
   _texture (NULL),
   _sprite (NULL),
   _width (0),
@@ -40,13 +35,13 @@ Image::~Image()
   std::cout << "Image Dtor" << std::endl;
 # endif
   if (_rectangle)
-	delete _rectangle;
+    delete _rectangle;
 
   if (_texture)
-	delete _texture;
+    delete _texture;
 
   if (_sprite)
-	delete _sprite;
+    delete _sprite;
 }
 
 
@@ -54,10 +49,10 @@ sf::Texture *Image::getTexture()
 {
   if (!_texture)
   {
-	_texture = new sf::Texture();
-	_texture->loadFromFile(_fileName);
-	_rectangle->setTexture(_texture);
-	_loaded = true;
+    _texture = new sf::Texture();
+    _texture->loadFromFile(_fileName);
+    _rectangle->setTexture(_texture);
+    _loaded = true;
   }
 
   return _texture;
@@ -80,10 +75,10 @@ void Image::initSprite()
 sf::Sprite *Image::getSprite()
 {
   if (!_texture)
-	this->initTexture();
+    this->initTexture();
 
   if (!_sprite)
-	this->initSprite();
+    this->initSprite();
 
   return _sprite;
 }
@@ -107,7 +102,7 @@ void Image::setSize(sf::Vector2f size) {
 void Image::setPosition(sf::Vector2f position)
 {
   if (!_sprite)
-	this->initSprite();
+    this->initSprite();
   _sprite->setPosition(position);
 }
 
@@ -135,7 +130,7 @@ bool Image::load()
 void Image::unload()
 {
   if (!_texture)
-	return;
+    return;
 
   delete _texture;
   _loaded = false;
@@ -147,10 +142,11 @@ void Image::unload()
   return;
 }
 
+
 void Image::reload(std::string file_name)
 {
   if (_texture)
-	delete _texture;
+    delete _texture;
 
   _texture->loadFromFile(file_name);
   _rectangle->setTexture(_texture);
@@ -158,46 +154,38 @@ void Image::reload(std::string file_name)
 }
 
 
-// void Image::draw(unsigned int pos_x, unsigned int pos_y,
-// 				 unsigned int size_x, unsigned int size_y)
-// {
-//   _rectangle->setPosition(sf::Vector2f(pos_x, pos_y));
-//   _rectangle->setSize(sf::Vector2f(size_x, size_y));
-
-//   this->load();
-//   //_window->draw(&_rectangle);
-// }
-
-
 void Image::drawAtCell(unsigned int i, unsigned int j)
 {
-  _rectangle->setPosition(
-  	sf::Vector2f(i * g_status->getCellWidth()
-				 + g_status->getGridThickness()
-				 + g_status->getGridOffsetX(),
-
-  				 j * g_status->getCellHeight()
-				 + g_status->getGridThickness()
-				 + g_status->getGridOffsetY()));
-
-  _rectangle->setSize(sf::Vector2f(g_status->getCellWidth(), g_status->getCellHeight()));
+  // Rectangle position
+  sf::Vector2f position;
+  position.x = i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X;
+  position.y = j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
 
   if (!_sprite)
-	this->getSprite();
+    this->getSprite();
+
+  _rectangle->setPosition(position);
+  _rectangle->setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
+
+  // Sprite position
+  position += sf::Vector2f(CELL_WIDTH / 2, CELL_HEIGHT / 2);
+  _sprite->setPosition(position);
+  _sprite->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
   if (this->load())
-	g_status->getWindow()->draw(*_rectangle);
+    g_status->getWindow()->draw(*_sprite);
+  g_status->getWindow()->draw(*_rectangle);
 }
 
 
 void Image::draw()
 {
-  // _rectangle->setPosition(_sprite->position);
-  // _rectangle->setSize(_sprite->position);
-
   if (!_sprite)
-	this->getSprite();
+    this->getSprite();
+
+  _rectangle->setPosition(_sprite->getPosition());
 
   if (this->load())
-	g_status->getWindow()->draw(*_sprite);
+    g_status->getWindow()->draw(*_sprite);
+  g_status->getWindow()->draw(*_rectangle);
 }
