@@ -22,5 +22,10 @@ commit
 # Emacs TAGS
 TAGS
 
+# Eclipse files
+.autotools
+.cproject
+.project
+
 # binary
 we
