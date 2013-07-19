@@ -32,8 +32,6 @@ public:
 private:
   Event* _event; ///< Events management
   Map* _map; ///< global map
-
-  // TODO add global stack (menu, game, ...)
 };
 
 #endif /* !GAME_HH_ */

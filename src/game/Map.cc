@@ -28,8 +28,8 @@ void Map::init()
   // TODO read informations from a map file
   for (unsigned int i = 0; i < _nbColumns; ++i)
   {
-	for (unsigned int j = 0; j < _nbLines; ++j)
-	  _cells[i * _nbLines + j].setTerrain(E_TERRAINS_FOREST);
+    for (unsigned int j = 0; j < _nbLines; ++j)
+      _cells[i * _nbLines + j].setTerrain(E_TERRAINS_FOREST);
   }
 
   Unit* soldier = new Unit("soldiers");
@@ -59,28 +59,15 @@ e_terrains Map::getTerrain(unsigned int x, unsigned int y) {
 }
 
 
-Image* Map::getTerrainImage(unsigned int x, unsigned int y) {
+Image* Map::getTerrainImage(unsigned int x, unsigned int y)
+{
   e_terrains terrain = _cells[x * _nbLines + y].getTerrain();
 
   switch (terrain)
   {
-	case E_TERRAINS_FOREST:
-	  return GETIMAGE("forest");
-	default:
-	  return NULL;
+    case E_TERRAINS_FOREST:
+      return GETIMAGE("forest");
+    default:
+      return NULL;
   }
 }
-
-
-
-// e_units Map::getUnitId(unsigned int x, unsigned int y) {
-//   return _cells[x * _nbLines + y].getUnitId();
-// }
-
-// e_units Map::getUnitId(sf::Vector2f v) {
-//   return _cells[static_cast<unsigned int>(v.x * _nbLines + v.y)].getUnitId();
-// }
-
-// e_terrains Map::getTerrainId(unsigned int x, unsigned int y) {
-//   return _cells[x * _nbLines + y].getTerrainId();
-// }

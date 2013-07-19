@@ -8,7 +8,7 @@ ResourcesManager::ResourcesManager(const std::string file_name)
 {
   this->parseXML(file_name);
   if (buildFromXML() == -1)
-	std::cerr << "FAILURE" << std::endl;
+    std::cerr << "FAILURE" << std::endl;
 
 #ifdef DEBUG_XML
   this->listResources();
@@ -36,9 +36,9 @@ void ResourcesManager::initTypeNames()
 
 
 bool ResourcesManager::addResource(e_resource_type type,
-								   const std::string name,
-								   const std::string file_name,
-								   unsigned int id)
+                                   const std::string name,
+                                   const std::string file_name,
+                                   unsigned int id)
 {
   switch (type)
   {
@@ -65,19 +65,19 @@ bool ResourcesManager::addResource(e_resource_type type,
 Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name)
 {
   if (*id)
-	return _images[*id];
+    return _images[*id];
 
   for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
   {
-	if ((*it)->getName() == image_name)
-	{
-	  if (!(*it)->getLoaded())
-		(*it)->load();
+    if ((*it)->getName() == image_name)
+    {
+      if (!(*it)->getLoaded())
+        (*it)->load();
 
-	  *id = ((*it)->getId());
+      *id = ((*it)->getId());
 
-	  return dynamic_cast <Image*> (*it);
-	}
+      return dynamic_cast <Image*> (*it);
+    }
   }
 
 # ifdef DEBUG
@@ -101,7 +101,7 @@ Image *ResourcesManager::getImage(const char *image_name)
     if ((*it)->getName() == str)
     {
       if (!(*it)->getLoaded())
-      (*it)->load();
+        (*it)->load();
 
       _mapping[str] = ((*it)->getId());
 
@@ -121,19 +121,19 @@ Image *ResourcesManager::getImage(const std::string image_name)
 {
   unsigned int id = 0;
   if ((id = _mapping[image_name]))
-	return _images[id];
+    return _images[id];
 
   for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
   {
-	if ((*it)->getName() == image_name)
-	{
-	  if (!(*it)->getLoaded())
-		(*it)->load();
+    if ((*it)->getName() == image_name)
+    {
+      if (!(*it)->getLoaded())
+        (*it)->load();
 
-	  _mapping[image_name] = ((*it)->getId());
+      _mapping[image_name] = ((*it)->getId());
 
-	  return dynamic_cast <Image*> (*it);
-	}
+      return dynamic_cast <Image*> (*it);
+    }
   }
 
 # ifdef DEBUG
@@ -148,13 +148,13 @@ Font *ResourcesManager::getFont(const std::string font_name)
 {
   for (auto it = _resources[E_RESOURCE_TYPE_FONT].begin(); it != _resources[E_RESOURCE_TYPE_FONT].end(); ++it)
   {
-	if ((*it)->getName() == font_name)
-	{
-	  if (!(*it)->getLoaded())
-		(*it)->load();
+    if ((*it)->getName() == font_name)
+    {
+      if (!(*it)->getLoaded())
+        (*it)->load();
 
-	  return dynamic_cast <Font*> (*it);
-	}
+      return dynamic_cast <Font*> (*it);
+    }
   }
 
 # ifdef DEBUG
@@ -171,8 +171,8 @@ bool ResourcesManager::parseXML(const std::string file_name)
   std::basic_ifstream<char> stream(file_name);
   if (!stream)
   {
-	std::cerr << "XML: input error" << std::endl;
-  	return false;
+    std::cerr << "XML: input error" << std::endl;
+      return false;
   }
   stream.unsetf(std::ios::skipws); // skip white spaces
 
@@ -215,52 +215,52 @@ int ResourcesManager::buildFromXML()
   while (current_type < E_RESOURCE_TYPE_NB) // for all categories
   {
 #   ifdef DEBUG
-	if (!type)
-	{
-	  std::cerr << "type is NULL" << std::endl <<
-		"tried to match>" << _typeNames[current_type].c_str() << std::endl;
-	  return -1;
-	}
+    if (!type)
+    {
+      std::cerr << "type is NULL" << std::endl <<
+      "tried to match>" << _typeNames[current_type].c_str() << std::endl;
+      return -1;
+    }
 #   endif
 
-	folder = type->first_node("folder");
-	while (folder)
-	{
-	  path = folder->first_attribute();
-	  file = folder->first_node("file");
-	  const std::string str_path = std::string(path->value());
+    folder = type->first_node("folder");
+    while (folder)
+    {
+      path = folder->first_attribute();
+      file = folder->first_node("file");
+      const std::string str_path = std::string(path->value());
 
-#    ifdef DEBUG
-	  // testing if last char is effectively a FOLDER_SEPARATOR
-	  if (*(str_path.end() - 1) != FOLDER_DELIMITER)
-	  {
-		std::cerr << ">>ERROR<< XML file:" << std::endl <<
-		  "-- Missing trailing folder delimiter in " << str_path << std::endl;
-	  }
+#     ifdef DEBUG
+      // testing if last char is effectively a FOLDER_SEPARATOR
+      if (*(str_path.end() - 1) != FOLDER_DELIMITER)
+      {
+        std::cerr << ">>ERROR<< XML file:" << std::endl <<
+          "-- Missing trailing folder delimiter in " << str_path << std::endl;
+      }
 
-	  if (!path)
-	  {
-		std::cerr << "XML file: Missing path" << std::endl;
-		return -1;
-	  }
+      if (!path)
+      {
+        std::cerr << "XML file: Missing path" << std::endl;
+        return -1;
+      }
 
-	  if (!file)
-		std::cerr << ">Warning< XML file: empty folder " << str_path << std::endl;
-#   endif
+      if (!file)
+        std::cerr << ">Warning< XML file: empty folder " << str_path << std::endl;
+#     endif
 
-	  while (file)
-	  {
-		std::string filename = std::string(file->first_attribute()->value());
-		name = file->first_node("name");
-		this->addResource(current_type, name->value(), str_path + filename, id++);
-		file = file->next_sibling("file");
-	  }
+      while (file)
+      {
+        std::string filename = std::string(file->first_attribute()->value());
+        name = file->first_node("name");
+        this->addResource(current_type, name->value(), str_path + filename, id++);
+        file = file->next_sibling("file");
+      }
 
-	  folder = folder->next_sibling("folder");
-	}
+      folder = folder->next_sibling("folder");
+    }
 
-	current_type = static_cast<e_resource_type>(current_type + 1);
-	type = type->next_sibling();
+    current_type = static_cast<e_resource_type>(current_type + 1);
+    type = type->next_sibling();
   }
 
   return 0;
@@ -274,14 +274,14 @@ void ResourcesManager::listResources()
 
   for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
   {
-	e_resource_type type = static_cast<e_resource_type>(i);
-	std::cout << "Category: " << _typeNames[type] << std::endl;
-	for (auto it = _resources[type].begin(); it != _resources[type].end(); ++it)
-	{
-	  std::cout << (*it)->getFileName() << '\t'
-				<< (*it)->getName() << '\t'
-				<< (*it)->getId() << std::endl;
-	}
+    e_resource_type type = static_cast<e_resource_type>(i);
+    std::cout << "Category: " << _typeNames[type] << std::endl;
+    for (auto it = _resources[type].begin(); it != _resources[type].end(); ++it)
+    {
+      std::cout << (*it)->getFileName() << '\t'
+                << (*it)->getName() << '\t'
+                << (*it)->getId() << std::endl;
+    }
   }
 }
 #endif

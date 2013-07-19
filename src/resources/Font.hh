@@ -16,8 +16,8 @@ public:
    */
   Font();
   Font(const std::string file_name,
-		const std::string name,
-		unsigned int id);
+       const std::string name,
+       unsigned int id);
 
   ~Font();
 

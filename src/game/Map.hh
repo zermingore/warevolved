@@ -11,7 +11,6 @@
 
 /** \brief class which represents the game map
  */
-
 class Map
 {
 public:
@@ -64,26 +63,6 @@ public:
    */
   Unit *getUnit(sf::Vector2f v);
 
-  /** \brief gets the Unit Texture id at x, y coordinates
-   **
-   ** \param x Coordinates according to columns
-   ** \param y Coordinates according to lines
-   **
-   ** \return the id in the std::map stored in the Resources Manager matching the unit
-   **   located at coordinates (v.x, v.y)
-   */
-  unsigned int getUnitTextureId(unsigned int x, unsigned int y);
-
-  /** \brief gets the unit at v's coordinates
-   **
-   ** \param v targeted Cell's coordinates
-   **
-   ** \return the enum index in e_unit matching the unit
-   **   located at coordinates (v.x, v.y)
-   */
-  unsigned int getUnitTextureId(sf::Vector2f v);
-
-
   /** \brief gets the terrain at coordinates (x, y)
    **
    ** \param x Coordinates according to columns
@@ -104,16 +83,6 @@ public:
    **   located at coordinates (x, y)
    */
   Image* getTerrainImage(unsigned int x, unsigned int y);
-
-  /** \brief gets the terrain texture id at coordinates (x, y)
-   **
-   ** \param x Coordinates according to columns
-   ** \param y Coordinates according to lines
-   **
-   ** \return the enum index in e_terrain matching the terrain
-   **   located at coordinates (x, y)
-   */
-  unsigned int getTerrainTextureId(unsigned int x, unsigned int y);
 
 
 private:

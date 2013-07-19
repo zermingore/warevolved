@@ -19,16 +19,16 @@ Font::Font(const std::string file_name,
 Font::~Font()
 {
   if (_font)
-	delete _font;
+    delete _font;
 }
 
 bool Font::load()
 {
   if (_loaded)
-	return true;
+    return true;
 
   if (!_font)
-	_font = new sf::Font();
+    _font = new sf::Font();
 
   _font->loadFromFile(_fileName);
   _loaded = true;
@@ -45,7 +45,7 @@ void Font::unload()
 sf::Font *Font::getFont()
 {
   if (!_loaded)
-	this->load();
+    this->load();
 
   return _font;
 }

@@ -52,8 +52,8 @@ void Game::run()
   for (unsigned int i = 0; i < frame_generation.size(); ++i)
   {
     std::cout << "frame generation: " << frame_generation[i]
-          << "\tFPS: " << 1000000 / frame_generation[i]
-          << std::endl;
+              << "\tFPS: " << 1000000 / frame_generation[i]
+              << std::endl;
   }
 # endif
 

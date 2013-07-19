@@ -64,9 +64,6 @@ void Unit::setTextureId(unsigned int texture_id) {
 
 void Unit::draw()
 {
-  // if (_posX && _posY)
-  // 	_image->drawAt(_posX, _posY);
-
   _image = GETIMAGE(_name);
   _image->drawAtCell(_cellX, _cellY);
 }

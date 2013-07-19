@@ -78,9 +78,9 @@ private:
    **   false otherwise
    */
   bool addResource(e_resource_type type,
-				   const std::string name,
-				   const std::string file_name,
-				   unsigned int id);
+                   const std::string name,
+                   const std::string file_name,
+                   unsigned int id);
 
   /** \brief parses XML file
    ** \param file_name file to parse
