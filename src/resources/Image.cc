@@ -117,7 +117,7 @@ bool Image::load()
   	return true;
 
   if (!_texture)
-	_texture = new sf::Texture();
+    _texture = new sf::Texture();
 
   _texture->loadFromFile(_fileName);
   _rectangle->setTexture(_texture);
@@ -156,20 +156,14 @@ void Image::reload(std::string file_name)
 
 void Image::drawAtCell(unsigned int i, unsigned int j)
 {
-  // Rectangle position
-  sf::Vector2f position;
-  position.x = i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X;
-  position.y = j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
-
   if (!_sprite)
     this->getSprite();
 
-  _rectangle->setPosition(position);
-  _rectangle->setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
-
   // Sprite position
-  position += sf::Vector2f(CELL_WIDTH / 2, CELL_HEIGHT / 2);
-  _sprite->setPosition(position);
+  sf::Vector2f pos;
+  pos.x = i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
+  pos.y = j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
+  _sprite->setPosition(pos);
   _sprite->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
   if (this->load())

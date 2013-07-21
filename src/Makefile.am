@@ -1,9 +1,9 @@
 bin_PROGRAMS = $(top_srcdir)/we
 
 # Use right g++ flags.
-__top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic	 		\
+__top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 -Wfloat-equal -Wcast-qual -Wcast-align -Wunreachable-code -Wundef		\
--Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses 		\
+-Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses	\
 -O0 -g -DDEBUG -DDEBUG_LEAKS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
@@ -43,6 +43,7 @@ game/Map.cc						\
 game/Cell.cc					\
 game/Unit.cc					\
 game/Terrain.cc					\
+game/PathElement.cc				\
 game/PathFinding.cc				\
 \
 interface/Interface.cc			\

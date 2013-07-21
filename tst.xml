@@ -24,6 +24,14 @@
 		<name>selection_menu_selection</name>
 	  </file>
 	</folder>
+	<folder path='resources/interface/path/'>
+	  <file filename='path_shape.png'>
+		<name>path_shape</name>
+	  </file>
+	  <file filename='path_arrow.png'>
+		<name>path_arrow</name>
+	  </file>
+	</folder>
   </images>
   <fonts>
 	<folder path='resources/fonts/'>
