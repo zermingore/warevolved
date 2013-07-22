@@ -9,6 +9,7 @@
 # define PATHELEMENT_HH_
 
 # include <common/path_shape.hh>
+# include <common/direction.hh>
 
 
 // TODO optimize this path management
@@ -17,35 +18,57 @@
 //     direction of the following elements (could use a byte 1-4)
 
 /** \brief class for path-finding elements
+ ** this class does not compute the path, it just stores it
  */
 class PathElement
 {
 public:
-  PathElement();
-
-  // dummy version Ctor
-  PathElement(unsigned int x, unsigned int y, e_path_shape shape);
+  /** \brief Constructor
+   ** sets the origin cell
+   ** it's orientation will be computed as soon as we'll get another element
+   */
+  PathElement(unsigned int x, unsigned int y);
 
   /** Destructor */
   ~PathElement();
 
-  /** \brief _x getter */
+  /** \brief current cell x coordinate getter */
   unsigned int getX();
 
-  /** \brief _y getter */
+  /** \brief current cell y coordinate getter */
   unsigned int getY();
 
-  /** \brief shape getter */
-  inline e_path_shape getShape() {return _shape;};
+  /** \brief shape getter
+   ** checks the both previous and next segments
+   **   to return the right match
+   */
+  e_path_shape getShape();
 
-  // TODO addNext()
+  /** \brief adds the next element to the current path
+   ** \param direction of the element
+   **   as the path finding is computed elsewhere,
+   **   we have not to check it
+   */
+  void addNextDirection(e_direction direction);
+
 
 private:
-  // TODO origin (avoid using selected cell)
-
   unsigned int _x; ///< cell x coordinate
-  unsigned int _y; ///< cell y coordinate
-  e_path_shape _shape; ///< path shape
+  unsigned int _y;
+
+  e_path_shape _shape;
+  Image *_image;
+
+//  unsigned int _originX; ///< origin cell x coordinate
+//  unsigned int _originY; ///< origin cell y coordinate
+//
+//  unsigned int _currentX; ///< current cell x coordinate
+//  unsigned int _currentY; ///< current cell y coordinate
+//
+//  unsigned int _index; ///< _directions list current index
+//
+//  std::list<e_direction> _directions; ///< list of path directions
+//                                      ///< filled through addNextDirection
 };
 
 #endif /* !PATHELEMENT_HH_ */
