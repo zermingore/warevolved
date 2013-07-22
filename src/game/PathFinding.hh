@@ -8,11 +8,10 @@
 #ifndef PATHFINDING_HH_
 # define PATHFINDING_HH_
 
-# include <list>
+# include <vector>
 # include <common/path_shape.hh>
 # include <common/direction.hh>
 # include <resources/Image.hh>
-# include <game/PathElement.hh>
 
 
 /** \brief Computes and display path findings
@@ -20,9 +19,9 @@
 class PathFinding
 {
 public:
-  /** Default Ctor
+  /** Constructor
    */
-  PathFinding();
+  PathFinding(unsigned int x, unsigned int y);
 
   /** Destructor
    */
@@ -39,11 +38,13 @@ public:
    */
   void addNextDirection(e_direction direction);
 
-
-
   /** \brief uses _graphicPath to draw the current path
    */
   void drawPath();
+
+  /** \brief clears current path
+   */
+  void clearPath();
 
 
 private:
@@ -53,15 +54,26 @@ private:
    */
   Image *getImage(unsigned int index);
 
-  // TODO remove vector, only use PathElement class
-  //std::vector<PathElement*> _graphicPath; ///< path elements array
+  /** \brief builds Images* Vector (_images)
+   */
+  void buildImageVector(); // TODO use (cache management)
 
-  // path direction list
-  // list[0]: origin cell
-  // list[i]: relative to list[i-1]
-//  std::list<e_direction> _directions;
+  /** \brief frees Images* Vector (_images)
+   ** deletes all Images in _images
+   */
+  void deleteImagesVector();
 
-  void buildImageList();
+  /** \brief updates current cell coordinates
+   **   according to \param direction
+   ** \param direction current move direction
+   */
+  void updateCurrentCell(e_direction direction);
+
+  /** \brief returns shape matching _direction[\param index]
+   ** \param index index in _direction vector
+   ** \return shape of _direction[\param index]
+   **   according to the next direction (for smooth corners)
+   */
   e_path_shape getShape(unsigned int index);
 
 
@@ -71,11 +83,10 @@ private:
   unsigned int _currentX; ///< current cell x coordinate
   unsigned int _currentY; ///< current cell y coordinate
 
-  unsigned int _index; ///< _directions list current index
-
   std::vector<e_direction> _directions; ///< list of path directions
-                                      ///< filled through addNextDirection
+                                        ///< filled through addNextDirection
 
+  std::vector<Image*> _images; ///< Images* of the path vector
 };
 
 #endif /* !PATHFINDING_HH_ */

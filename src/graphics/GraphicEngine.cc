@@ -48,7 +48,7 @@ void GraphicEngine::drawScene()
   this->drawGrid();
   this->drawCursor();
 
-  PathFinding *p = new PathFinding();
+  PathFinding *p = new PathFinding(_cursor->getX(), _cursor->getY()); // FIX coords
   p->drawPath();
 
   this->drawSelectionMenu();

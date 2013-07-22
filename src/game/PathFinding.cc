@@ -3,50 +3,99 @@
 #include <common/globals.hh>
 
 
-PathFinding::PathFinding() {
+PathFinding::PathFinding(unsigned int x, unsigned int y) :
+  _originX (x),
+  _originY (y),
+  _currentX (x),
+  _currentY (y)
+{
+  _directions.push_back(E_DIRECTION_DOWN);
+  _directions.push_back(E_DIRECTION_DOWN);
 }
 
 PathFinding::~PathFinding() {
+  deleteImagesVector();
 }
 
 
 void PathFinding::drawPath()
 {
-  // if cached
-//  for (auto it = _graphicPath.begin(); it != _graphicPath.end(); ++it)
-//    this->getImage(*it)->drawAtCell((*it)->getX(), (*it)->getY());
-
-  // To display an element, we have to know it's predecessor and it's successor
-  //   So let's manage some cases
-  if (_directions.size() < 2 || _directions.size() < 3) // TODO manage short lists
-    return;
+  // TODO cache management
+  //  unsigned int i = 0;
+  //  for (auto it = _directions.begin(); it != _directions.end(); ++it)
+  //  {
+  //    _images[i++]->drawAtCell(_currentX, _currentY);
+  //    this->updateCurrentCell(*it);
+  //  }
+  //  return;
 
   unsigned int i = 0;
-  for (auto it = _directions.begin(); it != _directions.end() - 1; ++it)
+  for (auto it = _directions.begin(); it != _directions.end(); ++it)
+  {
     this->getImage(i++)->drawAtCell(_currentX, _currentY);
-
-  // last element
+    this->updateCurrentCell(*it);
+  }
 }
 
-void PathFinding::buildImageList()
+
+void PathFinding::clearPath()
 {
-  // manage 'riding' the path (move orgin cell, inc index)
-  // if cached return
+  _directions.clear();
+  this->deleteImagesVector();
+  //_cached = false;
 
-  // current x, y cell
-  unsigned int x = _originX;
-  unsigned int y = _originY;
+  // TODO clear only if we made a path request on a new cell
+  // (to avoid clearing the path on selecting the same unit two times in a row)
+}
 
-    // To display an element, we have to know it's predecessor and it's successor
-    //   So let's manage some cases
-    if (_directions.size() < 2 || _directions.size() < 3) // TODO manage short lists
+
+
+void PathFinding::updateCurrentCell(e_direction direction)
+{
+  switch (direction)
+  {
+    case E_DIRECTION_UP:
+      --_currentY;
       return;
 
-    unsigned int i = 0;
-    for (auto it = _directions.begin(); it != _directions.end() - 1; ++it)
-      this->getImage(i++)->drawAtCell(_currentX, _currentY);
+    case E_DIRECTION_DOWN:
+      ++_currentY;
+      return;
 
-    // last element
+    case E_DIRECTION_LEFT:
+      --_currentX;
+      return;
+
+    case E_DIRECTION_RIGHT:
+      ++_currentX;
+      return;
+
+    default:
+      return;
+  }
+}
+
+void PathFinding::deleteImagesVector()
+{
+  // freeing images
+  for (auto it = _images.begin(); it != _images.end(); ++it)
+    delete (*it);
+
+  _images.clear();
+}
+
+
+// unused
+void PathFinding::buildImageVector()
+{
+  // manage 'riding' the path (inc a global index)
+  // if cached return
+
+  this->deleteImagesVector();
+
+  unsigned int i = 0;
+  for (auto it = _directions.begin(); it != _directions.end(); ++it)
+    _images.push_back(this->getImage(i++));
 }
 
 
@@ -54,31 +103,20 @@ e_path_shape PathFinding::getShape(unsigned int index)
 {
   // last element case
   if (index == _directions.size())
-    return ((e_path_shape) (_directions[index] - 360));
+    return (static_cast <e_path_shape> (_directions[index] - 360));
+
+  e_direction next = _directions[index + 1];
 
   // same element as next case
-  if (_directions[index] == _directions[index + 1])
-    return ((e_path_shape) _directions[index]);
+  if (_directions[index] == next)
+    return (static_cast <e_path_shape> (_directions[index]));
 
   // from here, we know the direction changed
-  unsigned int offset = 0;
-  switch (_directions[index + 1])
-  {
-    case E_DIRECTION_UP:
-    case E_DIRECTION_LEFT:
-      offset = 360;
-      break;
+  unsigned int offset = 360; // e_path_shape offset
+  if (next == E_DIRECTION_DOWN || next == E_DIRECTION_RIGHT)
+    offset = 720;
 
-    case E_DIRECTION_DOWN:
-    case E_DIRECTION_RIGHT:
-      offset = 720;
-      break;
-
-    default: // E_DIRECTION_NONE (could merge with previous cases)
-      break;
-  }
-
-  return ((e_path_shape) (_directions[index] + offset));
+  return (static_cast <e_path_shape> (_directions[index] + offset));
 }
 
 
@@ -108,11 +146,12 @@ Image *PathFinding::getImage(unsigned int index)
 
      // Corners
      default:
-       img = GETIMAGE("path_arrow");
+       img = GETIMAGE("path_arrow"); // TODO sprite
+       // DEBUG_PRINT("path: corner sprite needed");
        break;
   }
 
-  if ((angle = (unsigned int) shape % 360))
+  if ((angle = static_cast <unsigned int> (shape % 360)))
     img->getSprite()->setRotation(angle);
 
   return img;
@@ -122,4 +161,6 @@ Image *PathFinding::getImage(unsigned int index)
 void PathFinding::addNextDirection(e_direction direction)
 {
   _directions.push_back(direction);
+
+  // TODO add Image
 }
