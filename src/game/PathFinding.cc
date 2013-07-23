@@ -127,39 +127,29 @@ e_path_shape PathFinding::getShape(unsigned int index)
   if (std::abs(_directions[index] - next) == 180)
     return (static_cast <e_path_shape> (next));
 
-//  DEBUG_PRINT_VALUE(_directions[index]);
-
   // from here, we know the direction changed
-  unsigned int offset = 720; // e_path_shape offset
-  if (next == E_DIRECTION_DOWN || next == E_DIRECTION_RIGHT)
-    offset = 360;
+  switch (_directions[index])
+  {
+    case E_DIRECTION_UP:
+      if (next == E_DIRECTION_RIGHT)
+        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN));
+      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT));
 
-//  if (std::abs(next - _directions[index]) == 90)
-  if (_directions[index] == E_DIRECTION_RIGHT && next == E_DIRECTION_UP) // 180
-    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP)); // 270
+    case E_DIRECTION_DOWN:
+      if (next == E_DIRECTION_RIGHT)
+        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT));
+      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP));
 
-  if (_directions[index] == E_DIRECTION_UP && next == E_DIRECTION_LEFT) // 270
-    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT)); // 180
+    case E_DIRECTION_LEFT:
+      if (next == E_DIRECTION_UP)
+        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT));
+      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN));
 
-  if (_directions[index] == E_DIRECTION_LEFT && next == E_DIRECTION_DOWN) // 90
-    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN)); // 90
-
-  if (_directions[index] == E_DIRECTION_DOWN && next == E_DIRECTION_RIGHT) // 90
-    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT)); // 0
-
-
-  // anti clockwise
-  if (_directions[index] == E_DIRECTION_LEFT && next == E_DIRECTION_UP)
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_UP));
-
-  if (_directions[index] == E_DIRECTION_UP && next == E_DIRECTION_RIGHT)
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_RIGHT));
-
-  if (_directions[index] == E_DIRECTION_RIGHT && next == E_DIRECTION_DOWN)
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_DOWN));
-
-  // down left
-  return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_LEFT));
+    default:
+      if (next == E_DIRECTION_UP)
+        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP));
+      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT));
+    }
 }
 
 
