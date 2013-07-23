@@ -31,6 +31,9 @@
 	  <file filename='path_arrow.png'>
 		<name>path_arrow</name>
 	  </file>
+	  <file filename='path_corner.png'>
+		<name>path_corner</name>
+	  </file>
 	</folder>
   </images>
   <fonts>

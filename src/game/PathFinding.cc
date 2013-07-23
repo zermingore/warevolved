@@ -123,12 +123,43 @@ e_path_shape PathFinding::getShape(unsigned int index)
   if (_directions[index] == next)
     return (static_cast <e_path_shape> (_directions[index]));
 
-  // from here, we know the direction changed
-  unsigned int offset = 360; // e_path_shape offset
-  if (next == E_DIRECTION_DOWN || next == E_DIRECTION_RIGHT)
-    offset = 720;
+  // reverse
+  if (std::abs(_directions[index] - next) == 180)
+    return (static_cast <e_path_shape> (next));
 
-  return (static_cast <e_path_shape> (_directions[index] + offset));
+//  DEBUG_PRINT_VALUE(_directions[index]);
+
+  // from here, we know the direction changed
+  unsigned int offset = 720; // e_path_shape offset
+  if (next == E_DIRECTION_DOWN || next == E_DIRECTION_RIGHT)
+    offset = 360;
+
+//  if (std::abs(next - _directions[index]) == 90)
+  if (_directions[index] == E_DIRECTION_RIGHT && next == E_DIRECTION_UP) // 180
+    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP)); // 270
+
+  if (_directions[index] == E_DIRECTION_UP && next == E_DIRECTION_LEFT) // 270
+    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT)); // 180
+
+  if (_directions[index] == E_DIRECTION_LEFT && next == E_DIRECTION_DOWN) // 90
+    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN)); // 90
+
+  if (_directions[index] == E_DIRECTION_DOWN && next == E_DIRECTION_RIGHT) // 90
+    return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT)); // 0
+
+
+  // anti clockwise
+  if (_directions[index] == E_DIRECTION_LEFT && next == E_DIRECTION_UP)
+      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_UP));
+
+  if (_directions[index] == E_DIRECTION_UP && next == E_DIRECTION_RIGHT)
+      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_RIGHT));
+
+  if (_directions[index] == E_DIRECTION_RIGHT && next == E_DIRECTION_DOWN)
+      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_DOWN));
+
+  // down left
+  return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_LEFT));
 }
 
 
@@ -138,7 +169,7 @@ Image *PathFinding::getImage(unsigned int index)
   unsigned int angle = 0;
   e_path_shape shape = getShape(index);
 
-  DEBUG_PRINT_VALUE(shape);
+//  DEBUG_PRINT_VALUE(shape);
 
   switch (shape)
   {
@@ -160,14 +191,13 @@ Image *PathFinding::getImage(unsigned int index)
 
      // Corners
      default:
-       img = GETIMAGE("path_arrow"); // TODO sprite
-//       DEBUG_PRINT("path: corner sprite needed");
-//       DEBUG_PRINT_VALUE(shape);
+       img = GETIMAGE("path_corner");
+       DEBUG_PRINT_VALUE(shape);
        break;
   }
 
   angle = static_cast <unsigned int> (shape % 360);
-  img->getSprite()->setRotation(angle);
+  img->getSprite()->setRotation(angle); // -90
 
   return img;
 }
