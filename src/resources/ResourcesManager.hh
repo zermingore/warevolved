@@ -18,7 +18,7 @@ enum e_resource_type
   E_RESOURCE_TYPE_IMAGE,
   E_RESOURCE_TYPE_FONT,
 
-  E_RESOURCE_TYPE_SOUND, // TODO
+  E_RESOURCE_TYPE_SOUND, // TODO sound management
 
   E_RESOURCE_TYPE_NB
 };
@@ -54,10 +54,12 @@ public:
    ** if the Image wasn't loaded, loads it
    */
   Image *getImage(unsigned int *id, const std::string image_name);
-
   Image *getImage(const char *image_name);
   Image *getImage(const std::string image_name);
 
+  /** \brief Retrieve a Font from its name (alias)
+   ** if the Font wasn't loaded, loads it
+   */
   Font *getFont(const std::string font_name);
 
 

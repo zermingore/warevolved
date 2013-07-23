@@ -17,12 +17,17 @@ GraphicEngine::GraphicEngine()
   _cursor = new Cursor(8, 8);
   g_status->setCursor(_cursor);
   _selectionMenu = g_interface->getSelectionMenu();
+  _path = NULL;
 
   _IDTST = 0;
 }
 
 GraphicEngine::~GraphicEngine() {
   delete _cursor;
+}
+
+void GraphicEngine::updatePath(PathFinding *p) {
+  _path = p;
 }
 
 void GraphicEngine::initRoom()
@@ -48,11 +53,10 @@ void GraphicEngine::drawScene()
   this->drawGrid();
   this->drawCursor();
 
-  PathFinding *p = new PathFinding(_cursor->getX(), _cursor->getY()); // FIX coords
-  p->drawPath();
-
   this->drawSelectionMenu();
+  this->drawPath();
 }
+
 
 void GraphicEngine::drawBackground() // TODO (map background)
 {
@@ -72,7 +76,7 @@ void GraphicEngine::drawPanel()
     sf::Vector2f (0.66f * WINDOW_SIZE_X, 0),
     sf::Vector2f (0.66f * WINDOW_SIZE_X, WINDOW_SIZE_Y)
   };
-  g_status->getWindow()->draw(line, 2, sf::Lines);
+  WINDOW->draw(line, 2, sf::Lines);
 }
 
 void GraphicEngine::drawMenuBar()
@@ -86,7 +90,7 @@ void GraphicEngine::drawMenuBar()
   // for now, drawing a line to delimit the menu zone
   sf::Vertex line[2] = {sf::Vector2f (0, CELL_HEIGHT / 2),
 						sf::Vector2f (WINDOW_SIZE_X, (CELL_WIDTH + CELL_HEIGHT) / 4)};
-  g_status->getWindow()->draw(line, 2, sf::Lines);
+  WINDOW->draw(line, 2, sf::Lines);
 }
 
 
@@ -123,7 +127,7 @@ void GraphicEngine::drawGrid()
     {
       rectangle.setPosition(i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X,
                             j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y);
-      g_status->getWindow()->draw(rectangle);
+      WINDOW->draw(rectangle);
     }
 }
 
@@ -141,4 +145,11 @@ void GraphicEngine::drawSelectionMenu()
   // draw this menu only if requested
   if (g_status->getCurrentMode() == E_MODE_SELECTION_MENU)
     _selectionMenu->draw();
+}
+
+
+void GraphicEngine::drawPath()
+{
+  if (_path)
+    _path->drawPath();
 }

@@ -22,13 +22,16 @@ enum e_timer
  */
 enum e_switch
 {
-  E_SWITCH_SELECTION = 0,
+  E_SWITCH_SELECTION = 0, // in-game selection menu
+  E_SWITCH_EXIT, // exit request
 
   E_SWITCH_NB_SWITCHES
 };
 
 
-// keys index
+/** \brief Keys indexes
+ ** allowing key repeating
+ */
 enum e_key
 {
   // motion keys
@@ -51,6 +54,10 @@ enum e_key
   E_KEY_PANEL_1,
   E_KEY_PANEL_2,
 
+  // exit requests
+  E_KEY_EXIT_1,
+  E_KEY_EXIT_2,
+
   E_KEY_NB_KEYS
 };
 
@@ -70,6 +77,7 @@ public:
   bool left();
   bool right();
   bool selection();
+  bool exit();
 
   /** \brief Maps keyboard keys to function
    */
@@ -93,8 +101,15 @@ public:
    */
   void setSwitchStatus(e_switch index, bool status);
 
+  /** \brief returns true if the key matching index is ready
+   ** \return true if the key matching index is ready
+   **   false otherwise
+   */
   bool ready(e_timer index);
 
+  /** \brief notify a key as 'ready'
+   **   meaning being considered as pressed again
+   */
   void setReady(e_timer index, bool state);
 
   /** \brief restarts the clock \param index and sets _timers[index] to 0
@@ -103,10 +118,11 @@ public:
 
 
 private:
-  sf::Keyboard::Key _keys[E_KEY_NB_KEYS];
-  sf::Clock _clocks[E_TIMER_NB_TIMERS];
-  bool _ready[E_TIMER_NB_TIMERS];
-  bool _switches[E_SWITCH_NB_SWITCHES];
+  sf::Keyboard::Key _keys[E_KEY_NB_KEYS]; ///< keys list
+  sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks
+                                        ///< (to know if a key is ready)
+  bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
+  bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states
 };
 
 #endif /* !KEYMANAGER_HH_ */

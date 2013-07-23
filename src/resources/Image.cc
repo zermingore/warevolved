@@ -137,7 +137,7 @@ void Image::unload()
 
 # ifdef DEBUG
   _rectangle->setTexture(NULL);
-#endif
+# endif
 
   return;
 }
@@ -167,8 +167,8 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
   _sprite->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
   if (this->load())
-    g_status->getWindow()->draw(*_sprite);
-  g_status->getWindow()->draw(*_rectangle);
+    WINDOW->draw(*_sprite);
+  WINDOW->draw(*_rectangle);
 }
 
 
@@ -180,6 +180,6 @@ void Image::draw()
   _rectangle->setPosition(_sprite->getPosition());
 
   if (this->load())
-    g_status->getWindow()->draw(*_sprite);
-  g_status->getWindow()->draw(*_rectangle);
+    WINDOW->draw(*_sprite);
+  WINDOW->draw(*_rectangle);
 }

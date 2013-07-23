@@ -12,9 +12,10 @@
 class Font : public Resource
 {
 public:
-  /** \brief default Constructor
+  /** \brief Constructor
+   ** \param file_name font file name
+   ** \param name font alias
    */
-  Font();
   Font(const std::string file_name,
        const std::string name,
        unsigned int id);

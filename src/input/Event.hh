@@ -4,6 +4,7 @@
 # include <input/KeyManager.hh>
 # include <graphics/GraphicEngine.hh>
 # include <interface/SelectionMenu.hh>
+# include <game/PathFinding.hh>
 
 
 /** \brief Event processing class
@@ -15,9 +16,7 @@ public:
   /** \brief Default Constructor
    **   processes input events
    */
-  Event();
-  Event(KeyManager* km,
-		GraphicEngine* ge);
+  Event(KeyManager* km, GraphicEngine* ge);
 
   /** \brief Destructor
    */
@@ -58,6 +57,7 @@ private:
   KeyManager *_km; ///< KeyManager instance
   GraphicEngine *_ge; ///< GraphicEngine instance
   SelectionMenu *_selectionMenu; ///< in-game selection menu
+  PathFinding *_path; ///< PathFinding
 };
 
 #endif /* !EVENT_HH_ */

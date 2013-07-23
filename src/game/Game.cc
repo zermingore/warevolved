@@ -30,13 +30,13 @@ void Game::run()
 # endif
 
   // Game loop
-  while (g_status->getWindow()->isOpen())
+  while (WINDOW->isOpen())
   {
     _event->process(); // should be the first task of the game loop
     graphics->drawScene();
 
     // Update the window
-    g_status->getWindow()->display();
+    WINDOW->display();
 
 #   ifdef DEBUG_PERFS
     g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());

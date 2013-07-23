@@ -5,7 +5,7 @@
 KeyManager::KeyManager()
 {
   for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
-	_ready[i] = true;
+    _ready[i] = true;
 
   this->mapKeys();
 }
@@ -35,6 +35,10 @@ void KeyManager::mapKeys()
   _keys[E_KEY_MENUBAR_2] = sf::Keyboard::F3;
   _keys[E_KEY_PANEL_1] = sf::Keyboard::F2;
   _keys[E_KEY_PANEL_2] = sf::Keyboard::F2;
+
+  // exit request keys
+  _keys[E_KEY_EXIT_1] = sf::Keyboard::Escape;
+  _keys[E_KEY_EXIT_2] = sf::Keyboard::Escape;
 }
 
 int KeyManager::getTime(e_timer function) {
@@ -56,7 +60,7 @@ void KeyManager::setReady(e_timer index, bool state) {
 bool KeyManager::ready(e_timer index)
 {
   if (_clocks[index].getElapsedTime().asMilliseconds() > g_settings->getKeyRepeatDelay())
-	this->restartTimer(index);
+    this->restartTimer(index);
 
   return (_ready[index]);
 }
@@ -69,32 +73,26 @@ void KeyManager::restartTimer(e_timer index)
 }
 
 
-bool KeyManager::up()
-{
-  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_UP_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_UP_2]));
+bool KeyManager::up() {
+  return (PRESSED(E_KEY_MOVE_UP));
 }
 
-bool KeyManager::down()
-{
-  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_DOWN_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_DOWN_2]));
+bool KeyManager::down() {
+  return (PRESSED(E_KEY_MOVE_DOWN));
 }
 
-bool KeyManager::left()
-{
-  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_LEFT_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_LEFT_2]));
+bool KeyManager::left() {
+  return (PRESSED(E_KEY_MOVE_LEFT));
 }
 
-bool KeyManager::right()
-{
-  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_RIGHT_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_KEY_MOVE_RIGHT_2]));
+bool KeyManager::right() {
+  return (PRESSED(E_KEY_MOVE_RIGHT));
 }
 
-bool KeyManager::selection()
-{
-  return (sf::Keyboard::isKeyPressed(_keys[E_KEY_SELECTION_1]) ||
-		  sf::Keyboard::isKeyPressed(_keys[E_KEY_SELECTION_2]));
+bool KeyManager::selection() {
+  return (PRESSED(E_KEY_SELECTION));
+}
+
+bool KeyManager::exit() {
+  return (PRESSED(E_KEY_EXIT));
 }

@@ -63,7 +63,7 @@ sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
 
   // finally, replace the cursor at it's true position before returning it
   _sprite->setPosition(_x * CELL_WIDTH + offset_x + _middle.x,
-					   _y * CELL_HEIGHT + offset_y + _middle.y);
+                       _y * CELL_HEIGHT + offset_y + _middle.y);
 
   return *_sprite;
 }
@@ -79,20 +79,36 @@ void Cursor::setY(unsigned int y) {
 
 
 // Cursor Motion
-void Cursor::moveUp() {
+bool Cursor::moveUp()
+{
+  unsigned int old = _y;
   _y = std::min(_y - 1, _y);
+
+  return (old != _y);
 }
 
-void Cursor::moveDown() {
+bool Cursor::moveDown()
+{
+  unsigned int old = _y;
   _y = std::min(_y + 1, _nbLines - 1);
+
+  return (old != _y);
 }
 
-void Cursor::moveLeft() {
+bool Cursor::moveLeft()
+{
+  unsigned int old = _x;
   _x = std::min(_x, _x - 1);
+
+  return (old != _x);
 }
 
-void Cursor::moveRight() {
+bool Cursor::moveRight()
+{
+  unsigned int old = _x;
+
   _x = std::min(_x + 1, _nbColumns - 1);
+  return (old != _x);
 }
 
 void Cursor::draw() {

@@ -19,13 +19,18 @@
 class PathFinding
 {
 public:
-  /** Constructor
+  /** \brief Constructor
    */
-  PathFinding(unsigned int x, unsigned int y);
+  PathFinding();
 
-  /** Destructor
+  /** \brief Destructor
    */
   ~PathFinding();
+
+  /** \brief sets the origin of the path
+   **   also updates _current position
+   */
+  void setOrigin(unsigned int x, unsigned int y);
 
   /** \brief shape getter
    ** checks the both previous and next segments
@@ -43,6 +48,7 @@ public:
   void drawPath();
 
   /** \brief clears current path
+   ** calls deleteImagesVector, freeing images
    */
   void clearPath();
 
@@ -56,7 +62,7 @@ private:
 
   /** \brief builds Images* Vector (_images)
    */
-  void buildImageVector(); // TODO use (cache management)
+  // void buildImageVector(); // TODO use (cache management)
 
   /** \brief frees Images* Vector (_images)
    ** deletes all Images in _images

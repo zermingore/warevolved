@@ -26,7 +26,7 @@ public:
    */
   ~Cursor();
 
-  /** _sprite getter
+  /** \brief _sprite getter
    */
   sf::Sprite getSprite();
   sf::Sprite getSprite(int offset_x, int offset_y);
@@ -47,17 +47,21 @@ public:
 
   // Cursor Motion
   /** \brief Move the cursor up
+   ** \return true if the cursor moved
    */
-  void moveUp();
+  bool moveUp();
   /** \brief Move the cursor down
+   ** \return true if the cursor moved
    */
-  void moveDown();
+  bool moveDown();
   /** \brief Move the cursor left
+   ** \return true if the cursor moved
    */
-  void moveLeft();
+  bool moveLeft();
   /** \brief Move the cursor right
+   ** \return true if the cursor moved
    */
-  void moveRight();
+  bool moveRight();
 
   void draw();
 

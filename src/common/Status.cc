@@ -38,7 +38,7 @@ e_mode Status::getCurrentMode()
 {
 	if (_modes.empty())
 	{
-		std::cerr << "_modes stack is empty" << std::endl;
+	  DEBUG_PRINT("_modes stack is empty, exiting");
 		return E_MODE_NONE;
 	}
 

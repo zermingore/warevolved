@@ -46,9 +46,11 @@ bool ResourcesManager::addResource(e_resource_type type,
       _images[id] = new Image(file_name, name, id);
       _resources[type].push_back(_images[id]);
       return true;
+
     case E_RESOURCE_TYPE_FONT:
       _resources[type].push_back(new Font(file_name, name, id));
       return true;
+
     // case E_RESOURCE_TYPE_SOUND:
     //   _resources[type].push_back(new Sound(file_name, name, id));
     // return true;
@@ -146,7 +148,8 @@ Image *ResourcesManager::getImage(const std::string image_name)
 
 Font *ResourcesManager::getFont(const std::string font_name)
 {
-  for (auto it = _resources[E_RESOURCE_TYPE_FONT].begin(); it != _resources[E_RESOURCE_TYPE_FONT].end(); ++it)
+  for (auto it = _resources[E_RESOURCE_TYPE_FONT].begin();
+       it != _resources[E_RESOURCE_TYPE_FONT].end(); ++it)
   {
     if ((*it)->getName() == font_name)
     {
@@ -189,8 +192,8 @@ bool ResourcesManager::parseXML(const std::string file_name)
 
 #ifdef DEBUG_XML_FULL
   // prints whole XML
-  for(std::vector<char>::const_iterator i = xml_data.begin(); i != xml_data.end(); ++i)
-	std::cout << *i;
+  for(auto i = xml_data.begin(); i != xml_data.end(); ++i)
+    std::cout << *i;
 #endif
 
   _xml = new (rapidxml::xml_document<>);

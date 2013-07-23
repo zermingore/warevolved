@@ -47,5 +47,5 @@ void MenuEntry::draw(sf::Vector2f position)
   _label->setPosition(position);
 
   _background->draw();
-  g_status->getWindow()->draw(*_label);
+  WINDOW->draw(*_label);
 }

@@ -10,6 +10,7 @@
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
 # include <interface/SelectionMenu.hh>
+# include <game/PathFinding.hh>
 
 
 // TODO refresh only needed cells (mouse motion, cursor animation)
@@ -24,6 +25,10 @@ public:
   /** \brief Destructor
    */
   ~GraphicEngine();
+
+  /** \brief updates current path
+   */
+  void updatePath(PathFinding *p);
 
   /** \brief Draws the whole scene
    **   calls others drawing functions
@@ -74,6 +79,10 @@ private:
    */
   void drawSelectionMenu();
 
+  /** \brief draws current path
+   */
+  void drawPath();
+
 
   // space left for rendering
   // unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
@@ -83,6 +92,7 @@ private:
 
   Cursor *_cursor;
   SelectionMenu *_selectionMenu;
+  PathFinding *_path;
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

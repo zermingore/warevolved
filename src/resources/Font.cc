@@ -2,10 +2,6 @@
 #include <common/constants.hh>
 
 
-Font::Font() {
-  _loaded = false;
-}
-
 Font::Font(const std::string file_name,
 		   const std::string name,
 		   unsigned int id)

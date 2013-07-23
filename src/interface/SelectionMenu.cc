@@ -25,9 +25,9 @@ void SelectionMenu::incrementSelectedEntry() {
 void SelectionMenu::decrementSelectedEntry()
 {
   if (_selectedEntry)
-	_selectedEntry = (_selectedEntry - 1) % (_nbEntries - 1);
+    _selectedEntry = (_selectedEntry - 1) % (_nbEntries - 1);
   else
-	 _selectedEntry = (_nbEntries - 1);
+    _selectedEntry = (_nbEntries - 1);
 }
 
 
@@ -85,27 +85,30 @@ void SelectionMenu::draw()
 
 void SelectionMenu::executeEntry()
 {
-  std::cout << "Selected Entry: " << _selectedEntry << std::endl;
-
   switch (_entries[_selectedEntry].getId())
   {
-	case E_ENTRIES_MOVE:
-		g_status->pushMode(E_MODE_MOVING_UNIT);
-		std::cout << "move" << std::endl;
-		break;
-	case E_ENTRIES_NEXT_TURN:
-		std::cout << "next turn" << std::endl;
-		break;
+    case E_ENTRIES_MOVE:
+      g_status->pushMode(E_MODE_MOVING_UNIT);
+      std::cout << "move" << std::endl;
+      break;
 
-	case E_ENTRIES_VOID1:
-		std::cout << "void 1" << std::endl;
-		break;
+    case E_ENTRIES_NEXT_TURN:
+      std::cout << "next turn" << std::endl;
+      g_status->exitCurrentMode();
+      break;
 
-	case E_ENTRIES_VOID2:
-		std::cout << "void 2" << std::endl;
-		break;
-	default:
-	  std::cerr << "unable to match selection menu entry" << std::endl;
+    case E_ENTRIES_VOID1:
+      std::cout << "void 1" << std::endl;
+      g_status->exitCurrentMode();
+      break;
+
+    case E_ENTRIES_VOID2:
+      std::cout << "void 2" << std::endl;
+      g_status->exitCurrentMode();
+      break;
+
+    default:
+      std::cerr << "unable to match selection menu entry" << std::endl;
   }
 
   //_entries[_selectedEntry]->execute();

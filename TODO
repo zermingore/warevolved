@@ -1,7 +1,6 @@
 -*- mode:org -*-
 
-* Git
-
+* TODO Git
 ** DONE Merge ResourcesManager branch
    CLOSED: [2013-06-07 Fri 17:58]
 
@@ -97,6 +96,8 @@
 ** TODO non-regression tests
 ** TODO helper
    header guards with same name
+** TODO generate Doxygen Doc
+** TODO auto resources XML generator
 
 * TODO Bugs / Features
 ** DONE [#B] Add Doxygen Comments in headers
