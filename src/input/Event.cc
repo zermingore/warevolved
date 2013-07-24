@@ -4,17 +4,19 @@
 #include <interface/Interface.hh>
 
 
-Event::Event(KeyManager* km, GraphicEngine* ge) :
-    _km(km),
-    _ge(ge)
+Event::Event(KeyManager *km, GraphicEngine *ge) :
+  _km(km),
+  _ge(ge)
 {
   for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
     _km->restartTimer(static_cast<e_timer>(i));
 
   g_settings->setKeyRepeatDelay(150);
-  _selectionMenu = g_interface->getSelectionMenu();
-
   _path = new PathFinding();
+  _selectionMenu = g_interface->getSelectionMenu();
+  _selectionMenu->setPath(_path);
+
+  _actionMenu = g_interface->getActionMenu();
 }
 
 Event::~Event() {
@@ -24,7 +26,7 @@ void Event::process()
 {
   while (WINDOW->pollEvent(_event))
   {
-    // Close window : exit
+    // Close window : exit request
     if (_event.type == sf::Event::Closed)
       WINDOW->close();
   }
@@ -40,10 +42,20 @@ void Event::process()
 
   this->panel();
 
-  switch (g_status->getCurrentMode())
+  DEBUG_PRINT_VALUE(CURRENT_MODE);
+
+  switch (CURRENT_MODE)
   {
     case E_MODE_SELECTION_MENU:
-      this->menu();
+      if (_path)
+        _path->clearPath();
+
+      this->selectionMenu(_selectionMenu);
+      break;
+
+    case E_MODE_ACTION_MENU:
+      //_path->shadowPath(); // TODO
+      this->selectionMenu(_actionMenu);
       break;
 
     case E_MODE_MOVING_UNIT:
@@ -63,11 +75,27 @@ void Event::process()
 
 void Event::panel()
 {
-
 }
 
 void Event::moveUnit()
 {
+  // only called on E_MODE_MOVING_UNIT
+
+  // ---------- Selection ---------- //
+  if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
+  {
+    _selectionMenu->build();
+    g_status->pushMode(E_MODE_ACTION_MENU);
+    return;
+  }
+
+  if (!_path) // rm
+    DEBUG_PRINT("PATH is NULL");
+
+  // ---------- Motion ---------- //
+  if (!_path->allowedMove())
+    return;
+
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
     if (CURSOR->moveUp())
@@ -102,30 +130,29 @@ void Event::moveUnit()
   _ge->updatePath(_path);
 }
 
-void Event::menu()
+
+void Event::selectionMenu(EntriesMenu *menu)
 {
   // made a choice in selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
-    _selectionMenu->executeEntry();
-    _path->setOrigin(CURSOR->getX(), CURSOR->getY());
-    //g_status->cellSelection();
-
+    menu->executeEntry();
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
   }
 
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
-    _selectionMenu->incrementSelectedEntry();
+    menu->incrementSelectedEntry();
     _km->setReady(E_TIMER_MOVE_UP, false);
   }
 
   if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
   {
-    _selectionMenu->decrementSelectedEntry();
+    menu->decrementSelectedEntry();
     _km->setReady(E_TIMER_MOVE_DOWN, false);
   }
 }
+
 
 void Event::game()
 {
@@ -134,10 +161,22 @@ void Event::game()
   {
     g_status->cellSelection();
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
-    _selectionMenu->build();
-    g_status->pushMode(E_MODE_SELECTION_MENU);
 
+    if (CURRENT_MODE == E_MODE_ACTION_MENU)
+    {
+      g_status->exitCurrentMode();
+      return;
+    }
+
+    if (CURRENT_MODE == E_MODE_MOVING_UNIT)
+    {
+      g_status->pushMode(E_MODE_ACTION_MENU);
+      return;
+    }
+
+    _selectionMenu->build();
     _path->clearPath();
+    g_status->pushMode(E_MODE_SELECTION_MENU);
   }
 
   // ---------- Cursor Motion ---------- //
@@ -166,7 +205,6 @@ void Event::game()
     CURSOR->moveRight();
     _km->setReady(E_TIMER_MOVE_RIGHT, false);
   }
-  // ----------------------------------- //
 }
 
 void Event::releasedKeys()

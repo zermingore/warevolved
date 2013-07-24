@@ -17,6 +17,8 @@ GraphicEngine::GraphicEngine()
   _cursor = new Cursor(8, 8);
   g_status->setCursor(_cursor);
   _selectionMenu = g_interface->getSelectionMenu();
+  _actionMenu = g_interface->getActionMenu();
+
   _path = NULL;
 
   _IDTST = 0;
@@ -53,7 +55,7 @@ void GraphicEngine::drawScene()
   this->drawGrid();
   this->drawCursor();
 
-  this->drawSelectionMenu();
+  this->drawInGameMenus();
   this->drawPath();
 }
 
@@ -140,11 +142,17 @@ void GraphicEngine::drawCursor()
 }
 
 
-void GraphicEngine::drawSelectionMenu()
+void GraphicEngine::drawInGameMenus()
 {
   // draw this menu only if requested
-  if (g_status->getCurrentMode() == E_MODE_SELECTION_MENU)
+  if (CURRENT_MODE == E_MODE_SELECTION_MENU)
+  {
     _selectionMenu->draw();
+    return;
+  }
+
+  if (CURRENT_MODE == E_MODE_ACTION_MENU)
+    _actionMenu->draw();
 }
 
 

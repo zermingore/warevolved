@@ -7,6 +7,8 @@
 # include <SFML/Window.hpp>
 # include <SFML/Graphics/Color.hpp>
 
+# include <common/structures/Vector.hh>
+
 # include <string>
 # include <list>
 # include <iostream>

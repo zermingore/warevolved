@@ -15,7 +15,9 @@ Status::Status() :
   _gridOffsetX (0),
   _gridOffsetY (0),
   _renderX (0),
-  _renderY (0)
+  _renderY (0),
+  _cursorSaveX (0),
+  _cursorSaveY (0)
 {
 }
 
@@ -36,25 +38,71 @@ e_menu_bar_position Status::getMenuBarPosition() {
 
 e_mode Status::getCurrentMode()
 {
-	if (_modes.empty())
-	{
-	  DEBUG_PRINT("_modes stack is empty, exiting");
-		return E_MODE_NONE;
-	}
+  if (_modes.empty())
+  {
+    DEBUG_PRINT("_modes stack is empty, exiting");
+    return E_MODE_NONE;
+  }
 
-	return _modes.top();
+  if (!_cursorCoords.empty())
+    _cursorCoords.pop();
+
+  return _modes.top();
 }
 
-void Status::pushMode(e_mode mode) {
+
+e_mode Status::getCurrentMode(int &x, int &y)
+{
+  if (_modes.empty())
+  {
+    DEBUG_PRINT("_modes stack is empty, exiting");
+    return E_MODE_NONE;
+  }
+
+  if (!_cursorCoords.empty())
+  {
+    sf::Vector2f tmp = _cursorCoords.top();
+    x = tmp.x;
+    y = tmp.y;
+    _cursorCoords.pop();
+  }
+
+  return _modes.top();
+}
+
+
+void Status::pushMode(e_mode mode)
+{
 	_modes.push(mode);
+	if (_cursor) //  && _modes.top() != E_MODE_MOVING_UNIT
+	{
+    _cursorSaveX = _cursor->getX();
+    _cursorSaveY = _cursor->getY();
+
+    sf::Vector2f tmp(static_cast<float> (_cursor->getX()), static_cast<float> (_cursor->getY()));
+    _cursorCoords.push(tmp);
+	}
 }
 
 void Status::exitCurrentMode()
 {
 	if (_modes.empty())
-		std::exit(0); // TODO exit properly (at least with debug_leaks flag)
+		return;//std::exit(0); // TODO exit properly (at least with debug_leaks flag)
 
 	_modes.pop();
+
+	if (_cursorCoords.empty())
+	  return;
+
+  sf::Vector2f tmp = _cursorCoords.top();
+  _cursorSaveX = tmp.x;
+  _cursorSaveY = tmp.y;
+
+  if (_cursor)
+  {
+    _cursor->setX(_cursorSaveX);
+    _cursor->setY(_cursorSaveY);
+  }
 }
 
 
@@ -74,7 +122,7 @@ sf::RenderWindow *Status::getWindow() {
 }
 
 Map *Status::getMap() {
- return _map;
+  return _map;
 }
 
 float Status::getCurrentFPS() {

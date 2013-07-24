@@ -24,7 +24,8 @@ Unit::Unit(std::string name) :
   _posX (0),
   _posY (0),
   _cellX (1),
-  _cellY (1)
+  _cellY (1),
+  _motionValue (4)
 {
 }
 
@@ -46,6 +47,10 @@ unsigned int Unit::getCellX() {
 
 unsigned int Unit::getCellY() {
   return _cellY;
+}
+
+unsigned int Unit::getMotionValue() {
+  return _motionValue;
 }
 
 void Unit::setCellCoordinates(unsigned int cell_x, unsigned int cell_y)

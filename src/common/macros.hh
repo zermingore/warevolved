@@ -9,7 +9,9 @@
 # define WINDOW g_status->getWindow()
 # define WINDOW_SIZE_X g_status->getWindow()->getSize().x
 # define WINDOW_SIZE_Y g_status->getWindow()->getSize().y
+
 # define CURSOR g_status->getCursor()
+# define CURRENT_MODE g_status->getCurrentMode()
 
 /** \brief SFML key detection
  **   \return true if one of the two possible binding

@@ -4,6 +4,7 @@
 Interface::Interface()
 {
   _selectionMenu = new SelectionMenu();
+  _actionMenu = new ActionMenu();
 }
 
 Interface::~Interface() {
@@ -12,4 +13,8 @@ Interface::~Interface() {
 
 SelectionMenu *Interface::getSelectionMenu() {
   return _selectionMenu;
+}
+
+ActionMenu *Interface::getActionMenu() {
+  return _actionMenu;
 }

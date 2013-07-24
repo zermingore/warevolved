@@ -34,6 +34,7 @@ resources/Font.cc				\
 common/System.cc				\
 common/Settings.cc				\
 common/Status.cc				\
+common/State.cc					\
 \
 input/KeyManager.cc				\
 input/Event.cc					\
@@ -47,5 +48,7 @@ game/PathFinding.cc				\
 \
 interface/Interface.cc			\
 interface/Cursor.cc				\
+interface/EntriesMenu.cc		\
 interface/SelectionMenu.cc		\
+interface/ActionMenu.cc			\
 interface/MenuEntry.cc

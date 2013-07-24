@@ -38,6 +38,11 @@ public:
    */
   unsigned int getY();
 
+  /** \brief _coords getter
+   ** \return _coords value
+   */
+  Coords getCoords();
+
   /** \brief X (column) coordinate setter
    */
   void setX(unsigned int x);
@@ -63,6 +68,8 @@ public:
    */
   bool moveRight();
 
+  /** \brief draws the cursor
+   */
   void draw();
 
 
@@ -71,12 +78,9 @@ private:
   unsigned int _nbColumns;
   unsigned int _nbLines;
 
-  // Cursor specific
-  unsigned int _x; ///< Cursor x (column) position
-  unsigned int _y; ///< Cursor y (line) position
+  Coords _coords; ///< Cursor Coordinates
 
   Image* _image;
-
   sf::Sprite* _sprite;
   sf::Texture* _texture;
 

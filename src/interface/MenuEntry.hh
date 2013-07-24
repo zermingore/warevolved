@@ -5,7 +5,6 @@
 # include <resources/Image.hh>
 # include <resources/Font.hh>
 
-
 /** \brief entries descriptors
  */
 enum e_entries
@@ -13,12 +12,15 @@ enum e_entries
   E_ENTRIES_NONE = 0, // invalid selected entry
 
   E_ENTRIES_MOVE, // motion order
+  E_ENTRIES_STOP, // motion order
   E_ENTRIES_NEXT_TURN,
 
   E_ENTRIES_VOID1, // TODO remove
   E_ENTRIES_VOID2, // TODO remove
 
-  E_ENTRIES_ATTACK
+  E_ENTRIES_ATTACK,
+
+  E_ENTRIES_CANCEL
 };
 
 

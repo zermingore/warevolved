@@ -29,6 +29,7 @@ ResourcesManager::~ResourcesManager()
 
 void ResourcesManager::initTypeNames()
 {
+  _typeNames[E_RESOURCE_TYPE_NONE] = "none";
   _typeNames[E_RESOURCE_TYPE_IMAGE] = "images";
   _typeNames[E_RESOURCE_TYPE_FONT] = "fonts";
   _typeNames[E_RESOURCE_TYPE_SOUND] = "sounds";
@@ -221,7 +222,7 @@ int ResourcesManager::buildFromXML()
     if (!type)
     {
       std::cerr << "type is NULL" << std::endl <<
-      "tried to match>" << _typeNames[current_type].c_str() << std::endl;
+          "tried to match> " << _typeNames[current_type].c_str() << std::endl;
       return -1;
     }
 #   endif
@@ -231,7 +232,7 @@ int ResourcesManager::buildFromXML()
     {
       path = folder->first_attribute();
       file = folder->first_node("file");
-      const std::string str_path = std::string(path->value());
+      const std::string str_path = path->value();
 
 #     ifdef DEBUG
       // testing if last char is effectively a FOLDER_SEPARATOR
@@ -253,7 +254,7 @@ int ResourcesManager::buildFromXML()
 
       while (file)
       {
-        std::string filename = std::string(file->first_attribute()->value());
+        std::string filename = file->first_attribute()->value();
         name = file->first_node("name");
         this->addResource(current_type, name->value(), str_path + filename, id++);
         file = file->next_sibling("file");

@@ -1,6 +1,7 @@
 -*- mode:org -*-
 
-* TODO Git
+* DONE Git
+  CLOSED: [2013-07-24 Wed 07:10]
 ** DONE Merge ResourcesManager branch
    CLOSED: [2013-06-07 Fri 17:58]
 
@@ -23,7 +24,10 @@
 ** DONE Resources Manager
    CLOSED: [2013-05-07 Tue 13:08]
 ** TODO use size_t
+** TODO use emplace[_back] with std::vector (C++11)
 ** TODO use const
+** TODO use coords (or an int: high / low)
+   not SFML dependant
 ** TODO auto-generate XML
 *** TODO OS-dependant in script language
 **** TODO Shell Script
@@ -56,9 +60,19 @@
 	avoid embushes
 ** TODO more than one unit per cell (helicopter / soldier)
    could use more than one plan (one for ground units, one for air units)
+*** TODO Tunnels
    could use different levels of zoom (micro-ing a soldier, macro-ing a tank)
 ** TODO save / load from file (XML / own ?)
 ** TODO dual windows (main window / infos panel)
+** TODO Customize gear
+   (riffles, kevlar, silencer, vehicles options)
+** TODO ammo management
+   by clip || bullet per bullet
+** TODO Genie
+   building Heliport, wounded evac
+   repair center
+   bury mines
+   dig
 
 * TODO Interface
 ** DONE draw selection menu
@@ -69,10 +83,11 @@
 ** TODO Configuration file
 ** TODO Mini-map
 ** TODO select between satellite or schematic view
-** TODO unit selection -> 'appels de phares'
+** TODO unit selection -> 'flashing lights'
 
 * TODO Network
 ** TODO Chat
+** TODO multi-players
 
 * TODO Multi-Platforms
 ** TODO Linux (current ref: Ubuntu)
@@ -88,8 +103,10 @@
 *** TODO switch 'on demand' (at compilation time)
 	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 
-* TODO Menu
-** TODO Stack implementation
+* DONE Menu
+  CLOSED: [2013-07-24 Wed 07:06]
+** DONE Stack implementation
+   CLOSED: [2013-07-24 Wed 07:06]
 
 * TODO Tools
 ** TODO memory leaks checker before commit
@@ -110,8 +127,9 @@
 ** DONE map initialisation failure
    CLOSED: [2013-04-19 Fri 16:33]
    was a rendering zone room trouble
-** TODO Memory Leaks
+** TODO Memory Leaks / Errors
 *** TODO Definitely Lost
+*** TODO Read errors
 
 * TODO Suppress Warnings
 ** TODO incomplete Ctors initialisation

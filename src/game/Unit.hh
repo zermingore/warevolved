@@ -17,7 +17,6 @@ public:
    */
   Unit();
 
-
   explicit Unit(std::string name);
 
 
@@ -50,6 +49,11 @@ public:
    ** \return _cellY, y unit coordinate on the map
    */
   unsigned int getCellY();
+
+  /** \brief _motionValue getter
+   ** \return number of cells the unit can cross in one turn
+   */
+  unsigned int getMotionValue();
 
   /** \brief sets Unit's coordinates
    ** \param cell_x x coordinate (column)
@@ -87,7 +91,7 @@ private:
   unsigned int _cellX; ///< x coordinate (column) on the map
   unsigned int _cellY; ///< y coordinate (row) on the map
 
-  //Cell *_cell;
+  unsigned int _motionValue; ///< Number of cells a unit can cross in one turn
 };
 
 #endif /* !UNIT_HH_ */

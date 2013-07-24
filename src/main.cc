@@ -18,7 +18,7 @@ int main(int ac, const char **av)
 
   Context *context = new Context(fullscreen);
   g_status->setWindow(context->init());
-  g_status->pushMode(E_MODE_MAIN_MENU);
+  g_status->pushMode(E_MODE_PLAYING); // TODO a main menu
   Game *game = new Game();
   game->run();
 

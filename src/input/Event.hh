@@ -3,20 +3,21 @@
 
 # include <input/KeyManager.hh>
 # include <graphics/GraphicEngine.hh>
+# include <interface/EntriesMenu.hh>
 # include <interface/SelectionMenu.hh>
+# include <interface/ActionMenu.hh>
 # include <game/PathFinding.hh>
 
 
 /** \brief Event processing class
  */
-
 class Event
 {
 public:
   /** \brief Default Constructor
    **   processes input events
    */
-  Event(KeyManager* km, GraphicEngine* ge);
+  Event(KeyManager *km, GraphicEngine *ge);
 
   /** \brief Destructor
    */
@@ -29,19 +30,20 @@ public:
 
 
 private:
-  /** Processes events relative to panel requests (show, save game, ...)
+  /** \brief Processes events relative to panel requests
+   **   (show, save game, ...)
    */
   void panel();
 
-  /** \brief Processes events while we're in a menu
+  /** \brief Processes events while we're in the selection menu
    **   (for example arrows do not move game cursor but menu cursor)
+   ** \param menu menu of which we want to manage events
    */
-  void menu();
+  void selectionMenu(EntriesMenu *menu);
 
   /** \brief Processes events while moving a unit
    */
   void moveUnit();
-
 
   /** \brief Processes all game events
    */
@@ -57,6 +59,7 @@ private:
   KeyManager *_km; ///< KeyManager instance
   GraphicEngine *_ge; ///< GraphicEngine instance
   SelectionMenu *_selectionMenu; ///< in-game selection menu
+  ActionMenu *_actionMenu; ///< in-game action menu
   PathFinding *_path; ///< PathFinding
 };
 

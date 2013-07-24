@@ -2,8 +2,10 @@
 # define STATUS_HH_
 
 # include <common/include.hh>
+# include <common/mode.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
+# include <common/State.hh>
 # include <stack>
 
 /** \brief Side Panel possible positions
@@ -40,29 +42,6 @@ enum e_menu_bar_position
 //  E_EVENT_MENU_SELECTION = 0x00000012,
 //  E_EVENT_USER_INPUT
 //};
-
-
-/** \brief various menu mode values
- ** use this to notify the mode stack
- */
-enum e_mode
-{
-  E_MODE_NONE = 0, // we should never be in this mode
-
-  E_MODE_MAIN_MENU,
-
-  E_MODE_IN_GAME,
-  E_MODE_PLAYING,
-  E_MODE_LOADING,
-  E_MODE_SAVING,
-
-  E_MODE_SELECTION_MENU,
-  E_MODE_MOVING_UNIT,
-  E_MODE_ANIMATION_ATTACK,
-
-  E_MODE_READ_TEXTBOX,
-  E_MODE_WRITE_MESSAGE,
-};
 
 
 /** \brief stores game status information such as
@@ -121,6 +100,16 @@ public:
    */
   e_mode getCurrentMode();
 
+
+  /** \brief \return current mode
+   ** meaning, the summit of _modes stack
+   ** Restores cursor position through
+   ** \param x cursor x value
+   ** \param y cursor y value
+   */
+  e_mode getCurrentMode(int &x, int &y);
+
+
   /** \brief \return the whole stack modes
    */
   std::stack<e_mode> getModes();
@@ -153,6 +142,9 @@ private:
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   std::stack<e_mode> _modes; ///< Current mode
+  std::stack<sf::Vector2f> _cursorCoords; ///< Cursor coordinates
+
+  std::stack<State*> _states; ///< States stack
 
   sf::Vector2f _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
@@ -169,6 +161,10 @@ private:
 
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
+
+  //Coords _cursorSave; ///< Cursor position save
+  unsigned int _cursorSaveX; ///< Cursor position x coordinate save
+  unsigned int _cursorSaveY; ///< Cursor position y coordinate save
 };
 
 #endif /* !STATUS_HH_ */

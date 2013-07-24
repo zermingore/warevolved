@@ -32,11 +32,27 @@ public:
    */
   void setOrigin(unsigned int x, unsigned int y);
 
-  /** \brief shape getter
-   ** checks the both previous and next segments
-   **   to return the right match
+
+  /** \brief current path length getter
    */
-  e_path_shape getShape();
+  unsigned int getCurrentLength();
+
+  /** \brief current path length setter
+   */
+  void setCurrentLength(const unsigned int length);
+
+  /** \brief Maximum path length getter
+   */
+  unsigned int getMaxLength();
+
+  /** \brief Maximum path length setter
+   */
+  void setMaxLength(const unsigned int length);
+
+  /** \brief allowed move notifier
+   ** \return true if the move is allowed
+   */
+  bool allowedMove(); // TODO send direction request
 
   /** \brief adds the next element to the current path
    ** \param direction of the element
@@ -62,7 +78,7 @@ private:
 
   /** \brief builds Images* Vector (_images)
    */
-  // void buildImageVector(); // TODO use (cache management)
+  void buildImageVector(); // TODO use (cache management)
 
   /** \brief frees Images* Vector (_images)
    ** deletes all Images in _images
@@ -88,6 +104,11 @@ private:
 
   unsigned int _currentX; ///< current cell x coordinate
   unsigned int _currentY; ///< current cell y coordinate
+
+  bool _cached; ///< true if we have already build the path
+
+  unsigned int _maxLength; ///< path max length
+  unsigned int _currentLength; ///< path current length
 
   std::vector<e_direction> _directions; ///< list of path directions
                                         ///< filled through addNextDirection

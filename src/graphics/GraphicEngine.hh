@@ -9,6 +9,7 @@
 # include <common/terrains.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
+# include <interface/ActionMenu.hh>
 # include <interface/SelectionMenu.hh>
 # include <game/PathFinding.hh>
 
@@ -73,11 +74,12 @@ private:
    */
   void drawSelectionMenu(Cell *cell);
 
-  /** \brief Draw Selection Menu
+  /** \brief Draw Selection Menu or Action menu
    ** selection menu pop when you select something
    ** fetches automatically cell on which the cursor is
+   ** action menu pops at the end of a move (when 'stop' is selected)
    */
-  void drawSelectionMenu();
+  void drawInGameMenus();
 
   /** \brief draws current path
    */
@@ -92,6 +94,7 @@ private:
 
   Cursor *_cursor;
   SelectionMenu *_selectionMenu;
+  ActionMenu *_actionMenu;
   PathFinding *_path;
 };
 

@@ -6,7 +6,10 @@ PathFinding::PathFinding() :
   _originX (0),
   _originY (0),
   _currentX (0),
-  _currentY (0)
+  _currentY (0),
+  _cached (false),
+  _maxLength (0),
+  _currentLength (0)
 {
 }
 
@@ -24,29 +27,47 @@ void PathFinding::setOrigin(unsigned int x, unsigned int y)
 
   _currentX = x;
   _currentY = y;
+
+  _cached = false;
+
+  _currentLength = 0;
+  _maxLength = g_status->getMap()->getUnit(x, y)->getMotionValue();
+}
+
+unsigned int PathFinding::getCurrentLength() {
+  return _currentLength;
+}
+
+void PathFinding::setCurrentLength(const unsigned int length) {
+  _currentLength = length;
+}
+
+unsigned int PathFinding::getMaxLength() {
+  return _maxLength;
+}
+
+void PathFinding::setMaxLength(const unsigned int length) {
+  _maxLength = length;
 }
 
 
 void PathFinding::drawPath()
 {
-  // TODO cache management
-  //  unsigned int i = 0;
-  //  for (auto it = _directions.begin(); it != _directions.end(); ++it)
-  //  {
-  //    _images[i++]->drawAtCell(_currentX, _currentY);
-  //    this->updateCurrentCell(*it);
-  //  }
-  //  return;
+//  if (!_cached)
+//    buildImageVector();
 
   _currentX = _originX;
   _currentY = _originY;
-
   unsigned int i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)
   {
     this->updateCurrentCell(*it);
+    // TODO manage cache and image sprites
+    // _images[i++]->drawAtCell(_currentX, _currentY);
     this->getImage(i++)->drawAtCell(_currentX, _currentY);
   }
+
+//  _cached = false;
 }
 
 
@@ -91,24 +112,26 @@ void PathFinding::deleteImagesVector()
 {
   // freeing images
   for (auto it = _images.begin(); it != _images.end(); ++it)
-    delete (*it);
+  {
+    if (*it)
+      delete (*it);
+  }
 
   _images.clear();
 }
 
 
-// unused
-//void PathFinding::buildImageVector()
-//{
-//  // manage 'riding' the path (inc a global index)
-//  // if cached return
-//
-//  this->deleteImagesVector();
-//
-//  unsigned int i = 0;
-//  for (auto it = _directions.begin(); it != _directions.end(); ++it)
-//    _images.push_back(this->getImage(i++));
-//}
+void PathFinding::buildImageVector()
+{
+  // manage 'riding' the path (inc a global index)
+  //this->deleteImagesVector();
+
+  unsigned int i = 0;
+  for (auto it = _directions.begin(); it != _directions.end(); ++it)
+    _images.push_back(this->getImage(i++));
+
+  _cached = true;
+}
 
 
 e_path_shape PathFinding::getShape(unsigned int index)
@@ -159,8 +182,6 @@ Image *PathFinding::getImage(unsigned int index)
   unsigned int angle = 0;
   e_path_shape shape = getShape(index);
 
-//  DEBUG_PRINT_VALUE(shape);
-
   switch (shape)
   {
      // Rectangles
@@ -182,20 +203,23 @@ Image *PathFinding::getImage(unsigned int index)
      // Corners
      default:
        img = GETIMAGE("path_corner");
-       DEBUG_PRINT_VALUE(shape);
        break;
   }
 
   angle = static_cast <unsigned int> (shape % 360);
-  img->getSprite()->setRotation(angle); // -90
+  img->getSprite()->setRotation(angle);
 
   return img;
 }
 
+bool PathFinding::allowedMove() {
+  return _currentLength < _maxLength;
+}
 
 void PathFinding::addNextDirection(e_direction direction)
 {
   _directions.push_back(direction);
+  ++_currentLength;
 
   // TODO add Image
 }
