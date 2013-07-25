@@ -2,7 +2,7 @@
 # define STATUS_HH_
 
 # include <common/include.hh>
-# include <common/mode.hh>
+# include <common/enums/mode.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
 # include <common/State.hh>

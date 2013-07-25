@@ -2,7 +2,7 @@
  * debug.hh
  *
  *  Created on: Jul 23, 2013
- *      Author: zermingore
+ *      Author: Zermingore
  */
 
 #ifndef DEBUG_HH_

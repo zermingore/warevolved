@@ -9,8 +9,8 @@
 # define PATHFINDING_HH_
 
 # include <vector>
-# include <common/path_shape.hh>
-# include <common/direction.hh>
+# include <common/enums/path_shape.hh>
+# include <common/enums/direction.hh>
 # include <resources/Image.hh>
 
 

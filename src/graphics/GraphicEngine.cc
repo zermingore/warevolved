@@ -4,11 +4,11 @@
 #include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/Status.hh>
-#include <common/units.hh>
-#include <common/terrains.hh>
+#include <common/enums/units.hh>
+#include <common/enums/terrains.hh>
 #include <game/Map.hh>
 #include <game/PathFinding.hh>
-#include <common/types.hh>
+#include <common/enums/types.hh>
 
 
 GraphicEngine::GraphicEngine()

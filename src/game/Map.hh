@@ -2,8 +2,8 @@
 # define MAP_HH_
 
 # include <common/include.hh>
-# include <common/units.hh>
-# include <common/terrains.hh>
+# include <common/enums/units.hh>
+# include <common/enums/terrains.hh>
 # include <game/Cell.hh>
 # include <game/Unit.hh>
 # include <resources/ResourcesManager.hh>

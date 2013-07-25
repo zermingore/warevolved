@@ -3,8 +3,8 @@
 
 # include <game/Unit.hh>
 
-# include <common/units.hh>
-# include <common/terrains.hh>
+# include <common/enums/units.hh>
+# include <common/enums/terrains.hh>
 
 /** \brief Cell class: the simplest element of a map
  **   we can see a Map as a grid, an array of array, of Cell

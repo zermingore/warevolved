@@ -8,7 +8,7 @@
 #ifndef STATE_HH_
 # define STATE_HH_
 
-# include <common/mode.hh>
+# include <common/enums/mode.hh>
 # include <common/structures/Vector.hh>
 
 

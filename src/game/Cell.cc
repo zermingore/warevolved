@@ -1,8 +1,6 @@
 #include <game/Cell.hh>
 #include <common/include.hh>
-#include <common/terrains.hh>
-
-#include <common/units.hh>
+#include <common/enums/units.hh>
 
 
 Cell::Cell() :
@@ -16,7 +14,6 @@ Cell::Cell() :
 Cell::~Cell() {
 }
 
-// _________________________ GETTERS _________________________ //
 Unit *Cell::getUnit() {
   return _unit;
 }
@@ -34,7 +31,6 @@ unsigned int Cell::getTerrainTextureId() {
   return _terrainTextureId;
 }
 
-// _________________________ SETTERS _________________________ //
 void Cell::setUnit(Unit *unit) {
   _unit = unit;
 }

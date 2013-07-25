@@ -1,7 +1,7 @@
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/Terrain.hh>
-#include <common/terrains.hh>
+#include <common/enums/terrains.hh>
 #include <resources/ResourcesManager.hh>
 #include <common/globals.hh>
 
@@ -61,7 +61,7 @@ e_terrains Map::getTerrain(unsigned int x, unsigned int y) {
 }
 
 
-Image* Map::getTerrainImage(unsigned int x, unsigned int y)
+Image *Map::getTerrainImage(unsigned int x, unsigned int y)
 {
   e_terrains terrain = _cells[x * _nbLines + y].getTerrain();
 

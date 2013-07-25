@@ -5,8 +5,8 @@
 # include <common/Settings.hh>
 # include <common/Status.hh>
 # include <resources/ResourcesManager.hh>
-# include <common/units.hh>
-# include <common/terrains.hh>
+# include <common/enums/units.hh>
+# include <common/enums/terrains.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
 # include <interface/ActionMenu.hh>

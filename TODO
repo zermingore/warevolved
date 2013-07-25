@@ -73,6 +73,7 @@
    repair center
    bury mines
    dig
+** TODO units grades / promotion / leader
 ** TODO Motion
 *** TODO Move Management
    for each cell: simply move, shoot somewhere or sprint
@@ -137,7 +138,8 @@
 ** TODO auto resources XML generator
 
 * TODO Bugs / Features
-** TODO [#A] Fix in-game menu pop-up and location
+** DONE [#A] Fix in-game menu pop-up and location
+   CLOSED: [2013-07-25 Thu 17:20]
 ** TODO Fix cursor size trouble
    was too big
    (running for a long time ?)

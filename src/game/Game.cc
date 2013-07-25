@@ -4,7 +4,8 @@
 #include <common/globals.hh>
 
 
-Game::Game()
+Game::Game() :
+  _event (NULL)
 {
   // build map
   _map = new Map(8, 8);
