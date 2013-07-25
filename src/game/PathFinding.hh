@@ -30,7 +30,7 @@ public:
   /** \brief sets the origin of the path
    **   also updates _current position
    */
-  void setOrigin(unsigned int x, unsigned int y);
+  void setOrigin(Coords coords);
 
 
   /** \brief current path length getter
@@ -99,14 +99,10 @@ private:
   e_path_shape getShape(unsigned int index);
 
 
-  unsigned int _originX; ///< origin cell x coordinate
-  unsigned int _originY; ///< origin cell y coordinate
-
-  unsigned int _currentX; ///< current cell x coordinate
-  unsigned int _currentY; ///< current cell y coordinate
+  Coords _origin; ///< origin cell coordinates
+  Coords _current; ///< current cell coordinates
 
   bool _cached; ///< true if we have already build the path
-
   unsigned int _maxLength; ///< path max length
   unsigned int _currentLength; ///< path current length
 

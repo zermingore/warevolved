@@ -3,10 +3,9 @@
 
 # include <input/KeyManager.hh>
 # include <graphics/GraphicEngine.hh>
-# include <interface/EntriesMenu.hh>
-# include <interface/SelectionMenu.hh>
-# include <interface/ActionMenu.hh>
+# include <interface/menus/EntriesMenu.hh>
 # include <game/PathFinding.hh>
+# include <interface/menus/InGameMenu.hh>
 
 
 /** \brief Event processing class
@@ -25,8 +24,10 @@ public:
 
   /** \brief check if a generic event (like closing the window) occurs
    **   calls matching functions if any
+   ** \return false if a quit request has been sent
+   **   true otherwise
    */
-  void process();
+  bool process();
 
 
 private:
@@ -58,9 +59,8 @@ private:
   sf::Event _event; ///< Event Manager
   KeyManager *_km; ///< KeyManager instance
   GraphicEngine *_ge; ///< GraphicEngine instance
-  SelectionMenu *_selectionMenu; ///< in-game selection menu
-  ActionMenu *_actionMenu; ///< in-game action menu
-  PathFinding *_path; ///< PathFinding
+  InGameMenu *_inGameMenu; ///< in-game action menu
+  PathFinding *_path; ///< PathFinding path
 };
 
 #endif /* !EVENT_HH_ */

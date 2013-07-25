@@ -1,7 +1,6 @@
 #ifndef STATUS_HH_
 # define STATUS_HH_
 
-# include <common/include.hh>
 # include <common/enums/mode.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
@@ -59,9 +58,19 @@ public:
    */
   void cellSelection();
 
-
+  /** \brief _window getter */
   sf::RenderWindow *getWindow();
+
+  /** \brief _map getter */
   Map *getMap();
+
+  /** \brief returns current number of
+   **   generated frames per Seconds
+   ** \return number of fps
+   ** \note if the compilation flag DEBUG_PERFS is not set
+   **   the frame rate will be limited to 60
+   **   it will be unlimited otherwise
+   */
   float getCurrentFPS();
   unsigned int getCellWidth();
   unsigned int getCellHeight();
@@ -130,8 +139,6 @@ private:
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 
   Coords _cursorSave; ///< Cursor position save
-//  unsigned int _cursorSaveX; ///< Cursor position x coordinate save
-//  unsigned int _cursorSaveY; ///< Cursor position y coordinate save
 };
 
 #endif /* !STATUS_HH_ */

@@ -9,8 +9,7 @@
 # include <common/enums/terrains.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
-# include <interface/ActionMenu.hh>
-# include <interface/SelectionMenu.hh>
+# include <interface/menus/InGameMenu.hh>
 # include <game/PathFinding.hh>
 
 
@@ -26,10 +25,6 @@ public:
   /** \brief Destructor
    */
   ~GraphicEngine();
-
-  /** \brief updates current path
-   */
-  void updatePath(PathFinding *p);
 
   /** \brief Draws the whole scene
    **   calls others drawing functions
@@ -61,41 +56,32 @@ private:
 
   /// in case there are too many cells to display
   void drawGrid();
+
+  /** \brief draws the grid (map cells delimiter)
+   */
   void drawGrid(unsigned int nb_line, unsigned int nb_column);
 
-  /** \brief Draw map cursor
+  /** \brief Draw map cursor and interface
    */
-  void drawCursor();
+  void drawInterface();
 
   /** \brief Draw Selection Menu
    ** selection menu pop when you select something
    **
    ** \param cell The Cell on which the cursor is
    */
-  void drawSelectionMenu(Cell *cell);
+  //void drawSelectionMenu(Cell *cell);
 
   /** \brief Draw Selection Menu or Action menu
    ** selection menu pop when you select something
    ** fetches automatically cell on which the cursor is
    ** action menu pops at the end of a move (when 'stop' is selected)
    */
-  void drawInGameMenus();
-
-  /** \brief draws current path
-   */
-  void drawPath();
-
-
-  // space left for rendering
-  // unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
-  // unsigned int _renderY; ///< Drawable zone room left vertically (in px)
+//  void drawInGameMenus();
 
   unsigned int _IDTST; // rm
 
-  Cursor *_cursor;
-  SelectionMenu *_selectionMenu;
-  ActionMenu *_actionMenu;
-  PathFinding *_path;
+  Cursor *_cursor; ///< in game cursor // TODO move in Interface
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

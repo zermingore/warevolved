@@ -14,8 +14,8 @@ Font::Font(const std::string file_name,
 
 Font::~Font()
 {
-  if (_font)
-    delete _font;
+//  if (_font)
+//    delete _font;
 }
 
 bool Font::load()

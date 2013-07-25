@@ -82,9 +82,8 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Interface.$(OBJEXT) \
 	__top_srcdir__we-Cursor.$(OBJEXT) \
 	__top_srcdir__we-EntriesMenu.$(OBJEXT) \
-	__top_srcdir__we-SelectionMenu.$(OBJEXT) \
-	__top_srcdir__we-ActionMenu.$(OBJEXT) \
-	__top_srcdir__we-MenuEntry.$(OBJEXT)
+	__top_srcdir__we-MenuEntry.$(OBJEXT) \
+	__top_srcdir__we-InGameMenu.$(OBJEXT)
 __top_srcdir__we_OBJECTS = $(am___top_srcdir__we_OBJECTS)
 __top_srcdir__we_LDADD = $(LDADD)
 am__dirstamp = $(am__leading_dot)dirstamp
@@ -260,10 +259,9 @@ game/PathFinding.cc				\
 \
 interface/Interface.cc			\
 interface/Cursor.cc				\
-interface/EntriesMenu.cc		\
-interface/SelectionMenu.cc		\
-interface/ActionMenu.cc			\
-interface/MenuEntry.cc
+interface/menus/EntriesMenu.cc	\
+interface/menus/MenuEntry.cc	\
+interface/menus/InGameMenu.cc
 
 all: all-am
 
@@ -352,7 +350,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/__top_srcdir__we-ActionMenu.Po
 include ./$(DEPDIR)/__top_srcdir__we-Cell.Po
 include ./$(DEPDIR)/__top_srcdir__we-Context.Po
 include ./$(DEPDIR)/__top_srcdir__we-Cursor.Po
@@ -362,6 +359,7 @@ include ./$(DEPDIR)/__top_srcdir__we-Font.Po
 include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
 include ./$(DEPDIR)/__top_srcdir__we-Image.Po
+include ./$(DEPDIR)/__top_srcdir__we-InGameMenu.Po
 include ./$(DEPDIR)/__top_srcdir__we-Interface.Po
 include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Map.Po
@@ -369,7 +367,6 @@ include ./$(DEPDIR)/__top_srcdir__we-MenuEntry.Po
 include ./$(DEPDIR)/__top_srcdir__we-PathFinding.Po
 include ./$(DEPDIR)/__top_srcdir__we-Resource.Po
 include ./$(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
-include ./$(DEPDIR)/__top_srcdir__we-SelectionMenu.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
 include ./$(DEPDIR)/__top_srcdir__we-State.Po
 include ./$(DEPDIR)/__top_srcdir__we-Status.Po
@@ -686,61 +683,47 @@ __top_srcdir__we-Cursor.obj: interface/Cursor.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cursor.obj `if test -f 'interface/Cursor.cc'; then $(CYGPATH_W) 'interface/Cursor.cc'; else $(CYGPATH_W) '$(srcdir)/interface/Cursor.cc'; fi`
 
-__top_srcdir__we-EntriesMenu.o: interface/EntriesMenu.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-EntriesMenu.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-EntriesMenu.Tpo -c -o __top_srcdir__we-EntriesMenu.o `test -f 'interface/EntriesMenu.cc' || echo '$(srcdir)/'`interface/EntriesMenu.cc
+__top_srcdir__we-EntriesMenu.o: interface/menus/EntriesMenu.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-EntriesMenu.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-EntriesMenu.Tpo -c -o __top_srcdir__we-EntriesMenu.o `test -f 'interface/menus/EntriesMenu.cc' || echo '$(srcdir)/'`interface/menus/EntriesMenu.cc
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-EntriesMenu.Tpo $(DEPDIR)/__top_srcdir__we-EntriesMenu.Po
-#	$(AM_V_CXX)source='interface/EntriesMenu.cc' object='__top_srcdir__we-EntriesMenu.o' libtool=no \
+#	$(AM_V_CXX)source='interface/menus/EntriesMenu.cc' object='__top_srcdir__we-EntriesMenu.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-EntriesMenu.o `test -f 'interface/EntriesMenu.cc' || echo '$(srcdir)/'`interface/EntriesMenu.cc
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-EntriesMenu.o `test -f 'interface/menus/EntriesMenu.cc' || echo '$(srcdir)/'`interface/menus/EntriesMenu.cc
 
-__top_srcdir__we-EntriesMenu.obj: interface/EntriesMenu.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-EntriesMenu.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-EntriesMenu.Tpo -c -o __top_srcdir__we-EntriesMenu.obj `if test -f 'interface/EntriesMenu.cc'; then $(CYGPATH_W) 'interface/EntriesMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/EntriesMenu.cc'; fi`
+__top_srcdir__we-EntriesMenu.obj: interface/menus/EntriesMenu.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-EntriesMenu.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-EntriesMenu.Tpo -c -o __top_srcdir__we-EntriesMenu.obj `if test -f 'interface/menus/EntriesMenu.cc'; then $(CYGPATH_W) 'interface/menus/EntriesMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/menus/EntriesMenu.cc'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-EntriesMenu.Tpo $(DEPDIR)/__top_srcdir__we-EntriesMenu.Po
-#	$(AM_V_CXX)source='interface/EntriesMenu.cc' object='__top_srcdir__we-EntriesMenu.obj' libtool=no \
+#	$(AM_V_CXX)source='interface/menus/EntriesMenu.cc' object='__top_srcdir__we-EntriesMenu.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-EntriesMenu.obj `if test -f 'interface/EntriesMenu.cc'; then $(CYGPATH_W) 'interface/EntriesMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/EntriesMenu.cc'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-EntriesMenu.obj `if test -f 'interface/menus/EntriesMenu.cc'; then $(CYGPATH_W) 'interface/menus/EntriesMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/menus/EntriesMenu.cc'; fi`
 
-__top_srcdir__we-SelectionMenu.o: interface/SelectionMenu.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-SelectionMenu.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo -c -o __top_srcdir__we-SelectionMenu.o `test -f 'interface/SelectionMenu.cc' || echo '$(srcdir)/'`interface/SelectionMenu.cc
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo $(DEPDIR)/__top_srcdir__we-SelectionMenu.Po
-#	$(AM_V_CXX)source='interface/SelectionMenu.cc' object='__top_srcdir__we-SelectionMenu.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-SelectionMenu.o `test -f 'interface/SelectionMenu.cc' || echo '$(srcdir)/'`interface/SelectionMenu.cc
-
-__top_srcdir__we-SelectionMenu.obj: interface/SelectionMenu.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-SelectionMenu.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo -c -o __top_srcdir__we-SelectionMenu.obj `if test -f 'interface/SelectionMenu.cc'; then $(CYGPATH_W) 'interface/SelectionMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/SelectionMenu.cc'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-SelectionMenu.Tpo $(DEPDIR)/__top_srcdir__we-SelectionMenu.Po
-#	$(AM_V_CXX)source='interface/SelectionMenu.cc' object='__top_srcdir__we-SelectionMenu.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-SelectionMenu.obj `if test -f 'interface/SelectionMenu.cc'; then $(CYGPATH_W) 'interface/SelectionMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/SelectionMenu.cc'; fi`
-
-__top_srcdir__we-ActionMenu.o: interface/ActionMenu.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-ActionMenu.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-ActionMenu.Tpo -c -o __top_srcdir__we-ActionMenu.o `test -f 'interface/ActionMenu.cc' || echo '$(srcdir)/'`interface/ActionMenu.cc
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-ActionMenu.Tpo $(DEPDIR)/__top_srcdir__we-ActionMenu.Po
-#	$(AM_V_CXX)source='interface/ActionMenu.cc' object='__top_srcdir__we-ActionMenu.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-ActionMenu.o `test -f 'interface/ActionMenu.cc' || echo '$(srcdir)/'`interface/ActionMenu.cc
-
-__top_srcdir__we-ActionMenu.obj: interface/ActionMenu.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-ActionMenu.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-ActionMenu.Tpo -c -o __top_srcdir__we-ActionMenu.obj `if test -f 'interface/ActionMenu.cc'; then $(CYGPATH_W) 'interface/ActionMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/ActionMenu.cc'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-ActionMenu.Tpo $(DEPDIR)/__top_srcdir__we-ActionMenu.Po
-#	$(AM_V_CXX)source='interface/ActionMenu.cc' object='__top_srcdir__we-ActionMenu.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-ActionMenu.obj `if test -f 'interface/ActionMenu.cc'; then $(CYGPATH_W) 'interface/ActionMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/ActionMenu.cc'; fi`
-
-__top_srcdir__we-MenuEntry.o: interface/MenuEntry.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-MenuEntry.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-MenuEntry.Tpo -c -o __top_srcdir__we-MenuEntry.o `test -f 'interface/MenuEntry.cc' || echo '$(srcdir)/'`interface/MenuEntry.cc
+__top_srcdir__we-MenuEntry.o: interface/menus/MenuEntry.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-MenuEntry.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-MenuEntry.Tpo -c -o __top_srcdir__we-MenuEntry.o `test -f 'interface/menus/MenuEntry.cc' || echo '$(srcdir)/'`interface/menus/MenuEntry.cc
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-MenuEntry.Tpo $(DEPDIR)/__top_srcdir__we-MenuEntry.Po
-#	$(AM_V_CXX)source='interface/MenuEntry.cc' object='__top_srcdir__we-MenuEntry.o' libtool=no \
+#	$(AM_V_CXX)source='interface/menus/MenuEntry.cc' object='__top_srcdir__we-MenuEntry.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-MenuEntry.o `test -f 'interface/MenuEntry.cc' || echo '$(srcdir)/'`interface/MenuEntry.cc
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-MenuEntry.o `test -f 'interface/menus/MenuEntry.cc' || echo '$(srcdir)/'`interface/menus/MenuEntry.cc
 
-__top_srcdir__we-MenuEntry.obj: interface/MenuEntry.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-MenuEntry.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-MenuEntry.Tpo -c -o __top_srcdir__we-MenuEntry.obj `if test -f 'interface/MenuEntry.cc'; then $(CYGPATH_W) 'interface/MenuEntry.cc'; else $(CYGPATH_W) '$(srcdir)/interface/MenuEntry.cc'; fi`
+__top_srcdir__we-MenuEntry.obj: interface/menus/MenuEntry.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-MenuEntry.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-MenuEntry.Tpo -c -o __top_srcdir__we-MenuEntry.obj `if test -f 'interface/menus/MenuEntry.cc'; then $(CYGPATH_W) 'interface/menus/MenuEntry.cc'; else $(CYGPATH_W) '$(srcdir)/interface/menus/MenuEntry.cc'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-MenuEntry.Tpo $(DEPDIR)/__top_srcdir__we-MenuEntry.Po
-#	$(AM_V_CXX)source='interface/MenuEntry.cc' object='__top_srcdir__we-MenuEntry.obj' libtool=no \
+#	$(AM_V_CXX)source='interface/menus/MenuEntry.cc' object='__top_srcdir__we-MenuEntry.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-MenuEntry.obj `if test -f 'interface/MenuEntry.cc'; then $(CYGPATH_W) 'interface/MenuEntry.cc'; else $(CYGPATH_W) '$(srcdir)/interface/MenuEntry.cc'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-MenuEntry.obj `if test -f 'interface/menus/MenuEntry.cc'; then $(CYGPATH_W) 'interface/menus/MenuEntry.cc'; else $(CYGPATH_W) '$(srcdir)/interface/menus/MenuEntry.cc'; fi`
+
+__top_srcdir__we-InGameMenu.o: interface/menus/InGameMenu.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-InGameMenu.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-InGameMenu.Tpo -c -o __top_srcdir__we-InGameMenu.o `test -f 'interface/menus/InGameMenu.cc' || echo '$(srcdir)/'`interface/menus/InGameMenu.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-InGameMenu.Tpo $(DEPDIR)/__top_srcdir__we-InGameMenu.Po
+#	$(AM_V_CXX)source='interface/menus/InGameMenu.cc' object='__top_srcdir__we-InGameMenu.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-InGameMenu.o `test -f 'interface/menus/InGameMenu.cc' || echo '$(srcdir)/'`interface/menus/InGameMenu.cc
+
+__top_srcdir__we-InGameMenu.obj: interface/menus/InGameMenu.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-InGameMenu.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-InGameMenu.Tpo -c -o __top_srcdir__we-InGameMenu.obj `if test -f 'interface/menus/InGameMenu.cc'; then $(CYGPATH_W) 'interface/menus/InGameMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/menus/InGameMenu.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-InGameMenu.Tpo $(DEPDIR)/__top_srcdir__we-InGameMenu.Po
+#	$(AM_V_CXX)source='interface/menus/InGameMenu.cc' object='__top_srcdir__we-InGameMenu.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-InGameMenu.obj `if test -f 'interface/menus/InGameMenu.cc'; then $(CYGPATH_W) 'interface/menus/InGameMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/menus/InGameMenu.cc'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

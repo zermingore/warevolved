@@ -105,6 +105,11 @@ public:
    */
   void drawAtCell(unsigned int i, unsigned int j);
 
+  /** \brief draws the Image in the cell coords.x, coords.y
+   ** \param c coordinate to display the image
+   */
+  void drawAtCell(Coords c);
+
   /** \brief draws the Image at _sprite's position
    */
   void draw();

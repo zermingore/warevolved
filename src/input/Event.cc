@@ -12,23 +12,23 @@ Event::Event(KeyManager *km, GraphicEngine *ge) :
     _km->restartTimer(static_cast<e_timer>(i));
 
   g_settings->setKeyRepeatDelay(150);
-  _path = new PathFinding();
-  _selectionMenu = g_interface->getSelectionMenu();
-  _selectionMenu->setPath(_path);
-
-  _actionMenu = g_interface->getActionMenu();
+  _inGameMenu = g_interface->getInGameMenu();
+  _path = g_interface->getPath();
 }
 
 Event::~Event() {
 }
 
-void Event::process()
+bool Event::process()
 {
   while (WINDOW->pollEvent(_event))
   {
     // Close window : exit request
     if (_event.type == sf::Event::Closed)
+    {
       WINDOW->close();
+      return false;
+    }
   }
   if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) &&
       (_km->getSwitchStatus(E_SWITCH_EXIT) == OFF))
@@ -48,12 +48,12 @@ void Event::process()
       if (_path)
         _path->clearPath();
 
-      this->selectionEntriesMenu(_selectionMenu);
+      this->selectionEntriesMenu(_inGameMenu);
       break;
 
     case E_MODE_ACTION_MENU:
       //_path->shadowPath(); // TODO
-      this->selectionEntriesMenu(_actionMenu);
+      this->selectionEntriesMenu(_inGameMenu);
       break;
 
     case E_MODE_MOVING_UNIT:
@@ -62,12 +62,14 @@ void Event::process()
 
     case E_MODE_NONE: // empty mode stack
       WINDOW->close();
-      break;
+      return false;
 
     default:
       this->game();
       break;
   }
+
+  return true;
 }
 
 void Event::panel()
@@ -81,7 +83,7 @@ void Event::moveUnit()
   // ---------- Selection ---------- //
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
-    _selectionMenu->build();
+    _inGameMenu->build();
     g_status->pushMode(E_MODE_ACTION_MENU);
     return;
   }
@@ -125,8 +127,6 @@ void Event::moveUnit()
       _path->addNextDirection(E_DIRECTION_RIGHT);
     _km->setReady(E_TIMER_MOVE_RIGHT, false);
   }
-
-  _ge->updatePath(_path);
 }
 
 
@@ -174,7 +174,7 @@ void Event::game()
       return;
     }
 
-    _selectionMenu->build();
+    _inGameMenu->build();
     _path->clearPath();
     g_status->pushMode(E_MODE_SELECTION_MENU);
   }

@@ -3,10 +3,6 @@
 #include <common/globals.hh>
 
 PathFinding::PathFinding() :
-  _originX (0),
-  _originY (0),
-  _currentX (0),
-  _currentY (0),
   _cached (false),
   _maxLength (0),
   _currentLength (0)
@@ -18,20 +14,17 @@ PathFinding::~PathFinding() {
 }
 
 
-void PathFinding::setOrigin(unsigned int x, unsigned int y)
+void PathFinding::setOrigin(Coords coords)
 {
   this->clearPath();
 
-  _originX = x;
-  _originY = y;
-
-  _currentX = x;
-  _currentY = y;
+  _origin = coords;
+  _current = coords;
 
   _cached = false;
 
   _currentLength = 0;
-  _maxLength = g_status->getMap()->getUnit(x, y)->getMotionValue();
+  _maxLength = g_status->getMap()->getUnit(coords)->getMotionValue();
 }
 
 unsigned int PathFinding::getCurrentLength() {
@@ -56,15 +49,14 @@ void PathFinding::drawPath()
 //  if (!_cached)
 //    buildImageVector();
 
-  _currentX = _originX;
-  _currentY = _originY;
+  _current = _origin;
   unsigned int i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)
   {
     this->updateCurrentCell(*it);
     // TODO manage cache and image sprites
     // _images[i++]->drawAtCell(_currentX, _currentY);
-    this->getImage(i++)->drawAtCell(_currentX, _currentY);
+    this->getImage(i++)->drawAtCell(_current);
   }
 
 //  _cached = false;
@@ -87,19 +79,19 @@ void PathFinding::updateCurrentCell(e_direction direction)
   switch (direction)
   {
     case E_DIRECTION_UP:
-      --_currentY;
+      --_current.y;
       return;
 
     case E_DIRECTION_DOWN:
-      ++_currentY;
+      ++_current.y;
       return;
 
     case E_DIRECTION_LEFT:
-      --_currentX;
+      --_current.x;
       return;
 
     case E_DIRECTION_RIGHT:
-      ++_currentX;
+      ++_current.x;
       return;
 
     default:
@@ -123,8 +115,8 @@ void PathFinding::deleteImagesVector()
 
 void PathFinding::buildImageVector()
 {
-  // manage 'riding' the path (inc a global index)
-  //this->deleteImagesVector();
+  // manage 'riding' the path (increment a global index)
+  // this->deleteImagesVector();
 
   unsigned int i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)

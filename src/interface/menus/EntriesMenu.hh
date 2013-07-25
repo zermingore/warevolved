@@ -10,7 +10,7 @@
 
 # include <common/include.hh>
 # include <resources/Image.hh>
-# include <interface/MenuEntry.hh>
+# include <interface/menus/MenuEntry.hh>
 # include <game/PathFinding.hh>
 
 
@@ -38,11 +38,6 @@ public:
   /** \brief Y (line) coordinate setter
    */
   void setY(unsigned int y);
-
-  /** \brief PathFinding setter
-   */
-  void setPath(PathFinding *path);
-
 
   // TODO: merge and use a single function for all (4) directions
   /** \brief increments _selectedEntry modulo _nbEntries
@@ -74,18 +69,19 @@ protected:
    */
   void init();
 
+  void setOrigin(); // TODO sets the menu at optimal position
+
   // the first entry, at the bottom, has the index 0
   unsigned int _selectedEntry; ///< Current selected entry
   unsigned int _nbEntries; ///< Total number of entries in the menu
   std::vector<MenuEntry> _entries; ///< Entries list
   sf::Vector2f _origin; ///< Origin position of the menu
   Image *_imageSelection; ///< Background image (entry)
-  PathFinding *_path; ///< path (from Event)
 
-private:
+
+//private:
   /** \brief sets origin menu to the right cursor relative position
    */
-  void setOrigin(); // TODO sets the menu at optimal position
 };
 
 #endif /* !ENTRIESMENU_HH_ */

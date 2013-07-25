@@ -19,9 +19,9 @@ enum e_mode
   E_MODE_IN_GAME,
   E_MODE_PLAYING,
 
-  E_MODE_SELECTION_MENU, // 4
-  E_MODE_MOVING_UNIT,
-  E_MODE_ACTION_MENU,
+  E_MODE_SELECTION_MENU, // pick a unit
+  E_MODE_MOVING_UNIT, // move it
+  E_MODE_ACTION_MENU, // give it an order
 
   E_MODE_LOADING,
   E_MODE_SAVING,

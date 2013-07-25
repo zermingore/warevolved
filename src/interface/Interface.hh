@@ -1,14 +1,21 @@
 #ifndef INTERFACE_HH_
 # define INTERFACE_HH_
 
-# include <interface/SelectionMenu.hh>
-# include <interface/ActionMenu.hh>
+# include <interface/menus/InGameMenu.hh>
+# include <game/PathFinding.hh>
 
+
+// TODO method draw: path, menus
+
+/** \brief Interface class
+ ** keeps data relative to the user's interface
+ ** draws the user's interface
+ */
 class Interface
 {
 public:
   /** Default Constructor
-   ** Initializes _selectionMenu
+   ** Initializes in-game menu
    */
   Interface();
 
@@ -16,20 +23,28 @@ public:
    */
   ~Interface();
 
-  /** selection menu getter
-   ** \return _selectionMenu
+  /** in-game menu getter
+   ** \return _inGameMenu
    */
-  SelectionMenu *getSelectionMenu();
+  InGameMenu *getInGameMenu();
 
-  /** action menu getter
-   ** \return _actionMenu
+  /** \brief PathFinding getter
    */
-  ActionMenu *getActionMenu();
+  PathFinding *getPath();
 
+  /** \brief sets the path origin
+   ** meaning the cell from where it starts
+   */
+  void setPathOrigin(Coords coords);
+
+  /** \brief draws all element relative to the user's interface
+   ** meaning: in-game menus, panels and path (from path-finding)
+   */
+  void draw();
 
 private:
-  SelectionMenu *_selectionMenu; ///< in game selection menu
-  ActionMenu *_actionMenu; ///< in game action menu
+  InGameMenu *_inGameMenu; ///< in game menu
+  PathFinding *_path; ///< current path
 };
 
 #endif /* !INTERFACE_HH_ */

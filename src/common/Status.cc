@@ -38,8 +38,7 @@ e_mode Status::getCurrentMode()
 {
   if (_states.empty())
   {
-    DEBUG_PRINT("_states stack is empty, shd exit right now !");
-    // std::exit(0);
+    DEBUG_PRINT("_states stack is empty, exiting...");
     return E_MODE_NONE;
   }
 
@@ -55,7 +54,10 @@ void Status::exitCurrentMode()
   if (_states.empty())
   {
     // TODO exit properly (at least with debug_leaks flag)
-    DEBUG_PRINT("shd exit"); //std::exit(0);
+    DEBUG_PRINT("invalid State stack usage, exiting...");
+#   ifndef DEBUG
+    std::exit(1);
+#   endif
     return;
   }
 

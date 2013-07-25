@@ -1,4 +1,4 @@
-#include <interface/MenuEntry.hh>
+#include <interface/menus/MenuEntry.hh>
 #include <common/include.hh>
 #include <common/globals.hh>
 #include <common/Status.hh>

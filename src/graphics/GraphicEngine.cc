@@ -16,20 +16,12 @@ GraphicEngine::GraphicEngine()
   g_status->getMap()->init(); // TODO move
   _cursor = new Cursor(8, 8);
   g_status->setCursor(_cursor);
-  _selectionMenu = g_interface->getSelectionMenu();
-  _actionMenu = g_interface->getActionMenu();
-
-  _path = NULL;
 
   _IDTST = 0;
 }
 
 GraphicEngine::~GraphicEngine() {
   delete _cursor;
-}
-
-void GraphicEngine::updatePath(PathFinding *p) {
-  _path = p;
 }
 
 void GraphicEngine::initRoom()
@@ -53,10 +45,8 @@ void GraphicEngine::drawScene()
 
   this->drawCells();
   this->drawGrid();
-  this->drawCursor();
 
-  this->drawInGameMenus();
-  this->drawPath();
+  this->drawInterface();
 }
 
 
@@ -134,30 +124,11 @@ void GraphicEngine::drawGrid()
 }
 
 
-void GraphicEngine::drawCursor()
+void GraphicEngine::drawInterface()
 {
   // if (_cursor->getVisible())
   _cursor->getSprite(GRID_OFFSET_X, GRID_OFFSET_Y);
   _cursor->draw();
-}
 
-
-void GraphicEngine::drawInGameMenus()
-{
-  // draw this menu only if requested
-  if (CURRENT_MODE == E_MODE_SELECTION_MENU)
-  {
-    _selectionMenu->draw();
-    return;
-  }
-
-  if (CURRENT_MODE == E_MODE_ACTION_MENU)
-    _actionMenu->draw();
-}
-
-
-void GraphicEngine::drawPath()
-{
-  if (_path)
-    _path->drawPath();
+  g_interface->draw();
 }

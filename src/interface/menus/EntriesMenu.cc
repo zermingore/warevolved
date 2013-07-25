@@ -1,5 +1,5 @@
-#include <interface/EntriesMenu.hh>
-#include <interface/MenuEntry.hh>
+#include <interface/menus/EntriesMenu.hh>
+#include <interface/menus/MenuEntry.hh>
 #include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/macros.hh>
@@ -8,8 +8,7 @@
 EntriesMenu::EntriesMenu() :
   _selectedEntry (0),
   _nbEntries (0),
-  _imageSelection (NULL),
-  _path (NULL)
+  _imageSelection (NULL)
 {
 }
 
@@ -46,14 +45,10 @@ void EntriesMenu::decrementSelectedEntry()
     _selectedEntry = (_nbEntries - 1);
 }
 
-void EntriesMenu::setPath(PathFinding *path) {
-  _path = path;
-}
-
 
 void EntriesMenu::draw()
 {
-  if (abs(_origin.x) < EPSILON && abs(_origin.y) < EPSILON)
+//  if (abs(_origin.x) < EPSILON && abs(_origin.y) < EPSILON)
     this->build();
 
   this->setOrigin();

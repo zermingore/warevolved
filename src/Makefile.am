@@ -48,7 +48,6 @@ game/PathFinding.cc				\
 \
 interface/Interface.cc			\
 interface/Cursor.cc				\
-interface/EntriesMenu.cc		\
-interface/SelectionMenu.cc		\
-interface/ActionMenu.cc			\
-interface/MenuEntry.cc
+interface/menus/EntriesMenu.cc	\
+interface/menus/MenuEntry.cc	\
+interface/menus/InGameMenu.cc
