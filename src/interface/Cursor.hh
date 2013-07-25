@@ -50,6 +50,10 @@ public:
    */
   void setY(unsigned int y);
 
+  /** \brief coordinates setter
+   */
+  void setCoords(Coords coords);
+
   // Cursor Motion
   /** \brief Move the cursor up
    ** \return true if the cursor moved

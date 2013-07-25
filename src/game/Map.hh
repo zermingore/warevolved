@@ -61,7 +61,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (v.x, v.y)
    */
-  Unit *getUnit(sf::Vector2f v);
+  Unit *getUnit(Coords v);
 
   /** \brief gets the terrain at coordinates (x, y)
    **

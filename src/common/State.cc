@@ -6,7 +6,8 @@
 State::State(e_mode mode) :
   _mode (mode)
 {
-  _cursorCoords = CURSOR->getCoords();
+  if (g_status->getCursor())
+    _cursorCoords = CURSOR->getCoords();
 }
 
 

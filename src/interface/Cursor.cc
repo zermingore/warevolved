@@ -80,6 +80,9 @@ void Cursor::setY(unsigned int y) {
   _coords.y = y;
 }
 
+void Cursor::setCoords(Coords coords) {
+  _coords = coords;
+}
 
 // Cursor Motion
 bool Cursor::moveUp()

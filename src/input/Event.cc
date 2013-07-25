@@ -42,8 +42,6 @@ void Event::process()
 
   this->panel();
 
-  DEBUG_PRINT_VALUE(CURRENT_MODE);
-
   switch (CURRENT_MODE)
   {
     case E_MODE_SELECTION_MENU:
@@ -59,7 +57,6 @@ void Event::process()
       break;
 
     case E_MODE_MOVING_UNIT:
-      // TODO save cursor position to re-use when poping _modes
       this->moveUnit();
       break;
 

@@ -15,9 +15,7 @@ Status::Status() :
   _gridOffsetX (0),
   _gridOffsetY (0),
   _renderX (0),
-  _renderY (0),
-  _cursorSaveX (0),
-  _cursorSaveY (0)
+  _renderY (0)
 {
 }
 
@@ -38,75 +36,37 @@ e_menu_bar_position Status::getMenuBarPosition() {
 
 e_mode Status::getCurrentMode()
 {
-  if (_modes.empty())
+  if (_states.empty())
   {
-    DEBUG_PRINT("_modes stack is empty, exiting");
+    DEBUG_PRINT("_states stack is empty, shd exit right now !");
+    // std::exit(0);
     return E_MODE_NONE;
   }
 
-  if (!_cursorCoords.empty())
-    _cursorCoords.pop();
-
-  return _modes.top();
+  return _states.top()->getMode();
 }
 
-
-e_mode Status::getCurrentMode(int &x, int &y)
-{
-  if (_modes.empty())
-  {
-    DEBUG_PRINT("_modes stack is empty, exiting");
-    return E_MODE_NONE;
-  }
-
-  if (!_cursorCoords.empty())
-  {
-    sf::Vector2f tmp = _cursorCoords.top();
-    x = tmp.x;
-    y = tmp.y;
-    _cursorCoords.pop();
-  }
-
-  return _modes.top();
-}
-
-
-void Status::pushMode(e_mode mode)
-{
-	_modes.push(mode);
-	if (_cursor) //  && _modes.top() != E_MODE_MOVING_UNIT
-	{
-    _cursorSaveX = _cursor->getX();
-    _cursorSaveY = _cursor->getY();
-
-    sf::Vector2f tmp(static_cast<float> (_cursor->getX()), static_cast<float> (_cursor->getY()));
-    _cursorCoords.push(tmp);
-	}
+void Status::pushMode(e_mode mode) {
+  _states.push(new State (mode));
 }
 
 void Status::exitCurrentMode()
 {
-	if (_modes.empty())
-		return;//std::exit(0); // TODO exit properly (at least with debug_leaks flag)
-
-	_modes.pop();
-
-	if (_cursorCoords.empty())
-	  return;
-
-  sf::Vector2f tmp = _cursorCoords.top();
-  _cursorSaveX = tmp.x;
-  _cursorSaveY = tmp.y;
+  if (_states.empty())
+  {
+    // TODO exit properly (at least with debug_leaks flag)
+    DEBUG_PRINT("shd exit"); //std::exit(0);
+    return;
+  }
 
   if (_cursor)
-  {
-    _cursor->setX(_cursorSaveX);
-    _cursor->setY(_cursorSaveY);
-  }
+    _cursor->setCoords(_states.top()->getCursorCoords());
+
+  _states.pop();
 }
 
 
-sf::Vector2f Status::getSelectedCell() {
+Coords Status::getSelectedCell() {
   return _selectedCell;
 }
 
@@ -175,7 +135,7 @@ void Status::setMap(Map *map) {
   _map = map;
 }
 
-void Status::setSelectedCell(sf::Vector2f selected_cell) {
+void Status::setSelectedCell(Coords selected_cell) {
   _selectedCell = selected_cell;
 }
 

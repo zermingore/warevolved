@@ -12,7 +12,9 @@ Map::Map() {
 
 Map::Map(unsigned int nbColumns, unsigned int nbLines) :
   _nbColumns (nbColumns),
-  _nbLines (nbLines)
+  _nbLines (nbLines),
+  _cells (NULL),
+  _units (NULL)
 {
   _cells = new Cell[nbColumns * nbLines];
   this->init();
@@ -50,7 +52,7 @@ Unit *Map::getUnit(unsigned int x, unsigned int y) {
   return _cells[x * _nbLines + y].getUnit();
 }
 
-Unit *Map::getUnit(sf::Vector2f v) {
+Unit *Map::getUnit(Coords v) {
   return _cells[static_cast<unsigned int>(v.x * _nbLines + v.y)].getUnit();
 }
 
@@ -67,6 +69,7 @@ Image* Map::getTerrainImage(unsigned int x, unsigned int y)
   {
     case E_TERRAINS_FOREST:
       return GETIMAGE("forest");
+
     default:
       return NULL;
   }

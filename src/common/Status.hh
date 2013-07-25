@@ -26,23 +26,6 @@ enum e_menu_bar_position
   E_MENU_BAR_BOTTOM
 };
 
-/** \brief How we'll treat user's input
- ** it's sorted in sections, allowing compares like
- **   if (mode >= E_IN_GAME) do_something
- ** order more or less matches number of used keys
- */
-//enum e_event_mode
-//{
-//  E_EVENT_NONE = 0x00000000,
-//
-//  E_EVENT_MAIN_MENU = 0x00000001,
-//
-//  E_EVENT_IN_GAME = 0x00000010,
-//  E_EVENT_MAP_PLAYING = 0x00000011,
-//  E_EVENT_MENU_SELECTION = 0x00000012,
-//  E_EVENT_USER_INPUT
-//};
-
 
 /** \brief stores game status information such as
  **   last cell selected, current player, ...
@@ -66,7 +49,7 @@ public:
 
   /** \brief returns selected cell's coordinates
    */
-  sf::Vector2f getSelectedCell();
+  Coords getSelectedCell();
 
   /** \brief notify the Status that a cell was clicked
    ** it sets up _selectionActive to
@@ -101,19 +84,6 @@ public:
   e_mode getCurrentMode();
 
 
-  /** \brief \return current mode
-   ** meaning, the summit of _modes stack
-   ** Restores cursor position through
-   ** \param x cursor x value
-   ** \param y cursor y value
-   */
-  e_mode getCurrentMode(int &x, int &y);
-
-
-  /** \brief \return the whole stack modes
-   */
-  std::stack<e_mode> getModes();
-
   /** \brief _window setter
    **   updates _renderX and _renderY
    */
@@ -121,7 +91,7 @@ public:
   void setCursor(Cursor *cursor);
   void setMap(Map *map);
   void pushMode(e_mode mode); ///< stacks a new mode on _modes
-  void setSelectedCell(sf::Vector2f selected_cell);
+  void setSelectedCell(Coords selected_cell);
   void setCurrentFPS(float current_fps);
   void setCellWidth(unsigned int cell_width);
   void setCellHeight(unsigned int cell_height);
@@ -141,12 +111,9 @@ private:
   // Interface Status
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
-  std::stack<e_mode> _modes; ///< Current mode
-  std::stack<sf::Vector2f> _cursorCoords; ///< Cursor coordinates
-
   std::stack<State*> _states; ///< States stack
 
-  sf::Vector2f _selectedCell; ///< coordinates of the selected cell
+  Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
 
   // Cells Size
@@ -162,9 +129,9 @@ private:
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 
-  //Coords _cursorSave; ///< Cursor position save
-  unsigned int _cursorSaveX; ///< Cursor position x coordinate save
-  unsigned int _cursorSaveY; ///< Cursor position y coordinate save
+  Coords _cursorSave; ///< Cursor position save
+//  unsigned int _cursorSaveX; ///< Cursor position x coordinate save
+//  unsigned int _cursorSaveY; ///< Cursor position y coordinate save
 };
 
 #endif /* !STATUS_HH_ */

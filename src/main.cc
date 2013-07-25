@@ -13,7 +13,8 @@ int main(int ac, const char **av)
   av = av; // FIXME
 
   bool fullscreen = false;
-  if (ac > 1) // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
+  // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
+  if (ac > 1)
     fullscreen = true;
 
   Context *context = new Context(fullscreen);
