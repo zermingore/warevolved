@@ -1,5 +1,6 @@
 #include <interface/EntriesMenu.hh>
 #include <interface/MenuEntry.hh>
+#include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/macros.hh>
 
@@ -21,14 +22,16 @@ EntriesMenu::~EntriesMenu()
 
 void EntriesMenu::init()
 {
-  unsigned int x = CURSOR->getX();
-  unsigned int y = CURSOR->getY();
-  // TODO sets the menu at right (cursor-relative) position
-  _origin.x = (x + 1) * CELL_WIDTH + GRID_OFFSET_X;
-  _origin.y = y * CELL_HEIGHT + GRID_OFFSET_Y;
-
+  this->setOrigin();
   _selectedEntry = 0;
   _entries.clear();
+}
+
+void EntriesMenu::setOrigin()
+{
+  // TODO sets the menu at right (cursor-relative) position
+  _origin.x = (CURSOR->getX() + 1) * CELL_WIDTH + GRID_OFFSET_X;
+  _origin.y = CURSOR->getY() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
 void EntriesMenu::incrementSelectedEntry() {
@@ -50,8 +53,11 @@ void EntriesMenu::setPath(PathFinding *path) {
 
 void EntriesMenu::draw()
 {
-  sf::Vector2f v_rect(_origin);
+  if (abs(_origin.x) < EPSILON && abs(_origin.y) < EPSILON)
+    this->build();
 
+  this->setOrigin();
+  sf::Vector2f v_rect(_origin);
   for (auto it = _entries.begin(); it != _entries.end(); ++it)
   {
     it->draw(v_rect);

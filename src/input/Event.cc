@@ -48,12 +48,12 @@ void Event::process()
       if (_path)
         _path->clearPath();
 
-      this->selectionMenu(_selectionMenu);
+      this->selectionEntriesMenu(_selectionMenu);
       break;
 
     case E_MODE_ACTION_MENU:
       //_path->shadowPath(); // TODO
-      this->selectionMenu(_actionMenu);
+      this->selectionEntriesMenu(_actionMenu);
       break;
 
     case E_MODE_MOVING_UNIT:
@@ -86,8 +86,10 @@ void Event::moveUnit()
     return;
   }
 
+# ifdef DEBUG
   if (!_path) // rm
     DEBUG_PRINT("PATH is NULL");
+# endif
 
   // ---------- Motion ---------- //
   if (!_path->allowedMove())
@@ -128,13 +130,14 @@ void Event::moveUnit()
 }
 
 
-void Event::selectionMenu(EntriesMenu *menu)
+void Event::selectionEntriesMenu(EntriesMenu *menu)
 {
   // made a choice in selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
     menu->executeEntry();
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
+    return;
   }
 
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))

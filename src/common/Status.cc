@@ -70,12 +70,9 @@ Coords Status::getSelectedCell() {
   return _selectedCell;
 }
 
-void Status::cellSelection()
-{
-	_selectedCell.x = _cursor->getX();
-	_selectedCell.y = _cursor->getY();
+void Status::cellSelection() {
+	_selectedCell = _cursor->getCoords();
 }
-
 
 sf::RenderWindow *Status::getWindow() {
   return _window;

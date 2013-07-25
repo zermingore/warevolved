@@ -10,4 +10,7 @@
 # define ON true
 # define OFF false
 
+// float equality test
+# define EPSILON 0.000001
+
 #endif /* !CONSTANTS_HH_ */

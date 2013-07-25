@@ -73,6 +73,25 @@
    repair center
    bury mines
    dig
+** TODO Motion
+*** TODO Move Management
+   for each cell: simply move, shoot somewhere or sprint
+   could micro a 5 soldier team:
+     (5 cells max motion)
+     2 fires at cell #2 to the north, 3 fires at cell #3 to the south
+	 team regroup at #cell 4 (open fire costs 1 move)
+*** TODO Open Fire Management
+	while moving
+	Shift on a cell: sprint (increase move costs, reduces damages taken)
+	  [manage wounded whiles printing ?]
+	Control on a cell: open fire in mouse direction
+	  8 surrounding cells (less damages, even less for not 4 'direct' cells)
+	  ground unit: manage how many bullets per shot ?
+	  allow spamming ?
+	  vehicles: rotating turret required (else: fire more or less only straight shots)
+	Alt on a cell: unit rotation
+	  increase reactivity
+	  only on simple move
 
 * TODO Interface
 ** DONE draw selection menu
@@ -84,6 +103,7 @@
 ** TODO Mini-map
 ** TODO select between satellite or schematic view
 ** TODO unit selection -> 'flashing lights'
+** TODO center text in in-game menu entries
 
 * TODO Network
 ** TODO Chat
@@ -98,15 +118,15 @@
 * TODO Graphic Engine
 ** TODO Units orientation
    only graphic attribute ?
-   use while moving a unit (default: loo ahead, can check a side)
+   use while moving a unit (default: look ahead, can check a side)
 ** TODO Libraries
 *** TODO switch 'on demand' (at compilation time)
 	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 
-* DONE Menu
-  CLOSED: [2013-07-24 Wed 07:06]
+* TODO Menu
 ** DONE Stack implementation
    CLOSED: [2013-07-24 Wed 07:06]
+** TODO Main menu
 
 * TODO Tools
 ** TODO memory leaks checker before commit
@@ -117,6 +137,12 @@
 ** TODO auto resources XML generator
 
 * TODO Bugs / Features
+** TODO [#A] Fix in-game menu pop-up and location
+** TODO Fix cursor size trouble
+   was too big
+   (running for a long time ?)
+   overflow trouble ?
+
 ** DONE [#B] Add Doxygen Comments in headers
    CLOSED: [2013-04-19 Fri 16:33]
    not perfect but does the job for now

@@ -8,6 +8,8 @@
 MenuEntry::MenuEntry(e_entries entry) :
   _id (entry)
 {
+  DEBUG_PRINT("NOT yet implemented MenuEntry Ctor");
+
   _background = GETIMAGE("selection_menu_button");
   _background->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
 

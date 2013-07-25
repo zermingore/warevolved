@@ -65,7 +65,7 @@ public:
 
   /** \brief executes action matching _selectedEntry
    */
-  virtual void executeEntry() = 0; // shd be pure
+  virtual void executeEntry() = 0;
 
 
 protected:
@@ -81,6 +81,11 @@ protected:
   sf::Vector2f _origin; ///< Origin position of the menu
   Image *_imageSelection; ///< Background image (entry)
   PathFinding *_path; ///< path (from Event)
+
+private:
+  /** \brief sets origin menu to the right cursor relative position
+   */
+  void setOrigin(); // TODO sets the menu at optimal position
 };
 
 #endif /* !ENTRIESMENU_HH_ */

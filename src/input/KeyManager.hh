@@ -23,7 +23,7 @@ enum e_timer
 enum e_switch
 {
   E_SWITCH_SELECTION = 0, // in-game selection menu
-  E_SWITCH_ACTION, // action menu (after moving a unit)
+  //E_SWITCH_ACTION, // action menu (after moving a unit)
 
   E_SWITCH_EXIT, // exit request
 

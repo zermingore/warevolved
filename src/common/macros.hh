@@ -23,4 +23,5 @@
     sf::Keyboard::isKeyPressed(_keys[ x ##_2])
 # define GETIMAGE g_rm->getImage
 
+
 #endif /* !MACROS_HH_ */

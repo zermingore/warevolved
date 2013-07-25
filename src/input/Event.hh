@@ -39,7 +39,7 @@ private:
    **   (for example arrows do not move game cursor but menu cursor)
    ** \param menu menu of which we want to manage events
    */
-  void selectionMenu(EntriesMenu *menu);
+  void selectionEntriesMenu(EntriesMenu *menu);
 
   /** \brief Processes events while moving a unit
    */
