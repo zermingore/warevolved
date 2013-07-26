@@ -105,6 +105,7 @@
 ** TODO select between satellite or schematic view
 ** TODO unit selection -> 'flashing lights'
 ** TODO center text in in-game menu entries
+** TODO integrate Cursor ?
 
 * TODO Network
 ** TODO Chat
@@ -128,6 +129,8 @@
 ** DONE Stack implementation
    CLOSED: [2013-07-24 Wed 07:06]
 ** TODO Main menu
+** TODO improve InGameMenu stack usage
+   Do *NOT* rebuild all entries each frame...
 
 * TODO Tools
 ** TODO memory leaks checker before commit

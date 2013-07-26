@@ -18,9 +18,6 @@
 class InGameMenu: public EntriesMenu
 {
 public:
-  InGameMenu();
-  ~InGameMenu();
-
   /** \brief builds the selection menu, filling _entries
    */
   void build();

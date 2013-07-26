@@ -45,14 +45,14 @@ public:
    */
   ~MenuEntry();
 
-
+  /** \brief returns entry Identifier, as a e_entries value
+   */
   e_entries getId();
 
   /** \brief displays the entry at position
    ** \param position where the entry will be display
    */
   void draw(sf::Vector2f position);
-
 
   /** \brief Executes the action matching the entry
      */

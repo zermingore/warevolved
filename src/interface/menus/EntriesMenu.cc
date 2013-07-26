@@ -22,7 +22,6 @@ EntriesMenu::~EntriesMenu()
 void EntriesMenu::init()
 {
   this->setOrigin();
-  _selectedEntry = 0;
   _entries.clear();
 }
 
@@ -48,8 +47,7 @@ void EntriesMenu::decrementSelectedEntry()
 
 void EntriesMenu::draw()
 {
-//  if (abs(_origin.x) < EPSILON && abs(_origin.y) < EPSILON)
-    this->build();
+  this->build(); // use a cache (when pushing state)
 
   this->setOrigin();
   sf::Vector2f v_rect(_origin);
@@ -64,4 +62,9 @@ void EntriesMenu::draw()
   _imageSelection->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
   _imageSelection->setPosition(_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
   _imageSelection->draw();
+}
+
+
+void EntriesMenu::resetSelectedEntry() {
+  _selectedEntry = 0;
 }

@@ -3,17 +3,6 @@
 #include <common/globals.hh>
 #include <common/macros.hh>
 
-
-InGameMenu::InGameMenu() : EntriesMenu() {
-}
-
-InGameMenu::~InGameMenu()
-{
-# ifdef DEBUG_LEAKS
-  std::cout << "InGameMenu Dtor" << std::endl;
-# endif
-}
-
 void InGameMenu::build()
 {
   this->init();
@@ -39,6 +28,11 @@ void InGameMenu::build()
     // next turn button
     MenuEntry next_turn("Next\n\tTurn", E_ENTRIES_NEXT_TURN);
     _entries.push_back(next_turn);
+
+    MenuEntry void1("void1", E_ENTRIES_VOID1);
+    _entries.push_back(void1);
+    MenuEntry void2("void2", E_ENTRIES_VOID2);
+    _entries.push_back(void2);
   }
 
   // target
@@ -48,6 +42,9 @@ void InGameMenu::build()
     MenuEntry attack("Attack", E_ENTRIES_ATTACK);
     _entries.push_back(attack);
   }
+
+  MenuEntry cancel("Cancel", E_ENTRIES_CANCEL);
+  _entries.push_back(cancel);
 
   _nbEntries = _entries.size();
   this->setOrigin();
@@ -93,8 +90,19 @@ void InGameMenu::executeEntry()
       g_status->exitCurrentMode();
       break;
 
+    case E_ENTRIES_CANCEL:
+      DEBUG_PRINT("cancel");
+      g_status->exitCurrentMode();
+      // if we were dealing with orders,
+      //   directly return to the original position
+      if (CURRENT_MODE == E_MODE_MOVING_UNIT)
+        g_status->exitCurrentMode();
+      break;
+
     default:
       std::cerr << "unable to match selection menu entry" << std::endl;
       break;
   }
+
+  _selectedEntry = 0;
 }

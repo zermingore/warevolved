@@ -54,6 +54,10 @@ public:
    */
   void draw();
 
+  /** \brief sets _selectedEntry to 0
+   */
+  void resetSelectedEntry();
+
   /** \brief builds the selection menu, filling _entries
    */
   virtual void build() = 0;
@@ -69,6 +73,8 @@ protected:
    */
   void init();
 
+  /** \brief sets origin menu to the right cursor relative position
+   */
   void setOrigin(); // TODO sets the menu at optimal position
 
   // the first entry, at the bottom, has the index 0
@@ -77,11 +83,6 @@ protected:
   std::vector<MenuEntry> _entries; ///< Entries list
   sf::Vector2f _origin; ///< Origin position of the menu
   Image *_imageSelection; ///< Background image (entry)
-
-
-//private:
-  /** \brief sets origin menu to the right cursor relative position
-   */
 };
 
 #endif /* !ENTRIESMENU_HH_ */

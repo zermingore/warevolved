@@ -34,6 +34,7 @@ bool Event::process()
       (_km->getSwitchStatus(E_SWITCH_EXIT) == OFF))
   {
     g_status->exitCurrentMode();
+    _inGameMenu->resetSelectedEntry();
     _km->setSwitchStatus(E_SWITCH_EXIT, ON);
   }
 
@@ -87,11 +88,6 @@ void Event::moveUnit()
     g_status->pushMode(E_MODE_ACTION_MENU);
     return;
   }
-
-# ifdef DEBUG
-  if (!_path) // rm
-    DEBUG_PRINT("PATH is NULL");
-# endif
 
   // ---------- Motion ---------- //
   if (!_path->allowedMove())
