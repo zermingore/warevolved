@@ -8,22 +8,56 @@
 EntriesMenu::EntriesMenu() :
   _selectedEntry (0),
   _nbEntries (0),
-  _imageSelection (NULL)
+  _entries (nullptr),
+  _imageSelection (nullptr)
 {
 }
 
+
+EntriesMenu::EntriesMenu(std::vector<MenuEntry> entries) :
+    _selectedEntry (0),
+    _imageSelection (nullptr)
+{
+  _entries = new std::vector<MenuEntry>;
+  *_entries = entries;
+  _nbEntries = entries.size();
+
+  _origin.x = (CURSOR->getX() + 1) * CELL_WIDTH + GRID_OFFSET_X;
+  _origin.y = CURSOR->getY() * CELL_HEIGHT + GRID_OFFSET_Y;
+}
+
+
 EntriesMenu::~EntriesMenu()
 {
-# ifdef DEBUG_LEAKS
-  std::cout << "Entries Menu Dtor" << std::endl;
-# endif
+  DEBUG_PRINT("del entries");
+  delete _entries;
 }
 
 void EntriesMenu::init()
 {
   this->setOrigin();
-  _entries.clear();
+  _entries = new std::vector<MenuEntry>;
+  _entries->clear();
 }
+
+
+unsigned int EntriesMenu::getSelectedEntry() {
+  return _selectedEntry;
+}
+
+
+std::vector<MenuEntry> *EntriesMenu::getEntries() {
+  return _entries ? _entries : nullptr;
+}
+
+void EntriesMenu::loadMenu(EntriesMenu* menu)
+{
+  _entries = menu->getEntries();
+  _nbEntries = _entries->size();
+  _selectedEntry = menu->getSelectedEntry();
+  this->setOrigin();
+}
+
 
 void EntriesMenu::setOrigin()
 {
@@ -47,13 +81,14 @@ void EntriesMenu::decrementSelectedEntry()
 
 void EntriesMenu::draw()
 {
-  this->build(); // use a cache (when pushing state)
+  if (_entries->size() == 0)
+    this->build(CURRENT_MODE); // use a cache (when pushing state)
 
   this->setOrigin();
   sf::Vector2f v_rect(_origin);
-  for (auto it = _entries.begin(); it != _entries.end(); ++it)
+  for (MenuEntry it: *_entries)
   {
-    it->draw(v_rect);
+    it.draw(v_rect);
     v_rect -= sf::Vector2f(0, CELL_HEIGHT);
   }
 

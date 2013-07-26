@@ -49,15 +49,18 @@ void Status::pushMode(e_mode mode) {
   _states.push(new State (mode));
 }
 
-void Status::exitCurrentMode()
+void Status::pushModeInGameMenu(e_mode mode, InGameMenu *menu)
 {
-  if (_states.empty())
+  menu->build(mode); // shd push existing ?
+  _states.push(new State (mode, menu));
+}
+
+
+void Status::exitCurrentMode(bool skip)
+{
+  if (skip)
   {
-    // TODO exit properly (at least with debug_leaks flag)
-    DEBUG_PRINT("invalid State stack usage, exiting...");
-#   ifndef DEBUG
-    std::exit(1);
-#   endif
+    _states.pop();
     return;
   }
 
@@ -67,6 +70,14 @@ void Status::exitCurrentMode()
   _states.pop();
 }
 
+
+State *Status::popCurrentMode()
+{
+  State *tmp = _states.top();
+  _states.pop();
+
+  return tmp;
+}
 
 Coords Status::getSelectedCell() {
   return _selectedCell;

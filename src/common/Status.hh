@@ -4,6 +4,7 @@
 # include <common/enums/mode.hh>
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
+# include <interface/menus/InGameMenu.hh>
 # include <common/State.hh>
 # include <stack>
 
@@ -84,8 +85,14 @@ public:
 
   /** \brief pops _modes summit
    ** exits the game if the stack is empty
+   ** \param skip retrieve Cursor position or not
    */
-  void exitCurrentMode();
+  void exitCurrentMode(bool skip = false);
+
+  /** \brief pops _modes and returns summit
+   ** \return Menu of the top of the stack
+   */
+  State *popCurrentMode();
 
   /** \brief \return current mode
    ** meaning, the summit of _modes stack
@@ -99,7 +106,17 @@ public:
   void setWindow(sf::RenderWindow *window);
   void setCursor(Cursor *cursor);
   void setMap(Map *map);
-  void pushMode(e_mode mode); ///< stacks a new mode on _modes
+
+  /** \brief stacks a new mode on _modes
+   ** \param mode mode we just entered
+   */
+  void pushMode(e_mode mode);
+
+  /** \brief stacks a new mode on _modes
+   ** \param mode mode we just entered
+   */
+  void pushModeInGameMenu(e_mode mode, InGameMenu *menu);
+
   void setSelectedCell(Coords selected_cell);
   void setCurrentFPS(float current_fps);
   void setCellWidth(unsigned int cell_width);

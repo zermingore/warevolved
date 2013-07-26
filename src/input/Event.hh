@@ -47,6 +47,7 @@ private:
   void moveUnit();
 
   /** \brief Processes all game events
+   ** called when we're not browsing a menu, moving a unit, ...
    */
   void game();
 

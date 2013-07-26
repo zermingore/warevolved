@@ -73,19 +73,15 @@ bool Event::process()
   return true;
 }
 
-void Event::panel()
-{
+void Event::panel() {
 }
 
-void Event::moveUnit()
+void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 {
-  // only called on E_MODE_MOVING_UNIT
-
   // ---------- Selection ---------- //
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
-    _inGameMenu->build();
-    g_status->pushMode(E_MODE_ACTION_MENU);
+    g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
     return;
   }
 
@@ -160,19 +156,19 @@ void Event::game()
 
     if (CURRENT_MODE == E_MODE_ACTION_MENU)
     {
+      DEBUG_PRINT("exec");
       g_status->exitCurrentMode();
       return;
     }
 
     if (CURRENT_MODE == E_MODE_MOVING_UNIT)
     {
-      g_status->pushMode(E_MODE_ACTION_MENU);
+      g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
       return;
     }
 
-    _inGameMenu->build();
     _path->clearPath();
-    g_status->pushMode(E_MODE_SELECTION_MENU);
+    g_status->pushModeInGameMenu(E_MODE_SELECTION_MENU, _inGameMenu);
   }
 
   // ---------- Cursor Motion ---------- //

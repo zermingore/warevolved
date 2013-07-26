@@ -34,6 +34,10 @@
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
 ** TODO [#A] GLOBAL static class
+** TODO [#A] Clean (truly use C++11)
+*** TODO use reference
+*** TODO use const +/- whenever possible
+*** TODO use C++11 enum (type / size)
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
@@ -105,7 +109,7 @@
 ** TODO select between satellite or schematic view
 ** TODO unit selection -> 'flashing lights'
 ** TODO center text in in-game menu entries
-** TODO integrate Cursor ?
+** TODO think about integrating Cursor
 
 * TODO Network
 ** TODO Chat

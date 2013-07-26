@@ -19,8 +19,9 @@ class InGameMenu: public EntriesMenu
 {
 public:
   /** \brief builds the selection menu, filling _entries
+   ** \param mode The mode we're about to push
    */
-  void build();
+  void build(e_mode mode);
 
   /** \brief executes action matching _selectedEntry
    */

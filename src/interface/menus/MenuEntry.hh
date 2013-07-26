@@ -27,10 +27,6 @@ enum e_entries
 class MenuEntry
 {
 public:
-  /** \brief default Constructor
-   */
-  MenuEntry();
-
   /** \brief Constructor
    */
   // TODO use this one (auto label completion, using a DB)

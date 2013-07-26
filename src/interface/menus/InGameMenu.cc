@@ -3,7 +3,8 @@
 #include <common/globals.hh>
 #include <common/macros.hh>
 
-void InGameMenu::build()
+
+void InGameMenu::build(e_mode mode)
 {
   this->init();
 
@@ -12,54 +13,50 @@ void InGameMenu::build()
   // here, we cannot use cursor's position, we could have move the unit
   if (g_status->getMap()->getUnit(g_status->getSelectedCell()))
   {
-    if (CURRENT_MODE == E_MODE_PLAYING || CURRENT_MODE == E_MODE_SELECTION_MENU)
+    if (mode == E_MODE_SELECTION_MENU) //  || mode == E_MODE_MOVING_UNIT
     {
       MenuEntry move("Move", E_ENTRIES_MOVE);
-      _entries.push_back(move);
+      _entries->push_back(move);
     }
-    if (CURRENT_MODE == E_MODE_ACTION_MENU)
+    if (mode == E_MODE_ACTION_MENU)
     {
       MenuEntry stop("Stop", E_ENTRIES_STOP);
-      _entries.push_back(stop);
+      _entries->push_back(stop);
     }
   }
   else
   {
     // next turn button
     MenuEntry next_turn("Next\n\tTurn", E_ENTRIES_NEXT_TURN);
-    _entries.push_back(next_turn);
+    _entries->push_back(next_turn);
 
     MenuEntry void1("void1", E_ENTRIES_VOID1);
-    _entries.push_back(void1);
+    _entries->push_back(void1);
     MenuEntry void2("void2", E_ENTRIES_VOID2);
-    _entries.push_back(void2);
+    _entries->push_back(void2);
   }
 
   // target
-  if (CURRENT_MODE == E_MODE_ACTION_MENU &&
+  if (mode == E_MODE_ACTION_MENU &&
       g_status->getMap()->getUnit(CURSOR->getX(), CURSOR->getY()))
   {
     MenuEntry attack("Attack", E_ENTRIES_ATTACK);
-    _entries.push_back(attack);
+    _entries->push_back(attack);
   }
 
   MenuEntry cancel("Cancel", E_ENTRIES_CANCEL);
-  _entries.push_back(cancel);
+  _entries->push_back(cancel);
 
-  _nbEntries = _entries.size();
+  _nbEntries = _entries->size();
   this->setOrigin();
 }
 
 
 void InGameMenu::executeEntry()
 {
-  if (_entries.size() == 0)
-  {
-    this->build();
-    DEBUG_PRINT("invalid execution request, rebuilding...");
-  }
+  e_mode old_mode = E_MODE_NONE;
 
-  switch (_entries[_selectedEntry].getId())
+  switch ((*_entries)[_selectedEntry].getId())
   {
     case E_ENTRIES_ATTACK:
       std::cout << "attack" << std::endl;
@@ -70,7 +67,7 @@ void InGameMenu::executeEntry()
       break;
 
     case E_ENTRIES_MOVE:
-      g_status->pushMode(E_MODE_MOVING_UNIT);
+      g_status->pushModeInGameMenu(E_MODE_MOVING_UNIT, this);
       std::cout << "move" << std::endl;
       g_interface->setPathOrigin(CURSOR->getCoords());
       break;
@@ -91,12 +88,17 @@ void InGameMenu::executeEntry()
       break;
 
     case E_ENTRIES_CANCEL:
-      DEBUG_PRINT("cancel");
-      g_status->exitCurrentMode();
-      // if we were dealing with orders,
-      //   directly return to the original position
-      if (CURRENT_MODE == E_MODE_MOVING_UNIT)
+      old_mode = CURRENT_MODE;
+      this->loadMenu(g_status->popCurrentMode()->getMenu());
+
+      // if we were dealing with orders, return to the unit position
+      if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
+      {
         g_status->exitCurrentMode();
+        this->build(CURRENT_MODE); // re-build menu at selection state
+      }
+
+      DEBUG_PRINT("cancel");
       break;
 
     default:

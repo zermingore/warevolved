@@ -4,19 +4,30 @@
 
 
 State::State(e_mode mode) :
-  _mode (mode)
+  _mode (mode),
+  _menu (nullptr)
 {
   if (g_status->getCursor())
     _cursorCoords = CURSOR->getCoords();
 }
 
 
-e_mode State::getMode()
+State::State(e_mode mode, EntriesMenu *menu) :
+  _mode (mode)
 {
+  _menu = menu;
+  if (g_status->getCursor())
+    _cursorCoords = CURSOR->getCoords();
+}
+
+e_mode State::getMode() {
   return _mode;
 }
 
-Coords State::getCursorCoords()
-{
+EntriesMenu *State::getMenu() {
+  return _menu;
+}
+
+Coords State::getCursorCoords() {
   return _cursorCoords;
 }
