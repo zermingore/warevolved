@@ -14,10 +14,6 @@
 GraphicEngine::GraphicEngine()
 {
   g_status->getMap()->init(); // TODO move
-  //_cursor = new Cursor(8, 8);
-  // cursor line, column setter
-  //g_status->setCursor(_cursor);
-
   _IDTST = 0;
 }
 

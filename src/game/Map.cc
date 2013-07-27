@@ -26,6 +26,8 @@ Map::~Map() {
 
 void Map::init()
 {
+  CURSOR->setLimits(_nbColumns, _nbLines);
+
   // TODO read informations from a map file
   for (unsigned int i = 0; i < _nbColumns; ++i)
   {
