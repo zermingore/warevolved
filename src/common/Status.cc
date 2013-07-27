@@ -51,7 +51,7 @@ void Status::pushMode(e_mode mode) {
 
 void Status::pushModeInGameMenu(e_mode mode, InGameMenu *menu)
 {
-  menu->build(mode); // shd push existing ?
+  menu->build(mode);
   _states.push(new State (mode, menu));
 }
 

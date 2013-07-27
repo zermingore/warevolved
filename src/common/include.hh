@@ -1,3 +1,10 @@
+/*
+ * common/include.hh
+ *
+ *  Created on: April 15, 2013
+ *      Author: Zermingore
+ */
+
 #ifndef INCLUDE_HH_
 # define INCLUDE_HH_
 

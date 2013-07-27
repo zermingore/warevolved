@@ -1,7 +1,7 @@
 /*
- * InGameMenu.hh
+ * interface/menus/InGameMenu.hh
  *
- *  Created on: Jul 25, 2013
+ *  Created on: July 25, 2013
  *      Author: Zermingore
  */
 
@@ -28,4 +28,4 @@ public:
   void executeEntry();
 };
 
-#endif /* INGAMEMENU_HH_ */
+#endif /* !INGAMEMENU_HH_ */

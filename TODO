@@ -143,6 +143,7 @@
    header guards with same name
 ** TODO generate Doxygen Doc
 ** TODO auto resources XML generator
+** TODO auto fetch and insert commit id last modif
 
 * TODO Bugs / Features
 ** DONE [#A] Fix in-game menu pop-up and location

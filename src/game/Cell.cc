@@ -5,7 +5,7 @@
 
 Cell::Cell() :
   _terrain (E_TERRAINS_NONE),
-  _unit (NULL),
+  _unit (nullptr),
   _terrainTextureId (0),
   _unitTextureId (0)
 {

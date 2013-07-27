@@ -27,9 +27,7 @@ EntriesMenu::EntriesMenu(std::vector<MenuEntry> entries) :
 }
 
 
-EntriesMenu::~EntriesMenu()
-{
-  DEBUG_PRINT("del entries");
+EntriesMenu::~EntriesMenu() {
   delete _entries;
 }
 
@@ -82,7 +80,10 @@ void EntriesMenu::decrementSelectedEntry()
 void EntriesMenu::draw()
 {
   if (_entries->size() == 0)
+  {
+    DEBUG_PRINT("on demand build");
     this->build(CURRENT_MODE); // use a cache (when pushing state)
+  }
 
   this->setOrigin();
   sf::Vector2f v_rect(_origin);

@@ -1,36 +1,59 @@
+/*
+ * common/Settings.hh
+ *
+ *  Created on: April 15, 2013
+ *      Author: Zermingore
+ */
+
 #ifndef SETTINGS_HH_
 # define SETTINGS_HH_
 
 # include <string>
 
+
+// TODO create subclasses: VideoSettings, GameSettings
+
 /** \brief Settings in a class designed to store
  **   user's preferences
  **   system's informations (such as video modes)
  */
-
-
-// TODO create subclasses: VideoSettings, GameSettings
-
 class Settings
 {
 public:
-  /** \brief Default Constructor
+  /** \brief Constructor
+   ** sets graphic attributes
+   ** \param depth graphic depth value
+   ** \param stencil stencil value
+   ** \param antiAliasing anti aliasing coefficient
    */
-  Settings();
   Settings(unsigned int depth,
-		   unsigned int stencil,
-		   unsigned int antiAliasing);
+           unsigned int stencil,
+           unsigned int antiAliasing);
 
   /** \brief Default Destructor
    */
   ~Settings();
 
 
-  /// SFML settings getters
+  /** \brief graphic depth getter
+   ** \return depth value
+   */
   unsigned int getDepth();
+
+  /** \brief graphic getter
+   ** \return stencil value
+   */
   unsigned int getStencil();
+
+  /** \brief anti aliasing getter
+   ** \return anti aliasing coefficient
+   */
   unsigned int getAntiAliasing();
 
+  /** \brief _fullScreen getter
+   ** \return true if we're in full screen
+   **   false otherwise
+   */
   bool getFullScreen();
 
   /** \brief _keyRepeatDelay getter
@@ -53,7 +76,7 @@ public:
 
 
 private:
-  // SFML settings
+  // graphic settings
   unsigned int _depth; ///< depth buffer size
   unsigned int _stencil; ///< stencil buffer size
   unsigned int _antiAliasing; ///< anti aliasing level
@@ -61,8 +84,8 @@ private:
   // generic settings
   bool _fullScreen; ///< notify if we're running in full screen
 
-  // required time to consider a "second pressure"
-  int _keyRepeatDelay; // in ms, must be > 0 to avoid locking keyboard
+  int _keyRepeatDelay; ///< required time to consider a "second pressure"
+                       ///< in ms, must be positive to avoid locking keyboard
 };
 
 #endif /* !SETTINGS_HH_ */

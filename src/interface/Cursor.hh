@@ -1,3 +1,10 @@
+/*
+ * interface/Cursor.hh
+ *
+ *  Created on: April 15, 2013
+ *      Author: Zermingore
+ */
+
 #ifndef CURSOR_HH_
 # define CURSOR_HH_
 
@@ -5,10 +12,9 @@
 # include <resources/Image.hh>
 
 
-/** \ brief in-game Cursor class
- ** Manages cursor shape, animation
+/** \brief in-game Cursor class
+ ** Manages cursor shape, animation, motion
  */
-
 class Cursor
 {
 public:
@@ -54,6 +60,10 @@ public:
    */
   void setCoords(Coords coords);
 
+  /** \brief sets _nbColumns and _nbLines
+   */
+  void setLimits(unsigned int nbColumns, unsigned int nbLines);
+
   // Cursor Motion
   /** \brief Move the cursor up
    ** \return true if the cursor moved
@@ -79,14 +89,13 @@ public:
 
 private:
   // map attributes
-  unsigned int _nbColumns;
-  unsigned int _nbLines;
+  unsigned int _nbColumns; ///< number of columns in map
+  unsigned int _nbLines; ///< number of Lines in map
 
   Coords _coords; ///< Cursor Coordinates
 
-  Image* _image;
-  sf::Sprite* _sprite;
-  sf::Texture* _texture;
+  Image* _image; ///< Cursor's Image
+  sf::Sprite* _sprite; ///< pointer over _image->getSprite()
 
   // middle of the SPRITE coordinates, avoid computing its value each frame
   sf::Vector2f _middle; ///< middle of the Cursor sprite

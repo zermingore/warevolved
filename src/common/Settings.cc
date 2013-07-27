@@ -16,7 +16,7 @@ Settings::Settings(unsigned int depth,
 Settings::~Settings() {
 }
 
-// _________________________ GETTERS _________________________ //
+
 unsigned int Settings::getDepth() {
   return _depth;
 }
@@ -37,7 +37,7 @@ int Settings::getKeyRepeatDelay() {
   return _keyRepeatDelay;
 }
 
-// _________________________ SETTERS _________________________ //
+
 void Settings::setDepth(unsigned int depth) {
   _depth = depth;
 }

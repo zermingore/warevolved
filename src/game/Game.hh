@@ -1,3 +1,10 @@
+/*
+ * game/Game.hh
+ *
+ *  Created on: April 15, 2013
+ *      Author: Zermingore
+ */
+
 #ifndef GAME_HH_
 # define GAME_HH_
 

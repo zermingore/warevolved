@@ -1,3 +1,10 @@
+/*
+ * graphics/GraphicEngine.hh
+ *
+ *  Created on: April 15, 2013
+ *      Author: Zermingore
+ */
+
 #ifndef GRAPHICENGINE_HH_
 # define GRAPHICENGINE_HH_
 
@@ -15,6 +22,9 @@
 
 // TODO refresh only needed cells (mouse motion, cursor animation)
 
+/** \brief Graphic Engine class
+ ** manages the display of a scene
+ */
 class GraphicEngine
 {
 public:
@@ -65,23 +75,7 @@ private:
    */
   void drawInterface();
 
-  /** \brief Draw Selection Menu
-   ** selection menu pop when you select something
-   **
-   ** \param cell The Cell on which the cursor is
-   */
-  //void drawSelectionMenu(Cell *cell);
-
-  /** \brief Draw Selection Menu or Action menu
-   ** selection menu pop when you select something
-   ** fetches automatically cell on which the cursor is
-   ** action menu pops at the end of a move (when 'stop' is selected)
-   */
-//  void drawInGameMenus();
-
   unsigned int _IDTST; // rm
-
-  Cursor *_cursor; ///< in game cursor // TODO move in Interface
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

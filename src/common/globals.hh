@@ -1,3 +1,10 @@
+/*
+ * common/globals.hh
+ *
+ *  Created on: April 15, 2013
+ *      Author: Zermingore
+ */
+
 #ifndef GLOBALS_HH_
 # define GLOBALS_HH_
 

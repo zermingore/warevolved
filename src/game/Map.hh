@@ -90,7 +90,6 @@ private:
   unsigned int _nbLines; ///< number of lines (y coordinate)
 
   Cell *_cells; ///< Array which contains every cells of the map
-  Unit *_units;
 };
 
 #endif /* !MAP_HH_ */

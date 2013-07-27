@@ -1,6 +1,7 @@
 #ifndef INTERFACE_HH_
 # define INTERFACE_HH_
 
+# include <interface/Cursor.hh>
 # include <interface/menus/InGameMenu.hh>
 # include <game/PathFinding.hh>
 
@@ -43,6 +44,7 @@ public:
   void draw();
 
 private:
+  Cursor *_cursor; ///< Map Cursor
   InGameMenu *_inGameMenu; ///< in game menu
   PathFinding *_path; ///< current path
 };

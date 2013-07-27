@@ -13,8 +13,7 @@ Map::Map() {
 Map::Map(unsigned int nbColumns, unsigned int nbLines) :
   _nbColumns (nbColumns),
   _nbLines (nbLines),
-  _cells (NULL),
-  _units (NULL)
+  _cells (nullptr)
 {
   _cells = new Cell[nbColumns * nbLines];
   this->init();
@@ -71,6 +70,6 @@ Image *Map::getTerrainImage(unsigned int x, unsigned int y)
       return GETIMAGE("forest");
 
     default:
-      return NULL;
+      return nullptr;
   }
 }

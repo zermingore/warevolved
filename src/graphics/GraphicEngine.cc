@@ -14,14 +14,14 @@
 GraphicEngine::GraphicEngine()
 {
   g_status->getMap()->init(); // TODO move
-  _cursor = new Cursor(8, 8);
-  g_status->setCursor(_cursor);
+  //_cursor = new Cursor(8, 8);
+  // cursor line, column setter
+  //g_status->setCursor(_cursor);
 
   _IDTST = 0;
 }
 
 GraphicEngine::~GraphicEngine() {
-  delete _cursor;
 }
 
 void GraphicEngine::initRoom()
@@ -106,7 +106,7 @@ void GraphicEngine::drawCells()
 
 void GraphicEngine::drawGrid()
 {
-  sf::Color grid_color(202, 124, 0);
+  sf::Color grid_color(202, 124, 0); // FIXME Hard-Coded
 
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
@@ -127,8 +127,8 @@ void GraphicEngine::drawGrid()
 void GraphicEngine::drawInterface()
 {
   // if (_cursor->getVisible())
-  _cursor->getSprite(GRID_OFFSET_X, GRID_OFFSET_Y);
-  _cursor->draw();
+//  _cursor->getSprite(GRID_OFFSET_X, GRID_OFFSET_Y);
+//  _cursor->draw();
 
   g_interface->draw();
 }

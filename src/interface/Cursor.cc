@@ -8,10 +8,8 @@ Cursor::Cursor() :
 {
   _image = GETIMAGE("cursor");
   _sprite = _image->getSprite();
-  _texture = _image->getTexture();
-
-  _middle.x = _texture->getSize().x / 2;
-  _middle.y = _texture->getSize().y / 2;
+  _middle.x = _image->getTexture()->getSize().x / 2;
+  _middle.y = _image->getTexture()->getSize().y / 2;
 }
 
 Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
@@ -20,10 +18,8 @@ Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
 {
   _image = GETIMAGE("cursor");
   _sprite = _image->getSprite();
-  _texture = _image->getTexture();
-
-  _middle.x = _texture->getSize().x / 2;
-  _middle.y = _texture->getSize().y / 2;
+  _middle.x = _image->getTexture()->getSize().x / 2;
+  _middle.y = _image->getTexture()->getSize().y / 2;
 }
 
 Cursor::~Cursor()
@@ -83,6 +79,13 @@ void Cursor::setY(unsigned int y) {
 void Cursor::setCoords(Coords coords) {
   _coords = coords;
 }
+
+void Cursor::setLimits(unsigned int nbColumns, unsigned int nbLines)
+{
+  _nbColumns = nbColumns;
+  _nbLines = nbLines;
+}
+
 
 // Cursor Motion
 bool Cursor::moveUp()

@@ -1,7 +1,7 @@
 /*
- * PathFinding.hh
+ * game/PathFinding.hh
  *
- *  Created on: Jul 18, 2013
+ *  Created on: July 18, 2013
  *      Author: Zermingore
  */
 

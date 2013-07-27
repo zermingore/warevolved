@@ -1,5 +1,12 @@
-#ifndef COMMON_HH_
-# define COMMON_HH_
+/*
+ * common/System.hh
+ *
+ *  Created on: April 15, 2013
+ *      Author: Zermingore
+ */
+
+#ifndef SYSTEM_HH_
+# define SYSTEM_HH_
 
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
