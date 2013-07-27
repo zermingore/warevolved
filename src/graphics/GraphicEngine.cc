@@ -120,11 +120,6 @@ void GraphicEngine::drawGrid()
 }
 
 
-void GraphicEngine::drawInterface()
-{
-  // if (_cursor->getVisible())
-//  _cursor->getSprite(GRID_OFFSET_X, GRID_OFFSET_Y);
-//  _cursor->draw();
-
+void GraphicEngine::drawInterface() {
   g_interface->draw();
 }

@@ -40,8 +40,7 @@ Image *Terrain::getImage()
   return _image;
 }
 
-std::string Terrain::getImageName()
-{
+std::string Terrain::getImageName() {
   return _imageName;
 }
 

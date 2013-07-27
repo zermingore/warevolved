@@ -48,8 +48,9 @@ private:
 
   /** \brief Processes all game events
    ** called when we're not browsing a menu, moving a unit, ...
+   ** \return false if we got an exit request true otherwise
    */
-  void game();
+  bool game();
 
   /** \brief Looks for any released key.
    **   Reset the key timer matching the released key (if any)

@@ -73,6 +73,21 @@ void KeyManager::restartTimer(e_timer index)
 }
 
 
+void KeyManager::resetSwitches()
+{
+  if (!PRESSED(E_KEY_SELECTION))
+    _switches[E_SWITCH_SELECTION] = OFF;
+
+  if (!PRESSED(E_KEY_MENUBAR))
+    _switches[E_SWITCH_MENUBAR] = OFF;
+
+  if (!PRESSED(E_KEY_PANEL))
+    _switches[E_SWITCH_PANEL] = OFF;
+
+  if (!PRESSED(E_KEY_EXIT))
+    _switches[E_SWITCH_EXIT] = OFF;
+}
+
 bool KeyManager::up() {
   return (PRESSED(E_KEY_MOVE_UP));
 }
@@ -91,6 +106,14 @@ bool KeyManager::right() {
 
 bool KeyManager::selection() {
   return (PRESSED(E_KEY_SELECTION));
+}
+
+bool KeyManager::menubar() {
+  return (PRESSED(E_KEY_MENUBAR));
+}
+
+bool KeyManager::panel() {
+  return (PRESSED(E_KEY_PANEL));
 }
 
 bool KeyManager::exit() {

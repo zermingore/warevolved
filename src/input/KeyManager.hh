@@ -23,7 +23,9 @@ enum e_timer
 enum e_switch
 {
   E_SWITCH_SELECTION = 0, // in-game selection menu
-  //E_SWITCH_ACTION, // action menu (after moving a unit)
+
+  E_SWITCH_MENUBAR,
+  E_SWITCH_PANEL,
 
   E_SWITCH_EXIT, // exit request
 
@@ -79,6 +81,8 @@ public:
   bool left();
   bool right();
   bool selection();
+  bool menubar();
+  bool panel();
   bool exit();
 
   /** \brief Maps keyboard keys to function
@@ -102,6 +106,10 @@ public:
    ** \return switch status
    */
   void setSwitchStatus(e_switch index, bool status);
+
+  /** \brief resets _switches status, if needed
+   */
+  void resetSwitches();
 
   /** \brief returns true if the key matching index is ready
    ** \return true if the key matching index is ready

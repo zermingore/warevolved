@@ -22,12 +22,6 @@ public:
    */
   Cursor();
 
-  /** \brief Constructor which sets cursor, in function of map size
-   ** \param nbColumns number of columns in map (in cells)
-   ** \param nbLines number of lines in map (in cells)
-   */
-  Cursor(unsigned int nbColumns, unsigned int nbLines);
-
   /** \brief Destructor
    */
   ~Cursor();

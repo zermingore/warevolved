@@ -7,14 +7,14 @@ Settings *g_settings;
 
 
 Context::Context() :
-    _window (NULL)
+    _window (nullptr)
 {
   g_settings = new Settings(0, 0, 0); // depth, stencil, alias
   _system = new System(2, 0);
 }
 
 Context::Context(bool fullscreen) :
-        _window (NULL)
+        _window (nullptr)
 {
   if (fullscreen)
     g_settings = new Settings(24, 8, 4);

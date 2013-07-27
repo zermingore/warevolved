@@ -129,6 +129,9 @@
 ** TODO Libraries
 *** TODO switch 'on demand' (at compilation time)
 	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
+** TODO Sprites management
+   merge on common themes
+   1 theme -> 1 load, 1 free
 
 * TODO Menu
 ** DONE Stack implementation
@@ -153,6 +156,8 @@
    was too big
    (running for a long time ?)
    overflow trouble ?
+** TODO Font Cleanup segfault (launched from a terminal)
+** TODO In-game menu: Escape key <> Cancel entry
 
 ** DONE [#B] Add Doxygen Comments in headers
    CLOSED: [2013-04-19 Fri 16:33]

@@ -23,6 +23,21 @@
 ** war_fog unit is displayed for 3 days (even if it's gone)
 ** structures ? (bunker, command center...)
 ** blind shots : 25% hit rate ; 50% damages
+** action: velocity & ammo & aim Gauges
+** map: buildings / tunnels, units can enter (change view [-> map])
+** multi scale levels (microing a soldier [inside a building]), macroing a chopper
+** macro scale: not sure where small units are (eventually, fires on more than one cell at a time)
+   could use a delay between sight by micro units and sight by macro units
+** gas stations / hospital / market control
+** wind ?
+** field of earing
+** patrol
+** motion
+   a plane cannot perform a 180
+   nor a chopper (function of velocity)
+** macro / micro
+   is a vehicule a macro or micro ?
+   transport, Tank, Jeep
 
 
 * UNITS

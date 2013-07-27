@@ -23,7 +23,6 @@ int main(int ac, const char **av)
   Game *game = new Game();
   game->run();
 
-
 # ifdef DEBUG_LEAKS
   delete context;
   delete game;

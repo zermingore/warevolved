@@ -19,6 +19,7 @@ Event::Event(KeyManager *km, GraphicEngine *ge) :
 Event::~Event() {
 }
 
+
 bool Event::process()
 {
   while (WINDOW->pollEvent(_event))
@@ -30,18 +31,11 @@ bool Event::process()
       return false;
     }
   }
-  if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) &&
-      (_km->getSwitchStatus(E_SWITCH_EXIT) == OFF))
-  {
-    g_status->exitCurrentMode();
-    _inGameMenu->resetSelectedEntry();
-    _km->setSwitchStatus(E_SWITCH_EXIT, ON);
-  }
 
   if (_event.type == sf::Event::KeyReleased)
     this->releasedKeys();
 
-  this->panel();
+  this->panel(); // in all mode, for now
 
   switch (CURRENT_MODE)
   {
@@ -61,23 +55,40 @@ bool Event::process()
       this->moveUnit();
       break;
 
-    case E_MODE_NONE: // empty mode stack
+    case E_MODE_NONE: // mode stack is empty
       WINDOW->close();
       return false;
 
     default:
-      this->game();
-      break;
+      return (this->game());
   }
 
   return true;
 }
 
-void Event::panel() {
+
+void Event::panel()
+{
+  if (_km->panel() && _km->getSwitchStatus(E_SWITCH_PANEL) == OFF)
+  {
+    DEBUG_PRINT("PANEL");
+    _km->setSwitchStatus(E_SWITCH_PANEL, ON);
+    return;
+  }
 }
+
 
 void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 {
+  if (_km->exit() && _km->getSwitchStatus(E_SWITCH_EXIT) == OFF)
+  {
+    g_status->exitCurrentMode();
+    _inGameMenu->build(CURRENT_MODE); // re-build menu at selection state
+    _km->setSwitchStatus(E_SWITCH_EXIT, ON);
+
+    return; // we just quit the mode
+  }
+
   // ---------- Selection ---------- //
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
@@ -124,6 +135,23 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 
 void Event::selectionEntriesMenu(EntriesMenu *menu)
 {
+  if (_km->exit() && _km->getSwitchStatus(E_SWITCH_EXIT) == OFF)
+  {
+    e_mode old_mode = CURRENT_MODE;
+    _inGameMenu->resetSelectedEntry();
+    _inGameMenu->loadMenu(g_status->popCurrentMode()->getMenu());
+
+    // we were dealing with orders, return to the unit position
+    if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
+    {
+      g_status->exitCurrentMode();
+      _inGameMenu->build(CURRENT_MODE); // re-build menu at selection state
+    }
+    _km->setSwitchStatus(E_SWITCH_EXIT, ON);
+
+    return; // we just quit this mode
+  }
+
   // made a choice in selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
@@ -146,8 +174,20 @@ void Event::selectionEntriesMenu(EntriesMenu *menu)
 }
 
 
-void Event::game()
+bool Event::game()
 {
+  if (_km->exit() && _km->getSwitchStatus(E_SWITCH_EXIT) == OFF)
+  {
+    g_status->exitCurrentMode();
+    _km->setSwitchStatus(E_SWITCH_EXIT, ON);
+    WINDOW->close();
+
+    return false;
+  }
+
+  if (_km->menubar() && _km->getSwitchStatus(E_SWITCH_MENUBAR) == OFF)
+    _km->setSwitchStatus(E_SWITCH_MENUBAR, ON);
+
   // opened selection menu
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
@@ -158,13 +198,13 @@ void Event::game()
     {
       DEBUG_PRINT("exec");
       g_status->exitCurrentMode();
-      return;
+      return true;
     }
 
     if (CURRENT_MODE == E_MODE_MOVING_UNIT)
     {
       g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
-      return;
+      return true;
     }
 
     _path->clearPath();
@@ -197,6 +237,8 @@ void Event::game()
     CURSOR->moveRight();
     _km->setReady(E_TIMER_MOVE_RIGHT, false);
   }
+
+  return true;
 }
 
 void Event::releasedKeys()
@@ -216,9 +258,5 @@ void Event::releasedKeys()
   if (!_km->right())
     _km->restartTimer(E_TIMER_MOVE_RIGHT);
 
-  if (!_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == ON)
-    _km->setSwitchStatus(E_SWITCH_SELECTION, OFF);
-
-  if (!_km->exit())
-    _km->setSwitchStatus(E_SWITCH_EXIT, OFF);
+  _km->resetSwitches();
 }

@@ -12,16 +12,6 @@ Cursor::Cursor() :
   _middle.y = _image->getTexture()->getSize().y / 2;
 }
 
-Cursor::Cursor(unsigned int nbColumns, unsigned int nbLines) :
-  _nbColumns (nbColumns),
-  _nbLines (nbLines)
-{
-  _image = GETIMAGE("cursor");
-  _sprite = _image->getSprite();
-  _middle.x = _image->getTexture()->getSize().x / 2;
-  _middle.y = _image->getTexture()->getSize().y / 2;
-}
-
 Cursor::~Cursor()
 {
 # ifdef DEBUG
