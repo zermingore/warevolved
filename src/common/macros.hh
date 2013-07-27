@@ -10,7 +10,7 @@
 # define WINDOW_SIZE_X g_status->getWindow()->getSize().x
 # define WINDOW_SIZE_Y g_status->getWindow()->getSize().y
 
-# define CURSOR g_status->getCursor()
+# define CURSOR g_interface->getCursor()
 # define CURRENT_MODE g_status->getCurrentMode()
 
 /** \brief SFML key detection

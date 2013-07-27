@@ -3,28 +3,9 @@
 
 # include <common/enums/mode.hh>
 # include <game/Map.hh>
-# include <interface/Cursor.hh>
 # include <interface/menus/InGameMenu.hh>
 # include <common/State.hh>
 # include <stack>
-
-/** \brief Side Panel possible positions
- */
-enum e_panel_position
-{
-  E_PANEL_DEACTIVATED = 0,
-  E_PANEL_LEFT,
-  E_PANEL_RIGHT
-};
-
-/** \brief Menu Bar possible positions
- */
-enum e_menu_bar_position
-{
-  E_MENU_BAR_DEACTIVATED = 0,
-  E_MENU_BAR_TOP,
-  E_MENU_BAR_BOTTOM
-};
 
 
 /** \brief stores game status information such as
@@ -40,12 +21,6 @@ public:
   /** \brief Destructor
    */
   ~Status();
-
-  /** \brief _cursor getter
-   */
-  Cursor* getCursor();
-  e_panel_position getPanelPosition();
-  e_menu_bar_position getMenuBarPosition();
 
   /** \brief returns selected cell's coordinates
    */
@@ -99,12 +74,10 @@ public:
    */
   e_mode getCurrentMode();
 
-
   /** \brief _window setter
    **   updates _renderX and _renderY
    */
   void setWindow(sf::RenderWindow *window);
-  void setCursor(Cursor *cursor);
   void setMap(Map *map);
 
   /** \brief stacks a new mode on _modes
@@ -131,31 +104,19 @@ public:
 private:
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
   sf::RenderWindow *_window; ///< main Rendering Window
-  Cursor *_cursor; ///< map Cursor
   Map *_map; ///< storing map
-
-  // Interface Status
-  e_panel_position _panelPosition; ///< Side panel position (if any)
-  e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   std::stack<State*> _states; ///< States stack
 
   Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
 
-  // Cells Size
   unsigned int _cellWidth; ///< cells width (in px)
   unsigned int _cellHeight; ///< cells height (in px)
-
-  // Graphic: space left for rendering
   unsigned int _gridThickness; ///< cells delimiter thickness (in px)
-
   unsigned int _gridOffsetX; ///< x position from where we start drawing the grid
   unsigned int _gridOffsetY; ///< y position from where we start drawing the grid
-
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
-
-  Coords _cursorSave; ///< Cursor position save
 };
 
 #endif /* !STATUS_HH_ */

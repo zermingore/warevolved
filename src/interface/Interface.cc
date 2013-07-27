@@ -1,19 +1,32 @@
 #include <interface/Interface.hh>
 #include <common/globals.hh>
 
-Interface::Interface()
+
+Interface::Interface() :
+  _panelPosition (E_PANEL_DEACTIVATED),
+  _menuBarPosition (E_MENU_BAR_DEACTIVATED)
 {
   _cursor = new Cursor();
   _path = new PathFinding();
   _inGameMenu = new InGameMenu();
-
-  g_status->setCursor(_cursor);
 }
 
 Interface::~Interface() {
   delete _inGameMenu;
   delete _path;
   delete _cursor;
+}
+
+Cursor *Interface::getCursor() {
+  return _cursor;
+}
+
+e_panel_position Interface::getPanelPosition() {
+  return _panelPosition;
+}
+
+e_menu_bar_position Interface::getMenuBarPosition() {
+  return _menuBarPosition;
 }
 
 InGameMenu *Interface::getInGameMenu() {
@@ -26,6 +39,10 @@ PathFinding *Interface::getPath() {
 
 void Interface::setPathOrigin(Coords coords) {
   _path->setOrigin(coords);
+}
+
+void Interface::incrementPanelPosition() {
+  _panelPosition = static_cast<e_panel_position> ((_panelPosition + 1) % E_PANEL_NB_POSITIONS);
 }
 
 void Interface::draw()

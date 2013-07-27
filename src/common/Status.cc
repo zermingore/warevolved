@@ -1,13 +1,12 @@
 #include <common/Status.hh>
 #include <common/include.hh>
+#include <common/macros.hh>
+#include <common/globals.hh>
 
 
 Status::Status() :
   _window (NULL),
-  _cursor (NULL),
   _map (NULL),
-  _panelPosition (E_PANEL_DEACTIVATED),
-  _menuBarPosition (E_MENU_BAR_DEACTIVATED),
   _currentFPS (0),
   _cellWidth (0),
   _cellHeight (0),
@@ -20,18 +19,6 @@ Status::Status() :
 }
 
 Status::~Status() {
-}
-
-Cursor* Status::getCursor() {
-  return _cursor;
-}
-
-e_panel_position Status::getPanelPosition() {
-  return _panelPosition;
-}
-
-e_menu_bar_position Status::getMenuBarPosition() {
-  return _menuBarPosition;
 }
 
 e_mode Status::getCurrentMode()
@@ -64,8 +51,8 @@ void Status::exitCurrentMode(bool skip)
     return;
   }
 
-  if (_cursor)
-    _cursor->setCoords(_states.top()->getCursorCoords());
+  if (CURSOR)
+    CURSOR->setCoords(_states.top()->getCursorCoords());
 
   _states.pop();
 }
@@ -84,7 +71,7 @@ Coords Status::getSelectedCell() {
 }
 
 void Status::cellSelection() {
-	_selectedCell = _cursor->getCoords();
+	_selectedCell = CURSOR->getCoords();
 }
 
 sf::RenderWindow *Status::getWindow() {
@@ -135,10 +122,6 @@ void Status::setWindow(sf::RenderWindow *window)
   // initialize render room
   _renderX = _window->getSize().x;
   _renderY = _window->getSize().y;
-}
-
-void Status::setCursor(Cursor *cursor) {
-  _cursor = cursor;
 }
 
 void Status::setMap(Map *map) {

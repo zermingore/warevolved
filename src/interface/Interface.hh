@@ -6,6 +6,29 @@
 # include <game/PathFinding.hh>
 
 
+/** \brief Side Panel possible positions
+ */
+enum e_panel_position
+{
+  E_PANEL_DEACTIVATED = 0,
+  E_PANEL_LEFT,
+  E_PANEL_RIGHT,
+
+  E_PANEL_NB_POSITIONS // useful with modulo (++position % nb)
+};
+
+/** \brief Menu Bar possible positions
+ */
+enum e_menu_bar_position
+{
+  E_MENU_BAR_DEACTIVATED = 0,
+  E_MENU_BAR_TOP,
+  E_MENU_BAR_BOTTOM,
+
+  E_MENU_BAR_NB_POSITIONS // useful with modulo (++position % nb)
+};
+
+
 // TODO method draw: path, menus
 
 /** \brief Interface class
@@ -23,6 +46,23 @@ public:
   /** Destructor
    */
   ~Interface();
+
+  /** \brief _cursor getter
+   */
+  Cursor *getCursor();
+
+  /** \brief side panel position getter
+   */
+  e_panel_position getPanelPosition();
+
+  /** \brief side panel position getter
+   */
+  e_menu_bar_position getMenuBarPosition();
+
+  /** \brief sets panel position to the next position
+   ** loops over the E_PANEL_NB_POSITIONS possibilities
+   */
+  void incrementPanelPosition();
 
   /** in-game menu getter
    ** \return _inGameMenu
@@ -43,10 +83,13 @@ public:
    */
   void draw();
 
+
 private:
   Cursor *_cursor; ///< Map Cursor
   InGameMenu *_inGameMenu; ///< in game menu
   PathFinding *_path; ///< current path
+  e_panel_position _panelPosition; ///< Side panel position (if any)
+  e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
 };
 
 #endif /* !INTERFACE_HH_ */

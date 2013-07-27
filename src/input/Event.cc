@@ -71,6 +71,7 @@ void Event::panel()
 {
   if (_km->panel() && _km->getSwitchStatus(E_SWITCH_PANEL) == OFF)
   {
+    g_interface->incrementPanelPosition();
     DEBUG_PRINT("PANEL");
     _km->setSwitchStatus(E_SWITCH_PANEL, ON);
     return;

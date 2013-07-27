@@ -7,7 +7,7 @@ State::State(e_mode mode) :
   _mode (mode),
   _menu (nullptr)
 {
-  if (g_status->getCursor())
+  if (CURSOR)
     _cursorCoords = CURSOR->getCoords();
 }
 
@@ -16,7 +16,7 @@ State::State(e_mode mode, EntriesMenu *menu) :
   _mode (mode)
 {
   _menu = menu;
-  if (g_status->getCursor())
+  if (CURSOR)
     _cursorCoords = CURSOR->getCoords();
 }
 

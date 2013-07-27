@@ -53,7 +53,7 @@ void GraphicEngine::drawBackground() // TODO (map background)
 
 void GraphicEngine::drawPanel()
 {
-  if (g_status->getPanelPosition() == E_PANEL_DEACTIVATED)
+  if (g_interface->getPanelPosition() == E_PANEL_DEACTIVATED)
     return;
 
   // TODO manage removal
@@ -69,7 +69,7 @@ void GraphicEngine::drawPanel()
 
 void GraphicEngine::drawMenuBar()
 {
-  if (g_status->getMenuBarPosition() == E_MENU_BAR_DEACTIVATED)
+  if (g_interface->getMenuBarPosition() == E_MENU_BAR_DEACTIVATED)
     return;
 
   // TODO manage removal
