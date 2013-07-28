@@ -14,19 +14,25 @@
 GraphicEngine::GraphicEngine()
 {
   g_status->getMap()->init(); // TODO move
+  g_status->resetRender();
+
+  this->initRoom(); // TODO call only @init and when needed (panelPosition modified)
+
   _IDTST = 0;
 }
 
 GraphicEngine::~GraphicEngine() {
 }
 
+
 void GraphicEngine::initRoom()
 {
   // = scroll ? 0 : (g_status->getCellWidth() + g_status->getCellHeight()) / 4;
-  if (1) // !scroll // TODO split offset bottom, ...
+  //if (!scroll) // TODO split offset bottom, ...
   {
-    g_status->setGridOffsetX((g_status->getRenderX() - CELL_WIDTH * g_status->getMap()->getNbColumns()) / 2);
-    g_status->setGridOffsetY((g_status->getRenderY() - CELL_HEIGHT * g_status->getMap()->getNbLines()) / 2);
+    // offset = 1/2 left room
+    g_status->setGridOffsetX((g_status->getRenderX() - CELL_WIDTH * NB_COLUMNS) / 2);
+    g_status->setGridOffsetY((g_status->getRenderY() - CELL_HEIGHT * NB_LINES) / 2);
   }
 }
 
@@ -35,57 +41,22 @@ void GraphicEngine::drawScene()
 {
   this->drawBackground();
 
-  this->drawPanel();
-  this->drawMenuBar();
-  this->initRoom(); // TODO call only @init and when needed (panelPosition modified)
-
   this->drawCells();
   this->drawGrid();
-
-  this->drawInterface();
+  g_interface->draw();
 }
 
 
 void GraphicEngine::drawBackground() // TODO (map background)
 {
+  //WINDOW->clear();
   return;
 }
 
-void GraphicEngine::drawPanel()
-{
-  if (g_interface->getPanelPosition() == E_PANEL_DEACTIVATED)
-    return;
-
-  // TODO manage removal
-  // TODO update render zone size if there's a new panel
-
-  // for now, drawing a line to delimit the panel zone
-  sf::Vertex line[2] = {
-    sf::Vector2f (0.66f * WINDOW_SIZE_X, 0),
-    sf::Vector2f (0.66f * WINDOW_SIZE_X, WINDOW_SIZE_Y)
-  };
-  WINDOW->draw(line, 2, sf::Lines);
-}
-
-void GraphicEngine::drawMenuBar()
-{
-  if (g_interface->getMenuBarPosition() == E_MENU_BAR_DEACTIVATED)
-    return;
-
-  // TODO manage removal
-  // TODO update render zone size if there's a new bar
-
-  // for now, drawing a line to delimit the menu zone
-  sf::Vertex line[2] = {sf::Vector2f (0, CELL_HEIGHT / 2),
-						sf::Vector2f (WINDOW_SIZE_X, (CELL_WIDTH + CELL_HEIGHT) / 4)};
-  WINDOW->draw(line, 2, sf::Lines);
-}
-
-
 void GraphicEngine::drawCells()
 {
-  for (unsigned int i = 0; i < g_status->getMap()->getNbColumns(); ++i)
-    for (unsigned int j = 0; j < g_status->getMap()->getNbLines(); ++j)
+  for (unsigned int i = 0; i < NB_COLUMNS; ++i)
+    for (unsigned int j = 0; j < NB_LINES; ++j)
   	{
       //e_terrains terrain = g_status->getMap()->getTerrain(i, j);
       // _rm->getImage(E_TYPES_TERRAIN, [g_status->getMap()->getTerrain(i, j)])->draw()
@@ -117,9 +88,4 @@ void GraphicEngine::drawGrid()
                             j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y);
       WINDOW->draw(rectangle);
     }
-}
-
-
-void GraphicEngine::drawInterface() {
-  g_interface->draw();
 }

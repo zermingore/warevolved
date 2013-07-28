@@ -35,7 +35,7 @@ bool Event::process()
   if (_event.type == sf::Event::KeyReleased)
     this->releasedKeys();
 
-  this->panel(); // in all mode, for now
+  this->panels(); // in all mode, for now
 
   switch (CURRENT_MODE)
   {
@@ -47,7 +47,7 @@ bool Event::process()
       break;
 
     case E_MODE_ACTION_MENU:
-      //_path->shadowPath(); // TODO
+      //_path->shadowPath(); // TODO less visible path
       this->selectionEntriesMenu(_inGameMenu);
       break;
 
@@ -67,13 +67,19 @@ bool Event::process()
 }
 
 
-void Event::panel()
+void Event::panels()
 {
   if (_km->panel() && _km->getSwitchStatus(E_SWITCH_PANEL) == OFF)
   {
     g_interface->incrementPanelPosition();
-    DEBUG_PRINT("PANEL");
     _km->setSwitchStatus(E_SWITCH_PANEL, ON);
+    return;
+  }
+
+  if (_km->menubar() && _km->getSwitchStatus(E_SWITCH_MENUBAR) == OFF)
+  {
+    g_interface->incrementMenuBarPosition();
+    _km->setSwitchStatus(E_SWITCH_MENUBAR, ON);
     return;
   }
 }

@@ -5,8 +5,8 @@
 
 
 Status::Status() :
-  _window (NULL),
-  _map (NULL),
+  _window (nullptr),
+  _map (nullptr),
   _currentFPS (0),
   _cellWidth (0),
   _cellHeight (0),
@@ -114,14 +114,18 @@ unsigned int Status::getGridOffsetY() {
   return _gridOffsetY;
 }
 
+void Status::resetRender()
+{
+  _renderX = WINDOW_SIZE_X;
+  _renderY = WINDOW_SIZE_Y;
+}
 
 void Status::setWindow(sf::RenderWindow *window)
 {
   _window = window;
 
   // initialize render room
-  _renderX = _window->getSize().x;
-  _renderY = _window->getSize().y;
+  this->resetRender();
 }
 
 void Status::setMap(Map *map) {

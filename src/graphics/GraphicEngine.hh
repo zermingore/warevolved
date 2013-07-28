@@ -52,14 +52,6 @@ private:
    */
   void drawBackground();
 
-  /** \brief Draw side panel
-   */
-  void drawPanel();
-
-  /** \brief Draw menu bar
-   */
-  void drawMenuBar();
-
   /** \brief Draws cell content (terrain, unit)
    */
   void drawCells();
@@ -70,10 +62,6 @@ private:
   /** \brief draws the grid (map cells delimiter)
    */
   void drawGrid(unsigned int nb_line, unsigned int nb_column);
-
-  /** \brief Draw map cursor and interface
-   */
-  void drawInterface();
 
   unsigned int _IDTST; // rm
 };

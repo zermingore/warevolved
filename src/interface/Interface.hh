@@ -23,7 +23,7 @@ enum e_menu_bar_position
 {
   E_MENU_BAR_DEACTIVATED = 0,
   E_MENU_BAR_TOP,
-  E_MENU_BAR_BOTTOM,
+  E_MENU_BAR_BOTTOM, // not sure we'll allow this
 
   E_MENU_BAR_NB_POSITIONS // useful with modulo (++position % nb)
 };
@@ -64,6 +64,11 @@ public:
    */
   void incrementPanelPosition();
 
+  /** \brief sets menu bar position to the next position
+   ** loops over the E_MENU_BAR_NB_POSITIONS possibilities
+   */
+  void incrementMenuBarPosition();
+
   /** in-game menu getter
    ** \return _inGameMenu
    */
@@ -78,6 +83,14 @@ public:
    */
   void setPathOrigin(Coords coords);
 
+  /** \brief Draw side panel
+   */
+  void drawPanel();
+
+  /** \brief Draw menu bar
+   */
+  void drawMenuBar();
+
   /** \brief draws all element relative to the user's interface
    ** meaning: in-game menus, panels and path (from path-finding)
    */
@@ -90,6 +103,10 @@ private:
   PathFinding *_path; ///< current path
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
+  bool _modificationPanel; ///< notification: panel status changed
+  bool _modificationMenuBar; ///< notification: menu bar status changed
+  bool _drawPanel; ///< notification if we have to redraw the panel
+  bool _drawMenuBar; ///< notification if we have to redraw the menu bar
 };
 
 #endif /* !INTERFACE_HH_ */

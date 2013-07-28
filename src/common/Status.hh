@@ -74,6 +74,10 @@ public:
    */
   e_mode getCurrentMode();
 
+  /** \brief resets render zone, sets it to window size
+   */
+  void resetRender();
+
   /** \brief _window setter
    **   updates _renderX and _renderY
    */

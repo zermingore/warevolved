@@ -31,10 +31,11 @@ public:
 
 
 private:
-  /** \brief Processes events relative to panel requests
+  /** \brief Processes events relative to right panel requests
    **   (show, save game, ...)
+   ** and Menu bar
    */
-  void panel();
+  void panels();
 
   /** \brief Processes events while we're in the selection menu
    **   (for example arrows do not move game cursor but menu cursor)
