@@ -37,7 +37,6 @@ public:
    */
   e_terrains getTerrain();
 
-
   /** \brief _unitTextureId getter
    ** \return cell's terrain texture id
    **   (in Resources Manager std::map)
@@ -50,23 +49,27 @@ public:
    */
   unsigned int getTerrainTextureId(); // TODO move in a Terrain class
 
-
   /** \brief _unit setter
-   ** setts the unit \param unit in the cell
+   ** sets the unit \param unit in the cell
    **
    ** \param unit The unit to be set in the cell
    */
-  void setUnit(Unit *unit);
+  void setUnit(Unit &unit);
 
   /** \brief _terrain setter
-   ** setts the terrain \param terrain in the cell
+   ** sets the terrain \param terrain in the cell
    **
    ** \param terrain The terrain to be set in the cell
    */
-  void setTerrain(e_terrains terrain);
+  void setTerrain(const e_terrains terrain);
+
+  /** \brief draws cell's contents: terrain and unit
+   */
+  void draw();
 
 
 private:
+  Coords _coordinates; ///< cell's coordinates
   e_terrains _terrain; ///< Terrain type index (matching e_terrains)
   Unit *_unit; ///< Unit type index (matching e_terrains)
   unsigned int _terrainTextureId; ///< Terrain Texture id in the Resources Manager

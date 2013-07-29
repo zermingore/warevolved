@@ -55,6 +55,7 @@ void InGameMenu::build(e_mode mode)
 void InGameMenu::executeEntry()
 {
   e_mode old_mode = E_MODE_NONE;
+  Unit *selectedUnit = nullptr;
 
   switch ((*_entries)[_selectedEntry].getId())
   {
@@ -64,12 +65,17 @@ void InGameMenu::executeEntry()
 
     case E_ENTRIES_STOP:
       std::cout << "stop" << std::endl;
+      selectedUnit = g_status->getMap()->getUnit(_selectedUnitPosition);
+      selectedUnit->setLocation(CURSOR->getCoords());
+      //g_status->getMap()->setUnit(selectedUnit);
+      g_status->exitCurrentMode();
       break;
 
     case E_ENTRIES_MOVE:
       g_status->pushModeInGameMenu(E_MODE_MOVING_UNIT, this);
       std::cout << "move" << std::endl;
-      g_interface->setPathOrigin(CURSOR->getCoords());
+      _selectedUnitPosition = CURSOR->getCoords();
+      g_interface->setPathOrigin(_selectedUnitPosition);
       break;
 
     case E_ENTRIES_NEXT_TURN:

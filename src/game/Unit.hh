@@ -50,6 +50,16 @@ public:
    */
   unsigned int getCellY();
 
+  /** \brief gets unit's position
+   ** \return unit's cell location
+   */
+  Coords getLocation();
+
+  /** \brief sets unit's position
+   ** \param location: cell's coordinates to set unit's position
+   */
+  void setLocation(Coords location);
+
   /** \brief _motionValue getter
    ** \return number of cells the unit can cross in one turn
    */
@@ -75,6 +85,7 @@ public:
    */
   void draw();
 
+
 private:
   unsigned int _textureId; ///< Texture id in the Resources Manager std::map
   // _faction; // TODO with a e_faction
@@ -87,9 +98,11 @@ private:
   int _hp; ///< Health Points (-1: infinite)
   unsigned int _posX; ///< x position (in px) // NOTE: absolute ? / relative to _cell ?
   unsigned int _posY; ///< y position (in px)
+  //Coords _position; ///< Unit's cell relative position
 
   unsigned int _cellX; ///< x coordinate (column) on the map
   unsigned int _cellY; ///< y coordinate (row) on the map
+  Coords _location; ///< Unit's cell coordinates
 
   unsigned int _motionValue; ///< Number of cells a unit can cross in one turn
 };

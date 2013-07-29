@@ -117,8 +117,8 @@ private:
   bool _modificationMenuBar; ///< notification: menu bar status changed
   bool _drawPanel; ///< notification if we have to redraw the panel
   bool _drawMenuBar; ///< notification if we have to redraw the menu bar
-  unsigned int _panelCoords; ///< panel coordinates
-  unsigned int _menuBarCoords; ///< menu bar coordinates
+  unsigned int _panelX; ///< panel coordinates
+  unsigned int _menuBarY; ///< menu bar coordinates
 };
 
 #endif /* !INTERFACE_HH_ */

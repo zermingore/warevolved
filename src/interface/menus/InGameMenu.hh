@@ -9,6 +9,7 @@
 # define INGAMEMENU_HH_
 
 # include <interface/menus/EntriesMenu.hh>
+# include <game/Unit.hh>
 
 /** \brief in game menu class
  ** refers to the menu called when
@@ -26,6 +27,11 @@ public:
   /** \brief executes action matching _selectedEntry
    */
   void executeEntry();
+
+
+private:
+  Unit *_selectedUnit; ///< Current selected unit
+  Coords _selectedUnitPosition; ///< Position of the current selected unit
 };
 
 #endif /* !INGAMEMENU_HH_ */

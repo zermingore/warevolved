@@ -100,6 +100,7 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
   if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
   {
     g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
+    _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
     return;
   }
 

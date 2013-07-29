@@ -73,7 +73,6 @@ public:
    */
   e_terrains getTerrain(unsigned int x, unsigned int y);
 
-
   /** \brief gets the terrain image at coordinates (x, y)
    **
    ** \param x Coordinates according to columns
@@ -82,14 +81,23 @@ public:
    ** \return the Image matching the terrain
    **   located at coordinates (x, y)
    */
-  Image* getTerrainImage(unsigned int x, unsigned int y);
+  Image *getTerrainImage(unsigned int x, unsigned int y);
+
+  /** \brief _cells array getter
+   ** \return a pointer over the cells array
+   */
+  Cell **getCells();
+
+  /** \brief sets the given unit in the cells array
+   ** \param unit to set
+   */
+  void setUnit(Unit &u);
 
 
 private:
   unsigned int _nbColumns; ///< number of columns (x coordinate)
   unsigned int _nbLines; ///< number of lines (y coordinate)
-
-  Cell *_cells; ///< Array which contains every cells of the map
+  Cell **_cells; ///< Array which contains every cells of the map
 };
 
 #endif /* !MAP_HH_ */

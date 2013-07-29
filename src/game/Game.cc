@@ -9,6 +9,8 @@ Game::Game() :
 {
   // build map
   _map = new Map(8, 8);
+  g_status->setMap(_map);
+  _map->init();
 }
 
 Game::~Game()

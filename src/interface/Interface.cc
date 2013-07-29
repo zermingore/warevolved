@@ -8,7 +8,9 @@ Interface::Interface() :
   _modificationPanel (true),
   _modificationMenuBar (true),
   _drawPanel (true),
-  _drawMenuBar (true)
+  _drawMenuBar (true),
+  _panelX (0),
+  _menuBarY (0)
 {
   _cursor = new Cursor();
   _path = new PathFinding();
@@ -75,12 +77,12 @@ void Interface::setPanel()
   if (_panelPosition == E_PANEL_LEFT)
   {
     g_status->setGridOffsetX(offset + GRID_THICKNESS);
-    _panelCoords = WINDOW_SIZE_X - render_x - (render_x - CELL_WIDTH * NB_COLUMNS) / 2;
+    _panelX = WINDOW_SIZE_X - render_x - (render_x - CELL_WIDTH * NB_COLUMNS) / 2;
   }
   else
   {
     g_status->setGridOffsetX((render_x - CELL_WIDTH * NB_COLUMNS) / 2 - GRID_THICKNESS);
-    _panelCoords = render_x;
+    _panelX = render_x;
   }
 
   _modificationPanel = false;
@@ -89,7 +91,6 @@ void Interface::setPanel()
 
 void Interface::setMenuBar()
 {
-  DEBUG_PRINT_VALUE(_menuBarPosition);
   if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
   {
     g_status->setRenderY(WINDOW_SIZE_Y);
@@ -106,12 +107,12 @@ void Interface::setMenuBar()
   if (_menuBarPosition == E_MENU_BAR_TOP)
   {
     g_status->setGridOffsetY(offset + CELL_HEIGHT / 2 - GRID_THICKNESS);
-    _menuBarCoords = CELL_HEIGHT / 2;
+    _menuBarY = CELL_HEIGHT / 2;
   }
   else
   {
     g_status->setGridOffsetY(offset - GRID_THICKNESS);
-    _menuBarCoords = WINDOW_SIZE_Y - CELL_HEIGHT / 2;
+    _menuBarY = WINDOW_SIZE_Y - CELL_HEIGHT / 2;
   }
 
   _modificationMenuBar = false;
@@ -124,8 +125,8 @@ void Interface::drawPanel()
     return;
 
   sf::Vertex line[2] = {
-      sf::Vector2f (_panelCoords, 0),
-      sf::Vector2f (_panelCoords, WINDOW_SIZE_Y)
+      sf::Vector2f (_panelX, 0),
+      sf::Vector2f (_panelX, WINDOW_SIZE_Y)
   };
   WINDOW->draw(line, 2, sf::Lines);
 }
@@ -137,8 +138,8 @@ void Interface::drawMenuBar()
     return;
 
   sf::Vertex line[2] = {
-      sf::Vector2f (0, _menuBarCoords),
-      sf::Vector2f (WINDOW_SIZE_X, _menuBarCoords)
+      sf::Vector2f (0, _menuBarY),
+      sf::Vector2f (WINDOW_SIZE_X, _menuBarY)
   };
   WINDOW->draw(line, 2, sf::Lines);
 }

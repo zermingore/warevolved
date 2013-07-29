@@ -67,6 +67,15 @@ void Unit::setTextureId(unsigned int texture_id) {
   _textureId = texture_id;
 }
 
+Coords Unit::getLocation() {
+  return _location;
+}
+
+void Unit::setLocation(Coords location) {
+  _location = location;
+}
+
+
 void Unit::draw()
 {
   _image = GETIMAGE(_name);

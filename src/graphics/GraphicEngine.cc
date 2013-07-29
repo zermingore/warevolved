@@ -41,6 +41,11 @@ void GraphicEngine::drawScene()
 {
   this->drawBackground();
 
+  // perf
+  //  GETIMAGE(std::string("forest"))->drawAtCell(i, j);
+  //  GETIMAGE("forest")->drawAtCell(i, j);
+  //  GETIMAGE(&_IDTST, std::string("forest"))->drawAtCell(i, j);
+
   this->drawCells();
   this->drawGrid();
   g_interface->draw();
@@ -53,20 +58,15 @@ void GraphicEngine::drawBackground() // TODO (map background)
   return;
 }
 
+
 void GraphicEngine::drawCells()
 {
+  Cell **cells = g_status->getMap()->getCells();
+  // draws column by column
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)
   	{
-      //e_terrains terrain = g_status->getMap()->getTerrain(i, j);
-      // _rm->getImage(E_TYPES_TERRAIN, [g_status->getMap()->getTerrain(i, j)])->draw()
-      // _rm->getImage(g_status->getMap()->getTerrainId())->draw(i, j);
-
-      GETIMAGE(&_IDTST, std::string("forest"))->drawAtCell(i, j);
-
-      Unit *unit = g_status->getMap()->getUnit(i, j);
-      if (unit)
-        unit->draw();
+      cells[i * NB_COLUMNS + j]->draw();
   	}
 }
 
