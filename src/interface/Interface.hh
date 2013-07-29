@@ -83,6 +83,22 @@ public:
    */
   void setPathOrigin(Coords coords);
 
+  /** \brief draws all element relative to the user's interface
+   ** meaning: in-game menus, panels and path (from path-finding)
+   */
+  void draw();
+
+
+private:
+
+  /** \brief Initializes Panel position
+   */
+  void setPanel();
+
+  /** \brief Initializes Menu bar position
+   */
+  void setMenuBar();
+
   /** \brief Draw side panel
    */
   void drawPanel();
@@ -91,13 +107,7 @@ public:
    */
   void drawMenuBar();
 
-  /** \brief draws all element relative to the user's interface
-   ** meaning: in-game menus, panels and path (from path-finding)
-   */
-  void draw();
 
-
-private:
   Cursor *_cursor; ///< Map Cursor
   InGameMenu *_inGameMenu; ///< in game menu
   PathFinding *_path; ///< current path
@@ -107,6 +117,8 @@ private:
   bool _modificationMenuBar; ///< notification: menu bar status changed
   bool _drawPanel; ///< notification if we have to redraw the panel
   bool _drawMenuBar; ///< notification if we have to redraw the menu bar
+  unsigned int _panelCoords; ///< panel coordinates
+  unsigned int _menuBarCoords; ///< menu bar coordinates
 };
 
 #endif /* !INTERFACE_HH_ */

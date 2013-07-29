@@ -49,7 +49,7 @@ void GraphicEngine::drawScene()
 
 void GraphicEngine::drawBackground() // TODO (map background)
 {
-  //WINDOW->clear();
+  WINDOW->clear();
   return;
 }
 
