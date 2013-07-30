@@ -177,8 +177,9 @@
 ** TODO incomplete Ctors initialisation
 
 * TODO Optimization
-** retreive a Resource
+** DONE retreive a Resource
+   CLOSED: [2013-07-30 Tue 07:55]
    benchmark between
-     manually store an ID,
-	 use a std::map <const char*, unsigned int>
-	 use a std::map <std::string, unsigned int>
+     manually store an ID, : factor 1
+     use a std::map <const char*, unsigned int> : factor 2
+	 use a std::map <std::string, unsigned int> : factor 4

@@ -17,8 +17,6 @@ GraphicEngine::GraphicEngine()
   g_status->resetRender();
 
   this->initRoom(); // TODO call only @init and when needed (panelPosition modified)
-
-  _IDTST = 0;
 }
 
 GraphicEngine::~GraphicEngine() {
@@ -40,12 +38,6 @@ void GraphicEngine::initRoom()
 void GraphicEngine::drawScene()
 {
   this->drawBackground();
-
-  // perf
-  //  GETIMAGE(std::string("forest"))->drawAtCell(i, j);
-  //  GETIMAGE("forest")->drawAtCell(i, j);
-  //  GETIMAGE(&_IDTST, std::string("forest"))->drawAtCell(i, j);
-
   this->drawCells();
   this->drawGrid();
   g_interface->draw();

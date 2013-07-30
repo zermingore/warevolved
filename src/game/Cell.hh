@@ -68,12 +68,19 @@ public:
   void draw();
 
 
+
+  // rm
+  void printTimer();
+
 private:
   Coords _coordinates; ///< cell's coordinates
   e_terrains _terrain; ///< Terrain type index (matching e_terrains)
   Unit *_unit; ///< Unit type index (matching e_terrains)
   unsigned int _terrainTextureId; ///< Terrain Texture id in the Resources Manager
   unsigned int _unitTextureId; ///< Unit Texture id in the Resources Manager
+
+  unsigned int _IDTST; // rm
+  std::vector<sf::Int64> res1, res2, res3;
 };
 
 #endif /* !CELL_HH_ */

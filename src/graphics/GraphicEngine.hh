@@ -62,8 +62,6 @@ private:
   /** \brief draws the grid (map cells delimiter)
    */
   void drawGrid(unsigned int nb_line, unsigned int nb_column);
-
-  unsigned int _IDTST; // rm
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

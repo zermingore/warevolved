@@ -80,6 +80,6 @@ Image *Map::getTerrainImage(unsigned int x, unsigned int y)
   }
 }
 
-Cell** Map::getCells() {
+Cell **Map::getCells() {
   return _cells;
 }
