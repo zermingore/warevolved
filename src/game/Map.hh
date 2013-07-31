@@ -93,6 +93,11 @@ public:
    */
   void setUnit(Unit &u);
 
+  /** \brief moves the selected unit to the current cursor location
+   */
+  void moveUnit();
+
+
 
 private:
   unsigned int _nbColumns; ///< number of columns (x coordinate)

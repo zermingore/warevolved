@@ -13,7 +13,6 @@
  **   a terrain
  **   eventually, a unit
  */
-
 class Cell
 {
 public:
@@ -56,6 +55,10 @@ public:
    */
   void setUnit(Unit &unit);
 
+  /** \brief removes the unit in this cell
+   */
+  void removeUnit();
+
   /** \brief _terrain setter
    ** sets the terrain \param terrain in the cell
    **
@@ -68,19 +71,12 @@ public:
   void draw();
 
 
-
-  // rm
-  void printTimer();
-
 private:
   Coords _coordinates; ///< cell's coordinates
   e_terrains _terrain; ///< Terrain type index (matching e_terrains)
   Unit *_unit; ///< Unit type index (matching e_terrains)
   unsigned int _terrainTextureId; ///< Terrain Texture id in the Resources Manager
   unsigned int _unitTextureId; ///< Unit Texture id in the Resources Manager
-
-  unsigned int _IDTST; // rm
-  std::vector<sf::Int64> res1, res2, res3;
 };
 
 #endif /* !CELL_HH_ */

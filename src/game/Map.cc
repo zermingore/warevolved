@@ -83,3 +83,14 @@ Image *Map::getTerrainImage(unsigned int x, unsigned int y)
 Cell **Map::getCells() {
   return _cells;
 }
+
+
+void Map::moveUnit()
+{
+  Coords c = g_status->getSelectedCell();
+
+  Unit *tmp = _cells[c.x * NB_COLUMNS + c.y]->getUnit();
+  tmp->setCellCoordinates(CURSOR->getX(), CURSOR->getY());
+  _cells[CURSOR->getX() * NB_COLUMNS + CURSOR->getY()]->setUnit(*tmp);
+  _cells[c.x * NB_COLUMNS + c.y]->removeUnit();
+}
