@@ -66,15 +66,13 @@ void InGameMenu::executeEntry()
     case E_ENTRIES_STOP:
       selectedUnit = g_status->getMap()->getUnit(_selectedUnitPosition);
       selectedUnit->setLocation(CURSOR->getCoords());
-      g_status->getMap()->moveUnit();
-      g_status->exitCurrentMode(true);
-      g_status->exitCurrentMode(true);
-      g_status->exitCurrentMode(true);
+      if (_selectedUnitPosition != CURSOR->getCoords())
+        g_status->getMap()->moveUnit();
+      g_status->exitToMode(E_MODE_PLAYING, true);
       break;
 
     case E_ENTRIES_MOVE:
       g_status->pushModeInGameMenu(E_MODE_MOVING_UNIT, this);
-      std::cout << "move" << std::endl;
       _selectedUnitPosition = CURSOR->getCoords();
       g_interface->setPathOrigin(_selectedUnitPosition);
       break;

@@ -58,6 +58,25 @@ void Status::exitCurrentMode(bool skip)
 }
 
 
+void Status::exitToMode(e_mode mode, bool skip)
+{
+  while (_states.top()->getMode() != mode)
+  {
+#   ifdef DEBUG
+    if (_states.empty())
+    {
+      DEBUG_PRINT("exitToMode failure: _states stack is empty");
+      return;
+    }
+#   endif
+    _states.pop();
+
+    if (!skip && CURSOR)
+      CURSOR->setCoords(_states.top()->getCursorCoords());
+  }
+}
+
+
 State *Status::popCurrentMode()
 {
   State *tmp = _states.top();

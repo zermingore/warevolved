@@ -38,7 +38,11 @@ public:
     T y; ///< Y coordinate of the vector
 };
 
-typedef Vector2<unsigned int> Coords;
+// typedef Vector2<unsigned int> Coords;
+
+
+# include <SFML/Graphics.hpp>
+typedef sf::Vector2<unsigned int> Coords;
 
 
 #endif /* !VECTOR_HH_ */

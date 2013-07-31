@@ -64,6 +64,12 @@ public:
    */
   void exitCurrentMode(bool skip = false);
 
+  /** \brief pops _modes summit while current mode <> mode
+   ** exits the game if the stack is empty
+   ** \param skip retrieve Cursor position or not
+   */
+  void exitToMode(e_mode mode, bool skip = false);
+
   /** \brief pops _modes and returns summit
    ** \return Menu of the top of the stack
    */
