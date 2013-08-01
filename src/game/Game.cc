@@ -9,6 +9,10 @@ Game::Game() :
 {
   // build map
   _map = new Map(8, 8);
+  Player *player = new Player();
+  Player *player2 = new Player();
+  g_status->addPlayer(player);
+  g_status->addPlayer(player2);
   g_status->setMap(_map);
   _map->init();
 }

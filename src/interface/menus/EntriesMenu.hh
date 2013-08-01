@@ -1,7 +1,7 @@
 /*
- * EntriesMenu.hh
+ * interface/menus/EntriesMenu.hh
  *
- *  Created on: Jul 24, 2013
+ *  Created on: July 24, 2013
  *      Author: Zermingore
  */
 
@@ -66,7 +66,7 @@ public:
   /** \brief loads a previously saved menu
    ** \param menu menu to load
    */
-  void loadMenu(EntriesMenu* menu);
+  void loadMenu(EntriesMenu *menu);
 
 
 protected:

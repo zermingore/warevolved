@@ -79,6 +79,7 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Unit.$(OBJEXT) \
 	__top_srcdir__we-Terrain.$(OBJEXT) \
 	__top_srcdir__we-PathFinding.$(OBJEXT) \
+	__top_srcdir__we-Player.$(OBJEXT) \
 	__top_srcdir__we-Interface.$(OBJEXT) \
 	__top_srcdir__we-Cursor.$(OBJEXT) \
 	__top_srcdir__we-EntriesMenu.$(OBJEXT) \
@@ -256,6 +257,7 @@ game/Cell.cc					\
 game/Unit.cc					\
 game/Terrain.cc					\
 game/PathFinding.cc				\
+game/Player.cc					\
 \
 interface/Interface.cc			\
 interface/Cursor.cc				\
@@ -365,6 +367,7 @@ include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Map.Po
 include ./$(DEPDIR)/__top_srcdir__we-MenuEntry.Po
 include ./$(DEPDIR)/__top_srcdir__we-PathFinding.Po
+include ./$(DEPDIR)/__top_srcdir__we-Player.Po
 include ./$(DEPDIR)/__top_srcdir__we-Resource.Po
 include ./$(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
@@ -654,6 +657,20 @@ __top_srcdir__we-PathFinding.obj: game/PathFinding.cc
 #	$(AM_V_CXX)source='game/PathFinding.cc' object='__top_srcdir__we-PathFinding.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-PathFinding.obj `if test -f 'game/PathFinding.cc'; then $(CYGPATH_W) 'game/PathFinding.cc'; else $(CYGPATH_W) '$(srcdir)/game/PathFinding.cc'; fi`
+
+__top_srcdir__we-Player.o: game/Player.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Player.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Player.Tpo -c -o __top_srcdir__we-Player.o `test -f 'game/Player.cc' || echo '$(srcdir)/'`game/Player.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Player.Tpo $(DEPDIR)/__top_srcdir__we-Player.Po
+#	$(AM_V_CXX)source='game/Player.cc' object='__top_srcdir__we-Player.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Player.o `test -f 'game/Player.cc' || echo '$(srcdir)/'`game/Player.cc
+
+__top_srcdir__we-Player.obj: game/Player.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Player.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Player.Tpo -c -o __top_srcdir__we-Player.obj `if test -f 'game/Player.cc'; then $(CYGPATH_W) 'game/Player.cc'; else $(CYGPATH_W) '$(srcdir)/game/Player.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Player.Tpo $(DEPDIR)/__top_srcdir__we-Player.Po
+#	$(AM_V_CXX)source='game/Player.cc' object='__top_srcdir__we-Player.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Player.obj `if test -f 'game/Player.cc'; then $(CYGPATH_W) 'game/Player.cc'; else $(CYGPATH_W) '$(srcdir)/game/Player.cc'; fi`
 
 __top_srcdir__we-Interface.o: interface/Interface.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Interface.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Interface.Tpo -c -o __top_srcdir__we-Interface.o `test -f 'interface/Interface.cc' || echo '$(srcdir)/'`interface/Interface.cc

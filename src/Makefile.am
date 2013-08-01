@@ -45,6 +45,7 @@ game/Cell.cc					\
 game/Unit.cc					\
 game/Terrain.cc					\
 game/PathFinding.cc				\
+game/Player.cc					\
 \
 interface/Interface.cc			\
 interface/Cursor.cc				\

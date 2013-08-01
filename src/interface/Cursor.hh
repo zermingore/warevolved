@@ -87,6 +87,8 @@ private:
   unsigned int _nbLines; ///< number of Lines in map
 
   Coords _coords; ///< Cursor Coordinates
+  Coords _lastKnownPosition; ///< position to remember
+                             ///    when switching to next turn
 
   Image* _image; ///< Cursor's Image
   sf::Sprite* _sprite; ///< pointer over _image->getSprite()

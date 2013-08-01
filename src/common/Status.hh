@@ -1,11 +1,12 @@
 #ifndef STATUS_HH_
 # define STATUS_HH_
 
+# include <stack>
 # include <common/enums/mode.hh>
 # include <game/Map.hh>
 # include <interface/menus/InGameMenu.hh>
 # include <common/State.hh>
-# include <stack>
+# include <game/Player.hh>
 
 
 /** \brief stores game status information such as
@@ -110,6 +111,18 @@ public:
   void setGridOffsetX(unsigned int grid_offset_x);
   void setGridOffsetY(unsigned int grid_offset_y);
 
+  /** \brief Switches to the next player
+   **   adapt cursor color
+   **   sets cursor's position to the
+   **     last known position of the new current faction
+   */
+  void nextPlayer();
+
+  /** \brief adds a new Player in the Player's vector
+   ** \param player Player to add
+   */
+  void addPlayer(Player *player);
+
 
 private:
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
@@ -127,6 +140,9 @@ private:
   unsigned int _gridOffsetY; ///< y position from where we start drawing the grid
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
+
+  std::vector<Player*> _players;
+  unsigned int _currentPlayer; ///< index in the _players array
 };
 
 #endif /* !STATUS_HH_ */

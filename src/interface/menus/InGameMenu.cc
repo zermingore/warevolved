@@ -78,8 +78,8 @@ void InGameMenu::executeEntry()
       break;
 
     case E_ENTRIES_NEXT_TURN:
-      std::cout << "next turn" << std::endl;
-      g_status->exitCurrentMode();
+      g_status->nextPlayer();
+      g_status->exitCurrentMode(true);
       break;
 
     case E_ENTRIES_VOID1:

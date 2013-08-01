@@ -48,7 +48,7 @@ std::vector<MenuEntry> *EntriesMenu::getEntries() {
   return _entries ? _entries : nullptr;
 }
 
-void EntriesMenu::loadMenu(EntriesMenu* menu)
+void EntriesMenu::loadMenu(EntriesMenu *menu)
 {
   _entries = menu->getEntries();
   _nbEntries = _entries->size();

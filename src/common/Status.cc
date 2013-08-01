@@ -186,3 +186,17 @@ void Status::setGridOffsetX(unsigned int grid_offset_x) {
 void Status::setGridOffsetY(unsigned int grid_offset_y) {
   _gridOffsetY = grid_offset_y;
 }
+
+
+void Status::nextPlayer()
+{
+  _players[_currentPlayer]->saveCursorPosition();
+  ++_currentPlayer;
+  _currentPlayer %= _players.size();
+  CURSOR->setCoords(_players[_currentPlayer]->getLastCursorPosition());
+  // FIXME set cursor color
+}
+
+void Status::addPlayer(Player *player) {
+  _players.push_back(player);
+}
