@@ -89,6 +89,10 @@ public:
    **   updates _renderX and _renderY
    */
   void setWindow(sf::RenderWindow *window);
+
+  /** \brief sets map
+   ** \param map current map
+   */
   void setMap(Map *map);
 
   /** \brief stacks a new mode on _modes
@@ -106,10 +110,24 @@ public:
   void setCellWidth(unsigned int cell_width);
   void setCellHeight(unsigned int cell_height);
   void setGridThickness(unsigned int grid_thickness);
+
+  /** \brief sets drawable zone size width
+   ** \param render_x new render zone width
+   */
   void setRenderX(unsigned int render_x);
+
+  /** \brief sets drawable zone size height
+   ** \param render_x new render zone height
+   */
   void setRenderY(unsigned int render_y);
+  void setGridOffset();
   void setGridOffsetX(unsigned int grid_offset_x);
   void setGridOffsetY(unsigned int grid_offset_y);
+
+  /** \brief adds a new Player in the Player's vector
+   ** \param player Player to add
+   */
+  void addPlayer(Player *player);
 
   /** \brief Switches to the next player
    **   adapt cursor color
@@ -117,11 +135,6 @@ public:
    **     last known position of the new current faction
    */
   void nextPlayer();
-
-  /** \brief adds a new Player in the Player's vector
-   ** \param player Player to add
-   */
-  void addPlayer(Player *player);
 
 
 private:
@@ -141,7 +154,7 @@ private:
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 
-  std::vector<Player*> _players;
+  std::vector<Player*> _players; ///< array of players
   unsigned int _currentPlayer; ///< index in the _players array
 };
 

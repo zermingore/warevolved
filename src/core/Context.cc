@@ -7,14 +7,14 @@ Settings *g_settings;
 
 
 Context::Context() :
-    _window (nullptr)
+  _window (nullptr)
 {
   g_settings = new Settings(0, 0, 0); // depth, stencil, alias
   _system = new System(2, 0);
 }
 
 Context::Context(bool fullscreen) :
-        _window (nullptr)
+  _window (nullptr)
 {
   if (fullscreen)
     g_settings = new Settings(24, 8, 4);
@@ -34,10 +34,10 @@ Context::~Context()
 
 sf::RenderWindow* Context::init()
 {
-#ifdef DEBUG
+# ifdef DEBUG
   if (_system->getSfmlMajor() < 2)
     std::cerr << "SFML version not officially supported" << std::endl;
-#endif
+# endif
 
   sf::ContextSettings contextSettings(g_settings->getDepth(),
                                       g_settings->getStencil(),

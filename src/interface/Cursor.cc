@@ -8,6 +8,7 @@ Cursor::Cursor() :
 {
   _image = GETIMAGE("cursor");
   _sprite = _image->getSprite();
+  _sprite->setColor(sf::Color(255, 0, 0, 255));
   _middle.x = _image->getTexture()->getSize().x / 2;
   _middle.y = _image->getTexture()->getSize().y / 2;
 }
@@ -76,6 +77,10 @@ void Cursor::setLimits(unsigned int nbColumns, unsigned int nbLines)
   _nbLines = nbLines;
 }
 
+
+void Cursor::setColor(Color color) {
+  _sprite->setColor(color);
+}
 
 // Cursor Motion
 bool Cursor::moveUp()

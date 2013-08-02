@@ -14,11 +14,15 @@ Status::Status() :
   _gridOffsetX (0),
   _gridOffsetY (0),
   _renderX (0),
-  _renderY (0)
+  _renderY (0),
+  _currentPlayer (0)
 {
 }
 
-Status::~Status() {
+Status::~Status()
+{
+  for (auto it: _players)
+    delete it;
 }
 
 e_mode Status::getCurrentMode()
@@ -183,10 +187,20 @@ void Status::setGridOffsetX(unsigned int grid_offset_x) {
   _gridOffsetX = grid_offset_x;
 }
 
+void Status::setGridOffset()
+{
+  // offset = 1/2 left room
+  _gridOffsetX = (_renderX - _cellWidth * _map->getNbColumns()) / 2;
+  _gridOffsetY = (_renderY - _cellHeight * _map->getNbLines()) / 2;
+}
+
 void Status::setGridOffsetY(unsigned int grid_offset_y) {
   _gridOffsetY = grid_offset_y;
 }
 
+void Status::addPlayer(Player *player) {
+  _players.push_back(player);
+}
 
 void Status::nextPlayer()
 {
@@ -194,9 +208,6 @@ void Status::nextPlayer()
   ++_currentPlayer;
   _currentPlayer %= _players.size();
   CURSOR->setCoords(_players[_currentPlayer]->getLastCursorPosition());
+  CURSOR->setColor(_players[_currentPlayer]->getCursorColor());
   // FIXME set cursor color
-}
-
-void Status::addPlayer(Player *player) {
-  _players.push_back(player);
 }

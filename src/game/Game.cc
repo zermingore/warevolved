@@ -5,12 +5,14 @@
 
 
 Game::Game() :
-  _event (NULL)
+  _event (nullptr)
 {
   // build map
   _map = new Map(8, 8);
   Player *player = new Player();
   Player *player2 = new Player();
+  player->setCursorColor(Color(255, 0, 0));
+  player2->setCursorColor(Color(0, 255, 0));
   g_status->addPlayer(player);
   g_status->addPlayer(player2);
   g_status->setMap(_map);

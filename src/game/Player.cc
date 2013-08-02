@@ -18,6 +18,14 @@ Coords Player::getLastCursorPosition() {
   return _lastCursorPosition;
 }
 
+Color Player::getCursorColor() {
+  return _cursorColor;
+}
+
+void Player::setCursorColor(Color color) {
+  _cursorColor = color;
+}
+
 void Player::saveCursorPosition() {
   _lastCursorPosition = CURSOR->getCoords();
 }

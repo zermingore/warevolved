@@ -28,9 +28,10 @@ void GraphicEngine::initRoom()
   // = scroll ? 0 : (g_status->getCellWidth() + g_status->getCellHeight()) / 4;
   //if (!scroll) // TODO split offset bottom, ...
   {
-    // offset = 1/2 left room
-    g_status->setGridOffsetX((g_status->getRenderX() - CELL_WIDTH * NB_COLUMNS) / 2);
-    g_status->setGridOffsetY((g_status->getRenderY() - CELL_HEIGHT * NB_LINES) / 2);
+    g_status->setGridOffset();
+
+//    g_status->setGridOffsetX((g_status->getRenderX() - CELL_WIDTH * NB_COLUMNS) / 2);
+//    g_status->setGridOffsetY((g_status->getRenderY() - CELL_HEIGHT * NB_LINES) / 2);
   }
 }
 

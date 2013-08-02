@@ -31,6 +31,11 @@ public:
   sf::Sprite getSprite();
   sf::Sprite getSprite(int offset_x, int offset_y);
 
+  /** \brief sets the cursor color
+   ** \param color the color to set
+   */
+  void setColor(Color color);
+
   /** \brief X (column) coordinate getter
    */
   unsigned int getX();
@@ -90,8 +95,8 @@ private:
   Coords _lastKnownPosition; ///< position to remember
                              ///    when switching to next turn
 
-  Image* _image; ///< Cursor's Image
-  sf::Sprite* _sprite; ///< pointer over _image->getSprite()
+  Image *_image; ///< Cursor's Image
+  sf::Sprite *_sprite; ///< pointer over _image->getSprite()
 
   // middle of the SPRITE coordinates, avoid computing its value each frame
   sf::Vector2f _middle; ///< middle of the Cursor sprite

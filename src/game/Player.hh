@@ -50,6 +50,16 @@ public:
    */
   Coords getLastCursorPosition();
 
+  /** \brief return cursor color
+   ** \return _cursorColor
+   */
+  Color getCursorColor();
+
+  /** \brief sets cursor color
+   ** \param color _cursorColor value
+   */
+  void setCursorColor(Color color);
+
   /** \brief Saves current cursor position
    */
   void saveCursorPosition();
