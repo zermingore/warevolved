@@ -4,6 +4,19 @@
 #include <common/macros.hh>
 
 
+InGameMenu::InGameMenu() :
+  _selectedUnit(nullptr),
+  _battle(nullptr)
+{
+}
+
+InGameMenu::~InGameMenu() {
+}
+
+void InGameMenu::setBattle(Battle *battle) {
+  _battle = battle;
+}
+
 void InGameMenu::build(e_mode mode)
 {
   this->init();
@@ -78,8 +91,9 @@ void InGameMenu::executeEntry()
       break;
 
     case E_ENTRIES_NEXT_TURN:
-      g_status->nextPlayer();
+      _battle->nextPlayer();
       g_status->exitCurrentMode(true);
+      // reset _played in player unit list
       break;
 
     case E_ENTRIES_VOID1:

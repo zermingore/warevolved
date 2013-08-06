@@ -3,6 +3,18 @@
 #include <common/globals.hh>
 #include <interface/Interface.hh>
 
+Event::Event()
+{
+  _km = new KeyManager();
+
+  for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
+    _km->restartTimer(static_cast<e_timer>(i));
+
+  g_settings->setKeyRepeatDelay(150);
+  _inGameMenu = g_interface->getInGameMenu();
+  _path = g_interface->getPath();
+}
+
 
 Event::Event(KeyManager *km, GraphicEngine *ge) :
   _km(km),

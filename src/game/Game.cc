@@ -2,35 +2,24 @@
 #include <graphics/GraphicEngine.hh>
 #include <input/Event.hh>
 #include <common/globals.hh>
-
+#include <game/applications/Battle.hh>
 
 Game::Game() :
-  _event (nullptr)
+  _event (nullptr),
+  _currentApplication (nullptr)
 {
-  // build map
-  _map = new Map(8, 8);
-  Player *player = new Player();
-  Player *player2 = new Player();
-  player->setCursorColor(Color(255, 0, 0));
-  player2->setCursorColor(Color(0, 255, 0));
-  g_status->addPlayer(player);
-  g_status->addPlayer(player2);
-  g_status->setMap(_map);
-  _map->init();
+  _currentApplication = new Battle();
 }
 
-Game::~Game()
-{
-  delete _map;
+Game::~Game() {
   delete _event;
 }
 
 
 void Game::run()
 {
-  g_status->setMap(_map);
-  GraphicEngine* graphics = new GraphicEngine();
-  KeyManager* km = new KeyManager();
+  GraphicEngine *graphics = new GraphicEngine();
+  KeyManager *km = new KeyManager();
   _event = new Event(km, graphics);
 
 # ifdef DEBUG_PERFS
@@ -38,10 +27,13 @@ void Game::run()
   std::vector<sf::Int64> frame_generation;
 # endif
 
+
+  _currentApplication = new Battle;
   // Game loop
   while (WINDOW->isOpen() && _event->process())
   {
     graphics->drawScene();
+    //_currentApplication->run();
     WINDOW->display(); // Update the window
 
 #   ifdef DEBUG_PERFS
@@ -53,7 +45,7 @@ void Game::run()
   }
 
 
-// finished the main loop, displaying performances
+  // finished the main loop, displaying performances
 # ifdef DEBUG_PERFS
   for (unsigned int i = 0; i < frame_generation.size(); ++i)
   {
@@ -63,9 +55,6 @@ void Game::run()
   }
 # endif
 
-
-# ifdef DEBUG_LEAKS
-  //delete km;
-  //delete graphics;
-# endif
+  delete km;
+  delete graphics;
 }

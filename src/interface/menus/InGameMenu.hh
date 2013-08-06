@@ -10,6 +10,7 @@
 
 # include <interface/menus/EntriesMenu.hh>
 # include <game/Unit.hh>
+# include <game/applications/Battle.hh>
 
 /** \brief in game menu class
  ** refers to the menu called when
@@ -19,6 +20,18 @@
 class InGameMenu: public EntriesMenu
 {
 public:
+  /** \brief Default Constructor
+   */
+  InGameMenu();
+
+  /** \brief Destructor
+   */
+  ~InGameMenu();
+
+  /** \brief _battle setter
+   */
+  void setBattle(Battle *battle);
+
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
    */
@@ -32,6 +45,7 @@ public:
 private:
   Unit *_selectedUnit; ///< Current selected unit
   Coords _selectedUnitPosition; ///< Position of the current selected unit
+  Battle *_battle; ///< Current battle
 };
 
 #endif /* !INGAMEMENU_HH_ */

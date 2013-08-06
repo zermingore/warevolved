@@ -14,15 +14,11 @@ Status::Status() :
   _gridOffsetX (0),
   _gridOffsetY (0),
   _renderX (0),
-  _renderY (0),
-  _currentPlayer (0)
+  _renderY (0)
 {
 }
 
-Status::~Status()
-{
-  for (auto it: _players)
-    delete it;
+Status::~Status() {
 }
 
 e_mode Status::getCurrentMode()
@@ -196,18 +192,4 @@ void Status::setGridOffset()
 
 void Status::setGridOffsetY(unsigned int grid_offset_y) {
   _gridOffsetY = grid_offset_y;
-}
-
-void Status::addPlayer(Player *player) {
-  _players.push_back(player);
-}
-
-void Status::nextPlayer()
-{
-  _players[_currentPlayer]->saveCursorPosition();
-  ++_currentPlayer;
-  _currentPlayer %= _players.size();
-  CURSOR->setCoords(_players[_currentPlayer]->getLastCursorPosition());
-  CURSOR->setColor(_players[_currentPlayer]->getCursorColor());
-  // FIXME set cursor color
 }

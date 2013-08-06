@@ -58,7 +58,6 @@ void Cell::draw()
       GETIMAGE("forest")->drawAtCell(_coordinates);
   }
 
-  //  Unit *unit = g_status->getMap()->getUnit(CURSOR->getX(), CURSOR->getY());
   if (_unit)
     _unit->draw();
 }

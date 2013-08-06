@@ -42,10 +42,12 @@
 ** allow to play a map matching player physical location
 ** attack coordination between two units
 ** map themes stopwatch (sinking submarine)
-
+** fog of war: fake detonations (pull foes, allowing ambush with silencers)
 2+ Vs *: same faction plays simultaneously (allow packing units, ...) ?
 2+ Vs *: same day, different turn (only one attack at the end of the day)
 
+join 2 same type: minimum of both move left
+join soldier / vehicule packable: vehicule move left
 
 * UNITS
 ** SOLDIERS
@@ -69,6 +71,12 @@
 * SCENARIO
 ** Humans Vs Humans ?
 
+
+* UPGRADES
+** Soldiers
+*** Silencer
+*** Ad-Hoc comms
+	avoid shooting allies
 
 * OTHERS
 ** social_groups (Twitter, Facebook, MySpace...)

@@ -35,9 +35,9 @@ void Map::init()
       _cells[i * _nbLines + j]->setTerrain(E_TERRAINS_FOREST);
     }
 
-  Unit* soldier = new Unit("soldiers");
-  soldier->setCellCoordinates(1, 4);
-  _cells[12]->setUnit(*soldier); // 8 + 4
+//  Unit* soldier = new Unit("soldiers");
+//  soldier->setCellCoordinates(1, 4);
+//  _cells[12]->setUnit(*soldier); // 8 + 4
 }
 
 

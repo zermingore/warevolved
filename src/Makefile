@@ -76,6 +76,8 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Event.$(OBJEXT) \
 	__top_srcdir__we-Game.$(OBJEXT) __top_srcdir__we-Map.$(OBJEXT) \
 	__top_srcdir__we-Cell.$(OBJEXT) \
+	__top_srcdir__we-Application.$(OBJEXT) \
+	__top_srcdir__we-Battle.$(OBJEXT) \
 	__top_srcdir__we-Unit.$(OBJEXT) \
 	__top_srcdir__we-Terrain.$(OBJEXT) \
 	__top_srcdir__we-PathFinding.$(OBJEXT) \
@@ -232,37 +234,39 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 # -O3 -DNDEBUG
 # -Wshadow
 __top_srcdir__we_SOURCES = \
-main.cc							\
+main.cc								\
 \
-core/Context.cc					\
+core/Context.cc						\
 \
-graphics/GraphicEngine.cc		\
+graphics/GraphicEngine.cc			\
 \
-resources/ResourcesManager.cc	\
-resources/Resource.cc			\
-resources/Image.cc				\
-resources/Font.cc				\
+resources/ResourcesManager.cc		\
+resources/Resource.cc				\
+resources/Image.cc					\
+resources/Font.cc					\
 \
-common/System.cc				\
-common/Settings.cc				\
-common/Status.cc				\
-common/State.cc					\
+common/System.cc					\
+common/Settings.cc					\
+common/Status.cc					\
+common/State.cc						\
 \
-input/KeyManager.cc				\
-input/Event.cc					\
+input/KeyManager.cc					\
+input/Event.cc						\
 \
-game/Game.cc					\
-game/Map.cc						\
-game/Cell.cc					\
-game/Unit.cc					\
-game/Terrain.cc					\
-game/PathFinding.cc				\
-game/Player.cc					\
+game/Game.cc						\
+game/Map.cc							\
+game/Cell.cc						\
+game/applications/Application.cc	\
+game/applications/Battle.cc			\
+game/Unit.cc						\
+game/Terrain.cc						\
+game/PathFinding.cc					\
+game/Player.cc						\
 \
-interface/Interface.cc			\
-interface/Cursor.cc				\
-interface/menus/EntriesMenu.cc	\
-interface/menus/MenuEntry.cc	\
+interface/Interface.cc				\
+interface/Cursor.cc					\
+interface/menus/EntriesMenu.cc		\
+interface/menus/MenuEntry.cc		\
 interface/menus/InGameMenu.cc
 
 all: all-am
@@ -352,6 +356,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/__top_srcdir__we-Application.Po
+include ./$(DEPDIR)/__top_srcdir__we-Battle.Po
 include ./$(DEPDIR)/__top_srcdir__we-Cell.Po
 include ./$(DEPDIR)/__top_srcdir__we-Context.Po
 include ./$(DEPDIR)/__top_srcdir__we-Cursor.Po
@@ -615,6 +621,34 @@ __top_srcdir__we-Cell.obj: game/Cell.cc
 #	$(AM_V_CXX)source='game/Cell.cc' object='__top_srcdir__we-Cell.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Cell.obj `if test -f 'game/Cell.cc'; then $(CYGPATH_W) 'game/Cell.cc'; else $(CYGPATH_W) '$(srcdir)/game/Cell.cc'; fi`
+
+__top_srcdir__we-Application.o: game/applications/Application.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Application.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Application.Tpo -c -o __top_srcdir__we-Application.o `test -f 'game/applications/Application.cc' || echo '$(srcdir)/'`game/applications/Application.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Application.Tpo $(DEPDIR)/__top_srcdir__we-Application.Po
+#	$(AM_V_CXX)source='game/applications/Application.cc' object='__top_srcdir__we-Application.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Application.o `test -f 'game/applications/Application.cc' || echo '$(srcdir)/'`game/applications/Application.cc
+
+__top_srcdir__we-Application.obj: game/applications/Application.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Application.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Application.Tpo -c -o __top_srcdir__we-Application.obj `if test -f 'game/applications/Application.cc'; then $(CYGPATH_W) 'game/applications/Application.cc'; else $(CYGPATH_W) '$(srcdir)/game/applications/Application.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Application.Tpo $(DEPDIR)/__top_srcdir__we-Application.Po
+#	$(AM_V_CXX)source='game/applications/Application.cc' object='__top_srcdir__we-Application.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Application.obj `if test -f 'game/applications/Application.cc'; then $(CYGPATH_W) 'game/applications/Application.cc'; else $(CYGPATH_W) '$(srcdir)/game/applications/Application.cc'; fi`
+
+__top_srcdir__we-Battle.o: game/applications/Battle.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Battle.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Battle.Tpo -c -o __top_srcdir__we-Battle.o `test -f 'game/applications/Battle.cc' || echo '$(srcdir)/'`game/applications/Battle.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Battle.Tpo $(DEPDIR)/__top_srcdir__we-Battle.Po
+#	$(AM_V_CXX)source='game/applications/Battle.cc' object='__top_srcdir__we-Battle.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Battle.o `test -f 'game/applications/Battle.cc' || echo '$(srcdir)/'`game/applications/Battle.cc
+
+__top_srcdir__we-Battle.obj: game/applications/Battle.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Battle.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Battle.Tpo -c -o __top_srcdir__we-Battle.obj `if test -f 'game/applications/Battle.cc'; then $(CYGPATH_W) 'game/applications/Battle.cc'; else $(CYGPATH_W) '$(srcdir)/game/applications/Battle.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Battle.Tpo $(DEPDIR)/__top_srcdir__we-Battle.Po
+#	$(AM_V_CXX)source='game/applications/Battle.cc' object='__top_srcdir__we-Battle.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Battle.obj `if test -f 'game/applications/Battle.cc'; then $(CYGPATH_W) 'game/applications/Battle.cc'; else $(CYGPATH_W) '$(srcdir)/game/applications/Battle.cc'; fi`
 
 __top_srcdir__we-Unit.o: game/Unit.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Unit.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Unit.Tpo -c -o __top_srcdir__we-Unit.o `test -f 'game/Unit.cc' || echo '$(srcdir)/'`game/Unit.cc

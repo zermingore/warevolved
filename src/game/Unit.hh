@@ -71,6 +71,11 @@ public:
    */
   void setCellCoordinates(unsigned int cell_x, unsigned int cell_y);
 
+  /** \brief sets Unit's player belonging
+   ** \param player_id player's identifier
+   */
+  void setPlayerId(unsigned int player_id);
+
   /** \brief _textureId getter
    ** \return Unit Texture id
    **   matching the one in the Resources Manager std::map
@@ -105,6 +110,9 @@ private:
   Coords _location; ///< Unit's cell coordinates
 
   unsigned int _motionValue; ///< Number of cells a unit can cross in one turn
+
+  bool _played; ///< notify if the unit has already played this turn
+  unsigned int _playerId; ///< the unit belongs to the player matching this id
 };
 
 #endif /* !UNIT_HH_ */

@@ -4,19 +4,14 @@
 #include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/Status.hh>
-#include <common/enums/units.hh>
 #include <common/enums/terrains.hh>
 #include <game/Map.hh>
 #include <game/PathFinding.hh>
 #include <common/enums/types.hh>
 
 
-GraphicEngine::GraphicEngine()
-{
-  g_status->getMap()->init(); // TODO move
-  g_status->resetRender();
-
-  this->initRoom(); // TODO call only @init and when needed (panelPosition modified)
+GraphicEngine::GraphicEngine() {
+  this->initRoom();
 }
 
 GraphicEngine::~GraphicEngine() {
@@ -74,8 +69,8 @@ void GraphicEngine::drawGrid()
   rectangle.setOutlineColor(grid_color);
   rectangle.setOutlineThickness(5);
 
-  for (unsigned int i = 0; i < g_status->getMap()->getNbColumns(); ++i)
-  	for (unsigned int j = 0; j < g_status->getMap()->getNbLines(); ++j)
+  for (unsigned int i = 0; i < NB_COLUMNS; ++i)
+  	for (unsigned int j = 0; j < NB_LINES; ++j)
     {
       rectangle.setPosition(i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X,
                             j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y);

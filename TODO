@@ -25,8 +25,8 @@
    CLOSED: [2013-05-07 Tue 13:08]
 ** TODO use size_t
 ** TODO use emplace[_back] with std::vector (C++11)
-** TODO use const
-** TODO use coords (or an int: high / low)
+** DONE use Coords / Color / ... (or an int: high / low)
+   CLOSED: [2013-08-06 Tue 10:44]
    not SFML dependant
 ** TODO auto-generate XML
 *** TODO OS-dependant in script language
@@ -38,6 +38,7 @@
 *** TODO use reference
 *** TODO use const +/- whenever possible
 *** TODO use C++11 enum (type / size)
+** TODO follow the C++ rule of 5
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)

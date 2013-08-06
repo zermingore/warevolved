@@ -19,36 +19,38 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 # -Wshadow
 
 
-__top_srcdir__we_SOURCES =		\
-main.cc							\
+__top_srcdir__we_SOURCES =			\
+main.cc								\
 \
-core/Context.cc					\
+core/Context.cc						\
 \
-graphics/GraphicEngine.cc		\
+graphics/GraphicEngine.cc			\
 \
-resources/ResourcesManager.cc	\
-resources/Resource.cc			\
-resources/Image.cc				\
-resources/Font.cc				\
+resources/ResourcesManager.cc		\
+resources/Resource.cc				\
+resources/Image.cc					\
+resources/Font.cc					\
 \
-common/System.cc				\
-common/Settings.cc				\
-common/Status.cc				\
-common/State.cc					\
+common/System.cc					\
+common/Settings.cc					\
+common/Status.cc					\
+common/State.cc						\
 \
-input/KeyManager.cc				\
-input/Event.cc					\
+input/KeyManager.cc					\
+input/Event.cc						\
 \
-game/Game.cc					\
-game/Map.cc						\
-game/Cell.cc					\
-game/Unit.cc					\
-game/Terrain.cc					\
-game/PathFinding.cc				\
-game/Player.cc					\
+game/Game.cc						\
+game/Map.cc							\
+game/Cell.cc						\
+game/applications/Application.cc	\
+game/applications/Battle.cc			\
+game/Unit.cc						\
+game/Terrain.cc						\
+game/PathFinding.cc					\
+game/Player.cc						\
 \
-interface/Interface.cc			\
-interface/Cursor.cc				\
-interface/menus/EntriesMenu.cc	\
-interface/menus/MenuEntry.cc	\
+interface/Interface.cc				\
+interface/Cursor.cc					\
+interface/menus/EntriesMenu.cc		\
+interface/menus/MenuEntry.cc		\
 interface/menus/InGameMenu.cc

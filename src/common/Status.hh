@@ -127,14 +127,14 @@ public:
   /** \brief adds a new Player in the Player's vector
    ** \param player Player to add
    */
-  void addPlayer(Player *player);
+//  void addPlayer(Player *player);
 
   /** \brief Switches to the next player
    **   adapt cursor color
    **   sets cursor's position to the
    **     last known position of the new current faction
    */
-  void nextPlayer();
+  //void nextPlayer();
 
 
 private:
@@ -154,8 +154,8 @@ private:
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 
-  std::vector<Player*> _players; ///< array of players
-  unsigned int _currentPlayer; ///< index in the _players array
+//  std::vector<Player*> _players; ///< array of players
+//  unsigned int _currentPlayer; ///< index in the _players array
 };
 
 #endif /* !STATUS_HH_ */

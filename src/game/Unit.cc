@@ -8,7 +8,9 @@ Unit::Unit() :
   _posX (0),
   _posY (0),
   _cellX (1),
-  _cellY (1)
+  _cellY (1),
+  _played (false),
+  _playerId (0)
 {
 }
 
@@ -21,11 +23,14 @@ Unit::Unit() :
 Unit::Unit(std::string name) :
   _imageId (0),
   _name (name),
+  _hp (0),
   _posX (0),
   _posY (0),
   _cellX (1),
   _cellY (1),
-  _motionValue (4)
+  _motionValue (4),
+  _played (false),
+  _playerId (0)
 {
 }
 
@@ -59,6 +64,10 @@ void Unit::setCellCoordinates(unsigned int cell_x, unsigned int cell_y)
   _cellY = cell_y;
 }
 
+void Unit::setPlayerId(unsigned int player_id) {
+  _playerId = player_id;
+}
+
 unsigned int Unit::getTextureId() {
   return _textureId;
 }
@@ -71,8 +80,10 @@ Coords Unit::getLocation() {
   return _location;
 }
 
-void Unit::setLocation(Coords location) {
+void Unit::setLocation(Coords location)
+{
   _location = location;
+  _played = true;
 }
 
 

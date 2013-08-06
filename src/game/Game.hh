@@ -8,10 +8,8 @@
 #ifndef GAME_HH_
 # define GAME_HH_
 
-# include <common/include.hh>
-# include <game/Map.hh>
-# include <interface/Cursor.hh>
 # include <input/Event.hh>
+# include <game/applications/Application.hh>
 
 
 /** \brief Game is designed to hold the whole Game and not a single game
@@ -36,8 +34,8 @@ public:
 
 
 private:
-  Event* _event; ///< Events management
-  Map* _map; ///< global map
+  Event *_event; ///< Events management
+  Application *_currentApplication;
 };
 
 #endif /* !GAME_HH_ */
