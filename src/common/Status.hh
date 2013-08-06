@@ -58,6 +58,9 @@ public:
   unsigned int getGridOffsetY();
   unsigned int getSelectionMenuSelectedEntry();
 
+  std::vector<Player*> getPlayers();
+  unsigned int getCurrentPlayer();
+
 
   /** \brief pops _modes summit
    ** exits the game if the stack is empty
@@ -80,10 +83,6 @@ public:
    ** meaning, the summit of _modes stack
    */
   e_mode getCurrentMode();
-
-  /** \brief resets render zone, sets it to window size
-   */
-  void resetRender();
 
   /** \brief _window setter
    **   updates _renderX and _renderY
@@ -124,20 +123,18 @@ public:
   void setGridOffsetX(unsigned int grid_offset_x);
   void setGridOffsetY(unsigned int grid_offset_y);
 
-  /** \brief adds a new Player in the Player's vector
-   ** \param player Player to add
+  /** \brief
+   ** \param players
    */
-//  void addPlayer(Player *player);
-
-  /** \brief Switches to the next player
-   **   adapt cursor color
-   **   sets cursor's position to the
-   **     last known position of the new current faction
-   */
-  //void nextPlayer();
+  void setPlayers(std::vector<Player*> players);
 
 
 private:
+  /** \brief resets render zone, sets it to window size
+   */
+  void resetRender();
+
+
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
   sf::RenderWindow *_window; ///< main Rendering Window
   Map *_map; ///< storing map
@@ -154,8 +151,8 @@ private:
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 
-//  std::vector<Player*> _players; ///< array of players
-//  unsigned int _currentPlayer; ///< index in the _players array
+  std::vector<Player*> _players; ///< array of players
+  unsigned int _currentPlayer; ///< index in the _players array
 };
 
 #endif /* !STATUS_HH_ */

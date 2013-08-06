@@ -5,6 +5,7 @@
 Unit::Unit() :
   _imageId (0),
   _name (""),
+  _image (nullptr),
   _posX (0),
   _posY (0),
   _cellX (1),
@@ -14,15 +15,10 @@ Unit::Unit() :
 {
 }
 
-// Unit::Unit(Cell* cell)
-// {
-//   _cell = cell;
-//   _name = "soldiers";
-// }
-
 Unit::Unit(std::string name) :
   _imageId (0),
   _name (name),
+  _image (nullptr),
   _hp (0),
   _posX (0),
   _posY (0),
@@ -90,5 +86,6 @@ void Unit::setLocation(Coords location)
 void Unit::draw()
 {
   _image = GETIMAGE(_name);
+  _image->getSprite()->setColor(g_status->getPlayers()[_playerId]->getUnitsColor());
   _image->drawAtCell(_cellX, _cellY);
 }

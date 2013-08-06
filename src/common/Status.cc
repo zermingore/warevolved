@@ -14,7 +14,8 @@ Status::Status() :
   _gridOffsetX (0),
   _gridOffsetY (0),
   _renderX (0),
-  _renderY (0)
+  _renderY (0),
+  _currentPlayer (0)
 {
 }
 
@@ -133,6 +134,14 @@ unsigned int Status::getGridOffsetY() {
   return _gridOffsetY;
 }
 
+unsigned int Status::getCurrentPlayer() {
+  return _currentPlayer;
+}
+
+std::vector<Player*> Status::getPlayers() {
+  return _players;
+}
+
 void Status::resetRender()
 {
   _renderX = WINDOW_SIZE_X;
@@ -183,6 +192,10 @@ void Status::setGridOffsetX(unsigned int grid_offset_x) {
   _gridOffsetX = grid_offset_x;
 }
 
+void Status::setGridOffsetY(unsigned int grid_offset_y) {
+  _gridOffsetY = grid_offset_y;
+}
+
 void Status::setGridOffset()
 {
   // offset = 1/2 left room
@@ -190,6 +203,6 @@ void Status::setGridOffset()
   _gridOffsetY = (_renderY - _cellHeight * _map->getNbLines()) / 2;
 }
 
-void Status::setGridOffsetY(unsigned int grid_offset_y) {
-  _gridOffsetY = grid_offset_y;
+void Status::setPlayers(std::vector<Player*> players) {
+  _players = players;
 }

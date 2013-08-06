@@ -6,10 +6,6 @@
 #include <common/globals.hh>
 
 
-Map::Map() {
-  // TODO generate a random Map, read one from a file, ...
-}
-
 Map::Map(unsigned int nbColumns, unsigned int nbLines) :
   _nbColumns (nbColumns),
   _nbLines (nbLines),
@@ -34,10 +30,6 @@ void Map::init()
       _cells[i * _nbColumns + j] = new Cell;
       _cells[i * _nbLines + j]->setTerrain(E_TERRAINS_FOREST);
     }
-
-//  Unit* soldier = new Unit("soldiers");
-//  soldier->setCellCoordinates(1, 4);
-//  _cells[12]->setUnit(*soldier); // 8 + 4
 }
 
 
@@ -89,8 +81,8 @@ void Map::moveUnit()
 {
   Coords c = g_status->getSelectedCell();
 
-  Unit *tmp = _cells[c.x * NB_COLUMNS + c.y]->getUnit();
+  Unit *tmp = _cells[c.x * _nbColumns + c.y]->getUnit();
   tmp->setCellCoordinates(CURSOR->getX(), CURSOR->getY());
-  _cells[CURSOR->getX() * NB_COLUMNS + CURSOR->getY()]->setUnit(*tmp);
-  _cells[c.x * NB_COLUMNS + c.y]->removeUnit();
+  _cells[CURSOR->getX() * _nbColumns + CURSOR->getY()]->setUnit(*tmp);
+  _cells[c.x * _nbColumns + c.y]->removeUnit();
 }

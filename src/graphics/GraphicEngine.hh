@@ -41,13 +41,13 @@ public:
    */
   void drawScene();
 
-
-private:
   /** \brief Initializes drawable zone limits
    **   by setting g_status gridOffsets
    */
   void initRoom();
 
+
+private:
   /** \brief Draws the map background
    */
   void drawBackground();

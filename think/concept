@@ -32,9 +32,10 @@
 ** gas stations / hospital / market control
 ** wind ?
 ** field of earing
+** field of view: only if day duration < 1 min (else: suppose units can check behind)
 ** patrol
 ** motion
-   a plane cannot perform a 180
+   a plane (carrier) cannot perform a 180
    nor a chopper (function of velocity)
 ** macro / micro
    is a vehicule a macro or micro ?
@@ -67,6 +68,10 @@ join soldier / vehicule packable: vehicule move left
 *** PLANES: departure, target, arrival
 *** CHOPPERS: departure, target [arrival] [land]
 
+** Experience
+** as Crew member
+mechanics, cruise, gunner
+(improve resistance, move, accuracy)
 
 * SCENARIO
 ** Humans Vs Humans ?

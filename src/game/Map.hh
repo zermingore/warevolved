@@ -14,10 +14,6 @@
 class Map
 {
 public:
-  /** \brief Default Constructor
-   */
-  Map();
-
   /** \brief Constructs a map of nbColumns x nbLines
    ** \param nbColumns Number of columns required
    ** \param nbLines Number of lines required

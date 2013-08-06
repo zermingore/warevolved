@@ -63,7 +63,7 @@ public:
   /** \brief sets units color
    ** \param color units color
    */
-  void setunitsColor(Color color);
+  void setUnitsColor(Color color);
 
   /** \brief Saves current cursor position
    */

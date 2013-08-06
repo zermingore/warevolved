@@ -31,7 +31,7 @@ void Player::setCursorColor(Color color) {
   _cursorColor = color;
 }
 
-void Player::setunitsColor(Color color) {
+void Player::setUnitsColor(Color color) {
   _unitsColor = color;
 }
 

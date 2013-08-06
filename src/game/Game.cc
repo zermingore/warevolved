@@ -8,7 +8,6 @@ Game::Game() :
   _event (nullptr),
   _currentApplication (nullptr)
 {
-  _currentApplication = new Battle();
 }
 
 Game::~Game() {
@@ -27,8 +26,8 @@ void Game::run()
   std::vector<sf::Int64> frame_generation;
 # endif
 
-
   _currentApplication = new Battle;
+  graphics->initRoom();
   // Game loop
   while (WINDOW->isOpen() && _event->process())
   {

@@ -13,7 +13,7 @@ Cell::Cell() :
   static unsigned int x = 0;
   static unsigned int y = 0;
 
-  _coordinates.x = x++ / NB_COLUMNS - NB_COLUMNS; //why - NB_COLUMNS required
+  _coordinates.x = x++ / NB_COLUMNS;
   _coordinates.y = y++ % NB_LINES;
 }
 

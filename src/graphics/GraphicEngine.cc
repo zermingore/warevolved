@@ -11,7 +11,6 @@
 
 
 GraphicEngine::GraphicEngine() {
-  this->initRoom();
 }
 
 GraphicEngine::~GraphicEngine() {
@@ -24,9 +23,6 @@ void GraphicEngine::initRoom()
   //if (!scroll) // TODO split offset bottom, ...
   {
     g_status->setGridOffset();
-
-//    g_status->setGridOffsetX((g_status->getRenderX() - CELL_WIDTH * NB_COLUMNS) / 2);
-//    g_status->setGridOffsetY((g_status->getRenderY() - CELL_HEIGHT * NB_LINES) / 2);
   }
 }
 
