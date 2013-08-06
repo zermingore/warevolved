@@ -66,6 +66,7 @@ void Battle::nextPlayer()
   _currentPlayer %= _players.size();
   CURSOR->setCoords(_players[_currentPlayer]->getLastCursorPosition());
   CURSOR->setColor(_players[_currentPlayer]->getCursorColor());
+  g_status->setCurrentPlayer(_currentPlayer);
 }
 
 

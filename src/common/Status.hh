@@ -123,6 +123,10 @@ public:
   void setGridOffsetX(unsigned int grid_offset_x);
   void setGridOffsetY(unsigned int grid_offset_y);
 
+  /** \brief sets _currentPlayer
+   */
+  void setCurrentPlayer(unsigned int current_player_id);
+
   /** \brief
    ** \param players
    */

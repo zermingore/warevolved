@@ -86,6 +86,10 @@ public:
    */
   void setTextureId(unsigned int texture_id);
 
+  /** \brief _playerId getter
+   */
+  unsigned int getPlayerId();
+
   /** \brief draws the Unit at it's position
    */
   void draw();

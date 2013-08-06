@@ -203,6 +203,10 @@ void Status::setGridOffset()
   _gridOffsetY = (_renderY - _cellHeight * _map->getNbLines()) / 2;
 }
 
+void Status::setCurrentPlayer(unsigned int current_player_id) {
+  _currentPlayer = current_player_id;
+}
+
 void Status::setPlayers(std::vector<Player*> players) {
   _players = players;
 }

@@ -82,6 +82,10 @@ void Unit::setLocation(Coords location)
   _played = true;
 }
 
+unsigned int Unit::getPlayerId() {
+  return _playerId;
+}
+
 
 void Unit::draw()
 {
