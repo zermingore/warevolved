@@ -9,7 +9,7 @@
 # define PLAYER_HH_
 
 # include <common/enums/units.hh>
-# include <game/Unit.hh>
+# include <game/units/Unit.hh>
 
 
 /** \brief Faction enum

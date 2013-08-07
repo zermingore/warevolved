@@ -1,7 +1,7 @@
 #ifndef CELL_HH_
 # define CELL_HH_
 
-# include <game/Unit.hh>
+# include <game/units/Unit.hh>
 
 # include <common/enums/units.hh>
 # include <common/enums/terrains.hh>
@@ -36,18 +36,6 @@ public:
    */
   e_terrains getTerrain();
 
-  /** \brief _unitTextureId getter
-   ** \return cell's terrain texture id
-   **   (in Resources Manager std::map)
-   */
-  unsigned int getUnitTextureId(); // TODO move in a Unit class
-
-  /** \brief _terrainTextureId getter
-   ** \return cell's terrain texture id
-   **   (in Resources Manager std::map)
-   */
-  unsigned int getTerrainTextureId(); // TODO move in a Terrain class
-
   /** \brief _unit setter
    ** sets the unit \param unit in the cell
    **
@@ -75,8 +63,6 @@ private:
   Coords _coordinates; ///< cell's coordinates
   e_terrains _terrain; ///< Terrain type index (matching e_terrains)
   Unit *_unit; ///< Unit type index (matching e_terrains)
-  unsigned int _terrainTextureId; ///< Terrain Texture id in the Resources Manager
-  unsigned int _unitTextureId; ///< Unit Texture id in the Resources Manager
 };
 
 #endif /* !CELL_HH_ */

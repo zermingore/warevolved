@@ -44,7 +44,7 @@ game/Map.cc							\
 game/Cell.cc						\
 game/applications/Application.cc	\
 game/applications/Battle.cc			\
-game/Unit.cc						\
+game/units/Unit.cc					\
 game/Terrain.cc						\
 game/PathFinding.cc					\
 game/Player.cc						\

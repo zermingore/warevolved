@@ -258,7 +258,7 @@ game/Map.cc							\
 game/Cell.cc						\
 game/applications/Application.cc	\
 game/applications/Battle.cc			\
-game/Unit.cc						\
+game/units/Unit.cc					\
 game/Terrain.cc						\
 game/PathFinding.cc					\
 game/Player.cc						\
@@ -650,19 +650,19 @@ __top_srcdir__we-Battle.obj: game/applications/Battle.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Battle.obj `if test -f 'game/applications/Battle.cc'; then $(CYGPATH_W) 'game/applications/Battle.cc'; else $(CYGPATH_W) '$(srcdir)/game/applications/Battle.cc'; fi`
 
-__top_srcdir__we-Unit.o: game/Unit.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Unit.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Unit.Tpo -c -o __top_srcdir__we-Unit.o `test -f 'game/Unit.cc' || echo '$(srcdir)/'`game/Unit.cc
+__top_srcdir__we-Unit.o: game/units/Unit.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Unit.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Unit.Tpo -c -o __top_srcdir__we-Unit.o `test -f 'game/units/Unit.cc' || echo '$(srcdir)/'`game/units/Unit.cc
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Unit.Tpo $(DEPDIR)/__top_srcdir__we-Unit.Po
-#	$(AM_V_CXX)source='game/Unit.cc' object='__top_srcdir__we-Unit.o' libtool=no \
+#	$(AM_V_CXX)source='game/units/Unit.cc' object='__top_srcdir__we-Unit.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Unit.o `test -f 'game/Unit.cc' || echo '$(srcdir)/'`game/Unit.cc
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Unit.o `test -f 'game/units/Unit.cc' || echo '$(srcdir)/'`game/units/Unit.cc
 
-__top_srcdir__we-Unit.obj: game/Unit.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Unit.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Unit.Tpo -c -o __top_srcdir__we-Unit.obj `if test -f 'game/Unit.cc'; then $(CYGPATH_W) 'game/Unit.cc'; else $(CYGPATH_W) '$(srcdir)/game/Unit.cc'; fi`
+__top_srcdir__we-Unit.obj: game/units/Unit.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Unit.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Unit.Tpo -c -o __top_srcdir__we-Unit.obj `if test -f 'game/units/Unit.cc'; then $(CYGPATH_W) 'game/units/Unit.cc'; else $(CYGPATH_W) '$(srcdir)/game/units/Unit.cc'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Unit.Tpo $(DEPDIR)/__top_srcdir__we-Unit.Po
-#	$(AM_V_CXX)source='game/Unit.cc' object='__top_srcdir__we-Unit.obj' libtool=no \
+#	$(AM_V_CXX)source='game/units/Unit.cc' object='__top_srcdir__we-Unit.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Unit.obj `if test -f 'game/Unit.cc'; then $(CYGPATH_W) 'game/Unit.cc'; else $(CYGPATH_W) '$(srcdir)/game/Unit.cc'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Unit.obj `if test -f 'game/units/Unit.cc'; then $(CYGPATH_W) 'game/units/Unit.cc'; else $(CYGPATH_W) '$(srcdir)/game/units/Unit.cc'; fi`
 
 __top_srcdir__we-Terrain.o: game/Terrain.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Terrain.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Terrain.Tpo -c -o __top_srcdir__we-Terrain.o `test -f 'game/Terrain.cc' || echo '$(srcdir)/'`game/Terrain.cc

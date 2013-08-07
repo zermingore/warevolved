@@ -5,7 +5,7 @@
 # include <common/enums/units.hh>
 # include <common/enums/terrains.hh>
 # include <game/Cell.hh>
-# include <game/Unit.hh>
+# include <game/units/Unit.hh>
 # include <resources/ResourcesManager.hh>
 
 

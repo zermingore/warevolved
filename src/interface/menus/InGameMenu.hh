@@ -9,7 +9,7 @@
 # define INGAMEMENU_HH_
 
 # include <interface/menus/EntriesMenu.hh>
-# include <game/Unit.hh>
+# include <game/units/Unit.hh>
 # include <game/applications/Battle.hh>
 
 /** \brief in game menu class

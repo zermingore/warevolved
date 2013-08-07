@@ -13,8 +13,6 @@ config.log
 config.status
 src/.deps/
 
-src/tst.png
-
 # personal files
 valgrind_log*
 commit
@@ -26,6 +24,17 @@ TAGS
 .autotools
 .cproject
 .project
+
+# Doxygen
+html/
+latex/
+man/
+
+# Perf
+perf.data*
+
+# bugs screen shots
+screen_bugs/
 
 # binary
 we

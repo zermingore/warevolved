@@ -14,7 +14,8 @@
    set a boolean when pressed OR released
 
 * TODO Game
-** TODO [#A] Selection (drag and drop units)
+** DONE [#A] Selection (drag and drop units)
+   CLOSED: [2013-08-06 Tue 22:46]
 ** TODO path-finding
 
 * TODO Code Design
@@ -94,7 +95,9 @@
 	  8 surrounding cells (less damages, even less for not 4 'direct' cells)
 	  ground unit: manage how many bullets per shot ?
 	  allow spamming ?
-	  vehicles: rotating turret required (else: fire more or less only straight shots)
+	  vehicles: rotating turret required
+	    (else: fire more or less only straight shots)
+		(while moving ?)
 	Alt on a cell: unit rotation
 	  increase reactivity
 	  only on simple move
