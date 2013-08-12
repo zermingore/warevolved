@@ -43,11 +43,6 @@ void InGameMenu::build(e_mode mode)
     // next turn button
     MenuEntry next_turn("Next\n\tTurn", E_ENTRIES_NEXT_TURN);
     _entries->push_back(next_turn);
-
-    MenuEntry void1("void1", E_ENTRIES_VOID1);
-    _entries->push_back(void1);
-    MenuEntry void2("void2", E_ENTRIES_VOID2);
-    _entries->push_back(void2);
   }
 
   // target
@@ -97,16 +92,6 @@ void InGameMenu::executeEntry()
       // reset _played in player unit list
       break;
 
-    case E_ENTRIES_VOID1:
-      std::cout << "void 1" << std::endl;
-      g_status->exitCurrentMode();
-      break;
-
-    case E_ENTRIES_VOID2:
-      std::cout << "void 2" << std::endl;
-      g_status->exitCurrentMode();
-      break;
-
     case E_ENTRIES_CANCEL:
       old_mode = CURRENT_MODE;
       this->loadMenu(g_status->popCurrentMode()->getMenu());
@@ -117,12 +102,10 @@ void InGameMenu::executeEntry()
         g_status->exitCurrentMode();
         this->build(CURRENT_MODE); // re-build menu at selection state
       }
-
-      DEBUG_PRINT("cancel");
       break;
 
     default:
-      std::cerr << "unable to match selection menu entry" << std::endl;
+      DEBUG_PRINT("unable to match selection menu entry");
       break;
   }
 

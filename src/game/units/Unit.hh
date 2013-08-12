@@ -3,12 +3,15 @@
 
 # include <common/include.hh>
 # include <resources/Image.hh>
+# include <game/units/Team.hh>
 
+class Team;
 
 /** \brief Unit abstract class
  ** defines a generic unit
  */
-// TODO daughter classes
+// TODO abstract factory ?
+// TODO abstract class
 // (each have its own sprite [for rotation], but shared texture)
 class Unit
 {
@@ -19,7 +22,6 @@ public:
 
   explicit Unit(std::string name);
 
-
   /** \brief Builds a new unit at cell's position
    ** sets _cell
    */
@@ -27,7 +29,7 @@ public:
 
   /** \brief Destructor
    */
-  ~Unit(); // TODO virtual
+  virtual ~Unit();
 
 
   /** \brief _posX getter
@@ -59,6 +61,11 @@ public:
    ** \param location: cell's coordinates to set unit's position
    */
   void setLocation(Coords location);
+
+  /** \brief unit's name getter
+   ** \return unit's name value
+   */
+  virtual std::string getName();
 
   /** \brief _motionValue getter
    ** \return number of cells the unit can cross in one turn
@@ -94,14 +101,15 @@ public:
    */
   void draw();
 
+  /** \brief packs the Unit with \param unit
+   */
+  void pack(Unit *unit);
 
-private:
+
+protected:
   unsigned int _textureId; ///< Texture id in the Resources Manager std::map
-  // _faction; // TODO with a e_faction
-
   unsigned int _imageId; ///< Image id in the Resources Manager std::map
-  std::string _name; ///< unit's name
-
+  std::string _name; ///< Unit's class name
   Image *_image; ///< Unit's image
 
   int _hp; ///< Health Points (-1: infinite)
@@ -117,6 +125,7 @@ private:
 
   bool _played; ///< notify if the unit has already played this turn
   unsigned int _playerId; ///< the unit belongs to the player matching this id
+  Team *_team; ///< team in which this Unit belong to
 };
 
 #endif /* !UNIT_HH_ */

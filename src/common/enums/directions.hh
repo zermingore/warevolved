@@ -1,12 +1,12 @@
 /*
- * direction.hh
+ * common/enums/directions.hh
  *
- *  Created on: Jul 21, 2013
+ *  Created on: July 21, 2013
  *      Author: Zermingore
  */
 
-#ifndef DIRECTION_HH_
-# define DIRECTION_HH_
+#ifndef DIRECTIONS_HH_
+# define DIRECTIONS_HH_
 
 /** \brief stores vanilla directions
  ** used for paths
@@ -24,4 +24,4 @@ enum e_direction
   E_DIRECTION_RIGHT = 450
 };
 
-#endif /* DIRECTION_HH_ */
+#endif /* DIRECTIONS_HH_ */

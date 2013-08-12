@@ -1,18 +1,22 @@
 #include <game/units/Unit.hh>
 #include <common/include.hh>
 #include <common/globals.hh>
+#include <game/units/Team.hh>
 
 Unit::Unit() :
   _imageId (0),
-  _name (""),
+  //_name (""),
   _image (nullptr),
+  _hp (0),
   _posX (0),
   _posY (0),
   _cellX (1),
   _cellY (1),
   _played (false),
-  _playerId (0)
+  _playerId (0),
+  _team (nullptr)
 {
+  DEBUG_PRINT("UNIT CTOR");
 }
 
 Unit::Unit(std::string name) :
@@ -76,6 +80,10 @@ Coords Unit::getLocation() {
   return _location;
 }
 
+std::string Unit::getName() {
+  return _name;
+}
+
 void Unit::setLocation(Coords location)
 {
   _location = location;
@@ -90,6 +98,16 @@ unsigned int Unit::getPlayerId() {
 void Unit::draw()
 {
   _image = GETIMAGE(_name);
+# ifdef DEBUG
+  if (!_image)
+    DEBUG_PRINT("_image is NULL");
+# endif
   _image->getSprite()->setColor(g_status->getPlayers()[_playerId]->getUnitsColor());
   _image->drawAtCell(_cellX, _cellY);
+}
+
+
+void Unit::pack(Unit *unit)
+{
+  _team->addMember(unit);
 }

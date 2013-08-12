@@ -1,9 +1,11 @@
 #include <game/Player.hh>
 #include <common/globals.hh>
+#include <game/units/Soldier.hh>
 
 
 Player::Player() :
-  _isDead (false)
+  _isDead (false),
+  _faction (E_FACTION_T)
 {
   static unsigned int static_id = 0;
   _index = static_id++;
@@ -45,14 +47,15 @@ void Player::addUnit(Unit &unit)
   _units.push_back(&unit);
 }
 
-Unit &Player::newUnit(e_units unit, unsigned int line, unsigned int column)
+Unit &Player::newUnit(e_unit unit, unsigned int line, unsigned int column)
 {
   Unit *new_unit;
 
   switch (unit)
   {
-    case E_UNITS_SOLDIERS:
-      new_unit = new Unit("soldiers");
+    case E_UNIT_SOLDIERS:
+      //new_unit = new Unit("soldiers");
+      new_unit = new Soldier();
       break;
 
     default:

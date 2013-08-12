@@ -27,22 +27,6 @@ void PathFinding::setOrigin(Coords coords)
   _maxLength = g_status->getMap()->getUnit(coords)->getMotionValue();
 }
 
-unsigned int PathFinding::getCurrentLength() {
-  return _currentLength;
-}
-
-void PathFinding::setCurrentLength(const unsigned int length) {
-  _currentLength = length;
-}
-
-unsigned int PathFinding::getMaxLength() {
-  return _maxLength;
-}
-
-void PathFinding::setMaxLength(const unsigned int length) {
-  _maxLength = length;
-}
-
 
 void PathFinding::drawPath()
 {

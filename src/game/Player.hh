@@ -9,24 +9,11 @@
 # define PLAYER_HH_
 
 # include <common/enums/units.hh>
+# include <common/enums/factions.hh>
 # include <game/units/Unit.hh>
 
 
-/** \brief Faction enum
- ** list of factions
- */
-enum e_factions
-{
-  E_FACTION_T,
-  E_FACTION_Z,
-  E_FACTION_P, // we could have put a, b, c
-  E_FACTION_NEUTRAL,
-
-  E_FACTION_NB_FACTIONS
-};
-
-
-/** \brief Player class
+/** \class Player class
  ** a player can be control by human or AI
  */
 class Player
@@ -79,7 +66,7 @@ public:
    ** \param line line location of the new Unit
    ** \param column column location of the new Unit
    */
-  Unit &newUnit(e_units unit, unsigned int line = 0, unsigned int column = 0);
+  Unit &newUnit(e_unit unit, unsigned int line = 0, unsigned int column = 0);
 
   /** \brief removes a unit to the player's units list
    ** \param unit unit to remove from the player's list
@@ -100,6 +87,7 @@ private:
   Coords _lastCursorPosition; ///< position to remember each time we hit Next Turn
   std::vector<Unit*> _units; ///< units vector
   bool _isDead; ///< is the player still playing
+  e_faction _faction; ///< player's faction
 };
 
 #endif /* !PLAYER_HH_ */

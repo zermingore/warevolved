@@ -35,6 +35,7 @@ common/System.cc					\
 common/Settings.cc					\
 common/Status.cc					\
 common/State.cc						\
+common/Text.cc						\
 \
 input/KeyManager.cc					\
 input/Event.cc						\
@@ -45,6 +46,11 @@ game/Cell.cc						\
 game/applications/Application.cc	\
 game/applications/Battle.cc			\
 game/units/Unit.cc					\
+game/units/Team.cc					\
+game/units/Soldier.cc				\
+game/items/Item.cc					\
+game/items/guns/Gun.cc				\
+game/items/guns/Rifle.cc			\
 game/Terrain.cc						\
 game/PathFinding.cc					\
 game/Player.cc						\

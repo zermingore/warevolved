@@ -5,7 +5,7 @@
 
 
 Cell::Cell() :
-  _terrain (E_TERRAINS_NONE),
+  _terrain (E_TERRAIN_NONE),
   _unit (nullptr)
 {
   static unsigned int x = 0;
@@ -22,7 +22,7 @@ Unit *Cell::getUnit() {
   return _unit;
 }
 
-e_terrains Cell::getTerrain() {
+e_terrain Cell::getTerrain() {
   return _terrain;
 }
 
@@ -34,7 +34,7 @@ void Cell::removeUnit() {
   _unit = nullptr;
 }
 
-void Cell::setTerrain(const e_terrains terrain) {
+void Cell::setTerrain(const e_terrain terrain) {
   _terrain = terrain;
 }
 

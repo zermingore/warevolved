@@ -34,7 +34,7 @@ public:
   /** \brief _terrain getter
    ** \return cell's terrain
    */
-  e_terrains getTerrain();
+  e_terrain getTerrain();
 
   /** \brief _unit setter
    ** sets the unit \param unit in the cell
@@ -52,7 +52,7 @@ public:
    **
    ** \param terrain The terrain to be set in the cell
    */
-  void setTerrain(const e_terrains terrain);
+  void setTerrain(const e_terrain terrain);
 
   /** \brief draws cell's contents: terrain and unit
    */
@@ -61,7 +61,7 @@ public:
 
 private:
   Coords _coordinates; ///< cell's coordinates
-  e_terrains _terrain; ///< Terrain type index (matching e_terrains)
+  e_terrain _terrain; ///< Terrain type index (matching e_terrains)
   Unit *_unit; ///< Unit type index (matching e_terrains)
 };
 

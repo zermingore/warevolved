@@ -79,7 +79,7 @@
    repair center
    bury mines
    dig
-** TODO units grades / promotion / leader
+** TODO units ranks / promotion / leader
 ** TODO Motion
 *** TODO Move Management
    for each cell: simply move, shoot somewhere or sprint
@@ -127,6 +127,7 @@
 ** TODO Mac OS
 
 * TODO Graphic Engine
+** TODO Units filter sprite
 ** TODO Units orientation
    only graphic attribute ?
    use while moving a unit (default: look ahead, can check a side)
@@ -147,11 +148,12 @@
 * TODO Tools
 ** TODO memory leaks checker before commit
 ** TODO non-regression tests
+*** TODO game scripts
 ** TODO helper
    header guards with same name
 ** TODO generate Doxygen Doc
 ** TODO auto resources XML generator
-** TODO auto fetch and insert commit id last modif
+** TODO source file: auto fetch and insert commit id last modif
 
 * TODO Bugs / Features
 ** DONE [#A] Fix in-game menu pop-up and location

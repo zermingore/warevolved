@@ -53,10 +53,10 @@ void Battle::buildMap()
 
 void Battle::buildUnits()
 {
-  _map->setUnit(_players[0]->newUnit(E_UNITS_SOLDIERS, 5, 1));
+  _map->setUnit(_players[0]->newUnit(E_UNIT_SOLDIERS, 5, 1));
 
-  _map->setUnit(_players[1]->newUnit(E_UNITS_SOLDIERS, 3, 4));
-  _map->setUnit(_players[1]->newUnit(E_UNITS_SOLDIERS, 3, 6));
+  _map->setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 4));
+  _map->setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 6));
 }
 
 

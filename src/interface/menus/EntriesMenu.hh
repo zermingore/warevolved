@@ -12,7 +12,7 @@
 # include <resources/Image.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <game/PathFinding.hh>
-# include <common/enums/mode.hh>
+# include <common/enums/modes.hh>
 
 
 /** \brief EntriesMenu: generic Menu class
@@ -31,8 +31,7 @@ public:
    */
   explicit EntriesMenu(std::vector<MenuEntry> entries);
 
-  /** \brief virtual Dtor
-   */
+  /// \brief virtual Destructor
   virtual ~EntriesMenu();
 
   // TODO: merge and use a single function for all (4) directions
@@ -81,7 +80,6 @@ protected:
    **   informations from menu stack (see \class Status)
    */
   std::vector<MenuEntry> *getEntries();
-
 
   /** \brief selected entry getter
    ** \return current selected entry

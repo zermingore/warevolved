@@ -1,14 +1,14 @@
 /*
- * mode.hh
+ * common/enums/modes.hh
  *
- *  Created on: Jul 24, 2013
+ *  Created on: July 24, 2013
  *      Author: Zermingore
  */
 
-#ifndef MODE_HH_
-# define MODE_HH_
+#ifndef MODES_HH_
+# define MODES_HH_
 
-/** \brief various menu mode values
+/** \enum various menu mode values
  ** use this to notify the mode stack
  */
 enum e_mode
@@ -27,8 +27,8 @@ enum e_mode
   E_MODE_SAVING,
 
   E_MODE_READ_TEXTBOX,
-  E_MODE_WRITE_MESSAGE,
+  E_MODE_WRITE_MESSAGE
 };
 
 
-#endif /* MODE_HH_ */
+#endif /* !MODES_HH_ */

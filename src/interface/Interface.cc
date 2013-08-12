@@ -129,6 +129,10 @@ void Interface::drawPanel()
       sf::Vector2f (_panelX, WINDOW_SIZE_Y)
   };
   WINDOW->draw(line, 2, sf::Lines);
+
+  Unit *unit = g_status->getMap()->getUnit(CURSOR->getCoords());
+  if (unit)
+    DEBUG_PRINT(unit->getName());
 }
 
 

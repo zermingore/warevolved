@@ -67,7 +67,7 @@ public:
    ** \return the enum index in e_terrain matching the terrain
    **   located at coordinates (x, y)
    */
-  e_terrains getTerrain(unsigned int x, unsigned int y);
+  e_terrain getTerrain(unsigned int x, unsigned int y);
 
   /** \brief gets the terrain image at coordinates (x, y)
    **
@@ -77,7 +77,7 @@ public:
    ** \return the Image matching the terrain
    **   located at coordinates (x, y)
    */
-  Image *getTerrainImage(unsigned int x, unsigned int y);
+  // Image *getTerrainImage(unsigned int x, unsigned int y);
 
   /** \brief _cells array getter
    ** \return a pointer over the cells array

@@ -72,6 +72,7 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Settings.$(OBJEXT) \
 	__top_srcdir__we-Status.$(OBJEXT) \
 	__top_srcdir__we-State.$(OBJEXT) \
+	__top_srcdir__we-Text.$(OBJEXT) \
 	__top_srcdir__we-KeyManager.$(OBJEXT) \
 	__top_srcdir__we-Event.$(OBJEXT) \
 	__top_srcdir__we-Game.$(OBJEXT) __top_srcdir__we-Map.$(OBJEXT) \
@@ -79,6 +80,10 @@ am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
 	__top_srcdir__we-Application.$(OBJEXT) \
 	__top_srcdir__we-Battle.$(OBJEXT) \
 	__top_srcdir__we-Unit.$(OBJEXT) \
+	__top_srcdir__we-Team.$(OBJEXT) \
+	__top_srcdir__we-Soldier.$(OBJEXT) \
+	__top_srcdir__we-Item.$(OBJEXT) __top_srcdir__we-Gun.$(OBJEXT) \
+	__top_srcdir__we-Rifle.$(OBJEXT) \
 	__top_srcdir__we-Terrain.$(OBJEXT) \
 	__top_srcdir__we-PathFinding.$(OBJEXT) \
 	__top_srcdir__we-Player.$(OBJEXT) \
@@ -249,6 +254,7 @@ common/System.cc					\
 common/Settings.cc					\
 common/Status.cc					\
 common/State.cc						\
+common/Text.cc						\
 \
 input/KeyManager.cc					\
 input/Event.cc						\
@@ -259,6 +265,11 @@ game/Cell.cc						\
 game/applications/Application.cc	\
 game/applications/Battle.cc			\
 game/units/Unit.cc					\
+game/units/Team.cc					\
+game/units/Soldier.cc				\
+game/items/Item.cc					\
+game/items/guns/Gun.cc				\
+game/items/guns/Rifle.cc			\
 game/Terrain.cc						\
 game/PathFinding.cc					\
 game/Player.cc						\
@@ -366,9 +377,11 @@ include ./$(DEPDIR)/__top_srcdir__we-Event.Po
 include ./$(DEPDIR)/__top_srcdir__we-Font.Po
 include ./$(DEPDIR)/__top_srcdir__we-Game.Po
 include ./$(DEPDIR)/__top_srcdir__we-GraphicEngine.Po
+include ./$(DEPDIR)/__top_srcdir__we-Gun.Po
 include ./$(DEPDIR)/__top_srcdir__we-Image.Po
 include ./$(DEPDIR)/__top_srcdir__we-InGameMenu.Po
 include ./$(DEPDIR)/__top_srcdir__we-Interface.Po
+include ./$(DEPDIR)/__top_srcdir__we-Item.Po
 include ./$(DEPDIR)/__top_srcdir__we-KeyManager.Po
 include ./$(DEPDIR)/__top_srcdir__we-Map.Po
 include ./$(DEPDIR)/__top_srcdir__we-MenuEntry.Po
@@ -376,11 +389,15 @@ include ./$(DEPDIR)/__top_srcdir__we-PathFinding.Po
 include ./$(DEPDIR)/__top_srcdir__we-Player.Po
 include ./$(DEPDIR)/__top_srcdir__we-Resource.Po
 include ./$(DEPDIR)/__top_srcdir__we-ResourcesManager.Po
+include ./$(DEPDIR)/__top_srcdir__we-Rifle.Po
 include ./$(DEPDIR)/__top_srcdir__we-Settings.Po
+include ./$(DEPDIR)/__top_srcdir__we-Soldier.Po
 include ./$(DEPDIR)/__top_srcdir__we-State.Po
 include ./$(DEPDIR)/__top_srcdir__we-Status.Po
 include ./$(DEPDIR)/__top_srcdir__we-System.Po
+include ./$(DEPDIR)/__top_srcdir__we-Team.Po
 include ./$(DEPDIR)/__top_srcdir__we-Terrain.Po
+include ./$(DEPDIR)/__top_srcdir__we-Text.Po
 include ./$(DEPDIR)/__top_srcdir__we-Unit.Po
 include ./$(DEPDIR)/__top_srcdir__we-main.Po
 
@@ -552,6 +569,20 @@ __top_srcdir__we-State.obj: common/State.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-State.obj `if test -f 'common/State.cc'; then $(CYGPATH_W) 'common/State.cc'; else $(CYGPATH_W) '$(srcdir)/common/State.cc'; fi`
 
+__top_srcdir__we-Text.o: common/Text.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Text.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Text.Tpo -c -o __top_srcdir__we-Text.o `test -f 'common/Text.cc' || echo '$(srcdir)/'`common/Text.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Text.Tpo $(DEPDIR)/__top_srcdir__we-Text.Po
+#	$(AM_V_CXX)source='common/Text.cc' object='__top_srcdir__we-Text.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Text.o `test -f 'common/Text.cc' || echo '$(srcdir)/'`common/Text.cc
+
+__top_srcdir__we-Text.obj: common/Text.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Text.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Text.Tpo -c -o __top_srcdir__we-Text.obj `if test -f 'common/Text.cc'; then $(CYGPATH_W) 'common/Text.cc'; else $(CYGPATH_W) '$(srcdir)/common/Text.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Text.Tpo $(DEPDIR)/__top_srcdir__we-Text.Po
+#	$(AM_V_CXX)source='common/Text.cc' object='__top_srcdir__we-Text.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Text.obj `if test -f 'common/Text.cc'; then $(CYGPATH_W) 'common/Text.cc'; else $(CYGPATH_W) '$(srcdir)/common/Text.cc'; fi`
+
 __top_srcdir__we-KeyManager.o: input/KeyManager.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-KeyManager.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo -c -o __top_srcdir__we-KeyManager.o `test -f 'input/KeyManager.cc' || echo '$(srcdir)/'`input/KeyManager.cc
 	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-KeyManager.Tpo $(DEPDIR)/__top_srcdir__we-KeyManager.Po
@@ -663,6 +694,76 @@ __top_srcdir__we-Unit.obj: game/units/Unit.cc
 #	$(AM_V_CXX)source='game/units/Unit.cc' object='__top_srcdir__we-Unit.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Unit.obj `if test -f 'game/units/Unit.cc'; then $(CYGPATH_W) 'game/units/Unit.cc'; else $(CYGPATH_W) '$(srcdir)/game/units/Unit.cc'; fi`
+
+__top_srcdir__we-Team.o: game/units/Team.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Team.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Team.Tpo -c -o __top_srcdir__we-Team.o `test -f 'game/units/Team.cc' || echo '$(srcdir)/'`game/units/Team.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Team.Tpo $(DEPDIR)/__top_srcdir__we-Team.Po
+#	$(AM_V_CXX)source='game/units/Team.cc' object='__top_srcdir__we-Team.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Team.o `test -f 'game/units/Team.cc' || echo '$(srcdir)/'`game/units/Team.cc
+
+__top_srcdir__we-Team.obj: game/units/Team.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Team.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Team.Tpo -c -o __top_srcdir__we-Team.obj `if test -f 'game/units/Team.cc'; then $(CYGPATH_W) 'game/units/Team.cc'; else $(CYGPATH_W) '$(srcdir)/game/units/Team.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Team.Tpo $(DEPDIR)/__top_srcdir__we-Team.Po
+#	$(AM_V_CXX)source='game/units/Team.cc' object='__top_srcdir__we-Team.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Team.obj `if test -f 'game/units/Team.cc'; then $(CYGPATH_W) 'game/units/Team.cc'; else $(CYGPATH_W) '$(srcdir)/game/units/Team.cc'; fi`
+
+__top_srcdir__we-Soldier.o: game/units/Soldier.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Soldier.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Soldier.Tpo -c -o __top_srcdir__we-Soldier.o `test -f 'game/units/Soldier.cc' || echo '$(srcdir)/'`game/units/Soldier.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Soldier.Tpo $(DEPDIR)/__top_srcdir__we-Soldier.Po
+#	$(AM_V_CXX)source='game/units/Soldier.cc' object='__top_srcdir__we-Soldier.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Soldier.o `test -f 'game/units/Soldier.cc' || echo '$(srcdir)/'`game/units/Soldier.cc
+
+__top_srcdir__we-Soldier.obj: game/units/Soldier.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Soldier.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Soldier.Tpo -c -o __top_srcdir__we-Soldier.obj `if test -f 'game/units/Soldier.cc'; then $(CYGPATH_W) 'game/units/Soldier.cc'; else $(CYGPATH_W) '$(srcdir)/game/units/Soldier.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Soldier.Tpo $(DEPDIR)/__top_srcdir__we-Soldier.Po
+#	$(AM_V_CXX)source='game/units/Soldier.cc' object='__top_srcdir__we-Soldier.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Soldier.obj `if test -f 'game/units/Soldier.cc'; then $(CYGPATH_W) 'game/units/Soldier.cc'; else $(CYGPATH_W) '$(srcdir)/game/units/Soldier.cc'; fi`
+
+__top_srcdir__we-Item.o: game/items/Item.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Item.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Item.Tpo -c -o __top_srcdir__we-Item.o `test -f 'game/items/Item.cc' || echo '$(srcdir)/'`game/items/Item.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Item.Tpo $(DEPDIR)/__top_srcdir__we-Item.Po
+#	$(AM_V_CXX)source='game/items/Item.cc' object='__top_srcdir__we-Item.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Item.o `test -f 'game/items/Item.cc' || echo '$(srcdir)/'`game/items/Item.cc
+
+__top_srcdir__we-Item.obj: game/items/Item.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Item.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Item.Tpo -c -o __top_srcdir__we-Item.obj `if test -f 'game/items/Item.cc'; then $(CYGPATH_W) 'game/items/Item.cc'; else $(CYGPATH_W) '$(srcdir)/game/items/Item.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Item.Tpo $(DEPDIR)/__top_srcdir__we-Item.Po
+#	$(AM_V_CXX)source='game/items/Item.cc' object='__top_srcdir__we-Item.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Item.obj `if test -f 'game/items/Item.cc'; then $(CYGPATH_W) 'game/items/Item.cc'; else $(CYGPATH_W) '$(srcdir)/game/items/Item.cc'; fi`
+
+__top_srcdir__we-Gun.o: game/items/guns/Gun.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Gun.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Gun.Tpo -c -o __top_srcdir__we-Gun.o `test -f 'game/items/guns/Gun.cc' || echo '$(srcdir)/'`game/items/guns/Gun.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Gun.Tpo $(DEPDIR)/__top_srcdir__we-Gun.Po
+#	$(AM_V_CXX)source='game/items/guns/Gun.cc' object='__top_srcdir__we-Gun.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Gun.o `test -f 'game/items/guns/Gun.cc' || echo '$(srcdir)/'`game/items/guns/Gun.cc
+
+__top_srcdir__we-Gun.obj: game/items/guns/Gun.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Gun.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Gun.Tpo -c -o __top_srcdir__we-Gun.obj `if test -f 'game/items/guns/Gun.cc'; then $(CYGPATH_W) 'game/items/guns/Gun.cc'; else $(CYGPATH_W) '$(srcdir)/game/items/guns/Gun.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Gun.Tpo $(DEPDIR)/__top_srcdir__we-Gun.Po
+#	$(AM_V_CXX)source='game/items/guns/Gun.cc' object='__top_srcdir__we-Gun.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Gun.obj `if test -f 'game/items/guns/Gun.cc'; then $(CYGPATH_W) 'game/items/guns/Gun.cc'; else $(CYGPATH_W) '$(srcdir)/game/items/guns/Gun.cc'; fi`
+
+__top_srcdir__we-Rifle.o: game/items/guns/Rifle.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Rifle.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Rifle.Tpo -c -o __top_srcdir__we-Rifle.o `test -f 'game/items/guns/Rifle.cc' || echo '$(srcdir)/'`game/items/guns/Rifle.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Rifle.Tpo $(DEPDIR)/__top_srcdir__we-Rifle.Po
+#	$(AM_V_CXX)source='game/items/guns/Rifle.cc' object='__top_srcdir__we-Rifle.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Rifle.o `test -f 'game/items/guns/Rifle.cc' || echo '$(srcdir)/'`game/items/guns/Rifle.cc
+
+__top_srcdir__we-Rifle.obj: game/items/guns/Rifle.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Rifle.obj -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Rifle.Tpo -c -o __top_srcdir__we-Rifle.obj `if test -f 'game/items/guns/Rifle.cc'; then $(CYGPATH_W) 'game/items/guns/Rifle.cc'; else $(CYGPATH_W) '$(srcdir)/game/items/guns/Rifle.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/__top_srcdir__we-Rifle.Tpo $(DEPDIR)/__top_srcdir__we-Rifle.Po
+#	$(AM_V_CXX)source='game/items/guns/Rifle.cc' object='__top_srcdir__we-Rifle.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-Rifle.obj `if test -f 'game/items/guns/Rifle.cc'; then $(CYGPATH_W) 'game/items/guns/Rifle.cc'; else $(CYGPATH_W) '$(srcdir)/game/items/guns/Rifle.cc'; fi`
 
 __top_srcdir__we-Terrain.o: game/Terrain.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT __top_srcdir__we-Terrain.o -MD -MP -MF $(DEPDIR)/__top_srcdir__we-Terrain.Tpo -c -o __top_srcdir__we-Terrain.o `test -f 'game/Terrain.cc' || echo '$(srcdir)/'`game/Terrain.cc

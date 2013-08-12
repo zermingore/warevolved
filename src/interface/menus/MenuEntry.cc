@@ -51,3 +51,10 @@ void MenuEntry::draw(sf::Vector2f position)
   _background->draw();
   WINDOW->draw(*_label);
 }
+
+
+void MenuEntry::execute()
+{
+  // TODO set and call
+  DEBUG_PRINT("exec !");
+}

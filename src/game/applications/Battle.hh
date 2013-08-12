@@ -33,7 +33,7 @@ public:
   /** \brief builds a new unit of type \param unit
    ** \param unit type of the new unit
    */
-  void newUnit(e_units unit);
+  void newUnit(e_unit unit);
 
   /** \brief Switches to the next player
    **   adapt cursor color

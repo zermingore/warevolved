@@ -1,15 +1,15 @@
 /*
- * path_shape.hh
+ * common/enums/path_shapes.hh
  *
- *  Created on: Jul 21, 2013
+ *  Created on: July 21, 2013
  *      Author: Zermingore
  */
 
-#ifndef PATH_SHAPE_HH_
-# define PATH_SHAPE_HH_
+#ifndef PATH_SHAPES_HH_
+# define PATH_SHAPES_HH_
 
 
-/** \brief enum to help matching which element we want to display,
+/** \enum Help matching which element we want to display,
  **   drawing the path
  ** Their values matches the needed sprite rotation
  */
@@ -43,4 +43,4 @@ enum e_path_shape
 };
 
 
-#endif /* !PATH_SHAPE_HH_ */
+#endif /* !PATH_SHAPES_HH_ */

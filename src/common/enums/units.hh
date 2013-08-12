@@ -1,14 +1,12 @@
 #ifndef UNITS_HH_
 # define UNITS_HH_
 
-# include <string>
-
-enum e_units
+enum e_unit
 {
-  E_UNITS_SOLDIERS = 0,
+  E_UNIT_SOLDIERS = 0,
 
-  E_UNITS_NB_UNITS,
-  E_UNITS_NONE
+  E_UNIT_NB_UNITS,
+  E_UNIT_NONE
 };
 
 #endif /* !UNITS_HH_ */

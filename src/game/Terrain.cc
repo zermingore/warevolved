@@ -1,13 +1,14 @@
 #include <game/Terrain.hh>
 #include <common/globals.hh>
 
-Terrain::Terrain(e_terrains terrain) :
+
+Terrain::Terrain(e_terrain terrain) :
     _terrain(terrain),
     _image (NULL)
 {
   switch (_terrain)
   {
-    case E_TERRAINS_FOREST:
+    case E_TERRAIN_FOREST:
       _imageName = "forest";
       break;
 
@@ -16,8 +17,7 @@ Terrain::Terrain(e_terrains terrain) :
   }
 }
 
-Terrain::~Terrain()
-{
+Terrain::~Terrain() {
 }
 
 Image *Terrain::getImage()
@@ -28,7 +28,7 @@ Image *Terrain::getImage()
   // we never fetched it, let's do it now
   switch (_terrain)
   {
-    case E_TERRAINS_FOREST:
+    case E_TERRAIN_FOREST:
       _image = GETIMAGE("forest");
       break;
 

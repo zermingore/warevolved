@@ -2,7 +2,7 @@
 # define STATUS_HH_
 
 # include <stack>
-# include <common/enums/mode.hh>
+# include <common/enums/modes.hh>
 # include <game/Map.hh>
 # include <interface/menus/InGameMenu.hh>
 # include <common/State.hh>

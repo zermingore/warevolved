@@ -28,7 +28,7 @@ void Map::init()
     for (unsigned int j = 0; j < _nbLines; ++j)
     {
       _cells[i * _nbColumns + j] = new Cell;
-      _cells[i * _nbLines + j]->setTerrain(E_TERRAINS_FOREST);
+      _cells[i * _nbLines + j]->setTerrain(E_TERRAIN_FOREST);
     }
 }
 
@@ -53,24 +53,24 @@ void Map::setUnit(Unit &u) {
   _cells[static_cast<unsigned int>(u.getCellX() * _nbLines + u.getCellY())]->setUnit(u);
 }
 
-e_terrains Map::getTerrain(unsigned int x, unsigned int y) {
+e_terrain Map::getTerrain(unsigned int x, unsigned int y) {
   return _cells[x * _nbLines + y]->getTerrain();
 }
 
 
-Image *Map::getTerrainImage(unsigned int x, unsigned int y)
-{
-  e_terrains terrain = _cells[x * _nbLines + y]->getTerrain();
-
-  switch (terrain)
-  {
-    case E_TERRAINS_FOREST:
-      return GETIMAGE("forest");
-
-    default:
-      return nullptr;
-  }
-}
+//Image *Map::getTerrainImage(unsigned int x, unsigned int y)
+//{
+//  e_terrains terrain = _cells[x * _nbLines + y]->getTerrain();
+//
+//  switch (terrain)
+//  {
+//    case E_TERRAINS_FOREST:
+//      return GETIMAGE("forest");
+//
+//    default:
+//      return nullptr;
+//  }
+//}
 
 Cell **Map::getCells() {
   return _cells;

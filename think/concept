@@ -1,6 +1,5 @@
 -*- mode: org -*-
 
-
 * CORE
 ** multi-plateform
 ** website
@@ -16,7 +15,7 @@
 * GAMEPLAY
 ** multiples stairs
 ** day / night
-** fires / projectors
+** fires (propagation [equip genie with extinguishers ?]) / projectors
 ** ameliorations (new stuff)
 ** thermal vision
 ** recrut in town / form in center
@@ -50,16 +49,26 @@
 join 2 same type: minimum of both move left
 join soldier / vehicule packable: vehicule move left
 
+** Terrains
+   river (water strength, could need lifejacket, palms [1 per Soldier])
+   canyon rope needed (only one per team)
+
+note: closer than a simulator than a game...
+-> dual modes ?
+** radio
+   to give an order to a unit, this one must have a radio
+   (else only one order when splitting teams [patrol, move])
+
 * UNITS
 ** SOLDIERS
 *** clips
 *** wounds
-*** backpack / inventory (25 slots -> medkit / clips / ... / if dead -> allowed to recup)
+*** backpack / inventory (25 slots -> medkit / clips / ... / if dead -> allowed to pick it up)
 
 ** VEHICULES
 *** fuel ?
 *** crew ?
-*** repair coss ?
+*** repair cost ?
 *** damages
 
 ** HEROES ?
@@ -72,6 +81,17 @@ join soldier / vehicule packable: vehicule move left
 ** as Crew member
 mechanics, cruise, gunner
 (improve resistance, move, accuracy)
+
+base: recruit && build inventory
+specialisation (driver, sniper, ...)
+
+install tyrolienne [en] between two mountains
+
+train units
+
+* ITEMS
+** Tools
+   shovel toolbox
 
 * SCENARIO
 ** Humans Vs Humans ?
@@ -98,3 +118,4 @@ mechanics, cruise, gunner
 *** hover unit: fps view
 **** allow focusing a target ?
 **** lights ON / OFF
+** [#C] Manage fights with RODS

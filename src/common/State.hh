@@ -1,14 +1,14 @@
 /*
- * State.hh
+ * common/State.hh
  *
- *  Created on: Jul 24, 2013
+ *  Created on: July 24, 2013
  *      Author: Zermingore
  */
 
 #ifndef STATE_HH_
 # define STATE_HH_
 
-# include <common/enums/mode.hh>
+# include <common/enums/modes.hh>
 # include <common/structures/Vector.hh>
 # include <interface/menus/EntriesMenu.hh>
 

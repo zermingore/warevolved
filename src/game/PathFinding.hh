@@ -9,8 +9,8 @@
 # define PATHFINDING_HH_
 
 # include <vector>
-# include <common/enums/path_shape.hh>
-# include <common/enums/direction.hh>
+# include <common/enums/path_shapes.hh>
+# include <common/enums/directions.hh>
 # include <resources/Image.hh>
 
 
@@ -31,23 +31,6 @@ public:
    **   also updates _current position
    */
   void setOrigin(Coords coords);
-
-
-  /** \brief current path length getter
-   */
-  unsigned int getCurrentLength();
-
-  /** \brief current path length setter
-   */
-  void setCurrentLength(const unsigned int length);
-
-  /** \brief Maximum path length getter
-   */
-  unsigned int getMaxLength();
-
-  /** \brief Maximum path length setter
-   */
-  void setMaxLength(const unsigned int length);
 
   /** \brief allowed move notifier
    ** \return true if the move is allowed
