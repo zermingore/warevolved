@@ -2,7 +2,6 @@
 # define CELL_HH_
 
 # include <game/units/Unit.hh>
-
 # include <common/enums/units.hh>
 # include <common/enums/terrains.hh>
 

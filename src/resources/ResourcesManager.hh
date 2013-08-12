@@ -110,18 +110,20 @@ private:
 # endif
 
 
-  std::map<e_resource_type, std::list<Resource*> > _resources; ///< a resources list per type
-  std::map<unsigned int, Image*> _images; ///< a resources list per type
+  ///< a resources list per type
+  std::map<e_resource_type, std::list<Resource*> > _resources;
+  std::map<unsigned int, Image*> _images; ///< an Image list
 
-
-private:
   // NOTE think about a list per scope
   e_scope _currentScope; ///< actual context
 
-  std::map<std::string, unsigned int> _mapping; ///< getting resource id by it's name
+  ///< getting resource id by it's name
+  std::map<std::string, unsigned int> _mapping;
 
   rapidxml::xml_document<>* _xml; ///< pointer over XML file
-  std::map<e_resource_type, std::string> _typeNames; ///< map categories names with e_resource_type
+
+  ///< map categories names with e_resource_type
+  std::map<e_resource_type, std::string> _typeNames;
 };
 
 #endif /* !RESOURCESMANAGER_HH_ */

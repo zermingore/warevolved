@@ -14,11 +14,6 @@ class Event
 {
 public:
   /** \brief Default Constructor
-   ** processes input events
-   */
-  Event();
-
-  /** \brief Default Constructor
    **   processes input events
    */
   Event(KeyManager *km, GraphicEngine *ge);

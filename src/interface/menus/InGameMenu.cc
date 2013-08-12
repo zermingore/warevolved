@@ -27,21 +27,21 @@ void InGameMenu::build(e_mode mode)
   Unit *current_unit = g_status->getMap()->getUnit(g_status->getSelectedCell());
   if (current_unit && current_unit->getPlayerId() == g_status->getCurrentPlayer())
   {
-    if (mode == E_MODE_SELECTION_MENU) //  || mode == E_MODE_MOVING_UNIT
+    if (mode == E_MODE_SELECTION_MENU && !current_unit->getPlayed())
     {
-      MenuEntry move("Move", E_ENTRIES_MOVE);
+      MenuEntry move("Move", E_ENTRY_MOVE);
       _entries->push_back(move);
     }
     if (mode == E_MODE_ACTION_MENU)
     {
-      MenuEntry stop("Stop", E_ENTRIES_STOP);
+      MenuEntry stop("Stop", E_ENTRY_STOP);
       _entries->push_back(stop);
     }
   }
   else
   {
     // next turn button
-    MenuEntry next_turn("Next\n\tTurn", E_ENTRIES_NEXT_TURN);
+    MenuEntry next_turn("Next\n\tTurn", E_ENTRY_NEXT_TURN);
     _entries->push_back(next_turn);
   }
 
@@ -49,11 +49,11 @@ void InGameMenu::build(e_mode mode)
   if (mode == E_MODE_ACTION_MENU &&
       g_status->getMap()->getUnit(CURSOR->getX(), CURSOR->getY()))
   {
-    MenuEntry attack("Attack", E_ENTRIES_ATTACK);
+    MenuEntry attack("Attack", E_ENTRY_ATTACK);
     _entries->push_back(attack);
   }
 
-  MenuEntry cancel("Cancel", E_ENTRIES_CANCEL);
+  MenuEntry cancel("Cancel", E_ENTRY_CANCEL);
   _entries->push_back(cancel);
 
   _nbEntries = _entries->size();
@@ -68,11 +68,11 @@ void InGameMenu::executeEntry()
 
   switch ((*_entries)[_selectedEntry].getId())
   {
-    case E_ENTRIES_ATTACK:
+    case E_ENTRY_ATTACK:
       std::cout << "attack" << std::endl;
       break;
 
-    case E_ENTRIES_STOP:
+    case E_ENTRY_STOP:
       selectedUnit = g_status->getMap()->getUnit(_selectedUnitPosition);
       selectedUnit->setLocation(CURSOR->getCoords());
       if (_selectedUnitPosition != CURSOR->getCoords())
@@ -80,19 +80,19 @@ void InGameMenu::executeEntry()
       g_status->exitToMode(E_MODE_PLAYING, true);
       break;
 
-    case E_ENTRIES_MOVE:
+    case E_ENTRY_MOVE:
       g_status->pushModeInGameMenu(E_MODE_MOVING_UNIT, this);
       _selectedUnitPosition = CURSOR->getCoords();
       g_interface->setPathOrigin(_selectedUnitPosition);
       break;
 
-    case E_ENTRIES_NEXT_TURN:
+    case E_ENTRY_NEXT_TURN:
       _battle->nextPlayer();
       g_status->exitCurrentMode(true);
       // reset _played in player unit list
       break;
 
-    case E_ENTRIES_CANCEL:
+    case E_ENTRY_CANCEL:
       old_mode = CURRENT_MODE;
       this->loadMenu(g_status->popCurrentMode()->getMenu());
 

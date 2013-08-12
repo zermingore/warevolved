@@ -62,6 +62,7 @@ void Battle::buildUnits()
 
 void Battle::nextPlayer()
 {
+  _players[_currentPlayer]->endTurn();
   _players[_currentPlayer++]->saveCursorPosition();
   _currentPlayer %= _players.size();
   CURSOR->setCoords(_players[_currentPlayer]->getLastCursorPosition());

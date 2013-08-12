@@ -73,7 +73,7 @@ void EntriesMenu::decrementSelectedEntry()
   if (_selectedEntry)
     _selectedEntry = (_selectedEntry - 1) % (_nbEntries - 1);
   else
-    _selectedEntry = (_nbEntries - 1);
+    _selectedEntry = _nbEntries - 1;
 }
 
 

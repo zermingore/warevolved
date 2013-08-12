@@ -72,6 +72,16 @@ public:
    */
   unsigned int getMotionValue();
 
+  /** \brief _playerId getter
+   */
+  unsigned int getPlayerId();
+
+  /** \brief _played getter
+   ** \return true if the unit has already been played
+   **   false otherwise
+   */
+  bool getPlayed();
+
   /** \brief sets Unit's coordinates
    ** \param cell_x x coordinate (column)
    ** \param cell_y y coordinate (line)
@@ -93,9 +103,10 @@ public:
    */
   void setTextureId(unsigned int texture_id);
 
-  /** \brief _playerId getter
+  /** \brief _played setter
+   ** \param unit's played status
    */
-  unsigned int getPlayerId();
+  void setPlayed(bool played);
 
   /** \brief draws the Unit at it's position
    */

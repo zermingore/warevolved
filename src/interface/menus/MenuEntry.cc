@@ -5,7 +5,7 @@
 #include <common/macros.hh>
 
 
-MenuEntry::MenuEntry(e_entries entry) :
+MenuEntry::MenuEntry(e_entry entry) :
   _id (entry)
 {
   DEBUG_PRINT("NOT yet implemented MenuEntry Ctor");
@@ -17,7 +17,7 @@ MenuEntry::MenuEntry(e_entries entry) :
 }
 
 
-MenuEntry::MenuEntry(std::string label_name, e_entries entry)
+MenuEntry::MenuEntry(std::string label_name, e_entry entry)
 {
   _background = GETIMAGE("selection_menu_button");
   _background->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
@@ -39,7 +39,7 @@ MenuEntry::~MenuEntry() {
 }
 
 
-e_entries MenuEntry::getId() {
+e_entry MenuEntry::getId() {
   return _id;
 }
 

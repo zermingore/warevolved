@@ -57,7 +57,7 @@ class Text
 private:
   unsigned int _language; ///< database language column offset value
   std::map<e_rank, std::string> _ranks; ///< military ranks names
-  std::map<e_entries, std::string> _entries; ///< menu entries names
+  std::map<e_entry, std::string> _entries; ///< menu entries names
 };
 
 #endif /* !TEXT_HH_ */

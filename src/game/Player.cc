@@ -41,6 +41,12 @@ void Player::saveCursorPosition() {
   _lastCursorPosition = CURSOR->getCoords();
 }
 
+void Player::endTurn()
+{
+  for (auto it : _units)
+    it->setPlayed(false);
+}
+
 void Player::addUnit(Unit &unit)
 {
   // _units.insert(_id++, &unit);

@@ -58,6 +58,10 @@ unsigned int Unit::getMotionValue() {
   return _motionValue;
 }
 
+bool Unit::getPlayed() {
+  return _played;
+}
+
 void Unit::setCellCoordinates(unsigned int cell_x, unsigned int cell_y)
 {
   _cellX = cell_x;
@@ -92,6 +96,10 @@ void Unit::setLocation(Coords location)
 
 unsigned int Unit::getPlayerId() {
   return _playerId;
+}
+
+void Unit::setPlayed(bool played) {
+  _played = played;
 }
 
 

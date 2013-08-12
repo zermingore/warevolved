@@ -56,6 +56,11 @@ public:
    */
   void saveCursorPosition();
 
+  /** \brief Finished the turn of the player
+   ** sets all of it's units played flag to false
+   */
+  void endTurn();
+
   /** \brief adds a unit to the player's units list
    ** \param unit unit to add to the player's list
    */
