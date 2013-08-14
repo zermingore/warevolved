@@ -20,15 +20,19 @@ public:
        const std::string name,
        unsigned int id);
 
+  /// \brief Destructor
   ~Font();
 
   bool load();
   void unload();
+
+  /** \brief font getter
+   ** \return _font value
+   */
   sf::Font *getFont();
 
-
 private:
-  sf::Font *_font; ///< actual Font
+  sf::Font *_font; ///< current Font
 };
 
 #endif /* !FONT_HH_ */

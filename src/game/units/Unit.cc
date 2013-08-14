@@ -6,7 +6,6 @@
 
 Unit::Unit() :
   _imageId (0),
-  //_name (""),
   _image (nullptr),
   _hp (0),
   _posX (0),
@@ -33,7 +32,9 @@ Unit::Unit(std::string name) :
   _cellY (1),
   _motionValue (4),
   _played (false),
-  _playerId (0)
+  _playerId (0),
+  _team (nullptr),
+  _targetable (false)
 {
   _highlight = GETIMAGE("highlight");
 }
@@ -117,6 +118,7 @@ void Unit::draw()
   _image->getSprite()->setScale(CELL_WIDTH / x, CELL_HEIGHT / y);
 
   # ifdef DEBUG
+  // we suppose the sprite is always larger than the cell
   if (x < CELL_WIDTH || y < CELL_HEIGHT)
     std::cerr << "Sprite scale failure" << std::endl;
   # endif

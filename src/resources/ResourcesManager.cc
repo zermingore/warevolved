@@ -8,7 +8,7 @@ ResourcesManager::ResourcesManager(const std::string file_name)
 {
   this->parseXML(file_name);
   if (buildFromXML() == -1)
-    std::cerr << "FAILURE" << std::endl;
+    std::cerr << "build XML FAILURE" << std::endl;
 
 #ifdef DEBUG_XML
   this->listResources();
@@ -162,6 +162,7 @@ Font *ResourcesManager::getFont(const std::string font_name)
   }
 
 # ifdef DEBUG
+  // TODO reach this... in full screen only
   std::cerr << "Unable to find font " << font_name << std::endl;
 # endif
 

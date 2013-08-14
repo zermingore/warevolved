@@ -93,7 +93,7 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
     _inGameMenu->build(CURRENT_MODE); // re-build menu at selection state
     _km->setSwitchStatus(E_SWITCH_EXIT, ON);
 
-    return; // we just quit the mode
+    return;
   }
 
   // ---------- Selection ---------- //

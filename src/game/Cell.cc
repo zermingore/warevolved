@@ -7,7 +7,8 @@
 Cell::Cell() :
   _terrain (E_TERRAIN_NONE),
   _unit (nullptr),
-  _highlighted (false)
+  _highlight (false),
+  _highlightColor (255, 255, 255)
 {
   static unsigned int x = 0;
   static unsigned int y = 0;
@@ -40,6 +41,14 @@ void Cell::setTerrain(const e_terrain terrain) {
 }
 
 
+void Cell::setHighlight(bool highlight) {
+  _highlight = highlight;
+}
+
+void Cell::setHighlightColor(Color color) {
+  _highlightColor = color;
+}
+
 void Cell::draw()
 {
   // TODO check if we print the cell (scroll case)
@@ -50,8 +59,12 @@ void Cell::draw()
       GETIMAGE("forest")->drawAtCell(_coordinates);
   }
 
-  if (_highlighted)
-    GETIMAGE("highlight")->drawAtCell(_coordinates);
+  if (_highlight)
+  {
+    Image *highlight = GETIMAGE("highlight");
+    highlight->getSprite()->setColor(_highlightColor);
+    highlight->drawAtCell(_coordinates);
+  }
 
   if (_unit)
     _unit->draw();

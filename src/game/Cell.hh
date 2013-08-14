@@ -53,6 +53,17 @@ public:
    */
   void setTerrain(const e_terrain terrain);
 
+  /** \brief _highlight setter
+   ** \param highlight true if we want to highlight the cell
+   */
+  void setHighlight(bool highlight);
+
+  /** \brief highlight color setter
+   ** \param color color of the highlight of the cell
+   */
+  void setHighlightColor(Color color);
+
+
   /** \brief draws cell's contents: terrain and unit
    */
   void draw();
@@ -62,7 +73,8 @@ private:
   Coords _coordinates; ///< cell's coordinates
   e_terrain _terrain; ///< Terrain type index (matching e_terrains)
   Unit *_unit; ///< Unit type index (matching e_terrains)
-  bool _highlighted; ///< true if the cell needs to be highlighted
+  bool _highlight; ///< true if the cell needs to be highlighted
+  Color _highlightColor; ///< color of the cell's highlight
 };
 
 #endif /* !CELL_HH_ */

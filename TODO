@@ -56,9 +56,12 @@
 
 * TODO Resources
 ** TODO Sprites
-*** TODO soldiers filters
-**** TODO attackable
-**** TODO played
+*** DONE soldiers filters
+	 CLOSED: [2013-08-14 Wed 11:19]
+**** DONE attackable
+	 CLOSED: [2013-08-14 Wed 11:19]
+**** DONE played
+	 CLOSED: [2013-08-14 Wed 11:19]
 
 * TODO Gameplay
 ** TODO Meteo
@@ -148,16 +151,18 @@
 ** DONE Stack implementation
    CLOSED: [2013-07-24 Wed 07:06]
 ** TODO Main menu
-** TODO improve InGameMenu stack usage
-   Do *NOT* rebuild all entries each frame...
 
 * TODO Tools
-** TODO memory leaks checker before commit
+** TODO Commit checker
+*** TODO memory leaks checker before commit
+*** TODO auto-compile / launch for all build rules
+*** TODO auto generate documentation
 ** TODO non-regression tests
 *** TODO game scripts
 ** TODO helper
    header guards with same name
-** TODO generate Doxygen Doc
+** DONE generate Doxygen Doc
+   CLOSED: [2013-08-14 Wed 12:31]
 ** TODO auto resources XML generator
 ** TODO source file: auto fetch and insert commit id last modif
 
@@ -195,3 +200,8 @@
      manually store an ID, : factor 1
      use a std::map <const char*, unsigned int> : factor 2
 	 use a std::map <std::string, unsigned int> : factor 4
+** TODO improve InGameMenu stack usage
+   Do *NOT* rebuild all entries each frame...
+** TODO Sprites
+   Every cell doesn't need to have it's own highlight sprite
+   -> common sprites (1 per situation [move, attack])

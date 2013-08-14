@@ -4,7 +4,8 @@
 
 Font::Font(const std::string file_name,
 		   const std::string name,
-		   unsigned int id)
+		   unsigned int id) :
+	_font (nullptr)
 {
   _id = id;
   _fileName = file_name;
@@ -33,8 +34,7 @@ bool Font::load()
   return false;
 }
 
-void Font::unload()
-{
+void Font::unload() {
   return;
 }
 

@@ -79,7 +79,9 @@ void InGameMenu::executeEntry()
       selectedUnit->setLocation(CURSOR->getCoords());
       if (_selectedUnitPosition != CURSOR->getCoords())
         g_status->getMap()->moveUnit();
+
       g_status->exitToMode(E_MODE_PLAYING, true);
+      g_interface->getPath()->hideAllowedPath();
       break;
 
     case E_ENTRY_MOVE:

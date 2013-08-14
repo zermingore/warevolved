@@ -10,8 +10,6 @@ Interface *g_interface = new Interface();
 
 int main(int ac, const char **av)
 {
-  av = av; // FIXME use getopt
-
   bool fullscreen = false;
   // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
   if (ac > 1)

@@ -52,11 +52,9 @@ public:
    */
   void clearPath();
 
-  /** \brief Highlights cells which selected unit can cross
-   ** \param unit Selected unit
-   **   (used for location, faction, range, ...)
+  /** \brief hides crossable cells
    */
-  void showAlowedPath(Unit *unit);
+  void hideAllowedPath();
 
 
 private:
@@ -87,6 +85,12 @@ private:
    **   according to the next direction (for smooth corners)
    */
   e_path_shape getShape(unsigned int index);
+
+  /** \brief Highlights cells which selected unit can cross
+   ** \param unit Selected unit
+   **   (used for location, faction, range, ...)
+   */
+  void showAlowedPath(Unit *unit);
 
 
   Coords _origin; ///< origin cell coordinates

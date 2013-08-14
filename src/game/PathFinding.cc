@@ -18,13 +18,14 @@ void PathFinding::setOrigin(Coords coords)
 {
   this->clearPath();
 
+  Unit *unit = g_status->getMap()->getUnit(coords);
   _origin = coords;
   _current = coords;
-
   _cached = false;
-
   _currentLength = 0;
-  _maxLength = g_status->getMap()->getUnit(coords)->getMotionValue();
+  _maxLength = unit->getMotionValue();
+
+  this->showAlowedPath(unit);
 }
 
 
@@ -51,6 +52,9 @@ void PathFinding::clearPath()
 {
   _directions.clear();
   this->deleteImagesVector();
+
+  this->hideAllowedPath();
+
   //_cached = false;
 
   // TODO clear only if we made a path request on a new cell
@@ -210,21 +214,46 @@ void PathFinding::addNextDirection(e_direction direction)
 
 void PathFinding::showAlowedPath(Unit *unit)
 {
-//  unsigned int distance = unit->getMotionValue();
-//  unsigned int save = distance;
-//  unsigned int possibilities = 9;
-//
-//  Cell **cells = g_status->getMap()->getCells();
-//
-//  for (unsigned int i = 1; i < save; ++i)
-//  {
-//    //swhile ( < distance)
-//    distance++;
-//    //_cells[unit->getCellX()].
-//  }
-//
-//  while (possibilities)
-//  {
-//    distance
-//  }
+  Cell **cells = g_status->getMap()->getCells();
+
+  // these are not unsigned because we want to check negativity
+  int x = unit->getCellX();
+  int y = unit->getCellY();
+  int offset_x = 0;
+  int offset_y = 0;
+
+  // ugly tests
+  // TODO build a list of reachable Cells
+  //   allowing to clear it faster and test if we can fire to this Cell easier and cleaner
+  while (static_cast<unsigned int> (offset_y) <= _maxLength)
+  {
+    while (static_cast<unsigned int>(offset_x + offset_y) <= _maxLength)
+    {
+      if (x + offset_x < 8 && y + offset_y < 8)
+        cells[(x + offset_x) * 8 + y + offset_y]->setHighlight(true);
+
+      if (x - offset_x > -1 && y + offset_y < 8)
+        cells[(x - offset_x) * 8 + y + offset_y]->setHighlight(true);
+
+      if (x + offset_x < 8 && y - offset_y > -1)
+          cells[(x + offset_x) * 8 + y - offset_y]->setHighlight(true);
+
+      if (x - offset_x > -1 && y - offset_y > -1)
+        cells[(x - offset_x) * 8 + y - offset_y]->setHighlight(true);
+
+      ++offset_x;
+    }
+
+    ++offset_y;
+    offset_x = 0;
+  }
+}
+
+
+void PathFinding::hideAllowedPath()
+{
+  // cleaning displayed move possibilities
+  Cell **cells = g_status->getMap()->getCells();
+  for (unsigned int i = 0; i < NB_COLUMNS * NB_LINES; ++i)
+    cells[i]->setHighlight(false);
 }
