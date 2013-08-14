@@ -162,10 +162,9 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
 
   // Sprite position
   sf::Vector2f pos;
-  pos.x = i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
-  pos.y = j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
+  pos.x = i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X;
+  pos.y = j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
   _sprite->setPosition(pos);
-  _sprite->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
   if (this->load())
     WINDOW->draw(*_sprite);
@@ -180,10 +179,9 @@ void Image::drawAtCell(Coords c)
 
   // Sprite position
   sf::Vector2f pos;
-  pos.x = c.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
-  pos.y = c.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
+  pos.x = c.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X;
+  pos.y = c.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
   _sprite->setPosition(pos);
-  _sprite->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
   if (this->load())
     WINDOW->draw(*_sprite);

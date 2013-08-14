@@ -25,9 +25,11 @@ void InGameMenu::build(e_mode mode)
   // TODO check if we can control it
   // here, we cannot use cursor's position, we could have move the unit
   Unit *current_unit = g_status->getMap()->getUnit(g_status->getSelectedCell());
-  if (current_unit && current_unit->getPlayerId() == g_status->getCurrentPlayer())
+  if (current_unit
+      && current_unit->getPlayerId() == g_status->getCurrentPlayer()
+      && !current_unit->getPlayed())
   {
-    if (mode == E_MODE_SELECTION_MENU && !current_unit->getPlayed())
+    if (mode == E_MODE_SELECTION_MENU)
     {
       MenuEntry move("Move", E_ENTRY_MOVE);
       _entries->push_back(move);
@@ -46,8 +48,8 @@ void InGameMenu::build(e_mode mode)
   }
 
   // target
-  if (mode == E_MODE_ACTION_MENU &&
-      g_status->getMap()->getUnit(CURSOR->getX(), CURSOR->getY()))
+  if (mode == E_MODE_ACTION_MENU
+      && g_status->getMap()->getUnit(CURSOR->getX(), CURSOR->getY()))
   {
     MenuEntry attack("Attack", E_ENTRY_ATTACK);
     _entries->push_back(attack);
@@ -89,7 +91,6 @@ void InGameMenu::executeEntry()
     case E_ENTRY_NEXT_TURN:
       _battle->nextPlayer();
       g_status->exitCurrentMode(true);
-      // reset _played in player unit list
       break;
 
     case E_ENTRY_CANCEL:

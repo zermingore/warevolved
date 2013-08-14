@@ -54,6 +54,12 @@
 *** DONE add text to buttons
 	 CLOSED: [2013-04-21 Sun 21:50]
 
+* TODO Resources
+** TODO Sprites
+*** TODO soldiers filters
+**** TODO attackable
+**** TODO played
+
 * TODO Gameplay
 ** TODO Meteo
 *** TODO Graphics: add a snowy transparent sprite

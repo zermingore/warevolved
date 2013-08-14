@@ -122,6 +122,7 @@ protected:
   unsigned int _imageId; ///< Image id in the Resources Manager std::map
   std::string _name; ///< Unit's class name
   Image *_image; ///< Unit's image
+  Image *_highlight; ///< Unit's image halo
 
   int _hp; ///< Health Points (-1: infinite)
   unsigned int _posX; ///< x position (in px) // NOTE: absolute ? / relative to _cell ?
@@ -137,6 +138,7 @@ protected:
   bool _played; ///< notify if the unit has already played this turn
   unsigned int _playerId; ///< the unit belongs to the player matching this id
   Team *_team; ///< team in which this Unit belong to
+  bool _targetable; ///< true if this unit can be under fire
 };
 
 #endif /* !UNIT_HH_ */

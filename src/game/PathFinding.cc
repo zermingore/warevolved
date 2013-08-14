@@ -40,7 +40,7 @@ void PathFinding::drawPath()
     this->updateCurrentCell(*it);
     // TODO manage cache and image sprites
     // _images[i++]->drawAtCell(_currentX, _currentY);
-    this->getImage(i++)->drawAtCell(_current);
+    this->getImage(i++)->draw();
   }
 
 //  _cached = false;
@@ -184,6 +184,13 @@ Image *PathFinding::getImage(unsigned int index)
 
   angle = static_cast <unsigned int> (shape % 360);
   img->getSprite()->setRotation(angle);
+  img->getSprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
+
+  // drawing at the middle of the cell
+  sf::Vector2f pos;
+  pos.x = _current.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
+  pos.y = _current.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
+  img->getSprite()->setPosition(pos);
 
   return img;
 }
@@ -198,4 +205,26 @@ void PathFinding::addNextDirection(e_direction direction)
   ++_currentLength;
 
   // TODO add Image
+}
+
+
+void PathFinding::showAlowedPath(Unit *unit)
+{
+//  unsigned int distance = unit->getMotionValue();
+//  unsigned int save = distance;
+//  unsigned int possibilities = 9;
+//
+//  Cell **cells = g_status->getMap()->getCells();
+//
+//  for (unsigned int i = 1; i < save; ++i)
+//  {
+//    //swhile ( < distance)
+//    distance++;
+//    //_cells[unit->getCellX()].
+//  }
+//
+//  while (possibilities)
+//  {
+//    distance
+//  }
 }

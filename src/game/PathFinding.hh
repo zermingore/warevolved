@@ -11,6 +11,7 @@
 # include <vector>
 # include <common/enums/path_shapes.hh>
 # include <common/enums/directions.hh>
+# include <game/units/Unit.hh>
 # include <resources/Image.hh>
 
 
@@ -50,6 +51,12 @@ public:
    ** calls deleteImagesVector, freeing images
    */
   void clearPath();
+
+  /** \brief Highlights cells which selected unit can cross
+   ** \param unit Selected unit
+   **   (used for location, faction, range, ...)
+   */
+  void showAlowedPath(Unit *unit);
 
 
 private:

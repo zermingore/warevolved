@@ -6,7 +6,8 @@
 
 Cell::Cell() :
   _terrain (E_TERRAIN_NONE),
-  _unit (nullptr)
+  _unit (nullptr),
+  _highlighted (false)
 {
   static unsigned int x = 0;
   static unsigned int y = 0;
@@ -48,6 +49,9 @@ void Cell::draw()
     default:
       GETIMAGE("forest")->drawAtCell(_coordinates);
   }
+
+  if (_highlighted)
+    GETIMAGE("highlight")->drawAtCell(_coordinates);
 
   if (_unit)
     _unit->draw();

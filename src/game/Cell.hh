@@ -62,6 +62,7 @@ private:
   Coords _coordinates; ///< cell's coordinates
   e_terrain _terrain; ///< Terrain type index (matching e_terrains)
   Unit *_unit; ///< Unit type index (matching e_terrains)
+  bool _highlighted; ///< true if the cell needs to be highlighted
 };
 
 #endif /* !CELL_HH_ */

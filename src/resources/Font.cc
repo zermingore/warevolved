@@ -23,9 +23,10 @@ bool Font::load()
   if (_loaded)
     return true;
 
-  if (!_font)
-    _font = new sf::Font();
+//  if (_font)
+//    delete _font; // FIXME segfault
 
+  _font = new sf::Font();
   _font->loadFromFile(_fileName);
   _loaded = true;
 

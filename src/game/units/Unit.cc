@@ -3,6 +3,7 @@
 #include <common/globals.hh>
 #include <game/units/Team.hh>
 
+
 Unit::Unit() :
   _imageId (0),
   //_name (""),
@@ -14,9 +15,11 @@ Unit::Unit() :
   _cellY (1),
   _played (false),
   _playerId (0),
-  _team (nullptr)
+  _team (nullptr),
+  _targetable (false)
 {
   DEBUG_PRINT("UNIT CTOR");
+  _highlight = GETIMAGE("highlight");
 }
 
 Unit::Unit(std::string name) :
@@ -32,6 +35,7 @@ Unit::Unit(std::string name) :
   _played (false),
   _playerId (0)
 {
+  _highlight = GETIMAGE("highlight");
 }
 
 Unit::~Unit() {
@@ -106,16 +110,30 @@ void Unit::setPlayed(bool played) {
 void Unit::draw()
 {
   _image = GETIMAGE(_name);
-# ifdef DEBUG
-  if (!_image)
-    DEBUG_PRINT("_image is NULL");
-# endif
   _image->getSprite()->setColor(g_status->getPlayers()[_playerId]->getUnitsColor());
+
+  float x = _image->getSprite()->getTexture()->getSize().x;
+  float y = _image->getSprite()->getTexture()->getSize().y;
+  _image->getSprite()->setScale(CELL_WIDTH / x, CELL_HEIGHT / y);
+
+  # ifdef DEBUG
+  if (x < CELL_WIDTH || y < CELL_HEIGHT)
+    std::cerr << "Sprite scale failure" << std::endl;
+  # endif
+
+  if (_targetable)
+  {
+    _highlight->getSprite()->setColor(sf::Color(255, 0, 0));
+    _highlight->drawAtCell(_cellX, _cellY);
+  }
+
+  if (_played)
+    _image->getSprite()->setColor(sf::Color(127, 127, 127, 191));
+
   _image->drawAtCell(_cellX, _cellY);
 }
 
 
-void Unit::pack(Unit *unit)
-{
+void Unit::pack(Unit *unit) {
   _team->addMember(unit);
 }
