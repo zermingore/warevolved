@@ -2,6 +2,7 @@
 #include <common/macros.hh>
 #include <common/globals.hh>
 
+
 PathFinding::PathFinding() :
   _cached (false),
   _maxLength (0),
@@ -207,8 +208,6 @@ void PathFinding::addNextDirection(e_direction direction)
 {
   _directions.push_back(direction);
   ++_currentLength;
-
-  // TODO add Image
 }
 
 
@@ -222,30 +221,54 @@ void PathFinding::showAlowedPath(Unit *unit)
   int offset_x = 0;
   int offset_y = 0;
 
+  _reachableCells.clear();
   // ugly tests
-  // TODO build a list of reachable Cells
-  //   allowing to clear it faster and test if we can fire to this Cell easier and cleaner
   while (static_cast<unsigned int> (offset_y) <= _maxLength)
   {
     while (static_cast<unsigned int>(offset_x + offset_y) <= _maxLength)
     {
       if (x + offset_x < 8 && y + offset_y < 8)
-        cells[(x + offset_x) * 8 + y + offset_y]->setHighlight(true);
+        _reachableCells.push_back(cells[(x + offset_x) * 8 + y + offset_y]);
 
       if (x - offset_x > -1 && y + offset_y < 8)
-        cells[(x - offset_x) * 8 + y + offset_y]->setHighlight(true);
+        _reachableCells.push_back(cells[(x - offset_x) * 8 + y + offset_y]);
 
       if (x + offset_x < 8 && y - offset_y > -1)
-          cells[(x + offset_x) * 8 + y - offset_y]->setHighlight(true);
+        _reachableCells.push_back(cells[(x + offset_x) * 8 + y - offset_y]);
 
       if (x - offset_x > -1 && y - offset_y > -1)
-        cells[(x - offset_x) * 8 + y - offset_y]->setHighlight(true);
+        _reachableCells.push_back(cells[(x - offset_x) * 8 + y - offset_y]);
 
       ++offset_x;
     }
 
     ++offset_y;
     offset_x = 0;
+  }
+
+  this->highlightCells();
+}
+
+void PathFinding::highlightCells()
+{
+  // TODO use a current unit parameter and check it's inventory
+  //   (do not color enemies in red if we can't shoot them,
+  //    color allies in a different color if we can heal them, ...)
+
+  Unit *tmp;
+  for (auto it : _reachableCells)
+  {
+    it->setHighlight(true);
+
+    if ((tmp = it->getUnit()))
+    {
+     if (tmp->getPlayerId() != g_status->getCurrentPlayer())
+       it->setHighlightColor(sf::Color::Red);
+     else
+       it->setHighlightColor(sf::Color::Green);
+    }
+    else
+      it->setHighlightColor(sf::Color::Yellow);
   }
 }
 

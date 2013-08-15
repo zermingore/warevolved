@@ -13,9 +13,12 @@
 # include <common/enums/directions.hh>
 # include <game/units/Unit.hh>
 # include <resources/Image.hh>
+# include <game/Cell.hh>
 
 
-/** \brief Computes and display path findings
+/** \class PathFinding Computes and display path findings
+ **   as reachable cells and possible targets for the selected unit
+ ** It display user's path input and check it's validity
  */
 class PathFinding
 {
@@ -92,6 +95,9 @@ private:
    */
   void showAlowedPath(Unit *unit);
 
+  /** \brief sets highlight and highlight color for reachable cells
+   */
+  void highlightCells();
 
   Coords _origin; ///< origin cell coordinates
   Coords _current; ///< current cell coordinates
@@ -104,6 +110,8 @@ private:
                                         ///< filled through addNextDirection
 
   std::vector<Image*> _images; ///< Images* of the path vector
+  std::vector<Cell*> _reachableCells; ///< list of reachable cells
+                                      ///< for the selected unit
 };
 
 #endif /* !PATHFINDING_HH_ */
