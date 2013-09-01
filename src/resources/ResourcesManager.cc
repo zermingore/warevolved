@@ -10,9 +10,9 @@ ResourcesManager::ResourcesManager(const std::string file_name)
   if (buildFromXML() == -1)
     std::cerr << "build XML FAILURE" << std::endl;
 
-#ifdef DEBUG_XML
+# ifdef DEBUG_XML
   this->listResources();
-#endif
+# endif
 }
 
 ResourcesManager::~ResourcesManager()
@@ -22,8 +22,8 @@ ResourcesManager::~ResourcesManager()
   for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
   {
     e_resource_type type = static_cast<e_resource_type>(i);
-    for (auto it = _resources[type].begin(); it != _resources[type].end(); ++it)
-      delete *it;
+    for (auto it : _resources[type])
+      delete it;
   }
 }
 
@@ -70,16 +70,16 @@ Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name
   if (*id)
     return _images[*id];
 
-  for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
+  for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
-    if ((*it)->getName() == image_name)
+    if (it->getName() == image_name)
     {
-      if (!(*it)->getLoaded())
-        (*it)->load();
+      if (!it->getLoaded())
+        it->load();
 
-      *id = ((*it)->getId());
+      *id = (it->getId());
 
-      return dynamic_cast <Image*> (*it);
+      return dynamic_cast <Image*> (it);
     }
   }
 
@@ -99,16 +99,16 @@ Image *ResourcesManager::getImage(const char *image_name)
   if ((id = _mapping[str]))
     return _images[id];
 
-  for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
+  for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
-    if ((*it)->getName() == str)
+    if (it->getName() == str)
     {
-      if (!(*it)->getLoaded())
-        (*it)->load();
+      if (!it->getLoaded())
+        it->load();
 
-      _mapping[str] = ((*it)->getId());
+      _mapping[str] = (it->getId());
 
-      return dynamic_cast <Image*> (*it);
+      return dynamic_cast <Image*> (it);
     }
   }
 
@@ -126,16 +126,16 @@ Image *ResourcesManager::getImage(const std::string image_name)
   if ((id = _mapping[image_name]))
     return _images[id];
 
-  for (auto it = _resources[E_RESOURCE_TYPE_IMAGE].begin(); it != _resources[E_RESOURCE_TYPE_IMAGE].end(); ++it)
+  for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
-    if ((*it)->getName() == image_name)
+    if (it->getName() == image_name)
     {
-      if (!(*it)->getLoaded())
-        (*it)->load();
+      if (!it->getLoaded())
+        it->load();
 
-      _mapping[image_name] = ((*it)->getId());
+      _mapping[image_name] = (it->getId());
 
-      return dynamic_cast <Image*> (*it);
+      return dynamic_cast <Image*> (it);
     }
   }
 
@@ -149,20 +149,19 @@ Image *ResourcesManager::getImage(const std::string image_name)
 
 Font *ResourcesManager::getFont(const std::string font_name)
 {
-  for (auto it = _resources[E_RESOURCE_TYPE_FONT].begin();
-       it != _resources[E_RESOURCE_TYPE_FONT].end(); ++it)
+  for (auto it : _resources[E_RESOURCE_TYPE_FONT])
   {
-    if ((*it)->getName() == font_name)
+    if (it->getName() == font_name)
     {
-      if (!(*it)->getLoaded())
-        (*it)->load();
+      if (!it->getLoaded())
+        it->load();
 
-      return dynamic_cast <Font*> (*it);
+      return dynamic_cast <Font*> (it);
     }
   }
 
 # ifdef DEBUG
-  // TODO reach this... in full screen only
+  // TODO reach this... in full screen only (or launched from a Term)
   std::cerr << "Unable to find font " << font_name << std::endl;
 # endif
 
@@ -173,11 +172,11 @@ Font *ResourcesManager::getFont(const std::string font_name)
 bool ResourcesManager::parseXML(const std::string file_name)
 {
   // Open stream
-  std::basic_ifstream<char> stream(file_name);
+  std::basic_ifstream <char> stream(file_name);
   if (!stream)
   {
     std::cerr << "XML: input error" << std::endl;
-      return false;
+    return false;
   }
   stream.unsetf(std::ios::skipws); // skip white spaces
 
@@ -189,17 +188,17 @@ bool ResourcesManager::parseXML(const std::string file_name)
   // Load data and add terminating 0
   std::vector<char> xml_data;
   xml_data.resize(size + 1);
-  stream.read(&xml_data.front(), static_cast<unsigned int>(size));
+  stream.read(&xml_data.front(), static_cast <unsigned int> (size));
   xml_data[size] = 0;
 
 #ifdef DEBUG_XML_FULL
   // prints whole XML
-  for(auto i = xml_data.begin(); i != xml_data.end(); ++i)
-    std::cout << *i;
+  for (auto i : xml_data)
+    std::cout << i;
 #endif
 
   _xml = new (rapidxml::xml_document<>);
-  _xml->parse<0>(&xml_data[0]);
+  _xml->parse<0> (&xml_data[0]);
 
   return true;
 }
@@ -233,15 +232,19 @@ int ResourcesManager::buildFromXML()
     {
       path = folder->first_attribute();
       file = folder->first_node("file");
-      const std::string str_path = path->value();
+      //const std::string str_path = path->value();
+
+      const char *str_path = path->value();
+
 
 #     ifdef DEBUG
       // testing if last char is effectively a FOLDER_SEPARATOR
-      if (*(str_path.end() - 1) != FOLDER_DELIMITER)
-      {
-        std::cerr << ">>ERROR<< XML file:" << std::endl <<
-          "-- Missing trailing folder delimiter in " << str_path << std::endl;
-      }
+      //if (*(str_path.end() - 1) != FOLDER_DELIMITER)
+//      if (str_path[strlen(str_path) - 2] != FOLDER_DELIMITER)
+//      {
+//        std::cerr << ">>ERROR<< XML file:" << std::endl <<
+//          "-- Missing trailing folder delimiter in " << str_path << std::endl;
+//      }
 
       if (!path)
       {
@@ -255,13 +258,17 @@ int ResourcesManager::buildFromXML()
 
       while (file)
       {
-        std::string filename = file->first_attribute()->value();
+        const char *filename = file->first_attribute()->value();
         name = file->first_node("name");
-        this->addResource(current_type, name->value(), str_path + filename, id++);
+        std::string tmp = str_path;
+        tmp += filename;
+        this->addResource(current_type, name->value(), tmp, id++);
         file = file->next_sibling("file");
       }
 
       folder = folder->next_sibling("folder");
+
+      DEBUG_PRINT("loop !");
     }
 
     current_type = static_cast<e_resource_type>(current_type + 1);
@@ -281,11 +288,11 @@ void ResourcesManager::listResources()
   {
     e_resource_type type = static_cast<e_resource_type>(i);
     std::cout << "Category: " << _typeNames[type] << std::endl;
-    for (auto it = _resources[type].begin(); it != _resources[type].end(); ++it)
+    for (auto it : _resources[type])
     {
-      std::cout << (*it)->getFileName() << '\t'
-                << (*it)->getName() << '\t'
-                << (*it)->getId() << std::endl;
+      std::cout << it->getFileName() << '\t'
+                << it->getName() << '\t'
+                << it->getId() << std::endl;
     }
   }
 }

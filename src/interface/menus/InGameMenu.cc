@@ -22,7 +22,6 @@ void InGameMenu::build(e_mode mode)
   this->init();
 
   // show unit section only if we selected a unit
-  // TODO check if we can control it
   // here, we cannot use cursor's position, we could have move the unit
   Unit *current_unit = g_status->getMap()->getUnit(g_status->getSelectedCell());
   if (current_unit

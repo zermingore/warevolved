@@ -249,6 +249,7 @@ void PathFinding::showAlowedPath(Unit *unit)
   this->highlightCells();
 }
 
+
 void PathFinding::highlightCells()
 {
   // TODO use a current unit parameter and check it's inventory
