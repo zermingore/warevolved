@@ -7,6 +7,7 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 -O0 -g -DDEBUG -DDEBUG_LEAKS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
+# export GLIBCXX_FORCE_NEW
 
 # Advance Debug
 # -DDEBUG_XML

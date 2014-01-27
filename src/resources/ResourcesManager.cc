@@ -6,6 +6,9 @@
 
 ResourcesManager::ResourcesManager(const std::string file_name)
 {
+  leakint[0] = 6;
+  leakint[1] = 3;
+
   this->parseXML(file_name);
   if (buildFromXML() == -1)
     std::cerr << "build XML FAILURE" << std::endl;
@@ -15,17 +18,25 @@ ResourcesManager::ResourcesManager(const std::string file_name)
 # endif
 }
 
+
 ResourcesManager::~ResourcesManager()
 {
   delete _xml;
 
-  for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
+  for (unsigned int i = E_RESOURCE_TYPE_NONE; i < E_RESOURCE_TYPE_NB; ++i)
   {
     e_resource_type type = static_cast<e_resource_type>(i);
     for (auto it : _resources[type])
       delete it;
   }
+
+  for (auto it : _images)
+  {
+	if (it.second)
+	  delete it.second;
+  }
 }
+
 
 void ResourcesManager::initTypeNames()
 {
@@ -44,11 +55,13 @@ bool ResourcesManager::addResource(e_resource_type type,
   switch (type)
   {
     case E_RESOURCE_TYPE_IMAGE:
+	  std::cout << "Image detected" << std::endl;
       _images[id] = new Image(file_name, name, id);
       _resources[type].push_back(_images[id]);
       return true;
 
     case E_RESOURCE_TYPE_FONT:
+	  std::cout << "Font detected" << std::endl;
       _resources[type].push_back(new Font(file_name, name, id));
       return true;
 
@@ -149,8 +162,11 @@ Image *ResourcesManager::getImage(const std::string image_name)
 
 Font *ResourcesManager::getFont(const std::string font_name)
 {
+  std::cout << "Size: " << _resources[E_RESOURCE_TYPE_FONT].size() << std::endl;
+
   for (auto it : _resources[E_RESOURCE_TYPE_FONT])
   {
+    std::cout << font_name << " expected, found " << it << std::endl;
     if (it->getName() == font_name)
     {
       if (!it->getLoaded())
@@ -161,7 +177,7 @@ Font *ResourcesManager::getFont(const std::string font_name)
   }
 
 # ifdef DEBUG
-  // TODO reach this... in full screen only (or launched from a Term)
+  // TODO reaching this without Valgrind
   std::cerr << "Unable to find font " << font_name << std::endl;
 # endif
 
@@ -191,13 +207,19 @@ bool ResourcesManager::parseXML(const std::string file_name)
   stream.read(&xml_data.front(), static_cast <unsigned int> (size));
   xml_data[size] = 0;
 
-#ifdef DEBUG_XML_FULL
+# ifdef DEBUG_XML_FULL
   // prints whole XML
   for (auto i : xml_data)
     std::cout << i;
-#endif
+# endif
 
   _xml = new (rapidxml::xml_document<>);
+  if (!_xml)
+  {
+	std::cerr << "Unable to create a new XML document";
+	return false;
+  }
+
   _xml->parse<0> (&xml_data[0]);
 
   return true;
@@ -214,7 +236,7 @@ int ResourcesManager::buildFromXML()
   rapidxml::xml_node<> *folder, *file, *name;
   rapidxml::xml_attribute<> *path;
 
-  unsigned int id = 1; // 0: reserved (unset values, ...)
+  unsigned int id = 0; // 0: reserved (unset values, ...)
   type = resources->first_node(_typeNames[current_type].c_str());
   while (current_type < E_RESOURCE_TYPE_NB) // for all categories
   {
@@ -222,12 +244,18 @@ int ResourcesManager::buildFromXML()
     if (!type)
     {
       std::cerr << "type is NULL" << std::endl <<
-          "tried to match> " << _typeNames[current_type].c_str() << std::endl;
+          "tried to match> " << _typeNames[current_type] << std::endl;
       return -1;
     }
 #   endif
 
+    std::cout << "type: " << type << std::endl;
     folder = type->first_node("folder");
+    if (!folder)
+    {
+      std::cerr << "folder is NULL" << std::endl << std::endl;
+    }
+
     while (folder)
     {
       path = folder->first_attribute();
@@ -240,11 +268,11 @@ int ResourcesManager::buildFromXML()
 #     ifdef DEBUG
       // testing if last char is effectively a FOLDER_SEPARATOR
       //if (*(str_path.end() - 1) != FOLDER_DELIMITER)
-//      if (str_path[strlen(str_path) - 2] != FOLDER_DELIMITER)
-//      {
-//        std::cerr << ">>ERROR<< XML file:" << std::endl <<
-//          "-- Missing trailing folder delimiter in " << str_path << std::endl;
-//      }
+      //      if (str_path[strlen(str_path) - 2] != FOLDER_DELIMITER)
+      //      {
+      //        std::cerr << ">>ERROR<< XML file:" << std::endl <<
+      //          "-- Missing trailing folder delimiter in " << str_path << std::endl;
+      //      }
 
       if (!path)
       {
@@ -267,10 +295,10 @@ int ResourcesManager::buildFromXML()
       }
 
       folder = folder->next_sibling("folder");
-
       DEBUG_PRINT("loop !");
     }
 
+    DEBUG_PRINT("nb_type++");
     current_type = static_cast<e_resource_type>(current_type + 1);
     type = type->next_sibling();
   }

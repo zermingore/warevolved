@@ -19,7 +19,10 @@ Status::Status() :
 {
 }
 
-Status::~Status() {
+Status::~Status()
+{
+  delete _window;
+  delete _map;
 }
 
 e_mode Status::getCurrentMode()

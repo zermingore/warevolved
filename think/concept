@@ -4,7 +4,6 @@
 ** multi-plateform
 ** website
 
-
 * GRAPHICS
 ** realist (satellite pictures ?) / dark
 ** 2D / 3D / Mixx ? (2D maps with 3D units? xD)
@@ -58,6 +57,11 @@ note: closer than a simulator than a game...
 ** radio
    to give an order to a unit, this one must have a radio
    (else only one order when splitting teams [patrol, move])
+** loot
+   fetch pieces on damaged vehicles
+   fetch stuff on bodies (jacket -> get appearance, need Ad-Hoc to avoid friendly fire)
+   bleuprints
+
 
 * UNITS
 ** SOLDIERS
@@ -95,6 +99,19 @@ train units
 
 * SCENARIO
 ** Humans Vs Humans ?
+** 2100+ (need to print vehicles parts, with 3D printer)
+** aircraft, with a 3D printer
+*** build units
+*** build some stuff (riffles, ...)
+*** can drop it (could take shots)
+*** can land
+**** safer for content
+**** higher risks for the plane
+**** set up a printer on ground
+**** longer than
+** drones to harvest resources
+** Fr nuclear plants failure ?
+
 
 
 * UPGRADES

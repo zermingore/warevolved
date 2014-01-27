@@ -31,6 +31,8 @@ public:
    */
   virtual ~Unit();
 
+  inline int getHp() { return _hp; } /// _hp getter
+  inline int getAttackValue() { return _attackValue; } /// _attackValue getter
 
   /** \brief _posX getter
    ** \return _posX, x unit position (in px)
@@ -66,6 +68,11 @@ public:
    ** \return unit's name value
    */
   virtual std::string getName();
+
+  /** \brief receive damages
+   ** \return left Health Points
+   */
+  virtual int receiveDamages(unsigned int damages);
 
   /** \brief _motionValue getter
    ** \return number of cells the unit can cross in one turn
@@ -116,6 +123,12 @@ public:
    */
   void pack(Unit *unit);
 
+  /** \brief runs attack / strikes backs (if any) cycles
+   */
+  virtual void attack(Unit *target);
+
+  void calcNbSteps();
+
 
 protected:
   unsigned int _textureId; ///< Texture id in the Resources Manager std::map
@@ -125,6 +138,9 @@ protected:
   Image *_highlight; ///< Unit's image halo
 
   int _hp; ///< Health Points (-1: infinite)
+  int _attackValue; ///< target taken hp per shot (-1: instant death)
+
+
   unsigned int _posX; ///< x position (in px) // NOTE: absolute ? / relative to _cell ?
   unsigned int _posY; ///< y position (in px)
   //Coords _position; ///< Unit's cell relative position

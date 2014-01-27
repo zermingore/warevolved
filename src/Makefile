@@ -135,7 +135,7 @@ AM_DEFAULT_VERBOSITY = 1
 AUTOCONF = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run autoconf
 AUTOHEADER = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run autoheader
 AUTOMAKE = ${SHELL} /home/zermingore/Documents/workspace/warevolved/build-aux/missing --run automake-1.11
-AWK = mawk
+AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -228,6 +228,8 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 -O0 -g -DDEBUG -DDEBUG_LEAKS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
+
+# export GLIBCXX_FORCE_NEW
 
 # Advance Debug
 # -DDEBUG_XML

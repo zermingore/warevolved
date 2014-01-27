@@ -47,7 +47,7 @@ public:
 
   /** \brief Destructor
    */
-  ~ResourcesManager();
+  virtual ~ResourcesManager();
 
   // TODO templates
   /** \brief Retrieve an Image from its name (alias)
@@ -115,16 +115,18 @@ private:
   std::map<e_resource_type, std::list<Resource*> > _resources;
   std::map<unsigned int, Image*> _images; ///< an Image list
 
-  // NOTE think about a list per scope
+  // NOTE think about a list per scope (or a map of map, with 2nd index: scope)
   e_scope _currentScope; ///< actual context
 
   ///< getting resource id by it's name
   std::map<std::string, unsigned int> _mapping;
 
-  rapidxml::xml_document<>* _xml; ///< pointer over XML file
+  rapidxml::xml_document<>* _xml; ///< pointer on XML file
 
   ///< map categories names with e_resource_type
   std::map<e_resource_type, std::string> _typeNames;
+
+  std::map<int, int> leakint; // tmp: this can leak !? ...
 };
 
 #endif /* !RESOURCESMANAGER_HH_ */

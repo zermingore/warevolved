@@ -8,6 +8,7 @@ Unit::Unit() :
   _imageId (0),
   _image (nullptr),
   _hp (0),
+  _attackValue (1),
   _posX (0),
   _posY (0),
   _cellX (1),
@@ -26,6 +27,7 @@ Unit::Unit(std::string name) :
   _name (name),
   _image (nullptr),
   _hp (0),
+  _attackValue (1),
   _posX (0),
   _posY (0),
   _cellX (1),
@@ -89,6 +91,7 @@ Coords Unit::getLocation() {
   return _location;
 }
 
+// virtual method
 std::string Unit::getName() {
   return _name;
 }
@@ -138,4 +141,35 @@ void Unit::draw()
 
 void Unit::pack(Unit *unit) {
   _team->addMember(unit);
+}
+
+// virtual method
+int Unit::receiveDamages(unsigned int damages)
+{
+  return _hp - damages;
+}
+
+
+void Unit::calcNbSteps()
+{
+}
+
+
+// virtual method
+void Unit::attack(Unit *target)
+{
+  calcNbSteps();
+
+  unsigned int nb_steps = 2;
+  for (unsigned int i = 0; i < nb_steps; ++i)
+  {
+    target->receiveDamages(_attackValue / nb_steps);
+    if (!target)
+      break;
+    if (receiveDamages(target->getAttackValue() / nb_steps) < 1)
+    {
+      // TODO notify death
+      break;
+    }
+  }
 }
