@@ -4,13 +4,13 @@
 
 KeyManager::KeyManager()
 {
-  for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
+  for (auto i = 0; i < E_TIMER_NB_TIMERS; ++i)
     _ready[i] = true;
 
-  this->mapKeys();
-}
+  for (auto i = 0; i < E_SWITCH_NB_SWITCHES; ++i)
+	_switches[i] = false;
 
-KeyManager::~KeyManager() {
+  this->mapKeys();
 }
 
 void KeyManager::mapKeys()

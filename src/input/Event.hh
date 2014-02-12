@@ -8,19 +8,15 @@
 # include <interface/menus/InGameMenu.hh>
 
 
-/** \brief Event processing class
+/** \class processing class
  */
 class Event
 {
 public:
-  /** \brief Default Constructor
+  /** \brief Constructor
    **   processes input events
    */
   Event(KeyManager *km, GraphicEngine *ge);
-
-  /** \brief Destructor
-   */
-  ~Event();
 
   /** \brief check if a generic event (like closing the window) occurs
    **   calls matching functions if any

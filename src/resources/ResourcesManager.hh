@@ -125,8 +125,6 @@ private:
 
   ///< map categories names with e_resource_type
   std::map<e_resource_type, std::string> _typeNames;
-
-  std::map<int, int> leakint; // tmp: this can leak !? ...
 };
 
 #endif /* !RESOURCESMANAGER_HH_ */

@@ -23,6 +23,13 @@ Status::~Status()
 {
   delete _window;
   delete _map;
+
+  // State *tmp;
+  // while ((tmp = _states.top()))
+  // {
+  // 	delete tmp;
+  // 	_states.pop();
+  // }
 }
 
 e_mode Status::getCurrentMode()

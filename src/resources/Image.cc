@@ -31,9 +31,6 @@ Image::Image(const std::string file_name,
 
 Image::~Image()
 {
-# ifdef DEBUG
-  std::cout << "Image Dtor" << std::endl;
-# endif
   if (_rectangle)
     delete _rectangle;
 

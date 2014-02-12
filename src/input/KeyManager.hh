@@ -72,9 +72,6 @@ public:
   /** \brief Default Constructor
    */
   KeyManager();
-  /** \brief Destructor
-   */
-  ~KeyManager();
 
   bool up();
   bool down();

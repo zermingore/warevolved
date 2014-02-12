@@ -24,6 +24,7 @@ TAGS
 .autotools
 .cproject
 .project
+.settings
 
 # Doxygen
 html/

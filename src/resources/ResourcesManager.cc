@@ -6,9 +6,6 @@
 
 ResourcesManager::ResourcesManager(const std::string file_name)
 {
-  leakint[0] = 6;
-  leakint[1] = 3;
-
   this->parseXML(file_name);
   if (buildFromXML() == -1)
     std::cerr << "build XML FAILURE" << std::endl;
@@ -26,14 +23,8 @@ ResourcesManager::~ResourcesManager()
   for (unsigned int i = E_RESOURCE_TYPE_NONE; i < E_RESOURCE_TYPE_NB; ++i)
   {
     e_resource_type type = static_cast<e_resource_type>(i);
-    for (auto it : _resources[type])
+    for (auto it: _resources[type])
       delete it;
-  }
-
-  for (auto it : _images)
-  {
-	if (it.second)
-	  delete it.second;
   }
 }
 
@@ -209,7 +200,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
 
 # ifdef DEBUG_XML_FULL
   // prints whole XML
-  for (auto i : xml_data)
+  for (auto i: xml_data)
     std::cout << i;
 # endif
 
@@ -240,6 +231,8 @@ int ResourcesManager::buildFromXML()
   type = resources->first_node(_typeNames[current_type].c_str());
   while (current_type < E_RESOURCE_TYPE_NB) // for all categories
   {
+	std::cerr << "current tn: " << _typeNames[current_type].c_str() << std::endl;
+
 #   ifdef DEBUG
     if (!type)
     {
@@ -252,9 +245,7 @@ int ResourcesManager::buildFromXML()
     std::cout << "type: " << type << std::endl;
     folder = type->first_node("folder");
     if (!folder)
-    {
-      std::cerr << "folder is NULL" << std::endl << std::endl;
-    }
+	  std::cerr << "folder is NULL" << std::endl << std::endl;
 
     while (folder)
     {
@@ -295,7 +286,6 @@ int ResourcesManager::buildFromXML()
       }
 
       folder = folder->next_sibling("folder");
-      DEBUG_PRINT("loop !");
     }
 
     DEBUG_PRINT("nb_type++");
@@ -312,7 +302,7 @@ void ResourcesManager::listResources()
 {
   std::cout << "\t\tResources List" << std::endl;
 
-  for (unsigned int i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
+  for (auto i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
   {
     e_resource_type type = static_cast<e_resource_type>(i);
     std::cout << "Category: " << _typeNames[type] << std::endl;

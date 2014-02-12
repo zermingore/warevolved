@@ -16,9 +16,6 @@ Event::Event(KeyManager *km, GraphicEngine *ge) :
   _path = g_interface->getPath();
 }
 
-Event::~Event() {
-}
-
 
 bool Event::process()
 {

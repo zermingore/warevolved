@@ -8,6 +8,14 @@ AC_CONFIG_AUX_DIR([build-aux])
 # forcing c++11 usage (must be before AC_PROG_CXX)
 CXXFLAGS="$CXXFLAGS -std=c++11"
 
+
+if [[ -n "$SFML_PATH" ]]
+then
+CPPFLAGS="$CPPFLAGS -I$SFML_PATH -I$SFML_PATH/include/"
+else
+SFML_PATH=""
+fi
+
 # Automake.
 AM_INIT_AUTOMAKE([color-tests -Wall -Werror foreign])
 
@@ -46,9 +54,8 @@ AC_MSG_ERROR([SFML Graphics headers not found]))
 AC_LANG_POP([C++])
 
 
-
 AC_CONFIG_FILES([Makefile src/Makefile]) # check/Makefile
 
-#PKG_CHECK_MODULES([lsfmlwindow], [lsfml-window]) #-lsfml-graphics -lsfml-window -lsfml-system
+# PKG_CHECK_MODULES([lsfmlwindow], [lsfml-window]) #-lsfml-graphics -lsfml-window -lsfml-system
 
 AC_OUTPUT

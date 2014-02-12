@@ -13,7 +13,8 @@ Map::Map(unsigned int nbColumns, unsigned int nbLines) :
 {
 }
 
-Map::~Map() {
+Map::~Map()
+{
   delete[] _cells;
 }
 
@@ -25,11 +26,13 @@ void Map::init()
 
   // TODO read informations from a map file
   for (unsigned int i = 0; i < _nbColumns; ++i)
+  {
     for (unsigned int j = 0; j < _nbLines; ++j)
     {
       _cells[i * _nbColumns + j] = new Cell;
       _cells[i * _nbLines + j]->setTerrain(E_TERRAIN_FOREST);
     }
+  }
 }
 
 

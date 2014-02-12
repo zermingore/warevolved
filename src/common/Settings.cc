@@ -13,10 +13,6 @@ Settings::Settings(unsigned int depth,
 {
 }
 
-Settings::~Settings() {
-}
-
-
 unsigned int Settings::getDepth() {
   return _depth;
 }

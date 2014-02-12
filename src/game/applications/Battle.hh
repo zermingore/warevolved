@@ -42,10 +42,10 @@ public:
    */
   void nextPlayer();
 
-
   /** \brief initializes map
    */
   void buildMap();
+
 
 private:
   /** \brief initializes a Battle

@@ -33,24 +33,20 @@ public:
    */
   State(e_mode mode, EntriesMenu *menu);
 
-  /** Destructor
-   */
-  ~State();
-
   /** _mode getter
    ** \return _mode value
    */
-  e_mode getMode();
+  e_mode getMode() { return _mode; }
 
   /** _menu getter
    ** \return _menu a pointer over current menu
    */
-  EntriesMenu *getMenu();
+  EntriesMenu *getMenu() { return _menu; }
 
   /** _cursorCoords getters
    ** \return _cursorCoords value
    */
-  Coords getCursorCoords();
+  Coords getCursorCoords() { return _cursorCoords; }
 
 
 private:

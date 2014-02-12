@@ -12,6 +12,8 @@ Battle::Battle() :
 
 Battle::~Battle()
 {
+  // TODO never called
+
   delete _map;
   for (auto it: _players)
     delete it;

@@ -30,11 +30,6 @@ public:
            unsigned int stencil,
            unsigned int antiAliasing);
 
-  /** \brief Default Destructor
-   */
-  ~Settings();
-
-
   /** \brief graphic depth getter
    ** \return depth value
    */

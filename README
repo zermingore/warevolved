@@ -1,10 +1,8 @@
 War Evolved is a simple 2D tactical RPG
 
-to compile it, you'll need autotools, make, g++ and SFML2
+to compile it, you'll need autotools, make, g++ and SFML2+ (2.1)
 run
-> autoreconf -fvi
-to rebuild a configure files then run
-> ./configure && make
+> ./autogen.sh
 
 if it works, the binary file (we) will be created
 
