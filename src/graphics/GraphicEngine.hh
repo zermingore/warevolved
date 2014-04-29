@@ -28,14 +28,6 @@
 class GraphicEngine
 {
 public:
-  /** \brief Default Constructor
-   */
-  GraphicEngine();
-
-  /** \brief Destructor
-   */
-  ~GraphicEngine();
-
   /** \brief Draws the whole scene
    **   calls others drawing functions
    */

@@ -227,7 +227,6 @@ int ResourcesManager::buildFromXML()
   rapidxml::xml_node<> *folder, *file, *name;
   rapidxml::xml_attribute<> *path;
 
-  unsigned int id = 0; // 0: reserved (unset values, ...)
   type = resources->first_node(_typeNames[current_type].c_str());
   while (current_type < E_RESOURCE_TYPE_NB) // for all categories
   {
@@ -244,8 +243,11 @@ int ResourcesManager::buildFromXML()
 
     std::cout << "type: " << type << std::endl;
     folder = type->first_node("folder");
+
+#   ifdef DEBUG
     if (!folder)
 	  std::cerr << "folder is NULL" << std::endl << std::endl;
+#   endif
 
     while (folder)
     {

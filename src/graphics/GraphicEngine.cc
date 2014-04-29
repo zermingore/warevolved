@@ -7,14 +7,7 @@
 #include <common/enums/terrains.hh>
 #include <game/Map.hh>
 #include <game/PathFinding.hh>
-#include <common/enums/types.hh>
 
-
-GraphicEngine::GraphicEngine() {
-}
-
-GraphicEngine::~GraphicEngine() {
-}
 
 
 void GraphicEngine::initRoom()

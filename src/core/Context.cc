@@ -22,7 +22,7 @@ Context::Context(bool fullscreen) :
     g_settings = new Settings(0, 0, 0); // vanilla (debug) mode
 
   g_settings->setFullScreen(fullscreen);
-  _system = new System(2, 0); // SFML version: 2.0
+  _system = new System(2, 1); // SFML version: 2.1
 }
 
 Context::~Context()

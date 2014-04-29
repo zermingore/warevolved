@@ -28,6 +28,7 @@ void Game::run()
   std::vector<sf::Int64> frame_generation;
 # endif
 
+
   _currentApplication = new Battle;
   graphics->initRoom();
   // Game loop

@@ -17,7 +17,7 @@ SFML_PATH=""
 fi
 
 # Automake.
-AM_INIT_AUTOMAKE([color-tests -Wall -Werror foreign])
+AM_INIT_AUTOMAKE([subdir-objects color-tests -Wall -Werror foreign])
 
 # By default, let "make" hide the compilation command and display a
 # "GEN ..." message, unless V=1 is passed to "make".
