@@ -3,12 +3,17 @@
 #include <resources/Image.hh>
 #include <resources/Font.hh>
 
+# define DEBUG_XML 1
+# define DEBUG_XML_FULL 1
+
 
 ResourcesManager::ResourcesManager(const std::string file_name)
 {
   this->parseXML(file_name);
   if (buildFromXML() == -1)
     std::cerr << "build XML FAILURE" << std::endl;
+
+  this->initializeDefaultResources();
 
 # ifdef DEBUG_XML
   this->listResources();
@@ -29,6 +34,14 @@ ResourcesManager::~ResourcesManager()
 }
 
 
+void ResourcesManager::initializeDefaultResources()
+{
+  _resources[E_RESOURCE_TYPE_IMAGE].push_back(
+    new Font("resources/defaults/image.png", "default", 0));
+  _resources[E_RESOURCE_TYPE_FONT].push_back(
+    new Font("resources/defaults/font.ttf", "default", 0));
+}
+
 void ResourcesManager::initTypeNames()
 {
   _typeNames[E_RESOURCE_TYPE_NONE] = "none";
@@ -46,7 +59,7 @@ bool ResourcesManager::addResource(e_resource_type type,
   switch (type)
   {
     case E_RESOURCE_TYPE_IMAGE:
-	  std::cout << "Image detected" << std::endl;
+	  std::cout << "Image detected: " << file_name << std::endl;
       _images[id] = new Image(file_name, name, id);
       _resources[type].push_back(_images[id]);
       return true;
@@ -91,7 +104,8 @@ Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name
   std::cerr << "Unable to find image " << image_name << std::endl;
 # endif
 
-  return NULL; // NOTE return a default image
+  // return a default image
+  return _images[0];
 }
 
 
@@ -120,7 +134,8 @@ Image *ResourcesManager::getImage(const char *image_name)
   std::cerr << "Unable to find image " << image_name << std::endl;
 # endif
 
-  return NULL; // NOTE return a default image
+  // return a default image
+  return _images[0];
 }
 
 
@@ -147,7 +162,8 @@ Image *ResourcesManager::getImage(const std::string image_name)
   std::cerr << "Unable to find image " << image_name << std::endl;
 # endif
 
-  return NULL; // NOTE return a default image
+  // return a default image
+  return _images[0];
 }
 
 
@@ -169,10 +185,11 @@ Font *ResourcesManager::getFont(const std::string font_name)
 
 # ifdef DEBUG
   // TODO reaching this without Valgrind
-  std::cerr << "Unable to find font " << font_name << std::endl;
+  Debug::logprintf("Unable to find font", font_name);
 # endif
 
-  return NULL; // NOTE return a default font ?
+  // return a default font
+  return new Font("resources/fonts/army.ttf", font_name, 0); // leak
 }
 
 
@@ -242,7 +259,10 @@ int ResourcesManager::buildFromXML()
     }
 #   endif
 
-    std::cout << "type: " << type << std::endl;
+    // std::cout << "type: " << type << std::endl;
+    // std::cout << "type 1st node 'folder': " << type->first_node("folder") << std::endl;
+    // std::cout << "type 1st node: " << type->first_node() << std::endl;
+    // std::cout << "type 1st node name: " << type->first_node()->name() << std::endl;
     folder = type->first_node("folder");
 
 #   ifdef DEBUG
@@ -303,7 +323,7 @@ int ResourcesManager::buildFromXML()
 #ifdef DEBUG_XML
 void ResourcesManager::listResources()
 {
-  std::cout << "\t\tResources List" << std::endl;
+  std::cout << "\t\t__________Resources List__________" << std::endl;
 
   for (auto i = E_RESOURCE_TYPE_NONE + 1; i < E_RESOURCE_TYPE_NB; ++i)
   {

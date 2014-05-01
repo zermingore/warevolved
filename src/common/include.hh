@@ -8,7 +8,12 @@
 #ifndef INCLUDE_HH_
 # define INCLUDE_HH_
 
-# include <common/debug.hh>
+# include <string>
+# include <list>
+# include <iostream>
+# include <fstream>
+
+# include <common/Debug.hh>
 
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
@@ -16,9 +21,5 @@
 
 # include <common/structures/Vector.hh>
 
-# include <string>
-# include <list>
-# include <iostream>
-# include <fstream>
 
 #endif /* !INCLUDE_HH_ */

@@ -176,6 +176,10 @@
 ** TODO Font Cleanup segfault (launched from a terminal)
 ** TODO In-game menu: Escape key <> Cancel entry
 
+** TODO Font load resource segfault
+   without valgrind
+   multi-folder in xml file sections
+
 ** DONE [#B] Add Doxygen Comments in headers
    CLOSED: [2013-04-19 Fri 16:33]
    not perfect but does the job for now

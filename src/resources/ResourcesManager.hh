@@ -35,11 +35,6 @@ enum e_resource_type
 class ResourcesManager
 {
 public:
-  /** \brief default constructor
-   ** initializes resources mapping, calling buildFromXML();
-   */
-  ResourcesManager();
-
   /** \brief Constructor, parses the XML, calling buildFromXML()
    ** \param file_name XML file name to parse
    */
@@ -48,6 +43,11 @@ public:
   /** \brief Destructor
    */
   virtual ~ResourcesManager();
+
+  /** \brief initialize default resources
+   ** theses resources are used when we cannot find the expected one
+   */
+  void initializeDefaultResources();
 
   // TODO templates
   /** \brief Retrieve an Image from its name (alias)
