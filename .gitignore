@@ -2,6 +2,7 @@
 
 *.o
 *.in
+LOG
 
 # Autotools output
 .dirstamp

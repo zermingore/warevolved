@@ -35,13 +35,19 @@
     } while (0)
 # endif
 
-
 # ifdef DEBUG
 #   define DEBUG_PRINT_VALUE(x) do { \
       std::cout << #x << ": " << x << std::endl; \
     } while (0)
 # else
 #   define DEBUG_PRINT_VALUE(x) do { \
+    } while (0)
+# endif
+
+# ifdef DEBUG
+#   define PRINTF Debug::printf
+# else
+#   define PRINTF do { \
     } while (0)
 # endif
 
@@ -60,7 +66,7 @@ public:
   static void log(const std::string &msg, char severity = ' ');
 
   template<typename T, typename... Tail>
-  static void logprintf(T head, Tail... tail)
+  static void logPrintf(T head, Tail... tail)
   {
 	time_t now = time(0);
 	struct tm *full_date = localtime(&now);
@@ -93,6 +99,25 @@ public:
 	std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
 	log << " " << head;
 	std::cout << head << " ";
+  }
+
+
+  /** \brief print given parameters on standard output
+   ** \param head: element to print right now
+   ** \param tail eventually, rest of given arguments list
+   */
+  template<typename T, typename... Tail>
+  static void printf(T head, Tail... tail)
+  {
+	std::cout << head << " ";
+	printf(tail...);
+  }
+
+  /** \brief appends a new line after last parameter
+   */
+  static void printf()
+  {
+	std::cout << std::endl;
   }
 };
 

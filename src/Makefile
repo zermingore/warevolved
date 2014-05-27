@@ -195,7 +195,7 @@ AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPPFLAGS = -I/home/zermingore/bin/SFML-2.1/include-I/home/zermingore/bin/SFML-2.1/include/SFML/
+CPPFLAGS = 
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3

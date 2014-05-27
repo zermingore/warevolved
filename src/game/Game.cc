@@ -5,15 +5,13 @@
 #include <game/applications/Battle.hh>
 
 Game::Game() :
-  _event (nullptr),
-  _currentApplication (nullptr)
+  _event (nullptr)
 {
 }
 
 Game::~Game()
 {
   delete _event;
-  //delete _currentApplication;
 }
 
 
@@ -28,14 +26,14 @@ void Game::run()
   std::vector<sf::Int64> frame_generation;
 # endif
 
+  Battle b;
 
-  _currentApplication = new Battle;
   graphics->initRoom();
+
   // Game loop
   while (WINDOW->isOpen() && _event->process())
   {
     graphics->drawScene();
-    //_currentApplication->run();
     WINDOW->display(); // Update the window
 
 #   ifdef DEBUG_PERFS
@@ -45,7 +43,6 @@ void Game::run()
     timer.restart();
 #   endif
   }
-
 
   // finished the main loop, displaying performances
 # ifdef DEBUG_PERFS

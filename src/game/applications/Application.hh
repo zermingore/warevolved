@@ -25,8 +25,8 @@ public:
 
   virtual void run() = 0;
 
-
   virtual void buildMap() = 0;
+
 
 protected:
   virtual void init() = 0;

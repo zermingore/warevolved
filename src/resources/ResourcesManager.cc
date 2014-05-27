@@ -100,11 +100,8 @@ Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name
     }
   }
 
-# ifdef DEBUG
-  std::cerr << "Unable to find image " << image_name << std::endl;
-# endif
+  Debug::logPrintf("Unable to find image ", image_name, " using default");
 
-  // return a default image
   return _images[0];
 }
 
@@ -169,6 +166,8 @@ Image *ResourcesManager::getImage(const std::string image_name)
 
 Font *ResourcesManager::getFont(const std::string font_name)
 {
+  return new Font("resources/fonts/army.ttf", font_name, 0); // leak
+
   std::cout << "Size: " << _resources[E_RESOURCE_TYPE_FONT].size() << std::endl;
 
   for (auto it : _resources[E_RESOURCE_TYPE_FONT])
@@ -185,7 +184,7 @@ Font *ResourcesManager::getFont(const std::string font_name)
 
 # ifdef DEBUG
   // TODO reaching this without Valgrind
-  Debug::logprintf("Unable to find font", font_name);
+  Debug::logPrintf("Unable to find font", font_name);
 # endif
 
   // return a default font

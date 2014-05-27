@@ -15,19 +15,16 @@ int main(int ac, const char **av)
   if (ac > 1)
     fullscreen = true;
 
-  Context *context = new Context(fullscreen);
-  g_status->setWindow(context->init());
+  Context context(fullscreen);
+  g_status->setWindow(context.init());
   g_status->pushMode(E_MODE_PLAYING); // TODO a main menu
-  Game *game = new Game();
-  game->run();
 
-# ifdef DEBUG_LEAKS
-  delete context;
-  delete game;
+  Game game;
+  game.run();
+
   delete g_status;
   delete g_rm;
   delete g_interface;
-# endif
 
   return EXIT_SUCCESS;
 }

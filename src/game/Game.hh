@@ -9,8 +9,6 @@
 # define GAME_HH_
 
 # include <input/Event.hh>
-# include <game/applications/Application.hh>
-
 
 /** \brief Game is designed to hold the whole Game and not a single game
  **   This way the Game class launches the main menu when needed
@@ -35,7 +33,6 @@ public:
 
 private:
   Event *_event; ///< Events management
-  Application *_currentApplication;
 };
 
 #endif /* !GAME_HH_ */
