@@ -17,9 +17,6 @@ Cell::Cell() :
   _coordinates.y = y++ % NB_LINES;
 }
 
-Cell::~Cell() {
-}
-
 Unit *Cell::getUnit() {
   return _unit;
 }
@@ -39,7 +36,6 @@ void Cell::removeUnit() {
 void Cell::setTerrain(const e_terrain terrain) {
   _terrain = terrain;
 }
-
 
 void Cell::setHighlight(bool highlight) {
   _highlight = highlight;

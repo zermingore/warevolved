@@ -110,7 +110,7 @@ private:
                                         ///< filled through addNextDirection
 
   std::vector<Image*> _images; ///< Images* of the path vector
-  std::vector<Cell*> _reachableCells; ///< list of reachable cells
+  std::vector<Cell> _reachableCells; ///< list of reachable cells
                                       ///< for the selected unit
 };
 

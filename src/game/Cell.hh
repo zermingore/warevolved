@@ -21,10 +21,6 @@ public:
    */
   Cell();
 
-  /** \brief Destructor
-   */
-  ~Cell();
-
   /** \brief _unit getter
    ** \return cell's unit
    */
@@ -47,26 +43,33 @@ public:
   void removeUnit();
 
   /** \brief _terrain setter
-   ** sets the terrain \param terrain in the cell
+   ** sets the terrain \param terrain in the Cell
    **
-   ** \param terrain The terrain to be set in the cell
+   ** \param terrain The terrain to be set in the Cell
    */
   void setTerrain(const e_terrain terrain);
 
   /** \brief _highlight setter
-   ** \param highlight true if we want to highlight the cell
+   ** \param highlight true if we want to highlight the Cell
    */
   void setHighlight(bool highlight);
 
   /** \brief highlight color setter
-   ** \param color color of the highlight of the cell
+   ** \param color color of Cell's highlight
    */
   void setHighlightColor(Color color);
 
-
-  /** \brief draws cell's contents: terrain and unit
+  /** \brief draws Cell's contents: terrain and unit
    */
   void draw();
+
+  /** \brief returns Cell's x coordinate
+   */
+  inline unsigned int x() { return _coordinates.x; }
+
+  /** \brief returns Cell's y coordinate
+   */
+  inline unsigned int y() { return _coordinates.y; }
 
 
 private:

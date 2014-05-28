@@ -60,7 +60,6 @@ Unit &Player::newUnit(e_unit unit, unsigned int line, unsigned int column)
   switch (unit)
   {
     case E_UNIT_SOLDIERS:
-      //new_unit = new Unit("soldiers");
       new_unit = new Soldier();
       break;
 

@@ -3,6 +3,9 @@
 #include <common/globals.hh>
 
 
+#include <game/units/Soldier.hh>
+
+
 PathFinding::PathFinding() :
   _cached (false),
   _maxLength (0),
@@ -213,7 +216,7 @@ void PathFinding::addNextDirection(e_direction direction)
 
 void PathFinding::showAlowedPath(Unit *unit)
 {
-  Cell **cells = g_status->getMap()->getCells();
+  std::vector<std::vector<Cell>> &cells = g_status->getMap()->getCells();
 
   // these are not unsigned because we want to check negativity
   int x = unit->getCellX();
@@ -223,21 +226,21 @@ void PathFinding::showAlowedPath(Unit *unit)
 
   _reachableCells.clear();
   // ugly tests
-  while (static_cast<unsigned int> (offset_y) <= _maxLength)
+  while (static_cast<unsigned int> (offset_y) <= _maxLength) // use Unit motionValue
   {
     while (static_cast<unsigned int>(offset_x + offset_y) <= _maxLength)
     {
       if (x + offset_x < 8 && y + offset_y < 8)
-        _reachableCells.push_back(cells[(x + offset_x) * 8 + y + offset_y]);
+        _reachableCells.push_back(cells[x + offset_x][y + offset_y]);
 
       if (x - offset_x > -1 && y + offset_y < 8)
-        _reachableCells.push_back(cells[(x - offset_x) * 8 + y + offset_y]);
+        _reachableCells.push_back(cells[x - offset_x][y + offset_y]);
 
       if (x + offset_x < 8 && y - offset_y > -1)
-        _reachableCells.push_back(cells[(x + offset_x) * 8 + y - offset_y]);
+        _reachableCells.push_back(cells[x + offset_x][y - offset_y]);
 
       if (x - offset_x > -1 && y - offset_y > -1)
-        _reachableCells.push_back(cells[(x - offset_x) * 8 + y - offset_y]);
+        _reachableCells.push_back(cells[x - offset_x][y - offset_y]);
 
       ++offset_x;
     }
@@ -259,17 +262,18 @@ void PathFinding::highlightCells()
   Unit *tmp;
   for (auto it : _reachableCells)
   {
-    it->setHighlight(true);
+    Cell& c = g_status->getMap()->getCells()[it.x()][it.y()];
 
-    if ((tmp = it->getUnit()))
+    c.setHighlight(true);
+    if ((tmp = c.getUnit()))
     {
      if (tmp->getPlayerId() != g_status->getCurrentPlayer())
-       it->setHighlightColor(sf::Color::Red);
+       c.setHighlightColor(sf::Color::Red);
      else
-       it->setHighlightColor(sf::Color::Green);
+       c.setHighlightColor(sf::Color::Green);
     }
     else
-      it->setHighlightColor(sf::Color::Yellow);
+      c.setHighlightColor(sf::Color::Yellow);
   }
 }
 
@@ -277,7 +281,8 @@ void PathFinding::highlightCells()
 void PathFinding::hideAllowedPath()
 {
   // cleaning displayed move possibilities
-  Cell **cells = g_status->getMap()->getCells();
-  for (unsigned int i = 0; i < NB_COLUMNS * NB_LINES; ++i)
-    cells[i]->setHighlight(false);
+  std::vector<std::vector<Cell>> &cells = g_status->getMap()->getCells();
+  for (unsigned int i = 0; i < NB_COLUMNS; ++i)
+    for (unsigned int j = 0; j < NB_LINES; ++j)
+      cells[i][j].setHighlight(false);
 }

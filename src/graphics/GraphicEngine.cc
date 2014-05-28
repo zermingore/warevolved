@@ -38,12 +38,12 @@ void GraphicEngine::drawBackground() // TODO (map background)
 
 void GraphicEngine::drawCells()
 {
-  Cell **cells = g_status->getMap()->getCells();
+  std::vector<std::vector<Cell>> cells = g_status->getMap()->getCells();
   // draws column by column
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)
   	{
-      cells[i * NB_COLUMNS + j]->draw();
+      cells[i][j].draw();
   	}
 }
 

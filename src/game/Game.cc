@@ -27,7 +27,6 @@ void Game::run()
 # endif
 
   Battle b;
-
   graphics->initRoom();
 
   // Game loop

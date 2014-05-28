@@ -8,6 +8,7 @@
 #ifndef INCLUDE_HH_
 # define INCLUDE_HH_
 
+# include <vector>
 # include <string>
 # include <list>
 # include <iostream>
