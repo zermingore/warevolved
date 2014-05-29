@@ -25,7 +25,7 @@ public:
 
   /** \brief returns selected cell's coordinates
    */
-  Coords getSelectedCell();
+  Coords selectedCell();
 
   /** \brief notify the Status that a cell was clicked
    ** it sets up _selectionActive to
@@ -35,11 +35,16 @@ public:
    */
   void cellSelection();
 
-  /** \brief _window getter */
-  sf::RenderWindow *getWindow();
+  // __________________________ Getters / Setters __________________________ //
+  /** \brief _window getter
+   ** \return _window rendering window
+   */
+  sf::RenderWindow *window() { return _window; }
 
-  /** \brief _map getter */
-  Map *getMap();
+  /** \brief _map getter
+   ** \return _map
+   */
+  Map *map() { return _map; }
 
   /** \brief returns current number of
    **   generated frames per Seconds
@@ -48,19 +53,25 @@ public:
    **   the frame rate will be limited to 60
    **   it will be unlimited otherwise
    */
-  float getCurrentFPS();
-  unsigned int getCellWidth();
-  unsigned int getCellHeight();
-  unsigned int getGridThickness();
-  unsigned int getRenderX();
-  unsigned int getRenderY();
-  unsigned int getGridOffsetX();
-  unsigned int getGridOffsetY();
-  unsigned int getSelectionMenuSelectedEntry();
+  inline float currentFPS() { return _currentFPS; }
+  inline unsigned int cellWidth() { return _cellWidth; }
+  inline unsigned int cellHeight() { return _cellHeight; }
+  inline unsigned int gridThickness() { return _gridThickness; }
+  inline unsigned int renderX() { return _renderX; }
+  inline unsigned int renderY() { return _renderY; }
+  inline unsigned int gridOffsetX() { return _gridOffsetX; }
+  inline unsigned int gridOffsetY() { return _gridOffsetY; }
+  unsigned int selectionMenuSelectedEntry();
 
-  std::vector<Player*> getPlayers();
-  unsigned int getCurrentPlayer();
+  /** \brief players vector getter
+   ** \return _players vector
+   */
+  inline std::vector<Player*> players() { return _players; }
 
+  /** \brief current player identifier getter
+   ** \return _currentPlayer: current player identifier
+   */
+  inline unsigned int currentPlayer() { return _currentPlayer; }
 
   /** \brief pops _modes summit
    ** exits the game if the stack is empty
@@ -82,7 +93,7 @@ public:
   /** \brief \return current mode
    ** meaning, the summit of _modes stack
    */
-  e_mode getCurrentMode();
+  e_mode currentMode();
 
   /** \brief _window setter
    **   updates _renderX and _renderY
@@ -92,7 +103,7 @@ public:
   /** \brief sets map
    ** \param map current map
    */
-  void setMap(Map *map);
+  inline void setMap(Map *map) { _map = map; }
 
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
@@ -104,33 +115,54 @@ public:
    */
   void pushModeInGameMenu(e_mode mode, InGameMenu *menu);
 
-  void setSelectedCell(Coords selected_cell);
-  void setCurrentFPS(float current_fps);
-  void setCellWidth(unsigned int cell_width);
-  void setCellHeight(unsigned int cell_height);
-  void setGridThickness(unsigned int grid_thickness);
+  /** \brief sets selected cell coordinates to the given coordinates
+   ** \param c coordinates of the selected cell
+   */
+  inline void setSelectedCell(Coords c) { _selectedCell = c; }
+
+  /** \brief sets current fps to the given value
+   ** \param fps frame per second value
+   */
+  inline void setCurrentFPS(float fps) { _currentFPS = fps; }
+
+  /** \brief sets cells width
+   ** \param width cells width
+   */
+  inline void setCellWidth(unsigned int width) { _cellWidth = width; }
+
+  /** \brief sets cells height
+   ** \param height cells height
+   */
+  inline void setCellHeight(unsigned int height) { _cellHeight = height; }
+
+  /** \brief sets grid thickness
+   ** \param thickness graphical grid thickness
+   */
+  inline void setGridThickness(unsigned int t) { _gridThickness = t; }
 
   /** \brief sets drawable zone size width
    ** \param render_x new render zone width
    */
-  void setRenderX(unsigned int render_x);
+  inline void setRenderX(unsigned int x) { _renderX = x; }
 
   /** \brief sets drawable zone size height
    ** \param render_x new render zone height
    */
-  void setRenderY(unsigned int render_y);
+  inline void setRenderY(unsigned int y) { _renderY = y; }
+
+  inline void setGridOffsetX(unsigned int x) { _gridOffsetX = x; }
+  inline void setGridOffsetY(unsigned int y) { _gridOffsetY = y; }
+
   void setGridOffset();
-  void setGridOffsetX(unsigned int grid_offset_x);
-  void setGridOffsetY(unsigned int grid_offset_y);
 
   /** \brief sets _currentPlayer
    */
-  void setCurrentPlayer(unsigned int current_player_id);
+  inline void setCurrentPlayer(unsigned int id) { _currentPlayer = id; }
 
   /** \brief
    ** \param players
    */
-  void setPlayers(std::vector<Player*> players);
+  inline void setPlayers(std::vector<Player*> players) { _players = players; }
 
 
 private:

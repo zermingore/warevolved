@@ -39,7 +39,7 @@ void EntriesMenu::init()
 }
 
 
-unsigned int EntriesMenu::getSelectedEntry() {
+unsigned int EntriesMenu::selectedEntry() {
   return _selectedEntry;
 }
 
@@ -52,7 +52,7 @@ void EntriesMenu::loadMenu(EntriesMenu *menu)
 {
   _entries = menu->getEntries();
   _nbEntries = _entries->size();
-  _selectedEntry = menu->getSelectedEntry();
+  _selectedEntry = menu->selectedEntry();
   this->setOrigin();
 }
 

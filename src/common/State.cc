@@ -8,7 +8,7 @@ State::State(e_mode mode) :
   _menu (nullptr)
 {
   if (CURSOR)
-    _cursorCoords = CURSOR->getCoords();
+    _cursorCoords = CURSOR->coords();
 }
 
 
@@ -17,5 +17,5 @@ State::State(e_mode mode, EntriesMenu *menu) :
   _menu (menu)
 {
   if (CURSOR)
-    _cursorCoords = CURSOR->getCoords();
+    _cursorCoords = CURSOR->coords();
 }

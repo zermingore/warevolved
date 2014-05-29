@@ -33,8 +33,8 @@ public:
   void setSfmlMajor(unsigned int sfml_major);
   void setSfmlMinor(unsigned int sfml_minor);
 
-  unsigned int getSfmlMajor();
-  unsigned int getSfmlMinor();
+  unsigned int sfmlMajor();
+  unsigned int sfmlMinor();
 
 private:
   unsigned int _sfmlMajor; ///< SFML major version (x.*)

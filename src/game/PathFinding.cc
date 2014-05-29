@@ -22,12 +22,12 @@ void PathFinding::setOrigin(Coords coords)
 {
   this->clearPath();
 
-  Unit *unit = g_status->getMap()->getUnit(coords);
+  Unit *unit = g_status->map()->unit(coords);
   _origin = coords;
   _current = coords;
   _cached = false;
   _currentLength = 0;
-  _maxLength = unit->getMotionValue();
+  _maxLength = unit->motionValue();
 
   this->showAlowedPath(unit);
 }
@@ -191,14 +191,14 @@ Image *PathFinding::getImage(unsigned int index)
   }
 
   angle = static_cast <unsigned int> (shape % 360);
-  img->getSprite()->setRotation(angle);
-  img->getSprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
+  img->sprite()->setRotation(angle);
+  img->sprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
   // drawing at the middle of the cell
   sf::Vector2f pos;
   pos.x = _current.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
   pos.y = _current.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
-  img->getSprite()->setPosition(pos);
+  img->sprite()->setPosition(pos);
 
   return img;
 }
@@ -216,11 +216,11 @@ void PathFinding::addNextDirection(e_direction direction)
 
 void PathFinding::showAlowedPath(Unit *unit)
 {
-  std::vector<std::vector<Cell>> &cells = g_status->getMap()->getCells();
+  std::vector<std::vector<Cell>> &cells = g_status->map()->cells();
 
   // these are not unsigned because we want to check negativity
-  int x = unit->getCellX();
-  int y = unit->getCellY();
+  int x = unit->cellX();
+  int y = unit->cellY();
   int offset_x = 0;
   int offset_y = 0;
 
@@ -262,12 +262,12 @@ void PathFinding::highlightCells()
   Unit *tmp;
   for (auto it : _reachableCells)
   {
-    Cell& c = g_status->getMap()->getCells()[it.x()][it.y()];
+    Cell& c = g_status->map()->cells()[it.x()][it.y()];
 
     c.setHighlight(true);
-    if ((tmp = c.getUnit()))
+    if ((tmp = c.unit()))
     {
-     if (tmp->getPlayerId() != g_status->getCurrentPlayer())
+     if (tmp->playerId() != g_status->currentPlayer())
        c.setHighlightColor(sf::Color::Red);
      else
        c.setHighlightColor(sf::Color::Green);
@@ -281,7 +281,7 @@ void PathFinding::highlightCells()
 void PathFinding::hideAllowedPath()
 {
   // cleaning displayed move possibilities
-  std::vector<std::vector<Cell>> &cells = g_status->getMap()->getCells();
+  std::vector<std::vector<Cell>> &cells = g_status->map()->cells();
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)
       cells[i][j].setHighlight(false);

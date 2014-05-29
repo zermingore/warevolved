@@ -17,34 +17,6 @@ Cell::Cell() :
   _coordinates.y = y++ % NB_LINES;
 }
 
-Unit *Cell::getUnit() {
-  return _unit;
-}
-
-e_terrain Cell::getTerrain() {
-  return _terrain;
-}
-
-void Cell::setUnit(Unit &unit) {
-  _unit = &unit;
-}
-
-void Cell::removeUnit() {
-  _unit = nullptr;
-}
-
-void Cell::setTerrain(const e_terrain terrain) {
-  _terrain = terrain;
-}
-
-void Cell::setHighlight(bool highlight) {
-  _highlight = highlight;
-}
-
-void Cell::setHighlightColor(Color color) {
-  _highlightColor = color;
-}
-
 void Cell::draw()
 {
   // TODO check if we print the cell (scroll case)
@@ -58,7 +30,7 @@ void Cell::draw()
   if (_highlight)
   {
     Image *highlight = GETIMAGE("highlight");
-    highlight->getSprite()->setColor(_highlightColor);
+    highlight->sprite()->setColor(_highlightColor);
     highlight->drawAtCell(_coordinates);
   }
 

@@ -41,32 +41,9 @@ Unit::Unit(std::string name) :
   _highlight = GETIMAGE("highlight");
 }
 
-Unit::~Unit() {
-}
-
-
-unsigned int Unit::getPosX() {
-  return _posX;
-}
-
-unsigned int Unit::getPosY() {
-  return _posY;
-}
-
-unsigned int Unit::getCellX() {
-  return _cellX;
-}
-
-unsigned int Unit::getCellY() {
-  return _cellY;
-}
-
-unsigned int Unit::getMotionValue() {
-  return _motionValue;
-}
-
-bool Unit::getPlayed() {
-  return _played;
+void Unit::pack(Unit *unit)
+{
+  _team->addMember(unit);
 }
 
 void Unit::setCellCoordinates(unsigned int cell_x, unsigned int cell_y)
@@ -75,50 +52,20 @@ void Unit::setCellCoordinates(unsigned int cell_x, unsigned int cell_y)
   _cellY = cell_y;
 }
 
-void Unit::setPlayerId(unsigned int player_id) {
-  _playerId = player_id;
-}
-
-unsigned int Unit::getTextureId() {
-  return _textureId;
-}
-
-void Unit::setTextureId(unsigned int texture_id) {
-  _textureId = texture_id;
-}
-
-Coords Unit::getLocation() {
-  return _location;
-}
-
-// virtual method
-std::string Unit::getName() {
-  return _name;
-}
-
 void Unit::setLocation(Coords location)
 {
   _location = location;
   _played = true;
 }
 
-unsigned int Unit::getPlayerId() {
-  return _playerId;
-}
-
-void Unit::setPlayed(bool played) {
-  _played = played;
-}
-
-
 void Unit::draw()
 {
   _image = GETIMAGE(_name);
-  _image->getSprite()->setColor(g_status->getPlayers()[_playerId]->getUnitsColor());
+  _image->sprite()->setColor(g_status->players()[_playerId]->unitsColor());
 
-  float x = _image->getSprite()->getTexture()->getSize().x;
-  float y = _image->getSprite()->getTexture()->getSize().y;
-  _image->getSprite()->setScale(CELL_WIDTH / x, CELL_HEIGHT / y);
+  float x = _image->sprite()->getTexture()->getSize().x;
+  float y = _image->sprite()->getTexture()->getSize().y;
+  _image->sprite()->setScale(CELL_WIDTH / x, CELL_HEIGHT / y);
 
   # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
@@ -128,45 +75,26 @@ void Unit::draw()
 
   if (_targetable)
   {
-    _highlight->getSprite()->setColor(sf::Color(255, 0, 0));
+    _highlight->sprite()->setColor(sf::Color(255, 0, 0));
     _highlight->drawAtCell(_cellX, _cellY);
   }
 
   if (_played)
-    _image->getSprite()->setColor(sf::Color(127, 127, 127, 191));
+    _image->sprite()->setColor(sf::Color(127, 127, 127, 191));
 
   _image->drawAtCell(_cellX, _cellY);
 }
 
-
-void Unit::pack(Unit *unit) {
-  _team->addMember(unit);
-}
-
-// virtual method
-int Unit::receiveDamages(unsigned int damages)
-{
-  return _hp - damages;
-}
-
-
-void Unit::calcNbSteps()
-{
-}
-
-
 // virtual method
 void Unit::attack(Unit *target)
 {
-  calcNbSteps();
-
-  unsigned int nb_steps = 2;
+  unsigned int nb_steps = 2; // = calcNbSteps();
   for (unsigned int i = 0; i < nb_steps; ++i)
   {
     target->receiveDamages(_attackValue / nb_steps);
     if (!target)
       break;
-    if (receiveDamages(target->getAttackValue() / nb_steps) < 1)
+    if (receiveDamages(target->attackValue() / nb_steps) < 1)
     {
       // TODO notify death
       break;

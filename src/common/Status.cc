@@ -27,7 +27,7 @@ Status::~Status()
   	_states.pop(); // calls element destructor
 }
 
-e_mode Status::getCurrentMode()
+e_mode Status::currentMode()
 {
   if (_states.empty())
   {
@@ -35,7 +35,7 @@ e_mode Status::getCurrentMode()
     return E_MODE_NONE;
   }
 
-  return _states.top()->getMode();
+  return _states.top()->mode();
 }
 
 void Status::pushMode(e_mode mode) {
@@ -58,7 +58,7 @@ void Status::exitCurrentMode(bool skip)
   }
 
   if (CURSOR)
-    CURSOR->setCoords(_states.top()->getCursorCoords());
+    CURSOR->setCoords(_states.top()->cursorCoords());
 
   _states.pop();
 }
@@ -66,7 +66,7 @@ void Status::exitCurrentMode(bool skip)
 
 void Status::exitToMode(e_mode mode, bool skip)
 {
-  while (_states.top()->getMode() != mode)
+  while (_states.top()->mode() != mode)
   {
 #   ifdef DEBUG
     if (_states.empty())
@@ -78,7 +78,7 @@ void Status::exitToMode(e_mode mode, bool skip)
     _states.pop();
 
     if (!skip && CURSOR)
-      CURSOR->setCoords(_states.top()->getCursorCoords());
+      CURSOR->setCoords(_states.top()->cursorCoords());
   }
 }
 
@@ -91,60 +91,12 @@ State *Status::popCurrentMode()
   return tmp;
 }
 
-Coords Status::getSelectedCell() {
+Coords Status::selectedCell() {
   return _selectedCell;
 }
 
 void Status::cellSelection() {
-	_selectedCell = CURSOR->getCoords();
-}
-
-sf::RenderWindow *Status::getWindow() {
-  return _window;
-}
-
-Map *Status::getMap() {
-  return _map;
-}
-
-float Status::getCurrentFPS() {
-  return _currentFPS;
-}
-
-unsigned int Status::getCellWidth() {
-  return _cellWidth;
-}
-
-unsigned int Status::getCellHeight() {
- return _cellHeight;
-}
-
-unsigned int Status::getGridThickness() {
- return _gridThickness;
-}
-
-unsigned int Status::getRenderX() {
- return _renderX;
-}
-
-unsigned int Status::getRenderY() {
- return _renderY;
-}
-
-unsigned int Status::getGridOffsetX() {
-  return _gridOffsetX;
-}
-
-unsigned int Status::getGridOffsetY() {
-  return _gridOffsetY;
-}
-
-unsigned int Status::getCurrentPlayer() {
-  return _currentPlayer;
-}
-
-std::vector<Player*> Status::getPlayers() {
-  return _players;
+	_selectedCell = CURSOR->coords();
 }
 
 void Status::resetRender()
@@ -161,57 +113,9 @@ void Status::setWindow(sf::RenderWindow *window)
   this->resetRender();
 }
 
-void Status::setMap(Map *map) {
-  _map = map;
-}
-
-void Status::setSelectedCell(Coords selected_cell) {
-  _selectedCell = selected_cell;
-}
-
-void Status::setCurrentFPS(float current_fps) {
-  _currentFPS = current_fps;
-}
-
-void Status::setCellWidth(unsigned int cell_width) {
-  _cellWidth = cell_width;
-}
-
-void Status::setCellHeight(unsigned int cell_height) {
-  _cellHeight = cell_height;
-}
-
-void Status::setGridThickness(unsigned int grid_thickness) {
-  _gridThickness = grid_thickness;
-}
-
-void Status::setRenderX(unsigned int render_x) {
- _renderX = render_x;
-}
-
-void Status::setRenderY(unsigned int render_y) {
- _renderY = render_y;
-}
-
-void Status::setGridOffsetX(unsigned int grid_offset_x) {
-  _gridOffsetX = grid_offset_x;
-}
-
-void Status::setGridOffsetY(unsigned int grid_offset_y) {
-  _gridOffsetY = grid_offset_y;
-}
-
 void Status::setGridOffset()
 {
   // offset = 1/2 left room
-  _gridOffsetX = (_renderX - _cellWidth * _map->getNbColumns()) / 2;
-  _gridOffsetY = (_renderY - _cellHeight * _map->getNbLines()) / 2;
-}
-
-void Status::setCurrentPlayer(unsigned int current_player_id) {
-  _currentPlayer = current_player_id;
-}
-
-void Status::setPlayers(std::vector<Player*> players) {
-  _players = players;
+  _gridOffsetX = (_renderX - _cellWidth * _map->nbColumns()) / 2;
+  _gridOffsetY = (_renderY - _cellHeight * _map->nbLines()) / 2;
 }

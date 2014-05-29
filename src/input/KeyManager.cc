@@ -10,8 +10,9 @@ KeyManager::KeyManager()
   for (auto i = 0; i < E_SWITCH_NB_SWITCHES; ++i)
 	_switches[i] = false;
 
-  this->mapKeys();
+  mapKeys();
 }
+
 
 void KeyManager::mapKeys()
 {
@@ -41,26 +42,10 @@ void KeyManager::mapKeys()
   _keys[E_KEY_EXIT_2] = sf::Keyboard::Escape;
 }
 
-int KeyManager::getTime(e_timer function) {
-  return _clocks[function].getElapsedTime().asMilliseconds();
-}
-
-bool KeyManager::getSwitchStatus(e_switch index) {
-  return _switches[index];
-}
-
-void KeyManager::setSwitchStatus(e_switch index, bool status) {
-  _switches[index] = status;
-}
-
-void KeyManager::setReady(e_timer index, bool state) {
-  _ready[index] = state;
-}
-
 bool KeyManager::ready(e_timer index)
 {
-  if (_clocks[index].getElapsedTime().asMilliseconds() > g_settings->getKeyRepeatDelay())
-    this->restartTimer(index);
+  if (_clocks[index].getElapsedTime().asMilliseconds() > g_settings->keyRepeatDelay())
+    restartTimer(index);
 
   return (_ready[index]);
 }
@@ -86,36 +71,4 @@ void KeyManager::resetSwitches()
 
   if (!PRESSED(E_KEY_EXIT))
     _switches[E_SWITCH_EXIT] = OFF;
-}
-
-bool KeyManager::up() {
-  return (PRESSED(E_KEY_MOVE_UP));
-}
-
-bool KeyManager::down() {
-  return (PRESSED(E_KEY_MOVE_DOWN));
-}
-
-bool KeyManager::left() {
-  return (PRESSED(E_KEY_MOVE_LEFT));
-}
-
-bool KeyManager::right() {
-  return (PRESSED(E_KEY_MOVE_RIGHT));
-}
-
-bool KeyManager::selection() {
-  return (PRESSED(E_KEY_SELECTION));
-}
-
-bool KeyManager::menubar() {
-  return (PRESSED(E_KEY_MENUBAR));
-}
-
-bool KeyManager::panel() {
-  return (PRESSED(E_KEY_PANEL));
-}
-
-bool KeyManager::exit() {
-  return (PRESSED(E_KEY_EXIT));
 }

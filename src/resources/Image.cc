@@ -69,7 +69,7 @@ void Image::initSprite()
   _loaded = true;
 }
 
-sf::Sprite *Image::getSprite()
+sf::Sprite *Image::sprite()
 {
   if (!_texture)
     this->initTexture();
@@ -155,7 +155,7 @@ void Image::reload(std::string file_name)
 void Image::drawAtCell(unsigned int i, unsigned int j)
 {
   if (!_sprite)
-    this->getSprite();
+    this->sprite();
 
   // Sprite position
   sf::Vector2f pos;
@@ -172,7 +172,7 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
 void Image::drawAtCell(Coords c)
 {
   if (!_sprite)
-    this->getSprite();
+    this->sprite();
 
   // Sprite position
   sf::Vector2f pos;
@@ -189,11 +189,11 @@ void Image::drawAtCell(Coords c)
 void Image::draw()
 {
   if (!_sprite)
-    this->getSprite();
+    sprite();
 
   _rectangle->setPosition(_sprite->getPosition());
 
-  if (this->load())
+  if (load())
     WINDOW->draw(*_sprite);
   WINDOW->draw(*_rectangle);
 }

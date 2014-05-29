@@ -17,21 +17,21 @@ std::string Text::getRankName(e_rank rank) {
 
 
 //template <typename T>
-//std::string Text::getName(T id)
+//std::string Text::name(T id)
 //{
 //  if (typeid (id) == typeid (e_rank))
 //    return "_ranks[static_cast <unsigned int> (id)]";
 //}
 
 //template <e_rank>
-std::string Text::getName(e_rank rank)
+std::string Text::name(e_rank rank)
 {
   if (rank == 1) // TODO tmp test (need a DB)
     return "PRIVATE";
   return "Fetch error";
 }
 
-std::string Text::getName(e_terrain terrain)
+std::string Text::name(e_terrain terrain)
 {
   if (terrain == 1) // TODO tmp test (need a DB)
     return "FOREST";

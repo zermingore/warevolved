@@ -7,7 +7,7 @@ Cursor::Cursor() :
   _nbLines (0)
 {
   _image = GETIMAGE("cursor");
-  _sprite = _image->getSprite();
+  _sprite = _image->sprite();
   _sprite->setColor(sf::Color(255, 0, 0, 255));
   _middle.x = _image->getTexture()->getSize().x / 2;
   _middle.y = _image->getTexture()->getSize().y / 2;
@@ -30,16 +30,16 @@ unsigned int Cursor::getY() {
   return _coords.y;
 }
 
-Coords Cursor::getCoords() {
+Coords Cursor::coords() {
   return _coords;
 }
 
-sf::Sprite Cursor::getSprite() {
+sf::Sprite Cursor::sprite() {
   return *_sprite;
 }
 
 
-sf::Sprite Cursor::getSprite(int offset_x, int offset_y)
+sf::Sprite Cursor::sprite(int offset_x, int offset_y)
 {
   static unsigned int angle = 0;
   _sprite->setOrigin(_middle);

@@ -86,7 +86,7 @@ protected:
    ** \note this function is used to retrieve
    **   informations from menu stack (see \class Status)
    */
-  unsigned int getSelectedEntry();
+  unsigned int selectedEntry();
 
   /** \brief sets origin menu to the right cursor relative position
    */

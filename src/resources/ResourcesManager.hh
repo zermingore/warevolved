@@ -121,7 +121,7 @@ private:
   ///< getting resource id by it's name
   std::map<std::string, unsigned int> _mapping;
 
-  rapidxml::xml_document<>* _xml; ///< pointer on XML file
+  rapidxml::xml_document<> *_xml; ///< pointer on XML file
 
   ///< map categories names with e_resource_type
   std::map<e_resource_type, std::string> _typeNames;

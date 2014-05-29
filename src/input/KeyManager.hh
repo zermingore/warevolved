@@ -1,8 +1,16 @@
+/*
+ * input/keyManager.hh
+ *
+ *  Created on: April 17, 2013
+ *      Author: Zermingore
+ */
+
 #ifndef KEYMANAGER_HH_
 # define KEYMANAGER_HH_
 
 # include <common/include.hh>
 # include <common/constants.hh>
+# include <common/globals.hh>
 
 /** \brief timer index list
  */
@@ -73,14 +81,14 @@ public:
    */
   KeyManager();
 
-  bool up();
-  bool down();
-  bool left();
-  bool right();
-  bool selection();
-  bool menubar();
-  bool panel();
-  bool exit();
+  inline bool up() { return (PRESSED(E_KEY_MOVE_UP)); }
+  inline bool down() { return (PRESSED(E_KEY_MOVE_DOWN)); }
+  inline bool left() { return (PRESSED(E_KEY_MOVE_LEFT)); }
+  inline bool right() { return (PRESSED(E_KEY_MOVE_RIGHT)); }
+  inline bool selection() { return (PRESSED(E_KEY_SELECTION)); }
+  inline bool menubar() { return (PRESSED(E_KEY_MENUBAR)); }
+  inline bool panel() { return (PRESSED(E_KEY_PANEL)); }
+  inline bool exit() { return (PRESSED(E_KEY_EXIT)); }
 
   /** \brief Maps keyboard keys to function
    */
@@ -90,19 +98,21 @@ public:
    ** \param function Function associated to the the timer we're looking for
    ** \return Timer number index value (in ms)
    */
-  int getTime(e_timer function);
+  inline int getTime(e_timer function)
+  { return _clocks[function].getElapsedTime().asMilliseconds(); }
 
   /** \brief switch getter
    ** \param index _switches index to retrieve
    ** \return switch status
    */
-  bool getSwitchStatus(e_switch index);
+  inline bool switchStatus(e_switch index) { return _switches[index]; }
 
   /** \brief switch getter
    ** \param s Switch to retrieve
    ** \return switch status
    */
-  void setSwitchStatus(e_switch index, bool status);
+  inline void setSwitchStatus(e_switch index, bool status)
+  { _switches[index] = status; }
 
   /** \brief resets _switches status, if needed
    */
@@ -117,7 +127,7 @@ public:
   /** \brief notify a key as 'ready'
    **   meaning being considered as pressed again
    */
-  void setReady(e_timer index, bool state);
+  inline void setReady(e_timer index, bool state) { _ready[index] = state; }
 
   /** \brief restarts the clock \param index and sets _timers[index] to 0
    */
@@ -126,8 +136,7 @@ public:
 
 private:
   sf::Keyboard::Key _keys[E_KEY_NB_KEYS]; ///< keys list
-  sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks
-                                        ///< (to know if a key is ready)
+  sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks (for key readiness)
   bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
   bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states
 };

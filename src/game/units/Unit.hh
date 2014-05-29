@@ -20,6 +20,8 @@ public:
    */
   Unit();
 
+  virtual ~Unit() {}
+
   explicit Unit(std::string name);
 
   /** \brief Builds a new unit at cell's position
@@ -27,37 +29,34 @@ public:
    */
   //Unit(Cell* cell);
 
-  /** \brief Destructor
-   */
-  virtual ~Unit();
-
-  inline int getHp() { return _hp; } /// _hp getter
-  inline int getAttackValue() { return _attackValue; } /// _attackValue getter
+  // __________________________ Getters / Setters __________________________ //
+  inline int hp() { return _hp; } /// _hp getter
+  inline int attackValue() { return _attackValue; } /// _attackValue getter
 
   /** \brief _posX getter
    ** \return _posX, x unit position (in px)
    */
-  unsigned int getPosX();
+  inline unsigned int posX() { return _posX; }
 
   /** \brief _posY getter
    ** \return _posY, y unit position (in px)
    */
-  unsigned int getPosY();
+  inline unsigned int posY() { return _posY; }
 
   /** \brief _cellX getter
    ** \return _cellX, x unit coordinate on the map
    */
-  unsigned int getCellX();
+  inline unsigned int cellX() { return _cellX; }
 
   /** \brief _cellY getter
    ** \return _cellY, y unit coordinate on the map
    */
-  unsigned int getCellY();
+  inline unsigned int cellY() { return _cellY; }
 
   /** \brief gets unit's position
    ** \return unit's cell location
    */
-  Coords getLocation();
+  inline Coords location() { return _location; }
 
   /** \brief sets unit's position
    ** \param location: cell's coordinates to set unit's position
@@ -67,27 +66,27 @@ public:
   /** \brief unit's name getter
    ** \return unit's name value
    */
-  virtual std::string getName();
+  inline virtual std::string name() { return _name; }
 
   /** \brief receive damages
    ** \return left Health Points
    */
-  virtual int receiveDamages(unsigned int damages);
+  inline virtual int receiveDamages(unsigned int damages) { return _hp - damages; }
 
   /** \brief _motionValue getter
    ** \return number of cells the unit can cross in one turn
    */
-  unsigned int getMotionValue();
+  inline unsigned int motionValue() { return _motionValue; }
 
   /** \brief _playerId getter
    */
-  unsigned int getPlayerId();
+  inline unsigned int playerId() { return _playerId; }
 
   /** \brief _played getter
    ** \return true if the unit has already been played
    **   false otherwise
    */
-  bool getPlayed();
+  inline bool played() { return _played; }
 
   /** \brief sets Unit's coordinates
    ** \param cell_x x coordinate (column)
@@ -98,22 +97,22 @@ public:
   /** \brief sets Unit's player belonging
    ** \param player_id player's identifier
    */
-  void setPlayerId(unsigned int player_id);
+  inline void setPlayerId(unsigned int player_id) { _playerId = player_id; }
 
   /** \brief _textureId getter
    ** \return Unit Texture id
    **   matching the one in the Resources Manager std::map
    */
-  unsigned int getTextureId();
+  inline unsigned int textureId() { return _textureId; }
 
   /** \brief _textureId setter
    */
-  void setTextureId(unsigned int texture_id);
+  inline void setTextureId(unsigned int texture_id) { _textureId = texture_id; }
 
   /** \brief _played setter
    ** \param unit's played status
    */
-  void setPlayed(bool played);
+  inline void setPlayed(bool played) { _played = played; }
 
   /** \brief draws the Unit at it's position
    */
@@ -121,13 +120,11 @@ public:
 
   /** \brief packs the Unit with \param unit
    */
-  void pack(Unit *unit);
+  inline void pack(Unit *unit);
 
   /** \brief runs attack / strikes backs (if any) cycles
    */
   virtual void attack(Unit *target);
-
-  void calcNbSteps();
 
 
 protected:

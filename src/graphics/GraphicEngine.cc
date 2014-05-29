@@ -12,7 +12,7 @@
 
 void GraphicEngine::initRoom()
 {
-  // = scroll ? 0 : (g_status->getCellWidth() + g_status->getCellHeight()) / 4;
+  // = scroll ? 0 : (g_status->cellWidth() + g_status->cellHeight()) / 4;
   //if (!scroll) // TODO split offset bottom, ...
   {
     g_status->setGridOffset();
@@ -22,9 +22,9 @@ void GraphicEngine::initRoom()
 
 void GraphicEngine::drawScene()
 {
-  this->drawBackground();
-  this->drawCells();
-  this->drawGrid();
+  drawBackground();
+  drawCells();
+  drawGrid();
   g_interface->draw();
 }
 
@@ -32,13 +32,12 @@ void GraphicEngine::drawScene()
 void GraphicEngine::drawBackground() // TODO (map background)
 {
   WINDOW->clear();
-  return;
 }
 
 
 void GraphicEngine::drawCells()
 {
-  std::vector<std::vector<Cell>> cells = g_status->getMap()->getCells();
+  std::vector<std::vector<Cell>> cells = g_status->map()->cells();
   // draws column by column
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)

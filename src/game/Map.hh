@@ -31,12 +31,12 @@ public:
   /** \brief _nbColumns getter
    ** \return number of columns
    */
-  inline unsigned int getNbColumns() { return _nbColumns; }
+  inline unsigned int nbColumns() { return _nbColumns; }
 
   /** \brief _nbLines getter
    ** \return number of lines
    */
-  inline unsigned int getNbLines() { return _nbLines; }
+  inline unsigned int nbLines() { return _nbLines; }
 
   /** \brief gets the unit at coordinates (x, y)
    **
@@ -46,7 +46,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (x, y)
    */
-  Unit *getUnit(unsigned int x, unsigned int y);
+  Unit *unit(unsigned int x, unsigned int y) { return _cells[x][y].unit(); }
 
   /** \brief gets the unit at v's coordinates
    **
@@ -55,7 +55,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (v.x, v.y)
    */
-  Unit *getUnit(Coords v);
+  Unit *unit(Coords v) { return _cells[v.x][v.y].unit(); }
 
   /** \brief gets the terrain at coordinates (x, y)
    **
@@ -65,7 +65,7 @@ public:
    ** \return the enum index in e_terrain matching the terrain
    **   located at coordinates (x, y)
    */
-  e_terrain getTerrain(unsigned int x, unsigned int y);
+  e_terrain getTerrain(unsigned int x, unsigned int y) { return _cells[x][y].getTerrain(); }
 
   /** \brief gets the terrain image at coordinates (x, y)
    **
@@ -80,20 +80,20 @@ public:
   /** \brief _cells array getter
    ** \return a reference over the cells array
    */
-  inline std::vector<std::vector<Cell>> &getCells() { return _cells; }
+  inline std::vector<std::vector<Cell>> &cells() { return _cells; }
 
   /** \brief returns the Cell which coordinates are x and y
    ** \param x requested Cell x coordinate
    ** \param y requested Cell y coordinate
    ** \return a reference over the requested Cell
    */
-  inline Cell &getCell(unsigned int x, unsigned int y)
+  inline Cell &cell(unsigned int x, unsigned int y)
   { return _cells[x][y]; }
 
   /** \brief sets the given unit in the cells array
    ** \param unit to set
    */
-  void setUnit(Unit &u);
+  void setUnit(Unit &u) { _cells[u.cellX()][u.cellY()].setUnit(u); }
 
   /** \brief moves the selected unit to the current cursor location
    */

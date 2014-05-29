@@ -89,7 +89,7 @@ Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name
 
   for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
-    if (it->getName() == image_name)
+    if (it->name() == image_name)
     {
       if (!it->getLoaded())
         it->load();
@@ -116,7 +116,7 @@ Image *ResourcesManager::getImage(const char *image_name)
 
   for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
-    if (it->getName() == str)
+    if (it->name() == str)
     {
       if (!it->getLoaded())
         it->load();
@@ -144,7 +144,7 @@ Image *ResourcesManager::getImage(const std::string image_name)
 
   for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
-    if (it->getName() == image_name)
+    if (it->name() == image_name)
     {
       if (!it->getLoaded())
         it->load();
@@ -173,7 +173,7 @@ Font *ResourcesManager::getFont(const std::string font_name)
   for (auto it : _resources[E_RESOURCE_TYPE_FONT])
   {
     std::cout << font_name << " expected, found " << it << std::endl;
-    if (it->getName() == font_name)
+    if (it->name() == font_name)
     {
       if (!it->getLoaded())
         it->load();
@@ -331,7 +331,7 @@ void ResourcesManager::listResources()
     for (auto it : _resources[type])
     {
       std::cout << it->getFileName() << '\t'
-                << it->getName() << '\t'
+                << it->name() << '\t'
                 << it->getId() << std::endl;
     }
   }

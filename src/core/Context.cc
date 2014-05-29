@@ -35,18 +35,18 @@ Context::~Context()
 sf::RenderWindow* Context::init()
 {
 # ifdef DEBUG
-  if (_system->getSfmlMajor() < 2)
+  if (_system->sfmlMajor() < 2)
     std::cerr << "SFML version not officially supported" << std::endl;
 # endif
 
-  sf::ContextSettings contextSettings(g_settings->getDepth(),
-                                      g_settings->getStencil(),
-                                      g_settings->getAntiAliasing(),
-                                      _system->getSfmlMajor(),
-                                      _system->getSfmlMinor());
+  sf::ContextSettings contextSettings(g_settings->depth(),
+                                      g_settings->stencil(),
+                                      g_settings->antiAliasing(),
+                                      _system->sfmlMajor(),
+                                      _system->sfmlMinor());
 
   // getting right resolution, from desktop
-  if (g_settings->getFullScreen())
+  if (g_settings->fullScreen())
   {
     _window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
                                    "War Evolved",

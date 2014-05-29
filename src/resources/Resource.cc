@@ -41,7 +41,7 @@ void Resource::setFileName(std::string file_name) {
   _fileName = file_name;
 }
 
-std::string Resource::getName() const {
+std::string Resource::name() const {
   return _name;
 }
 

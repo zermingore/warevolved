@@ -18,7 +18,7 @@ public:
   /** \brief _name getter
    ** \return _name value
    */
-  std::string getName();
+  std::string name();
 
 private:
   std::string _name; ///< item name

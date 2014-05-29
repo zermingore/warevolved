@@ -33,41 +33,40 @@ public:
   /** \brief graphic depth getter
    ** \return depth value
    */
-  unsigned int getDepth();
+  inline unsigned int depth() { return _depth; }
 
   /** \brief graphic getter
    ** \return stencil value
    */
-  unsigned int getStencil();
+  inline unsigned int stencil() { return _stencil; }
 
   /** \brief anti aliasing getter
    ** \return anti aliasing coefficient
    */
-  unsigned int getAntiAliasing();
+  inline unsigned int antiAliasing() { return _antiAliasing; }
 
   /** \brief _fullScreen getter
    ** \return true if we're in full screen
    **   false otherwise
    */
-  bool getFullScreen();
+  inline bool fullScreen() { return _fullScreen; }
 
   /** \brief _keyRepeatDelay getter
    ** \return the required time to consider a "second pressure" (in ms)
    */
-  int getKeyRepeatDelay();
+  inline int keyRepeatDelay() { return _keyRepeatDelay; }
 
   /** \brief _keyRepeatDelay setter
    */
-  void setKeyRepeatDelay(int key_repeat_delay);
+  inline void setKeyRepeatDelay(int delay) { _keyRepeatDelay = delay; }
 
-
-  // SFML settings setters
-  void setDepth(unsigned int depth);
-  void setStencil(unsigned int stencil);
-  void setAntiAliasing(unsigned int antiAliasing);
+  // graphics settings setters
+  inline void setDepth(unsigned int depth) { _depth = depth; }
+  inline void setStencil(unsigned int stencil) { _stencil = stencil; }
+  inline void setAntiAliasing(unsigned int aa) { _antiAliasing = aa; }
 
   // generic settings
-  void setFullScreen(bool fullScreen);
+  inline void setFullScreen(bool fullScreen) { _fullScreen = fullScreen; }
 
 
 private:

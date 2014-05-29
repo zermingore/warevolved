@@ -33,7 +33,7 @@ public:
    ** \return a string composed of the unit name and it's grade,
    **   separated by a space
    */
-  std::string getName();
+  std::string name();
 
 
 private:

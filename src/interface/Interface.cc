@@ -23,30 +23,6 @@ Interface::~Interface() {
   delete _cursor;
 }
 
-Cursor *Interface::getCursor() {
-  return _cursor;
-}
-
-e_panel_position Interface::getPanelPosition() {
-  return _panelPosition;
-}
-
-e_menu_bar_position Interface::getMenuBarPosition() {
-  return _menuBarPosition;
-}
-
-InGameMenu *Interface::getInGameMenu() {
-  return _inGameMenu;
-}
-
-PathFinding *Interface::getPath() {
-  return _path;
-}
-
-void Interface::setPathOrigin(Coords coords) {
-  _path->setOrigin(coords);
-}
-
 void Interface::incrementPanelPosition()
 {
   _panelPosition = static_cast<e_panel_position> ((_panelPosition + 1) % E_PANEL_NB_POSITIONS);
@@ -58,7 +34,6 @@ void Interface::incrementMenuBarPosition()
   _menuBarPosition = static_cast<e_menu_bar_position> ((_menuBarPosition + 1) % E_MENU_BAR_NB_POSITIONS);
   _modificationMenuBar = true;
 }
-
 
 void Interface::setPanel()
 {
@@ -130,9 +105,9 @@ void Interface::drawPanel()
   };
   WINDOW->draw(line, 2, sf::Lines);
 
-  Unit *unit = g_status->getMap()->getUnit(CURSOR->getCoords());
+  Unit *unit = g_status->map()->unit(CURSOR->coords());
   if (unit)
-    DEBUG_PRINT(unit->getName());
+    DEBUG_PRINT(unit->name());
 }
 
 
@@ -158,7 +133,7 @@ void Interface::draw()
     this->setMenuBar();
 
   // if (_cursor->getVisible())
-  _cursor->getSprite(GRID_OFFSET_X, GRID_OFFSET_Y);
+  _cursor->sprite(GRID_OFFSET_X, GRID_OFFSET_Y);
   _cursor->draw();
 
   this->drawPanel();

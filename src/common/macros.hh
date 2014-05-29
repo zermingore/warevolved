@@ -1,20 +1,20 @@
 #ifndef MACROS_HH_
 # define MACROS_HH_
 
-# define WINDOW g_status->getWindow()
-# define WINDOW_SIZE_X g_status->getWindow()->getSize().x
-# define WINDOW_SIZE_Y g_status->getWindow()->getSize().y
+# define WINDOW g_status->window()
+# define WINDOW_SIZE_X g_status->window()->getSize().x
+# define WINDOW_SIZE_Y g_status->window()->getSize().y
 
-# define CELL_WIDTH g_status->getCellWidth()
-# define CELL_HEIGHT g_status->getCellHeight()
-# define GRID_THICKNESS g_status->getGridThickness()
-# define GRID_OFFSET_X g_status->getGridOffsetX()
-# define GRID_OFFSET_Y g_status->getGridOffsetY()
-# define NB_COLUMNS g_status->getMap()->getNbColumns()
-# define NB_LINES g_status->getMap()->getNbLines()
+# define CELL_WIDTH g_status->cellWidth()
+# define CELL_HEIGHT g_status->cellHeight()
+# define GRID_THICKNESS g_status->gridThickness()
+# define GRID_OFFSET_X g_status->gridOffsetX()
+# define GRID_OFFSET_Y g_status->gridOffsetY()
+# define NB_COLUMNS g_status->map()->nbColumns()
+# define NB_LINES g_status->map()->nbLines()
 
-# define CURSOR g_interface->getCursor()
-# define CURRENT_MODE g_status->getCurrentMode()
+# define CURSOR g_interface->cursor()
+# define CURRENT_MODE g_status->currentMode()
 
 /** \brief SFML key detection
  **   \return true if one of the two possible binding

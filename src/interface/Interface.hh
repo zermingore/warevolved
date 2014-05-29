@@ -49,15 +49,15 @@ public:
 
   /** \brief _cursor getter
    */
-  Cursor *getCursor();
+  inline Cursor *cursor() { return _cursor; }
 
   /** \brief side panel position getter
    */
-  e_panel_position getPanelPosition();
+  inline e_panel_position panelPosition() { return _panelPosition; }
 
   /** \brief side panel position getter
    */
-  e_menu_bar_position getMenuBarPosition();
+  inline e_menu_bar_position menuBarPosition() { return _menuBarPosition; }
 
   /** \brief sets panel position to the next position
    ** loops over the E_PANEL_NB_POSITIONS possibilities
@@ -72,16 +72,17 @@ public:
   /** in-game menu getter
    ** \return _inGameMenu
    */
-  InGameMenu *getInGameMenu();
+  inline InGameMenu *inGameMenu() { return _inGameMenu; }
 
   /** \brief PathFinding getter
+   ** \return _path current path
    */
-  PathFinding *getPath();
+  inline PathFinding *path() { return _path; }
 
   /** \brief sets the path origin
    ** meaning the cell from where it starts
    */
-  void setPathOrigin(Coords coords);
+  inline void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
 
   /** \brief draws all element relative to the user's interface
    ** meaning: in-game menus, panels and path (from path-finding)

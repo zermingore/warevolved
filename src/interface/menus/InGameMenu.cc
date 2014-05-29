@@ -23,10 +23,10 @@ void InGameMenu::build(e_mode mode)
 
   // show unit section only if we selected a unit
   // here, we cannot use cursor's position, we could have move the unit
-  Unit *current_unit = g_status->getMap()->getUnit(g_status->getSelectedCell());
+  Unit *current_unit = g_status->map()->unit(g_status->selectedCell());
   if (current_unit
-      && current_unit->getPlayerId() == g_status->getCurrentPlayer()
-      && !current_unit->getPlayed())
+      && current_unit->playerId() == g_status->currentPlayer()
+      && !current_unit->played())
   {
     if (mode == E_MODE_SELECTION_MENU)
     {
@@ -48,7 +48,7 @@ void InGameMenu::build(e_mode mode)
 
   // target
   if (mode == E_MODE_ACTION_MENU
-      && g_status->getMap()->getUnit(CURSOR->getX(), CURSOR->getY()))
+      && g_status->map()->unit(CURSOR->getX(), CURSOR->getY()))
   {
     MenuEntry attack("Attack", E_ENTRY_ATTACK);
     _entries->push_back(attack);
@@ -74,18 +74,18 @@ void InGameMenu::executeEntry()
       break;
 
     case E_ENTRY_STOP:
-      selectedUnit = g_status->getMap()->getUnit(_selectedUnitPosition);
-      selectedUnit->setLocation(CURSOR->getCoords());
-      if (_selectedUnitPosition != CURSOR->getCoords())
-        g_status->getMap()->moveUnit();
+      selectedUnit = g_status->map()->unit(_selectedUnitPosition);
+      selectedUnit->setLocation(CURSOR->coords());
+      if (_selectedUnitPosition != CURSOR->coords())
+        g_status->map()->moveUnit();
 
       g_status->exitToMode(E_MODE_PLAYING, true);
-      g_interface->getPath()->hideAllowedPath();
+      g_interface->path()->hideAllowedPath();
       break;
 
     case E_ENTRY_MOVE:
       g_status->pushModeInGameMenu(E_MODE_MOVING_UNIT, this);
-      _selectedUnitPosition = CURSOR->getCoords();
+      _selectedUnitPosition = CURSOR->coords();
       g_interface->setPathOrigin(_selectedUnitPosition);
       break;
 
@@ -96,7 +96,7 @@ void InGameMenu::executeEntry()
 
     case E_ENTRY_CANCEL:
       old_mode = CURRENT_MODE;
-      this->loadMenu(g_status->popCurrentMode()->getMenu());
+      this->loadMenu(g_status->popCurrentMode()->menu());
 
       // if we were dealing with orders, return to the unit position
       if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)

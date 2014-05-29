@@ -27,6 +27,6 @@ Soldier::Soldier() :
 Soldier::~Soldier() {
 }
 
-std::string Soldier::getName() {
-  return Text::getName(_rank) + " " + _fullName;
+std::string Soldier::name() {
+  return Text::name(_rank) + " " + _fullName;
 }

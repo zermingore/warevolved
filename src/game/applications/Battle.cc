@@ -7,7 +7,7 @@ Battle::Battle() :
   _map (nullptr),
   _currentPlayer (0)
 {
-  this->init();
+  init();
 }
 
 Battle::~Battle()
@@ -20,11 +20,11 @@ Battle::~Battle()
 
 void Battle::init()
 {
-  this->buildPlayers();
-  this->buildMap();
-  this->buildUnits();
-  CURSOR->setColor(_players[0]->getCursorColor());
-  g_interface->getInGameMenu()->setBattle(this);
+  buildPlayers();
+  buildMap();
+  buildUnits();
+  CURSOR->setColor(_players[0]->cursorColor());
+  g_interface->inGameMenu()->setBattle(this);
 }
 
 
@@ -65,8 +65,8 @@ void Battle::nextPlayer()
   _players[_currentPlayer]->endTurn();
   _players[_currentPlayer++]->saveCursorPosition();
   _currentPlayer %= _players.size();
-  CURSOR->setCoords(_players[_currentPlayer]->getLastCursorPosition());
-  CURSOR->setColor(_players[_currentPlayer]->getCursorColor());
+  CURSOR->setCoords(_players[_currentPlayer]->lastCursorPosition());
+  CURSOR->setColor(_players[_currentPlayer]->cursorColor());
   g_status->setCurrentPlayer(_currentPlayer);
 }
 

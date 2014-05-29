@@ -2,50 +2,47 @@
 #include <common/globals.hh>
 
 
-Terrain::Terrain(e_terrain terrain) :
-    _terrain(terrain),
-    _image (NULL)
-{
-  switch (_terrain)
-  {
-    case E_TERRAIN_FOREST:
-      _imageName = "forest";
-      break;
+// // Terrain::Terrain(e_terrain terrain) :
+//     _terrain(terrain),
+//     _image (NULL)
+// {
+//   switch (_terrain)
+//   {
+//     case E_TERRAIN_FOREST:
+//       _imageName = "forest";
+//       break;
 
-    default:
-      std::cerr << "Unable to find Terrain Texture: " << _imageName << std::endl;
-  }
-}
+//     default:
+//       std::cerr << "Unable to find Terrain Texture: " << _imageName << std::endl;
+//   }
+// }
 
-Terrain::~Terrain() {
-}
+// Image *Terrain::getImage()
+// {
+//   if (_image)
+//     return _image;
 
-Image *Terrain::getImage()
-{
-  if (_image)
-    return _image;
+//   // we never fetched it, let's do it now
+//   switch (_terrain)
+//   {
+//     case E_TERRAIN_FOREST:
+//       _image = GETIMAGE("forest");
+//       break;
 
-  // we never fetched it, let's do it now
-  switch (_terrain)
-  {
-    case E_TERRAIN_FOREST:
-      _image = GETIMAGE("forest");
-      break;
+//     default:
+//       std::cerr << "Unable to find Terrain Texture: " << _imageName << std::endl;
+//       break;
+//   }
 
-    default:
-      std::cerr << "Unable to find Terrain Texture: " << _imageName << std::endl;
-      break;
-  }
+//   return _image;
+// }
 
-  return _image;
-}
+// std::string Terrain::getImageName() {
+//   return _imageName;
+// }
 
-std::string Terrain::getImageName() {
-  return _imageName;
-}
-
-void Terrain::setImageName(std::string image_name)
-{
-  _imageName = image_name;
-  _image = GETIMAGE(image_name);
-}
+// void Terrain::setImageName(std::string image_name)
+// {
+//   _imageName = image_name;
+//   _image = GETIMAGE(image_name);
+// }

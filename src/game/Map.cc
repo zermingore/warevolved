@@ -28,23 +28,6 @@ void Map::init()
       _cells[i][j].setTerrain(E_TERRAIN_FOREST);
 }
 
-Unit *Map::getUnit(unsigned int x, unsigned int y) {
-  return _cells[x][y].getUnit();
-}
-
-Unit *Map::getUnit(Coords v) {
-  return _cells[v.x][v.y].getUnit();
-}
-
-void Map::setUnit(Unit &u) {
-  _cells[u.getCellX()][u.getCellY()].setUnit(u);
-}
-
-e_terrain Map::getTerrain(unsigned int x, unsigned int y) {
-  return _cells[x][y].getTerrain();
-}
-
-
 //Image *Map::getTerrainImage(unsigned int x, unsigned int y)
 //{
 //  e_terrains terrain = _cells[x * _nbLines + y]->getTerrain();
@@ -61,9 +44,9 @@ e_terrain Map::getTerrain(unsigned int x, unsigned int y) {
 
 void Map::moveUnit()
 {
-  Coords c = g_status->getSelectedCell();
+  Coords c = g_status->selectedCell();
 
-  Unit *tmp = _cells[c.x][c.y].getUnit();
+  Unit *tmp = _cells[c.x][c.y].unit();
   tmp->setCellCoordinates(CURSOR->getX(), CURSOR->getY());
   _cells[CURSOR->getX()][CURSOR->getY()].setUnit(*tmp);
   _cells[c.x][c.y].removeUnit();

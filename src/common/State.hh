@@ -36,17 +36,17 @@ public:
   /** _mode getter
    ** \return _mode value
    */
-  e_mode getMode() { return _mode; }
+  e_mode mode() { return _mode; }
 
   /** _menu getter
    ** \return _menu a pointer over current menu
    */
-  EntriesMenu *getMenu() { return _menu; }
+  EntriesMenu *menu() { return _menu; }
 
   /** _cursorCoords getters
    ** \return _cursorCoords value
    */
-  Coords getCursorCoords() { return _cursorCoords; }
+  Coords cursorCoords() { return _cursorCoords; }
 
 
 private:

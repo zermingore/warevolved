@@ -21,43 +21,44 @@ public:
    */
   Cell();
 
+  // __________________________ Getters / Setters __________________________ //
   /** \brief _unit getter
    ** \return cell's unit
    */
-  Unit *getUnit();
+  inline Unit *unit() { return _unit; }
 
   /** \brief _terrain getter
    ** \return cell's terrain
    */
-  e_terrain getTerrain();
+  inline e_terrain getTerrain() { return _terrain; }
 
   /** \brief _unit setter
-   ** sets the unit \param unit in the cell
-   **
+   ** sets the Unit \param unit in the cell
    ** \param unit The unit to be set in the cell
    */
-  void setUnit(Unit &unit);
-
-  /** \brief removes the unit in this cell
-   */
-  void removeUnit();
+  inline void setUnit(Unit &unit) { _unit = &unit; }
 
   /** \brief _terrain setter
    ** sets the terrain \param terrain in the Cell
    **
    ** \param terrain The terrain to be set in the Cell
    */
-  void setTerrain(const e_terrain terrain);
+  inline void setTerrain(const e_terrain terrain) { _terrain = terrain; }
 
   /** \brief _highlight setter
    ** \param highlight true if we want to highlight the Cell
    */
-  void setHighlight(bool highlight);
+  inline void setHighlight(bool highlight) { _highlight = highlight; }
 
   /** \brief highlight color setter
    ** \param color color of Cell's highlight
    */
-  void setHighlightColor(Color color);
+  inline void setHighlightColor(Color color) { _highlightColor = color; }
+
+
+  /** \brief removes the unit in this cell
+   */
+  inline void removeUnit() { _unit = nullptr; }
 
   /** \brief draws Cell's contents: terrain and unit
    */

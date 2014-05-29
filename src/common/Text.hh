@@ -41,11 +41,11 @@ class Text
    ** \param rank to fetch
    ** \return rank text
    */
-  static std::string getName(e_rank rank);
-  static std::string getName(e_terrain terrain);
+  static std::string name(e_rank rank);
+  static std::string name(e_terrain terrain);
 
   //  template <typename T>
-  //  static std::string getName(T id);
+  //  static std::string name(T id);
 
   /** \brief rank name getter
    ** \param rank rank we want name

@@ -28,30 +28,38 @@ public:
    */
   ~Player();
 
+  // __________________________ Getters / Setters __________________________ //
   /** \brief cursor last known position getter
    ** \return _lastCursorPosition
    */
-  Coords getLastCursorPosition();
+  inline Coords lastCursorPosition() { return _lastCursorPosition; }
 
-  /** \brief return cursor color
-   ** \return _cursorColor
+  /** \brief cursor color getter
+   ** \return color of the cursor (_cursorColor)
    */
-  Color getCursorColor();
+  inline Color cursorColor() { return _cursorColor; }
 
   /** \brief units color getter
+   ** \return units color (_unitsColor)
    */
-  Color getUnitsColor();
+  inline Color unitsColor() { return _unitsColor; }
+
+  /** \brief Units list getter
+   ** \return list of player's units (_units)
+   */
+  std::vector<Unit*> units() { return _units; }
 
   /** \brief sets cursor color
    ** \param color _cursorColor value
    */
-  void setCursorColor(Color color);
+  inline void setCursorColor(Color color) { _cursorColor = color; }
 
   /** \brief sets units color
    ** \param color units color
    */
-  void setUnitsColor(Color color);
+  inline void setUnitsColor(Color color) { _unitsColor = color; }
 
+  // __________________________ Member Functions __________________________ //
   /** \brief Saves current cursor position
    */
   void saveCursorPosition();
@@ -77,12 +85,6 @@ public:
    ** \param unit unit to remove from the player's list
    */
   void removeUnit(Unit &unit);
-
-  /** \brief Units list getter
-   */
-  std::vector<Unit*> getUnit() {
-    return _units;
-  }
 
 
 private:

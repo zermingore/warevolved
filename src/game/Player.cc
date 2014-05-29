@@ -17,28 +17,8 @@ Player::~Player()
     delete it;
 }
 
-Coords Player::getLastCursorPosition() {
-  return _lastCursorPosition;
-}
-
-Color Player::getCursorColor() {
-  return _cursorColor;
-}
-
-Color Player::getUnitsColor() {
-  return _unitsColor;
-}
-
-void Player::setCursorColor(Color color) {
-  _cursorColor = color;
-}
-
-void Player::setUnitsColor(Color color) {
-  _unitsColor = color;
-}
-
 void Player::saveCursorPosition() {
-  _lastCursorPosition = CURSOR->getCoords();
+  _lastCursorPosition = CURSOR->coords();
 }
 
 void Player::endTurn()

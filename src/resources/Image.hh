@@ -55,7 +55,7 @@ public:
    ** loads the texture if needed (through initTexture)
    ** allocates _sprites if needed (through initSprite)
    */
-  sf::Sprite *getSprite();
+  sf::Sprite *sprite();
 
   /** \brief sets _rectangle size
    */

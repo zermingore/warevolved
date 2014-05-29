@@ -12,8 +12,8 @@ Event::Event(KeyManager *km, GraphicEngine *ge) :
     _km->restartTimer(static_cast<e_timer>(i));
 
   g_settings->setKeyRepeatDelay(150);
-  _inGameMenu = g_interface->getInGameMenu();
-  _path = g_interface->getPath();
+  _inGameMenu = g_interface->inGameMenu();
+  _path = g_interface->path();
 }
 
 
@@ -66,14 +66,14 @@ bool Event::process()
 
 void Event::panels()
 {
-  if (_km->panel() && _km->getSwitchStatus(E_SWITCH_PANEL) == OFF)
+  if (_km->panel() && _km->switchStatus(E_SWITCH_PANEL) == OFF)
   {
     g_interface->incrementPanelPosition();
     _km->setSwitchStatus(E_SWITCH_PANEL, ON);
     return;
   }
 
-  if (_km->menubar() && _km->getSwitchStatus(E_SWITCH_MENUBAR) == OFF)
+  if (_km->menubar() && _km->switchStatus(E_SWITCH_MENUBAR) == OFF)
   {
     g_interface->incrementMenuBarPosition();
     _km->setSwitchStatus(E_SWITCH_MENUBAR, ON);
@@ -84,7 +84,7 @@ void Event::panels()
 
 void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 {
-  if (_km->exit() && _km->getSwitchStatus(E_SWITCH_EXIT) == OFF)
+  if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
     g_status->exitCurrentMode();
     _inGameMenu->build(CURRENT_MODE); // re-build menu at selection state
@@ -94,7 +94,7 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
   }
 
   // ---------- Selection ---------- //
-  if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
+  if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
     g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
@@ -140,11 +140,11 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 
 void Event::selectionEntriesMenu(EntriesMenu *menu)
 {
-  if (_km->exit() && _km->getSwitchStatus(E_SWITCH_EXIT) == OFF)
+  if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
     e_mode old_mode = CURRENT_MODE;
     _inGameMenu->resetSelectedEntry();
-    _inGameMenu->loadMenu(g_status->popCurrentMode()->getMenu());
+    _inGameMenu->loadMenu(g_status->popCurrentMode()->menu());
 
     // we were dealing with orders, return to the unit position
     if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
@@ -158,7 +158,7 @@ void Event::selectionEntriesMenu(EntriesMenu *menu)
   }
 
   // made a choice in selection menu
-  if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
+  if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
     menu->executeEntry();
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
@@ -181,7 +181,7 @@ void Event::selectionEntriesMenu(EntriesMenu *menu)
 
 bool Event::game()
 {
-  if (_km->exit() && _km->getSwitchStatus(E_SWITCH_EXIT) == OFF)
+  if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
     g_status->exitCurrentMode();
     _km->setSwitchStatus(E_SWITCH_EXIT, ON);
@@ -190,11 +190,11 @@ bool Event::game()
     return false;
   }
 
-  if (_km->menubar() && _km->getSwitchStatus(E_SWITCH_MENUBAR) == OFF)
+  if (_km->menubar() && _km->switchStatus(E_SWITCH_MENUBAR) == OFF)
     _km->setSwitchStatus(E_SWITCH_MENUBAR, ON);
 
   // opened selection menu
-  if (_km->selection() && _km->getSwitchStatus(E_SWITCH_SELECTION) == OFF)
+  if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
     g_status->cellSelection();
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);

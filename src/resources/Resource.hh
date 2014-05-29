@@ -57,7 +57,7 @@ public:
    ** \return _name : Resource alias
    **   _name could be an empty string
    */
-  std::string getName() const;
+  std::string name() const;
 
   /** \brief _name setter
    **   sets _name to name

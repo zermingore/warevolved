@@ -9,8 +9,7 @@ Game::Game() :
 {
 }
 
-Game::~Game()
-{
+Game::~Game() {
   delete _event;
 }
 

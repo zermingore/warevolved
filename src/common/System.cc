@@ -19,10 +19,10 @@ void System::setSfmlMinor(unsigned int sfml_minor) {
   _sfmlMinor = sfml_minor;
 }
 
-unsigned int System::getSfmlMajor() {
+unsigned int System::sfmlMajor() {
   return _sfmlMajor;
 }
 
-unsigned int System::getSfmlMinor() {
+unsigned int System::sfmlMinor() {
   return _sfmlMinor;
 }

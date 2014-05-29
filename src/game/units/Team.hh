@@ -29,7 +29,7 @@ public:
   /** \brief _members getter
    ** \return _members: every members of the team
    */
-  std::vector<Unit*> *getMembers();
+  std::vector<Unit*> *members();
 
   /** \brief adds a member to the Team
    ** \param Unit
