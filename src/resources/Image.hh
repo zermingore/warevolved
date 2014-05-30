@@ -15,7 +15,7 @@ public:
   /** \brief Image default Constructor
    ** \deprecated you should always create a new image with an image file
    */
-  Image();
+  Image() {}
 
   /** \brief Image Constructor
    ** \param file_name Image complete file name
@@ -29,11 +29,6 @@ public:
   Image(const std::string file_name,
         const std::string name,
         unsigned int id);
-
-  /** \brief Destructor
-   ** deletes the texture
-   */
-  ~Image();
 
   /** \brief initializes _texture
    **   sets _loaded to true
@@ -49,13 +44,13 @@ public:
    ** loads the texture (and sets _loaded flag) if _loaded was false
    ** \return _texture
    */
-  sf::Texture *getTexture();
+  std::shared_ptr<sf::Texture> getTexture();
 
   /** \brief _sprite getter
    ** loads the texture if needed (through initTexture)
    ** allocates _sprites if needed (through initSprite)
    */
-  sf::Sprite *sprite();
+  std::shared_ptr<sf::Sprite> sprite();
 
   /** \brief sets _rectangle size
    */
@@ -82,7 +77,7 @@ public:
   /** _sprite setter
    ** \param sprite _sprite value
    */
-  void setSprite(sf::Sprite *sprite);
+  inline void setSprite(std::shared_ptr<sf::Sprite> sprite) { _sprite = sprite; }
 
   /** \brief load Image texture to (V)RAM if necessary
    ** sets _rectangle->texture to the new _texture
@@ -116,9 +111,9 @@ public:
 
 
 private:
-  sf::Texture *_texture; ///< texture data pointer
-  sf::Sprite *_sprite; ///< Image sprite, allowing transformations
-  sf::RectangleShape *_rectangle; ///< image position
+  std::shared_ptr<sf::Texture> _texture; ///< texture data pointer
+  std::shared_ptr<sf::Sprite> _sprite; ///< Image sprite, allowing transformations
+  std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
 
   unsigned int _width; ///< image width
   unsigned int _height; ///< image height

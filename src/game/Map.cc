@@ -47,7 +47,7 @@ void Map::moveUnit()
   Coords c = g_status->selectedCell();
 
   Unit *tmp = _cells[c.x][c.y].unit();
-  tmp->setCellCoordinates(CURSOR->getX(), CURSOR->getY());
-  _cells[CURSOR->getX()][CURSOR->getY()].setUnit(*tmp);
+  tmp->setCellCoordinates(CURSOR->x(), CURSOR->y());
+  _cells[CURSOR->x()][CURSOR->y()].setUnit(*tmp);
   _cells[c.x][c.y].removeUnit();
 }

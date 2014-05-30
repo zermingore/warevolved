@@ -22,48 +22,45 @@ public:
    */
   Cursor();
 
-  /** \brief Destructor
-   */
-  ~Cursor();
-
   /** \brief _sprite getter
    */
-  sf::Sprite sprite();
-  sf::Sprite sprite(int offset_x, int offset_y);
+  inline std::shared_ptr<sf::Sprite> sprite() { return _sprite; }
+  std::shared_ptr<sf::Sprite> sprite(int offset_x, int offset_y);
 
   /** \brief sets the cursor color
    ** \param color the color to set
    */
-  void setColor(Color color);
+  inline void setColor(Color color) { _sprite->setColor(color); }
 
   /** \brief X (column) coordinate getter
    */
-  unsigned int getX();
+  inline unsigned int x() { return _coords.x; }
   /** \brief Y (line) coordinate getter
    */
-  unsigned int getY();
+  inline unsigned int y() { return _coords.y; }
 
   /** \brief _coords getter
    ** \return _coords value
    */
-  Coords coords();
+  inline Coords coords() { return _coords; }
 
   /** \brief X (column) coordinate setter
    */
-  void setX(unsigned int x);
+  inline void setX(unsigned int x) { _coords.x = x; }
   /** \brief Y (line) coordinate setter
    */
-  void setY(unsigned int y);
+  inline void setY(unsigned int y) { _coords.y = y; }
 
   /** \brief coordinates setter
    */
-  void setCoords(Coords coords);
+  inline void setCoords(Coords coords) { _coords = coords; }
 
   /** \brief sets _nbColumns and _nbLines
    */
   void setLimits(unsigned int nbColumns, unsigned int nbLines);
 
-  // Cursor Motion
+
+  // ____________________________ Cursor Motion ____________________________ //
   /** \brief Move the cursor up
    ** \return true if the cursor moved
    */
@@ -83,7 +80,7 @@ public:
 
   /** \brief draws the cursor
    */
-  void draw();
+  inline void draw() { _image.draw(); }
 
 
 private:
@@ -95,8 +92,8 @@ private:
   Coords _lastKnownPosition; ///< position to remember
                              ///    when switching to next turn
 
-  Image *_image; ///< Cursor's Image
-  sf::Sprite *_sprite; ///< pointer over _image->sprite()
+  Image _image; ///< Cursor's Image
+  std::shared_ptr<sf::Sprite> _sprite; ///< pointer over _image->sprite()
 
   // middle of the SPRITE coordinates, avoid computing its value each frame
   sf::Vector2f _middle; ///< middle of the Cursor sprite

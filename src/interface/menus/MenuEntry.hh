@@ -35,13 +35,9 @@ public:
    */
   MenuEntry(std::string label_name, e_entry entry);
 
-  /** \brief Destructor
-   */
-  ~MenuEntry();
-
   /** \brief returns entry Identifier, as a e_entries value
    */
-  e_entry getId();
+  inline e_entry id() { return _id; }
 
   /** \brief displays the entry at position
    ** \param position where the entry will be display
@@ -54,9 +50,9 @@ public:
 
 
 private:
-  Image *_background; ///< background image
+  Image _background; ///< background image
   sf::Text *_label; ///< button label text
-  Font *_font; ///< button label font
+  Font _font; ///< button label font
   e_entry _id; ///< entry identifier
 };
 

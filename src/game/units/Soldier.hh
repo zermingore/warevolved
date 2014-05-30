@@ -26,9 +26,6 @@ public:
    */
   Soldier();
 
-  /// \brief Destructor
-  ~Soldier();
-
   /** \brief gets name and add grade abbreviated
    ** \return a string composed of the unit name and it's grade,
    **   separated by a space

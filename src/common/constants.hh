@@ -39,5 +39,8 @@
 // float equality test
 # define EPSILON 0.000001
 
+// resources paths
+# define DEFAULT_IMAGE_PATH "resources/defaults/image.png"
+# define DEFAULT_FONT_PATH "resources/defaults/font.ttf"
 
 #endif /* !CONSTANTS_HH_ */

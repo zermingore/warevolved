@@ -5,12 +5,10 @@
 Image::Image(const std::string file_name,
              const std::string name,
              unsigned int id) :
-  _texture (NULL),
-  _sprite (NULL),
   _width (0),
   _height (0)
 {
-  _rectangle = new sf::RectangleShape(); // TODO allocation only if needed
+  _rectangle.reset(new sf::RectangleShape()); // TODO allocation only if needed
   _rectangle->setPosition(sf::Vector2f(0, 0));
   _rectangle->setSize(sf::Vector2f(0, 0));
 
@@ -28,27 +26,13 @@ Image::Image(const std::string file_name,
   _scope = E_SCOPE_ALL;
 }
 
-
-Image::~Image()
-{
-  if (_rectangle)
-    delete _rectangle;
-
-  if (_texture)
-    delete _texture;
-
-  if (_sprite)
-    delete _sprite;
-}
-
-
-sf::Texture *Image::getTexture()
+std::shared_ptr<sf::Texture> Image::getTexture()
 {
   if (!_texture)
   {
-    _texture = new sf::Texture();
+    _texture.reset(new sf::Texture());
     _texture->loadFromFile(_fileName);
-    _rectangle->setTexture(_texture);
+    _rectangle->setTexture(_texture.get());
     _loaded = true;
   }
 
@@ -57,25 +41,25 @@ sf::Texture *Image::getTexture()
 
 void Image::initTexture()
 {
-  _texture = new sf::Texture();
+  _texture.reset(new sf::Texture());
   _texture->loadFromFile(_fileName);
-  _rectangle->setTexture(_texture);
+  _rectangle->setTexture((sf::Texture *) (_texture.get()));
   _loaded = true;
 }
 
 void Image::initSprite()
 {
-  _sprite = new sf::Sprite(*_texture);
+  _sprite.reset(new sf::Sprite(*_texture));
   _loaded = true;
 }
 
-sf::Sprite *Image::sprite()
+std::shared_ptr<sf::Sprite> Image::sprite()
 {
   if (!_texture)
-    this->initTexture();
+    initTexture();
 
   if (!_sprite)
-    this->initSprite();
+    initSprite();
 
   return _sprite;
 }
@@ -88,10 +72,6 @@ void Image::setFileName(std::string file_name)
 }
 
 
-void Image::setSprite(sf::Sprite *sprite) {
-  _sprite = sprite;
-}
-
 void Image::setSize(sf::Vector2f size) {
   _rectangle->setSize(size);
 }
@@ -99,7 +79,7 @@ void Image::setSize(sf::Vector2f size) {
 void Image::setPosition(sf::Vector2f position)
 {
   if (!_sprite)
-    this->initSprite();
+    initSprite();
   _sprite->setPosition(position);
 }
 
@@ -114,10 +94,10 @@ bool Image::load()
   	return true;
 
   if (!_texture)
-    _texture = new sf::Texture();
+    _texture.reset(new sf::Texture());
 
   _texture->loadFromFile(_fileName);
-  _rectangle->setTexture(_texture);
+  _rectangle->setTexture(_texture.get());
   _loaded = true;
 
   return false;
@@ -129,7 +109,7 @@ void Image::unload()
   if (!_texture)
     return;
 
-  delete _texture;
+  //delete _texture; // reset() ?
   _loaded = false;
 
 # ifdef DEBUG
@@ -142,11 +122,11 @@ void Image::unload()
 
 void Image::reload(std::string file_name)
 {
-  if (_texture)
-    delete _texture;
+  // if (_texture)
+  //   delete _texture;
 
   _texture->loadFromFile(file_name);
-  _rectangle->setTexture(_texture);
+  _rectangle->setTexture(_texture.get());
   _loaded = true;
 }
 
@@ -155,7 +135,7 @@ void Image::reload(std::string file_name)
 void Image::drawAtCell(unsigned int i, unsigned int j)
 {
   if (!_sprite)
-    this->sprite();
+    sprite();
 
   // Sprite position
   sf::Vector2f pos;
@@ -163,7 +143,7 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
   pos.y = j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
   _sprite->setPosition(pos);
 
-  if (this->load())
+  if (load())
     WINDOW->draw(*_sprite);
   WINDOW->draw(*_rectangle);
 }
@@ -172,7 +152,7 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
 void Image::drawAtCell(Coords c)
 {
   if (!_sprite)
-    this->sprite();
+    sprite();
 
   // Sprite position
   sf::Vector2f pos;
@@ -180,7 +160,7 @@ void Image::drawAtCell(Coords c)
   pos.y = c.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
   _sprite->setPosition(pos);
 
-  if (this->load())
+  if (load())
     WINDOW->draw(*_sprite);
   WINDOW->draw(*_rectangle);
 }

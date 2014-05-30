@@ -6,7 +6,6 @@
 
 Unit::Unit() :
   _imageId (0),
-  _image (nullptr),
   _hp (0),
   _attackValue (1),
   _posX (0),
@@ -18,14 +17,11 @@ Unit::Unit() :
   _team (nullptr),
   _targetable (false)
 {
-  DEBUG_PRINT("UNIT CTOR");
-  _highlight = GETIMAGE("highlight");
 }
 
 Unit::Unit(std::string name) :
   _imageId (0),
   _name (name),
-  _image (nullptr),
   _hp (0),
   _attackValue (1),
   _posX (0),
@@ -38,7 +34,6 @@ Unit::Unit(std::string name) :
   _team (nullptr),
   _targetable (false)
 {
-  _highlight = GETIMAGE("highlight");
 }
 
 void Unit::pack(Unit *unit)
@@ -60,12 +55,12 @@ void Unit::setLocation(Coords location)
 
 void Unit::draw()
 {
-  _image = GETIMAGE(_name);
-  _image->sprite()->setColor(g_status->players()[_playerId]->unitsColor());
+  Image &image = GETIMAGE(_name);
+  image.sprite()->setColor(g_status->players()[_playerId]->unitsColor());
 
-  float x = _image->sprite()->getTexture()->getSize().x;
-  float y = _image->sprite()->getTexture()->getSize().y;
-  _image->sprite()->setScale(CELL_WIDTH / x, CELL_HEIGHT / y);
+  float x = image.sprite()->getTexture()->getSize().x;
+  float y = image.sprite()->getTexture()->getSize().y;
+  image.sprite()->setScale(CELL_WIDTH / x, CELL_HEIGHT / y);
 
   # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
@@ -75,14 +70,16 @@ void Unit::draw()
 
   if (_targetable)
   {
-    _highlight->sprite()->setColor(sf::Color(255, 0, 0));
-    _highlight->drawAtCell(_cellX, _cellY);
+    // Unit's image halo
+    Image &highlight = GETIMAGE("highlight");
+    highlight.sprite()->setColor(sf::Color(255, 0, 0));
+    highlight.drawAtCell(_cellX, _cellY);
   }
 
   if (_played)
-    _image->sprite()->setColor(sf::Color(127, 127, 127, 191));
+    image.sprite()->setColor(sf::Color(127, 127, 127, 191));
 
-  _image->drawAtCell(_cellX, _cellY);
+  image.drawAtCell(_cellX, _cellY);
 }
 
 // virtual method

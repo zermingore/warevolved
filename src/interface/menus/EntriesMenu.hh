@@ -99,7 +99,7 @@ protected:
   unsigned int _nbEntries; ///< Total number of entries in the menu
   std::vector<MenuEntry> *_entries; ///< Entries list
   sf::Vector2f _origin; ///< Origin position of the menu
-  Image *_imageSelection; ///< Background image (entry)
+  Image _imageSelection; ///< Background image (entry)
 };
 
 #endif /* !ENTRIESMENU_HH_ */

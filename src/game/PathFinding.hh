@@ -29,7 +29,7 @@ public:
 
   /** \brief Destructor
    */
-  ~PathFinding();
+  ~PathFinding() { deleteImagesVector(); }
 
   /** \brief sets the origin of the path
    **   also updates _current position
@@ -39,7 +39,8 @@ public:
   /** \brief allowed move notifier
    ** \return true if the move is allowed
    */
-  bool allowedMove(); // TODO send direction request
+  inline bool allowedMove() // TODO send direction request
+  { return _currentLength < _maxLength; }
 
   /** \brief adds the next element to the current path
    ** \param direction of the element
@@ -65,7 +66,7 @@ private:
    ** does the rotation if needed
    ** \return the image matching e_path_shape
    */
-  Image *getImage(unsigned int index);
+  Image getImage(unsigned int index);
 
   /** \brief builds Images* Vector (_images)
    */
@@ -109,7 +110,7 @@ private:
   std::vector<e_direction> _directions; ///< list of path directions
                                         ///< filled through addNextDirection
 
-  std::vector<Image*> _images; ///< Images* of the path vector
+  std::vector<Image> _images; ///< Images* of the path vector
   std::vector<Cell> _reachableCells; ///< list of reachable cells
                                       ///< for the selected unit
 };

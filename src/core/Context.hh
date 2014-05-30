@@ -26,18 +26,14 @@ public:
    */
   explicit Context(bool fullscreen);
 
-  /** \brief Destructor;
-   */
-  ~Context();
-
   /** \brief Builds and returns the main window
    ** \return Main rendering window
    */
-  sf::RenderWindow* init();
+  std::shared_ptr<sf::RenderWindow> init();
 
 private:
-  System* _system; ///< System settings (SFML version, ...)
-  sf::RenderWindow *_window; ///< Main graphic window
+  std::shared_ptr<System> _system; ///< System settings (SFML version, ...)
+  std::shared_ptr<sf::RenderWindow> _window; ///< Main graphic window
 };
 
 #endif /* !CONTEXT_HH_ */

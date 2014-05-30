@@ -39,12 +39,12 @@ public:
   /** \brief _window getter
    ** \return _window rendering window
    */
-  sf::RenderWindow *window() { return _window; }
+  std::shared_ptr<sf::RenderWindow> window() { return _window; }
 
   /** \brief _map getter
    ** \return _map
    */
-  Map *map() { return _map; }
+  std::shared_ptr<Map> map() { return _map; }
 
   /** \brief returns current number of
    **   generated frames per Seconds
@@ -66,7 +66,7 @@ public:
   /** \brief players vector getter
    ** \return _players vector
    */
-  inline std::vector<Player*> players() { return _players; }
+  inline std::vector<std::shared_ptr<Player>> players() { return _players; }
 
   /** \brief current player identifier getter
    ** \return _currentPlayer: current player identifier
@@ -88,7 +88,7 @@ public:
   /** \brief pops _modes and returns summit
    ** \return Menu of the top of the stack
    */
-  State *popCurrentMode();
+  std::shared_ptr<State> popCurrentMode();
 
   /** \brief \return current mode
    ** meaning, the summit of _modes stack
@@ -98,12 +98,12 @@ public:
   /** \brief _window setter
    **   updates _renderX and _renderY
    */
-  void setWindow(sf::RenderWindow *window);
+  void setWindow(std::shared_ptr<sf::RenderWindow> window);
 
   /** \brief sets map
    ** \param map current map
    */
-  inline void setMap(Map *map) { _map = map; }
+  inline void setMap(std::shared_ptr<Map> map) { _map = map; }
 
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
@@ -162,7 +162,8 @@ public:
   /** \brief
    ** \param players
    */
-  inline void setPlayers(std::vector<Player*> players) { _players = players; }
+  inline void setPlayers(std::vector<std::shared_ptr<Player>> players)
+  { _players = players; }
 
 
 private:
@@ -172,9 +173,9 @@ private:
 
 
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
-  sf::RenderWindow *_window; ///< main Rendering Window
-  Map *_map; ///< storing map
-  std::stack<State*> _states; ///< States stack
+  std::shared_ptr<sf::RenderWindow> _window; ///< main Rendering Window
+  std::shared_ptr<Map> _map; ///< storing map
+  std::stack<std::shared_ptr<State>> _states; ///< States stack
 
   Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
@@ -187,7 +188,7 @@ private:
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
 
-  std::vector<Player*> _players; ///< array of players
+  std::vector<std::shared_ptr<Player>> _players; ///< array of players
   unsigned int _currentPlayer; ///< index in the _players array
 };
 

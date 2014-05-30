@@ -24,14 +24,14 @@ void Cell::draw()
   switch (_terrain)
   {
     default:
-      GETIMAGE("forest")->drawAtCell(_coordinates);
+      GETIMAGE("forest").drawAtCell(_coordinates);
   }
 
   if (_highlight)
   {
-    Image *highlight = GETIMAGE("highlight");
-    highlight->sprite()->setColor(_highlightColor);
-    highlight->drawAtCell(_coordinates);
+    Image &highlight = GETIMAGE("highlight");
+    highlight.sprite()->setColor(_highlightColor);
+    highlight.drawAtCell(_coordinates);
   }
 
   if (_unit)

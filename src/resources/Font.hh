@@ -12,6 +12,8 @@
 class Font : public Resource
 {
 public:
+  Font() {}
+
   /** \brief Constructor
    ** \param file_name font file name
    ** \param name font alias

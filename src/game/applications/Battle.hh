@@ -26,10 +26,6 @@ public:
    */
   Battle();
 
-  /** \brief Destructor
-   */
-  ~Battle();
-
   /** \brief builds a new unit of type \param unit
    ** \param unit type of the new unit
    */
@@ -67,8 +63,8 @@ private:
   void buildUnits();
 
 
-  std::vector<Player*> _players; ///< list of players in this battle
-  Map *_map; ///< Map of this battle
+  std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
+  std::shared_ptr<Map> _map; ///< Map of this battle
   unsigned int _currentPlayer; ///< current player's id
 };
 

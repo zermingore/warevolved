@@ -23,18 +23,14 @@ class System
 public:
   /** \brief Default Constructor
    */
-  System();
+  System() = delete;
   System(unsigned int sfml_major, unsigned int sfml_minor);
 
-  /** \brief Destructor
-   */
-  ~System();
+  inline void setSfmlMajor(unsigned int major) { _sfmlMajor = major; }
+  inline void setSfmlMinor(unsigned int minor) { _sfmlMinor = minor; }
 
-  void setSfmlMajor(unsigned int sfml_major);
-  void setSfmlMinor(unsigned int sfml_minor);
-
-  unsigned int sfmlMajor();
-  unsigned int sfmlMinor();
+  inline unsigned int sfmlMajor() { return _sfmlMajor; }
+  inline unsigned int sfmlMinor() { return _sfmlMinor; }
 
 private:
   unsigned int _sfmlMajor; ///< SFML major version (x.*)

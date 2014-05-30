@@ -3,43 +3,34 @@
 #include <resources/Image.hh>
 #include <resources/Font.hh>
 
+
 # define DEBUG_XML 1
 # define DEBUG_XML_FULL 1
 
 
 ResourcesManager::ResourcesManager(const std::string file_name)
 {
-  this->parseXML(file_name);
+  parseXML(file_name);
   if (buildFromXML() == -1)
     std::cerr << "build XML FAILURE" << std::endl;
 
-  this->initializeDefaultResources();
+  initializeDefaultResources();
 
 # ifdef DEBUG_XML
-  this->listResources();
+  listResources();
 # endif
-}
-
-
-ResourcesManager::~ResourcesManager()
-{
-  delete _xml;
-
-  for (unsigned int i = E_RESOURCE_TYPE_NONE; i < E_RESOURCE_TYPE_NB; ++i)
-  {
-    e_resource_type type = static_cast<e_resource_type>(i);
-    for (auto it: _resources[type])
-      delete it;
-  }
 }
 
 
 void ResourcesManager::initializeDefaultResources()
 {
-  _resources[E_RESOURCE_TYPE_IMAGE].push_back(
-    new Font("resources/defaults/image.png", "default", 0));
-  _resources[E_RESOURCE_TYPE_FONT].push_back(
-    new Font("resources/defaults/font.ttf", "default", 0));
+  std::shared_ptr<Image> img(new Image(DEFAULT_IMAGE_PATH, "default", 0));
+  _resources[E_RESOURCE_TYPE_IMAGE].push_back(img);
+
+  std::shared_ptr<Font> font(new Font(DEFAULT_FONT_PATH, "default", 0));
+  _resources[E_RESOURCE_TYPE_FONT].push_back(font);
+
+  _fonts["default"] = font;
 }
 
 void ResourcesManager::initTypeNames()
@@ -56,18 +47,22 @@ bool ResourcesManager::addResource(e_resource_type type,
                                    const std::string file_name,
                                    unsigned int id)
 {
+  PRINTF("\nadd---------");
   switch (type)
   {
     case E_RESOURCE_TYPE_IMAGE:
-	  std::cout << "Image detected: " << file_name << std::endl;
-      _images[id] = new Image(file_name, name, id);
+      _images[id].reset(new Image(file_name, name, id));
       _resources[type].push_back(_images[id]);
       return true;
 
     case E_RESOURCE_TYPE_FONT:
-	  std::cout << "Font detected" << std::endl;
-      _resources[type].push_back(new Font(file_name, name, id));
+    {
+      std::shared_ptr<Font> font(new Font(file_name, name, id));
+      _fonts[name].reset(new Font(file_name, name, 0));
+      _resources[type].push_back(font);
+      PRINTF(">>  _________ NEW FONT:", file_name, name);
       return true;
+    }
 
     // case E_RESOURCE_TYPE_SOUND:
     //   _resources[type].push_back(new Sound(file_name, name, id));
@@ -82,12 +77,12 @@ bool ResourcesManager::addResource(e_resource_type type,
 }
 
 
-Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name)
+Image &ResourcesManager::getImage(unsigned int *id, const std::string image_name)
 {
   if (*id)
-    return _images[*id];
+    return *_images[*id];
 
-  for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
+  for (auto it: _resources[E_RESOURCE_TYPE_IMAGE])
   {
     if (it->name() == image_name)
     {
@@ -96,23 +91,23 @@ Image *ResourcesManager::getImage(unsigned int *id, const std::string image_name
 
       *id = (it->getId());
 
-      return dynamic_cast <Image*> (it);
+      return dynamic_cast <Image&> (*it);
     }
   }
 
   Debug::logPrintf("Unable to find image ", image_name, " using default");
 
-  return _images[0];
+  return *_images[0];
 }
 
 
-Image *ResourcesManager::getImage(const char *image_name)
+Image& ResourcesManager::getImage(const char *image_name)
 {
   std::string str = std::string(image_name);
 
   unsigned int id = 0;
   if ((id = _mapping[str]))
-    return _images[id];
+    return *_images[id];
 
   for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
@@ -123,7 +118,7 @@ Image *ResourcesManager::getImage(const char *image_name)
 
       _mapping[str] = (it->getId());
 
-      return dynamic_cast <Image*> (it);
+      return dynamic_cast <Image&> (*it);
     }
   }
 
@@ -132,15 +127,15 @@ Image *ResourcesManager::getImage(const char *image_name)
 # endif
 
   // return a default image
-  return _images[0];
+  return *_images[0];
 }
 
 
-Image *ResourcesManager::getImage(const std::string image_name)
+Image& ResourcesManager::getImage(const std::string image_name)
 {
   unsigned int id = 0;
   if ((id = _mapping[image_name]))
-    return _images[id];
+    return *_images[id];
 
   for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
   {
@@ -151,36 +146,32 @@ Image *ResourcesManager::getImage(const std::string image_name)
 
       _mapping[image_name] = (it->getId());
 
-      return dynamic_cast <Image*> (it);
+      return dynamic_cast <Image&> (*it);
     }
   }
 
-# ifdef DEBUG
-  std::cerr << "Unable to find image " << image_name << std::endl;
-# endif
+  Debug::logPrintf("Unable to find image", image_name);
 
   // return a default image
-  return _images[0];
+  return *_images[0];
 }
 
-
-Font *ResourcesManager::getFont(const std::string font_name)
+Font& ResourcesManager::getFont(const std::string font_name)
 {
-  return new Font("resources/fonts/army.ttf", font_name, 0); // leak
+  // for (auto it : _resources[E_RESOURCE_TYPE_FONT])
+  // {
+  //   std::cout << font_name << " expected, found " << it << std::endl;
+  //   if (it->name() == font_name)
+  //   {
+  //     if (!it->getLoaded())
+  //       it->load();
 
-  std::cout << "Size: " << _resources[E_RESOURCE_TYPE_FONT].size() << std::endl;
+  //     return dynamic_cast <Font&> (*it);
+  //   }
+  // }
 
-  for (auto it : _resources[E_RESOURCE_TYPE_FONT])
-  {
-    std::cout << font_name << " expected, found " << it << std::endl;
-    if (it->name() == font_name)
-    {
-      if (!it->getLoaded())
-        it->load();
-
-      return dynamic_cast <Font*> (it);
-    }
-  }
+  if (_fonts.find(font_name) != _fonts.end())
+    return *_fonts[font_name];
 
 # ifdef DEBUG
   // TODO reaching this without Valgrind
@@ -188,7 +179,7 @@ Font *ResourcesManager::getFont(const std::string font_name)
 # endif
 
   // return a default font
-  return new Font("resources/fonts/army.ttf", font_name, 0); // leak
+  return *_fonts["default"];
 }
 
 
@@ -220,10 +211,10 @@ bool ResourcesManager::parseXML(const std::string file_name)
     std::cout << i;
 # endif
 
-  _xml = new (rapidxml::xml_document<>);
+  _xml.reset(new (rapidxml::xml_document<>));
   if (!_xml)
   {
-	std::cerr << "Unable to create a new XML document";
+    Debug::logPrintf("Unable to create a new XML document");
 	return false;
   }
 
@@ -235,7 +226,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
 
 int ResourcesManager::buildFromXML()
 {
-  this->initTypeNames(); // building _typeNames
+  initTypeNames(); // building _typeNames
 
   e_resource_type current_type = static_cast<e_resource_type>(E_RESOURCE_TYPE_NONE + 1);
   rapidxml::xml_node<> *resources = _xml->first_node("resources");
@@ -266,17 +257,14 @@ int ResourcesManager::buildFromXML()
 
 #   ifdef DEBUG
     if (!folder)
-	  std::cerr << "folder is NULL" << std::endl << std::endl;
+      Debug::logPrintf("folder is NULL");
 #   endif
 
     while (folder)
     {
       path = folder->first_attribute();
       file = folder->first_node("file");
-      //const std::string str_path = path->value();
-
       const char *str_path = path->value();
-
 
 #     ifdef DEBUG
       // testing if last char is effectively a FOLDER_SEPARATOR
@@ -303,7 +291,7 @@ int ResourcesManager::buildFromXML()
         name = file->first_node("name");
         std::string tmp = str_path;
         tmp += filename;
-        this->addResource(current_type, name->value(), tmp, id++);
+        addResource(current_type, name->value(), tmp, id++);
         file = file->next_sibling("file");
       }
 

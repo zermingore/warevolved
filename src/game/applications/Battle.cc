@@ -10,14 +10,6 @@ Battle::Battle() :
   init();
 }
 
-Battle::~Battle()
-{
-  delete _map;
-  for (auto it: _players)
-    delete it;
-}
-
-
 void Battle::init()
 {
   buildPlayers();
@@ -27,15 +19,14 @@ void Battle::init()
   g_interface->inGameMenu()->setBattle(this);
 }
 
-
 void Battle::buildPlayers()
 {
-  Player *player1 = new Player();
+  std::shared_ptr<Player> player1(new Player());
   player1->setCursorColor(Color(0, 127, 127));
   player1->setUnitsColor(Color(0, 127, 127));
   _players.push_back(player1);
 
-  Player *player2 = new Player();
+  std::shared_ptr<Player> player2(new Player());
   player2->setCursorColor(Color(227, 227, 0));
   player2->setUnitsColor(Color(227, 227, 0));
   _players.push_back(player2);
@@ -46,7 +37,7 @@ void Battle::buildPlayers()
 // TODO generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  _map = new Map(8, 8);
+  _map.reset(new Map(8, 8));
   g_status->setMap(_map);
   _map->init();
 }

@@ -14,15 +14,15 @@
 
 
 /** \brief keeping a pointer to the main Setting instance */
-extern Settings *g_settings;
+extern std::unique_ptr<Settings> g_settings;
 
 /** \brief keeping all game status (map attributes, ...) */
-extern Status *g_status;
+extern std::unique_ptr<Status> g_status;
 
 /** \brief keeping all interface settings (menu status, ...) */
-extern Interface *g_interface;
+extern std::unique_ptr<Interface> g_interface;
 
 /** \brief ResourceManager keeper */
-extern ResourcesManager* g_rm;
+extern std::unique_ptr<ResourcesManager> g_rm;
 
 #endif /* !GLOBALS_HH_ */

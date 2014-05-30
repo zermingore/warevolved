@@ -48,7 +48,7 @@ void InGameMenu::build(e_mode mode)
 
   // target
   if (mode == E_MODE_ACTION_MENU
-      && g_status->map()->unit(CURSOR->getX(), CURSOR->getY()))
+      && g_status->map()->unit(CURSOR->x(), CURSOR->y()))
   {
     MenuEntry attack("Attack", E_ENTRY_ATTACK);
     _entries->push_back(attack);
@@ -58,7 +58,7 @@ void InGameMenu::build(e_mode mode)
   _entries->push_back(cancel);
 
   _nbEntries = _entries->size();
-  this->setOrigin();
+  setOrigin();
 }
 
 
@@ -67,7 +67,7 @@ void InGameMenu::executeEntry()
   e_mode old_mode = E_MODE_NONE;
   Unit *selectedUnit = nullptr;
 
-  switch ((*_entries)[_selectedEntry].getId())
+  switch ((*_entries)[_selectedEntry].id())
   {
     case E_ENTRY_ATTACK:
       std::cout << "attack" << std::endl;
@@ -107,7 +107,7 @@ void InGameMenu::executeEntry()
       break;
 
     default:
-      DEBUG_PRINT("unable to match selection menu entry");
+      Debug::logPrintf("unable to match selection menu entry");
       break;
   }
 

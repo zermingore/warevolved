@@ -21,7 +21,7 @@ Status::Status() :
 
 Status::~Status()
 {
-  delete _window;
+//  delete _window;
 
   while (!_states.empty())
   	_states.pop(); // calls element destructor
@@ -38,14 +38,18 @@ e_mode Status::currentMode()
   return _states.top()->mode();
 }
 
-void Status::pushMode(e_mode mode) {
-  _states.push(new State (mode));
+void Status::pushMode(e_mode mode)
+{
+  std::shared_ptr<State> state (new State(mode));
+  _states.push(state);
 }
 
 void Status::pushModeInGameMenu(e_mode mode, InGameMenu *menu)
 {
   menu->build(mode);
-  _states.push(new State (mode, menu));
+
+  std::shared_ptr<State> state (new State(mode, menu));
+  _states.push(state);
 }
 
 
@@ -82,10 +86,9 @@ void Status::exitToMode(e_mode mode, bool skip)
   }
 }
 
-
-State *Status::popCurrentMode()
+std::shared_ptr<State> Status::popCurrentMode()
 {
-  State *tmp = _states.top();
+  std::shared_ptr<State> tmp = _states.top();
   _states.pop();
 
   return tmp;
@@ -105,7 +108,7 @@ void Status::resetRender()
   _renderY = WINDOW_SIZE_Y;
 }
 
-void Status::setWindow(sf::RenderWindow *window)
+void Status::setWindow(std::shared_ptr<sf::RenderWindow> window)
 {
   _window = window;
 

@@ -3,9 +3,9 @@
 #include <interface/Interface.hh>
 #include <game/Game.hh>
 
-Status *g_status = new Status();
-ResourcesManager *g_rm = new ResourcesManager("tst.xml");
-Interface *g_interface = new Interface();
+std::unique_ptr<Status> g_status(new Status());
+std::unique_ptr<ResourcesManager> g_rm(new ResourcesManager("tst.xml"));
+std::unique_ptr<Interface> g_interface(new Interface());
 
 
 int main(int ac, const char **av)
@@ -23,10 +23,6 @@ int main(int ac, const char **av)
 
   Game game;
   game.run();
-
-  delete g_status;
-  delete g_rm;
-  delete g_interface;
 
   return EXIT_SUCCESS;
 }

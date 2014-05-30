@@ -13,7 +13,6 @@ Soldier::Soldier() :
   _name = "soldiers";
   _fullName = "John Doe";
   _imageId = 0;
-  _image = nullptr;
   _hp = 0;
   _posX = 0;
   _posY = 0;
@@ -22,9 +21,6 @@ Soldier::Soldier() :
   _motionValue = 4;
   _played = false;
   _playerId = 0;
-}
-
-Soldier::~Soldier() {
 }
 
 std::string Soldier::name() {

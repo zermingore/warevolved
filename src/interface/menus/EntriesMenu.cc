@@ -8,22 +8,20 @@
 EntriesMenu::EntriesMenu() :
   _selectedEntry (0),
   _nbEntries (0),
-  _entries (nullptr),
-  _imageSelection (nullptr)
+  _entries (nullptr)
 {
 }
 
 
 EntriesMenu::EntriesMenu(std::vector<MenuEntry> entries) :
-    _selectedEntry (0),
-    _imageSelection (nullptr)
+    _selectedEntry (0)
 {
   _entries = new std::vector<MenuEntry>;
   *_entries = entries;
   _nbEntries = entries.size();
 
-  _origin.x = (CURSOR->getX() + 1) * CELL_WIDTH + GRID_OFFSET_X;
-  _origin.y = CURSOR->getY() * CELL_HEIGHT + GRID_OFFSET_Y;
+  _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
+  _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
 
@@ -33,7 +31,7 @@ EntriesMenu::~EntriesMenu() {
 
 void EntriesMenu::init()
 {
-  this->setOrigin();
+  setOrigin();
   _entries = new std::vector<MenuEntry>;
   _entries->clear();
 }
@@ -60,8 +58,8 @@ void EntriesMenu::loadMenu(EntriesMenu *menu)
 void EntriesMenu::setOrigin()
 {
   // TODO sets the menu at right (cursor-relative) position
-  _origin.x = (CURSOR->getX() + 1) * CELL_WIDTH + GRID_OFFSET_X;
-  _origin.y = CURSOR->getY() * CELL_HEIGHT + GRID_OFFSET_Y;
+  _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
+  _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
 void EntriesMenu::incrementSelectedEntry() {
@@ -95,9 +93,9 @@ void EntriesMenu::draw()
 
   // showing selection rectangle
   _imageSelection = GETIMAGE("selection_menu_selection");
-  _imageSelection->setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-  _imageSelection->setPosition(_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
-  _imageSelection->draw();
+  _imageSelection.setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
+  _imageSelection.setPosition(_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
+  _imageSelection.draw();
 }
 
 

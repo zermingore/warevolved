@@ -13,14 +13,9 @@ PathFinding::PathFinding() :
 {
 }
 
-PathFinding::~PathFinding() {
-  this->deleteImagesVector();
-}
-
-
 void PathFinding::setOrigin(Coords coords)
 {
-  this->clearPath();
+  clearPath();
 
   Unit *unit = g_status->map()->unit(coords);
   _origin = coords;
@@ -29,7 +24,7 @@ void PathFinding::setOrigin(Coords coords)
   _currentLength = 0;
   _maxLength = unit->motionValue();
 
-  this->showAlowedPath(unit);
+  showAlowedPath(unit);
 }
 
 
@@ -42,10 +37,10 @@ void PathFinding::drawPath()
   unsigned int i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)
   {
-    this->updateCurrentCell(*it);
+    updateCurrentCell(*it);
     // TODO manage cache and image sprites
     // _images[i++]->drawAtCell(_currentX, _currentY);
-    this->getImage(i++)->draw();
+    getImage(i++).draw();
   }
 
 //  _cached = false;
@@ -55,9 +50,9 @@ void PathFinding::drawPath()
 void PathFinding::clearPath()
 {
   _directions.clear();
-  this->deleteImagesVector();
+  deleteImagesVector();
 
-  this->hideAllowedPath();
+  hideAllowedPath();
 
   //_cached = false;
 
@@ -95,11 +90,11 @@ void PathFinding::updateCurrentCell(e_direction direction)
 void PathFinding::deleteImagesVector()
 {
   // freeing images
-  for (auto it = _images.begin(); it != _images.end(); ++it)
-  {
-    if (*it)
-      delete (*it);
-  }
+  // for (auto it = _images.begin(); it != _images.end(); ++it)
+  // {
+  //   if (*it)
+  //     delete (*it);
+  // }
 
   _images.clear();
 }
@@ -108,11 +103,11 @@ void PathFinding::deleteImagesVector()
 void PathFinding::buildImageVector()
 {
   // manage 'riding' the path (increment a global index)
-  // this->deleteImagesVector();
+  // deleteImagesVector();
 
   unsigned int i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)
-    _images.push_back(this->getImage(i++));
+    _images.push_back(getImage(i++));
 
   _cached = true;
 }
@@ -160,9 +155,9 @@ e_path_shape PathFinding::getShape(unsigned int index)
 }
 
 
-Image *PathFinding::getImage(unsigned int index)
+Image PathFinding::getImage(unsigned int index)
 {
-  Image *img; // TODO use a copy Ctor (avoid rotating all sprites)
+  Image img; // TODO use a copy Ctor (avoid rotating all sprites)
   unsigned int angle = 0;
   e_path_shape shape = getShape(index);
 
@@ -191,20 +186,16 @@ Image *PathFinding::getImage(unsigned int index)
   }
 
   angle = static_cast <unsigned int> (shape % 360);
-  img->sprite()->setRotation(angle);
-  img->sprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
+  img.sprite()->setRotation(angle);
+  img.sprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
   // drawing at the middle of the cell
   sf::Vector2f pos;
   pos.x = _current.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
   pos.y = _current.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
-  img->sprite()->setPosition(pos);
+  img.sprite()->setPosition(pos);
 
   return img;
-}
-
-bool PathFinding::allowedMove() {
-  return _currentLength < _maxLength;
 }
 
 void PathFinding::addNextDirection(e_direction direction)
@@ -249,7 +240,7 @@ void PathFinding::showAlowedPath(Unit *unit)
     offset_x = 0;
   }
 
-  this->highlightCells();
+  highlightCells();
 }
 
 

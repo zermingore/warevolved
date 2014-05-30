@@ -17,6 +17,8 @@ config.status
 # personal files
 valgrind_log*
 commit
+LOG2
+VLOG*
 
 # Emacs TAGS
 TAGS

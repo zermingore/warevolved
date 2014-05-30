@@ -13,6 +13,7 @@
 # include <list>
 # include <iostream>
 # include <fstream>
+# include <memory>
 
 # include <common/Debug.hh>
 
