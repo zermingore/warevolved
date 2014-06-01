@@ -5,15 +5,13 @@
 # include <common/include.hh>
 
 
-/** \brief Image Resource type
+/** \class Image Resource type
  ** Derived from Resource
  */
-
 class Image : public Resource
 {
 public:
   /** \brief Image default Constructor
-   ** \deprecated you should always create a new image with an image file
    */
   Image() {}
 
@@ -21,14 +19,12 @@ public:
    ** \param file_name Image complete file name
    **   (with full path and extension)
    ** \param name Image alias name
-   ** \param id Image unique identifier
    **
    ** sets _texture to NULL
    ** _loaded to false
    */
   Image(const std::string file_name,
-        const std::string name,
-        unsigned int id);
+        const std::string name);
 
   /** \brief initializes _texture
    **   sets _loaded to true
@@ -55,7 +51,6 @@ public:
   /** \brief sets _rectangle size
    */
   void setSize(sf::Vector2f size);
-
 
   /** \brief sets _rectangle size
    **   builds a sf::Vector2f

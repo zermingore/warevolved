@@ -3,20 +3,12 @@
 
 
 Font::Font(const std::string file_name,
-		   const std::string name,
-		   unsigned int id) :
+		   const std::string name) :
 	_font (nullptr)
 {
-  _id = id;
   _fileName = file_name;
   _name = name;
   _loaded = false;
-}
-
-Font::~Font()
-{
-//  if (_font)
-//    delete _font;
 }
 
 bool Font::load()
@@ -24,10 +16,7 @@ bool Font::load()
   if (_loaded)
     return true;
 
-//  if (_font)
-//    delete _font; // FIXME segfault
-
-  _font = new sf::Font();
+  _font.reset(new sf::Font());
   _font->loadFromFile(_fileName);
   _loaded = true;
 
@@ -39,7 +28,7 @@ void Font::unload() {
 }
 
 
-sf::Font *Font::getFont()
+std::shared_ptr<sf::Font> Font::getFont()
 {
   if (!_loaded)
     this->load();

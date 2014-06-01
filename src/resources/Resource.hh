@@ -6,7 +6,9 @@
 // should split scopes ?
 // (menu_scopes) with main, end game, network
 
+
 /** \brief various scopes to delimit resources lifetime
+ ** *Warning*: unused for now
  */
 enum e_scope
 {
@@ -29,61 +31,49 @@ class Resource
 public:
   /** \brief Default Constructor
    */
-  Resource();
+  Resource() {}
+  /** \brief Constructor
+   ** \param name resource name
+   */
   explicit Resource(std::string name);
-  Resource(std::string name, unsigned int id);
-  virtual ~Resource();
+  virtual ~Resource() {}
 
   /** \brief virtual method: resource loading
    */
   virtual bool load() = 0;
   virtual void unload() = 0;
 
-  bool getLoaded();
+  bool getLoaded() { return _loaded; }
 
   /** \brief _fileName getter
    ** \return _fileName : Resource full file name (with path and extension)
    */
-  std::string getFileName() const;
+  std::string getFileName() const { return _fileName; }
 
   /** \brief _fileName setter
    **   sets _fileName to file_name
    ** \param file_name Resource File Name to put into _fileName
    */
-  void setFileName(std::string file_name);
-
+  void setFileName(std::string file_name) { _fileName = file_name; }
 
   /** \brief _name getter
    ** \return _name : Resource alias
    **   _name could be an empty string
    */
-  std::string name() const;
+  std::string name() const { return _name; }
 
   /** \brief _name setter
    **   sets _name to name
    ** \param name Resource alias name to put into _name
    */
-  void setName(std::string name);
-
-
-  /** \brief _id getter
-   ** \return _id : Resource unique identifier
-   */
-  unsigned int getId() const;
-
-  /** \brief _id setter
-   **   sets _id to id
-   ** \param id Resource Id to put into _id
-   */
-  void setid(unsigned int id);
+  void setName(std::string name) { _name = name; }
 
 
 protected:
-  unsigned int _id; ///< unique Resource identifier
   std::string _fileName; ///< Resource file name (with full path and extension)
   std::string _name; ///< Resource alias name
   bool _loaded; ///< is the resource already in RAM ?
-  e_scope _scope; ///< resource scope (the context it belongs to)
+  //e_scope _scope; ///< resource scope (the context it belongs to)
 };
 
 #endif /* !RESOURCE_HH_ */

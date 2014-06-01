@@ -3,8 +3,7 @@
 
 
 Image::Image(const std::string file_name,
-             const std::string name,
-             unsigned int id) :
+             const std::string name) :
   _width (0),
   _height (0)
 {
@@ -19,11 +18,10 @@ Image::Image(const std::string file_name,
   _rectangle->setTexture(NULL);
 # endif
 
-  _id = id;
   _fileName = file_name;
   _name = name;
   _loaded = false;
-  _scope = E_SCOPE_ALL;
+  //_scope = E_SCOPE_ALL;
 }
 
 std::shared_ptr<sf::Texture> Image::getTexture()
@@ -49,6 +47,14 @@ void Image::initTexture()
 
 void Image::initSprite()
 {
+  if (!_texture)
+  {
+    _texture.reset(new sf::Texture());
+    _texture->loadFromFile(_fileName);
+    _rectangle->setTexture(_texture.get());
+    _loaded = true;
+  }
+
   _sprite.reset(new sf::Sprite(*_texture));
   _loaded = true;
 }

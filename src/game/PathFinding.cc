@@ -3,9 +3,6 @@
 #include <common/globals.hh>
 
 
-#include <game/units/Soldier.hh>
-
-
 PathFinding::PathFinding() :
   _cached (false),
   _maxLength (0),
@@ -210,13 +207,14 @@ void PathFinding::showAlowedPath(Unit *unit)
   std::vector<std::vector<Cell>> &cells = g_status->map()->cells();
 
   // these are not unsigned because we want to check negativity
-  int x = unit->cellX();
-  int y = unit->cellY();
-  int offset_x = 0;
-  int offset_y = 0;
+  int x (unit->cellX());
+  int y (unit->cellY());
+  int offset_x (0);
+  int offset_y (0);
 
   _reachableCells.clear();
   // ugly tests
+  // TODO and... hum with a flood fill ?
   while (static_cast<unsigned int> (offset_y) <= _maxLength) // use Unit motionValue
   {
     while (static_cast<unsigned int>(offset_x + offset_y) <= _maxLength)

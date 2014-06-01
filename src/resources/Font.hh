@@ -5,10 +5,9 @@
 # include <common/include.hh>
 
 
-/** \brief Font Resource type
+/** \class Font Resource type
  ** Derived from Resource
  */
-
 class Font : public Resource
 {
 public:
@@ -19,11 +18,7 @@ public:
    ** \param name font alias
    */
   Font(const std::string file_name,
-       const std::string name,
-       unsigned int id);
-
-  /// \brief Destructor
-  ~Font();
+       const std::string name);
 
   bool load();
   void unload();
@@ -31,10 +26,11 @@ public:
   /** \brief font getter
    ** \return _font value
    */
-  sf::Font *getFont();
+  std::shared_ptr<sf::Font> getFont();
+
 
 private:
-  sf::Font *_font; ///< current Font
+  std::shared_ptr<sf::Font> _font; ///< current Font
 };
 
 #endif /* !FONT_HH_ */

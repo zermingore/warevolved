@@ -8,8 +8,8 @@
 # include <resources/Font.hh>
 # include <resources/Image.hh>
 
+# define DEBUG_XML
 
-# define DEBUG_XML 1
 
 /** \brief enum matching every resource types
  */
@@ -50,14 +50,13 @@ public:
   /** \brief Retrieve an Image from its name (alias)
    ** if the Image wasn't loaded, loads it
    */
-  Image& getImage(unsigned int *id, const std::string image_name);
-  Image& getImage(const char *image_name);
-  Image& getImage(const std::string image_name);
+  // Image& getImage(unsigned int *id, const std::string image_name);
+  Image& getImage(const std::string name);
 
   /** \brief Retrieve a Font from its name (alias)
    ** if the Font wasn't loaded, loads it
    */
-  Font& getFont(const std::string font_name);
+  Font& getFont(const std::string name);
 
 
 private:
@@ -76,10 +75,20 @@ private:
    ** \return true on success
    **   false otherwise
    */
+  // bool addResource(e_resource_type type,
+  //                  const std::string name,
+  //                  const std::string file_name,
+  //                  unsigned int id);
+
+  // template<typename T>
+  // void addResource(const std::string name,
+  //                  const std::string file_name,
+  //                  unsigned int id);
+
   bool addResource(e_resource_type type,
                    const std::string name,
-                   const std::string file_name,
-                   unsigned int id);
+                   const std::string file_name);
+
 
   /** \brief parses XML file
    ** \param file_name file to parse
@@ -107,20 +116,8 @@ private:
   void listResources();
 # endif
 
-
-  ///< a resources list per type
-  std::map<e_resource_type, std::list<std::shared_ptr<Resource>>> _resources;
-  std::map<unsigned int, std::shared_ptr<Image>> _images; ///< an Image list
-
-  // NOTE: as we're using a few font, we use a std::string
-  //   furthermore, here, we don't care about the overhead
-  std::map<std::string, std::shared_ptr<Font>> _fonts; ///< a Font list
-
-  // NOTE think about a list per scope (or a map of map, with 2nd index: scope)
-  e_scope _currentScope; ///< actual context
-
-  ///< getting resource id by it's name
-  std::map<std::string, unsigned int> _mapping;
+  std::map<std::string, std::shared_ptr<Image>> _images; ///< Images list
+  std::map<std::string, std::shared_ptr<Font>> _fonts; ///< Fonts list
 
   ///< unique pointer on resources XML file
   std::unique_ptr<rapidxml::xml_document<>> _xml;

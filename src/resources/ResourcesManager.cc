@@ -2,10 +2,10 @@
 #include <common/constants.hh>
 #include <resources/Image.hh>
 #include <resources/Font.hh>
+#include <cstring> // strlen
 
-
-# define DEBUG_XML 1
-# define DEBUG_XML_FULL 1
+#define DEBUG_XML
+#define DEBUG_XML_FULL
 
 
 ResourcesManager::ResourcesManager(const std::string file_name)
@@ -24,13 +24,8 @@ ResourcesManager::ResourcesManager(const std::string file_name)
 
 void ResourcesManager::initializeDefaultResources()
 {
-  std::shared_ptr<Image> img(new Image(DEFAULT_IMAGE_PATH, "default", 0));
-  _resources[E_RESOURCE_TYPE_IMAGE].push_back(img);
-
-  std::shared_ptr<Font> font(new Font(DEFAULT_FONT_PATH, "default", 0));
-  _resources[E_RESOURCE_TYPE_FONT].push_back(font);
-
-  _fonts["default"] = font;
+  _images["default"].reset(new Image(DEFAULT_IMAGE_PATH, "default"));
+  _fonts["default"].reset(new Font(DEFAULT_FONT_PATH, "default"));
 }
 
 void ResourcesManager::initTypeNames()
@@ -44,32 +39,27 @@ void ResourcesManager::initTypeNames()
 
 bool ResourcesManager::addResource(e_resource_type type,
                                    const std::string name,
-                                   const std::string file_name,
-                                   unsigned int id)
+                                   const std::string file_name)
 {
-  PRINTF("\nadd---------");
+  //PRINTF("--------- add", name, file_name);
   switch (type)
   {
     case E_RESOURCE_TYPE_IMAGE:
-      _images[id].reset(new Image(file_name, name, id));
-      _resources[type].push_back(_images[id]);
+      _images[name].reset(new Image(file_name, name));
       return true;
 
     case E_RESOURCE_TYPE_FONT:
     {
-      std::shared_ptr<Font> font(new Font(file_name, name, id));
-      _fonts[name].reset(new Font(file_name, name, 0));
-      _resources[type].push_back(font);
-      PRINTF(">>  _________ NEW FONT:", file_name, name);
+      _fonts[name].reset(new Font(file_name, name));
       return true;
     }
 
     // case E_RESOURCE_TYPE_SOUND:
     //   _resources[type].push_back(new Sound(file_name, name, id));
-    // return true;
+    //   return true;
 
     default:
-      std::cerr << file_name << ": Unknown resource type" << std::endl;
+      Debug::logPrintf(file_name, ": Unknown resource type");
       return false;
   }
 
@@ -77,106 +67,35 @@ bool ResourcesManager::addResource(e_resource_type type,
 }
 
 
-Image &ResourcesManager::getImage(unsigned int *id, const std::string image_name)
+Image& ResourcesManager::getImage(const std::string name)
 {
-  if (*id)
-    return *_images[*id];
+  if (_images.find(name) != _images.end())
+    return *_images[name];
 
-  for (auto it: _resources[E_RESOURCE_TYPE_IMAGE])
+  for (auto it: _images)
   {
-    if (it->name() == image_name)
+    if (it.first == name)
     {
-      if (!it->getLoaded())
-        it->load();
+      if (!it.second->getLoaded())
+        it.second->load();
 
-      *id = (it->getId());
-
-      return dynamic_cast <Image&> (*it);
+      return dynamic_cast <Image&> (*it.second);
     }
   }
 
-  Debug::logPrintf("Unable to find image ", image_name, " using default");
-
-  return *_images[0];
-}
-
-
-Image& ResourcesManager::getImage(const char *image_name)
-{
-  std::string str = std::string(image_name);
-
-  unsigned int id = 0;
-  if ((id = _mapping[str]))
-    return *_images[id];
-
-  for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
-  {
-    if (it->name() == str)
-    {
-      if (!it->getLoaded())
-        it->load();
-
-      _mapping[str] = (it->getId());
-
-      return dynamic_cast <Image&> (*it);
-    }
-  }
-
-# ifdef DEBUG
-  std::cerr << "Unable to find image " << image_name << std::endl;
-# endif
+  Debug::logPrintf("Unable to find image", name);
 
   // return a default image
-  return *_images[0];
+  return *_images["default"];
 }
 
 
-Image& ResourcesManager::getImage(const std::string image_name)
+Font& ResourcesManager::getFont(const std::string name)
 {
-  unsigned int id = 0;
-  if ((id = _mapping[image_name]))
-    return *_images[id];
+  if (_fonts.find(name) != _fonts.end())
+    return *_fonts[name];
 
-  for (auto it : _resources[E_RESOURCE_TYPE_IMAGE])
-  {
-    if (it->name() == image_name)
-    {
-      if (!it->getLoaded())
-        it->load();
-
-      _mapping[image_name] = (it->getId());
-
-      return dynamic_cast <Image&> (*it);
-    }
-  }
-
-  Debug::logPrintf("Unable to find image", image_name);
-
-  // return a default image
-  return *_images[0];
-}
-
-Font& ResourcesManager::getFont(const std::string font_name)
-{
-  // for (auto it : _resources[E_RESOURCE_TYPE_FONT])
-  // {
-  //   std::cout << font_name << " expected, found " << it << std::endl;
-  //   if (it->name() == font_name)
-  //   {
-  //     if (!it->getLoaded())
-  //       it->load();
-
-  //     return dynamic_cast <Font&> (*it);
-  //   }
-  // }
-
-  if (_fonts.find(font_name) != _fonts.end())
-    return *_fonts[font_name];
-
-# ifdef DEBUG
-  // TODO reaching this without Valgrind
-  Debug::logPrintf("Unable to find font", font_name);
-# endif
+  Debug::logPrintf("Unable to find font", name);
 
   // return a default font
   return *_fonts["default"];
@@ -209,16 +128,17 @@ bool ResourcesManager::parseXML(const std::string file_name)
   // prints whole XML
   for (auto i: xml_data)
     std::cout << i;
+  std::cout << std::endl;
 # endif
 
-  _xml.reset(new (rapidxml::xml_document<>));
+  _xml.reset(new rapidxml::xml_document<>);
   if (!_xml)
   {
     Debug::logPrintf("Unable to create a new XML document");
 	return false;
   }
 
-  _xml->parse<0> (&xml_data[0]);
+  _xml->parse<(0)> (&xml_data[0]);
 
   return true;
 }
@@ -234,30 +154,25 @@ int ResourcesManager::buildFromXML()
   rapidxml::xml_node<> *folder, *file, *name;
   rapidxml::xml_attribute<> *path;
 
-  unsigned int id = 0; // 0: reserved (unset values, ...)
   type = resources->first_node(_typeNames[current_type].c_str());
+
   while (current_type < E_RESOURCE_TYPE_NB) // for all categories
   {
-	std::cerr << "current tn: " << _typeNames[current_type].c_str() << std::endl;
-
 #   ifdef DEBUG
     if (!type)
     {
-      std::cerr << "type is NULL" << std::endl <<
-          "tried to match> " << _typeNames[current_type] << std::endl;
+      Debug::logPrintf("Type is NULL\n Tried to match>", _typeNames[current_type]);
       return -1;
     }
 #   endif
 
-    // std::cout << "type: " << type << std::endl;
-    // std::cout << "type 1st node 'folder': " << type->first_node("folder") << std::endl;
-    // std::cout << "type 1st node: " << type->first_node() << std::endl;
-    // std::cout << "type 1st node name: " << type->first_node()->name() << std::endl;
     folder = type->first_node("folder");
 
 #   ifdef DEBUG
+    std::cout << type->name() << std::endl;
+
     if (!folder)
-      Debug::logPrintf("folder is NULL");
+      PRINTF("folder is NULL");
 #   endif
 
     while (folder)
@@ -268,21 +183,20 @@ int ResourcesManager::buildFromXML()
 
 #     ifdef DEBUG
       // testing if last char is effectively a FOLDER_SEPARATOR
-      //if (*(str_path.end() - 1) != FOLDER_DELIMITER)
-      //      if (str_path[strlen(str_path) - 2] != FOLDER_DELIMITER)
-      //      {
-      //        std::cerr << ">>ERROR<< XML file:" << std::endl <<
-      //          "-- Missing trailing folder delimiter in " << str_path << std::endl;
-      //      }
+      // if ((str_path[std::strlen(str_path) - 1]) != FOLDER_DELIMITER)
+      // {
+      //   Debug::logPrintf(
+      //     ">>ERROR<< XML file: Missing trailing folder delimiter: ", str_path);
+      // }
 
       if (!path)
       {
-        std::cerr << "XML file: Missing path" << std::endl;
+        Debug::logPrintf("XML file: Missing path");
         return -1;
       }
 
       if (!file)
-        std::cerr << ">Warning< XML file: empty folder " << str_path << std::endl;
+        Debug::logPrintf(">Warning< XML file: empty folder ", str_path);
 #     endif
 
       while (file)
@@ -291,14 +205,13 @@ int ResourcesManager::buildFromXML()
         name = file->first_node("name");
         std::string tmp = str_path;
         tmp += filename;
-        addResource(current_type, name->value(), tmp, id++);
+        addResource(current_type, name->value(), tmp);
         file = file->next_sibling("file");
       }
 
       folder = folder->next_sibling("folder");
     }
 
-    DEBUG_PRINT("nb_type++");
     current_type = static_cast<e_resource_type>(current_type + 1);
     type = type->next_sibling();
   }
@@ -316,12 +229,11 @@ void ResourcesManager::listResources()
   {
     e_resource_type type = static_cast<e_resource_type>(i);
     std::cout << "Category: " << _typeNames[type] << std::endl;
-    for (auto it : _resources[type])
-    {
-      std::cout << it->getFileName() << '\t'
-                << it->name() << '\t'
-                << it->getId() << std::endl;
-    }
+    for (auto it : _images)
+      Debug::logPrintf(it.second->name());
+
+    for (auto it : _fonts)
+      Debug::logPrintf(it.second->name());
   }
 }
 #endif
