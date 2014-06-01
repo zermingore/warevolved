@@ -7,11 +7,10 @@
 # include <resources/Resource.hh>
 # include <resources/Font.hh>
 # include <resources/Image.hh>
+# include <pugixml/pugixml.hpp>
 
-# define DEBUG_XML
 
-
-/** \brief enum matching every resource types
+/** \enum enum matching every resource types
  */
 enum e_resource_type
 {
@@ -25,7 +24,7 @@ enum e_resource_type
 };
 
 
-/** \brief ResourcesManager class
+/** \class ResourcesManager
  ** uses a XML file, containing all resources data:
  **   their path, name and specific attributes
  ** it manages:
@@ -41,20 +40,13 @@ public:
    */
   explicit ResourcesManager(const std::string file_name);
 
-  /** \brief initialize default resources
-   ** theses resources are used when we cannot find the expected one
+  /** \brief Retrieve an Image from _images map
+   ** if the Image does not exist, print an error and return the default one
    */
-  void initializeDefaultResources();
-
-  // TODO templates
-  /** \brief Retrieve an Image from its name (alias)
-   ** if the Image wasn't loaded, loads it
-   */
-  // Image& getImage(unsigned int *id, const std::string image_name);
   Image& getImage(const std::string name);
 
-  /** \brief Retrieve a Font from its name (alias)
-   ** if the Font wasn't loaded, loads it
+  /** \brief Retrieve a Font from _fonts map
+   ** if the Font does not exist, print an error and return the default one
    */
   Font& getFont(const std::string name);
 
@@ -63,6 +55,11 @@ private:
   /** \brief initializes _typeNames array
    */
   void initTypeNames();
+
+  /** \brief initialize default resources
+   ** theses resources are used when we cannot find the expected one
+   */
+  void initializeDefaultResources();
 
   /** \brief adds resource to the _resources map
    **   adds it in the right list, according to type
@@ -75,20 +72,9 @@ private:
    ** \return true on success
    **   false otherwise
    */
-  // bool addResource(e_resource_type type,
-  //                  const std::string name,
-  //                  const std::string file_name,
-  //                  unsigned int id);
-
-  // template<typename T>
-  // void addResource(const std::string name,
-  //                  const std::string file_name,
-  //                  unsigned int id);
-
   bool addResource(e_resource_type type,
                    const std::string name,
                    const std::string file_name);
-
 
   /** \brief parses XML file
    ** \param file_name file to parse
@@ -97,16 +83,6 @@ private:
    **   false otherwise (prints an error message on std::err)
    */
   bool parseXML(const std::string file_name);
-
-  /** \brief builds the global std::map containing all resources
-   ** \return 0 on success
-   **   -1 on failure
-   **   a strictly positive value corresponding to the number of unmatched files
-   ** should be called only one time (when launching the game)
-   ** very long execution time [function of number of resources]
-   ** adds every XML entry to the std::map _resources
-   */
-  int buildFromXML();
 
 
 # ifdef DEBUG_XML
@@ -119,10 +95,7 @@ private:
   std::map<std::string, std::shared_ptr<Image>> _images; ///< Images list
   std::map<std::string, std::shared_ptr<Font>> _fonts; ///< Fonts list
 
-  ///< unique pointer on resources XML file
-  std::unique_ptr<rapidxml::xml_document<>> _xml;
-
-  ///< map categories names with e_resource_type
+  ///< map categories names matching e_resource_type
   std::map<e_resource_type, std::string> _typeNames;
 };
 

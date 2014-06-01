@@ -23,6 +23,8 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 __top_srcdir__we_SOURCES =			\
 main.cc								\
 \
+pugixml/pugixml.cpp                 \
+\
 core/Context.cc						\
 \
 graphics/GraphicEngine.cc			\

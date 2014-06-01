@@ -91,6 +91,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am___top_srcdir__we_OBJECTS = __top_srcdir__we-main.$(OBJEXT) \
+	pugixml/__top_srcdir__we-pugixml.$(OBJEXT) \
 	core/__top_srcdir__we-Context.$(OBJEXT) \
 	graphics/__top_srcdir__we-GraphicEngine.$(OBJEXT) \
 	resources/__top_srcdir__we-ResourcesManager.$(OBJEXT) \
@@ -299,6 +300,8 @@ __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 __top_srcdir__we_SOURCES = \
 main.cc								\
 \
+pugixml/pugixml.cpp                 \
+\
 core/Context.cc						\
 \
 graphics/GraphicEngine.cc			\
@@ -341,7 +344,7 @@ interface/menus/InGameMenu.cc
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .o .obj
+.SUFFIXES: .cc .cpp .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -414,6 +417,14 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+pugixml/$(am__dirstamp):
+	@$(MKDIR_P) pugixml
+	@: > pugixml/$(am__dirstamp)
+pugixml/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) pugixml/$(DEPDIR)
+	@: > pugixml/$(DEPDIR)/$(am__dirstamp)
+pugixml/__top_srcdir__we-pugixml.$(OBJEXT): pugixml/$(am__dirstamp) \
+	pugixml/$(DEPDIR)/$(am__dirstamp)
 core/$(am__dirstamp):
 	@$(MKDIR_P) core
 	@: > core/$(am__dirstamp)
@@ -582,6 +593,7 @@ mostlyclean-compile:
 	-rm -f input/*.$(OBJEXT)
 	-rm -f interface/*.$(OBJEXT)
 	-rm -f interface/menus/*.$(OBJEXT)
+	-rm -f pugixml/*.$(OBJEXT)
 	-rm -f resources/*.$(OBJEXT)
 
 distclean-compile:
@@ -616,6 +628,7 @@ include interface/$(DEPDIR)/__top_srcdir__we-Interface.Po
 include interface/menus/$(DEPDIR)/__top_srcdir__we-EntriesMenu.Po
 include interface/menus/$(DEPDIR)/__top_srcdir__we-InGameMenu.Po
 include interface/menus/$(DEPDIR)/__top_srcdir__we-MenuEntry.Po
+include pugixml/$(DEPDIR)/__top_srcdir__we-pugixml.Po
 include resources/$(DEPDIR)/__top_srcdir__we-Font.Po
 include resources/$(DEPDIR)/__top_srcdir__we-Image.Po
 include resources/$(DEPDIR)/__top_srcdir__we-Resource.Po
@@ -650,6 +663,20 @@ __top_srcdir__we-main.obj: main.cc
 #	$(AM_V_CXX)source='main.cc' object='__top_srcdir__we-main.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o __top_srcdir__we-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+
+pugixml/__top_srcdir__we-pugixml.o: pugixml/pugixml.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT pugixml/__top_srcdir__we-pugixml.o -MD -MP -MF pugixml/$(DEPDIR)/__top_srcdir__we-pugixml.Tpo -c -o pugixml/__top_srcdir__we-pugixml.o `test -f 'pugixml/pugixml.cpp' || echo '$(srcdir)/'`pugixml/pugixml.cpp
+	$(AM_V_at)$(am__mv) pugixml/$(DEPDIR)/__top_srcdir__we-pugixml.Tpo pugixml/$(DEPDIR)/__top_srcdir__we-pugixml.Po
+#	$(AM_V_CXX)source='pugixml/pugixml.cpp' object='pugixml/__top_srcdir__we-pugixml.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o pugixml/__top_srcdir__we-pugixml.o `test -f 'pugixml/pugixml.cpp' || echo '$(srcdir)/'`pugixml/pugixml.cpp
+
+pugixml/__top_srcdir__we-pugixml.obj: pugixml/pugixml.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT pugixml/__top_srcdir__we-pugixml.obj -MD -MP -MF pugixml/$(DEPDIR)/__top_srcdir__we-pugixml.Tpo -c -o pugixml/__top_srcdir__we-pugixml.obj `if test -f 'pugixml/pugixml.cpp'; then $(CYGPATH_W) 'pugixml/pugixml.cpp'; else $(CYGPATH_W) '$(srcdir)/pugixml/pugixml.cpp'; fi`
+	$(AM_V_at)$(am__mv) pugixml/$(DEPDIR)/__top_srcdir__we-pugixml.Tpo pugixml/$(DEPDIR)/__top_srcdir__we-pugixml.Po
+#	$(AM_V_CXX)source='pugixml/pugixml.cpp' object='pugixml/__top_srcdir__we-pugixml.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o pugixml/__top_srcdir__we-pugixml.obj `if test -f 'pugixml/pugixml.cpp'; then $(CYGPATH_W) 'pugixml/pugixml.cpp'; else $(CYGPATH_W) '$(srcdir)/pugixml/pugixml.cpp'; fi`
 
 core/__top_srcdir__we-Context.o: core/Context.cc
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT core/__top_srcdir__we-Context.o -MD -MP -MF core/$(DEPDIR)/__top_srcdir__we-Context.Tpo -c -o core/__top_srcdir__we-Context.o `test -f 'core/Context.cc' || echo '$(srcdir)/'`core/Context.cc
@@ -1099,6 +1126,22 @@ interface/menus/__top_srcdir__we-InGameMenu.obj: interface/menus/InGameMenu.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(__top_srcdir__we_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o interface/menus/__top_srcdir__we-InGameMenu.obj `if test -f 'interface/menus/InGameMenu.cc'; then $(CYGPATH_W) 'interface/menus/InGameMenu.cc'; else $(CYGPATH_W) '$(srcdir)/interface/menus/InGameMenu.cc'; fi`
 
+.cpp.o:
+	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+	$(am__mv) $$depbase.Tpo $$depbase.Po
+#	$(AM_V_CXX)source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+	$(CXXCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+	$(am__mv) $$depbase.Tpo $$depbase.Po
+#	$(AM_V_CXX)source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
 tags: tags-am
@@ -1236,6 +1279,8 @@ distclean-generic:
 	-rm -f interface/$(am__dirstamp)
 	-rm -f interface/menus/$(DEPDIR)/$(am__dirstamp)
 	-rm -f interface/menus/$(am__dirstamp)
+	-rm -f pugixml/$(DEPDIR)/$(am__dirstamp)
+	-rm -f pugixml/$(am__dirstamp)
 	-rm -f resources/$(DEPDIR)/$(am__dirstamp)
 	-rm -f resources/$(am__dirstamp)
 	-test -z "$(top_srcdir)/$(am__dirstamp)" || rm -f $(top_srcdir)/$(am__dirstamp)
@@ -1248,7 +1293,7 @@ clean: clean-am
 clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) common/$(DEPDIR) core/$(DEPDIR) game/$(DEPDIR) game/applications/$(DEPDIR) game/items/$(DEPDIR) game/items/guns/$(DEPDIR) game/units/$(DEPDIR) graphics/$(DEPDIR) input/$(DEPDIR) interface/$(DEPDIR) interface/menus/$(DEPDIR) resources/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) common/$(DEPDIR) core/$(DEPDIR) game/$(DEPDIR) game/applications/$(DEPDIR) game/items/$(DEPDIR) game/items/guns/$(DEPDIR) game/units/$(DEPDIR) graphics/$(DEPDIR) input/$(DEPDIR) interface/$(DEPDIR) interface/menus/$(DEPDIR) pugixml/$(DEPDIR) resources/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -1294,7 +1339,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) common/$(DEPDIR) core/$(DEPDIR) game/$(DEPDIR) game/applications/$(DEPDIR) game/items/$(DEPDIR) game/items/guns/$(DEPDIR) game/units/$(DEPDIR) graphics/$(DEPDIR) input/$(DEPDIR) interface/$(DEPDIR) interface/menus/$(DEPDIR) resources/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) common/$(DEPDIR) core/$(DEPDIR) game/$(DEPDIR) game/applications/$(DEPDIR) game/items/$(DEPDIR) game/items/guns/$(DEPDIR) game/units/$(DEPDIR) graphics/$(DEPDIR) input/$(DEPDIR) interface/$(DEPDIR) interface/menus/$(DEPDIR) pugixml/$(DEPDIR) resources/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

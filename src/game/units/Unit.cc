@@ -65,7 +65,7 @@ void Unit::draw()
   # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
   if (x < CELL_WIDTH || y < CELL_HEIGHT)
-    std::cerr << "Sprite scale failure" << std::endl;
+    Debug::logPrintf("Sprite scale failure");
   # endif
 
   if (_targetable)

@@ -7,11 +7,10 @@ run
 if it works, the binary file (we) will be created
 
 
-This project is under GPL license but uses rapidXML,
+This project is under GPL license though uses PugiXML,
 a XML file parser which is under Boost license
-I have not written any code in src/rapidxml folder
-credits go to Marcin Kalicinski (http://rapidxml.sourceforge.net/)
-
+I have not written any code in src/pugixml folder
+credits go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
 
 If you haven't downloaded War Evolved on google code,
 you still can find it there https://code.google.com/p/warevolved/
