@@ -21,7 +21,7 @@ void PathFinding::setOrigin(Coords coords)
   _currentLength = 0;
   _maxLength = unit->motionValue();
 
-  showAlowedPath(unit);
+  showAllowedPath(unit);
 }
 
 
@@ -202,40 +202,34 @@ void PathFinding::addNextDirection(e_direction direction)
 }
 
 
-void PathFinding::showAlowedPath(Unit *unit)
+void PathFinding::showAllowedPath(Unit *unit) // std::shared_ptr<Unit> unit
 {
-  std::vector<std::vector<Cell>> &cells = g_status->map()->cells();
-
-  // these are not unsigned because we want to check negativity
-  int x (unit->cellX());
-  int y (unit->cellY());
-  int offset_x (0);
-  int offset_y (0);
-
+  std::stack<std::pair<int, int>> s;
+  s.push(std::pair<int, int>(unit->cellX(), unit->cellY()));
   _reachableCells.clear();
-  // ugly tests
-  // TODO and... hum with a flood fill ?
-  while (static_cast<unsigned int> (offset_y) <= _maxLength) // use Unit motionValue
+  std::vector<std::pair<int, int>> checked;
+
+  while (!s.empty())
   {
-    while (static_cast<unsigned int>(offset_x + offset_y) <= _maxLength)
+    int x = s.top().first;
+    int y = s.top().second;
+    s.pop();
+
+    // check overflow, Manhattan distance and if we already marked the cell
+    if (x < 0 || y < 0 || x > (int) NB_COLUMNS - 1 || y > (int) NB_LINES - 1
+        || std::abs((int) unit->cellX() - x) + std::abs((int) unit->cellY() - y) > (int) unit->motionValue()
+        || std::find(checked.begin(), checked.end(), std::pair<int, int>(x, y)) != checked.end())
     {
-      if (x + offset_x < 8 && y + offset_y < 8)
-        _reachableCells.push_back(cells[x + offset_x][y + offset_y]);
-
-      if (x - offset_x > -1 && y + offset_y < 8)
-        _reachableCells.push_back(cells[x - offset_x][y + offset_y]);
-
-      if (x + offset_x < 8 && y - offset_y > -1)
-        _reachableCells.push_back(cells[x + offset_x][y - offset_y]);
-
-      if (x - offset_x > -1 && y - offset_y > -1)
-        _reachableCells.push_back(cells[x - offset_x][y - offset_y]);
-
-      ++offset_x;
+      continue;
     }
 
-    ++offset_y;
-    offset_x = 0;
+    _reachableCells.push_back(g_status->map()->cells()[x][y]);
+    checked.push_back(std::pair<int, int>(x, y));
+
+    s.emplace(std::pair<int, int>(x + 1, y));
+    s.emplace(std::pair<int, int>(x, y + 1));
+    s.emplace(std::pair<int, int>(x - 1, y));
+    s.emplace(std::pair<int, int>(x, y - 1));
   }
 
   highlightCells();

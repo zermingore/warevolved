@@ -4,7 +4,7 @@
 #include <game/Game.hh>
 
 std::unique_ptr<Status> g_status(new Status());
-std::unique_ptr<ResourcesManager> g_rm(new ResourcesManager("tst.xml"));
+std::unique_ptr<ResourcesManager> g_rm(new ResourcesManager("resources.xml"));
 std::unique_ptr<Interface> g_interface(new Interface());
 
 

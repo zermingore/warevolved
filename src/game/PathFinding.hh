@@ -60,6 +60,8 @@ public:
    */
   void hideAllowedPath();
 
+  void floodFill(Unit* unit); // TODO std::shared_ptr<Unit>
+
 
 private:
   /** \brief returns the sprite matching e_path_shape
@@ -91,10 +93,11 @@ private:
   e_path_shape getShape(unsigned int index);
 
   /** \brief Highlights cells which selected unit can cross
+   ** (uses a Flood Fill algorithm)
    ** \param unit Selected unit
    **   (used for location, faction, range, ...)
    */
-  void showAlowedPath(Unit *unit);
+  void showAllowedPath(Unit *unit);
 
   /** \brief sets highlight and highlight color for reachable cells
    */

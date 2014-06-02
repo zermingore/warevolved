@@ -3,7 +3,6 @@
 
 # include <common/include.hh>
 # include <common/macros.hh>
-# include <rapidxml/rapidxml.hpp>
 # include <resources/Resource.hh>
 # include <resources/Font.hh>
 # include <resources/Image.hh>
