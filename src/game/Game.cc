@@ -9,25 +9,30 @@ Game::Game() :
 {
 }
 
+Game::~Game() {
+  delete _event;
+}
+
+
 void Game::run()
 {
-  std::shared_ptr<GraphicEngine> graphics(new GraphicEngine());
-  std::shared_ptr<KeyManager> km(new KeyManager());
-  _event.reset(new Event(km, graphics));
+  GraphicEngine *graphics = new GraphicEngine();
+  KeyManager *km = new KeyManager();
+  _event = new Event(km, graphics);
 
 # ifdef DEBUG_PERFS
   sf::Clock timer;
   std::vector<sf::Int64> frame_generation;
 # endif
 
-  Battle b; // launch a new Battle
+  Battle b;
   graphics->initRoom();
 
   // Game loop
-  while (g_window->isOpen() && _event->process())
+  while (WINDOW->isOpen() && _event->process())
   {
     graphics->drawScene();
-    g_window->display(); // Update the window
+    WINDOW->display(); // Update the window
 
 #   ifdef DEBUG_PERFS
     g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
@@ -46,4 +51,7 @@ void Game::run()
               << std::endl;
   }
 # endif
+
+  delete km;
+  delete graphics;
 }

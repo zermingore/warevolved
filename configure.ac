@@ -5,8 +5,8 @@ AC_INIT([ms], [1.0])
 
 AC_CONFIG_AUX_DIR([build-aux])
 
-# forcing c++14 usage (must be before AC_PROG_CXX)
-CXXFLAGS="$CXXFLAGS -std=c++1y"
+# forcing c++11 usage (must be before AC_PROG_CXX)
+CXXFLAGS="$CXXFLAGS -std=c++11"
 
 
 if [[ -n "$SFML_PATH" ]]
@@ -24,7 +24,7 @@ AM_INIT_AUTOMAKE([subdir-objects color-tests -Wall -Werror foreign])
 AM_SILENT_RULES
 
 # Checks for programs.
-AC_PROG_CXX([clang]) # g++
+AC_PROG_CXX
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_HEADER_STDBOOL6

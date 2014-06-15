@@ -20,6 +20,10 @@ public:
    */
   Game();
 
+  /** \brief Destructor
+   */
+  ~Game();
+
   /** \brief contains the game loop which calls
    **   event processing
    **   window rendering
@@ -28,7 +32,7 @@ public:
 
 
 private:
-  std::shared_ptr<Event> _event; ///< Events management
+  Event *_event; ///< Events management
 };
 
 #endif /* !GAME_HH_ */

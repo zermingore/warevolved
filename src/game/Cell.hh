@@ -25,7 +25,7 @@ public:
   /** \brief _unit getter
    ** \return cell's unit
    */
-  inline std::shared_ptr<Unit> unit() { return _unit; }
+  inline Unit *unit() { return _unit; }
 
   /** \brief _terrain getter
    ** \return cell's terrain
@@ -36,7 +36,7 @@ public:
    ** sets the Unit \param unit in the cell
    ** \param unit The unit to be set in the cell
    */
-  inline void setUnit(std::shared_ptr<Unit> unit) { _unit = unit; }
+  inline void setUnit(Unit &unit) { _unit = &unit; }
 
   /** \brief _terrain setter
    ** sets the terrain \param terrain in the Cell
@@ -76,7 +76,7 @@ public:
 private:
   Coords _coordinates; ///< cell's coordinates
   e_terrain _terrain; ///< Terrain type index (matching e_terrains)
-  std::shared_ptr<Unit> _unit; ///< Unit type index (matching e_terrains)
+  Unit *_unit; ///< Unit type index (matching e_terrains)
   bool _highlight; ///< true if the cell needs to be highlighted
   Color _highlightColor; ///< color of the cell's highlight
 };

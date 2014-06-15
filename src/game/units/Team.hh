@@ -12,7 +12,8 @@ class Unit;
 
 # include <game/units/Unit.hh>
 
-/** \class Team: Units group
+/** \class Units group
+ *
  */
 class Team
 {
@@ -20,20 +21,23 @@ public:
   /** \brief Constructor
    ** builds a new team with \param unit and \param unit2
    */
-  Team(std::shared_ptr<Unit> unit, std::shared_ptr<Unit> unit2);
+  Team(Unit *unit, Unit *unit2);
+
+  /// \brief Destructor
+  ~Team();
 
   /** \brief _members getter
    ** \return _members: every members of the team
    */
-  inline std::vector<std::shared_ptr<Unit>> members() { return _members; }
+  std::vector<Unit*> *members();
 
   /** \brief adds a member to the Team
    ** \param Unit
    */
-  inline void addMember(std::shared_ptr<Unit> unit) { _members.push_back(unit); }
+  void addMember(Unit *unit);
 
 private:
-  std::vector<std::shared_ptr<Unit>> _members; ///< list of all team members
+  std::vector<Unit*> *_members; ///< list of all team members
 };
 
 #endif /* !TEAM_HH_ */

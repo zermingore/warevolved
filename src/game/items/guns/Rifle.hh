@@ -22,8 +22,8 @@ public:
   Rifle();
   ~Rifle();
 
-// private:
-//   unsigned short _clipSize; ///< maximum number of bullet in the clip
+private:
+  unsigned short _clipSize; ///< maximum number of bullet in the clip
 };
 
 #endif /* !RIFLE_HH_ */

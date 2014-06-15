@@ -31,13 +31,13 @@ void GraphicEngine::drawScene()
 
 void GraphicEngine::drawBackground() // TODO (map background)
 {
-  g_window->clear();
+  WINDOW->clear();
 }
 
 
 void GraphicEngine::drawCells()
 {
-  std::vector<std::vector<Cell>> cells = CELLS;
+  std::vector<std::vector<Cell>> cells = g_status->map()->cells();
   // draws column by column
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)
@@ -58,12 +58,10 @@ void GraphicEngine::drawGrid()
   rectangle.setOutlineThickness(5);
 
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
-  {
   	for (unsigned int j = 0; j < NB_LINES; ++j)
     {
       rectangle.setPosition(i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X,
                             j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y);
-      g_window->draw(rectangle);
+      WINDOW->draw(rectangle);
     }
-  }
 }

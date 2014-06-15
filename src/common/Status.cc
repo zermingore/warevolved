@@ -5,6 +5,8 @@
 
 
 Status::Status() :
+  _window (nullptr),
+  _map (nullptr),
   _currentFPS (0),
   _cellWidth (0),
   _cellHeight (0),
@@ -19,12 +21,10 @@ Status::Status() :
 
 Status::~Status()
 {
+//  delete _window;
+
   while (!_states.empty())
   	_states.pop(); // calls element destructor
-}
-
-void Status::cellSelection() {
-  _selectedCell = CURSOR->coords();
 }
 
 e_mode Status::currentMode()
@@ -40,13 +40,16 @@ e_mode Status::currentMode()
 
 void Status::pushMode(e_mode mode)
 {
-  _states.push(std::make_shared<State> (mode));
+  std::shared_ptr<State> state (new State(mode));
+  _states.push(state);
 }
 
 void Status::pushModeInGameMenu(e_mode mode, InGameMenu *menu)
 {
   menu->build(mode);
-  _states.push(std::make_shared<State> (mode, menu));
+
+  std::shared_ptr<State> state (new State(mode, menu));
+  _states.push(state);
 }
 
 
@@ -72,7 +75,7 @@ void Status::exitToMode(e_mode mode, bool skip)
 #   ifdef DEBUG
     if (_states.empty())
     {
-      PRINTF("exitToMode failure: _states stack is empty");
+      DEBUG_PRINT("exitToMode failure: _states stack is empty");
       return;
     }
 #   endif
@@ -83,31 +86,39 @@ void Status::exitToMode(e_mode mode, bool skip)
   }
 }
 
-State Status::popCurrentMode()
+std::shared_ptr<State> Status::popCurrentMode()
 {
-  auto tmp(_states.top());
+  std::shared_ptr<State> tmp = _states.top();
   _states.pop();
 
-  return *tmp;
+  return tmp;
 }
 
-void Status::setWindow(std::unique_ptr<sf::RenderWindow> window)
-{
-  g_window = std::move(window);
-
-  // initialize render room
-  resetRender();
+Coords Status::selectedCell() {
+  return _selectedCell;
 }
 
-void Status::setGridOffset()
-{
-  // offset = 1/2 left room
-  _gridOffsetX = (_renderX - _cellWidth * NB_COLUMNS) / 2;
-  _gridOffsetY = (_renderY - _cellHeight * NB_LINES) / 2;
+void Status::cellSelection() {
+	_selectedCell = CURSOR->coords();
 }
 
 void Status::resetRender()
 {
   _renderX = WINDOW_SIZE_X;
   _renderY = WINDOW_SIZE_Y;
+}
+
+void Status::setWindow(std::shared_ptr<sf::RenderWindow> window)
+{
+  _window = window;
+
+  // initialize render room
+  this->resetRender();
+}
+
+void Status::setGridOffset()
+{
+  // offset = 1/2 left room
+  _gridOffsetX = (_renderX - _cellWidth * _map->nbColumns()) / 2;
+  _gridOffsetY = (_renderY - _cellHeight * _map->nbLines()) / 2;
 }

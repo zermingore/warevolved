@@ -27,7 +27,10 @@ class Text
    ** \param language database language column offset
    ** default value: English (offset = 0)
    */
-  explicit Text(unsigned int language = 0);
+  Text(unsigned int language = 0);
+
+  /// \brief Destructor
+  ~Text();
 
   /** \brief fills in std::maps
    ** TODO initialize DataBase connection
@@ -48,7 +51,7 @@ class Text
    ** \param rank rank we want name
    ** \return rank name value
    */
-  inline std::string getRankName(e_rank rank) { return _ranks[rank]; }
+  std::string getRankName(e_rank rank);
 
 
 private:

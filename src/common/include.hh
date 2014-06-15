@@ -10,7 +10,6 @@
 
 # include <vector>
 # include <string>
-# include <stack>
 # include <list>
 # include <iostream>
 # include <fstream>

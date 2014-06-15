@@ -109,6 +109,9 @@ private:
   std::shared_ptr<sf::Texture> _texture; ///< texture data pointer
   std::shared_ptr<sf::Sprite> _sprite; ///< Image sprite, allowing transformations
   std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
+
+  unsigned int _width; ///< image width
+  unsigned int _height; ///< image height
 };
 
 #endif /* !IMAGE_HH_ */

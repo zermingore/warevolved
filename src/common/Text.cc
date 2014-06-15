@@ -7,6 +7,15 @@ Text::Text(unsigned int language) :
 {
 }
 
+Text::~Text() {
+}
+
+
+std::string Text::getRankName(e_rank rank) {
+  return _ranks[rank];
+}
+
+
 //template <typename T>
 //std::string Text::name(T id)
 //{

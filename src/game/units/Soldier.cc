@@ -1,10 +1,14 @@
 #include <common/enums/ranks.hh>
 #include <game/units/Soldier.hh>
 #include <common/globals.hh>
+#include <common/Text.hh>
 
 Soldier::Soldier() :
   _equipedWeapon (nullptr),
-  _rank (E_RANK_PRIVATE)
+  _rank (E_RANK_PRIVATE),
+  _driverLevel (0),
+  _mechanicsLevel (0),
+  _gunnerLevel (0)
 {
   _name = "soldiers";
   _fullName = "John Doe";
@@ -17,4 +21,8 @@ Soldier::Soldier() :
   _motionValue = 4;
   _played = false;
   _playerId = 0;
+}
+
+std::string Soldier::name() {
+  return Text::name(_rank) + " " + _fullName;
 }

@@ -16,7 +16,7 @@ public:
   /** \brief Constructor
    **   processes input events
    */
-  Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicEngine> ge);
+  Event(KeyManager *km, GraphicEngine *ge);
 
   /** \brief check if a generic event (like closing the window) occurs
    **   calls matching functions if any
@@ -37,7 +37,7 @@ private:
    **   (for example arrows do not move game cursor but menu cursor)
    ** \param menu menu of which we want to manage events
    */
-  void selectionEntriesMenu();
+  void selectionEntriesMenu(EntriesMenu *menu);
 
   /** \brief Processes events while moving a unit
    */
@@ -56,10 +56,10 @@ private:
   void releasedKeys();
 
   sf::Event _event; ///< Event Manager
-  std::shared_ptr<KeyManager> _km; ///< KeyManager instance
-  std::shared_ptr<GraphicEngine> _ge; ///< GraphicEngine instance
-  std::shared_ptr<InGameMenu> _inGameMenu; ///< in-game action menu
-  std::shared_ptr<PathFinding> _path; ///< PathFinding path
+  KeyManager *_km; ///< KeyManager instance
+  GraphicEngine *_ge; ///< GraphicEngine instance
+  InGameMenu *_inGameMenu; ///< in-game action menu
+  PathFinding *_path; ///< PathFinding path
 };
 
 #endif /* !EVENT_HH_ */

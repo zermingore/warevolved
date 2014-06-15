@@ -5,7 +5,6 @@
 # include <resources/Image.hh>
 # include <resources/Font.hh>
 
-
 // TODO add execute method given to ctor
 
 /** \brief entries descriptors
@@ -29,7 +28,7 @@ public:
   /** \brief Constructor
    */
   // TODO use this one (auto label completion, using a DB)
-  explicit MenuEntry(e_entry &entry);
+  explicit MenuEntry(e_entry entry);
 
   /** \brief Constructor
    ** \deprecated use MenuEntry(e_entries entry); with auto label completion
@@ -52,7 +51,7 @@ public:
 
 private:
   Image _background; ///< background image
-  std::shared_ptr<sf::Text> _label; ///< button label text
+  sf::Text *_label; ///< button label text
   Font _font; ///< button label font
   e_entry _id; ///< entry identifier
 };

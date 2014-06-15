@@ -54,6 +54,8 @@ bool ResourcesManager::addResource(e_resource_type type,
       Debug::logPrintf(file_name, ": Unknown resource type");
       return false;
   }
+
+  return false;
 }
 
 

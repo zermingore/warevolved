@@ -53,7 +53,7 @@ private:
 
   /** \brief draws the grid (map cells delimiter)
    */
-  // TODO void drawGrid(unsigned int nb_line, unsigned int nb_column);
+  void drawGrid(unsigned int nb_line, unsigned int nb_column);
 };
 
 #endif /* !GRAPHICENGINE_HH_ */

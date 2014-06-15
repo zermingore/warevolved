@@ -22,10 +22,7 @@ extern std::unique_ptr<Status> g_status;
 /** \brief keeping all interface settings (menu status, ...) */
 extern std::unique_ptr<Interface> g_interface;
 
-/** \brief Resources Manager keeper */
+/** \brief ResourceManager keeper */
 extern std::unique_ptr<ResourcesManager> g_rm;
-
-/** \brief pointer on the main graphic window */
-extern std::unique_ptr<sf::RenderWindow> g_window;
 
 #endif /* !GLOBALS_HH_ */

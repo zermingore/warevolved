@@ -43,9 +43,13 @@ public:
    */
   Interface();
 
+  /** Destructor
+   */
+  ~Interface();
+
   /** \brief _cursor getter
    */
-  inline std::shared_ptr<Cursor> cursor() { return _cursor; }
+  inline Cursor *cursor() { return _cursor; }
 
   /** \brief side panel position getter
    */
@@ -68,12 +72,12 @@ public:
   /** in-game menu getter
    ** \return _inGameMenu
    */
-  inline std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
+  inline InGameMenu *inGameMenu() { return _inGameMenu; }
 
   /** \brief PathFinding getter
    ** \return _path current path
    */
-  inline const PathFinding &path() const { return *_path; }
+  inline PathFinding *path() { return _path; }
 
   /** \brief sets the path origin
    ** meaning the cell from where it starts
@@ -87,6 +91,7 @@ public:
 
 
 private:
+
   /** \brief Initializes Panel position
    */
   void setPanel();
@@ -103,13 +108,16 @@ private:
    */
   void drawMenuBar();
 
-  std::shared_ptr<Cursor> _cursor; ///< Map Cursor
-  std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
-  std::unique_ptr<PathFinding> _path; ///< current path
+
+  Cursor *_cursor; ///< Map Cursor
+  InGameMenu *_inGameMenu; ///< in game menu
+  PathFinding *_path; ///< current path
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   bool _modificationPanel; ///< notification: panel status changed
   bool _modificationMenuBar; ///< notification: menu bar status changed
+  bool _drawPanel; ///< notification if we have to redraw the panel
+  bool _drawMenuBar; ///< notification if we have to redraw the menu bar
   unsigned int _panelX; ///< panel coordinates
   unsigned int _menuBarY; ///< menu bar coordinates
 };

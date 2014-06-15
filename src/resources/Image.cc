@@ -3,7 +3,9 @@
 
 
 Image::Image(const std::string file_name,
-             const std::string name)
+             const std::string name) :
+  _width (0),
+  _height (0)
 {
   _rectangle.reset(new sf::RectangleShape()); // TODO allocation only if needed
   _rectangle->setPosition(sf::Vector2f(0, 0));
@@ -141,8 +143,6 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
   if (!_sprite)
     sprite();
 
-  sf::Sprite &s(*_sprite);
-
   // Sprite position
   sf::Vector2f pos;
   pos.x = i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X;
@@ -150,8 +150,8 @@ void Image::drawAtCell(unsigned int i, unsigned int j)
   _sprite->setPosition(pos);
 
   if (load())
-    g_window->draw(s);
-  g_window->draw(*_rectangle);
+    WINDOW->draw(*_sprite);
+  WINDOW->draw(*_rectangle);
 }
 
 
@@ -167,8 +167,8 @@ void Image::drawAtCell(Coords c)
   _sprite->setPosition(pos);
 
   if (load())
-    g_window->draw(*_sprite);
-  g_window->draw(*_rectangle);
+    WINDOW->draw(*_sprite);
+  WINDOW->draw(*_rectangle);
 }
 
 
@@ -180,6 +180,6 @@ void Image::draw()
   _rectangle->setPosition(_sprite->getPosition());
 
   if (load())
-    g_window->draw(*_sprite);
-  g_window->draw(*_rectangle);
+    WINDOW->draw(*_sprite);
+  WINDOW->draw(*_rectangle);
 }

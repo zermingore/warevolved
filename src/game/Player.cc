@@ -11,6 +11,12 @@ Player::Player() :
   _index = static_id++;
 }
 
+Player::~Player()
+{
+  for (auto it: _units)
+    delete it;
+}
+
 void Player::saveCursorPosition() {
   _lastCursorPosition = CURSOR->coords();
 }
@@ -21,25 +27,30 @@ void Player::endTurn()
     it->setPlayed(false);
 }
 
-std::shared_ptr<Unit> Player::newUnit(e_unit unit,
-                                      unsigned int line, unsigned int column)
+void Player::addUnit(Unit &unit)
 {
-  std::shared_ptr<Unit> new_unit;
+  // _units.insert(_id++, &unit);
+  _units.push_back(&unit);
+}
+
+Unit &Player::newUnit(e_unit unit, unsigned int line, unsigned int column)
+{
+  Unit *new_unit;
 
   switch (unit)
   {
     case E_UNIT_SOLDIERS:
-      new_unit.reset(new Soldier());
+      new_unit = new Soldier();
       break;
 
     default:
       DEBUG_PRINT("Unable to match this unit type");
-      return nullptr;
+      break;
   }
 
   new_unit->setCellCoordinates(line, column);
   new_unit->setPlayerId(_index);
   _units.push_back(new_unit);
 
-  return new_unit;
+  return *new_unit;
 }

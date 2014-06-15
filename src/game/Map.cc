@@ -46,8 +46,8 @@ void Map::moveUnit()
 {
   Coords c = g_status->selectedCell();
 
-  std::shared_ptr<Unit> tmp(_cells[c.x][c.y].unit());
+  Unit *tmp = _cells[c.x][c.y].unit();
   tmp->setCellCoordinates(CURSOR->x(), CURSOR->y());
-  _cells[CURSOR->x()][CURSOR->y()].setUnit(tmp);
+  _cells[CURSOR->x()][CURSOR->y()].setUnit(*tmp);
   _cells[c.x][c.y].removeUnit();
 }

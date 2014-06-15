@@ -4,12 +4,12 @@
 #include <interface/Interface.hh>
 
 
-Event::Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicEngine> ge) :
+Event::Event(KeyManager *km, GraphicEngine *ge) :
   _km(km),
   _ge(ge)
 {
-  for (auto i = 0; i < E_TIMER_NB_TIMERS; ++i)
-    _km->restartTimer(static_cast<e_timer> (i));
+  for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
+    _km->restartTimer(static_cast<e_timer>(i));
 
   g_settings->setKeyRepeatDelay(150);
   _inGameMenu = g_interface->inGameMenu();
@@ -19,44 +19,45 @@ Event::Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicEngine> ge) 
 
 bool Event::process()
 {
-  while (g_window->pollEvent(_event))
+  while (WINDOW->pollEvent(_event))
   {
     // Close window : exit request
     if (_event.type == sf::Event::Closed)
     {
-      g_window->close();
+      WINDOW->close();
       return false;
     }
   }
 
   if (_event.type == sf::Event::KeyReleased)
-    releasedKeys();
+    this->releasedKeys();
 
-  panels(); // in all mode, for now
+  this->panels(); // in all mode, for now
+
   switch (CURRENT_MODE)
   {
     case E_MODE_SELECTION_MENU:
       if (_path)
         _path->clearPath();
 
-      selectionEntriesMenu();
+      this->selectionEntriesMenu(_inGameMenu);
       break;
 
     case E_MODE_ACTION_MENU:
       //_path->shadowPath(); // TODO less visible path
-      selectionEntriesMenu();
+      this->selectionEntriesMenu(_inGameMenu);
       break;
 
     case E_MODE_MOVING_UNIT:
-      moveUnit();
+      this->moveUnit();
       break;
 
     case E_MODE_NONE: // mode stack is empty
-      g_window->close();
+      WINDOW->close();
       return false;
 
     default:
-      return game();
+      return (this->game());
   }
 
   return true;
@@ -95,7 +96,7 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
   // ---------- Selection ---------- //
   if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
-    g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu.get());
+    g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
     return;
   }
@@ -137,13 +138,13 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 }
 
 
-void Event::selectionEntriesMenu()
+void Event::selectionEntriesMenu(EntriesMenu *menu)
 {
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
     e_mode old_mode = CURRENT_MODE;
     _inGameMenu->resetSelectedEntry();
-    _inGameMenu->loadMenu(); // g_status->popCurrentMode();
+    _inGameMenu->loadMenu(g_status->popCurrentMode()->menu());
 
     // we were dealing with orders, return to the unit position
     if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
@@ -159,20 +160,20 @@ void Event::selectionEntriesMenu()
   // made a choice in selection menu
   if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
-    _inGameMenu->executeEntry();
+    menu->executeEntry();
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
     return;
   }
 
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
-    _inGameMenu->incrementSelectedEntry();
+    menu->incrementSelectedEntry();
     _km->setReady(E_TIMER_MOVE_UP, false);
   }
 
   if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
   {
-    _inGameMenu->decrementSelectedEntry();
+    menu->decrementSelectedEntry();
     _km->setReady(E_TIMER_MOVE_DOWN, false);
   }
 }
@@ -184,7 +185,7 @@ bool Event::game()
   {
     g_status->exitCurrentMode();
     _km->setSwitchStatus(E_SWITCH_EXIT, ON);
-    g_window->close();
+    WINDOW->close();
 
     return false;
   }
@@ -200,19 +201,19 @@ bool Event::game()
 
     if (CURRENT_MODE == E_MODE_ACTION_MENU)
     {
-      PRINTF("exec");
+      DEBUG_PRINT("exec");
       g_status->exitCurrentMode();
       return true;
     }
 
     if (CURRENT_MODE == E_MODE_MOVING_UNIT)
     {
-      g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu.get());
+      g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
       return true;
     }
 
     _path->clearPath();
-    g_status->pushModeInGameMenu(E_MODE_SELECTION_MENU, _inGameMenu.get());
+    g_status->pushModeInGameMenu(E_MODE_SELECTION_MENU, _inGameMenu);
   }
 
   // ---------- Cursor Motion ---------- //

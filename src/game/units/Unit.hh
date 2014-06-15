@@ -20,9 +20,9 @@ public:
    */
   Unit();
 
-  virtual ~Unit() { PRINTF("Unit Dtor", this); }
+  virtual ~Unit() {}
 
-  explicit Unit(std::string &name);
+  explicit Unit(std::string name);
 
   /** \brief Builds a new unit at cell's position
    ** sets _cell
@@ -120,11 +120,11 @@ public:
 
   /** \brief packs the Unit with \param unit
    */
-  inline void pack(std::shared_ptr<Unit> unit);
+  inline void pack(Unit *unit);
 
   /** \brief runs attack / strikes backs (if any) cycles
    */
-  virtual void attack(std::shared_ptr<Unit> target);
+  virtual void attack(Unit *target);
 
 
 protected:
