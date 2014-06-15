@@ -6,15 +6,13 @@
 std::unique_ptr<Settings> g_settings;
 
 
-Context::Context() :
-  _window (nullptr)
+Context::Context()
 {
   g_settings.reset(new Settings(0, 0, 0)); // depth, stencil, alias
   _system.reset(new System(2, 0));
 }
 
-Context::Context(bool fullscreen) :
-  _window (nullptr)
+Context::Context(bool fullscreen)
 {
   if (fullscreen)
     g_settings.reset(new Settings(24, 8, 4));
@@ -26,7 +24,7 @@ Context::Context(bool fullscreen) :
 }
 
 
-std::shared_ptr<sf::RenderWindow> Context::init()
+void Context::init()
 {
 # ifdef DEBUG
   if (_system->sfmlMajor() < 2)
@@ -42,7 +40,7 @@ std::shared_ptr<sf::RenderWindow> Context::init()
   // getting right resolution, from desktop
   if (g_settings->fullScreen())
   {
-    _window.reset(new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
+    g_window.reset(new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
                                        "War Evolved",
                                        sf::Style::Fullscreen));
   }
@@ -61,13 +59,13 @@ std::shared_ptr<sf::RenderWindow> Context::init()
         std::exit(-1); // This time we quit // TODO browse all supported modes
     }
 
-    _window.reset(new sf::RenderWindow(video_mode, "War Evolved"));
+    g_window.reset(new sf::RenderWindow(video_mode, "War Evolved"));
   }
 
 # ifndef DEBUG_PERFS
-  _window->setFramerateLimit(60);
+  g_window->setFramerateLimit(60);
 # else
-  _window->setFramerateLimit(0);
+  g_window->setFramerateLimit(0);
 #endif
   //_window->setIcon(64, 64, "icon");
 
@@ -75,6 +73,4 @@ std::shared_ptr<sf::RenderWindow> Context::init()
   g_status->setCellWidth(64); // TODO change dynamically (in px)
   g_status->setCellHeight(64); // TODO change dynamically (in px)
   g_status->setGridThickness(5); // TODO change dynamically (in px)
-
-  return _window;
 }

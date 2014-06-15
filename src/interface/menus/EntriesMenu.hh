@@ -29,16 +29,14 @@ public:
    **   sets _origin according to current Cursor position
    **   and _selectedEntry to 0
    */
-  explicit EntriesMenu(std::vector<MenuEntry> entries);
-
-  /// \brief virtual Destructor
-  virtual ~EntriesMenu();
+  explicit EntriesMenu(std::vector<std::shared_ptr<MenuEntry>> &entries);
 
   // TODO: merge and use a single function for all (4) directions
   /** \brief increments _selectedEntry modulo _nbEntries
    **  allowing cycling
    */
-  void incrementSelectedEntry();
+  inline void incrementSelectedEntry() { ++_selectedEntry %= _nbEntries; }
+
   /** \brief decrements _selectedEntry modulo _nbEntries
    **  allowing cycling
    */
@@ -51,7 +49,7 @@ public:
 
   /** \brief sets _selectedEntry to 0
    */
-  void resetSelectedEntry();
+  inline void resetSelectedEntry() { _selectedEntry = 0; }
 
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
@@ -65,7 +63,7 @@ public:
   /** \brief loads a previously saved menu
    ** \param menu menu to load
    */
-  void loadMenu(EntriesMenu *menu);
+  void loadMenu();
 
 
 protected:
@@ -79,25 +77,30 @@ protected:
    ** \note this function is used to retrieve
    **   informations from menu stack (see \class Status)
    */
-  std::vector<MenuEntry> *getEntries();
+  // inline const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
+  // { return *_entries; }
+
+  inline std::shared_ptr<std::vector<std::shared_ptr<MenuEntry>>> getEntries() const
+  { return _entries; }
 
   /** \brief selected entry getter
    ** \return current selected entry
    ** \note this function is used to retrieve
    **   informations from menu stack (see \class Status)
    */
-  unsigned int selectedEntry();
+  inline unsigned int selectedEntry() { return _selectedEntry; }
 
   /** \brief sets origin menu to the right cursor relative position
    */
   void setOrigin(); // TODO sets the menu at optimal position
 
-
   unsigned int _selectedEntry; ///< Current selected entry
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
   unsigned int _nbEntries; ///< Total number of entries in the menu
-  std::vector<MenuEntry> *_entries; ///< Entries list
+
+  ///< Entries list
+  std::shared_ptr<std::vector<std::shared_ptr<MenuEntry>>> _entries;
   sf::Vector2f _origin; ///< Origin position of the menu
   Image _imageSelection; ///< Background image (entry)
 };

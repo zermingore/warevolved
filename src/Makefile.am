@@ -1,10 +1,11 @@
 bin_PROGRAMS = $(top_srcdir)/we
 
 # Use right g++ flags.
+# Debug Flags (no optimization, debug symbols, defines)
 __top_srcdir__we_CPPFLAGS = -W -Wall -Wextra -pedantic			 		\
 -Wfloat-equal -Wcast-qual -Wcast-align -Wunreachable-code -Wundef		\
 -Wpointer-arith -Wmissing-declarations -Wmissing-braces -Wparentheses	\
--O0 -g -DDEBUG -DDEBUG_LEAKS \
+-O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS \
 -Wformat -Wwrite-strings # check printf args && const strings
 
 # export GLIBCXX_FORCE_NEW
@@ -46,7 +47,6 @@ input/Event.cc						\
 game/Game.cc						\
 game/Map.cc							\
 game/Cell.cc						\
-game/applications/Application.cc	\
 game/applications/Battle.cc			\
 game/units/Unit.cc					\
 game/units/Team.cc					\

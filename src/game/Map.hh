@@ -31,12 +31,12 @@ public:
   /** \brief _nbColumns getter
    ** \return number of columns
    */
-  inline unsigned int nbColumns() { return _nbColumns; }
+  inline unsigned int nbColumns() const { return _nbColumns; }
 
   /** \brief _nbLines getter
    ** \return number of lines
    */
-  inline unsigned int nbLines() { return _nbLines; }
+  inline unsigned int nbLines() const { return _nbLines; }
 
   /** \brief gets the unit at coordinates (x, y)
    **
@@ -46,7 +46,8 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (x, y)
    */
-  Unit *unit(unsigned int x, unsigned int y) { return _cells[x][y].unit(); }
+  std::shared_ptr<Unit> unit(unsigned int x, unsigned int y)
+  { return _cells[x][y].unit(); }
 
   /** \brief gets the unit at v's coordinates
    **
@@ -55,7 +56,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (v.x, v.y)
    */
-  Unit *unit(Coords v) { return _cells[v.x][v.y].unit(); }
+  std::shared_ptr<Unit> unit(Coords v) { return _cells[v.x][v.y].unit(); }
 
   /** \brief gets the terrain at coordinates (x, y)
    **
@@ -65,7 +66,8 @@ public:
    ** \return the enum index in e_terrain matching the terrain
    **   located at coordinates (x, y)
    */
-  e_terrain getTerrain(unsigned int x, unsigned int y) { return _cells[x][y].getTerrain(); }
+  e_terrain getTerrain(unsigned int x, unsigned int y)
+  { return _cells[x][y].getTerrain(); }
 
   /** \brief gets the terrain image at coordinates (x, y)
    **
@@ -93,7 +95,8 @@ public:
   /** \brief sets the given unit in the cells array
    ** \param unit to set
    */
-  void setUnit(Unit &u) { _cells[u.cellX()][u.cellY()].setUnit(u); }
+  void setUnit(std::shared_ptr<Unit> u)
+  { _cells[u->cellX()][u->cellY()].setUnit(u); }
 
   /** \brief moves the selected unit to the current cursor location
    */

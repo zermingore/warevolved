@@ -40,6 +40,7 @@
 *** TODO use const +/- whenever possible
 *** TODO use C++11 enum (type / size)
 ** TODO follow the C++ rule of 5
+** TODO remove non needed raw pointers
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
@@ -124,6 +125,7 @@
 ** TODO center text in in-game menu entries
 ** DONE integrate Cursor
    CLOSED: [2013-07-27 Sat 07:59]
+** TODO Display last killed unit list
 
 * TODO Network
 ** TODO Chat
@@ -173,10 +175,12 @@
    was too big
    (running for a long time ?)
    overflow trouble ?
-** TODO Font Cleanup segfault (launched from a terminal)
+** DONE Font Cleanup segfault (launched from a terminal)
+   CLOSED: [2014-06-04 Wed 08:40]
 ** TODO In-game menu: Escape key <> Cancel entry
 
-** TODO Font load resource segfault
+** DONE Font load resource segfault
+   CLOSED: [2014-06-04 Wed 08:40]
    without valgrind
    multi-folder in xml file sections
 

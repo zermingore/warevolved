@@ -14,7 +14,7 @@ void PathFinding::setOrigin(Coords coords)
 {
   clearPath();
 
-  Unit *unit = g_status->map()->unit(coords);
+  std::shared_ptr<Unit> unit(MAP.unit(coords));
   _origin = coords;
   _current = coords;
   _cached = false;
@@ -27,8 +27,8 @@ void PathFinding::setOrigin(Coords coords)
 
 void PathFinding::drawPath()
 {
-//  if (!_cached)
-//    buildImageVector();
+  //  if (!_cached)
+  //    buildImageVector();
 
   _current = _origin;
   unsigned int i = 0;
@@ -40,7 +40,7 @@ void PathFinding::drawPath()
     getImage(i++).draw();
   }
 
-//  _cached = false;
+  //  _cached = false;
 }
 
 
@@ -82,20 +82,6 @@ void PathFinding::updateCurrentCell(e_direction direction)
       return;
   }
 }
-
-
-void PathFinding::deleteImagesVector()
-{
-  // freeing images
-  // for (auto it = _images.begin(); it != _images.end(); ++it)
-  // {
-  //   if (*it)
-  //     delete (*it);
-  // }
-
-  _images.clear();
-}
-
 
 void PathFinding::buildImageVector()
 {
@@ -202,7 +188,7 @@ void PathFinding::addNextDirection(e_direction direction)
 }
 
 
-void PathFinding::showAllowedPath(Unit *unit) // std::shared_ptr<Unit> unit
+void PathFinding::showAllowedPath(std::shared_ptr<Unit> unit)
 {
   std::stack<std::pair<int, int>> s;
   s.push(std::pair<int, int>(unit->cellX(), unit->cellY()));
@@ -217,13 +203,13 @@ void PathFinding::showAllowedPath(Unit *unit) // std::shared_ptr<Unit> unit
 
     // check overflow, Manhattan distance and if we already marked the cell
     if (x < 0 || y < 0 || x > (int) NB_COLUMNS - 1 || y > (int) NB_LINES - 1
-        || std::abs((int) unit->cellX() - x) + std::abs((int) unit->cellY() - y) > (int) unit->motionValue()
+        || std::abs((int) unit->cellX() - x) + std::abs((int) unit->cellY() - y) > _maxLength
         || std::find(checked.begin(), checked.end(), std::pair<int, int>(x, y)) != checked.end())
     {
       continue;
     }
 
-    _reachableCells.push_back(g_status->map()->cells()[x][y]);
+    _reachableCells.push_back(MAP.cells()[x][y]);
     checked.push_back(std::pair<int, int>(x, y));
 
     s.emplace(std::pair<int, int>(x + 1, y));
@@ -242,10 +228,10 @@ void PathFinding::highlightCells()
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
 
-  Unit *tmp;
+  std::shared_ptr<Unit> tmp;
   for (auto it : _reachableCells)
   {
-    Cell& c = g_status->map()->cells()[it.x()][it.y()];
+    Cell& c = MAP.cells()[it.x()][it.y()];
 
     c.setHighlight(true);
     if ((tmp = c.unit()))
@@ -261,10 +247,10 @@ void PathFinding::highlightCells()
 }
 
 
-void PathFinding::hideAllowedPath()
+void PathFinding::hideAllowedPath() const
 {
   // cleaning displayed move possibilities
-  std::vector<std::vector<Cell>> &cells = g_status->map()->cells();
+  std::vector<std::vector<Cell>> &cells = MAP.cells();
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)
       cells[i][j].setHighlight(false);

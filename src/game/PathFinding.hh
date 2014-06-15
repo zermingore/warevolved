@@ -58,9 +58,7 @@ public:
 
   /** \brief hides crossable cells
    */
-  void hideAllowedPath();
-
-  void floodFill(Unit* unit); // TODO std::shared_ptr<Unit>
+  void hideAllowedPath() const;
 
 
 private:
@@ -74,10 +72,9 @@ private:
    */
   void buildImageVector(); // TODO use (cache management)
 
-  /** \brief frees Images* Vector (_images)
-   ** deletes all Images in _images
+  /** \brief clears _images Vector
    */
-  void deleteImagesVector();
+  inline void deleteImagesVector() { _images.clear(); }
 
   /** \brief updates current cell coordinates
    **   according to \param direction
@@ -97,18 +94,18 @@ private:
    ** \param unit Selected unit
    **   (used for location, faction, range, ...)
    */
-  void showAllowedPath(Unit *unit);
+  void showAllowedPath(std::shared_ptr<Unit> unit);
 
   /** \brief sets highlight and highlight color for reachable cells
    */
   void highlightCells();
 
+
   Coords _origin; ///< origin cell coordinates
   Coords _current; ///< current cell coordinates
-
   bool _cached; ///< true if we have already build the path
-  unsigned int _maxLength; ///< path max length
-  unsigned int _currentLength; ///< path current length
+  int _maxLength; ///< path max length
+  int _currentLength; ///< path current length
 
   std::vector<e_direction> _directions; ///< list of path directions
                                         ///< filled through addNextDirection

@@ -7,63 +7,43 @@
 
 EntriesMenu::EntriesMenu() :
   _selectedEntry (0),
-  _nbEntries (0),
-  _entries (nullptr)
+  _nbEntries (0)
 {
+  _entries = std::make_shared<std::vector<std::shared_ptr<MenuEntry>>> ();
+  PRINTF("EntriesMenu Ctor");
 }
 
 
-EntriesMenu::EntriesMenu(std::vector<MenuEntry> entries) :
+EntriesMenu::EntriesMenu(std::vector<std::shared_ptr<MenuEntry>> &entries) :
     _selectedEntry (0)
 {
-  _entries = new std::vector<MenuEntry>;
-  *_entries = entries;
+  _entries.reset(new std::vector<std::shared_ptr<MenuEntry>> (entries));
   _nbEntries = entries.size();
 
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
-
-EntriesMenu::~EntriesMenu() {
-  delete _entries;
-}
-
 void EntriesMenu::init()
 {
   setOrigin();
-  _entries = new std::vector<MenuEntry>;
+  _entries = std::make_shared<std::vector<std::shared_ptr<MenuEntry>>> ();
   _entries->clear();
 }
 
-
-unsigned int EntriesMenu::selectedEntry() {
-  return _selectedEntry;
-}
-
-
-std::vector<MenuEntry> *EntriesMenu::getEntries() {
-  return _entries ? _entries : nullptr;
-}
-
-void EntriesMenu::loadMenu(EntriesMenu *menu)
+void EntriesMenu::loadMenu()
 {
-  _entries = menu->getEntries();
+  //_entries.reset(new std::vector<std::shared_ptr<MenuEntry>> (g_status->popCurrentMode().menu()->getEntries()));
   _nbEntries = _entries->size();
-  _selectedEntry = menu->selectedEntry();
-  this->setOrigin();
+  //_selectedEntry = menu.selectedEntry();
+  setOrigin();
 }
-
 
 void EntriesMenu::setOrigin()
 {
   // TODO sets the menu at right (cursor-relative) position
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
-}
-
-void EntriesMenu::incrementSelectedEntry() {
-  ++_selectedEntry %= _nbEntries;
 }
 
 void EntriesMenu::decrementSelectedEntry()
@@ -80,14 +60,14 @@ void EntriesMenu::draw()
   if (_entries->size() == 0)
   {
     DEBUG_PRINT("on demand build");
-    this->build(CURRENT_MODE); // use a cache (when pushing state)
+    build(CURRENT_MODE); // use a cache (when pushing state)
   }
 
-  this->setOrigin();
+  setOrigin();
   sf::Vector2f v_rect(_origin);
-  for (MenuEntry it: *_entries)
+  for (auto it: *_entries)
   {
-    it.draw(v_rect);
+    it->draw(v_rect);
     v_rect -= sf::Vector2f(0, CELL_HEIGHT);
   }
 
@@ -96,9 +76,4 @@ void EntriesMenu::draw()
   _imageSelection.setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
   _imageSelection.setPosition(_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
   _imageSelection.draw();
-}
-
-
-void EntriesMenu::resetSelectedEntry() {
-  _selectedEntry = 0;
 }

@@ -8,7 +8,9 @@
 #ifndef APPLICATION_HH_
 # define APPLICATION_HH_
 
-/** \brief Application class
+# include <common/Debug.hh>
+
+/** \class Application class
  ** An application is a full screen state
  **   it could be the Main Menu, a Battle, ...
  */
@@ -17,11 +19,11 @@ class Application
 public:
   /** \brief Constructor
    */
-  Application();
+  Application() { PRINTF("Application Ctor"); }
 
   /** \brief Destructor
    */
-  virtual ~Application();
+  virtual ~Application() { PRINTF("Application Dtor"); }
 
   virtual void run() = 0;
 
