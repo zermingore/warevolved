@@ -29,7 +29,7 @@ public:
    **   sets _origin according to current Cursor position
    **   and _selectedEntry to 0
    */
-  explicit EntriesMenu(std::vector<std::shared_ptr<MenuEntry>> &entries);
+  explicit EntriesMenu(std::vector<MenuEntry> &entries);
 
   // TODO: merge and use a single function for all (4) directions
   /** \brief increments _selectedEntry modulo _nbEntries
@@ -80,7 +80,7 @@ protected:
   // inline const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
   // { return *_entries; }
 
-  inline std::shared_ptr<std::vector<std::shared_ptr<MenuEntry>>> getEntries() const
+  inline std::vector<MenuEntry> getEntries() const
   { return _entries; }
 
   /** \brief selected entry getter
@@ -100,7 +100,7 @@ protected:
   unsigned int _nbEntries; ///< Total number of entries in the menu
 
   ///< Entries list
-  std::shared_ptr<std::vector<std::shared_ptr<MenuEntry>>> _entries;
+  std::vector<MenuEntry> _entries;
   sf::Vector2f _origin; ///< Origin position of the menu
   Image _imageSelection; ///< Background image (entry)
 };

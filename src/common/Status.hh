@@ -104,7 +104,7 @@ public:
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
    */
-  void pushModeInGameMenu(e_mode mode, InGameMenu *menu);
+  void pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu);
 
   /** \brief sets selected cell coordinates to the given coordinates
    ** \param c coordinates of the selected cell
@@ -171,7 +171,7 @@ private:
 
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
   // std::unique_ptr<sf::RenderWindow> _window; ///< main Rendering Window
-  std::stack<std::shared_ptr<State>> _states; ///< States stack
+  std::stack<State> _states; ///< States stack
 
   Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second

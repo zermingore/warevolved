@@ -9,15 +9,15 @@ EntriesMenu::EntriesMenu() :
   _selectedEntry (0),
   _nbEntries (0)
 {
-  _entries = std::make_shared<std::vector<std::shared_ptr<MenuEntry>>> ();
+  _entries = std::vector<MenuEntry> ();
   PRINTF("EntriesMenu Ctor");
 }
 
 
-EntriesMenu::EntriesMenu(std::vector<std::shared_ptr<MenuEntry>> &entries) :
+EntriesMenu::EntriesMenu(std::vector<MenuEntry> &entries) :
     _selectedEntry (0)
 {
-  _entries.reset(new std::vector<std::shared_ptr<MenuEntry>> (entries));
+  _entries = std::vector<MenuEntry> (entries);
   _nbEntries = entries.size();
 
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
@@ -27,15 +27,15 @@ EntriesMenu::EntriesMenu(std::vector<std::shared_ptr<MenuEntry>> &entries) :
 void EntriesMenu::init()
 {
   setOrigin();
-  _entries = std::make_shared<std::vector<std::shared_ptr<MenuEntry>>> ();
-  _entries->clear();
+  _entries.clear();
 }
 
 void EntriesMenu::loadMenu()
 {
-  //_entries.reset(new std::vector<std::shared_ptr<MenuEntry>> (g_status->popCurrentMode().menu()->getEntries()));
-  _nbEntries = _entries->size();
-  //_selectedEntry = menu.selectedEntry();
+  auto menu = g_status->popCurrentMode().menu();
+  _entries = menu->getEntries();
+  _nbEntries = _entries.size();
+  _selectedEntry = menu->selectedEntry();
   setOrigin();
 }
 
@@ -57,17 +57,17 @@ void EntriesMenu::decrementSelectedEntry()
 
 void EntriesMenu::draw()
 {
-  if (_entries->size() == 0)
+  if (_entries.size() == 0)
   {
-    DEBUG_PRINT("on demand build");
+    PRINTF("on demand build");
     build(CURRENT_MODE); // use a cache (when pushing state)
   }
 
   setOrigin();
   sf::Vector2f v_rect(_origin);
-  for (auto it: *_entries)
+  for (auto it: _entries)
   {
-    it->draw(v_rect);
+    it.draw(v_rect);
     v_rect -= sf::Vector2f(0, CELL_HEIGHT);
   }
 

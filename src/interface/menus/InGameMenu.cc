@@ -18,40 +18,40 @@ void InGameMenu::build(e_mode mode)
   {
     if (mode == E_MODE_SELECTION_MENU)
     {
-      auto move = std::make_shared<MenuEntry> ("Move", E_ENTRY_MOVE);
-      _entries->push_back(move);
+      auto move = MenuEntry("Move", E_ENTRY_MOVE);
+      _entries.push_back(move);
     }
     if (mode == E_MODE_ACTION_MENU)
     {
-      auto stop = std::make_shared<MenuEntry> ("Stop", E_ENTRY_STOP);
-      _entries->push_back(stop);
+      auto stop = MenuEntry("Stop", E_ENTRY_STOP);
+      _entries.push_back(stop);
     }
   }
   else
   {
     // next turn button
-    auto next_turn = std::make_shared<MenuEntry> ("Next\n\tTurn", E_ENTRY_NEXT_TURN);
-    _entries->push_back(next_turn);
+    auto next_turn = MenuEntry("Next\n\tTurn", E_ENTRY_NEXT_TURN);
+    _entries.push_back(next_turn);
   }
 
   // target
   if (mode == E_MODE_ACTION_MENU
       && MAP->unit(CURSOR->x(), CURSOR->y()))
   {
-    auto attack = std::make_shared<MenuEntry> ("Attack", E_ENTRY_ATTACK);
-    _entries->push_back(attack);
+    auto attack = MenuEntry("Attack", E_ENTRY_ATTACK);
+    _entries.push_back(attack);
   }
 
-  auto cancel = std::make_shared<MenuEntry> ("Cancel", E_ENTRY_CANCEL);
-  _entries->push_back(cancel);
+  auto cancel = MenuEntry("Cancel", E_ENTRY_CANCEL);
+  _entries.push_back(cancel);
 
-  _nbEntries = _entries->size();
+  _nbEntries = _entries.size();
   setOrigin();
 }
 
 
 void InGameMenu::executeEntry()
 {
-  (*_entries)[_selectedEntry]->execute();
+  (_entries)[_selectedEntry].execute();
   _selectedEntry = 0;
 }

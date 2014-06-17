@@ -95,7 +95,7 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
   // ---------- Selection ---------- //
   if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
-    g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu.get());
+    g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
     return;
   }
@@ -143,7 +143,7 @@ void Event::selectionEntriesMenu()
   {
     e_mode old_mode = CURRENT_MODE;
     _inGameMenu->resetSelectedEntry();
-    _inGameMenu->loadMenu(); // g_status->popCurrentMode();
+    _inGameMenu->loadMenu();
 
     // we were dealing with orders, return to the unit position
     if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
@@ -207,12 +207,12 @@ bool Event::game()
 
     if (CURRENT_MODE == E_MODE_MOVING_UNIT)
     {
-      g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu.get());
+      g_status->pushModeInGameMenu(E_MODE_ACTION_MENU, _inGameMenu);
       return true;
     }
 
     _path->clearPath();
-    g_status->pushModeInGameMenu(E_MODE_SELECTION_MENU, _inGameMenu.get());
+    g_status->pushModeInGameMenu(E_MODE_SELECTION_MENU, _inGameMenu);
   }
 
   // ---------- Cursor Motion ---------- //

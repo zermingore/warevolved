@@ -16,8 +16,7 @@
 /** \class Battle
  ** a battle is a game, launched from the Game
  */
-class Battle: public Application,
-              public std::enable_shared_from_this<Battle>
+class Battle: public Application
 {
 public:
   // TODO add filename XOr nb players, ...
@@ -27,8 +26,6 @@ public:
    ** with a random number of players, units, ...
    */
   Battle();
-
-  ~Battle() { PRINTF(">> Battle Dtor <<"); }
 
   /** \brief initializes a Battle
    ** calls buildPlayers, buildMap, buildUnits

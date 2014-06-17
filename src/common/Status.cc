@@ -35,18 +35,18 @@ e_mode Status::currentMode()
     return E_MODE_NONE;
   }
 
-  return _states.top()->mode();
+  return _states.top().mode();
 }
 
 void Status::pushMode(e_mode mode)
 {
-  _states.push(std::make_shared<State> (mode));
+  _states.push(State(mode));
 }
 
-void Status::pushModeInGameMenu(e_mode mode, InGameMenu *menu)
+void Status::pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu)
 {
   menu->build(mode);
-  _states.push(std::make_shared<State> (mode, menu));
+  _states.push(State(mode, menu));
 }
 
 
@@ -59,7 +59,7 @@ void Status::exitCurrentMode(bool skip)
   }
 
   if (CURSOR)
-    CURSOR->setCoords(_states.top()->cursorCoords());
+    CURSOR->setCoords(_states.top().cursorCoords());
 
   _states.pop();
 }
@@ -67,12 +67,12 @@ void Status::exitCurrentMode(bool skip)
 
 void Status::exitToMode(e_mode mode, bool skip)
 {
-  while (_states.top()->mode() != mode)
+  while (_states.top().mode() != mode)
   {
     _states.pop();
 
     if (!skip && CURSOR)
-      CURSOR->setCoords(_states.top()->cursorCoords());
+      CURSOR->setCoords(_states.top().cursorCoords());
   }
 }
 
@@ -81,7 +81,7 @@ State Status::popCurrentMode()
   auto tmp(_states.top());
   _states.pop();
 
-  return *tmp;
+  return tmp;
 }
 
 void Status::setWindow(std::unique_ptr<sf::RenderWindow> window)

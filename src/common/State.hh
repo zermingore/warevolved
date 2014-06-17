@@ -32,7 +32,7 @@ public:
    ** \param mode State mode value
    ** auto fetch Cursor coordinates
    */
-  State(e_mode mode, EntriesMenu *menu);
+  State(e_mode mode, std::shared_ptr<EntriesMenu> menu);
 
   /** _mode getter
    ** \return _mode value
