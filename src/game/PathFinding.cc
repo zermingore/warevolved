@@ -14,7 +14,7 @@ void PathFinding::setOrigin(Coords coords)
 {
   clearPath();
 
-  std::shared_ptr<Unit> unit(MAP.unit(coords));
+  std::shared_ptr<Unit> unit(MAP->unit(coords));
   _origin = coords;
   _current = coords;
   _cached = false;
@@ -209,7 +209,7 @@ void PathFinding::showAllowedPath(std::shared_ptr<Unit> unit)
       continue;
     }
 
-    _reachableCells.push_back(MAP.cells()[x][y]);
+    _reachableCells.push_back(MAP->cells()[x][y]);
     checked.push_back(std::pair<int, int>(x, y));
 
     s.emplace(std::pair<int, int>(x + 1, y));
@@ -231,7 +231,7 @@ void PathFinding::highlightCells()
   std::shared_ptr<Unit> tmp;
   for (auto it : _reachableCells)
   {
-    Cell& c = MAP.cells()[it.x()][it.y()];
+    Cell& c = MAP->cells()[it.x()][it.y()];
 
     c.setHighlight(true);
     if ((tmp = c.unit()))
@@ -250,7 +250,7 @@ void PathFinding::highlightCells()
 void PathFinding::hideAllowedPath() const
 {
   // cleaning displayed move possibilities
-  std::vector<std::vector<Cell>> &cells = MAP.cells();
+  std::vector<std::vector<Cell>> &cells = MAP->cells();
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)
       cells[i][j].setHighlight(false);

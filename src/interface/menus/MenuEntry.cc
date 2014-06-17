@@ -49,19 +49,19 @@ void MenuEntry::execute()
   switch (_id)
   {
     case E_ENTRY_ATTACK:
-      std::cout << "attack" << std::endl;
+      PRINTF("attack");
       break;
 
     case E_ENTRY_STOP:
     {
       Coords _selectedUnitPosition(0, 0); // TODO check 0, 0
-      auto selectedUnit(MAP.unit(_selectedUnitPosition));
+      auto selectedUnit(MAP->unit(_selectedUnitPosition));
       selectedUnit->setLocation(CURSOR->coords());
       if (_selectedUnitPosition != CURSOR->coords())
-        MAP.moveUnit();
+        MAP->moveUnit();
 
       g_status->exitToMode(E_MODE_PLAYING, true);
-      g_interface->path().hideAllowedPath();
+      g_interface->path()->hideAllowedPath();
       break;
     }
 

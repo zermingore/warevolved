@@ -7,7 +7,6 @@ Battle::Battle() :
   _map (nullptr),
   _currentPlayer (0)
 {
-  g_status->setBattle(std::unique_ptr<Battle> (this));
   init();
 }
 
@@ -35,14 +34,7 @@ void Battle::buildPlayers()
 // TODO generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  if (!_map)
-    PRINTF("MAP IS NULL :C");
-
-  _map.reset(new Map(8, 8));
-
-  if (!_map)
-    PRINTF("MAP IS NULL :C");
-
+  _map = std::make_shared<Map> (8, 8);
   _map->init();
 }
 

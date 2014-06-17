@@ -28,16 +28,11 @@ public:
    */
   explicit State(e_mode &mode);
 
-  // State(const State&) = delete;
-  // State& operator=(const State&) = delete;
-
   /** Constructor
    ** \param mode State mode value
    ** auto fetch Cursor coordinates
    */
   State(e_mode mode, EntriesMenu *menu);
-
-  ~State();
 
   /** _mode getter
    ** \return _mode value

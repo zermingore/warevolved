@@ -69,13 +69,6 @@ void Status::exitToMode(e_mode mode, bool skip)
 {
   while (_states.top()->mode() != mode)
   {
-#   ifdef DEBUG
-    if (_states.empty())
-    {
-      PRINTF("exitToMode failure: _states stack is empty");
-      return;
-    }
-#   endif
     _states.pop();
 
     if (!skip && CURSOR)

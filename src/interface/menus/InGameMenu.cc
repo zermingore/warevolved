@@ -11,7 +11,7 @@ void InGameMenu::build(e_mode mode)
   // show unit section only if we selected a unit
   // here, we cannot use cursor's position, we could have move the unit
 
-  auto current_unit(MAP.unit(g_status->selectedCell()));
+  auto current_unit(MAP->unit(g_status->selectedCell()));
   if (current_unit
       && current_unit->playerId() == g_status->currentPlayer()
       && !current_unit->played())
@@ -36,7 +36,7 @@ void InGameMenu::build(e_mode mode)
 
   // target
   if (mode == E_MODE_ACTION_MENU
-      && MAP.unit(CURSOR->x(), CURSOR->y()))
+      && MAP->unit(CURSOR->x(), CURSOR->y()))
   {
     auto attack = std::make_shared<MenuEntry> ("Attack", E_ENTRY_ATTACK);
     _entries->push_back(attack);

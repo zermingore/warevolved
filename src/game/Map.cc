@@ -10,6 +10,8 @@ Map::Map(unsigned int nbColumns, unsigned int nbLines) :
   _nbColumns (nbColumns),
   _nbLines (nbLines)
 {
+  g_status->setNbColumns(nbColumns);
+  g_status->setNbLines(nbLines);
 }
 
 void Map::init()

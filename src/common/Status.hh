@@ -22,7 +22,6 @@ public:
    */
   ~Status();
 
-
   /** \brief notify the Status that a cell was clicked
    ** it sets up _selectionActive to
    **   true if we're now in selection mode
@@ -35,11 +34,6 @@ public:
   /** \brief returns selected cell's coordinates
    */
   inline Coords selectedCell() { return _selectedCell; }
-
-  /** \brief _window getter
-   ** \return _window rendering window
-   */
-  // inline const sf::RenderWindow &window() const { return *_window; }
 
   /** \brief returns current number of
    **   generated frames per Seconds
@@ -158,9 +152,17 @@ public:
 
   inline std::shared_ptr<Battle> battle() { return _battle; }
 
-  inline void setBattle(std::unique_ptr<Battle> battle)
-  { _battle = std::move(battle); }
+  inline void setBattle(Battle b)
+  { _battle = std::make_shared<Battle> (b); }
 
+
+  inline unsigned int nbColumns() { return _nbColumns; }
+
+  inline unsigned int nbLines() { return _nbLines; }
+
+  inline void setNbColumns(unsigned int c) { _nbColumns = c; }
+
+  inline void setNbLines(unsigned int l) { _nbLines = l; }
 
 private:
   /** \brief resets render zone, sets it to window size
@@ -173,7 +175,8 @@ private:
 
   Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
-
+  unsigned int _nbColumns; ///< map number of columns
+  unsigned int _nbLines; ///< map number of lines
   unsigned int _cellWidth; ///< cells width (in px)
   unsigned int _cellHeight; ///< cells height (in px)
   unsigned int _gridThickness; ///< cells delimiter thickness (in px)

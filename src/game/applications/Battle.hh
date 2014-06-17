@@ -11,11 +11,13 @@
 # include <game/applications/Application.hh>
 # include <game/Player.hh>
 # include <game/Map.hh>
+# include <memory>
 
 /** \class Battle
  ** a battle is a game, launched from the Game
  */
-class Battle: public Application
+class Battle: public Application,
+              public std::enable_shared_from_this<Battle>
 {
 public:
   // TODO add filename XOr nb players, ...
@@ -26,7 +28,12 @@ public:
    */
   Battle();
 
-  ~Battle() {};
+  ~Battle() { PRINTF(">> Battle Dtor <<"); }
+
+  /** \brief initializes a Battle
+   ** calls buildPlayers, buildMap, buildUnits
+   */
+  void init();
 
   /** \brief players vector getter
    ** \return _players vector
@@ -43,7 +50,7 @@ public:
   /** \brief _map getter
    ** \return a reference to the map
    */
-  inline Map &map() const { return *_map; }
+  inline std::shared_ptr<Map> map() const { return _map; }
 
   /** \brief builds a new unit of type \param unit
    ** \param unit type of the new unit
@@ -63,11 +70,6 @@ public:
 
 
 private:
-  /** \brief initializes a Battle
-   ** calls buildPlayers, buildMap, buildUnits
-   */
-  void init();
-
   /** \brief battle body
    ** processes events
    */
@@ -83,7 +85,7 @@ private:
 
 
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
-  std::unique_ptr<Map> _map; ///< Map of this battle
+  std::shared_ptr<Map> _map; ///< Map of this battle
   unsigned int _currentPlayer; ///< current player's id
 };
 

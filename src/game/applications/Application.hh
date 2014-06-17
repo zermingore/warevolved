@@ -17,20 +17,14 @@
 class Application
 {
 public:
-  /** \brief Constructor
-   */
-  Application() { PRINTF("Application Ctor"); }
-
-  /** \brief Destructor
-   */
-  virtual ~Application() { PRINTF("Application Dtor"); }
-
   virtual void run() = 0;
 
   virtual void buildMap() = 0;
 
 
 protected:
+  /** \brief Initialize the application
+   */
   virtual void init() = 0;
 };
 

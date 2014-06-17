@@ -11,8 +11,8 @@ Game::Game() :
 
 void Game::run()
 {
-  std::shared_ptr<GraphicEngine> graphics(new GraphicEngine());
-  std::shared_ptr<KeyManager> km(new KeyManager());
+  auto graphics = std::make_shared<GraphicEngine> ();
+  auto km = std::make_shared<KeyManager> ();
   _event.reset(new Event(km, graphics));
 
 # ifdef DEBUG_PERFS
@@ -20,7 +20,8 @@ void Game::run()
   std::vector<sf::Int64> frame_generation;
 # endif
 
-  Battle b; // launch a new Battle
+  Battle b;
+  g_status->setBattle(b);
   graphics->initRoom();
 
   // Game loop
@@ -41,9 +42,8 @@ void Game::run()
 # ifdef DEBUG_PERFS
   for (unsigned int i = 0; i < frame_generation.size(); ++i)
   {
-    std::cout << "frame generation: " << frame_generation[i]
-              << "\tFPS: " << 1000000 / frame_generation[i]
-              << std::endl;
+    PRINTF("frame generation:", frame_generation[i],
+           "\tFPS:", 1000000 / frame_generation[i]);
   }
 # endif
 }

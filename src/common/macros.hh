@@ -6,10 +6,10 @@
 
 # define BATTLE g_status->battle()
 # define MAP g_status->battle()->map()
-# define NB_COLUMNS MAP.nbColumns()
-# define NB_LINES MAP.nbLines()
-# define CELLS MAP.cells()
+# define CELLS MAP->cells()
 
+# define NB_COLUMNS g_status->nbColumns()
+# define NB_LINES g_status->nbLines()
 # define CELL_WIDTH g_status->cellWidth()
 # define CELL_HEIGHT g_status->cellHeight()
 # define GRID_THICKNESS g_status->gridThickness()
