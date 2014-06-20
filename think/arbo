@@ -1,15 +1,31 @@
-|-- AUTHORS
-|-- Makefile
-|-- core
-|   |-- main.c
-|-- headers
-|   |-- headers.h
-|-- libs
-|   |-- libfiles.c
-|-- graphics
-|   |-- engine.c
-|   |-- resources
-|   |   |-- sprites
-|   |   |-- models
-|   |   |-- textures
-|-- editor
+├── AUTHORS
+├── configure
+├── Makefile
+├── doc
+├── resources
+│   ├── cursors
+│   ├── defaults
+│   ├── fonts
+│   ├── interface
+│   │   ├── in_game_menu
+│   │   └── path
+│   ├── terrains
+│   └── units
+├── src
+│   ├── common
+│   │   ├── enums
+│   │   └── structures
+│   ├── core
+│   ├── game
+│   │   ├── applications
+│   │   ├── items
+│   │   │   └── guns
+│   │   └── units
+│   ├── graphics
+│   ├── input
+│   ├── interface
+│   │   └── menus
+│   ├── pugixml
+│   └── resources
+├── think
+└── tools

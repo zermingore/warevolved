@@ -15,7 +15,8 @@ Status::Status() :
   _gridOffsetY (0),
   _renderX (0),
   _renderY (0),
-  _currentPlayer (0)
+  _currentPlayer (0),
+  _selectedUnitPosition(-1, -1)
 {
 }
 
@@ -35,21 +36,18 @@ e_mode Status::currentMode()
     return E_MODE_NONE;
   }
 
-  return _states.top()->mode();
+  return _states.top().mode();
 }
 
 void Status::pushMode(e_mode mode)
 {
-  std::shared_ptr<State> state (new State(mode));
-  _states.push(state);
+  _states.push(State(mode));
 }
 
-void Status::pushModeInGameMenu(e_mode mode, InGameMenu *menu)
+void Status::pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu)
 {
   menu->build(mode);
-
-  std::shared_ptr<State> state (new State(mode, menu));
-  _states.push(state);
+  _states.push(State(mode, menu));
 }
 
 
@@ -62,7 +60,7 @@ void Status::exitCurrentMode(bool skip)
   }
 
   if (CURSOR)
-    CURSOR->setCoords(_states.top()->cursorCoords());
+    CURSOR->setCoords(_states.top().cursorCoords());
 
   _states.pop();
 }
@@ -70,19 +68,12 @@ void Status::exitCurrentMode(bool skip)
 
 void Status::exitToMode(e_mode mode, bool skip)
 {
-  while (_states.top()->mode() != mode)
+  while (_states.top().mode() != mode)
   {
-#   ifdef DEBUG
-    if (_states.empty())
-    {
-      DEBUG_PRINT("exitToMode failure: _states stack is empty");
-      return;
-    }
-#   endif
     _states.pop();
 
     if (!skip && CURSOR)
-      CURSOR->setCoords(_states.top()->cursorCoords());
+      CURSOR->setCoords(_states.top().cursorCoords());
   }
 }
 

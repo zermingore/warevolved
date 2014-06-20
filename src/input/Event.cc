@@ -144,7 +144,7 @@ void Event::selectionEntriesMenu(EntriesMenu *menu)
   {
     e_mode old_mode = CURRENT_MODE;
     _inGameMenu->resetSelectedEntry();
-    _inGameMenu->loadMenu(g_status->popCurrentMode()->menu());
+    _inGameMenu->loadMenu();
 
     // we were dealing with orders, return to the unit position
     if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)

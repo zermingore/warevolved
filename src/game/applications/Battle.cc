@@ -4,7 +4,7 @@
 
 
 Battle::Battle() :
-  _map (nullptr),
+  _map (8, 8),
   _currentPlayer (0)
 {
   init();
@@ -37,18 +37,16 @@ void Battle::buildPlayers()
 // TODO generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  _map.reset(new Map(8, 8));
-  g_status->setMap(_map);
-  _map->init();
+  _map.init();
 }
 
 void Battle::buildUnits()
 {
-  _map->setUnit(_players[0]->newUnit(E_UNIT_SOLDIERS, 0, 0));
-  _map->setUnit(_players[0]->newUnit(E_UNIT_SOLDIERS, 5, 1));
+  _map.setUnit(_players[0]->newUnit(E_UNIT_SOLDIERS, 1, 1));
+  _map.setUnit(_players[0]->newUnit(E_UNIT_SOLDIERS, 4, 1));
 
-  _map->setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 4));
-  _map->setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 6));
+  _map.setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 4));
+  _map.setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 6));
 }
 
 

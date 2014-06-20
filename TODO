@@ -4,6 +4,7 @@
   CLOSED: [2013-07-24 Wed 07:10]
 ** DONE Merge ResourcesManager branch
    CLOSED: [2013-06-07 Fri 17:58]
+** TODO Merge master & test (switch to std::shared__ptr)
 
 * TODO keys
 ** DONE make the cursor move
@@ -16,7 +17,8 @@
 * TODO Game
 ** DONE [#A] Selection (drag and drop units)
    CLOSED: [2013-08-06 Tue 22:46]
-** TODO path-finding
+** DONE path-finding
+   CLOSED: [2014-06-18 Wed 00:10] (using a flood-fill)
 
 * TODO Code Design
 ** DONE [#A] really use Settings class (key repeat delay, ...) should be in it
@@ -24,7 +26,7 @@
 ** TODO make an Event Manager test with boost signals (emulate callbacks)
 ** DONE Resources Manager
    CLOSED: [2013-05-07 Tue 13:08]
-** TODO use size_t
+** TODO use size__t
 ** TODO use emplace[_back] with std::vector (C++11)
 ** DONE use Coords / Color / ... (or an int: high / low)
    CLOSED: [2013-08-06 Tue 10:44]
@@ -35,11 +37,15 @@
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
 ** TODO [#A] GLOBAL static class
-** TODO [#A] Clean (truly use C++11)
+** TODO [#A] Clean (truly use C++11-14)
 *** TODO use reference
 *** TODO use const +/- whenever possible
 *** TODO use C++11 enum (type / size)
 ** TODO follow the C++ rule of 5
+** DONE remove non needed raw pointers
+   CLOSED: [2014-06-20 Fri 14:30]
+** TODO remove non needed new (use std::make__shared)
+** TODO Hunt dead code
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
@@ -111,6 +117,9 @@
 	  increase reactivity
 	  only on simple move
 
+* TODO Sound
+** 3D sound (using OpenAL)
+
 * TODO Interface
 ** DONE draw selection menu
    CLOSED: [2013-04-21 Sun 11:17]
@@ -130,9 +139,10 @@
 ** TODO multi-players
 
 * TODO Multi-Platforms
-** TODO Linux (current ref: Ubuntu)
-** TODO Unix
+** DONE Linux (current ref: Arch Linux)
+   CLOSED: [2014-06-20 Fri 14:29]
 ** TODO Windows
+** TODO Unix (BSD)
 ** TODO Mac OS
 
 * TODO Graphic Engine
@@ -173,7 +183,9 @@
    was too big
    (running for a long time ?)
    overflow trouble ?
-** TODO Font Cleanup segfault (launched from a terminal)
+   unseen for a long time (maybee fixed ?)
+** DONE Font Cleanup segfault (launched from a terminal)
+   CLOSED: [2014-06-04 Wed 08:40]
 ** TODO In-game menu: Escape key <> Cancel entry
 
 ** TODO Font load resource segfault
@@ -191,13 +203,18 @@
    CLOSED: [2013-04-19 Fri 16:33]
    was a rendering zone room trouble
 ** TODO Memory Leaks / Errors
-*** TODO Definitely Lost
-*** TODO Read errors
+*** DONE Definitely Lost
+    CLOSED: [2014-06-20 Fri 14:27]
+*** DONE Read errors
+    CLOSED: [2014-06-20 Fri 14:27]
+*** TODO Hide SFML leaks
+    (current ref: Still reachable: 41,364 bytes in 425 blocks)
 
 * TODO Suppress Warnings
-** TODO incomplete Ctors initialisation
+** DONE incomplete Ctors initialisation
+   CLOSED: [2014-06-20 Fri 14:28]
 
-* TODO Optimization
+* TODO [#C] Optimization
 ** DONE retreive a Resource
    CLOSED: [2013-07-30 Tue 07:55]
    benchmark between

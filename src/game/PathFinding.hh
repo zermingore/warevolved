@@ -113,9 +113,10 @@ private:
   std::vector<e_direction> _directions; ///< list of path directions
                                         ///< filled through addNextDirection
 
-  std::vector<Image> _images; ///< Images* of the path vector
-  std::vector<Cell> _reachableCells; ///< list of reachable cells
-                                      ///< for the selected unit
+  std::vector<Image> _images; ///< Images of the path vector
+
+  ///< list of reachable cells for the selected unit
+  std::vector<std::shared_ptr<Cell>> _reachableCells;
 };
 
 #endif /* !PATHFINDING_HH_ */

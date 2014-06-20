@@ -11,6 +11,7 @@
 # include <game/applications/Application.hh>
 # include <game/Player.hh>
 # include <game/Map.hh>
+# include <memory>
 
 /** \class Battle
  ** a battle is a game, launched from the Game
@@ -25,6 +26,28 @@ public:
    ** with a random number of players, units, ...
    */
   Battle();
+
+  /** \brief initializes a Battle
+   ** calls buildPlayers, buildMap, buildUnits
+   */
+  void init();
+
+  /** \brief players vector getter
+   ** \return _players vector
+   */
+  inline std::vector<std::shared_ptr<Player>> const players() { return _players; }
+
+  /** \brief _players[id] getter
+   ** \param id Player's id to retrieve
+   ** \return the Player which number is \param id
+   */
+  inline std::shared_ptr<Player> const getPlayer(const unsigned int &id)
+  { return _players[id]; }
+
+  /** \brief _map getter
+   ** \return a reference to the map
+   */
+  inline Map map() { return _map; }
 
   /** \brief builds a new unit of type \param unit
    ** \param unit type of the new unit
@@ -44,11 +67,6 @@ public:
 
 
 private:
-  /** \brief initializes a Battle
-   ** calls buildPlayers, buildMap, buildUnits
-   */
-  void init();
-
   /** \brief battle body
    ** processes events
    */
@@ -64,7 +82,7 @@ private:
 
 
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
-  std::shared_ptr<Map> _map; ///< Map of this battle
+  Map _map; ///< Map of this battle
   unsigned int _currentPlayer; ///< current player's id
 };
 

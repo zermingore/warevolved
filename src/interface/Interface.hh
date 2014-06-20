@@ -77,7 +77,7 @@ public:
   /** \brief PathFinding getter
    ** \return _path current path
    */
-  inline PathFinding *path() { return _path; }
+  inline std::shared_ptr<PathFinding> path() { return _path; }
 
   /** \brief sets the path origin
    ** meaning the cell from where it starts
@@ -108,10 +108,9 @@ private:
    */
   void drawMenuBar();
 
-
-  Cursor *_cursor; ///< Map Cursor
-  InGameMenu *_inGameMenu; ///< in game menu
-  PathFinding *_path; ///< current path
+  std::shared_ptr<Cursor> _cursor; ///< Map Cursor
+  std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
+  std::shared_ptr<PathFinding> _path; ///< current path
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   bool _modificationPanel; ///< notification: panel status changed

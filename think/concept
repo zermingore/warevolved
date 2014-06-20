@@ -10,12 +10,12 @@
 ** use of Strategy Design Pattern (3D, 2D, Ascii-Art) with templates (compile-time)
 ** background: satellite view
 
-
 * GAMEPLAY
 ** multiples stairs
 ** day / night
 ** fires (propagation [equip genie with extinguishers ?]) / projectors
 ** ameliorations (new stuff)
+** weapon shoot selector (bullet per bullet, ...)
 ** thermal vision
 ** recrut in town / form in center
 ** supply (mall, stations)
@@ -82,7 +82,7 @@ note: closer than a simulator than a game...
 *** CHOPPERS: departure, target [arrival] [land]
 
 ** Experience
-** as Crew member
+*** as Crew member
 mechanics, cruise, gunner
 (improve resistance, move, accuracy)
 
@@ -117,12 +117,12 @@ train units
 * UPGRADES
 ** Soldiers
 *** Silencer
-*** Ad-Hoc comms
+*** Ad-Hoc communications
 	avoid shooting allies
 
 * OTHERS
 ** social_groups (Twitter, Facebook, MySpace...)
-** store save on serv
+** allow to store saves on server
 ** editor
 ** videos
 ** on-line version

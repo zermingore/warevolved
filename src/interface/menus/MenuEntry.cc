@@ -46,6 +46,54 @@ void MenuEntry::draw(sf::Vector2f position)
 
 void MenuEntry::execute()
 {
-  // TODO set and call
-  DEBUG_PRINT("exec !");
+  switch (_id)
+  {
+    case E_ENTRY_ATTACK:
+      PRINTF("attack");
+      break;
+
+    case E_ENTRY_STOP:
+    {
+      auto selectedUnit(MAP.unit(g_status->selectedUnitPosition()));
+      selectedUnit->setLocation(CURSOR->coords());
+      if (g_status->selectedUnitPosition() != CURSOR->coords())
+        MAP.moveUnit();
+
+      g_status->exitToMode(E_MODE_PLAYING, true);
+      g_interface->path()->hideAllowedPath();
+      break;
+    }
+
+    case E_ENTRY_MOVE:
+    {
+      g_status->pushMode(E_MODE_MOVING_UNIT);
+      g_status->setSelectedUnitPosition(CURSOR->coords());
+      g_interface->setPathOrigin(CURSOR->coords());
+      break;
+    }
+
+    case E_ENTRY_NEXT_TURN:
+      BATTLE->nextPlayer();
+      g_status->exitCurrentMode(true);
+      break;
+
+    case E_ENTRY_CANCEL:
+    {
+      auto old_mode(CURRENT_MODE);
+      g_interface->inGameMenu()->loadMenu();
+
+      // if we were dealing with orders, return to the unit position
+      if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
+      {
+        g_status->exitCurrentMode();
+        // re-build menu at selection state
+        g_interface->inGameMenu()->build(CURRENT_MODE);
+      }
+      break;
+    }
+
+    default:
+      Debug::logPrintf("unable to match selection menu entry");
+      break;
+  }
 }

@@ -15,20 +15,14 @@
 class Application
 {
 public:
-  /** \brief Constructor
-   */
-  Application();
-
-  /** \brief Destructor
-   */
-  virtual ~Application();
-
   virtual void run() = 0;
 
   virtual void buildMap() = 0;
 
 
 protected:
+  /** \brief Initialize the application
+   */
   virtual void init() = 0;
 };
 

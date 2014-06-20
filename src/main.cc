@@ -3,10 +3,10 @@
 #include <interface/Interface.hh>
 #include <game/Game.hh>
 
-std::unique_ptr<Status> g_status(new Status());
-std::unique_ptr<ResourcesManager> g_rm(new ResourcesManager("resources.xml"));
-std::unique_ptr<Interface> g_interface(new Interface());
-
+auto g_status(std::make_unique<Status> ());
+auto g_rm(std::make_unique<ResourcesManager> ("resources.xml"));
+auto g_interface(std::make_unique<Interface> ());
+auto g_window(std::make_unique<sf::RenderWindow> ());
 
 int main(int ac, const char **av)
 {
@@ -18,7 +18,8 @@ int main(int ac, const char **av)
     fullscreen = true;
 
   Context context(fullscreen);
-  g_status->setWindow(context.init());
+  context.init();
+
   g_status->pushMode(E_MODE_PLAYING); // TODO a main menu
 
   Game game;

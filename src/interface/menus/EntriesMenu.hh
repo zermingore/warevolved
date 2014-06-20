@@ -29,10 +29,7 @@ public:
    **   sets _origin according to current Cursor position
    **   and _selectedEntry to 0
    */
-  explicit EntriesMenu(std::vector<MenuEntry> entries);
-
-  /// \brief virtual Destructor
-  virtual ~EntriesMenu();
+  explicit EntriesMenu(std::vector<MenuEntry> &entries);
 
   // TODO: merge and use a single function for all (4) directions
   /** \brief increments _selectedEntry modulo _nbEntries
@@ -79,7 +76,11 @@ protected:
    ** \note this function is used to retrieve
    **   informations from menu stack (see \class Status)
    */
-  std::vector<MenuEntry> *getEntries();
+  // inline const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
+  // { return *_entries; }
+
+  inline std::vector<MenuEntry> getEntries() const
+  { return _entries; }
 
   /** \brief selected entry getter
    ** \return current selected entry
@@ -97,7 +98,9 @@ protected:
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
   unsigned int _nbEntries; ///< Total number of entries in the menu
-  std::vector<MenuEntry> *_entries; ///< Entries list
+
+  ///< Entries list
+  std::vector<MenuEntry> _entries;
   sf::Vector2f _origin; ///< Origin position of the menu
   Image _imageSelection; ///< Background image (entry)
 };

@@ -4,6 +4,7 @@
 #include <common/globals.hh>
 #include <game/applications/Battle.hh>
 
+
 Game::Game() :
   _event (nullptr)
 {
@@ -16,9 +17,9 @@ Game::~Game() {
 
 void Game::run()
 {
-  GraphicEngine *graphics = new GraphicEngine();
-  KeyManager *km = new KeyManager();
-  _event = new Event(km, graphics);
+  auto graphics = std::make_shared<GraphicEngine> ();
+  auto km = std::make_shared<KeyManager> ();
+  _event.reset(new Event(km, graphics));
 
 # ifdef DEBUG_PERFS
   sf::Clock timer;
@@ -26,6 +27,7 @@ void Game::run()
 # endif
 
   Battle b;
+  g_status->setBattle(b);
   graphics->initRoom();
 
   // Game loop
@@ -46,9 +48,8 @@ void Game::run()
 # ifdef DEBUG_PERFS
   for (unsigned int i = 0; i < frame_generation.size(); ++i)
   {
-    std::cout << "frame generation: " << frame_generation[i]
-              << "\tFPS: " << 1000000 / frame_generation[i]
-              << std::endl;
+    PRINTF("frame generation:", frame_generation[i],
+           "\tFPS:", 1000000 / frame_generation[i]);
   }
 # endif
 

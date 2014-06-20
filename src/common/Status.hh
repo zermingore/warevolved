@@ -23,10 +23,6 @@ public:
    */
   ~Status();
 
-  /** \brief returns selected cell's coordinates
-   */
-  Coords selectedCell();
-
   /** \brief notify the Status that a cell was clicked
    ** it sets up _selectionActive to
    **   true if we're now in selection mode
@@ -36,15 +32,9 @@ public:
   void cellSelection();
 
   // __________________________ Getters / Setters __________________________ //
-  /** \brief _window getter
-   ** \return _window rendering window
+  /** \brief returns selected cell's coordinates
    */
-  std::shared_ptr<sf::RenderWindow> window() { return _window; }
-
-  /** \brief _map getter
-   ** \return _map
-   */
-  std::shared_ptr<Map> map() { return _map; }
+  inline Coords selectedCell() { return _selectedCell; }
 
   /** \brief returns current number of
    **   generated frames per Seconds
@@ -61,7 +51,6 @@ public:
   inline unsigned int renderY() { return _renderY; }
   inline unsigned int gridOffsetX() { return _gridOffsetX; }
   inline unsigned int gridOffsetY() { return _gridOffsetY; }
-  unsigned int selectionMenuSelectedEntry();
 
   /** \brief players vector getter
    ** \return _players vector
@@ -88,10 +77,11 @@ public:
   /** \brief pops _modes and returns summit
    ** \return Menu of the top of the stack
    */
-  std::shared_ptr<State> popCurrentMode();
+  State popCurrentMode();
 
   /** \brief \return current mode
-   ** meaning, the summit of _modes stack
+   ** meaning, the top of _modes stack
+   ** does *NOT* pop the stack
    */
   e_mode currentMode();
 
@@ -99,11 +89,6 @@ public:
    **   updates _renderX and _renderY
    */
   void setWindow(std::shared_ptr<sf::RenderWindow> window);
-
-  /** \brief sets map
-   ** \param map current map
-   */
-  inline void setMap(std::shared_ptr<Map> map) { _map = map; }
 
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
@@ -113,7 +98,7 @@ public:
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
    */
-  void pushModeInGameMenu(e_mode mode, InGameMenu *menu);
+  void pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu);
 
   /** \brief sets selected cell coordinates to the given coordinates
    ** \param c coordinates of the selected cell
@@ -150,20 +135,50 @@ public:
    */
   inline void setRenderY(unsigned int y) { _renderY = y; }
 
+  ///< _gridOffsetX setter
   inline void setGridOffsetX(unsigned int x) { _gridOffsetX = x; }
+  ///< _gridOffsetY setter
   inline void setGridOffsetY(unsigned int y) { _gridOffsetY = y; }
 
+  ///< \brief sets grid offset, according to _gridOffsetX and _gridOffsetY
   void setGridOffset();
 
   /** \brief sets _currentPlayer
+   ** \param id new current player identifier
    */
   inline void setCurrentPlayer(unsigned int id) { _currentPlayer = id; }
 
-  /** \brief
-   ** \param players
+  /** \brief _battle getter
+   ** \return _battle
    */
-  inline void setPlayers(std::vector<std::shared_ptr<Player>> players)
-  { _players = players; }
+  inline std::shared_ptr<Battle> battle() { return _battle; }
+  /** \brief _battle setter
+   ** \param b current battle
+   */
+  inline void setBattle(Battle b) { _battle = std::make_shared<Battle> (b); }
+
+  ///< \brief _nbLines getter
+  inline unsigned int nbLines() { return _nbLines; }
+  ///< \brief _nbColumns getter
+  inline unsigned int nbColumns() { return _nbColumns; }
+
+  /** \brief _nbLines setter
+   ** \param l new number of lines
+   */
+  inline void setNbLines(unsigned int l) { _nbLines = l; }
+  /** \brief _nbColumns setter
+   ** \param c new number of columns
+   */
+  inline void setNbColumns(unsigned int c) { _nbColumns = c; }
+
+  /** \brief _selectedUnitPosition getter
+   ** \return _selectedUnitPosition
+   */
+  inline Coords selectedUnitPosition() { return _selectedUnitPosition; }
+  /** \brief _selectedUnitPosition setter
+   ** \param pos selected Unit position
+   */
+  inline void setSelectedUnitPosition(Coords pos) { _selectedUnitPosition = pos; }
 
 
 private:
@@ -173,13 +188,11 @@ private:
 
 
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
-  std::shared_ptr<sf::RenderWindow> _window; ///< main Rendering Window
-  std::shared_ptr<Map> _map; ///< storing map
-  std::stack<std::shared_ptr<State>> _states; ///< States stack
-
+  std::stack<State> _states; ///< States stack
   Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
-
+  unsigned int _nbColumns; ///< map number of columns
+  unsigned int _nbLines; ///< map number of lines
   unsigned int _cellWidth; ///< cells width (in px)
   unsigned int _cellHeight; ///< cells height (in px)
   unsigned int _gridThickness; ///< cells delimiter thickness (in px)
@@ -190,6 +203,7 @@ private:
 
   std::vector<std::shared_ptr<Player>> _players; ///< array of players
   unsigned int _currentPlayer; ///< index in the _players array
+  Coords _selectedUnitPosition; ///< current selected Unit's coordinates
 };
 
 #endif /* !STATUS_HH_ */

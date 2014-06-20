@@ -16,6 +16,7 @@ config.status
 
 # personal files
 valgrind_log*
+valgrind_suppressions
 commit
 LOG2
 VLOG*
