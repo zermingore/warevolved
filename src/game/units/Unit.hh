@@ -113,11 +113,11 @@ public:
 
   /** \brief packs the Unit with \param unit
    */
-  inline void pack(Unit *unit);
+  inline void pack(std::shared_ptr<Unit> unit);
 
   /** \brief runs attack / strikes backs (if any) cycles
    */
-  virtual void attack(Unit *target);
+  virtual void attack(std::shared_ptr<Unit> target);
 
 
 protected:

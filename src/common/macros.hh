@@ -15,8 +15,6 @@
 # define GRID_THICKNESS g_status->gridThickness()
 # define GRID_OFFSET_X g_status->gridOffsetX()
 # define GRID_OFFSET_Y g_status->gridOffsetY()
-# define NB_COLUMNS g_status->map()->nbColumns()
-# define NB_LINES g_status->map()->nbLines()
 
 # define CURSOR g_interface->cursor()
 # define CURRENT_MODE g_status->currentMode()

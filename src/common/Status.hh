@@ -1,7 +1,6 @@
 #ifndef STATUS_HH_
 # define STATUS_HH_
 
-# include <stack>
 # include <common/enums/modes.hh>
 # include <game/Map.hh>
 # include <interface/menus/InGameMenu.hh>
@@ -52,11 +51,6 @@ public:
   inline unsigned int gridOffsetX() { return _gridOffsetX; }
   inline unsigned int gridOffsetY() { return _gridOffsetY; }
 
-  /** \brief players vector getter
-   ** \return _players vector
-   */
-  inline std::vector<std::shared_ptr<Player>> players() { return _players; }
-
   /** \brief current player identifier getter
    ** \return _currentPlayer: current player identifier
    */
@@ -88,7 +82,7 @@ public:
   /** \brief _window setter
    **   updates _renderX and _renderY
    */
-  void setWindow(std::shared_ptr<sf::RenderWindow> window);
+  void setWindow(std::unique_ptr<sf::RenderWindow> window);
 
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
@@ -186,7 +180,6 @@ private:
    */
   void resetRender();
 
-
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
   std::stack<State> _states; ///< States stack
   Coords _selectedCell; ///< coordinates of the selected cell
@@ -200,8 +193,7 @@ private:
   unsigned int _gridOffsetY; ///< y position from where we start drawing the grid
   unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
-
-  std::vector<std::shared_ptr<Player>> _players; ///< array of players
+  std::shared_ptr<Battle> _battle; ///< pointer on Battle
   unsigned int _currentPlayer; ///< index in the _players array
   Coords _selectedUnitPosition; ///< current selected Unit's coordinates
 };

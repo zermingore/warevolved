@@ -12,6 +12,7 @@
 # include <common/structures/Vector.hh>
 # include <interface/menus/EntriesMenu.hh>
 
+class EntriesMenu;
 
 /** \brief state class
  ** stores a state, which is composed of
@@ -41,17 +42,17 @@ public:
   /** _menu getter
    ** \return _menu a pointer over current menu
    */
-  EntriesMenu *menu() { return _menu; }
+  inline std::shared_ptr<EntriesMenu> menu() { return _menu; }
 
   /** _cursorCoords getters
    ** \return _cursorCoords value
    */
-  Coords cursorCoords() { return _cursorCoords; }
+  inline Coords cursorCoords() { return _cursorCoords; }
 
 
 private:
   e_mode _mode; ///< State's mode
-  EntriesMenu *_menu; ///< menu state to save
+  std::shared_ptr<EntriesMenu> _menu; ///< menu state to save
   Coords _cursorCoords; ///< Cursor coordinates
                         ///< when the mode was activated
 };

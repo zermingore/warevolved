@@ -3,7 +3,7 @@
 #include <common/globals.hh>
 
 
-State::State(e_mode mode) :
+State::State(e_mode& mode) :
   _mode (mode),
   _menu (nullptr)
 {

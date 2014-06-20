@@ -7,20 +7,12 @@ Interface::Interface() :
   _menuBarPosition (E_MENU_BAR_DEACTIVATED),
   _modificationPanel (true),
   _modificationMenuBar (true),
-  _drawPanel (true),
-  _drawMenuBar (true),
   _panelX (0),
   _menuBarY (0)
 {
-  _cursor = new Cursor();
-  _path = new PathFinding();
-  _inGameMenu = new InGameMenu();
-}
-
-Interface::~Interface() {
-  delete _inGameMenu;
-  delete _path;
-  delete _cursor;
+  _cursor.reset(new Cursor());
+  _path.reset(new PathFinding());
+  _inGameMenu.reset(new InGameMenu());
 }
 
 void Interface::incrementPanelPosition()
@@ -103,9 +95,9 @@ void Interface::drawPanel()
       sf::Vector2f (_panelX, 0),
       sf::Vector2f (_panelX, WINDOW_SIZE_Y)
   };
-  WINDOW->draw(line, 2, sf::Lines);
+  g_window->draw(line, 2, sf::Lines);
 
-  Unit *unit = g_status->map()->unit(CURSOR->coords());
+  std::shared_ptr<Unit> unit(MAP.unit(CURSOR->coords()));
   if (unit)
     DEBUG_PRINT(unit->name());
 }
@@ -117,31 +109,32 @@ void Interface::drawMenuBar()
     return;
 
   sf::Vertex line[2] = {
-      sf::Vector2f (0, _menuBarY),
-      sf::Vector2f (WINDOW_SIZE_X, _menuBarY)
+    sf::Vector2f(0, _menuBarY),
+    sf::Vector2f(WINDOW_SIZE_X, _menuBarY)
   };
-  WINDOW->draw(line, 2, sf::Lines);
+  g_window->draw(line, 2, sf::Lines);
 }
 
 
 void Interface::draw()
 {
   if (_modificationPanel)
-    this->setPanel();
+    setPanel();
 
   if (_modificationMenuBar)
-    this->setMenuBar();
+    setMenuBar();
 
   // if (_cursor->getVisible())
   _cursor->sprite(GRID_OFFSET_X, GRID_OFFSET_Y);
   _cursor->draw();
 
-  this->drawPanel();
-  this->drawMenuBar();
+  drawPanel();
+  drawMenuBar();
 
   if (CURRENT_MODE == E_MODE_MOVING_UNIT || CURRENT_MODE == E_MODE_ACTION_MENU)
     _path->drawPath();
 
+  // TODO get right inGameMenu
   if (CURRENT_MODE == E_MODE_SELECTION_MENU || CURRENT_MODE == E_MODE_ACTION_MENU)
     _inGameMenu->draw();
 }

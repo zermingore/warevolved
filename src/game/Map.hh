@@ -31,12 +31,12 @@ public:
   /** \brief _nbColumns getter
    ** \return number of columns
    */
-  inline unsigned int nbColumns() { return _nbColumns; }
+  inline unsigned int nbColumns() const { return _nbColumns; }
 
   /** \brief _nbLines getter
    ** \return number of lines
    */
-  inline unsigned int nbLines() { return _nbLines; }
+  inline unsigned int nbLines() const { return _nbLines; }
 
   /** \brief gets the unit at coordinates (x, y)
    **

@@ -24,10 +24,6 @@ public:
    */
   Player();
 
-  /** \brief Destructor
-   */
-  ~Player();
-
   // __________________________ Getters / Setters __________________________ //
   /** \brief cursor last known position getter
    ** \return _lastCursorPosition
@@ -47,7 +43,7 @@ public:
   /** \brief Units list getter
    ** \return list of player's units (_units)
    */
-  std::vector<Unit*> units() { return _units; }
+  std::vector<std::shared_ptr<Unit>> units() { return _units; }
 
   /** \brief sets cursor color
    ** \param color _cursorColor value
@@ -72,14 +68,15 @@ public:
   /** \brief adds a unit to the player's units list
    ** \param unit unit to add to the player's list
    */
-  void addUnit(Unit &unit);
+  void addUnit(std::shared_ptr<Unit> unit) { _units.push_back(unit); }
 
   /** \brief builds a new Unit and adds it to the player's units list
    ** \param unit type of the unit to add to the player's list
-   ** \param line line location of the new Unit
    ** \param column column location of the new Unit
+   ** \param line line location of the new Unit
    */
-  Unit &newUnit(e_unit unit, unsigned int line = 0, unsigned int column = 0);
+  std::shared_ptr<Unit> newUnit(e_unit unit,
+                                unsigned int column = 0, unsigned int line = 0);
 
   /** \brief removes a unit to the player's units list
    ** \param unit unit to remove from the player's list
@@ -92,7 +89,7 @@ private:
   Color _cursorColor; ///< cursor's color
   Color _unitsColor; ///< units color
   Coords _lastCursorPosition; ///< position to remember each time we hit Next Turn
-  std::vector<Unit*> _units; ///< units vector
+  std::vector<std::shared_ptr<Unit>> _units; ///< units vector
   bool _isDead; ///< is the player still playing
   e_faction _faction; ///< player's faction
 };

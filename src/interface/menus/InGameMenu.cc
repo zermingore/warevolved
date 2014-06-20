@@ -4,26 +4,14 @@
 #include <common/macros.hh>
 
 
-InGameMenu::InGameMenu() :
-  _selectedUnit(nullptr),
-  _battle(nullptr)
-{
-}
-
-InGameMenu::~InGameMenu() {
-}
-
-void InGameMenu::setBattle(Battle *battle) {
-  _battle = battle;
-}
-
 void InGameMenu::build(e_mode mode)
 {
-  this->init();
+  init();
 
   // show unit section only if we selected a unit
   // here, we cannot use cursor's position, we could have move the unit
-  Unit *current_unit = g_status->map()->unit(g_status->selectedCell());
+
+  auto current_unit(MAP.unit(g_status->selectedCell()));
   if (current_unit
       && current_unit->playerId() == g_status->currentPlayer()
       && !current_unit->played())
@@ -48,7 +36,7 @@ void InGameMenu::build(e_mode mode)
 
   // target
   if (mode == E_MODE_ACTION_MENU
-      && g_status->map()->unit(CURSOR->x(), CURSOR->y()))
+      && MAP.unit(CURSOR->x(), CURSOR->y()))
   {
     auto attack = MenuEntry("Attack", E_ENTRY_ATTACK);
     _entries.push_back(attack);

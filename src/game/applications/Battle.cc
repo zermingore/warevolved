@@ -16,22 +16,19 @@ void Battle::init()
   buildMap();
   buildUnits();
   CURSOR->setColor(_players[0]->cursorColor());
-  g_interface->inGameMenu()->setBattle(this);
 }
 
 void Battle::buildPlayers()
 {
-  std::shared_ptr<Player> player1(new Player());
+  auto player1 = std::make_shared<Player> ();
   player1->setCursorColor(Color(0, 127, 127));
   player1->setUnitsColor(Color(0, 127, 127));
   _players.push_back(player1);
 
-  std::shared_ptr<Player> player2(new Player());
+  auto player2 = std::make_shared<Player> ();
   player2->setCursorColor(Color(227, 227, 0));
   player2->setUnitsColor(Color(227, 227, 0));
   _players.push_back(player2);
-
-  g_status->setPlayers(_players);
 }
 
 // TODO generate a random Map, read one from a file, ...

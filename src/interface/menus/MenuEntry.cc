@@ -5,7 +5,7 @@
 #include <common/macros.hh>
 
 
-MenuEntry::MenuEntry(e_entry entry) :
+MenuEntry::MenuEntry(e_entry &entry) :
   _id (entry)
 {
   DEBUG_PRINT("NOT yet implemented MenuEntry Ctor");
@@ -24,7 +24,7 @@ MenuEntry::MenuEntry(std::string label_name, e_entry entry)
 
   // label initialization
   // TODO better calculus, ratio dependent, eventually, text length dependent
-  _label = new sf::Text();
+  _label.reset(new sf::Text());
   _label->setCharacterSize((CELL_WIDTH + CELL_HEIGHT) / 4);
 
   _font = g_rm->getFont("font_army");
@@ -40,7 +40,7 @@ void MenuEntry::draw(sf::Vector2f position)
   _label->setPosition(position);
 
   _background.draw();
-  WINDOW->draw(*_label);
+  g_window->draw(*_label);
 }
 
 

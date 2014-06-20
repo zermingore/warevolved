@@ -4,12 +4,12 @@
 #include <interface/Interface.hh>
 
 
-Event::Event(KeyManager *km, GraphicEngine *ge) :
+Event::Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicEngine> ge) :
   _km(km),
   _ge(ge)
 {
-  for (unsigned int i = 0; i < E_TIMER_NB_TIMERS; ++i)
-    _km->restartTimer(static_cast<e_timer>(i));
+  for (auto i = 0; i < E_TIMER_NB_TIMERS; ++i)
+    _km->restartTimer(static_cast<e_timer> (i));
 
   g_settings->setKeyRepeatDelay(150);
   _inGameMenu = g_interface->inGameMenu();
@@ -19,45 +19,44 @@ Event::Event(KeyManager *km, GraphicEngine *ge) :
 
 bool Event::process()
 {
-  while (WINDOW->pollEvent(_event))
+  while (g_window->pollEvent(_event))
   {
     // Close window : exit request
     if (_event.type == sf::Event::Closed)
     {
-      WINDOW->close();
+      g_window->close();
       return false;
     }
   }
 
   if (_event.type == sf::Event::KeyReleased)
-    this->releasedKeys();
+    releasedKeys();
 
-  this->panels(); // in all mode, for now
-
+  panels(); // in all mode, for now
   switch (CURRENT_MODE)
   {
     case E_MODE_SELECTION_MENU:
       if (_path)
         _path->clearPath();
 
-      this->selectionEntriesMenu(_inGameMenu);
+      selectionEntriesMenu();
       break;
 
     case E_MODE_ACTION_MENU:
       //_path->shadowPath(); // TODO less visible path
-      this->selectionEntriesMenu(_inGameMenu);
+      selectionEntriesMenu();
       break;
 
     case E_MODE_MOVING_UNIT:
-      this->moveUnit();
+      moveUnit();
       break;
 
     case E_MODE_NONE: // mode stack is empty
-      WINDOW->close();
+      g_window->close();
       return false;
 
     default:
-      return (this->game());
+      return game();
   }
 
   return true;
@@ -138,7 +137,7 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 }
 
 
-void Event::selectionEntriesMenu(EntriesMenu *menu)
+void Event::selectionEntriesMenu()
 {
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
@@ -160,20 +159,20 @@ void Event::selectionEntriesMenu(EntriesMenu *menu)
   // made a choice in selection menu
   if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
-    menu->executeEntry();
+    _inGameMenu->executeEntry();
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
     return;
   }
 
   if (_km->up() && _km->ready(E_TIMER_MOVE_UP))
   {
-    menu->incrementSelectedEntry();
+    _inGameMenu->incrementSelectedEntry();
     _km->setReady(E_TIMER_MOVE_UP, false);
   }
 
   if (_km->down() && _km->ready(E_TIMER_MOVE_DOWN))
   {
-    menu->decrementSelectedEntry();
+    _inGameMenu->decrementSelectedEntry();
     _km->setReady(E_TIMER_MOVE_DOWN, false);
   }
 }
@@ -185,7 +184,7 @@ bool Event::game()
   {
     g_status->exitCurrentMode();
     _km->setSwitchStatus(E_SWITCH_EXIT, ON);
-    WINDOW->close();
+    g_window->close();
 
     return false;
   }
@@ -201,7 +200,7 @@ bool Event::game()
 
     if (CURRENT_MODE == E_MODE_ACTION_MENU)
     {
-      DEBUG_PRINT("exec");
+      PRINTF("exec");
       g_status->exitCurrentMode();
       return true;
     }

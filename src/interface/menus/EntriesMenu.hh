@@ -35,7 +35,8 @@ public:
   /** \brief increments _selectedEntry modulo _nbEntries
    **  allowing cycling
    */
-  void incrementSelectedEntry();
+  inline void incrementSelectedEntry() { ++_selectedEntry %= _nbEntries; }
+
   /** \brief decrements _selectedEntry modulo _nbEntries
    **  allowing cycling
    */
@@ -48,7 +49,7 @@ public:
 
   /** \brief sets _selectedEntry to 0
    */
-  void resetSelectedEntry();
+  inline void resetSelectedEntry() { _selectedEntry = 0; }
 
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
@@ -62,7 +63,7 @@ public:
   /** \brief loads a previously saved menu
    ** \param menu menu to load
    */
-  void loadMenu(EntriesMenu *menu);
+  void loadMenu();
 
 
 protected:
@@ -87,12 +88,11 @@ protected:
    ** \note this function is used to retrieve
    **   informations from menu stack (see \class Status)
    */
-  unsigned int selectedEntry();
+  inline unsigned int selectedEntry() { return _selectedEntry; }
 
   /** \brief sets origin menu to the right cursor relative position
    */
   void setOrigin(); // TODO sets the menu at optimal position
-
 
   unsigned int _selectedEntry; ///< Current selected entry
                                ///< the first entry, is at the bottom,

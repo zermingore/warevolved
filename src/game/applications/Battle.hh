@@ -16,7 +16,7 @@
 /** \class Battle
  ** a battle is a game, launched from the Game
  */
-class Battle : public Application
+class Battle: public Application
 {
 public:
   // TODO add filename XOr nb players, ...

@@ -133,6 +133,7 @@
 ** TODO center text in in-game menu entries
 ** DONE integrate Cursor
    CLOSED: [2013-07-27 Sat 07:59]
+** TODO Display last killed unit list
 
 * TODO Network
 ** TODO Chat
@@ -188,7 +189,8 @@
    CLOSED: [2014-06-04 Wed 08:40]
 ** TODO In-game menu: Escape key <> Cancel entry
 
-** TODO Font load resource segfault
+** DONE Font load resource segfault
+   CLOSED: [2014-06-04 Wed 08:40]
    without valgrind
    multi-folder in xml file sections
 

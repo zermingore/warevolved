@@ -2191,8 +2191,8 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 
 
-# forcing c++11 usage (must be before AC_PROG_CXX)
-CXXFLAGS="$CXXFLAGS -std=c++11"
+# forcing c++14 usage (must be before AC_PROG_CXX)
+CXXFLAGS="$CXXFLAGS -std=c++1y"
 
 
 if [ -n "$SFML_PATH" ]
@@ -3522,7 +3522,7 @@ else
   am__fastdepCXX_FALSE=
 fi
 
-
+ # g++
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_HEADER_STDBOOL6

@@ -10,9 +10,10 @@ auto g_window(std::make_unique<sf::RenderWindow> ());
 
 int main(int ac, const char **av)
 {
-  av = av;
-
   bool fullscreen = false;
+
+  PRINTF(av);
+
   // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
   if (ac > 1)
     fullscreen = true;

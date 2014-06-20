@@ -19,7 +19,7 @@ Unit::Unit() :
 {
 }
 
-Unit::Unit(std::string name) :
+Unit::Unit(std::string &name) :
   _imageId (0),
   _name (name),
   _hp (0),
@@ -36,7 +36,7 @@ Unit::Unit(std::string name) :
 {
 }
 
-void Unit::pack(Unit *unit)
+void Unit::pack(std::shared_ptr<Unit> unit)
 {
   _team->addMember(unit);
 }
@@ -56,7 +56,7 @@ void Unit::setLocation(Coords location)
 void Unit::draw()
 {
   Image &image = GETIMAGE(_name);
-  image.sprite()->setColor(g_status->players()[_playerId]->unitsColor());
+  image.sprite()->setColor(BATTLE->getPlayer(_playerId)->unitsColor());
 
   float x = image.sprite()->getTexture()->getSize().x;
   float y = image.sprite()->getTexture()->getSize().y;
@@ -83,7 +83,7 @@ void Unit::draw()
 }
 
 // virtual method
-void Unit::attack(Unit *target)
+void Unit::attack(std::shared_ptr<Unit> target)
 {
   unsigned int nb_steps = 2; // = calcNbSteps();
   for (unsigned int i = 0; i < nb_steps; ++i)

@@ -22,30 +22,16 @@ class InGameMenu: public EntriesMenu
 public:
   /** \brief Default Constructor
    */
-  InGameMenu();
-
-  /** \brief Destructor
-   */
-  ~InGameMenu();
-
-  /** \brief _battle setter
-   */
-  void setBattle(Battle *battle);
+  InGameMenu() {}
 
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
    */
   void build(e_mode mode);
 
-  /** \brief executes action matching _selectedEntry
+  /** \brief executes action matching EntriesMenu::_selectedEntry
    */
   void executeEntry();
-
-
-private:
-  Unit *_selectedUnit; ///< Current selected unit
-  Coords _selectedUnitPosition; ///< Position of the current selected unit
-  Battle *_battle; ///< Current battle
 };
 
 #endif /* !INGAMEMENU_HH_ */

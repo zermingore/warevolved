@@ -31,7 +31,7 @@ void GraphicEngine::drawScene()
 
 void GraphicEngine::drawBackground() // TODO (map background)
 {
-  WINDOW->clear();
+  g_window->clear();
 }
 
 
@@ -59,10 +59,12 @@ void GraphicEngine::drawGrid()
   rectangle.setOutlineThickness(5);
 
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
+  {
   	for (unsigned int j = 0; j < NB_LINES; ++j)
     {
       rectangle.setPosition(i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X,
                             j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y);
-      WINDOW->draw(rectangle);
+      g_window->draw(rectangle);
     }
+  }
 }

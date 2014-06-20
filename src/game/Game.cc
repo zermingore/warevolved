@@ -10,11 +10,6 @@ Game::Game() :
 {
 }
 
-Game::~Game() {
-  delete _event;
-}
-
-
 void Game::run()
 {
   auto graphics = std::make_shared<GraphicEngine> ();
@@ -31,10 +26,10 @@ void Game::run()
   graphics->initRoom();
 
   // Game loop
-  while (WINDOW->isOpen() && _event->process())
+  while (g_window->isOpen() && _event->process())
   {
     graphics->drawScene();
-    WINDOW->display(); // Update the window
+    g_window->display(); // Update the window
 
 #   ifdef DEBUG_PERFS
     g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
@@ -52,7 +47,4 @@ void Game::run()
            "\tFPS:", 1000000 / frame_generation[i]);
   }
 # endif
-
-  delete km;
-  delete graphics;
 }
