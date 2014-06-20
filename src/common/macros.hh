@@ -6,7 +6,7 @@
 
 # define BATTLE g_status->battle()
 # define MAP g_status->battle()->map()
-# define CELLS MAP->cells()
+# define CELLS MAP.cells()
 
 # define NB_COLUMNS g_status->nbColumns()
 # define NB_LINES g_status->nbLines()
@@ -28,6 +28,5 @@
 # define PRESSED(x) sf::Keyboard::isKeyPressed(_keys[ x ##_1]) || \
     sf::Keyboard::isKeyPressed(_keys[ x ##_2])
 # define GETIMAGE g_rm->getImage
-
 
 #endif /* !MACROS_HH_ */

@@ -4,6 +4,7 @@
 #include <common/globals.hh>
 #include <game/applications/Battle.hh>
 
+
 Game::Game() :
   _event (nullptr)
 {

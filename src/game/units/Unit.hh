@@ -20,14 +20,7 @@ public:
    */
   Unit();
 
-  virtual ~Unit() { PRINTF("Unit Dtor", this); }
-
   explicit Unit(std::string &name);
-
-  /** \brief Builds a new unit at cell's position
-   ** sets _cell
-   */
-  //Unit(Cell* cell);
 
   // __________________________ Getters / Setters __________________________ //
   inline int hp() { return _hp; } /// _hp getter
@@ -134,7 +127,6 @@ protected:
 
   int _hp; ///< Health Points (-1: infinite)
   int _attackValue; ///< target taken hp per shot (-1: instant death)
-
 
   unsigned int _posX; ///< x position (in px) // NOTE: absolute ? / relative to _cell ?
   unsigned int _posY; ///< y position (in px)

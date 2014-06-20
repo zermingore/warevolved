@@ -27,13 +27,11 @@ public:
    */
   Soldier();
 
-  ~Soldier() { PRINTF("Soldier Dtor", this); }
-
   /** \brief gets name and add grade abbreviated
    ** \return a string composed of the unit name and it's grade,
    **   separated by a space
    */
-  std::string name() { return Text::name(_rank) + " " + _fullName; }
+  inline std::string name() { return Text::name(_rank) + " " + _fullName; }
 
 
 private:

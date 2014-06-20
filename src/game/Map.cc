@@ -18,7 +18,12 @@ void Map::init()
 {
   for (unsigned int i = 0; i < _nbLines; i++)
   {
-    std::vector<Cell> vec(_nbColumns);
+    std::vector<std::shared_ptr<Cell>> vec(_nbColumns);
+
+    // Allocates each Cell
+    for (unsigned int j = 0; j < _nbColumns; j++)
+      vec[j] = std::make_shared<Cell> ();
+
     _cells.push_back(vec);
   }
 
@@ -27,29 +32,15 @@ void Map::init()
   // TODO read informations from a map file
   for (unsigned int i = 0; i < _nbColumns; ++i)
     for (unsigned int j = 0; j < _nbLines; ++j)
-      _cells[i][j].setTerrain(E_TERRAIN_FOREST);
+      _cells[i][j]->setTerrain(E_TERRAIN_FOREST);
 }
-
-//Image *Map::getTerrainImage(unsigned int x, unsigned int y)
-//{
-//  e_terrains terrain = _cells[x * _nbLines + y]->getTerrain();
-//
-//  switch (terrain)
-//  {
-//    case E_TERRAINS_FOREST:
-//      return GETIMAGE("forest");
-//
-//    default:
-//      return nullptr;
-//  }
-//}
 
 void Map::moveUnit()
 {
   Coords c = g_status->selectedCell();
+  std::shared_ptr<Unit> tmp(_cells[c.x][c.y]->unit());
 
-  std::shared_ptr<Unit> tmp(_cells[c.x][c.y].unit());
   tmp->setCellCoordinates(CURSOR->x(), CURSOR->y());
-  _cells[CURSOR->x()][CURSOR->y()].setUnit(tmp);
-  _cells[c.x][c.y].removeUnit();
+  _cells[CURSOR->x()][CURSOR->y()]->setUnit(tmp);
+  _cells[c.x][c.y]->removeUnit();
 }

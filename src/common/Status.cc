@@ -13,7 +13,8 @@ Status::Status() :
   _gridOffsetY (0),
   _renderX (0),
   _renderY (0),
-  _currentPlayer (0)
+  _currentPlayer (0),
+  _selectedUnitPosition(-1, -1)
 {
 }
 

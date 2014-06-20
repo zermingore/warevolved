@@ -17,7 +17,6 @@ Unit::Unit() :
   _team (nullptr),
   _targetable (false)
 {
-  PRINTF("Unit Ctor", this);
 }
 
 Unit::Unit(std::string &name) :
@@ -35,7 +34,6 @@ Unit::Unit(std::string &name) :
   _team (nullptr),
   _targetable (false)
 {
-  PRINTF("Unit Ctor str", this);
 }
 
 void Unit::pack(std::shared_ptr<Unit> unit)

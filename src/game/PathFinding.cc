@@ -14,7 +14,7 @@ void PathFinding::setOrigin(Coords coords)
 {
   clearPath();
 
-  std::shared_ptr<Unit> unit(MAP->unit(coords));
+  std::shared_ptr<Unit> unit(MAP.unit(coords));
   _origin = coords;
   _current = coords;
   _cached = false;
@@ -209,7 +209,8 @@ void PathFinding::showAllowedPath(std::shared_ptr<Unit> unit)
       continue;
     }
 
-    _reachableCells.push_back(MAP->cells()[x][y]);
+    auto cells = CELLS;
+    _reachableCells.push_back(cells[x][y]);
     checked.push_back(std::pair<int, int>(x, y));
 
     s.emplace(std::pair<int, int>(x + 1, y));
@@ -227,22 +228,20 @@ void PathFinding::highlightCells()
   // TODO use a current unit parameter and check it's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
-
-  std::shared_ptr<Unit> tmp;
   for (auto it : _reachableCells)
   {
-    Cell& c = MAP->cells()[it.x()][it.y()];
+    std::shared_ptr<Cell> c = CELLS[it->x()][it->y()];
 
-    c.setHighlight(true);
-    if ((tmp = c.unit()))
+    c->setHighlight(true);
+    if (c->unit())
     {
-     if (tmp->playerId() != g_status->currentPlayer())
-       c.setHighlightColor(sf::Color::Red);
+     if (c->unit()->playerId() != g_status->currentPlayer())
+       c->setHighlightColor(sf::Color::Red);
      else
-       c.setHighlightColor(sf::Color::Green);
+       c->setHighlightColor(sf::Color::Green);
     }
     else
-      c.setHighlightColor(sf::Color::Yellow);
+      c->setHighlightColor(sf::Color::Yellow);
   }
 }
 
@@ -250,8 +249,8 @@ void PathFinding::highlightCells()
 void PathFinding::hideAllowedPath() const
 {
   // cleaning displayed move possibilities
-  std::vector<std::vector<Cell>> &cells = MAP->cells();
+  std::vector<std::vector<std::shared_ptr<Cell>>> cells = CELLS;
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)
     for (unsigned int j = 0; j < NB_LINES; ++j)
-      cells[i][j].setHighlight(false);
+      cells[i][j]->setHighlight(false);
 }

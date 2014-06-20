@@ -10,7 +10,6 @@ EntriesMenu::EntriesMenu() :
   _nbEntries (0)
 {
   _entries = std::vector<MenuEntry> ();
-  PRINTF("EntriesMenu Ctor");
 }
 
 

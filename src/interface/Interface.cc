@@ -97,7 +97,7 @@ void Interface::drawPanel()
   };
   g_window->draw(line, 2, sf::Lines);
 
-  std::shared_ptr<Unit> unit(MAP->unit(CURSOR->coords()));
+  std::shared_ptr<Unit> unit(MAP.unit(CURSOR->coords()));
   if (unit)
     DEBUG_PRINT(unit->name());
 }

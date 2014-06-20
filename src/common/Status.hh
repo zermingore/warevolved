@@ -50,7 +50,6 @@ public:
   inline unsigned int renderY() { return _renderY; }
   inline unsigned int gridOffsetX() { return _gridOffsetX; }
   inline unsigned int gridOffsetY() { return _gridOffsetY; }
-  unsigned int selectionMenuSelectedEntry();
 
   /** \brief current player identifier getter
    ** \return _currentPlayer: current player identifier
@@ -72,11 +71,11 @@ public:
   /** \brief pops _modes and returns summit
    ** \return Menu of the top of the stack
    */
-  // TODO Override with an optional parameter: pointer to get pop-ed mode
   State popCurrentMode();
 
   /** \brief \return current mode
-   ** meaning, the summit of _modes stack
+   ** meaning, the top of _modes stack
+   ** does *NOT* pop the stack
    */
   e_mode currentMode();
 
@@ -84,17 +83,6 @@ public:
    **   updates _renderX and _renderY
    */
   void setWindow(std::unique_ptr<sf::RenderWindow> window);
-
-  // inline void windowClear() { _window->clear(); }
-
-  // inline void windowDraw(const sf::Drawable &drawable) { _window->draw(drawable); }
-
-  // inline bool windowPollEvent(sf::Event &event)
-  // { return _window->pollEvent(event); }
-
-  // inline void windowClose() { _window->close(); }
-  // inline bool windowIsOpen() { return _window->isOpen(); }
-  // inline void windowDisplay() { _window->display(); }
 
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
@@ -141,28 +129,51 @@ public:
    */
   inline void setRenderY(unsigned int y) { _renderY = y; }
 
+  ///< _gridOffsetX setter
   inline void setGridOffsetX(unsigned int x) { _gridOffsetX = x; }
+  ///< _gridOffsetY setter
   inline void setGridOffsetY(unsigned int y) { _gridOffsetY = y; }
 
+  ///< \brief sets grid offset, according to _gridOffsetX and _gridOffsetY
   void setGridOffset();
 
   /** \brief sets _currentPlayer
+   ** \param id new current player identifier
    */
   inline void setCurrentPlayer(unsigned int id) { _currentPlayer = id; }
 
+  /** \brief _battle getter
+   ** \return _battle
+   */
   inline std::shared_ptr<Battle> battle() { return _battle; }
+  /** \brief _battle setter
+   ** \param b current battle
+   */
+  inline void setBattle(Battle b) { _battle = std::make_shared<Battle> (b); }
 
-  inline void setBattle(Battle b)
-  { _battle = std::make_shared<Battle> (b); }
-
-
+  ///< \brief _nbLines getter
+  inline unsigned int nbLines() { return _nbLines; }
+  ///< \brief _nbColumns getter
   inline unsigned int nbColumns() { return _nbColumns; }
 
-  inline unsigned int nbLines() { return _nbLines; }
-
+  /** \brief _nbLines setter
+   ** \param l new number of lines
+   */
+  inline void setNbLines(unsigned int l) { _nbLines = l; }
+  /** \brief _nbColumns setter
+   ** \param c new number of columns
+   */
   inline void setNbColumns(unsigned int c) { _nbColumns = c; }
 
-  inline void setNbLines(unsigned int l) { _nbLines = l; }
+  /** \brief _selectedUnitPosition getter
+   ** \return _selectedUnitPosition
+   */
+  inline Coords selectedUnitPosition() { return _selectedUnitPosition; }
+  /** \brief _selectedUnitPosition setter
+   ** \param pos selected Unit position
+   */
+  inline void setSelectedUnitPosition(Coords pos) { _selectedUnitPosition = pos; }
+
 
 private:
   /** \brief resets render zone, sets it to window size
@@ -170,9 +181,7 @@ private:
   void resetRender();
 
   // TODO use a union with sfml, opengl, dx, ascii windows, ...
-  // std::unique_ptr<sf::RenderWindow> _window; ///< main Rendering Window
   std::stack<State> _states; ///< States stack
-
   Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
   unsigned int _nbColumns; ///< map number of columns
@@ -186,6 +195,7 @@ private:
   unsigned int _renderY; ///< Drawable zone room left vertically (in px)
   std::shared_ptr<Battle> _battle; ///< pointer on Battle
   unsigned int _currentPlayer; ///< index in the _players array
+  Coords _selectedUnitPosition; ///< current selected Unit's coordinates
 };
 
 #endif /* !STATUS_HH_ */

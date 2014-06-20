@@ -54,11 +54,10 @@ void MenuEntry::execute()
 
     case E_ENTRY_STOP:
     {
-      Coords _selectedUnitPosition(0, 0); // TODO check 0, 0
-      auto selectedUnit(MAP->unit(_selectedUnitPosition));
+      auto selectedUnit(MAP.unit(g_status->selectedUnitPosition()));
       selectedUnit->setLocation(CURSOR->coords());
-      if (_selectedUnitPosition != CURSOR->coords())
-        MAP->moveUnit();
+      if (g_status->selectedUnitPosition() != CURSOR->coords())
+        MAP.moveUnit();
 
       g_status->exitToMode(E_MODE_PLAYING, true);
       g_interface->path()->hideAllowedPath();
@@ -67,10 +66,9 @@ void MenuEntry::execute()
 
     case E_ENTRY_MOVE:
     {
-      Coords _selectedUnitPosition(0, 0); // TODO check 0, 0
-      g_status->pushMode(E_MODE_MOVING_UNIT); // InGameMenu
-      _selectedUnitPosition = CURSOR->coords();
-      g_interface->setPathOrigin(_selectedUnitPosition);
+      g_status->pushMode(E_MODE_MOVING_UNIT);
+      g_status->setSelectedUnitPosition(CURSOR->coords());
+      g_interface->setPathOrigin(CURSOR->coords());
       break;
     }
 

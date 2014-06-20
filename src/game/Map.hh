@@ -47,16 +47,16 @@ public:
    **   located at coordinates (x, y)
    */
   std::shared_ptr<Unit> unit(unsigned int x, unsigned int y)
-  { return _cells[x][y].unit(); }
+  { return _cells[x][y]->unit(); }
 
-  /** \brief gets the unit at v's coordinates
+  /** \brief gets the unit at c's coordinates
    **
-   ** \param v targeted cell's coordinates
+   ** \param c targeted Cell's coordinates
    **
    ** \return the enum index in e_unit matching the unit
-   **   located at coordinates (v.x, v.y)
+   **   located at coordinates (c.x, c.y)
    */
-  std::shared_ptr<Unit> unit(Coords v) { return _cells[v.x][v.y].unit(); }
+  std::shared_ptr<Unit> unit(Coords c) { return _cells[c.x][c.y]->unit(); }
 
   /** \brief gets the terrain at coordinates (x, y)
    **
@@ -67,36 +67,26 @@ public:
    **   located at coordinates (x, y)
    */
   e_terrain getTerrain(unsigned int x, unsigned int y)
-  { return _cells[x][y].getTerrain(); }
-
-  /** \brief gets the terrain image at coordinates (x, y)
-   **
-   ** \param x Coordinates according to columns
-   ** \param y Coordinates according to lines
-   **
-   ** \return the Image matching the terrain
-   **   located at coordinates (x, y)
-   */
-  // Image *getTerrainImage(unsigned int x, unsigned int y);
+  { return _cells[x][y]->getTerrain(); }
 
   /** \brief _cells array getter
    ** \return a reference over the cells array
    */
-  inline std::vector<std::vector<Cell>> &cells() { return _cells; }
+  inline std::vector<std::vector<std::shared_ptr<Cell>>> cells() { return _cells; }
 
   /** \brief returns the Cell which coordinates are x and y
    ** \param x requested Cell x coordinate
    ** \param y requested Cell y coordinate
-   ** \return a reference over the requested Cell
+   ** \return a pointer over the requested Cell
    */
-  inline Cell &cell(unsigned int x, unsigned int y)
+  inline std::shared_ptr<Cell> cell(unsigned int x, unsigned int y)
   { return _cells[x][y]; }
 
   /** \brief sets the given unit in the cells array
    ** \param unit to set
    */
   void setUnit(std::shared_ptr<Unit> u)
-  { _cells[u->cellX()][u->cellY()].setUnit(u); }
+  { _cells[u->cellX()][u->cellY()]->setUnit(u); }
 
   /** \brief moves the selected unit to the current cursor location
    */
@@ -106,7 +96,9 @@ public:
 private:
   unsigned int _nbColumns; ///< number of columns (x coordinate)
   unsigned int _nbLines; ///< number of lines (y coordinate)
-  std::vector<std::vector<Cell>> _cells; ///< 2D Array of every cells of the map
+
+  ///< 2D Array of every cells of the map
+  std::vector<std::vector<std::shared_ptr<Cell>>> _cells;
 };
 
 #endif /* !MAP_HH_ */

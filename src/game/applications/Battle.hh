@@ -47,7 +47,7 @@ public:
   /** \brief _map getter
    ** \return a reference to the map
    */
-  inline std::shared_ptr<Map> map() const { return _map; }
+  inline Map map() { return _map; }
 
   /** \brief builds a new unit of type \param unit
    ** \param unit type of the new unit
@@ -82,7 +82,7 @@ private:
 
 
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
-  std::shared_ptr<Map> _map; ///< Map of this battle
+  Map _map; ///< Map of this battle
   unsigned int _currentPlayer; ///< current player's id
 };
 
