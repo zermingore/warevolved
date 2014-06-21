@@ -56,10 +56,3 @@ void Battle::nextPlayer()
   CURSOR->setColor(_players[_currentPlayer]->cursorColor());
   g_status->setCurrentPlayer(_currentPlayer);
 }
-
-
-void Battle::run()
-{
-  // call from Game and manage Events ?
-  // with a eventBattle class ?
-}

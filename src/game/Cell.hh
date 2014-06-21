@@ -6,7 +6,7 @@
 # include <common/enums/terrains.hh>
 
 /** \brief Cell class: the simplest element of a map
- **   we can see a Map as a grid, an array of array, of Cell
+ **   we can see a Map as a grid, an array of array of Cell
  **
  ** a Cell has:
  **   a terrain
@@ -54,7 +54,6 @@ public:
    ** \param color color of Cell's highlight
    */
   inline void setHighlightColor(Color color) { _highlightColor = color; }
-
 
   /** \brief removes the unit in this cell
    */

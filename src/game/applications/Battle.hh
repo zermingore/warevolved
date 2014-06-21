@@ -11,10 +11,10 @@
 # include <game/applications/Application.hh>
 # include <game/Player.hh>
 # include <game/Map.hh>
-# include <memory>
+
 
 /** \class Battle
- ** a battle is a game, launched from the Game
+ ** a battle is a game, launched from the Game class
  */
 class Battle: public Application
 {
@@ -41,7 +41,7 @@ public:
    ** \param id Player's id to retrieve
    ** \return the Player which number is \param id
    */
-  inline std::shared_ptr<Player> const getPlayer(const unsigned int &id)
+  inline std::shared_ptr<Player> getPlayer(const unsigned int &id)
   { return _players[id]; }
 
   /** \brief _map getter
@@ -67,11 +67,6 @@ public:
 
 
 private:
-  /** \brief battle body
-   ** processes events
-   */
-  void run();
-
   /** \brief initializes players
    */
   void buildPlayers();

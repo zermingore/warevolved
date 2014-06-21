@@ -3,7 +3,7 @@
 
 # include <input/KeyManager.hh>
 # include <graphics/GraphicEngine.hh>
-# include <interface/menus/EntriesMenu.hh>
+# include <interface/menus/Menu.hh>
 # include <game/PathFinding.hh>
 # include <interface/menus/InGameMenu.hh>
 
@@ -37,7 +37,7 @@ private:
    **   (for example arrows do not move game cursor but menu cursor)
    ** \param menu menu of which we want to manage events
    */
-  void selectionEntriesMenu();
+  void selectionMenu();
 
   /** \brief Processes events while moving a unit
    */

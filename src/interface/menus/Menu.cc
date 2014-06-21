@@ -1,11 +1,11 @@
-#include <interface/menus/EntriesMenu.hh>
+#include <interface/menus/Menu.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/constants.hh>
 #include <common/globals.hh>
 #include <common/macros.hh>
 
 
-EntriesMenu::EntriesMenu() :
+Menu::Menu() :
   _selectedEntry (0),
   _nbEntries (0)
 {
@@ -13,7 +13,7 @@ EntriesMenu::EntriesMenu() :
 }
 
 
-EntriesMenu::EntriesMenu(std::vector<MenuEntry> &entries) :
+Menu::Menu(std::vector<MenuEntry> &entries) :
     _selectedEntry (0)
 {
   _entries = std::vector<MenuEntry> (entries);
@@ -23,13 +23,13 @@ EntriesMenu::EntriesMenu(std::vector<MenuEntry> &entries) :
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
-void EntriesMenu::init()
+void Menu::init()
 {
   setOrigin();
   _entries.clear();
 }
 
-void EntriesMenu::loadMenu()
+void Menu::loadMenu()
 {
   auto menu = g_status->popCurrentMode().menu();
   _entries = menu->getEntries();
@@ -38,14 +38,14 @@ void EntriesMenu::loadMenu()
   setOrigin();
 }
 
-void EntriesMenu::setOrigin()
+void Menu::setOrigin()
 {
   // TODO sets the menu at right (cursor-relative) position
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
-void EntriesMenu::decrementSelectedEntry()
+void Menu::decrementSelectedEntry()
 {
   if (_selectedEntry)
     _selectedEntry = (_selectedEntry - 1) % (_nbEntries - 1);
@@ -54,7 +54,7 @@ void EntriesMenu::decrementSelectedEntry()
 }
 
 
-void EntriesMenu::draw()
+void Menu::draw()
 {
   if (_entries.size() == 0)
   {

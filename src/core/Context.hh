@@ -16,9 +16,8 @@
 class Context
 {
 public:
-  /** \brief default Constructor;
-   */
-  Context();
+  /// \brief deleted default Constructor;
+  Context() = delete;
 
   /** \brief Constructor
    ** \param fullscreen equals true if we're in full screen
@@ -26,12 +25,11 @@ public:
    */
   explicit Context(bool fullscreen);
 
+private:
   /** \brief Builds and sets the main window
-   ** \return Main rendering window
    */
   void init();
 
-private:
   std::shared_ptr<System> _system; ///< System settings (SFML version, ...)
 };
 

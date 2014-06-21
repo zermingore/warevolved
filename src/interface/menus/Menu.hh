@@ -1,12 +1,12 @@
 /*
- * interface/menus/EntriesMenu.hh
+ * interface/menus/Menu.hh
  *
  *  Created on: July 24, 2013
  *      Author: Zermingore
  */
 
-#ifndef ENTRIESMENU_HH_
-# define ENTRIESMENU_HH_
+#ifndef MENU_HH_
+# define MENU_HH_
 
 # include <common/include.hh>
 # include <resources/Image.hh>
@@ -15,21 +15,21 @@
 # include <common/enums/modes.hh>
 
 
-/** \brief EntriesMenu: generic Menu class
+/** \class Menu: generic Menu class
  ** mother of \class InGameMenu
  */
-class EntriesMenu
+class Menu
 {
 public:
   /** \brief default Ctor
    */
-  EntriesMenu();
+  Menu();
 
   /** \brief allows to build a menu which entries are \param entries
    **   sets _origin according to current Cursor position
    **   and _selectedEntry to 0
    */
-  explicit EntriesMenu(std::vector<MenuEntry> &entries);
+  explicit Menu(std::vector<MenuEntry> &entries);
 
   // TODO: merge and use a single function for all (4) directions
   /** \brief increments _selectedEntry modulo _nbEntries
@@ -99,10 +99,9 @@ protected:
                                ///< it has the index 0
   unsigned int _nbEntries; ///< Total number of entries in the menu
 
-  ///< Entries list
-  std::vector<MenuEntry> _entries;
+  std::vector<MenuEntry> _entries; ///< Entries list
   sf::Vector2f _origin; ///< Origin position of the menu
   Image _imageSelection; ///< Background image (entry)
 };
 
-#endif /* !ENTRIESMENU_HH_ */
+#endif /* !MENU_HH_ */

@@ -33,6 +33,8 @@ public:
    */
   inline std::string name() { return Text::name(_rank) + " " + _fullName; }
 
+  void fillActions(std::vector<MenuEntry>& menu);
+
 
 private:
   std::shared_ptr<Item> _equipedWeapon; ///< can be a rifle, a shovel, ...

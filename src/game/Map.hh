@@ -7,9 +7,10 @@
 # include <game/Cell.hh>
 # include <game/units/Unit.hh>
 # include <resources/ResourcesManager.hh>
+# include <game/Player.hh>
 
 
-/** \brief class which represents the game map
+/** \class represents the game map
  */
 class Map
 {
@@ -99,6 +100,10 @@ private:
 
   ///< 2D Array of every cells of the map
   std::vector<std::vector<std::shared_ptr<Cell>>> _cells;
+
+  ///< players in this battle
+  std::shared_ptr<std::vector<std::shared_ptr<Player>>> _players;
+
 };
 
 #endif /* !MAP_HH_ */

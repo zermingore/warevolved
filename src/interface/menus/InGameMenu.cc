@@ -35,12 +35,8 @@ void InGameMenu::build(e_mode mode)
   }
 
   // target
-  if (mode == E_MODE_ACTION_MENU
-      && MAP.unit(CURSOR->x(), CURSOR->y()))
-  {
-    auto attack = MenuEntry("Attack", E_ENTRY_ATTACK);
-    _entries.push_back(attack);
-  }
+  if (mode == E_MODE_ACTION_MENU)
+    current_unit->fillActions(_entries);
 
   auto cancel = MenuEntry("Cancel", E_ENTRY_CANCEL);
   _entries.push_back(cancel);

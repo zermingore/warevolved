@@ -60,6 +60,6 @@ game/Player.cc						\
 \
 interface/Interface.cc				\
 interface/Cursor.cc					\
-interface/menus/EntriesMenu.cc		\
+interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc		\
 interface/menus/InGameMenu.cc

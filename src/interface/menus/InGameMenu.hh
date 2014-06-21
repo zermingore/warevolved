@@ -8,7 +8,7 @@
 #ifndef INGAMEMENU_HH_
 # define INGAMEMENU_HH_
 
-# include <interface/menus/EntriesMenu.hh>
+# include <interface/menus/Menu.hh>
 # include <game/units/Unit.hh>
 # include <game/applications/Battle.hh>
 
@@ -17,7 +17,7 @@
  **   you pick a unit
  **   click on a void cell
  */
-class InGameMenu: public EntriesMenu
+class InGameMenu: public Menu
 {
 public:
   /** \brief Default Constructor
@@ -29,7 +29,7 @@ public:
    */
   void build(e_mode mode);
 
-  /** \brief executes action matching EntriesMenu::_selectedEntry
+  /** \brief executes action matching Menu::_selectedEntry
    */
   void executeEntry();
 };

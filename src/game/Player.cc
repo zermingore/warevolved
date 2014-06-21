@@ -25,11 +25,10 @@ std::shared_ptr<Unit> Player::newUnit(e_unit unit,
                                       unsigned int line, unsigned int column)
 {
   std::shared_ptr<Unit> new_unit;
-
   switch (unit)
   {
     case E_UNIT_SOLDIERS:
-      new_unit.reset(new Soldier());
+      new_unit = std::make_shared<Soldier> ();
       break;
 
     default:
@@ -42,4 +41,18 @@ std::shared_ptr<Unit> Player::newUnit(e_unit unit,
   _units.push_back(new_unit);
 
   return new_unit;
+}
+
+
+void Player::removeUnit(std::shared_ptr<Unit> unit)
+{
+  auto u = std::find(_units.begin(), _units.end(), unit);
+  if (u == _units.end())
+  {
+    PRINTF("Unit not found");
+    return;
+  }
+
+  _units.erase(u);
+  _isDead = _isDead || _units.empty();
 }

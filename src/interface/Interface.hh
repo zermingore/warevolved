@@ -110,7 +110,7 @@ private:
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   bool _modificationPanel; ///< notification: panel status changed
   bool _modificationMenuBar; ///< notification: menu bar status changed
-  unsigned int _panelX; ///< panel coordinates
+  int _panelX; ///< panel coordinates
   unsigned int _menuBarY; ///< menu bar coordinates
 };
 

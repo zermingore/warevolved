@@ -46,6 +46,7 @@
    CLOSED: [2014-06-20 Fri 14:30]
 ** TODO remove non needed new (use std::make__shared)
 ** TODO Hunt dead code
+** TODO split 'own' code and libs (easier to grep, cleaner)
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
@@ -188,12 +189,17 @@
 ** DONE Font Cleanup segfault (launched from a terminal)
    CLOSED: [2014-06-04 Wed 08:40]
 ** TODO In-game menu: Escape key <> Cancel entry
+** TODO Multiple keys maintained for more than a sec
+   probably a timer related
+   confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
+** TODO F2 Panel malfunction
+   only in fullscreen mode
+   due to an overflow in __panelX value
 
 ** DONE Font load resource segfault
    CLOSED: [2014-06-04 Wed 08:40]
    without valgrind
    multi-folder in xml file sections
-
 ** DONE [#B] Add Doxygen Comments in headers
    CLOSED: [2013-04-19 Fri 16:33]
    not perfect but does the job for now

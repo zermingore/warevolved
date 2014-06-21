@@ -81,7 +81,7 @@ public:
   /** \brief removes a unit to the player's units list
    ** \param unit unit to remove from the player's list
    */
-  void removeUnit(Unit &unit);
+  void removeUnit(std::shared_ptr<Unit> unit);
 
 
 private:

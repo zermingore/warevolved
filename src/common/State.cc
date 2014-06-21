@@ -11,7 +11,7 @@ State::State(e_mode& mode) :
     _cursorCoords = CURSOR->coords();
 }
 
-State::State(e_mode mode, std::shared_ptr<EntriesMenu> menu) :
+State::State(e_mode mode, std::shared_ptr<Menu> menu) :
   _mode (mode),
   _menu (menu)
 {

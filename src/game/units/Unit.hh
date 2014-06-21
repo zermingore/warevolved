@@ -4,6 +4,7 @@
 # include <common/include.hh>
 # include <resources/Image.hh>
 # include <game/units/Team.hh>
+# include <interface/menus/MenuEntry.hh>
 
 class Team;
 
@@ -11,20 +12,21 @@ class Team;
  ** defines a generic unit
  */
 // TODO abstract factory ?
-// TODO abstract class
 // (each have its own sprite [for rotation], but shared texture)
 class Unit
 {
 public:
-  /** \brief Default Constructor
-   */
+  ///< \brief Default Constructor
   Unit();
 
+  /** \brief build a Unit, given its name
+   ** \brief name Unit's name
+   */
   explicit Unit(std::string &name);
 
   // __________________________ Getters / Setters __________________________ //
-  inline int hp() { return _hp; } /// _hp getter
-  inline int attackValue() { return _attackValue; } /// _attackValue getter
+  inline int hp() { return _hp; } ///< _hp getter
+  inline int attackValue() { return _attackValue; } ///< _attackValue getter
 
   /** \brief _posX getter
    ** \return _posX, x unit position (in px)
@@ -118,6 +120,12 @@ public:
   /** \brief runs attack / strikes backs (if any) cycles
    */
   virtual void attack(std::shared_ptr<Unit> target);
+
+  /** \brief fills the given Menu with the possible Entries,
+   **   according to the Unit skills
+   ** \param menu inGameMenu in which we add relevant entries
+   */
+  virtual void fillActions(std::vector<MenuEntry>&) {}
 
 
 protected:

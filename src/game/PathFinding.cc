@@ -4,7 +4,6 @@
 
 
 PathFinding::PathFinding() :
-  _cached (false),
   _maxLength (0),
   _currentLength (0)
 {
@@ -17,7 +16,6 @@ void PathFinding::setOrigin(Coords coords)
   std::shared_ptr<Unit> unit(MAP.unit(coords));
   _origin = coords;
   _current = coords;
-  _cached = false;
   _currentLength = 0;
   _maxLength = unit->motionValue();
 
@@ -27,9 +25,6 @@ void PathFinding::setOrigin(Coords coords)
 
 void PathFinding::drawPath()
 {
-  //  if (!_cached)
-  //    buildImageVector();
-
   _current = _origin;
   unsigned int i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)
@@ -39,8 +34,6 @@ void PathFinding::drawPath()
     // _images[i++]->drawAtCell(_currentX, _currentY);
     getImage(i++).draw();
   }
-
-  //  _cached = false;
 }
 
 
@@ -50,8 +43,6 @@ void PathFinding::clearPath()
   deleteImagesVector();
 
   hideAllowedPath();
-
-  //_cached = false;
 
   // TODO clear only if we made a path request on a new cell
   // (to avoid clearing the path on selecting the same unit two times in a row)
@@ -91,8 +82,6 @@ void PathFinding::buildImageVector()
   unsigned int i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)
     _images.push_back(getImage(i++));
-
-  _cached = true;
 }
 
 

@@ -17,7 +17,8 @@
 class Application
 {
 public:
-  virtual void run() = 0;
+  Application() {}
+  ~Application() {}
 
   virtual void buildMap() = 0;
 

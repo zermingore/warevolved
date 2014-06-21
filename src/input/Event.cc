@@ -39,12 +39,12 @@ bool Event::process()
       if (_path)
         _path->clearPath();
 
-      selectionEntriesMenu();
+      selectionMenu();
       break;
 
     case E_MODE_ACTION_MENU:
       //_path->shadowPath(); // TODO less visible path
-      selectionEntriesMenu();
+      selectionMenu();
       break;
 
     case E_MODE_MOVING_UNIT:
@@ -137,7 +137,7 @@ void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 }
 
 
-void Event::selectionEntriesMenu()
+void Event::selectionMenu()
 {
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {

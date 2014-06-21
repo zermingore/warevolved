@@ -103,7 +103,6 @@ private:
 
   Coords _origin; ///< origin cell coordinates
   Coords _current; ///< current cell coordinates
-  bool _cached; ///< true if we have already build the path
   int _maxLength; ///< path max length
   int _currentLength; ///< path current length
 

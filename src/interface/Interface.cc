@@ -10,9 +10,9 @@ Interface::Interface() :
   _panelX (0),
   _menuBarY (0)
 {
-  _cursor.reset(new Cursor());
-  _path.reset(new PathFinding());
-  _inGameMenu.reset(new InGameMenu());
+  _cursor = std::make_shared<Cursor> ();
+  _path = std::make_shared<PathFinding> ();
+  _inGameMenu = std::make_shared<InGameMenu> ();
 }
 
 void Interface::incrementPanelPosition()
@@ -38,8 +38,8 @@ void Interface::setPanel()
     return;
   }
 
-  unsigned int offset = 4 * CELL_WIDTH;
-  unsigned int render_x = WINDOW_SIZE_X - offset;
+  auto offset = 4 * CELL_WIDTH;
+  auto render_x = WINDOW_SIZE_X - offset;
   g_status->setRenderX(render_x);
   if (_panelPosition == E_PANEL_LEFT)
   {
@@ -96,6 +96,8 @@ void Interface::drawPanel()
       sf::Vector2f (_panelX, WINDOW_SIZE_Y)
   };
   g_window->draw(line, 2, sf::Lines);
+
+  PRINTF("X:", _panelX);
 
   std::shared_ptr<Unit> unit(MAP.unit(CURSOR->coords()));
   if (unit)

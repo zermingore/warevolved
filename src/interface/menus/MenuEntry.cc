@@ -49,8 +49,23 @@ void MenuEntry::execute()
   switch (_id)
   {
     case E_ENTRY_ATTACK:
-      PRINTF("attack");
+    {
+      auto selectedUnit(MAP.unit(g_status->selectedUnitPosition()));
+      auto target(MAP.unit(CURSOR->coords()));
+      selectedUnit->attack(target);
+
+      // if the unit survived, move it
+      if (selectedUnit)
+      {
+        selectedUnit->setLocation(CURSOR->coords());
+        if (g_status->selectedUnitPosition() != CURSOR->coords())
+          MAP.moveUnit();
+      }
+
+      g_status->exitToMode(E_MODE_PLAYING, true);
+      g_interface->path()->hideAllowedPath();
       break;
+    }
 
     case E_ENTRY_STOP:
     {

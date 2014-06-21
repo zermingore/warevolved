@@ -5,22 +5,16 @@
 
 std::unique_ptr<Settings> g_settings;
 
-
-Context::Context()
-{
-  g_settings.reset(new Settings(0, 0, 0)); // depth, stencil, alias
-  _system.reset(new System(2, 0));
-}
-
 Context::Context(bool fullscreen)
 {
   if (fullscreen)
-    g_settings.reset(new Settings(24, 8, 4));
+    g_settings = std::make_unique<Settings> (24, 8, 4);
   else
-    g_settings.reset(new Settings(0, 0, 0)); // vanilla (debug) mode
+    g_settings = std::make_unique<Settings> (0, 0, 0); // vanilla (debug) mode
 
   g_settings->setFullScreen(fullscreen);
   _system.reset(new System(2, 1)); // SFML version: 2.1
+  init();
 }
 
 
