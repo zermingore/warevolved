@@ -11,7 +11,7 @@
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
 
-/** \brief System storage class
+/** \class System storage class
  ** designed to fill bugs reports
  ** keeps software information
  **  - SFML version

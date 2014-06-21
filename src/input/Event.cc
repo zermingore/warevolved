@@ -4,7 +4,7 @@
 #include <interface/Interface.hh>
 
 
-Event::Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicEngine> ge) :
+Event::Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicsEngine> ge) :
   _km(km),
   _ge(ge)
 {

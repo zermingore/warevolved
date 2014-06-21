@@ -65,7 +65,7 @@ public:
    */
   void incrementMenuBarPosition();
 
-  /** in-game menu getter
+  /** \brief in-game menu getter
    ** \return _inGameMenu
    */
   inline std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
@@ -110,7 +110,7 @@ private:
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   bool _modificationPanel; ///< notification: panel status changed
   bool _modificationMenuBar; ///< notification: menu bar status changed
-  int _panelX; ///< panel coordinates
+  unsigned int _panelX; ///< panel coordinates
   unsigned int _menuBarY; ///< menu bar coordinates
 };
 

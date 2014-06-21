@@ -17,11 +17,7 @@
 class Application
 {
 public:
-  Application() {}
-  ~Application() {}
-
   virtual void buildMap() = 0;
-
 
 protected:
   /** \brief Initialize the application

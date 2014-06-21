@@ -1,26 +1,17 @@
-#include <common/include.hh>
-#include <graphics/GraphicEngine.hh>
-#include <resources/ResourcesManager.hh>
-#include <common/constants.hh>
+#include <graphics/GraphicsEngine.hh>
 #include <common/globals.hh>
-#include <common/Status.hh>
-#include <common/enums/terrains.hh>
-#include <game/Map.hh>
-#include <game/PathFinding.hh>
 
 
-
-void GraphicEngine::initRoom()
+void GraphicsEngine::initRoom()
 {
   // = scroll ? 0 : (g_status->cellWidth() + g_status->cellHeight()) / 4;
   //if (!scroll) // TODO split offset bottom, ...
-  {
-    g_status->setGridOffset();
-  }
+
+  g_status->setGridOffset();
 }
 
 
-void GraphicEngine::drawScene()
+void GraphicsEngine::drawScene()
 {
   drawBackground();
   drawCells();
@@ -29,13 +20,14 @@ void GraphicEngine::drawScene()
 }
 
 
-void GraphicEngine::drawBackground() // TODO (map background)
+void GraphicsEngine::drawBackground()
 {
+  // TODO draw map background
   g_window->clear();
 }
 
 
-void GraphicEngine::drawCells()
+void GraphicsEngine::drawCells()
 {
   auto cells = CELLS;
 
@@ -48,7 +40,7 @@ void GraphicEngine::drawCells()
 }
 
 
-void GraphicEngine::drawGrid()
+void GraphicsEngine::drawGrid()
 {
   sf::Color grid_color(202, 124, 0); // FIXME Hard-Coded
 

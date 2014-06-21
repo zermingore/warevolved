@@ -95,6 +95,7 @@
    repair center
    bury mines
    dig
+   build bridges
 ** TODO units ranks / promotion / leader
 ** TODO Motion
 *** TODO Move Management
@@ -192,9 +193,13 @@
 ** TODO Multiple keys maintained for more than a sec
    probably a timer related
    confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
-** TODO F2 Panel malfunction
+** DONE Panel (F2) malfunction
+   CLOSED: [2014-06-21 Sat 21:04]
    only in fullscreen mode
    due to an overflow in __panelX value
+   Fixed using another default offset value in full screen
+   Fixed another linked bug: left and right panel sizes weren't the same
+   -> applied grid thickness twice
 
 ** DONE Font load resource segfault
    CLOSED: [2014-06-04 Wed 08:40]
@@ -234,3 +239,5 @@
 ** TODO Sprites
    Every cell doesn't need to have it's own highlight sprite
    -> common sprites (1 per situation [move, attack])
+** TODO [#C] refresh only needed cells
+   check mouse motion, cursor / units animation

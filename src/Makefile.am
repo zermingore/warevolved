@@ -28,7 +28,7 @@ pugixml/pugixml.cpp                 \
 \
 core/Context.cc						\
 \
-graphics/GraphicEngine.cc			\
+graphics/GraphicsEngine.cc			\
 \
 resources/ResourcesManager.cc		\
 resources/Resource.cc				\

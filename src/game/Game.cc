@@ -1,5 +1,5 @@
 #include <game/Game.hh>
-#include <graphics/GraphicEngine.hh>
+#include <graphics/GraphicsEngine.hh>
 #include <input/Event.hh>
 #include <common/globals.hh>
 #include <game/applications/Battle.hh>
@@ -12,7 +12,7 @@ Game::Game() :
 
 void Game::run()
 {
-  auto graphics = std::make_shared<GraphicEngine> ();
+  auto graphics = std::make_shared<GraphicsEngine> ();
   auto km = std::make_shared<KeyManager> ();
   _event.reset(new Event(km, graphics));
 

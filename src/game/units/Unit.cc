@@ -100,5 +100,4 @@ void Unit::attack(std::shared_ptr<Unit> target)
       break;
     }
   }
-
 }

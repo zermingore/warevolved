@@ -39,6 +39,9 @@ void Interface::setPanel()
   }
 
   auto offset = 4 * CELL_WIDTH;
+  if (g_settings->fullScreen())
+    offset *= 2;
+
   auto render_x = WINDOW_SIZE_X - offset;
   g_status->setRenderX(render_x);
   if (_panelPosition == E_PANEL_LEFT)
@@ -48,7 +51,8 @@ void Interface::setPanel()
   }
   else
   {
-    g_status->setGridOffsetX((render_x - CELL_WIDTH * NB_COLUMNS) / 2 - GRID_THICKNESS);
+    g_status->setGridOffsetX(
+      (render_x - CELL_WIDTH * NB_COLUMNS) / 2 - 2 * GRID_THICKNESS);
     _panelX = render_x;
   }
 
@@ -97,11 +101,9 @@ void Interface::drawPanel()
   };
   g_window->draw(line, 2, sf::Lines);
 
-  PRINTF("X:", _panelX);
-
   std::shared_ptr<Unit> unit(MAP.unit(CURSOR->coords()));
   if (unit)
-    DEBUG_PRINT(unit->name());
+    PRINTF(unit->name());
 }
 
 

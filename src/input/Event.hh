@@ -2,7 +2,7 @@
 # define EVENT_HH_
 
 # include <input/KeyManager.hh>
-# include <graphics/GraphicEngine.hh>
+# include <graphics/GraphicsEngine.hh>
 # include <interface/menus/Menu.hh>
 # include <game/PathFinding.hh>
 # include <interface/menus/InGameMenu.hh>
@@ -16,7 +16,7 @@ public:
   /** \brief Constructor
    **   processes input events
    */
-  Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicEngine> ge);
+  Event(std::shared_ptr<KeyManager> km, std::shared_ptr<GraphicsEngine> ge);
 
   /** \brief check if a generic event (like closing the window) occurs
    **   calls matching functions if any
@@ -57,7 +57,7 @@ private:
 
   sf::Event _event; ///< Event Manager
   std::shared_ptr<KeyManager> _km; ///< KeyManager instance
-  std::shared_ptr<GraphicEngine> _ge; ///< GraphicEngine instance
+  std::shared_ptr<GraphicsEngine> _ge; ///< GraphicsEngine instance
   std::shared_ptr<InGameMenu> _inGameMenu; ///< in-game action menu
   std::shared_ptr<PathFinding> _path; ///< PathFinding path
 };
