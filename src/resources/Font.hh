@@ -11,6 +11,7 @@
 class Font : public Resource
 {
 public:
+  /// \brief default constructor
   Font() {}
 
   /** \brief Constructor
@@ -21,13 +22,12 @@ public:
        const std::string name);
 
   bool load();
-  void unload();
 
-  /** \brief font getter
+  /** \brief _font getter
+   **   loads the requested Font if needed
    ** \return _font value
    */
   std::shared_ptr<sf::Font> getFont();
-
 
 private:
   std::shared_ptr<sf::Font> _font; ///< current Font

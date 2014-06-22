@@ -41,7 +41,7 @@ public:
   /** \brief virtual method: resource loading
    */
   virtual bool load() = 0;
-  virtual void unload() = 0;
+  virtual void unload() {};
 
   bool getLoaded() { return _loaded; }
 

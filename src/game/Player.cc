@@ -17,7 +17,7 @@ void Player::saveCursorPosition() {
 
 void Player::endTurn()
 {
-  for (auto it : _units)
+  for (auto it: _units)
     it->setPlayed(false);
 }
 

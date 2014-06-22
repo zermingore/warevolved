@@ -5,7 +5,8 @@
 Image::Image(const std::string file_name,
              const std::string name)
 {
-  _rectangle.reset(new sf::RectangleShape()); // TODO allocation only if needed
+  // TODO allocation only if needed
+  _rectangle = std::make_shared<sf::RectangleShape> ();
   _rectangle->setPosition(sf::Vector2f(0, 0));
   _rectangle->setSize(sf::Vector2f(0, 0));
 
@@ -26,7 +27,7 @@ std::shared_ptr<sf::Texture> Image::getTexture()
 {
   if (!_texture)
   {
-    _texture.reset(new sf::Texture());
+    _texture = std::make_shared<sf::Texture> ();
     _texture->loadFromFile(_fileName);
     _rectangle->setTexture(_texture.get());
     _loaded = true;
@@ -37,7 +38,7 @@ std::shared_ptr<sf::Texture> Image::getTexture()
 
 void Image::initTexture()
 {
-  _texture.reset(new sf::Texture());
+  _texture = std::make_shared<sf::Texture> ();
   _texture->loadFromFile(_fileName);
   _rectangle->setTexture((sf::Texture *) (_texture.get()));
   _loaded = true;
@@ -47,13 +48,13 @@ void Image::initSprite()
 {
   if (!_texture)
   {
-    _texture.reset(new sf::Texture());
+    _texture = std::make_shared<sf::Texture> ();
     _texture->loadFromFile(_fileName);
     _rectangle->setTexture(_texture.get());
     _loaded = true;
   }
 
-  _sprite.reset(new sf::Sprite(*_texture));
+  _sprite = std::make_shared<sf::Sprite> (*_texture);
   _loaded = true;
 }
 
@@ -98,7 +99,7 @@ bool Image::load()
   	return true;
 
   if (!_texture)
-    _texture.reset(new sf::Texture());
+    _texture = std::make_shared<sf::Texture> ();
 
   _texture->loadFromFile(_fileName);
   _rectangle->setTexture(_texture.get());

@@ -14,7 +14,7 @@ void Game::run()
 {
   auto graphics = std::make_shared<GraphicsEngine> ();
   auto km = std::make_shared<KeyManager> ();
-  _event.reset(new Event(km, graphics));
+  _event = std::make_shared<Event> (km, graphics);
 
 # ifdef DEBUG_PERFS
   sf::Clock timer;

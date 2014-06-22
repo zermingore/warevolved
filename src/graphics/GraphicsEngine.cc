@@ -1,6 +1,6 @@
 #include <graphics/GraphicsEngine.hh>
 #include <common/globals.hh>
-
+#include <common/constants.hh>
 
 void GraphicsEngine::initRoom()
 {
@@ -42,12 +42,10 @@ void GraphicsEngine::drawCells()
 
 void GraphicsEngine::drawGrid()
 {
-  sf::Color grid_color(202, 124, 0); // FIXME Hard-Coded
-
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(CELL_WIDTH, CELL_HEIGHT));
   rectangle.setFillColor(sf::Color::Transparent);
-  rectangle.setOutlineColor(grid_color);
+  rectangle.setOutlineColor(GRID_COLOR);
   rectangle.setOutlineThickness(5);
 
   for (unsigned int i = 0; i < NB_COLUMNS; ++i)

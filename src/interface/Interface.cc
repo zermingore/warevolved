@@ -96,12 +96,12 @@ void Interface::drawPanel()
     return;
 
   sf::Vertex line[2] = {
-      sf::Vector2f (_panelX, 0),
-      sf::Vector2f (_panelX, WINDOW_SIZE_Y)
+      sf::Vector2f(_panelX, 0),
+      sf::Vector2f(_panelX, WINDOW_SIZE_Y)
   };
   g_window->draw(line, 2, sf::Lines);
 
-  std::shared_ptr<Unit> unit(MAP.unit(CURSOR->coords()));
+  auto unit(MAP.unit(CURSOR->coords()));
   if (unit)
     PRINTF(unit->name());
 }

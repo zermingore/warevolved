@@ -13,7 +13,7 @@ Context::Context(bool fullscreen)
     g_settings = std::make_unique<Settings> (0, 0, 0); // vanilla (debug) mode
 
   g_settings->setFullScreen(fullscreen);
-  _system.reset(new System(2, 1)); // SFML version: 2.1
+  _system = std::make_unique<System> (2, 1); // SFML version: 2.1
   init();
 }
 
@@ -34,9 +34,9 @@ void Context::init()
   // getting right resolution, from desktop
   if (g_settings->fullScreen())
   {
-    g_window.reset(new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
-                                       "War Evolved",
-                                       sf::Style::Fullscreen));
+    g_window = std::make_unique<sf::RenderWindow> (sf::VideoMode::getDesktopMode(),
+                                                   "War Evolved",
+                                                   sf::Style::Fullscreen);
   }
   else
   {
@@ -53,7 +53,7 @@ void Context::init()
         std::exit(-1); // This time we quit // TODO browse all supported modes
     }
 
-    g_window.reset(new sf::RenderWindow(video_mode, "War Evolved"));
+    g_window = std::make_unique<sf::RenderWindow> (video_mode, "War Evolved");
   }
 
 # ifndef DEBUG_PERFS

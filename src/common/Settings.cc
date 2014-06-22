@@ -1,5 +1,4 @@
 #include <common/Settings.hh>
-#include <common/constants.hh>
 
 
 Settings::Settings(unsigned int depth,

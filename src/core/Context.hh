@@ -16,7 +16,7 @@
 class Context
 {
 public:
-  /// \brief deleted default Constructor;
+  /// \brief deleted default Constructor
   Context() = delete;
 
   /** \brief Constructor

@@ -1,12 +1,13 @@
 #ifndef CONSTANTS_HH_
 # define CONSTANTS_HH_
 
+# include <SFML/Graphics/Color.hpp>
+
 # ifdef __unix__
 #   define FOLDER_DELIMITER '/'
 # else
 #   define FOLDER_DELIMITER '\\'
 # endif
-
 
 # ifdef __unix__
 #   define COLOR_NORMAL  "\x1B[0m"
@@ -42,5 +43,7 @@
 // resources paths
 # define DEFAULT_IMAGE_PATH "resources/defaults/image.png"
 # define DEFAULT_FONT_PATH "resources/defaults/font.ttf"
+
+const sf::Color GRID_COLOR(202, 124, 0);
 
 #endif /* !CONSTANTS_HH_ */

@@ -24,7 +24,7 @@ MenuEntry::MenuEntry(std::string label_name, e_entry entry)
 
   // label initialization
   // TODO better calculus, ratio dependent, eventually, text length dependent
-  _label.reset(new sf::Text());
+  _label = std::make_shared<sf::Text> ();
   _label->setCharacterSize((CELL_WIDTH + CELL_HEIGHT) / 4);
 
   _font = g_rm->getFont("font_army");

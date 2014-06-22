@@ -17,8 +17,8 @@ ResourcesManager::ResourcesManager(const std::string file_name)
 
 void ResourcesManager::initializeDefaultResources()
 {
-  _images["default"].reset(new Image(DEFAULT_IMAGE_PATH, "default"));
-  _fonts["default"].reset(new Font(DEFAULT_FONT_PATH, "default"));
+  _images["default"] = std::make_shared<Image> (DEFAULT_IMAGE_PATH, "default");
+  _fonts["default"] = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
 }
 
 void ResourcesManager::initTypeNames()
@@ -37,17 +37,17 @@ bool ResourcesManager::addResource(e_resource_type type,
   switch (type)
   {
     case E_RESOURCE_TYPE_IMAGE:
-      _images[name].reset(new Image(file_name, name));
+      _images[name] = std::make_shared<Image> (file_name, name);
       return true;
 
     case E_RESOURCE_TYPE_FONT:
     {
-      _fonts[name].reset(new Font(file_name, name));
+      _fonts[name] = std::make_shared<Font> (file_name, name);
       return true;
     }
 
     // case E_RESOURCE_TYPE_SOUND:
-    //   _sounds[name].reset(new Sound(file_name, name));
+    //   _sounds[name] = std::make_shared<Sound> (file_name, name);
     //   return true;
 
     default:

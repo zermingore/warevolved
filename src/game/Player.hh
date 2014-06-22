@@ -20,7 +20,7 @@ class Player
 {
 public:
   /** \brief Constructor
-   **   builds a new Player
+   ** sets the Player's index to a unique value
    */
   Player();
 

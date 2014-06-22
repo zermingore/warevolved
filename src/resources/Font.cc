@@ -16,17 +16,12 @@ bool Font::load()
   if (_loaded)
     return true;
 
-  _font.reset(new sf::Font());
+  _font = std::make_shared<sf::Font> ();
   _font->loadFromFile(_fileName);
   _loaded = true;
 
   return false;
 }
-
-void Font::unload() {
-  return;
-}
-
 
 std::shared_ptr<sf::Font> Font::getFont()
 {
