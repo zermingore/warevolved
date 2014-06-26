@@ -39,6 +39,11 @@ private:
    */
   void selectionMenu();
 
+  /** \brief select a cell
+   **   browse Cells containing an available target on keyboard strikes
+   */
+  void selectTarget();
+
   /** \brief Processes events while moving a unit
    */
   void moveUnit();

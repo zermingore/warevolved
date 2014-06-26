@@ -91,7 +91,7 @@ private:
   Coords _lastCursorPosition; ///< position to remember each time we hit Next Turn
   std::vector<std::shared_ptr<Unit>> _units; ///< units vector
   bool _isDead; ///< is the player still playing
-  e_faction _faction; ///< player's faction
+  //e_faction _faction; ///< player's faction
 };
 
 #endif /* !PLAYER_HH_ */

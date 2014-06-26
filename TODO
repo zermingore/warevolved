@@ -4,7 +4,8 @@
   CLOSED: [2013-07-24 Wed 07:10]
 ** DONE Merge ResourcesManager branch
    CLOSED: [2013-06-07 Fri 17:58]
-** TODO Merge master & test (switch to std::shared__ptr)
+** DONE Merge master & test (switch to std::shared__ptr)
+   CLOSED: [2014-06-22 Sun 13:50]
 
 * TODO keys
 ** DONE make the cursor move
@@ -28,6 +29,7 @@
    CLOSED: [2013-05-07 Tue 13:08]
 ** TODO use size__t
 ** TODO use emplace[_back] with std::vector (C++11)
+   (instead of create and push)
 ** DONE use Coords / Color / ... (or an int: high / low)
    CLOSED: [2013-08-06 Tue 10:44]
    not SFML dependant
@@ -44,9 +46,16 @@
 ** TODO follow the C++ rule of 5
 ** DONE remove non needed raw pointers
    CLOSED: [2014-06-20 Fri 14:30]
-** TODO remove non needed new (use std::make__shared)
+** DONE remove non needed new (use std::make__shared)
+   CLOSED: [2014-06-22 Sun 10:59]
 ** TODO Hunt dead code
 ** TODO split 'own' code and libs (easier to grep, cleaner)
+** TODO clean Status class (making a global class ?)
+** TODO think about cleaning some types names
+   (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
+   could use using std::vector
+   could use typedef std::shared_ptr SP
+** TODO is inline still relevant in C++14 ?
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
@@ -180,19 +189,21 @@
 ** TODO source file: auto fetch and insert commit id last modif
 
 * TODO Bugs / Features
-** DONE [#A] Fix in-game menu pop-up and location
-   CLOSED: [2013-07-25 Thu 17:20]
 ** TODO Fix cursor size trouble
    was too big
    (running for a long time ?)
    overflow trouble ?
    unseen for a long time (maybee fixed ?)
-** DONE Font Cleanup segfault (launched from a terminal)
-   CLOSED: [2014-06-04 Wed 08:40]
 ** TODO In-game menu: Escape key <> Cancel entry
 ** TODO Multiple keys maintained for more than a sec
    probably a timer related
    confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
+** TODO Floating Point Exception Failure
+
+** DONE [#A] Fix in-game menu pop-up and location
+   CLOSED: [2013-07-25 Thu 17:20]
+** DONE Font Cleanup segfault (launched from a terminal)
+   CLOSED: [2014-06-04 Wed 08:40]
 ** DONE Panel (F2) malfunction
    CLOSED: [2014-06-21 Sat 21:04]
    only in fullscreen mode
@@ -200,7 +211,6 @@
    Fixed using another default offset value in full screen
    Fixed another linked bug: left and right panel sizes weren't the same
    -> applied grid thickness twice
-
 ** DONE Font load resource segfault
    CLOSED: [2014-06-04 Wed 08:40]
    without valgrind
@@ -220,7 +230,7 @@
     CLOSED: [2014-06-20 Fri 14:27]
 *** DONE Read errors
     CLOSED: [2014-06-20 Fri 14:27]
-*** TODO Hide SFML leaks
+*** TODO Hide SFML "leaks"
     (current ref: Still reachable: 41,364 bytes in 425 blocks)
 
 * TODO Suppress Warnings

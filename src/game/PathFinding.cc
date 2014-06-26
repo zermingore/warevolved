@@ -4,9 +4,13 @@
 
 
 PathFinding::PathFinding() :
+  _origin (0, 0),
+  _current (0, 0),
   _maxLength (0),
-  _currentLength (0)
+  _currentLength (0),
+  _targetIndex (0)
 {
+  _targetList = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
 }
 
 void PathFinding::setOrigin(Coords coords)
@@ -40,8 +44,9 @@ void PathFinding::drawPath()
 void PathFinding::clearPath()
 {
   _directions.clear();
+  _targetList->clear();
+  _targetIndex = 0;
   deleteImagesVector();
-
   hideAllowedPath();
 
   // TODO clear only if we made a path request on a new cell
@@ -186,6 +191,7 @@ void PathFinding::showAllowedPath(std::shared_ptr<Unit> unit)
 
   while (!s.empty())
   {
+    // getting Cell's coordinates (stack of Coordinates)
     int x = s.top().first;
     int y = s.top().second;
     s.pop();
@@ -225,13 +231,18 @@ void PathFinding::highlightCells()
     if (c->unit())
     {
      if (c->unit()->playerId() != g_status->currentPlayer())
+     {
        c->setHighlightColor(sf::Color::Red);
+       _targetList->push_back(c);
+     }
      else
        c->setHighlightColor(sf::Color::Green);
     }
     else
       c->setHighlightColor(sf::Color::Yellow);
   }
+
+  g_status->setTargetList(_targetList);
 }
 
 

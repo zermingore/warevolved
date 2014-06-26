@@ -4,7 +4,7 @@
 
 
 Battle::Battle() :
-  _map (8, 8),
+  _map (8, 8), // TODO hard-coded
   _currentPlayer (0)
 {
   init();

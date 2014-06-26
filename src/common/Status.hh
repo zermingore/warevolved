@@ -174,6 +174,14 @@ public:
    */
   inline void setSelectedUnitPosition(Coords pos) { _selectedUnitPosition = pos; }
 
+  /** \brief returns list of reachable targets
+   ** which was built from the last selected unit
+   */
+  inline std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targetsList()
+  { return _targetsList; }
+
+  inline void setTargetList(std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targetsList)
+  { _targetsList = targetsList; }
 
 private:
   /** \brief resets render zone, sets it to window size
@@ -196,6 +204,9 @@ private:
   std::shared_ptr<Battle> _battle; ///< pointer on Battle
   unsigned int _currentPlayer; ///< index in the _players array
   Coords _selectedUnitPosition; ///< current selected Unit's coordinates
+
+  ///< useful cells fills by PathFinding
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targetsList;
 };
 
 #endif /* !STATUS_HH_ */

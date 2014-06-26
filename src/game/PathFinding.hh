@@ -60,6 +60,14 @@ public:
    */
   void hideAllowedPath() const;
 
+  /** \brief selects the next target in target list
+   */
+  inline void nextTarget() { ++_targetIndex %= _targetList->size(); }
+
+  /** \brief selects the next target in target list
+   */
+  inline void previousTarget() { --_targetIndex %= _targetList->size(); }
+
 
 private:
   /** \brief returns the sprite matching e_path_shape
@@ -106,13 +114,15 @@ private:
   int _maxLength; ///< path max length
   int _currentLength; ///< path current length
 
-  std::vector<e_direction> _directions; ///< list of path directions
-                                        ///< filled through addNextDirection
-
+  ///< list of path directions filled through addNextDirection
+  std::vector<e_direction> _directions;
   std::vector<Image> _images; ///< Images of the path vector
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
+  ///< list of Cells the current Unit can interact with
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targetList;
+  int _targetIndex; ///< targeted Cell's index in _targetList
 };
 
 #endif /* !PATHFINDING_HH_ */

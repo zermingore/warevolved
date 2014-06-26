@@ -11,6 +11,8 @@ class Team;
 /** \brief Unit abstract class
  ** defines a generic unit
  */
+// TODO add target list && cell
+
 // TODO abstract factory ?
 // (each have its own sprite [for rotation], but shared texture)
 class Unit
@@ -135,6 +137,7 @@ protected:
 
   int _hp; ///< Health Points (-1: infinite)
   int _attackValue; ///< target taken hp per shot (-1: instant death)
+  std::pair<int, int> _range; ///< Attack range
 
   unsigned int _posX; ///< x position (in px) // NOTE: absolute ? / relative to _cell ?
   unsigned int _posY; ///< y position (in px)

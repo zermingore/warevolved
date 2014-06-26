@@ -7,11 +7,11 @@
 Unit::Unit() :
   _imageId (0),
   _hp (0),
-  _attackValue (5),
+  _attackValue (0),
   _posX (0),
   _posY (0),
-  _cellX (1),
-  _cellY (1),
+  _cellX (0),
+  _cellY (0),
   _played (false),
   _playerId (0),
   _team (nullptr),
@@ -23,11 +23,12 @@ Unit::Unit(std::string &name) :
   _imageId (0),
   _name (name),
   _hp (0),
-  _attackValue (5),
+  _attackValue (0),
+  _range (0, 0),
   _posX (0),
   _posY (0),
-  _cellX (1),
-  _cellY (1),
+  _cellX (0),
+  _cellY (0),
   _motionValue (4),
   _played (false),
   _playerId (0),
@@ -87,6 +88,8 @@ void Unit::attack(std::shared_ptr<Unit> target)
   unsigned int nb_steps = 2; // = calcNbSteps();
   for (unsigned int i = 0; i < nb_steps; ++i)
   {
+    PRINTF("target:", target);
+
     if (target->receiveDamages(_attackValue / nb_steps) < 1)
     {
       PRINTF("target down");

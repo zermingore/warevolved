@@ -81,6 +81,22 @@ void Event::panels()
 }
 
 
+void Event::selectTarget()
+{
+  if ((_km->down() && _km->ready(E_TIMER_MOVE_DOWN)) ||
+      (_km->left() && _km->ready(E_TIMER_MOVE_LEFT)))
+  {
+    _path->nextTarget();
+  }
+
+  if ((_km->up() && _km->ready(E_TIMER_MOVE_UP)) ||
+      (_km->right() && _km->ready(E_TIMER_MOVE_RIGHT)))
+  {
+    _path->previousTarget();
+  }
+}
+
+
 void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 {
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)

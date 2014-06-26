@@ -50,9 +50,13 @@ void MenuEntry::execute()
   {
     case E_ENTRY_ATTACK:
     {
+      g_status->pushMode(E_MODE_ATTACK);
+
       auto selectedUnit(MAP.unit(g_status->selectedUnitPosition()));
-      auto target(MAP.unit(CURSOR->coords()));
-      selectedUnit->attack(target);
+      auto target(MAP.unit(CURSOR->coords())); // push select_target mode
+
+      // commented to prevent a segfault (no reliable target selection for now)
+      // selectedUnit->attack(target);
 
       // if the unit survived, move it
       if (selectedUnit)

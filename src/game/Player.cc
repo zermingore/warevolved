@@ -4,8 +4,7 @@
 
 
 Player::Player() :
-  _isDead (false),
-  _faction (E_FACTION_T)
+  _isDead (false)
 {
   static unsigned int static_id = 0;
   _index = static_id++;
@@ -32,7 +31,7 @@ std::shared_ptr<Unit> Player::newUnit(e_unit unit,
       break;
 
     default:
-      DEBUG_PRINT("Unable to match this unit type");
+      PRINTF("Unable to match this unit type");
       return nullptr;
   }
 
