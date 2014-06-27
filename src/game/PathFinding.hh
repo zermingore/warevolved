@@ -60,13 +60,10 @@ public:
    */
   void hideAllowedPath() const;
 
-  /** \brief selects the next target in target list
+  /** \brief current Unit (_unit) getter
+   ** \return _unit
    */
-  inline void nextTarget() { ++_targetIndex %= _targetList->size(); }
-
-  /** \brief selects the next target in target list
-   */
-  inline void previousTarget() { --_targetIndex %= _targetList->size(); }
+  std::shared_ptr<Unit> unit() { return _unit; }
 
 
 private:
@@ -97,18 +94,17 @@ private:
    */
   e_path_shape getShape(unsigned int index);
 
-  /** \brief Highlights cells which selected unit can cross
+  /** \brief Highlights cells which selected unit (_unit) can cross
    ** (uses a Flood Fill algorithm)
-   ** \param unit Selected unit
-   **   (used for location, faction, range, ...)
    */
-  void showAllowedPath(std::shared_ptr<Unit> unit);
+  void showAllowedPath();
 
   /** \brief sets highlight and highlight color for reachable cells
    */
   void highlightCells();
 
 
+  std::shared_ptr<Unit> _unit; ///< The selected Unit we're working with
   Coords _origin; ///< origin cell coordinates
   Coords _current; ///< current cell coordinates
   int _maxLength; ///< path max length
@@ -120,9 +116,6 @@ private:
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
-  ///< list of Cells the current Unit can interact with
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targetList;
-  int _targetIndex; ///< targeted Cell's index in _targetList
 };
 
 #endif /* !PATHFINDING_HH_ */

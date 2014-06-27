@@ -7,14 +7,15 @@
 # include <interface/menus/MenuEntry.hh>
 
 class Team;
+class Cell;
 
 /** \brief Unit abstract class
  ** defines a generic unit
  */
-// TODO add target list && cell
+// TODO add Cell
 
 // TODO abstract factory ?
-// (each have its own sprite [for rotation], but shared texture)
+// (each Unit have its own sprite [for rotation], but shared texture)
 class Unit
 {
 public:
@@ -30,35 +31,25 @@ public:
   inline int hp() { return _hp; } ///< _hp getter
   inline int attackValue() { return _attackValue; } ///< _attackValue getter
 
-  /** \brief _posX getter
-   ** \return _posX, x unit position (in px)
+  /** \brief x coordinate on the map getter
+   ** \return x (column) coordinate on the map
    */
-  inline unsigned int posX() { return _posX; }
+  inline unsigned int x() { return _coords.x; }
 
-  /** \brief _posY getter
-   ** \return _posY, y unit position (in px)
+  /** \brief x unit coordinate on the map getter
+   ** \return y (line) coordinate on the map
    */
-  inline unsigned int posY() { return _posY; }
-
-  /** \brief _cellX getter
-   ** \return _cellX, x unit coordinate on the map
-   */
-  inline unsigned int cellX() { return _cellX; }
-
-  /** \brief _cellY getter
-   ** \return _cellY, y unit coordinate on the map
-   */
-  inline unsigned int cellY() { return _cellY; }
+  inline unsigned int y() { return _coords.y; }
 
   /** \brief gets unit's position
-   ** \return unit's cell location
+   ** \return unit's cell coordinates
    */
-  inline Coords location() { return _location; }
+  inline Coords coords() { return _coords; }
 
-  /** \brief sets unit's position
-   ** \param location: cell's coordinates to set unit's position
+  /** \brief sets unit's position and _played to true (we moved the unit)
+   ** \param coords: cell's coordinates to set unit's position
    */
-  void setLocation(Coords location);
+  void setCoords(Coords coords);
 
   /** \brief unit's name getter
    ** \return unit's name value
@@ -86,10 +77,9 @@ public:
   inline bool played() { return _played; }
 
   /** \brief sets Unit's coordinates
-   ** \param cell_x x coordinate (column)
-   ** \param cell_y y coordinate (line)
+   ** \param coords Unit's new coordinates
    */
-  void setCellCoordinates(unsigned int cell_x, unsigned int cell_y);
+  inline void setCellCoordinates(Coords coords) { _coords = coords; }
 
   /** \brief sets Unit's player belonging
    ** \param player_id player's identifier
@@ -115,19 +105,44 @@ public:
    */
   void draw();
 
-  /** \brief packs the Unit with \param unit
+  //
+  // __________ Targets management __________
+  //
+  /** \brief _targets getter
+   ** \return _targets list of reachable targets
    */
-  inline void pack(std::shared_ptr<Unit> unit);
-
-  /** \brief runs attack / strikes backs (if any) cycles
+  inline std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targets()
+  { return _targets; }
+  /** \brief _targetIndex setter
+   ** \param i _targetIndex value
    */
-  virtual void attack(std::shared_ptr<Unit> target);
+  inline void setTargetIndex(int i) { _targetIndex = i; }
 
+  /** \brief selects the next target in targets list
+   */
+  inline void nextTarget() { ++_targetIndex %= _targets->size(); }
+
+  /** \brief selects the previous target in targets list
+   */
+  inline void previousTarget() { --_targetIndex %= _targets->size(); }
+
+  //
+  // __________ Actions management __________
+  //
   /** \brief fills the given Menu with the possible Entries,
    **   according to the Unit skills
    ** \param menu inGameMenu in which we add relevant entries
    */
   virtual void fillActions(std::vector<MenuEntry>&) {}
+
+  /** \brief runs attack / strikes backs (if any) cycles
+   ** the target is _targets[_targetIndex]
+   */
+  virtual void attack();
+
+  /** \brief packs the Unit with \param unit
+   */
+  inline void pack(std::shared_ptr<Unit> unit);
 
 
 protected:
@@ -138,21 +153,16 @@ protected:
   int _hp; ///< Health Points (-1: infinite)
   int _attackValue; ///< target taken hp per shot (-1: instant death)
   std::pair<int, int> _range; ///< Attack range
-
-  unsigned int _posX; ///< x position (in px) // NOTE: absolute ? / relative to _cell ?
-  unsigned int _posY; ///< y position (in px)
-  //Coords _position; ///< Unit's cell relative position
-
-  unsigned int _cellX; ///< x coordinate (column) on the map
-  unsigned int _cellY; ///< y coordinate (row) on the map
-  Coords _location; ///< Unit's cell coordinates
-
+  Coords _coords; ///< Unit's cell coordinates
   unsigned int _motionValue; ///< Number of cells a unit can cross in one turn
-
   bool _played; ///< notify if the unit has already played this turn
   unsigned int _playerId; ///< the unit belongs to the player matching this id
   std::shared_ptr<Team> _team; ///< team in which this Unit belong to
   bool _targetable; ///< true if this unit can be under fire
+
+  ///< list of Cells the current Unit can interact with
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targets;
+  int _targetIndex; ///< targeted Cell's index in _targets
 };
 
 #endif /* !UNIT_HH_ */

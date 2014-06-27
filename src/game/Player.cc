@@ -35,7 +35,7 @@ std::shared_ptr<Unit> Player::newUnit(e_unit unit,
       return nullptr;
   }
 
-  new_unit->setCellCoordinates(line, column);
+  new_unit->setCellCoordinates(Coords(line, column));
   new_unit->setPlayerId(_index);
   _units.push_back(new_unit);
 

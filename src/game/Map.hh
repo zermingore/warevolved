@@ -87,7 +87,7 @@ public:
    ** \param unit to set
    */
   void setUnit(std::shared_ptr<Unit> u)
-  { _cells[u->cellX()][u->cellY()]->setUnit(u); }
+  { _cells[u->x()][u->y()]->setUnit(u); }
 
   /** \brief moves the selected unit to the current cursor location
    */
@@ -103,7 +103,6 @@ private:
 
   ///< players in this battle
   std::shared_ptr<std::vector<std::shared_ptr<Player>>> _players;
-
 };
 
 #endif /* !MAP_HH_ */

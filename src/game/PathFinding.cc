@@ -7,23 +7,23 @@ PathFinding::PathFinding() :
   _origin (0, 0),
   _current (0, 0),
   _maxLength (0),
-  _currentLength (0),
-  _targetIndex (0)
+  _currentLength (0)
 {
-  _targetList = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
 }
 
 void PathFinding::setOrigin(Coords coords)
 {
   clearPath();
 
-  std::shared_ptr<Unit> unit(MAP.unit(coords));
+  _unit = MAP.unit(coords);
+  _unit->setTargetIndex(0);
+
   _origin = coords;
   _current = coords;
   _currentLength = 0;
-  _maxLength = unit->motionValue();
+  _maxLength = _unit->motionValue();
 
-  showAllowedPath(unit);
+  showAllowedPath();
 }
 
 
@@ -44,8 +44,6 @@ void PathFinding::drawPath()
 void PathFinding::clearPath()
 {
   _directions.clear();
-  _targetList->clear();
-  _targetIndex = 0;
   deleteImagesVector();
   hideAllowedPath();
 
@@ -182,10 +180,10 @@ void PathFinding::addNextDirection(e_direction direction)
 }
 
 
-void PathFinding::showAllowedPath(std::shared_ptr<Unit> unit)
+void PathFinding::showAllowedPath()
 {
   std::stack<std::pair<int, int>> s;
-  s.push(std::pair<int, int>(unit->cellX(), unit->cellY()));
+  s.push(std::pair<int, int>(_unit->x(), _unit->y()));
   _reachableCells.clear();
   std::vector<std::pair<int, int>> checked;
 
@@ -198,7 +196,7 @@ void PathFinding::showAllowedPath(std::shared_ptr<Unit> unit)
 
     // check overflow, Manhattan distance and if we already marked the cell
     if (x < 0 || y < 0 || x > (int) NB_COLUMNS - 1 || y > (int) NB_LINES - 1
-        || std::abs((int) unit->cellX() - x) + std::abs((int) unit->cellY() - y) > _maxLength
+        || std::abs((int) _unit->x() - x) + std::abs((int) _unit->y() - y) > _maxLength
         || std::find(checked.begin(), checked.end(), std::pair<int, int>(x, y)) != checked.end())
     {
       continue;
@@ -220,7 +218,7 @@ void PathFinding::showAllowedPath(std::shared_ptr<Unit> unit)
 
 void PathFinding::highlightCells()
 {
-  // TODO use a current unit parameter and check it's inventory
+  // TODO check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
   for (auto it : _reachableCells)
@@ -233,7 +231,7 @@ void PathFinding::highlightCells()
      if (c->unit()->playerId() != g_status->currentPlayer())
      {
        c->setHighlightColor(sf::Color::Red);
-       _targetList->push_back(c);
+       _unit->targets()->push_back(c);
      }
      else
        c->setHighlightColor(sf::Color::Green);
@@ -241,8 +239,6 @@ void PathFinding::highlightCells()
     else
       c->setHighlightColor(sf::Color::Yellow);
   }
-
-  g_status->setTargetList(_targetList);
 }
 
 

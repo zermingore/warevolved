@@ -6,13 +6,13 @@
 
 Status::Status() :
   _currentFPS (0),
-  _cellWidth (0),
-  _cellHeight (0),
+  _renderX (0),
+  _renderY (0),
   _gridThickness (0),
   _gridOffsetX (0),
   _gridOffsetY (0),
-  _renderX (0),
-  _renderY (0),
+  _cellWidth (0),
+  _cellHeight (0),
   _currentPlayer (0),
   _selectedUnitPosition(-1, -1)
 {
@@ -90,7 +90,8 @@ void Status::setWindow(std::unique_ptr<sf::RenderWindow> window)
   g_window = std::move(window);
 
   // initialize render room
-  resetRender();
+  _renderX = WINDOW_SIZE_X;
+  _renderY = WINDOW_SIZE_Y;
 }
 
 void Status::setGridOffset()
@@ -98,10 +99,4 @@ void Status::setGridOffset()
   // offset = 1/2 left room
   _gridOffsetX = (_renderX - _cellWidth * NB_COLUMNS) / 2;
   _gridOffsetY = (_renderY - _cellHeight * NB_LINES) / 2;
-}
-
-void Status::resetRender()
-{
-  _renderX = WINDOW_SIZE_X;
-  _renderY = WINDOW_SIZE_Y;
 }

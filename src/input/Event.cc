@@ -86,13 +86,15 @@ void Event::selectTarget()
   if ((_km->down() && _km->ready(E_TIMER_MOVE_DOWN)) ||
       (_km->left() && _km->ready(E_TIMER_MOVE_LEFT)))
   {
-    _path->nextTarget();
+    _path->unit()->nextTarget();
+    auto u = _path->unit();
+    CURSOR->setCoords(Coords(u->x(), u->y()));
   }
 
   if ((_km->up() && _km->ready(E_TIMER_MOVE_UP)) ||
       (_km->right() && _km->ready(E_TIMER_MOVE_RIGHT)))
   {
-    _path->previousTarget();
+    _path->unit()->previousTarget();
   }
 }
 

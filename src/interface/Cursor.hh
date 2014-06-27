@@ -89,8 +89,7 @@ private:
   unsigned int _nbLines; ///< number of Lines in map
 
   Coords _coords; ///< Cursor Coordinates
-  Coords _lastKnownPosition; ///< position to remember
-                             ///    when switching to next turn
+  Coords _lastKnownPosition; ///< position to remember when switching turns
 
   Image _image; ///< Cursor's Image
   std::shared_ptr<sf::Sprite> _sprite; ///< pointer over _image->sprite()

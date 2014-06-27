@@ -7,6 +7,7 @@
 # include <common/State.hh>
 # include <game/Player.hh>
 
+// TODO For graphic windows: use a union with sfml, opengl, dx, ascii windows, ...
 
 /** \brief stores game status information such as
  **   last cell selected, current player, ...
@@ -174,39 +175,23 @@ public:
    */
   inline void setSelectedUnitPosition(Coords pos) { _selectedUnitPosition = pos; }
 
-  /** \brief returns list of reachable targets
-   ** which was built from the last selected unit
-   */
-  inline std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targetsList()
-  { return _targetsList; }
-
-  inline void setTargetList(std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targetsList)
-  { _targetsList = targetsList; }
 
 private:
-  /** \brief resets render zone, sets it to window size
-   */
-  void resetRender();
-
-  // TODO use a union with sfml, opengl, dx, ascii windows, ...
-  std::stack<State> _states; ///< States stack
-  Coords _selectedCell; ///< coordinates of the selected cell
   float _currentFPS; ///< current number of generated frame per second
-  unsigned int _nbColumns; ///< map number of columns
-  unsigned int _nbLines; ///< map number of lines
-  unsigned int _cellWidth; ///< cells width (in px)
-  unsigned int _cellHeight; ///< cells height (in px)
+  unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
+  unsigned int _renderY; ///< Drawable zone room left vertically (in px)
   unsigned int _gridThickness; ///< cells delimiter thickness (in px)
   unsigned int _gridOffsetX; ///< x position from where we start drawing the grid
   unsigned int _gridOffsetY; ///< y position from where we start drawing the grid
-  unsigned int _renderX; ///< Drawable zone room left horizontally (in px)
-  unsigned int _renderY; ///< Drawable zone room left vertically (in px)
+  unsigned int _cellWidth; ///< cells width (in px)
+  unsigned int _cellHeight; ///< cells height (in px)
+  unsigned int _nbColumns; ///< map number of columns
+  unsigned int _nbLines; ///< map number of lines
+  std::stack<State> _states; ///< States stack
+  Coords _selectedCell; ///< coordinates of the selected cell
   std::shared_ptr<Battle> _battle; ///< pointer on Battle
   unsigned int _currentPlayer; ///< index in the _players array
   Coords _selectedUnitPosition; ///< current selected Unit's coordinates
-
-  ///< useful cells fills by PathFinding
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targetsList;
 };
 
 #endif /* !STATUS_HH_ */

@@ -33,6 +33,11 @@ public:
    */
   inline std::string name() { return Text::name(_rank) + " " + _fullName; }
 
+  /** \brief fills the given Menu with the possible Entries,
+   **   according to the Unit skills
+   ** \param menu inGameMenu in which we add relevant entries
+   ** virtual method
+   */
   void fillActions(std::vector<MenuEntry>& menu);
 
 

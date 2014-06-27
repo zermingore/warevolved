@@ -25,6 +25,7 @@ public:
    */
   explicit Context(bool fullscreen);
 
+
 private:
   /** \brief Builds and sets the main window
    */

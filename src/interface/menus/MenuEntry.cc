@@ -51,17 +51,19 @@ void MenuEntry::execute()
     case E_ENTRY_ATTACK:
     {
       g_status->pushMode(E_MODE_ATTACK);
+      execute();
 
       auto selectedUnit(MAP.unit(g_status->selectedUnitPosition()));
-      auto target(MAP.unit(CURSOR->coords())); // push select_target mode
+      auto targets(selectedUnit->targets());
+      auto target = (*targets)[0]->unit();
 
       // commented to prevent a segfault (no reliable target selection for now)
-      // selectedUnit->attack(target);
+      selectedUnit->attack();
 
       // if the unit survived, move it
       if (selectedUnit)
       {
-        selectedUnit->setLocation(CURSOR->coords());
+        selectedUnit->setCoords(CURSOR->coords());
         if (g_status->selectedUnitPosition() != CURSOR->coords())
           MAP.moveUnit();
       }
@@ -74,7 +76,7 @@ void MenuEntry::execute()
     case E_ENTRY_STOP:
     {
       auto selectedUnit(MAP.unit(g_status->selectedUnitPosition()));
-      selectedUnit->setLocation(CURSOR->coords());
+      selectedUnit->setCoords(CURSOR->coords());
       if (g_status->selectedUnitPosition() != CURSOR->coords())
         MAP.moveUnit();
 
