@@ -221,7 +221,7 @@ void PathFinding::highlightCells()
   // TODO check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
-  for (auto it : _reachableCells)
+  for (auto it: _reachableCells)
   {
     std::shared_ptr<Cell> c = CELLS[it->x()][it->y()];
 

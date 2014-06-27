@@ -16,10 +16,6 @@
 class Game
 {
 public:
-  /** \brief Default Constructor
-   */
-  Game();
-
   /** \brief contains the game loop which calls
    **   event processing
    **   window rendering

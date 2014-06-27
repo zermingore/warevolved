@@ -22,7 +22,7 @@ void Soldier::fillActions(std::vector<MenuEntry>& menu)
 {
   // TODO add inventory entry
 
-  // checks if we have to add the 'Attack' entry
+  // checks if we must add the 'Attack' entry
   for (auto c: *_targets)
   {
     // Manhattan distance

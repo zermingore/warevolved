@@ -5,11 +5,6 @@
 #include <game/applications/Battle.hh>
 
 
-Game::Game() :
-  _event (nullptr)
-{
-}
-
 void Game::run()
 {
   auto graphics = std::make_shared<GraphicsEngine> ();

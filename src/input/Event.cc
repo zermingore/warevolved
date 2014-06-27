@@ -51,6 +51,10 @@ bool Event::process()
       moveUnit();
       break;
 
+    case E_MODE_ATTACK:
+      selectTarget();
+      break;
+
     case E_MODE_NONE: // mode stack is empty
       g_window->close();
       return false;
@@ -83,6 +87,8 @@ void Event::panels()
 
 void Event::selectTarget()
 {
+  PRINTF("mode: selectTarget");
+
   if ((_km->down() && _km->ready(E_TIMER_MOVE_DOWN)) ||
       (_km->left() && _km->ready(E_TIMER_MOVE_LEFT)))
   {
@@ -101,6 +107,11 @@ void Event::selectTarget()
 
 void Event::moveUnit() // only called on E_MODE_MOVING_UNIT
 {
+# ifdef DEBUG
+  if (CURRENT_MODE != E_MODE_MOVING_UNIT)
+    PRINTF("unexpected mode", CURRENT_MODE, "expected moving", E_MODE_MOVING_UNIT);
+# endif
+
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
     g_status->exitCurrentMode();

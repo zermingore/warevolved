@@ -77,8 +77,6 @@ void Unit::attack()
   unsigned int nb_steps = 2; // = calcNbSteps();
   for (unsigned int i = 0; i < nb_steps; ++i)
   {
-    PRINTF("target:", target);
-
     if (target->receiveDamages(_attackValue / nb_steps) < 1)
     {
       PRINTF("target down");
