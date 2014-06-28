@@ -8,7 +8,7 @@
 MenuEntry::MenuEntry(e_entry &entry) :
   _id (entry)
 {
-  DEBUG_PRINT("NOT yet implemented MenuEntry Ctor");
+  PRINTF("NOT yet implemented MenuEntry Ctor");
 
   _background = GETIMAGE("selection_menu_button");
   _background.setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
@@ -34,6 +34,7 @@ MenuEntry::MenuEntry(std::string label_name, e_entry entry)
   _id = entry;
 }
 
+
 void MenuEntry::draw(sf::Vector2f position)
 {
   _background.setPosition(position);
@@ -51,30 +52,15 @@ void MenuEntry::execute()
     case E_ENTRY_ATTACK:
     {
       g_status->pushMode(E_MODE_ATTACK);
-
       auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
       auto targets (selectedUnit->targets());
-      auto target ((*targets)[0]->unit());
-
-      // commented to prevent a segfault (no reliable target selection for now)
-      selectedUnit->attack();
-
-      // if the unit survived, move it
-      if (selectedUnit)
-      {
-        selectedUnit->setCoords(CURSOR->coords());
-        if (g_status->selectedUnitPosition() != CURSOR->coords())
-          MAP.moveUnit();
-      }
-
-      g_status->exitToMode(E_MODE_PLAYING, true);
-      g_interface->path()->hideAllowedPath();
+      CURSOR->setCoords((*targets)[0]->getCoords());
       break;
     }
 
     case E_ENTRY_STOP:
     {
-      auto selectedUnit(MAP.unit(g_status->selectedUnitPosition()));
+      auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
       selectedUnit->setCoords(CURSOR->coords());
       if (g_status->selectedUnitPosition() != CURSOR->coords())
         MAP.moveUnit();
@@ -99,7 +85,7 @@ void MenuEntry::execute()
 
     case E_ENTRY_CANCEL:
     {
-      auto old_mode(CURRENT_MODE);
+      auto old_mode (CURRENT_MODE);
       g_interface->inGameMenu()->loadMenu();
 
       // if we were dealing with orders, return to the unit position

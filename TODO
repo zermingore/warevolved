@@ -4,7 +4,7 @@
   CLOSED: [2013-07-24 Wed 07:10]
 ** DONE Merge ResourcesManager branch
    CLOSED: [2013-06-07 Fri 17:58]
-** DONE Merge master & test (switch to std::shared__ptr)
+** DONE Merge master & test (switch to std::shared_ptr)
    CLOSED: [2014-06-22 Sun 13:50]
 
 * TODO keys
@@ -15,11 +15,14 @@
    CLOSED: [2013-04-21 Sun 21:56]
    set a boolean when pressed OR released
 
-* TODO Game
+* TODO Game Features
 ** DONE [#A] Selection (drag and drop units)
    CLOSED: [2013-08-06 Tue 22:46]
 ** DONE path-finding
    CLOSED: [2014-06-18 Wed 00:10] (using a flood-fill)
+** TODO Allow direct attack when a target is already at range
+   (do not pass through move action)
+** TODO allow a unit to attack when a target become accessible (after moving)
 
 * TODO Code Design
 ** DONE [#A] really use Settings class (key repeat delay, ...) should be in it
@@ -27,7 +30,7 @@
 ** TODO make an Event Manager test with boost signals (emulate callbacks)
 ** DONE Resources Manager
    CLOSED: [2013-05-07 Tue 13:08]
-** TODO use size__t
+** TODO use size_t
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
 ** DONE use Coords / Color / ... (or an int: high / low)
@@ -46,10 +49,10 @@
 ** TODO follow the C++ rule of 5
 ** DONE remove non needed raw pointers
    CLOSED: [2014-06-20 Fri 14:30]
-** DONE remove non needed new (use std::make__shared)
+** DONE remove non needed new (use std::make_shared)
    CLOSED: [2014-06-22 Sun 10:59]
 ** TODO Hunt dead code
-** TODO split 'own' code and libs (easier to grep, cleaner)
+** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
 ** TODO clean Status class (making a global class ?)
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
@@ -116,7 +119,7 @@
 *** TODO Open Fire Management
 	while moving
 	Shift on a cell: sprint (increase move costs, reduces damages taken)
-	  [manage wounded whiles printing ?]
+	  [manage wounded whiles sprinting ?]
 	Control on a cell: open fire in mouse direction
 	  8 surrounding cells (less damages, even less for not 4 'direct' cells)
 	  ground unit: manage how many bullets per shot ?
@@ -187,6 +190,9 @@
    CLOSED: [2013-08-14 Wed 12:31]
 ** TODO auto resources XML generator
 ** TODO source file: auto fetch and insert commit id last modif
+** TODO Debug::assert check only on debug if a condition is satisfied
+   Debug::assert(state, MODE__MENU)
+   -> test if state equals to MODE__MENU and prints an error if not
 
 * TODO Bugs / Features
 ** TODO Fix cursor size trouble
@@ -198,7 +204,9 @@
 ** TODO Multiple keys maintained for more than a sec
    probably a timer related
    confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
-** TODO Floating Point Exception Failure
+** DONE Floating Point Exception Failure
+   CLOSED: [2014-06-27 Fri 22:48]
+   (bug while building menu -> 0 entries, failed on modulo 0)
 
 ** DONE [#A] Fix in-game menu pop-up and location
    CLOSED: [2013-07-25 Thu 17:20]
@@ -207,7 +215,7 @@
 ** DONE Panel (F2) malfunction
    CLOSED: [2014-06-21 Sat 21:04]
    only in fullscreen mode
-   due to an overflow in __panelX value
+   due to an overflow in _panelX value
    Fixed using another default offset value in full screen
    Fixed another linked bug: left and right panel sizes weren't the same
    -> applied grid thickness twice

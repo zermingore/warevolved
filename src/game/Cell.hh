@@ -30,7 +30,7 @@ public:
   /** \brief _terrain getter
    ** \return cell's terrain
    */
-  inline e_terrain getTerrain() { return _terrain; }
+  inline e_terrain terrain() { return _terrain; }
 
   /** \brief _unit setter
    ** sets the Unit \param unit in the cell
@@ -65,15 +65,19 @@ public:
 
   /** \brief returns Cell's x coordinate
    */
-  inline unsigned int x() { return _coordinates.x; }
+  inline unsigned int x() { return _coords.x; }
 
   /** \brief returns Cell's y coordinate
    */
-  inline unsigned int y() { return _coordinates.y; }
+  inline unsigned int y() { return _coords.y; }
+
+  /** \brief coords getter
+   */
+  inline Coords getCoords() { return _coords; }
 
 
 private:
-  Coords _coordinates; ///< cell's coordinates
+  Coords _coords; ///< cell's coordinates
   e_terrain _terrain; ///< Terrain type index (matching e_terrains)
   std::shared_ptr<Unit> _unit; ///< Unit type index (matching e_terrains)
   bool _highlight; ///< true if the cell needs to be highlighted

@@ -41,6 +41,18 @@ void Unit::setCoords(Coords location)
   _played = true;
 }
 
+std::shared_ptr<Cell> Unit::previousTarget()
+{
+  --_targetIndex %= _targets->size();
+  return (*_targets)[_targetIndex];
+}
+
+std::shared_ptr<Cell> Unit::nextTarget()
+{
+  ++_targetIndex %= _targets->size();
+  return (*_targets)[_targetIndex];
+}
+
 void Unit::draw()
 {
   Image &image = GETIMAGE(_name);
@@ -69,6 +81,7 @@ void Unit::draw()
 
   image.drawAtCell(_coords);
 }
+
 
 // virtual method
 void Unit::attack()

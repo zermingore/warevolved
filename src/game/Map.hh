@@ -68,7 +68,7 @@ public:
    **   located at coordinates (x, y)
    */
   e_terrain getTerrain(unsigned int x, unsigned int y)
-  { return _cells[x][y]->getTerrain(); }
+  { return _cells[x][y]->terrain(); }
 
   /** \brief _cells array getter
    ** \return a reference over the cells array

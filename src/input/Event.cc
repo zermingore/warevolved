@@ -87,20 +87,50 @@ void Event::panels()
 
 void Event::selectTarget()
 {
-  PRINTF("mode: selectTarget");
+  // quit mode request
+  if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
+  {
+    g_status->exitCurrentMode();
+    _inGameMenu->build(CURRENT_MODE); // re-build menu
+    _km->setSwitchStatus(E_SWITCH_EXIT, ON);
+    return;
+  }
+
+  auto selectedUnit (_path->unit());
 
   if ((_km->down() && _km->ready(E_TIMER_MOVE_DOWN)) ||
       (_km->left() && _km->ready(E_TIMER_MOVE_LEFT)))
   {
-    _path->unit()->nextTarget();
-    auto u = _path->unit();
-    CURSOR->setCoords(Coords(u->x(), u->y()));
+    auto prev = selectedUnit->previousTarget();
+    CURSOR->setCoords(Coords(prev->x(), prev->y()));
+    _km->setReady(E_TIMER_MOVE_DOWN, false);
+    _km->setReady(E_TIMER_MOVE_LEFT, false);
   }
 
   if ((_km->up() && _km->ready(E_TIMER_MOVE_UP)) ||
       (_km->right() && _km->ready(E_TIMER_MOVE_RIGHT)))
   {
-    _path->unit()->previousTarget();
+    auto next = selectedUnit->nextTarget();
+    CURSOR->setCoords(Coords(next->x(), next->y()));
+    _km->setReady(E_TIMER_MOVE_UP, false);
+    _km->setReady(E_TIMER_MOVE_RIGHT, false);
+  }
+
+  if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
+  {
+    _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
+    selectedUnit->attack();
+
+    // if the unit survived, move it
+    if (selectedUnit)
+    {
+      selectedUnit->setCoords(CURSOR->coords());
+      if (g_status->selectedUnitPosition() != CURSOR->coords())
+        MAP.moveUnit();
+    }
+
+    g_status->exitToMode(E_MODE_PLAYING, true);
+    g_interface->path()->hideAllowedPath();
   }
 }
 
@@ -229,7 +259,6 @@ bool Event::game()
 
     if (CURRENT_MODE == E_MODE_ACTION_MENU)
     {
-      PRINTF("exec");
       g_status->exitCurrentMode();
       return true;
     }

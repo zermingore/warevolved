@@ -118,13 +118,15 @@ public:
    */
   inline void setTargetIndex(int i) { _targetIndex = i; }
 
-  /** \brief selects the next target in targets list
-   */
-  inline void nextTarget() { ++_targetIndex %= _targets->size(); }
-
   /** \brief selects the previous target in targets list
+   ** \return selected target
    */
-  inline void previousTarget() { --_targetIndex %= _targets->size(); }
+  std::shared_ptr<Cell> previousTarget();
+
+  /** \brief selects the next target in targets list
+   ** \return selected target
+   */
+  std::shared_ptr<Cell> nextTarget();
 
   //
   // __________ Actions management __________
