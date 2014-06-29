@@ -1,5 +1,11 @@
 -*- mode:org -*-
 
+* TODO Roadmap
+  (should be no more than 2 commits ahead)
+** TODO Multiturn attacks
+** TODO Units: random names
+   (tmp: use a filled vector and a static index when creating a Unit)
+
 * DONE Git
   CLOSED: [2013-07-24 Wed 07:10]
 ** DONE Merge ResourcesManager branch
@@ -31,7 +37,8 @@
 ** DONE Resources Manager
    CLOSED: [2013-05-07 Tue 13:08]
 ** TODO use size_t
-** TODO use emplace[_back] with std::vector (C++11)
+** DONE use emplace[_back] with std::vector (C++11)
+   CLOSED: [2014-06-29 Sun 12:09]
    (instead of create and push)
 ** DONE use Coords / Color / ... (or an int: high / low)
    CLOSED: [2013-08-06 Tue 10:44]
@@ -195,15 +202,18 @@
    -> test if state equals to MODE__MENU and prints an error if not
 
 * TODO Bugs / Features
-** TODO Fix cursor size trouble
-   was too big
-   (running for a long time ?)
-   overflow trouble ?
-   unseen for a long time (maybee fixed ?)
-** TODO In-game menu: Escape key <> Cancel entry
 ** TODO Multiple keys maintained for more than a sec
    probably a timer related
    confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
+** DONE Selecct target mode
+   CLOSED: [2014-06-29 Sun 12:23]
+   Index value: tends to have more than nb entries possible values
+   -> tend to 'browse' a cell two times
+   targets array is not clear each time we select a unit (it should be)
+** DONE In-game menu: Escape key <> Cancel entry
+   CLOSED: [2014-06-29 Sun 12:08]
+   same comportement for Escape key and Cancel entry
+   (if cancel should unstack everything, it's not a bug)
 ** DONE Floating Point Exception Failure
    CLOSED: [2014-06-27 Fri 22:48]
    (bug while building menu -> 0 entries, failed on modulo 0)
@@ -233,6 +243,11 @@
 ** DONE map initialisation failure
    CLOSED: [2013-04-19 Fri 16:33]
    was a rendering zone room trouble
+** TODO Fix cursor size trouble
+   was too big
+   (running for a long time ?)
+   overflow trouble ?
+   unseen for a very long time (probably fixed ?)
 ** TODO Memory Leaks / Errors
 *** DONE Definitely Lost
     CLOSED: [2014-06-20 Fri 14:27]

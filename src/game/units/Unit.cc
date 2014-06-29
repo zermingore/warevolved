@@ -2,33 +2,21 @@
 #include <common/include.hh>
 #include <common/globals.hh>
 #include <game/units/Team.hh>
+#include <common/Text.hh>
 
 
 Unit::Unit() :
   _imageId (0),
-  _hp (0),
-  _attackValue (0),
+  _rank (E_RANK_PRIVATE),
   _played (false),
-  _playerId (0),
   _team (nullptr),
   _targetable (false)
 {
   _targets = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
 }
 
-Unit::Unit(std::string &name) :
-  _imageId (0),
-  _name (name),
-  _hp (0),
-  _attackValue (0),
-  _range (0, 0),
-  _motionValue (4),
-  _played (false),
-  _playerId (0),
-  _team (nullptr),
-  _targetable (false)
-{
-  _targets = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
+std::string Unit::getRank() {
+  return Text::name(_rank);
 }
 
 void Unit::pack(std::shared_ptr<Unit> unit) {
@@ -43,7 +31,13 @@ void Unit::setCoords(Coords location)
 
 std::shared_ptr<Cell> Unit::previousTarget()
 {
-  --_targetIndex %= _targets->size();
+  if (_targetIndex == 0)
+  {
+    _targetIndex = _targets->size() - 1;
+    return (*_targets)[_targetIndex];
+  }
+
+  _targetIndex = (_targetIndex - 1) % (_targets->size() - 1);
   return (*_targets)[_targetIndex];
 }
 
@@ -55,7 +49,7 @@ std::shared_ptr<Cell> Unit::nextTarget()
 
 void Unit::draw()
 {
-  Image &image = GETIMAGE(_name);
+  Image &image = GETIMAGE(_class);
   image.sprite()->setColor(BATTLE->getPlayer(_playerId)->unitsColor());
 
   float x = image.sprite()->getTexture()->getSize().x;

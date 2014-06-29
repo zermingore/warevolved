@@ -4,19 +4,19 @@
 
 
 Soldier::Soldier() :
-  _equipedWeapon (nullptr),
-  _rank (E_RANK_PRIVATE)
+  _equipedWeapon (nullptr)
 {
-  _name = "soldiers";
-  _fullName = "John Doe";
+  _class = "soldiers";
+  _name = "John Doe";
   _imageId = 0;
   _hp = 10;
+  _maxHp = _hp;
   _attackValue = 25;
   _range = std::make_pair(0, 3);
   _motionValue = 4;
-  _played = false;
   _playerId = 0;
 }
+
 
 void Soldier::fillActions(std::vector<MenuEntry>& menu)
 {

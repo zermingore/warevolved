@@ -5,6 +5,7 @@
 # include <resources/Image.hh>
 # include <game/units/Team.hh>
 # include <interface/menus/MenuEntry.hh>
+# include <common/enums/ranks.hh>
 
 class Team;
 class Cell;
@@ -22,14 +23,14 @@ public:
   ///< \brief Default Constructor
   Unit();
 
-  /** \brief build a Unit, given its name
-   ** \brief name Unit's name
-   */
-  explicit Unit(std::string &name);
-
   // __________________________ Getters / Setters __________________________ //
   inline int hp() { return _hp; } ///< _hp getter
+  inline int maxHp() { return _maxHp; } ///< _maxHp getter
   inline int attackValue() { return _attackValue; } ///< _attackValue getter
+
+  /** \brief returns Unit's rank as a string
+   */
+  std::string getRank();
 
   /** \brief x coordinate on the map getter
    ** \return x (column) coordinate on the map
@@ -150,9 +151,11 @@ public:
 protected:
   unsigned int _textureId; ///< Texture id in the Resources Manager std::map
   unsigned int _imageId; ///< Image id in the Resources Manager std::map
-  std::string _name; ///< Unit's class name
-
+  e_rank _rank; ///< military grade
+  std::string _class; ///< Unit's class name
+  std::string _name; ///< Unit's name
   int _hp; ///< Health Points (-1: infinite)
+  int _maxHp; ///< Maximum number of Health Points
   int _attackValue; ///< target taken hp per shot (-1: instant death)
   std::pair<int, int> _range; ///< Attack range
   Coords _coords; ///< Unit's cell coordinates

@@ -2,7 +2,7 @@
 #include <common/macros.hh>
 #include <common/globals.hh>
 #include <common/enums/units.hh>
-
+#include <common/Text.hh>
 
 Cell::Cell() :
   _terrain (E_TERRAIN_NONE),
@@ -15,6 +15,10 @@ Cell::Cell() :
 
   _coords.x = x++ / NB_COLUMNS;
   _coords.y = y++ % NB_LINES;
+}
+
+std::string Cell::getTerrain() {
+  return Text::name(_terrain);
 }
 
 void Cell::draw()

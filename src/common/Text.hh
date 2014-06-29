@@ -8,8 +8,6 @@
 #ifndef TEXT_HH_
 # define TEXT_HH_
 
-# include <map>
-# include <string>
 # include <interface/menus/MenuEntry.hh>
 # include <common/enums/ranks.hh>
 # include <common/enums/terrains.hh>
