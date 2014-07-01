@@ -92,6 +92,9 @@ public:
   /** \brief moves the selected unit to the current cursor location
    */
   void moveUnit();
+  /** \brief moves given unit to the given coordinates
+   */
+  void moveUnit(std::shared_ptr<Unit> u, Coords c);
 
 
 private:

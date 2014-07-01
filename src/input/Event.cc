@@ -119,14 +119,16 @@ void Event::selectTarget()
   if (_km->selection() && _km->switchStatus(E_SWITCH_SELECTION) == OFF)
   {
     _km->setSwitchStatus(E_SWITCH_SELECTION, ON);
-    selectedUnit->attack();
-
-    // if the unit survived, move it
-    if (selectedUnit)
+    if (selectedUnit->attack() == false) // unit died in fight
     {
-      selectedUnit->setCoords(CURSOR->coords());
-      if (g_status->selectedUnitPosition() != CURSOR->coords())
-        MAP.moveUnit();
+      _path->removeUnit();
+      selectedUnit.reset();
+    }
+    else // the unit survived, move it if needed
+    {
+      if (selectedUnit->coords() != selectedUnit->attackCoords())
+        MAP.moveUnit(selectedUnit, selectedUnit->attackCoords());
+      selectedUnit->setPlayed(true);
     }
 
     g_status->exitToMode(E_MODE_PLAYING, true);

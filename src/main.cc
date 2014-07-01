@@ -7,6 +7,7 @@ auto g_status(std::make_unique<Status> ());
 auto g_rm(std::make_unique<ResourcesManager> ("resources.xml"));
 auto g_interface(std::make_unique<Interface> ());
 auto g_window(std::make_unique<sf::RenderWindow> ());
+auto g_text(std::make_unique<Text> ());
 
 int main(int ac, const char **av)
 {

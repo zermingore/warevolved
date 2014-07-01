@@ -54,6 +54,7 @@ void MenuEntry::execute()
       g_status->pushMode(E_MODE_ATTACK);
       auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
       auto targets (selectedUnit->targets());
+      selectedUnit->setAttackCoords(CURSOR->coords());
       CURSOR->setCoords((*targets)[0]->getCoords());
       break;
     }

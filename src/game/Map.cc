@@ -44,3 +44,11 @@ void Map::moveUnit()
   _cells[CURSOR->x()][CURSOR->y()]->setUnit(tmp);
   _cells[c.x][c.y]->removeUnit();
 }
+
+void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
+{
+  Coords tmp = unit->coords();
+  unit->setCellCoordinates(c);
+  _cells[c.x][c.y]->setUnit(unit);
+  _cells[tmp.x][tmp.y]->removeUnit();
+}

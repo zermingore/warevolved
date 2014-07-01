@@ -11,7 +11,6 @@
 # include <interface/menus/MenuEntry.hh>
 # include <common/enums/ranks.hh>
 # include <common/enums/terrains.hh>
-//# include <common/type_checker.hh>
 
 
 // TODO db
@@ -31,6 +30,11 @@ class Text
    ** TODO initialize DataBase connection
    */
   void init();
+
+  /** \brief return _name entry number id
+   ** if id is not given, a random name is returned
+   */
+  std::string getName(int id = -1);
 
   /** \brief military rank text getter
    ** \param rank to fetch
@@ -53,6 +57,7 @@ private:
   unsigned int _language; ///< database language column offset value
   std::map<e_rank, std::string> _ranks; ///< military ranks names
   std::map<e_entry, std::string> _entries; ///< menu entries names
+  std::vector<std::string> _names; ///< vector of built-in names (TODO DB)
 };
 
 #endif /* !TEXT_HH_ */

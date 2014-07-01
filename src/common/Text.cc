@@ -3,7 +3,8 @@
 #include <common/enums/terrains.hh>
 
 Text::Text(unsigned int language) :
-  _language (language)
+  _language (language),
+  _names {"John Doe", "Jack Sheppard", "James Williams", "Robert Jones"}
 {
 }
 
@@ -27,4 +28,13 @@ std::string Text::name(e_terrain terrain)
   if (terrain == E_TERRAIN_FOREST) // TODO tmp test (need a DB)
     return "FOREST";
   return "Fetch error";
+}
+
+
+std::string Text::getName(int id)
+{
+  if (id == -1)
+    return _names[0];
+
+  return _names[id % _names.size()];
 }

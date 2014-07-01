@@ -2,8 +2,12 @@
 
 * TODO Roadmap
   (should be no more than 2 commits ahead)
-** TODO Multiturn attacks
-** TODO Units: random names
+
+* old roadmap
+** DONE Multiturn attacks
+   CLOSED: [2014-07-01 Tue 20:17]
+** DONE Units: random names
+   CLOSED: [2014-06-29 Sun 17:04]
    (tmp: use a filled vector and a static index when creating a Unit)
 
 * DONE Git
@@ -205,6 +209,9 @@
 ** TODO Multiple keys maintained for more than a sec
    probably a timer related
    confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
+** DONE Attack a target without moving: unit deletion
+   CLOSED: [2014-07-01 Tue 20:19]
+   was due to a move failure
 ** DONE Selecct target mode
    CLOSED: [2014-06-29 Sun 12:23]
    Index value: tends to have more than nb entries possible values
@@ -217,7 +224,6 @@
 ** DONE Floating Point Exception Failure
    CLOSED: [2014-06-27 Fri 22:48]
    (bug while building menu -> 0 entries, failed on modulo 0)
-
 ** DONE [#A] Fix in-game menu pop-up and location
    CLOSED: [2013-07-25 Thu 17:20]
 ** DONE Font Cleanup segfault (launched from a terminal)

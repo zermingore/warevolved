@@ -19,6 +19,12 @@ std::string Unit::getRank() {
   return Text::name(_rank);
 }
 
+int Unit::receiveDamages(unsigned int damages)
+{
+  _hp -= damages;
+  return _hp;
+}
+
 void Unit::pack(std::shared_ptr<Unit> unit) {
   _team->addMember(unit);
 }
@@ -26,6 +32,7 @@ void Unit::pack(std::shared_ptr<Unit> unit) {
 void Unit::setCoords(Coords location)
 {
   _coords = location;
+  _attackCoords = _coords;
   _played = true;
 }
 
@@ -78,7 +85,7 @@ void Unit::draw()
 
 
 // virtual method
-void Unit::attack()
+bool Unit::attack()
 {
   auto target = (*_targets)[_targetIndex]->unit();
   unsigned int nb_steps = 2; // = calcNbSteps();
@@ -86,15 +93,19 @@ void Unit::attack()
   {
     if (target->receiveDamages(_attackValue / nb_steps) < 1)
     {
-      PRINTF("target down");
       g_status->battle()->getPlayer(target->playerId())->removeUnit(target);
       CELLS[target->x()][target->y()]->removeUnit();
-      break;
+      return true;
     }
     if (receiveDamages(target->attackValue() / nb_steps) < 1)
     {
       // TODO notify death
-      break;
+      auto itself (CELLS[_coords.x][_coords.y]->unit());
+      g_status->battle()->getPlayer(_playerId)->removeUnit(itself);
+      CELLS[_coords.x][_coords.y]->removeUnit();
+      return false;;
     }
   }
+
+  return true;
 }

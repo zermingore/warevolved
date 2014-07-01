@@ -27,6 +27,7 @@ public:
   inline int hp() { return _hp; } ///< _hp getter
   inline int maxHp() { return _maxHp; } ///< _maxHp getter
   inline int attackValue() { return _attackValue; } ///< _attackValue getter
+  inline Coords attackCoords() { return _attackCoords; } ///< _attackCoords getter
 
   /** \brief returns Unit's rank as a string
    */
@@ -52,6 +53,11 @@ public:
    */
   void setCoords(Coords coords);
 
+  /** \brief sets unit's attack coordinates
+   ** \param coords: cell's coordinates to set unit's position
+   */
+  inline void setAttackCoords(Coords coords) {  _attackCoords = coords; }
+
   /** \brief unit's name getter
    ** \return unit's name value
    */
@@ -60,7 +66,7 @@ public:
   /** \brief receive damages
    ** \return left Health Points
    */
-  inline virtual int receiveDamages(unsigned int damages) { return _hp - damages; }
+  virtual int receiveDamages(unsigned int damages);
 
   /** \brief _motionValue getter
    ** \return number of cells the unit can cross in one turn
@@ -140,8 +146,9 @@ public:
 
   /** \brief runs attack / strikes backs (if any) cycles
    ** the target is _targets[_targetIndex]
+   ** \return true if the unit is still alive, false otherwise
    */
-  virtual void attack();
+  virtual bool attack(); // could return an attack status (killed, injured)
 
   /** \brief packs the Unit with \param unit
    */
@@ -159,6 +166,7 @@ protected:
   int _attackValue; ///< target taken hp per shot (-1: instant death)
   std::pair<int, int> _range; ///< Attack range
   Coords _coords; ///< Unit's cell coordinates
+  Coords _attackCoords; ///< Unit's coordinates from where it attacks
   unsigned int _motionValue; ///< Number of cells a unit can cross in one turn
   bool _played; ///< notify if the unit has already played this turn
   unsigned int _playerId; ///< the unit belongs to the player matching this id

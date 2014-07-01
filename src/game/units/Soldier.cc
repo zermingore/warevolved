@@ -6,12 +6,14 @@
 Soldier::Soldier() :
   _equipedWeapon (nullptr)
 {
+  static int id = 0;
+
   _class = "soldiers";
-  _name = "John Doe";
+  _name = g_text->getName(id++);
   _imageId = 0;
-  _hp = 10;
+  _hp = 15;
   _maxHp = _hp;
-  _attackValue = 25;
+  _attackValue = 10;
   _range = std::make_pair(0, 3);
   _motionValue = 4;
   _playerId = 0;

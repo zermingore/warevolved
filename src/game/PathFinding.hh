@@ -65,6 +65,9 @@ public:
    */
   std::shared_ptr<Unit> unit() { return _unit; }
 
+  /** \brief releases (reset) _unit
+   */
+  void removeUnit() { _unit.reset(); }
 
 private:
   /** \brief returns the sprite matching e_path_shape

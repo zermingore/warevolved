@@ -11,6 +11,7 @@
 # include <interface/Interface.hh>
 # include <common/Settings.hh>
 # include <common/Status.hh>
+# include <common/Text.hh>
 
 
 /** \brief keeping a pointer to the main Setting instance */
@@ -27,5 +28,8 @@ extern std::unique_ptr<ResourcesManager> g_rm;
 
 /** \brief pointer on the main graphic window */
 extern std::unique_ptr<sf::RenderWindow> g_window;
+
+/** \brief pointer on the main graphic window */
+extern std::unique_ptr<Text> g_text;
 
 #endif /* !GLOBALS_HH_ */
