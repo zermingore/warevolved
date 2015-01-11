@@ -13,6 +13,7 @@ Interface::Interface() :
   _cursor = std::make_shared<Cursor> ();
   _path = std::make_shared<PathFinding> ();
   _inGameMenu = std::make_shared<InGameMenu> ();
+  _panel = std::make_shared<Panel> ();
 }
 
 void Interface::incrementPanelPosition()
@@ -96,60 +97,16 @@ void Interface::drawPanel()
     return;
 
   sf::Vertex line[2] = {
-    sf::Vector2f(_panelX, 0),
-    sf::Vector2f(_panelX, WINDOW_SIZE_Y)
+      sf::Vector2f(_panelX, 0),
+      sf::Vector2f(_panelX, WINDOW_SIZE_Y)
   };
   g_window->draw(line, 2, sf::Lines);
 
-  sf::Vector2f left(0, WINDOW_SIZE_Y / 2);
-  if (_panelPosition == E_PANEL_RIGHT)
-    left.x = WINDOW_SIZE_X;
+  _panel->draw();
 
-  sf::Vertex hline[2] = { left, sf::Vector2f(_panelX, WINDOW_SIZE_Y / 2) };
-  g_window->draw(hline, 2, sf::Lines);
-
-  sf::Text info;
-  // Displaying Unit's informations
   auto unit(MAP.unit(CURSOR->coords()));
   if (unit)
-  {
-    sf::Vector2f position (10, 20);
-    if (_panelPosition == E_PANEL_RIGHT)
-      position.x += _panelX;
-
-    if (_menuBarPosition == E_MENU_BAR_TOP)
-      position.y += _menuBarY;
-
-    info.setCharacterSize(CELL_HEIGHT / 4);
-    Font font = g_rm->getFont("font_army");
-    info.setFont(*font.getFont());
-    info.setPosition(position);
-
-    std::stringstream tmp;
-    tmp << unit->getRank() << std::endl;
-    tmp << unit->name() << std::endl << std::endl;
-
-    // TODO hard-coded string
-    tmp << "Health: " << unit->hp() << " / " << unit->maxHp() << std::endl;
-    tmp << "Motion Value: " << unit->motionValue() << std::endl;
-    tmp << "Attack: " << unit->attackValue() << std::endl;
-
-    info.setString(tmp.str());
-    g_window->draw(info);
-  }
-
-  // Cells informations
-  sf::Vector2f position (10, WINDOW_SIZE_Y / 2 + 20);
-  if (_panelPosition == E_PANEL_RIGHT)
-    position.x += _panelX;
-
-  info.setCharacterSize(CELL_HEIGHT / 4);
-  Font font = g_rm->getFont("font_army");
-  info.setFont(*font.getFont());
-  info.setPosition(position);
-
-  info.setString(CELLS[CURSOR->x()][CURSOR->y()]-> getTerrain());
-  g_window->draw(info);
+    PRINTF(unit->name());
 }
 
 

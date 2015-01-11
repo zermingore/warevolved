@@ -32,7 +32,6 @@ void InGameMenu::build(e_mode mode)
     current_unit->fillActions(_entries);
 
   _entries.emplace_back(MenuEntry("Cancel", E_ENTRY_CANCEL));
-  _nbEntries = _entries.size();
   setOrigin();
 }
 

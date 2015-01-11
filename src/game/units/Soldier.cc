@@ -4,18 +4,24 @@
 
 
 Soldier::Soldier() :
-  _equipedWeapon (nullptr)
+  _equipedWeapon (nullptr),
+  _rank (E_RANK_PRIVATE)
 {
-  static int id = 0;
+  // static int id = 0;
 
-  _class = "soldiers";
-  _name = g_text->getName(id++);
+  // _class = "soldiers";
+  // _name = g_text->getName(id++);
+  // _imageId = 0;
+  // _maxHp = _hp;
+
+  _name = "soldiers";
+  _fullName = "John Doe";
   _imageId = 0;
   _hp = 15;
-  _maxHp = _hp;
   _attackValue = 10;
   _range = std::make_pair(0, 3);
   _motionValue = 4;
+  _played = false;
   _playerId = 0;
 }
 

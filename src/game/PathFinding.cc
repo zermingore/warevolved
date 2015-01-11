@@ -17,7 +17,6 @@ void PathFinding::setOrigin(Coords coords)
 
   _unit = MAP.unit(coords);
   _unit->setTargetIndex(0);
-  _unit->targets()->clear();
 
   _origin = coords;
   _current = coords;

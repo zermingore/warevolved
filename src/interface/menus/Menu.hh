@@ -10,6 +10,7 @@
 
 # include <common/include.hh>
 # include <resources/Image.hh>
+# include <interface/InterfaceBlock.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <game/PathFinding.hh>
 # include <common/enums/modes.hh>
@@ -18,7 +19,7 @@
 /** \class Menu: generic Menu class
  ** mother of \class InGameMenu
  */
-class Menu
+class Menu: public InterfaceBlock
 {
 public:
   /** \brief default Ctor
@@ -32,15 +33,19 @@ public:
   explicit Menu(std::vector<MenuEntry> &entries);
 
   // TODO: merge and use a single function for all (4) directions
-  /** \brief increments _selectedEntry modulo _nbEntries
+  /** \brief increments _selectedEntry modulo number of Entries
    **  allowing cycling
    */
-  inline void incrementSelectedEntry() { ++_selectedEntry %= _nbEntries; }
+  inline void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
   /** \brief decrements _selectedEntry modulo _nbEntries
    **  allowing cycling
    */
   void decrementSelectedEntry();
+
+  /** \brief sets origin menu to the right cursor relative position
+   */
+  void setOrigin(); // TODO sets the menu at optimal position
 
   /** \brief draws the menu
    ** with its entries and the current entry highlighter
@@ -90,17 +95,11 @@ protected:
    */
   inline unsigned int selectedEntry() { return _selectedEntry; }
 
-  /** \brief sets origin menu to the right cursor relative position
-   */
-  void setOrigin(); // TODO sets the menu at optimal position
-
   unsigned int _selectedEntry; ///< Current selected entry
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
-  unsigned int _nbEntries; ///< Total number of entries in the menu
 
   std::vector<MenuEntry> _entries; ///< Entries list
-  sf::Vector2f _origin; ///< Origin position of the menu
   Image _imageSelection; ///< Background image (entry)
 };
 

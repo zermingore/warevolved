@@ -6,19 +6,16 @@
 
 
 Menu::Menu() :
-  _selectedEntry (0),
-  _nbEntries (0)
+  _selectedEntry (0)
 {
   _entries = std::vector<MenuEntry> ();
 }
 
 
 Menu::Menu(std::vector<MenuEntry> &entries) :
-    _selectedEntry (0)
+  _selectedEntry (0)
 {
   _entries = std::vector<MenuEntry> (entries);
-  _nbEntries = entries.size();
-
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
@@ -33,7 +30,6 @@ void Menu::loadMenu()
 {
   auto menu = g_status->popCurrentMode().menu();
   _entries = menu->getEntries();
-  _nbEntries = _entries.size();
   _selectedEntry = menu->selectedEntry();
   setOrigin();
 }
@@ -48,9 +44,9 @@ void Menu::setOrigin()
 void Menu::decrementSelectedEntry()
 {
   if (_selectedEntry)
-    _selectedEntry = (_selectedEntry - 1) % (_nbEntries - 1);
+    _selectedEntry = (_selectedEntry - 1) % (_entries.size() - 1);
   else
-    _selectedEntry = _nbEntries - 1;
+    _selectedEntry = _entries.size() - 1;
 }
 
 

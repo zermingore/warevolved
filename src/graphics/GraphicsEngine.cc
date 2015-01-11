@@ -2,6 +2,7 @@
 #include <common/globals.hh>
 #include <common/constants.hh>
 
+
 void GraphicsEngine::initRoom()
 {
   // = scroll ? 0 : (g_status->cellWidth() + g_status->cellHeight()) / 4;

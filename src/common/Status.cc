@@ -32,14 +32,15 @@ e_mode Status::currentMode()
 {
   if (_states.empty())
   {
-    PRINTF("_states stack is empty, exiting...");
+    DEBUG_PRINT("_states stack is empty, exiting...");
     return E_MODE_NONE;
   }
 
   return _states.top().mode();
 }
 
-void Status::pushMode(e_mode mode) {
+void Status::pushMode(e_mode mode)
+{
   _states.push(State(mode));
 }
 

@@ -305,6 +305,7 @@ bool Event::game()
   return true;
 }
 
+
 void Event::releasedKeys()
 {
   // The timer we want to reset must not match a pressed key

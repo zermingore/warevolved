@@ -8,6 +8,8 @@
 #ifndef SOLDIER_HH_
 # define SOLDIER_HH_
 
+# include <vector>
+# include <string>
 # include <game/units/Unit.hh>
 # include <game/items/Item.hh>
 # include <resources/Image.hh>
@@ -25,15 +27,11 @@ public:
    */
   Soldier();
 
-  /** \brief _rank getter
-   ** \return the Unit's rank (as a string)
+  /** \brief gets name and add grade abbreviated
+   ** \return a string composed of the unit name and it's grade,
+   **   separated by a space
    */
-  inline std::string getRankName() { return Text::name(_rank); }
-
-  /** \brief _name getter
-   ** \return the Unit's name
-   */
-  inline std::string name() { return _name; }
+  inline std::string name() { return Text::name(_rank) + " " + _fullName; }
 
   /** \brief fills the given Menu with the possible Entries,
    **   according to the Unit skills
@@ -47,6 +45,8 @@ private:
   std::shared_ptr<Item> _equipedWeapon; ///< can be a rifle, a shovel, ...
   std::vector<std::shared_ptr<Item>> _gear; ///< Equipped items
   std::vector<std::shared_ptr<Item>> _inventory; ///< non equipped items
+  e_rank _rank; ///< military grade
+  std::string _fullName; ///< soldier's full name (first and last names)
 
   // short _driverLevel; ///< driver level
   // short _mechanicsLevel; ///< mechanics level

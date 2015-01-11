@@ -32,10 +32,6 @@ public:
    */
   inline e_terrain terrain() { return _terrain; }
 
-  /** \brief terrain name getter
-   */
-  std::string getTerrain();
-
   /** \brief _unit setter
    ** sets the Unit \param unit in the cell
    ** \param unit The unit to be set in the cell

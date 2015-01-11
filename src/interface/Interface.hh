@@ -3,6 +3,7 @@
 
 # include <interface/Cursor.hh>
 # include <interface/menus/InGameMenu.hh>
+# include <interface/panels/Panel.hh>
 # include <game/PathFinding.hh>
 
 
@@ -105,6 +106,7 @@ private:
 
   std::shared_ptr<Cursor> _cursor; ///< Map Cursor
   std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
+  std::shared_ptr<Panel> _panel; ///< in game menu
   std::shared_ptr<PathFinding> _path; ///< current path
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)

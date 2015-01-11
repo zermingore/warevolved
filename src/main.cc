@@ -3,11 +3,13 @@
 #include <interface/Interface.hh>
 #include <game/Game.hh>
 
-auto g_status(std::make_unique<Status> ());
-auto g_rm(std::make_unique<ResourcesManager> ("resources.xml"));
-auto g_interface(std::make_unique<Interface> ());
-auto g_window(std::make_unique<sf::RenderWindow> ());
-auto g_text(std::make_unique<Text> ());
+
+std::unique_ptr<Status> g_status(std::make_unique<Status> ());
+std::unique_ptr<ResourcesManager> g_rm(std::make_unique<ResourcesManager> ("resources.xml"));
+std::unique_ptr<Interface> g_interface(std::make_unique<Interface> ());
+std::unique_ptr<sf::RenderWindow> g_window(std::make_unique<sf::RenderWindow> ());
+std::unique_ptr<Text> g_text(std::make_unique<Text> ());
+
 
 int main(int ac, const char **av)
 {
