@@ -9,6 +9,7 @@ Menu::Menu() :
   _selectedEntry (0)
 {
   _entries = std::vector<MenuEntry> ();
+  _origin = {0, 0};
 }
 
 
@@ -16,6 +17,7 @@ Menu::Menu(std::vector<MenuEntry> &entries) :
   _selectedEntry (0)
 {
   _entries = std::vector<MenuEntry> (entries);
+
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
@@ -39,6 +41,11 @@ void Menu::setOrigin()
   // TODO sets the menu at right (cursor-relative) position
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
+}
+
+void Menu::setOrigin(sf::Vector2f origin)
+{
+  _origin = origin;
 }
 
 void Menu::decrementSelectedEntry()

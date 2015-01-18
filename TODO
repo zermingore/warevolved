@@ -1,6 +1,5 @@
 -*- mode:org -*-
 
-<<<<<<< HEAD
 * TODO Roadmap
   (should be no more than 2 commits ahead)
 
@@ -11,8 +10,6 @@
    CLOSED: [2014-06-29 Sun 17:04]
    (tmp: use a filled vector and a static index when creating a Unit)
 
-=======
->>>>>>> parent of ac6872c... Fixed a bug in target selection
 * DONE Git
   CLOSED: [2013-07-24 Wed 07:10]
 ** DONE Merge ResourcesManager branch
@@ -208,6 +205,8 @@
    -> test if state equals to MODE__MENU and prints an error if not
 
 * TODO Bugs / Features
+** TODO Moving Unit
+   sometimes a unt can move too far (2 keys simultaneously pressed ?)
 ** TODO Fix cursor size trouble
    was too big
    (running for a long time ?)
@@ -217,7 +216,6 @@
 ** TODO Multiple keys maintained for more than a sec
    probably a timer related
    confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
-<<<<<<< HEAD
 ** DONE Attack a target without moving: unit deletion
    CLOSED: [2014-07-01 Tue 20:19]
    was due to a move failure
@@ -230,8 +228,6 @@
    CLOSED: [2014-06-29 Sun 12:08]
    same comportement for Escape key and Cancel entry
    (if cancel should unstack everything, it's not a bug)
-=======
->>>>>>> parent of ac6872c... Fixed a bug in target selection
 ** DONE Floating Point Exception Failure
    CLOSED: [2014-06-27 Fri 22:48]
    (bug while building menu -> 0 entries, failed on modulo 0)

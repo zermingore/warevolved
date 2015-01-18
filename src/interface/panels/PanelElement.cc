@@ -17,4 +17,19 @@ PanelElement::PanelElement(std::string label_name, e_panel entry)
   _label->setString(label_name);
 
   _id = entry;
+
+  _size = sf::Vector2f(5, 5);
+  static sf::Vector2f static_pos = sf::Vector2f(0, 0);
+  _position = static_pos;
+  static_pos += _size;
+}
+
+
+void PanelElement::draw()
+{
+  _background.setPosition(_position);
+  _label->setPosition(_position);
+
+  _background.draw();
+  g_window->draw(*_label);
 }

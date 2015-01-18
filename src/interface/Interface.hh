@@ -3,7 +3,8 @@
 
 # include <interface/Cursor.hh>
 # include <interface/menus/InGameMenu.hh>
-# include <interface/panels/Panel.hh>
+# include <interface/panels/SidePanel.hh>
+# include <interface/panels/MenuBar.hh>
 # include <game/PathFinding.hh>
 
 
@@ -90,7 +91,7 @@ public:
 private:
   /** \brief Initializes Panel position
    */
-  void setPanel();
+  void setSidePanel();
 
   /** \brief Initializes Menu bar position
    */
@@ -98,7 +99,7 @@ private:
 
   /** \brief Draw side panel
    */
-  void drawPanel();
+  void drawSidePanel();
 
   /** \brief Draw menu bar
    */
@@ -106,14 +107,13 @@ private:
 
   std::shared_ptr<Cursor> _cursor; ///< Map Cursor
   std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
-  std::shared_ptr<Panel> _panel; ///< in game menu
+  std::shared_ptr<SidePanel> _panel; ///< side menu
+  std::shared_ptr<MenuBar> _menuBar; ///< menuBar
   std::shared_ptr<PathFinding> _path; ///< current path
   e_panel_position _panelPosition; ///< Side panel position (if any)
   e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   bool _modificationPanel; ///< notification: panel status changed
   bool _modificationMenuBar; ///< notification: menu bar status changed
-  unsigned int _panelX; ///< panel coordinates
-  unsigned int _menuBarY; ///< menu bar coordinates
 };
 
 #endif /* !INTERFACE_HH_ */

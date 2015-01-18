@@ -22,11 +22,16 @@ enum e_panel
 class PanelElement: public InterfaceElement
 {
 public:
-  PanelElement();
+  PanelElement() = delete;
   PanelElement(std::string label_name, e_panel entry);
   // void onClick();
 
+  void draw();
+
+
 private:
+  sf::Vector2f _position;
+  sf::Vector2f _size;
   e_panel _id; ///< entry identifier
 };
 

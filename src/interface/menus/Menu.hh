@@ -10,7 +10,7 @@
 
 # include <common/include.hh>
 # include <resources/Image.hh>
-# include <interface/InterfaceBlock.hh>
+# include <interface/panels/Panel.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <game/PathFinding.hh>
 # include <common/enums/modes.hh>
@@ -19,7 +19,7 @@
 /** \class Menu: generic Menu class
  ** mother of \class InGameMenu
  */
-class Menu: public InterfaceBlock
+class Menu
 {
 public:
   /** \brief default Ctor
@@ -46,6 +46,10 @@ public:
   /** \brief sets origin menu to the right cursor relative position
    */
   void setOrigin(); // TODO sets the menu at optimal position
+
+  /** \brief sets origin menu to the right cursor relative position
+   */
+  virtual void setOrigin(sf::Vector2f origin); // TODO sets the menu at optimal position
 
   /** \brief draws the menu
    ** with its entries and the current entry highlighter
@@ -101,6 +105,7 @@ protected:
 
   std::vector<MenuEntry> _entries; ///< Entries list
   Image _imageSelection; ///< Background image (entry)
+  sf::Vector2f _origin; ///< menu origin
 };
 
 #endif /* !MENU_HH_ */
