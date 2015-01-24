@@ -1,7 +1,8 @@
 -*- mode:org -*-
 
 * TODO Roadmap
-  (should be no more than 2 commits ahead)
+: Should be no more than 2 commits ahead :
+** TODO add the tooltip (interface)
 
 * old roadmap
 ** DONE Multiturn attacks
@@ -10,12 +11,14 @@
    CLOSED: [2014-06-29 Sun 17:04]
    (tmp: use a filled vector and a static index when creating a Unit)
 
-* DONE Git
-  CLOSED: [2013-07-24 Wed 07:10]
+* TODO Git
+: Do not add directly new features on master anymore :
 ** DONE Merge ResourcesManager branch
    CLOSED: [2013-06-07 Fri 17:58]
 ** DONE Merge master & test (switch to std::shared_ptr)
    CLOSED: [2014-06-22 Sun 13:50]
+** TODO Merge master & interface (refactored interface)
+
 
 * TODO keys
 ** DONE make the cursor move
@@ -55,7 +58,8 @@
 ** TODO [#A] Clean (truly use C++11-14)
 *** TODO use reference
 *** TODO use const +/- whenever possible
-*** TODO use C++11 enum (type / size)
+*** DONE use C++11 enum (type / size)
+    CLOSED: [2015-01-24 Sa 15:06]
 ** TODO follow the C++ rule of 5
 ** DONE remove non needed raw pointers
    CLOSED: [2014-06-20 Fri 14:30]
@@ -64,6 +68,7 @@
 ** TODO Hunt dead code
 ** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
 ** TODO clean Status class (making a global class ?)
+** TODO limit sf::Vector usage
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
@@ -164,7 +169,7 @@
 ** TODO multi-players
 
 * TODO Multi-Platforms
-** DONE Linux (current ref: Arch Linux)
+** DONE Linux (current ref: Arch Linux / Fedora)
    CLOSED: [2014-06-20 Fri 14:29]
 ** TODO Windows
 ** TODO Unix (BSD)
@@ -219,7 +224,7 @@
 ** DONE Attack a target without moving: unit deletion
    CLOSED: [2014-07-01 Tue 20:19]
    was due to a move failure
-** DONE Selecct target mode
+** DONE Select target mode
    CLOSED: [2014-06-29 Sun 12:23]
    Index value: tends to have more than nb entries possible values
    -> tend to 'browse' a cell two times
@@ -257,8 +262,7 @@
    CLOSED: [2013-04-19 Fri 16:33]
    was a rendering zone room trouble
 ** TODO Memory Leaks / Errors
-*** DONE Definitely Lost
-    CLOSED: [2014-06-20 Fri 14:27]
+*** TODO Definitely Lost
 *** DONE Read errors
     CLOSED: [2014-06-20 Fri 14:27]
 *** TODO Hide SFML "leaks"

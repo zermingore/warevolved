@@ -71,14 +71,14 @@ void Event::panels()
 {
   if (_km->panel() && _km->switchStatus(E_SWITCH_PANEL) == OFF)
   {
-    g_interface->incrementPanelPosition();
+    g_interface->nextPanelPosition();
     _km->setSwitchStatus(E_SWITCH_PANEL, ON);
     return;
   }
 
   if (_km->menubar() && _km->switchStatus(E_SWITCH_MENUBAR) == OFF)
   {
-    g_interface->incrementMenuBarPosition();
+    g_interface->nextMenuBarPosition();
     _km->setSwitchStatus(E_SWITCH_MENUBAR, ON);
     return;
   }

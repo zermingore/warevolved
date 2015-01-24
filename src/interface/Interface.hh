@@ -8,32 +8,9 @@
 # include <game/PathFinding.hh>
 
 
-/** \brief Side Panel possible positions
- */
-enum e_panel_position
-{
-  E_PANEL_DEACTIVATED = 0,
-  E_PANEL_LEFT,
-  E_PANEL_RIGHT,
-
-  E_PANEL_NB_POSITIONS // useful with modulo (++position % nb)
-};
-
-/** \brief Menu Bar possible positions
- */
-enum e_menu_bar_position
-{
-  E_MENU_BAR_DEACTIVATED = 0,
-  E_MENU_BAR_TOP,
-  E_MENU_BAR_BOTTOM, // not sure we'll allow this
-
-  E_MENU_BAR_NB_POSITIONS // useful with modulo (++position % nb)
-};
-
-
 // TODO method draw: path, menus
 
-/** \brief Interface class
+/** \class Interface class
  ** keeps data relative to the user's interface
  ** draws the user's interface
  */
@@ -45,27 +22,8 @@ public:
    */
   Interface();
 
-  /** \brief _cursor getter
-   */
+  ///< \brief _cursor getter
   inline std::shared_ptr<Cursor> cursor() { return _cursor; }
-
-  /** \brief side panel position getter
-   */
-  inline e_panel_position panelPosition() { return _panelPosition; }
-
-  /** \brief side panel position getter
-   */
-  inline e_menu_bar_position menuBarPosition() { return _menuBarPosition; }
-
-  /** \brief sets panel position to the next position
-   ** loops over the E_PANEL_NB_POSITIONS possibilities
-   */
-  void incrementPanelPosition();
-
-  /** \brief sets menu bar position to the next position
-   ** loops over the E_MENU_BAR_NB_POSITIONS possibilities
-   */
-  void incrementMenuBarPosition();
 
   /** \brief in-game menu getter
    ** \return _inGameMenu
@@ -81,6 +39,11 @@ public:
    ** meaning the cell from where it starts
    */
   inline void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
+
+  ///< \brief changes _menubar position (DEACTIVATED, UP, DOWN)
+  void nextMenuBarPosition();
+  ///< \brief changes _panel position (DEACTIVATED, LEFT, RIGHT)
+  void nextPanelPosition();
 
   /** \brief draws all element relative to the user's interface
    ** meaning: in-game menus, panels and path (from path-finding)
@@ -110,8 +73,8 @@ private:
   std::shared_ptr<SidePanel> _panel; ///< side menu
   std::shared_ptr<MenuBar> _menuBar; ///< menuBar
   std::shared_ptr<PathFinding> _path; ///< current path
-  e_panel_position _panelPosition; ///< Side panel position (if any)
-  e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
+  Panel_position _lastPanelPosition; ///< last known Side panel position
+  MenuBar_position _lastMenuBarPosition; ///< last known Menu Bar position
   bool _modificationPanel; ///< notification: panel status changed
   bool _modificationMenuBar; ///< notification: menu bar status changed
 };

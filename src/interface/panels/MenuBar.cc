@@ -1,8 +1,14 @@
-#include <interface/panels/MenuBar.hh>
 #include <common/include.hh>
 #include <common/globals.hh>
 #include <common/macros.hh>
+#include <interface/panels/MenuBar.hh>
+#include <interface/panels/MenuBar.hxx>
 
+
+MenuBar::MenuBar() :
+  _position(MenuBar_position::DEACTIVATED)
+{
+}
 
 void MenuBar::draw()
 {
@@ -25,4 +31,13 @@ void MenuBar::draw()
     sf::Vector2f(_size.x, _origin.y)
   };
   g_window->draw(line2, 2, sf::Lines);
+}
+
+
+MenuBar_position MenuBar::incrementPosition()
+{
+  MenuBar_position old = _position;
+  _position++;
+
+  return old;
 }
