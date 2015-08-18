@@ -1,5 +1,9 @@
 #include <resources/Image.hh>
-#include <common/globals.hh>
+#include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
+
+
+namespace graphics {
 
 
 Image::Image(const std::string file_name,
@@ -136,40 +140,20 @@ void Image::reload(std::string file_name)
 }
 
 
-/// \deprecated use Coords
-void Image::drawAtCell(unsigned int i, unsigned int j)
-{
-  if (!_sprite)
-    sprite();
-
-  sf::Sprite &s(*_sprite);
-
-  // Sprite position
-  sf::Vector2f pos;
-  pos.x = i * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X;
-  pos.y = j * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
-  _sprite->setPosition(pos);
-
-  if (load())
-    g_window->draw(s);
-  g_window->draw(*_rectangle);
-}
-
-
-void Image::drawAtCell(Coords c)
+void Image::drawAtCell(Coords c, const std::shared_ptr<MapGraphicsProperties> p)
 {
   if (!_sprite)
     sprite();
 
   // Sprite position
   sf::Vector2f pos;
-  pos.x = c.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X;
-  pos.y = c.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y;
+  pos.x = c.x * p->cellWidth()  + p->gridThickness() + p->gridOffsetX();
+  pos.y = c.y * p->cellHeight() + p->gridThickness() + p->gridOffsetY();
   _sprite->setPosition(pos);
 
   if (load())
-    g_window->draw(*_sprite);
-  g_window->draw(*_rectangle);
+    graphics::GraphicsEngine::draw(_sprite);
+  graphics::GraphicsEngine::draw(_rectangle);
 }
 
 
@@ -181,6 +165,8 @@ void Image::draw()
   _rectangle->setPosition(_sprite->getPosition());
 
   if (load())
-    g_window->draw(*_sprite);
-  g_window->draw(*_rectangle);
+    graphics::GraphicsEngine::draw(_sprite);
+  graphics::GraphicsEngine::draw(_rectangle);
 }
+
+} // namespace graphics

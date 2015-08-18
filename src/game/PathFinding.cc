@@ -1,9 +1,12 @@
 #include <game/PathFinding.hh>
-#include <common/macros.hh>
-#include <common/globals.hh>
+#include <game/Map.hh>
+#include <game/Cell.hh>
+#include <game/units/Unit.hh>
+#include <resources/Image.hh>
 
 
-PathFinding::PathFinding() :
+PathFinding::PathFinding(std::shared_ptr<Map> map) :
+  _map (map),
   _origin (0, 0),
   _current (0, 0),
   _maxLength (0),
@@ -11,11 +14,12 @@ PathFinding::PathFinding() :
 {
 }
 
-void PathFinding::setOrigin(Coords coords)
+void PathFinding::setOrigin(Coords coords,
+                            std::shared_ptr<Unit> unit)
 {
   clearPath();
 
-  _unit = MAP.unit(coords);
+  _unit = unit;
   _unit->setTargetIndex(0);
 
   _origin = coords;
@@ -30,7 +34,7 @@ void PathFinding::setOrigin(Coords coords)
 void PathFinding::drawPath()
 {
   _current = _origin;
-  unsigned int i = 0;
+  size_t i = 0;
   for (auto it = _directions.begin(); it != _directions.end(); ++it)
   {
     updateCurrentCell(*it);
@@ -52,23 +56,23 @@ void PathFinding::clearPath()
 }
 
 
-void PathFinding::updateCurrentCell(e_direction direction)
+void PathFinding::updateCurrentCell(direction direction)
 {
   switch (direction)
   {
-    case E_DIRECTION_UP:
+  case direction::UP:
       --_current.y;
       return;
 
-    case E_DIRECTION_DOWN:
+    case direction::DOWN:
       ++_current.y;
       return;
 
-    case E_DIRECTION_LEFT:
+    case direction::LEFT:
       --_current.x;
       return;
 
-    case E_DIRECTION_RIGHT:
+    case direction::RIGHT:
       ++_current.x;
       return;
 
@@ -83,97 +87,100 @@ void PathFinding::buildImageVector()
   // deleteImagesVector();
 
   unsigned int i = 0;
-  for (auto it = _directions.begin(); it != _directions.end(); ++it)
+  for (auto it: _directions) // NOTE unused it
     _images.push_back(getImage(i++));
 }
 
 
-e_path_shape PathFinding::getShape(unsigned int index)
+path_shape PathFinding::getShape(size_t index)
 {
   // last element case
   if (index + 1 == _directions.size())
-    return (static_cast <e_path_shape> (_directions[index] - 360));
+    return (static_cast <path_shape> (static_cast<int >(_directions[index]) - 360));
 
-  e_direction next = _directions[index + 1];
+  direction next = _directions[index + 1];
 
   // same element as next case
   if (_directions[index] == next)
-    return (static_cast <e_path_shape> (_directions[index]));
+    return (static_cast <path_shape> (_directions[index]));
 
   // reverse
-  if (std::abs(_directions[index] - next) == 180)
-    return (static_cast <e_path_shape> (next));
+  if (std::abs(static_cast<int >(_directions[index]) - static_cast<int >(next)) == 180)
+    return (static_cast <path_shape> (next));
 
   // from here, we know the direction changed
   switch (_directions[index])
   {
-    case E_DIRECTION_UP:
-      if (next == E_DIRECTION_RIGHT)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT));
+    case direction::UP:
+      if (next == direction::RIGHT)
+        return path_shape::CORNER_RIGHT_DOWN;
+      return path_shape::CORNER_DOWN_LEFT;
 
-    case E_DIRECTION_DOWN:
-      if (next == E_DIRECTION_RIGHT)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP));
+    case direction::DOWN:
+      if (next == direction::RIGHT)
+        return path_shape::CORNER_UP_RIGHT;
+      return path_shape::CORNER_LEFT_UP;
 
-    case E_DIRECTION_LEFT:
-      if (next == E_DIRECTION_UP)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN));
+    case direction::LEFT:
+      if (next == direction::UP)
+        return path_shape::CORNER_UP_RIGHT;
+      return path_shape::CORNER_RIGHT_DOWN;
 
     default:
-      if (next == E_DIRECTION_UP)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT));
+      if (next == direction::UP)
+        return path_shape::CORNER_LEFT_UP;
+      return path_shape::CORNER_DOWN_LEFT;
     }
 }
 
 
-Image PathFinding::getImage(unsigned int index)
+graphics::Image PathFinding::getImage(size_t index)
 {
-  Image img; // TODO use a copy Ctor (avoid rotating all sprites)
-  unsigned int angle = 0;
-  e_path_shape shape = getShape(index);
+  return graphics::Image();
+  // TODO up to GraphicsEngine
 
-  switch (shape)
-  {
-     // Rectangles
-     case E_PATH_SHAPE_UP:
-     case E_PATH_SHAPE_DOWN:
-     case E_PATH_SHAPE_LEFT:
-     case E_PATH_SHAPE_RIGHT:
-       img = GETIMAGE("path_shape");
-       break;
+  // Image img; // TODO use a copy Ctor (avoid rotating all sprites)
+  // unsigned int angle = 0;
+  // path_shape shape = getShape(index);
 
-     // Arrows
-     case E_PATH_SHAPE_LAST_UP:
-     case E_PATH_SHAPE_LAST_DOWN:
-     case E_PATH_SHAPE_LAST_LEFT:
-     case E_PATH_SHAPE_LAST_RIGHT:
-       img = GETIMAGE("path_arrow");
-       break;
+  // switch (shape)
+  // {
+  //    // Rectangles
+  //    case path_shape::UP:
+  //    case path_shape::DOWN:
+  //    case path_shape::LEFT:
+  //    case path_shape::RIGHT:
+  //      img = GETIMAGE("path_shape");
+  //      break;
 
-     // Corners
-     default:
-       img = GETIMAGE("path_corner");
-       break;
-  }
+  //    // Arrows
+  //    case path_shape::LAST_UP:
+  //    case path_shape::LAST_DOWN:
+  //    case path_shape::LAST_LEFT:
+  //    case path_shape::LAST_RIGHT:
+  //      img = GETIMAGE("path_arrow");
+  //      break;
 
-  angle = static_cast <unsigned int> (shape % 360);
-  img.sprite()->setRotation(angle);
-  img.sprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
+  //    // Corners
+  //    default:
+  //      img = GETIMAGE("path_corner");
+  //      break;
+  // }
 
-  // drawing at the middle of the cell
-  sf::Vector2f pos;
-  pos.x = _current.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
-  pos.y = _current.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
-  img.sprite()->setPosition(pos);
+  // angle = static_cast <unsigned int> (shape % 360);
+  // img.sprite()->setRotation(angle);
+  // img.sprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
 
-  return img;
+  // // drawing at the middle of the cell
+  // sf::Vector2f pos;
+  // pos.x = _current.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
+  // pos.y = _current.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
+  // img.sprite()->setPosition(pos);
+
+  //  return img;
 }
 
-void PathFinding::addNextDirection(e_direction direction)
+void PathFinding::addNextDirection(direction direction)
 {
   _directions.push_back(direction);
   ++_currentLength;
@@ -182,34 +189,33 @@ void PathFinding::addNextDirection(e_direction direction)
 
 void PathFinding::showAllowedPath()
 {
-  std::stack<std::pair<int, int>> s;
-  s.push(std::pair<int, int>(_unit->x(), _unit->y()));
+  std::stack<std::pair<size_t, size_t>> s;
+  s.push(std::pair<size_t, size_t>(_unit->x(), _unit->y()));
   _reachableCells.clear();
-  std::vector<std::pair<int, int>> checked;
+  std::vector<std::pair<size_t, size_t>> checked;
 
   while (!s.empty())
   {
     // getting Cell's coordinates (stack of Coordinates)
-    int x = s.top().first;
-    int y = s.top().second;
+    size_t x = s.top().first;
+    size_t y = s.top().second;
     s.pop();
 
     // check overflow, Manhattan distance and if we already marked the cell
-    if (x < 0 || y < 0 || x > (int) NB_COLUMNS - 1 || y > (int) NB_LINES - 1
-        || std::abs((int) _unit->x() - x) + std::abs((int) _unit->y() - y) > _maxLength
-        || std::find(checked.begin(), checked.end(), std::pair<int, int>(x, y)) != checked.end())
+    if (x < 0 || y < 0 || x > _map->nbColumns() - 1 || y > _map->nbLines() - 1
+        || std::abs(_unit->x() - x) + std::abs(_unit->y() - y) > _maxLength
+        || std::find(checked.begin(), checked.end(), std::pair<size_t, size_t>(x, y)) != checked.end())
     {
       continue;
     }
+;
+    _reachableCells.push_back(_map->cell(x, y));
+    checked.push_back(std::pair<size_t, size_t>(x, y));
 
-    auto cells = CELLS;
-    _reachableCells.push_back(cells[x][y]);
-    checked.push_back(std::pair<int, int>(x, y));
-
-    s.emplace(std::pair<int, int>(x + 1, y));
-    s.emplace(std::pair<int, int>(x, y + 1));
-    s.emplace(std::pair<int, int>(x - 1, y));
-    s.emplace(std::pair<int, int>(x, y - 1));
+    s.emplace(std::pair<size_t, size_t>(x + 1, y));
+    s.emplace(std::pair<size_t, size_t>(x, y + 1));
+    s.emplace(std::pair<size_t, size_t>(x - 1, y));
+    s.emplace(std::pair<size_t, size_t>(x, y - 1));
   }
 
   highlightCells();
@@ -223,12 +229,12 @@ void PathFinding::highlightCells()
   //    color allies in a different color if we can heal them, ...)
   for (auto it: _reachableCells)
   {
-    std::shared_ptr<Cell> c = CELLS[it->x()][it->y()];
+    std::shared_ptr<Cell> c = _map->cell(it->x(), it->y());
 
     c->setHighlight(true);
     if (c->unit())
     {
-     if (c->unit()->playerId() != g_status->currentPlayer())
+     if (c->unit()->playerId() != _map->currentPlayer())
      {
        c->setHighlightColor(sf::Color::Red);
        _unit->targets()->push_back(c);
@@ -239,14 +245,17 @@ void PathFinding::highlightCells()
     else
       c->setHighlightColor(sf::Color::Yellow);
   }
+
+  // highlight reachable targets
+  // for (auto unit: MAP->players.units())
+  // {}
 }
 
 
 void PathFinding::hideAllowedPath() const
 {
   // cleaning displayed move possibilities
-  std::vector<std::vector<std::shared_ptr<Cell>>> cells = CELLS;
-  for (unsigned int i = 0; i < NB_COLUMNS; ++i)
-    for (unsigned int j = 0; j < NB_LINES; ++j)
-      cells[i][j]->setHighlight(false);
+  for (unsigned int i = 0; i < _map->nbColumns(); ++i)
+    for (unsigned int j = 0; j < _map->nbLines(); ++j)
+      _map->cell(i, j)->setHighlight(false);
 }

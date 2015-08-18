@@ -8,8 +8,8 @@
 #ifndef TERRAIN_HH_
 # define TERRAIN_HH_
 
-# include <game/Cell.hh>
-# include <resources/Image.hh>
+// # include <game/Cell.hh>
+// # include <resources/Image.hh>
 
 
 // NOTE we could add a randomized sf::shape

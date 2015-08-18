@@ -23,6 +23,9 @@ enum e_resource_type
 };
 
 
+namespace resources {
+
+
 /** \class ResourcesManager
  ** uses a XML file, containing all resources data:
  **   their path, name and specific attributes
@@ -42,12 +45,12 @@ public:
   /** \brief Retrieve an Image from _images map
    ** if the Image does not exist, print an error and return the default one
    */
-  Image& getImage(const std::string name);
+  static graphics::Image& getImage(const std::string name);
 
   /** \brief Retrieve a Font from _fonts map
    ** if the Font does not exist, print an error and return the default one
    */
-  Font& getFont(const std::string name);
+  static Font& getFont(const std::string name);
 
 
 private:
@@ -91,11 +94,14 @@ private:
   void listResources();
 # endif
 
-  std::map<std::string, std::shared_ptr<Image>> _images; ///< Images list
-  std::map<std::string, std::shared_ptr<Font>> _fonts; ///< Fonts list
+  static std::map<std::string, std::shared_ptr<graphics::Image>> _images; ///< Images list
+  static std::map<std::string, std::shared_ptr<Font>> _fonts; ///< Fonts list
 
   ///< map categories names matching e_resource_type
-  std::map<e_resource_type, std::string> _typeNames;
+  static std::map<e_resource_type, std::string> _typeNames;
 };
+
+} // namespace resources
+
 
 #endif /* !RESOURCESMANAGER_HH_ */

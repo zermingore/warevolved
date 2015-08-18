@@ -11,24 +11,24 @@
 /** \enum various menu mode values
  ** use this to notify the mode stack
  */
-enum e_mode
+enum class mode
 {
-  E_MODE_NONE = 0, // we should never be in this mode
+  NONE = 0, // we should never be in this mode
 
-  E_MODE_MAIN_MENU,
-  E_MODE_IN_GAME,
-  E_MODE_PLAYING,
+  MAIN_MENU,
+  IN_GAME,
+  PLAYING,
 
-  E_MODE_SELECTION_MENU, // pick a Unit
-  E_MODE_MOVING_UNIT, // move it
-  E_MODE_ACTION_MENU, // give it an order
-  E_MODE_ATTACK, // ask a Unit to attack
+  SELECTION_MENU, // pick a Unit
+  MOVING_UNIT, // move it
+  ACTION_MENU, // give it an order
+  ATTACK, // ask a Unit to attack
 
-  E_MODE_LOADING,
-  E_MODE_SAVING,
+  LOADING,
+  SAVING,
 
-  E_MODE_READ_TEXTBOX,
-  E_MODE_WRITE_MESSAGE
+  READ_TEXTBOX,
+  WRITE_MESSAGE
 };
 
 

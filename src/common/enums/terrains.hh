@@ -3,12 +3,12 @@
 
 /** \enum listing of all terrains
  */
-enum e_terrain
+enum class terrain
 {
-  E_TERRAIN_NONE = 0,
-  E_TERRAIN_FOREST,
+  NONE = 0,
+  FOREST,
 
-  E_TERRAIN_NB_TERRAIN
+  NB_TERRAIN
 };
 
 #endif /* !TERRAINS_HH_ */

@@ -12,14 +12,14 @@
 /** \enum Faction enum
  ** list of factions
  */
-enum e_faction
+enum class faction
 {
-  E_FACTION_T,
-  E_FACTION_Z,
-  E_FACTION_P, // we could have put a, b, c
-  E_FACTION_NEUTRAL,
+  T = 0,
+  Z,
+  P, // we could have put a, b, c
+  NEUTRAL,
 
-  E_FACTIONS_NB_FACTIONS
+  NB_FACTIONS
 };
 
 #endif /* !FACTIONS_HH_ */

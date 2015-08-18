@@ -8,16 +8,16 @@
 #ifndef STATE_HH_
 # define STATE_HH_
 
+# include <memory>
 # include <common/enums/modes.hh>
 # include <common/structures/Vector.hh>
-# include <interface/menus/Menu.hh>
 
 class Menu;
 
 /** \brief state class
  ** stores a state, which is composed of
  **   a cursor position
- **   a mode: \enum e_state index
+ **   a mode: \enum state index
  */
 class State
 {
@@ -26,18 +26,18 @@ public:
    ** \param mode State mode value
    ** auto fetch Cursor coordinates
    */
-  explicit State(e_mode &mode);
+  explicit State(mode &mode);
 
   /** Constructor
    ** \param mode State mode value
    ** auto fetch Cursor coordinates
    */
-  State(e_mode mode, std::shared_ptr<Menu> menu);
+  State(mode mode, std::shared_ptr<Menu> menu);
 
   /** _mode getter
    ** \return _mode value
    */
-  e_mode mode() { return _mode; }
+  mode currentMode() { return _currentMode; }
 
   /** _menu getter
    ** \return _menu a pointer over current menu
@@ -51,7 +51,7 @@ public:
 
 
 private:
-  e_mode _mode; ///< State's mode
+  mode _currentMode; ///< State's mode
   std::shared_ptr<Menu> _menu; ///< menu state to save
   Coords _cursorCoords; ///< Cursor coordinates
                         ///< when the mode was activated

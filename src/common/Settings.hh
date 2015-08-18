@@ -20,66 +20,65 @@
 class Settings
 {
 public:
-  /** \brief Constructor
-   ** sets graphic attributes
+  /** \brief initialization function, sets graphic attributes
    ** \param depth graphic depth value
    ** \param stencil stencil value
    ** \param antiAliasing anti aliasing coefficient
    */
-  Settings(unsigned int depth,
-           unsigned int stencil,
-           unsigned int antiAliasing);
+  static void initialize(unsigned int depth,
+                         unsigned int stencil,
+                         unsigned int antiAliasing);
 
   /** \brief graphic depth getter
    ** \return depth value
    */
-  inline unsigned int depth() { return _depth; }
+  static inline unsigned int depth() { return Settings::_depth; }
 
   /** \brief graphic getter
    ** \return stencil value
    */
-  inline unsigned int stencil() { return _stencil; }
+  static inline unsigned int stencil() { return Settings::_stencil; }
 
   /** \brief anti aliasing getter
    ** \return anti aliasing coefficient
    */
-  inline unsigned int antiAliasing() { return _antiAliasing; }
+  static inline unsigned int antiAliasing() { return Settings::_antiAliasing; }
 
   /** \brief _fullScreen getter
    ** \return true if we're in full screen
    **   false otherwise
    */
-  inline bool fullScreen() { return _fullScreen; }
+  static inline bool fullScreen() { return Settings::_fullScreen; }
 
   /** \brief _keyRepeatDelay getter
    ** \return the required time to consider a "second pressure" (in ms)
    */
-  inline int keyRepeatDelay() { return _keyRepeatDelay; }
+  static inline int keyRepeatDelay() { return Settings::_keyRepeatDelay; }
 
   /** \brief _keyRepeatDelay setter
    */
-  inline void setKeyRepeatDelay(int delay) { _keyRepeatDelay = delay; }
+  static inline void setKeyRepeatDelay(int delay) { Settings::_keyRepeatDelay = delay; }
 
   // graphics settings setters
-  inline void setDepth(unsigned int depth) { _depth = depth; }
-  inline void setStencil(unsigned int stencil) { _stencil = stencil; }
-  inline void setAntiAliasing(unsigned int aa) { _antiAliasing = aa; }
+  static inline void setDepth(unsigned int depth) { Settings::_depth = depth; }
+  static inline void setStencil(unsigned int stencil) { Settings::_stencil = stencil; }
+  static inline void setAntiAliasing(unsigned int aa) { Settings::_antiAliasing = aa; }
 
   // generic settings
-  inline void setFullScreen(bool fullScreen) { _fullScreen = fullScreen; }
+  static inline void setFullScreen(bool fullScreen) { Settings::_fullScreen = fullScreen; }
 
 
 private:
   // graphic settings
-  unsigned int _depth; ///< depth buffer size
-  unsigned int _stencil; ///< stencil buffer size
-  unsigned int _antiAliasing; ///< anti aliasing level
+  static unsigned int _depth; ///< depth buffer size
+  static unsigned int _stencil; ///< stencil buffer size
+  static unsigned int _antiAliasing; ///< anti aliasing level
 
   // generic settings
-  bool _fullScreen; ///< notify if we're running in full screen
+  static bool _fullScreen; ///< notify if we're running in full screen
 
-  int _keyRepeatDelay; ///< required time to consider a "second pressure"
-                       ///< in ms, must be positive to avoid locking keyboard
+  static unsigned int _keyRepeatDelay; ///< required time to consider a "second pressure"
+                                       ///< in ms, must be positive to avoid locking keyboard
 };
 
 #endif /* !SETTINGS_HH_ */

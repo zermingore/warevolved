@@ -29,12 +29,14 @@ pugixml/pugixml.cpp                 \
 core/Context.cc						\
 \
 graphics/GraphicsEngine.cc			\
+graphics/MapGraphicsProperties.cc   \
 \
-resources/ResourcesManager.cc		\
+resources/ResourcesManager.cc       \
 resources/Resource.cc				\
 resources/Image.cc					\
 resources/Font.cc					\
 \
+common/Globals.cc					\
 common/System.cc					\
 common/Settings.cc					\
 common/Status.cc					\

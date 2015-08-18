@@ -15,11 +15,16 @@
 class Cell
 {
 public:
-  /** \brief Default Constructor creates an empty Cell
+  /** \brief deleted default constructor
+   */
+  Cell() = delete;
+
+  /** \brief Constructor: creates an empty Cell
+   **   at coordinates x, y
    **   without any Terrain (so no Texture either)
    **   without any Unit
    */
-  Cell();
+  Cell(size_t x, size_t y);
 
   // __________________________ Getters / Setters __________________________ //
   /** \brief _unit getter
@@ -30,7 +35,7 @@ public:
   /** \brief _terrain getter
    ** \return cell's terrain
    */
-  inline e_terrain terrain() { return _terrain; }
+  inline terrain terrain() { return _terrain; }
 
   /** \brief _unit setter
    ** sets the Unit \param unit in the cell
@@ -43,12 +48,22 @@ public:
    **
    ** \param terrain The terrain to be set in the Cell
    */
-  inline void setTerrain(const e_terrain terrain) { _terrain = terrain; }
+  inline void setTerrain(const enum terrain terrain) { _terrain = terrain; }
+
+  /** \brief _highlight getter
+   ** \return highlight Boolean value
+   */
+  inline bool highlight() { return _highlight; }
 
   /** \brief _highlight setter
    ** \param highlight true if we want to highlight the Cell
    */
   inline void setHighlight(bool highlight) { _highlight = highlight; }
+
+  /** \brief highlight color getter
+   ** \return highlight color value
+   */
+  inline Color highlightColor() { return _highlightColor; }
 
   /** \brief highlight color setter
    ** \param color color of Cell's highlight
@@ -58,10 +73,6 @@ public:
   /** \brief removes the unit in this cell
    */
   inline void removeUnit() { _unit = nullptr; }
-
-  /** \brief draws Cell's contents: terrain and unit
-   */
-  void draw();
 
   /** \brief returns Cell's x coordinate
    */
@@ -73,13 +84,13 @@ public:
 
   /** \brief coords getter
    */
-  inline Coords getCoords() { return _coords; }
+  inline Coords coords() { return _coords; }
 
 
 private:
   Coords _coords; ///< cell's coordinates
-  e_terrain _terrain; ///< Terrain type index (matching e_terrains)
-  std::shared_ptr<Unit> _unit; ///< Unit type index (matching e_terrains)
+  enum terrain _terrain; ///< Terrain type index (matching terrains)
+  std::shared_ptr<Unit> _unit; ///< Unit type index (matching terrains)
   bool _highlight; ///< true if the cell needs to be highlighted
   Color _highlightColor; ///< color of the cell's highlight
 };

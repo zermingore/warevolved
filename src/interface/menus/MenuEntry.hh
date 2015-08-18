@@ -10,16 +10,16 @@
 
 /** \brief entries descriptors
  */
-enum e_entry
+enum class entry
 {
-  E_ENTRY_NONE = 0, // invalid selected entry
+  NONE = 0, // invalid selected entry
 
-  E_ENTRY_MOVE, // motion order
-  E_ENTRY_STOP, // motion order
-  E_ENTRY_NEXT_TURN,
-  E_ENTRY_ATTACK,
+  MOVE, // motion order
+  STOP, // motion order
+  NEXT_TURN,
+  ATTACK,
 
-  E_ENTRY_CANCEL
+  CANCEL
 };
 
 
@@ -29,21 +29,21 @@ public:
   /** \brief Constructor
    */
   // TODO use this one (auto label completion, using a DB)
-  explicit MenuEntry(e_entry &entry);
+  explicit MenuEntry(entry &entry);
 
   /** \brief Constructor
-   ** \deprecated use MenuEntry(e_entries entry); with auto label completion
+   ** \deprecated use MenuEntry(entries entry); with auto label completion
    */
-  MenuEntry(std::string label_name, e_entry entry);
+  MenuEntry(std::string label_name, entry entry);
 
-  /** \brief returns entry Identifier, as a e_entries value
+  /** \brief returns entry Identifier, as a entries value
    */
-  inline e_entry id() { return _id; }
+  inline entry id() { return _id; }
 
   /** \brief displays the entry at position
    ** \param position where the entry will be display
    */
-  void draw(sf::Vector2f position);
+  void draw(Coords position);
 
   /** \brief Executes the action matching the entry
    */
@@ -51,10 +51,11 @@ public:
 
 
 private:
-  Image _background; ///< background image
+  entry _id; ///< entry identifier
+  std::string _background; ///< background image name
   std::shared_ptr<sf::Text> _label; ///< button label text
+  std::string _labelName; ///< menu entry text
   Font _font; ///< button label font
-  e_entry _id; ///< entry identifier
 };
 
 #endif /* !MENUENTRY_HH_ */

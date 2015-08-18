@@ -1,33 +1,32 @@
 #include <game/Game.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <input/Event.hh>
-#include <common/globals.hh>
 #include <game/applications/Battle.hh>
+#include <input/KeyManager.hh>
 
 
 void Game::run()
 {
-  auto graphics = std::make_shared<GraphicsEngine> ();
+  using namespace graphics; // function scope
+
   auto km = std::make_shared<KeyManager> ();
-  _event = std::make_shared<Event> (km, graphics);
+  _event = std::make_shared<Event> (km);
+  _battle = std::make_shared<Battle> ();
 
 # ifdef DEBUG_PERFS
   sf::Clock timer;
   std::vector<sf::Int64> frame_generation;
 # endif
 
-  Battle b;
-  g_status->setBattle(b);
-  graphics->initRoom();
+  // GraphicsEngine::initRoom();
 
   // Game loop
-  while (g_window->isOpen() && _event->process())
+  while (GraphicsEngine::windowIsOpen() && _event->process())
   {
-    graphics->drawScene();
-    g_window->display(); // Update the window
+    GraphicsEngine::drawScene(_battle->map());
 
 #   ifdef DEBUG_PERFS
-    g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
+    GraphicsEngine::setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
     // storing all values, avoiding syscalls
     frame_generation.push_back(timer.getElapsedTime().asMicroseconds());
     timer.restart();
@@ -36,10 +35,8 @@ void Game::run()
 
   // finished the main loop, displaying performances
 # ifdef DEBUG_PERFS
-  for (unsigned int i = 0; i < frame_generation.size(); ++i)
-  {
-    PRINTF("frame generation:", frame_generation[i],
-           "\tFPS:", 1000000 / frame_generation[i]);
+  for (auto i: frame_generation) {
+    PRINTF("frame generation:", i, "\tFPS:", 1000000 / i);
   }
 # endif
 }

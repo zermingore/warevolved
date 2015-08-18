@@ -4,6 +4,14 @@
 #include <resources/Font.hh>
 
 
+namespace resources
+{
+// Static Variables definition
+std::map<std::string, std::shared_ptr<graphics::Image>> ResourcesManager::_images;
+std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
+std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
+
+
 ResourcesManager::ResourcesManager(const std::string file_name)
 {
   initTypeNames();
@@ -17,15 +25,15 @@ ResourcesManager::ResourcesManager(const std::string file_name)
 
 void ResourcesManager::initializeDefaultResources()
 {
-  _images["default"] = std::make_shared<Image> (DEFAULT_IMAGE_PATH, "default");
+  _images["default"] = std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
   _fonts["default"] = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
 }
 
 void ResourcesManager::initTypeNames()
 {
-  _typeNames[E_RESOURCE_TYPE_NONE] = "none";
+  _typeNames[E_RESOURCE_TYPE_NONE]  = "none";
   _typeNames[E_RESOURCE_TYPE_IMAGE] = "images";
-  _typeNames[E_RESOURCE_TYPE_FONT] = "fonts";
+  _typeNames[E_RESOURCE_TYPE_FONT]  = "fonts";
   _typeNames[E_RESOURCE_TYPE_SOUND] = "sounds";
 }
 
@@ -37,7 +45,7 @@ bool ResourcesManager::addResource(e_resource_type type,
   switch (type)
   {
     case E_RESOURCE_TYPE_IMAGE:
-      _images[name] = std::make_shared<Image> (file_name, name);
+      _images[name] = std::make_shared<graphics::Image> (file_name, name);
       return true;
 
     case E_RESOURCE_TYPE_FONT:
@@ -105,7 +113,7 @@ void ResourcesManager::listResources()
 #endif
 
 
-Image& ResourcesManager::getImage(const std::string name)
+graphics::Image& ResourcesManager::getImage(const std::string name)
 {
   if (_images.find(name) != _images.end())
     return *_images[name];
@@ -125,3 +133,6 @@ Font& ResourcesManager::getFont(const std::string name)
 
   return *_fonts["default"];
 }
+
+
+} // namespace resources

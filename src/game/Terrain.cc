@@ -1,5 +1,4 @@
 #include <game/Terrain.hh>
-#include <common/globals.hh>
 
 
 // // Terrain::Terrain(e_terrain terrain) :

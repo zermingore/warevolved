@@ -40,7 +40,7 @@ public:
 
 
 # include <SFML/Graphics.hpp>
-typedef sf::Vector2<unsigned int> Coords; // FIXME (own [use ifndef SFML])
+typedef sf::Vector2<size_t> Coords; // FIXME (own [use ifndef SFML])
 typedef sf::Color Color; // FIXME (own [use ifndef SFML])
 // NOTE: this software uses SFML and does not try to hide it
 //   these defines are here to avoid

@@ -6,6 +6,11 @@ run
 
 if it works, the binary file (we) will be created
 
+NOTE: to install SFML 2.1
+you can download it from it' s official website
+and copy the library files into in /usr/lib
+(the path depends on your system / configuration)
+
 
 This project is under GPL license though uses PugiXML,
 a XML file parser which is under Boost license

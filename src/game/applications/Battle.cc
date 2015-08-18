@@ -1,12 +1,17 @@
 #include <game/applications/Battle.hh>
+#include <common/structures/Vector.hh>
 #include <common/Status.hh>
-#include <common/globals.hh>
+#include <game/Player.hh>
+#include <game/Map.hh>
+#include <interface/Cursor.hh>
 
 
 Battle::Battle() :
-  _map (8, 8), // TODO hard-coded
   _currentPlayer (0)
 {
+  // TODO map size is hard-coded
+  _map = std::make_shared<Map> (8, 8);
+  _map->setBattle(this);
   init();
 }
 
@@ -15,7 +20,7 @@ void Battle::init()
   buildPlayers();
   buildMap();
   buildUnits();
-  CURSOR->setColor(_players[0]->cursorColor());
+  _map->cursor(_currentPlayer)->setColor(_players[_currentPlayer]->cursorColor());
 }
 
 void Battle::buildPlayers()
@@ -34,25 +39,30 @@ void Battle::buildPlayers()
 // TODO generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  _map.init();
+  _map->init();
 }
 
 void Battle::buildUnits()
 {
-  _map.setUnit(_players[0]->newUnit(E_UNIT_SOLDIERS, 1, 1));
-  _map.setUnit(_players[0]->newUnit(E_UNIT_SOLDIERS, 4, 1));
+  // TODO delegate to a factory
+  _map->newUnit(unit::SOLDIERS, 1, 1);
+  _map->newUnit(unit::SOLDIERS, 4, 1);
 
-  _map.setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 4));
-  _map.setUnit(_players[1]->newUnit(E_UNIT_SOLDIERS, 3, 6));
+  _map->newUnit(unit::SOLDIERS, 3, 4);
+  _map->newUnit(unit::SOLDIERS, 3, 6);
 }
 
 
 void Battle::nextPlayer()
 {
-  _players[_currentPlayer]->endTurn();
-  _players[_currentPlayer++]->saveCursorPosition();
+  _map->endTurn();
+//  _players[_currentPlayer]->saveCursorPosition();
+  _currentPlayer++;
   _currentPlayer %= _players.size();
-  CURSOR->setCoords(_players[_currentPlayer]->lastCursorPosition());
-  CURSOR->setColor(_players[_currentPlayer]->cursorColor());
-  g_status->setCurrentPlayer(_currentPlayer);
+//  _map->cursor(_currentPlayer)->setCoords(_players[_currentPlayer]->lastCursorPosition());
+//  CURSOR->setColor(_players[_currentPlayer]->cursorColor());
+}
+
+std::vector<std::shared_ptr<Player>> const Battle::players() {
+  return _players;
 }

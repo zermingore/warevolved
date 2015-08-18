@@ -15,7 +15,7 @@
  ** designed to fill bugs reports
  ** keeps software information
  **  - SFML version
- ** keeps hardware informations
+ ** keeps hardware information
  */
 
 class System
@@ -37,4 +37,4 @@ private:
   unsigned int _sfmlMinor; ///< SFML minor version (*.x)
 };
 
-#endif /* !COMMON_HH_ */
+#endif /* !SYSTEM_HH_ */

@@ -10,7 +10,7 @@
 
 # include <common/include.hh>
 # include <common/constants.hh>
-# include <common/globals.hh>
+//# include <common/globals.hh>
 
 /** \brief timer index list
  */
@@ -76,6 +76,15 @@ enum e_key
 
 class KeyManager
 {
+/** \brief SFML key detection
+ **   \return true if one of the two possible binding
+ **     of a function has been triggered
+ **   \return false otherwise
+ **   \param feature key name auto expand _1 and _2 to this name
+ */
+# define PRESSED(x) sf::Keyboard::isKeyPressed(_keys[ x ##_1]) || \
+    sf::Keyboard::isKeyPressed(_keys[ x ##_2])
+
 public:
   /** \brief Default Constructor
    */

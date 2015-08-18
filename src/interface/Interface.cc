@@ -1,15 +1,15 @@
 #include <interface/Interface.hh>
-#include <common/globals.hh>
+#include <common/Status.hh>
 
 
 Interface::Interface() :
-  _panelPosition (E_PANEL_DEACTIVATED),
-  _menuBarPosition (E_MENU_BAR_DEACTIVATED),
+  _panelPosition (panel_position::DEACTIVATED),
+  _menuBarPosition (menu_bar_position::DEACTIVATED),
   _modificationPanel (true),
   _modificationMenuBar (true)
 {
   _cursor = std::make_shared<Cursor> ();
-  _path = std::make_shared<PathFinding> ();
+//  _path = std::make_shared<PathFinding> ();
   _inGameMenu = std::make_shared<InGameMenu> ();
   _panel = std::make_shared<SidePanel> ();
   _menuBar = std::make_shared<MenuBar> ();
@@ -17,106 +17,108 @@ Interface::Interface() :
 
 void Interface::incrementPanelPosition()
 {
-  _panelPosition = static_cast<e_panel_position> ((_panelPosition + 1) % E_PANEL_NB_POSITIONS);
+  _panelPosition = static_cast<panel_position>
+    ((static_cast<int> (_panelPosition) + 1) % static_cast<int> (panel_position::NB_POSITIONS));
   _modificationPanel = true;
 }
 
 void Interface::incrementMenuBarPosition()
 {
-  _menuBarPosition = static_cast<e_menu_bar_position> ((_menuBarPosition + 1) % E_MENU_BAR_NB_POSITIONS);
+  _menuBarPosition = static_cast<menu_bar_position>
+    ((static_cast<int> (_menuBarPosition) + 1) % static_cast<int> (menu_bar_position::NB_POSITIONS));
   _modificationMenuBar = true;
 }
 
 void Interface::setSidePanel()
 {
-  if (_panelPosition == E_PANEL_DEACTIVATED)
-  {
-    g_status->setRenderX(WINDOW_SIZE_X);
-    g_status->setGridOffsetX((WINDOW_SIZE_X - CELL_WIDTH * NB_COLUMNS) / 2);
-    _modificationPanel = false;
+//   if (_panelPosition == panel_position::DEACTIVATED)
+//   {
+//     Status::setRenderX(WINDOW_SIZE_X);
+//     g_status->setGridOffsetX((WINDOW_SIZE_X - CELL_WIDTH * NB_COLUMNS) / 2);
+//     _modificationPanel = false;
 
-    return;
-  }
+//     return;
+//   }
 
-  auto offset = 4 * CELL_WIDTH; // panel_width
-  if (g_settings->fullScreen())
-    offset *= 2;
+//   auto offset = 4 * CELL_WIDTH; // panel_width
+//   if (g_settings->fullScreen())
+//     offset *= 2;
 
-  auto render_x = WINDOW_SIZE_X - offset;
-  g_status->setRenderX(render_x);
-  sf::Vector2f origin {0, 0};
-  sf::Vector2f size = {
-    (float) WINDOW_SIZE_X - render_x - (render_x - CELL_WIDTH * NB_COLUMNS) / 2,
-    (float) WINDOW_SIZE_Y
-  };
+//   auto render_x = WINDOW_SIZE_X - offset;
+//   g_status->setRenderX(render_x);
+//   sf::Vector2f origin {0, 0};
+//   sf::Vector2f size = {
+//     (float) WINDOW_SIZE_X - render_x - (render_x - CELL_WIDTH * NB_COLUMNS) / 2,
+//     (float) WINDOW_SIZE_Y
+//   };
 
-  if (_panelPosition == E_PANEL_LEFT)
-  {
-    g_status->setGridOffsetX(offset + GRID_THICKNESS);
-  }
-  else
-  {
-    g_status->setGridOffsetX(
-      (render_x - CELL_WIDTH * NB_COLUMNS) / 2 - 2 * GRID_THICKNESS);
-    origin.x = WINDOW_SIZE_X - size.x;
-  }
+//   if (_panelPosition == panel_position::LEFT)
+//   {
+//     g_status->setGridOffsetX(offset + GRID_THICKNESS);
+//   }
+//   else
+//   {
+//     g_status->setGridOffsetX(
+//       (render_x - CELL_WIDTH * NB_COLUMNS) / 2 - 2 * GRID_THICKNESS);
+//     origin.x = WINDOW_SIZE_X - size.x;
+//   }
 
-  if (_menuBarPosition == E_MENU_BAR_TOP)
-  {
-//    size.y -= _menuBar->size().y;
-    origin.y += _menuBar->size().y;
-  }
-  if (_menuBarPosition == E_MENU_BAR_BOTTOM)
-  {
-    size.y -= _menuBar->size().y;
-  }
+//   if (_menuBarPosition == menu_bar_position::TOP)
+//   {
+// //    size.y -= _menuBar->size().y;
+//     origin.y += _menuBar->size().y;
+//   }
+//   if (_menuBarPosition == menu_bar_position::BOTTOM)
+//   {
+//     size.y -= _menuBar->size().y;
+//   }
 
-  _panel->setSize(size);
-  _panel->setOrigin(origin);
-  _modificationPanel = false;
+//   _panel->setSize(size);
+//   _panel->setOrigin(origin);
+//   _modificationPanel = false;
 }
 
 
 void Interface::setMenuBar()
 {
-  if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
-  {
-    g_status->setRenderY(WINDOW_SIZE_Y);
-    g_status->setGridOffsetY((WINDOW_SIZE_Y - CELL_HEIGHT * NB_LINES) / 2);
-    _modificationMenuBar = false;
+  // if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
+  // {
+  //   g_status->setRenderY(WINDOW_SIZE_Y);
+  //   g_status->setGridOffsetY((WINDOW_SIZE_Y - CELL_HEIGHT * NB_LINES) / 2);
+  //   _modificationMenuBar = false;
 
-    // redraw side panel if needed
-    return;
-  }
+  //   // redraw side panel if needed
+  //   return;
+  // }
 
-  unsigned int render_y = WINDOW_SIZE_Y - CELL_HEIGHT / 2;
-  g_status->setRenderY(WINDOW_SIZE_Y - render_y);
+  // unsigned int render_y = WINDOW_SIZE_Y - CELL_HEIGHT / 2;
+  // g_status->setRenderY(WINDOW_SIZE_Y - render_y);
 
-  unsigned int offset = (render_y - CELL_HEIGHT * NB_LINES) / 2;
-  if (_menuBarPosition == E_MENU_BAR_TOP)
-  {
-    g_status->setGridOffsetY(offset + CELL_HEIGHT / 2 - GRID_THICKNESS);
-    sf::Vector2f size(WINDOW_SIZE_X, CELL_HEIGHT / 2);
-    _menuBar->setSize(size);
-    sf::Vector2f origin(0, 0);
-    _menuBar->setOrigin(origin);
-  }
-  else
-  {
-    g_status->setGridOffsetY(offset - GRID_THICKNESS);
-    sf::Vector2f size(WINDOW_SIZE_X, CELL_HEIGHT / 2);
-    _menuBar->setSize(size);
-    sf::Vector2f origin(0, WINDOW_SIZE_Y - size.y);
-    _menuBar->setOrigin(origin);
-  }
+  // unsigned int offset = (render_y - CELL_HEIGHT * NB_LINES) / 2;
+  // if (_menuBarPosition == menu_bar_position::TOP)
+  // {
+  //   g_status->setGridOffsetY(offset + CELL_HEIGHT / 2 - GRID_THICKNESS);
+  //   sf::Vector2f size(WINDOW_SIZE_X, CELL_HEIGHT / 2);
+  //   _menuBar->setSize(size);
+  //   sf::Vector2f origin(0, 0);
+  //   _menuBar->setOrigin(origin);
+  // }
+  // else
+  // {
+  //   g_status->setGridOffsetY(offset - GRID_THICKNESS);
+  //   sf::Vector2f size(WINDOW_SIZE_X, CELL_HEIGHT / 2);
+  //   _menuBar->setSize(size);
+  //   sf::Vector2f origin(0, WINDOW_SIZE_Y - size.y);
+  //   _menuBar->setOrigin(origin);
+  // }
 
-  _modificationMenuBar = false;
+  // _modificationMenuBar = false;
 }
 
 
 void Interface::drawSidePanel()
 {
-  if (_panelPosition == E_PANEL_DEACTIVATED)
+  if (_panelPosition == panel_position::DEACTIVATED)
     return;
 
   _panel->draw();
@@ -125,7 +127,7 @@ void Interface::drawSidePanel()
 
 void Interface::drawMenuBar()
 {
-  if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
+  if (_menuBarPosition == menu_bar_position::DEACTIVATED)
     return;
 
   _menuBar->draw();
@@ -141,16 +143,17 @@ void Interface::draw()
     setMenuBar();
 
   // if (_cursor->getVisible())
-  _cursor->sprite(GRID_OFFSET_X, GRID_OFFSET_Y);
-  _cursor->draw();
+  // _cursor->sprite(GRID_OFFSET_X, GRID_OFFSET_Y);
+  // _cursor->draw();
 
   drawSidePanel();
   drawMenuBar();
 
-  if (CURRENT_MODE == E_MODE_MOVING_UNIT || CURRENT_MODE == E_MODE_ACTION_MENU)
-    _path->drawPath();
+  auto mode = Status::currentMode();
+  // if (mode == mode::MOVING_UNIT || mode == mode::ACTION_MENU)
+  //   _path->drawPath();
 
   // TODO get right inGameMenu
-  if (CURRENT_MODE == E_MODE_SELECTION_MENU || CURRENT_MODE == E_MODE_ACTION_MENU)
+  if (mode == mode::SELECTION_MENU || mode == mode::ACTION_MENU)
     _inGameMenu->draw();
 }

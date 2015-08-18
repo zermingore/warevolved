@@ -4,11 +4,16 @@
 # include <resources/Resource.hh>
 # include <common/include.hh>
 
+class MapGraphicsProperties;
+
+
+namespace graphics {
+
 
 /** \class Image Resource type
  ** Derived from Resource
  */
-class Image : public Resource
+class Image: public Resource
 {
 public:
   /** \brief Image default Constructor
@@ -89,16 +94,11 @@ public:
    */
   void reload(std::string file_name);
 
-  /** \brief draws the Image in the cell i, j
-   ** \param i x cell's coordinate to display the image (column)
-   ** \param j y cell's coordinate to display the image (row)
-   */
-  void drawAtCell(unsigned int i, unsigned int j);
-
   /** \brief draws the Image in the cell coords.x, coords.y
    ** \param c coordinate to display the image
+   ** \param p Map Graphics Properties (cells size, grid thickness, ...)
    */
-  void drawAtCell(Coords c);
+  void drawAtCell(Coords c, const std::shared_ptr<MapGraphicsProperties> p);
 
   /** \brief draws the Image at _sprite's position
    */
@@ -110,5 +110,7 @@ private:
   std::shared_ptr<sf::Sprite> _sprite; ///< Image sprite, allowing transformations
   std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
 };
+
+} // namespace graphics
 
 #endif /* !IMAGE_HH_ */

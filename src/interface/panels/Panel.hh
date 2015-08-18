@@ -8,7 +8,6 @@
 #ifndef PANEL_HH_
 # define PANEL_HH_
 
-# include <common/include.hh>
 # include <resources/Image.hh>
 # include <interface/panels/PanelElement.hh>
 
@@ -36,7 +35,7 @@ protected:
   sf::Vector2f _origin; ///< Origin position of the menu
   sf::Vector2f _size; ///< panel's size
   std::vector<PanelElement> _elts; ///< panel's elements
-  Image _background; ///< background image
+  graphics::Image _background; ///< background image
 };
 
 #endif /* !PANEL_HH_ */

@@ -16,16 +16,16 @@ Text::Text(unsigned int language) :
 //}
 
 //template <e_rank>
-std::string Text::name(e_rank rank)
+std::string Text::name(rank r)
 {
-  if (rank == 1) // TODO tmp test (need a DB)
+  if (r == rank::PRIVATE) // TODO tmp test (need a DB)
     return "PRIVATE";
   return "Fetch error";
 }
 
-std::string Text::name(e_terrain terrain)
+std::string Text::name(terrain t)
 {
-  if (terrain == 1) // TODO tmp test (need a DB)
+  if (t == terrain::FOREST) // TODO tmp test (need a DB)
     return "FOREST";
   return "Fetch error";
 }

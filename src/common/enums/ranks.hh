@@ -11,11 +11,12 @@
 
 /** \enum Stores units ranks
  */
-enum e_rank
+enum class rank
 {
-  E_RANK_NONE = 0,
+  PRIVATE = 0,
 
-  E_RANK_PRIVATE,
+  NB_RANK,
+  NONE
 };
 
 #endif /* !RANKS_HH_ */

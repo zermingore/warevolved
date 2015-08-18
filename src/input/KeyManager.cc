@@ -1,5 +1,5 @@
 #include <input/KeyManager.hh>
-#include <common/globals.hh>
+#include <common/Settings.hh>
 
 
 KeyManager::KeyManager()
@@ -44,7 +44,7 @@ void KeyManager::mapKeys()
 
 bool KeyManager::ready(e_timer index)
 {
-  if (_clocks[index].getElapsedTime().asMilliseconds() > g_settings->keyRepeatDelay())
+  if (_clocks[index].getElapsedTime().asMilliseconds() > Settings::keyRepeatDelay())
     restartTimer(index);
 
   return (_ready[index]);

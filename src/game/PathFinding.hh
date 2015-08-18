@@ -9,11 +9,15 @@
 # define PATHFINDING_HH_
 
 # include <vector>
+# include <memory>
+# include <common/structures/Vector.hh>
 # include <common/enums/path_shapes.hh>
 # include <common/enums/directions.hh>
-# include <game/units/Unit.hh>
 # include <resources/Image.hh>
-# include <game/Cell.hh>
+
+class Map;
+class Unit;
+class Cell;
 
 
 /** \class PathFinding Computes and display path findings
@@ -23,9 +27,14 @@
 class PathFinding
 {
 public:
-  /** \brief Constructor
+  /** \brief removed default Constructor (as we need a map)
    */
-  PathFinding();
+  PathFinding() = delete;
+
+  /** \brief constructor
+   ** \param map map to execute the path-finding on
+   */
+  PathFinding(std::shared_ptr<Map> map);
 
   /** \brief Destructor
    */
@@ -34,7 +43,7 @@ public:
   /** \brief sets the origin of the path
    **   also updates _current position
    */
-  void setOrigin(Coords coords);
+  void setOrigin(Coords coords, std::shared_ptr<Unit> unit);
 
   /** \brief allowed move notifier
    ** \return true if the move is allowed
@@ -45,7 +54,7 @@ public:
   /** \brief adds the next element to the current path
    ** \param direction of the element
    */
-  void addNextDirection(e_direction direction);
+  void addNextDirection(direction direction);
 
   /** \brief uses _graphicPath to draw the current path
    */
@@ -69,12 +78,13 @@ public:
    */
   void removeUnit() { _unit.reset(); }
 
+
 private:
   /** \brief returns the sprite matching e_path_shape
    ** does the rotation if needed
    ** \return the image matching e_path_shape
    */
-  Image getImage(unsigned int index);
+  graphics::Image getImage(size_t index);
 
   /** \brief builds Images* Vector (_images)
    */
@@ -88,14 +98,14 @@ private:
    **   according to \param direction
    ** \param direction current move direction
    */
-  void updateCurrentCell(e_direction direction);
+  void updateCurrentCell(direction direction);
 
   /** \brief returns shape matching _direction[\param index]
    ** \param index index in _direction vector
    ** \return shape of _direction[\param index]
    **   according to the next direction (for smooth corners)
    */
-  e_path_shape getShape(unsigned int index);
+  path_shape getShape(size_t index);
 
   /** \brief Highlights cells which selected unit (_unit) can cross
    ** (uses a Flood Fill algorithm)
@@ -107,6 +117,8 @@ private:
   void highlightCells();
 
 
+  std::shared_ptr<Map> _map; // TODO make a relation map - path-finding
+
   std::shared_ptr<Unit> _unit; ///< The selected Unit we're working with
   Coords _origin; ///< origin cell coordinates
   Coords _current; ///< current cell coordinates
@@ -114,8 +126,8 @@ private:
   int _currentLength; ///< path current length
 
   ///< list of path directions filled through addNextDirection
-  std::vector<e_direction> _directions;
-  std::vector<Image> _images; ///< Images of the path vector
+  std::vector<direction> _directions;
+  std::vector<graphics::Image> _images; ///< Images of the path vector
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;

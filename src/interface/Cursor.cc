@@ -1,34 +1,34 @@
 #include <interface/Cursor.hh>
-#include <common/globals.hh>
+
 
 
 Cursor::Cursor() :
   _nbColumns (0),
   _nbLines (0)
 {
-  _image = GETIMAGE("cursor");
+  // _image = GETIMAGE("cursor");
   _sprite = _image.sprite();
   _sprite->setColor(sf::Color(255, 0, 0, 255));
-  _middle.x = _image.getTexture()->getSize().x / 2;
-  _middle.y = _image.getTexture()->getSize().y / 2;
+  _center.x = _image.getTexture()->getSize().x / 2;
+  _center.y = _image.getTexture()->getSize().y / 2;
 }
 
 
 std::shared_ptr<sf::Sprite> Cursor::sprite(int offset_x, int offset_y)
 {
-  static unsigned int angle = 0;
-  _sprite->setOrigin(_middle);
-  _sprite->setRotation(angle++);
+  // static unsigned int angle = 0;
+  // _sprite->setOrigin(_center);
+  // _sprite->setRotation(angle++);
 
-  // scale is function of rotation
-  // TODO setup a timer to dissociate rotation and scale
-  static float scale_factor = 1;
-  angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
-  _sprite->setScale(scale_factor, scale_factor);
+  // // scale is function of rotation
+  // // TODO setup a timer to dissociate rotation and scale
+  // static float scale_factor = 1;
+  // angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
+  // _sprite->setScale(scale_factor, scale_factor);
 
-  // finally, replace the cursor at it's true position before returning it
-  _sprite->setPosition(_coords.x * CELL_WIDTH + offset_x + _middle.x,
-                       _coords.y * CELL_HEIGHT + offset_y + _middle.y);
+  // // finally, replace the cursor at it's true position before returning it
+  // _sprite->setPosition(_coords.x * CELL_WIDTH + offset_x + _center.x,
+  //                      _coords.y * CELL_HEIGHT + offset_y + _center.y);
 
   return _sprite;
 }

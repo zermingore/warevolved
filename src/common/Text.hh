@@ -42,8 +42,8 @@ class Text
    ** \param rank to fetch
    ** \return rank text
    */
-  static std::string name(e_rank rank);
-  static std::string name(e_terrain terrain);
+  static std::string name(rank r);
+  static std::string name(terrain t);
 
   //  template <typename T>
   //  static std::string name(T id);
@@ -52,13 +52,13 @@ class Text
    ** \param rank rank we want name
    ** \return rank name value
    */
-  inline std::string getRankName(e_rank rank) { return _ranks[rank]; }
+  inline std::string getRankName(rank r) { return _ranks[r]; }
 
 
 private:
   unsigned int _language; ///< database language column offset value
-  std::map<e_rank, std::string> _ranks; ///< military ranks names
-  std::map<e_entry, std::string> _entries; ///< menu entries names
+  std::map<rank, std::string> _ranks; ///< military ranks names
+  std::map<entry, std::string> _entries; ///< menu entries names
   std::vector<std::string> _names; ///< vector of built-in names (TODO DB)
 };
 

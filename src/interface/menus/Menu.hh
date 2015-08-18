@@ -10,9 +10,7 @@
 
 # include <common/include.hh>
 # include <resources/Image.hh>
-# include <interface/panels/Panel.hh>
 # include <interface/menus/MenuEntry.hh>
-# include <game/PathFinding.hh>
 # include <common/enums/modes.hh>
 
 
@@ -49,7 +47,7 @@ public:
 
   /** \brief sets origin menu to the right cursor relative position
    */
-  virtual void setOrigin(sf::Vector2f origin); // TODO sets the menu at optimal position
+  virtual void setOrigin(Coords origin); // TODO sets the menu at optimal position
 
   /** \brief draws the menu
    ** with its entries and the current entry highlighter
@@ -63,7 +61,7 @@ public:
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
    */
-  virtual void build(e_mode mode) = 0;
+  virtual void build(mode mode) = 0;
 
   /** \brief executes action matching _selectedEntry
    */
@@ -104,8 +102,8 @@ protected:
                                ///< it has the index 0
 
   std::vector<MenuEntry> _entries; ///< Entries list
-  Image _imageSelection; ///< Background image (entry)
-  sf::Vector2f _origin; ///< menu origin
+  graphics::Image _imageSelection; ///< Background image (entry)
+  Coords _origin; ///< menu origin
 };
 
 #endif /* !MENU_HH_ */

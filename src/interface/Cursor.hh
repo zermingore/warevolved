@@ -85,15 +85,15 @@ public:
 
 private:
   // map attributes
-  unsigned int _nbColumns; ///< number of columns in map
-  unsigned int _nbLines; ///< number of Lines in map
+  size_t _nbColumns; ///< number of columns in map
+  size_t _nbLines; ///< number of Lines in map
 
   Coords _coords; ///< Cursor Coordinates
-  Image _image; ///< Cursor's Image
+  graphics::Image _image; ///< Cursor's Image
   std::shared_ptr<sf::Sprite> _sprite; ///< pointer over _image->sprite()
 
-  // middle of the SPRITE coordinates, avoid computing its value each frame
-  sf::Vector2f _middle; ///< middle of the Cursor sprite
+  // center of the SPRITE coordinates, avoid computing its value each frame
+  sf::Vector2f _center; ///< center of the Cursor sprite
 };
 
 #endif /* !CURSOR_HH_ */

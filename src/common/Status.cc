@@ -1,22 +1,18 @@
 #include <common/Status.hh>
 #include <common/include.hh>
 #include <common/macros.hh>
-#include <common/globals.hh>
+#include <common/State.hh>
+#include <interface/menus/InGameMenu.hh>
+#include <game/applications/Battle.hh>
+#include <game/Map.hh>
 
 
-Status::Status() :
-  _currentFPS (0),
-  _renderX (0),
-  _renderY (0),
-  _gridThickness (0),
-  _gridOffsetX (0),
-  _gridOffsetY (0),
-  _cellWidth (0),
-  _cellHeight (0),
-  _currentPlayer (0),
-  _selectedUnitPosition(-1, -1)
-{
-}
+// Static Variables definition
+std::stack<std::shared_ptr<State>> Status::_states;
+std::shared_ptr<Battle> Status::_battle;
+Coords Status::_selectedCell;
+Coords Status::_selectedUnitPosition;
+
 
 Status::~Status()
 {
@@ -24,30 +20,32 @@ Status::~Status()
   	_states.pop(); // calls element destructor
 }
 
-void Status::cellSelection() {
-  _selectedCell = CURSOR->coords();
+void Status::initialize()
+{
+  _selectedUnitPosition = Coords(-1, -1);
 }
 
-e_mode Status::currentMode()
+// void Status::cellSelection()
+// {
+//   _selectedCell = _battle->map()->cursor(_battle->currentPlayer())->coords();
+// }
+
+
+mode Status::currentMode()
 {
   if (_states.empty())
   {
     DEBUG_PRINT("_states stack is empty, exiting...");
-    return E_MODE_NONE;
+    return mode::NONE;
   }
 
-  return _states.top().mode();
+  return _states.top()->currentMode();
 }
 
-void Status::pushMode(e_mode mode)
-{
-  _states.push(State(mode));
-}
-
-void Status::pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu)
+void Status::pushModeInGameMenu(mode mode, std::shared_ptr<InGameMenu> menu)
 {
   menu->build(mode);
-  _states.push(State(mode, menu));
+  _states.push(std::make_shared<State> (State(mode, menu)));
 }
 
 
@@ -59,25 +57,24 @@ void Status::exitCurrentMode(bool skip)
     return;
   }
 
-  if (CURSOR)
-    CURSOR->setCoords(_states.top().cursorCoords());
-
+  _battle->map()->setCursorCoords(_states.top()->cursorCoords());
   _states.pop();
 }
 
 
-void Status::exitToMode(e_mode mode, bool skip)
+void Status::exitToMode(mode mode, bool skip)
 {
-  while (_states.top().mode() != mode)
+  while (_states.top()->currentMode() != mode)
   {
     _states.pop();
 
-    if (!skip && CURSOR)
-      CURSOR->setCoords(_states.top().cursorCoords());
+    if (!skip)
+      _battle->map()->setCursorCoords(_states.top()->cursorCoords());
   }
 }
 
-State Status::popCurrentMode()
+
+std::shared_ptr<State> Status::popCurrentMode()
 {
   auto tmp(_states.top());
   _states.pop();
@@ -85,18 +82,11 @@ State Status::popCurrentMode()
   return tmp;
 }
 
-void Status::setWindow(std::unique_ptr<sf::RenderWindow> window)
-{
-  g_window = std::move(window);
 
-  // initialize render room
-  _renderX = WINDOW_SIZE_X;
-  _renderY = WINDOW_SIZE_Y;
+void Status::pushMode(mode mode) {
+  _states.push(std::make_shared<State> (State(mode)));
 }
 
-void Status::setGridOffset()
-{
-  // offset = 1/2 left room
-  _gridOffsetX = (_renderX - _cellWidth * NB_COLUMNS) / 2;
-  _gridOffsetY = (_renderY - _cellHeight * NB_LINES) / 2;
+void Status::setBattle(Battle b) {
+  _battle = std::make_shared<Battle> (b);
 }

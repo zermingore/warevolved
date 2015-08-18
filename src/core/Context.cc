@@ -1,18 +1,17 @@
 #include <core/Context.hh>
 #include <common/System.hh>
 #include <common/Settings.hh>
-#include <common/globals.hh>
+#include <graphics/GraphicsEngine.hh>
 
-std::unique_ptr<Settings> g_settings;
 
 Context::Context(bool fullscreen)
 {
   if (fullscreen)
-    g_settings = std::make_unique<Settings> (24, 8, 4);
+    Settings::initialize(24, 8, 4);
   else
-    g_settings = std::make_unique<Settings> (0, 0, 0); // vanilla (debug) mode
+    Settings::initialize(0, 0, 0); // vanilla (debug) mode
 
-  g_settings->setFullScreen(fullscreen);
+  Settings::setFullScreen(fullscreen);
   _system = std::make_unique<System> (2, 1); // SFML version: 2.1
   init();
 }
@@ -25,18 +24,19 @@ void Context::init()
     std::cerr << "SFML version not officially supported" << std::endl;
 # endif
 
-  sf::ContextSettings contextSettings(g_settings->depth(),
-                                      g_settings->stencil(),
-                                      g_settings->antiAliasing(),
+  sf::ContextSettings contextSettings(Settings::depth(),
+                                      Settings::stencil(),
+                                      Settings::antiAliasing(),
                                       _system->sfmlMajor(),
                                       _system->sfmlMinor());
 
   // getting right resolution, from desktop
-  if (g_settings->fullScreen())
+  std::unique_ptr<sf::RenderWindow> window;
+  if (Settings::fullScreen())
   {
-    g_window = std::make_unique<sf::RenderWindow> (sf::VideoMode::getDesktopMode(),
-                                                   "War Evolved",
-                                                   sf::Style::Fullscreen);
+    window = std::make_unique<sf::RenderWindow> (sf::VideoMode::getDesktopMode(),
+                                                 "War Evolved",
+                                                 sf::Style::Fullscreen);
   }
   else
   {
@@ -53,18 +53,20 @@ void Context::init()
         std::exit(-1); // This time we quit // TODO browse all supported modes
     }
 
-    g_window = std::make_unique<sf::RenderWindow> (video_mode, "War Evolved");
+    window  = std::make_unique<sf::RenderWindow> (video_mode, "War Evolved");
   }
 
 # ifndef DEBUG_PERFS
-  g_window->setFramerateLimit(60);
+  window->setFramerateLimit(60);
 # else
-  g_window->setFramerateLimit(0);
+  window->setFramerateLimit(0);
 #endif
   //_window->setIcon(64, 64, "icon");
 
+  graphics::GraphicsEngine::setWindow(std::move(window));
+
   // Deducing some Status
-  g_status->setCellWidth(64); // TODO change dynamically (in px)
-  g_status->setCellHeight(64); // TODO change dynamically (in px)
-  g_status->setGridThickness(5); // TODO change dynamically (in px)
+  graphics::GraphicsEngine::setCellWidth(64); // TODO change dynamically (in px)
+  graphics::GraphicsEngine::setCellHeight(64); // TODO change dynamically (in px)
+  graphics::GraphicsEngine::setGridThickness(5); // TODO change dynamically (in px)
 }

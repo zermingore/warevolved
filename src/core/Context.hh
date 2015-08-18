@@ -8,10 +8,9 @@
 #ifndef CONTEXT_HH_
 # define CONTEXT_HH_
 
-# include <common/include.hh>
-# include <common/System.hh>
-# include <common/Settings.hh>
-# include <common/globals.hh>
+# include <memory>
+
+class System;
 
 class Context
 {

@@ -24,7 +24,7 @@ private:
   std::string _name; ///< item name
   // TODO option: change displayed units (kg / lbs, meter / miles)
   unsigned int _weight; ///< weight, in grams
-  Image *_image; ///< tooltip image
+  // Image *_image; ///< tooltip image
 };
 
 #endif /* !ITEM_HH_ */

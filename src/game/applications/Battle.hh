@@ -8,9 +8,14 @@
 #ifndef BATTLE_HH_
 # define BATTLE_HH_
 
+# include <vector>
+# include <memory>
 # include <game/applications/Application.hh>
-# include <game/Player.hh>
-# include <game/Map.hh>
+# include <common/enums/units.hh>
+# include <common/structures/Vector.hh>
+
+class Map;
+class Player;
 
 
 /** \class Battle
@@ -35,24 +40,19 @@ public:
   /** \brief players vector getter
    ** \return _players vector
    */
-  inline std::vector<std::shared_ptr<Player>> const players() { return _players; }
+  std::vector<std::shared_ptr<Player>> const players();
 
   /** \brief _players[id] getter
    ** \param id Player's id to retrieve
    ** \return the Player which number is \param id
    */
-  inline std::shared_ptr<Player> getPlayer(const unsigned int &id)
+  inline std::shared_ptr<Player> getPlayer (const size_t &id) const
   { return _players[id]; }
 
   /** \brief _map getter
    ** \return a reference to the map
    */
-  inline Map map() { return _map; }
-
-  /** \brief builds a new unit of type \param unit
-   ** \param unit type of the new unit
-   */
-  void newUnit(e_unit unit);
+  inline std::shared_ptr<Map> map() { return _map; }
 
   /** \brief Switches to the next player
    **   adapt cursor color
@@ -66,6 +66,17 @@ public:
   void buildMap();
 
 
+  /** \brief current player identifier getter
+   ** \return _currentPlayer: current player identifier
+   */
+  inline size_t currentPlayer() { return _currentPlayer; }
+
+  /** \brief sets _currentPlayer
+   ** \param id new current player identifier
+   */
+  inline void setCurrentPlayer(size_t id) { _currentPlayer = id; }
+
+
 private:
   /** \brief initializes players
    */
@@ -75,10 +86,9 @@ private:
    */
   void buildUnits();
 
-
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
-  Map _map; ///< Map of this battle
-  unsigned int _currentPlayer; ///< current player's id
+  std::shared_ptr<Map> _map; ///< Map of this battle
+  size_t _currentPlayer; ///< current player's id
 };
 
 #endif /* !BATTLE_HH_ */

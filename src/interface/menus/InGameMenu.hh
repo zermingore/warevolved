@@ -9,8 +9,8 @@
 # define INGAMEMENU_HH_
 
 # include <interface/menus/Menu.hh>
-# include <game/units/Unit.hh>
-# include <game/applications/Battle.hh>
+# include <common/enums/modes.hh>
+
 
 /** \brief in game menu class
  ** refers to the menu called when
@@ -27,7 +27,7 @@ public:
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
    */
-  void build(e_mode mode);
+  void build(mode mode);
 
   /** \brief executes action matching Menu::_selectedEntry
    */

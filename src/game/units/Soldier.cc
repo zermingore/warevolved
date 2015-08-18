@@ -1,11 +1,11 @@
-#include <common/enums/ranks.hh>
 #include <game/units/Soldier.hh>
-#include <common/globals.hh>
+#include <common/enums/ranks.hh>
+#include <common/Text.hh>
 
 
 Soldier::Soldier() :
   _equipedWeapon (nullptr),
-  _rank (E_RANK_PRIVATE)
+  _rank (rank::PRIVATE)
 {
   // static int id = 0;
 
@@ -26,20 +26,26 @@ Soldier::Soldier() :
 }
 
 
+// TODO move into Map
 void Soldier::fillActions(std::vector<MenuEntry>& menu)
 {
+  menu = menu;
   // TODO add inventory entry
 
   // checks if we must add the 'Attack' entry
-  for (auto c: *_targets)
-  {
-    // Manhattan distance
-    auto manhattan = std::abs((int) CURSOR->x() - (int) c->x()) +
-      std::abs((int) CURSOR->y() - (int) c->y());
-    if (manhattan > _range.first && manhattan < _range.second)
-    {
-      menu.emplace_back(MenuEntry("Attack", E_ENTRY_ATTACK));
-      break; // we do not need to add the entry multiple times
-    }
-  }
+  // for (auto c: *_targets)
+  // {
+  //   // Manhattan distance
+  //   auto manhattan = std::abs((int) CURSOR->x() - (int) c->x()) +
+  //     std::abs((int) CURSOR->y() - (int) c->y());
+  //   if (manhattan > _range.first && manhattan < _range.second)
+  //   {
+  //     menu.emplace_back(MenuEntry("Attack", entry::attack));
+  //     break; // we do not need to add the entry multiple times
+  //   }
+  // }
+}
+
+std::string Soldier::name() {
+  return Text::name(_rank) + " " + _fullName;
 }

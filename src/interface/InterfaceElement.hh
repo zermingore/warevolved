@@ -15,7 +15,8 @@ public:
 protected:
   InterfaceElement() {};
   sf::Vector2f _position; ///< Element position
-  Image _background; ///< background image
+  graphics::Image _background; ///< background image
+  std::string _backgroundName; ///< background image name
   std::shared_ptr<sf::Text> _label; ///< label text
   Font _font; ///< label font
 };

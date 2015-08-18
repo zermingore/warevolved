@@ -8,7 +8,6 @@
 #ifndef APPLICATION_HH_
 # define APPLICATION_HH_
 
-# include <common/Debug.hh>
 
 /** \class Application class
  ** An application is a full screen state
