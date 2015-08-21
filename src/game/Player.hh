@@ -25,6 +25,8 @@ public:
    */
   Player();
 
+  inline size_t id() { return _id; }
+
   // __________________________ Getters / Setters __________________________ //
   /** \brief cursor color getter
    ** \return color of the cursor (_cursorColor)
@@ -48,7 +50,8 @@ public:
 
 
 private:
-  size_t _id;
+  // (logicaly const, cannot be initialized by a static variable)
+  mutable size_t _id; ///< Player identifier
 //  std::unique_ptr<Interface> _interface; ///< interface (menu status, ...)
   Color _cursorColor; ///< cursor's color
   Color _unitsColor; ///< units color

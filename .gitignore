@@ -1,8 +1,11 @@
 #		-*- mode:sh -*-			#
 
+# temporary files
 *.o
 *.in
 LOG
+*\#
+*user
 
 # Autotools output
 .dirstamp

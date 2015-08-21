@@ -7,6 +7,7 @@
 #include <common/enums/terrains.hh>
 #include <resources/ResourcesManager.hh>
 #include <game/units/Soldier.hh>
+#include <game/Player.hh>
 
 
 Map::Map(size_t nbColumns, size_t nbLines// , std::shared_ptr<Battle> battle
@@ -29,6 +30,10 @@ void Map::init()
 
     _cells.push_back(vec);
   }
+
+  // building Cursors
+  for (auto p: _battle->players())
+    _cursors[p->id()] = std::make_shared<Cursor> ();
 
   _cursors[_battle->currentPlayer()]->setLimits(_nbColumns, _nbLines);
 
