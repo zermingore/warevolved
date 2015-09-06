@@ -66,7 +66,7 @@ void Context::init()
   graphics::GraphicsEngine::setWindow(std::move(window));
 
   // Deducing some Status
-  graphics::GraphicsEngine::setCellWidth(64); // TODO change dynamically (in px)
-  graphics::GraphicsEngine::setCellHeight(64); // TODO change dynamically (in px)
-  graphics::GraphicsEngine::setGridThickness(5); // TODO change dynamically (in px)
+  // graphics::GraphicsEngine::setCellWidth(64); // TODO change dynamically (in px)
+  // graphics::GraphicsEngine::setCellHeight(64); // TODO change dynamically (in px)
+  // graphics::GraphicsEngine::setGridThickness(5); // TODO change dynamically (in px)
 }

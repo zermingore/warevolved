@@ -1,8 +1,9 @@
 #ifndef UNIT_HH_
 # define UNIT_HH_
 
-# include <common/include.hh>
-# include <resources/Image.hh>
+# include <memory>
+# include <string>
+
 # include <game/units/Team.hh>
 # include <interface/menus/MenuEntry.hh>
 
@@ -35,12 +36,12 @@ public:
   /** \brief x coordinate on the map getter
    ** \return x (column) coordinate on the map
    */
-  inline unsigned int x() { return _coords.x; }
+  inline size_t x() { return _coords.x; }
 
   /** \brief x unit coordinate on the map getter
    ** \return y (line) coordinate on the map
    */
-  inline unsigned int y() { return _coords.y; }
+  inline size_t y() { return _coords.y; }
 
   /** \brief gets unit's position
    ** \return unit's cell coordinates

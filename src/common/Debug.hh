@@ -8,9 +8,11 @@
 #ifndef DEBUG_HH_
 # define DEBUG_HH_
 
+# include <memory>
 # include <iostream>
 # include <fstream>
 # include <sstream>
+
 
 /// \def Log file name
 # ifdef __unix__
@@ -20,6 +22,32 @@
 #   define LOG_FILENAME "LOG.txt"
 #   define LOG_FILENAME_OLD "LOG_old.txt"
 # endif
+
+
+# ifdef __unix__
+#   define COLOR_NORMAL  "\x1B[0m"
+#   define COLOR_RED     "\x1B[31m"
+#   define COLOR_GREEN   "\x1B[32m"
+#   define COLOR_YELLOW  "\x1B[33m"
+#   define COLOR_BLUE    "\x1B[34m"
+#   define COLOR_MAGENTA "\x1B[35m"
+#   define COLOR_CYAN    "\x1B[36m"
+#   define COLOR_WHITE   "\x1B[37m"
+# else
+#   define COLOR_NORMAL  ""
+#   define COLOR_RED     ""
+#   define COLOR_GREEN   ""
+#   define COLOR_YELLOW  ""
+#   define COLOR_BLUE    ""
+#   define COLOR_MAGENTA ""
+#   define COLOR_CYAN    ""
+#   define COLOR_WHITE   ""
+# endif
+
+# define COLOR_ERROR   COLOR_RED
+# define COLOR_WARNING COLOR_YELLOW
+# define COLOR_SUCCESS COLOR_GREEN
+# define COLOR_VERBOSE COLOR_BLUE
 
 
 /** \macro debug print macro
@@ -56,51 +84,46 @@
 class Debug
 {
 public:
-  static void init();
-
-  /** \brief adds the string message to the log file
-   ** \param msg message to append
-   ** \param err true if the message should be printed as an error
-   ** NOTE: reopens the file each time we add a message (slow)
-   */
-  static void log(const std::string &msg, char severity = ' ');
-
   template<typename T, typename... Tail>
   static void logPrintf(T head, Tail... tail)
   {
+    std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
+
 	time_t now = time(0);
 	struct tm *full_date = localtime(&now);
 	char buf[80] = {0};
-    std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
 
 	strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
 	log << buf << "\t";
 	bodylogprintf(head, tail...);
-  }
-
-  template<typename T, typename... Tail>
-  static void bodylogprintf(T head, Tail... tail)
-  {
-	print(head);
-	bodylogprintf(tail...);
-  }
-
-  // execute after the last argument
-  static void bodylogprintf()
-  {
-	std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
-	log << std::endl;
-	std::cout << std::endl;
+    printf(head, tail...);
   }
 
   template<typename T>
-  static void print(T head)
+  static void printLog(T head)
   {
-	std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
-	log << " " << head;
-	std::cout << head << " ";
+    *_log << " " << head;
   }
 
+
+  /** \brief print as error given parameters on standard output
+   ** \param head: element to print right now
+   ** \param tail eventually, rest of given arguments list
+   */
+  template<typename T, typename... Tail>
+  static void error(T head, Tail... tail)
+  {
+    time_t now = time(0);
+	struct tm *full_date = localtime(&now);
+	char buf[80] = {0};
+
+	strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
+	*_log << buf << "\t";
+	bodylogprintf(head, tail...);
+
+	std::cout << COLOR_ERROR;
+	printf(head, tail...);
+  }
 
   /** \brief print given parameters on standard output
    ** \param head: element to print right now
@@ -113,12 +136,26 @@ public:
 	printf(tail...);
   }
 
+
+private:
+  // methods
+  template<typename T, typename... Tail>
+  static void bodylogprintf(T head, Tail... tail)
+  {
+	printLog(head);
+	bodylogprintf(tail...);
+  }
+
+  // execute after the last argument
+  static void bodylogprintf();
+
   /** \brief appends a new line after last parameter
    */
-  static void printf()
-  {
-	std::cout << std::endl;
-  }
+  static void printf();
+
+
+  // attributes
+  static std::unique_ptr<std::ofstream> _log; ///< log file
 };
 
 

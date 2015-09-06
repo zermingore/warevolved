@@ -3,27 +3,29 @@
 #include <input/Event.hh>
 #include <game/applications/Battle.hh>
 #include <input/KeyManager.hh>
+#include <resources/ResourcesManager.hh>
 
 
 void Game::run()
 {
   using namespace graphics; // function scope
 
-  auto km = std::make_shared<KeyManager> ();
-  _event = std::make_shared<Event> (km);
-  _battle = std::make_shared<Battle> ();
+  auto km     = std::make_shared<KeyManager> ();
+  auto event  = std::make_shared<Event> (km);
+  auto battle = std::make_shared<Battle> ();
 
 # ifdef DEBUG_PERFS
   sf::Clock timer;
   std::vector<sf::Int64> frame_generation;
 # endif
 
+  resources::ResourcesManager::initialize("resources.xml");
   // GraphicsEngine::initRoom();
 
   // Game loop
-  while (GraphicsEngine::windowIsOpen() && _event->process())
+  while (GraphicsEngine::windowIsOpen() && event->process())
   {
-    GraphicsEngine::drawScene(_battle->map());
+    GraphicsEngine::drawScene(battle->map());
 
 #   ifdef DEBUG_PERFS
     GraphicsEngine::setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());

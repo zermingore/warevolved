@@ -1,22 +1,38 @@
 #include <game/Map.hh>
 #include <game/applications/Battle.hh>
-#include <interface/Cursor.hh>
-#include <common/Status.hh>
-#include <game/Cell.hh>
-#include <game/Terrain.hh>
-#include <common/enums/terrains.hh>
-#include <resources/ResourcesManager.hh>
 #include <game/units/Soldier.hh>
 #include <game/Player.hh>
+#include <game/Cell.hh>
+#include <game/Terrain.hh>
+#include <interface/Cursor.hh>
+#include <common/Status.hh>
 
 
-Map::Map(size_t nbColumns, size_t nbLines// , std::shared_ptr<Battle> battle
-  ) :
-  _nbColumns (nbColumns),
-  _nbLines (nbLines)//,
-//  _battle (battle)
+
+Map::MapGraphicsProperties::MapGraphicsProperties()
 {
+  _cellWidth = 64;
+  _cellHeight = 64;
+  _gridThickness = 5;
+  _gridOffsetX = 0;
+  _gridOffsetY = 0;
 }
+
+
+Map::Map(Battle* battle, size_t nbColumns, size_t nbLines) :
+  _nbColumns (nbColumns),
+  _nbLines (nbLines),
+  _battle (battle)
+{
+  _mapGraphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
+
+// _cellWidth = 64;
+  // _cellHeight = 64;
+  // _gridThickness = 5;
+  // _gridOffsetX = 0;
+  // _gridOffsetY = 0;
+}
+
 
 void Map::init()
 {
@@ -38,8 +54,8 @@ void Map::init()
   _cursors[_battle->currentPlayer()]->setLimits(_nbColumns, _nbLines);
 
   // TODO read informations from a map file
-  for (size_t i = 0; i < _nbColumns; ++i)
-    for (size_t j = 0; j < _nbLines; ++j)
+  for (auto i = 0u; i < _nbColumns; ++i)
+    for (auto j = 0u; j < _nbLines; ++j)
       _cells[i][j]->setTerrain(terrain::FOREST);
 }
 
@@ -85,7 +101,7 @@ std::shared_ptr<Cursor> Map::cursor(size_t player){
 
 void Map::endTurn()
 {
-  for (auto it: (*_units)[_battle->currentPlayer()])
+  for (auto it: _units[_battle->currentPlayer()])
     it->setPlayed(false);
 }
 
@@ -108,7 +124,7 @@ void Map::newUnit(enum unit unit, size_t line, size_t column)
   auto player_id = _battle->currentPlayer();
   new_unit->setCellCoordinates(Coords(line, column));
   new_unit->setPlayerId(player_id);
-  (*_units)[player_id].push_back(new_unit);
+  _units[player_id].push_back(new_unit);
 }
 
 
@@ -116,9 +132,6 @@ void Map::setCursorCoords(Coords coords) {
   _cursors[_battle->currentPlayer()]->setCoords(coords);
 }
 
-void Map::setBattle(Battle* battle) {
-  _battle.reset(battle); }
-
-size_t Map::currentPlayer() {
+size_t Map::currentPlayer() const {
   return _battle->currentPlayer();
 }

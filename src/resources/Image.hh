@@ -4,7 +4,9 @@
 # include <resources/Resource.hh>
 # include <common/include.hh>
 
-class MapGraphicsProperties;
+# include <game/Map.hh>
+// class Map;
+// class Map::MapGraphicsProperties;
 
 
 namespace graphics {
@@ -98,7 +100,7 @@ public:
    ** \param c coordinate to display the image
    ** \param p Map Graphics Properties (cells size, grid thickness, ...)
    */
-  void drawAtCell(Coords c, const std::shared_ptr<MapGraphicsProperties> p);
+  void drawAtCell(Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p);
 
   /** \brief draws the Image at _sprite's position
    */

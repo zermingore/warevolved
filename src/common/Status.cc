@@ -86,7 +86,3 @@ std::shared_ptr<State> Status::popCurrentMode()
 void Status::pushMode(mode mode) {
   _states.push(std::make_shared<State> (State(mode)));
 }
-
-void Status::setBattle(Battle b) {
-  _battle = std::make_shared<Battle> (b);
-}

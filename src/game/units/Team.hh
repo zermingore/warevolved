@@ -8,9 +8,10 @@
 #ifndef TEAM_HH_
 # define TEAM_HH_
 
-class Unit;
+# include <memory>
+# include <vector>
 
-# include <game/units/Unit.hh>
+class Unit;
 
 /** \class Team: Units group
  */

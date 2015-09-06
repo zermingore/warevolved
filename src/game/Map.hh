@@ -1,38 +1,70 @@
 #ifndef MAP_HH_
 # define MAP_HH_
 
-# include <memory>
-
-# include <game/units/Unit.hh>
+# include <common/include.hh>
 # include <common/enums/terrains.hh>
 # include <common/enums/units.hh>
 
-class MapGraphicsProperties;
+class Cell;
 class Battle;
 class Cursor;
+class Unit;
 
 
 /** \class represents the game map
  */
 class Map
 {
-  typedef std::shared_ptr<std::map<size_t, std::list<std::shared_ptr<Unit>>>> unit_list;
-
-
 public:
+
+  class MapGraphicsProperties
+  {
+  public:
+    MapGraphicsProperties();
+    void initialize();
+
+    inline unsigned int cellWidth() { return _cellWidth; }
+    inline unsigned int cellHeight() { return _cellHeight; }
+    inline unsigned int gridThickness() { return _gridThickness; }
+    inline unsigned int gridOffsetX() { return _gridOffsetX; }
+    inline unsigned int gridOffsetY() { return _gridOffsetY; }
+
+
+    inline void setCellWidth(unsigned int cell_width) { _cellWidth = cell_width; }
+    inline void setCellHeight(unsigned int cell_height) { _cellHeight = cell_height; }
+    inline void setGridThickness(unsigned int grid_thickness) { _gridThickness = grid_thickness; }
+    inline void setGridOffsetX(unsigned int grid_offset_x) { _gridOffsetX = grid_offset_x; }
+    inline void setGridOffsetY(unsigned int grid_offset_y) { _gridOffsetY = grid_offset_y; }
+
+
+  private:
+     size_t _cellWidth; ///< cells width
+     size_t _cellHeight; ///< cells height
+     size_t _gridThickness; ///< thickness of the grid
+     size_t _gridOffsetX; ///< X offset of the grid (related to the window)
+     size_t _gridOffsetY; ///< Y offset of the grid (related to the window)
+  };
+
+
+  ///< \typedef player's units as a list
+  typedef std::map<size_t, std::list<std::shared_ptr<Unit>>> unit_list;
+
+  /** \class graphics properties
+   */
+//  class MapGraphicsProperties;
+
+
   /** \brief removing default constructor
    */
   Map() = delete;
 
   /** \brief Constructs a map of nbColumns x nbLines
+   ** \param battle pointer on the battle in which this map is
    ** \param nbColumns Number of columns required
    ** \param nbLines Number of lines required
    ** calls this->init() to initialize a fresh Map
    */
-  Map(size_t nbColumns, size_t nbLines// , std::shared_ptr<Battle> battle
-    );
-
-  void setBattle(Battle* battle);
+  Map(Battle* battle, size_t nbColumns, size_t nbLines);
 
   /** \brief Initializes the map
    **   Puts units where needed;
@@ -56,6 +88,11 @@ public:
    */
   inline std::shared_ptr<MapGraphicsProperties> graphicsProperties() const
   { return _graphicsProperties; }
+
+  /** \brief returns the current player in the map
+   ** \return current player's identifier
+   */
+  size_t currentPlayer() const;
 
   /** \brief gets the unit at coordinates (x, y)
    **
@@ -118,11 +155,6 @@ public:
    */
   void moveUnit(std::shared_ptr<Unit> u, Coords c);
 
-  /** \brief returns all units
-   */
-  unit_list units() const
-  { return _units; }
-
   /** \brief returns the cursor of the given player
    */
   std::shared_ptr<Cursor> cursor(size_t player);
@@ -136,11 +168,6 @@ public:
   void setCursorCoords(Coords coords);
 
 
-  /** \brief returns battle current player
-   */
-  size_t currentPlayer();
-
-
 private:
   size_t _nbColumns; ///< number of columns (x coordinate)
   size_t _nbLines; ///< number of lines (y coordinate)
@@ -150,13 +177,15 @@ private:
   std::vector<std::vector<std::shared_ptr<Cell>>> _cells;
 
   ///< map of units: <player, unit_list>
-  std::shared_ptr<std::map<size_t, std::list<std::shared_ptr<Unit>>>> _units;
+  unit_list _units;
 
   ///< map of players cursors (map[player_id] = cursor)
   std::map<size_t, std::shared_ptr<Cursor>> _cursors;
 
   ///< list of map graphics properties (cells size, grid thickness, ...)
   std::shared_ptr<MapGraphicsProperties> _graphicsProperties;
+
+  std::shared_ptr<Map::MapGraphicsProperties> _mapGraphicsProperties;
 };
 
 #endif /* !MAP_HH_ */

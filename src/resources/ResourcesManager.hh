@@ -2,11 +2,10 @@
 # define RESOURCESMANAGER_HH_
 
 # include <common/include.hh>
-# include <common/macros.hh>
-# include <resources/Resource.hh>
+
+//# include <resources/Resource.hh>
 # include <resources/Font.hh>
 # include <resources/Image.hh>
-# include <pugixml/pugixml.hpp>
 
 
 /** \enum enum matching every resource types
@@ -37,10 +36,14 @@ namespace resources {
 class ResourcesManager
 {
 public:
-  /** \brief Constructor, parses the XML, calling buildFromXML()
+  /** \brief removing default constructor as we need a resources file
+   */
+  ResourcesManager() = delete;
+
+  /** \brief Initialization, parses the XML, calling buildFromXML()
    ** \param file_name XML file name to parse
    */
-  explicit ResourcesManager(const std::string file_name);
+  static void initialize(const std::string file_name);
 
   /** \brief Retrieve an Image from _images map
    ** if the Image does not exist, print an error and return the default one
@@ -56,12 +59,12 @@ public:
 private:
   /** \brief initializes _typeNames array
    */
-  void initTypeNames();
+  static void initTypeNames();
 
   /** \brief initialize default resources
    ** theses resources are used when we cannot find the expected one
    */
-  void initializeDefaultResources();
+  static void initializeDefaultResources();
 
   /** \brief adds resource to the _resources map
    **   adds it in the right list, according to type
@@ -74,9 +77,9 @@ private:
    ** \return true on success
    **   false otherwise
    */
-  bool addResource(e_resource_type type,
-                   const std::string name,
-                   const std::string file_name);
+  static bool addResource(e_resource_type type,
+                          const std::string name,
+                          const std::string file_name);
 
   /** \brief parses XML file
    ** \param file_name file to parse
@@ -84,7 +87,7 @@ private:
    ** \return true if the file was successfully parsed
    **   false otherwise (prints an error message on std::err)
    */
-  bool parseXML(const std::string file_name);
+  static bool parseXML(const std::string file_name);
 
 
 # ifdef DEBUG_XML

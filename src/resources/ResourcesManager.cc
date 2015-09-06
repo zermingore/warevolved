@@ -1,4 +1,5 @@
 #include <resources/ResourcesManager.hh>
+#include <pugixml/pugixml.hpp>
 #include <common/constants.hh>
 #include <resources/Image.hh>
 #include <resources/Font.hh>
@@ -12,8 +13,14 @@ std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
 std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
 
 
-ResourcesManager::ResourcesManager(const std::string file_name)
+// default resources paths
+const std::string DEFAULT_IMAGE_PATH = "resources/defaults/image.png";
+const std::string DEFAULT_FONT_PATH = "resources/defaults/font.ttf";
+
+
+void ResourcesManager::initialize(const std::string file_name)
 {
+  Debug::error("initialize()");
   initTypeNames();
   initializeDefaultResources();
   parseXML(file_name);
@@ -23,10 +30,15 @@ ResourcesManager::ResourcesManager(const std::string file_name)
 # endif
 }
 
+
 void ResourcesManager::initializeDefaultResources()
 {
+  Debug::error("initializing default resources");
+
   _images["default"] = std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
   _fonts["default"] = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
+
+  Debug::error(_images["default"]);
 }
 
 void ResourcesManager::initTypeNames()
@@ -70,7 +82,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
   pugi::xml_document doc;
   if (!doc.load_file(file_name.c_str()))
   {
-    PRINTF("unable to load file");
+    Debug::error("unable to load file");
     return false;
   }
 
@@ -115,10 +127,14 @@ void ResourcesManager::listResources()
 
 graphics::Image& ResourcesManager::getImage(const std::string name)
 {
+  Debug::error("fetching: ", name);
+  Debug::error("nb images: ", _images.size());
+
+
   if (_images.find(name) != _images.end())
     return *_images[name];
 
-  Debug::logPrintf("Unable to find image", name);
+  Debug::error("Unable to find image", name);
 
   return *_images["default"];
 }

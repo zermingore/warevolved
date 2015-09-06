@@ -3,9 +3,16 @@
 #include <game/Game.hh>
 #include <common/Debug.hh>
 
+///< log file definition
+// std::ofstream* Debug::_log = new std::ofstream(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
 
 int main(int ac, const char **av)
 {
+  // Debug::initialize();
+  // std::ofstream* log = new std::ofstream(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
+  // Debug::_log = log;
+
+
   // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
   PRINTF(av);
 

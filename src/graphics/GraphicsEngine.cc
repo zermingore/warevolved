@@ -1,22 +1,32 @@
 #include <common/constants.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <resources/ResourcesManager.hh>
+#include <game/Map.hh>
 #include <game/Cell.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <game/units/Unit.hh>
 
 
 namespace graphics {
 
+const std::string DEFAULT_RESOURCES_XML_FILE = "resources.xml";
+
 // Static Variables definition
 std::unique_ptr<sf::RenderWindow> GraphicsEngine::_window;
 float GraphicsEngine::_currentFPS;
-unsigned int GraphicsEngine::_cellWidth; // TODO dynamic, somewhere else (Map ?)
-unsigned int GraphicsEngine::_cellHeight; // TODO dynamic, somewhere else (Map ?)
-unsigned int GraphicsEngine::_gridThickness;
-unsigned int GraphicsEngine::_renderX;
-unsigned int GraphicsEngine::_renderY;
-unsigned int GraphicsEngine::_gridOffsetX;
-unsigned int GraphicsEngine::_gridOffsetY;
+size_t GraphicsEngine::_cellWidth; // TODO dynamic, somewhere else (Map ?)
+size_t GraphicsEngine::_cellHeight; // TODO dynamic, somewhere else (Map ?)
+size_t GraphicsEngine::_gridThickness;
+size_t GraphicsEngine::_renderX;
+size_t GraphicsEngine::_renderY;
+size_t GraphicsEngine::_gridOffsetX;
+size_t GraphicsEngine::_gridOffsetY;
+
+
+void initialize()
+{
+  resources::ResourcesManager::initialize(DEFAULT_RESOURCES_XML_FILE);
+  // MapGraphicsProperties::initialize();
+}
 
 
 // void GraphicsEngine::initRoom()
@@ -59,9 +69,9 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Map> map)
   // TODO [Optimization] fetch every terrains first
 
   // draws column by column
-  for (size_t i = 0; i < map->nbColumns(); ++i)
+  for (auto i = 0u; i < map->nbColumns(); ++i)
   {
-    for (size_t j = 0; j < map->nbLines(); ++j)
+    for (auto j = 0u; j < map->nbLines(); ++j)
     {
       // TODO check if we print the cell (scroll case)
 
@@ -69,7 +79,13 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Map> map)
       switch (c->terrain())
       {
         default:
-          resources::ResourcesManager::getImage("forest").drawAtCell(c->coords(), map->graphicsProperties());
+          auto img = resources::ResourcesManager::getImage("forest");
+          Debug::error("forest request: ", &c);
+
+          Debug::error(&img);
+          Debug::error("map: ", &map);
+          img.drawAtCell(c->coords(), map->graphicsProperties());
+          break;
       }
 
       if (c->highlight())
@@ -94,12 +110,13 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   rectangle.setOutlineColor(GRID_COLOR);
   rectangle.setOutlineThickness(5);
 
-  std::shared_ptr<MapGraphicsProperties> p = map->graphicsProperties();
-  unsigned int offset_x = p->cellWidth()  + p->gridThickness() + p->gridOffsetX();
-  unsigned int offset_y = p->cellHeight() + p->gridThickness() + p->gridOffsetY();
-  for (unsigned int i = 0; i < map->nbColumns(); ++i)
+  // auto p = std::make_shared<Map::MapGraphicsProperties> (map->graphicsProperties());
+  std::shared_ptr<Map::MapGraphicsProperties> p (map->graphicsProperties());
+  auto offset_x = p->cellWidth()  + p->gridThickness() + p->gridOffsetX();
+  auto offset_y = p->cellHeight() + p->gridThickness() + p->gridOffsetY();
+  for (auto i = 0u; i < map->nbColumns(); ++i)
   {
-   for (unsigned int j = 0; j < map->nbLines(); ++j)
+   for (auto j = 0u; j < map->nbLines(); ++j)
     {
       rectangle.setPosition(i * offset_x, j * offset_y);
       _window->draw(rectangle);
@@ -131,5 +148,20 @@ void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
   _gridOffsetY = (_window->getSize().y - _cellHeight * map->nbLines()) / 2;
 }
 
+
+template <class T>
+void GraphicsEngine::draw(std::shared_ptr<T> drawable, Coords pos, Coords size)
+{
+  std::cout << "image: " << drawable->imageName() << std::endl;
+  drawable->imageName();
+}
+
+
+template <class T>
+void GraphicsEngine::draw(std::shared_ptr<T> drawable, Cell c)
+{
+  std::cout << "image: " << drawable->imageName() << std::endl;
+  drawable->imageName();
+}
 
 } // namespace graphics

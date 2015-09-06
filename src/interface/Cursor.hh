@@ -9,7 +9,6 @@
 # define CURSOR_HH_
 
 # include <common/include.hh>
-# include <resources/Image.hh>
 
 
 /** \brief in-game Cursor class
@@ -24,13 +23,15 @@ public:
 
   /** \brief _sprite getter
    */
-  inline std::shared_ptr<sf::Sprite> sprite() { return _sprite; }
-  std::shared_ptr<sf::Sprite> sprite(int offset_x, int offset_y);
+  // inline std::shared_ptr<sf::Sprite> sprite() { return _sprite; }
+
+  // std::shared_ptr<sf::Sprite> sprite(int offset_x, int offset_y);
 
   /** \brief sets the cursor color
    ** \param color the color to set
    */
-  inline void setColor(Color color) { _sprite->setColor(color); }
+  // inline void setColor(Color color) { _sprite->setColor(color); }
+  inline void setColor(Color color) { _color = color; }
 
   /** \brief X (column) coordinate getter
    */
@@ -44,20 +45,13 @@ public:
    */
   inline Coords coords() { return _coords; }
 
-  /** \brief X (column) coordinate setter
-   */
-  inline void setX(unsigned int x) { _coords.x = x; }
-  /** \brief Y (line) coordinate setter
-   */
-  inline void setY(unsigned int y) { _coords.y = y; }
-
   /** \brief coordinates setter
    */
   inline void setCoords(Coords coords) { _coords = coords; }
 
   /** \brief sets _nbColumns and _nbLines
    */
-  void setLimits(unsigned int nbColumns, unsigned int nbLines);
+  void setLimits(size_t nbColumns, size_t nbLines);
 
 
   // ____________________________ Cursor Motion ____________________________ //
@@ -80,7 +74,7 @@ public:
 
   /** \brief draws the cursor
    */
-  inline void draw() { _image.draw(); }
+  // inline void draw() { _image.draw(); }
 
 
 private:
@@ -89,11 +83,11 @@ private:
   size_t _nbLines; ///< number of Lines in map
 
   Coords _coords; ///< Cursor Coordinates
-  graphics::Image _image; ///< Cursor's Image
-  std::shared_ptr<sf::Sprite> _sprite; ///< pointer over _image->sprite()
+  std::string _image; ///< Cursor's Image
+  sf::Color _color; ///< cursor' s color
 
   // center of the SPRITE coordinates, avoid computing its value each frame
-  sf::Vector2f _center; ///< center of the Cursor sprite
+//  sf::Vector2f _center; ///< center of the Cursor sprite
 };
 
 #endif /* !CURSOR_HH_ */

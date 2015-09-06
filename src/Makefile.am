@@ -28,16 +28,15 @@ pugixml/pugixml.cpp                 \
 \
 core/Context.cc						\
 \
-graphics/GraphicsEngine.cc			\
-graphics/MapGraphicsProperties.cc   \
+graphics/GraphicsEngine.cc          \
 \
 resources/ResourcesManager.cc       \
-resources/Resource.cc				\
-resources/Image.cc					\
-resources/Font.cc					\
+resources/Resource.cc               \
+resources/Image.cc                  \
+resources/Font.cc                   \
 \
-common/Globals.cc					\
-common/System.cc					\
+common/Debug.cc                    	\
+common/System.cc                    \
 common/Settings.cc					\
 common/Status.cc					\
 common/State.cc						\

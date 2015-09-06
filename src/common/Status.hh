@@ -86,7 +86,7 @@ public:
   /** \brief _battle setter
    ** \param b current battle
    */
-  static inline void setBattle(Battle b);
+  // static inline void setBattle(Battle b);
 
   /** \brief _selectedUnitPosition getter
    ** \return _selectedUnitPosition

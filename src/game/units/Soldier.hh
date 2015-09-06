@@ -14,7 +14,6 @@
 # include <common/enums/ranks.hh>
 
 class Item;
-class Image;
 
 
 /** \class This class describes a Soldier, not a unit

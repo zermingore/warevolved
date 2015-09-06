@@ -1,6 +1,6 @@
 #include <resources/Image.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+// #include <graphics/MapGraphicsProperties.hh>
 
 
 namespace graphics {
@@ -9,12 +9,12 @@ namespace graphics {
 Image::Image(const std::string file_name,
              const std::string name)
 {
-  // TODO allocation only if needed
+  // TODO allocation only if needed (using a proxy)
   _rectangle = std::make_shared<sf::RectangleShape> ();
   _rectangle->setPosition(sf::Vector2f(0, 0));
   _rectangle->setSize(sf::Vector2f(0, 0));
 
-  // in debug, load an ugly texture to help noticing it
+  // TODO in debug, load an ugly texture to help noticing it
 # ifdef DEBUG
   _rectangle->setTexture(NULL);
 # else
@@ -42,6 +42,16 @@ std::shared_ptr<sf::Texture> Image::getTexture()
 
 void Image::initTexture()
 {
+# ifdef DEBUG
+  if (_fileName == "")
+  {
+    Debug::logPrintf(__FILE__, " at line ", __LINE__,
+                     "Unable to initialize a texture without fileName");
+  }
+# endif // DEBUG
+
+  assert(_fileName != "");
+
   _texture = std::make_shared<sf::Texture> ();
   _texture->loadFromFile(_fileName);
   _rectangle->setTexture((sf::Texture *) (_texture.get()));
@@ -140,7 +150,7 @@ void Image::reload(std::string file_name)
 }
 
 
-void Image::drawAtCell(Coords c, const std::shared_ptr<MapGraphicsProperties> p)
+void Image::drawAtCell(Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p)
 {
   if (!_sprite)
     sprite();

@@ -8,13 +8,6 @@
 #ifndef GAME_HH_
 # define GAME_HH_
 
-# include <memory>
-
-// forward declarations instead of includes
-class Battle;
-class Event;
-
-
 /** \brief Game is designed to hold the whole Game and not a single game
  **   This way the Game class launches the main menu when needed
  */
@@ -26,11 +19,6 @@ public:
    **   window rendering
    */
   void run();
-
-
-private:
-  std::shared_ptr<Battle> _battle; ///< pointer on the game itself
-  std::shared_ptr<Event> _event; ///< Events management
 };
 
 #endif /* !GAME_HH_ */
