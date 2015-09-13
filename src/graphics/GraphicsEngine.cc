@@ -13,13 +13,8 @@ const std::string DEFAULT_RESOURCES_XML_FILE = "resources.xml";
 // Static Variables definition
 std::unique_ptr<sf::RenderWindow> GraphicsEngine::_window;
 float GraphicsEngine::_currentFPS;
-size_t GraphicsEngine::_cellWidth; // TODO dynamic, somewhere else (Map ?)
-size_t GraphicsEngine::_cellHeight; // TODO dynamic, somewhere else (Map ?)
-size_t GraphicsEngine::_gridThickness;
 size_t GraphicsEngine::_renderX;
 size_t GraphicsEngine::_renderY;
-size_t GraphicsEngine::_gridOffsetX;
-size_t GraphicsEngine::_gridOffsetY;
 
 
 void initialize()
@@ -80,10 +75,6 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Map> map)
       {
         default:
           auto img = resources::ResourcesManager::getImage("forest");
-          Debug::error("forest request: ", &c);
-
-          Debug::error(&img);
-          Debug::error("map: ", &map);
           img.drawAtCell(c->coords(), map->graphicsProperties());
           break;
       }
@@ -104,14 +95,14 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Map> map)
 
 void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 {
+  auto p(map->graphicsProperties());
   sf::RectangleShape rectangle;
-  rectangle.setSize(sf::Vector2f(_cellWidth, _cellHeight));
+  rectangle.setSize(sf::Vector2f(p->cellWidth(), p->cellHeight()));
   rectangle.setFillColor(sf::Color::Transparent);
   rectangle.setOutlineColor(GRID_COLOR);
   rectangle.setOutlineThickness(5);
 
   // auto p = std::make_shared<Map::MapGraphicsProperties> (map->graphicsProperties());
-  std::shared_ptr<Map::MapGraphicsProperties> p (map->graphicsProperties());
   auto offset_x = p->cellWidth()  + p->gridThickness() + p->gridOffsetX();
   auto offset_y = p->cellHeight() + p->gridThickness() + p->gridOffsetY();
   for (auto i = 0u; i < map->nbColumns(); ++i)
@@ -143,9 +134,11 @@ void GraphicsEngine::setWindow(std::unique_ptr<sf::RenderWindow> window)
 
 void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
 {
+  auto p(map->graphicsProperties());
+
   // offset = 1/2 left room
-  _gridOffsetX = (_window->getSize().x - _cellWidth * map->nbColumns()) / 2;
-  _gridOffsetY = (_window->getSize().y - _cellHeight * map->nbLines()) / 2;
+  p->setGridOffsetX((_window->getSize().x - p->cellWidth()  * map->nbColumns()) / 2);
+  p->setGridOffsetY((_window->getSize().y - p->cellHeight() * map->nbLines()) / 2);
 }
 
 

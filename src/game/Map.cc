@@ -24,13 +24,7 @@ Map::Map(Battle* battle, size_t nbColumns, size_t nbLines) :
   _nbLines (nbLines),
   _battle (battle)
 {
-  _mapGraphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
-
-// _cellWidth = 64;
-  // _cellHeight = 64;
-  // _gridThickness = 5;
-  // _gridOffsetX = 0;
-  // _gridOffsetY = 0;
+  _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
 }
 
 

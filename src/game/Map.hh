@@ -16,12 +16,15 @@ class Unit;
 class Map
 {
 public:
+  ///< \typedef player's units as a list
+  typedef std::map<size_t, std::list<std::shared_ptr<Unit>>> unit_list;
 
+  /** \class graphics properties
+   */
   class MapGraphicsProperties
   {
   public:
     MapGraphicsProperties();
-    void initialize();
 
     inline unsigned int cellWidth() { return _cellWidth; }
     inline unsigned int cellHeight() { return _cellHeight; }
@@ -44,14 +47,6 @@ public:
      size_t _gridOffsetX; ///< X offset of the grid (related to the window)
      size_t _gridOffsetY; ///< Y offset of the grid (related to the window)
   };
-
-
-  ///< \typedef player's units as a list
-  typedef std::map<size_t, std::list<std::shared_ptr<Unit>>> unit_list;
-
-  /** \class graphics properties
-   */
-//  class MapGraphicsProperties;
 
 
   /** \brief removing default constructor
@@ -86,7 +81,7 @@ public:
   /** \brief Graphics properties getter
    ** \return a pointer on the graphics properties class
    */
-  inline std::shared_ptr<MapGraphicsProperties> graphicsProperties() const
+  inline std::shared_ptr<MapGraphicsProperties> graphicsProperties()
   { return _graphicsProperties; }
 
   /** \brief returns the current player in the map
@@ -183,9 +178,7 @@ private:
   std::map<size_t, std::shared_ptr<Cursor>> _cursors;
 
   ///< list of map graphics properties (cells size, grid thickness, ...)
-  std::shared_ptr<MapGraphicsProperties> _graphicsProperties;
-
-  std::shared_ptr<Map::MapGraphicsProperties> _mapGraphicsProperties;
+  std::shared_ptr<Map::MapGraphicsProperties> _graphicsProperties;
 };
 
 #endif /* !MAP_HH_ */

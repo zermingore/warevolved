@@ -20,7 +20,6 @@ const std::string DEFAULT_FONT_PATH = "resources/defaults/font.ttf";
 
 void ResourcesManager::initialize(const std::string file_name)
 {
-  Debug::error("initialize()");
   initTypeNames();
   initializeDefaultResources();
   parseXML(file_name);
@@ -33,12 +32,8 @@ void ResourcesManager::initialize(const std::string file_name)
 
 void ResourcesManager::initializeDefaultResources()
 {
-  Debug::error("initializing default resources");
-
   _images["default"] = std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
   _fonts["default"] = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
-
-  Debug::error(_images["default"]);
 }
 
 void ResourcesManager::initTypeNames()
@@ -127,10 +122,6 @@ void ResourcesManager::listResources()
 
 graphics::Image& ResourcesManager::getImage(const std::string name)
 {
-  Debug::error("fetching: ", name);
-  Debug::error("nb images: ", _images.size());
-
-
   if (_images.find(name) != _images.end())
     return *_images[name];
 

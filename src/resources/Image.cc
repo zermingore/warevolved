@@ -163,6 +163,7 @@ void Image::drawAtCell(Coords c, const std::shared_ptr<Map::MapGraphicsPropertie
 
   if (load())
     graphics::GraphicsEngine::draw(_sprite);
+
   graphics::GraphicsEngine::draw(_rectangle);
 }
 
