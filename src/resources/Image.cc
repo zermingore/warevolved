@@ -150,15 +150,15 @@ void Image::reload(std::string file_name)
 }
 
 
-void Image::drawAtCell(Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p)
+void Image::drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p)
 {
   if (!_sprite)
     sprite();
 
   // Sprite position
   sf::Vector2f pos;
-  pos.x = c.x * p->cellWidth()  + p->gridThickness() + p->gridOffsetX();
-  pos.y = c.y * p->cellHeight() + p->gridThickness() + p->gridOffsetY();
+  pos.x = c.x * p->cellWidth()  + p->gridOffsetX();
+  pos.y = c.y * p->cellHeight() + p->gridOffsetY();
   _sprite->setPosition(pos);
 
   if (load())

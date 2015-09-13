@@ -100,7 +100,7 @@ public:
    ** \param c coordinate to display the image
    ** \param p Map Graphics Properties (cells size, grid thickness, ...)
    */
-  void drawAtCell(Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p);
+  void drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p);
 
   /** \brief draws the Image at _sprite's position
    */

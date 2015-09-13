@@ -97,23 +97,45 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 {
   auto p(map->graphicsProperties());
   sf::RectangleShape rectangle;
-  rectangle.setSize(sf::Vector2f(p->cellWidth(), p->cellHeight()));
   rectangle.setFillColor(sf::Color::Transparent);
   rectangle.setOutlineColor(GRID_COLOR);
-  rectangle.setOutlineThickness(5);
+  rectangle.setOutlineThickness(p->gridThickness());
 
-  // auto p = std::make_shared<Map::MapGraphicsProperties> (map->graphicsProperties());
-  auto offset_x = p->cellWidth()  + p->gridThickness() + p->gridOffsetX();
-  auto offset_y = p->cellHeight() + p->gridThickness() + p->gridOffsetY();
-  for (auto i = 0u; i < map->nbColumns(); ++i)
+  auto offset_x = p->gridOffsetX();
+  auto offset_y = p->gridOffsetY();
+
+  // for each line, draw a rectangle
+  for (auto i = 0u; i < map->nbLines(); ++i)
   {
-   for (auto j = 0u; j < map->nbLines(); ++j)
-    {
-      rectangle.setPosition(i * offset_x, j * offset_y);
-      _window->draw(rectangle);
-    }
+    rectangle.setPosition(offset_x, offset_y);
+    rectangle.setSize(sf::Vector2f(p->cellWidth() * map->nbColumns(),
+                                   p->cellHeight()));
+
+    _window->draw(rectangle);
+
+    // skipping to next line
+    offset_y += p->cellHeight();
+  }
+
+
+  // resetting offsets
+  offset_x = p->gridOffsetX();
+  offset_y = p->gridOffsetY();
+
+  // for each column, draw a rectangle
+  for (auto j = 0u; j < map->nbLines(); ++j)
+  {
+    rectangle.setPosition(offset_x, offset_y);
+    rectangle.setSize(sf::Vector2f(p->cellWidth(),
+                                   p->cellHeight() * map->nbLines()));
+
+    _window->draw(rectangle);
+
+    // skipping to next column
+    offset_x += p->cellWidth();
   }
 }
+
 
 
 void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
