@@ -65,7 +65,6 @@ public:
    */
   void buildMap();
 
-
   /** \brief current player identifier getter
    ** \return _currentPlayer: current player identifier
    */

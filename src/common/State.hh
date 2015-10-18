@@ -13,11 +13,13 @@
 # include <common/structures/Vector.hh>
 
 class Menu;
+class EventManager;
 
 /** \brief state class
  ** stores a state, which is composed of
  **   a cursor position
  **   a mode: \enum state index
+ **   an event manager
  */
 class State
 {
@@ -49,12 +51,17 @@ public:
    */
   inline Coords cursorCoords() { return _cursorCoords; }
 
+  /** \brief event manager getter
+   ** \return _eventManager
+   */
+  std::shared_ptr<EventManager> eventManager() { return _eventManager; }
+
 
 private:
   mode _currentMode; ///< State's mode
   std::shared_ptr<Menu> _menu; ///< menu state to save
-  Coords _cursorCoords; ///< Cursor coordinates
-                        ///< when the mode was activated
+  Coords _cursorCoords; ///< Cursor coordinates when the mode was activated
+  std::shared_ptr<EventManager> _eventManager; ///< State related events
 };
 
 #endif /* !STATE_HH_ */

@@ -42,6 +42,16 @@ mode Status::currentMode()
   return _states.top()->currentMode();
 }
 
+std::shared_ptr<State> Status::currentState()
+{
+  if (_states.empty())
+  {
+    DEBUG_PRINT("_states stack is empty, exiting...");
+  }
+
+  return _states.top();
+}
+
 void Status::pushModeInGameMenu(mode mode, std::shared_ptr<InGameMenu> menu)
 {
   menu->build(mode);

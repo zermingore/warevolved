@@ -12,7 +12,7 @@ int main(int ac, const char **av)
   bool fullscreen = ac > 1;
   Context context(fullscreen);
 
-  // TODO: do not push a flag, push a pointer to the mode itself
+  // TODO do not push a flag, push a pointer to the mode itself
   Status::pushMode(mode::PLAYING); // TODO main menu
 
   Game game;

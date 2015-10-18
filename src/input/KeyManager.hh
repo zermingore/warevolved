@@ -10,7 +10,6 @@
 
 # include <common/include.hh>
 # include <common/constants.hh>
-//# include <common/globals.hh>
 
 /** \brief timer index list
  */

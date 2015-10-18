@@ -1,4 +1,4 @@
-#include <input/Event.hh>
+#include <input/EventManager.hh>
 #include <input/KeyManager.hh>
 #include <common/Status.hh>
 #include <common/Settings.hh>
@@ -6,9 +6,9 @@
 #include <graphics/GraphicsEngine.hh>
 
 
-Event::Event(std::shared_ptr<KeyManager> km) :
-  _km(km)
+EventManager::EventManager()
 {
+  _km = std::make_shared<KeyManager> ();
   for (auto i = 0; i < E_TIMER_NB_TIMERS; ++i)
     _km->restartTimer(static_cast<e_timer> (i));
 
@@ -16,7 +16,20 @@ Event::Event(std::shared_ptr<KeyManager> km) :
 }
 
 
-bool Event::process()
+bool EventManager::execute(std::string key)
+{
+  if (_callbacks.find(key) == _callbacks.end())
+  {
+    Debug::printf("callback not found");
+    return false;
+  }
+
+  _callbacks[key]();
+  return true;
+}
+
+
+bool EventManager::process()
 {
   while (graphics::GraphicsEngine::pollEvent(_event))
   {
@@ -65,7 +78,8 @@ bool Event::process()
 }
 
 
-void Event::panels()
+
+void EventManager::panels()
 {
   // if (_km->panel() && _km->switchStatus(E_SWITCH_PANEL) == OFF)
   // {
@@ -83,7 +97,7 @@ void Event::panels()
 }
 
 
-void Event::selectTarget()
+void EventManager::selectTarget()
 {
   // quit mode request
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
@@ -135,7 +149,7 @@ void Event::selectTarget()
 }
 
 
-void Event::moveUnit()
+void EventManager::moveUnit()
 {
   // only called on mode::MOVING_UNIT
   assert(Status::currentMode() != mode::MOVING_UNIT);
@@ -193,7 +207,7 @@ void Event::moveUnit()
 }
 
 
-void Event::selectionMenu()
+void EventManager::selectionMenu()
 {
   // if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   // {
@@ -233,7 +247,7 @@ void Event::selectionMenu()
 }
 
 
-bool Event::game()
+bool EventManager::game()
 {
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
@@ -300,7 +314,7 @@ bool Event::game()
 }
 
 
-void Event::releasedKeys()
+void EventManager::releasedKeys()
 {
   // The timer we want to reset must not match a pressed key
   // (in case 2 keys are pressed simultaneously)

@@ -1,17 +1,16 @@
 #include <game/Game.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <input/Event.hh>
+#include <input/EventManager.hh>
 #include <game/applications/Battle.hh>
 #include <input/KeyManager.hh>
 #include <resources/ResourcesManager.hh>
+#include <common/Status.hh>
+#include <common/State.hh>
 
 
 void Game::run()
 {
   using namespace graphics; // function scope
-
-  auto km     = std::make_shared<KeyManager> ();
-  auto event  = std::make_shared<Event> (km);
   auto battle = std::make_shared<Battle> ();
 
 # ifdef DEBUG_PERFS
@@ -23,7 +22,8 @@ void Game::run()
   // GraphicsEngine::initRoom();
 
   // Game loop
-  while (GraphicsEngine::windowIsOpen() && event->process())
+  while (GraphicsEngine::windowIsOpen() &&
+         Status::currentState()->eventManager()->process())
   {
     GraphicsEngine::drawScene(battle->map());
 
@@ -37,8 +37,7 @@ void Game::run()
 
   // finished the main loop, displaying performances
 # ifdef DEBUG_PERFS
-  for (auto i: frame_generation) {
+  for (auto i: frame_generation)
     PRINTF("frame generation:", i, "\tFPS:", 1000000 / i);
-  }
 # endif
 }

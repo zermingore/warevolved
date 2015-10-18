@@ -8,7 +8,7 @@ KeyManager::KeyManager()
     _ready[i] = true;
 
   for (auto i = 0; i < E_SWITCH_NB_SWITCHES; ++i)
-	_switches[i] = false;
+    _switches[i] = false;
 
   mapKeys();
 }
@@ -16,7 +16,7 @@ KeyManager::KeyManager()
 
 void KeyManager::mapKeys()
 {
-  // read configuration file to retrieve these values
+  // TODO read configuration file to retrieve these values
   // use Settings Class
   _keys[E_KEY_MOVE_UP_1] = sf::Keyboard::Up;
   _keys[E_KEY_MOVE_UP_2] = sf::Keyboard::W;

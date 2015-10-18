@@ -50,11 +50,17 @@ public:
    */
   static std::shared_ptr<State> popCurrentMode();
 
-  /** \brief \return current mode
-   ** meaning, the top of _modes stack
+  /** \brief return current mode
+   ** meaning, the top of _modes stack's mode
    ** does *NOT* pop the stack
    */
   static mode currentMode();
+
+  /** \brief return current state
+   ** meaning, the top of _modes stack
+   ** does *NOT* pop the stack
+   */
+  static std::shared_ptr<State> currentState();
 
   /** \brief stacks a new mode on _modes
    ** \param mode mode we just entered
@@ -70,23 +76,6 @@ public:
    ** \param c coordinates of the selected cell
    */
   static inline void setSelectedCell(Coords c) { _selectedCell = c; }
-
-  // ///< _gridOffsetX setter
-  // static inline void setGridOffsetX(unsigned int x) { _gridOffsetX = x; }
-  // ///< _gridOffsetY setter
-  // static inline void setGridOffsetY(unsigned int y) { _gridOffsetY = y; }
-
-  // ///< \brief sets grid offset, according to _gridOffsetX and _gridOffsetY
-  // static void setGridOffset();
-
-  /** \brief _battle getter
-   ** \return _battle
-   */
-  // static inline std::shared_ptr<Battle> battle() { return _battle; }
-  /** \brief _battle setter
-   ** \param b current battle
-   */
-  // static inline void setBattle(Battle b);
 
   /** \brief _selectedUnitPosition getter
    ** \return _selectedUnitPosition
