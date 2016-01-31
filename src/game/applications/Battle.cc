@@ -13,14 +13,15 @@ Battle::Battle() :
   init();
 }
 
+
 void Battle::init()
 {
   _map = std::make_shared<Map> (this, 8, 8);
   buildPlayers();
   buildMap();
-  buildUnits();
   _map->cursor(_currentPlayer)->setColor(_players[_currentPlayer]->cursorColor());
 }
+
 
 void Battle::buildPlayers()
 {
@@ -35,20 +36,18 @@ void Battle::buildPlayers()
   _players.push_back(player2);
 }
 
+
 // TODO generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
   _map->init();
-}
 
-void Battle::buildUnits()
-{
-  // TODO delegate to a factory
-  _map->newUnit(unit::SOLDIERS, 1, 1);
-  _map->newUnit(unit::SOLDIERS, 4, 1);
+    // TODO delegate to a factory
+  _map->newUnit(e_unit::SOLDIERS, 1, 1);
+  _map->newUnit(e_unit::SOLDIERS, 4, 1);
 
-  _map->newUnit(unit::SOLDIERS, 3, 4);
-  _map->newUnit(unit::SOLDIERS, 3, 6);
+  _map->newUnit(e_unit::SOLDIERS, 3, 4);
+  _map->newUnit(e_unit::SOLDIERS, 3, 6);
 }
 
 
@@ -61,6 +60,7 @@ void Battle::nextPlayer()
 //  _map->cursor(_currentPlayer)->setCoords(_players[_currentPlayer]->lastCursorPosition());
 //  CURSOR->setColor(_players[_currentPlayer]->cursorColor());
 }
+
 
 std::vector<std::shared_ptr<Player>> const Battle::players() {
   return _players;

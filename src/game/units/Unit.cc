@@ -64,31 +64,8 @@ std::shared_ptr<Cell> Unit::nextTarget()
 
 void Unit::draw()
 {
-//   graphics::Image &image = resources::ResourcesManager::getImage(_name);
-//   image.sprite()->setColor(BATTLE->getPlayer(_playerId)->unitsColor());
+  PRINTF("DEPRECATED draw in unit class !");
 
-//   float x = image.sprite()->getTexture()->getSize().x;
-//   float y = image.sprite()->getTexture()->getSize().y;
-//   image.sprite()->setScale(CELL_WIDTH / x, CELL_HEIGHT / y);
-
-// # ifdef DEBUG
-//   // we suppose the sprite is always larger than the cell
-//   if (x < CELL_WIDTH || y < CELL_HEIGHT)
-//     Debug::logPrintf("Sprite scale failure");
-// # endif
-
-//   if (_targetable)
-//   {
-//     // Unit's image halo
-//     Image &highlight = GETIMAGE("highlight");
-//     highlight.sprite()->setColor(sf::Color(255, 0, 0));
-//     highlight.drawAtCell(_coords);
-//   }
-
-//   if (_played)
-//     image.sprite()->setColor(sf::Color(127, 127, 127, 191));
-
-//   image.drawAtCell(_coords);
 }
 
 

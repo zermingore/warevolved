@@ -1,9 +1,9 @@
-#ifndef TERRAINS_HH_
-# define TERRAINS_HH_
+#ifndef ENUM_TERRAINS_HH_
+# define ENUM_TERRAINS_HH_
 
 /** \enum listing of all terrains
  */
-enum class terrain
+enum class e_terrain
 {
   NONE = 0,
   FOREST,

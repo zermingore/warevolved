@@ -28,18 +28,18 @@ public:
    ** \param mode State mode value
    ** auto fetch Cursor coordinates
    */
-  explicit State(mode &mode);
+  explicit State(e_mode &mode);
 
   /** Constructor
    ** \param mode State mode value
    ** auto fetch Cursor coordinates
    */
-  State(mode mode, std::shared_ptr<Menu> menu);
+  State(e_mode mode, std::shared_ptr<Menu> menu);
 
   /** _mode getter
    ** \return _mode value
    */
-  mode currentMode() { return _currentMode; }
+  e_mode currentMode() { return _currentMode; }
 
   /** _menu getter
    ** \return _menu a pointer over current menu
@@ -58,7 +58,7 @@ public:
 
 
 private:
-  mode _currentMode; ///< State's mode
+  e_mode _currentMode; ///< State's mode
   std::shared_ptr<Menu> _menu; ///< menu state to save
   Coords _cursorCoords; ///< Cursor coordinates when the mode was activated
   std::shared_ptr<EventManager> _eventManager; ///< State related events

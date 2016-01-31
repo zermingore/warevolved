@@ -54,7 +54,7 @@ public:
   /** \brief adds the next element to the current path
    ** \param direction of the element
    */
-  void addNextDirection(direction direction);
+  void addNextDirection(e_direction direction);
 
   /** \brief uses _graphicPath to draw the current path
    */
@@ -98,14 +98,14 @@ private:
    **   according to \param direction
    ** \param direction current move direction
    */
-  void updateCurrentCell(direction direction);
+  void updateCurrentCell(e_direction direction);
 
   /** \brief returns shape matching _direction[\param index]
    ** \param index index in _direction vector
    ** \return shape of _direction[\param index]
    **   according to the next direction (for smooth corners)
    */
-  path_shape getShape(size_t index);
+  e_path_shape getShape(size_t index);
 
   /** \brief Highlights cells which selected unit (_unit) can cross
    ** (uses a Flood Fill algorithm)
@@ -126,7 +126,7 @@ private:
   int _currentLength; ///< path current length
 
   ///< list of path directions filled through addNextDirection
-  std::vector<direction> _directions;
+  std::vector<e_direction> _directions;
   std::vector<graphics::Image> _images; ///< Images of the path vector
 
   ///< list of reachable cells for the selected unit

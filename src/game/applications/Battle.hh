@@ -46,7 +46,7 @@ public:
    ** \param id Player's id to retrieve
    ** \return the Player which number is \param id
    */
-  inline std::shared_ptr<Player> getPlayer (const size_t &id) const
+  inline std::shared_ptr<Player> getPlayer(const size_t &id) const
   { return _players[id]; }
 
   /** \brief _map getter
@@ -65,6 +65,12 @@ public:
    */
   void buildMap();
 
+  /** \brief current player getter
+   ** \return a pointer on the current player
+   */
+  inline std::shared_ptr<Player> getCurrentPlayer()
+  { return _players[_currentPlayer]; }
+
   /** \brief current player identifier getter
    ** \return _currentPlayer: current player identifier
    */
@@ -80,10 +86,6 @@ private:
   /** \brief initializes players
    */
   void buildPlayers();
-
-  /** \brief initializes units
-   */
-  void buildUnits();
 
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
   std::shared_ptr<Map> _map; ///< Map of this battle

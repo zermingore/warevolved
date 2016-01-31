@@ -6,8 +6,10 @@ run
 
 if it works, the binary file (we) will be created
 
-NOTE: to install SFML 2.1
-you can download it from it' s official website
+NOTE: to install SFML
+You can install the following packages in your packet manager:
+libsfml-dev libsfml-graphics2.3v5 (names / versions may vary)
+As an alternative, you can download it from it's official website
 and copy the library files into in /usr/lib
 (the path depends on your system / configuration)
 

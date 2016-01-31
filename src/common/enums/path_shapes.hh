@@ -5,15 +5,15 @@
  *      Author: Zermingore
  */
 
-#ifndef PATH_SHAPES_HH_
-# define PATH_SHAPES_HH_
+#ifndef ENUM_PATH_SHAPES_HH_
+# define ENUM_PATH_SHAPES_HH_
 
 
 /** \enum Help matching which element we want to display,
  **   drawing the path
  ** Their values matches the needed sprite rotation
  */
-enum class path_shape
+enum class e_path_shape
 {
   // Arrows (last of the path)
   LAST_UP = 0,
@@ -43,4 +43,4 @@ enum class path_shape
 };
 
 
-#endif /* !PATH_SHAPES_HH_ */
+#endif /* !ENUM_PATH_SHAPES_HH_ */

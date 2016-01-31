@@ -43,9 +43,9 @@ public:
 
 
 private:
-  /** \brief Processes events relative to right panel requests
-   **   (show, save game, ...)
-   ** and Menu bar
+  /** \brief Processes events relative to
+   ** - right panel requests (show, save game, ...)
+   ** - menu bar
    */
   void panels();
 
@@ -79,6 +79,8 @@ private:
 
   sf::Event _event; ///< Event Manager
   std::shared_ptr<KeyManager> _km; ///< KeyManager instance
+
+  ///< callbacks / events association
   std::map<std::string, std::function<void()>> _callbacks;
 };
 

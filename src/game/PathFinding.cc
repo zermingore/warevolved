@@ -56,23 +56,23 @@ void PathFinding::clearPath()
 }
 
 
-void PathFinding::updateCurrentCell(direction direction)
+void PathFinding::updateCurrentCell(e_direction direction)
 {
   switch (direction)
   {
-  case direction::UP:
+  case e_direction::UP:
       --_current.y;
       return;
 
-    case direction::DOWN:
+    case e_direction::DOWN:
       ++_current.y;
       return;
 
-    case direction::LEFT:
+    case e_direction::LEFT:
       --_current.x;
       return;
 
-    case direction::RIGHT:
+    case e_direction::RIGHT:
       ++_current.x;
       return;
 
@@ -86,50 +86,49 @@ void PathFinding::buildImageVector()
   // manage 'riding' the path (increment a global index)
   // deleteImagesVector();
 
-  size_t i = 0;
-  for (auto it: _directions) // NOTE unused it
-    _images.push_back(getImage(i++));
+  for (auto i = 0u; i < _directions.size(); ++i)
+    _images.push_back(getImage(i));
 }
 
 
-path_shape PathFinding::getShape(size_t index)
+e_path_shape PathFinding::getShape(size_t index)
 {
   // last element case
   if (index + 1 == _directions.size())
-    return (static_cast <path_shape> (static_cast<int >(_directions[index]) - 360));
+    return (static_cast <e_path_shape> (static_cast<int >(_directions[index]) - 360));
 
-  direction next = _directions[index + 1];
+  e_direction next = _directions[index + 1];
 
   // same element as next case
   if (_directions[index] == next)
-    return (static_cast <path_shape> (_directions[index]));
+    return (static_cast <e_path_shape> (_directions[index]));
 
   // reverse
   if (std::abs(static_cast<int >(_directions[index]) - static_cast<int >(next)) == 180)
-    return (static_cast <path_shape> (next));
+    return (static_cast <e_path_shape> (next));
 
   // from here, we know the direction changed
   switch (_directions[index])
   {
-    case direction::UP:
-      if (next == direction::RIGHT)
-        return path_shape::CORNER_RIGHT_DOWN;
-      return path_shape::CORNER_DOWN_LEFT;
+    case e_direction::UP:
+      if (next == e_direction::RIGHT)
+        return e_path_shape::CORNER_RIGHT_DOWN;
+      return e_path_shape::CORNER_DOWN_LEFT;
 
-    case direction::DOWN:
-      if (next == direction::RIGHT)
-        return path_shape::CORNER_UP_RIGHT;
-      return path_shape::CORNER_LEFT_UP;
+    case e_direction::DOWN:
+      if (next == e_direction::RIGHT)
+        return e_path_shape::CORNER_UP_RIGHT;
+      return e_path_shape::CORNER_LEFT_UP;
 
-    case direction::LEFT:
-      if (next == direction::UP)
-        return path_shape::CORNER_UP_RIGHT;
-      return path_shape::CORNER_RIGHT_DOWN;
+    case e_direction::LEFT:
+      if (next == e_direction::UP)
+        return e_path_shape::CORNER_UP_RIGHT;
+      return e_path_shape::CORNER_RIGHT_DOWN;
 
     default:
-      if (next == direction::UP)
-        return path_shape::CORNER_LEFT_UP;
-      return path_shape::CORNER_DOWN_LEFT;
+      if (next == e_direction::UP)
+        return e_path_shape::CORNER_LEFT_UP;
+      return e_path_shape::CORNER_DOWN_LEFT;
     }
 }
 
@@ -180,7 +179,7 @@ graphics::Image PathFinding::getImage(size_t index)
   //  return img;
 }
 
-void PathFinding::addNextDirection(direction direction)
+void PathFinding::addNextDirection(e_direction direction)
 {
   _directions.push_back(direction);
   ++_currentLength;
@@ -202,13 +201,14 @@ void PathFinding::showAllowedPath()
     s.pop();
 
     // check overflow, Manhattan distance and if we already marked the cell
-    if (x < 0 || y < 0 || x > _map->nbColumns() - 1 || y > _map->nbLines() - 1
+    if (x > _map->nbColumns() - 1
+        || y > _map->nbLines() - 1
         || std::abs(_unit->x() - x) + std::abs(_unit->y() - y) > _maxLength
         || std::find(checked.begin(), checked.end(), std::pair<size_t, size_t>(x, y)) != checked.end())
     {
       continue;
     }
-;
+
     _reachableCells.push_back(_map->cell(x, y));
     checked.push_back(std::pair<size_t, size_t>(x, y));
 

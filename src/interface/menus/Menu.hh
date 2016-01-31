@@ -61,7 +61,7 @@ public:
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
    */
-  virtual void build(mode mode) = 0;
+  virtual void build(e_mode mode) = 0;
 
   /** \brief executes action matching _selectedEntry
    */

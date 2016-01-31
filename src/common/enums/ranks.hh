@@ -5,13 +5,13 @@
  *      Author: Zermingore
  */
 
-#ifndef RANKS_HH_
-# define RANKS_HH_
+#ifndef ENUM_RANKS_HH_
+# define ENUM_RANKS_HH_
 
 
 /** \enum Stores units ranks
  */
-enum class rank
+enum class e_rank
 {
   PRIVATE = 0,
 
@@ -19,4 +19,4 @@ enum class rank
   NONE
 };
 
-#endif /* !RANKS_HH_ */
+#endif /* !ENUM_RANKS_HH_ */

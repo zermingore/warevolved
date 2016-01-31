@@ -59,7 +59,7 @@ public:
    ** \param nbLines Number of lines required
    ** calls this->init() to initialize a fresh Map
    */
-  Map(Battle* battle, size_t nbColumns, size_t nbLines);
+  Map(Battle* battle, size_t nb_columns, size_t nb_lines);
 
   /** \brief Initializes the map
    **   Puts units where needed;
@@ -116,7 +116,7 @@ public:
    ** \return the enum index in e_terrain matching the terrain
    **   located at coordinates (x, y)
    */
-  terrain getTerrain(size_t x, size_t y) const;
+  e_terrain getTerrain(size_t x, size_t y) const;
 
   /** \brief _cells array getter
    ** \return a reference over the cells array
@@ -135,7 +135,7 @@ public:
   /** \brief builds a new unit of type \param unit
    ** \param unit type of the new unit
    */
-  void newUnit(enum unit unit, size_t line, size_t column);
+  void newUnit(e_unit u, size_t line, size_t column);
 
   /** \brief sets the given unit in the cells array
    ** \param unit to set

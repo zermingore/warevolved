@@ -5,7 +5,7 @@
 
 Soldier::Soldier() :
   _equipedWeapon (nullptr),
-  _rank (rank::PRIVATE)
+  _rank (e_rank::PRIVATE)
 {
   // static int id = 0;
 

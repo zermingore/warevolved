@@ -45,7 +45,7 @@ private:
   std::shared_ptr<Item> _equipedWeapon; ///< can be a rifle, a shovel, ...
   std::vector<std::shared_ptr<Item>> _gear; ///< Equipped items
   std::vector<std::shared_ptr<Item>> _inventory; ///< non equipped items
-  rank _rank; ///< military grade
+  e_rank _rank; ///< military grade
   std::string _fullName; ///< soldier's full name (first and last names)
 
   // short _driverLevel; ///< driver level

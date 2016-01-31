@@ -10,6 +10,8 @@
 
 # include <memory>
 # include <common/structures/Vector.hh> // for Color
+# include <interface/Interface.hh>
+
 
 class Interface;
 
@@ -38,6 +40,8 @@ public:
    */
   inline Color unitsColor() { return _unitsColor; }
 
+  inline std::shared_ptr<Interface> interface() { return _interface; }
+
   /** \brief sets cursor color
    ** \param color _cursorColor value
    */
@@ -52,7 +56,7 @@ public:
 private:
   // (logicaly const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player identifier
-//  std::unique_ptr<Interface> _interface; ///< interface (menu status, ...)
+  std::shared_ptr<Interface> _interface; ///< interface (menu status, ...)
   Color _cursorColor; ///< cursor's color
   Color _unitsColor; ///< units color
 };

@@ -6,6 +6,10 @@ Player::Player()
 {
   static unsigned int static_id = 0;
   _id = static_id++;
+
+  std::cout << "new Player" << std::endl;
+
+  _interface = std::make_shared<Interface> ();
 }
 
 // void Player::saveCursorPosition() {

@@ -6,7 +6,7 @@
 #include <game/Terrain.hh>
 #include <interface/Cursor.hh>
 #include <common/Status.hh>
-
+#include <common/enums/units.hh>
 
 
 Map::MapGraphicsProperties::MapGraphicsProperties()
@@ -19,9 +19,9 @@ Map::MapGraphicsProperties::MapGraphicsProperties()
 }
 
 
-Map::Map(Battle* battle, size_t nbColumns, size_t nbLines) :
-  _nbColumns (nbColumns),
-  _nbLines (nbLines),
+Map::Map(Battle* battle, size_t nb_columns, size_t nb_lines) :
+  _nbColumns (nb_columns),
+  _nbLines (nb_lines),
   _battle (battle)
 {
   _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
@@ -30,12 +30,12 @@ Map::Map(Battle* battle, size_t nbColumns, size_t nbLines) :
 
 void Map::init()
 {
-  for (size_t i = 0; i < _nbLines; i++)
+  for (auto i = 0u; i < _nbLines; i++)
   {
     std::vector<std::shared_ptr<Cell>> vec(_nbColumns);
 
     // Allocates each Cell
-    for (size_t j = 0; j < _nbColumns; j++)
+    for (auto j = 0u; j < _nbColumns; j++)
       vec[j] = std::make_shared<Cell> (j, i);
 
     _cells.push_back(vec);
@@ -50,7 +50,7 @@ void Map::init()
   // TODO read informations from a map file
   for (auto i = 0u; i < _nbColumns; ++i)
     for (auto j = 0u; j < _nbLines; ++j)
-      _cells[i][j]->setTerrain(terrain::FOREST);
+      _cells[i][j]->setTerrain(e_terrain::FOREST);
 }
 
 void Map::moveUnit()
@@ -80,7 +80,7 @@ std::shared_ptr<Unit> Map::unit(size_t x, size_t y) const {
   return _cells[x][y]->unit();
 }
 
-terrain Map::getTerrain(size_t x, size_t y) const {
+e_terrain Map::getTerrain(size_t x, size_t y) const {
   return _cells[x][y]->terrain();
 }
 
@@ -88,7 +88,7 @@ terrain Map::getTerrain(size_t x, size_t y) const {
 //   _cells[u->x()][u->y()]->setUnit(u);
 // }
 
-std::shared_ptr<Cursor> Map::cursor(size_t player){
+std::shared_ptr<Cursor> Map::cursor(size_t player) {
   return _cursors[player];
 }
 
@@ -100,13 +100,13 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(enum unit unit, size_t line, size_t column)
+void Map::newUnit(e_unit unit_type, size_t line, size_t column)
 {
   std::shared_ptr<Unit> new_unit;
 
-  switch (unit)
+  switch (unit_type)
   {
-    case unit::SOLDIERS:
+    case e_unit::SOLDIERS:
       new_unit = std::make_shared<Soldier> ();
       break;
 
@@ -119,6 +119,8 @@ void Map::newUnit(enum unit unit, size_t line, size_t column)
   new_unit->setCellCoordinates(Coords(line, column));
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);
+
+  _cells[line][column]->setUnit(new_unit);
 }
 
 

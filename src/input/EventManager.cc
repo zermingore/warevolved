@@ -47,26 +47,26 @@ bool EventManager::process()
   panels(); // in all mode, for now
   switch (Status::currentMode())
   {
-    case mode::SELECTION_MENU:
+    case e_mode::SELECTION_MENU:
       // Interface::path()->clearPath();
 
       selectionMenu();
       break;
 
-    case mode::ACTION_MENU:
+    case e_mode::ACTION_MENU:
       //_path->shadowPath(); // TODO less visible path
       selectionMenu();
       break;
 
-    case mode::MOVING_UNIT:
+    case e_mode::MOVING_UNIT:
       // moveUnit();
       break;
 
-    case mode::ATTACK:
+    case e_mode::ATTACK:
       // selectTarget();
       break;
 
-    case mode::NONE: // mode stack is empty
+    case e_mode::NONE: // mode stack is empty
       graphics::GraphicsEngine::closeWindow();
       return false;
 
@@ -152,7 +152,7 @@ void EventManager::selectTarget()
 void EventManager::moveUnit()
 {
   // only called on mode::MOVING_UNIT
-  assert(Status::currentMode() != mode::MOVING_UNIT);
+  assert(Status::currentMode() != e_mode::MOVING_UNIT);
   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
   {
     Status::exitCurrentMode();

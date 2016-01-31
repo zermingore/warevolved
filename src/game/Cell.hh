@@ -35,7 +35,7 @@ public:
   /** \brief _terrain getter
    ** \return cell's terrain
    */
-  inline terrain terrain() { return _terrain; }
+  inline e_terrain terrain() { return _terrain; }
 
   /** \brief _unit setter
    ** sets the Unit \param unit in the cell
@@ -48,7 +48,7 @@ public:
    **
    ** \param terrain The terrain to be set in the Cell
    */
-  inline void setTerrain(const enum terrain terrain) { _terrain = terrain; }
+  inline void setTerrain(const e_terrain terrain) { _terrain = terrain; }
 
   /** \brief _highlight getter
    ** \return highlight Boolean value
@@ -89,7 +89,7 @@ public:
 
 private:
   Coords _coords; ///< cell's coordinates
-  enum terrain _terrain; ///< Terrain type index (matching terrains)
+  e_terrain _terrain; ///< Terrain type index (matching terrains)
   std::shared_ptr<Unit> _unit; ///< Unit type index (matching terrains)
   bool _highlight; ///< true if the cell needs to be highlighted
   Color _highlightColor; ///< color of the cell's highlight

@@ -3,7 +3,7 @@
 #include <input/EventManager.hh>
 
 
-State::State(mode& mode) :
+State::State(e_mode& mode) :
   _currentMode (mode),
   _menu (nullptr),
   _eventManager (nullptr)
@@ -36,9 +36,12 @@ State::State(mode& mode) :
   //   default:
   //   static_assert("invalid mode");
       }
+
+
+//  _eventManager->registerEvent("cursor right", Cursor::moveRight());
 }
 
-State::State(mode mode,
+State::State(e_mode mode,
              std::shared_ptr<Menu> menu) :
   _currentMode (mode),
   _menu (menu)

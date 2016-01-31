@@ -1,7 +1,8 @@
-#ifndef UNITS_HH_
-# define UNITS_HH_
+#ifndef ENUM_UNITS_HH_
+# define ENUM_UNITS_HH_
 
-enum class unit
+
+enum class e_unit
 {
   SOLDIERS = 0,
 
@@ -9,4 +10,4 @@ enum class unit
   NONE
 };
 
-#endif /* !UNITS_HH_ */
+#endif /* !ENUM_UNITS_HH_ */

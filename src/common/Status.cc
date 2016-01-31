@@ -7,7 +7,7 @@
 #include <game/Map.hh>
 
 
-// Static Variables definition
+// Static class attributes definition
 std::stack<std::shared_ptr<State>> Status::_states;
 std::shared_ptr<Battle> Status::_battle;
 Coords Status::_selectedCell;
@@ -31,12 +31,12 @@ void Status::initialize()
 // }
 
 
-mode Status::currentMode()
+e_mode Status::currentMode()
 {
   if (_states.empty())
   {
     DEBUG_PRINT("_states stack is empty, exiting...");
-    return mode::NONE;
+    return e_mode::NONE;
   }
 
   return _states.top()->currentMode();
@@ -52,7 +52,7 @@ std::shared_ptr<State> Status::currentState()
   return _states.top();
 }
 
-void Status::pushModeInGameMenu(mode mode, std::shared_ptr<InGameMenu> menu)
+void Status::pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu)
 {
   menu->build(mode);
   _states.push(std::make_shared<State> (State(mode, menu)));
@@ -72,7 +72,7 @@ void Status::exitCurrentMode(bool skip)
 }
 
 
-void Status::exitToMode(mode mode, bool skip)
+void Status::exitToMode(e_mode mode, bool skip)
 {
   while (_states.top()->currentMode() != mode)
   {
@@ -93,6 +93,6 @@ std::shared_ptr<State> Status::popCurrentMode()
 }
 
 
-void Status::pushMode(mode mode) {
+void Status::pushMode(e_mode mode) {
   _states.push(std::make_shared<State> (State(mode)));
 }

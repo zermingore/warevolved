@@ -16,6 +16,7 @@ build-aux/
 config.log
 config.status
 *.deps/
+*.am.user*
 
 # personal files
 valgrind_log*

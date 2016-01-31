@@ -4,7 +4,8 @@
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
-
+#include <game/applications/Battle.hh>
+#include <game/Player.hh>
 
 namespace graphics {
 
@@ -33,16 +34,23 @@ void initialize()
 // }
 
 
-void GraphicsEngine::drawScene(const std::shared_ptr<Map> map)
+void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   drawBackground();
-  drawMap(map);
-  drawGrid(map);
+  drawMap(battle);
+  drawGrid(battle->map());
 
   // draw interface of current_player
+  drawInterface(battle->getCurrentPlayer()->interface());
 
   // update the window
   _window->display();
+}
+
+
+void GraphicsEngine::drawInterface(const std::shared_ptr<Interface> interface)
+{
+  interface->draw();
 }
 
 
@@ -53,8 +61,10 @@ void GraphicsEngine::drawBackground()
 }
 
 
-void GraphicsEngine::drawMap(const std::shared_ptr<Map> map)
+void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
 {
+  const std::shared_ptr<Map> map(battle->map());
+
   // re-checking grid offsets
   setGridOffset(map);
 
@@ -87,7 +97,10 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Map> map)
       }
 
       if (c->unit())
-        drawUnit(c->unit());
+      {
+        drawUnit(battle, c->unit());
+        PRINTF("unit @ ", i, ", ", j);
+      }
     }
   }
 }
@@ -138,10 +151,44 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 
 
 
-void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
+void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
+                              const std::shared_ptr<Unit> unit)
 {
-  if (!unit)
-    return;
+  assert(unit != nullptr);
+  // if (!unit)
+  //   return;
+
+  PRINTF("p:");
+
+  auto p(battle->map()->graphicsProperties());
+
+  PRINTF("p", p);
+
+  Image &image = resources::ResourcesManager::getImage(unit->name());
+  image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
+
+  float x = image.sprite()->getTexture()->getSize().x;
+  float y = image.sprite()->getTexture()->getSize().y;
+  image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+
+# ifdef DEBUG
+  // we suppose the sprite is always larger than the cell
+  if (x < p->cellWidth() || y < p->cellHeight())
+    Debug::logPrintf("Sprite scale failure");
+# endif
+
+  // if (unit->targetable())
+  // {
+  //   // Unit's image halo
+  //   Image &highlight = GETIMAGE("highlight");
+  //   highlight.sprite()->setColor(sf::Color(255, 0, 0));
+  //   highlight.drawAtCell(unit->coords());
+  // }
+
+  if (unit->played())
+    image.sprite()->setColor(sf::Color(127, 127, 127, 191));
+
+  image.drawAtCell(unit->coords(), p);
 }
 
 

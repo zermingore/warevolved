@@ -5,14 +5,14 @@
  *      Author: Zermingore
  */
 
-#ifndef FACTIONS_HH_
-# define FACTIONS_HH_
+#ifndef ENUM_FACTIONS_HH_
+# define ENUM_FACTIONS_HH_
 
 
 /** \enum Faction enum
  ** list of factions
  */
-enum class faction
+enum class e_faction
 {
   T = 0,
   Z,
@@ -22,4 +22,4 @@ enum class faction
   NB_FACTIONS
 };
 
-#endif /* !FACTIONS_HH_ */
+#endif /* !ENUM_FACTIONS_HH_ */

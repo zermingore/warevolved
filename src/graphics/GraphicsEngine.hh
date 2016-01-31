@@ -14,6 +14,8 @@ class Map;
 class MapGraphicsProperties;
 class Cell;
 class Unit;
+class Battle;
+class Interface;
 
 
 namespace graphics {
@@ -33,7 +35,7 @@ public:
    **   - calls others drawing functions
    **   - updates the window
    */
-  static void drawScene(const std::shared_ptr<Map> map);
+  static void drawScene(const std::shared_ptr<Battle> battle);
 
   /** \brief Initializes drawable zone limits
    **   by setting gridOffsets
@@ -124,10 +126,14 @@ private:
    */
   static void drawBackground();
 
-  /** \brief Draws cell content (terrain, unit)
-   ** \param map map content to draw
+  /** \brief Draws the interface
    */
-  static void drawMap(const std::shared_ptr<Map> map);
+  static void drawInterface(const std::shared_ptr<Interface> interface);
+
+  /** \brief Draws cells content (terrain, unit)
+   ** \param battle battle content to draw
+   */
+  static void drawMap(const std::shared_ptr<Battle> battle);
 
   /** \brief draws the grid, graphic cells separator
    ** \param map for which we draw a grid
@@ -137,7 +143,7 @@ private:
   /** \brief Draws the given Unit
    ** \param unit unit to draw
    */
-  static void drawUnit(const std::shared_ptr<Unit> unit);
+  static void drawUnit(const std::shared_ptr<Battle> battle, const std::shared_ptr<Unit> unit);
 
 
   // TODO use a Window type: union with sfml, opengl, dx, ascii windows, ...

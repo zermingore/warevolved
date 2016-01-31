@@ -8,6 +8,8 @@ Cursor::Cursor() :
   _image ("cursor"),
   _color (sf::Color(255, 0, 0, 255))
 {
+  std::cout << "Cursor Ctor" << std::endl;
+
   // _image = GETIMAGE("cursor");
   // _sprite = _image.sprite();
   // _center.x = _image.getTexture()->getSize().x / 2;

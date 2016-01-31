@@ -5,13 +5,13 @@
  *      Author: Zermingore
  */
 
-#ifndef DIRECTIONS_HH_
-# define DIRECTIONS_HH_
+#ifndef ENUM_DIRECTIONS_HH_
+# define ENUM_DIRECTIONS_HH_
 
 /** \brief stores vanilla directions
  ** used for paths
  */
-enum class direction
+enum class e_direction
 {
   NONE = 0,
 
@@ -24,4 +24,4 @@ enum class direction
   RIGHT = 450
 };
 
-#endif /* DIRECTIONS_HH_ */
+#endif /* ENUM_DIRECTIONS_HH_ */

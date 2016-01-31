@@ -2,7 +2,7 @@
 #include <interface/menus/MenuEntry.hh>
 
 
-void InGameMenu::build(mode mode)
+void InGameMenu::build(e_mode mode)
 {
   init();
 

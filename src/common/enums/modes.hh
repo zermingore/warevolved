@@ -5,13 +5,13 @@
  *      Author: Zermingore
  */
 
-#ifndef MODES_HH_
-# define MODES_HH_
+#ifndef ENUM_MODES_HH_
+# define ENUM_MODES_HH_
 
 /** \enum various menu mode values
  ** use this to notify the mode stack
  */
-enum class mode
+enum class e_mode
 {
   NONE = 0, // we should never be in this mode
 
@@ -32,4 +32,4 @@ enum class mode
 };
 
 
-#endif /* !MODES_HH_ */
+#endif /* !ENUM_MODES_HH_ */
