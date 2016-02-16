@@ -46,13 +46,13 @@ public:
    ** \param id Player's id to retrieve
    ** \return the Player which number is \param id
    */
-  inline std::shared_ptr<Player> getPlayer(const size_t &id) const
+  std::shared_ptr<Player> getPlayer(const size_t &id) const
   { return _players[id]; }
 
   /** \brief _map getter
    ** \return a reference to the map
    */
-  inline std::shared_ptr<Map> map() { return _map; }
+  std::shared_ptr<Map> map() { return _map; }
 
   /** \brief Switches to the next player
    **   adapt cursor color
@@ -68,18 +68,18 @@ public:
   /** \brief current player getter
    ** \return a pointer on the current player
    */
-  inline std::shared_ptr<Player> getCurrentPlayer()
+  std::shared_ptr<Player> getCurrentPlayer()
   { return _players[_currentPlayer]; }
 
   /** \brief current player identifier getter
    ** \return _currentPlayer: current player identifier
    */
-  inline size_t currentPlayer() { return _currentPlayer; }
+  size_t currentPlayer() { return _currentPlayer; }
 
   /** \brief sets _currentPlayer
    ** \param id new current player identifier
    */
-  inline void setCurrentPlayer(size_t id) { _currentPlayer = id; }
+  void setCurrentPlayer(size_t id) { _currentPlayer = id; }
 
 
 private:

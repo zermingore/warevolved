@@ -26,12 +26,12 @@ public:
   /** \brief _members getter
    ** \return _members: every members of the team
    */
-  inline std::vector<std::shared_ptr<Unit>> members() { return _members; }
+  std::vector<std::shared_ptr<Unit>> members() { return _members; }
 
   /** \brief adds a member to the Team
    ** \param Unit
    */
-  inline void addMember(std::shared_ptr<Unit> unit) { _members.push_back(unit); }
+  void addMember(std::shared_ptr<Unit> unit) { _members.push_back(unit); }
 
 private:
   std::vector<std::shared_ptr<Unit>> _members; ///< list of all team members

@@ -48,7 +48,7 @@ public:
   /** \brief allowed move notifier
    ** \return true if the move is allowed
    */
-  inline bool allowedMove() // TODO send direction request
+  bool allowedMove() // TODO send direction request
   { return _currentLength < _maxLength; }
 
   /** \brief adds the next element to the current path
@@ -92,7 +92,7 @@ private:
 
   /** \brief clears _images Vector
    */
-  inline void deleteImagesVector() { _images.clear(); }
+  void deleteImagesVector() { _images.clear(); }
 
   /** \brief updates current cell coordinates
    **   according to \param direction

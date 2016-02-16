@@ -27,30 +27,30 @@ public:
    */
   Player();
 
-  inline size_t id() { return _id; }
+  size_t id() { return _id; }
 
   // __________________________ Getters / Setters __________________________ //
   /** \brief cursor color getter
    ** \return color of the cursor (_cursorColor)
    */
-  inline Color cursorColor() { return _cursorColor; }
+  Color cursorColor() { return _cursorColor; }
 
   /** \brief units color getter
    ** \return units color (_unitsColor)
    */
-  inline Color unitsColor() { return _unitsColor; }
+  Color unitsColor() { return _unitsColor; }
 
-  inline std::shared_ptr<Interface> interface() { return _interface; }
+  std::shared_ptr<Interface> interface() { return _interface; }
 
   /** \brief sets cursor color
    ** \param color _cursorColor value
    */
-  inline void setCursorColor(Color color) { _cursorColor = color; }
+  void setCursorColor(Color color) { _cursorColor = color; }
 
   /** \brief sets units color
    ** \param color units color
    */
-  inline void setUnitsColor(Color color) { _unitsColor = color; }
+  void setUnitsColor(Color color) { _unitsColor = color; }
 
 
 private:

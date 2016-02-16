@@ -17,14 +17,14 @@ class Panel
 public:
   /** \brief sets Panel's origin, using \param origin
    */
-  inline void setOrigin(sf::Vector2f origin) { _origin = origin; }
+  void setOrigin(sf::Vector2f origin) { _origin = origin; }
 
   /** \brief sets Panel's size, using \param size
    */
-  inline void setSize(sf::Vector2f size) { _size = size; }
+  void setSize(sf::Vector2f size) { _size = size; }
 
   ///< _size getter
-  inline sf::Vector2f size() { return _size; }
+  sf::Vector2f size() { return _size; }
 
 
 protected:

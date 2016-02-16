@@ -38,7 +38,7 @@ public:
 
   /** \brief returns entry Identifier, as a entries value
    */
-  inline entry id() { return _id; }
+  entry id() { return _id; }
 
   /** \brief displays the entry at position
    ** \param position where the entry will be display

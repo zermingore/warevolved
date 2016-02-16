@@ -44,12 +44,12 @@ public:
   /** _menu getter
    ** \return _menu a pointer over current menu
    */
-  inline std::shared_ptr<Menu> menu() { return _menu; }
+  std::shared_ptr<Menu> menu() { return _menu; }
 
   /** _cursorCoords getters
    ** \return _cursorCoords value
    */
-  inline Coords cursorCoords() { return _cursorCoords; }
+  Coords cursorCoords() { return _cursorCoords; }
 
   /** \brief event manager getter
    ** \return _eventManager

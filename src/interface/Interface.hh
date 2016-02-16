@@ -47,15 +47,15 @@ public:
 
   /** \brief _cursor getter
    */
-  inline std::shared_ptr<Cursor> cursor() { return _cursor; }
+  std::shared_ptr<Cursor> cursor() { return _cursor; }
 
   /** \brief side panel position getter
    */
-  inline panel_position panelPosition() { return _panelPosition; }
+  panel_position panelPosition() { return _panelPosition; }
 
   /** \brief side panel position getter
    */
-  inline menu_bar_position menuBarPosition() { return _menuBarPosition; }
+  menu_bar_position menuBarPosition() { return _menuBarPosition; }
 
   /** \brief sets panel position to the next position
    ** loops over the panel::NB_POSITIONS possibilities
@@ -70,17 +70,17 @@ public:
   /** \brief in-game menu getter
    ** \return _inGameMenu
    */
-  inline std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
+  std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
 
   /** \brief PathFinding getter
    ** \return _path current path
    */
-//  inline std::shared_ptr<PathFinding> path() { return _path; }
+//  std::shared_ptr<PathFinding> path() { return _path; }
 
   /** \brief sets the path origin
    ** meaning the cell from where it starts
    */
-//  inline void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
+//  void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
 
   /** \brief draws all element relative to the user's interface
    ** meaning: in-game menus, panels and path (from path-finding)

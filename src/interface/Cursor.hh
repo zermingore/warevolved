@@ -23,31 +23,31 @@ public:
 
   /** \brief _sprite getter
    */
-  // inline std::shared_ptr<sf::Sprite> sprite() { return _sprite; }
+  // std::shared_ptr<sf::Sprite> sprite() { return _sprite; }
 
   // std::shared_ptr<sf::Sprite> sprite(int offset_x, int offset_y);
 
   /** \brief sets the cursor color
    ** \param color the color to set
    */
-  // inline void setColor(Color color) { _sprite->setColor(color); }
-  inline void setColor(Color color) { _color = color; }
+  // void setColor(Color color) { _sprite->setColor(color); }
+  void setColor(Color color) { _color = color; }
 
   /** \brief X (column) coordinate getter
    */
-  inline unsigned int x() { return _coords.x; }
+  unsigned int x() { return _coords.x; }
   /** \brief Y (line) coordinate getter
    */
-  inline unsigned int y() { return _coords.y; }
+  unsigned int y() { return _coords.y; }
 
   /** \brief _coords getter
    ** \return _coords value
    */
-  inline Coords coords() { return _coords; }
+  Coords coords() { return _coords; }
 
   /** \brief coordinates setter
    */
-  inline void setCoords(Coords coords) { _coords = coords; }
+  void setCoords(Coords coords) { _coords = coords; }
 
   /** \brief sets _nbColumns and _nbLines
    */
@@ -74,7 +74,7 @@ public:
 
   /** \brief draws the cursor
    */
-  // inline void draw() { _image.draw(); }
+  // void draw() { _image.draw(); }
 
 
 private:

@@ -70,7 +70,8 @@
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
    could use typedef std::shared_ptr SP
-** TODO is inline still relevant in C++14 ?
+** DONE is inline still relevant in C++14 ?
+   CLOSED: [2016-02-16 Di 19:56]
 
 * TODO Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)

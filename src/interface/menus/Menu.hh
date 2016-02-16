@@ -34,7 +34,7 @@ public:
   /** \brief increments _selectedEntry modulo number of Entries
    **  allowing cycling
    */
-  inline void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
+  void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
   /** \brief decrements _selectedEntry modulo _nbEntries
    **  allowing cycling
@@ -56,7 +56,7 @@ public:
 
   /** \brief sets _selectedEntry to 0
    */
-  inline void resetSelectedEntry() { _selectedEntry = 0; }
+  void resetSelectedEntry() { _selectedEntry = 0; }
 
   /** \brief builds the selection menu, filling _entries
    ** \param mode The mode we're about to push
@@ -84,10 +84,10 @@ protected:
    ** \note this function is used to retrieve
    **   informations from menu stack (see \class Status)
    */
-  // inline const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
+  // const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
   // { return *_entries; }
 
-  inline std::vector<MenuEntry> getEntries() const
+  std::vector<MenuEntry> getEntries() const
   { return _entries; }
 
   /** \brief selected entry getter
@@ -95,7 +95,7 @@ protected:
    ** \note this function is used to retrieve
    **   informations from menu stack (see \class Status)
    */
-  inline unsigned int selectedEntry() { return _selectedEntry; }
+  unsigned int selectedEntry() { return _selectedEntry; }
 
   unsigned int _selectedEntry; ///< Current selected entry
                                ///< the first entry, is at the bottom,

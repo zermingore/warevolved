@@ -32,40 +32,40 @@ public:
   /** \brief graphic depth getter
    ** \return depth value
    */
-  static inline unsigned int depth() { return Settings::_depth; }
+  static unsigned int depth() { return Settings::_depth; }
 
   /** \brief graphic getter
    ** \return stencil value
    */
-  static inline unsigned int stencil() { return Settings::_stencil; }
+  static unsigned int stencil() { return Settings::_stencil; }
 
   /** \brief anti aliasing getter
    ** \return anti aliasing coefficient
    */
-  static inline unsigned int antiAliasing() { return Settings::_antiAliasing; }
+  static unsigned int antiAliasing() { return Settings::_antiAliasing; }
 
   /** \brief _fullScreen getter
    ** \return true if we're in full screen
    **   false otherwise
    */
-  static inline bool fullScreen() { return Settings::_fullScreen; }
+  static bool fullScreen() { return Settings::_fullScreen; }
 
   /** \brief _keyRepeatDelay getter
    ** \return the required time to consider a "second pressure" (in ms)
    */
-  static inline int keyRepeatDelay() { return Settings::_keyRepeatDelay; }
+  static int keyRepeatDelay() { return Settings::_keyRepeatDelay; }
 
   /** \brief _keyRepeatDelay setter
    */
-  static inline void setKeyRepeatDelay(int delay) { Settings::_keyRepeatDelay = delay; }
+  static void setKeyRepeatDelay(int delay) { Settings::_keyRepeatDelay = delay; }
 
   // graphics settings setters
-  static inline void setDepth(unsigned int depth) { Settings::_depth = depth; }
-  static inline void setStencil(unsigned int stencil) { Settings::_stencil = stencil; }
-  static inline void setAntiAliasing(unsigned int aa) { Settings::_antiAliasing = aa; }
+  static void setDepth(unsigned int depth) { Settings::_depth = depth; }
+  static void setStencil(unsigned int stencil) { Settings::_stencil = stencil; }
+  static void setAntiAliasing(unsigned int aa) { Settings::_antiAliasing = aa; }
 
   // generic settings
-  static inline void setFullScreen(bool fullScreen) { Settings::_fullScreen = fullScreen; }
+  static void setFullScreen(bool fullScreen) { Settings::_fullScreen = fullScreen; }
 
 
 private:

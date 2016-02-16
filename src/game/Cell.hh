@@ -30,61 +30,61 @@ public:
   /** \brief _unit getter
    ** \return cell's unit
    */
-  inline std::shared_ptr<Unit> unit() { return _unit; }
+  std::shared_ptr<Unit> unit() { return _unit; }
 
   /** \brief _terrain getter
    ** \return cell's terrain
    */
-  inline e_terrain terrain() { return _terrain; }
+  e_terrain terrain() { return _terrain; }
 
   /** \brief _unit setter
    ** sets the Unit \param unit in the cell
    ** \param unit The unit to be set in the cell
    */
-  inline void setUnit(std::shared_ptr<Unit> unit) { _unit = unit; }
+  void setUnit(std::shared_ptr<Unit> unit) { _unit = unit; }
 
   /** \brief _terrain setter
    ** sets the terrain \param terrain in the Cell
    **
    ** \param terrain The terrain to be set in the Cell
    */
-  inline void setTerrain(const e_terrain terrain) { _terrain = terrain; }
+  void setTerrain(const e_terrain terrain) { _terrain = terrain; }
 
   /** \brief _highlight getter
    ** \return highlight Boolean value
    */
-  inline bool highlight() { return _highlight; }
+  bool highlight() { return _highlight; }
 
   /** \brief _highlight setter
    ** \param highlight true if we want to highlight the Cell
    */
-  inline void setHighlight(bool highlight) { _highlight = highlight; }
+  void setHighlight(bool highlight) { _highlight = highlight; }
 
   /** \brief highlight color getter
    ** \return highlight color value
    */
-  inline Color highlightColor() { return _highlightColor; }
+  Color highlightColor() { return _highlightColor; }
 
   /** \brief highlight color setter
    ** \param color color of Cell's highlight
    */
-  inline void setHighlightColor(Color color) { _highlightColor = color; }
+  void setHighlightColor(Color color) { _highlightColor = color; }
 
   /** \brief removes the unit in this cell
    */
-  inline void removeUnit() { _unit = nullptr; }
+  void removeUnit() { _unit = nullptr; }
 
   /** \brief returns Cell's x coordinate
    */
-  inline unsigned int x() { return _coords.x; }
+  unsigned int x() { return _coords.x; }
 
   /** \brief returns Cell's y coordinate
    */
-  inline unsigned int y() { return _coords.y; }
+  unsigned int y() { return _coords.y; }
 
   /** \brief coords getter
    */
-  inline Coords coords() { return _coords; }
+  Coords coords() { return _coords; }
 
 
 private:

@@ -31,7 +31,7 @@ public:
   // __________________________ Getters / Setters __________________________ //
   /** \brief returns selected cell's coordinates
    */
-  static inline Coords selectedCell() { return _selectedCell; }
+  static Coords selectedCell() { return _selectedCell; }
 
   /** \brief pops _modes summit
    ** exits the game if the stack is empty
@@ -75,16 +75,16 @@ public:
   /** \brief sets selected cell coordinates to the given coordinates
    ** \param c coordinates of the selected cell
    */
-  static inline void setSelectedCell(Coords c) { _selectedCell = c; }
+  static void setSelectedCell(Coords c) { _selectedCell = c; }
 
   /** \brief _selectedUnitPosition getter
    ** \return _selectedUnitPosition
    */
-  static inline Coords selectedUnitPosition() { return _selectedUnitPosition; }
+  static Coords selectedUnitPosition() { return _selectedUnitPosition; }
   /** \brief _selectedUnitPosition setter
    ** \param pos selected Unit position
    */
-  static inline void setSelectedUnitPosition(Coords pos) { _selectedUnitPosition = pos; }
+  static void setSelectedUnitPosition(Coords pos) { _selectedUnitPosition = pos; }
 
 
 private:

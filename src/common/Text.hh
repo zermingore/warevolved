@@ -52,7 +52,7 @@ class Text
    ** \param rank rank we want name
    ** \return rank name value
    */
-  inline std::string getRankName(e_rank r) { return _ranks[r]; }
+  std::string getRankName(e_rank r) { return _ranks[r]; }
 
 
 private:

@@ -26,18 +26,18 @@ public:
   public:
     MapGraphicsProperties();
 
-    inline unsigned int cellWidth() { return _cellWidth; }
-    inline unsigned int cellHeight() { return _cellHeight; }
-    inline unsigned int gridThickness() { return _gridThickness; }
-    inline unsigned int gridOffsetX() { return _gridOffsetX; }
-    inline unsigned int gridOffsetY() { return _gridOffsetY; }
+    unsigned int cellWidth() { return _cellWidth; }
+    unsigned int cellHeight() { return _cellHeight; }
+    unsigned int gridThickness() { return _gridThickness; }
+    unsigned int gridOffsetX() { return _gridOffsetX; }
+    unsigned int gridOffsetY() { return _gridOffsetY; }
 
 
-    inline void setCellWidth(unsigned int cell_width) { _cellWidth = cell_width; }
-    inline void setCellHeight(unsigned int cell_height) { _cellHeight = cell_height; }
-    inline void setGridThickness(unsigned int grid_thickness) { _gridThickness = grid_thickness; }
-    inline void setGridOffsetX(unsigned int grid_offset_x) { _gridOffsetX = grid_offset_x; }
-    inline void setGridOffsetY(unsigned int grid_offset_y) { _gridOffsetY = grid_offset_y; }
+    void setCellWidth(unsigned int cell_width) { _cellWidth = cell_width; }
+    void setCellHeight(unsigned int cell_height) { _cellHeight = cell_height; }
+    void setGridThickness(unsigned int grid_thickness) { _gridThickness = grid_thickness; }
+    void setGridOffsetX(unsigned int grid_offset_x) { _gridOffsetX = grid_offset_x; }
+    void setGridOffsetY(unsigned int grid_offset_y) { _gridOffsetY = grid_offset_y; }
 
 
   private:
@@ -71,17 +71,17 @@ public:
   /** \brief _nbColumns getter
    ** \return number of columns
    */
-  inline size_t nbColumns() const { return _nbColumns; }
+  size_t nbColumns() const { return _nbColumns; }
 
   /** \brief _nbLines getter
    ** \return number of lines
    */
-  inline size_t nbLines() const { return _nbLines; }
+  size_t nbLines() const { return _nbLines; }
 
   /** \brief Graphics properties getter
    ** \return a pointer on the graphics properties class
    */
-  inline std::shared_ptr<MapGraphicsProperties> graphicsProperties()
+  std::shared_ptr<MapGraphicsProperties> graphicsProperties()
   { return _graphicsProperties; }
 
   /** \brief returns the current player in the map
@@ -121,7 +121,7 @@ public:
   /** \brief _cells array getter
    ** \return a reference over the cells array
    */
-  inline std::vector<std::vector<std::shared_ptr<Cell>>> cells() const
+  std::vector<std::vector<std::shared_ptr<Cell>>> cells() const
   { return _cells; }
 
   /** \brief returns the Cell which coordinates are x and y
@@ -129,7 +129,7 @@ public:
    ** \param y requested Cell y coordinate
    ** \return a pointer over the requested Cell
    */
-  inline std::shared_ptr<Cell> cell(size_t x, size_t y) const
+  std::shared_ptr<Cell> cell(size_t x, size_t y) const
   { return _cells[x][y]; }
 
   /** \brief builds a new unit of type \param unit

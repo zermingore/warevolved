@@ -89,14 +89,14 @@ public:
    */
   KeyManager();
 
-  inline bool up() { return (PRESSED(E_KEY_MOVE_UP)); }
-  inline bool down() { return (PRESSED(E_KEY_MOVE_DOWN)); }
-  inline bool left() { return (PRESSED(E_KEY_MOVE_LEFT)); }
-  inline bool right() { return (PRESSED(E_KEY_MOVE_RIGHT)); }
-  inline bool selection() { return (PRESSED(E_KEY_SELECTION)); }
-  inline bool menubar() { return (PRESSED(E_KEY_MENUBAR)); }
-  inline bool panel() { return (PRESSED(E_KEY_PANEL)); }
-  inline bool exit() { return (PRESSED(E_KEY_EXIT)); }
+  bool up() { return (PRESSED(E_KEY_MOVE_UP)); }
+  bool down() { return (PRESSED(E_KEY_MOVE_DOWN)); }
+  bool left() { return (PRESSED(E_KEY_MOVE_LEFT)); }
+  bool right() { return (PRESSED(E_KEY_MOVE_RIGHT)); }
+  bool selection() { return (PRESSED(E_KEY_SELECTION)); }
+  bool menubar() { return (PRESSED(E_KEY_MENUBAR)); }
+  bool panel() { return (PRESSED(E_KEY_PANEL)); }
+  bool exit() { return (PRESSED(E_KEY_EXIT)); }
 
   /** \brief Maps keyboard keys to function
    */
@@ -106,20 +106,20 @@ public:
    ** \param function Function associated to the the timer we're looking for
    ** \return Timer number index value (in ms)
    */
-  inline int getTime(e_timer function)
+  int getTime(e_timer function)
   { return _clocks[function].getElapsedTime().asMilliseconds(); }
 
   /** \brief switch getter
    ** \param index _switches index to retrieve
    ** \return switch status
    */
-  inline bool switchStatus(e_switch index) { return _switches[index]; }
+  bool switchStatus(e_switch index) { return _switches[index]; }
 
   /** \brief switch getter
    ** \param s Switch to retrieve
    ** \return switch status
    */
-  inline void setSwitchStatus(e_switch index, bool status)
+  void setSwitchStatus(e_switch index, bool status)
   { _switches[index] = status; }
 
   /** \brief resets _switches status, if needed
@@ -135,7 +135,7 @@ public:
   /** \brief notify a key as 'ready'
    **   meaning being considered as pressed again
    */
-  inline void setReady(e_timer index, bool state) { _ready[index] = state; }
+  void setReady(e_timer index, bool state) { _ready[index] = state; }
 
   /** \brief restarts the clock \param index and sets _timers[index] to 0
    */

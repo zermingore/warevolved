@@ -79,7 +79,7 @@ public:
   /** _sprite setter
    ** \param sprite _sprite value
    */
-  inline void setSprite(std::shared_ptr<sf::Sprite> sprite) { _sprite = sprite; }
+  void setSprite(std::shared_ptr<sf::Sprite> sprite) { _sprite = sprite; }
 
   /** \brief load Image texture to (V)RAM if necessary
    ** sets _rectangle->texture to the new _texture

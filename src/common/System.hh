@@ -26,11 +26,11 @@ public:
   System() = delete;
   System(unsigned int sfml_major, unsigned int sfml_minor);
 
-  inline void setSfmlMajor(unsigned int major) { _sfmlMajor = major; }
-  inline void setSfmlMinor(unsigned int minor) { _sfmlMinor = minor; }
+  void setSfmlMajor(unsigned int major) { _sfmlMajor = major; }
+  void setSfmlMinor(unsigned int minor) { _sfmlMinor = minor; }
 
-  inline unsigned int sfmlMajor() { return _sfmlMajor; }
-  inline unsigned int sfmlMinor() { return _sfmlMinor; }
+  unsigned int sfmlMajor() { return _sfmlMajor; }
+  unsigned int sfmlMinor() { return _sfmlMinor; }
 
 private:
   unsigned int _sfmlMajor; ///< SFML major version (x.*)
