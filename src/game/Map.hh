@@ -19,34 +19,87 @@ public:
   /// \typedef player's units as a list
   typedef std::map<size_t, std::list<std::shared_ptr<Unit>>> unit_list;
 
-  /** \class MapGraphicsProperties
-   * \brief Graphics properties of the Map
+  /**
+   * \class MapGraphicsProperties
+   * \brief Graphics properties of the Map (cell sizes, grid thickness, ...)
    */
   class MapGraphicsProperties
   {
   public:
+    /**
+     * \brief Constructor
+     * Initializes attributes with default values
+     */
     MapGraphicsProperties();
 
-    unsigned int cellWidth() { return _cellWidth; }
-    unsigned int cellHeight() { return _cellHeight; }
-    unsigned int gridThickness() { return _gridThickness; }
-    unsigned int gridOffsetX() { return _gridOffsetX; }
-    unsigned int gridOffsetY() { return _gridOffsetY; }
+    /**
+     * \brief cell width getter
+     * \return cell width in pixels
+     */
+    size_t cellWidth() { return _cellWidth; }
+
+    /**
+     * \brief cell height getter
+     * \return cell height in pixels
+     */
+    size_t cellHeight() { return _cellHeight; }
+
+    /**
+     * \brief grid thickness getter
+     * \return grid thickness in pixels
+     */
+    size_t gridThickness() { return _gridThickness; }
+
+    /**
+     * \brief offset of the grid (from the left border of the window) getter
+     * \return grid offset, in x
+     */
+    size_t gridOffsetX() { return _gridOffsetX; }
+
+    /**
+     * \brief offset of the grid (from the top border of the window) getter
+     * \return grid offset, in y
+     */
+    size_t gridOffsetY() { return _gridOffsetY; }
 
 
-    void setCellWidth(unsigned int cell_width) { _cellWidth = cell_width; }
-    void setCellHeight(unsigned int cell_height) { _cellHeight = cell_height; }
-    void setGridThickness(unsigned int grid_thickness) { _gridThickness = grid_thickness; }
-    void setGridOffsetX(unsigned int grid_offset_x) { _gridOffsetX = grid_offset_x; }
-    void setGridOffsetY(unsigned int grid_offset_y) { _gridOffsetY = grid_offset_y; }
+    /**
+     * \brief cell width setter
+     * \param width cell width in pixels
+     */
+    void setCellWidth(size_t width) { _cellWidth = width; }
+
+    /**
+     * \brief cell height setter
+     * \param height cell height in pixels
+     */
+    void setCellHeight(size_t height) { _cellHeight = height; }
+
+    /**
+     * \brief grid thickness setter
+     * \param thickness of the grid in pixels
+     */
+    void setGridThickness(size_t thickness) { _gridThickness = thickness; }
+
+    /**
+     * \brief offset of the grid (from the left border of the window) setter
+     * \param x offset
+     */
+    void setGridOffsetX(size_t grid_offset_x) { _gridOffsetX = grid_offset_x; }
+
+    /**
+     * \brief offset of the grid (from the top border of the window) setter
+     * \param y offset
+     */
+    void setGridOffsetY(size_t grid_offset_y) { _gridOffsetY = grid_offset_y; }
 
 
   private:
-     size_t _cellWidth;     ///< cells width
-     size_t _cellHeight;    ///< cells height
+     size_t _cellWidth;     ///< cells width in pixels
+     size_t _cellHeight;    ///< cells height in pixels
      size_t _gridThickness; ///< thickness of the grid
-     size_t _gridOffsetX;   ///< X offset of the grid (related to the window)
-     size_t _gridOffsetY;   ///< Y offset of the grid (related to the window)
+     size_t _gridOffsetX;   ///< X grid offset (from the window left border)
+     size_t _gridOffsetY;   ///< Y grid offset (from the window top border)
   };
 
 
@@ -125,15 +178,14 @@ public:
   std::vector<std::vector<std::shared_ptr<Cell>>> cells() const
   { return _cells; }
 
-  /** \brief builds a new unit of type \param unit
-   ** \param unit type of the new unit
+  /**
+   * \brief builds a new unit of type \param unit
+   *
+   * \param unit type of the new unit
+   * \param line line to set the new unit
+   * \param column column to set the new unit
    */
   void newUnit(e_unit u, size_t line, size_t column);
-
-  /** \brief sets the given unit in the cells array
-   ** \param unit to set
-   */
-  // void setUnit(std::shared_ptr<Unit> u);
 
   /** \brief moves the selected unit to the current cursor location
    */
@@ -156,14 +208,16 @@ public:
   void setCursorCoords(Coords coords);
 
   /** \brief operator to allow getting a cell calling map[i][j]
-   * returns the Cell which coordinates are x and y
+   * returns a vector of pointers to Cell
+   * To get the requested cell, use the second coordinate as vector index
    *
-   * \param x requested Cell x coordinate
-   * \param y requested Cell y coordinate
+   * \param line requested Cell coordinate
    *
-   * \return a pointer to the requested Cell
+   * \return a vector of pointers to Cell
    */
-  std::vector<std::shared_ptr<Cell>> operator[] (size_t line) { return _cells[line]; }
+  std::vector<std::shared_ptr<Cell>> operator[] (size_t line) {
+    return _cells[line];
+  }
 
 
 private:
