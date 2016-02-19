@@ -9,10 +9,14 @@
 # define CURSOR_HH_
 
 # include <common/include.hh>
+# include <common/using.hh>
 
 
-/** \brief in-game Cursor class
- ** Manages cursor shape, animation, motion
+/**
+ * \class Cursor
+ * \brief in-game Cursor class
+ *
+ * Manages cursor shape, animation, motion
  */
 class Cursor
 {
@@ -59,35 +63,35 @@ public:
    ** \return true if the cursor moved
    */
   bool moveUp();
+
   /** \brief Move the cursor down
    ** \return true if the cursor moved
    */
   bool moveDown();
+
   /** \brief Move the cursor left
    ** \return true if the cursor moved
    */
   bool moveLeft();
+
   /** \brief Move the cursor right
    ** \return true if the cursor moved
    */
   bool moveRight();
 
-  /** \brief draws the cursor
-   */
-  // void draw() { _image.draw(); }
-
 
 private:
   // map attributes
   size_t _nbColumns; ///< number of columns in map
-  size_t _nbLines; ///< number of Lines in map
+  size_t _nbLines;   ///< number of Lines in map
 
   Coords _coords; ///< Cursor Coordinates
+
   std::string _image; ///< Cursor's Image
-  sf::Color _color; ///< cursor' s color
+  sf::Color _color;   ///< cursor's color
 
   // center of the SPRITE coordinates, avoid computing its value each frame
-//  sf::Vector2f _center; ///< center of the Cursor sprite
+  //  sf::Vector2f _center; ///< center of the Cursor sprite
 };
 
 #endif /* !CURSOR_HH_ */

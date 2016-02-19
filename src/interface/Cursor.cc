@@ -6,7 +6,7 @@ Cursor::Cursor() :
   _nbColumns (0),
   _nbLines (0),
   _image ("cursor"),
-  _color (sf::Color(255, 0, 0, 255))
+  _color (Color(255, 0, 0, 255))
 {
   std::cout << "Cursor Ctor" << std::endl;
 

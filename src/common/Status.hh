@@ -3,7 +3,7 @@
 
 # include <memory>
 # include <stack>
-# include <common/structures/Vector.hh>
+# include <common/using.hh>
 # include <common/enums/modes.hh>
 
 class State;

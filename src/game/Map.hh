@@ -2,6 +2,7 @@
 # define MAP_HH_
 
 # include <common/include.hh>
+# include <common/using.hh>
 # include <common/enums/terrains.hh>
 # include <common/enums/units.hh>
 

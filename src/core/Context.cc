@@ -1,3 +1,4 @@
+#include <common/include.hh>
 #include <core/Context.hh>
 #include <common/System.hh>
 #include <common/Settings.hh>

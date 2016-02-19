@@ -9,6 +9,8 @@
 # define GRAPHICSENGINE_HH_
 
 # include <common/include.hh>
+# include <common/using.hh> // Coords
+
 
 class Map;
 class MapGraphicsProperties;
@@ -114,10 +116,10 @@ public:
   /** \brief Draws the given element
    ** \param drawable item to draw
    */
-  template <class T>
+  template <typename T>
   static void draw(std::shared_ptr<T> drawable, Coords pos, Coords size);
 
-  template <class T>
+  template <typename T>
   void draw(std::shared_ptr<T> drawable, Cell c);
 
 

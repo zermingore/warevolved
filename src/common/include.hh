@@ -18,12 +18,11 @@
 # include <cassert>
 
 # include <common/Debug.hh>
+# include <common/structures/Vector.hh>
 
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
 # include <SFML/Graphics/Color.hpp>
-
-# include <common/structures/Vector.hh>
 
 
 #endif /* !INCLUDE_HH_ */

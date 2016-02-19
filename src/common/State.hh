@@ -9,13 +9,16 @@
 # define STATE_HH_
 
 # include <memory>
+# include <common/using.hh>
 # include <common/enums/modes.hh>
 # include <common/structures/Vector.hh>
 
 class Menu;
 class EventManager;
 
-/** \brief state class
+/**
+ * \class State
+ * \brief state class
  ** stores a state, which is composed of
  **   a cursor position
  **   a mode: \enum state index
