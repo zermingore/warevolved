@@ -47,5 +47,5 @@ void Soldier::fillActions(std::vector<MenuEntry>& menu)
 }
 
 std::string Soldier::name() {
-  return Text::name(_rank) + " " + _fullName;
+  return _name;/*Text::name(_rank) + " " + _fullName*/;
 }

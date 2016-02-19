@@ -16,10 +16,11 @@ class Unit;
 class Map
 {
 public:
-  ///< \typedef player's units as a list
+  /// \typedef player's units as a list
   typedef std::map<size_t, std::list<std::shared_ptr<Unit>>> unit_list;
 
-  /** \class graphics properties
+  /** \class MapGraphicsProperties
+   * \brief Graphics properties of the Map
    */
   class MapGraphicsProperties
   {
@@ -41,32 +42,32 @@ public:
 
 
   private:
-     size_t _cellWidth; ///< cells width
-     size_t _cellHeight; ///< cells height
+     size_t _cellWidth;     ///< cells width
+     size_t _cellHeight;    ///< cells height
      size_t _gridThickness; ///< thickness of the grid
-     size_t _gridOffsetX; ///< X offset of the grid (related to the window)
-     size_t _gridOffsetY; ///< Y offset of the grid (related to the window)
+     size_t _gridOffsetX;   ///< X offset of the grid (related to the window)
+     size_t _gridOffsetY;   ///< Y offset of the grid (related to the window)
   };
 
 
-  /** \brief removing default constructor
-   */
+  /// \brief remove default constructor as we need the dimensions of the map
   Map() = delete;
 
   /** \brief Constructs a map of nbColumns x nbLines
-   ** \param battle pointer on the battle in which this map is
-   ** \param nbColumns Number of columns required
-   ** \param nbLines Number of lines required
-   ** calls this->init() to initialize a fresh Map
-   */
-  Map(Battle* battle, size_t nb_columns, size_t nb_lines);
-
-  /** \brief Initializes the map
+   **
+   ** Initializes the map as follow:
    **   Puts units where needed;
    **   Sets right Terrains;
    **   Asks ResourcesManager to loads needed Resources
+   **
+   ** \param battle pointer on the battle in which this map is
+   ** \param nbColumns Number of columns required
+   ** \param nbLines Number of lines required
    */
-  void init();
+  Map(Battle* battle, size_t nb_columns, size_t nb_lines);
+
+  /// initializes the cursors
+  void initCursors();
 
   /** \brief _nbColumns getter
    ** \return number of columns
@@ -124,14 +125,6 @@ public:
   std::vector<std::vector<std::shared_ptr<Cell>>> cells() const
   { return _cells; }
 
-  /** \brief returns the Cell which coordinates are x and y
-   ** \param x requested Cell x coordinate
-   ** \param y requested Cell y coordinate
-   ** \return a pointer over the requested Cell
-   */
-  std::shared_ptr<Cell> cell(size_t x, size_t y) const
-  { return _cells[x][y]; }
-
   /** \brief builds a new unit of type \param unit
    ** \param unit type of the new unit
    */
@@ -161,6 +154,16 @@ public:
   /** \brief sets current player cursor coordinates to the given coordinates
    */
   void setCursorCoords(Coords coords);
+
+  /** \brief operator to allow getting a cell calling map[i][j]
+   * returns the Cell which coordinates are x and y
+   *
+   * \param x requested Cell x coordinate
+   * \param y requested Cell y coordinate
+   *
+   * \return a pointer to the requested Cell
+   */
+  std::vector<std::shared_ptr<Cell>> operator[] (size_t line) { return _cells[line]; }
 
 
 private:

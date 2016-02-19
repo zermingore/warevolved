@@ -17,11 +17,6 @@ class Application
 {
 public:
   virtual void buildMap() = 0;
-
-protected:
-  /** \brief Initialize the application
-   */
-  virtual void init() = 0;
 };
 
 #endif /* !APPLICATION_HH_ */

@@ -35,7 +35,7 @@ void PathFinding::drawPath()
 {
   _current = _origin;
   size_t i = 0;
-  for (auto it = _directions.begin(); it != _directions.end(); ++it)
+  for (auto it(_directions.begin()); it != _directions.end(); ++it)
   {
     updateCurrentCell(*it);
     // TODO manage cache and image sprites
@@ -209,7 +209,7 @@ void PathFinding::showAllowedPath()
       continue;
     }
 
-    _reachableCells.push_back(_map->cell(x, y));
+    _reachableCells.push_back((*_map)[x][y]);
     checked.push_back(std::pair<size_t, size_t>(x, y));
 
     s.emplace(std::pair<size_t, size_t>(x + 1, y));
@@ -224,12 +224,12 @@ void PathFinding::showAllowedPath()
 
 void PathFinding::highlightCells()
 {
-  // TODO check _unit's inventory
+  /// \todo check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
   for (auto it: _reachableCells)
   {
-    std::shared_ptr<Cell> c = _map->cell(it->x(), it->y());
+    auto c = (*_map)[it->x()][it->y()];
 
     c->setHighlight(true);
     if (c->unit())
@@ -255,7 +255,9 @@ void PathFinding::highlightCells()
 void PathFinding::hideAllowedPath() const
 {
   // cleaning displayed move possibilities
-  for (unsigned int i = 0; i < _map->nbColumns(); ++i)
-    for (unsigned int j = 0; j < _map->nbLines(); ++j)
-      _map->cell(i, j)->setHighlight(false);
+  for (auto i(0u); i < _map->nbColumns(); ++i) {
+    for (auto j(0u); j < _map->nbLines(); ++j) {
+      (*_map)[i][j]->setHighlight(false);
+    }
+  }
 }

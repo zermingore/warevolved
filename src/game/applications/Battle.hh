@@ -19,28 +19,25 @@ class Player;
 
 
 /** \class Battle
- ** a battle is a game, launched from the Game class
+ ** \brief A battle is a game, launched from the Game class
  */
 class Battle: public Application
 {
 public:
-  // TODO add filename XOr nb players, ...
+  /// \todo add filename XOr nb players, ...
 
   /** \brief Default Constructor
+   *
    ** builds a random battle
    ** with a random number of players, units, ...
-   */
-  Battle();
-
-  /** \brief initializes a Battle
    ** calls buildPlayers, buildMap, buildUnits
    */
-  void init();
+  Battle();
 
   /** \brief players vector getter
    ** \return _players vector
    */
-  std::vector<std::shared_ptr<Player>> const players();
+  const std::vector<std::shared_ptr<Player>> players() const { return _players; }
 
   /** \brief _players[id] getter
    ** \param id Player's id to retrieve
@@ -61,7 +58,7 @@ public:
    */
   void nextPlayer();
 
-  /** \brief initializes map
+  /** \brief initializes the map
    */
   void buildMap();
 

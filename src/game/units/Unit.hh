@@ -108,9 +108,6 @@ public:
    */
   void setPlayed(bool played) { _played = played; }
 
-  /** \brief draws the Unit at it's position
-   */
-  void draw();
 
   //
   // __________ Targets management __________

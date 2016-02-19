@@ -9,13 +9,7 @@
 Battle::Battle() :
   _currentPlayer (0)
 {
-  // TODO map size is hard-coded
-  init();
-}
-
-
-void Battle::init()
-{
+  /// \todo map size is hard-coded
   _map = std::make_shared<Map> (this, 8, 8);
   buildPlayers();
   buildMap();
@@ -37,12 +31,12 @@ void Battle::buildPlayers()
 }
 
 
-// TODO generate a random Map, read one from a file, ...
+/// \todo generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  _map->init();
+  _map->initCursors();
 
-    // TODO delegate to a factory
+  /// \todo delegate to a factory
   _map->newUnit(e_unit::SOLDIERS, 1, 1);
   _map->newUnit(e_unit::SOLDIERS, 4, 1);
 
@@ -55,13 +49,8 @@ void Battle::nextPlayer()
 {
   _map->endTurn();
 //  _players[_currentPlayer]->saveCursorPosition();
-  _currentPlayer++;
+  ++_currentPlayer;
   _currentPlayer %= _players.size();
 //  _map->cursor(_currentPlayer)->setCoords(_players[_currentPlayer]->lastCursorPosition());
 //  CURSOR->setColor(_players[_currentPlayer]->cursorColor());
-}
-
-
-std::vector<std::shared_ptr<Player>> const Battle::players() {
-  return _players;
 }

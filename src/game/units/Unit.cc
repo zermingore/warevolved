@@ -62,12 +62,6 @@ std::shared_ptr<Cell> Unit::nextTarget()
   return (*_targets)[_targetIndex];
 }
 
-void Unit::draw()
-{
-  PRINTF("DEPRECATED draw in unit class !");
-
-}
-
 
 // virtual method
 // TODO move into Map

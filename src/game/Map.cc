@@ -25,11 +25,7 @@ Map::Map(Battle* battle, size_t nb_columns, size_t nb_lines) :
   _battle (battle)
 {
   _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
-}
 
-
-void Map::init()
-{
   for (auto i = 0u; i < _nbLines; i++)
   {
     std::vector<std::shared_ptr<Cell>> vec(_nbColumns);
@@ -41,17 +37,22 @@ void Map::init()
     _cells.push_back(vec);
   }
 
-  // building Cursors
-  for (auto p: _battle->players())
-    _cursors[p->id()] = std::make_shared<Cursor> ();
-
-  _cursors[_battle->currentPlayer()]->setLimits(_nbColumns, _nbLines);
-
   // TODO read informations from a map file
   for (auto i = 0u; i < _nbColumns; ++i)
     for (auto j = 0u; j < _nbLines; ++j)
       _cells[i][j]->setTerrain(e_terrain::FOREST);
 }
+
+
+void Map::initCursors()
+{
+  // building Cursors
+  for (auto p: _battle->players())
+    _cursors[p->id()] = std::make_shared<Cursor> ();
+
+  _cursors[_battle->currentPlayer()]->setLimits(_nbColumns, _nbLines);
+}
+
 
 void Map::moveUnit()
 {
