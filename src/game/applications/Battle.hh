@@ -19,6 +19,7 @@ class Player;
 
 
 /** \class Battle
+ *
  ** \brief A battle is a game, launched from the Game class
  */
 class Battle: public Application
@@ -35,18 +36,22 @@ public:
   Battle();
 
   /** \brief players vector getter
+   *
    ** \return _players vector
    */
   const std::vector<std::shared_ptr<Player>> players() const { return _players; }
 
   /** \brief _players[id] getter
+   *
    ** \param id Player's id to retrieve
+   **
    ** \return the Player which number is \param id
    */
   std::shared_ptr<Player> getPlayer(const size_t &id) const
   { return _players[id]; }
 
   /** \brief _map getter
+   *
    ** \return a reference to the map
    */
   std::shared_ptr<Map> map() { return _map; }
@@ -63,6 +68,7 @@ public:
   void buildMap();
 
   /** \brief current player getter
+   *
    ** \return a pointer on the current player
    */
   std::shared_ptr<Player> getCurrentPlayer()

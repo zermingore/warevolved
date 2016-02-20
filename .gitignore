@@ -35,6 +35,9 @@ etags
 .project
 .settings
 
+# Qt Creator files
+warevolved.*
+
 # Doxygen
 html/
 latex/

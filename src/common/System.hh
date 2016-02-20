@@ -11,8 +11,10 @@
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
 
-/** \class System storage class
- ** designed to fill bugs reports
+/** \class System
+ *
+ ** \brief designed to fill bugs reports
+ **
  ** keeps software information
  **  - SFML version
  ** keeps hardware information
@@ -21,8 +23,7 @@
 class System
 {
 public:
-  /** \brief Default Constructor
-   */
+  /// deleted Default Constructor
   System() = delete;
   System(unsigned int sfml_major, unsigned int sfml_minor);
 

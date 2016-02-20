@@ -10,19 +10,19 @@
 
 
 Map::MapGraphicsProperties::MapGraphicsProperties()
+  : _cellWidth(64)
+  , _cellHeight(64)
+  , _gridThickness(5)
+  , _gridOffsetX(0)
+  , _gridOffsetY(0)
 {
-  _cellWidth = 64;
-  _cellHeight = 64;
-  _gridThickness = 5;
-  _gridOffsetX = 0;
-  _gridOffsetY = 0;
 }
 
 
-Map::Map(Battle* battle, size_t nb_columns, size_t nb_lines) :
-  _nbColumns (nb_columns),
-  _nbLines (nb_lines),
-  _battle (battle)
+Map::Map(Battle* battle, const size_t nb_columns, const size_t nb_lines)
+  : _battle (battle)
+  , _nbColumns (nb_columns)
+  , _nbLines (nb_lines)
 {
   _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
 
@@ -37,17 +37,19 @@ Map::Map(Battle* battle, size_t nb_columns, size_t nb_lines) :
     _cells.push_back(vec);
   }
 
-  // TODO read informations from a map file
+  /// \todo read informations from a map file
   for (auto i = 0u; i < _nbColumns; ++i)
+  {
     for (auto j = 0u; j < _nbLines; ++j)
       _cells[i][j]->setTerrain(e_terrain::FOREST);
+  }
 }
 
 
 void Map::initCursors()
 {
   // building Cursors
-  for (auto p: _battle->players())
+  for (const auto& p: _battle->players())
     _cursors[p->id()] = std::make_shared<Cursor> ();
 
   _cursors[_battle->currentPlayer()]->setLimits(_nbColumns, _nbLines);
@@ -73,15 +75,15 @@ void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
   _cells[tmp.x][tmp.y]->removeUnit();
 }
 
-std::shared_ptr<Unit> Map::unit(Coords c) const {
+std::shared_ptr<Unit> Map::unit(const Coords& c) const {
   return _cells[c.x][c.y]->unit();
 }
 
-std::shared_ptr<Unit> Map::unit(size_t x, size_t y) const {
+std::shared_ptr<Unit> Map::unit(const size_t x, const size_t y) const {
   return _cells[x][y]->unit();
 }
 
-e_terrain Map::getTerrain(size_t x, size_t y) const {
+e_terrain Map::getTerrain(const size_t x, const size_t y) const {
   return _cells[x][y]->terrain();
 }
 
@@ -89,7 +91,7 @@ e_terrain Map::getTerrain(size_t x, size_t y) const {
 //   _cells[u->x()][u->y()]->setUnit(u);
 // }
 
-std::shared_ptr<Cursor> Map::cursor(size_t player) {
+std::shared_ptr<Cursor> Map::cursor(const size_t player) {
   return _cursors[player];
 }
 
@@ -101,11 +103,11 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(e_unit unit_type, size_t line, size_t column)
+void Map::newUnit(const e_unit type, const size_t line, const size_t column)
 {
   std::shared_ptr<Unit> new_unit;
 
-  switch (unit_type)
+  switch (type)
   {
     case e_unit::SOLDIERS:
       new_unit = std::make_shared<Soldier> ();

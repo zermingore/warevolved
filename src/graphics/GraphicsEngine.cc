@@ -121,8 +121,8 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   for (auto i = 0u; i < map->nbLines(); ++i)
   {
     rectangle.setPosition(offset_x, offset_y);
-    rectangle.setSize(sf::Vector2f(p->cellWidth() * map->nbColumns(),
-                                   p->cellHeight()));
+    rectangle.setSize({p->cellWidth() * map->nbColumns(),
+                       p->cellHeight()});
 
     _window->draw(rectangle);
 

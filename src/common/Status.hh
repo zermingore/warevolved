@@ -17,6 +17,8 @@ class Status
 {
 public:
   /** \brief Destructor
+   *
+   * Pops every state
    */
   ~Status();
 
@@ -37,7 +39,7 @@ public:
    ** exits the game if the stack is empty
    ** \param skip retrieve Cursor position or not
    */
-  static void exitCurrentMode(bool skip = false);
+  static void exitCurrentMode(const bool skip = false);
 
   /** \brief pops _modes summit while current mode <> mode
    ** exits the game if the stack is empty
@@ -81,6 +83,7 @@ public:
    ** \return _selectedUnitPosition
    */
   static Coords selectedUnitPosition() { return _selectedUnitPosition; }
+
   /** \brief _selectedUnitPosition setter
    ** \param pos selected Unit position
    */

@@ -18,10 +18,11 @@ class Map
 {
 public:
   /// \typedef player's units as a list
-  typedef std::map<size_t, std::list<std::shared_ptr<Unit>>> unit_list;
+  using unit_list = std::map<size_t, std::list<std::shared_ptr<Unit>>>;
 
   /**
    * \class MapGraphicsProperties
+   *
    * \brief Graphics properties of the Map (cell sizes, grid thickness, ...)
    */
   class MapGraphicsProperties
@@ -29,67 +30,78 @@ public:
   public:
     /**
      * \brief Constructor
+     *
      * Initializes attributes with default values
      */
     MapGraphicsProperties();
 
     /**
      * \brief cell width getter
+     *
      * \return cell width in pixels
      */
-    size_t cellWidth() { return _cellWidth; }
+    size_t cellWidth() const { return _cellWidth; }
 
     /**
      * \brief cell height getter
+     *
      * \return cell height in pixels
      */
-    size_t cellHeight() { return _cellHeight; }
+    size_t cellHeight() const { return _cellHeight; }
 
     /**
      * \brief grid thickness getter
+     *
      * \return grid thickness in pixels
      */
-    size_t gridThickness() { return _gridThickness; }
+    size_t gridThickness() const { return _gridThickness; }
 
     /**
      * \brief offset of the grid (from the left border of the window) getter
+     *
      * \return grid offset, in x
      */
-    size_t gridOffsetX() { return _gridOffsetX; }
+    size_t gridOffsetX() const { return _gridOffsetX; }
 
     /**
      * \brief offset of the grid (from the top border of the window) getter
+     *
      * \return grid offset, in y
      */
-    size_t gridOffsetY() { return _gridOffsetY; }
+    size_t gridOffsetY() const { return _gridOffsetY; }
 
 
     /**
      * \brief cell width setter
+     *
      * \param width cell width in pixels
      */
     void setCellWidth(size_t width) { _cellWidth = width; }
 
     /**
      * \brief cell height setter
+     *
      * \param height cell height in pixels
      */
     void setCellHeight(size_t height) { _cellHeight = height; }
 
     /**
      * \brief grid thickness setter
+     *
      * \param thickness of the grid in pixels
      */
     void setGridThickness(size_t thickness) { _gridThickness = thickness; }
 
     /**
      * \brief offset of the grid (from the left border of the window) setter
+     *
      * \param x offset
      */
     void setGridOffsetX(size_t grid_offset_x) { _gridOffsetX = grid_offset_x; }
 
     /**
      * \brief offset of the grid (from the top border of the window) setter
+     *
      * \param y offset
      */
     void setGridOffsetY(size_t grid_offset_y) { _gridOffsetY = grid_offset_y; }
@@ -104,7 +116,7 @@ public:
   };
 
 
-  /// \brief remove default constructor as we need the dimensions of the map
+  /// remove default constructor as we need the dimensions of the map
   Map() = delete;
 
   /** \brief Constructs a map of nbColumns x nbLines
@@ -118,12 +130,13 @@ public:
    ** \param nbColumns Number of columns required
    ** \param nbLines Number of lines required
    */
-  Map(Battle* battle, size_t nb_columns, size_t nb_lines);
+  Map(Battle* battle, const size_t nb_columns, const size_t nb_lines);
 
   /// initializes the cursors
   void initCursors();
 
   /** \brief _nbColumns getter
+   *
    ** \return number of columns
    */
   size_t nbColumns() const { return _nbColumns; }
@@ -136,7 +149,7 @@ public:
   /** \brief Graphics properties getter
    ** \return a pointer on the graphics properties class
    */
-  std::shared_ptr<MapGraphicsProperties> graphicsProperties()
+  std::shared_ptr<MapGraphicsProperties> graphicsProperties() const
   { return _graphicsProperties; }
 
   /** \brief returns the current player in the map
@@ -152,7 +165,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (x, y)
    */
-  std::shared_ptr<Unit> unit(size_t x, size_t y) const;
+  std::shared_ptr<Unit> unit(const size_t x, const size_t y) const;
 
   /** \brief gets the unit at c's coordinates
    **
@@ -161,7 +174,7 @@ public:
    ** \return the enum index in e_unit matching the unit
    **   located at coordinates (c.x, c.y)
    */
-  std::shared_ptr<Unit> unit(Coords c) const;
+  std::shared_ptr<Unit> unit(const Coords& c) const;
 
   /** \brief gets the terrain at coordinates (x, y)
    **
@@ -171,7 +184,7 @@ public:
    ** \return the enum index in e_terrain matching the terrain
    **   located at coordinates (x, y)
    */
-  e_terrain getTerrain(size_t x, size_t y) const;
+  e_terrain getTerrain(const size_t x, const size_t y) const;
 
   /** \brief _cells array getter
    ** \return a reference over the cells array
@@ -182,11 +195,11 @@ public:
   /**
    * \brief builds a new unit of type \param unit
    *
-   * \param unit type of the new unit
+   * \param type type of the new unit
    * \param line line to set the new unit
    * \param column column to set the new unit
    */
-  void newUnit(e_unit u, size_t line, size_t column);
+  void newUnit(const e_unit type, const size_t line, const size_t column);
 
   /** \brief moves the selected unit to the current cursor location
    */
@@ -222,20 +235,21 @@ public:
 
 
 private:
-  size_t _nbColumns; ///< number of columns (x coordinate)
-  size_t _nbLines; ///< number of lines (y coordinate)
   std::shared_ptr<Battle> _battle; ///< Battle in which this map belong to
 
-  ///< 2D Array of every cells of the map
+  size_t _nbColumns; ///< number of columns (x coordinate)
+  size_t _nbLines;   ///< number of lines (y coordinate)
+
+  /// 2D Array of every cells of the map
   std::vector<std::vector<std::shared_ptr<Cell>>> _cells;
 
-  ///< map of units: <player, unit_list>
+  /// map of units: <player, unit_list>
   unit_list _units;
 
-  ///< map of players cursors (map[player_id] = cursor)
+  /// map of players cursors (map[player_id] = cursor)
   std::map<size_t, std::shared_ptr<Cursor>> _cursors;
 
-  ///< list of map graphics properties (cells size, grid thickness, ...)
+  /// list of map graphics properties (cells size, grid thickness, ...)
   std::shared_ptr<Map::MapGraphicsProperties> _graphicsProperties;
 };
 

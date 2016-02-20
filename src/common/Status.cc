@@ -8,16 +8,16 @@
 
 
 // Static class attributes definition
-std::stack<std::shared_ptr<State>> Status::_states;
-std::shared_ptr<Battle> Status::_battle;
-Coords Status::_selectedCell;
-Coords Status::_selectedUnitPosition;
+std::stack<std::shared_ptr<State>> _states;
+std::shared_ptr<Battle> _battle;
+Coords _selectedCell;
+Coords _selectedUnitPosition;
 
 
 Status::~Status()
 {
   while (!_states.empty())
-  	_states.pop(); // calls element destructor
+    _states.pop(); // calls element destructor
 }
 
 void Status::initialize()
@@ -59,7 +59,7 @@ void Status::pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu)
 }
 
 
-void Status::exitCurrentMode(bool skip)
+void Status::exitCurrentMode(const bool skip)
 {
   if (skip)
   {
