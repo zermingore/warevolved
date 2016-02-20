@@ -1,10 +1,16 @@
 War Evolved is a simple 2D tactical RPG
 
-to compile it, you'll need autotools, make, g++ and SFML2+ (2.1)
+to compile it, you'll need autotools, make, g++ and SFML2+ (2.3)
 run
 > ./autogen.sh
 
-if it works, the binary file (we) will be created
+The binary file (we) should be created at the root
+
+
+To generate the documentation, you will need:
+- graphviz to generate caller graphs
+- doxygen
+
 
 NOTE: to install SFML
 You can install the following packages in your packet manager:
@@ -19,8 +25,8 @@ a XML file parser which is under Boost license
 I have not written any code in src/pugixml folder
 credits go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
 
-If you haven't downloaded War Evolved on google code,
-you still can find it there https://code.google.com/p/warevolved/
+If you haven't downloaded War Evolved on GitHub,
+you still can find it there https://github.com/zermingore/warevolved
 to make sure you have the latest version
 
 
