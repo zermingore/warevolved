@@ -22,35 +22,35 @@
 // {
 // public:
 //   /**
-   * \brief Default Constructor
+//   * \brief Default Constructor
 //    */
 //   Terrain();
 
 //   /**
-   * \brief Terrain Constructor
+//   * \brief Terrain Constructor
 //    *   builds a Terrain of type terrain
 //    */
 //   explicit Terrain(e_terrain terrain);
 
 //   /**
-   * \brief _imageName getter
+//   * \brief _imageName getter
 //    * \return Image name (alias)
 //    */
 //   std::string getImageName();
 
 //   /**
-   * \brief _image getter
+//   * \brief _image getter
 //    * \return Terrain's Image
 //    */
 //   Image *getImage();
 
 //   /**
-   * \brief _image setter
+//   * \brief _image setter
 //    */
 //   void setTextureId(unsigned int texture_id);
 
 //   /**
-   * \brief _imageName setter
+//   * \brief _imageName setter
 //    */
 //   void setImageName(std::string image_name);
 

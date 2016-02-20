@@ -29,9 +29,7 @@ public:
    */
   void initialize();
 
-  // /**
-   * \brief keeps clicked cell's coordinates in _selectedCell
-  //  */
+  // keeps clicked cell's coordinates in _selectedCell
   // void cellSelection();
 
   // __________________________ Getters / Setters __________________________ //

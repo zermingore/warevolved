@@ -8,10 +8,10 @@
 
 
 // Static class attributes definition
-std::stack<std::shared_ptr<State>> _states;
-std::shared_ptr<Battle> _battle;
-Coords _selectedCell;
-Coords _selectedUnitPosition;
+std::stack<std::shared_ptr<State>> Status::_states;
+std::shared_ptr<Battle> Status::_battle;
+Coords Status::_selectedCell;
+Coords Status::_selectedUnitPosition;
 
 
 Status::~Status()
