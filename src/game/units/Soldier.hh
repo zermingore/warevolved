@@ -17,26 +17,29 @@ class Item;
 
 
 /** \class This class describes a Soldier, not a unit
- ** a Soldier has a name, an inventory, ...
+ * a Soldier has a name, an inventory, ...
  */
 class Soldier: public Unit
 {
 public:
-  /** \brief Default Constructor
-   ** creates a random Soldier (random name, characteristics, ...)
+  /**
+   * \brief Default Constructor
+   * creates a random Soldier (random name, characteristics, ...)
    */
   Soldier();
 
-  /** \brief gets name and add grade abbreviated
-   ** \return a string composed of the unit name and it's grade,
-   **   separated by a space
+  /**
+   * \brief gets name and add grade abbreviated
+   * \return a string composed of the unit name and it's grade,
+   *   separated by a space
    */
   std::string name();
 
-  /** \brief fills the given Menu with the possible Entries,
-   **   according to the Unit skills
-   ** \param menu inGameMenu in which we add relevant entries
-   ** virtual method
+  /**
+   * \brief fills the given Menu with the possible Entries,
+   *   according to the Unit skills
+   * \param menu inGameMenu in which we add relevant entries
+   * virtual method
    */
   void fillActions(std::vector<MenuEntry>& menu);
 

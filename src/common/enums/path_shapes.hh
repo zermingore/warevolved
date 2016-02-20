@@ -10,8 +10,8 @@
 
 
 /** \enum Help matching which element we want to display,
- **   drawing the path
- ** Their values matches the needed sprite rotation
+ *   drawing the path
+ * Their values matches the needed sprite rotation
  */
 enum class e_path_shape
 {

@@ -8,7 +8,8 @@
 
 // TODO add execute method given to ctor
 
-/** \brief entries descriptors
+/**
+   * \brief entries descriptors
  */
 enum class entry
 {
@@ -26,26 +27,31 @@ enum class entry
 class MenuEntry
 {
 public:
-  /** \brief Constructor
+  /**
+   * \brief Constructor
    */
   // TODO use this one (auto label completion, using a DB)
   explicit MenuEntry(entry &entry);
 
-  /** \brief Constructor
-   ** \deprecated use MenuEntry(entries entry); with auto label completion
+  /**
+   * \brief Constructor
+   * \deprecated use MenuEntry(entries entry); with auto label completion
    */
   MenuEntry(std::string label_name, entry entry);
 
-  /** \brief returns entry Identifier, as a entries value
+  /**
+   * \brief returns entry Identifier, as a entries value
    */
   entry id() { return _id; }
 
-  /** \brief displays the entry at position
-   ** \param position where the entry will be display
+  /**
+   * \brief displays the entry at position
+   * \param position where the entry will be display
    */
   void draw(Coords position);
 
-  /** \brief Executes the action matching the entry
+  /**
+   * \brief Executes the action matching the entry
    */
   void execute();
 

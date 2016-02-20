@@ -8,7 +8,8 @@
 // # include <game/PathFinding.hh>
 
 
-/** \brief Side Panel possible positions
+/**
+   * \brief Side Panel possible positions
  */
 enum class panel_position
 {
@@ -19,7 +20,8 @@ enum class panel_position
   NB_POSITIONS // useful with modulo (++position % nb)
 };
 
-/** \brief Menu Bar possible positions
+/**
+   * \brief Menu Bar possible positions
  */
 enum class menu_bar_position
 {
@@ -33,75 +35,89 @@ enum class menu_bar_position
 
 // TODO method draw: path, menus
 
-/** \brief Interface class
- ** keeps data relative to the user's interface
- ** draws the user's interface
+/**
+   * \brief Interface class
+ * keeps data relative to the user's interface
+ * draws the user's interface
  */
 class Interface
 {
 public:
   /** Default Constructor
-   ** Initializes in-game menu
+   * Initializes in-game menu
    */
   Interface();
 
-  /** \brief _cursor getter
+  /**
+   * \brief _cursor getter
    */
   std::shared_ptr<Cursor> cursor() { return _cursor; }
 
-  /** \brief side panel position getter
+  /**
+   * \brief side panel position getter
    */
   panel_position panelPosition() { return _panelPosition; }
 
-  /** \brief side panel position getter
+  /**
+   * \brief side panel position getter
    */
   menu_bar_position menuBarPosition() { return _menuBarPosition; }
 
-  /** \brief sets panel position to the next position
-   ** loops over the panel::NB_POSITIONS possibilities
+  /**
+   * \brief sets panel position to the next position
+   * loops over the panel::NB_POSITIONS possibilities
    */
   void incrementPanelPosition();
 
-  /** \brief sets menu bar position to the next position
-   ** loops over the menu_bar::NB_POSITIONS possibilities
+  /**
+   * \brief sets menu bar position to the next position
+   * loops over the menu_bar::NB_POSITIONS possibilities
    */
   void incrementMenuBarPosition();
 
-  /** \brief in-game menu getter
-   ** \return _inGameMenu
+  /**
+   * \brief in-game menu getter
+   * \return _inGameMenu
    */
   std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
 
-  /** \brief PathFinding getter
-   ** \return _path current path
+  /**
+   * \brief PathFinding getter
+   * \return _path current path
    */
 //  std::shared_ptr<PathFinding> path() { return _path; }
 
-  /** \brief sets the path origin
-   ** meaning the cell from where it starts
+  /**
+   * \brief sets the path origin
+   * meaning the cell from where it starts
    */
 //  void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
 
-  /** \brief draws all element relative to the user's interface
-   ** meaning: in-game menus, panels and path (from path-finding)
+  /**
+   * \brief draws all element relative to the user's interface
+   * meaning: in-game menus, panels and path (from path-finding)
    */
   void draw();
 
 
 private:
-  /** \brief Initializes Panel position
+  /**
+   * \brief Initializes Panel position
    */
   void setSidePanel();
 
-  /** \brief Initializes Menu bar position
+  /**
+   * \brief Initializes Menu bar position
    */
   void setMenuBar();
 
-  /** \brief Draw side panel
+  /**
+   * \brief Draw side panel
    */
   void drawSidePanel();
 
-  /** \brief Draw menu bar
+  /**
+   * \brief Draw menu bar
    */
   void drawMenuBar();
 

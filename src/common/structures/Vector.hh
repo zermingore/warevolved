@@ -19,14 +19,16 @@ template <typename T>
 class Vector2
 {
 public:
-  /** \brief Default constructor
+  /**
+   * \brief Default constructor
    *
    * Creates a Vector2(0, 0).
    */
   Vector2() : x(0), y(0)
   {}
 
-  /** \brief Construct the vector with given coordinates
+  /**
+   * \brief Construct the vector with given coordinates
    *
    * \param a x coordinate
    * \param b x coordinate

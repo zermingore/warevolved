@@ -10,8 +10,8 @@
 
 
 /** \class Application class
- ** An application is a full screen state
- **   it could be the Main Menu, a Battle, ...
+ * An application is a full screen state
+ *   it could be the Main Menu, a Battle, ...
  */
 class Application
 {

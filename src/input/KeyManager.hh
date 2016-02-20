@@ -11,7 +11,8 @@
 # include <common/include.hh>
 # include <common/constants.hh>
 
-/** \brief timer index list
+/**
+   * \brief timer index list
  */
 enum e_timer
 {
@@ -24,8 +25,9 @@ enum e_timer
 };
 
 
-/** \brief switches (on /off) keys
- ** they don't allow key-repeating
+/**
+   * \brief switches (on /off) keys
+ * they don't allow key-repeating
  */
 enum e_switch
 {
@@ -40,8 +42,9 @@ enum e_switch
 };
 
 
-/** \brief Keys indexes
- ** allowing key repeating
+/**
+   * \brief Keys indexes
+ * allowing key repeating
  */
 enum e_key
 {
@@ -75,17 +78,19 @@ enum e_key
 
 class KeyManager
 {
-/** \brief SFML key detection
- **   \return true if one of the two possible binding
- **     of a function has been triggered
- **   \return false otherwise
- **   \param feature key name auto expand _1 and _2 to this name
+/**
+   * \brief SFML key detection
+ *   \return true if one of the two possible binding
+ *     of a function has been triggered
+ *   \return false otherwise
+ *   \param feature key name auto expand _1 and _2 to this name
  */
 # define PRESSED(x) sf::Keyboard::isKeyPressed(_keys[ x ##_1]) || \
     sf::Keyboard::isKeyPressed(_keys[ x ##_2])
 
 public:
-  /** \brief Default Constructor
+  /**
+   * \brief Default Constructor
    */
   KeyManager();
 
@@ -98,46 +103,54 @@ public:
   bool panel() { return (PRESSED(E_KEY_PANEL)); }
   bool exit() { return (PRESSED(E_KEY_EXIT)); }
 
-  /** \brief Maps keyboard keys to function
+  /**
+   * \brief Maps keyboard keys to function
    */
   void mapKeys();
 
-  /** \brief timer value getter
-   ** \param function Function associated to the the timer we're looking for
-   ** \return Timer number index value (in ms)
+  /**
+   * \brief timer value getter
+   * \param function Function associated to the the timer we're looking for
+   * \return Timer number index value (in ms)
    */
   int getTime(e_timer function)
   { return _clocks[function].getElapsedTime().asMilliseconds(); }
 
-  /** \brief switch getter
-   ** \param index _switches index to retrieve
-   ** \return switch status
+  /**
+   * \brief switch getter
+   * \param index _switches index to retrieve
+   * \return switch status
    */
   bool switchStatus(e_switch index) { return _switches[index]; }
 
-  /** \brief switch getter
-   ** \param s Switch to retrieve
-   ** \return switch status
+  /**
+   * \brief switch getter
+   * \param s Switch to retrieve
+   * \return switch status
    */
   void setSwitchStatus(e_switch index, bool status)
   { _switches[index] = status; }
 
-  /** \brief resets _switches status, if needed
+  /**
+   * \brief resets _switches status, if needed
    */
   void resetSwitches();
 
-  /** \brief returns true if the key matching index is ready
-   ** \return true if the key matching index is ready
-   **   false otherwise
+  /**
+   * \brief returns true if the key matching index is ready
+   * \return true if the key matching index is ready
+   *   false otherwise
    */
   bool ready(e_timer index);
 
-  /** \brief notify a key as 'ready'
-   **   meaning being considered as pressed again
+  /**
+   * \brief notify a key as 'ready'
+   *   meaning being considered as pressed again
    */
   void setReady(e_timer index, bool state) { _ready[index] = state; }
 
-  /** \brief restarts the clock \param index and sets _timers[index] to 0
+  /**
+   * \brief restarts the clock \param index and sets _timers[index] to 0
    */
   void restartTimer(e_timer index);
 

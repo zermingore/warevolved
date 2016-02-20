@@ -8,8 +8,9 @@
 #ifndef ENUM_DIRECTIONS_HH_
 # define ENUM_DIRECTIONS_HH_
 
-/** \brief stores vanilla directions
- ** used for paths
+/**
+   * \brief stores vanilla directions
+ * used for paths
  */
 enum class e_direction
 {

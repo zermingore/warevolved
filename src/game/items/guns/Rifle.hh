@@ -11,10 +11,10 @@
 # include <game/items/guns/Gun.hh>
 
 /** \class Assault Rifle class
- ** an assault rifle is a heavy, long, accurate gun
- ** it uses clips, specific items can be mounted on it
- **   such as silencers, scopes, ...
- ** it is deprecated in close combat (in buildings)
+ * an assault rifle is a heavy, long, accurate gun
+ * it uses clips, specific items can be mounted on it
+ *   such as silencers, scopes, ...
+ * it is deprecated in close combat (in buildings)
  */
 class Rifle : public Gun
 {

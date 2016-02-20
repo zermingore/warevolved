@@ -119,75 +119,84 @@ public:
   /// remove default constructor as we need the dimensions of the map
   Map() = delete;
 
-  /** \brief Constructs a map of nbColumns x nbLines
-   **
-   ** Initializes the map as follow:
-   **   Puts units where needed;
-   **   Sets right Terrains;
-   **   Asks ResourcesManager to loads needed Resources
-   **
-   ** \param battle pointer on the battle in which this map is
-   ** \param nbColumns Number of columns required
-   ** \param nbLines Number of lines required
+  /**
+   * \brief Constructs a map of nbColumns x nbLines
+   *
+   * Initializes the map as follow:
+   *   Puts units where needed;
+   *   Sets right Terrains;
+   *   Asks ResourcesManager to loads needed Resources
+   *
+   * \param battle pointer on the battle in which this map is
+   * \param nbColumns Number of columns required
+   * \param nbLines Number of lines required
    */
   Map(Battle* battle, const size_t nb_columns, const size_t nb_lines);
 
   /// initializes the cursors
   void initCursors();
 
-  /** \brief _nbColumns getter
+  /**
+   * \brief _nbColumns getter
    *
-   ** \return number of columns
+   * \return number of columns
    */
   size_t nbColumns() const { return _nbColumns; }
 
-  /** \brief _nbLines getter
-   ** \return number of lines
+  /**
+   * \brief _nbLines getter
+   * \return number of lines
    */
   size_t nbLines() const { return _nbLines; }
 
-  /** \brief Graphics properties getter
-   ** \return a pointer on the graphics properties class
+  /**
+   * \brief Graphics properties getter
+   * \return a pointer on the graphics properties class
    */
   std::shared_ptr<MapGraphicsProperties> graphicsProperties() const
   { return _graphicsProperties; }
 
-  /** \brief returns the current player in the map
-   ** \return current player's identifier
+  /**
+   * \brief returns the current player in the map
+   * \return current player's identifier
    */
   size_t currentPlayer() const;
 
-  /** \brief gets the unit at coordinates (x, y)
-   **
-   ** \param x Coordinates according to columns
-   ** \param y Coordinates according to lines
-   **
-   ** \return the enum index in e_unit matching the unit
-   **   located at coordinates (x, y)
+  /**
+   * \brief gets the unit at coordinates (x, y)
+   *
+   * \param x Coordinates according to columns
+   * \param y Coordinates according to lines
+   *
+   * \return the enum index in e_unit matching the unit
+   *   located at coordinates (x, y)
    */
   std::shared_ptr<Unit> unit(const size_t x, const size_t y) const;
 
-  /** \brief gets the unit at c's coordinates
-   **
-   ** \param c targeted Cell's coordinates
-   **
-   ** \return the enum index in e_unit matching the unit
-   **   located at coordinates (c.x, c.y)
+  /**
+   * \brief gets the unit at c's coordinates
+   *
+   * \param c targeted Cell's coordinates
+   *
+   * \return the enum index in e_unit matching the unit
+   *   located at coordinates (c.x, c.y)
    */
   std::shared_ptr<Unit> unit(const Coords& c) const;
 
-  /** \brief gets the terrain at coordinates (x, y)
-   **
-   ** \param x Coordinates according to columns
-   ** \param y Coordinates according to lines
-   **
-   ** \return the enum index in e_terrain matching the terrain
-   **   located at coordinates (x, y)
+  /**
+   * \brief gets the terrain at coordinates (x, y)
+   *
+   * \param x Coordinates according to columns
+   * \param y Coordinates according to lines
+   *
+   * \return the enum index in e_terrain matching the terrain
+   *   located at coordinates (x, y)
    */
   e_terrain getTerrain(const size_t x, const size_t y) const;
 
-  /** \brief _cells array getter
-   ** \return a reference over the cells array
+  /**
+   * \brief _cells array getter
+   * \return a reference over the cells array
    */
   std::vector<std::vector<std::shared_ptr<Cell>>> cells() const
   { return _cells; }
@@ -201,27 +210,33 @@ public:
    */
   void newUnit(const e_unit type, const size_t line, const size_t column);
 
-  /** \brief moves the selected unit to the current cursor location
+  /**
+   * \brief moves the selected unit to the current cursor location
    */
   void moveUnit();
 
-  /** \brief moves given unit to the given coordinates
+  /**
+   * \brief moves given unit to the given coordinates
    */
   void moveUnit(std::shared_ptr<Unit> u, Coords c);
 
-  /** \brief returns the cursor of the given player
+  /**
+   * \brief returns the cursor of the given player
    */
   std::shared_ptr<Cursor> cursor(size_t player);
 
-  /** \brief reset all units played boolean to false
+  /**
+   * \brief reset all units played boolean to false
    */
   void endTurn();
 
-  /** \brief sets current player cursor coordinates to the given coordinates
+  /**
+   * \brief sets current player cursor coordinates to the given coordinates
    */
   void setCursorCoords(Coords coords);
 
-  /** \brief operator to allow getting a cell calling map[i][j]
+  /**
+   * \brief operator to allow getting a cell calling map[i][j]
    * returns a vector of pointers to Cell
    * To get the requested cell, use the second coordinate as vector index
    *

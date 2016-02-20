@@ -12,24 +12,28 @@
 # include <common/enums/modes.hh>
 
 
-/** \brief in game menu class
- ** refers to the menu called when
- **   you pick a unit
- **   click on a void cell
+/**
+   * \brief in game menu class
+ * refers to the menu called when
+ *   you pick a unit
+ *   click on a void cell
  */
 class InGameMenu: public Menu
 {
 public:
-  /** \brief Default Constructor
+  /**
+   * \brief Default Constructor
    */
   InGameMenu() {}
 
-  /** \brief builds the selection menu, filling _entries
-   ** \param mode The mode we're about to push
+  /**
+   * \brief builds the selection menu, filling _entries
+   * \param mode The mode we're about to push
    */
   void build(e_mode mode);
 
-  /** \brief executes action matching Menu::_selectedEntry
+  /**
+   * \brief executes action matching Menu::_selectedEntry
    */
   void executeEntry();
 };

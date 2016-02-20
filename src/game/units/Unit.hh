@@ -10,8 +10,9 @@
 class Team;
 class Cell;
 
-/** \brief Unit abstract class
- ** defines a generic unit
+/**
+   * \brief Unit abstract class
+ * defines a generic unit
  */
 // TODO add Cell
 
@@ -23,8 +24,9 @@ public:
   ///< \brief Default Constructor
   Unit();
 
-  /** \brief build a Unit, given its name
-   ** \brief name Unit's name
+  /**
+   * \brief build a Unit, given its name
+   * \brief name Unit's name
    */
   explicit Unit(std::string &name);
 
@@ -33,78 +35,93 @@ public:
   int attackValue() { return _attackValue; } ///< _attackValue getter
   Coords attackCoords() { return _attackCoords; } ///< _attackCoords getter
 
-  /** \brief x coordinate on the map getter
-   ** \return x (column) coordinate on the map
+  /**
+   * \brief x coordinate on the map getter
+   * \return x (column) coordinate on the map
    */
   size_t x() { return _coords.x; }
 
-  /** \brief x unit coordinate on the map getter
-   ** \return y (line) coordinate on the map
+  /**
+   * \brief x unit coordinate on the map getter
+   * \return y (line) coordinate on the map
    */
   size_t y() { return _coords.y; }
 
-  /** \brief gets unit's position
-   ** \return unit's cell coordinates
+  /**
+   * \brief gets unit's position
+   * \return unit's cell coordinates
    */
   Coords coords() { return _coords; }
 
-  /** \brief sets unit's position and _played to true (we moved the unit)
-   ** \param coords: cell's coordinates to set unit's position
+  /**
+   * \brief sets unit's position and _played to true (we moved the unit)
+   * \param coords: cell's coordinates to set unit's position
    */
   void setCoords(Coords coords);
 
-  /** \brief sets unit's attack coordinates
-   ** \param coords: cell's coordinates to set unit's position
+  /**
+   * \brief sets unit's attack coordinates
+   * \param coords: cell's coordinates to set unit's position
    */
   void setAttackCoords(Coords coords) {  _attackCoords = coords; }
 
-  /** \brief unit's name getter
-   ** \return unit's name value
+  /**
+   * \brief unit's name getter
+   * \return unit's name value
    */
   virtual std::string name() { return _name; }
 
-  /** \brief receive damages
-   ** \return left Health Points
+  /**
+   * \brief receive damages
+   * \return left Health Points
    */
   virtual int receiveDamages(unsigned int damages);
 
-  /** \brief _motionValue getter
-   ** \return number of cells the unit can cross in one turn
+  /**
+   * \brief _motionValue getter
+   * \return number of cells the unit can cross in one turn
    */
   unsigned int motionValue() { return _motionValue; }
 
-  /** \brief _playerId getter
+  /**
+   * \brief _playerId getter
    */
   unsigned int playerId() { return _playerId; }
 
-  /** \brief _played getter
-   ** \return true if the unit has already been played
-   **   false otherwise
+  /**
+   * \brief _played getter
+   * \return true if the unit has already been played
+   *   false otherwise
    */
   bool played() { return _played; }
 
-  /** \brief sets Unit's coordinates
-   ** \param coords Unit's new coordinates
+  /**
+   * \brief sets Unit's coordinates
+   * \param coords Unit's new coordinates
    */
   void setCellCoordinates(Coords coords) { _coords = coords; }
 
-  /** \brief sets Unit's player belonging
-   ** \param player_id player's identifier
+  /**
+   * \brief sets Unit's player belonging
+   * \param player_id player's identifier
    */
   void setPlayerId(unsigned int player_id) { _playerId = player_id; }
 
-  /** \brief _textureId getter
-   ** \return Unit Texture id
-   **   matching the one in the Resources Manager std::map
+  /**
+   * \brief _textureId getter
+   * \return Unit Texture id
+   *   matching the one in the Resources Manager std::map
    */
   unsigned int textureId() { return _textureId; }
 
-  /** \brief _textureId setter
+  /**
+   * \brief _textureId setter
    */
   void setTextureId(unsigned int texture_id) { _textureId = texture_id; }
 
-  /** \brief _played setter
-   ** \param unit's played status
+  /**
+   * \brief _played setter
+   * \param unit's played status
    */
   void setPlayed(bool played) { _played = played; }
 
@@ -112,42 +129,49 @@ public:
   //
   // __________ Targets management __________
   //
-  /** \brief _targets getter
-   ** \return _targets list of reachable targets
+  /**
+   * \brief _targets getter
+   * \return _targets list of reachable targets
    */
   std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targets()
   { return _targets; }
-  /** \brief _targetIndex setter
-   ** \param i _targetIndex value
+  /**
+   * \brief _targetIndex setter
+   * \param i _targetIndex value
    */
   void setTargetIndex(int i) { _targetIndex = i; }
 
-  /** \brief selects the previous target in targets list
-   ** \return selected target
+  /**
+   * \brief selects the previous target in targets list
+   * \return selected target
    */
   std::shared_ptr<Cell> previousTarget();
 
-  /** \brief selects the next target in targets list
-   ** \return selected target
+  /**
+   * \brief selects the next target in targets list
+   * \return selected target
    */
   std::shared_ptr<Cell> nextTarget();
 
   //
   // __________ Actions management __________
   //
-  /** \brief fills the given Menu with the possible Entries,
-   **   according to the Unit skills
-   ** \param menu inGameMenu in which we add relevant entries
+  /**
+   * \brief fills the given Menu with the possible Entries,
+   *   according to the Unit skills
+   * \param menu inGameMenu in which we add relevant entries
    */
   virtual void fillActions(std::vector<MenuEntry>&) {}
 
-  /** \brief runs attack / strikes backs (if any) cycles
-   ** the target is _targets[_targetIndex]
-   ** \return true if the unit is still alive, false otherwise
+  /**
+   * \brief runs attack / strikes backs (if any) cycles
+   * the target is _targets[_targetIndex]
+   * \return true if the unit is still alive, false otherwise
    */
   virtual bool attack(); // could return an attack status (killed, injured)
 
-  /** \brief packs the Unit with \param unit
+  /**
+   * \brief packs the Unit with \param unit
    */
   void pack(std::shared_ptr<Unit> unit);
 

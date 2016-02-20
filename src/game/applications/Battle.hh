@@ -20,73 +20,83 @@ class Player;
 
 /** \class Battle
  *
- ** \brief A battle is a game, launched from the Game class
+ * \brief A battle is a game, launched from the Game class
  */
 class Battle: public Application
 {
 public:
   /// \todo add filename XOr nb players, ...
 
-  /** \brief Default Constructor
+  /**
+   * \brief Default Constructor
    *
-   ** builds a random battle
-   ** with a random number of players, units, ...
-   ** calls buildPlayers, buildMap, buildUnits
+   * builds a random battle
+   * with a random number of players, units, ...
+   * calls buildPlayers, buildMap, buildUnits
    */
   Battle();
 
-  /** \brief players vector getter
+  /**
+   * \brief players vector getter
    *
-   ** \return _players vector
+   * \return _players vector
    */
   const std::vector<std::shared_ptr<Player>> players() const { return _players; }
 
-  /** \brief _players[id] getter
+  /**
+   * \brief _players[id] getter
    *
-   ** \param id Player's id to retrieve
-   **
-   ** \return the Player which number is \param id
+   * \param id Player's id to retrieve
+   *
+   * \return the Player which number is \param id
    */
   std::shared_ptr<Player> getPlayer(const size_t &id) const
   { return _players[id]; }
 
-  /** \brief _map getter
+  /**
+   * \brief _map getter
    *
-   ** \return a reference to the map
+   * \return a reference to the map
    */
   std::shared_ptr<Map> map() { return _map; }
 
-  /** \brief Switches to the next player
-   **   adapt cursor color
-   **   sets cursor's position to the
-   **     last known position of the new current faction
+  /**
+   * \brief Switches to the next player
+   *   adapt cursor color
+   *   sets cursor's position to the
+   *     last known position of the new current faction
    */
   void nextPlayer();
 
-  /** \brief initializes the map
+  /**
+   * \brief initializes the map
    */
   void buildMap();
 
-  /** \brief current player getter
+  /**
+   * \brief current player getter
    *
-   ** \return a pointer on the current player
+   * \return a pointer on the current player
    */
   std::shared_ptr<Player> getCurrentPlayer()
   { return _players[_currentPlayer]; }
 
-  /** \brief current player identifier getter
-   ** \return _currentPlayer: current player identifier
+  /**
+   * \brief current player identifier getter
+   * \return _currentPlayer: current player identifier
    */
   size_t currentPlayer() { return _currentPlayer; }
 
-  /** \brief sets _currentPlayer
-   ** \param id new current player identifier
+  /**
+   * \brief sets _currentPlayer
+   * \param id new current player identifier
    */
   void setCurrentPlayer(size_t id) { _currentPlayer = id; }
 
 
 private:
-  /** \brief initializes players
+  /**
+   * \brief initializes players
    */
   void buildPlayers();
 

@@ -9,7 +9,7 @@
 # define ENUM_MODES_HH_
 
 /** \enum various menu mode values
- ** use this to notify the mode stack
+ * use this to notify the mode stack
  */
 enum class e_mode
 {

@@ -51,8 +51,8 @@
 
 
 /** \macro debug print macro
- ** prints the given string
- **   only if we compiled with the DEBUG flag
+ * prints the given string
+ *   only if we compiled with the DEBUG flag
  */
 # ifdef DEBUG
 #   define DEBUG_PRINT(x) do { \
@@ -106,9 +106,10 @@ public:
   }
 
 
-  /** \brief print as error given parameters on standard output
-   ** \param head: element to print right now
-   ** \param tail eventually, rest of given arguments list
+  /**
+   * \brief print as error given parameters on standard output
+   * \param head: element to print right now
+   * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
   static void error(T head, Tail... tail)
@@ -125,9 +126,10 @@ public:
 	printf(head, tail...);
   }
 
-  /** \brief print given parameters on standard output
-   ** \param head: element to print right now
-   ** \param tail eventually, rest of given arguments list
+  /**
+   * \brief print given parameters on standard output
+   * \param head: element to print right now
+   * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
   static void printf(T head, Tail... tail)
@@ -149,7 +151,8 @@ private:
   // execute after the last argument
   static void bodylogprintf();
 
-  /** \brief appends a new line after last parameter
+  /**
+   * \brief appends a new line after last parameter
    */
   static void printf();
 

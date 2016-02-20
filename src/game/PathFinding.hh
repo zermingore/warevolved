@@ -21,98 +21,116 @@ class Cell;
 
 
 /** \class PathFinding Computes and display path findings
- **   as reachable cells and possible targets for the selected unit
- ** It display user's path input and check it's validity
+ *   as reachable cells and possible targets for the selected unit
+ * It display user's path input and check it's validity
  */
 class PathFinding
 {
 public:
-  /** \brief removed default Constructor (as we need a map)
+  /**
+   * \brief removed default Constructor (as we need a map)
    */
   PathFinding() = delete;
 
-  /** \brief constructor
-   ** \param map map to execute the path-finding on
+  /**
+   * \brief constructor
+   * \param map map to execute the path-finding on
    */
   PathFinding(std::shared_ptr<Map> map);
 
-  /** \brief Destructor
+  /**
+   * \brief Destructor
    */
   ~PathFinding() { deleteImagesVector(); }
 
-  /** \brief sets the origin of the path
-   **   also updates _current position
+  /**
+   * \brief sets the origin of the path
+   *   also updates _current position
    */
   void setOrigin(Coords coords, std::shared_ptr<Unit> unit);
 
-  /** \brief allowed move notifier
-   ** \return true if the move is allowed
+  /**
+   * \brief allowed move notifier
+   * \return true if the move is allowed
    */
   bool allowedMove() // TODO send direction request
   { return _currentLength < _maxLength; }
 
-  /** \brief adds the next element to the current path
-   ** \param direction of the element
+  /**
+   * \brief adds the next element to the current path
+   * \param direction of the element
    */
   void addNextDirection(e_direction direction);
 
-  /** \brief uses _graphicPath to draw the current path
+  /**
+   * \brief uses _graphicPath to draw the current path
    */
   void drawPath();
 
-  /** \brief clears current path
-   ** calls deleteImagesVector, freeing images
+  /**
+   * \brief clears current path
+   * calls deleteImagesVector, freeing images
    */
   void clearPath();
 
-  /** \brief hides crossable cells
+  /**
+   * \brief hides crossable cells
    */
   void hideAllowedPath() const;
 
-  /** \brief current Unit (_unit) getter
-   ** \return _unit
+  /**
+   * \brief current Unit (_unit) getter
+   * \return _unit
    */
   std::shared_ptr<Unit> unit() { return _unit; }
 
-  /** \brief releases (reset) _unit
+  /**
+   * \brief releases (reset) _unit
    */
   void removeUnit() { _unit.reset(); }
 
 
 private:
-  /** \brief returns the sprite matching e_path_shape
-   ** does the rotation if needed
-   ** \return the image matching e_path_shape
+  /**
+   * \brief returns the sprite matching e_path_shape
+   * does the rotation if needed
+   * \return the image matching e_path_shape
    */
   graphics::Image getImage(size_t index);
 
-  /** \brief builds Images* Vector (_images)
+  /**
+   * \brief builds Images* Vector (_images)
    */
   void buildImageVector(); // TODO use (cache management)
 
-  /** \brief clears _images Vector
+  /**
+   * \brief clears _images Vector
    */
   void deleteImagesVector() { _images.clear(); }
 
-  /** \brief updates current cell coordinates
-   **   according to \param direction
-   ** \param direction current move direction
+  /**
+   * \brief updates current cell coordinates
+   *   according to \param direction
+   * \param direction current move direction
    */
   void updateCurrentCell(e_direction direction);
 
-  /** \brief returns shape matching _direction[\param index]
-   ** \param index index in _direction vector
-   ** \return shape of _direction[\param index]
-   **   according to the next direction (for smooth corners)
+  /**
+   * \brief returns shape matching _direction[\param index]
+   * \param index index in _direction vector
+   * \return shape of _direction[\param index]
+   *   according to the next direction (for smooth corners)
    */
   e_path_shape getShape(size_t index);
 
-  /** \brief Highlights cells which selected unit (_unit) can cross
-   ** (uses a Flood Fill algorithm)
+  /**
+   * \brief Highlights cells which selected unit (_unit) can cross
+   * (uses a Flood Fill algorithm)
    */
   void showAllowedPath();
 
-  /** \brief sets highlight and highlight color for reachable cells
+  /**
+   * \brief sets highlight and highlight color for reachable cells
    */
   void highlightCells();
 

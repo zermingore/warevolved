@@ -15,74 +15,87 @@
 
 
 /** \class Menu: generic Menu class
- ** mother of \class InGameMenu
+ * mother of \class InGameMenu
  */
 class Menu
 {
 public:
-  /** \brief default Ctor
+  /**
+   * \brief default Ctor
    */
   Menu();
 
-  /** \brief allows to build a menu which entries are \param entries
-   **   sets _origin according to current Cursor position
-   **   and _selectedEntry to 0
+  /**
+   * \brief allows to build a menu which entries are \param entries
+   *   sets _origin according to current Cursor position
+   *   and _selectedEntry to 0
    */
   explicit Menu(std::vector<MenuEntry> &entries);
 
   // TODO: merge and use a single function for all (4) directions
-  /** \brief increments _selectedEntry modulo number of Entries
-   **  allowing cycling
+  /**
+   * \brief increments _selectedEntry modulo number of Entries
+   *  allowing cycling
    */
   void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
-  /** \brief decrements _selectedEntry modulo _nbEntries
-   **  allowing cycling
+  /**
+   * \brief decrements _selectedEntry modulo _nbEntries
+   *  allowing cycling
    */
   void decrementSelectedEntry();
 
-  /** \brief sets origin menu to the right cursor relative position
+  /**
+   * \brief sets origin menu to the right cursor relative position
    */
   void setOrigin(); // TODO sets the menu at optimal position
 
-  /** \brief sets origin menu to the right cursor relative position
+  /**
+   * \brief sets origin menu to the right cursor relative position
    */
   virtual void setOrigin(Coords origin); // TODO sets the menu at optimal position
 
-  /** \brief draws the menu
-   ** with its entries and the current entry highlighter
+  /**
+   * \brief draws the menu
+   * with its entries and the current entry highlighter
    */
   void draw();
 
-  /** \brief sets _selectedEntry to 0
+  /**
+   * \brief sets _selectedEntry to 0
    */
   void resetSelectedEntry() { _selectedEntry = 0; }
 
-  /** \brief builds the selection menu, filling _entries
-   ** \param mode The mode we're about to push
+  /**
+   * \brief builds the selection menu, filling _entries
+   * \param mode The mode we're about to push
    */
   virtual void build(e_mode mode) = 0;
 
-  /** \brief executes action matching _selectedEntry
+  /**
+   * \brief executes action matching _selectedEntry
    */
   virtual void executeEntry() = 0;
 
-  /** \brief loads a previously saved menu
-   ** \param menu menu to load
+  /**
+   * \brief loads a previously saved menu
+   * \param menu menu to load
    */
   void loadMenu();
 
 
 protected:
-  /** \brief initializes the menu
-   ** called by this->build()
+  /**
+   * \brief initializes the menu
+   * called by this->build()
    */
   void init();
 
-  /** \brief list of entries getter
-   ** \return a pointer over _entries array
-   ** \note this function is used to retrieve
-   **   informations from menu stack (see \class Status)
+  /**
+   * \brief list of entries getter
+   * \return a pointer over _entries array
+   * \note this function is used to retrieve
+   *   informations from menu stack (see \class Status)
    */
   // const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
   // { return *_entries; }
@@ -90,10 +103,11 @@ protected:
   std::vector<MenuEntry> getEntries() const
   { return _entries; }
 
-  /** \brief selected entry getter
-   ** \return current selected entry
-   ** \note this function is used to retrieve
-   **   informations from menu stack (see \class Status)
+  /**
+   * \brief selected entry getter
+   * \return current selected entry
+   * \note this function is used to retrieve
+   *   informations from menu stack (see \class Status)
    */
   unsigned int selectedEntry() { return _selectedEntry; }
 

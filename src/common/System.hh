@@ -13,11 +13,11 @@
 
 /** \class System
  *
- ** \brief designed to fill bugs reports
- **
- ** keeps software information
- **  - SFML version
- ** keeps hardware information
+ * \brief designed to fill bugs reports
+ *
+ * keeps software information
+ *  - SFML version
+ * keeps hardware information
  */
 
 class System

@@ -18,18 +18,21 @@ class Unit;
 class Team
 {
 public:
-  /** \brief Constructor
-   ** builds a new team with \param unit and \param unit2
+  /**
+   * \brief Constructor
+   * builds a new team with \param unit and \param unit2
    */
   Team(std::shared_ptr<Unit> unit, std::shared_ptr<Unit> unit2);
 
-  /** \brief _members getter
-   ** \return _members: every members of the team
+  /**
+   * \brief _members getter
+   * \return _members: every members of the team
    */
   std::vector<std::shared_ptr<Unit>> members() { return _members; }
 
-  /** \brief adds a member to the Team
-   ** \param Unit
+  /**
+   * \brief adds a member to the Team
+   * \param Unit
    */
   void addMember(std::shared_ptr<Unit> unit) { _members.push_back(unit); }
 

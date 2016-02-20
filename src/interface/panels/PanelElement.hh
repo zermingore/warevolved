@@ -7,7 +7,8 @@
 # include <interface/InterfaceElement.hh>
 
 
-/** \brief panel elements descriptors
+/**
+   * \brief panel elements descriptors
  */
 enum e_panel
 {

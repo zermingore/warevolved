@@ -15,11 +15,13 @@
 class Panel
 {
 public:
-  /** \brief sets Panel's origin, using \param origin
+  /**
+   * \brief sets Panel's origin, using \param origin
    */
   void setOrigin(sf::Vector2f origin) { _origin = origin; }
 
-  /** \brief sets Panel's size, using \param size
+  /**
+   * \brief sets Panel's size, using \param size
    */
   void setSize(sf::Vector2f size) { _size = size; }
 
@@ -28,7 +30,8 @@ public:
 
 
 protected:
-  /** \brief draw the Panel, at its _position
+  /**
+   * \brief draw the Panel, at its _position
    */
   virtual void draw() = 0;
 

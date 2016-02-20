@@ -22,25 +22,29 @@
 class Text
 {
   public:
-  /** \brief Constructor
-   ** \param language database language column offset
-   ** default value: English (offset = 0)
+  /**
+   * \brief Constructor
+   * \param language database language column offset
+   * default value: English (offset = 0)
    */
   explicit Text(unsigned int language = 0);
 
-  /** \brief fills in std::maps
-   ** TODO initialize DataBase connection
+  /**
+   * \brief fills in std::maps
+   * TODO initialize DataBase connection
    */
   void init();
 
-  /** \brief return _name entry number id
-   ** if id is not given, a random name is returned
+  /**
+   * \brief return _name entry number id
+   * if id is not given, a random name is returned
    */
   std::string getName(int id = -1);
 
-  /** \brief military rank text getter
-   ** \param rank to fetch
-   ** \return rank text
+  /**
+   * \brief military rank text getter
+   * \param rank to fetch
+   * \return rank text
    */
   static std::string name(e_rank r);
   static std::string name(e_terrain t);
@@ -48,9 +52,10 @@ class Text
   //  template <typename T>
   //  static std::string name(T id);
 
-  /** \brief rank name getter
-   ** \param rank rank we want name
-   ** \return rank name value
+  /**
+   * \brief rank name getter
+   * \param rank rank we want name
+   * \return rank name value
    */
   std::string getRankName(e_rank r) { return _ranks[r]; }
 

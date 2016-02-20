@@ -15,19 +15,22 @@
 # include <common/enums/modes.hh>
 
 
-/** \brief EntriesMenu: generic Menu class
- ** mother of \class InGameMenu
+/**
+   * \brief EntriesMenu: generic Menu class
+ * mother of \class InGameMenu
  */
 class EntriesMenu
 {
 public:
-  /** \brief default Ctor
+  /**
+   * \brief default Ctor
    */
   EntriesMenu();
 
-  /** \brief allows to build a menu which entries are \param entries
-   **   sets _origin according to current Cursor position
-   **   and _selectedEntry to 0
+  /**
+   * \brief allows to build a menu which entries are \param entries
+   *   sets _origin according to current Cursor position
+   *   and _selectedEntry to 0
    */
   explicit EntriesMenu(std::vector<MenuEntry> entries);
 
@@ -35,60 +38,71 @@ public:
   virtual ~EntriesMenu();
 
   // TODO: merge and use a single function for all (4) directions
-  /** \brief increments _selectedEntry modulo _nbEntries
-   **  allowing cycling
+  /**
+   * \brief increments _selectedEntry modulo _nbEntries
+   *  allowing cycling
    */
   void incrementSelectedEntry();
-  /** \brief decrements _selectedEntry modulo _nbEntries
-   **  allowing cycling
+  /**
+   * \brief decrements _selectedEntry modulo _nbEntries
+   *  allowing cycling
    */
   void decrementSelectedEntry();
 
-  /** \brief draws the menu
-   ** with its entries and the current entry highlighter
+  /**
+   * \brief draws the menu
+   * with its entries and the current entry highlighter
    */
   void draw();
 
-  /** \brief sets _selectedEntry to 0
+  /**
+   * \brief sets _selectedEntry to 0
    */
   void resetSelectedEntry();
 
-  /** \brief builds the selection menu, filling _entries
-   ** \param mode The mode we're about to push
+  /**
+   * \brief builds the selection menu, filling _entries
+   * \param mode The mode we're about to push
    */
   virtual void build(e_mode mode) = 0;
 
-  /** \brief executes action matching _selectedEntry
+  /**
+   * \brief executes action matching _selectedEntry
    */
   virtual void executeEntry() = 0;
 
-  /** \brief loads a previously saved menu
-   ** \param menu menu to load
+  /**
+   * \brief loads a previously saved menu
+   * \param menu menu to load
    */
   void loadMenu(EntriesMenu *menu);
 
 
 protected:
-  /** \brief initializes the menu
-   ** called by this->build()
+  /**
+   * \brief initializes the menu
+   * called by this->build()
    */
   void init();
 
-  /** \brief list of entries getter
-   ** \return a pointer over _entries array
-   ** \note this function is used to retrieve
-   **   informations from menu stack (see \class Status)
+  /**
+   * \brief list of entries getter
+   * \return a pointer over _entries array
+   * \note this function is used to retrieve
+   *   informations from menu stack (see \class Status)
    */
   std::vector<MenuEntry> *getEntries();
 
-  /** \brief selected entry getter
-   ** \return current selected entry
-   ** \note this function is used to retrieve
-   **   informations from menu stack (see \class Status)
+  /**
+   * \brief selected entry getter
+   * \return current selected entry
+   * \note this function is used to retrieve
+   *   informations from menu stack (see \class Status)
    */
   unsigned int selectedEntry();
 
-  /** \brief sets origin menu to the right cursor relative position
+  /**
+   * \brief sets origin menu to the right cursor relative position
    */
   void setOrigin(); // TODO sets the menu at optimal position
 

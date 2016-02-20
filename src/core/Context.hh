@@ -18,15 +18,17 @@ public:
   /// \brief deleted default Constructor
   Context() = delete;
 
-  /** \brief Constructor
-   ** \param fullscreen equals true if we're in full screen
-   **   false if we're in windowed mode
+  /**
+   * \brief Constructor
+   * \param fullscreen equals true if we're in full screen
+   *   false if we're in windowed mode
    */
   explicit Context(bool fullscreen);
 
 
 private:
-  /** \brief Builds and sets the main window
+  /**
+   * \brief Builds and sets the main window
    */
   void init();
 

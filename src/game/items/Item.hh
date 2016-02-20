@@ -15,8 +15,9 @@
 class Item
 {
 public:
-  /** \brief _name getter
-   ** \return _name value
+  /**
+   * \brief _name getter
+   * \return _name value
    */
   std::string name();
 

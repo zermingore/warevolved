@@ -8,15 +8,17 @@
 #ifndef GAME_HH_
 # define GAME_HH_
 
-/** \brief Game is designed to hold the whole Game and not a single game
- **   This way the Game class launches the main menu when needed
+/**
+   * \brief Game is designed to hold the whole Game and not a single game
+ *   This way the Game class launches the main menu when needed
  */
 class Game
 {
 public:
-  /** \brief contains the game loop which calls
-   **   event processing
-   **   window rendering
+  /**
+   * \brief contains the game loop which calls
+   *   event processing
+   *   window rendering
    */
   void run();
 };

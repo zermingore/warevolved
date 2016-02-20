@@ -10,7 +10,7 @@
 
 
 /** \enum Faction enum
- ** list of factions
+ * list of factions
  */
 enum class e_faction
 {

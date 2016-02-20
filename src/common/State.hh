@@ -19,43 +19,44 @@ class EventManager;
 /**
  * \class State
  * \brief state class
- ** stores a state, which is composed of
- **   a cursor position
- **   a mode: \enum state index
- **   an event manager
+ * stores a state, which is composed of
+ *   a cursor position
+ *   a mode: \enum state index
+ *   an event manager
  */
 class State
 {
 public:
   /** Constructor
-   ** \param mode State mode value
-   ** auto fetch Cursor coordinates
+   * \param mode State mode value
+   * auto fetch Cursor coordinates
    */
   explicit State(e_mode &mode);
 
   /** Constructor
-   ** \param mode State mode value
-   ** auto fetch Cursor coordinates
+   * \param mode State mode value
+   * auto fetch Cursor coordinates
    */
   State(e_mode mode, std::shared_ptr<Menu> menu);
 
   /** _mode getter
-   ** \return _mode value
+   * \return _mode value
    */
   e_mode currentMode() { return _currentMode; }
 
   /** _menu getter
-   ** \return _menu a pointer over current menu
+   * \return _menu a pointer over current menu
    */
   std::shared_ptr<Menu> menu() { return _menu; }
 
   /** _cursorCoords getters
-   ** \return _cursorCoords value
+   * \return _cursorCoords value
    */
   Coords cursorCoords() { return _cursorCoords; }
 
-  /** \brief event manager getter
-   ** \return _eventManager
+  /**
+   * \brief event manager getter
+   * \return _eventManager
    */
   std::shared_ptr<EventManager> eventManager() { return _eventManager; }
 

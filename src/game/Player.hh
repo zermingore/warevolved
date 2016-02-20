@@ -17,38 +17,43 @@ class Interface;
 
 
 /** \class Player class
- ** a player can be control by human or AI
+ * a player can be control by human or AI
  */
 class Player
 {
 public:
-  /** \brief Constructor
-   ** sets the Player's index to a unique value
+  /**
+   * \brief Constructor
+   * sets the Player's index to a unique value
    */
   Player();
 
   size_t id() { return _id; }
 
   // __________________________ Getters / Setters __________________________ //
-  /** \brief cursor color getter
-   ** \return color of the cursor (_cursorColor)
+  /**
+   * \brief cursor color getter
+   * \return color of the cursor (_cursorColor)
    */
   Color cursorColor() { return _cursorColor; }
 
-  /** \brief units color getter
-   ** \return units color (_unitsColor)
+  /**
+   * \brief units color getter
+   * \return units color (_unitsColor)
    */
   Color unitsColor() { return _unitsColor; }
 
   std::shared_ptr<Interface> interface() { return _interface; }
 
-  /** \brief sets cursor color
-   ** \param color _cursorColor value
+  /**
+   * \brief sets cursor color
+   * \param color _cursorColor value
    */
   void setCursorColor(Color color) { _cursorColor = color; }
 
-  /** \brief sets units color
-   ** \param color units color
+  /**
+   * \brief sets units color
+   * \param color units color
    */
   void setUnitsColor(Color color) { _unitsColor = color; }
 
