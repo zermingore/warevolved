@@ -64,7 +64,7 @@ std::shared_ptr<Cell> Unit::nextTarget()
 
 
 // virtual method
-// TODO move into Map
+ /// \todo move into Map
 bool Unit::attack(// std::shared_ptr<Unit> target
   )
 {
@@ -79,7 +79,7 @@ bool Unit::attack(// std::shared_ptr<Unit> target
   //   }
   //   if (receiveDamages(target->attackValue() / nb_steps) < 1)
   //   {
-  //     // TODO notify death
+  //      /// \todo notify death
   //     auto itself (CELLS[_coords.x][_coords.y]->unit());
   //     g_status->battle()->getPlayer(_playerId)->removeUnit(itself);
   //     CELLS[_coords.x][_coords.y]->removeUnit();

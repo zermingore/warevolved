@@ -39,7 +39,7 @@ void Menu::loadMenu()
 
 void Menu::setOrigin()
 {
-//   // TODO sets the menu at wright (cursor-relative) position
+//    /// \todo sets the menu at wright (cursor-relative) position
 //   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
 //   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }

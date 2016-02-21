@@ -28,7 +28,7 @@ void initialize()
 // void GraphicsEngine::initRoom()
 // {
 //   // = scroll ? 0 : (cellWidth() + cellHeight()) / 4;
-//   //if (!scroll) // TODO split offset bottom, ...
+//   //if (!scroll)  /// \todo split offset bottom, ...
 
 //   setGridOffset(map);
 // }
@@ -56,7 +56,7 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Interface> interface)
 
 void GraphicsEngine::drawBackground()
 {
-  // TODO draw map background
+   /// \todo draw map background
   _window->clear();
 }
 
@@ -71,14 +71,14 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
   // drawing cells (their background and their content)
   std::vector<std::vector<std::shared_ptr<Cell>>> cells = map->cells();
 
-  // TODO [Optimization] fetch every terrains first
+   /// \todo [Optimization] fetch every terrains first
 
   // draws column by column
   for (auto i = 0u; i < map->nbColumns(); ++i)
   {
     for (auto j = 0u; j < map->nbLines(); ++j)
     {
-      // TODO check if we print the cell (scroll case)
+       /// \todo check if we print the cell (scroll case)
 
       const std::shared_ptr<Cell> c = cells[i][j];
       switch (c->terrain())

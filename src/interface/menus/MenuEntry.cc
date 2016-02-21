@@ -13,7 +13,7 @@ MenuEntry::MenuEntry(entry &entry) :
   // _background = GETIMAGE("selection_menu_button");
   // _background.setSize(Coords(2 * CELL_WIDTH, CELL_HEIGHT));
 
-  // TODO set font and label using a DB
+   /// \todo set font and label using a DB
 }
 
 
@@ -23,7 +23,7 @@ MenuEntry::MenuEntry(std::string label_name, entry entry)
   // _background.setSize(Coords(2 * CELL_WIDTH, CELL_HEIGHT));
 
   // label initialization
-  // TODO better calculus, ratio dependent, eventually, text length dependent
+   /// \todo better calculus, ratio dependent, eventually, text length dependent
   // _label = std::make_shared<sf::Text> ();
   // _label->setCharacterSize((CELL_WIDTH + CELL_HEIGHT) / 4);
 

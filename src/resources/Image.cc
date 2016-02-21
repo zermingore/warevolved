@@ -9,12 +9,12 @@ namespace graphics {
 Image::Image(const std::string file_name,
              const std::string name)
 {
-  // TODO allocation only if needed (using a proxy)
+   /// \todo allocation only if needed (using a proxy)
   _rectangle = std::make_shared<sf::RectangleShape> ();
   _rectangle->setPosition(sf::Vector2f(0, 0));
   _rectangle->setSize(sf::Vector2f(0, 0));
 
-  // TODO in debug, load an ugly texture to help noticing it
+   /// \todo in debug, load an ugly texture to help noticing it
 # ifdef DEBUG
   _rectangle->setTexture(NULL);
 # else

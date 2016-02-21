@@ -153,7 +153,7 @@ void Interface::draw()
   // if (mode == mode::MOVING_UNIT || mode == mode::ACTION_MENU)
   //   _path->drawPath();
 
-  // TODO get right inGameMenu
+   /// \todo get right inGameMenu
   if (mode == e_mode::SELECTION_MENU || mode == e_mode::ACTION_MENU)
     _inGameMenu->draw();
 }

@@ -57,7 +57,7 @@ void EntriesMenu::loadMenu(EntriesMenu *menu)
 
 void EntriesMenu::setOrigin()
 {
-  // TODO sets the menu at right (cursor-relative) position
+   /// \todo sets the menu at right (cursor-relative) position
   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }

@@ -9,7 +9,7 @@ PanelElement::PanelElement(std::string label_name, e_panel entry)
   _backgroundName = "selection_menu_button";
 
   // label initialization
-  // TODO better calculus, ratio dependent, eventually, text length dependent
+   /// \todo better calculus, ratio dependent, eventually, text length dependent
   // _label = std::make_shared<sf::Text> ();
   // _label->setCharacterSize((CELL_WIDTH + CELL_HEIGHT) / 8);
 

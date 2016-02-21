@@ -38,7 +38,7 @@ void PathFinding::drawPath()
   for (auto it(_directions.begin()); it != _directions.end(); ++it)
   {
     updateCurrentCell(*it);
-    // TODO manage cache and image sprites
+     /// \todo manage cache and image sprites
     // _images[i++]->drawAtCell(_currentX, _currentY);
     getImage(i++).draw();
   }
@@ -51,7 +51,7 @@ void PathFinding::clearPath()
   deleteImagesVector();
   hideAllowedPath();
 
-  // TODO clear only if we made a path request on a new cell
+   /// \todo clear only if we made a path request on a new cell
   // (to avoid clearing the path on selecting the same unit two times in a row)
 }
 
@@ -136,9 +136,9 @@ e_path_shape PathFinding::getShape(size_t index)
 graphics::Image PathFinding::getImage(size_t index)
 {
   return graphics::Image();
-  // TODO up to GraphicsEngine
+   /// \todo up to GraphicsEngine
 
-  // Image img; // TODO use a copy Ctor (avoid rotating all sprites)
+  // Image img;  /// \todo use a copy Ctor (avoid rotating all sprites)
   // unsigned int angle = 0;
   // path_shape shape = getShape(index);
 

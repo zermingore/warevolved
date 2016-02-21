@@ -26,11 +26,11 @@ Soldier::Soldier() :
 }
 
 
-// TODO move into Map
+ /// \todo move into Map
 void Soldier::fillActions(std::vector<MenuEntry>& menu)
 {
   menu = menu;
-  // TODO add inventory entry
+   /// \todo add inventory entry
 
   // checks if we must add the 'Attack' entry
   // for (auto c: *_targets)

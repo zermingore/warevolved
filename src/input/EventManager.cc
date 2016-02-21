@@ -54,7 +54,7 @@ bool EventManager::process()
       break;
 
     case e_mode::ACTION_MENU:
-      //_path->shadowPath(); // TODO less visible path
+      //_path->shadowPath();  /// \todo less visible path
       selectionMenu();
       break;
 

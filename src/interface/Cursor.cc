@@ -24,7 +24,7 @@ Cursor::Cursor() :
 //   // _sprite->setRotation(angle++);
 
 //   // // scale is function of rotation
-//   // // TODO setup a timer to dissociate rotation and scale
+//   //  /// \todo setup a timer to dissociate rotation and scale
 //   // static float scale_factor = 1;
 //   // angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
 //   // _sprite->setScale(scale_factor, scale_factor);

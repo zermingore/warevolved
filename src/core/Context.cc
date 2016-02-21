@@ -51,7 +51,7 @@ void Context::init()
       std::cerr << "Unsupported Video Mode, falling back" << std::endl;
       video_mode = sf::VideoMode::getDesktopMode(); // falling back to desktop mode
       if (!video_mode.isValid())
-        std::exit(-1); // This time we quit // TODO browse all supported modes
+        std::exit(-1); // This time we quit  /// \todo browse all supported modes
     }
 
     window  = std::make_unique<sf::RenderWindow> (video_mode, "War Evolved");
@@ -67,7 +67,7 @@ void Context::init()
   graphics::GraphicsEngine::setWindow(std::move(window));
 
   // Deducing some Status
-  // graphics::GraphicsEngine::setCellWidth(64); // TODO change dynamically (in px)
-  // graphics::GraphicsEngine::setCellHeight(64); // TODO change dynamically (in px)
-  // graphics::GraphicsEngine::setGridThickness(5); // TODO change dynamically (in px)
+  // graphics::GraphicsEngine::setCellWidth(64);  /// \todo change dynamically (in px)
+  // graphics::GraphicsEngine::setCellHeight(64);  /// \todo change dynamically (in px)
+  // graphics::GraphicsEngine::setGridThickness(5);  /// \todo change dynamically (in px)
 }
