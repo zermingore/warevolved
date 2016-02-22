@@ -1,6 +1,4 @@
 #include <interface/panels/MenuBar.hh>
-#include <common/include.hh>
-#include <common/macros.hh>
 
 
 void MenuBar::draw()

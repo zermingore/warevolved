@@ -7,7 +7,7 @@
 class MenuBar: public Panel
 {
 public:
-  MenuBar() {};
+  MenuBar() {}
   void draw();
 };
 
