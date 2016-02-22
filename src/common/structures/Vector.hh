@@ -11,7 +11,7 @@
 
 /**
  * \class Vector2
- * \brief mathematic vector, with two dimensions
+ * \brief Two dimensions vector.
  *
  * Allow not being dependent of a library vector implementation.
  */

@@ -37,7 +37,7 @@ public:
   /// \brief virtual Destructor
   virtual ~EntriesMenu();
 
-  // TODO: merge and use a single function for all (4) directions
+   /// \todo: merge and use a single function for all (4) directions
   /**
    * \brief increments _selectedEntry modulo _nbEntries
    *  allowing cycling
@@ -104,7 +104,7 @@ protected:
   /**
    * \brief sets origin menu to the right cursor relative position
    */
-  void setOrigin(); // TODO sets the menu at optimal position
+  void setOrigin();  /// \todo sets the menu at optimal position
 
 
   unsigned int _selectedEntry; ///< Current selected entry

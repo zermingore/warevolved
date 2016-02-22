@@ -6,7 +6,7 @@
 # include <resources/Font.hh>
 
 
-// TODO add execute method given to ctor
+ /// \todo add execute method given to ctor
 
 /**
    * \brief entries descriptors
@@ -30,7 +30,7 @@ public:
   /**
    * \brief Constructor
    */
-  // TODO use this one (auto label completion, using a DB)
+   /// \todo use this one (auto label completion, using a DB)
   explicit MenuEntry(entry &entry);
 
   /**

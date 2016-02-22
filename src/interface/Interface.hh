@@ -9,7 +9,7 @@
 
 
 /**
-   * \brief Side Panel possible positions
+ * \brief Side Panel possible positions
  */
 enum class panel_position
 {
@@ -21,7 +21,7 @@ enum class panel_position
 };
 
 /**
-   * \brief Menu Bar possible positions
+ * \brief Menu Bar possible positions
  */
 enum class menu_bar_position
 {
@@ -33,17 +33,16 @@ enum class menu_bar_position
 };
 
 
-// TODO method draw: path, menus
-
 /**
-   * \brief Interface class
- * keeps data relative to the user's interface
- * draws the user's interface
+ * \class Interface
+ * \brief Keeps data relative to the user's interface.
  */
 class Interface
 {
 public:
-  /** Default Constructor
+  /**
+   * \brief Default Constructor
+   *
    * Initializes in-game menu
    */
   Interface();
@@ -64,22 +63,26 @@ public:
   menu_bar_position menuBarPosition() { return _menuBarPosition; }
 
   /**
-   * \brief sets panel position to the next position
-   * loops over the panel::NB_POSITIONS possibilities
+   * \brief Interface elements vector getter.
+   * \return Elements of the interface.
    */
-  void incrementPanelPosition();
-
-  /**
-   * \brief sets menu bar position to the next position
-   * loops over the menu_bar::NB_POSITIONS possibilities
-   */
-  void incrementMenuBarPosition();
+  std::vector<InterfaceElement>& elements() { return _elts; }
 
   /**
    * \brief in-game menu getter
    * \return _inGameMenu
    */
   std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
+
+  /**
+   * \brief sets panel position to the next position
+   */
+  void incrementPanelPosition();
+
+  /**
+   * \brief sets menu bar position to the next position
+   */
+  void incrementMenuBarPosition();
 
   /**
    * \brief PathFinding getter
@@ -93,11 +96,13 @@ public:
    */
 //  void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
 
+
   /**
-   * \brief draws all element relative to the user's interface
-   * meaning: in-game menus, panels and path (from path-finding)
+   * \brief Sets all element to draw.
+   *
+   * Sets coordinates of each elements.
    */
-  void draw();
+  void buildElements();
 
 
 private:
@@ -111,15 +116,6 @@ private:
    */
   void setMenuBar();
 
-  /**
-   * \brief Draw side panel
-   */
-  void drawSidePanel();
-
-  /**
-   * \brief Draw menu bar
-   */
-  void drawMenuBar();
 
   std::shared_ptr<Cursor> _cursor; ///< Map Cursor
   std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
@@ -129,6 +125,7 @@ private:
   menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
   bool _modificationPanel; ///< notification: panel status changed
   bool _modificationMenuBar; ///< notification: menu bar status changed
+  std::vector<InterfaceElement> _elts; ///< list of elements
 
   //  std::shared_ptr<PathFinding> _path; ///< current path
 };

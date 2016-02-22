@@ -36,6 +36,8 @@ public:
    */
   Battle();
 
+  ~Battle() {}
+
   /**
    * \brief players vector getter
    *

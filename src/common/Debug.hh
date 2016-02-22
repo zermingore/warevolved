@@ -50,7 +50,8 @@
 # define COLOR_VERBOSE COLOR_BLUE
 
 
-/** \macro debug print macro
+/**
+ * \macro debug print macro
  * prints the given string
  *   only if we compiled with the DEBUG flag
  */
@@ -140,7 +141,6 @@ public:
 
 
 private:
-  // methods
   template<typename T, typename... Tail>
   static void bodylogprintf(T head, Tail... tail)
   {
@@ -148,16 +148,13 @@ private:
 	bodylogprintf(tail...);
   }
 
-  // execute after the last argument
+  /// execute after the last argument
   static void bodylogprintf();
 
-  /**
-   * \brief appends a new line after last parameter
-   */
+  /// appends a new line after last parameter
   static void printf();
 
 
-  // attributes
   static std::unique_ptr<std::ofstream> _log; ///< log file
 };
 

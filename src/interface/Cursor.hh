@@ -21,23 +21,20 @@
 class Cursor
 {
 public:
-  /** Default Constructor
+  /**
+   * \brief Default Constructor
    */
   Cursor();
 
   /**
-   * \brief _sprite getter
+   * \brief Constructor
+   *
+   * Sets the map limits according to the given parameters.
+   *
+   * \param nb_columns number of columns in the map
+   * \param nb_lines number of lines in the map
    */
-  // std::shared_ptr<sf::Sprite> sprite() { return _sprite; }
-
-  // std::shared_ptr<sf::Sprite> sprite(int offset_x, int offset_y);
-
-  /**
-   * \brief sets the cursor color
-   * \param color the color to set
-   */
-  // void setColor(Color color) { _sprite->setColor(color); }
-  void setColor(Color color) { _color = color; }
+  Cursor(size_t nb_columns, size_t nb_lines);
 
   /**
    * \brief X (column) coordinate getter
@@ -98,7 +95,7 @@ private:
 
   Coords _coords; ///< Cursor Coordinates
 
-  std::string _image; ///< Cursor's Image
+  std::string _image; ///< cursor's Image
   sf::Color _color;   ///< cursor's color
 
   // center of the SPRITE coordinates, avoid computing its value each frame

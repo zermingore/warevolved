@@ -41,16 +41,33 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   drawGrid(battle->map());
 
   // draw interface of current_player
-  drawInterface(battle->getCurrentPlayer()->interface());
+  drawInterface(battle);
 
   // update the window
   _window->display();
 }
 
 
-void GraphicsEngine::drawInterface(const std::shared_ptr<Interface> interface)
+void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
 {
-  interface->draw();
+  auto p(battle->map()->graphicsProperties());
+  auto interface(battle->getCurrentPlayer()->interface());
+
+  // prepare the elements to draw
+  interface->buildElements();
+
+  // Draw every element in Interface
+  for (const auto& elt: interface->elements())
+  {
+    Image& image(resources::ResourcesManager::getImage(elt.name()));
+    image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
+
+    float x = elt.scale().x; // image.sprite()->getTexture()->getSize().x;
+    float y = elt.scale().y; // image.sprite()->getTexture()->getSize().y;
+//    image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+
+    image.drawAtCell(elt.position(), p);
+  }
 }
 
 
@@ -71,15 +88,14 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
   // drawing cells (their background and their content)
   std::vector<std::vector<std::shared_ptr<Cell>>> cells = map->cells();
 
-   /// \todo [Optimization] fetch every terrains first
+  /// \todo [Optimization] fetch every terrains first
 
-  // draws column by column
-  for (auto i = 0u; i < map->nbColumns(); ++i)
+  // draw column by column
+  for (auto i(0u); i < map->nbColumns(); ++i)
   {
-    for (auto j = 0u; j < map->nbLines(); ++j)
+    for (auto j(0u); j < map->nbLines(); ++j)
     {
-       /// \todo check if we print the cell (scroll case)
-
+      /// \todo check if we print the cell (scroll case)
       const std::shared_ptr<Cell> c = cells[i][j];
       switch (c->terrain())
       {
@@ -99,7 +115,6 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
       if (c->unit())
       {
         drawUnit(battle, c->unit());
-        PRINTF("unit @ ", i, ", ", j);
       }
     }
   }
@@ -118,11 +133,11 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   auto offset_y = p->gridOffsetY();
 
   // for each line, draw a rectangle
-  for (auto i = 0u; i < map->nbLines(); ++i)
+  for (auto i(0u); i < map->nbLines(); ++i)
   {
     rectangle.setPosition(offset_x, offset_y);
-    rectangle.setSize({p->cellWidth() * map->nbColumns(),
-                       p->cellHeight()});
+    rectangle.setSize(sf::Vector2f(p->cellWidth() * map->nbColumns(),
+                                   p->cellHeight()));
 
     _window->draw(rectangle);
 
@@ -130,19 +145,18 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
     offset_y += p->cellHeight();
   }
 
-
   // resetting offsets
   offset_x = p->gridOffsetX();
   offset_y = p->gridOffsetY();
 
   // for each column, draw a rectangle
-  for (auto j = 0u; j < map->nbLines(); ++j)
+  for (auto j(0u); j < map->nbLines(); ++j)
   {
     rectangle.setPosition(offset_x, offset_y);
     rectangle.setSize(sf::Vector2f(p->cellWidth(),
                                    p->cellHeight() * map->nbLines()));
 
-    _window->draw(rectangle);
+     _window->draw(rectangle);
 
     // skipping to next column
     offset_x += p->cellWidth();
@@ -155,16 +169,10 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
                               const std::shared_ptr<Unit> unit)
 {
   assert(unit != nullptr);
-  // if (!unit)
-  //   return;
-
-  PRINTF("p:");
 
   auto p(battle->map()->graphicsProperties());
 
-  PRINTF("p", p);
-
-  Image &image = resources::ResourcesManager::getImage(unit->name());
+  Image &image(resources::ResourcesManager::getImage(unit->name()));
   image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
 
   float x = image.sprite()->getTexture()->getSize().x;
@@ -201,6 +209,7 @@ void GraphicsEngine::setWindow(std::unique_ptr<sf::RenderWindow> window)
   _renderY = _window->getSize().y;
 }
 
+
 void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
 {
   auto p(map->graphicsProperties());
@@ -211,7 +220,7 @@ void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
 }
 
 
-template <class T>
+template <typename T>
 void GraphicsEngine::draw(std::shared_ptr<T> drawable, Coords pos, Coords size)
 {
   std::cout << "image: " << drawable->imageName() << std::endl;
@@ -219,7 +228,7 @@ void GraphicsEngine::draw(std::shared_ptr<T> drawable, Coords pos, Coords size)
 }
 
 
-template <class T>
+template <typename T>
 void GraphicsEngine::draw(std::shared_ptr<T> drawable, Cell c)
 {
   std::cout << "image: " << drawable->imageName() << std::endl;

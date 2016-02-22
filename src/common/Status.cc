@@ -67,7 +67,9 @@ void Status::exitCurrentMode(const bool skip)
     return;
   }
 
-  _battle->map()->setCursorCoords(_states.top()->cursorCoords());
+  if (_battle)
+    _battle->map()->setCursorCoords(_states.top()->cursorCoords());
+
   _states.pop();
 }
 

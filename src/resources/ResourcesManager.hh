@@ -16,7 +16,7 @@ enum e_resource_type
 
   E_RESOURCE_TYPE_IMAGE,
   E_RESOURCE_TYPE_FONT,
-  E_RESOURCE_TYPE_SOUND, // TODO sound management
+  E_RESOURCE_TYPE_SOUND,  /// \todo sound management
 
   E_RESOURCE_TYPE_NB
 };

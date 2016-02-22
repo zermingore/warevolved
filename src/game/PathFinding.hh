@@ -53,7 +53,7 @@ public:
    * \brief allowed move notifier
    * \return true if the move is allowed
    */
-  bool allowedMove() // TODO send direction request
+  bool allowedMove()  /// \todo send direction request
   { return _currentLength < _maxLength; }
 
   /**
@@ -101,7 +101,7 @@ private:
   /**
    * \brief builds Images* Vector (_images)
    */
-  void buildImageVector(); // TODO use (cache management)
+  void buildImageVector();  /// \todo use (cache management)
 
   /**
    * \brief clears _images Vector
@@ -135,7 +135,7 @@ private:
   void highlightCells();
 
 
-  std::shared_ptr<Map> _map; // TODO make a relation map - path-finding
+  std::shared_ptr<Map> _map;  /// \todo make a relation map - path-finding
 
   std::shared_ptr<Unit> _unit; ///< The selected Unit we're working with
   Coords _origin; ///< origin cell coordinates

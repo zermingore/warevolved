@@ -14,9 +14,9 @@ class Cell;
    * \brief Unit abstract class
  * defines a generic unit
  */
-// TODO add Cell
+ /// \todo add Cell
 
-// TODO abstract factory ?
+ /// \todo abstract factory ?
 // (each Unit have its own sprite [for rotation], but shared texture)
 class Unit
 {

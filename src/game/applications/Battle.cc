@@ -13,7 +13,6 @@ Battle::Battle() :
   _map = std::make_shared<Map> (this, 8, 8);
   buildPlayers();
   buildMap();
-  _map->cursor(_currentPlayer)->setColor(_players[_currentPlayer]->cursorColor());
 }
 
 
@@ -48,9 +47,7 @@ void Battle::buildMap()
 void Battle::nextPlayer()
 {
   _map->endTurn();
-//  _players[_currentPlayer]->saveCursorPosition();
   ++_currentPlayer;
   _currentPlayer %= _players.size();
-//  _map->cursor(_currentPlayer)->setCoords(_players[_currentPlayer]->lastCursorPosition());
-//  CURSOR->setColor(_players[_currentPlayer]->cursorColor());
+  //  _map->cursor(_currentPlayer)->setCoords(_players[_currentPlayer]->lastCursorPosition());
 }

@@ -144,7 +144,7 @@ private:
   /**
    * \brief Draws the interface
    */
-  static void drawInterface(const std::shared_ptr<Interface> interface);
+  static void drawInterface(const std::shared_ptr<Battle> battle);
 
   /**
    * \brief Draws cells content (terrain, unit)
@@ -165,7 +165,7 @@ private:
   static void drawUnit(const std::shared_ptr<Battle> battle, const std::shared_ptr<Unit> unit);
 
 
-  // TODO use a Window type: union with sfml, opengl, dx, ascii windows, ...
+   /// \todo use a Window type: union with sfml, opengl, dx, ascii windows, ...
   static std::unique_ptr<sf::RenderWindow> _window;
 
   /**
@@ -175,8 +175,8 @@ private:
    *   it will be unlimited otherwise
    */
   static float _currentFPS;
-  static size_t _cellWidth; // TODO dynamic, somewhere else (Map ?)
-  static size_t _cellHeight; // TODO dynamic, somewhere else (Map ?)
+  static size_t _cellWidth;  /// \todo dynamic, somewhere else (Map ?)
+  static size_t _cellHeight;  /// \todo dynamic, somewhere else (Map ?)
   static size_t _gridThickness;
   static size_t _renderX;
   static size_t _renderY;

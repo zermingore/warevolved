@@ -1,11 +1,10 @@
 #include <interface/InterfaceElement.hh>
 
-
-void InterfaceElement::draw()
+InterfaceElement::InterfaceElement(const std::string &image_name) :
+  _img_name(image_name)
 {
-  // _background.setPosition(_position);
-  // _label->setPosition(_position);
 
-  // _background.draw();
-  // g_window->draw(*_label);
+  //  float x(image.sprite()->getTexture()->getSize().x);
+  //  float y(image.sprite()->getTexture()->getSize().y);
+  //  image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
 }

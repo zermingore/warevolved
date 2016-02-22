@@ -50,9 +50,9 @@ void Map::initCursors()
 {
   // building Cursors
   for (const auto& p: _battle->players())
-    _cursors[p->id()] = std::make_shared<Cursor> ();
+    _cursors[p->id()] = std::make_shared<Cursor> (_nbColumns, _nbLines);
 
-  _cursors[_battle->currentPlayer()]->setLimits(_nbColumns, _nbLines);
+//  _cursors[_battle->currentPlayer()]->setLimits(_nbColumns, _nbLines);
 }
 
 

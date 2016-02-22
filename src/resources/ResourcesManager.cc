@@ -12,7 +12,6 @@ std::map<std::string, std::shared_ptr<graphics::Image>> ResourcesManager::_image
 std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
 std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
 
-
 // default resources paths
 const std::string DEFAULT_IMAGE_PATH = "resources/defaults/image.png";
 const std::string DEFAULT_FONT_PATH = "resources/defaults/font.ttf";
@@ -125,7 +124,11 @@ graphics::Image& ResourcesManager::getImage(const std::string name)
   if (_images.find(name) != _images.end())
     return *_images[name];
 
-  Debug::error("Unable to find image", name);
+# ifdef DEBUG
+  assert(false && "Image not found");
+# endif
+
+  Debug::error("Unable to find image: ", name);
 
   return *_images["default"];
 }
@@ -136,7 +139,7 @@ Font& ResourcesManager::getFont(const std::string name)
   if (_fonts.find(name) != _fonts.end())
     return *_fonts[name];
 
-  Debug::logPrintf("Unable to find font", name);
+  Debug::logPrintf("Unable to find font: ", name);
 
   return *_fonts["default"];
 }

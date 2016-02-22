@@ -16,6 +16,8 @@
 class Application
 {
 public:
+  virtual ~Application() {}
+
   virtual void buildMap() = 0;
 };
 

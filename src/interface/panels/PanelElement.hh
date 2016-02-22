@@ -8,7 +8,7 @@
 
 
 /**
-   * \brief panel elements descriptors
+ * \brief panel elements descriptors
  */
 enum e_panel
 {
@@ -23,11 +23,11 @@ enum e_panel
 class PanelElement: public InterfaceElement
 {
 public:
-  PanelElement() = delete;
-  PanelElement(std::string label_name, e_panel entry);
+//  PanelElement() = delete;
+//  PanelElement(std::string label_name, e_panel entry);
   // void onClick();
 
-  void draw();
+//  void draw();
 
 
 private:

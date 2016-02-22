@@ -32,7 +32,7 @@ public:
    */
   explicit Menu(std::vector<MenuEntry> &entries);
 
-  // TODO: merge and use a single function for all (4) directions
+   /// \todo: merge and use a single function for all (4) directions
   /**
    * \brief increments _selectedEntry modulo number of Entries
    *  allowing cycling
@@ -48,12 +48,12 @@ public:
   /**
    * \brief sets origin menu to the right cursor relative position
    */
-  void setOrigin(); // TODO sets the menu at optimal position
+  void setOrigin();  /// \todo sets the menu at optimal position
 
   /**
    * \brief sets origin menu to the right cursor relative position
    */
-  virtual void setOrigin(Coords origin); // TODO sets the menu at optimal position
+  virtual void setOrigin(Coords origin);  /// \todo sets the menu at optimal position
 
   /**
    * \brief draws the menu

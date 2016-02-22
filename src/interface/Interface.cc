@@ -2,21 +2,22 @@
 #include <common/Status.hh>
 
 
-Interface::Interface() :
-  _panelPosition (panel_position::DEACTIVATED),
-  _menuBarPosition (menu_bar_position::DEACTIVATED),
-  _modificationPanel (true),
-  _modificationMenuBar (true)
+Interface::Interface()
+  : _panelPosition (panel_position::DEACTIVATED)
+  , _menuBarPosition (menu_bar_position::DEACTIVATED)
+  , _modificationPanel (true)
+  , _modificationMenuBar (true)
 {
   _cursor = std::make_shared<Cursor> ();
-//  _path = std::make_shared<PathFinding> ();
-  _inGameMenu = std::make_shared<InGameMenu> ();
-  _panel = std::make_shared<SidePanel> ();
-  _menuBar = std::make_shared<MenuBar> ();
+  //  _path = std::make_shared<PathFinding> ();
+  //  _inGameMenu = std::make_shared<InGameMenu> ();
+  //  _panel = std::make_shared<SidePanel> ();
+  //  _menuBar = std::make_shared<MenuBar> ();
 }
 
 void Interface::incrementPanelPosition()
 {
+  // Loops over the panel::NB_POSITIONS possibilities.
   _panelPosition = static_cast<panel_position>
     ((static_cast<int> (_panelPosition) + 1) % static_cast<int> (panel_position::NB_POSITIONS));
   _modificationPanel = true;
@@ -24,6 +25,7 @@ void Interface::incrementPanelPosition()
 
 void Interface::incrementMenuBarPosition()
 {
+  // Loops over the menu_bar::NB_POSITIONS possibilities.
   _menuBarPosition = static_cast<menu_bar_position>
     ((static_cast<int> (_menuBarPosition) + 1) % static_cast<int> (menu_bar_position::NB_POSITIONS));
   _modificationMenuBar = true;
@@ -116,44 +118,44 @@ void Interface::setMenuBar()
 }
 
 
-void Interface::drawSidePanel()
+//void Interface::drawSidePanel()
+//{
+//  if (_panelPosition == panel_position::DEACTIVATED)
+//    return;
+
+//  _panel->draw();
+//}
+
+
+//void Interface::drawMenuBar()
+//{
+//  if (_menuBarPosition == menu_bar_position::DEACTIVATED)
+//    return;
+
+//  _menuBar->draw();
+//}
+
+
+void Interface::buildElements()
 {
-  if (_panelPosition == panel_position::DEACTIVATED)
-    return;
+//  if (_modificationPanel)
+//    setSidePanel();
 
-  _panel->draw();
-}
+//  if (_modificationMenuBar)
+//    setMenuBar();
 
+  InterfaceElement elt("cursor");
+  elt.setPosition(_cursor->coords());
+  elt.setRotation(45.);
+  elt.setScale(.1);
 
-void Interface::drawMenuBar()
-{
-  if (_menuBarPosition == menu_bar_position::DEACTIVATED)
-    return;
+  _elts.push_back(elt);
 
-  _menuBar->draw();
-}
-
-
-void Interface::draw()
-{
-  if (_modificationPanel)
-    setSidePanel();
-
-  if (_modificationMenuBar)
-    setMenuBar();
-
-  // if (_cursor->getVisible())
-  // _cursor->sprite(GRID_OFFSET_X, GRID_OFFSET_Y);
-  // _cursor->draw();
-
-  drawSidePanel();
-  drawMenuBar();
-
-  auto mode = Status::currentMode();
+  //  auto mode = Status::currentMode();
   // if (mode == mode::MOVING_UNIT || mode == mode::ACTION_MENU)
   //   _path->drawPath();
 
-   /// \todo get right inGameMenu
-  if (mode == e_mode::SELECTION_MENU || mode == e_mode::ACTION_MENU)
-    _inGameMenu->draw();
+  /// \todo get right inGameMenu
+  //  if (mode == e_mode::SELECTION_MENU || mode == e_mode::ACTION_MENU)
+  //    _inGameMenu->draw();
 }

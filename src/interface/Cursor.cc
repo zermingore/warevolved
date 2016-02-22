@@ -2,20 +2,25 @@
 
 
 
-Cursor::Cursor() :
-  _nbColumns (0),
-  _nbLines (0),
-  _image ("cursor"),
-  _color (Color(255, 0, 0, 255))
+Cursor::Cursor()
+  : _nbColumns (0)
+  , _nbLines (0)
+  , _image ("cursor")
+  , _color (Color(255, 0, 0, 255))
 {
-  std::cout << "Cursor Ctor" << std::endl;
-
-  // _image = GETIMAGE("cursor");
   // _sprite = _image.sprite();
   // _center.x = _image.getTexture()->getSize().x / 2;
   // _center.y = _image.getTexture()->getSize().y / 2;
 }
 
+
+Cursor::Cursor(size_t nb_columns, size_t nb_lines)
+  : _nbColumns (nb_columns)
+  , _nbLines (nb_lines)
+  , _image ("cursor")
+  , _color (Color(255, 0, 0, 255))
+{
+}
 
 // std::shared_ptr<sf::Sprite> Cursor::sprite(int offset_x, int offset_y)
 // {

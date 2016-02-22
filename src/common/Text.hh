@@ -15,7 +15,7 @@
 # include <common/enums/terrains.hh>
 
 
-// TODO db
+ /// \todo db
 // static ? 2 different languages at same time on the same computer
 /** \class Static class which role is to fetch the required text
  */
