@@ -3,17 +3,23 @@
 
 /**
  * \file
+ * \author Zermingore
  * \brief Interface class declaration.
  *
- * Manages all the User Interface.
+ * Manages the User Interface.
  */
 
-
-# include <interface/Cursor.hh>
+# include <vector>
 # include <interface/InterfaceElement.hh>
+# include <interface/InterfaceSettings.hh>
 // # include <interface/menus/InGameMenu.hh>
 // # include <game/PathFinding.hh>
 
+
+class Cursor;
+
+
+namespace interface {
 
 /**
  * \class Interface
@@ -31,12 +37,21 @@ public:
 
 
   /**
+   * \brief Sets all element to draw.
+   *
+   * Sets coordinates of each elements.
+   */
+  void buildElements();
+
+
+
+
+  /**
    * \brief _cursor getter
    *
    * \return Player's Cursor.
    */
   std::shared_ptr<Cursor> cursor() { return _cursor; }
-
 
   /**
    * \brief Interface elements vector getter.
@@ -45,13 +60,30 @@ public:
    */
   std::vector<InterfaceElement>& elements() { return _elts; }
 
+  /**
+   * \brief Cursor color getter.
+   * \return Color of the cursor.
+   */
+  Color cursorColor() const { return _settings->cursorColor(); }
 
   /**
-   * \brief Sets all element to draw.
-   *
-   * Sets coordinates of each elements.
+   * \brief Player's units color getter.
+   * \return Units color.
    */
-  void buildElements();
+  Color unitsColor() const { return _settings->unitsColor(); }
+
+
+  /**
+   * \brief sets cursor color.
+   * \param color _cursorColor value.
+   */
+  void setCursorColor(Color color) { _settings->setCursorColor(color); }
+
+  /**
+   * \brief sets units color.
+   * \param color units color.
+   */
+  void setUnitsColor(Color color) { _settings->setUnitsColor(color); }
 
 
   /**
@@ -59,7 +91,6 @@ public:
    * \return _inGameMenu
    */
   //  std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
-
 
   /**
    * \brief PathFinding getter
@@ -77,9 +108,13 @@ public:
 private:
   std::shared_ptr<Cursor> _cursor; ///< Map Cursor
   std::vector<InterfaceElement> _elts; ///< list of elements
+  std::unique_ptr<InterfaceSettings> _settings; ///< interface settings
 
   //  std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
   //  std::shared_ptr<PathFinding> _path; ///< current path
 };
+
+
+} // namespace interface
 
 #endif /* !INTERFACE_HH_ */

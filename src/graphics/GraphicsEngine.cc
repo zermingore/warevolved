@@ -7,6 +7,9 @@
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
 
+
+//using namespace interface;
+
 namespace graphics {
 
 const std::string DEFAULT_RESOURCES_XML_FILE = "resources.xml";
@@ -60,11 +63,11 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
   for (const auto& elt: interface->elements())
   {
     Image& image(resources::ResourcesManager::getImage(elt.name()));
-    image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
+    image.sprite()->setColor(interface->unitsColor());
 
-    float x = elt.scale().x; // image.sprite()->getTexture()->getSize().x;
-    float y = elt.scale().y; // image.sprite()->getTexture()->getSize().y;
-//    image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+    //    float x = elt.scale().x;
+    //    float y = elt.scale().y;
+    //    image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
 
     image.drawAtCell(elt.position(), p);
   }
@@ -173,7 +176,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
   auto p(battle->map()->graphicsProperties());
 
   Image &image(resources::ResourcesManager::getImage(unit->name()));
-  image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
+//  image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
 
   float x = image.sprite()->getTexture()->getSize().x;
   float y = image.sprite()->getTexture()->getSize().y;

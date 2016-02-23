@@ -61,6 +61,7 @@ game/PathFinding.cc                 \
 game/Player.cc                      \
 \
 interface/Interface.cc              \
+interface/InterfaceSettings.cc      \
 interface/Cursor.cc                 \
 interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc        \

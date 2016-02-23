@@ -19,13 +19,13 @@ Battle::Battle() :
 void Battle::buildPlayers()
 {
   auto player1 = std::make_shared<Player> ();
-  player1->setCursorColor(Color(0, 127, 127));
-  player1->setUnitsColor(Color(0, 127, 127));
+//  player1->setCursorColor(Color(0, 127, 127));
+//  player1->setUnitsColor(Color(0, 127, 127));
   _players.push_back(player1);
 
   auto player2 = std::make_shared<Player> ();
-  player2->setCursorColor(Color(227, 227, 0));
-  player2->setUnitsColor(Color(227, 227, 0));
+//  player2->setCursorColor(Color(227, 227, 0));
+//  player2->setUnitsColor(Color(227, 227, 0));
   _players.push_back(player2);
 }
 

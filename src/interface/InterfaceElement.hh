@@ -2,14 +2,22 @@
 # define INTERFACEELEMENT_HH_
 
 /**
- * \file InterfaceElement definition
+ * \file InterfaceElement definition.
  */
 
 # include <string>
+# include <memory>
 # include <common/using.hh>
 # include <common/structures/Vector.hh>
+# include <interface/InterfaceSettings.hh>
 
 
+namespace interface {
+
+/**
+ * \class InterfaceElement
+ * \brief Represents an element of the interface (cursor, menu entry, ...).
+ */
 class InterfaceElement
 {
 public:
@@ -50,7 +58,6 @@ public:
    */
   float rotation() const { return _rotation; }
 
-
   /**
    * \brief position setter.
    * \param position cells coordinates to place the element.
@@ -88,6 +95,8 @@ public:
    */
   void setRotation(const float &rotation) { _rotation = rotation; }
 
+
+
 protected:
   std::string _img_name; ///< Associated image name
 
@@ -101,5 +110,8 @@ protected:
 //std::string _backgroundName; ///< background image name
 //std::shared_ptr<sf::Text> _label; ///< label text
 //Font _font; ///< label font
+
+
+} // namespace interface
 
 #endif /* !INTERFACEELEMENT_HH_ */

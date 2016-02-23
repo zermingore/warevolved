@@ -1,8 +1,7 @@
-/*
- * interface/Cursor.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
  */
 
 #ifndef CURSOR_HH_
@@ -14,9 +13,9 @@
 
 /**
  * \class Cursor
- * \brief in-game Cursor class
+ * \brief in-game Cursor class.
  *
- * Manages cursor shape, animation, motion
+ * Manages cursor shape, animation, motion.
  */
 class Cursor
 {
@@ -24,7 +23,7 @@ public:
   /**
    * \brief Default Constructor
    */
-  Cursor();
+  Cursor() {};
 
   /**
    * \brief Constructor
@@ -39,11 +38,12 @@ public:
   /**
    * \brief X (column) coordinate getter
    */
-  unsigned int x() { return _coords.x; }
+  size_t x() { return _coords.x; }
+
   /**
    * \brief Y (line) coordinate getter
    */
-  unsigned int y() { return _coords.y; }
+  size_t y() { return _coords.y; }
 
   /**
    * \brief _coords getter
@@ -52,7 +52,8 @@ public:
   Coords coords() { return _coords; }
 
   /**
-   * \brief coordinates setter
+   * \brief coordinates setter.
+   * \return Cursor's coordinates.
    */
   void setCoords(Coords coords) { _coords = coords; }
 
@@ -97,9 +98,6 @@ private:
 
   std::string _image; ///< cursor's Image
   sf::Color _color;   ///< cursor's color
-
-  // center of the SPRITE coordinates, avoid computing its value each frame
-  //  sf::Vector2f _center; ///< center of the Cursor sprite
 };
 
 #endif /* !CURSOR_HH_ */

@@ -20,7 +20,7 @@ enum e_panel
 };
 
 
-class PanelElement: public InterfaceElement
+class PanelElement: public interface::InterfaceElement
 {
 public:
 //  PanelElement() = delete;
