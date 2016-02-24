@@ -16,10 +16,11 @@
 // # include <game/PathFinding.hh>
 
 
-class Cursor;
 
 
 namespace interface {
+
+class Cursor;
 
 /**
  * \class Interface

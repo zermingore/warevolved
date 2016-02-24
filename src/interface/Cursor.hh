@@ -10,6 +10,7 @@
 # include <common/include.hh>
 # include <common/using.hh>
 
+namespace interface {
 
 /**
  * \class Cursor
@@ -99,5 +100,8 @@ private:
   std::string _image; ///< cursor's Image
   sf::Color _color;   ///< cursor's color
 };
+
+} // namespace interface
+
 
 #endif /* !CURSOR_HH_ */

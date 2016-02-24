@@ -8,6 +8,8 @@
 #include <interface/Cursor.hh>
 
 
+namespace interface {
+
 Cursor::Cursor(size_t nb_columns, size_t nb_lines)
   : _nbColumns (nb_columns)
   , _nbLines (nb_lines)
@@ -54,3 +56,5 @@ bool Cursor::moveRight()
 
   return (old != _coords.x);
 }
+
+} // namespace interface
