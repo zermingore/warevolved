@@ -9,7 +9,6 @@
 #include <game/units/Soldier.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
-#include <game/Terrain.hh>
 #include <interface/Cursor.hh>
 #include <common/Status.hh>
 #include <common/enums/units.hh>

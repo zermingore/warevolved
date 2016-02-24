@@ -51,7 +51,6 @@ game/Cell.cc                        \
 game/applications/Battle.cc         \
 game/units/Unit.cc                  \
 game/units/Soldier.cc               \
-game/Terrain.cc                     \
 game/PathFinding.cc                 \
 game/Player.cc                      \
 \
