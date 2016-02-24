@@ -51,7 +51,6 @@ game/Map.cc                         \
 game/Cell.cc                        \
 game/applications/Battle.cc         \
 game/units/Unit.cc                  \
-game/units/Team.cc                  \
 game/units/Soldier.cc               \
 game/items/Item.cc                  \
 game/items/guns/Gun.cc              \

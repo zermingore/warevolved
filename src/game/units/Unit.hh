@@ -4,7 +4,6 @@
 # include <memory>
 # include <string>
 
-# include <game/units/Team.hh>
 # include <interface/menus/MenuEntry.hh>
 
 class Team;

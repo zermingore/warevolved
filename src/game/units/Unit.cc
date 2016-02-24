@@ -1,6 +1,5 @@
 #include <game/units/Unit.hh>
 #include <common/include.hh>
-#include <game/units/Team.hh>
 #include <resources/ResourcesManager.hh>
 #include <resources/Image.hh>
 #include <game/Cell.hh>
@@ -37,10 +36,6 @@ int Unit::receiveDamages(unsigned int damages)
 {
   _hp -= damages;
   return _hp;
-}
-
-void Unit::pack(std::shared_ptr<Unit> unit) {
-  _team->addMember(unit);
 }
 
 void Unit::setCoords(Coords location)
