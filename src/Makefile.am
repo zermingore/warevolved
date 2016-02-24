@@ -65,8 +65,5 @@ interface/InterfaceSettings.cc      \
 interface/Cursor.cc                 \
 interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc        \
-interface/panels/SidePanel.cc       \
-interface/panels/MenuBar.cc         \
-interface/panels/PanelElement.cc    \
 interface/InterfaceElement.cc       \
 interface/menus/InGameMenu.cc
