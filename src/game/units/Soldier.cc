@@ -1,19 +1,8 @@
 #include <game/units/Soldier.hh>
-#include <common/enums/ranks.hh>
-#include <common/Text.hh>
 
 
-Soldier::Soldier() :
-  _equipedWeapon (nullptr),
-  _rank (e_rank::PRIVATE)
+Soldier::Soldier()
 {
-  // static int id = 0;
-
-  // _class = "soldiers";
-  // _name = g_text->getName(id++);
-  // _imageId = 0;
-  // _maxHp = _hp;
-
   _name = "soldiers";
   _fullName = "John Doe";
   _imageId = 0;
@@ -44,8 +33,4 @@ void Soldier::fillActions(std::vector<MenuEntry>& menu)
   //     break; // we do not need to add the entry multiple times
   //   }
   // }
-}
-
-std::string Soldier::name() {
-  return _name;/*Text::name(_rank) + " " + _fullName*/;
 }

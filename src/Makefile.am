@@ -40,7 +40,6 @@ common/System.cc                    \
 common/Settings.cc                  \
 common/Status.cc                    \
 common/State.cc                     \
-common/Text.cc                      \
 \
 input/KeyManager.cc                 \
 input/EventManager.cc               \
