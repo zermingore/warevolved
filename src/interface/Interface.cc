@@ -13,9 +13,9 @@
 namespace interface {
 
 
-Interface::Interface()
+Interface::Interface(Color c)
 {
-  _settings = std::make_unique<InterfaceSettings> (Color(122, 122, 0));
+  _settings = std::make_unique<InterfaceSettings> (c);
   _cursor = std::make_shared<Cursor> ();
   //  _path = std::make_shared<PathFinding> ();
   //  _inGameMenu = std::make_shared<InGameMenu> ();

@@ -6,10 +6,12 @@
 # include <common/enums/terrains.hh>
 
 /**
-   * \brief Cell class: the simplest element of a map
- *   we can see a Map as a grid, an array of array of Cell
+ * \class Cell
+ * \brief The element of a map.
  *
- * a Cell has:
+ * A Map can be seen as a grid, an array of array of Cell.
+ *
+ * A Cell has:
  *   a terrain
  *   eventually, a unit
  */
@@ -103,10 +105,11 @@ public:
 
 
 private:
-  Coords _coords; ///< cell's coordinates
-  e_terrain _terrain; ///< Terrain type index (matching terrains)
+  Coords _coords;              ///< cell's coordinates
+  e_terrain _terrain;          ///< Terrain type index (matching terrains)
   std::shared_ptr<Unit> _unit; ///< Unit type index (matching terrains)
-  bool _highlight; ///< true if the cell needs to be highlighted
+
+  bool _highlight;       ///< true if the cell needs to be highlighted
   Color _highlightColor; ///< color of the cell's highlight
 };
 

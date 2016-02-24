@@ -16,8 +16,8 @@ void Game::run()
   resources::ResourcesManager::initialize("resources.xml");
 
   // Game loop: processing events, updating display
-  while (GraphicsEngine::windowIsOpen() &&
-         Status::currentState()->eventManager()->process())
+  while (GraphicsEngine::windowIsOpen()
+         && Status::currentState()->eventManager()->process())
   {
     GraphicsEngine::drawScene(battle);
   }

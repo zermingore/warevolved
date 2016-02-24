@@ -18,8 +18,9 @@ class EventManager;
 
 /**
  * \class State
- * \brief state class
- * stores a state, which is composed of
+ * \brief Records a current state.
+ *
+ * Stores a state, which is composed of:
  *   a cursor position
  *   a mode: \enum state index
  *   an event manager
@@ -27,32 +28,42 @@ class EventManager;
 class State
 {
 public:
-  /** Constructor
-   * \param mode State mode value
-   * auto fetch Cursor coordinates
+  /**
+   * \brief Constructor
+   *
+   * Fetch Cursor coordinates.
+   *
+   * \param mode State mode value.
    */
   explicit State(e_mode &mode);
 
-  /** Constructor
-   * \param mode State mode value
-   * auto fetch Cursor coordinates
+  /**
+   * \brief Constructor
+   *
+   * Fetch Cursor coordinates.
+   *
+   * \param mode State mode value.
+   * \param menu menu state to save.
    */
   State(e_mode mode, std::shared_ptr<Menu> menu);
 
-  /** _mode getter
+  /**
+   * \brief _mode getter
    * \return _mode value
    */
   e_mode currentMode() { return _currentMode; }
 
-  /** _menu getter
+  /**
+   * \brief _menu getter
    * \return _menu a pointer over current menu
    */
   std::shared_ptr<Menu> menu() { return _menu; }
 
-  /** _cursorCoords getters
+  /**
+   * \brief _cursorCoords getters
    * \return _cursorCoords value
    */
-  Coords cursorCoords() { return _cursorCoords; }
+//  Coords cursorCoords() { return _cursorCoords; }
 
   /**
    * \brief event manager getter
@@ -62,10 +73,11 @@ public:
 
 
 private:
-  e_mode _currentMode; ///< State's mode
+  e_mode _currentMode;         ///< State's mode
   std::shared_ptr<Menu> _menu; ///< menu state to save
-  Coords _cursorCoords; ///< Cursor coordinates when the mode was activated
+
   std::shared_ptr<EventManager> _eventManager; ///< State related events
+//  Coords _cursorCoords; ///< Cursor coordinates when the mode was activated
 };
 
 #endif /* !STATE_HH_ */

@@ -9,8 +9,9 @@
 # define GAME_HH_
 
 /**
-   * \brief Game is designed to hold the whole Game and not a single game
- *   This way the Game class launches the main menu when needed
+ * \brief Game is designed to hold the whole Game and not a single game.
+ *
+ * This way the Game class launches the main menu when needed.
  */
 class Game
 {

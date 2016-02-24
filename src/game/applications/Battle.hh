@@ -63,10 +63,7 @@ public:
   std::shared_ptr<Map> map() { return _map; }
 
   /**
-   * \brief Switches to the next player
-   *   adapt cursor color
-   *   sets cursor's position to the
-   *     last known position of the new current faction
+   * \brief Switches to the next player.
    */
   void nextPlayer();
 

@@ -1,8 +1,7 @@
-/*
- * Vector.hh
- *
- *  Created on: Jul 24, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date Jul 24, 2013
+ * \author Zermingore
  */
 
 #ifndef VECTOR_HH_
@@ -19,19 +18,14 @@ template <typename T>
 class Vector2
 {
 public:
-  /**
-   * \brief Default constructor
-   *
-   * Creates a Vector2(0, 0).
-   */
+  /// Default constructor. Creates a Vector2(0, 0).
   Vector2() : x(0), y(0)
   {}
 
   /**
    * \brief Construct the vector with given coordinates
-   *
    * \param a x coordinate
-   * \param b x coordinate
+   * \param b y coordinate
    */
   Vector2(const T& a, const T& b) : x(a), y(b)
   {}

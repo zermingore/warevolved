@@ -3,7 +3,6 @@
 #include <common/Status.hh>
 #include <game/Player.hh>
 #include <game/Map.hh>
-#include <interface/Cursor.hh>
 
 
 Battle::Battle() :
@@ -18,14 +17,10 @@ Battle::Battle() :
 
 void Battle::buildPlayers()
 {
-  auto player1 = std::make_shared<Player> ();
-//  player1->setCursorColor(Color(0, 127, 127));
-//  player1->setUnitsColor(Color(0, 127, 127));
+  auto player1 = std::make_shared<Player> (Color(0, 127, 127));
   _players.push_back(player1);
 
-  auto player2 = std::make_shared<Player> ();
-//  player2->setCursorColor(Color(227, 227, 0));
-//  player2->setUnitsColor(Color(227, 227, 0));
+  auto player2 = std::make_shared<Player> (Color(227, 227, 0));
   _players.push_back(player2);
 }
 
@@ -33,8 +28,6 @@ void Battle::buildPlayers()
 /// \todo generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  _map->initCursors();
-
   /// \todo delegate to a factory
   _map->newUnit(e_unit::SOLDIERS, 1, 1);
   _map->newUnit(e_unit::SOLDIERS, 4, 1);
@@ -49,5 +42,4 @@ void Battle::nextPlayer()
   _map->endTurn();
   ++_currentPlayer;
   _currentPlayer %= _players.size();
-  //  _map->cursor(_currentPlayer)->setCoords(_players[_currentPlayer]->lastCursorPosition());
 }

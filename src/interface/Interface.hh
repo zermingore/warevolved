@@ -4,7 +4,7 @@
 /**
  * \file
  * \author Zermingore
- * \brief Interface class declaration.
+ * \brief Interface class definition.
  *
  * Manages the User Interface.
  */
@@ -28,12 +28,15 @@ namespace interface {
 class Interface
 {
 public:
+  /// deleted default constructor.
+  Interface() = delete;
+
   /**
-   * \brief Default Constructor
+   * \brief Default Constructor.
    *
    * Initializes in-game menu
    */
-  Interface();
+  explicit Interface(Color c);
 
 
   /**
@@ -42,8 +45,6 @@ public:
    * Sets coordinates of each elements.
    */
   void buildElements();
-
-
 
 
   /**

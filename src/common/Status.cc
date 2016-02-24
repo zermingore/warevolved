@@ -16,8 +16,9 @@ Coords Status::_selectedUnitPosition;
 
 Status::~Status()
 {
-  while (!_states.empty())
+  while (!_states.empty()) {
     _states.pop(); // calls element destructor
+  }
 }
 
 void Status::initialize()
@@ -44,9 +45,8 @@ e_mode Status::currentMode()
 
 std::shared_ptr<State> Status::currentState()
 {
-  if (_states.empty())
-  {
-    DEBUG_PRINT("_states stack is empty, exiting...");
+  if (_states.empty()) {
+    assert(false && "_states stack is empty, exiting...");
   }
 
   return _states.top();
@@ -67,8 +67,8 @@ void Status::exitCurrentMode(const bool skip)
     return;
   }
 
-  if (_battle)
-    _battle->map()->setCursorCoords(_states.top()->cursorCoords());
+//  if (_battle)
+//    _battle->map()->setCursorCoords(_states.top()->cursorCoords());
 
   _states.pop();
 }
@@ -80,8 +80,8 @@ void Status::exitToMode(e_mode mode, bool skip)
   {
     _states.pop();
 
-    if (!skip)
-      _battle->map()->setCursorCoords(_states.top()->cursorCoords());
+//    if (!skip)
+//      _battle->map()->setCursorCoords(_states.top()->cursorCoords());
   }
 }
 

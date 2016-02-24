@@ -15,17 +15,19 @@ class Interface;
 
 /**
  * \class Player
- * \brief A player can be control by human or AI.
+ * \brief A player can be controled by a human or an AI.
  */
 class Player
 {
 public:
+  /// deleted default constructor
+  Player() = delete;
+
   /**
-   * \brief Constructor
-   *
-   * Sets the Player's index to a unique value.
+   * \brief Constructor. Sets the Player's index to a unique value.
+   * \param c color used by the player
    */
-  Player();
+  explicit Player(Color c);
 
 
   /**
@@ -39,6 +41,7 @@ public:
    * \return Interface pointer.
    */
   std::shared_ptr<interface::Interface> interface() { return _interface; }
+
 
 
 private:
