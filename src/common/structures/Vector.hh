@@ -23,9 +23,9 @@ public:
   {}
 
   /**
-   * \brief Construct the vector with given coordinates
-   * \param a x coordinate
-   * \param b y coordinate
+   * \brief Construct the vector with given coordinates.
+   * \param a x coordinate.
+   * \param b y coordinate.
    */
   Vector2(const T& a, const T& b) : x(a), y(b)
   {}

@@ -1,8 +1,7 @@
-/*
- * game/Applications/Battle.hh
- *
- *  Created on: August 3, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date August 3, 2013
+ * \author Zermingore
  */
 
 #ifndef BATTLE_HH_
@@ -18,9 +17,9 @@ class Map;
 class Player;
 
 
-/** \class Battle
- *
- * \brief A battle is a game, launched from the Game class
+/**
+ * \class Battle
+ * \brief A battle is a game, launched from the Game class.
  */
 class Battle: public Application
 {
@@ -30,59 +29,55 @@ public:
   /**
    * \brief Default Constructor
    *
-   * builds a random battle
+   * Builds a random battle.
    * with a random number of players, units, ...
-   * calls buildPlayers, buildMap, buildUnits
+   * Calls buildPlayers(), buildMap()
    */
   Battle();
 
+  /// Default destructor.
   ~Battle() {}
 
   /**
-   * \brief players vector getter
-   *
-   * \return _players vector
+   * \brief Players vector getter.
+   * \return Players list.
    */
-  const std::vector<std::shared_ptr<Player>> players() const { return _players; }
+  const std::vector<std::shared_ptr<Player>> players() const {
+    return _players;
+  }
 
   /**
-   * \brief _players[id] getter
-   *
-   * \param id Player's id to retrieve
-   *
-   * \return the Player which number is \param id
+   * \brief _players[id] getter.
+   * \param id Player's id to retrieve.
+   * \return Player which number match the given id.
    */
-  std::shared_ptr<Player> getPlayer(const size_t &id) const
-  { return _players[id]; }
+  std::shared_ptr<Player> getPlayer(const size_t &id) const {
+    return _players[id];
+  }
 
   /**
-   * \brief _map getter
-   *
-   * \return a reference to the map
+   * \brief Map getter.
+   * \return A pointer to the map.
    */
   std::shared_ptr<Map> map() { return _map; }
 
-  /**
-   * \brief Switches to the next player.
-   */
+  /// End Player turns. Switch to the next player.
   void nextPlayer();
 
-  /**
-   * \brief initializes the map
-   */
+  /// Initializes the map, adding the units.
   void buildMap();
 
   /**
    * \brief current player getter
-   *
    * \return a pointer on the current player
    */
-  std::shared_ptr<Player> getCurrentPlayer()
-  { return _players[_currentPlayer]; }
+  std::shared_ptr<Player> getCurrentPlayer() {
+    return _players[_currentPlayer];
+  }
 
   /**
-   * \brief current player identifier getter
-   * \return _currentPlayer: current player identifier
+   * \brief current player's identifier getter
+   * \return Current player's identifier.
    */
   size_t currentPlayer() { return _currentPlayer; }
 
@@ -94,9 +89,7 @@ public:
 
 
 private:
-  /**
-   * \brief initializes players
-   */
+  /// Initializes players.
   void buildPlayers();
 
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle

@@ -2,7 +2,8 @@
 # define INTERFACEELEMENT_HH_
 
 /**
- * \file InterfaceElement definition.
+ * \file
+ * \author Zermingore
  */
 
 # include <string>

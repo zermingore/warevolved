@@ -52,10 +52,8 @@ public:
   void setUnit(std::shared_ptr<Unit> unit) { _unit = unit; }
 
   /**
-   * \brief _terrain setter
-   * sets the terrain \param terrain in the Cell
-   *
-   * \param terrain The terrain to be set in the Cell
+   * \brief Sets the given terrain in the Cell.
+   * \param terrain The terrain to be set in the Cell.
    */
   void setTerrain(const e_terrain terrain) { _terrain = terrain; }
 

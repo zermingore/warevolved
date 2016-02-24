@@ -17,7 +17,6 @@
 
 
 
-
 namespace interface {
 
 class Cursor;
@@ -29,16 +28,11 @@ class Cursor;
 class Interface
 {
 public:
-  /// deleted default constructor.
+  /// Deleted default constructor.
   Interface() = delete;
 
-  /**
-   * \brief Default Constructor.
-   *
-   * Initializes in-game menu
-   */
+  /// Constructor. Initializes in-game menu.
   explicit Interface(Color c);
-
 
   /**
    * \brief Sets all element to draw.
@@ -49,15 +43,13 @@ public:
 
 
   /**
-   * \brief _cursor getter
-   *
+   * \brief cursor's getter.
    * \return Player's Cursor.
    */
   std::shared_ptr<Cursor> cursor() { return _cursor; }
 
   /**
    * \brief Interface elements vector getter.
-   *
    * \return Elements of the interface.
    */
   std::vector<InterfaceElement>& elements() { return _elts; }
