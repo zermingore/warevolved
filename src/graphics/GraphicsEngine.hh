@@ -49,14 +49,13 @@ public:
 
 
   /**
-   * \brief _window setter
-   *   updates _renderX and _renderY
+   * \brief _window setter.
    */
   static void setWindow(std::unique_ptr<sf::RenderWindow> window);
 
   /**
-   * \brief sets current fps to the given value
-   * \param fps frame per second value
+   * \brief Sets current fps to the given value.
+   * \param fps Frame per second value.
    */
   static void setCurrentFPS(float fps) { _currentFPS = fps; }
 
@@ -69,48 +68,8 @@ public:
    *   it will be unlimited otherwise
    */
   static float currentFPS() { return _currentFPS; }
-  static size_t cellWidth() { return _cellWidth; }
-  static size_t cellHeight() { return _cellHeight; }
-  static size_t gridThickness() { return _gridThickness; }
-  static size_t renderX() { return _renderX; }
-  static size_t renderY() { return _renderY; }
-  static size_t gridOffsetX() { return _gridOffsetX; }
-  static size_t gridOffsetY() { return _gridOffsetY; }
-
-
-  /**
-   * \brief sets cells width
-   * \param width cells width
-   */
-  // static void setCellWidth(unsigned int width) { _cellWidth = width; }
-
-  /**
-   * \brief sets cells height
-   * \param height cells height
-   */
-  // static void setCellHeight(unsigned int height) { _cellHeight = height; }
-
-
-  /**
-   * \brief sets grid thickness
-   * \param thickness graphical grid thickness
-   */
-  // static void setGridThickness(unsigned int t) { _gridThickness = t; }
 
   static void setGridOffset(const std::shared_ptr<Map> map);
-
-
-  /**
-   * \brief sets drawable zone size width
-   * \param render_x new render zone width
-   */
-  static void setRenderX(size_t x) { _renderX = x; }
-
-  /**
-   * \brief sets drawable zone size height
-   * \param render_x new render zone height
-   */
-  static void setRenderY(size_t y) { _renderY = y; }
 
   static void closeWindow() { _window->close(); }
 
@@ -136,36 +95,37 @@ public:
 
 
 private:
-  /**
-   * \brief Draws the map background
-   */
+  /// Draw the map background.
   static void drawBackground();
 
   /**
-   * \brief Draws the interface
+   * \brief Draw the interface of the current Player.
+   * \param battle Battle to get the current Player.
    */
   static void drawInterface(const std::shared_ptr<Battle> battle);
 
   /**
-   * \brief Draws cells content (terrain, unit)
-   * \param battle battle content to draw
+   * \brief Draws cells content (terrain, unit).
+   * \param battle Battle content to draw.
    */
   static void drawMap(const std::shared_ptr<Battle> battle);
 
   /**
-   * \brief draws the grid, graphic cells separator
-   * \param map for which we draw a grid
+   * \brief Draws the grid, graphic cells separator.
+   * \param Map for which we draw the grid.
    */
   static void drawGrid(const std::shared_ptr<Map> map);
 
   /**
-   * \brief Draws the given Unit
-   * \param unit unit to draw
+   * \brief Draws the given Unit.
+   * \param unit Unit to draw.
+   * \param battle Battle to get the graphics properties of the current Player.
    */
-  static void drawUnit(const std::shared_ptr<Battle> battle, const std::shared_ptr<Unit> unit);
+  static void drawUnit(const std::shared_ptr<Battle> battle,
+                       const std::shared_ptr<Unit> unit);
 
 
-   /// \todo use a Window type: union with sfml, opengl, dx, ascii windows, ...
+  /// \todo use a Window type: union with sfml, opengl, dx, ascii windows, ...
   static std::unique_ptr<sf::RenderWindow> _window;
 
   /**
@@ -175,13 +135,6 @@ private:
    *   it will be unlimited otherwise
    */
   static float _currentFPS;
-  static size_t _cellWidth;  /// \todo dynamic, somewhere else (Map ?)
-  static size_t _cellHeight;  /// \todo dynamic, somewhere else (Map ?)
-  static size_t _gridThickness;
-  static size_t _renderX;
-  static size_t _renderY;
-  static size_t _gridOffsetX;
-  static size_t _gridOffsetY;
 };
 
 

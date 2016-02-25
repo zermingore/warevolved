@@ -17,8 +17,6 @@ const std::string DEFAULT_RESOURCES_XML_FILE = "resources.xml";
 // Static Variables definition
 std::unique_ptr<sf::RenderWindow> GraphicsEngine::_window;
 float GraphicsEngine::_currentFPS;
-size_t GraphicsEngine::_renderX;
-size_t GraphicsEngine::_renderY;
 
 
 void initialize()
@@ -206,10 +204,6 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
 void GraphicsEngine::setWindow(std::unique_ptr<sf::RenderWindow> window)
 {
   _window = std::move(window);
-
-  // initialize render room
-  _renderX = _window->getSize().x;
-  _renderY = _window->getSize().y;
 }
 
 
