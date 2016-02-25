@@ -1,15 +1,16 @@
-/*
- * common/enums/modes.hh
- *
- *  Created on: July 24, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 24, 2013
+ * \author Zermingore
  */
 
 #ifndef ENUM_MODES_HH_
 # define ENUM_MODES_HH_
 
-/** \enum various menu mode values
- * use this to notify the mode stack
+
+/**
+ * \enum e_mode
+ * \brief various menu mode values. Used to notify the mode stack.
  */
 enum class e_mode
 {

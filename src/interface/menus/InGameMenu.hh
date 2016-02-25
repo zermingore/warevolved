@@ -1,40 +1,34 @@
-/*
- * interface/menus/InGameMenu.hh
- *
- *  Created on: July 25, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 25, 2013
+ * \author Zermingore
  */
 
 #ifndef INGAMEMENU_HH_
 # define INGAMEMENU_HH_
 
+
 # include <interface/menus/Menu.hh>
-# include <common/enums/modes.hh>
+
+enum class e_mode;
 
 
 /**
-   * \brief in game menu class
- * refers to the menu called when
- *   you pick a unit
- *   click on a void cell
+ * \class InGameMenu
+ * \brief Refers to the menu called when
+ *   A unit is picked
+ *   A void cell is clicked
  */
 class InGameMenu: public Menu
 {
 public:
   /**
-   * \brief Default Constructor
-   */
-  InGameMenu() {}
-
-  /**
-   * \brief builds the selection menu, filling _entries
-   * \param mode The mode we're about to push
+   * \brief builds the selection menu, filling the entries.
+   * \param mode The mode about to be pushed.
    */
   void build(e_mode mode);
 
-  /**
-   * \brief executes action matching Menu::_selectedEntry
-   */
+  /// \brief executes action matching the selected entry.
   void executeEntry();
 };
 

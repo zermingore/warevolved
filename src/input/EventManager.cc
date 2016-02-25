@@ -1,4 +1,5 @@
 #include <input/EventManager.hh>
+#include <common/enums/modes.hh>
 #include <input/KeyManager.hh>
 #include <common/Status.hh>
 #include <common/Settings.hh>

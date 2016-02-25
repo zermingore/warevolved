@@ -3,14 +3,16 @@
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
 #include <resources/Image.hh>
+#include <common/enums/directions.hh>
+#include <common/enums/path_shapes.hh>
 
 
-PathFinding::PathFinding(std::shared_ptr<Map> map) :
-  _map (map),
-  _origin (0, 0),
-  _current (0, 0),
-  _maxLength (0),
-  _currentLength (0)
+PathFinding::PathFinding(std::shared_ptr<Map> map)
+  : _map (map)
+  , _origin (0, 0)
+  , _current (0, 0)
+  , _maxLength (0)
+  , _currentLength (0)
 {
 }
 
@@ -38,7 +40,7 @@ void PathFinding::drawPath()
   for (auto it(_directions.begin()); it != _directions.end(); ++it)
   {
     updateCurrentCell(*it);
-     /// \todo manage cache and image sprites
+    /// \todo manage cache and image sprites
     // _images[i++]->drawAtCell(_currentX, _currentY);
     getImage(i++).draw();
   }
@@ -51,7 +53,7 @@ void PathFinding::clearPath()
   deleteImagesVector();
   hideAllowedPath();
 
-   /// \todo clear only if we made a path request on a new cell
+  /// \todo clear only if we made a path request on a new cell
   // (to avoid clearing the path on selecting the same unit two times in a row)
 }
 
@@ -60,7 +62,7 @@ void PathFinding::updateCurrentCell(e_direction direction)
 {
   switch (direction)
   {
-  case e_direction::UP:
+    case e_direction::UP:
       --_current.y;
       return;
 
@@ -136,7 +138,7 @@ e_path_shape PathFinding::getShape(size_t index)
 graphics::Image PathFinding::getImage(size_t index)
 {
   return graphics::Image();
-   /// \todo up to GraphicsEngine
+  /// \todo up to GraphicsEngine
 
   // Image img;  /// \todo use a copy Ctor (avoid rotating all sprites)
   // unsigned int angle = 0;

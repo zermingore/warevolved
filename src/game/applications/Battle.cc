@@ -1,4 +1,5 @@
 #include <game/applications/Battle.hh>
+#include <common/enums/units.hh>
 #include <common/structures/Vector.hh>
 #include <common/Status.hh>
 #include <game/Player.hh>

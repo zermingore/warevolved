@@ -10,12 +10,12 @@
 # include <vector>
 # include <memory>
 # include <game/applications/Application.hh>
-# include <common/enums/units.hh>
 # include <common/structures/Vector.hh>
 
 class Map;
 class Player;
 
+enum class e_units;
 
 /**
  * \class Battle

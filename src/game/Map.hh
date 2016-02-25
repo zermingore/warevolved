@@ -9,12 +9,13 @@
 
 # include <common/include.hh>
 # include <common/using.hh>
-# include <common/enums/terrains.hh>
-# include <common/enums/units.hh>
 
 class Cell;
 class Battle;
 class Unit;
+
+enum class e_terrain;
+enum class e_unit;
 
 
 /**

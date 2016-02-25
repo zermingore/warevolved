@@ -1,7 +1,9 @@
 #ifndef ENUM_TERRAINS_HH_
 # define ENUM_TERRAINS_HH_
 
-/** \enum listing of all terrains
+/**
+ * \enum e_terrain
+ * \brief Listing of all terrains
  */
 enum class e_terrain
 {

@@ -1,15 +1,16 @@
-/*
- * common/enums/directions.hh
- *
- *  Created on: July 21, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 21, 2013
+ * \author Zermingore
  */
 
 #ifndef ENUM_DIRECTIONS_HH_
 # define ENUM_DIRECTIONS_HH_
 
+
 /**
-   * \brief stores vanilla directions
+ * \enum e_direction
+ * \brief Stores vanilla directions.
  * used for paths
  */
 enum class e_direction

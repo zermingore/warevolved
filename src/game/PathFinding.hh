@@ -1,8 +1,7 @@
-/*
- * game/PathFinding.hh
- *
- *  Created on: July 18, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 18, 2013
+ * \author Zermingore
  */
 
 #ifndef PATHFINDING_HH_
@@ -11,18 +10,22 @@
 # include <vector>
 # include <memory>
 # include <common/structures/Vector.hh>
-# include <common/enums/path_shapes.hh>
-# include <common/enums/directions.hh>
 # include <resources/Image.hh>
 
 class Map;
 class Unit;
 class Cell;
 
+enum class e_direction;
+enum class e_path_shape;
 
-/** \class PathFinding Computes and display path findings
- *   as reachable cells and possible targets for the selected unit
- * It display user's path input and check it's validity
+
+/**
+ * \class PathFinding
+ * \brief Computes and display path finded.
+ *
+ * Display reachable cells and possible targets for the selected unit.
+ * Display user's path input and check it's validity.
  */
 class PathFinding
 {

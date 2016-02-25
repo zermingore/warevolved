@@ -1,26 +1,27 @@
 #ifndef STATUS_HH_
 # define STATUS_HH_
 
+
 # include <memory>
 # include <stack>
 # include <common/using.hh>
-# include <common/enums/modes.hh>
 
 class State;
 class Battle;
 class InGameMenu;
 
+enum class e_mode;
+
+
 /**
-   * \brief stores game status information such as
+ * \brief stores game status information such as
  *   last cell selected, current player, ...
  */
 class Status
 {
 public:
   /**
-   * \brief Destructor
-   *
-   * Pops every state
+   * \brief Destructor. Pops every state
    */
   ~Status();
 
@@ -100,7 +101,9 @@ public:
    * \brief _selectedUnitPosition setter
    * \param pos selected Unit position
    */
-  static void setSelectedUnitPosition(Coords pos) { _selectedUnitPosition = pos; }
+  static void setSelectedUnitPosition(Coords pos) {
+    _selectedUnitPosition = pos;
+  }
 
 
 private:

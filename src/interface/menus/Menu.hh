@@ -1,28 +1,29 @@
-/*
- * interface/menus/Menu.hh
- *
- *  Created on: July 24, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 24, 2013
+ * \author Zermingore
  */
 
 #ifndef MENU_HH_
 # define MENU_HH_
 
+
 # include <common/include.hh>
 # include <resources/Image.hh>
 # include <interface/menus/MenuEntry.hh>
-# include <common/enums/modes.hh>
+
+enum class e_mode;
 
 
-/** \class Menu: generic Menu class
+/**
+ * \class Menu
+ * \brief Generic Menu.
  * mother of \class InGameMenu
  */
 class Menu
 {
 public:
-  /**
-   * \brief default Ctor
-   */
+  /// \brief Constructor.
   Menu();
 
   /**
@@ -32,7 +33,7 @@ public:
    */
   explicit Menu(std::vector<MenuEntry> &entries);
 
-   /// \todo: merge and use a single function for all (4) directions
+  /// \todo: merge and use a single function for all (4) directions
   /**
    * \brief increments _selectedEntry modulo number of Entries
    *  allowing cycling
@@ -86,8 +87,7 @@ public:
 
 protected:
   /**
-   * \brief initializes the menu
-   * called by this->build()
+   * \brief initializes the menu called by this->build()
    */
   void init();
 

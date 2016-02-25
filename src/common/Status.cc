@@ -1,3 +1,4 @@
+#include <common/enums/modes.hh>
 #include <common/Status.hh>
 #include <common/include.hh>
 #include <common/macros.hh>

@@ -1,22 +1,21 @@
-/*
- * interface/menus/EntriesMenu.hh
- *
- *  Created on: July 24, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 24, 2013
+ * \author Zermingore
  */
 
 #ifndef ENTRIESMENU_HH_
 # define ENTRIESMENU_HH_
 
+
 # include <common/include.hh>
 # include <resources/Image.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <game/PathFinding.hh>
-# include <common/enums/modes.hh>
 
 
 /**
-   * \brief EntriesMenu: generic Menu class
+ * \brief EntriesMenu: generic Menu class
  * mother of \class InGameMenu
  */
 class EntriesMenu
@@ -37,7 +36,7 @@ public:
   /// \brief virtual Destructor
   virtual ~EntriesMenu();
 
-   /// \todo: merge and use a single function for all (4) directions
+  /// \todo: merge and use a single function for all (4) directions
   /**
    * \brief increments _selectedEntry modulo _nbEntries
    *  allowing cycling
@@ -112,7 +111,7 @@ protected:
                                ///< it has the index 0
   unsigned int _nbEntries; ///< Total number of entries in the menu
   std::vector<MenuEntry> *_entries; ///< Entries list
-  sf::Vector2f _origin; ///< Origin position of the menu
+  Vector2<float> _origin; ///< Origin position of the menu
   Image _imageSelection; ///< Background image (entry)
 };
 

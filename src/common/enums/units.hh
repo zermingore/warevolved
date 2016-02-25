@@ -2,6 +2,10 @@
 # define ENUM_UNITS_HH_
 
 
+/**
+ * \enum e_unit
+ * \brief Different units types.
+ */
 enum class e_unit
 {
   SOLDIERS = 0,

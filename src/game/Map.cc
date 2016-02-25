@@ -5,13 +5,14 @@
  */
 
 #include <game/Map.hh>
+#include <common/Status.hh>
+#include <common/enums/terrains.hh>
+#include <common/enums/units.hh>
 #include <game/applications/Battle.hh>
 #include <game/units/Soldier.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
 #include <interface/Cursor.hh>
-#include <common/Status.hh>
-#include <common/enums/units.hh>
 
 
 Map::MapGraphicsProperties::MapGraphicsProperties()
@@ -113,6 +114,5 @@ void Map::newUnit(const e_unit type, const size_t line, const size_t column)
   new_unit->setCellCoordinates(Coords(line, column));
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);
-
   _cells[line][column]->setUnit(new_unit);
 }
