@@ -16,7 +16,7 @@ KeyManager::KeyManager()
 
 void KeyManager::mapKeys()
 {
-   /// \todo read configuration file to retrieve these values
+  /// \todo read configuration file to retrieve these values
   // use Settings Class
   _keys[E_KEY_MOVE_UP_1] = sf::Keyboard::Up;
   _keys[E_KEY_MOVE_UP_2] = sf::Keyboard::W;

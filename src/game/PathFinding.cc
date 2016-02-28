@@ -88,7 +88,7 @@ void PathFinding::buildImageVector()
   // manage 'riding' the path (increment a global index)
   // deleteImagesVector();
 
-  for (auto i = 0u; i < _directions.size(); ++i)
+  for (auto i(0u); i < _directions.size(); ++i)
     _images.push_back(getImage(i));
 }
 

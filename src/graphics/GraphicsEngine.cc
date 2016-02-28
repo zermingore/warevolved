@@ -8,8 +8,6 @@
 #include <game/Player.hh>
 
 
-//using namespace interface;
-
 namespace graphics {
 
 const std::string DEFAULT_RESOURCES_XML_FILE = "resources.xml";
@@ -22,17 +20,7 @@ float GraphicsEngine::_currentFPS;
 void initialize()
 {
   resources::ResourcesManager::initialize(DEFAULT_RESOURCES_XML_FILE);
-  // MapGraphicsProperties::initialize();
 }
-
-
-// void GraphicsEngine::initRoom()
-// {
-//   // = scroll ? 0 : (cellWidth() + cellHeight()) / 4;
-//   //if (!scroll)  /// \todo split offset bottom, ...
-
-//   setGridOffset(map);
-// }
 
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
@@ -63,9 +51,9 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
     Image& image(resources::ResourcesManager::getImage(elt.name()));
     image.sprite()->setColor(interface->unitsColor());
 
-    //    float x = elt.scale().x;
-    //    float y = elt.scale().y;
-    //    image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+    // float x = elt.scale().x;
+    // float y = elt.scale().y;
+    // image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
 
     image.drawAtCell(elt.position(), p);
   }
@@ -74,8 +62,8 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
 
 void GraphicsEngine::drawBackground()
 {
-   /// \todo draw map background
   _window->clear();
+  /// \todo draw map background
 }
 
 
@@ -174,7 +162,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
   auto p(battle->map()->graphicsProperties());
 
   Image &image(resources::ResourcesManager::getImage(unit->name()));
-//  image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
+  // image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
 
   float x = image.sprite()->getTexture()->getSize().x;
   float y = image.sprite()->getTexture()->getSize().y;
@@ -212,7 +200,7 @@ void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
   auto p(map->graphicsProperties());
 
   // offset = 1/2 left room
-  p->setGridOffsetX((_window->getSize().x - p->cellWidth()  * map->nbColumns()) / 2);
+  p->setGridOffsetX((_window->getSize().x - p->cellWidth() * map->nbColumns()) / 2);
   p->setGridOffsetY((_window->getSize().y - p->cellHeight() * map->nbLines()) / 2);
 }
 
@@ -221,7 +209,6 @@ template <typename T>
 void GraphicsEngine::draw(std::shared_ptr<T> drawable, Coords pos, Coords size)
 {
   std::cout << "image: " << drawable->imageName() << std::endl;
-  drawable->imageName();
 }
 
 
@@ -229,7 +216,7 @@ template <typename T>
 void GraphicsEngine::draw(std::shared_ptr<T> drawable, Cell c)
 {
   std::cout << "image: " << drawable->imageName() << std::endl;
-  drawable->imageName();
 }
+
 
 } // namespace graphics

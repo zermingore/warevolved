@@ -1,9 +1,10 @@
-/*
- * graphics/GraphicsEngine.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \brief Graphics related class / functions declarations
  */
+
 
 #ifndef GRAPHICSENGINE_HH_
 # define GRAPHICSENGINE_HH_
@@ -28,25 +29,18 @@ void initialize();
 typedef sf::Sprite Sprite;
 
 /**
-   * \brief Graphics Engine class
- * manages the display of a scene
+ * \class GraphicsEngine
+ * \brief Manages the display of a scene.
  */
 class GraphicsEngine
 {
 public:
   /**
-   * \brief Draws the whole scene
+   * \brief Draws the whole scene.
    *   - calls others drawing functions
    *   - updates the window
    */
   static void drawScene(const std::shared_ptr<Battle> battle);
-
-  /**
-   * \brief Initializes drawable zone limits
-   *   by setting gridOffsets
-   */
-  // static void initRoom();
-
 
   /**
    * \brief _window setter.
@@ -60,10 +54,9 @@ public:
   static void setCurrentFPS(float fps) { _currentFPS = fps; }
 
   /**
-   * \brief returns current number of
-   *   generated frames per Seconds
-   * \return number of fps
-   * \note if the compilation flag DEBUG_PERFS is not set
+   * \brief Returns current number of generated frames per Seconds.
+   * \return Number of fps.
+   * \note If the compilation flag DEBUG_PERFS is not set
    *   the frame rate will be limited to 60
    *   it will be unlimited otherwise
    */
@@ -77,11 +70,11 @@ public:
 
   static bool pollEvent(sf::Event& event) { return _window->pollEvent(event); }
 
-  static void draw(std::shared_ptr<Sprite> sprite)
-  { _window->draw(*sprite); }
+  static void draw(std::shared_ptr<Sprite> sprite) { _window->draw(*sprite); }
 
-  static void draw(std::shared_ptr<sf::RectangleShape> rectangle)
-  { _window->draw(*rectangle); }
+  static void draw(std::shared_ptr<sf::RectangleShape> rectangle) {
+    _window->draw(*rectangle);
+  }
 
   /**
    * \brief Draws the given element
@@ -126,7 +119,7 @@ private:
 
 
   /// \todo use a Window type: union with sfml, opengl, dx, ascii windows, ...
-  static std::unique_ptr<sf::RenderWindow> _window;
+  static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
 
   /**
    * \brief current number of generated frames per Seconds

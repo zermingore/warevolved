@@ -1,22 +1,21 @@
-/*
- * common/Settings.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \brief Global settings class definition.
  */
 
 #ifndef SETTINGS_HH_
 # define SETTINGS_HH_
 
-# include <string>
+# include <stddef.h>
 
 
 /// \todo create subclasses: VideoSettings, GameSettings
 
 /**
  * \class Settings
- *
- * \brief Class storing settings
+ * \brief Class storing settings.
  *
  * Storing the following settings:
  *   user's preferences
@@ -27,7 +26,6 @@ class Settings
 public:
   /**
    * \brief initialization function, sets graphic attributes
-   *
    * \param depth graphic depth value
    * \param stencil stencil value
    * \param antiAliasing anti aliasing coefficient
@@ -38,50 +36,44 @@ public:
 
 
   /**
-   * \brief graphic depth getter
-   *
-   * \return depth value
+   * \brief graphic depth getter.
+   * \return depth value.
    */
   static unsigned int depth() { return _depth; }
 
   /**
-   * \brief graphic getter
-   *
-   * \return stencil value
+   * \brief graphic stencil getter.
+   * \return stencil value.
    */
   static unsigned int stencil() { return _stencil; }
 
   /**
-   * \brief anti aliasing getter
-   *
-   * \return anti aliasing coefficient
+   * \brief Anti aliasing getter.
+   * \return Anti aliasing coefficient.
    */
   static unsigned int antiAliasing() { return _antiAliasing; }
 
   /**
-   * \brief _fullScreen getter
-   *
-   * \return true if we're in full screen false otherwise
+   * \brief _fullScreen getter.
+   * \return true if we're in full screen false otherwise.
    */
   static bool fullScreen() { return _fullScreen; }
 
   /**
-   * \brief _keyRepeatDelay getter
-   *
-   * \return the required time to consider a "second pressure" (in ms)
+   * \brief _keyRepeatDelay getter.
+   * \return the required time to consider a "second pressure" (in ms).
    */
   static int keyRepeatDelay() { return _keyRepeatDelay; }
 
-
   /**
-   * \brief _keyRepeatDelay setter
+   * \brief _keyRepeatDelay setter.
    */
-  static void setKeyRepeatDelay(int delay) { _keyRepeatDelay = delay; }
+  static void setKeyRepeatDelay(size_t delay) { _keyRepeatDelay = delay; }
 
   // graphics settings setters
-  static void setDepth(unsigned int depth) { _depth = depth; }
-  static void setStencil(unsigned int stencil) { _stencil = stencil; }
-  static void setAntiAliasing(unsigned int aa) { _antiAliasing = aa; }
+  static void setDepth(size_t depth) { _depth = depth; }
+  static void setStencil(size_t stencil) { _stencil = stencil; }
+  static void setAntiAliasing(size_t aa) { _antiAliasing = aa; }
 
   // generic settings setters
   static void setFullScreen(bool fullScreen) { _fullScreen = fullScreen; }
@@ -89,14 +81,14 @@ public:
 
 private:
   // graphic settings
-  static unsigned int _depth; ///< depth buffer size
-  static unsigned int _stencil; ///< stencil buffer size
-  static unsigned int _antiAliasing; ///< anti aliasing level
+  static unsigned int _depth; ///< Depth buffer size.
+  static unsigned int _stencil; ///< Stencil buffer size
+  static unsigned int _antiAliasing; ///< Anti aliasing level.
 
   // generic settings
-  static bool _fullScreen; ///< notify if we're running in full screen
+  static bool _fullScreen; ///< Notify if we're running in full screen.
 
-  static unsigned int _keyRepeatDelay; ///< required time to consider a "second pressure" in ms
+  static unsigned int _keyRepeatDelay; ///< Required time to consider a "second pressure" in ms.
 };
 
 #endif /* !SETTINGS_HH_ */

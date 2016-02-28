@@ -22,6 +22,7 @@ Status::~Status()
   }
 }
 
+
 void Status::initialize()
 {
   _selectedUnitPosition = Coords(-1, -1);
@@ -44,6 +45,7 @@ e_mode Status::currentMode()
   return _states.top()->currentMode();
 }
 
+
 std::shared_ptr<State> Status::currentState()
 {
   if (_states.empty()) {
@@ -52,6 +54,7 @@ std::shared_ptr<State> Status::currentState()
 
   return _states.top();
 }
+
 
 void Status::pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu)
 {

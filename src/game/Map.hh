@@ -1,11 +1,11 @@
-#ifndef MAP_HH_
-# define MAP_HH_
-
 /**
  * \file
  * \author Zermingore
  * \brief Map class definition.
  */
+
+#ifndef MAP_HH_
+# define MAP_HH_
 
 # include <common/include.hh>
 # include <common/using.hh>

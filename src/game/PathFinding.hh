@@ -119,36 +119,33 @@ private:
   void updateCurrentCell(e_direction direction);
 
   /**
-   * \brief returns shape matching _direction[\param index]
-   * \param index index in _direction vector
+   * \brief returns shape matching _direction (index parameter)
+   * \param index index in _direction vector.
    * \return shape of _direction[\param index]
-   *   according to the next direction (for smooth corners)
+   *   according to the next direction (for smooth corners).
    */
   e_path_shape getShape(size_t index);
 
   /**
-   * \brief Highlights cells which selected unit (_unit) can cross
+   * \brief Highlights cells which selected unit (_unit) can cross.
    * (uses a Flood Fill algorithm)
    */
   void showAllowedPath();
 
-  /**
-   * \brief sets highlight and highlight color for reachable cells
-   */
+  /// Sets highlight and highlight color for reachable cells.
   void highlightCells();
 
+  /// \todo make a relation map - path-finding
+  std::shared_ptr<Map> _map; ///< Map of the battle.
+  std::shared_ptr<Unit> _unit; ///< The selected Unit.
+  Coords _origin; ///< Origin cell coordinates.
+  Coords _current; ///< Current cell coordinates.
+  int _maxLength; ///< Path max length.
+  int _currentLength; ///< Path current length.
 
-  std::shared_ptr<Map> _map;  /// \todo make a relation map - path-finding
-
-  std::shared_ptr<Unit> _unit; ///< The selected Unit we're working with
-  Coords _origin; ///< origin cell coordinates
-  Coords _current; ///< current cell coordinates
-  int _maxLength; ///< path max length
-  int _currentLength; ///< path current length
-
-  ///< list of path directions filled through addNextDirection
+  ///< List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;
-  std::vector<graphics::Image> _images; ///< Images of the path vector
+  std::vector<graphics::Image> _images; ///< Images of the path vector.
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
