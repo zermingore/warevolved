@@ -8,7 +8,7 @@
 #ifndef SETTINGS_HH_
 # define SETTINGS_HH_
 
-# include <stddef.h>
+# include <stddef.h> // size_t
 
 
 /// \todo create subclasses: VideoSettings, GameSettings

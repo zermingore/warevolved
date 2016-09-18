@@ -39,9 +39,7 @@ etags
 warevolved.*
 
 # Doxygen
-html/
-latex/
-man/
+doc/doxygen/
 
 # Perf
 perf.data*

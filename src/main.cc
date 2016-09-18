@@ -7,7 +7,7 @@
 
 int main(int ac, const char **av)
 {
-  /// \todo use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
+  /// \todo use getopt, support: resolution, graphic engine ({2,3}D, ASCII), ...
   PRINTF(av);
 
   bool fullscreen(ac > 1);

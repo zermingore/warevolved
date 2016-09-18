@@ -24,7 +24,7 @@ AM_INIT_AUTOMAKE([subdir-objects color-tests -Wall -Werror foreign])
 AM_SILENT_RULES
 
 # Checks for programs.
-AC_PROG_CXX([g++]) # clang++
+AC_PROG_CXX([clang++]) # g++
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_HEADER_STDBOOL6
