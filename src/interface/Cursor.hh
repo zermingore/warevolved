@@ -21,16 +21,11 @@ namespace interface {
 class Cursor
 {
 public:
-  /**
-   * \brief Default Constructor
-   */
-  Cursor() {};
+  /// Default Constructor
+  Cursor() {}
 
   /**
-   * \brief Constructor
-   *
-   * Sets the map limits according to the given parameters.
-   *
+   * \brief Constructor. Sets the map limits according to the given parameters.
    * \param nb_columns number of columns in the map
    * \param nb_lines number of lines in the map
    */
@@ -100,6 +95,7 @@ private:
   std::string _image; ///< cursor's Image
   sf::Color _color;   ///< cursor's color
 };
+
 
 } // namespace interface
 

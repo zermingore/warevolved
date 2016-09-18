@@ -1,4 +1,17 @@
 #include <input/MapEventManager.hh>
+#include <input/KeyManager.hh>
+
+MapEventManager::MapEventManager()
+{
+  // sf::Keyboard::Left
+  registerEvent(e_key::E_KEY_LEFT, [=] { moveCursorLeft(); });
+}
+
+void MapEventManager::moveCursorLeft()
+{
+
+}
+
 
 bool MapEventManager::process()
 {
@@ -6,7 +19,7 @@ bool MapEventManager::process()
 }
 
 
-void MapEventManager::registerEvent(std::string key, std::function<void()> cb)
+void MapEventManager::registerEvent(e_key key, std::function<void()> cb)
 {
 
 }

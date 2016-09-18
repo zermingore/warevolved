@@ -1,18 +1,30 @@
-/*
- * input/keyManager.hh
- *
- *  Created on: April 17, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 17, 2013
+ * \author Zermingore
  */
 
 #ifndef KEYMANAGER_HH_
 # define KEYMANAGER_HH_
 
 # include <common/include.hh>
-# include <common/constants.hh>
+
+enum class e_input;
+
+
+class InputKey
+{
+public:
+  InputKey(e_input input) { _input = input; }
+
+
+private:
+  e_input _input;
+};
+
 
 /**
-   * \brief timer index list
+ * \brief timer index list
  */
 enum e_timer
 {
@@ -26,8 +38,7 @@ enum e_timer
 
 
 /**
-   * \brief switches (on /off) keys
- * they don't allow key-repeating
+ * \brief switches keys. Do not allow key-repeatition (on /off).
  */
 enum e_switch
 {
@@ -43,8 +54,7 @@ enum e_switch
 
 
 /**
-   * \brief Keys indexes
- * allowing key repeating
+ * \brief Keys indexes allowing key repeating.
  */
 enum e_key
 {
@@ -62,59 +72,44 @@ enum e_key
   E_KEY_SELECTION_1,
   E_KEY_SELECTION_2,
 
-  // menu keys
-  E_KEY_MENUBAR_1,
-  E_KEY_MENUBAR_2,
-  E_KEY_PANEL_1,
-  E_KEY_PANEL_2,
-
   // exit requests
   E_KEY_EXIT_1,
   E_KEY_EXIT_2,
+
+  E_KEY_LEFT,
 
   E_KEY_NB_KEYS
 };
 
 
+/**
+ * \class KeyManager
+ * \brief maps the raw input keys into events.
+ */
 class KeyManager
 {
-/**
+
+  /**
    * \brief SFML key detection
- *   \return true if one of the two possible binding
- *     of a function has been triggered
- *   \return false otherwise
- *   \param feature key name auto expand _1 and _2 to this name
- */
-# define PRESSED(x) sf::Keyboard::isKeyPressed(_keys[ x ##_1]) || \
-    sf::Keyboard::isKeyPressed(_keys[ x ##_2])
+   * \param feature key name auto expand _1 and _2 to this name
+   * \return true if one of the two possible binding
+   *   of a function has been triggered, false otherwise.
+   */
+# define PRESSED(x) true /*sf::Keyboard::isKeyPressed(_keys[ x ##_1]) || \
+  sf::Keyboard::isKeyPressed(_keys[ x ##_2])*/
 
 public:
-  /**
-   * \brief Default Constructor
-   */
+  /// Default Constructor. Initializes the timers / switches
   KeyManager();
-
-  bool up() { return (PRESSED(E_KEY_MOVE_UP)); }
-  bool down() { return (PRESSED(E_KEY_MOVE_DOWN)); }
-  bool left() { return (PRESSED(E_KEY_MOVE_LEFT)); }
-  bool right() { return (PRESSED(E_KEY_MOVE_RIGHT)); }
-  bool selection() { return (PRESSED(E_KEY_SELECTION)); }
-  bool menubar() { return (PRESSED(E_KEY_MENUBAR)); }
-  bool panel() { return (PRESSED(E_KEY_PANEL)); }
-  bool exit() { return (PRESSED(E_KEY_EXIT)); }
-
-  /**
-   * \brief Maps keyboard keys to function
-   */
-  void mapKeys();
 
   /**
    * \brief timer value getter
    * \param function Function associated to the the timer we're looking for
    * \return Timer number index value (in ms)
    */
-  int getTime(e_timer function)
-  { return _clocks[function].getElapsedTime().asMilliseconds(); }
+  int getTime(e_timer function) {
+    return _clocks[function].getElapsedTime().asMilliseconds();
+  }
 
   /**
    * \brief switch getter
@@ -125,11 +120,12 @@ public:
 
   /**
    * \brief switch getter
-   * \param s Switch to retrieve
-   * \return switch status
+   * \param index _switches index to retrieve
+   * \param status switch status
    */
-  void setSwitchStatus(e_switch index, bool status)
-  { _switches[index] = status; }
+  void setSwitchStatus(e_switch index, bool status) {
+    _switches[index] = status;
+  }
 
   /**
    * \brief resets _switches status, if needed
@@ -144,22 +140,28 @@ public:
   bool ready(e_timer index);
 
   /**
-   * \brief notify a key as 'ready'
-   *   meaning being considered as pressed again
+   * \brief notify a key as 'ready': considerable as pressed again.
    */
   void setReady(e_timer index, bool state) { _ready[index] = state; }
 
   /**
-   * \brief restarts the clock \param index and sets _timers[index] to 0
+   * \brief restarts the clock.
+   * \param index and sets _timers[index] to 0.
    */
   void restartTimer(e_timer index);
 
+  /// sets the boolean of each considered key
+  void setkeysStatus();
+
+
 
 private:
-  sf::Keyboard::Key _keys[E_KEY_NB_KEYS]; ///< keys list
+  //  std::pair<bool, sf::Keyboard::Key> _keys[E_KEY_NB_KEYS]; ///< keys list
+  std::multimap<sf::Keyboard::Key, e_key> _keys_mapping; ///< key mapping
   sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks (for key readiness)
   bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
   bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states
 };
+
 
 #endif /* !KEYMANAGER_HH_ */

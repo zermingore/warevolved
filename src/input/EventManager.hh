@@ -1,84 +1,60 @@
-#ifndef EVENT_HH_
-# define EVENT_HH_
+#ifndef EVENT_MANAGER_HH_
+# define EVENT_MANAGER_HH_
 
 # include <map>
 # include <memory>
 # include <functional>
-# include <SFML/Window.hpp>
+# include <SFML/Window/Event.hpp>
 
 
 class KeyManager;
+enum class e_input;
 
-/** \class processing event class
+
+/**
+ * \class EventManager
+ * \brief Process events.
  */
 class EventManager
 {
 public:
-  /**
-   * \brief Constructor
-   *   processes input events
-   */
+  /// Constructor. Initializes the repetition timers.
   EventManager();
+
+  /// Destructor
+  virtual ~EventManager() {}
+
 
   /**
    * \brief check if a generic event (like closing the window) occurs
    *   calls matching functions if any
-   * \return false if a quit request has been sent
-   *   true otherwise
+   * \return false if a quit request has been sent. True otherwise.
    */
-  bool process();
+  virtual bool process() {}
 
 
   /**
-   * \brief associates a callback to an event identified by key
-   * \param key event name
-   * \param cb callback to associate to the event
+   * \brief Associates a callback to an event identified by key.
+   * \param key event name.
+   * \param cb callback to associate to the event.
    */
-  void registerEvent(std::string key, std::function<void()> cb) {
-    _callbacks[key] = cb;
+  virtual void registerEvent(e_input key, std::function<void()> cb) {
+//    _callbacks[key] = cb;
   }
+
 
   /**
    * \brief executes the callback matching the given event
    * \return true if a callback was executed
    */
-  bool execute(std::string key);
+//  bool execute(e_key key);
+
+
+//  void processEvents();
 
 
 
 private:
-  /**
-   * \brief Processes events relative to
-   * - right panel requests (show, save game, ...)
-   * - menu bar
-   */
-  void panels();
-
-  /**
-   * \brief Processes events while we're in the selection menu
-   *   (for example arrows do not move game cursor but menu cursor)
-   * \param menu menu of which we want to manage events
-   */
-  void selectionMenu();
-
-  /**
-   * \brief select a cell
-   *   browse Cells containing an available target on keyboard strikes
-   */
-  void selectTarget();
-
-  /**
-   * \brief Processes events while moving a unit
-   */
-  void moveUnit();
-
-  /**
-   * \brief Processes all game events
-   * called when we're not browsing a menu, moving a unit, ...
-   * \return false if we got an exit request true otherwise
-   */
-  bool game();
-
   /**
    * \brief Looks for any released key.
    *   Reset the key timer matching the released key (if any)
@@ -88,10 +64,10 @@ private:
 
 
   sf::Event _event; ///< Event Manager
-  std::shared_ptr<KeyManager> _km; ///< KeyManager instance
 
-  ///< callbacks / events association
-  std::map<std::string, std::function<void()>> _callbacks;
+  /// callbacks / events association
+  std::map<e_input, std::function<void()>> _callbacks;
 };
 
-#endif /* !EVENT_HH_ */
+
+#endif /* !EVENT_MANAGER_HH_ */
