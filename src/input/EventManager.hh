@@ -30,7 +30,7 @@ public:
    *   calls matching functions if any
    * \return false if a quit request has been sent. True otherwise.
    */
-  virtual bool process() {}
+  virtual bool process() { return true; } // FIXME
 
 
   /**
