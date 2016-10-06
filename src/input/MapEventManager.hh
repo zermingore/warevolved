@@ -1,8 +1,8 @@
 #ifndef MAPEVENTMANAGER_HH_
 # define MAPEVENTMANAGER_HH_
 
-#include <input/EventManager.hh>
-#include <input/KeyManager.hh>
+# include <input/EventManager.hh>
+# include <input/KeyManager.hh>
 
 
 /**

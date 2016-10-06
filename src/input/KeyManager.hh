@@ -88,7 +88,6 @@ enum e_key
  */
 class KeyManager
 {
-
   /**
    * \brief SFML key detection
    * \param feature key name auto expand _1 and _2 to this name

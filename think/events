@@ -1,0 +1,36 @@
+KeyManager
+----------
+Link HW
+Event keyboard -> Token (event)
+'a' -> EVENT_LEFT
+'a' -> EVENT_CHAR_A
+
+
+InputProcessor
+--------------
+Submit current events to the EventManagers
+for every event e
+  for every EventManagers EM do
+    if EM->process(e)
+       break
+
+
+EventManager
+------------
+Abstract class ?
+process(event)
+List of processable events
+
+
+State
+-----
+Has an EventManager
+
+
+Game
+----
+Stack of States
+
+
+1st: Could implement pause:
+Consume every event to prevent execution by others

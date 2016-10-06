@@ -30,7 +30,7 @@ public:
    *   calls matching functions if any
    * \return false if a quit request has been sent. True otherwise.
    */
-  virtual bool process() { return true; } // FIXME
+  virtual bool process() { return true; }
 
 
   /**
@@ -63,7 +63,7 @@ private:
   void releasedKeys();
 
 
-  sf::Event _event; ///< Event Manager
+//  sf::Event _event; ///< Event Manager
 
   /// callbacks / events association
   std::map<e_input, std::function<void()>> _callbacks;
