@@ -8,6 +8,10 @@ KeyManager::KeyManager()
   /// \todo Read configuration file to retrieve these values (use Settings Class)
 
   _keys_mapping.insert({sf::Keyboard::Left, e_key::E_KEY_LEFT});
+  _keys_mapping.insert({sf::Keyboard::Right, e_key::E_KEY_RIGHT});
+
+  _events_mapping.insert({sf::Keyboard::Left, e_input::MOVE_LEFT_1});
+  _events_mapping.insert({sf::Keyboard::Right, e_input::MOVE_RIGHT_1});
 
 //  // directions
 //  _keys_mapping.insert({sf::Keyboard::Up, {e_input::MOVE_UP_1}});
@@ -30,6 +34,18 @@ KeyManager::KeyManager()
 //  _keys_mapping.insert({sf::Keyboard::Escape, {e_input::EXIT_1}});
 //  _keys_mapping.insert({sf::Keyboard::Escape, {e_input::EXIT_2}});
 }
+
+
+void KeyManager::populateEvents()
+{
+  for (const auto& it: _events_mapping)
+  {
+    if (sf::Keyboard::isKeyPressed(it.first))
+      std::cout << "pressed" << std::endl;
+  }
+}
+
+
 
 
 bool KeyManager::ready(e_timer index)

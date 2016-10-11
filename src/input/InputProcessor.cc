@@ -2,10 +2,13 @@
 #include <input/InputProcessor.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <common/State.hh>
+#include <input/KeyManager.hh>
+
 
 bool InputProcessor::process()
 {
   sf::Event event;
+  auto km = std::make_shared<KeyManager> ();
   while (graphics::GraphicsEngine::pollEvent(event))
   {
     // Close window: exit request
@@ -15,6 +18,13 @@ bool InputProcessor::process()
       return false;
     }
 
+    km->populateEvents();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+      std::cout << "PRESSED" << std::endl;
+
+
+    // if sf::Keyboard::isKeyPressed(sf::Keyboard::escape)...
     // we don't care of the event type for now
 
 
@@ -26,46 +36,17 @@ bool InputProcessor::process()
 
     // call KeyManager to have a e_key from a sf::key
     // but we still need an e_event
-    // Status::currentState()->eventManager()->process(event)
+
+    // key manager _events_mapping (not _keys_mapping)
+    // auto ev = KeyManager[event.]
+//    Status::currentState()->eventManager()->process(event);
   }
 
   return true;
 }
 
-
-
-
-
-// bool InputProcessor::process()
-// {
-//   while (graphics::GraphicsEngine::pollEvent(_event))
-//   {
-//     // Close window: exit request
-//     if (_event.type == sf::Event::Closed)
-//     {
-//       graphics::GraphicsEngine::closeWindow();
-//       return false;
-//     }
-//   }
-
 //   if (_event.type == sf::Event::KeyReleased)
 //     releasedKeys();
-
-//   // trying to consume the event for every active EventManager
-// //  for (const auto& event: _km->)
-// //  {
-// //    for (const auto& manager: _managers)
-// //    {
-// //      if (_managers.process())
-// //      {
-// //        events.erase(event);
-// //        break;
-// //      }
-// //    }
-// //  }
-
-//   return true;
-// }
 
 
 // void InputProcessor::processEvents()

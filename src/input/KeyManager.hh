@@ -58,7 +58,7 @@ enum e_switch
  */
 enum e_key
 {
-  // motion keys
+  // motion keys -> events !
   E_KEY_MOVE_UP_1 = 0,
   E_KEY_MOVE_UP_2,
   E_KEY_MOVE_DOWN_1,
@@ -77,6 +77,7 @@ enum e_key
   E_KEY_EXIT_2,
 
   E_KEY_LEFT,
+  E_KEY_RIGHT,
 
   E_KEY_NB_KEYS
 };
@@ -156,11 +157,16 @@ public:
   /// sets the boolean of each considered key
   void setkeysStatus();
 
+  void getEvent(sf::Keyboard::Key key);
+
+  void populateEvents();
+
 
 
 private:
   //  std::pair<bool, sf::Keyboard::Key> _keys[E_KEY_NB_KEYS]; ///< keys list
   std::multimap<sf::Keyboard::Key, e_key> _keys_mapping; ///< key mapping
+  std::map<sf::Keyboard::Key, e_input> _events_mapping; ///< events mapping
   sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks (for key readiness)
   bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
   bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states

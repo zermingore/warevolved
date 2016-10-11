@@ -26,9 +26,7 @@ public:
 
 
   /**
-   * \brief check if a generic event (like closing the window) occurs
-   *   calls matching functions if any
-   * \return false if a quit request has been sent. True otherwise.
+   * Try to process the given event
    */
   virtual bool process() { return true; }
 
