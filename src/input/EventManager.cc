@@ -22,17 +22,18 @@ EventManager::EventManager()
 }
 
 
-//bool EventManager::execute(e_key key)
-//{
-////  if (_callbacks.find(key) == _callbacks.end())
-////  {
-////    DEBUG_PRINT("callback not found");
-////    return false;
-////  }
+bool EventManager::execute(e_input input)
+{
+ if (_callbacks.find(input) == _callbacks.end())
+ {
+   DEBUG_PRINT("callback not found");
+   return false;
+ }
 
-////  _callbacks[key]();
-//  return true;
-//}
+ // key Vs event
+ _callbacks[input]();
+ return true;
+}
 
 
 void EventManager::releasedKeys()

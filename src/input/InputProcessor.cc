@@ -1,18 +1,22 @@
-#include <input/Inputprocessor.hh>
+#include <common/Status.hh>
+#include <input/InputProcessor.hh>
+#include <graphics/GraphicsEngine.hh>
+#include <common/State.hh>
 
-
-
-boot Inputprocessor::process()
+bool InputProcessor::process()
 {
   sf::Event event;
   while (graphics::GraphicsEngine::pollEvent(event))
   {
     // Close window: exit request
-    if (_event.type == sf::Event::Closed)
+    if (event.type == sf::Event::Closed)
     {
       graphics::GraphicsEngine::closeWindow();
       return false;
     }
+
+    // we don't care of the event type for now
+
 
     // for (auto st: states)
     // {
@@ -20,7 +24,9 @@ boot Inputprocessor::process()
     //     break;
     // }
 
-    Status::currentMode()->eventManager()->process(event)
+    // call KeyManager to have a e_key from a sf::key
+    // but we still need an e_event
+    // Status::currentState()->eventManager()->process(event)
   }
 
   return true;

@@ -39,7 +39,7 @@ public:
    * \param cb callback to associate to the event.
    */
   virtual void registerEvent(e_input key, std::function<void()> cb) {
-//    _callbacks[key] = cb;
+    _callbacks[key] = cb;
   }
 
 
@@ -48,6 +48,7 @@ public:
    * \return true if a callback was executed
    */
 //  bool execute(e_key key);
+  bool execute(e_input input);
 
 
 //  void processEvents();

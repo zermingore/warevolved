@@ -10,7 +10,7 @@ InputProcessor
 --------------
 Submit current events to the EventManagers
 for every event e
-  for every EventManagers EM do
+  for every EventManagers EM do // only for the top of the States stack
     if EM->process(e)
        break
 

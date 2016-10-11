@@ -101,6 +101,10 @@ public:
   /// Default Constructor. Initializes the timers / switches
   KeyManager();
 
+  /// Returns a e_key from a sf::key
+  // e_key getKey(sf::Keyboard::Key key) { return _keys_mapping[key]; }
+
+
   /**
    * \brief timer value getter
    * \param function Function associated to the the timer we're looking for

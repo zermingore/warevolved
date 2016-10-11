@@ -3,6 +3,8 @@
 
 # include <memory>
 # include <queue>
+# include <input/EventManager.hh>
+
 
 class KeyManager;
 
@@ -13,7 +15,7 @@ public:
   /**
    * \brief process events.
    */
-  void process();
+  bool process();
 
 
 
