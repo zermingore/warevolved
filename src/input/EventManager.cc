@@ -6,8 +6,6 @@
 #include <interface/Interface.hh>
 #include <graphics/GraphicsEngine.hh>
 
-#include <input/MapEventManager.hh>
-
 
 EventManager::EventManager()
 {
@@ -16,9 +14,6 @@ EventManager::EventManager()
 //    _km->restartTimer(static_cast<e_timer> (i));
 
 //  Settings::setKeyRepeatDelay(150);
-
-//  std::shared_ptr<MapEventManager> m;
-//  _managers.push_front(m);
 }
 
 

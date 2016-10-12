@@ -43,7 +43,6 @@ common/State.cc                     \
 \
 input/KeyManager.cc                 \
 input/EventManager.cc               \
-input/MapEventManager.cc            \
 input/InputProcessor.cc             \
 \
 game/Game.cc                        \

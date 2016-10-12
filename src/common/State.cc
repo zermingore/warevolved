@@ -1,7 +1,6 @@
 #include <common/State.hh>
 #include <common/macros.hh>
 #include <input/EventManager.hh>
-#include <input/MapEventManager.hh>
 #include <common/enums/input.hh>
 
 #include <common/Debug.hh>
@@ -27,7 +26,6 @@ State::State(e_mode& mode)
     DEBUG_PRINT_VALUE(static_cast<int> (mode));
     default:
       DEBUG_PRINT("Unrecognized mode -> unable to instantiate an EventManager");
-      DEBUG_PRINT("Picking MapEventManager");
       _eventManager = std::make_shared<EventManager> ();
       _eventManager->registerEvent(e_input::MOVE_LEFT_1, print);
       break;
