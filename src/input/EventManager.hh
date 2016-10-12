@@ -28,7 +28,7 @@ public:
   /**
    * Try to process the given event
    */
-  virtual bool process() { return true; }
+  virtual bool process(e_input input);
 
 
   /**
@@ -36,8 +36,8 @@ public:
    * \param key event name.
    * \param cb callback to associate to the event.
    */
-  virtual void registerEvent(e_input key, std::function<void()> cb) {
-    _callbacks[key] = cb;
+  virtual void registerEvent(e_input input, std::function<void()> cb) {
+    _callbacks[input] = cb;
   }
 
 

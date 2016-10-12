@@ -24,6 +24,8 @@ EventManager::EventManager()
 
 bool EventManager::execute(e_input input)
 {
+  std::cout << "IMPLEM: execute shd not be called" << std::endl;
+
  if (_callbacks.find(input) == _callbacks.end())
  {
    DEBUG_PRINT("callback not found");
@@ -35,6 +37,20 @@ bool EventManager::execute(e_input input)
  return true;
 }
 
+
+bool EventManager::process(e_input input)
+{
+ if (_callbacks.find(input) == _callbacks.end())
+ {
+   std::cout << "callback not found for input "
+             << static_cast<int> (input)
+             << std::endl;
+   return false;
+ }
+
+ _callbacks[input]();
+ return true;
+}
 
 void EventManager::releasedKeys()
 {

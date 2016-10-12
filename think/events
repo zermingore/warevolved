@@ -4,6 +4,7 @@ Link HW
 Event keyboard -> Token (event)
 'a' -> EVENT_LEFT
 'a' -> EVENT_CHAR_A
+builds the list of current active events
 
 
 InputProcessor
@@ -34,3 +35,8 @@ Stack of States
 
 1st: Could implement pause:
 Consume every event to prevent execution by others
+
+
+# semantic
+HW  > HW abstraction > usable event
+key > input          > event

@@ -3,6 +3,7 @@
 #include <graphics/GraphicsEngine.hh>
 #include <common/State.hh>
 #include <input/KeyManager.hh>
+#include <common/enums/input.hh>
 
 
 bool InputProcessor::process()
@@ -20,9 +21,14 @@ bool InputProcessor::process()
 
     km->populateEvents();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-      std::cout << "PRESSED" << std::endl;
+    auto inputs(km->activeInputs());
+    for (const auto& i: inputs)
+      Status::currentState()->eventManager()->process(i);
 
+    // for every eventManager em
+    //   for every watched event e
+    //     if (keyManager::isActive(event))
+    //       em->process(e)
 
     // if sf::Keyboard::isKeyPressed(sf::Keyboard::escape)...
     // we don't care of the event type for now

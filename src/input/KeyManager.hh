@@ -161,12 +161,15 @@ public:
 
   void populateEvents();
 
+  bool isActive(e_input e);
 
+  std::vector<e_input> activeInputs() { return _active_inputs; }
 
 private:
   //  std::pair<bool, sf::Keyboard::Key> _keys[E_KEY_NB_KEYS]; ///< keys list
   std::multimap<sf::Keyboard::Key, e_key> _keys_mapping; ///< key mapping
   std::map<sf::Keyboard::Key, e_input> _events_mapping; ///< events mapping
+  std::vector<e_input> _active_inputs; ///< current inputs (high level keys)
   sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks (for key readiness)
   bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
   bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states
