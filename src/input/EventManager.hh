@@ -18,17 +18,11 @@ enum class e_input;
 class EventManager
 {
 public:
-  /// Constructor. Initializes the repetition timers.
-  EventManager();
-
-  /// Destructor
-  virtual ~EventManager() {}
-
-
   /**
-   * Try to process the given event
+   * \brief executes the callback matching the given event, if any
+   * \return true if a callback was executed
    */
-  virtual bool process(e_input input);
+  bool process(e_input input);
 
 
   /**
@@ -36,21 +30,9 @@ public:
    * \param key event name.
    * \param cb callback to associate to the event.
    */
-  virtual void registerEvent(e_input input, std::function<void()> cb) {
+  void registerEvent(e_input input, std::function<void()> cb) {
     _callbacks[input] = cb;
   }
-
-
-  /**
-   * \brief executes the callback matching the given event
-   * \return true if a callback was executed
-   */
-//  bool execute(e_key key);
-  bool execute(e_input input);
-
-
-//  void processEvents();
-
 
 
 private:
