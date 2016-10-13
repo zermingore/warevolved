@@ -43,9 +43,6 @@ private:
    */
   void releasedKeys();
 
-
-//  sf::Event _event; ///< Event Manager
-
   /// callbacks / events association
   std::map<e_input, std::function<void()>> _callbacks;
 };

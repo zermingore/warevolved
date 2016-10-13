@@ -1,9 +1,14 @@
 -*- mode:org -*-
 
 * TODO Roadmap
-  (should be no more than 2 commits ahead)
-** TODO Fix units display
-** TODO Fix events system
+** TODO Clean the code
+*** DONE Remove MapEventManager
+    CLOSED: [2016-10-13 Do 08:24]
+*** TODO Merge mode / state
+** TODO Implement the State daughter classes
+** TODO Handle real events in the EventManager
+** TODO Merge with master
+
 
 * old roadmap
 ** DONE Multiturn attacks

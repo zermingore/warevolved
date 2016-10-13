@@ -23,7 +23,13 @@ bool InputProcessor::process()
 
     auto inputs(km->activeInputs());
     for (const auto& i: inputs)
-      Status::currentState()->eventManager()->process(i);
+    {
+      // special return value -> pop State ?
+      if (Status::currentState()->eventManager()->process(i))
+        std::cout << '+' << std::flush;
+      else
+        std::cout << '.' << std::flush;
+    }
 
     // for every eventManager em
     //   for every watched event e
