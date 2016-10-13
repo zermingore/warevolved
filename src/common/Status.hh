@@ -10,7 +10,7 @@ class State;
 class Battle;
 class InGameMenu;
 
-enum class e_mode;
+enum class e_state;
 
 
 /**
@@ -40,50 +40,50 @@ public:
   static Coords selectedCell() { return _selectedCell; }
 
   /**
-   * \brief pops _modes summit
+   * \brief pops _states summit
    * exits the game if the stack is empty
    * \param skip retrieve Cursor position or not
    */
-  static void exitCurrentMode(const bool skip = false);
+  static void exitCurrentState(const bool skip = false);
 
   /**
-   * \brief pops _modes summit while current mode <> mode
+   * \brief pops _states summit while current state <> state
    * exits the game if the stack is empty
    * \param skip retrieve Cursor position or not
    */
-  static void exitToMode(e_mode mode, bool skip = false);
+  static void exitToState(e_state state, bool skip = false);
 
   /**
-   * \brief pops _modes and returns summit
+   * \brief pops _states and returns summit
    * \return Menu of the top of the stack
    */
-  static std::shared_ptr<State> popCurrentMode();
+  static std::shared_ptr<State> popCurrentState();
 
-  /**
-   * \brief return current mode
-   * meaning, the top of _modes stack's mode
-   * does *NOT* pop the stack
-   */
-  static e_mode currentMode();
+  // /**
+  //  * \brief return current state
+  //  * meaning, the top of _states stack's state
+  //  * does *NOT* pop the stack
+  //  */
+  // static e_state currentState();
 
   /**
    * \brief return current state
-   * meaning, the top of _modes stack
+   * meaning, the top of _states stack
    * does *NOT* pop the stack
    */
   static std::shared_ptr<State> currentState();
 
   /**
-   * \brief stacks a new mode on _modes
-   * \param mode mode we just entered
+   * \brief stacks a new state on _states
+   * \param state state we just entered
    */
-  static void pushMode(e_mode mode);
+  static void pushState(e_state state);
 
   /**
-   * \brief stacks a new mode on _modes
-   * \param mode mode we just entered
+   * \brief stacks a new state on _states
+   * \param state state we just entered
    */
-  static void pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu);
+  static void pushStateInGameMenu(e_state state, std::shared_ptr<InGameMenu> menu);
 
   /**
    * \brief sets selected cell coordinates to the given coordinates

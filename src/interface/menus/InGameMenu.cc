@@ -2,7 +2,7 @@
 #include <interface/menus/MenuEntry.hh>
 
 
-void InGameMenu::build(e_mode mode)
+void InGameMenu::build(/* e_state state */)
 {
   init();
 
@@ -13,10 +13,10 @@ void InGameMenu::build(e_mode mode)
   //     && current_unit->playerId() == g_status->currentPlayer()
   //     && !current_unit->played())
   // {
-  //   if (mode == mode::SELECTION_MENU)
+  //   if (state == state::SELECTION_MENU)
   //     _entries.emplace_back(MenuEntry("Move", entry::MOVE));
 
-  //   if (mode == mode::ACTION_MENU)
+  //   if (state == state::ACTION_MENU)
   //     _entries.emplace_back(MenuEntry("Stop", entry::STOP));
   // }
   // else
@@ -26,7 +26,7 @@ void InGameMenu::build(e_mode mode)
   // }
 
   // target
-  // if (mode == mode::ACTION_MENU)
+  // if (state == state::ACTION_MENU)
   //   current_unit->fillActions(_entries);
 
   _entries.emplace_back(MenuEntry("Cancel", entry::CANCEL));

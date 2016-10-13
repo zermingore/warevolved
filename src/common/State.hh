@@ -15,7 +15,7 @@
 class Menu;
 class EventManager;
 
-enum class e_mode;
+enum class e_state;
 
 
 /**
@@ -24,7 +24,7 @@ enum class e_mode;
  *
  * Stores a state, which is composed of:
  *   a cursor position
- *   a mode: \enum state index
+ *   a state: \enum state index
  *   an event manager
  */
 class State
@@ -32,22 +32,22 @@ class State
 public:
   /**
    * \brief Constructor. Fetch Cursor coordinates.
-   * \param mode State mode value.
+   * \param state State state value.
    */
-  explicit State(e_mode &mode);
+  explicit State(e_state &state);
 
   /**
    * \brief Constructor. Fetch Cursor coordinates.
-   * \param mode State mode value.
+   * \param state State state value.
    * \param menu menu state to save.
    */
-  State(e_mode mode, std::shared_ptr<Menu> menu);
+  State(e_state state, std::shared_ptr<Menu> menu);
 
   /**
-   * \brief _mode getter
-   * \return _mode value
+   * \brief _state getter
+   * \return _state value
    */
-  e_mode currentMode() { return _currentMode; }
+  e_state currentState() { return _currentState; }
 
   /**
    * \brief _menu getter
@@ -63,7 +63,7 @@ public:
 
 
 private:
-  e_mode _currentMode;         ///< State's mode
+  e_state _currentState;         ///< State's state
   std::shared_ptr<Menu> _menu; ///< menu state to save
 
   std::shared_ptr<EventManager> _eventManager; ///< State related events

@@ -1,4 +1,4 @@
-#include <common/enums/modes.hh>
+#include <common/enums/states.hh>
 #include <common/Status.hh>
 #include <common/include.hh>
 #include <common/macros.hh>
@@ -34,16 +34,16 @@ void Status::initialize()
 // }
 
 
-e_mode Status::currentMode()
-{
-  if (_states.empty())
-  {
-    DEBUG_PRINT("_states stack is empty, exiting...");
-    return e_mode::NONE;
-  }
+// e_state Status::currentState()
+// {
+//   if (_states.empty())
+//   {
+//     DEBUG_PRINT("_states stack is empty, exiting...");
+//     return e_state::NONE;
+//   }
 
-  return _states.top()->currentMode();
-}
+//   return _states.top()->currentState();
+// }
 
 
 std::shared_ptr<State> Status::currentState()
@@ -56,14 +56,14 @@ std::shared_ptr<State> Status::currentState()
 }
 
 
-void Status::pushModeInGameMenu(e_mode mode, std::shared_ptr<InGameMenu> menu)
+void Status::pushStateInGameMenu(e_state state, std::shared_ptr<InGameMenu> menu)
 {
-  menu->build(mode);
-  _states.push(std::make_shared<State> (State(mode, menu)));
+  menu->build(/*state*/);
+  _states.push(std::make_shared<State> (State(state, menu)));
 }
 
 
-void Status::exitCurrentMode(const bool skip)
+void Status::exitCurrentState(const bool skip)
 {
   if (skip)
   {
@@ -78,9 +78,9 @@ void Status::exitCurrentMode(const bool skip)
 }
 
 
-void Status::exitToMode(e_mode mode, bool skip)
+void Status::exitToState(e_state state, bool skip)
 {
-  while (_states.top()->currentMode() != mode)
+  while (_states.top()->currentState() != state)
   {
     _states.pop();
 
@@ -90,7 +90,7 @@ void Status::exitToMode(e_mode mode, bool skip)
 }
 
 
-std::shared_ptr<State> Status::popCurrentMode()
+std::shared_ptr<State> Status::popCurrentState()
 {
   auto tmp(_states.top());
   _states.pop();
@@ -99,6 +99,6 @@ std::shared_ptr<State> Status::popCurrentMode()
 }
 
 
-void Status::pushMode(e_mode mode) {
-  _states.push(std::make_shared<State> (State(mode)));
+void Status::pushState(e_state state) {
+  _states.push(std::make_shared<State> (State(state)));
 }

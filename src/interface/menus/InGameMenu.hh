@@ -10,7 +10,7 @@
 
 # include <interface/menus/Menu.hh>
 
-enum class e_mode;
+enum class e_state;
 
 
 /**
@@ -23,10 +23,10 @@ class InGameMenu: public Menu
 {
 public:
   /**
-   * \brief builds the selection menu, filling the entries.
-   * \param mode The mode about to be pushed.
+   * \brief Builds the selection menu, filling the entries.
+   * \param state The state about to be pushed.
    */
-  void build(e_mode mode);
+  void build(/* e_state state */);
 
   /// \brief executes action matching the selected entry.
   void executeEntry();

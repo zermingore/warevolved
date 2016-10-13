@@ -65,7 +65,7 @@ bool InputProcessor::process()
 // {
 //   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
 //   {
-//     Status::exitCurrentMode();
+//     Status::exitCurrentState();
 //     _km->setSwitchStatus(E_SWITCH_EXIT, ON);
 //     graphics::GraphicsEngine::closeWindow();
 //   }

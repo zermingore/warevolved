@@ -80,7 +80,7 @@ void EntriesMenu::draw()
   if (_entries->size() == 0)
   {
     DEBUG_PRINT("on demand build");
-    this->build(CURRENT_MODE); // use a cache (when pushing state)
+    this->build(CURRENT_STATE); // use a cache (when pushing state)
   }
 
   this->setOrigin();

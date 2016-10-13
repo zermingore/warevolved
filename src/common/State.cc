@@ -11,8 +11,8 @@ void print()
   DEBUG_PRINT("print()");
 }
 
-State::State(e_mode& mode)
-  : _currentMode (mode)
+State::State(e_state& state)
+  : _currentState (state)
   , _menu (nullptr)
   , _eventManager (nullptr)
 {
@@ -20,12 +20,12 @@ State::State(e_mode& mode)
   //   _cursorCoords = CURSOR->coords();
 
   // Facto DP
-  switch (static_cast<int> (mode))
+  switch (static_cast<int> (state))
   {
-    DEBUG_PRINT("State: current mode");
-    DEBUG_PRINT_VALUE(static_cast<int> (mode));
+    DEBUG_PRINT("State: current state");
+    DEBUG_PRINT_VALUE(static_cast<int> (state));
     default:
-      DEBUG_PRINT("Unrecognized mode -> unable to instantiate an EventManager");
+      DEBUG_PRINT("Unrecognized state -> unable to instantiate an EventManager");
       _eventManager = std::make_shared<EventManager> ();
       _eventManager->registerEvent(e_input::MOVE_LEFT_1, print);
       break;
@@ -38,14 +38,14 @@ State::State(e_mode& mode)
   // ACTION_MENU, // give it an order
   // ATTACK, // ask a Unit to attack
   //   default:
-  //   static_assert("invalid mode");
+  //   static_assert("invalid state");
   }
 
   //  _eventManager->registerEvent("cursor right", Cursor::moveRight());
 }
 
-State::State(e_mode mode, std::shared_ptr<Menu> menu)
-  : _currentMode (mode)
+State::State(e_state state, std::shared_ptr<Menu> menu)
+  : _currentState (state)
   , _menu (menu)
 {
   // if (CURSOR)

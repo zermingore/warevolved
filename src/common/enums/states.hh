@@ -4,17 +4,17 @@
  * \author Zermingore
  */
 
-#ifndef ENUM_MODES_HH_
-# define ENUM_MODES_HH_
+#ifndef ENUM_STATES_HH_
+# define ENUM_STATES_HH_
 
 
 /**
- * \enum e_mode
- * \brief various menu mode values. Used to notify the mode stack.
+ * \enum e_state
+ * \brief various menu state values. Used to notify the state stack.
  */
-enum class e_mode
+enum class e_state
 {
-  NONE = 0, // we should never be in this mode
+  NONE = 0, // we should never be in this state
 
   MAIN_MENU,
   IN_GAME,
@@ -33,4 +33,4 @@ enum class e_mode
 };
 
 
-#endif /* !ENUM_MODES_HH_ */
+#endif /* !ENUM_STATES_HH_ */

@@ -31,7 +31,7 @@ void Menu::init()
 
 void Menu::loadMenu()
 {
-  auto menu = Status::popCurrentMode()->menu();
+  auto menu = Status::popCurrentState()->menu();
   _entries = menu->getEntries();
   _selectedEntry = menu->selectedEntry();
   setOrigin();
@@ -63,7 +63,7 @@ void Menu::draw()
   if (_entries.size() == 0)
   {
     PRINTF("on demand build");
-    build(Status::currentMode()); // use a cache (when pushing state)
+    build(/* Status::currentState() */); // use a cache (when pushing state)
   }
 
   // setOrigin();

@@ -12,7 +12,7 @@
 # include <resources/Image.hh>
 # include <interface/menus/MenuEntry.hh>
 
-enum class e_mode;
+enum class e_state;
 
 
 /**
@@ -69,9 +69,9 @@ public:
 
   /**
    * \brief builds the selection menu, filling _entries
-   * \param mode The mode we're about to push
+   * \param state The state we're about to push
    */
-  virtual void build(e_mode mode) = 0;
+  virtual void build(/* e_state state */) = 0;
 
   /**
    * \brief executes action matching _selectedEntry
@@ -100,8 +100,7 @@ protected:
   // const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
   // { return *_entries; }
 
-  std::vector<MenuEntry> getEntries() const
-  { return _entries; }
+  std::vector<MenuEntry> getEntries() const { return _entries; }
 
   /**
    * \brief selected entry getter

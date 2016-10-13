@@ -2,7 +2,7 @@
 #include <core/Context.hh>
 #include <game/Game.hh>
 #include <common/Debug.hh>
-#include <common/enums/modes.hh>
+#include <common/enums/states.hh>
 
 
 int main(int ac, const char **av)
@@ -13,8 +13,8 @@ int main(int ac, const char **av)
   bool fullscreen(ac > 1);
   Context context(fullscreen);
 
-  /// \todo do not push a flag, push a pointer to the mode itself
-  Status::pushMode(e_mode::PLAYING); /// \todo main menu
+  /// \todo do not push a flag, push a pointer to the state itself
+  Status::pushState(e_state::PLAYING); /// \todo main menu
 
   Game game;
   game.run();

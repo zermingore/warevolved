@@ -52,7 +52,7 @@ void MenuEntry::execute()
   {
   //   case entry::ATTACK:
   //   {
-  //     g_status->pushMode(E_MODE_ATTACK);
+  //     g_status->pushState(E_STATE_ATTACK);
   //     auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
   //     auto targets (selectedUnit->targets());
   //     selectedUnit->setAttackCoords(CURSOR->coords());
@@ -67,14 +67,14 @@ void MenuEntry::execute()
   //     if (g_status->selectedUnitPosition() != CURSOR->coords())
   //       MAP.moveUnit();
 
-  //     g_status->exitToMode(E_MODE_PLAYING, true);
+  //     g_status->exitToState(E_STATE_PLAYING, true);
   //     g_interface->path()->hideAllowedPath();
   //     break;
   //   }
 
   //   case entry::MOVE:
   //   {
-  //     g_status->pushMode(E_MODE_MOVING_UNIT);
+  //     g_status->pushState(E_STATE_MOVING_UNIT);
   //     g_status->setSelectedUnitPosition(CURSOR->coords());
   //     g_interface->setPathOrigin(CURSOR->coords());
   //     break;
@@ -82,20 +82,20 @@ void MenuEntry::execute()
 
   //   case entry::NEXT_TURN:
   //     BATTLE->nextPlayer();
-  //     g_status->exitCurrentMode(true);
+  //     g_status->exitCurrentState(true);
   //     break;
 
   //   case entry::CANCEL:
   //   {
-  //     auto old_mode (CURRENT_MODE);
+  //     auto old_state (CURRENT_STATE);
   //     g_interface->inGameMenu()->loadMenu();
 
   //     // if we were dealing with orders, return to the unit position
-  //     if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
+  //     if (old_state == E_STATE_ACTION_MENU && CURRENT_STATE == E_STATE_MOVING_UNIT)
   //     {
-  //       g_status->exitCurrentMode();
+  //       g_status->exitCurrentState();
   //       // re-build menu at selection state
-  //       g_interface->inGameMenu()->build(CURRENT_MODE);
+  //       g_interface->inGameMenu()->build(CURRENT_STATE);
   //     }
   //     break;
   //   }

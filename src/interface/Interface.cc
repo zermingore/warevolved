@@ -31,12 +31,12 @@ void Interface::buildElements()
 
   _elts.push_back(elt);
 
-  //  auto mode = Status::currentMode();
-  // if (mode == mode::MOVING_UNIT || mode == mode::ACTION_MENU)
+  //  auto state = Status::currentState();
+  // if (state == state::MOVING_UNIT || state == state::ACTION_MENU)
   //   _path->drawPath();
 
   /// \todo get right inGameMenu
-  //  if (mode == e_mode::SELECTION_MENU || mode == e_mode::ACTION_MENU)
+  //  if (state == e_state::SELECTION_MENU || state == e_state::ACTION_MENU)
   //    _inGameMenu->draw();
 }
 
