@@ -2,7 +2,7 @@
 #include <common/Status.hh>
 #include <common/include.hh>
 #include <common/macros.hh>
-#include <common/State.hh>
+#include <context/State.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <game/applications/Battle.hh>
 #include <game/Map.hh>
