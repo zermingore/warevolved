@@ -59,7 +59,7 @@ std::shared_ptr<State> Status::currentState()
 void Status::pushStateInGameMenu(e_state state, std::shared_ptr<InGameMenu> menu)
 {
   menu->build(/*state*/);
-  _states.push(std::make_shared<State> (State(state, menu)));
+  // _states.push(std::make_shared<StateInGameMenu> ());
 }
 
 

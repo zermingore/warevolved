@@ -7,12 +7,13 @@
 #ifndef STATE_HH_
 # define STATE_HH_
 
-
 # include <memory>
+# include <vector>
 # include <common/using.hh>
 # include <common/structures/Vector.hh>
 
-class Menu;
+# include <iostream>
+
 class EventManager;
 
 enum class e_state;
@@ -37,23 +38,20 @@ public:
   explicit State(e_state &state);
 
   /**
-   * \brief Constructor. Fetch Cursor coordinates.
-   * \param state State state value.
-   * \param menu menu state to save.
-   */
-  State(e_state state, std::shared_ptr<Menu> menu);
-
-  /**
    * \brief _state getter
    * \return _state value
    */
   e_state currentState() { return _currentState; }
 
-  /**
-   * \brief _menu getter
-   * \return _menu a pointer over current menu
-   */
-  std::shared_ptr<Menu> menu() { return _menu; }
+  // return specific State components
+  // returns menu, ...
+  virtual std::vector<int> getAttrList() {
+    std::cout << "[IMPLEMENTATION ERROR] State "
+              << "Illegal call to moterclass getAttrList()"
+              << std::endl;
+
+    return std::vector<int> ();
+  }
 
   /**
    * \brief event manager getter
@@ -64,7 +62,6 @@ public:
 
 private:
   e_state _currentState;         ///< State's state
-  std::shared_ptr<Menu> _menu; ///< menu state to save
 
   std::shared_ptr<EventManager> _eventManager; ///< State related events
 };

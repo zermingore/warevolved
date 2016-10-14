@@ -4,7 +4,8 @@
 ** TODO Clean the code
 *** DONE Remove MapEventManager
     CLOSED: [2016-10-13 Do 08:24]
-*** TODO Merge mode / state
+*** DONE Merge mode / state
+    CLOSED: [2016-10-13 Do 08:55]
 ** TODO Implement the State daughter classes
 ** TODO Handle real events in the EventManager
 ** TODO Merge with master

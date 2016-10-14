@@ -13,19 +13,15 @@ void print()
 
 State::State(e_state& state)
   : _currentState (state)
-  , _menu (nullptr)
   , _eventManager (nullptr)
 {
-  // if (CURSOR)
-  //   _cursorCoords = CURSOR->coords();
-
   // Facto DP
   switch (static_cast<int> (state))
   {
     DEBUG_PRINT("State: current state");
     DEBUG_PRINT_VALUE(static_cast<int> (state));
     default:
-      DEBUG_PRINT("Unrecognized state -> unable to instantiate an EventManager");
+      DEBUG_PRINT("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
       _eventManager = std::make_shared<EventManager> ();
       _eventManager->registerEvent(e_input::MOVE_LEFT_1, print);
       break;
@@ -42,12 +38,4 @@ State::State(e_state& state)
   }
 
   //  _eventManager->registerEvent("cursor right", Cursor::moveRight());
-}
-
-State::State(e_state state, std::shared_ptr<Menu> menu)
-  : _currentState (state)
-  , _menu (menu)
-{
-  // if (CURSOR)
-  //   _cursorCoords = CURSOR->coords();
 }

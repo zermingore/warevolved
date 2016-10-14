@@ -29,13 +29,20 @@ void Menu::init()
   _entries.clear();
 }
 
+
 void Menu::loadMenu()
 {
-  auto menu = Status::popCurrentState()->menu();
-  _entries = menu->getEntries();
-  _selectedEntry = menu->selectedEntry();
+  auto menu_vector (Status::popCurrentState()->getAttrList());
+  if (menu_vector.empty()) {
+    assert("Menu::loadMenu() empty menu vector");
+  }
+
+  auto menu (menu_vector[0]);
+  // _entries = menu->getEntries();
+  // _selectedEntry = menu->selectedEntry();
   setOrigin();
 }
+
 
 void Menu::setOrigin()
 {

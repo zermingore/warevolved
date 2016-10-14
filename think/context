@@ -1,0 +1,11 @@
+State:
+Abstract class
+
+PlayingState, ...
+
+
+Interface, menus, ...
+link with menu
+
+menu is a kind of State ?
+Same eventManager for every Menu
