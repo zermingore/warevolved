@@ -31,11 +31,9 @@ enum class e_state;
 class State
 {
 public:
-  /**
-   * \brief Constructor. Fetch Cursor coordinates.
-   * \param state State state value.
-   */
-  explicit State(e_state &state);
+  State():
+    _eventManager(std::make_shared<EventManager> ())
+  {}
 
   /**
    * \brief _state getter
@@ -45,13 +43,7 @@ public:
 
   // return specific State components
   // returns menu, ...
-  virtual std::vector<int> getAttrList() {
-    std::cout << "[IMPLEMENTATION ERROR] State "
-              << "Illegal call to moterclass getAttrList()"
-              << std::endl;
-
-    return std::vector<int> ();
-  }
+  virtual std::vector<int> getAttrList() = 0;
 
   /**
    * \brief event manager getter
@@ -60,7 +52,7 @@ public:
   std::shared_ptr<EventManager> eventManager() { return _eventManager; }
 
 
-private:
+protected:
   e_state _currentState;         ///< State's state
 
   std::shared_ptr<EventManager> _eventManager; ///< State related events

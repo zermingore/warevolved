@@ -3,10 +3,11 @@
 #include <common/include.hh>
 #include <common/macros.hh>
 #include <context/State.hh>
+#include <context/StatePlaying.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <game/applications/Battle.hh>
 #include <game/Map.hh>
-
+#include <input/EventManager.hh>
 
 // Static class attributes definition
 std::stack<std::shared_ptr<State>> Status::_states;
@@ -56,7 +57,7 @@ std::shared_ptr<State> Status::currentState()
 }
 
 
-void Status::pushStateInGameMenu(e_state state, std::shared_ptr<InGameMenu> menu)
+void Status::pushStateInGameMenu(std::shared_ptr<InGameMenu> menu)
 {
   menu->build(/*state*/);
   // _states.push(std::make_shared<StateInGameMenu> ());
@@ -100,5 +101,10 @@ std::shared_ptr<State> Status::popCurrentState()
 
 
 void Status::pushState(e_state state) {
-  _states.push(std::make_shared<State> (State(state)));
+  if (state == e_state::PLAYING)
+    _states.push(std::make_shared<StatePlaying> ());
+  else
+    DEBUG_PRINT("Dunno what to do with this state");
+
+//  _states.push(std::make_shared<State> (State(state)));
 }

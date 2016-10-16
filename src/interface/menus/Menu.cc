@@ -4,6 +4,7 @@
 #include <common/macros.hh>
 #include <common/Status.hh>
 #include <context/State.hh>
+#include <input/EventManager.hh>
 
 
 Menu::Menu() :

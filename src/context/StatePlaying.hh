@@ -7,11 +7,16 @@
 #ifndef STATE_PLAYING_HH_
 # define STATE_PLAYING_HH_
 
+# include <context/State.hh>
+
 class StatePlaying: public State
 {
 public:
+  /// registers to callbacks
+  StatePlaying();
+  void moveCursor(); // add param ?
 
-private:
+  std::vector<int> getAttrList();
 };
 
 

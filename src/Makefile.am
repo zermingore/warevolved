@@ -39,7 +39,7 @@ common/Debug.cc                     \
 common/System.cc                    \
 common/Settings.cc                  \
 common/Status.cc                    \
-context/State.cc                    \
+context/StatePlaying.cc             \
 \
 input/KeyManager.cc                 \
 input/EventManager.cc               \

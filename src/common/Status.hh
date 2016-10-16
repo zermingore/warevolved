@@ -83,7 +83,7 @@ public:
    * \brief stacks a new state on _states
    * \param state state we just entered
    */
-  static void pushStateInGameMenu(e_state state, std::shared_ptr<InGameMenu> menu);
+  static void pushStateInGameMenu(std::shared_ptr<InGameMenu> menu);
 
   /**
    * \brief sets selected cell coordinates to the given coordinates
