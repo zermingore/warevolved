@@ -12,8 +12,6 @@
 # include <common/using.hh>
 # include <common/structures/Vector.hh>
 
-# include <iostream>
-
 class EventManager;
 
 enum class e_state;
@@ -53,8 +51,7 @@ public:
 
 
 protected:
-  e_state _currentState;         ///< State's state
-
+  e_state _currentState; ///< State's state
   std::shared_ptr<EventManager> _eventManager; ///< State related events
 };
 

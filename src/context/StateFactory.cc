@@ -4,6 +4,7 @@
 
 #include <common/Debug.hh>
 
+
 std::shared_ptr<State> StateFactory::createState(e_state& state)
 {
   DEBUG_PRINT("ILLEGAL CALL to abstract class State ?");

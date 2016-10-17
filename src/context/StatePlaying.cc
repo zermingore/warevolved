@@ -14,7 +14,6 @@ void test()
 StatePlaying::StatePlaying()
   : State()
 {
-//  _eventManager = std::make_shared<EventManager> ();
   _eventManager->registerEvent(e_input::MOVE_LEFT_1, test);
 }
 
@@ -30,6 +29,8 @@ std::vector<int> StatePlaying::getAttrList()
   std::cout << "[IMPLEMENTATION ERROR] StatePlaying"
             << " Illegal call to getAttrList()"
             << std::endl;
+
+  // std::static_assert(false);
 
   return std::vector<int> ();
 }

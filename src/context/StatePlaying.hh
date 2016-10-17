@@ -9,14 +9,23 @@
 
 # include <context/State.hh>
 
+
+/**
+ * \class StatePlaying
+ * \brief Represents the default playing State (on the map, without menu)
+ */
 class StatePlaying: public State
 {
 public:
   /// registers to callbacks
   StatePlaying();
-  void moveCursor(); // add param ?
 
+  /// Aborts the execution
   std::vector<int> getAttrList();
+
+
+private:
+  void moveCursor(); // add param ?
 };
 
 

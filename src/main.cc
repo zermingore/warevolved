@@ -13,7 +13,6 @@ int main(int ac, const char **av)
   bool fullscreen(ac > 1);
   Context context(fullscreen);
 
-  /// \todo do not push a flag, push a pointer to the state itself
   Status::pushState(e_state::PLAYING); /// \todo main menu
 
   Game game;

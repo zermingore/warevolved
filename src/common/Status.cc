@@ -104,11 +104,4 @@ std::shared_ptr<State> Status::popCurrentState()
 
 void Status::pushState(e_state state) {
   _states.push(StateFactory::createState(state));
-
-  // if (state == e_state::PLAYING)
-  //   _states.push(std::make_shared<StatePlaying> ());
-  // else
-  //   DEBUG_PRINT("Dunno what to do with this state");
-
-//  _states.push(std::make_shared<State> (State(state)));
 }
