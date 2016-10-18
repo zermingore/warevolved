@@ -12,6 +12,7 @@ InputProcessor::InputProcessor()
 {
 }
 
+
 bool InputProcessor::process()
 {
   sf::Event event;

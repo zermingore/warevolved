@@ -5,13 +5,17 @@
 # include <queue>
 # include <input/EventManager.hh>
 
-
 class KeyManager;
 
 
+/**
+ * \class InputProcessor
+ * \brief Processes events through the States EventManagers
+ */
 class InputProcessor
 {
 public:
+  /// Instanciates a KeyManager
   InputProcessor();
 
   /**
@@ -20,12 +24,11 @@ public:
   bool process();
 
 
-
 private:
   /// Event managers queue
   std::deque<std::shared_ptr<EventManager>> _managers;
 
-  /// Key Manager
+  /// Key Manager to handle Hardware input
   std::shared_ptr<KeyManager> _km;
 };
 
