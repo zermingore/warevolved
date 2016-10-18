@@ -12,6 +12,8 @@ class KeyManager;
 class InputProcessor
 {
 public:
+  InputProcessor();
+
   /**
    * \brief process events.
    */
@@ -23,6 +25,7 @@ private:
   /// Event managers queue
   std::deque<std::shared_ptr<EventManager>> _managers;
 
+  /// Key Manager
   std::shared_ptr<KeyManager> _km;
 };
 

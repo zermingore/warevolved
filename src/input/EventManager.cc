@@ -9,14 +9,14 @@
 
 bool EventManager::process(e_input input)
 {
- if (_callbacks.find(input) == _callbacks.end())
- {
-   std::cout << "callback not found for input "
-             << static_cast<int> (input)
-             << std::endl;
-   return false;
- }
+  if (_callbacks.find(input) == _callbacks.end())
+  {
+    std::cout << "callback not found for input "
+              << static_cast<int> (input)
+              << std::endl;
+    return false;
+  }
 
- _callbacks[input]();
- return true;
+  _callbacks[input]();
+  return true;
 }

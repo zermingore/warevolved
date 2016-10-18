@@ -1,6 +1,7 @@
 #include <context/StatePlaying.hh>
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
+#include <game/applications/Battle.hh>
 
 #include <iostream>
 
@@ -14,11 +15,12 @@ void test()
 StatePlaying::StatePlaying()
   : State()
 {
-  _eventManager->registerEvent(e_input::MOVE_LEFT_1, test);
+  _eventManager->registerEvent(e_input::MOVE_LEFT_1,
+                               std::bind(&StatePlaying::moveCursorLeft, this));
 }
 
 
-void StatePlaying::moveCursor() // add param ?
+void StatePlaying::moveCursorLeft()
 {
   std::cout << "moveCursor()" << std::endl;
 }

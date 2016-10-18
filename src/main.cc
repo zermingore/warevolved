@@ -1,8 +1,6 @@
-#include <common/Status.hh>
 #include <core/Context.hh>
 #include <game/Game.hh>
 #include <common/Debug.hh>
-#include <common/enums/states.hh>
 
 
 int main(int ac, const char **av)
@@ -13,7 +11,7 @@ int main(int ac, const char **av)
   bool fullscreen(ac > 1);
   Context context(fullscreen);
 
-  Status::pushState(e_state::PLAYING); /// \todo main menu
+  /// \todo main menu (pushState or the like)
 
   Game game;
   game.run();

@@ -6,10 +6,15 @@
 #include <common/enums/input.hh>
 
 
+
+InputProcessor::InputProcessor()
+  : _km(std::make_shared<KeyManager> ())
+{
+}
+
 bool InputProcessor::process()
 {
   sf::Event event;
-  auto km = std::make_shared<KeyManager> ();
   while (graphics::GraphicsEngine::pollEvent(event))
   {
     // Close window: exit request
@@ -19,9 +24,9 @@ bool InputProcessor::process()
       return false;
     }
 
-    km->populateEvents();
+    _km->populateEvents();
 
-    auto inputs(km->activeInputs());
+    auto inputs(_km->activeInputs());
     for (const auto& i: inputs)
     {
       // special return value -> pop State ?
@@ -30,28 +35,6 @@ bool InputProcessor::process()
       else
         std::cout << '.' << std::flush;
     }
-
-    // for every eventManager em
-    //   for every watched event e
-    //     if (keyManager::isActive(event))
-    //       em->process(e)
-
-    // if sf::Keyboard::isKeyPressed(sf::Keyboard::escape)...
-    // we don't care of the event type for now
-
-
-    // for (auto st: states)
-    // {
-    //   if (st->eventManager()->process(event))
-    //     break;
-    // }
-
-    // call KeyManager to have a e_key from a sf::key
-    // but we still need an e_event
-
-    // key manager _events_mapping (not _keys_mapping)
-    // auto ev = KeyManager[event.]
-//    Status::currentState()->eventManager()->process(event);
   }
 
   return true;

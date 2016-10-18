@@ -57,3 +57,19 @@ Abstract class
 MapState / MenuState / ...
 has ist own EventManager
 (will be deleted / created at every push / pop but we don't care for now)
+
+
+
+
+Ex:
+StatePlaying: event left -> cursor left
+-> how ?
+
+call battle / map -> change_cursor or the like ?
+
+
+Lambda
+------
+
+std::function<void> () = [=] Class::method()
+// or = std::bind(&Class::method, this)

@@ -24,6 +24,7 @@ Menu::Menu(std::vector<MenuEntry> &entries) :
   // _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
+
 void Menu::init()
 {
   setOrigin();

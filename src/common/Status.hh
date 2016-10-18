@@ -34,6 +34,12 @@ public:
   // void cellSelection();
 
   // __________________________ Getters / Setters __________________________ //
+  /// Battle getter
+  static std::shared_ptr<Battle> battle() { return _battle; }
+
+  /// Battle setter
+  static void setBattle(std::shared_ptr<Battle> battle) { _battle = battle; }
+
   /**
    * \brief returns selected cell's coordinates
    */
@@ -58,13 +64,6 @@ public:
    * \return Menu of the top of the stack
    */
   static std::shared_ptr<State> popCurrentState();
-
-  // /**
-  //  * \brief return current state
-  //  * meaning, the top of _states stack's state
-  //  * does *NOT* pop the stack
-  //  */
-  // static e_state currentState();
 
   /**
    * \brief return current state

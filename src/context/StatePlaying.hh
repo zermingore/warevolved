@@ -25,7 +25,8 @@ public:
 
 
 private:
-  void moveCursor(); // add param ?
+  void moveCursorLeft();
+  // void moveCursor(); // add param ? (issue: input cb: std::function<void()>)
 };
 
 
