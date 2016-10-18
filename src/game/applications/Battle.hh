@@ -17,6 +17,7 @@ class Player;
 
 enum class e_units;
 
+
 /**
  * \class Battle
  * \brief A battle is a game, launched from the Game class.

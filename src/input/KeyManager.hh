@@ -58,26 +58,29 @@ enum e_switch
  */
 enum e_key
 {
-  // motion keys -> events !
-  E_KEY_MOVE_UP_1 = 0,
-  E_KEY_MOVE_UP_2,
-  E_KEY_MOVE_DOWN_1,
-  E_KEY_MOVE_DOWN_2,
-  E_KEY_MOVE_LEFT_1,
-  E_KEY_MOVE_LEFT_2,
-  E_KEY_MOVE_RIGHT_1,
-  E_KEY_MOVE_RIGHT_2,
+  // // motion keys -> events !
+  // E_KEY_MOVE_UP_1 = 0,
+  // E_KEY_MOVE_UP_2,
+  // E_KEY_MOVE_DOWN_1,
+  // E_KEY_MOVE_DOWN_2,
+  // E_KEY_MOVE_LEFT_1,
+  // E_KEY_MOVE_LEFT_2,
+  // E_KEY_MOVE_RIGHT_1,
+  // E_KEY_MOVE_RIGHT_2,
 
-  // action keys
-  E_KEY_SELECTION_1,
-  E_KEY_SELECTION_2,
+  // // action keys
+  // E_KEY_SELECTION_1,
+  // E_KEY_SELECTION_2,
 
-  // exit requests
-  E_KEY_EXIT_1,
-  E_KEY_EXIT_2,
+  // // exit requests
+  // E_KEY_EXIT_1,
+  // E_KEY_EXIT_2,
 
+  E_KEY_UP,
+  E_KEY_DOWN,
   E_KEY_LEFT,
   E_KEY_RIGHT,
+
 
   E_KEY_NB_KEYS
 };

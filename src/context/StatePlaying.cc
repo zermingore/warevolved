@@ -2,6 +2,9 @@
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
 #include <game/applications/Battle.hh>
+#include <common/Status.hh>
+#include <game/Player.hh>
+#include <interface/Cursor.hh>
 
 #include <iostream>
 
@@ -15,14 +18,46 @@ void test()
 StatePlaying::StatePlaying()
   : State()
 {
+  // Lambda + parameter ?
+  // _eventManager->registerEvent(e_input::MOVE_LEFT_1, [this] {moveCursorRight});
+  _eventManager->registerEvent(e_input::MOVE_UP_1,
+                               std::bind(&StatePlaying::moveCursorUp, this));
+
+  _eventManager->registerEvent(e_input::MOVE_DOWN_1,
+                               std::bind(&StatePlaying::moveCursorDown, this));
+
   _eventManager->registerEvent(e_input::MOVE_LEFT_1,
                                std::bind(&StatePlaying::moveCursorLeft, this));
+
+  _eventManager->registerEvent(e_input::MOVE_RIGHT_1,
+                               std::bind(&StatePlaying::moveCursorRight, this));
 }
 
 
 void StatePlaying::moveCursorLeft()
 {
-  std::cout << "moveCursor()" << std::endl;
+  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
+  cursor->moveLeft();
+}
+
+
+void StatePlaying::moveCursorRight()
+{
+  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
+  cursor->moveRight();
+}
+
+
+void StatePlaying::moveCursorUp()
+{
+  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
+  cursor->moveUp();
+}
+
+void StatePlaying::moveCursorDown()
+{
+  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
+  cursor->moveDown();
 }
 
 
