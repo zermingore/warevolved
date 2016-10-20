@@ -36,6 +36,9 @@ public:
    */
   size_t id() { return _id; }
 
+
+  void moveCursorRight();
+
   /**
    * \brief Player's interface getter.
    * \return Interface pointer.
@@ -48,6 +51,7 @@ private:
   // (logicaly const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player's identifier
   std::shared_ptr<interface::Interface> _interface; ///< User Interface
+  std::shared_ptr<interface::Cursor> _cursor; ///< Map Cursor
 };
 
 #endif /* !PLAYER_HH_ */

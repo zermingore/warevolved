@@ -31,33 +31,34 @@ StatePlaying::StatePlaying()
 
   _eventManager->registerEvent(e_input::MOVE_RIGHT_1,
                                std::bind(&StatePlaying::moveCursorRight, this));
+  // _eventManager->registerEvent(e_input::MOVE_RIGHT_1,
+  //                              std::bind(&Status::battle()->getCurrentPlayer()->moveCursorRight, Status::battle()));
 }
 
 
 void StatePlaying::moveCursorLeft()
 {
-  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
-  cursor->moveLeft();
+//  const auto cursor(Status::battle()->getCurrentPlayer()->moveCursorLeft());
 }
 
 
 void StatePlaying::moveCursorRight()
 {
-  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
-  cursor->moveRight();
+  Status::battle()->getCurrentPlayer()->moveCursorRight();
+//  const auto cursor(Status::battle()->getCurrentPlayer()->moveCursorRight());
 }
 
 
 void StatePlaying::moveCursorUp()
 {
-  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
-  cursor->moveUp();
+  const auto cursor(Status::battle()->getCurrentPlayer()->interface());
+//  cursor->moveUp();
 }
 
 void StatePlaying::moveCursorDown()
 {
-  const auto cursor(Status::battle()->getCurrentPlayer()->interface()->cursor());
-  cursor->moveDown();
+  const auto cursor(Status::battle()->getCurrentPlayer()->interface());
+//  cursor->moveDown();
 }
 
 

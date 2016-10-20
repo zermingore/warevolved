@@ -13,6 +13,9 @@
 # include <interface/InterfaceSettings.hh>
 
 
+# include <SFML/Graphics.hpp>
+
+
 namespace interface {
 
 /**
@@ -23,10 +26,7 @@ class InterfaceElement
 {
 public:
   /**
-   * \brief Default constructor.
-   *
-   * Initializes position, scale and rotation of the element.
-   *
+   * \brief constructor. Initialize position, scale and rotation of the element.
    * \param image_string name of the Image resource
    */
   explicit InterfaceElement(const std::string& image_name);
@@ -97,11 +97,19 @@ public:
   void setRotation(const float &rotation) { _rotation = rotation; }
 
 
+  std::shared_ptr<sf::Sprite> getSprite();
+
+
+  /**
+   * \brief Updates the graphical attributes of the elements before rendering
+   */
+  virtual void update() = 0;
+
 
 protected:
   std::string _img_name; ///< Associated image name
 
-  Coords _position;      ///< Element position
+  Coords _position;      ///< Element position (px or cell ?)
   Vector2<float> _scale; ///< Element scale (related to a Cell size)
   float _rotation;       ///< Element rotation
 };

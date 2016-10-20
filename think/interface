@@ -1,0 +1,12 @@
+Interface
+
+Player:
+- has an Interface
+- has some InterfaceElement
+
+InterfaceElement
+::update
+-> update position, graphics attributes
+
+Interface::update()
+call update() on every InterfaceElement

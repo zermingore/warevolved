@@ -12,7 +12,6 @@
 # include <common/include.hh>
 # include <common/using.hh> // Coords
 
-
 class Map;
 class MapGraphicsProperties;
 class Cell;
@@ -22,8 +21,6 @@ class Interface;
 
 
 namespace graphics {
-
-void initialize();
 
 
 typedef sf::Sprite Sprite;

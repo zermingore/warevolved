@@ -41,18 +41,22 @@ public:
    */
   void buildElements();
 
+  /**
+   * \brief Update every elements parameters.
+   */
+  void updateElements();
 
   /**
-   * \brief cursor's getter.
-   * \return Player's Cursor.
+   * \brief Adds an InterfaceElement to manage
+   * \param elt Element to add to the interface
    */
-  std::shared_ptr<Cursor> cursor() { return _cursor; }
+  void addElement(std::shared_ptr<InterfaceElement> elt);
 
   /**
    * \brief Interface elements vector getter.
    * \return Elements of the interface.
    */
-  std::vector<InterfaceElement>& elements() { return _elts; }
+  std::vector<std::shared_ptr<InterfaceElement>>& elements() { return _elts; }
 
   /**
    * \brief Cursor color getter.
@@ -100,8 +104,7 @@ public:
 
 
 private:
-  std::shared_ptr<Cursor> _cursor; ///< Map Cursor
-  std::vector<InterfaceElement> _elts; ///< list of elements
+  std::vector<std::shared_ptr<InterfaceElement>> _elts; ///< list of elements
   std::unique_ptr<InterfaceSettings> _settings; ///< interface settings
 
   //  std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu

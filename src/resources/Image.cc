@@ -155,6 +155,10 @@ void Image::drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsPro
   if (!_sprite)
     sprite();
 
+
+  // static int offset=0;
+  // offset = ++offset % 5; // stylish shaking
+
   // Sprite position
   sf::Vector2f pos;
   pos.x = c.x * p->cellWidth()  + p->gridOffsetX();

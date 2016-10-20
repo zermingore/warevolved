@@ -10,17 +10,9 @@
 
 namespace graphics {
 
-const std::string DEFAULT_RESOURCES_XML_FILE = "resources.xml";
-
 // Static Variables definition
 std::unique_ptr<sf::RenderWindow> GraphicsEngine::_window;
 float GraphicsEngine::_currentFPS;
-
-
-void initialize()
-{
-  resources::ResourcesManager::initialize(DEFAULT_RESOURCES_XML_FILE);
-}
 
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
@@ -43,20 +35,32 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
   auto interface(battle->getCurrentPlayer()->interface());
 
   // prepare the elements to draw
-  interface->buildElements();
+  // interface->updateElements();
 
   // Draw every element in Interface
+  int i = 0;
   for (const auto& elt: interface->elements())
   {
-    Image& image(resources::ResourcesManager::getImage(elt.name()));
-    image.sprite()->setColor(interface->unitsColor());
+    std::cout << ++i << ' ';
+
+    elt->update();
+
+    // Image& image(resources::ResourcesManager::getImage(elt->name()));
+    // image.sprite()->setColor(interface->unitsColor());
+
+    auto sprite(elt->getSprite());
+    sprite->setColor(interface->unitsColor());
+
+    draw(sprite);
 
     // float x = elt.scale().x;
     // float y = elt.scale().y;
     // image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
 
-    image.drawAtCell(elt.position(), p);
+    // image.drawAtCell(elt->position(), p);
   }
+
+  std::cout << '\n';
 }
 
 
@@ -75,9 +79,9 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
   setGridOffset(map);
 
   // drawing cells (their background and their content)
-  std::vector<std::vector<std::shared_ptr<Cell>>> cells = map->cells();
+  const auto cells(map->cells());
 
-  /// \todo [Optimization] fetch every terrains first
+  /// \todo [Optimization] fetch every terrain first
 
   // draw column by column
   for (auto i(0u); i < map->nbColumns(); ++i)
@@ -89,7 +93,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
       switch (c->terrain())
       {
         default:
-          auto img = resources::ResourcesManager::getImage("forest");
+          auto img(resources::ResourcesManager::getImage("forest"));
           img.drawAtCell(c->coords(), map->graphicsProperties());
           break;
       }
@@ -118,8 +122,8 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   rectangle.setOutlineColor(GRID_COLOR);
   rectangle.setOutlineThickness(p->gridThickness());
 
-  auto offset_x = p->gridOffsetX();
-  auto offset_y = p->gridOffsetY();
+  auto offset_x(p->gridOffsetX());
+  auto offset_y(p->gridOffsetY());
 
   // for each line, draw a rectangle
   for (auto i(0u); i < map->nbLines(); ++i)

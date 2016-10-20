@@ -1,17 +1,21 @@
 -*- mode:org -*-
 
+* TODO Tasks
+Main menu
+Free at exit
+Map graphic update
+Cursor (interface) in its thread
+
 * TODO Roadmap
-** TODO Clean the code
-*** DONE Remove MapEventManager
-    CLOSED: [2016-10-13 Do 08:24]
-*** DONE Merge mode / state
-    CLOSED: [2016-10-13 Do 08:55]
-** TODO Implement the State daughter classes
-** TODO Handle real events in the EventManager
-** TODO Merge with master
 
 
 * old roadmap
+** DONE Implement the State daughter classes
+   CLOSED: [2016-10-19 Mi 07:17]
+** DONE Handle real events in the EventManager
+   CLOSED: [2016-10-19 Mi 07:17]
+** DONE Merge with clean
+   CLOSED: [2016-10-19 Mi 07:17]
 ** DONE Multiturn attacks
    CLOSED: [2014-07-01 Tue 20:17]
 ** DONE Units: random names

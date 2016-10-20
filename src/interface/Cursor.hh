@@ -9,8 +9,11 @@
 
 # include <common/include.hh>
 # include <common/using.hh>
+# include <interface/InterfaceElement.hh>
+
 
 namespace interface {
+
 
 /**
  * \class Cursor
@@ -18,18 +21,11 @@ namespace interface {
  *
  * Manages cursor shape, animation, motion.
  */
-class Cursor
+class Cursor: public InterfaceElement
 {
 public:
   /// Default Constructor
-  Cursor() {}
-
-  /**
-   * \brief Constructor. Sets the map limits according to the given parameters.
-   * \param nb_columns number of columns in the map
-   * \param nb_lines number of lines in the map
-   */
-  Cursor(size_t nb_columns, size_t nb_lines);
+  Cursor();
 
   /**
    * \brief X (column) coordinate getter
@@ -54,9 +50,11 @@ public:
   void setCoords(Coords coords) { _coords = coords; }
 
   /**
-   * \brief sets _nbColumns and _nbLines
+   * \brief Sets the map limits according to the given parameters.
+   * \param nb_columns number of columns in the map
+   * \param nb_lines number of lines in the map
    */
-  void setLimits(size_t nbColumns, size_t nbLines);
+  void setLimits(size_t nb_columns, size_t nb_lines);
 
 
   // ____________________________ Cursor Motion ____________________________ //
@@ -85,15 +83,19 @@ public:
   bool moveRight();
 
 
+  /**
+   * \brief Updates the graphics properties of the cursor
+   */
+  void update();
+
+
+
 private:
   // map attributes
   size_t _nbColumns; ///< number of columns in map
   size_t _nbLines;   ///< number of Lines in map
-
-  Coords _coords; ///< Cursor Coordinates
-
-  std::string _image; ///< cursor's Image
-  sf::Color _color;   ///< cursor's color
+  Coords _coords;    ///< Cursor Coordinates (in cells)
+  sf::Color _color;  ///< cursor's color
 };
 
 

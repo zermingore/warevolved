@@ -70,13 +70,13 @@ size_t Map::currentPlayer() const {
 
 void Map::moveUnit()
 {
-  const Coords c(Status::selectedCell());
-  std::shared_ptr<Unit> tmp(_cells[c.x][c.y]->unit());
-  const auto cursor(_battle->getCurrentPlayer()->interface()->cursor());
+  // const Coords c(Status::selectedCell());
+  // std::shared_ptr<Unit> tmp(_cells[c.x][c.y]->unit());
+  // const auto cursor(_battle->getCurrentPlayer()->interface()->cursor());
 
-  tmp->setCellCoordinates(cursor->coords());
-  _cells[cursor->x()][cursor->y()]->setUnit(tmp);
-  _cells[c.x][c.y]->removeUnit();
+  // tmp->setCellCoordinates(cursor->coords());
+  // _cells[cursor->x()][cursor->y()]->setUnit(tmp);
+  // _cells[c.x][c.y]->removeUnit();
 }
 
 void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
