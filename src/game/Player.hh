@@ -37,6 +37,9 @@ public:
   size_t id() { return _id; }
 
 
+  void moveCursorUp();
+  void moveCursorDown();
+  void moveCursorLeft();
   void moveCursorRight();
 
   /**

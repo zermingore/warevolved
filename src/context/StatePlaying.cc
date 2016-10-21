@@ -9,56 +9,27 @@
 #include <iostream>
 
 
-void test()
-{
-  std::cout << "test" << std::endl;
-}
-
 
 StatePlaying::StatePlaying()
   : State()
 {
   // Lambda + parameter ?
+
+  auto player(Status::battle()->getCurrentPlayer());
+
+
   // _eventManager->registerEvent(e_input::MOVE_LEFT_1, [this] {moveCursorRight});
   _eventManager->registerEvent(e_input::MOVE_UP_1,
-                               std::bind(&StatePlaying::moveCursorUp, this));
+                               [=] { player->moveCursorUp(); });
 
   _eventManager->registerEvent(e_input::MOVE_DOWN_1,
-                               std::bind(&StatePlaying::moveCursorDown, this));
+                               [=] { player->moveCursorDown(); });
 
   _eventManager->registerEvent(e_input::MOVE_LEFT_1,
-                               std::bind(&StatePlaying::moveCursorLeft, this));
+                               [=] { player->moveCursorLeft(); });
 
   _eventManager->registerEvent(e_input::MOVE_RIGHT_1,
-                               std::bind(&StatePlaying::moveCursorRight, this));
-  // _eventManager->registerEvent(e_input::MOVE_RIGHT_1,
-  //                              std::bind(&Status::battle()->getCurrentPlayer()->moveCursorRight, Status::battle()));
-}
-
-
-void StatePlaying::moveCursorLeft()
-{
-//  const auto cursor(Status::battle()->getCurrentPlayer()->moveCursorLeft());
-}
-
-
-void StatePlaying::moveCursorRight()
-{
-  Status::battle()->getCurrentPlayer()->moveCursorRight();
-//  const auto cursor(Status::battle()->getCurrentPlayer()->moveCursorRight());
-}
-
-
-void StatePlaying::moveCursorUp()
-{
-  const auto cursor(Status::battle()->getCurrentPlayer()->interface());
-//  cursor->moveUp();
-}
-
-void StatePlaying::moveCursorDown()
-{
-  const auto cursor(Status::battle()->getCurrentPlayer()->interface());
-//  cursor->moveDown();
+                               [=] { player->moveCursorRight(); });
 }
 
 

@@ -53,8 +53,6 @@ bool Cursor::moveRight()
   unsigned int old = _coords.x;
   _coords.x = std::min(_coords.x + 1, _nbColumns - 1);
 
-  setPosition(_coords);
-
   return (old != _coords.x);
 }
 

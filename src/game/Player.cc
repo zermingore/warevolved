@@ -12,16 +12,25 @@ Player::Player(Color c)
 
   _cursor = std::make_shared<interface::Cursor> ();
 
-  // interface::InterfaceElement elt("cursor");
-  // elt.setPosition(_cursor->coords());
-  // elt.setRotation(45.);
-  // elt.setScale(.1);
-
   _interface->addElement(_cursor);
 }
 
 
+
+void Player::moveCursorUp() {
+  _cursor->moveUp();
+}
+
+
+void Player::moveCursorDown() {
+  _cursor->moveDown();
+}
+
+void Player::moveCursorLeft() {
+  _cursor->moveLeft();
+}
+
+
 void Player::moveCursorRight() {
-  std::cout << "->" << std::endl;
   _cursor->moveRight();
 }
