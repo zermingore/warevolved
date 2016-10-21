@@ -31,22 +31,13 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
 void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
 {
-  auto p(battle->map()->graphicsProperties());
+//  const std::shared_ptr<MapGraphicsProperties> p(battle->map()->graphicsProperties());
   auto interface(battle->getCurrentPlayer()->interface());
 
-  // prepare the elements to draw
-  // interface->updateElements();
-
   // Draw every element in Interface
-  int i = 0;
   for (const auto& elt: interface->elements())
   {
-    std::cout << ++i << ' ';
-
-    elt->update();
-
-    // Image& image(resources::ResourcesManager::getImage(elt->name()));
-    // image.sprite()->setColor(interface->unitsColor());
+    elt->update(battle->map()->graphicsProperties());
 
     auto sprite(elt->getSprite());
     sprite->setColor(interface->unitsColor());

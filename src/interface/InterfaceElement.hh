@@ -11,7 +11,7 @@
 # include <common/using.hh>
 # include <common/structures/Vector.hh>
 # include <interface/InterfaceSettings.hh>
-
+# include <game/Map.hh>
 
 # include <SFML/Graphics.hpp>
 
@@ -103,7 +103,7 @@ public:
   /**
    * \brief Updates the graphical attributes of the elements before rendering
    */
-  virtual void update() = 0;
+  virtual void update(const std::shared_ptr<Map::MapGraphicsProperties> properties) = 0;
 
 
 protected:

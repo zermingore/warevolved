@@ -57,13 +57,12 @@ bool Cursor::moveRight()
 }
 
 
-void Cursor::update()
+void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
 {
   _rotation += 1;
-  _position.x = _coords.x * 64;
-  _position.y = _coords.y * 64;
-  std::cout << "cursor update "
-            << _position.x << ', ' << _position.y << std::endl;
+
+  _position.x = _coords.x * properties->cellWidth()  + properties->gridOffsetX();
+  _position.y = _coords.y * properties->cellHeight() + properties->gridOffsetY();
 }
 
 
