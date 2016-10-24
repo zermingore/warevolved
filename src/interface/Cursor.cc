@@ -59,10 +59,14 @@ bool Cursor::moveRight()
 
 void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
 {
-  _rotation += 1;
+  auto width(properties->cellWidth());
+  auto height(properties->cellHeight());
 
-  _position.x = _coords.x * properties->cellWidth()  + properties->gridOffsetX();
-  _position.y = _coords.y * properties->cellHeight() + properties->gridOffsetY();
+  _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
+  _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
+
+  _image.sprite()->setOrigin(width / 2, height / 2);
+  _rotation += 1;
 }
 
 

@@ -11,12 +11,13 @@
 void Game::run()
 {
   using namespace graphics; // function scope
-  auto battle = std::make_shared<Battle> ();
-  Status::setBattle(battle);
-
-  auto input_processor = std::make_shared<InputProcessor> ();
 
   resources::ResourcesManager::initialize("resources.xml");
+
+  auto battle(std::make_shared<Battle> ());
+  Status::setBattle(battle);
+
+  auto input_processor(std::make_shared<InputProcessor> ());
   Status::pushState(e_state::PLAYING);
 
   // Game loop: processing events, updating display

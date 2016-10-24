@@ -103,7 +103,7 @@ private:
    * \brief list all available Resources
    * it displays resources lists, by categories
    */
-  void listResources();
+  static void listResources();
 # endif
 
   static std::map<std::string, std::shared_ptr<graphics::Image>> _images; ///< Images list

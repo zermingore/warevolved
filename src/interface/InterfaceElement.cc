@@ -13,21 +13,21 @@ namespace interface {
 
 InterfaceElement::InterfaceElement(const std::string &image_name) :
   _img_name(image_name)
+  , _image(resources::ResourcesManager::getImage(_img_name))
 {
+  _scale.x = _image.sprite()->getTexture()->getSize().x;
+  _scale.y = _image.sprite()->getTexture()->getSize().y;
 
-  //  float x(image.sprite()->getTexture()->getSize().x);
-  //  float y(image.sprite()->getTexture()->getSize().y);
-  //  image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+//  _image.sprite()->setScale(p->cellWidth() / _scale.x, p->cellHeight() / _scale.y);
 }
 
 
 std::shared_ptr<sf::Sprite> InterfaceElement::getSprite()
 {
-  graphics::Image& image(resources::ResourcesManager::getImage(_img_name));
-
-  auto sprite(image.sprite());
+  auto sprite(_image.sprite());
   sprite->setRotation(_rotation);
-  sprite->setPosition(sf::Vector2f (_position.x, _position.y));
+
+  sprite->setPosition(sf::Vector2f(_position.x, _position.y));
 
   return sprite;
 }

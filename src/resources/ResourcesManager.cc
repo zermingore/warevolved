@@ -125,7 +125,8 @@ graphics::Image& ResourcesManager::getImage(const std::string name)
     return *_images[name];
 
 # ifdef DEBUG
-  assert(false && "Image not found");
+  std::cout << "ResourcesManager::getImage image name: " << name << std::endl;
+  //assert(! "Image not found");
 # endif
 
   Debug::error("Unable to find image: ", name);

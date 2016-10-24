@@ -16,6 +16,9 @@
 # include <SFML/Graphics.hpp>
 
 
+#include <resources/ResourcesManager.hh>
+
+
 namespace interface {
 
 /**
@@ -25,6 +28,11 @@ namespace interface {
 class InterfaceElement
 {
 public:
+  /**
+   * \brief Deleted default constructor as we need an image
+   */
+  InterfaceElement() = delete;
+
   /**
    * \brief constructor. Initialize position, scale and rotation of the element.
    * \param image_string name of the Image resource
@@ -106,12 +114,14 @@ public:
   virtual void update(const std::shared_ptr<Map::MapGraphicsProperties> properties) = 0;
 
 
-protected:
-  std::string _img_name; ///< Associated image name
 
-  Coords _position;      ///< Element position (px or cell ?)
-  Vector2<float> _scale; ///< Element scale (related to a Cell size)
-  float _rotation;       ///< Element rotation
+protected:
+  std::string _img_name;   ///< Associated image name
+  graphics::Image& _image; ///< Associated image
+
+  Coords _position;        ///< Element position (px or cell ?)
+  Vector2<float> _scale;   ///< Element scale (related to a Cell size)
+  float _rotation;         ///< Element rotation
 };
 
 // InterfaceElementButton
