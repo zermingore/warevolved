@@ -30,27 +30,13 @@ bool InputProcessor::process()
     auto inputs(_km->activeInputs());
     for (const auto& i: inputs)
     {
-      // special return value -> pop State ?
       if (Status::currentState()->eventManager()->process(i))
-        std::cout << '+' << std::flush;
+        std::cout << '+';
       else
-        std::cout << '.' << std::flush;
+        std::cout << '.';
     }
+    std::cout << std::endl;
   }
 
   return true;
 }
-
-//   if (_event.type == sf::Event::KeyReleased)
-//     releasedKeys();
-
-
-// void InputProcessor::processEvents()
-// {
-//   if (_km->exit() && _km->switchStatus(E_SWITCH_EXIT) == OFF)
-//   {
-//     Status::exitCurrentState();
-//     _km->setSwitchStatus(E_SWITCH_EXIT, ON);
-//     graphics::GraphicsEngine::closeWindow();
-//   }
-// }

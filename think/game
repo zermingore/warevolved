@@ -1,0 +1,16 @@
+Player: selection clicked
+
+Map ?
+if (attack ...) [-> StateAttack]
+if (empty_cell / unit / ...)
+
+
+StateMenu
+Browse entries
+Select entry -> pushState(entry->State) ?
+
+
+stack EventManagers ?
+^ StatePlayer
+| StateMenu
+| StateMap

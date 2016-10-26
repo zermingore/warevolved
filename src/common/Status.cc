@@ -3,8 +3,6 @@
 #include <common/include.hh>
 #include <common/macros.hh>
 #include <context/State.hh>
-#include <context/StatePlaying.hh>
-#include <interface/menus/InGameMenu.hh>
 #include <game/applications/Battle.hh>
 #include <game/Map.hh>
 #include <input/EventManager.hh>
@@ -31,11 +29,6 @@ void Status::initialize()
   _selectedUnitPosition = Coords(-1, -1);
 }
 
-// void Status::cellSelection()
-// {
-//   _selectedCell = _battle->map()->cursor(_battle->currentPlayer())->coords();
-// }
-
 
 // e_state Status::currentState()
 // {
@@ -59,38 +52,11 @@ std::shared_ptr<State> Status::currentState()
 }
 
 
-void Status::pushStateInGameMenu(std::shared_ptr<InGameMenu> menu)
+void Status::exitCurrentState()
 {
-  menu->build(/*state*/);
-  // _states.push(std::make_shared<StateInGameMenu> ());
-}
-
-
-void Status::exitCurrentState(const bool skip)
-{
-  if (skip)
-  {
-    _states.pop();
-    return;
-  }
-
-//  if (_battle)
-//    _battle->map()->setCursorCoords(_states.top()->cursorCoords());
-
   _states.pop();
 }
 
-
-void Status::exitToState(e_state state, bool skip)
-{
-  while (_states.top()->currentState() != state)
-  {
-    _states.pop();
-
-//    if (!skip)
-//      _battle->map()->setCursorCoords(_states.top()->cursorCoords());
-  }
-}
 
 
 std::shared_ptr<State> Status::popCurrentState()

@@ -10,8 +10,12 @@
 # include <common/include.hh>
 # include <resources/Image.hh>
 # include <interface/menus/MenuEntry.hh>
+# include <interface/InterfaceElement.hh>
 
 enum class e_state;
+
+
+namespace interface {
 
 
 /**
@@ -19,7 +23,7 @@ enum class e_state;
  * \brief Generic Menu.
  * mother of \class InGameMenu
  */
-class Menu
+class Menu: public InterfaceElement
 {
 public:
   /// \brief Constructor.
@@ -117,5 +121,8 @@ protected:
   graphics::Image _imageSelection; ///< Background image (entry)
   Coords _origin; ///< menu origin
 };
+
+
+} // namespace interface
 
 #endif /* !MENU_HH_ */

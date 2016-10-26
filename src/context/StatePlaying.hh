@@ -31,6 +31,8 @@ private:
   void moveCursorDown();
   void moveCursorUp();
   // void moveCursor(); // add param ? (issue: input cb: std::function<void()>)
+
+  void select();
 };
 
 

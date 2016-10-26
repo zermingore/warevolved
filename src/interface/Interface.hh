@@ -12,14 +12,10 @@
 # include <vector>
 # include <interface/InterfaceElement.hh>
 # include <interface/InterfaceSettings.hh>
-// # include <interface/menus/InGameMenu.hh>
-// # include <game/PathFinding.hh>
-
 
 
 namespace interface {
 
-class Cursor;
 
 /**
  * \class Interface
@@ -70,7 +66,6 @@ public:
    */
   Color unitsColor() const { return _settings->unitsColor(); }
 
-
   /**
    * \brief sets cursor color.
    * \param color _cursorColor value.
@@ -84,31 +79,9 @@ public:
   void setUnitsColor(Color color) { _settings->setUnitsColor(color); }
 
 
-  /**
-   * \brief in-game menu getter
-   * \return _inGameMenu
-   */
-  //  std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
-
-  /**
-   * \brief PathFinding getter
-   * \return _path current path
-   */
-  //  std::shared_ptr<PathFinding> path() { return _path; }
-
-  /**
-   * \brief sets the path origin
-   * meaning the cell from where it starts
-   */
-  //  void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
-
-
 private:
   std::vector<std::shared_ptr<InterfaceElement>> _elts; ///< list of elements
   std::unique_ptr<InterfaceSettings> _settings; ///< interface settings
-
-  //  std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
-  //  std::shared_ptr<PathFinding> _path; ///< current path
 };
 
 

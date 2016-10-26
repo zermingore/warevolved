@@ -16,8 +16,7 @@ enum class e_state
 {
   NONE = 0, // we should never be in this state
 
-  MAIN_MENU,
-  IN_GAME,
+  MENU,
   PLAYING,
 
   SELECTION_MENU, // pick a Unit

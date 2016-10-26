@@ -16,13 +16,11 @@ namespace interface {
 Interface::Interface(Color c)
 {
   _settings = std::make_unique<InterfaceSettings> (c);
-  //  _path = std::make_shared<PathFinding> ();
-  //  _inGameMenu = std::make_shared<InGameMenu> ();
 }
-
 
 void Interface::updateElements()
 {
+  // unused grepme
   // call update on all elements
 }
 

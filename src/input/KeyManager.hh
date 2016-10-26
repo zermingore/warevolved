@@ -69,11 +69,11 @@ enum e_key
   // E_KEY_MOVE_RIGHT_2,
 
   // // action keys
-  // E_KEY_SELECTION_1,
+  E_KEY_SELECTION_1,
   // E_KEY_SELECTION_2,
 
   // // exit requests
-  // E_KEY_EXIT_1,
+  E_KEY_EXIT_1,
   // E_KEY_EXIT_2,
 
   E_KEY_UP,

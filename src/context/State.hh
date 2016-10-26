@@ -29,9 +29,10 @@ enum class e_state;
 class State
 {
 public:
-  State():
-    _eventManager(std::make_shared<EventManager> ())
-  {}
+  /**
+   * \brief Default constructor. Instantiates the EventManager
+   */
+  State();
 
   /**
    * \brief _state getter
@@ -47,12 +48,12 @@ public:
    * \brief event manager getter
    * \return _eventManager
    */
-  std::shared_ptr<EventManager> eventManager() { return _eventManager; }
+  std::shared_ptr<EventManager> eventManager() { return _evtMgr; }
 
 
 protected:
   e_state _currentState; ///< State's state
-  std::shared_ptr<EventManager> _eventManager; ///< State related events
+  std::shared_ptr<EventManager> _evtMgr; ///< State related events
 };
 
 #endif /* !STATE_HH_ */

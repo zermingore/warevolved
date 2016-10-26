@@ -50,8 +50,6 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
 
     // image.drawAtCell(elt->position(), p);
   }
-
-  std::cout << '\n';
 }
 
 

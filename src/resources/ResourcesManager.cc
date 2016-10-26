@@ -124,12 +124,10 @@ graphics::Image& ResourcesManager::getImage(const std::string name)
   if (_images.find(name) != _images.end())
     return *_images[name];
 
-# ifdef DEBUG
-  std::cout << "ResourcesManager::getImage image name: " << name << std::endl;
-  //assert(! "Image not found");
-# endif
-
   Debug::error("Unable to find image: ", name);
+# ifdef DEBUG
+  assert(! "Image not found");
+# endif
 
   return *_images["default"];
 }

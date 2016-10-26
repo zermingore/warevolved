@@ -1,16 +1,21 @@
-#ifndef PLAYER_HH_
-# define PLAYER_HH_
-
 /**
  * \file Player definition.
  * \date August 1, 2013
  * \author Zermingore
  */
 
+
+#ifndef PLAYER_HH_
+# define PLAYER_HH_
+
 # include <memory>
 # include <interface/Interface.hh>
 
+namespace interface {
 class Interface;
+class Cursor;
+class InGameMenu;
+}
 
 
 /**
@@ -37,10 +42,17 @@ public:
   size_t id() { return _id; }
 
 
+  // Cursor motion
   void moveCursorUp();
   void moveCursorDown();
   void moveCursorLeft();
   void moveCursorRight();
+
+  // Cursor click
+  void select();
+
+  // Exit current mode (selection)
+  void cancel();
 
   /**
    * \brief Player's interface getter.
@@ -54,7 +66,9 @@ private:
   // (logicaly const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player's identifier
   std::shared_ptr<interface::Interface> _interface; ///< User Interface
-  std::shared_ptr<interface::Cursor> _cursor; ///< Map Cursor
+  std::shared_ptr<interface::Cursor> _cursor;       ///< Map Cursor
+  std::shared_ptr<interface::InGameMenu> _menu;     ///< In game menu
 };
+
 
 #endif /* !PLAYER_HH_ */

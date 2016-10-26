@@ -7,11 +7,12 @@
 #ifndef INGAMEMENU_HH_
 # define INGAMEMENU_HH_
 
-
 # include <interface/menus/Menu.hh>
 
 enum class e_state;
 
+
+namespace interface {
 
 /**
  * \class InGameMenu
@@ -23,6 +24,11 @@ class InGameMenu: public Menu
 {
 public:
   /**
+   * \brief Default constructor calling the mother class constructor.
+   */
+  InGameMenu() = default;
+
+  /**
    * \brief Builds the selection menu, filling the entries.
    * \param state The state about to be pushed.
    */
@@ -30,6 +36,12 @@ public:
 
   /// \brief executes action matching the selected entry.
   void executeEntry();
+
+  void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
 };
+
+
+} // namespace interface
+
 
 #endif /* !INGAMEMENU_HH_ */

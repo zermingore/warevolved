@@ -2,6 +2,10 @@
 #include <interface/menus/MenuEntry.hh>
 
 
+namespace interface {
+
+
+
 void InGameMenu::build(/* e_state state */)
 {
   init();
@@ -39,3 +43,22 @@ void InGameMenu::executeEntry()
   (_entries)[_selectedEntry].execute();
   _selectedEntry = 0;
 }
+
+
+void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
+{
+  auto width(properties->cellWidth());
+  auto height(properties->cellHeight());
+
+//  auto cursor_coords(battle->getCurrentPlayer())->interface()->elements[""];
+
+  _position.x = 1 * width + properties->gridOffsetX() + width / 2;
+  _position.y = 2 * height + properties->gridOffsetY() + height / 2;
+  // _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
+  // _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
+
+  _image.sprite()->setOrigin(width / 2, height / 2);
+}
+
+
+} // namespace interface

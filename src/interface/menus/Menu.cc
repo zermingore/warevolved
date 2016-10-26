@@ -7,16 +7,21 @@
 #include <input/EventManager.hh>
 
 
-Menu::Menu() :
-  _selectedEntry (0)
+namespace interface {
+
+
+Menu::Menu()
+  : InterfaceElement("selection_menu_button")
+  , _selectedEntry (0)
 {
   _entries = std::vector<MenuEntry> ();
   _origin = {0, 0};
 }
 
 
-Menu::Menu(std::vector<MenuEntry> &entries) :
-  _selectedEntry (0)
+Menu::Menu(std::vector<MenuEntry> &entries)
+  : InterfaceElement("selection_menu_button")
+  , _selectedEntry (0)
 {
   _entries = std::vector<MenuEntry> (entries);
 
@@ -39,7 +44,7 @@ void Menu::loadMenu()
     assert("Menu::loadMenu() empty menu vector");
   }
 
-  auto menu (menu_vector[0]);
+  // auto menu (menu_vector[0]);
   // _entries = menu->getEntries();
   // _selectedEntry = menu->selectedEntry();
   setOrigin();
@@ -48,7 +53,7 @@ void Menu::loadMenu()
 
 void Menu::setOrigin()
 {
-//    /// \todo sets the menu at wright (cursor-relative) position
+//    /// \todo sets the menu at right (cursor-relative) position
 //   _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
 //   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
@@ -89,3 +94,6 @@ void Menu::draw()
   // _imageSelection.setPosition(_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
   // _imageSelection.draw();
 }
+
+
+} // namespace interface

@@ -30,8 +30,6 @@ public:
    */
   void initialize();
 
-  // keeps clicked cell's coordinates in _selectedCell
-  // void cellSelection();
 
   // __________________________ Getters / Setters __________________________ //
   /// Battle getter
@@ -50,14 +48,7 @@ public:
    * exits the game if the stack is empty
    * \param skip retrieve Cursor position or not
    */
-  static void exitCurrentState(const bool skip = false);
-
-  /**
-   * \brief pops _states summit while current state <> state
-   * exits the game if the stack is empty
-   * \param skip retrieve Cursor position or not
-   */
-  static void exitToState(e_state state, bool skip = false);
+  static void exitCurrentState();
 
   /**
    * \brief pops _states and returns summit
@@ -77,12 +68,6 @@ public:
    * \param state state we just entered
    */
   static void pushState(e_state state);
-
-  /**
-   * \brief stacks a new state on _states
-   * \param state state we just entered
-   */
-  static void pushStateInGameMenu(std::shared_ptr<InGameMenu> menu);
 
   /**
    * \brief sets selected cell coordinates to the given coordinates

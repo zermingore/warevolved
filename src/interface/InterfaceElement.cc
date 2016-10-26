@@ -8,6 +8,7 @@
 #include <resources/Image.hh>
 #include <resources/ResourcesManager.hh>
 
+
 namespace interface {
 
 
