@@ -1,3 +1,6 @@
+#include <common/Status.hh>
+#include <game/applications/Battle.hh>
+#include <game/Player.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuEntry.hh>
 
@@ -50,12 +53,10 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
   auto width(properties->cellWidth());
   auto height(properties->cellHeight());
 
-//  auto cursor_coords(battle->getCurrentPlayer())->interface()->elements[""];
+  auto cursor_coords(Status::battle()->getCurrentPlayer()->interface()->element("cursor")->coords());
 
-  _position.x = 1 * width + properties->gridOffsetX() + width / 2;
-  _position.y = 2 * height + properties->gridOffsetY() + height / 2;
-  // _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
-  // _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
+  _position.x = cursor_coords.x * width + properties->gridOffsetX() + width / 2;
+  _position.y = cursor_coords.y * height + properties->gridOffsetY() + height / 2;
 
   _image.sprite()->setOrigin(width / 2, height / 2);
 }

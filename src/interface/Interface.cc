@@ -31,4 +31,17 @@ void Interface::addElement(std::shared_ptr<InterfaceElement> elt)
 }
 
 
+
+const std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
+{
+  for (const auto it: _elts)
+  {
+    if (it->name() == id)
+      return it;
+  }
+
+  Debug::error("Interface: invalid element name request: ", id);
+  return nullptr;
+}
+
 } // namespace interface

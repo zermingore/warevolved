@@ -54,6 +54,14 @@ public:
    */
   std::vector<std::shared_ptr<InterfaceElement>>& elements() { return _elts; }
 
+
+  /**
+   * \brief Returns the first InterfaceElement which name is name
+   * \param name name of the InterfaceElement to retrieve
+   * \return a pointer to the matching InterfaceElement, nullptr if there is none
+   */
+  const std::shared_ptr<InterfaceElement> element(const std::string id);
+
   /**
    * \brief Cursor color getter.
    * \return Color of the cursor.

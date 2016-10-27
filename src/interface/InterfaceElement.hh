@@ -12,11 +12,10 @@
 # include <common/structures/Vector.hh>
 # include <interface/InterfaceSettings.hh>
 # include <game/Map.hh>
+# include <resources/ResourcesManager.hh>
 
-# include <SFML/Graphics.hpp>
 
 
-#include <resources/ResourcesManager.hh>
 
 
 namespace interface {
@@ -40,8 +39,6 @@ public:
   explicit InterfaceElement(const std::string& image_name);
 
 
-  //  virtual void onSelection();
-
   // ___________________________ Getters / Setters _________________________ //
   /**
    * \brief image name getter.
@@ -54,6 +51,12 @@ public:
    * \return Position of the element in grid frame.
    */
   Coords position() const { return _position; }
+
+  /**
+   * \brief _coords getter
+   * \return _coords value
+   */
+  Coords coords() { return _coords; }
 
   /**
    * \brief scale getter.
@@ -118,8 +121,8 @@ public:
 protected:
   std::string _img_name;   ///< Associated image name
   graphics::Image& _image; ///< Associated image
-
-  Coords _position;        ///< Element position (px or cell ?)
+  Coords _position;        ///< Element position (in pixels)
+  Coords _coords;          ///< Element position (in cells; not always filled)
   Vector2<float> _scale;   ///< Element scale (related to a Cell size)
   float _rotation;         ///< Element rotation
 };
