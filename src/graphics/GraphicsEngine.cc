@@ -6,6 +6,9 @@
 #include <game/units/Unit.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
+#include <common/Status.hh>
+#include <context/State.hh>
+#include <interface/InterfaceElement.hh>
 
 
 namespace graphics {
@@ -31,11 +34,10 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
 void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
 {
-//  const std::shared_ptr<MapGraphicsProperties> p(battle->map()->graphicsProperties());
   auto interface(battle->getCurrentPlayer()->interface());
 
-  // Draw every element in Interface
-  for (const auto& elt: interface->elements())
+  // Draw every interface elements related to the current context
+  for (const auto& elt: Status::currentState()->interfaceElements())
   {
     elt->update(battle->map()->graphicsProperties());
 

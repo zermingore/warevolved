@@ -24,6 +24,7 @@ public:
   std::vector<int> getAttrList();
 
 
+
 private:
   // Cursor motion
   void moveCursorLeft();

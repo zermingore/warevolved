@@ -10,3 +10,19 @@ InterfaceElement
 
 Interface::update()
 call update() on every InterfaceElement
+
+
+Which element to draw ?
+(playing -> cursor; select -> menu, no more cursor)
+(menu; sub-menu -> menu and sub-menu)
+
+State push / pop
+-> interface push / pop
+
+StateManager ?
+push / pop States and InterfaceElements
+-> when push / pop
+-> has an EventManager ?
+-> access to Interface, Player, Menu, ...
+
+Each State manages the transition to the new one.

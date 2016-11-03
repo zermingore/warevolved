@@ -2,6 +2,10 @@
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <common/Status.hh>
+#include <game/applications/Battle.hh>
+#include <game/Player.hh>
+#include <interface/menus/InGameMenu.hh>
+
 
 
 StateMenu::StateMenu()
@@ -15,7 +19,12 @@ StateMenu::StateMenu()
   _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
 
   _evtMgr->registerEvent(e_input::EXIT_1, [=] { Status::exitCurrentState(); });
+
+
+  auto player(Status::battle()->getCurrentPlayer());
+  addInterfaceElement(player->menu());
 }
+
 
 std::vector<int> StateMenu::getAttrList() {}
 

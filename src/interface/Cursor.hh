@@ -24,7 +24,7 @@ namespace interface {
 class Cursor: public InterfaceElement
 {
 public:
-  /// Default Constructor
+  /// Default Constructor, calls InterfaceElement constructor
   Cursor();
 
   /**

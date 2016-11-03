@@ -64,7 +64,6 @@ public:
    * with its entries and the current entry highlighter
    */
   void draw();
-
   /**
    * \brief sets _selectedEntry to 0
    */

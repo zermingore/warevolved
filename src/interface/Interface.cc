@@ -40,7 +40,15 @@ const std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
       return it;
   }
 
+# ifdef DEBUG
   Debug::error("Interface: invalid element name request: ", id);
+  Debug::printf("displaying", _elts.size(), "element names");
+  for (const auto it: _elts)
+  {
+    Debug::printf(" >", id);
+  }
+# endif // DEBUG
+
   return nullptr;
 }
 

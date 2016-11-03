@@ -12,9 +12,15 @@
 # include <common/using.hh>
 # include <common/structures/Vector.hh>
 
+
 class EventManager;
 
+namespace interface {
+  class InterfaceElement;
+}
+
 enum class e_state;
+
 
 
 /**
@@ -50,10 +56,29 @@ public:
    */
   std::shared_ptr<EventManager> eventManager() { return _evtMgr; }
 
+  /**
+   * \brief returns the list of related interface elements
+   */
+  auto& interfaceElements() {
+    return _interfaceElements;
+  }
+
+  /**
+   * \brief Adds an InterfaceElement to manage
+   * \param elt Element to add to the interface
+   */
+  void addInterfaceElement(std::shared_ptr<interface::InterfaceElement> elt) {
+    _interfaceElements.push_back(elt);
+  }
+
+
 
 protected:
   e_state _currentState; ///< State's state
   std::shared_ptr<EventManager> _evtMgr; ///< State related events
+
+  ///< interface elements list
+  std::vector<std::shared_ptr<interface::InterfaceElement>> _interfaceElements;
 };
 
 #endif /* !STATE_HH_ */

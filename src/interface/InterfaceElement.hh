@@ -16,8 +16,6 @@
 
 
 
-
-
 namespace interface {
 
 /**
@@ -69,6 +67,14 @@ public:
    * \return Rotation of the element in grid frame.
    */
   float rotation() const { return _rotation; }
+
+  /**
+   * \brief position setter.
+   * \param position cells coordinates to place the element.
+   */
+  void setCoords(const Coords &coords) {
+    _coords = coords;
+  }
 
   /**
    * \brief position setter.

@@ -41,7 +41,7 @@ void Menu::loadMenu()
 {
   auto menu_vector (Status::popCurrentState()->getAttrList());
   if (menu_vector.empty()) {
-    assert("Menu::loadMenu() empty menu vector");
+    assert(! "Menu::loadMenu() empty menu vector");
   }
 
   // auto menu (menu_vector[0]);

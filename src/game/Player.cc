@@ -5,6 +5,7 @@
 #include <interface/menus/InGameMenu.hh>
 #include <common/Status.hh>
 #include <common/enums/states.hh>
+#include <context/State.hh>
 
 
 Player::Player(Color c)
@@ -15,8 +16,6 @@ Player::Player(Color c)
   _interface = std::make_shared<interface::Interface> (c);
   _cursor = std::make_shared<interface::Cursor> ();
   _menu = std::make_shared<interface::InGameMenu> ();
-
-  _interface->addElement(_cursor);
 }
 
 
@@ -38,6 +37,8 @@ void Player::moveCursorRight() {
 
 
 void Player::select() {
+  Debug::printf("select");
+  _menu->setCoords(_cursor->coords());
   _interface->addElement(_menu);
   Status::pushState(e_state::MENU);
 }

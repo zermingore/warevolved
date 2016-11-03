@@ -61,6 +61,13 @@ public:
   std::shared_ptr<interface::Interface> interface() { return _interface; }
 
 
+  /// Cursor getter
+  std::shared_ptr<interface::Cursor> cursor() { return _cursor; }
+
+
+  std::shared_ptr<interface::InGameMenu> menu() { return _menu; }
+
+
 
 private:
   // (logicaly const, cannot be initialized by a static variable)
