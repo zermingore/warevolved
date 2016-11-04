@@ -7,10 +7,12 @@
 
 namespace interface {
 
+
 InGameMenu::InGameMenu()
-  : InterfaceElement("selection_menu_button")
 {
+  Debug::printf("Ctor");
 }
+
 
 
 void InGameMenu::build(/* e_state state */)
@@ -40,8 +42,16 @@ void InGameMenu::build(/* e_state state */)
   // if (state == state::ACTION_MENU)
   //   current_unit->fillActions(_entries);
 
-  //_entries.emplace_back(MenuEntry("Cancel", entry::CANCEL));
-  //setOrigin();
+  auto map(Status::battle()->map());
+
+  Debug::printf("coords:", _coords.x, _coords.y);
+  if (map->unit(_coords))
+  {
+    Debug::printf("unit !");
+    _entries.emplace_back(MenuEntry("tst", entry::CANCEL));
+  }
+
+  _entries.emplace_back(MenuEntry("Cancel", entry::CANCEL));
 }
 
 
@@ -57,11 +67,17 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
   auto width(properties->cellWidth());
   auto height(properties->cellHeight());
 
-  // coords is filled by the player, with cursor coordinates
+  // _coords is filled by the player, with cursor coordinates
   _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
   _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
 
+
+//  for (const auto entry: _entries)
+
+
+  Debug::printf("nb entries:", _entries.size());
   _image.sprite()->setOrigin(width / 2, height / 2);
+  _image.sprite()->setScale(1, _entries.size());
 }
 
 

@@ -31,6 +31,11 @@ private:
   void selectDown();
   void selectUp();
   void validate();
+
+  /**
+   * \brief Callback associated with the exit menu event
+   */
+  void exit();
 };
 
 

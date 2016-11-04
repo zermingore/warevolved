@@ -15,7 +15,6 @@ Player::Player(Color c)
 
   _interface = std::make_shared<interface::Interface> (c);
   _cursor = std::make_shared<interface::Cursor> ();
-  _menu = std::make_shared<interface::InGameMenu> ();
 }
 
 
@@ -38,7 +37,9 @@ void Player::moveCursorRight() {
 
 void Player::select() {
   Debug::printf("select");
+  _menu = std::make_shared<interface::InGameMenu> ();
   _menu->setCoords(_cursor->coords());
+  _menu->build();
   _interface->addElement(_menu);
   Status::pushState(e_state::MENU);
 }

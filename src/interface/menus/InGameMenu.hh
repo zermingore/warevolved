@@ -20,11 +20,11 @@ namespace interface {
  *   A unit is picked
  *   A void cell is clicked
  */
-class InGameMenu: public InterfaceElement
+class InGameMenu: public Menu
 {
 public:
   /**
-   * \brief Calls the mother class constructor.
+   * \brief default constructor.
    */
   InGameMenu();
 

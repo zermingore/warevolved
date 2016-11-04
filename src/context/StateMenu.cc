@@ -18,7 +18,7 @@ StateMenu::StateMenu()
 
   _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
 
-  _evtMgr->registerEvent(e_input::EXIT_1, [=] { Status::exitCurrentState(); });
+  _evtMgr->registerEvent(e_input::EXIT_1, [=] { exit(); });
 
 
   auto player(Status::battle()->getCurrentPlayer());
@@ -49,4 +49,12 @@ void StateMenu::selectUp()
 void StateMenu::validate()
 {
   // State.push(entry-> ...);
+}
+
+
+void StateMenu::exit()
+{
+  auto player(Status::battle()->getCurrentPlayer());
+
+  Status::exitCurrentState();
 }
