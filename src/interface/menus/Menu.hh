@@ -64,6 +64,7 @@ public:
    * with its entries and the current entry highlighter
    */
   void draw();
+
   /**
    * \brief sets _selectedEntry to 0
    */
@@ -78,21 +79,11 @@ public:
   /**
    * \brief executes action matching _selectedEntry
    */
-  virtual void executeEntry() = 0;
+  virtual void executeEntry();
 
-  /**
-   * \brief loads a previously saved menu
-   * \param menu menu to load
-   */
-  void loadMenu();
 
 
 protected:
-  /**
-   * \brief initializes the menu called by this->build()
-   */
-  void init();
-
   /**
    * \brief list of entries getter
    * \return a pointer over _entries array

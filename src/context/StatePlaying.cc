@@ -23,9 +23,3 @@ StatePlaying::StatePlaying()
 
   addInterfaceElement(player->cursor());
 }
-
-
-std::vector<int> StatePlaying::getAttrList()
-{
-  assert(! "[IMPLEMENTATION ERROR] StatePlaying Illegal call to getAttrList()");
-}

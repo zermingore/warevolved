@@ -30,27 +30,6 @@ Menu::Menu(std::vector<MenuEntry> &entries)
 }
 
 
-void Menu::init()
-{
-  setOrigin();
-  _entries.clear();
-}
-
-
-void Menu::loadMenu()
-{
-  auto menu_vector (Status::popCurrentState()->getAttrList());
-  if (menu_vector.empty()) {
-    assert(! "Menu::loadMenu() empty menu vector");
-  }
-
-  // auto menu (menu_vector[0]);
-  // _entries = menu->getEntries();
-  // _selectedEntry = menu->selectedEntry();
-  setOrigin();
-}
-
-
 void Menu::setOrigin()
 {
 //    /// \todo sets the menu at right (cursor-relative) position
@@ -58,10 +37,12 @@ void Menu::setOrigin()
 //   _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
 }
 
+
 void Menu::setOrigin(Coords origin)
 {
   _origin = origin;
 }
+
 
 void Menu::decrementSelectedEntry()
 {
@@ -69,6 +50,13 @@ void Menu::decrementSelectedEntry()
     _selectedEntry = (_selectedEntry - 1) % (_entries.size() - 1);
   else
     _selectedEntry = _entries.size() - 1;
+}
+
+
+void Menu::executeEntry()
+{
+//  (_entries)[_selectedEntry].execute();
+//  _selectedEntry = 0;
 }
 
 

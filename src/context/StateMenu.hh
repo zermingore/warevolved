@@ -20,9 +20,6 @@ public:
   /// registers to callbacks
   StateMenu();
 
-  /// Aborts the execution
-  std::vector<int> getAttrList();
-
 
 private:
   // Cursor motion

@@ -22,7 +22,6 @@ namespace interface {
 enum class e_state;
 
 
-
 /**
  * \class State
  * \brief Records a current state.
@@ -46,10 +45,6 @@ public:
    */
   e_state currentState() { return _currentState; }
 
-  // return specific State components
-  // returns menu, ...
-  virtual std::vector<int> getAttrList() = 0;
-
   /**
    * \brief event manager getter
    * \return _eventManager
@@ -70,7 +65,6 @@ public:
   void addInterfaceElement(std::shared_ptr<interface::InterfaceElement> elt) {
     _interfaceElements.push_back(elt);
   }
-
 
 
 protected:

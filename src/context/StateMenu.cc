@@ -26,9 +26,6 @@ StateMenu::StateMenu()
 }
 
 
-std::vector<int> StateMenu::getAttrList() {}
-
-
 void StateMenu::selectLeft()
 {
   // _highlighted_entry ...
@@ -54,7 +51,5 @@ void StateMenu::validate()
 
 void StateMenu::exit()
 {
-  auto player(Status::battle()->getCurrentPlayer());
-
   Status::exitCurrentState();
 }

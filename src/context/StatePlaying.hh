@@ -20,10 +20,6 @@ public:
   /// registers to callbacks
   StatePlaying();
 
-  /// Aborts the execution
-  std::vector<int> getAttrList();
-
-
 
 private:
   // Cursor motion

@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef INGAMEMENU_HH_
-# define INGAMEMENU_HH_
+#ifndef IN_GAME_MENU_HH_
+# define IN_GAME_MENU_HH_
 
 # include <interface/menus/Menu.hh>
 
@@ -30,13 +30,12 @@ public:
 
   /**
    * \brief Builds the selection menu, filling the entries.
-   * \param state The state about to be pushed.
    */
-  void build(/* e_state state */);
+  void build();
 
-  /// \brief executes action matching the selected entry.
-  void executeEntry();
-
+  /**
+   * \brief updates the graphics attributes of the menu
+   */
   void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
 };
 
@@ -44,4 +43,4 @@ public:
 } // namespace interface
 
 
-#endif /* !INGAMEMENU_HH_ */
+#endif /* !IN_GAME_MENU_HH_ */

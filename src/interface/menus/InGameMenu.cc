@@ -14,11 +14,8 @@ InGameMenu::InGameMenu()
 }
 
 
-
-void InGameMenu::build(/* e_state state */)
+void InGameMenu::build()
 {
-  //init();
-
   // show unit section only if we selected a unit
   // here, we cannot use cursor's position, we could have move the unit
   // auto current_unit(MAP.unit(g_status->selectedCell()));
@@ -43,8 +40,6 @@ void InGameMenu::build(/* e_state state */)
   //   current_unit->fillActions(_entries);
 
   auto map(Status::battle()->map());
-
-  Debug::printf("coords:", _coords.x, _coords.y);
   if (map->unit(_coords))
   {
     Debug::printf("unit !");
@@ -52,13 +47,6 @@ void InGameMenu::build(/* e_state state */)
   }
 
   _entries.emplace_back(MenuEntry("Cancel", entry::CANCEL));
-}
-
-
-void InGameMenu::executeEntry()
-{
-//  (_entries)[_selectedEntry].execute();
-//  _selectedEntry = 0;
 }
 
 

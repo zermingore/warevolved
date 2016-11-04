@@ -6,10 +6,10 @@
 # include <resources/Font.hh>
 
 
- /// \todo add execute method given to ctor
+/// \todo add execute method given to ctor
 
 /**
-   * \brief entries descriptors
+ * \brief entries descriptors
  */
 enum class entry
 {
