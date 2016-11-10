@@ -55,7 +55,6 @@ game/Cell.cc                        \
 game/applications/Battle.cc         \
 game/units/Unit.cc                  \
 game/units/Soldier.cc               \
-game/PathFinding.cc                 \
 game/Player.cc                      \
 \
 interface/Interface.cc              \
@@ -65,3 +64,5 @@ interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc        \
 interface/InterfaceElement.cc       \
 interface/menus/InGameMenu.cc
+
+# game/PathFinding.cc

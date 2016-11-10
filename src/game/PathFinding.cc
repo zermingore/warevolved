@@ -1,3 +1,11 @@
+//
+
+ IS NOT COMPILED !
+
+
+
+crash !
+
 #include <game/PathFinding.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>

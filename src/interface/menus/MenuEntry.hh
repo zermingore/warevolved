@@ -65,7 +65,6 @@ public:
 
 private:
   e_entry _id;                      ///< entry identifier
-  std::string _background;          ///< background image name
   std::shared_ptr<sf::Text> _label; ///< button label text
   std::string _labelName;           ///< menu entry text
   Font _font;                       ///< button label font

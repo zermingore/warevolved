@@ -12,16 +12,13 @@ namespace interface {
 
 MenuEntry::MenuEntry(e_entry entry)
   : InterfaceElement("selection_menu_button")
+  , _labelName("UNSET")
   , _id (entry)
 {
-  _labelName = "UNSET";
-
-  // _background.setSize(Coords(2 * CELL_WIDTH, CELL_HEIGHT));
-
   // label initialization
-  /// \todo better calculus, ratio dependent, eventually, text length dependent
   _label = std::make_shared<sf::Text> ();
 
+  /// \todo better calculus, ratio dependent, eventually, text length dependent
   const auto props(Status::battle()->map()->graphicsProperties());
   _label->setCharacterSize((props->cellWidth() + props->cellHeight()) / 4);
 
