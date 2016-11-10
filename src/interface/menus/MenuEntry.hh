@@ -1,17 +1,19 @@
-#ifndef MENUENTRY_HH_
-# define MENUENTRY_HH_
+#ifndef MENU_ENTRY_HH_
+# define MENU_ENTRY_HH_
 
 # include <common/include.hh>
 # include <resources/Image.hh>
 # include <resources/Font.hh>
+# include <interface/InterfaceElement.hh>
 
 
-/// \todo add execute method given to ctor
+namespace interface {
+
 
 /**
  * \brief entries descriptors
  */
-enum class entry
+enum class e_entry
 {
   NONE = 0, // invalid selected entry
 
@@ -24,44 +26,53 @@ enum class entry
 };
 
 
-class MenuEntry
+
+/**
+ * \class MenuEntry
+ * \brief One entry (a clickable item) of a menu
+ *
+ * Its position is relative to the menu it belongs to.
+ */
+class MenuEntry: public InterfaceElement
 {
 public:
-  /**
-   * \brief Constructor
-   */
-   /// \todo use this one (auto label completion, using a DB)
-  explicit MenuEntry(entry &entry);
+  MenuEntry() = delete;
 
   /**
    * \brief Constructor
-   * \deprecated use MenuEntry(entries entry); with auto label completion
+   * \param entry Entry type to build.
    */
-  MenuEntry(std::string label_name, entry entry);
+  explicit MenuEntry(e_entry entry);
 
   /**
    * \brief returns entry Identifier, as a entries value
    */
-  entry id() { return _id; }
-
-  /**
-   * \brief displays the entry at position
-   * \param position where the entry will be display
-   */
-  void draw(Coords position);
+  e_entry id() { return _id; }
 
   /**
    * \brief Executes the action matching the entry
    */
   void execute();
 
+  /**
+   * \brief updates the graphical attributes of the entry
+   */
+  void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
+
+
+  void draw();
+
 
 private:
-  entry _id; ///< entry identifier
-  std::string _background; ///< background image name
+  e_entry _id;                      ///< entry identifier
+  std::string _background;          ///< background image name
   std::shared_ptr<sf::Text> _label; ///< button label text
-  std::string _labelName; ///< menu entry text
-  Font _font; ///< button label font
+  std::string _labelName;           ///< menu entry text
+  Font _font;                       ///< button label font
 };
 
-#endif /* !MENUENTRY_HH_ */
+
+} // namespace interface
+
+
+#endif /* !MENU_ENTRY_HH_ */

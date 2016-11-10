@@ -12,6 +12,7 @@
 # include <common/include.hh>
 # include <common/using.hh> // Coords
 
+
 class Map;
 class MapGraphicsProperties;
 class Cell;
@@ -67,21 +68,15 @@ public:
 
   static bool pollEvent(sf::Event& event) { return _window->pollEvent(event); }
 
-  static void draw(std::shared_ptr<Sprite> sprite) { _window->draw(*sprite); }
-
-  static void draw(std::shared_ptr<sf::RectangleShape> rectangle) {
-    _window->draw(*rectangle);
-  }
 
   /**
    * \brief Draws the given element
    * \param drawable item to draw
    */
   template <typename T>
-  static void draw(std::shared_ptr<T> drawable, Coords pos, Coords size);
-
-  template <typename T>
-  void draw(std::shared_ptr<T> drawable, Cell c);
+  static void draw(std::shared_ptr<T> drawable) {
+    _window->draw(*drawable);
+  }
 
 
 private:

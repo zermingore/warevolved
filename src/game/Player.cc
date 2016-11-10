@@ -15,6 +15,8 @@ Player::Player(Color c)
 
   _interface = std::make_shared<interface::Interface> (c);
   _cursor = std::make_shared<interface::Cursor> ();
+  _interface->addElement(_cursor);
+  _cursor->setColor(c);
 }
 
 

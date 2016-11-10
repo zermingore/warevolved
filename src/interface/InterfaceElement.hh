@@ -123,6 +123,8 @@ public:
   virtual void update(const std::shared_ptr<Map::MapGraphicsProperties> properties) = 0;
 
 
+  virtual void draw();
+
 
 protected:
   std::string _img_name;   ///< Associated image name

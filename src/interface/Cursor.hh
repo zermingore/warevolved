@@ -67,6 +67,10 @@ public:
   void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
 
 
+  void draw() final;
+
+
+  void setColor(Color color) { _color = color; }
 
 private:
   // map attributes

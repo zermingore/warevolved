@@ -160,7 +160,7 @@ public:
    *   according to the Unit skills
    * \param menu inGameMenu in which we add relevant entries
    */
-  virtual void fillActions(std::vector<MenuEntry>&) {}
+  virtual void fillActions(std::vector<interface::MenuEntry>&) {}
 
   /**
    * \brief runs attack / strikes backs (if any) cycles

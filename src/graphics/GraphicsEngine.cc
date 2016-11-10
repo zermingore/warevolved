@@ -37,14 +37,25 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
   auto interface(battle->getCurrentPlayer()->interface());
 
   // Draw every interface elements related to the current context
-  for (const auto& elt: Status::currentState()->interfaceElements())
+  for (const auto& elt: interface->elements())
   {
     elt->update(battle->map()->graphicsProperties());
+    elt->draw();
 
-    auto sprite(elt->getSprite());
-    sprite->setColor(interface->unitsColor());
+    /// \todo OSD debug infos
+    auto font(resources::ResourcesManager::getFont("font_army"));
+    auto label(std::make_shared<sf::Text> ());
+    label->setFont(*(font.getFont()));
+    char test(interface->elements().size() + 48); // C-style ...
+    label->setString(test);
+    draw(label);
 
-    draw(sprite);
+    // auto drawables(elt->getGraphics());
+    // for (const auto it: drawables)
+    // {
+    //   // it->setColor(interface->unitsColor());
+    //   draw(it);
+    // }
 
     // float x = elt.scale().x;
     // float y = elt.scale().y;
@@ -199,19 +210,6 @@ void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
   p->setGridOffsetY((_window->getSize().y - p->cellHeight() * map->nbLines()) / 2);
 }
 
-
-template <typename T>
-void GraphicsEngine::draw(std::shared_ptr<T> drawable, Coords pos, Coords size)
-{
-  std::cout << "image: " << drawable->imageName() << std::endl;
-}
-
-
-template <typename T>
-void GraphicsEngine::draw(std::shared_ptr<T> drawable, Cell c)
-{
-  std::cout << "image: " << drawable->imageName() << std::endl;
-}
 
 
 } // namespace graphics

@@ -7,6 +7,7 @@
 #include <interface/InterfaceElement.hh>
 #include <resources/Image.hh>
 #include <resources/ResourcesManager.hh>
+#include <graphics/GraphicsEngine.hh>
 
 
 namespace interface {
@@ -32,6 +33,14 @@ std::shared_ptr<sf::Sprite> InterfaceElement::getSprite()
 
   return sprite;
 }
+
+
+void InterfaceElement::draw()
+{
+  Debug::printf("interfaceelement::draw()", _img_name);
+  graphics::GraphicsEngine::draw(_image.sprite());
+}
+
 
 
 } // namespace interface

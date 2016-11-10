@@ -51,5 +51,7 @@ void StateMenu::validate()
 
 void StateMenu::exit()
 {
+  auto player(Status::battle()->getCurrentPlayer());
+  player->menu()->clear();
   Status::exitCurrentState();
 }

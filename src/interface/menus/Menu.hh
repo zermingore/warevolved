@@ -34,7 +34,7 @@ public:
    *   sets _origin according to current Cursor position
    *   and _selectedEntry to 0
    */
-  explicit Menu(std::vector<MenuEntry> &entries);
+  explicit Menu(std::vector<std::shared_ptr<MenuEntry>> &entries);
 
   /// \todo: merge and use a single function for all (4) directions
   /**
@@ -81,6 +81,7 @@ public:
    */
   virtual void executeEntry();
 
+  virtual void clear() { _entries.clear(); }
 
 
 protected:
@@ -93,7 +94,7 @@ protected:
   // const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
   // { return *_entries; }
 
-  std::vector<MenuEntry> getEntries() const { return _entries; }
+  auto getEntries() const { return _entries; }
 
   /**
    * \brief selected entry getter
@@ -107,7 +108,7 @@ protected:
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
 
-  std::vector<MenuEntry> _entries; ///< Entries list
+  std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list
   graphics::Image _imageSelection; ///< Background image (entry)
   Coords _origin; ///< menu origin
 };

@@ -1,3 +1,7 @@
 menu:
 - graphical part (-> Interface elements)
 - getting Event (-> state)
+
+
+draw menu:
+Graphics Engine: get sprite, draw sprite.

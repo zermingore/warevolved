@@ -38,11 +38,6 @@ public:
   void buildElements();
 
   /**
-   * \brief Update every elements parameters.
-   */
-  void updateElements();
-
-  /**
    * \brief Adds an InterfaceElement to manage
    * \param elt Element to add to the interface
    */

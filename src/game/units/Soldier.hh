@@ -35,14 +35,6 @@ public:
    */
   std::string name() { return _name; }
 
-  /**
-   * \brief fills the given Menu with the possible Entries,
-   *   according to the Unit skills
-   * \param menu inGameMenu in which we add relevant entries
-   * virtual method
-   */
-  void fillActions(std::vector<MenuEntry>& menu);
-
 
 private:
   std::string _fullName; ///< soldier's full name (first and last names)

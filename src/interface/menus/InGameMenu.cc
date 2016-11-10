@@ -8,14 +8,12 @@
 namespace interface {
 
 
-InGameMenu::InGameMenu()
-{
-  Debug::printf("Ctor");
-}
-
 
 void InGameMenu::build()
 {
+  // Clearing entries content
+  //_entries.clear();
+
   // show unit section only if we selected a unit
   // here, we cannot use cursor's position, we could have move the unit
   // auto current_unit(MAP.unit(g_status->selectedCell()));
@@ -39,14 +37,18 @@ void InGameMenu::build()
   // if (state == state::ACTION_MENU)
   //   current_unit->fillActions(_entries);
 
+  // auto interface(Status::battle()->getCurrentPlayer()->interface());
   auto map(Status::battle()->map());
   if (map->unit(_coords))
   {
-    Debug::printf("unit !");
-    _entries.emplace_back(MenuEntry("tst", entry::CANCEL));
+    auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
+    _entries.push_back(entry);
+    Status::battle()->getCurrentPlayer()->interface()->addElement(entry);
   }
 
-  _entries.emplace_back(MenuEntry("Cancel", entry::CANCEL));
+  auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
+  _entries.push_back(entry);
+  Status::battle()->getCurrentPlayer()->interface()->addElement(entry);
 }
 
 
@@ -59,13 +61,16 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
   _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
   _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
 
-
-//  for (const auto entry: _entries)
-
-
-  Debug::printf("nb entries:", _entries.size());
   _image.sprite()->setOrigin(width / 2, height / 2);
   _image.sprite()->setScale(1, _entries.size());
+
+  _image.sprite()->setPosition(_position.x, _position.y);
+
+  // update entries positions
+  for (auto entry: _entries)
+  {
+    entry->setPosition(Coords(_position.x, _position.y));
+  }
 }
 
 

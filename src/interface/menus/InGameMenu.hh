@@ -26,7 +26,7 @@ public:
   /**
    * \brief default constructor.
    */
-  InGameMenu();
+  InGameMenu() = default;
 
   /**
    * \brief Builds the selection menu, filling the entries.

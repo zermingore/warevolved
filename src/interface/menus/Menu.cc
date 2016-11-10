@@ -14,16 +14,16 @@ Menu::Menu()
   : InterfaceElement("selection_menu_button")
   , _selectedEntry (0)
 {
-  _entries = std::vector<MenuEntry> ();
+  _entries = std::vector<std::shared_ptr<MenuEntry>> ();
   _origin = {0, 0};
 }
 
 
-Menu::Menu(std::vector<MenuEntry> &entries)
+Menu::Menu(std::vector<std::shared_ptr<MenuEntry>> &entries)
   : InterfaceElement("selection_menu_button")
   , _selectedEntry (0)
 {
-  _entries = std::vector<MenuEntry> (entries);
+  _entries = std::vector<std::shared_ptr<MenuEntry>> (entries);
 
   // _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
   // _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;

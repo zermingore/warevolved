@@ -181,7 +181,9 @@ void Image::draw()
 
   if (load())
     graphics::GraphicsEngine::draw(_sprite);
+
   graphics::GraphicsEngine::draw(_rectangle);
 }
+
 
 } // namespace graphics

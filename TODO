@@ -219,6 +219,8 @@ Cursor (interface) in its thread
    -> test if state equals to MODE__MENU and prints an error if not
 
 * TODO Bugs / Features
+** TODO InterfaceElements are never removed
+
 ** TODO Moving Unit
    sometimes a unt can move too far (2 keys simultaneously pressed ?)
 ** TODO Fix cursor size trouble

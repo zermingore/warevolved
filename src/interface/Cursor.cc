@@ -6,6 +6,7 @@
  */
 
 #include <interface/Cursor.hh>
+#include <graphics/GraphicsEngine.hh>
 
 
 namespace interface {
@@ -64,11 +65,22 @@ void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties
 
   _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
   _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
+  _image.sprite()->setPosition(_position.x, _position.y);
 
+  // The origin of the sprite is the middle of the cell
   _image.sprite()->setOrigin(width / 2, height / 2);
+
   _rotation += 1;
+  _image.sprite()->setRotation(_rotation);
+
+  _image.sprite()->setColor(_color);
 }
 
+
+void Cursor::draw()
+{
+  graphics::GraphicsEngine::draw(_image.sprite());
+}
 
 
 } // namespace interface

@@ -1,49 +1,52 @@
 #include <interface/menus/MenuEntry.hh>
 #include <resources/ResourcesManager.hh>
 #include <common/Status.hh>
+#include <game/applications/Battle.hh>
+#include <game/Player.hh>
+#include <graphics/GraphicsEngine.hh>
 
 
-MenuEntry::MenuEntry(entry &entry) :
-  _id (entry),
-  _background ("selection_menu_button"),
-  _labelName ("LABEL UNSET") // could use a #ifdef debug
+
+namespace interface {
+
+
+MenuEntry::MenuEntry(e_entry entry)
+  : InterfaceElement("selection_menu_button")
+  , _id (entry)
 {
-  PRINTF("NOT yet implemented MenuEntry Ctor");
+  _labelName = "UNSET";
 
-  // _background = GETIMAGE("selection_menu_button");
-  // _background.setSize(Coords(2 * CELL_WIDTH, CELL_HEIGHT));
-
-   /// \todo set font and label using a DB
-}
-
-
-MenuEntry::MenuEntry(std::string label_name, entry entry)
-{
-  // _background = GETIMAGE("selection_menu_button");
   // _background.setSize(Coords(2 * CELL_WIDTH, CELL_HEIGHT));
 
   // label initialization
-   /// \todo better calculus, ratio dependent, eventually, text length dependent
-  // _label = std::make_shared<sf::Text> ();
-  // _label->setCharacterSize((CELL_WIDTH + CELL_HEIGHT) / 4);
+  /// \todo better calculus, ratio dependent, eventually, text length dependent
+  _label = std::make_shared<sf::Text> ();
 
-  // // _font = resources::ResourcesManager::getFont("font_army");
-  // _label->setFont(*(_font.getFont()));
-  // _label->setString(label_name);
+  const auto props(Status::battle()->map()->graphicsProperties());
+  _label->setCharacterSize((props->cellWidth() + props->cellHeight()) / 4);
 
-  _labelName = label_name;
-  _id = entry;
+  /// \todo set font and label using a DB
+  _font = resources::ResourcesManager::getFont("font_army");
+  _label->setFont(*(_font.getFont()));
+  _label->setString(_labelName);
 }
 
 
-void MenuEntry::draw(Coords position)
+
+void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
 {
-  // _background.setPosition(position);
-  // _label->setPosition(position);
-
-  // _background.draw();
-  // g_window->draw(*_label);
+  _label->setPosition(_position.x, _position.y);
+  _image.sprite()->setPosition(_position.x, _position.y);
 }
+
+
+
+void MenuEntry::draw()
+{
+  graphics::GraphicsEngine::draw(_label);
+  graphics::GraphicsEngine::draw(_image.sprite());
+}
+
 
 
 void MenuEntry::execute()
@@ -105,3 +108,6 @@ void MenuEntry::execute()
       break;
   }
 }
+
+
+} // namespace interface
