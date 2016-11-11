@@ -27,7 +27,7 @@ public:
   /// Deleted default constructor.
   Interface() = delete;
 
-  /// Constructor. Initializes in-game menu.
+  /// Constructor. Initializes interface settings (colors, ...)
   explicit Interface(Color c);
 
   /**
@@ -42,6 +42,12 @@ public:
    * \param elt Element to add to the interface
    */
   void addElement(std::shared_ptr<InterfaceElement> elt);
+
+  /**
+   * \brief Remove a managed InterfaceElement
+   * \param elt Element to remove from the interface.
+   */
+  void removeElement(std::shared_ptr<InterfaceElement> elt);
 
   /**
    * \brief Interface elements vector getter.

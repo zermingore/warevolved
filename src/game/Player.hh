@@ -11,10 +11,11 @@
 # include <memory>
 # include <interface/Interface.hh>
 
+
 namespace interface {
-class Interface;
-class Cursor;
-class InGameMenu;
+  class Interface;
+  class Cursor;
+  class InGameMenu;
 }
 
 
@@ -60,11 +61,16 @@ public:
    */
   std::shared_ptr<interface::Interface> interface() { return _interface; }
 
-
-  /// Cursor getter
+  /**
+   * \brief Cursor getter.
+   * \return a pointer to the player's cursor.
+   */
   std::shared_ptr<interface::Cursor> cursor() { return _cursor; }
 
-
+  /**
+   * \brief InGameMenu getter.
+   * \return a pointer to the in game menu.
+   */
   std::shared_ptr<interface::InGameMenu> menu() { return _menu; }
 
 
@@ -72,9 +78,10 @@ public:
 private:
   // (logicaly const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player's identifier
-  std::shared_ptr<interface::Interface> _interface; ///< User Interface
-  std::shared_ptr<interface::Cursor> _cursor;       ///< Map Cursor
-  std::shared_ptr<interface::InGameMenu> _menu;     ///< In game menu
+
+  std::shared_ptr<interface::Interface>  _interface; ///< User Interface
+  std::shared_ptr<interface::Cursor>     _cursor;    ///< Map Cursor
+  std::shared_ptr<interface::InGameMenu> _menu;      ///< In game menu
 };
 
 

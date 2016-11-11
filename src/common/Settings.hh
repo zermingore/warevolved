@@ -67,6 +67,7 @@ public:
 
   /**
    * \brief _keyRepeatDelay setter.
+   * \param delay delay to consider a key as maintained, in ms
    */
   static void setKeyRepeatDelay(size_t delay) { _keyRepeatDelay = delay; }
 

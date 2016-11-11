@@ -31,9 +31,13 @@ bool InputProcessor::process()
     for (const auto& i: inputs)
     {
       if (Status::currentState()->eventManager()->process(i))
+      {
         std::cout << '+';
-      else
+        continue;
+      }
+      else {
         std::cout << '.';
+      }
     }
     std::cout << std::endl;
   }

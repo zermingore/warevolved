@@ -16,7 +16,7 @@ StateMenu::StateMenu()
   _evtMgr->registerEvent(e_input::MOVE_LEFT_1, [=] { selectLeft(); });
   _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { selectRight(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
+//  _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
 
   _evtMgr->registerEvent(e_input::EXIT_1, [=] { exit(); });
 
@@ -51,7 +51,9 @@ void StateMenu::validate()
 
 void StateMenu::exit()
 {
+  Debug::printf("StateMenu exit !");
+
   auto player(Status::battle()->getCurrentPlayer());
-  player->menu()->clear();
+  player->cancel();
   Status::exitCurrentState();
 }

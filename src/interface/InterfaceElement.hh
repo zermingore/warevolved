@@ -123,7 +123,13 @@ public:
   virtual void update(const std::shared_ptr<Map::MapGraphicsProperties> properties) = 0;
 
 
+  /**
+   * \brief Default InterfaceElement draw method.
+   *
+   * Calls the GraphicsEngine::draw() method with the sprite of _image
+   */
   virtual void draw();
+
 
 
 protected:
@@ -134,12 +140,6 @@ protected:
   Vector2<float> _scale;   ///< Element scale (related to a Cell size)
   float _rotation;         ///< Element rotation
 };
-
-// InterfaceElementButton
-//# include <resources/Font.hh>
-//std::string _backgroundName; ///< background image name
-//std::shared_ptr<sf::Text> _label; ///< label text
-//Font _font; ///< label font
 
 
 } // namespace interface

@@ -12,7 +12,6 @@
 #include <game/units/Soldier.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
-#include <interface/Cursor.hh>
 
 
 Map::MapGraphicsProperties::MapGraphicsProperties()
@@ -68,17 +67,6 @@ size_t Map::currentPlayer() const {
 }
 
 
-void Map::moveUnit()
-{
-  // const Coords c(Status::selectedCell());
-  // std::shared_ptr<Unit> tmp(_cells[c.x][c.y]->unit());
-  // const auto cursor(_battle->getCurrentPlayer()->interface()->cursor());
-
-  // tmp->setCellCoordinates(cursor->coords());
-  // _cells[cursor->x()][cursor->y()]->setUnit(tmp);
-  // _cells[c.x][c.y]->removeUnit();
-}
-
 void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
 {
   Coords tmp(unit->coords());
@@ -106,7 +94,7 @@ void Map::newUnit(const e_unit type, const size_t line, const size_t column)
       break;
 
     default:
-      assert(false && "Unable to match this unit type");
+      assert(! "Unable to match this unit type");
       return;
   }
 

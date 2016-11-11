@@ -13,10 +13,13 @@ Player::Player(Color c)
   static size_t static_id = 0;
   _id = static_id++;
 
-  _interface = std::make_shared<interface::Interface> (c);
+  // Cursor
   _cursor = std::make_shared<interface::Cursor> ();
-  _interface->addElement(_cursor);
   _cursor->setColor(c);
+
+  // Interface
+  _interface = std::make_shared<interface::Interface> (c);
+  _interface->addElement(_cursor);
 }
 
 
@@ -37,15 +40,18 @@ void Player::moveCursorRight() {
 }
 
 
-void Player::select() {
-  Debug::printf("select");
+void Player::select()
+{
   _menu = std::make_shared<interface::InGameMenu> ();
   _menu->setCoords(_cursor->coords());
   _menu->build();
   _interface->addElement(_menu);
+  Debug::printf("state menu");
   Status::pushState(e_state::MENU);
 }
 
 
-void Player::cancel() {
+void Player::cancel()
+{
+  _interface->removeElement(_menu);
 }

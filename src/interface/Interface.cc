@@ -20,7 +20,21 @@ Interface::Interface(Color c)
 
 void Interface::addElement(std::shared_ptr<InterfaceElement> elt)
 {
+  Debug::printf("interface addElement");
   _elts.push_back(elt);
+}
+
+
+void Interface::removeElement(std::shared_ptr<InterfaceElement> elt)
+{
+  // Locating the right element to remove
+  /// \todo (do not remove a graphical element based on its sprite name)
+  for (auto it: _elts)
+  {
+    if (it->name() == elt->name()) {
+      _elts.pop_back();
+    }
+  }
 }
 
 
@@ -28,8 +42,9 @@ const std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
 {
   for (const auto it: _elts)
   {
-    if (it->name() == id)
+    if (it->name() == id) {
       return it;
+    }
   }
 
 # ifdef DEBUG
