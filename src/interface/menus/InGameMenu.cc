@@ -41,11 +41,12 @@ void InGameMenu::build()
   auto map(Status::battle()->map());
   if (map->unit(_coords))
   {
-    auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
+    auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
     _entries.push_back(entry);
     Status::battle()->getCurrentPlayer()->interface()->addElement(entry);
   }
 
+  Debug::printf("Adding entry");
   auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
   _entries.push_back(entry);
   Status::battle()->getCurrentPlayer()->interface()->addElement(entry);
@@ -58,18 +59,15 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
   auto height(properties->cellHeight());
 
   // _coords is filled by the player, with cursor coordinates
-  _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
-  _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
-
-  _image.sprite()->setOrigin(width / 2, height / 2);
-  _image.sprite()->setScale(1, _entries.size());
-
-  _image.sprite()->setPosition(_position.x, _position.y);
+  _position.x = _coords.x * width  + properties->gridOffsetX();
+  _position.y = _coords.y * height + properties->gridOffsetY();
 
   // update entries positions
+  auto entry_index(0);
   for (auto entry: _entries)
   {
-    entry->setPosition(Coords(_position.x, _position.y));
+    entry->setPosition(Coords(_position.x, _position.y + height * entry_index));
+    ++entry_index;
   }
 }
 

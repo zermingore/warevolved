@@ -12,8 +12,8 @@ namespace interface {
 
 MenuEntry::MenuEntry(e_entry entry)
   : InterfaceElement("selection_menu_button")
-  , _labelName("UNSET")
   , _id (entry)
+  , _labelName("UNSET")
 {
   // label initialization
   _label = std::make_shared<sf::Text> ();
