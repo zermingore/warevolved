@@ -35,7 +35,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
 void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
 {
-  auto interface(battle->getCurrentPlayer()->interface());
+  auto interface(Status::interface());
 
   // Draw every interface elements related to the current context
   for (const auto& elt: interface->elements())
@@ -117,6 +117,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
 }
 
 
+
 void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 {
   auto p(map->graphicsProperties());
@@ -169,7 +170,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
   auto p(battle->map()->graphicsProperties());
 
   Image &image(resources::ResourcesManager::getImage(unit->name()));
-  // image.sprite()->setColor(battle->getCurrentPlayer()->unitsColor());
+  // image.sprite()->setColor(Status::player()->unitsColor());
 
   float x = image.sprite()->getTexture()->getSize().x;
   float y = image.sprite()->getTexture()->getSize().y;
@@ -196,8 +197,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
 }
 
 
-void GraphicsEngine::setWindow(std::unique_ptr<sf::RenderWindow> window)
-{
+void GraphicsEngine::setWindow(std::unique_ptr<sf::RenderWindow> window) {
   _window = std::move(window);
 }
 

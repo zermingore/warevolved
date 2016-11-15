@@ -37,19 +37,19 @@ void InGameMenu::build()
   // if (state == state::ACTION_MENU)
   //   current_unit->fillActions(_entries);
 
-  // auto interface(Status::battle()->getCurrentPlayer()->interface());
+  // auto interface(Status::interface());
   auto map(Status::battle()->map());
   if (map->unit(_coords))
   {
     auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
     _entries.push_back(entry);
-    Status::battle()->getCurrentPlayer()->interface()->addElement(entry);
+    Status::interface()->addElement(entry);
   }
 
   Debug::printf("Adding entry");
   auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
   _entries.push_back(entry);
-  Status::battle()->getCurrentPlayer()->interface()->addElement(entry);
+  Status::interface()->addElement(entry);
 }
 
 
@@ -75,7 +75,7 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
 
 void InGameMenu::close()
 {
-  auto interface(Status::battle()->getCurrentPlayer()->interface());
+  auto interface(Status::interface());
   for (auto entry: _entries) {
     interface->removeElement(entry);
   }

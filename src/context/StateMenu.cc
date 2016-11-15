@@ -48,7 +48,6 @@ void StateMenu::validate()
 void StateMenu::exit()
 {
   // Calling the current active menu of the interface
-  auto player(Status::battle()->getCurrentPlayer());
-  player->interface()->currentMenu()->close();
+  Status::interface()->currentMenu()->close();
   Status::exitCurrentState();
 }
