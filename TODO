@@ -8,6 +8,8 @@ Free at exit
 Cursor (interface) in its thread
 
 * TODO Roadmap
+fill in game menu entries (make them clickable)
+limit the cursor to the map
 
 
 * old roadmap
@@ -219,8 +221,9 @@ Cursor (interface) in its thread
    -> test if state equals to MODE__MENU and prints an error if not
 
 * TODO Bugs / Features
-** TODO InterfaceElements are never removed
-
+** DONE InterfaceElements are never removed
+   CLOSED: [2016-11-15 Di 07:37]
+** TODO The Cursor can exit the map (border right / bottom not effective)
 ** TODO Moving Unit
    sometimes a unt can move too far (2 keys simultaneously pressed ?)
 ** TODO Fix cursor size trouble

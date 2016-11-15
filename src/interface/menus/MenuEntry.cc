@@ -13,8 +13,9 @@ namespace interface {
 MenuEntry::MenuEntry(e_entry entry)
   : InterfaceElement("selection_menu_button")
   , _id (entry)
-  , _labelName("UNSET")
 {
+  setLabelName(entry);
+
   // label initialization
   _label = std::make_shared<sf::Text> ();
 
@@ -27,7 +28,6 @@ MenuEntry::MenuEntry(e_entry entry)
   _label->setFont(*(_font.getFont()));
   _label->setString(_labelName);
 }
-
 
 
 void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
@@ -102,6 +102,34 @@ void MenuEntry::execute()
 
     default:
       Debug::logPrintf("unable to match selection menu entry");
+      break;
+  }
+}
+
+
+void MenuEntry::setLabelName(e_entry entry)
+{
+  switch (entry)
+  {
+    case e_entry::MOVE:
+      _labelName = "Move";
+      break;
+    case e_entry::STOP:
+      _labelName = "Stop";
+      break;
+    case e_entry::NEXT_TURN:
+      _labelName = "Next Turn";
+      break;
+    case e_entry::ATTACK:
+      _labelName = "Attack";
+      break;
+    case e_entry::CANCEL:
+      _labelName = "Cancel";
+      break;
+
+    default:
+      _labelName = "## NOT FOUND ##";
+      Debug::error("No label found for e_entry", static_cast<int> (entry));
       break;
   }
 }

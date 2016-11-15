@@ -64,6 +64,13 @@ public:
 
 
 private:
+  /**
+   * \brief Initializes the label name
+   * \param entry entry which associated name will be used
+   */
+  void setLabelName(e_entry entry);
+
+
   e_entry _id;                      ///< entry identifier
   std::shared_ptr<sf::Text> _label; ///< button label text
   std::string _labelName;           ///< menu entry text
