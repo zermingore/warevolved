@@ -1,14 +1,7 @@
-#include <common/enums/states.hh>
 #include <common/Status.hh>
-#include <common/include.hh>
-#include <common/macros.hh>
-#include <context/State.hh>
 #include <game/applications/Battle.hh>
-#include <game/Map.hh>
 #include <game/Player.hh>
-#include <input/EventManager.hh>
 #include <context/StateFactory.hh>
-#include <interface/Interface.hh>
 
 
 // Static class attributes definition

@@ -9,7 +9,6 @@
 
 # include <memory>
 # include <vector>
-# include <common/using.hh>
 # include <common/structures/Vector.hh>
 
 

@@ -1,6 +1,12 @@
+/**
+ * \file
+ * \date April 18, 2013
+ * \author Zermingore
+ * \brief Global game status accessor, including current Player, State, ...
+ */
+
 #ifndef STATUS_HH_
 # define STATUS_HH_
-
 
 # include <memory>
 # include <stack>
@@ -29,11 +35,6 @@ public:
    * \brief Destructor. Pops every state
    */
   ~Status();
-
-  /**
-   * \brief initializes selectedUnitPosition
-   */
-  void initialize();
 
 
   // ________________________________ Battle ________________________________ //

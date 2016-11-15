@@ -1,15 +1,12 @@
 #include <context/StateFactory.hh>
 #include <context/StatePlaying.hh>
 #include <context/StateMenu.hh>
-#include <input/EventManager.hh>
-
 #include <common/Debug.hh>
 
 
 std::shared_ptr<State> StateFactory::createState(e_state& state)
 {
-  DEBUG_PRINT("State: current state");
-  DEBUG_PRINT_VALUE(static_cast<int> (state));
+  Debug::printf("State: current state:", static_cast<int> (state));
 
   // Facto DP
   switch (state)

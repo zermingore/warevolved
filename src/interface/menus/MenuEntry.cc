@@ -1,8 +1,6 @@
 #include <interface/menus/MenuEntry.hh>
-#include <resources/ResourcesManager.hh>
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
-#include <game/Player.hh>
 #include <graphics/GraphicsEngine.hh>
 
 
@@ -37,13 +35,11 @@ void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> propert
 }
 
 
-
 void MenuEntry::draw()
 {
   graphics::GraphicsEngine::draw(_label);
   graphics::GraphicsEngine::draw(_image.sprite());
 }
-
 
 
 void MenuEntry::execute()

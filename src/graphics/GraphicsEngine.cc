@@ -1,15 +1,9 @@
-#include <common/constants.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <resources/ResourcesManager.hh>
-#include <game/Map.hh>
+#include <common/constants.hh> // GRID_COLOR
+#include <common/Status.hh>
 #include <game/Cell.hh>
-#include <game/units/Unit.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
-#include <common/Status.hh>
-#include <context/State.hh>
-#include <interface/InterfaceElement.hh>
-
 
 
 namespace graphics {
