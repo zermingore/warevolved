@@ -6,6 +6,7 @@
 #include <common/Status.hh>
 #include <common/enums/states.hh>
 #include <context/State.hh>
+#include <context/StateMenu.hh>
 
 
 Player::Player(Color c)
@@ -46,7 +47,8 @@ void Player::select()
   _menu->setCoords(_cursor->coords());
   _menu->build();
   _interface->addElement(_menu);
-  Debug::printf("state menu");
+  _interface->setCurrentMenu(_menu);
+
   Status::pushState(e_state::MENU);
 }
 

@@ -7,6 +7,7 @@
  */
 
 #include <interface/Interface.hh>
+#include <interface/menus/Menu.hh>
 
 
 namespace interface {

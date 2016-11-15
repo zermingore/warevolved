@@ -16,6 +16,8 @@
 
 namespace interface {
 
+class Menu;
+
 
 /**
  * \class Interface
@@ -70,16 +72,17 @@ public:
   Color cursorColor() const { return _settings->cursorColor(); }
 
   /**
-   * \brief Player's units color getter.
-   * \return Units color.
-   */
-  Color unitsColor() const { return _settings->unitsColor(); }
-
-  /**
    * \brief sets cursor color.
    * \param color _cursorColor value.
    */
   void setCursorColor(Color color) { _settings->setCursorColor(color); }
+
+
+  /**
+   * \brief Player's units color getter.
+   * \return Units color.
+   */
+  Color unitsColor() const { return _settings->unitsColor(); }
 
   /**
    * \brief sets units color.
@@ -88,9 +91,25 @@ public:
   void setUnitsColor(Color color) { _settings->setUnitsColor(color); }
 
 
+  /**
+   * \brief sets current menu.
+   * \param menu new current menu.
+   */
+  std::shared_ptr<Menu> currentMenu() { return _menu; }
+
+  /**
+   * \brief sets current menu.
+   * \param menu new current menu.
+   */
+  void setCurrentMenu(std::shared_ptr<Menu> menu) { _menu = menu; }
+
+
+
+
 private:
   std::vector<std::shared_ptr<InterfaceElement>> _elts; ///< list of elements
   std::unique_ptr<InterfaceSettings> _settings; ///< interface settings
+  std::shared_ptr<Menu> _menu; ///< current menu getter
 };
 
 

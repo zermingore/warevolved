@@ -2,7 +2,6 @@
 #include <game/Game.hh>
 #include <common/Debug.hh>
 
-#include <stdio.h>
 
 int main(int ac, const char **av)
 {

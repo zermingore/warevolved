@@ -83,6 +83,12 @@ public:
 
   virtual void clear() { _entries.clear(); }
 
+  /**
+   * \brief Callback for closing the menu
+   */
+  virtual void close() = 0;
+
+
 
 protected:
   /**

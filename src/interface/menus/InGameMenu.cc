@@ -53,6 +53,7 @@ void InGameMenu::build()
 }
 
 
+
 void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
 {
   auto width(properties->cellWidth());
@@ -69,6 +70,18 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
     entry->setPosition(Coords(_position.x, _position.y + height * entry_index));
     ++entry_index;
   }
+}
+
+
+void InGameMenu::close()
+{
+  auto interface(Status::battle()->getCurrentPlayer()->interface());
+  for (auto entry: _entries) {
+    interface->removeElement(entry);
+  }
+  // interface->removeElement(this); // apparently not needed, not sure why
+
+  interface->setCurrentMenu(nullptr);
 }
 
 
