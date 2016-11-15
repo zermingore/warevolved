@@ -6,16 +6,21 @@
 # include <stack>
 # include <common/using.hh>
 
+
 class State;
 class Battle;
-class InGameMenu;
+class Player;
+
+namespace interface {
+  class Interface;
+}
 
 enum class e_state;
 
 
 /**
- * \brief stores game status information such as
- *   last cell selected, current player, ...
+ * \class Status
+ * \brief stores game status information such as current player, battle, ...
  */
 class Status
 {
@@ -31,18 +36,15 @@ public:
   void initialize();
 
 
-  // __________________________ Getters / Setters __________________________ //
+  // ________________________________ Battle ________________________________ //
   /// Battle getter
   static std::shared_ptr<Battle> battle() { return _battle; }
 
   /// Battle setter
   static void setBattle(std::shared_ptr<Battle> battle) { _battle = battle; }
 
-  /**
-   * \brief returns selected cell's coordinates
-   */
-  static Coords selectedCell() { return _selectedCell; }
 
+  // ________________________________ States ________________________________ //
   /**
    * \brief pops _states summit
    * exits the game if the stack is empty
@@ -69,25 +71,19 @@ public:
    */
   static void pushState(e_state state);
 
+
+  // _______________________________ Wrappers _______________________________ //
   /**
-   * \brief sets selected cell coordinates to the given coordinates
-   * \param c coordinates of the selected cell
+   * \brief wrapper to the battle to get the current player
+   * \return current player
    */
-  static void setSelectedCell(Coords c) { _selectedCell = c; }
+  static std::shared_ptr<Player> player();
 
   /**
-   * \brief _selectedUnitPosition getter
-   * \return _selectedUnitPosition
+   * \brief wrapper to the battle to get the current player
+   * \return current player
    */
-  static Coords selectedUnitPosition() { return _selectedUnitPosition; }
-
-  /**
-   * \brief _selectedUnitPosition setter
-   * \param pos selected Unit position
-   */
-  static void setSelectedUnitPosition(Coords pos) {
-    _selectedUnitPosition = pos;
-  }
+  static std::shared_ptr<interface::Interface> interface();
 
 
 private:
