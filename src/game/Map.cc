@@ -62,10 +62,6 @@ e_terrain Map::getTerrain(const size_t x, const size_t y) const {
   return _cells[x][y]->terrain();
 }
 
-size_t Map::currentPlayer() const {
-  return _battle->currentPlayer();
-}
-
 
 void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
 {

@@ -46,13 +46,13 @@ public:
 
   /**
    * \brief position getter.
-   * \return Position of the element in grid frame.
+   * \return Position of the element in the absolute frame.
    */
   Coords position() const { return _position; }
 
   /**
    * \brief _coords getter
-   * \return _coords value
+   * \return _coords value in the grid frame
    */
   Coords coords() { return _coords; }
 

@@ -38,6 +38,11 @@ public:
    */
   void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
 
+  /**
+   * \brief Highlights the selected entry
+   */
+  void draw();
+
 
   void close();
 };

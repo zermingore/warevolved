@@ -59,8 +59,11 @@ public:
    */
   void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
 
-
+  /**
+   * \brief Draws label and sprite of the entry, calling the graphics engine
+   */
   void draw();
+
 
 
 private:
@@ -69,7 +72,6 @@ private:
    * \param entry entry which associated name will be used
    */
   void setLabelName(e_entry entry);
-
 
   e_entry _id;                      ///< entry identifier
   std::shared_ptr<sf::Text> _label; ///< button label text

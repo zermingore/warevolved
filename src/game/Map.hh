@@ -73,13 +73,6 @@ public:
     size_t gridOffsetY() const { return _gridOffsetY; }
 
     /**
-     * \brief Current player getter.
-     * \return Current player (from Battle).
-     */
-    size_t currentPlayer() const;
-
-
-    /**
      * \brief cell width setter.
      * \param width cell width in pixels.
      */
@@ -153,14 +146,9 @@ public:
    * \brief Graphics properties getter
    * \return a pointer on the graphics properties class
    */
-  std::shared_ptr<MapGraphicsProperties> graphicsProperties() const
-  { return _graphicsProperties; }
-
-  /**
-   * \brief returns the current player in the map
-   * \return current player's identifier
-   */
-  size_t currentPlayer() const;
+  std::shared_ptr<MapGraphicsProperties> graphicsProperties() const {
+    return _graphicsProperties;
+  }
 
   /**
    * \brief gets the unit at coordinates (x, y)

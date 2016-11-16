@@ -1,6 +1,7 @@
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
+#include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuEntry.hh>
 
@@ -63,6 +64,10 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
   _position.x = _coords.x * width  + properties->gridOffsetX();
   _position.y = _coords.y * height + properties->gridOffsetY();
 
+
+  // highlighting current selection
+  _imageSelection.setPosition(sf::Vector2f(_position.x, _position.y));
+
   // update entries positions
   auto entry_index(0);
   for (auto entry: _entries)
@@ -71,6 +76,7 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
     ++entry_index;
   }
 }
+
 
 
 void InGameMenu::close()
@@ -82,6 +88,11 @@ void InGameMenu::close()
   // interface->removeElement(this); // apparently not needed, not sure why
 
   interface->setCurrentMenu(nullptr);
+}
+
+
+void InGameMenu::draw() {
+  _imageSelection.draw();
 }
 
 

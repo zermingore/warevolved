@@ -36,23 +36,18 @@ public:
    */
   explicit Menu(std::vector<std::shared_ptr<MenuEntry>> &entries);
 
-  /// \todo: merge and use a single function for all (4) directions
-  /**
-   * \brief increments _selectedEntry modulo number of Entries
-   *  allowing cycling
-   */
-  void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
+  // /// \todo: merge and use a single function for all (4) directions
+  // /**
+  //  * \brief increments _selectedEntry modulo number of Entries
+  //  *  allowing cycling
+  //  */
+  // void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
-  /**
-   * \brief decrements _selectedEntry modulo _nbEntries
-   *  allowing cycling
-   */
-  void decrementSelectedEntry();
-
-  /**
-   * \brief sets origin menu to the right cursor relative position
-   */
-  void setOrigin();  /// \todo sets the menu at optimal position
+  // /**
+  //  * \brief decrements _selectedEntry modulo _nbEntries
+  //  *  allowing cycling
+  //  */
+  // void decrementSelectedEntry();
 
   /**
    * \brief sets origin menu to the right cursor relative position
@@ -110,13 +105,15 @@ protected:
    */
   unsigned int selectedEntry() { return _selectedEntry; }
 
+
+  std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list
+  Coords _origin; ///< menu origin
+
   unsigned int _selectedEntry; ///< Current selected entry
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
 
-  std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list
-  graphics::Image _imageSelection; ///< Background image (entry)
-  Coords _origin; ///< menu origin
+  graphics::Image _imageSelection; ///< Emphasis of the selected entry
 };
 
 

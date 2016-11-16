@@ -44,19 +44,6 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
     char test(interface->elements().size() + 48); // C-style ...
     label->setString(test);
     draw(label);
-
-    // auto drawables(elt->getGraphics());
-    // for (const auto it: drawables)
-    // {
-    //   // it->setColor(interface->unitsColor());
-    //   draw(it);
-    // }
-
-    // float x = elt.scale().x;
-    // float y = elt.scale().y;
-    // image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
-
-    // image.drawAtCell(elt->position(), p);
   }
 }
 
