@@ -102,6 +102,13 @@ void Image::setPosition(sf::Vector2f position)
   _sprite->setPosition(position);
 }
 
+void Image::setPosition(Coords position)
+{
+  if (!_sprite)
+    initSprite();
+  _sprite->setPosition(sf::Vector2f(position.x, position.y));
+}
+
 void Image::setSize(float width, float height) {
   _rectangle->setSize(sf::Vector2f(width, height));
 }

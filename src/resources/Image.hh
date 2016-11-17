@@ -79,6 +79,7 @@ public:
    * \param position: _sprite vector position
    */
   void setPosition(sf::Vector2f position);
+  void setPosition(Coords position);
 
   /**
    * \brief sets _fileName to file_name

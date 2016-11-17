@@ -32,13 +32,13 @@ void Menu::setOrigin(Coords origin) {
 }
 
 
-// void Menu::decrementSelectedEntry()
-// {
-//   if (_selectedEntry)
-//     _selectedEntry = (_selectedEntry - 1) % (_entries.size() - 1);
-//   else
-//     _selectedEntry = _entries.size() - 1;
-// }
+void Menu::decrementSelectedEntry()
+{
+  if (_selectedEntry)
+    _selectedEntry = (_selectedEntry - 1) % (_entries.size() - 1);
+  else
+    _selectedEntry = _entries.size() - 1;
+}
 
 
 void Menu::executeEntry()

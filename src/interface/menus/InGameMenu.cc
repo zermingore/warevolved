@@ -55,6 +55,15 @@ void InGameMenu::build()
 
 
 
+void InGameMenu::moveUp() {
+  incrementSelectedEntry();
+}
+
+void InGameMenu::moveDown() {
+  decrementSelectedEntry();
+}
+
+
 void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
 {
   auto width(properties->cellWidth());
@@ -64,9 +73,9 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
   _position.x = _coords.x * width  + properties->gridOffsetX();
   _position.y = _coords.y * height + properties->gridOffsetY();
 
-
   // highlighting current selection
-  _imageSelection.setPosition(sf::Vector2f(_position.x, _position.y));
+  Coords selected_entry_pos(_position.x, _position.y + height * _selectedEntry);
+  _imageSelection.setPosition(selected_entry_pos);
 
   // update entries positions
   auto entry_index(0);

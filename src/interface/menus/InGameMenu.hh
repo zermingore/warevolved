@@ -33,6 +33,9 @@ public:
    */
   void build();
 
+  void moveUp();
+  void moveDown();
+
   /**
    * \brief updates the graphics attributes of the menu
    */

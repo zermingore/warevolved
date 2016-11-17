@@ -36,18 +36,18 @@ public:
    */
   explicit Menu(std::vector<std::shared_ptr<MenuEntry>> &entries);
 
-  // /// \todo: merge and use a single function for all (4) directions
-  // /**
-  //  * \brief increments _selectedEntry modulo number of Entries
-  //  *  allowing cycling
-  //  */
-  // void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
+  /// \todo: merge and use a single function for all (4) directions
+  /**
+   * \brief increments _selectedEntry modulo number of Entries
+   *  allowing cycling
+   */
+  void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
-  // /**
-  //  * \brief decrements _selectedEntry modulo _nbEntries
-  //  *  allowing cycling
-  //  */
-  // void decrementSelectedEntry();
+  /**
+   * \brief decrements _selectedEntry modulo _nbEntries
+   *  allowing cycling
+   */
+  void decrementSelectedEntry();
 
   /**
    * \brief sets origin menu to the right cursor relative position
@@ -71,11 +71,21 @@ public:
    */
   virtual void build(/* e_state state */) = 0;
 
+
+  // Selection motion
+  virtual void moveUp()    {}
+  virtual void moveDown()  {}
+  virtual void moveLeft()  {}
+  virtual void moveRight() {}
+
   /**
    * \brief executes action matching _selectedEntry
    */
   virtual void executeEntry();
 
+  /**
+   * \brief Removes the entries of the menu
+   */
   virtual void clear() { _entries.clear(); }
 
   /**

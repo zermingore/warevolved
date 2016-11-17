@@ -11,10 +11,11 @@
 StateMenu::StateMenu()
 {
   // browsing entries
-  _evtMgr->registerEvent(e_input::MOVE_UP_1, [=] { selectUp(); });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { selectDown(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT_1, [=] { selectLeft(); });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { selectRight(); });
+  auto menu(Status::interface()->currentMenu());
+  _evtMgr->registerEvent(e_input::MOVE_UP_1, [=] { menu->moveUp(); });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { menu->moveDown(); });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT_1, [=] { menu->moveLeft(); });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { menu->moveRight(); });
 
 //  _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
 
