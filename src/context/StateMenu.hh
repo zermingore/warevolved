@@ -23,10 +23,11 @@ public:
 
 private:
   // Cursor motion
-  void selectLeft();
-  void selectRight();
-  void selectDown();
-  void selectUp();
+  void moveLeft();
+  void moveRight();
+  void moveDown();
+  void moveUp();
+
   void validate();
 
   /**

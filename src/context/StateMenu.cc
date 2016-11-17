@@ -11,11 +11,10 @@
 StateMenu::StateMenu()
 {
   // browsing entries
-  auto menu(Status::interface()->currentMenu());
-  _evtMgr->registerEvent(e_input::MOVE_UP_1, [=] { menu->moveUp(); });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { menu->moveDown(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT_1, [=] { menu->moveLeft(); });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { menu->moveRight(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP_1, [=] { moveUp(); });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { moveDown(); });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT_1, [=] { moveLeft(); });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { moveRight(); });
 
 //  _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
 
@@ -23,22 +22,22 @@ StateMenu::StateMenu()
 }
 
 
-void StateMenu::selectLeft()
-{
-  // _highlighted_entry ...
+void StateMenu::moveUp() {
+  Status::interface()->currentMenu()->moveUp();
 }
 
-void StateMenu::selectRight()
-{
+void StateMenu::moveDown() {
+  Status::interface()->currentMenu()->moveDown();
 }
 
-void StateMenu::selectDown()
-{
+void StateMenu::moveLeft() {
+  Status::interface()->currentMenu()->moveLeft();
 }
 
-void StateMenu::selectUp()
-{
+void StateMenu::moveRight() {
+  Status::interface()->currentMenu()->moveRight();
 }
+
 
 void StateMenu::validate()
 {
