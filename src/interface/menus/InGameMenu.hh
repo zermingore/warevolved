@@ -48,6 +48,9 @@ public:
 
 
   void close();
+
+
+  void validate();
 };
 
 

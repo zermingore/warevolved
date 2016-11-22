@@ -3,10 +3,14 @@
 #include <game/Player.hh>
 #include <context/StateFactory.hh>
 
+#include <input/InputProcessor.hh>
+#include <input/KeyManager.hh>
+
 
 // Static class attributes definition
 std::stack<std::shared_ptr<State>> Status::_states;
 std::shared_ptr<Battle> Status::_battle;
+std::shared_ptr<InputProcessor> Status::_inputProcessor;
 Coords Status::_selectedCell;
 Coords Status::_selectedUnitPosition;
 
@@ -41,12 +45,18 @@ std::shared_ptr<State> Status::popCurrentState()
   auto tmp(_states.top());
   _states.pop();
 
+  // Force ignoring current active inputs
+  _inputProcessor->keyManager()->blockInputs();
+
   return tmp;
 }
 
 
 void Status::pushState(e_state state) {
   _states.push(StateFactory::createState(state));
+
+  // Force ignoring current active inputs
+  _inputProcessor->keyManager()->blockInputs();
 }
 
 

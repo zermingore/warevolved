@@ -12,6 +12,9 @@ StatePlaying::StatePlaying()
 {
   // Add parameters in the lambda ?
 
+
+  // should these functions return booleans to consume events ?
+
   auto player(Status::player());
   _evtMgr->registerEvent(e_input::MOVE_UP_1, [=] { player->moveCursorUp(); });
   _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { player->moveCursorDown(); });

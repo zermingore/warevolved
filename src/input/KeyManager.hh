@@ -105,70 +105,28 @@ public:
   /// Default Constructor. Initializes the timers / switches
   KeyManager();
 
-  /// Returns a e_key from a sf::key
-  // e_key getKey(sf::Keyboard::Key key) { return _keys_mapping[key]; }
-
-
-  /**
-   * \brief timer value getter
-   * \param function Function associated to the the timer we're looking for
-   * \return Timer number index value (in ms)
-   */
-  int getTime(e_timer function) {
-    return _clocks[function].getElapsedTime().asMilliseconds();
-  }
-
-  /**
-   * \brief switch getter
-   * \param index _switches index to retrieve
-   * \return switch status
-   */
-  bool switchStatus(e_switch index) { return _switches[index]; }
-
-  /**
-   * \brief switch getter
-   * \param index _switches index to retrieve
-   * \param status switch status
-   */
-  void setSwitchStatus(e_switch index, bool status) {
-    _switches[index] = status;
-  }
-
-  /**
-   * \brief resets _switches status, if needed
-   */
-  void resetSwitches();
-
-  /**
-   * \brief returns true if the key matching index is ready
-   * \return true if the key matching index is ready
-   *   false otherwise
-   */
-  bool ready(e_timer index);
-
-  /**
-   * \brief notify a key as 'ready': considerable as pressed again.
-   */
-  void setReady(e_timer index, bool state) { _ready[index] = state; }
-
-  /**
-   * \brief restarts the clock.
-   * \param index and sets _timers[index] to 0.
-   */
-  void restartTimer(e_timer index);
-
-  /// sets the boolean of each considered key
-  void setkeysStatus();
-
   void getEvent(sf::Keyboard::Key key);
 
   void populateEvents();
 
-  bool isActive(e_input e);
-
+  /**
+   * \brief returns the list of available and non blocked inputs
+   */
   std::vector<e_input> activeInputs() { return _active_inputs; }
 
+
+  /**
+   * \brief Blocks every input, active or not
+   * \param duration Time in ms during which one events will be ignored
+   */
+  void blockInputs(unsigned int duration = 100);
+
+
+
 private:
+  bool available(e_input input);
+
+
   //  std::pair<bool, sf::Keyboard::Key> _keys[E_KEY_NB_KEYS]; ///< keys list
   std::multimap<sf::Keyboard::Key, e_key> _keys_mapping; ///< key mapping
   std::map<sf::Keyboard::Key, e_input> _events_mapping; ///< events mapping
@@ -176,6 +134,9 @@ private:
   sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks (for key readiness)
   bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
   bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states
+
+  sf::Clock _clock_events_freeze; ///< clock to manage events freezing
+  int _events_freeze_duration;    ///< duration to deactivate events
 };
 
 

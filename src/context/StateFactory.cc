@@ -21,19 +21,12 @@ std::shared_ptr<State> StateFactory::createState(e_state& state)
       Debug::error("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
       break;
   //   MAIN_MENU,
-  //     IN_GAME,
-  //     PLAYING,
 
   // SELECTION_MENU, // pick a Unit
   // MOVING_UNIT, // move it
   // ACTION_MENU, // give it an order
   // ATTACK, // ask a Unit to attack
-  //   default:
-  //   static_assert("invalid state");
   }
-
-  //  _eventManager->registerEvent("cursor right", Cursor::moveRight());
-
 
   // never reached
   return nullptr;

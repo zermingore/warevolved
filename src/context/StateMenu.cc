@@ -11,14 +11,13 @@
 StateMenu::StateMenu()
 {
   // browsing entries
-  _evtMgr->registerEvent(e_input::MOVE_UP_1, [=] { moveUp(); });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { moveDown(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT_1, [=] { moveLeft(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUp();    });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveDown();  });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT_1,  [=] { moveLeft();  });
   _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { moveRight(); });
 
-//  _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
-
-  _evtMgr->registerEvent(e_input::EXIT_1, [=] { exit(); });
+  _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { validate();  });
+  _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();      });
 }
 
 
@@ -39,9 +38,8 @@ void StateMenu::moveRight() {
 }
 
 
-void StateMenu::validate()
-{
-  // State.push(entry-> ...);
+void StateMenu::validate() {
+  Status::interface()->currentMenu()->validate();
 }
 
 

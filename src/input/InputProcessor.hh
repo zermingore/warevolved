@@ -23,6 +23,11 @@ public:
    */
   bool process();
 
+  /**
+   * \brief key manager getter
+   */
+  auto keyManager() { return _km; }
+
 
 private:
   /// Event managers queue

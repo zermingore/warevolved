@@ -64,6 +64,19 @@ void InGameMenu::moveDown() {
 }
 
 
+void InGameMenu::validate()
+{
+  Debug::printf("validate: entry", _selectedEntry);
+  if (_selectedEntry == _entries.size() - 1)
+  {
+    Debug::printf("selected entry: 0 - cancel?");
+    Debug::printf("number of entries:", _entries.size());
+    close();
+    Status::popCurrentState();
+  }
+}
+
+
 void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
 {
   auto width(properties->cellWidth());

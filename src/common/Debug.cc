@@ -2,8 +2,8 @@
 
 
 // Debug::_log definition
-std::unique_ptr<std::ofstream> Debug::_log =
-    std::make_unique<std::ofstream> (LOG_FILENAME, std::ios_base::out);
+auto Debug::_log(std::make_unique<std::ofstream>
+                 (LOG_FILENAME, std::ios_base::out));
 
 
 void Debug::bodylogprintf()

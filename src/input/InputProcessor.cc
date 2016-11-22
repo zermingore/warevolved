@@ -26,20 +26,16 @@ bool InputProcessor::process()
     }
 
     _km->populateEvents();
+    Debug::printf("nb input:", _km->activeInputs().size());
 
-    auto inputs(_km->activeInputs());
-    for (const auto& i: inputs)
+    for (const auto& i: _km->activeInputs())
     {
       if (Status::currentState()->eventManager()->process(i))
       {
-        std::cout << '+';
-        continue;
-      }
-      else {
-        std::cout << '.';
+        Debug::printf("processed:", (int) i,
+                      "in current state", Status::currentState());
       }
     }
-    std::cout << std::endl;
   }
 
   return true;

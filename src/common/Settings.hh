@@ -92,4 +92,5 @@ private:
   static unsigned int _keyRepeatDelay; ///< Required time to consider a "second pressure" in ms.
 };
 
+
 #endif /* !SETTINGS_HH_ */

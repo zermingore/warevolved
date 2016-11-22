@@ -93,6 +93,7 @@ public:
    */
   virtual void close() = 0;
 
+  virtual void validate() = 0;
 
 
 protected:
@@ -102,9 +103,6 @@ protected:
    * \note this function is used to retrieve
    *   informations from menu stack (see \class Status)
    */
-  // const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
-  // { return *_entries; }
-
   auto getEntries() const { return _entries; }
 
   /**
