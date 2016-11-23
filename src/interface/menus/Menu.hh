@@ -30,33 +30,26 @@ public:
   Menu();
 
   /**
-   * \brief allows to build a menu which entries are \param entries
-   *   sets _origin according to current Cursor position
-   *   and _selectedEntry to 0
-   */
-  explicit Menu(std::vector<std::shared_ptr<MenuEntry>> &entries);
-
-  /// \todo: merge and use a single function for all (4) directions
-  /**
    * \brief increments _selectedEntry modulo number of Entries
-   *  allowing cycling
+   *   allowing cycling
    */
   void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
   /**
    * \brief decrements _selectedEntry modulo _nbEntries
-   *  allowing cycling
+   *   allowing cycling
    */
   void decrementSelectedEntry();
 
   /**
    * \brief sets origin menu to the right cursor relative position
+   * \todo set the menu at optimal position
    */
-  virtual void setOrigin(Coords origin);  /// \todo sets the menu at optimal position
+  virtual void setOrigin(Coords origin);
 
   /**
    * \brief draws the menu
-   * with its entries and the current entry highlighter
+   *   with its entries and the current entry highlighter
    */
   void draw();
 
@@ -78,10 +71,6 @@ public:
   virtual void moveLeft()  {}
   virtual void moveRight() {}
 
-  /**
-   * \brief executes action matching _selectedEntry
-   */
-  virtual void executeEntry();
 
   /**
    * \brief Removes the entries of the menu
@@ -93,7 +82,11 @@ public:
    */
   virtual void close() = 0;
 
+  /**
+   * \brief executes action matching _selectedEntry
+   */
   virtual void validate() = 0;
+
 
 
 protected:

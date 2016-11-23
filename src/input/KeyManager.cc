@@ -34,10 +34,18 @@ KeyManager::KeyManager()
 
 void KeyManager::populateEvents()
 {
+  // Clear the active inputs list
   _active_inputs.clear();
+
+  // If the inputs are disabled, return, leaving an empty active input array
+  if (eventsFreezed()) {
+    return;
+  }
+
+  // Add every event which key is pressed
   for (const auto& it: _events_mapping)
   {
-    if (sf::Keyboard::isKeyPressed(it.first) && available(it.second)) {
+    if (sf::Keyboard::isKeyPressed(it.first)) {
       _active_inputs.push_back(it.second);
     }
   }
@@ -57,9 +65,9 @@ void KeyManager::blockInputs(unsigned int duration)
 
 
 
-bool KeyManager::available(e_input input)
+bool KeyManager::eventsFreezed()
 {
   // Check if the events were blocked for a minimal duration
   return (_clock_events_freeze.getElapsedTime().asMilliseconds()
-          >= _events_freeze_duration);
+          < _events_freeze_duration);
 }

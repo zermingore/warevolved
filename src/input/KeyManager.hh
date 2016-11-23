@@ -124,7 +124,13 @@ public:
 
 
 private:
-  bool available(e_input input);
+  /**
+   * \brief Returns a boolean to know if the inputs are available
+   *
+   * If they are not, they will be available in max _clock_events_freeze ms
+   *   (unless a call to blockInputs is made)
+   */
+  bool eventsFreezed();
 
 
   //  std::pair<bool, sf::Keyboard::Key> _keys[E_KEY_NB_KEYS]; ///< keys list
