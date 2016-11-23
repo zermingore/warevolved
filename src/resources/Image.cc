@@ -1,6 +1,5 @@
 #include <resources/Image.hh>
 #include <graphics/GraphicsEngine.hh>
-// #include <graphics/MapGraphicsProperties.hh>
 
 
 namespace graphics {
@@ -91,11 +90,7 @@ void Image::setFileName(std::string file_name)
 }
 
 
-void Image::setSize(sf::Vector2f size) {
-  _rectangle->setSize(size);
-}
-
-void Image::setPosition(sf::Vector2f position)
+  void Image::setPosition(sf::Vector2f position)
 {
   if (!_sprite)
     initSprite();
@@ -107,6 +102,11 @@ void Image::setPosition(Coords position)
   if (!_sprite)
     initSprite();
   _sprite->setPosition(sf::Vector2f(position.x, position.y));
+}
+
+
+void Image::setSize(sf::Vector2f size) {
+  _rectangle->setSize(size);
 }
 
 void Image::setSize(float width, float height) {

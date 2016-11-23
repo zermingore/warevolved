@@ -30,8 +30,12 @@ MenuEntry::MenuEntry(e_entry entry)
 
 void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
 {
+  auto width(properties->cellWidth());
+  auto height(properties->cellHeight());
+
   _label->setPosition(_position.x, _position.y);
   _image.sprite()->setPosition(_position.x, _position.y);
+  _image.setSize(width * 2, height);
 }
 
 

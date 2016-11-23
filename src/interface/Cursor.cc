@@ -72,7 +72,6 @@ void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties
 
   _rotation += 1;
   _image.sprite()->setRotation(_rotation);
-
   _image.sprite()->setColor(_color);
 }
 

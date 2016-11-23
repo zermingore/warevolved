@@ -12,7 +12,8 @@
 namespace graphics {
 
 
-/** \class Image Resource type
+/**
+ * \class Image Resource type
  * Derived from Resource
  */
 class Image: public Resource
@@ -21,7 +22,7 @@ public:
   /**
    * \brief Image default Constructor
    */
-  Image() {}
+  Image() = default;
 
   /**
    * \brief Image Constructor
@@ -62,6 +63,13 @@ public:
   std::shared_ptr<sf::Sprite> sprite();
 
   /**
+   * \brief sets _sprite position
+   * \param position: _sprite vector position
+   */
+  void setPosition(sf::Vector2f position);
+  void setPosition(Coords position);
+
+  /**
    * \brief sets _rectangle size
    */
   void setSize(sf::Vector2f size);
@@ -73,13 +81,6 @@ public:
    * \param height: image height
    */
   void setSize(float width, float height);
-
-  /**
-   * \brief sets _sprite position
-   * \param position: _sprite vector position
-   */
-  void setPosition(sf::Vector2f position);
-  void setPosition(Coords position);
 
   /**
    * \brief sets _fileName to file_name
