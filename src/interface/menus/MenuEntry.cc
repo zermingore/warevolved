@@ -33,9 +33,9 @@ void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> propert
   auto width(properties->cellWidth());
   auto height(properties->cellHeight());
 
+  _image.setSize(width * 2, height);
   _label->setPosition(_position.x, _position.y);
   _image.sprite()->setPosition(_position.x, _position.y);
-  _image.setSize(width * 2, height);
 }
 
 

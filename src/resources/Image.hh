@@ -4,9 +4,13 @@
 # include <resources/Resource.hh>
 # include <common/include.hh>
 
+
+/// \todo forward declaration of Map::MapGraphicsProperties
 # include <game/Map.hh>
+
 // class Map;
 // class Map::MapGraphicsProperties;
+
 
 
 namespace graphics {
@@ -69,18 +73,42 @@ public:
   void setPosition(sf::Vector2f position);
   void setPosition(Coords position);
 
+
   /**
-   * \brief sets _rectangle size
+   * \brief sets _rectangle and _sprite size.
+   *
+   * The new size of the object depends on the cell size
    */
   void setSize(sf::Vector2f size);
 
   /**
-   * \brief sets _rectangle size
+   * \brief sets _rectangle and _sprite size
    *   builds a sf::Vector2f
    * \param width: image width
    * \param height: image height
    */
   void setSize(float width, float height);
+
+
+  /**
+   * \brief sets _rectangle and _sprite scale
+   */
+  void setScale(sf::Vector2f scale);
+
+  /**
+   * \brief sets _rectangle and _sprite scale
+   *   builds a sf::Vector2f
+   * \param width: image width
+   * \param height: image height
+   */
+  void setScale(float width, float height);
+
+  /**
+   * \brief sets _rectangle and _sprite scale
+   *   builds a sf::Vector2f to apply the ratio for the width and height
+   * \param ratio: Scale ratio
+   */
+  void setScale(float ratio);
 
   /**
    * \brief sets _fileName to file_name

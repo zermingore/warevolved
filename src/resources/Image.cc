@@ -57,6 +57,7 @@ void Image::initTexture()
   _loaded = true;
 }
 
+
 void Image::initSprite()
 {
   if (!_texture)
@@ -70,6 +71,7 @@ void Image::initSprite()
   _sprite = std::make_shared<sf::Sprite> (*_texture);
   _loaded = true;
 }
+
 
 std::shared_ptr<sf::Sprite> Image::sprite()
 {
@@ -90,12 +92,13 @@ void Image::setFileName(std::string file_name)
 }
 
 
-  void Image::setPosition(sf::Vector2f position)
+void Image::setPosition(sf::Vector2f position)
 {
   if (!_sprite)
     initSprite();
   _sprite->setPosition(position);
 }
+
 
 void Image::setPosition(Coords position)
 {
@@ -105,12 +108,42 @@ void Image::setPosition(Coords position)
 }
 
 
-void Image::setSize(sf::Vector2f size) {
+
+void Image::setSize(sf::Vector2f size)
+{
+  auto old_size(_rectangle->getSize());
   _rectangle->setSize(size);
+  _sprite->setScale(sf::Vector2f(size.x / old_size.x, size.y / old_size.y));
 }
 
-void Image::setSize(float width, float height) {
-  _rectangle->setSize(sf::Vector2f(width, height));
+void Image::setSize(float width, float height)
+{
+  auto size(_texture->getSize());
+  _rectangle->setSize(sf::Vector2f(width / size.x, height / size.y));
+
+  Debug::printf(size.x, width, size.y, height);
+  _sprite->setScale(sf::Vector2f(width / size.x, height / size.y));
+}
+
+
+
+void Image::setScale(sf::Vector2f size)
+{
+  _rectangle->setScale(size);
+  _sprite->setScale(size);
+}
+
+void Image::setScale(float width, float height)
+{
+  _rectangle->setScale(sf::Vector2f(width, height));
+  _sprite->setScale(sf::Vector2f(width, height));
+}
+
+
+void Image::setScale(float ratio)
+{
+  _rectangle->setScale(sf::Vector2f(ratio, ratio));
+  _sprite->setScale(sf::Vector2f(ratio, ratio));
 }
 
 
@@ -122,8 +155,9 @@ bool Image::load()
   if (!_texture)
     _texture = std::make_shared<sf::Texture> ();
 
+  _rectangle->setTexture(_texture.get(), true);
+
   _texture->loadFromFile(_fileName);
-  _rectangle->setTexture(_texture.get());
   _loaded = true;
 
   return false;
@@ -159,9 +193,9 @@ void Image::reload(std::string file_name)
 
 void Image::drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p)
 {
-  if (!_sprite)
+  if (!_sprite) {
     sprite();
-
+  }
 
   // static int offset=0;
   // offset = ++offset % 5; // stylish shaking
