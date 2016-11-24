@@ -120,8 +120,6 @@ void Image::setSize(float width, float height)
 {
   auto size(_texture->getSize());
   _rectangle->setSize(sf::Vector2f(width / size.x, height / size.y));
-
-  Debug::printf(size.x, width, size.y, height);
   _sprite->setScale(sf::Vector2f(width / size.x, height / size.y));
 }
 
@@ -149,11 +147,13 @@ void Image::setScale(float ratio)
 
 bool Image::load()
 {
-  if (_loaded)
+  if (_loaded) {
   	return true;
+  }
 
-  if (!_texture)
+  if (!_texture) {
     _texture = std::make_shared<sf::Texture> ();
+  }
 
   _rectangle->setTexture(_texture.get(), true);
 
@@ -166,8 +166,9 @@ bool Image::load()
 
 void Image::unload()
 {
-  if (!_texture)
+  if (!_texture) {
     return;
+  }
 
   //delete _texture; // reset() ?
   _loaded = false;
@@ -206,8 +207,9 @@ void Image::drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsPro
   pos.y = c.y * p->cellHeight() + p->gridOffsetY();
   _sprite->setPosition(pos);
 
-  if (load())
+  if (load()) {
     graphics::GraphicsEngine::draw(_sprite);
+  }
 
   graphics::GraphicsEngine::draw(_rectangle);
 }
@@ -215,13 +217,15 @@ void Image::drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsPro
 
 void Image::draw()
 {
-  if (!_sprite)
+  if (!_sprite) {
     sprite();
+  }
 
   _rectangle->setPosition(_sprite->getPosition());
 
-  if (load())
+  if (load()) {
     graphics::GraphicsEngine::draw(_sprite);
+  }
 
   graphics::GraphicsEngine::draw(_rectangle);
 }
