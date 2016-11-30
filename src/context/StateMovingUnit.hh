@@ -1,0 +1,29 @@
+/**
+ * \file
+ * \date November 25, 2016
+ * \author Zermingore
+ */
+#ifndef STATE_MOVING_UNIT_HH_
+# define STATE_MOVING_UNIT_HH_
+
+# include <context/State.hh>
+
+
+/**
+ * \class StateMovingUnit
+ * \brief State active while moving a unit on the map
+ */
+class StateMovingUnit: public State
+{
+public:
+  /// registers to callbacks
+  StateMovingUnit();
+
+  /**
+   * \brief exits the current State
+   */
+  void exit();
+};
+
+
+#endif /* !STATE_MOVING_UNIT_HH_ */

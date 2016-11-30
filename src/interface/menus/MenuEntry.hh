@@ -55,6 +55,12 @@ public:
   void execute();
 
   /**
+   * \brief _callback setter
+   * \param callback Callback called when the menu entry is selected
+   */
+  void setCallback(std::function<void()> callback) { _callback = callback; }
+
+  /**
    * \brief updates the graphical attributes of the entry
    */
   void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
@@ -77,6 +83,9 @@ private:
   std::shared_ptr<sf::Text> _label; ///< button label text
   std::string _labelName;           ///< menu entry text
   Font _font;                       ///< button label font
+
+  /// callback executed when the entry is selected
+  std::function<void()> _callback;
 };
 
 

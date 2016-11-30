@@ -150,6 +150,17 @@ public:
     return _graphicsProperties;
   }
 
+
+  /**
+   * \brief Updates the cells graphics properties.
+   *
+   * This update depends on:
+   * - The current player
+   * - If a unit is selected
+   */
+  void update();
+
+
   /**
    * \brief gets the unit at coordinates (x, y)
    *
@@ -170,6 +181,15 @@ public:
   std::shared_ptr<Unit> unit(const Coords& c) const;
 
   /**
+   * \brief Marks the Unit located at the given coordinates as selected.
+   * \param c coordinates where the Unit to select is located
+   * \return true and updates the selected unit on success
+   *   returns false and sets the selected unit to nullptr otherwise
+   *   (this happens if no unit was found at the given coordinates)
+   */
+  bool selectUnit(Coords c);
+
+  /**
    * \brief gets the terrain at coordinates (x, y).
    *
    * \param x Coordinates according to columns.
@@ -184,8 +204,9 @@ public:
    * \brief _cells array getter.
    * \return The cells array.
    */
-  std::vector<std::vector<std::shared_ptr<Cell>>> cells() const
-  { return _cells; }
+  std::vector<std::vector<std::shared_ptr<Cell>>> cells() const {
+    return _cells;
+  }
 
   /**
    * \brief builds a new unit of type \param unit
@@ -239,6 +260,10 @@ private:
 
   /// list of map graphics properties (cells size, grid thickness, ...)
   std::shared_ptr<Map::MapGraphicsProperties> _graphicsProperties;
+
+  /// Current selected unit
+  std::shared_ptr<Unit> _selectedUnit;
 };
+
 
 #endif /* !MAP_HH_ */

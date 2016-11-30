@@ -49,6 +49,14 @@ public:
   void moveCursorLeft();
   void moveCursorRight();
 
+  // Unit motion
+  void moveUnitUp();
+  void moveUnitDown();
+  void moveUnitLeft();
+  void moveUnitRight();
+  void validateMoveUnit();
+
+
   // Cursor click
   void select();
 
@@ -72,6 +80,9 @@ public:
    * \return a pointer to the in game menu.
    */
   std::shared_ptr<interface::InGameMenu> menu() { return _menu; }
+
+
+  bool updateSelectedUnit();
 
 
 

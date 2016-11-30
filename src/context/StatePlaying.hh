@@ -19,17 +19,6 @@ class StatePlaying: public State
 public:
   /// registers to callbacks
   StatePlaying();
-
-
-private:
-  // Cursor motion
-  void moveCursorLeft();
-  void moveCursorRight();
-  void moveCursorDown();
-  void moveCursorUp();
-  // void moveCursor(); // add param ? (issue: input cb: std::function<void()>)
-
-  void select();
 };
 
 

@@ -44,6 +44,7 @@ context/State.cc                    \
 context/StateFactory.cc             \
 context/StatePlaying.cc             \
 context/StateMenu.cc                \
+context/StateMovingUnit.cc          \
 \
 input/KeyManager.cc                 \
 input/EventManager.cc               \

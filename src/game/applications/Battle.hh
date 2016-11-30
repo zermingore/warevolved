@@ -36,8 +36,6 @@ public:
    */
   Battle();
 
-  /// Default destructor.
-  ~Battle() {}
 
   /**
    * \brief Players vector getter.

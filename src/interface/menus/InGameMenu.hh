@@ -51,6 +51,11 @@ public:
 
 
   void validate();
+
+
+
+  /// \todo should not be there
+  void moveUnit();
 };
 
 

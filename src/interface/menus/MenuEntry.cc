@@ -4,6 +4,9 @@
 #include <graphics/GraphicsEngine.hh>
 
 
+#include <common/enums/states.hh>
+
+
 
 namespace interface {
 
@@ -46,8 +49,20 @@ void MenuEntry::draw()
 }
 
 
+
+
+
+
 void MenuEntry::execute()
 {
+  Debug::printf("executing", (int) _id);
+  _callback();
+  return;
+
+
+  // _________________________ dead code ! _________________________
+
+  /// \todo instead of switching, set a lambda at initialization
   switch (_id)
   {
   //   case entry::ATTACK:
@@ -72,33 +87,20 @@ void MenuEntry::execute()
   //     break;
   //   }
 
-  //   case entry::MOVE:
-  //   {
-  //     g_status->pushState(E_STATE_MOVING_UNIT);
-  //     g_status->setSelectedUnitPosition(CURSOR->coords());
-  //     g_interface->setPathOrigin(CURSOR->coords());
-  //     break;
-  //   }
+    case e_entry::MOVE:
+    {
+      Debug::printf("_________________________MOVE");
+      // g_status->pushState(E_STATE_MOVING_UNIT);
+      // g_status->setSelectedUnitPosition(CURSOR->coords());
+      // g_interface->setPathOrigin(CURSOR->coords());
+      break;
+    }
 
   //   case entry::NEXT_TURN:
   //     BATTLE->nextPlayer();
   //     g_status->exitCurrentState(true);
   //     break;
 
-  //   case entry::CANCEL:
-  //   {
-  //     auto old_state (CURRENT_STATE);
-  //     g_interface->inGameMenu()->loadMenu();
-
-  //     // if we were dealing with orders, return to the unit position
-  //     if (old_state == E_STATE_ACTION_MENU && CURRENT_STATE == E_STATE_MOVING_UNIT)
-  //     {
-  //       g_status->exitCurrentState();
-  //       // re-build menu at selection state
-  //       g_interface->inGameMenu()->build(CURRENT_STATE);
-  //     }
-  //     break;
-  //   }
 
     default:
       Debug::logPrintf("unable to match selection menu entry");
@@ -107,12 +109,15 @@ void MenuEntry::execute()
 }
 
 
+
 void MenuEntry::setLabelName(e_entry entry)
 {
   switch (entry)
   {
     case e_entry::MOVE:
       _labelName = "Move";
+      // _callback = // {map ? player ? unit ?}->moveUnit
+      // unit: use FoV, movement, inventory, ...
       break;
     case e_entry::STOP:
       _labelName = "Stop";

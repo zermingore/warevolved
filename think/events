@@ -73,3 +73,12 @@ Lambda
 
 std::function<void> () = [=] Class::method()
 // or = std::bind(&Class::method, this)
+
+
+
+
+menu entries callbacks
+----------------------
+assign callback in the menu -> dependencies to everything
+implement everything in menu -> crappy design
+group callbacks in separate files [units, map, ...]: broken design ?

@@ -46,9 +46,12 @@ Map::Map(Battle* battle, const size_t nb_columns, const size_t nb_lines)
   for (auto i(0u); i < _nbColumns; ++i)
   {
     for (auto j(0u); j < _nbLines; ++j)
+    {
       _cells[i][j]->setTerrain(e_terrain::FOREST);
+    }
   }
 }
+
 
 std::shared_ptr<Unit> Map::unit(const size_t x, const size_t y) const {
   return _cells[x][y]->unit();
@@ -63,6 +66,28 @@ e_terrain Map::getTerrain(const size_t x, const size_t y) const {
 }
 
 
+void Map::update()
+{
+  /// \todo dead code
+}
+
+
+bool Map::selectUnit(Coords c)
+{
+  _selectedUnit = nullptr;
+
+  auto unit(_cells[c.x][c.y]->unit());
+  if (!unit)
+  {
+    Debug::error("No unit to select at given coords", c.x, c.y);
+    return false;
+  }
+
+  _selectedUnit = unit;
+  return true;
+}
+
+
 void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
 {
   Coords tmp(unit->coords());
@@ -74,8 +99,9 @@ void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
 
 void Map::endTurn()
 {
-  for (auto& it: _units[_battle->currentPlayer()])
+  for (auto& it: _units[_battle->currentPlayer()]) {
     it->setPlayed(false);
+  }
 }
 
 
@@ -90,7 +116,7 @@ void Map::newUnit(const e_unit type, const size_t line, const size_t column)
       break;
 
     default:
-      assert(! "Unable to match this unit type");
+      assert(!"Unable to match this unit type");
       return;
   }
 

@@ -6,6 +6,8 @@
 #include <interface/menus/MenuEntry.hh>
 
 
+#include <common/enums/states.hh>
+
 namespace interface {
 
 
@@ -44,6 +46,7 @@ void InGameMenu::build()
   {
     auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
     _entries.push_back(entry);
+    entry->setCallback( [=] { moveUnit(); });
     Status::interface()->addElement(entry);
   }
 
@@ -67,13 +70,34 @@ void InGameMenu::moveDown() {
 void InGameMenu::validate()
 {
   Debug::printf("validate: entry", _selectedEntry);
+
+  // Cancel entry particular case (always the last one)
   if (_selectedEntry == _entries.size() - 1)
   {
     Debug::printf("selected entry: 0 - cancel?");
     Debug::printf("number of entries:", _entries.size());
     close();
     Status::popCurrentState();
+
+    return;
   }
+
+
+  _entries[_selectedEntry]->execute();
+}
+
+
+void InGameMenu::moveUnit()
+{
+  Debug::printf("moving unit");
+
+  // Hiding but not deleting the current menu
+  auto interface(Status::interface());
+  for (auto entry: _entries) {
+    interface->removeElement(entry);
+  }
+
+  Status::pushState(e_state::MOVING_UNIT);
 }
 
 

@@ -9,6 +9,7 @@ int main(int ac, const char **av)
   PRINTF(av);
 
   bool fullscreen(ac > 1);
+
   Context context(fullscreen);
 
   /// \todo main menu (pushState or the like)

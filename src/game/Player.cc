@@ -7,6 +7,7 @@
 #include <common/enums/states.hh>
 #include <context/State.hh>
 #include <context/StateMenu.hh>
+#include <game/applications/Battle.hh>
 
 
 Player::Player(Color c)
@@ -56,4 +57,47 @@ void Player::select()
 void Player::cancel()
 {
   _interface->removeElement(_menu);
+}
+
+
+
+// _____________________________  Units motion _____________________________ //
+
+// tmp
+void Player::moveUnitUp()
+{
+  moveCursorUp();
+}
+
+void Player::moveUnitDown()
+{
+  moveCursorDown();
+}
+
+void Player::moveUnitLeft()
+{
+  moveCursorLeft();
+}
+
+void Player::moveUnitRight()
+{
+  moveCursorRight();
+}
+
+void Player::validateMoveUnit()
+{
+//  Status::battle()->map()->moveUnit();
+}
+
+
+bool Player::updateSelectedUnit()
+{
+  // update the Map selected Unit
+  auto coords(Status::player()->cursor()->coords());
+  if (Status::battle()->map()->selectUnit(coords) == false) {
+    Debug::error("Unable to select a unit");
+    return false;
+  }
+
+  return true;
 }
