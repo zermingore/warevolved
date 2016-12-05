@@ -72,6 +72,8 @@ public:
 
   void setColor(Color color) { _color = color; }
 
+
+
 private:
   // map attributes
   size_t _nbColumns; ///< number of columns in map

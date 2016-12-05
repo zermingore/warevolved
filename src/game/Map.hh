@@ -241,8 +241,8 @@ public:
 private:
   std::shared_ptr<Battle> _battle; ///< Battle in which this map belong to
 
-  size_t _nbLines;   ///< number of lines (y coordinate)
   size_t _nbColumns; ///< number of columns (x coordinate)
+  size_t _nbLines;   ///< number of lines (y coordinate)
 
   /// 2D Array of every cells of the map
   std::vector<std::vector<std::shared_ptr<Cell>>> _cells;

@@ -26,8 +26,8 @@ Map::MapGraphicsProperties::MapGraphicsProperties()
 
 Map::Map(Battle* battle, const size_t nb_lines, const size_t nb_columns)
   : _battle(battle)
-  , _nbLines(nb_lines)
   , _nbColumns(nb_columns)
+  , _nbLines(nb_lines)
 {
   _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
 

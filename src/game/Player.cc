@@ -44,6 +44,7 @@ void Player::moveCursorRight() {
 
 void Player::select()
 {
+  PRINTF("cursor coords:", _cursor->coords());
   _menu = std::make_shared<interface::InGameMenu> ();
   _menu->setCoords(_cursor->coords());
   _menu->build();

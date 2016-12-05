@@ -25,7 +25,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   //   interface / player can do everything
   //   when done, call map to check and do the move / attack
 
-    // study (broken ATM)
+  // study (broken ATM)
   // pf: left -> push, right -> pop ...
   // 1 2 4 8 -> 0001 & 0001 -> push / pop
   // left 0001 0010 right

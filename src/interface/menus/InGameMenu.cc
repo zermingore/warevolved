@@ -50,7 +50,6 @@ void InGameMenu::build()
     Status::interface()->addElement(entry);
   }
 
-  Debug::printf("Adding entry");
   auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
   _entries.push_back(entry);
   Status::interface()->addElement(entry);
