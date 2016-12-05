@@ -86,7 +86,8 @@ void Player::moveUnitRight()
 
 void Player::validateMoveUnit()
 {
-//  Status::battle()->map()->moveUnit();
+  assert(_selectedUnit && "No selected unit");
+  Status::battle()->map()->moveUnit(_selectedUnit, _cursor->coords());
 }
 
 
@@ -94,10 +95,13 @@ bool Player::updateSelectedUnit()
 {
   // update the Map selected Unit
   auto coords(Status::player()->cursor()->coords());
-  if (Status::battle()->map()->selectUnit(coords) == false) {
+  if (!(_selectedUnit = Status::battle()->map()->selectUnit(coords))) {
     Debug::error("Unable to select a unit");
     return false;
   }
+
+  // \todo highlight the unit
+  // \todo save in the class a copy of the unit sprite
 
   return true;
 }

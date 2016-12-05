@@ -21,8 +21,9 @@ Context::Context(bool fullscreen)
 void Context::init()
 {
 # ifdef DEBUG
-  if (_system->sfmlMajor() < 2)
+  if (_system->sfmlMajor() < 2) {
     std::cerr << "SFML version not officially supported" << std::endl;
+  }
 # endif
 
   sf::ContextSettings contextSettings(Settings::depth(),

@@ -92,13 +92,13 @@ public:
    * \brief returns Cell's x coordinate.
    * \return cell x coordinate.
    */
-  unsigned int x() { return _coords.x; }
+  size_t x() { return _coords.x; }
 
   /**
    * \brief returns Cell's y coordinate.
    * \return cell y coordinate.
    */
-  unsigned int y() { return _coords.y; }
+  size_t y() { return _coords.y; }
 
   /**
    * \brief coords getter.

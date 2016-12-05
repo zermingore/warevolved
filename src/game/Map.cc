@@ -24,55 +24,43 @@ Map::MapGraphicsProperties::MapGraphicsProperties()
 }
 
 
-Map::Map(Battle* battle, const size_t nb_columns, const size_t nb_lines)
-  : _battle (battle)
-  , _nbColumns (nb_columns)
-  , _nbLines (nb_lines)
+Map::Map(Battle* battle, const size_t nb_lines, const size_t nb_columns)
+  : _battle(battle)
+  , _nbLines(nb_lines)
+  , _nbColumns(nb_columns)
 {
   _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
 
-  for (auto i(0u); i < _nbLines; i++)
+  for (auto i(0u); i < _nbLines; ++i)
   {
     std::vector<std::shared_ptr<Cell>> vec(_nbColumns);
 
     // Allocate each Cell
-    for (auto j(0u); j < _nbColumns; j++)
-      vec[j] = std::make_shared<Cell> (j, i);
-
+    for (auto j(0u); j < _nbColumns; ++j) {
+      vec[j] = std::make_shared<Cell> (i, j);
+    }
     _cells.push_back(vec);
   }
 
-  /// \todo Read informations from a map file
-  for (auto i(0u); i < _nbColumns; ++i)
-  {
-    for (auto j(0u); j < _nbLines; ++j)
-    {
-      _cells[i][j]->setTerrain(e_terrain::FOREST);
-    }
-  }
+  /// \todo Read data from a map file to set the terrains
+  // (should be called from Battle)
 }
 
 
-std::shared_ptr<Unit> Map::unit(const size_t x, const size_t y) const {
-  return _cells[x][y]->unit();
+std::shared_ptr<Unit> Map::unit(const size_t line, const size_t column) const {
+  return _cells[line][column]->unit();
 }
 
 std::shared_ptr<Unit> Map::unit(const Coords& c) const {
   return _cells[c.x][c.y]->unit();
 }
 
-e_terrain Map::getTerrain(const size_t x, const size_t y) const {
-  return _cells[x][y]->terrain();
+e_terrain Map::getTerrain(const size_t line, const size_t column) const {
+  return _cells[line][column]->terrain();
 }
 
 
-void Map::update()
-{
-  /// \todo dead code
-}
-
-
-bool Map::selectUnit(Coords c)
+std::shared_ptr<Unit> Map::selectUnit(const Coords c)
 {
   _selectedUnit = nullptr;
 
@@ -80,20 +68,33 @@ bool Map::selectUnit(Coords c)
   if (!unit)
   {
     Debug::error("No unit to select at given coords", c.x, c.y);
-    return false;
+    return nullptr;
   }
 
   _selectedUnit = unit;
-  return true;
+  return _selectedUnit;
 }
 
 
-void Map::moveUnit(std::shared_ptr<Unit> unit, Coords c)
+void Map::moveUnit(std::shared_ptr<Unit> unit, const Coords c)
 {
-  Coords tmp(unit->coords());
+  Debug::printf("before moving unit", unit->coords().x, unit->coords().y,
+                "to", c.x, c.y);
+  dump();
+
+  if (unit->coords() == c)
+  {
+    Debug::printf("move unit: src == dst");
+    return;
+  }
+
+  Coords old(unit->coords());
+  _cells[old.x][old.y]->removeUnit();
   unit->setCellCoordinates(c);
   _cells[c.x][c.y]->setUnit(unit);
-  _cells[tmp.x][tmp.y]->removeUnit();
+
+  Debug::printf("moved unit:", unit);
+  dump();
 }
 
 
@@ -125,4 +126,29 @@ void Map::newUnit(const e_unit type, const size_t line, const size_t column)
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);
   _cells[line][column]->setUnit(new_unit);
+}
+
+
+
+void Map::dump()
+{
+  std::cout << "Units: 0,2 4,1 3,4 3,6\n";
+  std::cout << std::endl;
+  for (auto i(0u); i < _nbLines; ++i)
+  {
+    std::cout << i << " |";
+    for (auto j(0u); j < _nbColumns; ++j)
+    {
+      // std::cout << "|  " << j << "," << i << " ";
+      auto unit = _cells[i][j]->unit();
+      if (unit) {
+        unit == _selectedUnit ? std::cout << "#" : std::cout << "X";
+      }
+      else {
+        std::cout << ".";
+      }
+    }
+
+    std::cout << "|" << std::endl;
+  }
 }

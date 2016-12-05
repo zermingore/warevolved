@@ -78,14 +78,17 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
   const auto cells(map->cells());
 
   /// \todo [Optimization] fetch every terrain first
+  /// (but not here, in MapGraphicsProperties ?)
 
-  // draw column by column
-  for (auto i(0u); i < map->nbColumns(); ++i)
+
+  // draw line by line
+  for (auto i(0u); i < map->nbLines(); ++i)
   {
-    for (auto j(0u); j < map->nbLines(); ++j)
+    for (auto j(0u); j < map->nbColumns(); ++j)
     {
       /// \todo check if we print the cell (scroll case)
       const std::shared_ptr<Cell> c = cells[i][j];
+
       switch (c->terrain())
       {
         default:
@@ -101,8 +104,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
         highlight.drawAtCell(c->coords(), map->graphicsProperties());
       }
 
-      if (c->unit())
-      {
+      if (c->unit()) {
         drawUnit(battle, c->unit());
       }
     }
@@ -119,10 +121,10 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   rectangle.setOutlineColor(GRID_COLOR);
   rectangle.setOutlineThickness(p->gridThickness());
 
-  auto offset_x(p->gridOffsetX());
-  auto offset_y(p->gridOffsetY());
 
   // for each line, draw a rectangle
+  auto offset_x(p->gridOffsetX());
+  auto offset_y(p->gridOffsetY());
   for (auto i(0u); i < map->nbLines(); ++i)
   {
     rectangle.setPosition(offset_x, offset_y);
@@ -132,24 +134,24 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
     _window->draw(rectangle);
 
     // skipping to next line
-    offset_y += p->cellHeight();
+    offset_y += p->cellHeight(); /// \todo - grid thickness in y / 2
   }
 
+
+  // for each column draw a rectangle
   // resetting offsets
   offset_x = p->gridOffsetX();
   offset_y = p->gridOffsetY();
-
-  // for each column, draw a rectangle
-  for (auto j(0u); j < map->nbLines(); ++j)
+  for (auto j(0u); j < map->nbColumns(); ++j)
   {
     rectangle.setPosition(offset_x, offset_y);
     rectangle.setSize(sf::Vector2f(p->cellWidth(),
                                    p->cellHeight() * map->nbLines()));
 
-     _window->draw(rectangle);
+    _window->draw(rectangle);
 
     // skipping to next column
-    offset_x += p->cellWidth();
+    offset_x += p->cellWidth(); /// \todo - grid thickness in x / 2
   }
 }
 
@@ -162,7 +164,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
 
   auto p(battle->map()->graphicsProperties());
 
-  Image &image(resources::ResourcesManager::getImage(unit->name()));
+  Image& image(resources::ResourcesManager::getImage(unit->name()));
   // image.sprite()->setColor(Status::player()->unitsColor());
 
   float x = image.sprite()->getTexture()->getSize().x;
@@ -171,8 +173,9 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
 
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
-  if (x < p->cellWidth() || y < p->cellHeight())
+  if (x < p->cellWidth() || y < p->cellHeight()) {
     Debug::logPrintf("Sprite scale failure");
+  }
 # endif
 
   // if (unit->targetable())
@@ -183,8 +186,9 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
   //   highlight.drawAtCell(unit->coords());
   // }
 
-  if (unit->played())
+  if (unit->played()) {
     image.sprite()->setColor(sf::Color(127, 127, 127, 191));
+  }
 
   image.drawAtCell(unit->coords(), p);
 }

@@ -10,7 +10,7 @@ Battle::Battle() :
   _currentPlayer (0)
 {
   /// \todo map size is hard-coded
-  _map = std::make_shared<Map> (this, 8, 8);
+  _map = std::make_shared<Map> (this, 8, 5);
   buildPlayers();
   buildMap();
 }
@@ -30,11 +30,13 @@ void Battle::buildPlayers()
 void Battle::buildMap()
 {
   /// \todo delegate to a factory
-  _map->newUnit(e_unit::SOLDIERS, 1, 1);
-  _map->newUnit(e_unit::SOLDIERS, 4, 1);
+  _map->newUnit(e_unit::SOLDIERS, 0, 1);
+  _map->newUnit(e_unit::SOLDIERS, 4, 2);
 
   _map->newUnit(e_unit::SOLDIERS, 3, 4);
-  _map->newUnit(e_unit::SOLDIERS, 3, 6);
+  _map->newUnit(e_unit::SOLDIERS, 3, 1);
+
+  /// \todo set terrain
 }
 
 

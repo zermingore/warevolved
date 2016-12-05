@@ -127,7 +127,7 @@ public:
    * \param nbColumns Number of columns required
    * \param nbLines Number of lines required
    */
-  Map(Battle* battle, const size_t nb_columns, const size_t nb_lines);
+  Map(Battle* battle, const size_t nb_lines, const size_t nb_columns);
 
   /**
    * \brief _nbColumns getter
@@ -152,16 +152,6 @@ public:
 
 
   /**
-   * \brief Updates the cells graphics properties.
-   *
-   * This update depends on:
-   * - The current player
-   * - If a unit is selected
-   */
-  void update();
-
-
-  /**
    * \brief gets the unit at coordinates (x, y)
    *
    * \param x Coordinates according to columns
@@ -170,7 +160,7 @@ public:
    * \return the enum index in e_unit matching the unit
    *   located at coordinates (x, y)
    */
-  std::shared_ptr<Unit> unit(const size_t x, const size_t y) const;
+  std::shared_ptr<Unit> unit(const size_t line, const size_t column) const;
 
   /**
    * \brief gets the unit at c's coordinates.
@@ -183,11 +173,11 @@ public:
   /**
    * \brief Marks the Unit located at the given coordinates as selected.
    * \param c coordinates where the Unit to select is located
-   * \return true and updates the selected unit on success
-   *   returns false and sets the selected unit to nullptr otherwise
+   * \return a pointer to the updated selected unit on success
+   *   returns nullptr and sets the selected unit to nullptr otherwise
    *   (this happens if no unit was found at the given coordinates)
    */
-  bool selectUnit(Coords c);
+  std::shared_ptr<Unit> selectUnit(const Coords c);
 
   /**
    * \brief gets the terrain at coordinates (x, y).
@@ -198,15 +188,13 @@ public:
    * \return the enum index in e_terrain matching the terrain
    *   located at coordinates (x, y).
    */
-  e_terrain getTerrain(const size_t x, const size_t y) const;
+  e_terrain getTerrain(const size_t line, const size_t column) const;
 
   /**
    * \brief _cells array getter.
    * \return The cells array.
    */
-  std::vector<std::vector<std::shared_ptr<Cell>>> cells() const {
-    return _cells;
-  }
+  auto cells() const { return _cells; }
 
   /**
    * \brief builds a new unit of type \param unit
@@ -225,7 +213,7 @@ public:
   /**
    * \brief moves given unit to the given coordinates
    */
-  void moveUnit(std::shared_ptr<Unit> u, Coords c);
+  void moveUnit(std::shared_ptr<Unit> u, const Coords c);
 
   /**
    * \brief reset all units played boolean to false
@@ -241,16 +229,20 @@ public:
    *
    * \return a vector of pointers to Cell
    */
-  std::vector<std::shared_ptr<Cell>> operator[] (size_t line) {
-    return _cells[line];
-  }
+  auto operator[] (const size_t line) { return _cells[line]; }
+
+  /**
+   * \brief ascii art dump of the map
+   */
+  void dump();
+
 
 
 private:
   std::shared_ptr<Battle> _battle; ///< Battle in which this map belong to
 
-  size_t _nbColumns; ///< number of columns (x coordinate)
   size_t _nbLines;   ///< number of lines (y coordinate)
+  size_t _nbColumns; ///< number of columns (x coordinate)
 
   /// 2D Array of every cells of the map
   std::vector<std::vector<std::shared_ptr<Cell>>> _cells;

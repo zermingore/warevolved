@@ -26,8 +26,6 @@ bool InputProcessor::process()
     }
 
     _km->populateEvents();
-    Debug::printf("nb input:", _km->activeInputs().size());
-
     for (const auto& i: _km->activeInputs())
     {
       if (Status::currentState()->eventManager()->process(i))

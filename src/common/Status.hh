@@ -54,13 +54,6 @@ public:
 
   // ________________________________ States ________________________________ //
   /**
-   * \brief pops _states summit
-   * exits the game if the stack is empty
-   * \param skip retrieve Cursor position or not
-   */
-  static void exitCurrentState();
-
-  /**
    * \brief pops _states and returns summit
    * \return Menu of the top of the stack
    */
@@ -99,7 +92,7 @@ private:
   static std::shared_ptr<Battle> _battle; ///< pointer on Battle
   static Coords _selectedCell; ///< coordinates of the selected cell
   static Coords _selectedUnitPosition; ///< current selected Unit's coordinates
-  static std::shared_ptr<InputProcessor> _inputProcessor;
+  static std::shared_ptr<InputProcessor> _inputProcessor; ///< input processor
 };
 
 

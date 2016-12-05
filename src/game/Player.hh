@@ -90,9 +90,12 @@ private:
   // (logicaly const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player's identifier
 
+  // interface
   std::shared_ptr<interface::Interface>  _interface; ///< User Interface
   std::shared_ptr<interface::Cursor>     _cursor;    ///< Map Cursor
   std::shared_ptr<interface::InGameMenu> _menu;      ///< In game menu
+
+  std::shared_ptr<Unit> _selectedUnit; ///< current selected unit
 };
 
 

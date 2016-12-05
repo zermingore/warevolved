@@ -6,28 +6,28 @@
 
 
 Unit::Unit() :
-  _imageId (0),
-  _hp (0),
-  _attackValue (0),
-  _played (false),
-  _playerId (0),
-  _team (nullptr),
-  _targetable (false)
+  _imageId(0),
+  _hp(0),
+  _attackValue(0),
+  _played(false),
+  _playerId(0),
+  _team(nullptr),
+  _targetable(false)
 {
   _targets = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
 }
 
 Unit::Unit(std::string &name) :
-  _imageId (0),
-  _name (name),
-  _hp (0),
-  _attackValue (0),
-  _range (0, 0),
-  _motionValue (4),
-  _played (false),
-  _playerId (0),
-  _team (nullptr),
-  _targetable (false)
+  _imageId(0),
+  _name(name),
+  _hp(0),
+  _attackValue(0),
+  _range(0, 0),
+  _motionValue(4),
+  _played(false),
+  _playerId(0),
+  _team(nullptr),
+  _targetable(false)
 {
   _targets = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
 }
@@ -42,7 +42,7 @@ void Unit::setCoords(Coords location)
 {
   _coords = location;
   _attackCoords = _coords;
-  _played = true;
+//  _played = true;
 }
 
 std::shared_ptr<Cell> Unit::previousTarget()

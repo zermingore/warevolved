@@ -192,7 +192,8 @@ void Image::reload(std::string file_name)
 }
 
 
-void Image::drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p)
+void Image::drawAtCell(const Coords c,
+                       const std::shared_ptr<Map::MapGraphicsProperties> p)
 {
   if (!_sprite) {
     sprite();
@@ -201,10 +202,12 @@ void Image::drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsPro
   // static int offset=0;
   // offset = ++offset % 5; // stylish shaking
 
-  // Sprite position
+  /// \todo loosy design...
+  // Sprite position. As we're drawing at cell, flipping x and y
   sf::Vector2f pos;
-  pos.x = c.x * p->cellWidth()  + p->gridOffsetX();
-  pos.y = c.y * p->cellHeight() + p->gridOffsetY();
+  pos.x = c.y * p->cellHeight() + p->gridOffsetX();
+  pos.y = c.x * p->cellWidth()  + p->gridOffsetY();
+
   _sprite->setPosition(pos);
 
   if (load()) {

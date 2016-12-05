@@ -47,5 +47,5 @@ void StateMenu::exit()
 {
   // Calling the current active menu of the interface
   Status::interface()->currentMenu()->close();
-  Status::exitCurrentState();
+  Status::popCurrentState();
 }

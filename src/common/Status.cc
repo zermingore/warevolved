@@ -34,12 +34,6 @@ std::shared_ptr<State> Status::currentState()
 }
 
 
-void Status::exitCurrentState()
-{
-  _states.pop();
-}
-
-
 std::shared_ptr<State> Status::popCurrentState()
 {
   auto tmp(_states.top());

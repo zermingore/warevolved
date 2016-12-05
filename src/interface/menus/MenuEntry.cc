@@ -4,10 +4,6 @@
 #include <graphics/GraphicsEngine.hh>
 
 
-#include <common/enums/states.hh>
-
-
-
 namespace interface {
 
 
@@ -50,62 +46,11 @@ void MenuEntry::draw()
 
 
 
-
-
-
 void MenuEntry::execute()
 {
   Debug::printf("executing", (int) _id);
   _callback();
   return;
-
-
-  // _________________________ dead code ! _________________________
-
-  /// \todo instead of switching, set a lambda at initialization
-  switch (_id)
-  {
-  //   case entry::ATTACK:
-  //   {
-  //     g_status->pushState(E_STATE_ATTACK);
-  //     auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
-  //     auto targets (selectedUnit->targets());
-  //     selectedUnit->setAttackCoords(CURSOR->coords());
-  //     CURSOR->setCoords((*targets)[0]->getCoords());
-  //     break;
-  //   }
-
-  //   case entry::STOP:
-  //   {
-  //     auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
-  //     selectedUnit->setCoords(CURSOR->coords());
-  //     if (g_status->selectedUnitPosition() != CURSOR->coords())
-  //       MAP.moveUnit();
-
-  //     g_status->exitToState(E_STATE_PLAYING, true);
-  //     g_interface->path()->hideAllowedPath();
-  //     break;
-  //   }
-
-    case e_entry::MOVE:
-    {
-      Debug::printf("_________________________MOVE");
-      // g_status->pushState(E_STATE_MOVING_UNIT);
-      // g_status->setSelectedUnitPosition(CURSOR->coords());
-      // g_interface->setPathOrigin(CURSOR->coords());
-      break;
-    }
-
-  //   case entry::NEXT_TURN:
-  //     BATTLE->nextPlayer();
-  //     g_status->exitCurrentState(true);
-  //     break;
-
-
-    default:
-      Debug::logPrintf("unable to match selection menu entry");
-      break;
-  }
 }
 
 
