@@ -59,4 +59,12 @@ const std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
   return nullptr;
 }
 
+
+void Interface::pushMenu(std::shared_ptr<Menu> menu)
+{
+  addElement(menu);
+  _menus.push(menu);
+}
+
+
 } // namespace interface

@@ -3,6 +3,7 @@
 #include <common/enums/input.hh>
 #include <common/Status.hh>
 #include <game/Player.hh>
+#include <common/enums/states.hh>
 
 
 

@@ -20,15 +20,10 @@ enum class e_state
   PLAYING,
 
   SELECTION_MENU, // pick a Unit
-  MOVING_UNIT, // move it
-  ACTION_MENU, // give it an order
-  ATTACK, // ask a Unit to attack
-
-  LOADING,
-  SAVING,
-
-  READ_TEXTBOX,
-  WRITE_MESSAGE
+  MOVING_UNIT,    // move it
+  ACTION_MENU,    // give it an order
+  ATTACK,         // ask a Unit to attack
+  ACTION,         // confirm move, switch to attack state
 };
 
 

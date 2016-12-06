@@ -90,26 +90,29 @@ public:
    */
   void setUnitsColor(Color color) { _settings->setUnitsColor(color); }
 
+  /**
+   * \brief push the current menu.
+   * \param menu new current menu.
+   */
+  void pushMenu(std::shared_ptr<Menu> menu);
+
+  /**
+   * \brief pops the current menu.
+   */
+  void popMenu() { _menus.pop(); }
 
   /**
    * \brief sets current menu.
    * \param menu new current menu.
    */
-  std::shared_ptr<Menu> currentMenu() { return _menu; }
-
-  /**
-   * \brief sets current menu.
-   * \param menu new current menu.
-   */
-  void setCurrentMenu(std::shared_ptr<Menu> menu) { _menu = menu; }
-
+  std::shared_ptr<Menu> currentMenu() { return _menus.top(); }
 
 
 
 private:
   std::vector<std::shared_ptr<InterfaceElement>> _elts; ///< list of elements
-  std::unique_ptr<InterfaceSettings> _settings; ///< interface settings
-  std::shared_ptr<Menu> _menu; ///< current menu getter
+  std::unique_ptr<InterfaceSettings> _settings;         ///< interface settings
+  std::stack<std::shared_ptr<Menu>> _menus;             ///< current menus stack
 };
 
 

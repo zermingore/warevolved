@@ -45,18 +45,17 @@ void Player::moveCursorRight() {
 void Player::select()
 {
   PRINTF("cursor coords:", _cursor->coords());
-  _menu = std::make_shared<interface::InGameMenu> ();
-  _menu->setCoords(_cursor->coords());
-  _menu->build();
-  _interface->addElement(_menu);
-  _interface->setCurrentMenu(_menu);
+  auto menu(std::make_shared<interface::InGameMenu> ());
+  menu->setCoords(_cursor->coords());
+  menu->build();
+  _interface->pushMenu(menu);
 
   Status::pushState(e_state::MENU);
 }
 
 
 void Player::cancel() {
-  _interface->removeElement(_menu);
+  _interface->popMenu();
 }
 
 

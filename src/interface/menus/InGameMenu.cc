@@ -132,7 +132,7 @@ void InGameMenu::close()
   }
   // interface->removeElement(this); // apparently not needed, not sure why
 
-  interface->setCurrentMenu(nullptr);
+  interface->popMenu();
 }
 
 
