@@ -127,7 +127,7 @@ public:
    * \param nbColumns Number of columns required
    * \param nbLines Number of lines required
    */
-  Map(Battle* battle, const size_t nb_lines, const size_t nb_columns);
+  Map(Battle* battle, const size_t nb_columns, const size_t nb_lines);
 
   /**
    * \brief _nbColumns getter
@@ -203,7 +203,7 @@ public:
    * \param line line to set the new unit
    * \param column column to set the new unit
    */
-  void newUnit(const e_unit type, const size_t line, const size_t column);
+  void newUnit(const e_unit type, const size_t column, const size_t line);
 
   /**
    * \brief moves the selected unit to the current cursor location
@@ -229,7 +229,7 @@ public:
    *
    * \return a vector of pointers to Cell
    */
-  auto operator[] (const size_t line) { return _cells[line]; }
+  auto operator[] (const size_t column) { return _cells[column]; }
 
   /**
    * \brief ascii art dump of the map

@@ -80,14 +80,13 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
   /// \todo [Optimization] fetch every terrain first
   /// (but not here, in MapGraphicsProperties ?)
 
-
-  // draw line by line
-  for (auto i(0u); i < map->nbLines(); ++i)
+  // draw column by column (as the cells are stored by column)
+  for (auto col(0u); col < map->nbColumns(); ++col)
   {
-    for (auto j(0u); j < map->nbColumns(); ++j)
+    for (auto line(0u); line < map->nbLines(); ++line)
     {
       /// \todo check if we print the cell (scroll case)
-      const std::shared_ptr<Cell> c = cells[i][j];
+      const std::shared_ptr<Cell> c = cells[col][line];
 
       switch (c->terrain())
       {
@@ -142,7 +141,7 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   // resetting offsets
   offset_x = p->gridOffsetX();
   offset_y = p->gridOffsetY();
-  for (auto j(0u); j < map->nbColumns(); ++j)
+  for (auto col(0u); col < map->nbColumns(); ++col)
   {
     rectangle.setPosition(offset_x, offset_y);
     rectangle.setSize(sf::Vector2f(p->cellWidth(),

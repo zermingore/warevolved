@@ -199,21 +199,15 @@ void Image::drawAtCell(const Coords c,
     sprite();
   }
 
-  // static int offset=0;
-  // offset = ++offset % 5; // stylish shaking
-
-  /// \todo loosy design...
-  // Sprite position. As we're drawing at cell, flipping x and y
+  // Sprite position
   sf::Vector2f pos;
-  pos.x = c.y * p->cellHeight() + p->gridOffsetX();
-  pos.y = c.x * p->cellWidth()  + p->gridOffsetY();
-
+  pos.x = c.x * p->cellWidth()  + p->gridOffsetX();
+  pos.y = c.y * p->cellHeight() + p->gridOffsetY();
   _sprite->setPosition(pos);
 
   if (load()) {
     graphics::GraphicsEngine::draw(_sprite);
   }
-
   graphics::GraphicsEngine::draw(_rectangle);
 }
 

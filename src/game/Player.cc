@@ -55,8 +55,7 @@ void Player::select()
 }
 
 
-void Player::cancel()
-{
+void Player::cancel() {
   _interface->removeElement(_menu);
 }
 

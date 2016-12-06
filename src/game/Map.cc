@@ -24,21 +24,22 @@ Map::MapGraphicsProperties::MapGraphicsProperties()
 }
 
 
-Map::Map(Battle* battle, const size_t nb_lines, const size_t nb_columns)
+Map::Map(Battle* battle, const size_t nb_columns, const size_t nb_lines)
   : _battle(battle)
   , _nbColumns(nb_columns)
   , _nbLines(nb_lines)
 {
   _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
 
-  for (auto i(0u); i < _nbLines; ++i)
+  for (auto col(0u); col < _nbColumns; ++col)
   {
-    std::vector<std::shared_ptr<Cell>> vec(_nbColumns);
+    std::vector<std::shared_ptr<Cell>> vec(_nbLines);
 
     // Allocate each Cell
-    for (auto j(0u); j < _nbColumns; ++j) {
-      vec[j] = std::make_shared<Cell> (i, j);
+    for (auto line(0u); line < _nbLines; ++line) {
+      vec[line] = std::make_shared<Cell> (col, line);
     }
+
     _cells.push_back(vec);
   }
 
@@ -47,7 +48,7 @@ Map::Map(Battle* battle, const size_t nb_lines, const size_t nb_columns)
 }
 
 
-std::shared_ptr<Unit> Map::unit(const size_t line, const size_t column) const {
+std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const {
   return _cells[line][column]->unit();
 }
 
@@ -55,8 +56,8 @@ std::shared_ptr<Unit> Map::unit(const Coords& c) const {
   return _cells[c.x][c.y]->unit();
 }
 
-e_terrain Map::getTerrain(const size_t line, const size_t column) const {
-  return _cells[line][column]->terrain();
+e_terrain Map::getTerrain(const size_t column, const size_t line) const {
+  return _cells[column][line]->terrain();
 }
 
 
@@ -106,7 +107,7 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(const e_unit type, const size_t line, const size_t column)
+void Map::newUnit(const e_unit type, const size_t column, const size_t line)
 {
   std::shared_ptr<Unit> new_unit;
 
@@ -122,25 +123,31 @@ void Map::newUnit(const e_unit type, const size_t line, const size_t column)
   }
 
   auto player_id = _battle->currentPlayer();
-  new_unit->setCellCoordinates(Coords(line, column));
+  new_unit->setCellCoordinates(Coords(column, line));
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);
-  _cells[line][column]->setUnit(new_unit);
+  _cells[column][line]->setUnit(new_unit);
+
+  dump();
 }
 
 
 
 void Map::dump()
 {
-  std::cout << "Units: 0,2 4,1 3,4 3,6\n";
+  // Browsing the _cells array by line, even if the cells are stored by column
+  //   is only to make it clearer to see
+  //   (and easier to code, do not need to move the cursor manually)
+
   std::cout << std::endl;
-  for (auto i(0u); i < _nbLines; ++i)
+  for (auto line(0u); line < _nbLines; ++line)
   {
-    std::cout << i << " |";
-    for (auto j(0u); j < _nbColumns; ++j)
+    std::cout << line << " |";
+
+    for (auto col(0u); col < _nbColumns; ++col)
     {
       // std::cout << "|  " << j << "," << i << " ";
-      auto unit = _cells[i][j]->unit();
+      auto unit = _cells[col][line]->unit();
       if (unit) {
         unit == _selectedUnit ? std::cout << "#" : std::cout << "X";
       }

@@ -27,34 +27,34 @@ void Cursor::setLimits(size_t nb_columns, size_t nb_lines)
 // _____________________________ Cursor Motion _____________________________ //
 bool Cursor::moveUp()
 {
-  auto old(_coords.x);
-  _coords.x = std::min(_coords.x - 1, _coords.x);
+  auto old(_coords.y);
+  _coords.y = std::min(_coords.y - 1, _coords.y);
 
-  return (old != _coords.x);
+  return (old != _coords.y);
 }
 
 bool Cursor::moveDown()
 {
-  auto old(_coords.x);
-  _coords.x = std::min(_coords.x + 1, _nbLines - 1);
+  auto old(_coords.y);
+  _coords.y = std::min(_coords.y + 1, _nbLines - 1);
 
-  return (old != _coords.x);
+  return (old != _coords.y);
 }
 
 bool Cursor::moveLeft()
 {
-  auto old(_coords.y);
-  _coords.y = std::min(_coords.y, _coords.y - 1);
+  auto old(_coords.x);
+  _coords.x = std::min(_coords.x, _coords.x - 1);
 
-  return (old != _coords.y);
+  return (old != _coords.x);
 }
 
 bool Cursor::moveRight()
 {
-  auto old(_coords.y);
-  _coords.y = std::min(_coords.y + 1, _nbColumns - 1);
+  auto old(_coords.x);
+  _coords.x = std::min(_coords.x + 1, _nbColumns - 1);
 
-  return (old != _coords.y);
+  return (old != _coords.x);
 }
 
 
@@ -63,8 +63,8 @@ void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties
   auto width(properties->cellWidth());
   auto height(properties->cellHeight());
 
-  _position.x = _coords.y * width + properties->gridOffsetX() + width / 2;
-  _position.y = _coords.x * height + properties->gridOffsetY() + height / 2;
+  _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
+  _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
   _image.sprite()->setPosition(_position.x, _position.y);
 
   static float scale_factor = 1;
