@@ -49,14 +49,22 @@ const std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
 
 # ifdef DEBUG
   Debug::error("Interface: invalid element name request: ", id);
-  Debug::printf("displaying", _elts.size(), "element names");
+  PRINTF("displaying", _elts.size(), "element names");
   for (const auto it: _elts)
   {
-    Debug::printf(" >", id);
+    PRINTF(" >", id);
   }
 # endif // DEBUG
 
   return nullptr;
+}
+
+
+void Interface::clearMenu()
+{
+  while (!_menus.empty()) {
+    _menus.pop();
+  }
 }
 
 

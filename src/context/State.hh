@@ -39,12 +39,6 @@ public:
   State();
 
   /**
-   * \brief _state getter
-   * \return _state value
-   */
-  e_state currentState() { return _currentState; }
-
-  /**
    * \brief event manager getter
    * \return _eventManager
    */
@@ -67,7 +61,6 @@ public:
 
 
 protected:
-  e_state _currentState; ///< State's state
   std::shared_ptr<EventManager> _evtMgr; ///< State related events
 
   ///< interface elements list

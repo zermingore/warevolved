@@ -38,7 +38,7 @@ void Menu::draw()
   if (_entries.size() == 0)
   {
     PRINTF("on demand build");
-    build(/* Status::currentState() */); // use a cache (when pushing state)
+    build(); // use a cache (when pushing state)
   }
 }
 

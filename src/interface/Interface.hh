@@ -1,6 +1,3 @@
-#ifndef INTERFACE_HH_
-# define INTERFACE_HH_
-
 /**
  * \file
  * \author Zermingore
@@ -8,6 +5,9 @@
  *
  * Manages the User Interface.
  */
+
+#ifndef INTERFACE_HH_
+# define INTERFACE_HH_
 
 # include <vector>
 # include <interface/InterfaceElement.hh>
@@ -89,6 +89,11 @@ public:
    * \param color units color.
    */
   void setUnitsColor(Color color) { _settings->setUnitsColor(color); }
+
+  /**
+   * \brief Clears the menu stack.
+   */
+  void clearMenu();
 
   /**
    * \brief push the current menu.

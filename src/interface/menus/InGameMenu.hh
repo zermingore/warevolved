@@ -31,7 +31,9 @@ public:
   /**
    * \brief Builds the selection menu, filling the entries.
    */
-  void build();
+  void build() final;
+
+  void buildConfirmMove();
 
   void moveUp();
   void moveDown();
@@ -53,9 +55,10 @@ public:
   void validate();
 
 
-
   /// \todo should not be there
   void moveUnit();
+
+  void waitUnit();
 };
 
 

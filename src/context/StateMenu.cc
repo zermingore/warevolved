@@ -9,6 +9,7 @@
 
 
 StateMenu::StateMenu()
+  : State()
 {
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUp();    });

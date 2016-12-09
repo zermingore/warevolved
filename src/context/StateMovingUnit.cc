@@ -8,6 +8,7 @@
 
 
 StateMovingUnit::StateMovingUnit()
+  : State()
 {
   // used to get the cursor's coordinates and access to the callbacks
   auto player(Status::player());
@@ -23,8 +24,9 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::MOVE_LEFT_1,  [=] { player->moveUnitLeft();  });
   _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { player->moveUnitRight(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { player->validateMoveUnit();
-      Status::popCurrentState();
+  _evtMgr->registerEvent(e_input::SELECTION_1,  [=] {
+      player->validateMoveUnit();
+//      Status::pushState(e_state::MENU);
     });
 
   _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit(); });

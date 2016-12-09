@@ -44,13 +44,11 @@ void Player::moveCursorRight() {
 
 void Player::select()
 {
-  PRINTF("cursor coords:", _cursor->coords());
+  Status::pushState(e_state::SELECTION_UNIT);
   auto menu(std::make_shared<interface::InGameMenu> ());
   menu->setCoords(_cursor->coords());
   menu->build();
   _interface->pushMenu(menu);
-
-  Status::pushState(e_state::MENU);
 }
 
 
@@ -63,30 +61,34 @@ void Player::cancel() {
 // _____________________________  Units motion _____________________________ //
 
 // tmp
-void Player::moveUnitUp()
-{
+void Player::moveUnitUp() {
   moveCursorUp();
 }
 
-void Player::moveUnitDown()
-{
+void Player::moveUnitDown() {
   moveCursorDown();
 }
 
-void Player::moveUnitLeft()
-{
+void Player::moveUnitLeft() {
   moveCursorLeft();
 }
 
-void Player::moveUnitRight()
-{
+void Player::moveUnitRight() {
   moveCursorRight();
 }
+
 
 void Player::validateMoveUnit()
 {
   assert(_selectedUnit && "No selected unit");
   Status::battle()->map()->moveUnit(_selectedUnit, _cursor->coords());
+
+  Status::pushState(e_state::ACTION_MENU);
+
+  auto menu(std::make_shared<interface::InGameMenu> ());
+  menu->setCoords(_cursor->coords());
+  menu->build();
+  _interface->pushMenu(menu);
 }
 
 

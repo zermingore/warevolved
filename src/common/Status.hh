@@ -54,10 +54,9 @@ public:
 
   // ________________________________ States ________________________________ //
   /**
-   * \brief pops _states and returns summit
-   * \return Menu of the top of the stack
+   * \brief pops _states and blocks the inputs
    */
-  static std::shared_ptr<State> popCurrentState();
+  static void popCurrentState();
 
   /**
    * \brief return current state
@@ -72,6 +71,10 @@ public:
    */
   static void pushState(e_state state);
 
+  /**
+   * \brief returns the current state identifier
+   */
+  static e_state state();
 
   // _______________________________ Wrappers _______________________________ //
   /**
@@ -88,7 +91,9 @@ public:
 
 
 private:
-  static std::stack<std::shared_ptr<State>> _states; ///< States stack
+  ///< States stack: storing a pointer to the state and its (more specific) type
+  static std::stack<std::pair<e_state, std::shared_ptr<State>>> _states;
+
   static std::shared_ptr<Battle> _battle; ///< pointer on Battle
   static Coords _selectedCell; ///< coordinates of the selected cell
   static Coords _selectedUnitPosition; ///< current selected Unit's coordinates

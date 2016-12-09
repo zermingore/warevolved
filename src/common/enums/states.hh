@@ -12,18 +12,17 @@
  * \enum e_state
  * \brief various menu state values. Used to notify the state stack.
  */
-enum class e_state
+enum class e_state: int
 {
   NONE = 0, // we should never be in this state
 
   MENU,
   PLAYING,
 
-  SELECTION_MENU, // pick a Unit
+  SELECTION_UNIT, // pick a Unit
   MOVING_UNIT,    // move it
-  ACTION_MENU,    // give it an order
+  ACTION_MENU,    // give it an order (confirm move, switch to attack state)
   ATTACK,         // ask a Unit to attack
-  ACTION,         // confirm move, switch to attack state
 };
 
 

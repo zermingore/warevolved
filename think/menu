@@ -5,3 +5,22 @@ menu:
 
 draw menu:
 Graphics Engine: get sprite, draw sprite.
+
+
+
+Stack example:
+--------------
+
+^ confirm move
+| move unit
+| select unit
+| playing
+
+confirm move
+-> clear interface menu stack
+   unit->played = true
+   State = playing
+
+move unit canceled
+-> State.pop()
+   restore cursor position

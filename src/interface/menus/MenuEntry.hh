@@ -18,7 +18,7 @@ enum class e_entry
   NONE = 0, // invalid selected entry
 
   MOVE, // motion order
-  STOP, // motion order
+  WAIT, // motion order
   NEXT_TURN,
   ATTACK,
 

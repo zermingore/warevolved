@@ -35,11 +35,12 @@ Map::Map(Battle* battle, const size_t nb_columns, const size_t nb_lines)
   {
     std::vector<std::shared_ptr<Cell>> vec(_nbLines);
 
-    // Allocate each Cell
+    // Allocate each Cell of the column
     for (auto line(0u); line < _nbLines; ++line) {
       vec[line] = std::make_shared<Cell> (col, line);
     }
 
+    // _cells is a vector of columns
     _cells.push_back(vec);
   }
 
@@ -79,13 +80,9 @@ std::shared_ptr<Unit> Map::selectUnit(const Coords c)
 
 void Map::moveUnit(std::shared_ptr<Unit> unit, const Coords c)
 {
-  Debug::printf("before moving unit", unit->coords().x, unit->coords().y,
-                "to", c.x, c.y);
-  dump();
-
   if (unit->coords() == c)
   {
-    Debug::printf("move unit: src == dst");
+    Debug::error("move unit: src == dst");
     return;
   }
 
@@ -93,9 +90,6 @@ void Map::moveUnit(std::shared_ptr<Unit> unit, const Coords c)
   _cells[old.x][old.y]->removeUnit();
   unit->setCellCoordinates(c);
   _cells[c.x][c.y]->setUnit(unit);
-
-  Debug::printf("moved unit:", unit);
-  dump();
 }
 
 
@@ -127,8 +121,6 @@ void Map::newUnit(const e_unit type, const size_t column, const size_t line)
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
-
-  dump();
 }
 
 

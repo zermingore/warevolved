@@ -11,8 +11,6 @@ StatePlaying::StatePlaying()
   : State()
 {
   // Add parameters in the lambda ?
-
-
   // should these functions return booleans to consume events ?
 
   auto player(Status::player());

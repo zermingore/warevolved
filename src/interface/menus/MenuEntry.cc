@@ -48,7 +48,7 @@ void MenuEntry::draw()
 
 void MenuEntry::execute()
 {
-  Debug::printf("executing", (int) _id);
+  PRINTF("executing", (int) _id);
   _callback();
   return;
 }
@@ -64,8 +64,8 @@ void MenuEntry::setLabelName(e_entry entry)
       // _callback = // {map ? player ? unit ?}->moveUnit
       // unit: use FoV, movement, inventory, ...
       break;
-    case e_entry::STOP:
-      _labelName = "Stop";
+    case e_entry::WAIT:
+      _labelName = "Wait";
       break;
     case e_entry::NEXT_TURN:
       _labelName = "Next Turn";

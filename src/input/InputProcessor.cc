@@ -30,8 +30,8 @@ bool InputProcessor::process()
     {
       if (Status::currentState()->eventManager()->process(i))
       {
-        Debug::printf("processed:", (int) i,
-                      "in current state", Status::currentState());
+        PRINTF("processed:", (int) i,
+               "in current state", Status::currentState());
       }
     }
   }

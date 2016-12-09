@@ -62,7 +62,7 @@ public:
    * \brief builds the selection menu, filling _entries
    * \param state The state we're about to push
    */
-  virtual void build(/* e_state state */) = 0;
+  virtual void build() = 0;
 
 
   // Selection motion

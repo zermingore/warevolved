@@ -4,7 +4,6 @@
  * \author Zermingore
  */
 
-
 #ifndef PLAYER_HH_
 # define PLAYER_HH_
 

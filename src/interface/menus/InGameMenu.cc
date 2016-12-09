@@ -4,57 +4,54 @@
 #include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuEntry.hh>
-
-
 #include <common/enums/states.hh>
+
 
 namespace interface {
 
 
-
 void InGameMenu::build()
 {
-  // Clearing entries content
-  //_entries.clear();
-
-  // show unit section only if we selected a unit
-  // here, we cannot use cursor's position, we could have move the unit
-  // auto current_unit(MAP.unit(g_status->selectedCell()));
-  // if (current_unit
-  //     && current_unit->playerId() == g_status->currentPlayer()
-  //     && !current_unit->played())
-  // {
-  //   if (state == state::SELECTION_MENU)
-  //     _entries.emplace_back(MenuEntry("Move", entry::MOVE));
-
-  //   if (state == state::ACTION_MENU)
-  //     _entries.emplace_back(MenuEntry("Stop", entry::STOP));
-  // }
-  // else
-  // {
-  //   // next turn button
-  //   _entries.emplace_back(MenuEntry("Next\n\tTurn", entry::NEXT_TURN));
-  // }
-
-  // target
-  // if (state == state::ACTION_MENU)
-  //   current_unit->fillActions(_entries);
-
-  // auto interface(Status::interface());
-  auto map(Status::battle()->map());
-  if (map->unit(_coords))
+  switch (Status::state())
   {
-    auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
-    _entries.push_back(entry);
-    entry->setCallback( [=] { moveUnit(); });
-    Status::interface()->addElement(entry);
+    case e_state::ACTION_MENU:
+    {
+      PRINTF("-= Action menu =-");
+      /// \todo check if there is a target
+      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
+      entry->setCallback( [=] { waitUnit(); });
+      _entries.push_back(entry);
+      Status::interface()->addElement(entry);
+      break;
+    }
+
+    case e_state::SELECTION_UNIT:
+    case e_state::MENU:
+      PRINTF("-= Selection menu =-");
+      if (Status::battle()->map()->unit(_coords))
+      {
+        auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
+        entry->setCallback( [=] { moveUnit(); });
+        _entries.push_back(entry);
+        Status::interface()->addElement(entry);
+      }
+      break;
+
+    case e_state::PLAYING:
+      break;
+
+    default:
+      Debug::error("InGameMenu::build Invalid State:", (int) Status::state());
+      std::exit(1);
+      assert(!"Invalid state found building menu");
+      break;
   }
 
+  // Whatever the menu is, we always add a 'Cancel' entry at the end
   auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
   _entries.push_back(entry);
   Status::interface()->addElement(entry);
 }
-
 
 
 void InGameMenu::moveUp() {
@@ -68,19 +65,13 @@ void InGameMenu::moveDown() {
 
 void InGameMenu::validate()
 {
-  Debug::printf("validate: entry", _selectedEntry);
-
   // Cancel entry particular case (always the last one)
   if (_selectedEntry == _entries.size() - 1)
   {
-    Debug::printf("selected entry: 0 - cancel?");
-    Debug::printf("number of entries:", _entries.size());
     close();
     Status::popCurrentState();
-
     return;
   }
-
 
   _entries[_selectedEntry]->execute();
 }
@@ -88,7 +79,7 @@ void InGameMenu::validate()
 
 void InGameMenu::moveUnit()
 {
-  Debug::printf("moving unit");
+  PRINTF("moving unit");
 
   // Hiding but not deleting the current menu
   auto interface(Status::interface());
@@ -97,6 +88,23 @@ void InGameMenu::moveUnit()
   }
 
   Status::pushState(e_state::MOVING_UNIT);
+}
+
+
+void InGameMenu::waitUnit()
+{
+  // pop every State pushed since Playing (select, move unit)
+  while (Status::state() != e_state::PLAYING) {
+    Status::popCurrentState();
+  }
+
+  // Removing the interface elements of this menu
+  for (auto entry: _entries) {
+    Status::interface()->removeElement(entry);
+  }
+
+  // clearing the menu stack
+  Status::interface()->clearMenu();
 }
 
 

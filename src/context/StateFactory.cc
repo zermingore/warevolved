@@ -7,7 +7,7 @@
 
 std::shared_ptr<State> StateFactory::createState(e_state& state)
 {
-  Debug::printf("State: current state:", static_cast<int> (state));
+  PRINTF("StateFactory: creating state:", static_cast<int> (state));
 
   // Facto DP
   switch (state)
@@ -15,7 +15,10 @@ std::shared_ptr<State> StateFactory::createState(e_state& state)
     case e_state::PLAYING:
       return std::make_shared<StatePlaying> ();
 
+    // Every menu share the same State
     case e_state::MENU:
+    case e_state::ACTION_MENU:
+    case e_state::SELECTION_UNIT:
       return std::make_shared<StateMenu> ();
 
     case e_state::MOVING_UNIT:
@@ -24,12 +27,6 @@ std::shared_ptr<State> StateFactory::createState(e_state& state)
     default:
       Debug::error("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
       break;
-  //   MAIN_MENU,
-
-  // SELECTION_MENU, // pick a Unit
-  // MOVING_UNIT, // move it
-  // ACTION_MENU, // give it an order
-  // ATTACK, // ask a Unit to attack
   }
 
   // never reached
