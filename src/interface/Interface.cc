@@ -13,14 +13,12 @@
 namespace interface {
 
 
-Interface::Interface(Color c)
-{
+Interface::Interface(Color c) {
   _settings = std::make_unique<InterfaceSettings> (c);
 }
 
 
-void Interface::addElement(std::shared_ptr<InterfaceElement> elt)
-{
+void Interface::addElement(std::shared_ptr<InterfaceElement> elt) {
   _elts.push_back(elt);
 }
 
@@ -50,8 +48,7 @@ const std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
 # ifdef DEBUG
   Debug::error("Interface: invalid element name request: ", id);
   PRINTF("displaying", _elts.size(), "element names");
-  for (const auto it: _elts)
-  {
+  for (const auto it: _elts) {
     PRINTF(" >", id);
   }
 # endif // DEBUG

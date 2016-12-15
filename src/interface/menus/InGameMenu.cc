@@ -79,8 +79,6 @@ void InGameMenu::validate()
 
 void InGameMenu::moveUnit()
 {
-  PRINTF("moving unit");
-
   // Hiding but not deleting the current menu
   auto interface(Status::interface());
   for (auto entry: _entries) {

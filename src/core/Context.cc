@@ -7,10 +7,12 @@
 
 Context::Context(bool fullscreen)
 {
-  if (fullscreen)
+  if (fullscreen) {
     Settings::initialize(24, 8, 4);
-  else
+  }
+  else {
     Settings::initialize(0, 0, 0); // vanilla (debug) mode
+  }
 
   Settings::setFullScreen(fullscreen);
   _system = std::make_unique<System> (2, 1); // SFML version: 2.1
@@ -51,11 +53,12 @@ void Context::init()
     {
       std::cerr << "Unsupported Video Mode, falling back" << std::endl;
       video_mode = sf::VideoMode::getDesktopMode(); // falling back to desktop mode
-      if (!video_mode.isValid())
+      if (!video_mode.isValid()) {
         std::exit(-1); // This time we quit  /// \todo browse all supported modes
+      }
     }
 
-    window  = std::make_unique<sf::RenderWindow> (video_mode, "War Evolved");
+    window = std::make_unique<sf::RenderWindow> (video_mode, "War Evolved");
   }
 
 # ifndef DEBUG_PERFS
@@ -67,7 +70,6 @@ void Context::init()
 
   graphics::GraphicsEngine::setWindow(std::move(window));
 
-  // Deducing some Status
   // graphics::GraphicsEngine::setCellWidth(64);  /// \todo change dynamically (in px)
   // graphics::GraphicsEngine::setCellHeight(64);  /// \todo change dynamically (in px)
   // graphics::GraphicsEngine::setGridThickness(5);  /// \todo change dynamically (in px)

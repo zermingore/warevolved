@@ -64,15 +64,20 @@
     } while (0)
 # endif
 
+
 # ifdef DEBUG
-#   define DEBUG_PRINT_VALUE(x) do { \
+#   define PRINT_VALUE(x) do { \
       std::cout << #x << ": " << x << std::endl; \
     } while (0)
 # else
-#   define DEBUG_PRINT_VALUE(x) do { \
+#   define PRINT_VALUE(x) do { \
     } while (0)
 # endif
 
+
+# define ERROR Debug::error
+
+/// \todo in release, printf should print in a log
 # ifdef DEBUG
 #   define PRINTF Debug::printf
 # else

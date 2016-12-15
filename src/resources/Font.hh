@@ -5,23 +5,28 @@
 # include <common/include.hh>
 
 
-/** \class Font Resource type
- * Derived from Resource
+/**
+ * \class Font Resource type
+ * \brief Font class to draw text
  */
-class Font : public Resource
+class Font: public Resource
 {
 public:
   /// \brief default constructor
-  Font() {}
+  Font() = default;
 
   /**
    * \brief Constructor
    * \param file_name font file name
    * \param name font alias
    */
-  Font(const std::string file_name,
-       const std::string name);
+  Font(const std::string file_name, const std::string name);
 
+  /**
+   * \brief Loads a font, if needed
+   * \return true if the font was already loaded
+   *   false if it was loaded during this call
+   */
   bool load();
 
   /**
@@ -31,8 +36,10 @@ public:
    */
   std::shared_ptr<sf::Font> getFont();
 
+
 private:
   std::shared_ptr<sf::Font> _font; ///< current Font
 };
+
 
 #endif /* !FONT_HH_ */

@@ -54,6 +54,12 @@ public:
   static graphics::Image& getImage(const std::string name);
 
   /**
+   * \brief Retrieve a Font from _fonts map and return it's graphical font
+   * if the Font does not exist, print an error and return the default one
+   */
+  static sf::Font& font(const std::string name);
+
+  /**
    * \brief Retrieve a Font from _fonts map
    * if the Font does not exist, print an error and return the default one
    */
@@ -106,8 +112,11 @@ private:
   static void listResources();
 # endif
 
-  static std::map<std::string, std::shared_ptr<graphics::Image>> _images; ///< Images list
-  static std::map<std::string, std::shared_ptr<Font>> _fonts; ///< Fonts list
+  ///< Images list (accessed by their name)
+  static std::map<std::string, std::shared_ptr<graphics::Image>> _images;
+
+  ///< Fonts list (accessed by their name)
+  static std::map<std::string, std::shared_ptr<Font>> _fonts;
 
   ///< map categories names matching e_resource_type
   static std::map<e_resource_type, std::string> _typeNames;

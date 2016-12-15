@@ -35,7 +35,9 @@ resources/Resource.cc               \
 resources/Image.cc                  \
 resources/Font.cc                   \
 \
-common/Debug.cc                     \
+common/debug/Debug.cc               \
+common/debug/OSD.cc                 \
+\
 common/System.cc                    \
 common/Settings.cc                  \
 common/Status.cc                    \

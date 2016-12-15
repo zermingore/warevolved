@@ -1,4 +1,4 @@
-#include <common/Debug.hh>
+#include <common/debug/Debug.hh>
 
 
 // Debug::_log definition

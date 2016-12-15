@@ -7,7 +7,6 @@
 #include <common/enums/states.hh>
 #include <input/KeyManager.hh>
 
-#include <common/Settings.hh>
 
 void Game::run()
 {
@@ -22,9 +21,6 @@ void Game::run()
   Status::setInputProcessor(input_processor);
 
   Status::pushState(e_state::PLAYING);
-
-
-//  Settings::setKeyRepeatDelay(1000);
 
   // Game loop: processing events, updating display
   while (GraphicsEngine::windowIsOpen() && input_processor->process()) {

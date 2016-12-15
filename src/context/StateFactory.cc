@@ -2,13 +2,12 @@
 #include <context/StatePlaying.hh>
 #include <context/StateMovingUnit.hh>
 #include <context/StateMenu.hh>
-#include <common/Debug.hh>
+#include <common/debug/Debug.hh>
+#include <common/debug/OSD.hh>
 
 
 std::shared_ptr<State> StateFactory::createState(e_state& state)
 {
-  PRINTF("StateFactory: creating state:", static_cast<int> (state));
-
   // Facto DP
   switch (state)
   {
@@ -19,9 +18,11 @@ std::shared_ptr<State> StateFactory::createState(e_state& state)
     case e_state::MENU:
     case e_state::ACTION_MENU:
     case e_state::SELECTION_UNIT:
+      debug::OSD::addData("menus state");
       return std::make_shared<StateMenu> ();
 
     case e_state::MOVING_UNIT:
+      debug::OSD::addData(42);
       return std::make_shared<StateMovingUnit> ();
 
     default:

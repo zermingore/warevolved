@@ -133,10 +133,24 @@ graphics::Image& ResourcesManager::getImage(const std::string name)
 }
 
 
+
+sf::Font& ResourcesManager::font(const std::string name)
+{
+  if (_fonts.find(name) != _fonts.end()) {
+    return *(_fonts[name]->getFont());
+  }
+
+  Debug::logPrintf("Unable to find font: ", name);
+
+  return *(_fonts["default"]->getFont());
+}
+
+
 Font& ResourcesManager::getFont(const std::string name)
 {
-  if (_fonts.find(name) != _fonts.end())
+  if (_fonts.find(name) != _fonts.end()) {
     return *_fonts[name];
+  }
 
   Debug::logPrintf("Unable to find font: ", name);
 

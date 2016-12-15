@@ -4,6 +4,7 @@
 #include <game/Cell.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
+#include <common/debug/OSD.hh>
 
 
 namespace graphics {
@@ -13,26 +14,18 @@ std::unique_ptr<sf::RenderWindow> GraphicsEngine::_window;
 float GraphicsEngine::_currentFPS;
 
 
+
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   drawBackground();
-
-  // battle->map()->update();
   drawMap(battle);
   drawGrid(battle->map());
 
-  // unit selection managed by the interface ?
-  //   interface / player can do everything
-  //   when done, call map to check and do the move / attack
-
-  // study (broken ATM)
-  // pf: left -> push, right -> pop ...
-  // 1 2 4 8 -> 0001 & 0001 -> push / pop
-  // left 0001 0010 right
-
-
-  // draw interface of current_player
+  // draw the interface of current_player
   drawInterface(battle);
+
+  // draw the debug data, eventually over everything (at last)
+  debug::OSD::draw();
 
   // update the window
   _window->display();
@@ -48,14 +41,6 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
   {
     elt->update(battle->map()->graphicsProperties());
     elt->draw();
-
-    /// \todo OSD debug infos
-    auto font(resources::ResourcesManager::getFont("font_army"));
-    auto label(std::make_shared<sf::Text> ());
-    label->setFont(*(font.getFont()));
-    char test(interface->elements().size() + 48); // C-style ...
-    label->setString(test);
-    draw(label);
   }
 }
 

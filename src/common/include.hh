@@ -17,7 +17,7 @@
 # include <memory>
 # include <cassert>
 
-# include <common/Debug.hh>
+# include <common/debug/Debug.hh>
 # include <common/structures/Vector.hh>
 
 # include <SFML/Graphics.hpp>

@@ -71,12 +71,24 @@ public:
 
   /**
    * \brief Draws the given element
-   * \param drawable item to draw
+   * \param drawable shared pointer to an item to draw
    */
   template <typename T>
   static void draw(std::shared_ptr<T> drawable) {
     _window->draw(*drawable);
   }
+
+  /**
+   * \brief Draws the given element
+   * \param drawable item to draw
+   */
+  template <typename T>
+  static void draw(T drawable) {
+    _window->draw(drawable);
+  }
+
+  /// \todo use a Window type: union with sfml, opengl, dx, ascii windows, ...
+  static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
 
 
 private:
@@ -109,9 +121,6 @@ private:
   static void drawUnit(const std::shared_ptr<Battle> battle,
                        const std::shared_ptr<Unit> unit);
 
-
-  /// \todo use a Window type: union with sfml, opengl, dx, ascii windows, ...
-  static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
 
   /**
    * \brief current number of generated frames per Seconds

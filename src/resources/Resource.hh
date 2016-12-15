@@ -8,7 +8,7 @@
 
 
 /**
-   * \brief various scopes to delimit resources lifetime
+ * \brief various scopes to delimit resources lifetime
  * *Warning*: unused for now
  */
 enum e_scope
@@ -46,7 +46,7 @@ public:
    * \brief virtual method: resource loading
    */
   virtual bool load() = 0;
-  virtual void unload() {};
+  virtual void unload() {}
 
   bool getLoaded() { return _loaded; }
 
