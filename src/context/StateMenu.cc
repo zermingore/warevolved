@@ -46,7 +46,9 @@ void StateMenu::validate() {
 
 void StateMenu::exit()
 {
-  // Calling the current active menu of the interface
-  Status::interface()->currentMenu()->close();
-  Status::popCurrentState();
+  if (auto menu = Status::interface()->currentMenu())
+  {
+    menu->close();
+    Status::popCurrentState();
+  }
 }

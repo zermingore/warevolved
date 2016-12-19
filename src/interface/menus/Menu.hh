@@ -87,6 +87,11 @@ public:
    */
   virtual void validate() = 0;
 
+  /**
+   * \brief Resume the current menu
+   *   as a default behavior, updates the cursor coordinates to the menu ones
+   */
+  virtual void resume();
 
 
 protected:
@@ -105,6 +110,7 @@ protected:
    *   informations from menu stack (see \class Status)
    */
   unsigned int selectedEntry() { return _selectedEntry; }
+
 
 
   std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list

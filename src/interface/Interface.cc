@@ -8,6 +8,7 @@
 
 #include <interface/Interface.hh>
 #include <interface/menus/Menu.hh>
+#include <common/Status.hh>
 
 
 namespace interface {
@@ -69,6 +70,23 @@ void Interface::pushMenu(std::shared_ptr<Menu> menu)
 {
   addElement(menu);
   _menus.push(menu);
+}
+
+
+void Interface::popMenu()
+{
+  assert(!_menus.empty() && "Interface menu stack empty");
+
+  // Clearing current menu
+  _menus.top()->close(); // always implemented ?
+  _menus.pop();
+
+  // Taking care of the previous menu (if any)
+  if (!_menus.empty()) {
+    _menus.top()->resume();
+  }
+
+  Status::popCurrentState();
 }
 
 

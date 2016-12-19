@@ -9,6 +9,7 @@
 
 StateMovingUnit::StateMovingUnit()
   : State()
+  , _originalCoords(Status::interface()->element("cursor")->coords())
 {
   // used to get the cursor's coordinates and access to the callbacks
   auto player(Status::player());
@@ -29,12 +30,18 @@ StateMovingUnit::StateMovingUnit()
 //      Status::pushState(e_state::MENU);
     });
 
-  _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit(); });
+  _evtMgr->registerEvent(e_input::EXIT_1, [=] {
+      exit();
+      Status::interface()->popMenu();
+    });
 }
 
 
 void StateMovingUnit::exit()
 {
   // TODO kill the path finding (needed ?)
+  PRINTF("pop moving");
+
+  Status::interface()->element("cursor")->setCoords(_originalCoords);
   Status::popCurrentState();
 }

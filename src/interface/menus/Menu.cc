@@ -6,6 +6,8 @@
 #include <context/State.hh>
 #include <input/EventManager.hh>
 #include <game/applications/Battle.hh>
+#include <game/Player.hh>
+#include <interface/Cursor.hh>
 
 namespace interface {
 
@@ -26,10 +28,12 @@ void Menu::setOrigin(Coords origin) {
 
 void Menu::decrementSelectedEntry()
 {
-  if (_selectedEntry)
+  if (_selectedEntry) {
     _selectedEntry = (_selectedEntry - 1) % (_entries.size() - 1);
-  else
+  }
+  else {
     _selectedEntry = _entries.size() - 1;
+  }
 }
 
 
@@ -42,6 +46,10 @@ void Menu::draw()
   }
 }
 
+
+void Menu::resume() {
+  Status::player()->cursor()->setCoords(_coords);
+}
 
 
 } // namespace interface

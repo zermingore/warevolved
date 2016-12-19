@@ -49,6 +49,9 @@ public:
   void draw();
 
 
+  /**
+   * \brief Closes the current menu, clearing its interface elements
+   */
   void close();
 
 

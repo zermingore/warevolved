@@ -7,6 +7,7 @@
 # define STATE_MOVING_UNIT_HH_
 
 # include <context/State.hh>
+# include <common/using.hh> // Coords
 
 
 /**
@@ -23,6 +24,10 @@ public:
    * \brief exits the current State
    */
   void exit();
+
+
+private:
+  Coords _originalCoords;
 };
 
 

@@ -68,8 +68,9 @@ void InGameMenu::validate()
   // Cancel entry particular case (always the last one)
   if (_selectedEntry == _entries.size() - 1)
   {
-    close();
-    Status::popCurrentState();
+    Status::interface()->popMenu();
+//    close();
+//    Status::popCurrentState();
     return;
   }
 
@@ -130,6 +131,7 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
 
 
 
+/// \todo move in Dtor ?
 void InGameMenu::close()
 {
   auto interface(Status::interface());
@@ -137,8 +139,6 @@ void InGameMenu::close()
     interface->removeElement(entry);
   }
   // interface->removeElement(this); // apparently not needed, not sure why
-
-  interface->popMenu();
 }
 
 

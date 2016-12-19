@@ -104,7 +104,7 @@ public:
   /**
    * \brief pops the current menu.
    */
-  void popMenu() { _menus.pop(); }
+  void popMenu();
 
   /**
    * \brief sets current menu.
