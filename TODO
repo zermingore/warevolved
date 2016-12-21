@@ -2,7 +2,8 @@
 
 * TODO Tasks
 Main menu
-Free at exit
+** DONE Free at exit
+   CLOSED: [2016-12-21 Mi 19:58]
 ** DONE Map graphic update
    CLOSED: [2016-10-24 Mo 21:19]
 Cursor (interface) in its thread

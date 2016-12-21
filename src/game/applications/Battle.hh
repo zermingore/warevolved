@@ -38,6 +38,12 @@ public:
 
 
   /**
+   * \brief Initialize a new map (including the players)
+   */
+  void initializeMap();
+
+
+  /**
    * \brief Players vector getter.
    * \return Players list.
    */

@@ -38,3 +38,12 @@ study (broken ATM)
   pf: left -> push, right -> pop ...
   1 2 4 8 -> 0001 & 0001 -> push / pop
   left 0001 0010 right
+
+
+
+Ergonomy
+--------
+
+resume moving unit -> inteface::popMenu ?
+(resume move)
+  or osef, more practical with escape -> fu ?

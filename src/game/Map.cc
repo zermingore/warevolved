@@ -24,9 +24,8 @@ Map::MapGraphicsProperties::MapGraphicsProperties()
 }
 
 
-Map::Map(Battle* battle, const size_t nb_columns, const size_t nb_lines)
-  : _battle(battle)
-  , _nbColumns(nb_columns)
+Map::Map(const size_t nb_columns, const size_t nb_lines)
+  : _nbColumns(nb_columns)
   , _nbLines(nb_lines)
 {
   _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
@@ -47,6 +46,7 @@ Map::Map(Battle* battle, const size_t nb_columns, const size_t nb_lines)
   /// \todo Read data from a map file to set the terrains
   // (should be called from Battle)
 }
+
 
 
 std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const {
@@ -95,7 +95,7 @@ void Map::moveUnit(std::shared_ptr<Unit> unit, const Coords c)
 
 void Map::endTurn()
 {
-  for (auto& it: _units[_battle->currentPlayer()]) {
+  for (auto& it: _units[Status::battle()->currentPlayer()]) {
     it->setPlayed(false);
   }
 }
@@ -116,7 +116,7 @@ void Map::newUnit(const e_unit type, const size_t column, const size_t line)
       return;
   }
 
-  auto player_id = _battle->currentPlayer();
+  auto player_id = Status::battle()->currentPlayer();
   new_unit->setCellCoordinates(Coords(column, line));
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);

@@ -16,6 +16,7 @@ void Game::run()
 
   auto battle(std::make_shared<Battle> ());
   Status::setBattle(battle);
+  battle->initializeMap();
 
   auto input_processor(std::make_shared<InputProcessor> ());
   Status::setInputProcessor(input_processor);

@@ -130,7 +130,6 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
 }
 
 
-
 /// \todo move in Dtor ?
 void InGameMenu::close()
 {

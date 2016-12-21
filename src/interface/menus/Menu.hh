@@ -94,6 +94,7 @@ public:
   virtual void resume();
 
 
+
 protected:
   /**
    * \brief list of entries getter

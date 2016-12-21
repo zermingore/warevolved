@@ -10,7 +10,12 @@ Battle::Battle() :
   _currentPlayer (0)
 {
   /// \todo map size is hard-coded
-  _map = std::make_shared<Map> (this, 8, 5);
+  _map = std::make_shared<Map> (8, 5);
+}
+
+
+void Battle::initializeMap()
+{
   buildPlayers();
   buildMap();
 }

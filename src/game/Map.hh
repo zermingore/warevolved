@@ -11,7 +11,6 @@
 # include <common/using.hh>
 
 class Cell;
-class Battle;
 class Unit;
 
 enum class e_terrain;
@@ -123,11 +122,10 @@ public:
    *   Sets right Terrains;
    *   Asks ResourcesManager to loads needed Resources
    *
-   * \param battle pointer on the battle in which this map is
    * \param nbColumns Number of columns required
    * \param nbLines Number of lines required
    */
-  Map(Battle* battle, const size_t nb_columns, const size_t nb_lines);
+  Map(const size_t nb_columns, const size_t nb_lines);
 
   /**
    * \brief _nbColumns getter
@@ -239,8 +237,6 @@ public:
 
 
 private:
-  std::shared_ptr<Battle> _battle; ///< Battle in which this map belong to
-
   size_t _nbColumns; ///< number of columns (x coordinate)
   size_t _nbLines;   ///< number of lines (y coordinate)
 
