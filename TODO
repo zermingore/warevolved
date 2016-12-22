@@ -9,8 +9,9 @@ Main menu
 Cursor (interface) in its thread
 
 * TODO Roadmap
-fill in game menu entries (make them clickable)
-limit the cursor to the map
+** TODO pathfinding
+** TODO Unit played
+** TODO Next turn: players switch
 
 
 * old roadmap
@@ -25,6 +26,10 @@ limit the cursor to the map
 ** DONE Units: random names
    CLOSED: [2014-06-29 Sun 17:04]
    (tmp: use a filled vector and a static index when creating a Unit)
+** DONE fill in game menu entries (make them clickable)
+   CLOSED: [2016-12-22 Do 07:28]
+** DONE limit the cursor to the map
+   CLOSED: [2016-12-22 Do 07:28]
 
 * DONE Git
   CLOSED: [2013-07-24 Wed 07:10]
@@ -213,10 +218,12 @@ limit the cursor to the map
 *** TODO game scripts
 ** TODO helper
    header guards with same name
+   relevant ?
 ** DONE generate Doxygen Doc
    CLOSED: [2013-08-14 Wed 12:31]
 ** TODO auto resources XML generator
-** TODO source file: auto fetch and insert commit id last modif
+** [CLOSED] source file: auto fetch and insert commit id last modif
+   Irrelevant: pollute files, use git instead
 ** TODO Debug::assert check only on debug if a condition is satisfied
    Debug::assert(state, MODE__MENU)
    -> test if state equals to MODE__MENU and prints an error if not
@@ -224,7 +231,8 @@ limit the cursor to the map
 * TODO Bugs / Features
 ** DONE InterfaceElements are never removed
    CLOSED: [2016-11-15 Di 07:37]
-** TODO The Cursor can exit the map (border right / bottom not effective)
+** DONE The Cursor can exit the map (border right / bottom not effective)
+   CLOSED: [2016-12-22 Do 07:30]
 ** TODO Moving Unit
    sometimes a unt can move too far (2 keys simultaneously pressed ?)
 ** TODO Fix cursor size trouble

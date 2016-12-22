@@ -4,6 +4,7 @@
 #include <common/Status.hh>
 #include <game/Player.hh>
 #include <game/Map.hh>
+#include <interface/Cursor.hh>
 
 
 Battle::Battle() :
@@ -42,6 +43,12 @@ void Battle::buildMap()
   // _map->newUnit(e_unit::SOLDIERS, 3, 1);
 
   /// \todo set terrain
+
+
+  // Adjusting cursors limits
+  for (const auto player: _players) {
+    player->cursor()->setLimits(_map->nbColumns(), _map->nbLines());
+  }
 }
 
 
