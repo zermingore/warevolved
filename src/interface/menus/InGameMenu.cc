@@ -1,5 +1,6 @@
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
+#include <game/units/Unit.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
@@ -7,11 +8,19 @@
 #include <common/enums/states.hh>
 
 
+
 namespace interface {
 
 
 void InGameMenu::build()
 {
+  PRINTF(">> ", (int) Status::state(), " <<");
+
+  // Saving current state
+  _cursor = Status::player()->cursor()->coords();
+  _unit = Status::battle()->map()->unit(_coords);
+
+
   switch (Status::state())
   {
     case e_state::ACTION_MENU:
@@ -22,12 +31,31 @@ void InGameMenu::build()
       entry->setCallback( [=] { waitUnit(); });
       _entries.push_back(entry);
       Status::interface()->addElement(entry);
+
+      /// \todo separate actions (move / attack / ...)
+      // as they may have different cancel actions
+      addCancelEntry( [=] { actionCancel(); } );
+      break;
+    }
+
+    case e_state::MOVING_UNIT:
+    {
+      PRINTF("-= Action menu =-");
+      /// \todo check if there is a target
+      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
+      entry->setCallback( [=] { waitUnit(); });
+      _entries.push_back(entry);
+      Status::interface()->addElement(entry);
+
+      /// \todo separate actions (move / attack / ...)
+      // as they may have different cancel actions
+      addCancelEntry( [=] { actionCancel(); } );
       break;
     }
 
     case e_state::SELECTION_UNIT:
-    case e_state::MENU:
       PRINTF("-= Selection menu =-");
+      // if ((_unit = Status::battle()->map()->unit(_coords)))
       if (Status::battle()->map()->unit(_coords))
       {
         auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
@@ -35,9 +63,12 @@ void InGameMenu::build()
         _entries.push_back(entry);
         Status::interface()->addElement(entry);
       }
+      addCancelEntry( [=] { defaultCancel(); } );
       break;
 
     case e_state::PLAYING:
+      /// \todo next player
+      addCancelEntry( [=] { defaultCancel(); } );
       break;
 
     default:
@@ -46,11 +77,47 @@ void InGameMenu::build()
       assert(!"Invalid state found building menu");
       break;
   }
+}
 
-  // Whatever the menu is, we always add a 'Cancel' entry at the end
-  auto entry(std::make_shared<MenuEntry> (e_entry::CANCEL));
-  _entries.push_back(entry);
-  Status::interface()->addElement(entry);
+
+void InGameMenu::defaultCancel() {
+  Status::interface()->popMenu();
+}
+
+
+void InGameMenu::actionCancel()
+{
+  PRINTF("Canceling current action");
+
+  // if (_unit) {
+  //   _unit->setCoords(_cursor);
+  // }
+
+  // Status::interface()->popMenu();
+  // Status::player()->cursor()->setCoords(_cursor);
+
+  // from StateMovingUnit
+  Status::interface()->element("cursor")->setCoords(_cursor);
+
+
+  Status::interface()->clearMenu();
+
+  while (Status::state() != e_state::PLAYING) {
+    PRINTF("State:", (int) Status::state());
+    Status::popCurrentState();
+  }
+
+  // purge saved data
+  // _unit = nullptr;
+}
+
+
+void InGameMenu::addCancelEntry(std::function<void()> cancel_callback)
+{
+  auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL));
+  entry_cancel->setCallback( [=] { cancel_callback(); });
+  _entries.push_back(entry_cancel);
+  Status::interface()->addElement(entry_cancel);
 }
 
 
@@ -63,17 +130,8 @@ void InGameMenu::moveDown() {
 }
 
 
-void InGameMenu::validate()
-{
-  // Cancel entry particular case (always the last one)
-  if (_selectedEntry == _entries.size() - 1)
-  {
-    Status::interface()->popMenu();
-//    close();
-//    Status::popCurrentState();
-    return;
-  }
-
+void InGameMenu::validate() {
+  // end validation (unit moved, ...) -> purge every menu
   _entries[_selectedEntry]->execute();
 }
 
@@ -86,12 +144,18 @@ void InGameMenu::moveUnit()
     interface->removeElement(entry);
   }
 
+  // Building a new menu in the MOVING_UNIT State
   Status::pushState(e_state::MOVING_UNIT);
+  // auto menu(std::make_shared<interface::InGameMenu> ());
+  // menu->setCoords(_cursor);
+  // menu->build();
 }
 
 
 void InGameMenu::waitUnit()
 {
+  PRINTF("order: wait unit");
+
   // pop every State pushed since Playing (select, move unit)
   while (Status::state() != e_state::PLAYING) {
     Status::popCurrentState();

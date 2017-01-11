@@ -24,3 +24,49 @@ confirm move
 move unit canceled
 -> State.pop()
    restore cursor position
+
+
+
+Cancel Management
+-----------------
+
+standard: pop current state
+(-> need previous menu, from the stack)
+
+
+particular cases:
+
+moving a unit:
+ESC -> standard cancel, to pick a unit
+manual: click on a cell (pop menu) -> cancel: double pop
+
+
+
+confirm move (-> move and pop states until state playing)
+moving unit
+select unit
+playing State
+
+
+do something and push / pop state (resume ?)
+Player
+
+Menus
+
+States
+
+
+
+pause() hide menu
+resume() redisplay menu
+
+
+
+InGameMenu -> mother class ?
+
+
+moving unit: own state / event manager ?
+state: unique state
+event manager: confirm pressed -> special action (can overload browse map though)
+
+=> 1 state <-> 1 event manager ?

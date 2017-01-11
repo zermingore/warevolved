@@ -11,6 +11,7 @@
 
 enum class e_state;
 
+class Unit;
 
 namespace interface {
 
@@ -33,7 +34,6 @@ public:
    */
   void build() final;
 
-  void buildConfirmMove();
 
   void moveUp();
   void moveDown();
@@ -62,6 +62,34 @@ public:
   void moveUnit();
 
   void waitUnit();
+
+
+
+private:
+  /**
+   * \brief Default cancel entry callback (pops the menu)
+   */
+  void defaultCancel();
+
+  /**
+   * \brief Action cancel entry callback
+   */
+  void actionCancel();
+
+  /**
+   * \brief Restore menu to its previous state
+   */
+  void restore();
+
+  /**
+   * \brief Adds a standard cancel entry into the menu
+   */
+  void addCancelEntry(std::function<void()> cancel_callback);
+
+
+  // state data
+  Coords _cursor; ///< Saved cursor coordinates
+  std::shared_ptr<Unit> _unit; ///< Saved unit
 };
 
 

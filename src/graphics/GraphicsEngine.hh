@@ -121,6 +121,11 @@ private:
   static void drawUnit(const std::shared_ptr<Battle> battle,
                        const std::shared_ptr<Unit> unit);
 
+  /**
+   * \brief Draws the elements related to the given State
+   */
+  static void drawState();
+
 
   /**
    * \brief current number of generated frames per Seconds

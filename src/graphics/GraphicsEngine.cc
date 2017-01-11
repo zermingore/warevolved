@@ -5,6 +5,7 @@
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
 #include <common/debug/OSD.hh>
+#include <context/State.hh>
 
 
 namespace graphics {
@@ -19,10 +20,12 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   drawBackground();
   drawMap(battle);
-  drawGrid(battle->map());
 
   // draw the interface of current_player
+  drawGrid(battle->map());
   drawInterface(battle);
+
+  drawState();
 
   // draw the debug data, eventually over everything (at last)
   debug::OSD::draw();
@@ -42,6 +45,11 @@ void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
     elt->update(battle->map()->graphicsProperties());
     elt->draw();
   }
+}
+
+
+void GraphicsEngine::drawState() {
+  Status::currentState()->draw();
 }
 
 

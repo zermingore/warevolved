@@ -51,10 +51,16 @@ void Player::select()
   _interface->pushMenu(menu);
 }
 
+// void Player::move()
+// {
+//   ERROR("Player::select");
+//   Status::pushState(e_state::SELECTION_UNIT);
+//   auto menu(std::make_shared<interface::InGameMenu> ());
+//   menu->setCoords(_cursor->coords());
+//   menu->build();
+//   _interface->pushMenu(menu);
+// }
 
-void Player::cancel() {
-  _interface->popMenu();
-}
 
 
 
@@ -80,7 +86,9 @@ void Player::moveUnitRight() {
 
 void Player::validateMoveUnit()
 {
-  assert(_selectedUnit && "No selected unit");
+  PRINTF("move validated");
+
+  assert(_selectedUnit && "validateMoveUnit: No selected unit");
   Status::battle()->map()->moveUnit(_selectedUnit, _cursor->coords());
 
   Status::pushState(e_state::ACTION_MENU);
@@ -94,7 +102,7 @@ void Player::validateMoveUnit()
 
 bool Player::updateSelectedUnit()
 {
-  // update the Map selected Unit
+  // Update the Map selected Unit
   auto coords(Status::player()->cursor()->coords());
   if (!(_selectedUnit = Status::battle()->map()->selectUnit(coords))) {
     Debug::error("Unable to select a unit");

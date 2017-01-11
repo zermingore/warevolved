@@ -9,7 +9,7 @@
 
 # include <memory>
 # include <vector>
-# include <common/structures/Vector.hh>
+# include <common/using.hh>
 
 
 class EventManager;
@@ -39,17 +39,20 @@ public:
   State();
 
   /**
+   * \brief Destructor.
+   */
+  ~State() = default;
+
+  /**
    * \brief event manager getter
-   * \return _eventManager
+   * \return event manager
    */
   std::shared_ptr<EventManager> eventManager() { return _evtMgr; }
 
   /**
    * \brief returns the list of related interface elements
    */
-  auto& interfaceElements() {
-    return _interfaceElements;
-  }
+  auto& interfaceElements() { return _interfaceElements; }
 
   /**
    * \brief Adds an InterfaceElement to manage
@@ -59,12 +62,20 @@ public:
     _interfaceElements.push_back(elt);
   }
 
+  /**
+   * \brief Interface elements related to the State.
+   */
+  void draw();
+
 
 protected:
   std::shared_ptr<EventManager> _evtMgr; ///< State related events
 
-  ///< interface elements list
+  ///< Interface elements list
   std::vector<std::shared_ptr<interface::InterfaceElement>> _interfaceElements;
+
+  Coords _cursorCoords; ///< Cursor's coordinates
 };
+
 
 #endif /* !STATE_HH_ */

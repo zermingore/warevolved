@@ -22,11 +22,19 @@ std::shared_ptr<State> StateFactory::createState(e_state& state)
       return std::make_shared<StateMenu> ();
 
     case e_state::MOVING_UNIT:
-      debug::OSD::addData(42);
+      debug::OSD::addData("moving unit");
       return std::make_shared<StateMovingUnit> ();
 
+    // case e_state::COMMANDING_UNIT:
+    //   debug::OSD::addData("commanding unit");
+    //   return std::make_shared<StateCommandingUnit> ();
+
+    // case e_state::SELECTING_TARGET:
+    //   debug::OSD::addData("selecting target");
+    //   return std::make_shared<StateSelectingTarget> ();
+
     default:
-      Debug::error("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
+      ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
       break;
   }
 

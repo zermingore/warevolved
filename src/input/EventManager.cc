@@ -11,7 +11,7 @@ bool EventManager::process(e_input input)
 {
   if (_callbacks.find(input) == _callbacks.end())
   {
-    Debug::error("callback not found for input ", static_cast<int> (input));
+    Debug::error("callback not found for input", static_cast<int> (input));
     return false;
   }
 

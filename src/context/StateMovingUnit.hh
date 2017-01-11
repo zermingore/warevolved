@@ -17,7 +17,10 @@
 class StateMovingUnit: public State
 {
 public:
-  /// registers to callbacks
+  /**
+   * \brief registers to callbacks
+   * \param cursor_coords cursor coordinates
+   */
   StateMovingUnit();
 
   /**

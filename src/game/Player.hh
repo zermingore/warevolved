@@ -56,11 +56,11 @@ public:
   void validateMoveUnit();
 
 
-  // Cursor click
+  /**
+   * \brief callback when a cell is clicked.
+   * \note only used when no unit is selected / menu opened
+   */
   void select();
-
-  // Exit current mode (selection)
-  void cancel();
 
   /**
    * \brief Player's interface getter.

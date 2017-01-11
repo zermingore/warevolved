@@ -14,15 +14,17 @@
  */
 enum class e_state: int
 {
-  NONE = 0, // we should never be in this state
+  NONE = 0,          // we should never be in this state
 
-  MENU,
-  PLAYING,
+  MENU,              // Browsing a menu
+  PLAYING,           // Browsing the map
 
-  SELECTION_UNIT, // pick a Unit
-  MOVING_UNIT,    // move it
-  ACTION_MENU,    // give it an order (confirm move, switch to attack state)
-  ATTACK,         // ask a Unit to attack
+  SELECTION_UNIT,    // Pick a Unit
+  MOVING_UNIT,       // Move it
+  ACTION_MENU,       // Give it an order (confirm move, switch to attack state)
+
+  COMMANDING_UNIT,   // Selecting the order to give to the unit
+  SELECTING_TARGET,  // Select a taget (attack, heal, ...)
 };
 
 

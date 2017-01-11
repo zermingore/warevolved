@@ -4,6 +4,7 @@
 #include <common/Status.hh>
 #include <game/Player.hh>
 #include <common/enums/states.hh>
+#include <interface/menus/InGameMenu.hh>
 
 
 
@@ -27,7 +28,7 @@ StateMovingUnit::StateMovingUnit()
 
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] {
       player->validateMoveUnit();
-//      Status::pushState(e_state::MENU);
+      Status::pushState(e_state::ACTION_MENU);
     });
 
   _evtMgr->registerEvent(e_input::EXIT_1, [=] {
@@ -39,9 +40,9 @@ StateMovingUnit::StateMovingUnit()
 
 void StateMovingUnit::exit()
 {
-  // TODO kill the path finding (needed ?)
+  /// \todo kill the path finding (needed ?)
   PRINTF("pop moving");
 
-  Status::interface()->element("cursor")->setCoords(_originalCoords);
+//  Status::interface()->element("cursor")->setCoords(_originalCoords);
   Status::popCurrentState();
 }

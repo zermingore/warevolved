@@ -33,6 +33,11 @@ class Status
 {
 public:
   /**
+   * \brief Default constructor.
+   */
+  Status() = default;
+
+  /**
    * \brief Destructor. Pops every state
    */
   ~Status();

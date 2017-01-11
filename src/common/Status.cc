@@ -45,12 +45,20 @@ void Status::popCurrentState()
 
   // Force ignoring current active inputs
   _inputProcessor->keyManager()->blockInputs();
+
+
+  if (!_states.empty())
+    PRINTF("<< new State:", (int) _states.top().first);
+  else
+    PRINTF("<< empty states stack");
 }
 
 
 void Status::pushState(e_state state)
 {
   _states.push({state, StateFactory::createState(state)});
+
+  PRINTF(">> new State:", (int) state);
 
   // Force ignoring current active inputs
   _inputProcessor->keyManager()->blockInputs();

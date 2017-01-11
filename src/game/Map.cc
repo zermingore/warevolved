@@ -80,6 +80,8 @@ std::shared_ptr<Unit> Map::selectUnit(const Coords c)
 
 void Map::moveUnit(std::shared_ptr<Unit> unit, const Coords c)
 {
+  PRINTF("# Move unit order");
+
   if (unit->coords() == c)
   {
     Debug::error("move unit: src == dst");

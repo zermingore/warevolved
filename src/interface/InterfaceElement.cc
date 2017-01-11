@@ -1,7 +1,7 @@
 /**
  * \file
  * \namespace interface
- * \brief InterfaceElements implementation
+ * \brief InterfaceElement implementation
  */
 
 #include <interface/InterfaceElement.hh>
@@ -28,7 +28,6 @@ std::shared_ptr<sf::Sprite> InterfaceElement::getSprite()
 {
   auto sprite(_image.sprite());
   sprite->setRotation(_rotation);
-
   sprite->setPosition(sf::Vector2f(_position.x, _position.y));
 
   return sprite;
@@ -37,7 +36,7 @@ std::shared_ptr<sf::Sprite> InterfaceElement::getSprite()
 
 void InterfaceElement::draw()
 {
-  Debug::printf("interfaceelement::draw()", _img_name);
+  PRINTF("interfaceelement::draw()", _img_name);
   graphics::GraphicsEngine::draw(_image.sprite());
 }
 

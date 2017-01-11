@@ -20,6 +20,9 @@ public:
   /// registers to callbacks
   StateMenu();
 
+  /// Destructor
+  ~StateMenu() = default;
+
 
 private:
   // Cursor motion
