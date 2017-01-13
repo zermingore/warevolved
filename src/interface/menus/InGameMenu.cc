@@ -7,6 +7,7 @@
 #include <interface/menus/MenuEntry.hh>
 #include <common/enums/states.hh>
 
+#include <common/debug/EnumPrint.hh>
 
 
 namespace interface {
@@ -14,7 +15,7 @@ namespace interface {
 
 void InGameMenu::build()
 {
-  PRINTF(">> ", (int) Status::state(), " <<");
+  debug::printState(Status::state());
 
   // Saving current state
   _cursorCoords = Status::player()->cursor()->coords();
