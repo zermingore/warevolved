@@ -44,11 +44,13 @@ void Player::moveCursorRight() {
 
 void Player::select()
 {
+  /// \todo check selectable before push
   Status::pushState(e_state::SELECTION_UNIT);
-  auto menu(std::make_shared<interface::InGameMenu> ());
-  menu->setCoords(_cursor->coords());
-  menu->build();
-  _interface->pushMenu(menu);
+
+  // auto menu(std::make_shared<interface::InGameMenu> ());
+  // menu->setCoords(_cursor->coords());
+  // menu->build();
+  // _interface->pushMenu(menu);
 }
 
 // void Player::move()
@@ -81,22 +83,6 @@ void Player::moveUnitLeft() {
 
 void Player::moveUnitRight() {
   moveCursorRight();
-}
-
-
-void Player::validateMoveUnit()
-{
-  PRINTF("move validated");
-
-  assert(_selectedUnit && "validateMoveUnit: No selected unit");
-  Status::battle()->map()->moveUnit(_selectedUnit, _cursor->coords());
-
-  Status::pushState(e_state::ACTION_MENU);
-
-  auto menu(std::make_shared<interface::InGameMenu> ());
-  menu->setCoords(_cursor->coords());
-  menu->build();
-  _interface->pushMenu(menu);
 }
 
 

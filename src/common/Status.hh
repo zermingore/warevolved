@@ -59,16 +59,16 @@ public:
 
   // ________________________________ States ________________________________ //
   /**
-   * \brief pops _states and blocks the inputs
-   */
-  static void popCurrentState();
-
-  /**
    * \brief return current state
    * meaning, the top of _states stack
    * does *NOT* pop the stack
    */
   static std::shared_ptr<State> currentState();
+
+  /**
+   * \brief returns the current state identifier
+   */
+  static e_state state();
 
   /**
    * \brief stacks a new state on _states
@@ -77,9 +77,16 @@ public:
   static void pushState(e_state state);
 
   /**
-   * \brief returns the current state identifier
+   * \brief pops _states and blocks the inputs
    */
-  static e_state state();
+  static void popCurrentState();
+
+  /**
+   * \brief Clears states stack until the playing state
+   * \note The stack must not be empty and must contain e_state::PLAYING
+   */
+  static void clearStates();
+
 
   // _______________________________ Wrappers _______________________________ //
   /**
@@ -93,6 +100,7 @@ public:
    * \return current player
    */
   static std::shared_ptr<interface::Interface> interface();
+
 
 
 private:

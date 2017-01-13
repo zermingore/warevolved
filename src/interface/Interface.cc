@@ -7,7 +7,6 @@
  */
 
 #include <interface/Interface.hh>
-#include <interface/menus/Menu.hh>
 #include <common/Status.hh>
 
 
@@ -55,38 +54,6 @@ const std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
 # endif // DEBUG
 
   return nullptr;
-}
-
-
-void Interface::clearMenu()
-{
-  while (!_menus.empty()) {
-    _menus.pop();
-  }
-}
-
-
-void Interface::pushMenu(std::shared_ptr<Menu> menu)
-{
-  addElement(menu);
-  _menus.push(menu);
-}
-
-
-void Interface::popMenu()
-{
-  assert(!_menus.empty() && "Interface menu stack empty");
-
-  // Clearing current menu
-  _menus.top()->close(); // always implemented ?
-  _menus.pop();
-
-  // Taking care of the previous menu (if any)
-  if (!_menus.empty()) {
-    _menus.top()->resume();
-  }
-
-  Status::popCurrentState();
 }
 
 

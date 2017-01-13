@@ -53,8 +53,6 @@ public:
   void moveUnitDown();
   void moveUnitLeft();
   void moveUnitRight();
-  void validateMoveUnit();
-
 
   /**
    * \brief callback when a cell is clicked.

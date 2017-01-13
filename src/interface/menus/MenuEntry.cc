@@ -40,6 +40,8 @@ void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> propert
 
 void MenuEntry::draw()
 {
+  PRINTF("drawing", _label->getString().toAnsiString());
+
   graphics::GraphicsEngine::draw(_label);
   graphics::GraphicsEngine::draw(_image.sprite());
 }
@@ -79,7 +81,8 @@ void MenuEntry::setLabelName(e_entry entry)
 
     default:
       _labelName = "## NOT FOUND ##";
-      Debug::error("No label found for e_entry", static_cast<int> (entry));
+      ERROR("No label found for e_entry", static_cast<int> (entry));
+      assert(false);
       break;
   }
 }

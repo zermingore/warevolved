@@ -17,7 +17,7 @@ void InGameMenu::build()
   PRINTF(">> ", (int) Status::state(), " <<");
 
   // Saving current state
-  _cursor = Status::player()->cursor()->coords();
+  _cursorCoords = Status::player()->cursor()->coords();
   _unit = Status::battle()->map()->unit(_coords);
 
 
@@ -30,10 +30,12 @@ void InGameMenu::build()
       auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
       entry->setCallback( [=] { waitUnit(); });
       _entries.push_back(entry);
-      Status::interface()->addElement(entry);
 
       /// \todo separate actions (move / attack / ...)
       // as they may have different cancel actions
+      /// Could add a flag in the state: restoration point
+      /// -> pop until restoration point
+      /// (and execute resume function -> default selected entry)
       addCancelEntry( [=] { actionCancel(); } );
       break;
     }
@@ -45,7 +47,6 @@ void InGameMenu::build()
       auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
       entry->setCallback( [=] { waitUnit(); });
       _entries.push_back(entry);
-      Status::interface()->addElement(entry);
 
       /// \todo separate actions (move / attack / ...)
       // as they may have different cancel actions
@@ -61,7 +62,6 @@ void InGameMenu::build()
         auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
         entry->setCallback( [=] { moveUnit(); });
         _entries.push_back(entry);
-        Status::interface()->addElement(entry);
       }
       addCancelEntry( [=] { defaultCancel(); } );
       break;
@@ -77,11 +77,13 @@ void InGameMenu::build()
       assert(!"Invalid state found building menu");
       break;
   }
+
+  PRINTF("nb entries:", _entries.size());
 }
 
 
 void InGameMenu::defaultCancel() {
-  Status::interface()->popMenu();
+  Status::popCurrentState();
 }
 
 
@@ -89,18 +91,10 @@ void InGameMenu::actionCancel()
 {
   PRINTF("Canceling current action");
 
-  // if (_unit) {
-  //   _unit->setCoords(_cursor);
-  // }
-
-  // Status::interface()->popMenu();
-  // Status::player()->cursor()->setCoords(_cursor);
-
   // from StateMovingUnit
-  Status::interface()->element("cursor")->setCoords(_cursor);
+  // Status::interface()->element("cursor")->setCoords(_cursorCoords);
 
-
-  Status::interface()->clearMenu();
+  Status::clearStates();
 
   while (Status::state() != e_state::PLAYING) {
     PRINTF("State:", (int) Status::state());
@@ -117,7 +111,6 @@ void InGameMenu::addCancelEntry(std::function<void()> cancel_callback)
   auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL));
   entry_cancel->setCallback( [=] { cancel_callback(); });
   _entries.push_back(entry_cancel);
-  Status::interface()->addElement(entry_cancel);
 }
 
 
@@ -138,36 +131,19 @@ void InGameMenu::validate() {
 
 void InGameMenu::moveUnit()
 {
-  // Hiding but not deleting the current menu
-  auto interface(Status::interface());
-  for (auto entry: _entries) {
-    interface->removeElement(entry);
-  }
-
   // Building a new menu in the MOVING_UNIT State
   Status::pushState(e_state::MOVING_UNIT);
-  // auto menu(std::make_shared<interface::InGameMenu> ());
-  // menu->setCoords(_cursor);
-  // menu->build();
 }
 
 
 void InGameMenu::waitUnit()
 {
   PRINTF("order: wait unit");
+  ERROR("TODO move unit");
 
-  // pop every State pushed since Playing (select, move unit)
-  while (Status::state() != e_state::PLAYING) {
-    Status::popCurrentState();
-  }
-
-  // Removing the interface elements of this menu
-  for (auto entry: _entries) {
-    Status::interface()->removeElement(entry);
-  }
-
-  // clearing the menu stack
-  Status::interface()->clearMenu();
+  /// \todo move unit
+  // Status::battle()->map()->moveUnit(_selectedUnit, _cursorCoords);
+  Status::clearStates();
 }
 
 
@@ -189,6 +165,7 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
   for (auto entry: _entries)
   {
     entry->setPosition(Coords(_position.x, _position.y + height * entry_index));
+    entry->update(properties);
     ++entry_index;
   }
 }
@@ -197,15 +174,24 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
 /// \todo move in Dtor ?
 void InGameMenu::close()
 {
-  auto interface(Status::interface());
-  for (auto entry: _entries) {
-    interface->removeElement(entry);
-  }
+  // auto interface(Status::interface());
+  // for (auto entry: _entries) {
+  //   interface->removeElement(entry);
+  // }
+
   // interface->removeElement(this); // apparently not needed, not sure why
 }
 
 
 void InGameMenu::draw() {
+  update(Status::battle()->map()->graphicsProperties());
+
+  for (auto entry: _entries) {
+    entry->draw();
+    std::cout << ".";
+  }
+  std::cout << std::endl;
+
   _imageSelection.draw();
 }
 

@@ -9,6 +9,10 @@
 
 # include <context/State.hh>
 
+namespace interface {
+  class InGameMenu;
+}
+
 
 /**
  * \class StateMenu
@@ -17,26 +21,35 @@
 class StateMenu: public State
 {
 public:
-  /// registers to callbacks
+  /**
+   * \brief Default constuctor: Builds the menu, registers to callbacks
+   */
   StateMenu();
 
   /// Destructor
   ~StateMenu() = default;
 
+  /**
+   * \brief Draws the menu associated to the State
+   */
+  void draw();
+
 
 private:
-  // Cursor motion
-  void moveLeft();
-  void moveRight();
+  // Cursor motion in the menu
   void moveDown();
   void moveUp();
 
+  /// Validate menu entry selection
   void validate();
 
   /**
    * \brief Callback associated with the exit menu event
    */
   void exit();
+
+
+  std::shared_ptr<interface::InGameMenu> _menu; ///< menu associated to the state
 };
 
 

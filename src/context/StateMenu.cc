@@ -4,18 +4,22 @@
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
+#include <interface/menus/Menu.hh>
 #include <interface/menus/InGameMenu.hh>
+#include <interface/Cursor.hh>
 
 
 
 StateMenu::StateMenu()
   : State()
 {
+  _menu = std::make_shared<interface::InGameMenu> ();
+  _menu->setCoords(Status::player()->cursor()->coords());
+  _menu->build();
+
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUp();    });
   _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveDown();  });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT_1,  [=] { moveLeft();  });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { moveRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { validate();  });
   _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();      });
@@ -23,32 +27,27 @@ StateMenu::StateMenu()
 
 
 void StateMenu::moveUp() {
-  Status::interface()->currentMenu()->moveUp();
+  _menu->moveUp();
 }
 
 void StateMenu::moveDown() {
-  Status::interface()->currentMenu()->moveDown();
-}
-
-void StateMenu::moveLeft() {
-  Status::interface()->currentMenu()->moveLeft();
-}
-
-void StateMenu::moveRight() {
-  Status::interface()->currentMenu()->moveRight();
+  _menu->moveDown();
 }
 
 
 void StateMenu::validate() {
-  Status::interface()->currentMenu()->validate();
+  _menu->validate();
 }
 
 
-void StateMenu::exit()
-{
-  if (auto menu = Status::interface()->currentMenu())
-  {
-    menu->close();
-    Status::popCurrentState();
-  }
+void StateMenu::exit() {
+  PRINTF("poping myself...");
+  Status::popCurrentState();
 }
+
+
+void StateMenu::draw() {
+  _menu->draw();
+}
+
+// void resume

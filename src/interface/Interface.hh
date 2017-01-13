@@ -16,8 +16,6 @@
 
 namespace interface {
 
-class Menu;
-
 
 /**
  * \class Interface
@@ -31,6 +29,10 @@ public:
 
   /// Constructor. Initializes interface settings (colors, ...)
   explicit Interface(Color c);
+
+  /// Destructor
+  ~Interface() = default;
+
 
   /**
    * \brief Sets all element to draw.
@@ -90,34 +92,10 @@ public:
    */
   void setUnitsColor(Color color) { _settings->setUnitsColor(color); }
 
-  /**
-   * \brief Clears the menu stack.
-   */
-  void clearMenu();
-
-  /**
-   * \brief push the current menu.
-   * \param menu new current menu.
-   */
-  void pushMenu(std::shared_ptr<Menu> menu);
-
-  /**
-   * \brief pops the current menu.
-   */
-  void popMenu();
-
-  /**
-   * \brief sets current menu.
-   * \param menu new current menu.
-   */
-  std::shared_ptr<Menu> currentMenu() { return _menus.top(); }
-
-
 
 private:
   std::vector<std::shared_ptr<InterfaceElement>> _elts; ///< list of elements
   std::unique_ptr<InterfaceSettings> _settings;         ///< interface settings
-  std::stack<std::shared_ptr<Menu>> _menus;             ///< current menus stack
 };
 
 

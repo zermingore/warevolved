@@ -63,9 +63,9 @@ public:
   }
 
   /**
-   * \brief Interface elements related to the State.
+   * \brief Draw graphical elements related to the State.
    */
-  void draw();
+  virtual void draw();
 
 
 protected:

@@ -36,6 +36,9 @@ enum class e_entry
 class MenuEntry: public InterfaceElement
 {
 public:
+  /**
+   * \brief deleted default constructor
+   */
   MenuEntry() = delete;
 
   /**

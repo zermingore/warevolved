@@ -25,11 +25,6 @@ class InGameMenu: public Menu
 {
 public:
   /**
-   * \brief default constructor.
-   */
-  InGameMenu() = default;
-
-  /**
    * \brief Builds the selection menu, filling the entries.
    */
   void build() final;
@@ -88,7 +83,7 @@ private:
 
 
   // state data
-  Coords _cursor; ///< Saved cursor coordinates
+  Coords _cursorCoords; ///< Saved cursor coordinates
   std::shared_ptr<Unit> _unit; ///< Saved unit
 };
 

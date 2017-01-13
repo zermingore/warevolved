@@ -20,7 +20,7 @@ namespace interface {
 
 /**
  * \class Menu
- * \brief Generic Menu.
+ * \brief Generic Menu (abstract class)
  * mother of \class InGameMenu
  */
 class Menu: public InterfaceElement
@@ -48,8 +48,7 @@ public:
   virtual void setOrigin(Coords origin);
 
   /**
-   * \brief draws the menu
-   *   with its entries and the current entry highlighter
+   * \brief draws the menu its entries and the current entry highlighter
    */
   void draw();
 

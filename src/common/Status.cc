@@ -39,21 +39,6 @@ std::shared_ptr<State> Status::currentState()
 }
 
 
-void Status::popCurrentState()
-{
-  _states.pop();
-
-  // Force ignoring current active inputs
-  _inputProcessor->keyManager()->blockInputs();
-
-
-  if (!_states.empty())
-    PRINTF("<< new State:", (int) _states.top().first);
-  else
-    PRINTF("<< empty states stack");
-}
-
-
 void Status::pushState(e_state state)
 {
   _states.push({state, StateFactory::createState(state)});
@@ -62,6 +47,35 @@ void Status::pushState(e_state state)
 
   // Force ignoring current active inputs
   _inputProcessor->keyManager()->blockInputs();
+}
+
+
+void Status::popCurrentState()
+{
+  _states.pop();
+
+  // Force ignoring current active inputs
+  _inputProcessor->keyManager()->blockInputs();
+
+
+  if (!_states.empty()) {
+    PRINTF("<< new State:", (int) _states.top().first);
+  }
+  else {
+    PRINTF("<< empty states stack");
+  }
+}
+
+
+void Status::clearStates()
+{
+  assert(!_states.empty() && "clearStates called with empty stack");
+
+  while (_states.top().first != e_state::PLAYING)
+  {
+    _states.pop();
+    assert(!_states.empty() && "clearStates stack did not contain expected state");
+  }
 }
 
 
