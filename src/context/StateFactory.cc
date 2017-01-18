@@ -6,16 +6,17 @@
 #include <common/debug/OSD.hh>
 
 
-std::shared_ptr<State> StateFactory::createState(e_state& state)
+std::shared_ptr<State> StateFactory::createState(const e_state& state)
 {
   // Facto DP
   switch (state)
   {
     case e_state::PLAYING:
+      PRINTF("State factory: PLAYING state");
       return std::make_shared<StatePlaying> ();
 
     // Every menu share the same State
-    case e_state::MENU:
+    case e_state::MAP_MENU:
     case e_state::ACTION_MENU:
     case e_state::SELECTION_UNIT:
       debug::OSD::addData("menus state");
@@ -24,6 +25,7 @@ std::shared_ptr<State> StateFactory::createState(e_state& state)
     case e_state::MOVING_UNIT:
       debug::OSD::addData("moving unit");
       return std::make_shared<StateMovingUnit> ();
+
 
     // case e_state::COMMANDING_UNIT:
     //   debug::OSD::addData("commanding unit");
@@ -35,6 +37,7 @@ std::shared_ptr<State> StateFactory::createState(e_state& state)
 
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
+      std::exit(1);
       break;
   }
 

@@ -112,7 +112,8 @@ public:
   void setRotation(const float &rotation) { _rotation = rotation; }
 
 
-  std::shared_ptr<sf::Sprite> getSprite();
+  // no getter defined as the sprite is probably shared with another image
+  // std::shared_ptr<sf::Sprite> getSprite();
 
 
   /**

@@ -94,16 +94,18 @@ void Image::setFileName(std::string file_name)
 
 void Image::setPosition(sf::Vector2f position)
 {
-  if (!_sprite)
+  if (!_sprite) {
     initSprite();
+  }
   _sprite->setPosition(position);
 }
 
 
 void Image::setPosition(Coords position)
 {
-  if (!_sprite)
+  if (!_sprite) {
     initSprite();
+  }
   _sprite->setPosition(sf::Vector2f(position.x, position.y));
 }
 

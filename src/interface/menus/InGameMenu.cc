@@ -14,12 +14,9 @@ namespace interface {
 
 void InGameMenu::build()
 {
-  PRINTF(">> ", (int) Status::state(), " <<");
-
   // Saving current state
   _cursorCoords = Status::player()->cursor()->coords();
   _unit = Status::battle()->map()->unit(_coords);
-
 
   switch (Status::state())
   {
@@ -42,7 +39,7 @@ void InGameMenu::build()
 
     case e_state::MOVING_UNIT:
     {
-      PRINTF("-= Action menu =-");
+      PRINTF("-= Moving unit =-");
       /// \todo check if there is a target
       auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
       entry->setCallback( [=] { waitUnit(); });
@@ -55,7 +52,9 @@ void InGameMenu::build()
     }
 
     case e_state::SELECTION_UNIT:
-      PRINTF("-= Selection menu =-");
+      PRINTF("-= SELECTION UNIT =-");
+      assert(Status::battle()->map()->unit(_coords) && "no unit selected");
+
       // if ((_unit = Status::battle()->map()->unit(_coords)))
       if (Status::battle()->map()->unit(_coords))
       {
@@ -66,19 +65,18 @@ void InGameMenu::build()
       addCancelEntry( [=] { defaultCancel(); } );
       break;
 
-    case e_state::PLAYING:
+    case e_state::MAP_MENU:
+      PRINTF("-= Playing =-");
       /// \todo next player
       addCancelEntry( [=] { defaultCancel(); } );
       break;
 
     default:
-      Debug::error("InGameMenu::build Invalid State:", (int) Status::state());
-      std::exit(1);
+      ERROR("InGameMenu::build Invalid State:", (int) Status::state());
       assert(!"Invalid state found building menu");
+      std::exit(1);
       break;
   }
-
-  PRINTF("nb entries:", _entries.size());
 }
 
 
@@ -188,9 +186,7 @@ void InGameMenu::draw() {
 
   for (auto entry: _entries) {
     entry->draw();
-    std::cout << ".";
   }
-  std::cout << std::endl;
 
   _imageSelection.draw();
 }

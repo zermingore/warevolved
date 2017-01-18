@@ -43,6 +43,14 @@ public:
    */
   ~State() = default;
 
+
+  /**
+   * \brief Function to call when the State is resumed
+   * (or executed for the first time)
+   */
+  virtual void resume() {} /// \todo =0
+
+
   /**
    * \brief event manager getter
    * \return event manager

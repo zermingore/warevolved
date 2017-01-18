@@ -44,13 +44,16 @@ void Player::moveCursorRight() {
 
 void Player::select()
 {
-  /// \todo check selectable before push
-  Status::pushState(e_state::SELECTION_UNIT);
+  PRINTF("Player->select()");
 
-  // auto menu(std::make_shared<interface::InGameMenu> ());
-  // menu->setCoords(_cursor->coords());
-  // menu->build();
-  // _interface->pushMenu(menu);
+  /// \todo check selectable before push
+
+  if (Status::battle()->map()->unit(_cursor->coords())) {
+    Status::pushState(e_state::SELECTION_UNIT);
+  }
+  else {
+    Status::pushState(e_state::MAP_MENU);
+  }
 }
 
 // void Player::move()

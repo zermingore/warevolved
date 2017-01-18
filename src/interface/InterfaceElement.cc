@@ -24,16 +24,6 @@ InterfaceElement::InterfaceElement(const std::string &image_name)
 }
 
 
-std::shared_ptr<sf::Sprite> InterfaceElement::getSprite()
-{
-  auto sprite(_image.sprite());
-  sprite->setRotation(_rotation);
-  sprite->setPosition(sf::Vector2f(_position.x, _position.y));
-
-  return sprite;
-}
-
-
 void InterfaceElement::draw()
 {
   PRINTF("interfaceelement::draw()", _img_name);

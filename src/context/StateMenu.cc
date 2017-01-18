@@ -13,9 +13,7 @@
 StateMenu::StateMenu()
   : State()
 {
-  _menu = std::make_shared<interface::InGameMenu> ();
-  _menu->setCoords(Status::player()->cursor()->coords());
-  _menu->build();
+  PRINTF("StateMenu:", (int) Status::state());
 
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUp();    });
@@ -23,6 +21,15 @@ StateMenu::StateMenu()
 
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { validate();  });
   _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();      });
+
+  _menu = std::make_shared<interface::InGameMenu> ();
+}
+
+
+void StateMenu::resume()
+{
+  _menu->setCoords(Status::player()->cursor()->coords());
+  _menu->build();
 }
 
 
@@ -41,7 +48,6 @@ void StateMenu::validate() {
 
 
 void StateMenu::exit() {
-  PRINTF("poping myself...");
   Status::popCurrentState();
 }
 

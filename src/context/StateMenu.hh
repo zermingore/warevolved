@@ -29,6 +29,8 @@ public:
   /// Destructor
   ~StateMenu() = default;
 
+  void resume();
+
   /**
    * \brief Draws the menu associated to the State
    */

@@ -16,8 +16,8 @@ enum class e_state: int
 {
   NONE = 0,          // we should never be in this state
 
-  MENU,              // Browsing a menu
   PLAYING,           // Browsing the map
+  MAP_MENU,          // Generic map menu: next turn, ...
 
   SELECTION_UNIT,    // Pick a Unit
   MOVING_UNIT,       // Move it

@@ -104,6 +104,9 @@ Cursor (interface) in its thread
 	 CLOSED: [2013-04-21 Sun 21:50]
 *** DONE add text to buttons
 	 CLOSED: [2013-04-21 Sun 21:50]
+** TODO Multiple graphics::Image share the same sprite
+   -> require to re-set the sprite position, rotation, ... before drawing
+   (is it an issue)
 
 * TODO Resources
 ** TODO Sprites
@@ -222,11 +225,15 @@ Cursor (interface) in its thread
 ** DONE generate Doxygen Doc
    CLOSED: [2013-08-14 Wed 12:31]
 ** TODO auto resources XML generator
+** TODO enum inspector
+   print an enumeration name (token) from its value
 ** [CLOSED] source file: auto fetch and insert commit id last modif
    Irrelevant: pollute files, use git instead
-** TODO Debug::assert check only on debug if a condition is satisfied
+** [CLOSED] Debug::assert check only on debug if a condition is satisfied
+   CLOSED: [2017-01-18 Mi 07:33]
    Debug::assert(state, MODE__MENU)
    -> test if state equals to MODE__MENU and prints an error if not
+   should use assert (state == MODE__MENU)
 
 * TODO Bugs / Features
 ** DONE InterfaceElements are never removed

@@ -34,13 +34,12 @@ void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> propert
 
   _image.setSize(width * 2, height);
   _label->setPosition(_position.x, _position.y);
-  _image.sprite()->setPosition(_position.x, _position.y);
 }
 
 
 void MenuEntry::draw()
 {
-  PRINTF("drawing", _label->getString().toAnsiString());
+  _image.sprite()->setPosition(_position.x, _position.y);
 
   graphics::GraphicsEngine::draw(_label);
   graphics::GraphicsEngine::draw(_image.sprite());
@@ -52,7 +51,6 @@ void MenuEntry::execute()
 {
   PRINTF("executing", (int) _id);
   _callback();
-  return;
 }
 
 

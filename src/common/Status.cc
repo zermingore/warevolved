@@ -41,9 +41,9 @@ std::shared_ptr<State> Status::currentState()
 
 void Status::pushState(e_state state)
 {
-  _states.push({state, StateFactory::createState(state)});
-
-  PRINTF(">> new State:", (int) state);
+  auto new_state(StateFactory::createState(state));
+  _states.push({state, new_state});
+  new_state->resume();
 
   // Force ignoring current active inputs
   _inputProcessor->keyManager()->blockInputs();
@@ -52,6 +52,7 @@ void Status::pushState(e_state state)
 
 void Status::popCurrentState()
 {
+  assert(!_states.empty() && "No State found trying to pop States");
   _states.pop();
 
   // Force ignoring current active inputs
@@ -62,7 +63,7 @@ void Status::popCurrentState()
     PRINTF("<< new State:", (int) _states.top().first);
   }
   else {
-    PRINTF("<< empty states stack");
+    ERROR("<< empty states stack");
   }
 }
 
