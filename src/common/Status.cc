@@ -62,9 +62,6 @@ void Status::popCurrentState()
   if (!_states.empty()) {
     PRINTF("<< new State:", (int) _states.top().first);
   }
-  else {
-    ERROR("<< empty states stack");
-  }
 }
 
 
@@ -72,10 +69,8 @@ void Status::clearStates()
 {
   assert(!_states.empty() && "clearStates called with empty stack");
 
-  while (_states.top().first != e_state::PLAYING)
-  {
-    _states.pop();
-    assert(!_states.empty() && "clearStates stack did not contain expected state");
+  while (_states.top().first != e_state::PLAYING) {
+    popCurrentState();
   }
 }
 

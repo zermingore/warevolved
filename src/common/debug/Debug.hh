@@ -48,6 +48,7 @@
 # define COLOR_WARNING COLOR_YELLOW
 # define COLOR_SUCCESS COLOR_GREEN
 # define COLOR_VERBOSE COLOR_BLUE
+# define COLOR_NOTICE  COLOR_CYAN
 
 
 /**
@@ -75,7 +76,8 @@
 # endif
 
 
-# define ERROR Debug::error
+# define ERROR  Debug::error
+# define NOTICE Debug::notice
 
 /// \todo in release, printf should print in a log
 # ifdef DEBUG
@@ -129,6 +131,18 @@ public:
 	bodylogprintf(head, tail...);
 
 	std::cout << COLOR_ERROR;
+	printf(head, tail...);
+  }
+
+  /**
+   * \brief print as error given parameters on standard output
+   * \param head: element to print right now
+   * \param tail eventually, rest of given arguments list
+   */
+  template<typename T, typename... Tail>
+  static void notice(T head, Tail... tail)
+  {
+	std::cout << COLOR_NOTICE;
 	printf(head, tail...);
   }
 

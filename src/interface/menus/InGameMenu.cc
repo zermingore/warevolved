@@ -94,11 +94,6 @@ void InGameMenu::actionCancel()
 
   Status::clearStates();
 
-  while (Status::state() != e_state::PLAYING) {
-    PRINTF("State:", (int) Status::state());
-    Status::popCurrentState();
-  }
-
   // purge saved data
   // _unit = nullptr;
 }
@@ -130,13 +125,15 @@ void InGameMenu::validate() {
 void InGameMenu::moveUnit()
 {
   // Building a new menu in the MOVING_UNIT State
+  //_restore
   Status::pushState(e_state::MOVING_UNIT);
+  NOTICE("push move unit");
 }
 
 
 void InGameMenu::waitUnit()
 {
-  PRINTF("order: wait unit");
+  NOTICE("order: wait unit");
   ERROR("TODO move unit");
 
   /// \todo move unit
@@ -181,7 +178,8 @@ void InGameMenu::close()
 }
 
 
-void InGameMenu::draw() {
+void InGameMenu::draw()
+{
   update(Status::battle()->map()->graphicsProperties());
 
   for (auto entry: _entries) {

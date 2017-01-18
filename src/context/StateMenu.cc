@@ -55,5 +55,3 @@ void StateMenu::exit() {
 void StateMenu::draw() {
   _menu->draw();
 }
-
-// void resume
