@@ -93,10 +93,7 @@ bool Player::updateSelectedUnit()
 {
   // Update the Map selected Unit
   auto coords(Status::player()->cursor()->coords());
-  if (!(_selectedUnit = Status::battle()->map()->selectUnit(coords))) {
-    Debug::error("Unable to select a unit");
-    return false;
-  }
+  Status::battle()->map()->selectUnit(coords);
 
   // \todo highlight the unit
   // \todo save in the class a copy of the unit sprite

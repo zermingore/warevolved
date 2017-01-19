@@ -29,6 +29,15 @@ public:
   /// Destructor
   ~StateMenu() = default;
 
+  /**
+   * \brief Save the menu coordinates.
+   * \todo also save selected entry.
+   */
+  void suspend();
+
+  /**
+   * \brief re-build the menu.
+   */
   void resume();
 
   /**
@@ -52,6 +61,8 @@ private:
 
 
   std::shared_ptr<interface::InGameMenu> _menu; ///< menu associated to the state
+
+  Coords _menuCoords; ///> menu coordinates
 };
 
 

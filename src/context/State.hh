@@ -50,6 +50,11 @@ public:
    */
   virtual void resume() {} /// \todo =0
 
+  /**
+   * \brief Function to call when the State is suspended
+   */
+  virtual void suspend() {} /// \todo =0
+
 
   /**
    * \brief event manager getter

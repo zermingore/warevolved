@@ -62,36 +62,32 @@ e_terrain Map::getTerrain(const size_t column, const size_t line) const {
 }
 
 
-std::shared_ptr<Unit> Map::selectUnit(const Coords c)
+void Map::selectUnit(const Coords c)
 {
+  // allow to select another unit if already one is selected ?
   _selectedUnit = nullptr;
 
   auto unit(_cells[c.x][c.y]->unit());
-  if (!unit)
-  {
-    Debug::error("No unit to select at given coords", c.x, c.y);
-    return nullptr;
+  if (!unit) {
+    ERROR("No unit to select at given coords", c.x, c.y);
   }
 
   _selectedUnit = unit;
-  return _selectedUnit;
 }
 
 
-void Map::moveUnit(std::shared_ptr<Unit> unit, const Coords c)
+void Map::moveUnit(const Coords c)
 {
-  PRINTF("# Move unit order");
-
-  if (unit->coords() == c)
+  if (_selectedUnit->coords() == c)
   {
-    Debug::error("move unit: src == dst");
+    ERROR("move unit: src == dst");
     return;
   }
 
-  Coords old(unit->coords());
+  Coords old(_selectedUnit->coords());
   _cells[old.x][old.y]->removeUnit();
-  unit->setCellCoordinates(c);
-  _cells[c.x][c.y]->setUnit(unit);
+  _selectedUnit->setCellCoordinates(c);
+  _cells[c.x][c.y]->setUnit(_selectedUnit);
 }
 
 

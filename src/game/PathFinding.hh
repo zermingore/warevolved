@@ -22,7 +22,7 @@ enum class e_path_shape;
 
 /**
  * \class PathFinding
- * \brief Computes and display path finded.
+ * \brief Computes and display found path.
  *
  * Display reachable cells and possible targets for the selected unit.
  * Display user's path input and check it's validity.

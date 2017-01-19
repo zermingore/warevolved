@@ -13,8 +13,6 @@
 StateMenu::StateMenu()
   : State()
 {
-  PRINTF("StateMenu:", (int) Status::state());
-
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUp();    });
   _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveDown();  });
@@ -23,12 +21,19 @@ StateMenu::StateMenu()
   _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();      });
 
   _menu = std::make_shared<interface::InGameMenu> ();
+  _menuCoords = Status::player()->cursor()->coords();
 }
 
 
+void StateMenu::suspend()
+{
+  _menuCoords = _menu->coords();
+  /// \todo save selected entry
+}
+
 void StateMenu::resume()
 {
-  _menu->setCoords(Status::player()->cursor()->coords());
+  _menu->setCoords(_menuCoords);
   _menu->build();
 }
 

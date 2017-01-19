@@ -41,6 +41,12 @@ std::shared_ptr<State> Status::currentState()
 
 void Status::pushState(e_state state)
 {
+  // suspend the current State
+  if (!_states.empty()) {
+    _states.top().second->suspend();
+  }
+
+  // push a new State
   auto new_state(StateFactory::createState(state));
   _states.push({state, new_state});
   new_state->resume();

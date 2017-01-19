@@ -37,22 +37,8 @@ void InGameMenu::build()
       break;
     }
 
-    case e_state::MOVING_UNIT:
-    {
-      PRINTF("-= Moving unit =-");
-      /// \todo check if there is a target
-      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
-      entry->setCallback( [=] { waitUnit(); });
-      _entries.push_back(entry);
-
-      /// \todo separate actions (move / attack / ...)
-      // as they may have different cancel actions
-      addCancelEntry( [=] { actionCancel(); } );
-      break;
-    }
-
     case e_state::SELECTION_UNIT:
-      PRINTF("-= SELECTION UNIT =-");
+      PRINTF("-= Selection unit =-");
       assert(Status::battle()->map()->unit(_coords) && "no unit selected");
 
       // if ((_unit = Status::battle()->map()->unit(_coords)))
@@ -66,13 +52,13 @@ void InGameMenu::build()
       break;
 
     case e_state::MAP_MENU:
-      PRINTF("-= Playing =-");
+      PRINTF("-= Map menu =-");
       /// \todo next player
       addCancelEntry( [=] { defaultCancel(); } );
       break;
 
     default:
-      ERROR("InGameMenu::build Invalid State:", (int) Status::state());
+      ERROR("InGameMenu::build() Invalid State:", (int) Status::state());
       assert(!"Invalid state found building menu");
       std::exit(1);
       break;
@@ -87,11 +73,10 @@ void InGameMenu::defaultCancel() {
 
 void InGameMenu::actionCancel()
 {
-  PRINTF("Canceling current action");
-
   // from StateMovingUnit
   // Status::interface()->element("cursor")->setCoords(_cursorCoords);
 
+  Status::player()->cursor()->coords() = _cursorCoords;
   Status::clearStates();
 
   // purge saved data
@@ -124,20 +109,19 @@ void InGameMenu::validate() {
 
 void InGameMenu::moveUnit()
 {
-  // Building a new menu in the MOVING_UNIT State
-  //_restore
+  Status::player()->cursor()->coords() = _cursorCoords;
   Status::pushState(e_state::MOVING_UNIT);
-  NOTICE("push move unit");
 }
 
 
 void InGameMenu::waitUnit()
 {
   NOTICE("order: wait unit");
-  ERROR("TODO move unit");
 
-  /// \todo move unit
-  // Status::battle()->map()->moveUnit(_selectedUnit, _cursorCoords);
+  auto cursor_coords(Status::player()->cursor()->coords());
+  Status::battle()->map()->selectUnit(cursor_coords);
+  Status::battle()->map()->moveUnit(cursor_coords);
+
   Status::clearStates();
 }
 

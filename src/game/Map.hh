@@ -171,11 +171,9 @@ public:
   /**
    * \brief Marks the Unit located at the given coordinates as selected.
    * \param c coordinates where the Unit to select is located
-   * \return a pointer to the updated selected unit on success
-   *   returns nullptr and sets the selected unit to nullptr otherwise
-   *   (this happens if no unit was found at the given coordinates)
+   * \note A unit must be located at given coordinates
    */
-  std::shared_ptr<Unit> selectUnit(const Coords c);
+  void selectUnit(const Coords c);
 
   /**
    * \brief gets the terrain at coordinates (x, y).
@@ -204,14 +202,10 @@ public:
   void newUnit(const e_unit type, const size_t column, const size_t line);
 
   /**
-   * \brief moves the selected unit to the current cursor location
+   * \brief moves the _selectedUnit to the given coordinates
+   * \param c Destination coordinates
    */
-  void moveUnit();
-
-  /**
-   * \brief moves given unit to the given coordinates
-   */
-  void moveUnit(std::shared_ptr<Unit> u, const Coords c);
+  void moveUnit(const Coords c);
 
   /**
    * \brief reset all units played boolean to false
