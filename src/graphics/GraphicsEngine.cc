@@ -152,8 +152,6 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
                               const std::shared_ptr<Unit> unit)
 {
-  assert(unit != nullptr);
-
   auto p(battle->map()->graphicsProperties());
 
   Image& image(resources::ResourcesManager::getImage(unit->name()));
@@ -166,7 +164,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
   if (x < p->cellWidth() || y < p->cellHeight()) {
-    Debug::logPrintf("Sprite scale failure");
+    ERROR("Sprite scale failure");
   }
 # endif
 

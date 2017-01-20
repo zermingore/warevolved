@@ -30,7 +30,14 @@ public:
 
 
 private:
-  Coords _originalCoords;
+  // Units motion
+  void moveUnitUp();
+  void moveUnitDown();
+  void moveUnitLeft();
+  void moveUnitRight();
+
+  Coords _originalCoords;   ///< original unit coordinates
+  Coords _holoUnitPosition; ///< Unit position 'cursor'
 };
 
 

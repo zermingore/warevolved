@@ -21,10 +21,10 @@ StateMovingUnit::StateMovingUnit()
     // abort / exit mode ?
   }
 
-  _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { player->moveUnitUp();    });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { player->moveUnitDown();  });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT_1,  [=] { player->moveUnitLeft();  });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { player->moveUnitRight(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUnitUp();    });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveUnitDown();  });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT_1,  [=] { moveUnitLeft();  });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { moveUnitRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] {
 //      player->validateMoveUnit();
@@ -41,8 +41,24 @@ StateMovingUnit::StateMovingUnit()
 void StateMovingUnit::exit()
 {
   /// \todo kill the path finding (needed ?)
-  PRINTF("pop moving");
-
-//  Status::interface()->element("cursor")->setCoords(_originalCoords);
   Status::popCurrentState();
+}
+
+
+
+// _________________________  Graphical Units motion ________________________ //
+void StateMovingUnit::moveUnitUp() {
+  ++_holoUnitPosition.y;
+}
+
+void StateMovingUnit::moveUnitDown() {
+
+}
+
+void StateMovingUnit::moveUnitLeft() {
+
+}
+
+void StateMovingUnit::moveUnitRight() {
+  ++_holoUnitPosition.x;
 }

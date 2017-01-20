@@ -1,5 +1,6 @@
-#ifndef INTERFACEELEMENT_HH_
-# define INTERFACEELEMENT_HH_
+#ifndef INTERFACE_ELEMENT_HH_
+
+# define INTERFACE_ELEMENT_HH_
 
 /**
  * \file
@@ -21,6 +22,7 @@ namespace interface {
 /**
  * \class InterfaceElement
  * \brief Represents an element of the interface (cursor, menu entry, ...).
+ * \note Abstract class
  */
 class InterfaceElement
 {
@@ -143,4 +145,4 @@ protected:
 
 } // namespace interface
 
-#endif /* !INTERFACEELEMENT_HH_ */
+#endif /* !INTERFACE_ELEMENT_HH_ */

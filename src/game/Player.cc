@@ -68,27 +68,6 @@ void Player::select()
 
 
 
-
-// _____________________________  Units motion _____________________________ //
-
-// tmp
-void Player::moveUnitUp() {
-  moveCursorUp();
-}
-
-void Player::moveUnitDown() {
-  moveCursorDown();
-}
-
-void Player::moveUnitLeft() {
-  moveCursorLeft();
-}
-
-void Player::moveUnitRight() {
-  moveCursorRight();
-}
-
-
 bool Player::updateSelectedUnit()
 {
   // Update the Map selected Unit

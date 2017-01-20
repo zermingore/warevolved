@@ -48,12 +48,6 @@ public:
   void moveCursorLeft();
   void moveCursorRight();
 
-  // Unit motion
-  void moveUnitUp();
-  void moveUnitDown();
-  void moveUnitLeft();
-  void moveUnitRight();
-
   /**
    * \brief callback when a cell is clicked.
    * \note only used when no unit is selected / menu opened

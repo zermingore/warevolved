@@ -9,14 +9,15 @@
 class Team;
 class Cell;
 
-/**
-   * \brief Unit abstract class
- * defines a generic unit
- */
  /// \todo add Cell
 
  /// \todo abstract factory ?
 // (each Unit have its own sprite [for rotation], but shared texture)
+
+/**
+ * \class Unit
+ * \brief Unit abstract class
+ */
 class Unit
 {
 public:
@@ -134,6 +135,7 @@ public:
    */
   std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targets()
   { return _targets; }
+
   /**
    * \brief _targetIndex setter
    * \param i _targetIndex value
@@ -160,7 +162,7 @@ public:
    *   according to the Unit skills
    * \param menu inGameMenu in which we add relevant entries
    */
-  virtual void fillActions(std::vector<interface::MenuEntry>&) {}
+  virtual void fillActions(std::vector<interface::MenuEntry>&) {} ///\todo use
 
   /**
    * \brief runs attack / strikes backs (if any) cycles
