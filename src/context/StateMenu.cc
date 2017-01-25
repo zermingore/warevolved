@@ -57,6 +57,50 @@ void StateMenu::exit() {
 }
 
 
-void StateMenu::draw() {
+void StateMenu::draw()
+{
+  if (_attributes.size())
+  {
+    auto pCoords = std::static_pointer_cast<Coords> (_attributes[0]);
+    NOTICE("Coordinates:", pCoords->x, pCoords->y);
+  }
+
   _menu->draw();
+}
+
+int StateMenu::test_void(std::shared_ptr<void> p)
+{
+  PRINTF("test_void here, transferring");
+  test_int(std::static_pointer_cast<int> (p));
+
+  // p = std::make_shared<int> (3);
+  // std::shared_ptr<int> ip = std::static_pointer_cast<int> (p);
+
+
+  // if (typeid(int) == typeid(2))
+  //   NOTICE("Success");
+  // else
+  //   NOTICE("Failure");
+
+//  test_int((std::make_shared<int>) (p));
+//  PRINTF("test_void: VOID PTR value:", (int) (*p));
+  return 0;
+}
+
+int StateMenu::test_int(std::shared_ptr<int> p)
+{
+  PRINTF("test_int: p value:", *p);
+  return 0;
+}
+
+
+template<typename T>
+int StateMenu::test_t(T t)
+{
+  if (typeid(int) == typeid(t))
+    NOTICE("Success");
+  else
+    NOTICE("Failure");
+
+  return 0;
 }

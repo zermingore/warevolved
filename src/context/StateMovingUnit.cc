@@ -17,7 +17,7 @@ StateMovingUnit::StateMovingUnit()
 
   if (!player->updateSelectedUnit())
   {
-    Debug::error("Unable to set selected unit");
+    ERROR("Unable to set selected unit");
     // abort / exit mode ?
   }
 
@@ -27,13 +27,15 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { moveUnitRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] {
-//      player->validateMoveUnit();
+      PRINTF("selection in MovingUnit:", _holoUnitPosition.x, _holoUnitPosition.y);
       Status::pushState(e_state::ACTION_MENU);
+
+      // giving the next state (action menu) the original unit position
+      Status::currentState()->setAttributes(std::make_shared<Coords> (_holoUnitPosition));
     });
 
   _evtMgr->registerEvent(e_input::EXIT_1, [=] {
       exit();
-//      Status::interface()->popMenu();
     });
 }
 
@@ -52,11 +54,11 @@ void StateMovingUnit::moveUnitUp() {
 }
 
 void StateMovingUnit::moveUnitDown() {
-
+  --_holoUnitPosition.y;
 }
 
 void StateMovingUnit::moveUnitLeft() {
-
+  --_holoUnitPosition.x;
 }
 
 void StateMovingUnit::moveUnitRight() {

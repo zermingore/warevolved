@@ -45,6 +45,10 @@ public:
    */
   void draw();
 
+//  void setAttribute();
+
+  void getAttributeValue();
+
 
 private:
   // Cursor motion in the menu
@@ -63,6 +67,16 @@ private:
   std::shared_ptr<interface::InGameMenu> _menu; ///< menu associated to the state
 
   Coords _menuCoords; ///> menu coordinates
+
+
+
+
+  int test_void(std::shared_ptr<void> p);
+  int test_int(std::shared_ptr<int> p);
+
+  template<typename T>
+  int test_t(T t);
+
 };
 
 

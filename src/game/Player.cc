@@ -56,17 +56,6 @@ void Player::select()
   }
 }
 
-// void Player::move()
-// {
-//   ERROR("Player::select");
-//   Status::pushState(e_state::SELECTION_UNIT);
-//   auto menu(std::make_shared<interface::InGameMenu> ());
-//   menu->setCoords(_cursor->coords());
-//   menu->build();
-//   _interface->pushMenu(menu);
-// }
-
-
 
 bool Player::updateSelectedUnit()
 {
