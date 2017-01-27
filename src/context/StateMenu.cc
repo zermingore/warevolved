@@ -1,16 +1,19 @@
 #include <context/StateMenu.hh>
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
+#include <common/enums/states.hh>
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
 #include <interface/menus/Menu.hh>
 #include <interface/menus/InGameMenu.hh>
+#include <interface/menus/MenuMap.hh>
+#include <interface/menus/MenuAction.hh>
 #include <interface/Cursor.hh>
 
 
 
-StateMenu::StateMenu()
+StateMenu::StateMenu(e_state state)
   : State()
 {
   // browsing entries
@@ -20,8 +23,35 @@ StateMenu::StateMenu()
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { validate();  });
   _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();      });
 
-  _menu = std::make_shared<interface::InGameMenu> ();
+
+  // Building the menu depending on the State
   _menuCoords = Status::player()->cursor()->coords();
+  switch (state)
+  {
+    case e_state::MAP_MENU:
+      _menu = std::make_shared<interface::MenuMap> ();
+      break;
+
+    case e_state::SELECTION_UNIT:
+    case e_state::ACTION_MENU:
+      ERROR("Selection menu not yet handled");
+      _menu = std::make_shared<interface::MenuAction> (state, _menuCoords);
+      break;
+
+    /// \todo State ActionMenu
+    // case e_state::ACTION_MENU:
+    //   _menu = std::make_shared<interface::ActionMenu> ();
+    //   break;
+
+    // case e_state::SELECTION_UNIT: // is it really a menu ?
+    //   _menu = std::make_shared<interface::SelectionUnit> ();
+    //   break;
+
+    default:
+      ERROR("StateMenu() called with State", (int) Status::state());
+      assert(!"State is not a menu");
+      break;
+  }
 }
 
 

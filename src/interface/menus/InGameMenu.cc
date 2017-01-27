@@ -12,75 +12,8 @@
 namespace interface {
 
 
-void InGameMenu::build()
-{
-  // Saving current state
-  _cursorCoords = Status::player()->cursor()->coords();
-  _unit = Status::battle()->map()->unit(_coords);
-
-  switch (Status::state())
-  {
-    case e_state::ACTION_MENU:
-    {
-      PRINTF("-= Action menu =-");
-      /// \todo check if there is a target
-      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
-      entry->setCallback( [=] { waitUnit(); });
-      _entries.push_back(entry);
-
-      /// \todo separate actions (move / attack / ...)
-      // as they may have different cancel actions
-      /// Could add a flag in the state: restoration point
-      /// -> pop until restoration point
-      /// (and execute resume function -> default selected entry)
-      addCancelEntry( [=] { actionCancel(); } );
-      break;
-    }
-
-    case e_state::SELECTION_UNIT:
-      PRINTF("-= Selection unit =-");
-      assert(Status::battle()->map()->unit(_coords) && "no unit selected");
-
-      // if ((_unit = Status::battle()->map()->unit(_coords)))
-      if (Status::battle()->map()->unit(_coords))
-      {
-        auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
-        entry->setCallback( [=] { moveUnit(); });
-        _entries.push_back(entry);
-      }
-      addCancelEntry( [=] { defaultCancel(); } );
-      break;
-
-    case e_state::MAP_MENU:
-      PRINTF("-= Map menu =-");
-      /// \todo next player
-      addCancelEntry( [=] { defaultCancel(); } );
-      break;
-
-    default:
-      ERROR("InGameMenu::build() Invalid State:", (int) Status::state());
-      assert(!"Invalid state found building menu");
-      std::exit(1);
-      break;
-  }
-}
-
-
-void InGameMenu::defaultCancel() {
+void InGameMenu::cancel() {
   Status::popCurrentState();
-}
-
-
-void InGameMenu::actionCancel()
-{
-  // from StateMovingUnit
-  // Status::interface()->element("cursor")->setCoords(_cursorCoords);
-
-  Status::player()->cursor()->coords() = _cursorCoords;
-  Status::clearStates();
-
-  // purge saved data
-  // _unit = nullptr;
 }
 
 
@@ -106,24 +39,6 @@ void InGameMenu::validate() {
   _entries[_selectedEntry]->execute();
 }
 
-
-void InGameMenu::moveUnit()
-{
-  Status::player()->cursor()->coords() = _cursorCoords;
-  Status::pushState(e_state::MOVING_UNIT);
-}
-
-
-void InGameMenu::waitUnit()
-{
-  NOTICE("order: wait unit");
-
-  auto cursor_coords(Status::player()->cursor()->coords());
-  Status::battle()->map()->selectUnit(cursor_coords);
-  Status::battle()->map()->moveUnit(cursor_coords);
-
-  Status::clearStates();
-}
 
 
 void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)

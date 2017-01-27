@@ -9,9 +9,12 @@
 
 # include <context/State.hh>
 
+enum class e_state;
+
 namespace interface {
   class InGameMenu;
 }
+
 
 
 /**
@@ -22,12 +25,20 @@ class StateMenu: public State
 {
 public:
   /**
-   * \brief Default constuctor: Builds the menu, registers to callbacks
+   * \brief Deleted default constuctor as we need to know in which state we are
+   *   We cannot use Status::state() as the State is under construction
    */
-  StateMenu();
+  StateMenu() = delete;
+
+  /**
+   * \brief Constuctor: Builds the menu, registers to callbacks
+   * \param state: State which is currently built
+   */
+  explicit StateMenu(e_state state);
 
   /// Destructor
   ~StateMenu() = default;
+
 
   /**
    * \brief Save the menu coordinates.
@@ -67,7 +78,6 @@ private:
   std::shared_ptr<interface::InGameMenu> _menu; ///< menu associated to the state
 
   Coords _menuCoords; ///> menu coordinates
-
 
 
 

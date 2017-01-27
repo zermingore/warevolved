@@ -62,10 +62,12 @@ game/Player.cc                      \
 \
 interface/Interface.cc              \
 interface/InterfaceSettings.cc      \
+interface/InterfaceElement.cc       \
 interface/Cursor.cc                 \
 interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc        \
-interface/InterfaceElement.cc       \
-interface/menus/InGameMenu.cc
+interface/menus/InGameMenu.cc       \
+interface/menus/MenuMap.cc          \
+interface/menus/MenuAction.cc
 
 # game/PathFinding.cc
