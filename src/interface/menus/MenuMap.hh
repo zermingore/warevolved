@@ -16,15 +16,12 @@
 namespace interface {
 
 
-
 class MenuMap: public InGameMenu
 {
 public:
   void build();
-
-private:
-
 };
+
 
 } // namespace interface
 

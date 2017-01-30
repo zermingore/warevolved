@@ -27,6 +27,8 @@ void MenuAction::build()
   /// \todo add condition (not moved / ...)
   if (_state == e_state::ACTION_MENU)
   {
+    PRINTF("MenuAction::build - state == ACTION_MENU");
+
     auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
     entry->setCallback( [=] { waitUnit(); });
     _entries.push_back(entry);

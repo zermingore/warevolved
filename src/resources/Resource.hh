@@ -24,7 +24,7 @@ enum e_scope
 
 
 /**
-   * \brief generic Resource class
+ * \brief generic Resource class
  * Resource is an abstract class
  * Its daughters are Image, Sound, ...
  */

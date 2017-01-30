@@ -10,4 +10,4 @@ void MenuMap::build()
 }
 
 
-}; // namespace interface
+} // namespace interface

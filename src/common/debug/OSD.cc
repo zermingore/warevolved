@@ -59,4 +59,4 @@ std::shared_ptr<sf::Text> OSD::text(std::string str)
 }
 
 
-}; // namespace debug
+} // namespace debug

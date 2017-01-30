@@ -5,7 +5,9 @@
 #include <game/Player.hh>
 #include <common/enums/states.hh>
 #include <interface/menus/InGameMenu.hh>
-
+#include <graphics/GraphicsEngine.hh>
+#include <game/applications/Battle.hh>
+#include <resources/Image.hh>
 
 
 StateMovingUnit::StateMovingUnit()
@@ -50,11 +52,11 @@ void StateMovingUnit::exit()
 
 // _________________________  Graphical Units motion ________________________ //
 void StateMovingUnit::moveUnitUp() {
-  ++_holoUnitPosition.y;
+  --_holoUnitPosition.y;
 }
 
 void StateMovingUnit::moveUnitDown() {
-  --_holoUnitPosition.y;
+  ++_holoUnitPosition.y;
 }
 
 void StateMovingUnit::moveUnitLeft() {
@@ -63,4 +65,31 @@ void StateMovingUnit::moveUnitLeft() {
 
 void StateMovingUnit::moveUnitRight() {
   ++_holoUnitPosition.x;
+}
+
+
+void StateMovingUnit::draw()
+{
+//  graphics::GraphicsEngine::draw(_holoUnit);
+
+  auto p(Status::battle()->map()->graphicsProperties());
+
+  /// \todo set sprite accordingly to the unis at original coordinates
+  graphics::Image& image(resources::ResourcesManager::getImage("soldiers"));
+
+  float x = image.sprite()->getTexture()->getSize().x;
+  float y = image.sprite()->getTexture()->getSize().y;
+  image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+
+# ifdef DEBUG
+  // we suppose the sprite is always larger than the cell
+  if (x < p->cellWidth() || y < p->cellHeight()) {
+    ERROR("Sprite scale failure");
+  }
+# endif
+
+  /// \todo own sprite, not a copy (or else affect every sprite...)
+  image.sprite()->setColor(sf::Color(127, 127, 127, 100));
+
+  image.drawAtCell(_holoUnitPosition, p);
 }

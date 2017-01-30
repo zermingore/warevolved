@@ -34,7 +34,6 @@ StateMenu::StateMenu(e_state state)
 
     case e_state::SELECTION_UNIT:
     case e_state::ACTION_MENU:
-      ERROR("Selection menu not yet handled");
       _menu = std::make_shared<interface::MenuAction> (state, _menuCoords);
       break;
 
