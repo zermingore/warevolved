@@ -1,9 +1,9 @@
 #include <common/debug/Debug.hh>
 
-
 // Debug::_log definition
-auto Debug::_log(std::make_unique<std::ofstream>
-                 (LOG_FILENAME, std::ios_base::out));
+// not using auto to help g++
+std::unique_ptr<std::ofstream> Debug::_log(std::make_unique<std::ofstream>
+                                           (LOG_FILENAME, std::ios_base::out));
 
 
 void Debug::bodylogprintf()
