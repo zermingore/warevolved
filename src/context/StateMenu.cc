@@ -1,16 +1,19 @@
 #include <context/StateMenu.hh>
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
+#include <common/enums/states.hh>
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
 #include <interface/menus/Menu.hh>
 #include <interface/menus/InGameMenu.hh>
+#include <interface/menus/MenuMap.hh>
+#include <interface/menus/MenuAction.hh>
 #include <interface/Cursor.hh>
 
 
 
-StateMenu::StateMenu()
+StateMenu::StateMenu(e_state state)
   : State()
 {
   // browsing entries
@@ -20,8 +23,34 @@ StateMenu::StateMenu()
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { validate();  });
   _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();      });
 
-  _menu = std::make_shared<interface::InGameMenu> ();
+
+  // Building the menu depending on the State
   _menuCoords = Status::player()->cursor()->coords();
+  switch (state)
+  {
+    case e_state::MAP_MENU:
+      _menu = std::make_shared<interface::MenuMap> ();
+      break;
+
+    case e_state::SELECTION_UNIT:
+    case e_state::ACTION_MENU:
+      _menu = std::make_shared<interface::MenuAction> (state, _menuCoords);
+      break;
+
+    /// \todo State ActionMenu
+    // case e_state::ACTION_MENU:
+    //   _menu = std::make_shared<interface::ActionMenu> ();
+    //   break;
+
+    // case e_state::SELECTION_UNIT: // is it really a menu ?
+    //   _menu = std::make_shared<interface::SelectionUnit> ();
+    //   break;
+
+    default:
+      ERROR("StateMenu() called with State", (int) Status::state());
+      assert(!"State is not a menu");
+      break;
+  }
 }
 
 
@@ -57,6 +86,50 @@ void StateMenu::exit() {
 }
 
 
-void StateMenu::draw() {
+void StateMenu::draw()
+{
+  if (_attributes.size())
+  {
+    auto pCoords = std::static_pointer_cast<Coords> (_attributes[0]);
+    NOTICE("Coordinates:", pCoords->x, pCoords->y);
+  }
+
   _menu->draw();
+}
+
+int StateMenu::test_void(std::shared_ptr<void> p)
+{
+  PRINTF("test_void here, transferring");
+  test_int(std::static_pointer_cast<int> (p));
+
+  // p = std::make_shared<int> (3);
+  // std::shared_ptr<int> ip = std::static_pointer_cast<int> (p);
+
+
+  // if (typeid(int) == typeid(2))
+  //   NOTICE("Success");
+  // else
+  //   NOTICE("Failure");
+
+//  test_int((std::make_shared<int>) (p));
+//  PRINTF("test_void: VOID PTR value:", (int) (*p));
+  return 0;
+}
+
+int StateMenu::test_int(std::shared_ptr<int> p)
+{
+  PRINTF("test_int: p value:", *p);
+  return 0;
+}
+
+
+template<typename T>
+int StateMenu::test_t(T t)
+{
+  if (typeid(int) == typeid(t))
+    NOTICE("Success");
+  else
+    NOTICE("Failure");
+
+  return 0;
 }

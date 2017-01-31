@@ -12,6 +12,9 @@
 # include <common/using.hh>
 
 
+# include <common/debug/Debug.hh> // \todo remove !
+
+
 class EventManager;
 
 namespace interface {
@@ -42,6 +45,29 @@ public:
    * \brief Destructor.
    */
   ~State() = default;
+
+
+  /**
+   * \brief Set specific State's attributes
+   * \param attributes Attributes list
+   */
+  // template<typename... Attributes>
+  // virtual void setAttributes(Attributes... attributes) {}; /// \todo = 0
+
+  void setAttributes() { PRINTF("[State] Done setting attributes"); }
+
+  template<typename Head, typename... Tail>
+  void setAttributes(Head head, Tail... attributes) {
+    setAttribute(head);
+    setAttributes(attributes...);
+  }
+
+  template<typename Attribute>
+  void setAttribute(std::shared_ptr<Attribute> head) {
+    _attributes.push_back(head);
+    ERROR("[State] nb attr", _attributes.size());
+  }
+
 
 
   /**
@@ -88,6 +114,12 @@ protected:
   std::vector<std::shared_ptr<interface::InterfaceElement>> _interfaceElements;
 
   Coords _cursorCoords; ///< Cursor's coordinates
+
+  std::vector<std::shared_ptr<void>> _attributes; ///< pointer on Abstract attribute
+
+//  template <typename T> class _attr;
+
+//  std::vector<template <typename T>> _attrs;
 };
 
 

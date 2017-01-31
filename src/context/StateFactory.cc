@@ -19,8 +19,8 @@ std::shared_ptr<State> StateFactory::createState(const e_state& state)
     case e_state::MAP_MENU:
     case e_state::ACTION_MENU:
     case e_state::SELECTION_UNIT:
-      debug::OSD::addData("menus state");
-      return std::make_shared<StateMenu> ();
+      NOTICE("menus state", (int) state);
+      return std::make_shared<StateMenu> (state);
 
     case e_state::MOVING_UNIT:
       debug::OSD::addData("moving unit");

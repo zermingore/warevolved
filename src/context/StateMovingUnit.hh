@@ -9,6 +9,10 @@
 # include <context/State.hh>
 # include <common/using.hh> // Coords
 
+namespace sf {
+  class Drawable;
+}
+
 
 /**
  * \class StateMovingUnit
@@ -29,6 +33,12 @@ public:
   void exit();
 
 
+  /**
+   * \brief Draw the holo unit (shadow of the unit) at _holoUnitPosition
+   */
+  virtual void draw();
+
+
 private:
   // Units motion
   void moveUnitUp();
@@ -37,7 +47,9 @@ private:
   void moveUnitRight();
 
   Coords _originalCoords;   ///< original unit coordinates
-  Coords _holoUnitPosition; ///< Unit position 'cursor'
+  Coords _holoUnitPosition; ///< Unit position 'cursor' (in cell)
+
+  std::shared_ptr<sf::Drawable> _holoUnit;
 };
 
 

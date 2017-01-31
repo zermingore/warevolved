@@ -2848,7 +2848,7 @@ if test -z "$CXX"; then
     CXX=$CCC
   else
     if test -n "$ac_tool_prefix"; then
-  for ac_prog in clang++
+  for ac_prog in g++
   do
     # Extract the first word of "$ac_tool_prefix$ac_prog", so it can be a program name with args.
 set dummy $ac_tool_prefix$ac_prog; ac_word=$2
@@ -2892,7 +2892,7 @@ fi
 fi
 if test -z "$CXX"; then
   ac_ct_CXX=$CXX
-  for ac_prog in clang++
+  for ac_prog in g++
 do
   # Extract the first word of "$ac_prog", so it can be a program name with args.
 set dummy $ac_prog; ac_word=$2
@@ -3535,7 +3535,7 @@ else
   am__fastdepCXX_FALSE=
 fi
 
- # g++
+ # clang++
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_HEADER_STDBOOL6

@@ -53,6 +53,9 @@ void Status::pushState(e_state state)
 
   // Force ignoring current active inputs
   _inputProcessor->keyManager()->blockInputs();
+  // auto i(std::make_shared<int> (1));
+  // auto str(std::make_shared<std::string> ("abc"));
+  // _states.top().second->setAttributes(i, str);
 }
 
 
