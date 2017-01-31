@@ -3,12 +3,12 @@
 
 # include <common/include.hh>
 
-//# include <resources/Resource.hh>
 # include <resources/Font.hh>
 # include <resources/Image.hh>
 
 
-/** \enum enum matching every resource types
+/**
+ * \enum enum matching every resource types
  */
 enum e_resource_type
 {
@@ -25,7 +25,8 @@ enum e_resource_type
 namespace resources {
 
 
-/** \class ResourcesManager
+/**
+ * \class ResourcesManager
  * uses a XML file, containing all resources data:
  *   their path, name and specific attributes
  * it manages:

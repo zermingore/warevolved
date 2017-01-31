@@ -5,8 +5,8 @@
 #include <resources/Font.hh>
 
 
-namespace resources
-{
+namespace resources {
+
 // Static Variables definition
 std::map<std::string, std::shared_ptr<graphics::Image>> ResourcesManager::_images;
 std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
@@ -14,7 +14,8 @@ std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
 
 // default resources paths
 const std::string DEFAULT_IMAGE_PATH = "resources/defaults/image.png";
-const std::string DEFAULT_FONT_PATH = "resources/defaults/font.ttf";
+const std::string DEFAULT_FONT_PATH  = "resources/defaults/font.ttf";
+
 
 
 void ResourcesManager::initialize(const std::string file_name)
@@ -32,7 +33,7 @@ void ResourcesManager::initialize(const std::string file_name)
 void ResourcesManager::initializeDefaultResources()
 {
   _images["default"] = std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
-  _fonts["default"] = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
+  _fonts["default"]  = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
 }
 
 void ResourcesManager::initTypeNames()
@@ -55,10 +56,8 @@ bool ResourcesManager::addResource(e_resource_type type,
       return true;
 
     case E_RESOURCE_TYPE_FONT:
-    {
       _fonts[name] = std::make_shared<Font> (file_name, name);
       return true;
-    }
 
     // case E_RESOURCE_TYPE_SOUND:
     //   _sounds[name] = std::make_shared<Sound> (file_name, name);
@@ -76,7 +75,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
   pugi::xml_document doc;
   if (!doc.load_file(file_name.c_str()))
   {
-    Debug::error("unable to load file");
+    ERROR("unable to load file");
     return false;
   }
 
@@ -93,8 +92,9 @@ bool ResourcesManager::parseXML(const std::string file_name)
         std::string tmp = folder.attribute("path").value();
         tmp += file.attribute("filename").value();
 
-        for (pugi::xml_node child: file.children())
+        for (pugi::xml_node child: file.children()) {
           addResource(type, child.text().get(), tmp);
+        }
       }
     }
 
@@ -110,24 +110,25 @@ bool ResourcesManager::parseXML(const std::string file_name)
 void ResourcesManager::listResources()
 {
   PRINTF("\t\t__________Resources List__________");
-  for (auto it : _images)
+  for (auto it : _images) {
     Debug::logPrintf(it.second->name());
+  }
 
-  for (auto it : _fonts)
+  for (auto it : _fonts) {
     Debug::logPrintf(it.second->name());
+  }
 }
 #endif
 
 
 graphics::Image& ResourcesManager::getImage(const std::string name)
 {
-  if (_images.find(name) != _images.end())
+  if (_images.find(name) != _images.end()) {
     return *_images[name];
+  }
 
-  Debug::error("Unable to find image: ", name);
-# ifdef DEBUG
-  assert(! "Image not found");
-# endif
+  ERROR("Unable to find image:", name);
+  assert(!"Image not found");
 
   return *_images["default"];
 }
