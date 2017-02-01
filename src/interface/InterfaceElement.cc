@@ -17,8 +17,8 @@ InterfaceElement::InterfaceElement(const std::string &image_name)
   : _img_name(image_name)
   , _image(resources::ResourcesManager::getImage(_img_name))
 {
-  _scale.x = _image.sprite()->getTexture()->getSize().x;
-  _scale.y = _image.sprite()->getTexture()->getSize().y;
+  _scale.x = _image->sprite()->getTexture()->getSize().x;
+  _scale.y = _image->sprite()->getTexture()->getSize().y;
 
 //  _image.sprite()->setScale(p->cellWidth() / _scale.x, p->cellHeight() / _scale.y);
 }
@@ -27,7 +27,7 @@ InterfaceElement::InterfaceElement(const std::string &image_name)
 void InterfaceElement::draw()
 {
   PRINTF("interfaceelement::draw()", _img_name);
-  graphics::GraphicsEngine::draw(_image.sprite());
+  graphics::GraphicsEngine::draw(_image->sprite());
 }
 
 

@@ -79,10 +79,10 @@ public:
 
 
 protected:
-  std::string _fileName; ///< Resource file name (with full path and extension)
   std::string _name; ///< Resource alias name
   bool _loaded; ///< is the resource already in RAM ?
   //e_scope _scope; ///< resource scope (the context it belongs to)
+  std::string _fileName; ///< Resource file name (with full path and extension)
 };
 
 #endif /* !RESOURCE_HH_ */

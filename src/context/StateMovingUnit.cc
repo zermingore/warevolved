@@ -75,11 +75,11 @@ void StateMovingUnit::draw()
   auto p(Status::battle()->map()->graphicsProperties());
 
   /// \todo set sprite accordingly to the unis at original coordinates
-  graphics::Image& image(resources::ResourcesManager::getImage("soldiers"));
+  auto image(resources::ResourcesManager::getImage("soldiers"));
 
-  float x = image.sprite()->getTexture()->getSize().x;
-  float y = image.sprite()->getTexture()->getSize().y;
-  image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+  float x = image->sprite()->getTexture()->getSize().x;
+  float y = image->sprite()->getTexture()->getSize().y;
+  image->sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
 
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
@@ -89,7 +89,7 @@ void StateMovingUnit::draw()
 # endif
 
   /// \todo own sprite, not a copy (or else affect every sprite...)
-  image.sprite()->setColor(sf::Color(127, 127, 127, 100));
+  image->sprite()->setColor(sf::Color(127, 127, 127, 100));
 
-  image.drawAtCell(_holoUnitPosition, p);
+  image->drawAtCell(_holoUnitPosition, p);
 }

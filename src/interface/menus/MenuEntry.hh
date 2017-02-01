@@ -85,7 +85,7 @@ private:
   e_entry _id;                      ///< entry identifier
   std::shared_ptr<sf::Text> _label; ///< button label text
   std::string _labelName;           ///< menu entry text
-  Font _font;                       ///< button label font
+  graphics::Font _font;             ///< button label font
 
   /// callback executed when the entry is selected
   std::function<void()> _callback;

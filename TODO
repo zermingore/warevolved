@@ -13,6 +13,14 @@ Cursor (interface) in its thread
 ** TODO Unit played
 ** TODO Next turn: players switch
 
+* TODO experimental
+** DONE ResourcesManager
+   CLOSED: [2017-02-01 Mi 19:43]
+*** DONE _images: std::map<name, filename>
+    CLOSED: [2017-02-01 Mi 07:39]
+*** DONE getImage: return a newly allocated Image
+    CLOSED: [2017-02-01 Mi 07:39]
+
 
 * old roadmap
 ** DONE Implement the State daughter classes

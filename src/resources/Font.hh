@@ -5,6 +5,9 @@
 # include <common/include.hh>
 
 
+namespace graphics {
+
+
 /**
  * \class Font Resource type
  * \brief Font class to draw text
@@ -41,5 +44,7 @@ private:
   std::shared_ptr<sf::Font> _font; ///< current Font
 };
 
+
+} // namespace graphics
 
 #endif /* !FONT_HH_ */

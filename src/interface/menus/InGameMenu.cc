@@ -52,7 +52,7 @@ void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> proper
 
   // highlighting current selection
   Coords selected_entry_pos(_position.x, _position.y + height * _selectedEntry);
-  _imageSelection.setPosition(selected_entry_pos);
+  _imageSelection->setPosition(selected_entry_pos);
 
   // update entries positions
   auto entry_index(0);
@@ -85,7 +85,7 @@ void InGameMenu::draw()
     entry->draw();
   }
 
-  _imageSelection.draw();
+  _imageSelection->draw();
 }
 
 

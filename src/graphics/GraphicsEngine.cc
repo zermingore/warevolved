@@ -85,15 +85,15 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
       {
         default:
           auto img(resources::ResourcesManager::getImage("forest"));
-          img.drawAtCell(c->coords(), map->graphicsProperties());
+          img->drawAtCell(c->coords(), map->graphicsProperties());
           break;
       }
 
       if (c->highlight())
       {
-        Image& highlight = resources::ResourcesManager::getImage("highlight");
-        highlight.sprite()->setColor(c->highlightColor());
-        highlight.drawAtCell(c->coords(), map->graphicsProperties());
+        auto highlight = resources::ResourcesManager::getImage("highlight");
+        highlight->sprite()->setColor(c->highlightColor());
+        highlight->drawAtCell(c->coords(), map->graphicsProperties());
       }
 
       if (c->unit()) {
@@ -154,12 +154,12 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
 {
   auto p(battle->map()->graphicsProperties());
 
-  Image& image(resources::ResourcesManager::getImage(unit->name()));
+  auto image(resources::ResourcesManager::getImage(unit->name()));
   // image.sprite()->setColor(Status::player()->unitsColor());
 
-  float x = image.sprite()->getTexture()->getSize().x;
-  float y = image.sprite()->getTexture()->getSize().y;
-  image.sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+  float x = image->sprite()->getTexture()->getSize().x;
+  float y = image->sprite()->getTexture()->getSize().y;
+  image->sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
 
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
@@ -177,10 +177,10 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
   // }
 
   if (unit->played()) {
-    image.sprite()->setColor(sf::Color(127, 127, 127, 191));
+    image->sprite()->setColor(sf::Color(127, 127, 127, 191));
   }
 
-  image.drawAtCell(unit->coords(), p);
+  image->drawAtCell(unit->coords(), p);
 }
 
 

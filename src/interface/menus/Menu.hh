@@ -120,7 +120,8 @@ protected:
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
 
-  graphics::Image _imageSelection; ///< Emphasis of the selected entry
+  ///< Emphasis of the selected entry
+  std::shared_ptr<graphics::Image> _imageSelection;
 };
 
 

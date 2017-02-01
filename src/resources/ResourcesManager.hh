@@ -49,22 +49,24 @@ public:
   static void initialize(const std::string file_name);
 
   /**
-   * \brief Retrieve an Image from _images map
-   * if the Image does not exist, print an error and return the default one
+   * \brief If an image with the given name exists, return the matching Image
+   * \return A new Image matching the given name.
+   *   If the Image does not exist, print an error and return the default one
    */
-  static graphics::Image& getImage(const std::string name);
-
-  /**
-   * \brief Retrieve a Font from _fonts map and return it's graphical font
-   * if the Font does not exist, print an error and return the default one
-   */
-  static sf::Font& font(const std::string name);
+  static std::shared_ptr<graphics::Image> getImage(const std::string name);
 
   /**
    * \brief Retrieve a Font from _fonts map
    * if the Font does not exist, print an error and return the default one
    */
-  static Font& getFont(const std::string name);
+  static sf::Font& font(const std::string name);
+
+  /**
+   * \brief If a font with the given name exists, return the matching Font
+   * \return A new Font matching the given name.
+   *   If the Font does not exist, print an error and return the default one
+   */
+  static graphics::Font& getFont(const std::string name);
 
 
 private:
@@ -113,11 +115,11 @@ private:
   static void listResources();
 # endif
 
-  ///< Images list (accessed by their name)
-  static std::map<std::string, std::shared_ptr<graphics::Image>> _images;
+  ///< Fonts list (name [identifier] -> image file name)
+  static std::map<std::string, std::string> _images;
 
-  ///< Fonts list (accessed by their name)
-  static std::map<std::string, std::shared_ptr<Font>> _fonts;
+  ///< Fonts list (name [identifier] -> font file name)
+  static std::map<std::string, std::shared_ptr<graphics::Font>> _fonts;
 
   ///< map categories names matching e_resource_type
   static std::map<e_resource_type, std::string> _typeNames;

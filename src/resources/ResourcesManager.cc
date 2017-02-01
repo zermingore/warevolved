@@ -8,8 +8,8 @@
 namespace resources {
 
 // Static Variables definition
-std::map<std::string, std::shared_ptr<graphics::Image>> ResourcesManager::_images;
-std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
+std::map<std::string, std::string> ResourcesManager::_images;
+std::map<std::string, std::shared_ptr<graphics::Font>> ResourcesManager::_fonts;
 std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
 
 // default resources paths
@@ -32,8 +32,8 @@ void ResourcesManager::initialize(const std::string file_name)
 
 void ResourcesManager::initializeDefaultResources()
 {
-  _images["default"] = std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
-  _fonts["default"]  = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
+  _images["default"] = DEFAULT_IMAGE_PATH;
+  _fonts["default"]  = std::make_shared<graphics::Font> (DEFAULT_FONT_PATH, "defaut");
 }
 
 void ResourcesManager::initTypeNames()
@@ -52,11 +52,11 @@ bool ResourcesManager::addResource(e_resource_type type,
   switch (type)
   {
     case E_RESOURCE_TYPE_IMAGE:
-      _images[name] = std::make_shared<graphics::Image> (file_name, name);
+      _images[name] = file_name;
       return true;
 
     case E_RESOURCE_TYPE_FONT:
-      _fonts[name] = std::make_shared<Font> (file_name, name);
+      _fonts[name] = std::make_shared<graphics::Font> (file_name, name);
       return true;
 
     // case E_RESOURCE_TYPE_SOUND:
@@ -121,18 +121,31 @@ void ResourcesManager::listResources()
 #endif
 
 
-graphics::Image& ResourcesManager::getImage(const std::string name)
+std::shared_ptr<graphics::Image> ResourcesManager::getImage(const std::string name)
 {
   if (_images.find(name) != _images.end()) {
-    return *_images[name];
+    return std::make_shared<graphics::Image> (_images[name], name);
   }
 
   ERROR("Unable to find image:", name);
   assert(!"Image not found");
 
-  return *_images["default"];
+  return std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
 }
 
+
+
+graphics::Font& ResourcesManager::getFont(const std::string name)
+{
+  if (_fonts.find(name) != _fonts.end()) {
+    return *_fonts[name];
+  }
+
+  ERROR("Unable to find font: ", name);
+  assert(!"Font not found");
+
+  return *_fonts["default"];
+}
 
 
 sf::Font& ResourcesManager::font(const std::string name)
@@ -142,20 +155,7 @@ sf::Font& ResourcesManager::font(const std::string name)
   }
 
   Debug::logPrintf("Unable to find font: ", name);
-
   return *(_fonts["default"]->getFont());
-}
-
-
-Font& ResourcesManager::getFont(const std::string name)
-{
-  if (_fonts.find(name) != _fonts.end()) {
-    return *_fonts[name];
-  }
-
-  Debug::logPrintf("Unable to find font: ", name);
-
-  return *_fonts["default"];
 }
 
 

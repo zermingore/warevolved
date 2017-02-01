@@ -135,7 +135,7 @@ public:
 
 protected:
   std::string _img_name;   ///< Associated image name
-  graphics::Image& _image; ///< Associated image
+  std::shared_ptr<graphics::Image> _image; ///< Associated image
   Coords _position;        ///< Element position (in pixels)
   Coords _coords;          ///< Element position (in cells; not always filled)
   Vector2<float> _scale;   ///< Element scale (related to a Cell size)

@@ -65,27 +65,27 @@ void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties
 
   _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
   _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
-  _image.sprite()->setPosition(_position.x, _position.y);
+  _image->sprite()->setPosition(_position.x, _position.y);
 
   static float scale_factor = 1;
   static unsigned int angle = 0;
   angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
-  _image.setScale(scale_factor, scale_factor);
+  _image->setScale(scale_factor, scale_factor);
   ++angle;
 
 
   // The origin of the sprite is the middle of the cell
-  _image.sprite()->setOrigin(width / 2, height / 2);
-  _image.sprite()->setRotation(angle);
-  _image.setScale(scale_factor, scale_factor);
+  _image->sprite()->setOrigin(width / 2, height / 2);
+  _image->sprite()->setRotation(angle);
+  _image->setScale(scale_factor, scale_factor);
 
-  _image.sprite()->setColor(_color);
+  _image->sprite()->setColor(_color);
 }
 
 
 void Cursor::draw()
 {
-  graphics::GraphicsEngine::draw(_image.sprite());
+  graphics::GraphicsEngine::draw(_image->sprite());
 }
 
 
