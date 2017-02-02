@@ -18,9 +18,11 @@ Cursor (interface) in its thread
 ** DONE Image / Font in namespace resources
    CLOSED: [2017-02-02 Do 07:24]
 ** TODO Move Debug in its own folder
-** TODO ResourcesManager enum -> enum class
+** DONE ResourcesManager enum -> enum class
+   CLOSED: [2017-02-02 Do 07:31]
 
-* TODO experimental
+* DONE experimental
+  CLOSED: [2017-02-02 Do 07:25]
 ** DONE ResourcesManager
    CLOSED: [2017-02-01 Mi 19:43]
 *** DONE _images: std::map<name, filename>

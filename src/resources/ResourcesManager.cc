@@ -38,10 +38,10 @@ void ResourcesManager::initializeDefaultResources()
 
 void ResourcesManager::initTypeNames()
 {
-  _typeNames[E_RESOURCE_TYPE_NONE]  = "none";
-  _typeNames[E_RESOURCE_TYPE_IMAGE] = "images";
-  _typeNames[E_RESOURCE_TYPE_FONT]  = "fonts";
-  _typeNames[E_RESOURCE_TYPE_SOUND] = "sounds";
+  _typeNames[e_resource_type::NONE]  = "none";
+  _typeNames[e_resource_type::IMAGE] = "images";
+  _typeNames[e_resource_type::FONT]  = "fonts";
+  _typeNames[e_resource_type::SOUND] = "sounds";
 }
 
 
@@ -51,15 +51,15 @@ bool ResourcesManager::addResource(e_resource_type type,
 {
   switch (type)
   {
-    case E_RESOURCE_TYPE_IMAGE:
+    case e_resource_type::IMAGE:
       _images[name] = file_name;
       return true;
 
-    case E_RESOURCE_TYPE_FONT:
+    case e_resource_type::FONT:
       _fonts[name] = std::make_shared<resources::Font> (file_name, name);
       return true;
 
-    // case E_RESOURCE_TYPE_SOUND:
+    // case e_resource_type::SOUND:
     //   _sounds[name] = std::make_shared<Sound> (file_name, name);
     //   return true;
 
@@ -79,7 +79,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
     return false;
   }
 
-  e_resource_type type = static_cast<e_resource_type>(E_RESOURCE_TYPE_NONE + 1);
+  auto type = static_cast<e_resource_type>(static_cast<int> (e_resource_type::NONE) + 1);
   pugi::xml_node category = doc.child("resources").child(_typeNames[type].c_str());
 
   // for all categories > browse folders > for all files > get their infos
@@ -98,7 +98,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
       }
     }
 
-    type = static_cast<e_resource_type>(type + 1);
+    type = static_cast<e_resource_type>(static_cast<int> (type) + 1);
     category = category.next_sibling();
   }
 
@@ -118,7 +118,7 @@ void ResourcesManager::listResources()
     Debug::logPrintf(it.second->name());
   }
 }
-#endif
+#endif // DEBUG_XML
 
 
 std::shared_ptr<resources::Image> ResourcesManager::getImage(const std::string name)

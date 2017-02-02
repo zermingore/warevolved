@@ -10,15 +10,13 @@
 /**
  * \enum enum matching every resource types
  */
-enum e_resource_type
+enum class e_resource_type: int
 {
-  E_RESOURCE_TYPE_NONE = 0,
+  NONE = 0,
 
-  E_RESOURCE_TYPE_IMAGE,
-  E_RESOURCE_TYPE_FONT,
-  E_RESOURCE_TYPE_SOUND,  /// \todo sound management
-
-  E_RESOURCE_TYPE_NB
+  IMAGE,
+  FONT,
+  SOUND,  /// \todo sound management
 };
 
 
