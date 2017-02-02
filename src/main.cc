@@ -1,6 +1,6 @@
 #include <core/Context.hh>
 #include <game/Game.hh>
-#include <common/debug/Debug.hh>
+#include <debug/Debug.hh>
 
 
 int main(int ac, const char **av)

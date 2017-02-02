@@ -1,4 +1,4 @@
-#include <common/debug/OSD.hh>
+#include <debug/OSD.hh>
 #include <resources/ResourcesManager.hh>
 #include <common/Status.hh>
 #include <interface/Interface.hh>

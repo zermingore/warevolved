@@ -1,4 +1,4 @@
-#include <common/debug/Debug.hh>
+#include <debug/Debug.hh>
 
 // Debug::_log definition
 // not using auto to help g++

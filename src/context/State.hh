@@ -12,7 +12,7 @@
 # include <common/using.hh>
 
 
-# include <common/debug/Debug.hh> // \todo remove !
+# include <debug/Debug.hh> // \todo remove !
 
 
 class EventManager;

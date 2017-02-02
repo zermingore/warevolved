@@ -4,7 +4,7 @@
 #include <game/Cell.hh>
 #include <game/applications/Battle.hh>
 #include <game/Player.hh>
-#include <common/debug/OSD.hh>
+#include <debug/OSD.hh>
 #include <context/State.hh>
 
 

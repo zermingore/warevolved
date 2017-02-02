@@ -35,8 +35,8 @@ resources/Resource.cc               \
 resources/Image.cc                  \
 resources/Font.cc                   \
 \
-common/debug/Debug.cc               \
-common/debug/OSD.cc                 \
+debug/Debug.cc                      \
+debug/OSD.cc                        \
 \
 common/System.cc                    \
 common/Settings.cc                  \

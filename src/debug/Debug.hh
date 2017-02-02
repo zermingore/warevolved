@@ -1,5 +1,5 @@
-/*
- * common/Debug.hh
+/**
+ * \file
  *
  *  Created on: Jul 23, 2013
  *      Author: Zermingore

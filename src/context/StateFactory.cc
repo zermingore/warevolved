@@ -2,8 +2,8 @@
 #include <context/StatePlaying.hh>
 #include <context/StateMovingUnit.hh>
 #include <context/StateMenu.hh>
-#include <common/debug/Debug.hh>
-#include <common/debug/OSD.hh>
+#include <debug/Debug.hh>
+#include <debug/OSD.hh>
 
 
 std::shared_ptr<State> StateFactory::createState(const e_state& state)
