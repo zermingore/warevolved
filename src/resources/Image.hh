@@ -1,5 +1,5 @@
-#ifndef IMAGE_HH_
-# define IMAGE_HH_
+#ifndef RESOURCES_IMAGE_HH_
+# define RESOURCES_IMAGE_HH_
 
 # include <resources/Resource.hh>
 # include <common/include.hh>
@@ -13,7 +13,7 @@
 
 
 
-namespace graphics {
+namespace resources {
 
 
 /**
@@ -37,8 +37,7 @@ public:
    * sets _texture to NULL
    * _loaded to false
    */
-  Image(const std::string file_name,
-        const std::string name);
+  Image(const std::string file_name, const std::string name);
 
   /**
    * \brief initializes _texture
@@ -158,6 +157,6 @@ private:
   std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
 };
 
-} // namespace graphics
+} // namespace resources
 
-#endif /* !IMAGE_HH_ */
+#endif /* !RESOURCES_IMAGE_HH_ */

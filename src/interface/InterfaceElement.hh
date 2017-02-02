@@ -16,7 +16,6 @@
 # include <resources/ResourcesManager.hh>
 
 
-
 namespace interface {
 
 /**
@@ -134,12 +133,12 @@ public:
 
 
 protected:
-  std::string _img_name;   ///< Associated image name
-  std::shared_ptr<graphics::Image> _image; ///< Associated image
-  Coords _position;        ///< Element position (in pixels)
-  Coords _coords;          ///< Element position (in cells; not always filled)
-  Vector2<float> _scale;   ///< Element scale (related to a Cell size)
-  float _rotation;         ///< Element rotation
+  std::string _img_name;                    ///< Associated image name
+  std::shared_ptr<resources::Image> _image; ///< Associated image
+  Coords _position;                         ///< Element position (in pixels)
+  Coords _coords;                           ///< Position (in cells; not always filled)
+  Vector2<float> _scale;                    ///< Element scale (related to a Cell size)
+  float _rotation;                          ///< Element rotation
 };
 
 

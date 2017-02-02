@@ -9,7 +9,7 @@ namespace resources {
 
 // Static Variables definition
 std::map<std::string, std::string> ResourcesManager::_images;
-std::map<std::string, std::shared_ptr<graphics::Font>> ResourcesManager::_fonts;
+std::map<std::string, std::shared_ptr<resources::Font>> ResourcesManager::_fonts;
 std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
 
 // default resources paths
@@ -33,7 +33,7 @@ void ResourcesManager::initialize(const std::string file_name)
 void ResourcesManager::initializeDefaultResources()
 {
   _images["default"] = DEFAULT_IMAGE_PATH;
-  _fonts["default"]  = std::make_shared<graphics::Font> (DEFAULT_FONT_PATH, "defaut");
+  _fonts["default"]  = std::make_shared<resources::Font> (DEFAULT_FONT_PATH, "defaut");
 }
 
 void ResourcesManager::initTypeNames()
@@ -56,7 +56,7 @@ bool ResourcesManager::addResource(e_resource_type type,
       return true;
 
     case E_RESOURCE_TYPE_FONT:
-      _fonts[name] = std::make_shared<graphics::Font> (file_name, name);
+      _fonts[name] = std::make_shared<resources::Font> (file_name, name);
       return true;
 
     // case E_RESOURCE_TYPE_SOUND:
@@ -121,21 +121,21 @@ void ResourcesManager::listResources()
 #endif
 
 
-std::shared_ptr<graphics::Image> ResourcesManager::getImage(const std::string name)
+std::shared_ptr<resources::Image> ResourcesManager::getImage(const std::string name)
 {
   if (_images.find(name) != _images.end()) {
-    return std::make_shared<graphics::Image> (_images[name], name);
+    return std::make_shared<resources::Image> (_images[name], name);
   }
 
   ERROR("Unable to find image:", name);
   assert(!"Image not found");
 
-  return std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
+  return std::make_shared<resources::Image> (DEFAULT_IMAGE_PATH, "default");
 }
 
 
 
-graphics::Font& ResourcesManager::getFont(const std::string name)
+resources::Font& ResourcesManager::getFont(const std::string name)
 {
   if (_fonts.find(name) != _fonts.end()) {
     return *_fonts[name];

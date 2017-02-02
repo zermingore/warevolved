@@ -1,7 +1,7 @@
 #include <resources/Font.hh>
 #include <common/constants.hh>
 
-namespace graphics {
+namespace resources {
 
 
 Font::Font(const std::string file_name, const std::string name)
@@ -37,4 +37,4 @@ std::shared_ptr<sf::Font> Font::getFont()
 }
 
 
-} // namespace graphics
+} // namespace resources

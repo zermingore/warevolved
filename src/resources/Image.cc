@@ -2,7 +2,7 @@
 #include <graphics/GraphicsEngine.hh>
 
 
-namespace graphics {
+namespace resources {
 
 
 Image::Image(const std::string file_name,
@@ -230,4 +230,4 @@ void Image::draw()
 }
 
 
-} // namespace graphics
+} // namespace resources

@@ -1,11 +1,11 @@
-#ifndef FONT_HH_
-# define FONT_HH_
+#ifndef RESOURCES_FONT_HH_
+# define RESOURCES_FONT_HH_
 
 # include <resources/Resource.hh>
 # include <common/include.hh>
 
 
-namespace graphics {
+namespace resources {
 
 
 /**
@@ -45,6 +45,6 @@ private:
 };
 
 
-} // namespace graphics
+} // namespace resources
 
-#endif /* !FONT_HH_ */
+#endif /* !RESOURCES_FONT_HH_ */

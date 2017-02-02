@@ -53,7 +53,7 @@ public:
    * \return A new Image matching the given name.
    *   If the Image does not exist, print an error and return the default one
    */
-  static std::shared_ptr<graphics::Image> getImage(const std::string name);
+  static std::shared_ptr<resources::Image> getImage(const std::string name);
 
   /**
    * \brief Retrieve a Font from _fonts map
@@ -66,7 +66,7 @@ public:
    * \return A new Font matching the given name.
    *   If the Font does not exist, print an error and return the default one
    */
-  static graphics::Font& getFont(const std::string name);
+  static resources::Font& getFont(const std::string name);
 
 
 private:
@@ -119,7 +119,7 @@ private:
   static std::map<std::string, std::string> _images;
 
   ///< Fonts list (name [identifier] -> font file name)
-  static std::map<std::string, std::shared_ptr<graphics::Font>> _fonts;
+  static std::map<std::string, std::shared_ptr<resources::Font>> _fonts;
 
   ///< map categories names matching e_resource_type
   static std::map<e_resource_type, std::string> _typeNames;
