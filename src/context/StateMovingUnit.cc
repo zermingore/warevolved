@@ -8,6 +8,7 @@
 #include <graphics/GraphicsEngine.hh>
 #include <game/applications/Battle.hh>
 #include <resources/Image.hh>
+#include <interface/Cursor.hh>
 
 
 StateMovingUnit::StateMovingUnit()
@@ -17,11 +18,10 @@ StateMovingUnit::StateMovingUnit()
   // used to get the cursor's coordinates and access to the callbacks
   auto player(Status::player());
 
-  if (!player->updateSelectedUnit())
-  {
-    ERROR("Unable to set selected unit");
-    // abort / exit mode ?
-  }
+  // we need a selected unit to continue
+  assert(player->updateSelectedUnit());
+
+  _holoUnitPosition = player->cursor()->coords();
 
   _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUnitUp();    });
   _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveUnitDown();  });
@@ -39,6 +39,18 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::EXIT_1, [=] {
       exit();
     });
+
+
+  // Graphical attributes initialization
+  _mapGraphicProperties = Status::battle()->map()->graphicsProperties();
+  _holoUnit = resources::ResourcesManager::getImage("soldiers");
+  _holoUnitSprite = _holoUnit->sprite();
+
+  // explicitly using some floats for the division
+  float x = _holoUnitSprite->getTexture()->getSize().x;
+  float y = _holoUnitSprite->getTexture()->getSize().y;
+  _holoUnitSprite->setScale(_mapGraphicProperties->cellWidth()  / x,
+                            _mapGraphicProperties->cellHeight() / y);
 }
 
 
@@ -70,26 +82,9 @@ void StateMovingUnit::moveUnitRight() {
 
 void StateMovingUnit::draw()
 {
-//  graphics::GraphicsEngine::draw(_holoUnit);
+  _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
+  _holoUnit->drawAtCell(_holoUnitPosition, _mapGraphicProperties);
 
-  auto p(Status::battle()->map()->graphicsProperties());
-
-  /// \todo set sprite accordingly to the unis at original coordinates
-  auto image(resources::ResourcesManager::getImage("soldiers"));
-
-  float x = image->sprite()->getTexture()->getSize().x;
-  float y = image->sprite()->getTexture()->getSize().y;
-  image->sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
-
-# ifdef DEBUG
-  // we suppose the sprite is always larger than the cell
-  if (x < p->cellWidth() || y < p->cellHeight()) {
-    ERROR("Sprite scale failure");
-  }
-# endif
-
-  /// \todo own sprite, not a copy (or else affect every sprite...)
-  image->sprite()->setColor(sf::Color(127, 127, 127, 100));
-
-  image->drawAtCell(_holoUnitPosition, p);
+  /// \todo should only the graphics engine be allowed to draw ?
+  // graphics::GraphicsEngine::draw(_holoUnitSprite);
 }
