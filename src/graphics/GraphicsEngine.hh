@@ -41,6 +41,12 @@ public:
   static void drawScene(const std::shared_ptr<Battle> battle);
 
   /**
+   * \brief Draw the interface of the current Player.
+   * \note called by a State
+   */
+  static void drawInterface();
+
+  /**
    * \brief _window setter.
    */
   static void setWindow(std::unique_ptr<sf::RenderWindow> window);
@@ -94,12 +100,6 @@ public:
 private:
   /// Draw the map background.
   static void drawBackground();
-
-  /**
-   * \brief Draw the interface of the current Player.
-   * \param battle Battle to get the current Player.
-   */
-  static void drawInterface(const std::shared_ptr<Battle> battle);
 
   /**
    * \brief Draws cells content (terrain, unit).

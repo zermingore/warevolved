@@ -5,6 +5,7 @@
 #include <common/Status.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
+#include <graphics/GraphicsEngine.hh>
 
 
 StatePlaying::StatePlaying()
@@ -22,4 +23,9 @@ StatePlaying::StatePlaying()
   _evtMgr->registerEvent(e_input::SELECTION_1, [=] { player->select(); });
 
   addInterfaceElement(player->cursor());
+}
+
+
+void StatePlaying::draw() {
+  graphics::GraphicsEngine::drawInterface();
 }

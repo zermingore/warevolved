@@ -23,7 +23,6 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
   // draw the interface of current_player
   drawGrid(battle->map());
-  drawInterface(battle);
 
   drawState();
 
@@ -34,18 +33,6 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   _window->display();
 }
 
-
-void GraphicsEngine::drawInterface(const std::shared_ptr<Battle> battle)
-{
-  auto interface(Status::interface());
-
-  // Draw every interface elements related to the current context
-  for (const auto& elt: interface->elements())
-  {
-    elt->update(battle->map()->graphicsProperties());
-    elt->draw();
-  }
-}
 
 
 void GraphicsEngine::drawState() {
@@ -181,6 +168,20 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
   }
 
   image->drawAtCell(unit->coords(), p);
+}
+
+
+void GraphicsEngine::drawInterface()
+{
+  auto interface(Status::interface());
+  auto graphicsProperties(Status::battle()->map()->graphicsProperties());
+
+  // Draw every interface elements related to the current context
+  for (const auto& elt: interface->elements())
+  {
+    elt->update(graphicsProperties);
+    elt->draw();
+  }
 }
 
 

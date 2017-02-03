@@ -19,6 +19,15 @@ class StatePlaying: public State
 public:
   /// registers to callbacks
   StatePlaying();
+
+  /// Default destructor
+  ~StatePlaying() = default;
+
+
+  /**
+   * \brief Draw the player interface
+   */
+  virtual void draw();
 };
 
 
