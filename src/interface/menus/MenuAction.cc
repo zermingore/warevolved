@@ -52,11 +52,7 @@ void MenuAction::moveUnit() {
 
 void MenuAction::waitUnit()
 {
-  NOTICE("order: wait unit");
-
-//  Status::battle()->map()->selectUnit(cursor_coords);
-  Status::battle()->map()->moveUnit(_clickedCell);
-
+  Status::battle()->map()->moveUnit(_coords);
   Status::clearStates();
 }
 
