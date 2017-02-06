@@ -42,36 +42,41 @@ public:
   State();
 
   /**
-   * \brief Destructor.
+   * \brief Default destructor
    */
   ~State() = default;
 
 
   /**
    * \brief Set specific State's attributes
-   * \param attributes Attributes list
+   * \param head head of the attributes list
+   * \param attributes rest of the attributes list
    */
-  // template<typename... Attributes>
-  // virtual void setAttributes(Attributes... attributes) {}; /// \todo = 0
-
-  void setAttributes() { PRINTF("[State] Done setting attributes"); }
-
   template<typename Head, typename... Tail>
   void setAttributes(Head head, Tail... attributes) {
     setAttribute(head);
     setAttributes(attributes...);
   }
 
+  /**
+   * \brief Set the current attribute of the attributes list
+   * \param head current head of the list
+   */
   template<typename Attribute>
   void setAttribute(std::shared_ptr<Attribute> head) {
     _attributes.push_back(head);
-    ERROR("[State] nb attr", _attributes.size());
   }
+
+  /**
+   * \brief Set attribute tail recursion (attributes list empty)
+   */
+  void setAttributes() {}
+
 
   /**
    * \brief Fetch the attributes from the _attributes vector
    */
-  virtual void fetchAttributes() {}
+  virtual void fetchAttributes() {} /// \todo =0
 
 
   /**
@@ -120,10 +125,6 @@ protected:
   Coords _cursorCoords; ///< Cursor's coordinates
 
   std::vector<std::shared_ptr<void>> _attributes; ///< pointer on Abstract attribute
-
-//  template <typename T> class _attr;
-
-//  std::vector<template <typename T>> _attrs;
 };
 
 

@@ -42,7 +42,7 @@ public:
 
   /**
    * \brief Save the menu coordinates.
-   * \todo also save selected entry.
+   * \todo suspend() should also save selected entry.
    */
   void suspend();
 
@@ -56,26 +56,32 @@ public:
    */
   void draw();
 
-//  void setAttribute();
-
-  void getAttributeValue();
-
-
-  void fetchAttributes();
 
   /**
-   * \brief _menuCoords setter
-   * \param c New menu coordinates
+   * \brief Fetch the attribute from thle list
+   * \note Expects one attribute: menu coordinates.
+   * \note Aborts if no attribute was found
    */
-  // void setMenuCoordinates(Coords c) { _menuCoords = c; }
+  void fetchAttributes() final;
+
 
 
 private:
-  // Cursor motion in the menu
+  /**
+   * \brief Highlights the entry bellow the current one
+   * \note loops on the first entry if called on the last entry
+   */
   void moveDown();
+
+  /**
+   * \brief Highlights the entry on top of the current one
+   * \note loops on the last entry if called on the first one
+   */
   void moveUp();
 
-  /// Validate menu entry selection
+  /**
+   * \brief Validates the current entry selected
+   */
   void validate();
 
   /**
@@ -85,17 +91,7 @@ private:
 
 
   std::shared_ptr<interface::InGameMenu> _menu; ///< menu associated to the state
-
-  Coords _menuCoords; ///> menu coordinates
-
-
-
-  int test_void(std::shared_ptr<void> p);
-  int test_int(std::shared_ptr<int> p);
-
-  template<typename T>
-  int test_t(T t);
-
+  Coords _menuCoords;                           ///> menu coordinates
 };
 
 

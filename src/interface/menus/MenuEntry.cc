@@ -47,9 +47,7 @@ void MenuEntry::draw()
 
 
 
-void MenuEntry::execute()
-{
-  PRINTF("executing", (int) _id);
+void MenuEntry::execute() {
   _callback();
 }
 
@@ -61,8 +59,6 @@ void MenuEntry::setLabelName(e_entry entry)
   {
     case e_entry::MOVE:
       _labelName = "Move";
-      // _callback = // {map ? player ? unit ?}->moveUnit
-      // unit: use FoV, movement, inventory, ...
       break;
     case e_entry::WAIT:
       _labelName = "Wait";
@@ -80,7 +76,7 @@ void MenuEntry::setLabelName(e_entry entry)
     default:
       _labelName = "## NOT FOUND ##";
       ERROR("No label found for e_entry", static_cast<int> (entry));
-      assert(false);
+      assert(!"No label found");
       break;
   }
 }

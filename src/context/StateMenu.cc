@@ -17,11 +17,11 @@ StateMenu::StateMenu(e_state state)
   : State()
 {
   // browsing entries
-  _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUp();    });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveDown();  });
+  _evtMgr->registerEvent(e_input::MOVE_UP_1,   [=] { moveUp();   });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { moveDown(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { validate();  });
-  _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();      });
+  _evtMgr->registerEvent(e_input::SELECTION_1, [=] { validate(); });
+  _evtMgr->registerEvent(e_input::EXIT_1,      [=] { exit();     });
 
 
   // Building the menu depending on the State
@@ -36,15 +36,6 @@ StateMenu::StateMenu(e_state state)
     case e_state::ACTION_MENU:
       _menu = std::make_shared<interface::MenuAction> (state, _menuCoords);
       break;
-
-    /// \todo State ActionMenu
-    // case e_state::ACTION_MENU:
-    //   _menu = std::make_shared<interface::ActionMenu> ();
-    //   break;
-
-    // case e_state::SELECTION_UNIT: // is it really a menu ?
-    //   _menu = std::make_shared<interface::SelectionUnit> ();
-    //   break;
 
     default:
       ERROR("StateMenu() called with State", (int) Status::state());
@@ -63,15 +54,9 @@ void StateMenu::suspend()
 
 void StateMenu::resume()
 {
-  NOTICE("StateMenu::resume()");
-
-  fetchAttributes();
   // retrieve coordinates from the attributes
   if (_attributes.size()) {
-    auto p = std::static_pointer_cast<Coords> (_attributes[0]);
-    _menuCoords.x = p->x;
-    _menuCoords.y = p->y;
-    NOTICE("_________________________ attr:", _menuCoords.x, _menuCoords.y);
+    fetchAttributes();
   }
 
   _menu->setCoords(_menuCoords);
@@ -102,53 +87,19 @@ void StateMenu::fetchAttributes()
 {
   if (!_attributes.size()) {
     ERROR("StateMenu::fetchAttributes called without available attributes");
+    assert(!"No attribute found");
     return;
   }
 
-  auto pCoords = std::static_pointer_cast<Coords> (_attributes[0]);
-  NOTICE("Coordinates:", pCoords->x, pCoords->y);
+  auto p = std::static_pointer_cast<Coords> (_attributes[0]);
+  _menuCoords.x = p->x;
+  _menuCoords.y = p->y;
+
+  // reset the attributes vector
+  _attributes.clear();
 }
 
 
-
-void StateMenu::draw()
-{
+void StateMenu::draw() {
   _menu->draw();
-}
-
-int StateMenu::test_void(std::shared_ptr<void> p)
-{
-  PRINTF("test_void here, transferring");
-  test_int(std::static_pointer_cast<int> (p));
-
-  // p = std::make_shared<int> (3);
-  // std::shared_ptr<int> ip = std::static_pointer_cast<int> (p);
-
-
-  // if (typeid(int) == typeid(2))
-  //   NOTICE("Success");
-  // else
-  //   NOTICE("Failure");
-
-//  test_int((std::make_shared<int>) (p));
-//  PRINTF("test_void: VOID PTR value:", (int) (*p));
-  return 0;
-}
-
-int StateMenu::test_int(std::shared_ptr<int> p)
-{
-  PRINTF("test_int: p value:", *p);
-  return 0;
-}
-
-
-template<typename T>
-int StateMenu::test_t(T t)
-{
-  if (typeid(int) == typeid(t))
-    NOTICE("Success");
-  else
-    NOTICE("Failure");
-
-  return 0;
 }

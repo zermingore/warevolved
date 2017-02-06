@@ -44,8 +44,6 @@ void Player::moveCursorRight() {
 
 void Player::select()
 {
-  PRINTF("Player->select()");
-
   /// \todo check selectable before push
 
   if (Status::battle()->map()->unit(_cursor->coords())) {
