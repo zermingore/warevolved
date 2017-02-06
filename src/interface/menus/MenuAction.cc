@@ -3,6 +3,8 @@
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
 #include <context/State.hh>
+#include <game/Player.hh>
+#include <interface/Cursor.hh>
 
 
 namespace interface {
@@ -54,6 +56,9 @@ void MenuAction::waitUnit()
 {
   Status::battle()->map()->moveUnit(_coords);
   Status::clearStates();
+
+  // setting the cursor over the freshly moved unit
+  Status::player()->cursor()->setCoords(_coords);
 }
 
 
