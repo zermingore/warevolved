@@ -54,6 +54,7 @@ void Player::select()
   else {
     Status::pushState(e_state::MAP_MENU);
   }
+  Status::currentState()->resume();
 }
 
 

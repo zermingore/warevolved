@@ -61,6 +61,15 @@ public:
   void getAttributeValue();
 
 
+  void fetchAttributes();
+
+  /**
+   * \brief _menuCoords setter
+   * \param c New menu coordinates
+   */
+  // void setMenuCoordinates(Coords c) { _menuCoords = c; }
+
+
 private:
   // Cursor motion in the menu
   void moveDown();

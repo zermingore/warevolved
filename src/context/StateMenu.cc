@@ -56,12 +56,24 @@ StateMenu::StateMenu(e_state state)
 
 void StateMenu::suspend()
 {
+  /// \todo set menu at optimal coordinates (avoid hiding units for instance)
   _menuCoords = _menu->coords();
   /// \todo save selected entry
 }
 
 void StateMenu::resume()
 {
+  NOTICE("StateMenu::resume()");
+
+  fetchAttributes();
+  // retrieve coordinates from the attributes
+  if (_attributes.size()) {
+    auto p = std::static_pointer_cast<Coords> (_attributes[0]);
+    _menuCoords.x = p->x;
+    _menuCoords.y = p->y;
+    NOTICE("_________________________ attr:", _menuCoords.x, _menuCoords.y);
+  }
+
   _menu->setCoords(_menuCoords);
   _menu->build();
 }
@@ -86,14 +98,21 @@ void StateMenu::exit() {
 }
 
 
-void StateMenu::draw()
+void StateMenu::fetchAttributes()
 {
-  if (_attributes.size())
-  {
-    auto pCoords = std::static_pointer_cast<Coords> (_attributes[0]);
-    NOTICE("Coordinates:", pCoords->x, pCoords->y);
+  if (!_attributes.size()) {
+    ERROR("StateMenu::fetchAttributes called without available attributes");
+    return;
   }
 
+  auto pCoords = std::static_pointer_cast<Coords> (_attributes[0]);
+  NOTICE("Coordinates:", pCoords->x, pCoords->y);
+}
+
+
+
+void StateMenu::draw()
+{
   _menu->draw();
 }
 

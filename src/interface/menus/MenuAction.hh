@@ -19,17 +19,6 @@ enum class e_state;
 namespace interface {
 
 
-  // merge with MenuSelectionUnit ?
-  // The result in MenuAction
-
-  // A unit is selected -> we just need to test if it was 'used' before
-  // (do not re-allow to move it)
-
-  // But the actions are the same if it moved or not
-  // (shoot, heal, ...)
-
-
-
 /**
  * \class MenuAction
  * \brief Builds the menu displaying possible actions for a unit being played

@@ -34,6 +34,7 @@ StateMovingUnit::StateMovingUnit()
 
       // giving the next state (action menu) the original unit position
       Status::currentState()->setAttributes(std::make_shared<Coords> (_holoUnitPosition));
+      Status::currentState()->resume();
     });
 
   _evtMgr->registerEvent(e_input::EXIT_1, [=] {

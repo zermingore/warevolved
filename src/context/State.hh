@@ -68,6 +68,10 @@ public:
     ERROR("[State] nb attr", _attributes.size());
   }
 
+  /**
+   * \brief Fetch the attributes from the _attributes vector
+   */
+  virtual void fetchAttributes() {}
 
 
   /**

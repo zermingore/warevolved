@@ -2,6 +2,7 @@
 #include <interface/menus/MenuEntry.hh>
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
+#include <context/State.hh>
 
 
 namespace interface {
@@ -45,6 +46,7 @@ void MenuAction::cancel() {
 
 void MenuAction::moveUnit() {
   Status::pushState(e_state::MOVING_UNIT);
+  Status::currentState()->resume();
 }
 
 
