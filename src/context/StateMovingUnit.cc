@@ -29,7 +29,6 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { moveUnitRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] {
-      PRINTF("selection in MovingUnit:", _holoUnitPosition.x, _holoUnitPosition.y);
       Status::pushState(e_state::ACTION_MENU);
 
       // giving the next state (action menu) the original unit position

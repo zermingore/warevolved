@@ -5,6 +5,7 @@
 #include <context/State.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
+#include <game/units/Unit.hh>
 
 
 namespace interface {
@@ -19,15 +20,18 @@ MenuAction::MenuAction(e_state state, Coords clicked_cell)
 
 void MenuAction::build()
 {
-  /// \todo add condition (not moved / ...)
   if (_state == e_state::SELECTION_UNIT)
   {
-    auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
-    entry->setCallback( [=] { moveUnit(); });
-    _entries.push_back(entry);
+    /// \todo use other coordinates as the menu ones
+    if (Status::battle()->map()->unit(_coords)->played() == false)
+    {
+      auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
+      entry->setCallback( [=] { moveUnit(); });
+      _entries.push_back(entry);
+    }
   }
 
-  /// \todo add condition (not moved / ...)
+  /// \todo add actions (not moved / ...)
   if (_state == e_state::ACTION_MENU)
   {
     PRINTF("MenuAction::build - state == ACTION_MENU");
@@ -55,6 +59,7 @@ void MenuAction::moveUnit()
 
 void MenuAction::waitUnit()
 {
+  /// \todo use other coordinates as the menu ones
   Status::battle()->map()->moveUnit(_coords);
   Status::clearStates();
 

@@ -80,11 +80,14 @@ void Map::moveUnit(const Coords c)
 {
   if (_selectedUnit->coords() == c)
   {
-    ERROR("move unit: src == dst");
-    return;
+    ERROR("Moving unit at coordinates:", c.x, c.y);
+    assert("!move unit: src == dst");
   }
 
   Coords old(_selectedUnit->coords());
+  assert(_cells[old.x][old.y]->unit()->played() == false);
+
+  _cells[old.x][old.y]->unit()->setPlayed(true);
   _cells[old.x][old.y]->removeUnit();
   _selectedUnit->setCellCoordinates(c);
   _cells[c.x][c.y]->setUnit(_selectedUnit);
