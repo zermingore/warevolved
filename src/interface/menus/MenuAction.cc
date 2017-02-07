@@ -46,7 +46,8 @@ void MenuAction::cancel() {
 }
 
 
-void MenuAction::moveUnit() {
+void MenuAction::moveUnit()
+{
   Status::pushState(e_state::MOVING_UNIT);
   Status::currentState()->resume();
 }

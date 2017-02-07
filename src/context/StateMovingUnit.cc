@@ -61,23 +61,34 @@ void StateMovingUnit::exit()
   Status::popCurrentState();
 }
 
+void StateMovingUnit::resume()
+{
+  _nbColumns = Status::battle()->map()->nbColumns();
+  _nbLines = Status::battle()->map()->nbLines();
+}
 
 
 // _________________________  Graphical Units motion ________________________ //
-void StateMovingUnit::moveUnitUp() {
-  --_holoUnitPosition.y;
+void StateMovingUnit::moveUnitUp()
+{
+  if (_holoUnitPosition.y > 0) {
+    --_holoUnitPosition.y;
+  }
 }
 
 void StateMovingUnit::moveUnitDown() {
-  ++_holoUnitPosition.y;
+  _holoUnitPosition.y = std::min(_holoUnitPosition.y + 1, _nbLines - 1);
 }
 
-void StateMovingUnit::moveUnitLeft() {
-  --_holoUnitPosition.x;
+void StateMovingUnit::moveUnitLeft()
+{
+  if (_holoUnitPosition.x > 0) {
+    --_holoUnitPosition.x;
+  }
 }
 
 void StateMovingUnit::moveUnitRight() {
-  ++_holoUnitPosition.x;
+  _holoUnitPosition.x = std::min(_holoUnitPosition.x + 1, _nbColumns - 1);
 }
 
 

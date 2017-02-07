@@ -9,10 +9,14 @@ Main menu
 Cursor (interface) in its thread
 
 * TODO Roadmap
-** TODO Hide cursor while playing unit
+** DONE Hide cursor while playing unit
+   CLOSED: [2017-02-06 Mo 20:04]
 ** TODO pathfinding
 ** TODO Unit played
 ** TODO Next turn: players switch
+** DONE While moving a unit, lock selection in the map
+   CLOSED: [2017-02-07 Di 07:27]
+** TODO While moving a unit, fade or hide original unit sprite
 
 
 * DONE clean

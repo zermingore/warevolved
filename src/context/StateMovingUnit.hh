@@ -10,7 +10,7 @@
 # include <common/using.hh> // Coords
 
 
-# include <game/Map.hh>
+# include <game/Map.hh> /// \todo forward declaration
 
 namespace resources {
   class Image;
@@ -42,6 +42,12 @@ public:
   virtual void draw();
 
 
+  /**
+   * \brief Resumes the menu. Updates its copy of the map dimensions
+   */
+  void resume() final;
+
+
 private:
   // Units motion
   void moveUnitUp();
@@ -56,6 +62,9 @@ private:
   std::shared_ptr<Map::MapGraphicsProperties> _mapGraphicProperties;
   std::shared_ptr<resources::Image> _holoUnit; ///< 'cursor' moving unit
   std::shared_ptr<sf::Sprite> _holoUnitSprite; ///< 'cursor' sprite
+
+  size_t _nbColumns; ///< map number of columns
+  size_t _nbLines;   ///< map number of lines
 };
 
 
