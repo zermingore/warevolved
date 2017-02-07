@@ -12,11 +12,14 @@ Cursor (interface) in its thread
 ** DONE Hide cursor while playing unit
    CLOSED: [2017-02-06 Mo 20:04]
 ** TODO pathfinding
-** TODO Unit played
-** TODO Next turn: players switch
+** DONE Unit played
+   CLOSED: [2017-02-07 Di 19:47]
+** DONE Next turn: players switch
+   CLOSED: [2017-02-07 Di 19:47]
 ** DONE While moving a unit, lock selection in the map
    CLOSED: [2017-02-07 Di 07:27]
 ** TODO While moving a unit, fade or hide original unit sprite
+** TODO A player must be able to move only its own Units
 
 
 * DONE clean

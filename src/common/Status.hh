@@ -88,6 +88,12 @@ public:
   static void clearStates();
 
 
+  /**
+   * \brief Switch to the next Player
+   */
+  static void nextPlayer();
+
+
   // _______________________________ Wrappers _______________________________ //
   /**
    * \brief wrapper to the battle to get the current player

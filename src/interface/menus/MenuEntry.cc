@@ -64,7 +64,7 @@ void MenuEntry::setLabelName(e_entry entry)
       _labelName = "Wait";
       break;
     case e_entry::NEXT_TURN:
-      _labelName = "Next Turn";
+      _labelName = "Next\n  Turn";
       break;
     case e_entry::ATTACK:
       _labelName = "Attack";

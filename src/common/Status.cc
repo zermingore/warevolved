@@ -23,6 +23,11 @@ Status::~Status()
 }
 
 
+void Status::blockInputs() {
+  _inputProcessor->keyManager()->blockInputs();
+}
+
+
 e_state Status::state()
 {
   assert(!_states.empty() && "_states stack is empty, exiting...");
@@ -73,6 +78,21 @@ void Status::clearStates()
     popCurrentState();
   }
 }
+
+
+void Status::nextPlayer()
+{
+  blockInputs();
+
+  // Clearing states, totaly
+  _battle->nextPlayer();
+  clearStates();
+  popCurrentState();
+
+  /// \todo manage IA case: do not push a new state playing
+  pushState(e_state::PLAYING);
+}
+
 
 
 std::shared_ptr<Player> Status::player() {
