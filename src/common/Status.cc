@@ -23,8 +23,8 @@ Status::~Status()
 }
 
 
-void Status::blockInputs() {
-  _inputProcessor->keyManager()->blockInputs();
+void Status::blockInputs(size_t duration) {
+  _inputProcessor->keyManager()->blockInputs(duration);
 }
 
 
@@ -56,7 +56,7 @@ void Status::pushState(e_state state)
   _states.push({state, new_state});
 
   // Force ignoring current active inputs
-  _inputProcessor->keyManager()->blockInputs();
+  Status::blockInputs();
 }
 
 
@@ -66,7 +66,7 @@ void Status::popCurrentState()
   _states.pop();
 
   // Force ignoring current active inputs
-  _inputProcessor->keyManager()->blockInputs();
+  Status::blockInputs();
 }
 
 
@@ -82,7 +82,7 @@ void Status::clearStates()
 
 void Status::nextPlayer()
 {
-  blockInputs();
+  Status::blockInputs();
 
   // Clearing states, totaly
   _battle->nextPlayer();

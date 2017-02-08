@@ -110,6 +110,14 @@ public:
 
 
 private:
+  /**
+   * \brief Ignore every input for a short time period (default: 100ms)
+   * \param duration Delay in ms before re-considering input
+   * \note Useful when changing State to ignore involuntary but valid input
+   */
+  static void blockInputs(size_t duration = 100);
+
+
   ///< States stack: storing a pointer to the state and its (more specific) type
   static std::stack<std::pair<e_state, std::shared_ptr<State>>> _states;
 
