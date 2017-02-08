@@ -198,8 +198,15 @@ public:
    * \param type type of the new unit
    * \param line line to set the new unit
    * \param column column to set the new unit
+   * \param player_id player to which the unit belongs to
+   *
+   * \note player_id defaults to -1
+   *   In this case, the unit is assigned to the current player
    */
-  void newUnit(const e_unit type, const size_t column, const size_t line);
+  void newUnit(const e_unit type,
+               const size_t column,
+               const size_t line,
+               int player_id = -1);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates

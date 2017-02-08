@@ -19,7 +19,10 @@ Cursor (interface) in its thread
 ** DONE While moving a unit, lock selection in the map
    CLOSED: [2017-02-07 Di 07:27]
 ** TODO While moving a unit, fade or hide original unit sprite
-** TODO A player must be able to move only its own Units
+** DONE A player must be able to move only its own Units
+   CLOSED: [2017-02-08 Mi 19:52]
+** TODO Moved unit's sprite should be faded
+** TODO Disallow move on unit
 
 
 * DONE clean

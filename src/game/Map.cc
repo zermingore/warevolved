@@ -102,7 +102,10 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(const e_unit type, const size_t column, const size_t line)
+void Map::newUnit(const e_unit type,
+                  const size_t column,
+                  const size_t line,
+                  int player_id)
 {
   std::shared_ptr<Unit> new_unit;
 
@@ -117,7 +120,11 @@ void Map::newUnit(const e_unit type, const size_t column, const size_t line)
       return;
   }
 
-  auto player_id = Status::battle()->currentPlayer();
+  // assign the unit to the given player or to the current one
+  if (player_id == -1) {
+    player_id = Status::battle()->currentPlayer();
+  }
+
   new_unit->setCellCoordinates(Coords(column, line));
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);

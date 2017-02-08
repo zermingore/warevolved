@@ -23,7 +23,8 @@ void MenuAction::build()
   if (_state == e_state::SELECTION_UNIT)
   {
     /// \todo use other coordinates as the menu ones
-    if (Status::battle()->map()->unit(_coords)->played() == false)
+    auto unit(Status::battle()->map()->unit(_coords));
+    if (unit->played() == false && unit->playerId() == Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
       entry->setCallback( [=] { moveUnit(); });
@@ -34,8 +35,6 @@ void MenuAction::build()
   /// \todo add actions (not moved / ...)
   if (_state == e_state::ACTION_MENU)
   {
-    PRINTF("MenuAction::build - state == ACTION_MENU");
-
     auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
     entry->setCallback( [=] { waitUnit(); });
     _entries.push_back(entry);
