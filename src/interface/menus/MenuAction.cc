@@ -20,10 +20,12 @@ MenuAction::MenuAction(e_state state, Coords clicked_cell)
 
 void MenuAction::build()
 {
+  auto map(Status::battle()->map());
+
   if (_state == e_state::SELECTION_UNIT)
   {
     /// \todo use other coordinates as the menu ones
-    auto unit(Status::battle()->map()->unit(_coords));
+    auto unit(map->unit(_coords));
     if (unit->played() == false && unit->playerId() == Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
@@ -35,9 +37,14 @@ void MenuAction::build()
   /// \todo add actions (not moved / ...)
   if (_state == e_state::ACTION_MENU)
   {
-    auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
-    entry->setCallback( [=] { waitUnit(); });
-    _entries.push_back(entry);
+    /// \todo use other coordinates as the menu ones
+    // forbid to move a unit over another one
+    if (!map->unit(_coords))
+    {
+      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
+      entry->setCallback( [=] { waitUnit(); });
+      _entries.push_back(entry);
+    }
   }
 
   addCancelEntry( [=] { cancel(); } );
