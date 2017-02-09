@@ -57,6 +57,7 @@ game/Map.cc                         \
 game/Cell.cc                        \
 game/applications/Battle.cc         \
 game/units/Unit.cc                  \
+game/units/UnitFactory.cc           \
 game/units/Soldier.cc               \
 game/Player.cc                      \
 \

@@ -9,7 +9,7 @@
 #include <common/enums/terrains.hh>
 #include <common/enums/units.hh>
 #include <game/applications/Battle.hh>
-#include <game/units/Soldier.hh>
+#include <game/units/UnitFactory.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
 
@@ -107,18 +107,7 @@ void Map::newUnit(const e_unit type,
                   const size_t line,
                   int player_id)
 {
-  std::shared_ptr<Unit> new_unit;
-
-  switch (type)
-  {
-    case e_unit::SOLDIERS:
-      new_unit = std::make_shared<Soldier> ();
-      break;
-
-    default:
-      assert(!"Unable to match this unit type");
-      return;
-  }
+  auto new_unit(UnitFactory::createUnit(type));
 
   // assign the unit to the given player or to the current one
   if (player_id == -1) {
