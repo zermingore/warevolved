@@ -1,44 +1,34 @@
 #include <game/units/Unit.hh>
-#include <common/include.hh>
-#include <resources/ResourcesManager.hh>
-#include <resources/Image.hh>
 #include <game/Cell.hh>
 
 
-Unit::Unit() :
-  _imageId(0),
-  _hp(0),
-  _attackValue(0),
-  _played(false),
-  _playerId(0),
-  _team(nullptr),
-  _targetable(false)
+Unit::Unit()
+  : _hp(0)
+  , _attackValue(0)
+  , _range(0, 0)
+  , _motionValue(0)
+  , _played(false)
+  , _playerId(0)
+  , _team(nullptr)
+  , _targetable(false)
 {
   _targets = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
 }
 
-Unit::Unit(std::string &name) :
-  _imageId(0),
-  _name(name),
-  _hp(0),
-  _attackValue(0),
-  _range(0, 0),
-  _motionValue(4),
-  _played(false),
-  _playerId(0),
-  _team(nullptr),
-  _targetable(false)
+Unit::Unit(std::string &name)
+  : Unit::Unit()
 {
-  _targets = std::make_shared<std::vector<std::shared_ptr<Cell>>> ();
+  _name = name;
+//  buildUnit(name);
 }
 
-int Unit::receiveDamages(unsigned int damages)
+int Unit::receiveDamages(const unsigned int damages)
 {
   _hp -= damages;
   return _hp;
 }
 
-void Unit::setCoords(Coords location)
+void Unit::setCoords(const Coords location)
 {
   _coords = location;
   _attackCoords = _coords;

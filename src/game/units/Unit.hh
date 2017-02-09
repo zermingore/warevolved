@@ -30,6 +30,12 @@ public:
    */
   explicit Unit(std::string &name);
 
+  /**
+   * \brief Default destructor
+   */
+  ~Unit() = default;
+
+
   // __________________________ Getters / Setters __________________________ //
   int hp() { return _hp; } ///< _hp getter
   int attackValue() { return _attackValue; } ///< _attackValue getter
@@ -57,13 +63,13 @@ public:
    * \brief sets unit's position and _played to true (we moved the unit)
    * \param coords: cell's coordinates to set unit's position
    */
-  void setCoords(Coords coords);
+  void setCoords(const Coords coords);
 
   /**
    * \brief sets unit's attack coordinates
    * \param coords: cell's coordinates to set unit's position
    */
-  void setAttackCoords(Coords coords) {  _attackCoords = coords; }
+  void setAttackCoords(const Coords coords) {  _attackCoords = coords; }
 
   /**
    * \brief unit's name getter
@@ -75,7 +81,7 @@ public:
    * \brief receive damages
    * \return left Health Points
    */
-  virtual int receiveDamages(unsigned int damages);
+  virtual int receiveDamages(const unsigned int damages);
 
   /**
    * \brief _motionValue getter
@@ -108,18 +114,6 @@ public:
   void setPlayerId(unsigned int player_id) { _playerId = player_id; }
 
   /**
-   * \brief _textureId getter
-   * \return Unit Texture id
-   *   matching the one in the Resources Manager std::map
-   */
-  unsigned int textureId() { return _textureId; }
-
-  /**
-   * \brief _textureId setter
-   */
-  void setTextureId(unsigned int texture_id) { _textureId = texture_id; }
-
-  /**
    * \brief _played setter
    * \param unit's played status
    */
@@ -133,8 +127,9 @@ public:
    * \brief _targets getter
    * \return _targets list of reachable targets
    */
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targets()
-  { return _targets; }
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> targets() {
+    return _targets;
+  }
 
   /**
    * \brief _targetIndex setter
@@ -162,7 +157,7 @@ public:
    *   according to the Unit skills
    * \param menu inGameMenu in which we add relevant entries
    */
-  virtual void fillActions(std::vector<interface::MenuEntry>&) {} ///\todo use
+  // virtual void fillActions(std::vector<interface::MenuEntry>&) {} ///\todo use
 
   /**
    * \brief runs attack / strikes backs (if any) cycles
@@ -178,8 +173,6 @@ public:
 
 
 protected:
-  unsigned int _textureId; ///< Texture id in the Resources Manager std::map
-  unsigned int _imageId; ///< Image id in the Resources Manager std::map
   std::string _name; ///< Unit's class name
 
   int _hp; ///< Health Points (-1: infinite)

@@ -2,16 +2,14 @@
 
 
 Soldier::Soldier()
+  : Unit()
 {
-  _name = "soldiers";
+  _name = "soldiers"; /// \todo do not use name here, move into a factory
   _fullName = "John Doe";
-  _imageId = 0;
   _hp = 15;
   _attackValue = 10;
   _range = std::make_pair(0, 3);
   _motionValue = 4;
-  _played = false;
-  _playerId = 0;
 }
 
 
