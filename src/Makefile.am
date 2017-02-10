@@ -29,6 +29,7 @@ pugixml/pugixml.cpp                 \
 core/Context.cc                     \
 \
 graphics/GraphicsEngine.cc          \
+graphics/MapGraphicsProperties.cc   \
 \
 resources/ResourcesManager.cc       \
 resources/Resource.cc               \

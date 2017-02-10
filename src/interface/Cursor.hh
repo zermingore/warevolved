@@ -65,7 +65,7 @@ public:
    * \brief Updates the graphics properties of the cursor
    * \param properties map graphics properties to use
    */
-  void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
+  void update();
 
 
   void draw() final;

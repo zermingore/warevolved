@@ -1,5 +1,6 @@
 #include <resources/Image.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 namespace resources {
@@ -92,14 +93,6 @@ void Image::setFileName(std::string file_name)
 }
 
 
-void Image::setPosition(sf::Vector2f position)
-{
-  if (!_sprite) {
-    initSprite();
-  }
-  _sprite->setPosition(position);
-}
-
 
 void Image::setPosition(Coords position)
 {
@@ -107,6 +100,15 @@ void Image::setPosition(Coords position)
     initSprite();
   }
   _sprite->setPosition(sf::Vector2f(position.x, position.y));
+}
+
+
+void Image::setPosition(size_t x, size_t y)
+{
+  if (!_sprite) {
+    initSprite();
+  }
+  _sprite->setPosition(sf::Vector2f(x, y));
 }
 
 
@@ -194,17 +196,16 @@ void Image::reload(std::string file_name)
 }
 
 
-void Image::drawAtCell(const Coords c,
-                       const std::shared_ptr<Map::MapGraphicsProperties> p)
+void Image::drawAtCell(const Coords c)
 {
   if (!_sprite) {
     sprite();
   }
 
-  // Sprite position
-  sf::Vector2f pos;
-  pos.x = c.x * p->cellWidth()  + p->gridOffsetX();
-  pos.y = c.y * p->cellHeight() + p->gridOffsetY();
+  sf::Vector2f pos; // Sprite position
+  using p = graphics::MapGraphicsProperties;
+  pos.x = c.x * p::cellWidth()  + p::gridOffsetX();
+  pos.y = c.y * p::cellHeight() + p::gridOffsetY();
   _sprite->setPosition(pos);
 
   if (load()) {

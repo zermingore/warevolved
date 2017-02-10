@@ -5,6 +5,7 @@
 #include <game/Player.hh>
 #include <game/Map.hh>
 #include <interface/Cursor.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 Battle::Battle() :
@@ -17,6 +18,7 @@ Battle::Battle() :
 
 void Battle::initializeMap()
 {
+  graphics::MapGraphicsProperties::initialize();
   buildPlayers();
   buildMap();
 }

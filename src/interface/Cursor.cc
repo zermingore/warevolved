@@ -7,6 +7,7 @@
 
 #include <interface/Cursor.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 namespace interface {
@@ -58,13 +59,15 @@ bool Cursor::moveRight()
 }
 
 
-void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
+void Cursor::update()
 {
-  auto width(properties->cellWidth());
-  auto height(properties->cellHeight());
+  using p = graphics::MapGraphicsProperties;
 
-  _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
-  _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
+  auto width(p::cellWidth());
+  auto height(p::cellHeight());
+
+  _position.x = _coords.x * width +  p::gridOffsetX() + width / 2;
+  _position.y = _coords.y * height + p::gridOffsetY() + height / 2;
   _image->sprite()->setPosition(_position.x, _position.y);
 
   static float scale_factor = 1;
@@ -83,8 +86,7 @@ void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties
 }
 
 
-void Cursor::draw()
-{
+void Cursor::draw() {
   graphics::GraphicsEngine::draw(_image->sprite());
 }
 

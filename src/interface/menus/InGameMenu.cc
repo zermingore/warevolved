@@ -6,7 +6,7 @@
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/enums/states.hh>
-
+#include <graphics/MapGraphicsProperties.hh>
 
 
 namespace interface {
@@ -41,25 +41,25 @@ void InGameMenu::validate() {
 
 
 
-void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
+void InGameMenu::update()
 {
-  auto width(properties->cellWidth());
-  auto height(properties->cellHeight());
+  using p = graphics::MapGraphicsProperties;
 
   // _coords is filled by the player, with cursor coordinates
-  _position.x = _coords.x * width  + properties->gridOffsetX();
-  _position.y = _coords.y * height + properties->gridOffsetY();
+  _position.x = _coords.x * p::cellWidth()  + p::gridOffsetX();
+  _position.y = _coords.y * p::cellHeight() + p::gridOffsetY();
 
   // highlighting current selection
-  Coords selected_entry_pos(_position.x, _position.y + height * _selectedEntry);
-  _imageSelection->setPosition(selected_entry_pos);
+  _imageSelection->setPosition(_position.x,
+                               _position.y + p::cellHeight() * _selectedEntry);
 
   // update entries positions
   auto entry_index(0);
   for (auto entry: _entries)
   {
-    entry->setPosition(Coords(_position.x, _position.y + height * entry_index));
-    entry->update(properties);
+    entry->setPosition(Coords(_position.x,
+                              _position.y + p::cellHeight() * entry_index));
+    entry->update();
     ++entry_index;
   }
 }
@@ -79,7 +79,7 @@ void InGameMenu::close()
 
 void InGameMenu::draw()
 {
-  update(Status::battle()->map()->graphicsProperties());
+  update();
 
   for (auto entry: _entries) {
     entry->draw();

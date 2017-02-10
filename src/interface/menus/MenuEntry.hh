@@ -66,7 +66,7 @@ public:
   /**
    * \brief updates the graphical attributes of the entry
    */
-  void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
+  void update();
 
   /**
    * \brief Draws label and sprite of the entry, calling the graphics engine

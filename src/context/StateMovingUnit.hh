@@ -58,8 +58,6 @@ private:
   Coords _originalCoords;   ///< original unit coordinates
   Coords _holoUnitPosition; ///< Unit position 'cursor' (in cell)
 
-  ///< map graphics properties
-  std::shared_ptr<Map::MapGraphicsProperties> _mapGraphicProperties;
   std::shared_ptr<resources::Image> _holoUnit; ///< 'cursor' moving unit
   std::shared_ptr<sf::Sprite> _holoUnitSprite; ///< 'cursor' sprite
 

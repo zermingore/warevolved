@@ -14,22 +14,11 @@
 #include <game/Cell.hh>
 
 
-Map::MapGraphicsProperties::MapGraphicsProperties()
-  : _cellWidth(64)
-  , _cellHeight(64)
-  , _gridThickness(5)
-  , _gridOffsetX(0)
-  , _gridOffsetY(0)
-{
-}
-
 
 Map::Map(const size_t nb_columns, const size_t nb_lines)
   : _nbColumns(nb_columns)
   , _nbLines(nb_lines)
 {
-  _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
-
   for (auto col(0u); col < _nbColumns; ++col)
   {
     std::vector<std::shared_ptr<Cell>> vec(_nbLines);

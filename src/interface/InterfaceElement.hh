@@ -120,7 +120,7 @@ public:
   /**
    * \brief Updates the graphical attributes of the elements before rendering
    */
-  virtual void update(const std::shared_ptr<Map::MapGraphicsProperties> properties) = 0;
+  virtual void update() = 0;
 
 
   /**

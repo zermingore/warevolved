@@ -14,7 +14,6 @@
 
 
 class Map;
-class MapGraphicsProperties;
 class Cell;
 class Unit;
 class Battle;
@@ -118,8 +117,7 @@ private:
    * \param unit Unit to draw.
    * \param battle Battle to get the graphics properties of the current Player.
    */
-  static void drawUnit(const std::shared_ptr<Battle> battle,
-                       const std::shared_ptr<Unit> unit);
+  static void drawUnit(const std::shared_ptr<Unit> unit);
 
   /**
    * \brief Draws the elements related to the given State

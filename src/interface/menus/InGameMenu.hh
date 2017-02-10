@@ -54,7 +54,7 @@ public:
   /**
    * \brief updates the graphics attributes of the menu
    */
-  void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
+  void update();
 
   /**
    * \brief Draw the entries of the menu

@@ -3,18 +3,10 @@
 
 # include <resources/Resource.hh>
 # include <common/include.hh>
-
-
-/// \todo forward declaration of Map::MapGraphicsProperties
-# include <game/Map.hh>
-
-// class Map;
-// class Map::MapGraphicsProperties;
-
+# include <common/using.hh>
 
 
 namespace resources {
-
 
 /**
  * \class Image Resource type
@@ -69,8 +61,8 @@ public:
    * \brief sets _sprite position
    * \param position: _sprite vector position
    */
-  void setPosition(sf::Vector2f position);
   void setPosition(Coords position);
+  void setPosition(size_t x, size_t y);
 
 
   /**
@@ -141,9 +133,8 @@ public:
   /**
    * \brief draws the Image in the cell coords.x, coords.y
    * \param c coordinate to display the image
-   * \param p Map Graphics Properties (cells size, grid thickness, ...)
    */
-  void drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p);
+  void drawAtCell(const Coords c);
 
   /**
    * \brief draws the Image at _sprite's position
@@ -153,7 +144,7 @@ public:
 
 private:
   std::shared_ptr<sf::Texture> _texture; ///< texture data pointer
-  std::shared_ptr<sf::Sprite> _sprite; ///< Image sprite, allowing transformations
+  std::shared_ptr<sf::Sprite> _sprite;   ///< Image sprite, for transformations
   std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
 };
 

@@ -6,6 +6,7 @@
 #include <common/enums/states.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 #include <game/applications/Battle.hh>
 #include <resources/Image.hh>
 #include <interface/Cursor.hh>
@@ -42,15 +43,14 @@ StateMovingUnit::StateMovingUnit()
 
 
   // Graphical attributes initialization
-  _mapGraphicProperties = Status::battle()->map()->graphicsProperties();
   _holoUnit = resources::ResourcesManager::getImage("soldiers");
   _holoUnitSprite = _holoUnit->sprite();
 
   // explicitly using some floats for the division
   float x = _holoUnitSprite->getTexture()->getSize().x;
   float y = _holoUnitSprite->getTexture()->getSize().y;
-  _holoUnitSprite->setScale(_mapGraphicProperties->cellWidth()  / x,
-                            _mapGraphicProperties->cellHeight() / y);
+  using p = graphics::MapGraphicsProperties;
+  _holoUnitSprite->setScale(p::cellWidth()  / x, p::cellHeight() / y);
 }
 
 
@@ -94,7 +94,7 @@ void StateMovingUnit::moveUnitRight() {
 void StateMovingUnit::draw()
 {
   _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
-  _holoUnit->drawAtCell(_holoUnitPosition, _mapGraphicProperties);
+  _holoUnit->drawAtCell(_holoUnitPosition);
 
   /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnitSprite);

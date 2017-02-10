@@ -2,6 +2,7 @@
 #include <common/Status.hh>
 #include <game/applications/Battle.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 namespace interface {
@@ -17,8 +18,8 @@ MenuEntry::MenuEntry(e_entry entry)
   _label = std::make_shared<sf::Text> ();
 
   /// \todo better calculus, ratio dependent, eventually, text length dependent
-  const auto props(Status::battle()->map()->graphicsProperties());
-  _label->setCharacterSize((props->cellWidth() + props->cellHeight()) / 4);
+  using p = graphics::MapGraphicsProperties;
+  _label->setCharacterSize((p::cellWidth() + p::cellHeight()) / 4);
 
   /// \todo set font and label using a DB
   _font = resources::ResourcesManager::getFont("font_army");
@@ -27,12 +28,10 @@ MenuEntry::MenuEntry(e_entry entry)
 }
 
 
-void MenuEntry::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
+void MenuEntry::update()
 {
-  auto width(properties->cellWidth());
-  auto height(properties->cellHeight());
-
-  _image->setSize(width * 2, height);
+  using p = graphics::MapGraphicsProperties;
+  _image->setSize(p::cellWidth() * 2, p::cellHeight());
   _label->setPosition(_position.x, _position.y);
 }
 
