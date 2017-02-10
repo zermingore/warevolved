@@ -25,12 +25,6 @@ public:
   Unit();
 
   /**
-   * \brief build a Unit, given its name
-   * \brief name Unit's name
-   */
-  explicit Unit(std::string &name);
-
-  /**
    * \brief Default destructor
    */
   ~Unit() = default;
@@ -53,19 +47,16 @@ public:
    * \brief gets unit's position
    * \return unit's cell coordinates
    */
+
   Coords coords() { return _coords; }
 
   /**
    * \brief sets unit's position and _played to true (we moved the unit)
    * \param coords: cell's coordinates to set unit's position
    */
-  void setCoords(const Coords coords);
-
-  /**
-   * \brief unit's name getter
-   * \return unit's name value
-   */
-  virtual std::string name() { return _name; }
+  void setCoords(const Coords coords) {
+    _coords = coords;
+  }
 
   /**
    * \brief _playerId getter
@@ -97,13 +88,26 @@ public:
    */
   void setPlayed(bool played) { _played = played; }
 
+  /**
+   * \brief sprite getter
+   * \return a pointer on the Unit's sprite
+   */
+  auto sprite() { return _image->sprite(); }
+
+  /**
+   * \brief image getter
+   * \return a pointer on the Unit's image
+   */
+  auto image() { return _image; }
+
 
 protected:
-  std::string _name; ///< Unit's class name
-
   Coords _coords; ///< Unit's cell coordinates
   bool _played; ///< notify if the unit has already played this turn
   unsigned int _playerId; ///< the unit belongs to the player matching this id
+
+  std::shared_ptr<resources::Image> _image; ///< Unit Image
 };
+
 
 #endif /* !UNIT_HH_ */

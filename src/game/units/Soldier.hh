@@ -28,13 +28,6 @@ public:
    */
   Soldier();
 
-  /**
-   * \brief gets name and add grade abbreviated
-   * \return a string composed of the unit name and it's grade,
-   *   separated by a space
-   */
-  std::string name() { return _name; }
-
 
 private:
   std::string _fullName; ///< soldier's full name (first and last names)

@@ -140,13 +140,13 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
                               const std::shared_ptr<Unit> unit)
 {
   auto p(battle->map()->graphicsProperties());
+  auto sprite(unit->sprite());
 
-  auto image(resources::ResourcesManager::getImage(unit->name()));
   // image.sprite()->setColor(Status::player()->unitsColor());
 
-  float x = image->sprite()->getTexture()->getSize().x;
-  float y = image->sprite()->getTexture()->getSize().y;
-  image->sprite()->setScale(p->cellWidth() / x, p->cellHeight() / y);
+  float x = sprite->getTexture()->getSize().x;
+  float y = sprite->getTexture()->getSize().y;
+  sprite->setScale(p->cellWidth() / x, p->cellHeight() / y);
 
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
@@ -164,10 +164,10 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Battle> battle,
   // }
 
   if (unit->played()) {
-    image->sprite()->setColor(sf::Color(127, 127, 127, 191));
+    sprite->setColor(sf::Color(127, 127, 127, 191));
   }
 
-  image->drawAtCell(unit->coords(), p);
+  unit->image()->drawAtCell(unit->coords(), p);
 }
 
 

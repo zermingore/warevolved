@@ -4,6 +4,6 @@
 Soldier::Soldier()
   : Unit()
 {
-  _name = "soldiers"; /// \todo do not use name here, move into a factory
   _fullName = "John Doe";
+  _image = resources::ResourcesManager::getImage("soldiers");
 }
