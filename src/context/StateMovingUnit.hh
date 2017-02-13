@@ -31,6 +31,12 @@ public:
   StateMovingUnit();
 
   /**
+   * \brief Resets the unit's sprite
+   * \note It is necessary if the move was canceled
+   */
+  ~StateMovingUnit();
+
+  /**
    * \brief exits the current State
    */
   void exit();

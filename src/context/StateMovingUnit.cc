@@ -10,6 +10,7 @@
 #include <game/applications/Battle.hh>
 #include <resources/Image.hh>
 #include <interface/Cursor.hh>
+#include <game/units/Unit.hh>
 
 
 StateMovingUnit::StateMovingUnit()
@@ -51,6 +52,23 @@ StateMovingUnit::StateMovingUnit()
   float y = _holoUnitSprite->getTexture()->getSize().y;
   using p = graphics::MapGraphicsProperties;
   _holoUnitSprite->setScale(p::cellWidth()  / x, p::cellHeight() / y);
+
+
+  // Fading sprite at original position
+  auto unit(Status::battle()->map()->unit(_originalCoords));
+  assert(unit);
+  unit->sprite()->setColor(sf::Color(255, 255, 255, 160));
+}
+
+
+StateMovingUnit::~StateMovingUnit()
+{
+  auto unit(Status::battle()->map()->unit(_originalCoords));
+
+  // if the unit was moved, it is no longer existing at these original coordinates
+  if (unit) {
+    unit->sprite()->setColor(sf::Color(255, 255, 255, 255));
+  }
 }
 
 

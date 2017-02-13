@@ -2,7 +2,8 @@
 
 * TODO Roadmap
 ** TODO pathfinding
-** TODO While moving a unit, fade or hide original unit sprite
+** DONE While moving a unit, fade or hide original unit sprite
+   CLOSED: [2017-02-13 Mo 19:25]
 ** DONE Disallow move on unit
    CLOSED: [2017-02-09 Do 19:07]
 
