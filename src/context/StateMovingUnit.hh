@@ -3,6 +3,7 @@
  * \date November 25, 2016
  * \author Zermingore
  */
+
 #ifndef STATE_MOVING_UNIT_HH_
 # define STATE_MOVING_UNIT_HH_
 
@@ -10,11 +11,14 @@
 # include <common/using.hh> // Coords
 
 
-# include <game/Map.hh> /// \todo forward declaration
+namespace sf {
+  class Sprite;
+}
 
 namespace resources {
   class Image;
 }
+
 
 
 /**
