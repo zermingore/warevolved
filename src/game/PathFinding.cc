@@ -1,18 +1,13 @@
-//
-
- IS NOT COMPILED !
-
-
-
-crash !
-
 #include <game/PathFinding.hh>
+#include <common/Status.hh>
+#include <game/Player.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
 #include <resources/Image.hh>
 #include <common/enums/directions.hh>
 #include <common/enums/path_shapes.hh>
+
 
 
 PathFinding::PathFinding(std::shared_ptr<Map> map)
@@ -30,12 +25,10 @@ void PathFinding::setOrigin(Coords coords,
   clearPath();
 
   _unit = unit;
-  _unit->setTargetIndex(0);
-
   _origin = coords;
   _current = coords;
   _currentLength = 0;
-  _maxLength = _unit->motionValue();
+  _maxLength = 1; ///< \todo remove hard-coded value
 
   showAllowedPath();
 }
@@ -143,9 +136,10 @@ e_path_shape PathFinding::getShape(size_t index)
 }
 
 
-graphics::Image PathFinding::getImage(size_t index)
+resources::Image PathFinding::getImage(size_t index)
 {
-  return graphics::Image();
+  index = index+1;
+  return resources::Image();
   /// \todo up to GraphicsEngine
 
   // Image img;  /// \todo use a copy Ctor (avoid rotating all sprites)
@@ -198,22 +192,27 @@ void PathFinding::addNextDirection(e_direction direction)
 
 void PathFinding::showAllowedPath()
 {
+  // implicit cast into integer to handle negative values: unit_x - stack_x
+  int unit_x = _unit->x();
+  int unit_y = _unit->y();
+
   std::stack<std::pair<size_t, size_t>> s;
-  s.push(std::pair<size_t, size_t>(_unit->x(), _unit->y()));
+  s.push(std::pair<size_t, size_t>(unit_x, unit_y));
+
   _reachableCells.clear();
-  std::vector<std::pair<size_t, size_t>> checked;
+  std::vector<std::pair<size_t, size_t>> checked; // already visited cells
 
   while (!s.empty())
   {
     // getting Cell's coordinates (stack of Coordinates)
-    size_t x = s.top().first;
-    size_t y = s.top().second;
+    int x = s.top().first;
+    int y = s.top().second;
     s.pop();
 
     // check overflow, Manhattan distance and if we already marked the cell
-    if (x > _map->nbColumns() - 1
-        || y > _map->nbLines() - 1
-        || std::abs(_unit->x() - x) + std::abs(_unit->y() - y) > _maxLength
+    if (   static_cast<size_t> (x) > _map->nbColumns() - 1
+        || static_cast<size_t> (y) > _map->nbLines() - 1
+        || std::abs(unit_x - x) + std::abs(unit_y - y) > _maxLength
         || std::find(checked.begin(), checked.end(), std::pair<size_t, size_t>(x, y)) != checked.end())
     {
       continue;
@@ -244,13 +243,13 @@ void PathFinding::highlightCells()
     c->setHighlight(true);
     if (c->unit())
     {
-     if (c->unit()->playerId() != _map->currentPlayer())
-     {
-       c->setHighlightColor(sf::Color::Red);
-       _unit->targets()->push_back(c);
-     }
-     else
-       c->setHighlightColor(sf::Color::Green);
+      if (c->unit()->playerId() != Status::player()->id())
+      {
+        c->setHighlightColor(sf::Color::Red);
+        // _unit->targets()->push_back(c);
+      }
+      else
+        c->setHighlightColor(sf::Color::Green);
     }
     else
       c->setHighlightColor(sf::Color::Yellow);
@@ -265,7 +264,8 @@ void PathFinding::highlightCells()
 void PathFinding::hideAllowedPath() const
 {
   // cleaning displayed move possibilities
-  for (auto i(0u); i < _map->nbColumns(); ++i) {
+  for (auto i(0u); i < _map->nbColumns(); ++i)
+  {
     for (auto j(0u); j < _map->nbLines(); ++j) {
       (*_map)[i][j]->setHighlight(false);
     }

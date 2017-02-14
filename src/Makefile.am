@@ -61,6 +61,7 @@ game/units/Unit.cc                  \
 game/units/UnitFactory.cc           \
 game/units/Soldier.cc               \
 game/Player.cc                      \
+game/PathFinding.cc                 \
 \
 interface/Interface.cc              \
 interface/InterfaceSettings.cc      \
@@ -71,5 +72,3 @@ interface/menus/MenuEntry.cc        \
 interface/menus/InGameMenu.cc       \
 interface/menus/MenuMap.cc          \
 interface/menus/MenuAction.cc
-
-# game/PathFinding.cc

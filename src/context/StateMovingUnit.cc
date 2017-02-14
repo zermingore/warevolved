@@ -11,6 +11,9 @@
 #include <resources/Image.hh>
 #include <interface/Cursor.hh>
 #include <game/units/Unit.hh>
+#include <game/PathFinding.hh>
+#include <common/enums/directions.hh>
+
 
 
 StateMovingUnit::StateMovingUnit()
@@ -58,6 +61,11 @@ StateMovingUnit::StateMovingUnit()
   auto unit(Status::battle()->map()->unit(_originalCoords));
   assert(unit);
   unit->sprite()->setColor(sf::Color(255, 255, 255, 160));
+
+
+  // Path finding
+  _path = std::make_unique<PathFinding> (Status::battle()->map());
+  _path->setOrigin(_originalCoords, unit);
 }
 
 
@@ -91,6 +99,8 @@ void StateMovingUnit::moveUnitUp()
   if (_holoUnitPosition.y > 0) {
     --_holoUnitPosition.y;
   }
+
+  _path->addNextDirection(e_direction::UP);
 }
 
 void StateMovingUnit::moveUnitDown() {
@@ -116,4 +126,6 @@ void StateMovingUnit::draw()
 
   /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnitSprite);
+
+  _path->showAllowedPath();
 }

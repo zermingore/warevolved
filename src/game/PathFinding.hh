@@ -39,7 +39,7 @@ public:
    * \brief constructor
    * \param map map to execute the path-finding on
    */
-  PathFinding(std::shared_ptr<Map> map);
+  explicit PathFinding(std::shared_ptr<Map> map);
 
   /**
    * \brief Destructor
@@ -92,6 +92,12 @@ public:
    */
   void removeUnit() { _unit.reset(); }
 
+  /**
+   * \brief Highlights cells which selected unit (_unit) can cross.
+   * (uses a Flood Fill algorithm)
+   */
+  void showAllowedPath();
+
 
 private:
   /**
@@ -99,7 +105,7 @@ private:
    * does the rotation if needed
    * \return the image matching e_path_shape
    */
-  graphics::Image getImage(size_t index);
+  resources::Image getImage(size_t index);
 
   /**
    * \brief builds Images* Vector (_images)
@@ -126,12 +132,6 @@ private:
    */
   e_path_shape getShape(size_t index);
 
-  /**
-   * \brief Highlights cells which selected unit (_unit) can cross.
-   * (uses a Flood Fill algorithm)
-   */
-  void showAllowedPath();
-
   /// Sets highlight and highlight color for reachable cells.
   void highlightCells();
 
@@ -145,7 +145,7 @@ private:
 
   ///< List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;
-  std::vector<graphics::Image> _images; ///< Images of the path vector.
+  std::vector<resources::Image> _images; ///< Images of the path vector.
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
