@@ -56,8 +56,7 @@ public:
    * \brief allowed move notifier
    * \return true if the move is allowed
    */
-  bool allowedMove()  /// \todo send direction request
-  { return _currentLength < _maxLength; }
+  bool allowedMove();
 
   /**
    * \brief adds the next element to the current path
@@ -132,15 +131,18 @@ private:
    */
   e_path_shape getShape(size_t index);
 
+
   /// Sets highlight and highlight color for reachable cells.
   void highlightCells();
 
   /// \todo make a relation map - path-finding
-  std::shared_ptr<Map> _map; ///< Map of the battle.
+  std::shared_ptr<Map> _map;   ///< Map of the battle.
   std::shared_ptr<Unit> _unit; ///< The selected Unit.
-  Coords _origin; ///< Origin cell coordinates.
+
+  Coords _origin;  ///< Origin cell coordinates.
   Coords _current; ///< Current cell coordinates.
-  int _maxLength; ///< Path max length.
+
+  int _maxLength;     ///< Path max length.
   int _currentLength; ///< Path current length.
 
   ///< List of path directions filled through addNextDirection.
@@ -150,5 +152,6 @@ private:
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
 };
+
 
 #endif /* !PATHFINDING_HH_ */

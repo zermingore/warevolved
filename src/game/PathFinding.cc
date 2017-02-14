@@ -19,6 +19,7 @@ PathFinding::PathFinding(std::shared_ptr<Map> map)
 {
 }
 
+
 void PathFinding::setOrigin(Coords coords,
                             std::shared_ptr<Unit> unit)
 {
@@ -80,7 +81,8 @@ void PathFinding::updateCurrentCell(e_direction direction)
       return;
 
     default:
-      return;
+      ERROR("Invalid direction", (int) direction);
+      std::exit(1);
   }
 }
 
@@ -89,8 +91,9 @@ void PathFinding::buildImageVector()
   // manage 'riding' the path (increment a global index)
   // deleteImagesVector();
 
-  for (auto i(0u); i < _directions.size(); ++i)
+  for (auto i(0u); i < _directions.size(); ++i) {
     _images.push_back(getImage(i));
+  }
 }
 
 
@@ -98,40 +101,45 @@ e_path_shape PathFinding::getShape(size_t index)
 {
   // last element case
   if (index + 1 == _directions.size())
-    return (static_cast <e_path_shape> (static_cast<int >(_directions[index]) - 360));
+  {
+    return (static_cast <e_path_shape> (
+              static_cast<int> (_directions[index]) - 360));
+  }
 
   e_direction next = _directions[index + 1];
 
   // same element as next case
-  if (_directions[index] == next)
+  if (_directions[index] == next) {
     return (static_cast <e_path_shape> (_directions[index]));
+  }
 
   // reverse
-  if (std::abs(static_cast<int >(_directions[index]) - static_cast<int >(next)) == 180)
+  if (std::abs(static_cast<int> (_directions[index]) - static_cast<int> (next)) == 180) {
     return (static_cast <e_path_shape> (next));
+  }
 
   // from here, we know the direction changed
   switch (_directions[index])
   {
     case e_direction::UP:
-      if (next == e_direction::RIGHT)
-        return e_path_shape::CORNER_RIGHT_DOWN;
-      return e_path_shape::CORNER_DOWN_LEFT;
+      return next == e_direction::RIGHT
+        ? e_path_shape::CORNER_RIGHT_DOWN
+        : e_path_shape::CORNER_DOWN_LEFT;
 
     case e_direction::DOWN:
-      if (next == e_direction::RIGHT)
-        return e_path_shape::CORNER_UP_RIGHT;
-      return e_path_shape::CORNER_LEFT_UP;
+      return next == e_direction::RIGHT
+        ? e_path_shape::CORNER_UP_RIGHT
+        : e_path_shape::CORNER_LEFT_UP;
 
     case e_direction::LEFT:
-      if (next == e_direction::UP)
-        return e_path_shape::CORNER_UP_RIGHT;
-      return e_path_shape::CORNER_RIGHT_DOWN;
+      return next == e_direction::UP
+        ? e_path_shape::CORNER_UP_RIGHT
+        : e_path_shape::CORNER_RIGHT_DOWN;
 
     default:
-      if (next == e_direction::UP)
-        return e_path_shape::CORNER_LEFT_UP;
-      return e_path_shape::CORNER_DOWN_LEFT;
+      return next == e_direction::UP
+        ? e_path_shape::CORNER_LEFT_UP
+        : e_path_shape::CORNER_DOWN_LEFT;
     }
 }
 
@@ -192,39 +200,42 @@ void PathFinding::addNextDirection(e_direction direction)
 
 void PathFinding::showAllowedPath()
 {
-  // implicit cast into integer to handle negative values: unit_x - stack_x
+  // implicit cast into integer to handle negative values: unit_x - cell_x
   int unit_x = _unit->x();
   int unit_y = _unit->y();
 
-  std::stack<std::pair<size_t, size_t>> s;
-  s.push(std::pair<size_t, size_t>(unit_x, unit_y));
+  std::stack<std::pair<int, int>> s;
+  s.push(std::pair<int, int>(unit_x, unit_y));
 
   _reachableCells.clear();
-  std::vector<std::pair<size_t, size_t>> checked; // already visited cells
+  std::vector<std::pair<int, int>> checked; // already visited cells
 
   while (!s.empty())
   {
     // getting Cell's coordinates (stack of Coordinates)
-    int x = s.top().first;
-    int y = s.top().second;
+    auto current_cell = s.top();
+    int x = current_cell.first;
+    int y = current_cell.second;
     s.pop();
 
     // check overflow, Manhattan distance and if we already marked the cell
-    if (   static_cast<size_t> (x) > _map->nbColumns() - 1
-        || static_cast<size_t> (y) > _map->nbLines() - 1
+    if (   static_cast<size_t> (x) >= _map->nbColumns()
+        || static_cast<size_t> (y) >= _map->nbLines()
         || std::abs(unit_x - x) + std::abs(unit_y - y) > _maxLength
-        || std::find(checked.begin(), checked.end(), std::pair<size_t, size_t>(x, y)) != checked.end())
+        || std::find(checked.begin(), checked.end(), current_cell) != checked.end())
     {
+      // skipping invalid cells
       continue;
     }
 
     _reachableCells.push_back((*_map)[x][y]);
-    checked.push_back(std::pair<size_t, size_t>(x, y));
+    checked.push_back(current_cell);
 
-    s.emplace(std::pair<size_t, size_t>(x + 1, y));
-    s.emplace(std::pair<size_t, size_t>(x, y + 1));
-    s.emplace(std::pair<size_t, size_t>(x - 1, y));
-    s.emplace(std::pair<size_t, size_t>(x, y - 1));
+    // continuing with the four adjacent cells of the current one
+    s.emplace(x + 1, y    );
+    s.emplace(x    , y + 1);
+    s.emplace(x - 1, y    );
+    s.emplace(x    , y - 1);
   }
 
   highlightCells();
@@ -243,19 +254,19 @@ void PathFinding::highlightCells()
     c->setHighlight(true);
     if (c->unit())
     {
-      if (c->unit()->playerId() != Status::player()->id())
-      {
+      if (c->unit()->playerId() != Status::player()->id()) {
         c->setHighlightColor(sf::Color::Red);
-        // _unit->targets()->push_back(c);
       }
-      else
+      else {
         c->setHighlightColor(sf::Color::Green);
+      }
     }
-    else
+    else {
       c->setHighlightColor(sf::Color::Yellow);
+    }
   }
 
-  // highlight reachable targets
+  /// \todo highlight reachable units
   // for (auto unit: MAP->players.units())
   // {}
 }
@@ -270,4 +281,12 @@ void PathFinding::hideAllowedPath() const
       (*_map)[i][j]->setHighlight(false);
     }
   }
+}
+
+
+bool PathFinding::allowedMove()
+{
+  /// \todo complete receiving direction request
+  // at the moment it's only checking the path length
+  return _currentLength < _maxLength;
 }
