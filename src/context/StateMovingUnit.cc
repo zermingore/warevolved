@@ -96,26 +96,38 @@ void StateMovingUnit::resume()
 // _________________________  Graphical Units motion ________________________ //
 void StateMovingUnit::moveUnitUp()
 {
-  if (_holoUnitPosition.y > 0) {
+  if (_holoUnitPosition.y > 0 && _path->allowedMove())
+  {
     --_holoUnitPosition.y;
+    _path->addNextDirection(e_direction::UP);
   }
-
-  _path->addNextDirection(e_direction::UP);
 }
 
-void StateMovingUnit::moveUnitDown() {
-  _holoUnitPosition.y = std::min(_holoUnitPosition.y + 1, _nbLines - 1);
+void StateMovingUnit::moveUnitDown()
+{
+  if (_holoUnitPosition.y < _nbLines - 1 && _path->allowedMove())
+  {
+    ++_holoUnitPosition.y;
+    _path->addNextDirection(e_direction::DOWN);
+  }
 }
 
 void StateMovingUnit::moveUnitLeft()
 {
-  if (_holoUnitPosition.x > 0) {
+  if (_holoUnitPosition.x > 0 && _path->allowedMove())
+  {
     --_holoUnitPosition.x;
+    _path->addNextDirection(e_direction::LEFT);
   }
 }
 
-void StateMovingUnit::moveUnitRight() {
-  _holoUnitPosition.x = std::min(_holoUnitPosition.x + 1, _nbColumns - 1);
+void StateMovingUnit::moveUnitRight()
+{
+  if (_holoUnitPosition.x < _nbColumns - 1 && _path->allowedMove())
+  {
+    ++_holoUnitPosition.x;
+    _path->addNextDirection(e_direction::RIGHT);
+  }
 }
 
 

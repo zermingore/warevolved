@@ -1,7 +1,7 @@
 -*- mode:org -*-
 
 * TODO Roadmap
-** TODO pathfinding
+** TODO pathfinding re-integration
 ** DONE While moving a unit, fade or hide original unit sprite
    CLOSED: [2017-02-13 Mo 19:25]
 ** DONE Disallow move on unit
@@ -16,7 +16,8 @@
    CLOSED: [2017-02-02 Do 07:50]
 ** DONE ResourcesManager enum -> enum class
    CLOSED: [2017-02-02 Do 07:31]
-** TODO MapGraphicsProperties
+** DONE MapGraphicsProperties
+   CLOSED: [2017-02-15 Mi 07:38]
    Make this class static ?
    Integrate in GraphicsEngine ?
 
