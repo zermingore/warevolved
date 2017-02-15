@@ -1,13 +1,13 @@
 #include <game/PathFinding.hh>
-#include <common/Status.hh>
 #include <game/Player.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
 #include <resources/Image.hh>
+#include <common/Status.hh>
 #include <common/enums/directions.hh>
 #include <common/enums/path_shapes.hh>
-
+#include <graphics/MapGraphicsProperties.hh>
 
 
 PathFinding::PathFinding(std::shared_ptr<Map> map)
@@ -44,7 +44,7 @@ void PathFinding::drawPath()
     updateCurrentCell(*it);
     /// \todo manage cache and image sprites
     // _images[i++]->drawAtCell(_currentX, _currentY);
-    getImage(i++).draw();
+    getImage(i++)->draw(); /// \todo drawAtCell
   }
 }
 
@@ -144,51 +144,49 @@ e_path_shape PathFinding::getShape(size_t index)
 }
 
 
-resources::Image PathFinding::getImage(size_t index)
+std::shared_ptr<resources::Image> PathFinding::getImage(size_t index)
 {
-  index = index+1;
-  return resources::Image();
-  /// \todo up to GraphicsEngine
+  std::shared_ptr<resources::Image> img;
+  e_path_shape shape = getShape(index);
 
-  // Image img;  /// \todo use a copy Ctor (avoid rotating all sprites)
-  // unsigned int angle = 0;
-  // path_shape shape = getShape(index);
+  switch (shape)
+  {
+     // Rectangles
+     case e_path_shape::UP:
+     case e_path_shape::DOWN:
+     case e_path_shape::LEFT:
+     case e_path_shape::RIGHT:
+       img = resources::ResourcesManager::getImage("path_shape");
+       break;
 
-  // switch (shape)
-  // {
-  //    // Rectangles
-  //    case path_shape::UP:
-  //    case path_shape::DOWN:
-  //    case path_shape::LEFT:
-  //    case path_shape::RIGHT:
-  //      img = GETIMAGE("path_shape");
-  //      break;
+     // Arrows
+     case e_path_shape::LAST_UP:
+     case e_path_shape::LAST_DOWN:
+     case e_path_shape::LAST_LEFT:
+     case e_path_shape::LAST_RIGHT:
+       img = resources::ResourcesManager::getImage("path_arrow");
+       break;
 
-  //    // Arrows
-  //    case path_shape::LAST_UP:
-  //    case path_shape::LAST_DOWN:
-  //    case path_shape::LAST_LEFT:
-  //    case path_shape::LAST_RIGHT:
-  //      img = GETIMAGE("path_arrow");
-  //      break;
+     // Corners
+     default:
+       img = resources::ResourcesManager::getImage("path_corner");
+       break;
+  }
 
-  //    // Corners
-  //    default:
-  //      img = GETIMAGE("path_corner");
-  //      break;
-  // }
+  using p = graphics::MapGraphicsProperties;
 
-  // angle = static_cast <unsigned int> (shape % 360);
-  // img.sprite()->setRotation(angle);
-  // img.sprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
+  unsigned int angle(static_cast<int> (shape) % 360);
+  img->sprite()->setRotation(angle);
+  img->sprite()->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
-  // // drawing at the middle of the cell
-  // sf::Vector2f pos;
-  // pos.x = _current.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
-  // pos.y = _current.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
-  // img.sprite()->setPosition(pos);
+  // drawing at the middle of the cell
+  sf::Vector2f pos(
+    _current.x * p::cellWidth()  + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
+    _current.y * p::cellHeight() + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
 
-  //  return img;
+  img->sprite()->setPosition(pos);
+
+  return img;
 }
 
 void PathFinding::addNextDirection(e_direction direction)

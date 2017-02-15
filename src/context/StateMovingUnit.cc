@@ -140,4 +140,5 @@ void StateMovingUnit::draw()
   // graphics::GraphicsEngine::draw(_holoUnitSprite);
 
   _path->showAllowedPath();
+  _path->drawPath();
 }

@@ -104,7 +104,7 @@ private:
    * does the rotation if needed
    * \return the image matching e_path_shape
    */
-  resources::Image getImage(size_t index);
+  std::shared_ptr<resources::Image> getImage(size_t index);
 
   /**
    * \brief builds Images* Vector (_images)
@@ -147,7 +147,9 @@ private:
 
   ///< List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;
-  std::vector<resources::Image> _images; ///< Images of the path vector.
+
+  ///< Images of the path vector.
+  std::vector<std::shared_ptr<resources::Image>> _images;
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;

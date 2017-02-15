@@ -8,7 +8,7 @@
 #ifndef MAP_GRAPHICS_PROPERTIES_HH_
 # define MAP_GRAPHICS_PROPERTIES_HH_
 
-# include <cstddef>
+# include <cstddef> // size_t
 
 
 namespace graphics {

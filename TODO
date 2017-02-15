@@ -1,7 +1,10 @@
 -*- mode:org -*-
 
 * TODO Roadmap
-** TODO pathfinding re-integration
+** TODO Merge branches: feature with clean, then clean with master
+** TODO Attack management
+** DONE pathfinding re-integration
+   CLOSED: [2017-02-15 Mi 20:22]
 ** DONE While moving a unit, fade or hide original unit sprite
    CLOSED: [2017-02-13 Mo 19:25]
 ** DONE Disallow move on unit
