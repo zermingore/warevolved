@@ -142,8 +142,8 @@ private:
   Coords _origin;  ///< Origin cell coordinates.
   Coords _current; ///< Current cell coordinates.
 
-  int _maxLength;     ///< Path max length.
-  int _currentLength; ///< Path current length.
+  size_t _maxLength;     ///< Path max length.
+  size_t _currentLength; ///< Path current length.
 
   ///< List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;

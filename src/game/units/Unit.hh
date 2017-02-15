@@ -54,9 +54,7 @@ public:
    * \brief sets unit's position and _played to true (we moved the unit)
    * \param coords: cell's coordinates to set unit's position
    */
-  void setCoords(const Coords coords) {
-    _coords = coords;
-  }
+  void setCoords(const Coords coords) { _coords = coords; }
 
   /**
    * \brief _playerId getter
@@ -89,6 +87,11 @@ public:
   void setPlayed(bool played) { _played = played; }
 
   /**
+   * \brief _motionValue getter
+   */
+  auto motionValue() { return _motionValue; }
+
+  /**
    * \brief sprite getter
    * \return a pointer on the Unit's sprite
    */
@@ -102,9 +105,10 @@ public:
 
 
 protected:
-  Coords _coords; ///< Unit's cell coordinates
-  bool _played; ///< notify if the unit has already played this turn
-  unsigned int _playerId; ///< the unit belongs to the player matching this id
+  Coords _coords;      ///< Unit's cell coordinates
+  bool _played;        ///< notify if the unit has already played this turn
+  size_t _playerId;    ///< the unit belongs to the player matching this id
+  size_t _motionValue; ///< Unit's motion value
 
   std::shared_ptr<resources::Image> _image; ///< Unit Image
 };

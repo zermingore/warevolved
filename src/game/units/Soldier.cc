@@ -6,4 +6,5 @@ Soldier::Soldier()
 {
   _fullName = "John Doe";
   _image = resources::ResourcesManager::getImage("soldiers");
+  _motionValue = 3;
 }

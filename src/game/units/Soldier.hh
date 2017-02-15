@@ -15,8 +15,9 @@
 class Item;
 
 
-/** \class This class describes a Soldier, not a unit
- * a Soldier has a name, an inventory, ...
+/**
+ * \class Soldier
+ * \brief Specialization of Unit class
  */
 class Soldier: public Unit
 {

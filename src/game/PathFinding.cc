@@ -29,7 +29,7 @@ void PathFinding::setOrigin(Coords coords,
   _origin = coords;
   _current = coords;
   _currentLength = 0;
-  _maxLength = 1; ///< \todo remove hard-coded value
+  _maxLength = unit->motionValue();
 
   showAllowedPath();
 }
@@ -221,7 +221,7 @@ void PathFinding::showAllowedPath()
     // check overflow, Manhattan distance and if we already marked the cell
     if (   static_cast<size_t> (x) >= _map->nbColumns()
         || static_cast<size_t> (y) >= _map->nbLines()
-        || std::abs(unit_x - x) + std::abs(unit_y - y) > _maxLength
+        || std::abs(unit_x - x) + std::abs(unit_y - y) > static_cast<int> (_maxLength)
         || std::find(checked.begin(), checked.end(), current_cell) != checked.end())
     {
       // skipping invalid cells
