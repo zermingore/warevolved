@@ -30,7 +30,6 @@ public:
   ~Unit() = default;
 
 
-  // __________________________ Getters / Setters __________________________ //
   /**
    * \brief x coordinate on the map getter
    * \return x (column) coordinate on the map
@@ -47,7 +46,6 @@ public:
    * \brief gets unit's position
    * \return unit's cell coordinates
    */
-
   Coords coords() { return _coords; }
 
   /**
@@ -108,7 +106,10 @@ protected:
   Coords _coords;      ///< Unit's cell coordinates
   bool _played;        ///< notify if the unit has already played this turn
   size_t _playerId;    ///< the unit belongs to the player matching this id
-  size_t _motionValue; ///< Unit's motion value
+
+  int _hp;             ///< Health Points
+  size_t _motionValue; ///< Unit's motion value (not considering the terrains)
+  size_t _attackValue; ///< Amount of damages dealing to other units
 
   std::shared_ptr<resources::Image> _image; ///< Unit Image
 };

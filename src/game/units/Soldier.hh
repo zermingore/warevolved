@@ -23,9 +23,7 @@ class Soldier: public Unit
 {
 public:
   /**
-   * \brief Default Constructor
-   *
-   * Creates a Soldier (random name, characteristics, ...)
+   * \brief Default Constructor. Initializes characteristics motion, hp, ...
    */
   Soldier();
 

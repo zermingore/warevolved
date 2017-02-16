@@ -37,12 +37,21 @@ void MenuAction::build()
   /// \todo add actions (not moved / ...)
   if (_state == e_state::ACTION_MENU)
   {
-    /// \todo use other coordinates as the menu ones
+    auto target = map->unit(_coords);
+
     // forbid to move a unit over another one
-    if (!map->unit(_coords))
+    if (!target) /// \todo use other coordinates as the menu ones
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
       entry->setCallback( [=] { waitUnit(); });
+      _entries.push_back(entry);
+    }
+
+    /// \todo use other coordinates as the menu ones
+    if (target && target->playerId() != Status::player()->id())
+    {
+      auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
+      entry->setCallback( [=] { attackUnit(); });
       _entries.push_back(entry);
     }
   }
@@ -72,6 +81,13 @@ void MenuAction::waitUnit()
   // setting the cursor over the freshly moved unit
   Status::player()->cursor()->setCoords(_coords);
 }
+
+
+void MenuAction::attackUnit()
+{
+  NOTICE("Attack !");
+}
+
 
 
 } // namespace interface
