@@ -128,6 +128,12 @@ public:
   void endTurn();
 
   /**
+   * \brief Perform the attack of the _selectedUnit over the defender
+   * \param defender Unit defending the attack
+   */
+  void attack(std::shared_ptr<Unit> defender);
+
+  /**
    * \brief operator to allow getting a cell calling map[i][j]
    * returns a vector of pointers to Cell
    * To get the requested cell, use the second coordinate as vector index

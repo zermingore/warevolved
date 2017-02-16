@@ -25,8 +25,8 @@ void MenuAction::build()
   if (_state == e_state::SELECTION_UNIT)
   {
     /// \todo use other coordinates as the menu ones
-    auto unit(map->unit(_coords));
-    if (unit->played() == false && unit->playerId() == Status::player()->id())
+    _selectedUnit = map->unit(_coords);
+    if (!_selectedUnit->played() && _selectedUnit->playerId() == Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
       entry->setCallback( [=] { moveUnit(); });
@@ -51,7 +51,7 @@ void MenuAction::build()
     if (target && target->playerId() != Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-      entry->setCallback( [=] { attackUnit(); });
+      entry->setCallback( [=] { attackUnit(target); });
       _entries.push_back(entry);
     }
   }
@@ -83,11 +83,19 @@ void MenuAction::waitUnit()
 }
 
 
-void MenuAction::attackUnit()
+void MenuAction::attackUnit(std::shared_ptr<Unit> target)
 {
-  NOTICE("Attack !");
-}
+  assert(target);
 
+  /// \todo give also coordinates of the holo unit (from where it attacks)
+  Status::battle()->map()->attack(target);
+  Status::clearStates();
+
+  /// \todo move unit
+
+  // setting the cursor over the attacked unit
+  Status::player()->cursor()->setCoords(_coords);
+}
 
 
 } // namespace interface

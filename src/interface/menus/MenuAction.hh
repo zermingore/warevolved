@@ -69,7 +69,7 @@ private:
   /**
    * \brief Order the Unit to attack another one
    */
-  void attackUnit();
+  void attackUnit(std::shared_ptr<Unit> target);
 
 
   e_state _state;      ///< State related to this menu

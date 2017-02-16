@@ -110,6 +110,18 @@ void Map::newUnit(const e_unit type,
 }
 
 
+void Map::attack(std::shared_ptr<Unit> defender)
+{
+  assert(_selectedUnit && defender);
+  defender->setHP(defender->hp() - _selectedUnit->attackValue());
+  _selectedUnit->setPlayed(true);
+
+  if (defender->hp() <= 0) {
+    _cells[defender->x()][defender->y()]->removeUnit();
+  }
+}
+
+
 
 void Map::dump()
 {

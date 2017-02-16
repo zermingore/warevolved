@@ -85,6 +85,24 @@ public:
   void setPlayed(bool played) { _played = played; }
 
   /**
+   * \brief _hp setter
+   * \note allows negative values
+   */
+  void setHP(int hp) { _hp = hp; }
+
+  /**
+   * \brief _hp getter
+   * \return health points
+   */
+  int hp() { return _hp; }
+
+  /**
+   * \brief _attackValue getter
+   * \return attack value in hit points
+   */
+  size_t attackValue() { return _attackValue; }
+
+  /**
    * \brief _motionValue getter
    */
   auto motionValue() { return _motionValue; }
