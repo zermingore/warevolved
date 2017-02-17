@@ -23,6 +23,7 @@
    CLOSED: [2017-02-15 Mi 07:38]
    Make this class static ?
    Integrate in GraphicsEngine ?
+** TODO Set trivial getter return type to auto
 
 
 * TODO experimental

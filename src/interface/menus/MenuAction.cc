@@ -24,7 +24,7 @@ void MenuAction::build()
 
   if (_state == e_state::SELECTION_UNIT)
   {
-    /// \todo use other coordinates as the menu ones
+    /// \todo use other coordinates than the menu ones
     _selectedUnit = map->unit(_coords);
     if (!_selectedUnit->played() && _selectedUnit->playerId() == Status::player()->id())
     {
@@ -47,7 +47,7 @@ void MenuAction::build()
       _entries.push_back(entry);
     }
 
-    /// \todo use other coordinates as the menu ones
+    /// \todo use other coordinates than the menu ones
     if (target && target->playerId() != Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));

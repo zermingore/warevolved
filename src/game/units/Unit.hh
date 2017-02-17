@@ -108,6 +108,16 @@ public:
   auto motionValue() { return _motionValue; }
 
   /**
+   * \brief minimal attack range getter
+   */
+  auto minRange() { return _minRange; }
+
+  /**
+   * \brief maximal attack range getter
+   */
+  auto maxRange() { return _maxRange; }
+
+  /**
    * \brief sprite getter
    * \return a pointer on the Unit's sprite
    */
@@ -125,9 +135,12 @@ protected:
   bool _played;        ///< notify if the unit has already played this turn
   size_t _playerId;    ///< the unit belongs to the player matching this id
 
-  int _hp;             ///< Health Points
   size_t _motionValue; ///< Unit's motion value (not considering the terrains)
+  int _hp;             ///< Health Points
   size_t _attackValue; ///< Amount of damages dealing to other units
+
+  size_t _minRange;    ///< Minimal required range for a unit to attack
+  size_t _maxRange;    ///< Maximal range to attack a unit
 
   std::shared_ptr<resources::Image> _image; ///< Unit Image
 };
