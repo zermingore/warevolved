@@ -6,6 +6,7 @@
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <game/units/Unit.hh>
+#include <game/PathFinding.hh>
 
 
 namespace interface {
@@ -48,7 +49,13 @@ void MenuAction::build()
     }
 
     /// \todo use other coordinates than the menu ones
-    if (target && target->playerId() != Status::player()->id())
+
+    // _selectedUnit does not exits (another instance of MenuAction built it)
+    _selectedUnit = Status::battle()->map()->selectedUnit();
+
+    auto path = std::make_unique<PathFinding> (Status::battle()->map());
+    path->setOrigin(_coords, _selectedUnit);
+    if (path->allowedAttack(_selectedUnit, _coords))
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(target); });
@@ -85,6 +92,9 @@ void MenuAction::waitUnit()
 
 void MenuAction::attackUnit(std::shared_ptr<Unit> target)
 {
+  /// \todo add a state to select a target from the path finding
+  NOTICE("attackUnit: target will probably be invalid because not selected");
+
   assert(target);
 
   /// \todo give also coordinates of the holo unit (from where it attacks)

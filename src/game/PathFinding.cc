@@ -23,7 +23,11 @@ PathFinding::PathFinding(std::shared_ptr<Map> map)
 void PathFinding::setOrigin(Coords coords,
                             std::shared_ptr<Unit> unit)
 {
+  assert(unit && "PathFinding: No unit provided");
+
   clearPath();
+
+  _enemyPositions.clear();
 
   _unit = unit;
   _origin = coords;
@@ -252,8 +256,10 @@ void PathFinding::highlightCells()
     c->setHighlight(true);
     if (c->unit())
     {
-      if (c->unit()->playerId() != Status::player()->id()) {
+      if (c->unit()->playerId() != Status::player()->id())
+      {
         c->setHighlightColor(sf::Color::Red);
+        _enemyPositions.push_back(c);
       }
       else {
         c->setHighlightColor(sf::Color::Green);
@@ -263,10 +269,6 @@ void PathFinding::highlightCells()
       c->setHighlightColor(sf::Color::Yellow);
     }
   }
-
-  /// \todo highlight reachable units
-  // for (auto unit: MAP->players.units())
-  // {}
 }
 
 
@@ -287,4 +289,39 @@ bool PathFinding::allowedMove()
   /// \todo complete receiving direction request
   // at the moment it's only checking the path length
   return _currentLength < _maxLength;
+}
+
+
+bool PathFinding::allowedAttack(std::shared_ptr<Unit> unit, Coords c)
+{
+  if (_enemyPositions.empty()) {
+    return false;
+  }
+
+  // For every unit, if it's not in the same team as the given unit,
+  //   check if it's at attack range
+
+  // forcing signed values to allow negative values
+  int unit_x(c.x);
+  int unit_y(c.y);
+
+  for (auto cell: _enemyPositions)
+  {
+    /// \todo take into account min range
+
+    // Implicit cast into signed type to handle negative values
+    int x(cell->x());
+    int y(cell->y());
+
+    // checking Manhattan distance
+    if (std::abs(unit_x - x) + std::abs(unit_y - y)
+        > static_cast<int> (unit->maxRange()))
+    {
+      continue;
+    }
+
+    return true;
+  }
+
+  return false;
 }

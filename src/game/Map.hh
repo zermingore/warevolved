@@ -84,6 +84,12 @@ public:
   void selectUnit(const Coords c);
 
   /**
+   * \brief selected unit getter
+   * \return a pointer on the currently selected unit, if any
+   */
+  std::shared_ptr<Unit> selectedUnit() { return _selectedUnit; }
+
+  /**
    * \brief gets the terrain at coordinates (x, y).
    *
    * \param x Coordinates according to columns.

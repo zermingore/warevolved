@@ -59,6 +59,14 @@ public:
   bool allowedMove();
 
   /**
+   * \brief allowed attack notifier
+   * \param unit Attacking unit
+   * \param c cell from which the unit attacks
+   * \return true if the unit can attack from coordinates (false otherwise)
+   */
+  bool allowedAttack(std::shared_ptr<Unit> unit, Coords c);
+
+  /**
    * \brief adds the next element to the current path
    * \param direction of the element
    */
@@ -153,6 +161,9 @@ private:
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
+
+  ///< list of cells occupied by an enemy unit
+  std::vector<std::shared_ptr<Cell>> _enemyPositions;
 };
 
 
