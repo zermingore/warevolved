@@ -92,19 +92,22 @@ void MenuAction::waitUnit()
 
 void MenuAction::attackUnit(std::shared_ptr<Unit> target)
 {
-  /// \todo add a state to select a target from the path finding
-  NOTICE("attackUnit: target will probably be invalid because not selected");
+  Status::pushState(e_state::SELECT_TARGET);
+  Status::currentState()->resume();
 
-  assert(target);
+  // /// \todo add a state to select a target from the path finding
+  // NOTICE("attackUnit: target will probably be invalid because not selected");
 
-  /// \todo give also coordinates of the holo unit (from where it attacks)
-  Status::battle()->map()->attack(target);
-  Status::clearStates();
+  // assert(target);
 
-  /// \todo move unit
+  // /// \todo give also coordinates of the holo unit (from where it attacks)
+  // Status::battle()->map()->attack(target);
+  // Status::clearStates();
 
-  // setting the cursor over the attacked unit
-  Status::player()->cursor()->setCoords(_coords);
+  // /// \todo move unit
+
+  // // setting the cursor over the attacked unit
+  // Status::player()->cursor()->setCoords(_coords);
 }
 
 

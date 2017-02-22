@@ -23,8 +23,7 @@ enum class e_state: int
   MOVING_UNIT,       // Move it
   ACTION_MENU,       // Give it an order (confirm move, switch to attack state)
 
-  COMMANDING_UNIT,   // Selecting the order to give to the unit
-  SELECTING_TARGET,  // Select a taget (attack, heal, ...)
+  SELECT_TARGET,     // Select a taget (attack, heal, ...)
 };
 
 
