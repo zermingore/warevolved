@@ -6,13 +6,14 @@
 #include <game/Map.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <game/PathFinding.hh>
 
 
 Battle::Battle() :
   _currentPlayer (0)
 {
   /// \todo map size is hard-coded
-  _map = std::make_shared<Map> (8, 5);
+  _map = std::make_shared<Map> (8, 5); /// \todo move in buildMap
 }
 
 
@@ -21,6 +22,7 @@ void Battle::initializeMap()
   graphics::MapGraphicsProperties::initialize();
   buildPlayers();
   buildMap();
+  PathFinding::setMap(_map);
 }
 
 

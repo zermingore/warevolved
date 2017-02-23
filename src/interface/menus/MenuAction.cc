@@ -53,9 +53,8 @@ void MenuAction::build()
     // _selectedUnit does not exits (another instance of MenuAction built it)
     _selectedUnit = Status::battle()->map()->selectedUnit();
 
-    auto path = std::make_unique<PathFinding> (Status::battle()->map());
-    path->setOrigin(_coords, _selectedUnit);
-    if (path->allowedAttack(_selectedUnit, _coords))
+    PathFinding::setOrigin(_coords, _selectedUnit);
+    if (PathFinding::allowedAttack(_selectedUnit, _coords))
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(target); });

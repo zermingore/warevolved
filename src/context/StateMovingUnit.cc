@@ -62,8 +62,7 @@ StateMovingUnit::StateMovingUnit()
   unit->sprite()->setColor(sf::Color(255, 255, 255, 160));
 
   // Path finding
-  _path = std::make_unique<PathFinding> (Status::battle()->map());
-  _path->setOrigin(_originalCoords, unit);
+  PathFinding::setOrigin(_originalCoords, unit);
 }
 
 
@@ -76,7 +75,7 @@ StateMovingUnit::~StateMovingUnit()
     unit->sprite()->setColor(sf::Color(255, 255, 255, 255));
   }
 
-  _path->clearPath();
+  PathFinding::clearPath();
 }
 
 
@@ -96,37 +95,37 @@ void StateMovingUnit::resume()
 // _________________________  Graphical Units motion ________________________ //
 void StateMovingUnit::moveUnitUp()
 {
-  if (_holoUnitPosition.y > 0 && _path->allowedMove())
+  if (_holoUnitPosition.y > 0 && PathFinding::allowedMove())
   {
     --_holoUnitPosition.y;
-    _path->addNextDirection(e_direction::UP);
+    PathFinding::addNextDirection(e_direction::UP);
   }
 }
 
 void StateMovingUnit::moveUnitDown()
 {
-  if (_holoUnitPosition.y < _nbLines - 1 && _path->allowedMove())
+  if (_holoUnitPosition.y < _nbLines - 1 && PathFinding::allowedMove())
   {
     ++_holoUnitPosition.y;
-    _path->addNextDirection(e_direction::DOWN);
+    PathFinding::addNextDirection(e_direction::DOWN);
   }
 }
 
 void StateMovingUnit::moveUnitLeft()
 {
-  if (_holoUnitPosition.x > 0 && _path->allowedMove())
+  if (_holoUnitPosition.x > 0 && PathFinding::allowedMove())
   {
     --_holoUnitPosition.x;
-    _path->addNextDirection(e_direction::LEFT);
+    PathFinding::addNextDirection(e_direction::LEFT);
   }
 }
 
 void StateMovingUnit::moveUnitRight()
 {
-  if (_holoUnitPosition.x < _nbColumns - 1 && _path->allowedMove())
+  if (_holoUnitPosition.x < _nbColumns - 1 && PathFinding::allowedMove())
   {
     ++_holoUnitPosition.x;
-    _path->addNextDirection(e_direction::RIGHT);
+    PathFinding::addNextDirection(e_direction::RIGHT);
   }
 }
 
@@ -139,6 +138,6 @@ void StateMovingUnit::draw()
   /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnitSprite);
 
-  _path->showAllowedPath();
-  _path->drawPath();
+  PathFinding::showAllowedPath();
+  PathFinding::drawPath();
 }

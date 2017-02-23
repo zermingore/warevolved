@@ -20,9 +20,6 @@ namespace resources {
 }
 
 
-class PathFinding;
-
-
 /**
  * \class StateMovingUnit
  * \brief State active while moving a unit on the map
@@ -75,8 +72,6 @@ private:
 
   size_t _nbColumns; ///< map number of columns
   size_t _nbLines;   ///< map number of lines
-
-  std::unique_ptr<PathFinding> _path; ///< Path finding
 };
 
 

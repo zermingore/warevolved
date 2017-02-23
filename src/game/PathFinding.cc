@@ -10,18 +10,24 @@
 #include <graphics/MapGraphicsProperties.hh>
 
 
-PathFinding::PathFinding(std::shared_ptr<Map> map)
-  : _map (map)
-  , _origin (0, 0)
-  , _current (0, 0)
-  , _maxLength (0)
-  , _currentLength (0)
-{
-}
+// static members definition
+std::shared_ptr<Map> PathFinding::_map;
+std::shared_ptr<Unit> PathFinding::_unit;
+
+Coords PathFinding::_origin;
+Coords PathFinding::_current;
+
+size_t PathFinding::_maxLength;
+size_t PathFinding::_currentLength;
+
+std::vector<e_direction> PathFinding::_directions;
+std::vector<std::shared_ptr<resources::Image>> PathFinding::_images;
+std::vector<std::shared_ptr<Cell>> PathFinding::_reachableCells;
+std::vector<std::shared_ptr<Cell>> PathFinding::_enemyPositions;
 
 
-void PathFinding::setOrigin(Coords coords,
-                            std::shared_ptr<Unit> unit)
+
+void PathFinding::setOrigin(Coords coords, std::shared_ptr<Unit> unit)
 {
   assert(unit && "PathFinding: No unit provided");
 
@@ -272,7 +278,7 @@ void PathFinding::highlightCells()
 }
 
 
-void PathFinding::hideAllowedPath() const
+void PathFinding::hideAllowedPath()
 {
   // cleaning displayed move possibilities
   for (auto i(0u); i < _map->nbColumns(); ++i)
