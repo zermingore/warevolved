@@ -9,6 +9,16 @@
 
 # include <context/State.hh>
 
+class Cell;
+
+namespace sf {
+  class Sprite;
+}
+
+namespace resources {
+  class Image;
+}
+
 
 class StateSelectTarget: public State
 {
@@ -71,6 +81,19 @@ private:
    * \brief Callback associated with the exit menu event
    */
   void exit();
+
+
+  ///< targets list from the PathFinding
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targets;
+
+  size_t _index_target; ///< index of the selected target
+
+
+  ///< highlight of the selected target
+  std::shared_ptr<resources::Image> _targetHighlightImage;
+
+  ///< sprite associated to the highlight of the selected target
+  std::shared_ptr<sf::Sprite> _targetHighlight;
 };
 
 

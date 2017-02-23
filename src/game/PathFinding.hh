@@ -42,6 +42,14 @@ public:
   static void setOrigin(Coords coords, std::shared_ptr<Unit> unit);
 
   /**
+   * \brief _enemyPositions getter
+   * \return a pointer on the vector of enemy positions
+   */
+  static std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getEnemyPositions() {
+    return std::make_shared<std::vector<std::shared_ptr<Cell>>> (_enemyPositions);
+  }
+
+  /**
    * \brief allowed move notifier
    * \return true if the move is allowed
    */
