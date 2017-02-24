@@ -71,8 +71,7 @@ void StateSelectTarget::validate()
   NOTICE("validate");
 
 
-  /// \todo give also coordinates of the holo unit (from where it attacks)
-  //Status::battle()->map()->attack(target);
+  Status::battle()->map()->attack((*_targets)[_index_target]);
   Status::clearStates();
 }
 

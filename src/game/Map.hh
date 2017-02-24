@@ -140,6 +140,12 @@ public:
   void attack(std::shared_ptr<Unit> defender);
 
   /**
+   * \brief Perform the attack of the _selectedUnit on the target_cell
+   * \param target_cell target of the attack (may contain an unit)
+   */
+  void attack(std::shared_ptr<Cell> target_cell);
+
+  /**
    * \brief operator to allow getting a cell calling map[i][j]
    * returns a vector of pointers to Cell
    * To get the requested cell, use the second coordinate as vector index

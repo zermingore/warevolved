@@ -121,6 +121,25 @@ void Map::attack(std::shared_ptr<Unit> defender)
   }
 }
 
+void Map::attack(std::shared_ptr<Cell> target_cell)
+{
+  assert(_selectedUnit && target_cell);
+
+  auto defender = target_cell->unit();
+  if (!defender)
+  {
+    NOTICE("Attacking empty cell");
+    return;
+  }
+
+  defender->setHP(defender->hp() - _selectedUnit->attackValue());
+  _selectedUnit->setPlayed(true);
+
+  if (defender->hp() <= 0) {
+    _cells[defender->x()][defender->y()]->removeUnit();
+  }
+}
+
 
 
 void Map::dump()
