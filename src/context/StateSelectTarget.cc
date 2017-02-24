@@ -76,7 +76,8 @@ void StateSelectTarget::draw()
 
 void StateSelectTarget::selectPreviousTarget()
 {
-  if (_index_target == 0) {
+  if (_index_target == 0)
+  {
     _index_target = _targets->size();
     return;
   }

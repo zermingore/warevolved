@@ -15,6 +15,8 @@ Player::Player(Color c)
   static size_t static_id = 0;
   _id = static_id++;
 
+  _color = c;
+
   // Cursor
   _cursor = std::make_shared<interface::Cursor> ();
   _cursor->setColor(c);

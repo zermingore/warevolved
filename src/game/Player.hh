@@ -55,6 +55,12 @@ public:
   void select();
 
   /**
+   * \brief color getter
+   * \return the color associated to the player
+   */
+  auto color() { return _color; }
+
+  /**
    * \brief Player's interface getter.
    * \return Interface pointer.
    */
@@ -80,6 +86,8 @@ private:
   std::shared_ptr<interface::Cursor>     _cursor;    ///< Map Cursor
 
   std::shared_ptr<Unit> _selectedUnit; ///< current selected unit
+
+  sf::Color _color; ///< player's color
 };
 
 

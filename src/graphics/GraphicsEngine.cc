@@ -153,16 +153,11 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
   }
 # endif
 
-  // if (unit->targetable())
-  // {
-  //   // Unit's image halo
-  //   Image &highlight = GETIMAGE("highlight");
-  //   highlight.sprite()->setColor(sf::Color(255, 0, 0));
-  //   highlight.drawAtCell(unit->coords());
-  // }
+  auto players = Status::battle()->players();
+  sprite->setColor(players[unit->playerId()]->color());
 
   if (unit->played()) {
-    sprite->setColor(sf::Color(127, 127, 127, 191));
+    sprite->setColor(sf::Color(127, 127, 127, 150));
   }
 
   unit->image()->drawAtCell(unit->coords());
