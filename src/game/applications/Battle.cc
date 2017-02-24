@@ -41,8 +41,14 @@ void Battle::buildMap()
 {
   /// \todo delegate to a factory
 
+  _map->newUnit(e_unit::SOLDIERS, 0, 0, 0);
   _map->newUnit(e_unit::SOLDIERS, 2, 2, 0);
+
+  _map->newUnit(e_unit::SOLDIERS, 1, 1, 1);
   _map->newUnit(e_unit::SOLDIERS, 3, 0, 1);
+  _map->newUnit(e_unit::SOLDIERS, 3, 2, 1);
+
+
 
   // _map->newUnit(e_unit::SOLDIERS, 3, 4);
   // _map->newUnit(e_unit::SOLDIERS, 3, 1);

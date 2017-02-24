@@ -3,6 +3,8 @@
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
 ** TODO Attack management
+*** TODO Handle attacker death
+*** TODO Allow to attack only targets in range of the attack
 ** DONE pathfinding re-integration
    CLOSED: [2017-02-15 Mi 20:22]
 ** DONE While moving a unit, fade or hide original unit sprite
@@ -275,6 +277,7 @@
    should use assert (state == MODE__MENU)
 
 * TODO Bugs / Features
+** TODO Menu selection up / down inverted
 ** DONE InterfaceElements are never removed
    CLOSED: [2016-11-15 Di 07:37]
 ** DONE The Cursor can exit the map (border right / bottom not effective)

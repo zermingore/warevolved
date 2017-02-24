@@ -100,7 +100,10 @@ public:
    * \brief Highlights cells which selected unit (_unit) can cross.
    * (uses a Flood Fill algorithm)
    */
-  static void showAllowedPath();
+  static void computeAllowedPath();
+
+  /// Sets highlight and highlight color for reachable cells.
+  static void highlightCells();
 
 
 private:
@@ -135,10 +138,6 @@ private:
    *   according to the next direction (for smooth corners).
    */
   static e_path_shape getShape(size_t index);
-
-
-  /// Sets highlight and highlight color for reachable cells.
-  static void highlightCells();
 
   /// \todo make a relation map - path-finding
   static std::shared_ptr<Map> _map;   ///< Map of the battle.

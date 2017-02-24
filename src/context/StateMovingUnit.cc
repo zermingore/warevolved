@@ -138,6 +138,7 @@ void StateMovingUnit::draw()
   /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnitSprite);
 
-  PathFinding::showAllowedPath();
+  PathFinding::computeAllowedPath();
+  PathFinding::highlightCells();
   PathFinding::drawPath();
 }

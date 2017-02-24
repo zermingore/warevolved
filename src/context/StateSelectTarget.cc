@@ -55,7 +55,7 @@ void StateSelectTarget::fetchAttributes()
 
 void StateSelectTarget::resume()
 {
-  // retrieve coordinates from the attributes
+  // retrieve attack coordinates from the attributes
   if (_attributes.size()) {
     fetchAttributes();
   }

@@ -41,7 +41,8 @@ void PathFinding::setOrigin(Coords coords, std::shared_ptr<Unit> unit)
   _currentLength = 0;
   _maxLength = unit->motionValue();
 
-  showAllowedPath();
+  computeAllowedPath();
+  highlightCells();
 }
 
 
@@ -206,7 +207,7 @@ void PathFinding::addNextDirection(e_direction direction)
 }
 
 
-void PathFinding::showAllowedPath()
+void PathFinding::computeAllowedPath()
 {
   // implicit cast into integer to handle negative values: unit_x - cell_x
   int unit_x = _unit->x();
@@ -245,8 +246,6 @@ void PathFinding::showAllowedPath()
     s.emplace(x - 1, y    );
     s.emplace(x    , y - 1);
   }
-
-  highlightCells();
 }
 
 
