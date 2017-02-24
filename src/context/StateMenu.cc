@@ -85,7 +85,8 @@ void StateMenu::exit() {
 
 void StateMenu::fetchAttributes()
 {
-  if (!_attributes.size()) {
+  if (!_attributes.size())
+  {
     ERROR("StateMenu::fetchAttributes called without available attributes");
     assert(!"No attribute found");
     return;

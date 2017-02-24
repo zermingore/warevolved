@@ -133,7 +133,6 @@ void Map::attack(std::shared_ptr<Cell> target_cell)
   }
 
   defender->setHP(defender->hp() - _selectedUnit->attackValue());
-  _selectedUnit->setPlayed(true);
 
   if (defender->hp() <= 0) {
     _cells[defender->x()][defender->y()]->removeUnit();

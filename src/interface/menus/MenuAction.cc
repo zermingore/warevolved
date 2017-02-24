@@ -57,7 +57,7 @@ void MenuAction::build()
     if (PathFinding::allowedAttack(_selectedUnit, _coords))
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-      entry->setCallback( [=] { attackUnit(target); });
+      entry->setCallback( [=] { attackUnit(); });
       _entries.push_back(entry);
     }
   }
@@ -89,24 +89,11 @@ void MenuAction::waitUnit()
 }
 
 
-void MenuAction::attackUnit(std::shared_ptr<Unit> target)
+void MenuAction::attackUnit()
 {
   Status::pushState(e_state::SELECT_TARGET);
+  Status::currentState()->setAttributes(std::make_shared<Coords> (_coords));
   Status::currentState()->resume();
-
-  // /// \todo add a state to select a target from the path finding
-  // NOTICE("attackUnit: target will probably be invalid because not selected");
-
-  // assert(target);
-
-  // /// \todo give also coordinates of the holo unit (from where it attacks)
-  // Status::battle()->map()->attack(target);
-  // Status::clearStates();
-
-  // /// \todo move unit
-
-  // // setting the cursor over the attacked unit
-  // Status::player()->cursor()->setCoords(_coords);
 }
 
 

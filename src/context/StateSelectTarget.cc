@@ -35,7 +35,32 @@ StateSelectTarget::StateSelectTarget()
 }
 
 
-// void StateSelectTarget::resume();
+void StateSelectTarget::fetchAttributes()
+{
+  if (!_attributes.size())
+  {
+    ERROR("fetchAttributes called without available attributes");
+    assert(!"No attribute found");
+    return;
+  }
+
+  auto p = std::static_pointer_cast<Coords> (_attributes[0]);
+  _attackLocation.x = p->x;
+  _attackLocation.y = p->y;
+
+  // reset the attributes vector
+  _attributes.clear();
+}
+
+
+void StateSelectTarget::resume()
+{
+  // retrieve coordinates from the attributes
+  if (_attributes.size()) {
+    fetchAttributes();
+  }
+}
+
 
 void StateSelectTarget::draw()
 {
@@ -67,12 +92,11 @@ void StateSelectTarget::selectNextTarget() {
 
 void StateSelectTarget::validate()
 {
-  /// \todo add a state to select a target from the path finding
-  NOTICE("validate");
-
-
   Status::battle()->map()->attack((*_targets)[_index_target]);
   Status::clearStates();
+
+  // move the unit
+  Status::battle()->map()->moveUnit(_attackLocation); /// \todo check if the unit survived
 }
 
 

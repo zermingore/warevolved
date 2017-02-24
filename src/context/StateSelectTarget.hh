@@ -36,15 +36,9 @@ public:
   ~StateSelectTarget() = default;
 
   /**
-   * \brief Save the menu coordinates.
-   * \todo suspend() should also save selected entry.
-   */
-  void suspend() {}
-
-  /**
    * \brief re-build the menu.
    */
-  void resume() {}
+  void resume();
 
   /**
    * \brief Draws the menu associated to the State
@@ -56,7 +50,7 @@ public:
    * \note Expects one attribute: menu coordinates.
    * \note Aborts if no attribute was found
    */
-  void fetchAttributes() final {}
+  void fetchAttributes() final;
 
 
 private:
@@ -94,6 +88,8 @@ private:
 
   ///< sprite associated to the highlight of the selected target
   std::shared_ptr<sf::Sprite> _targetHighlight;
+
+  Coords _attackLocation; ///< Cell from which the attack is performed
 };
 
 
