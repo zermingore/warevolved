@@ -3,7 +3,8 @@
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
 ** TODO Attack management
-*** TODO Handle attacker death
+*** DONE Handle attacker death
+    CLOSED: [2017-02-27 Mo 08:00]
 *** TODO Allow to attack only targets in range of the attack
 ** DONE pathfinding re-integration
    CLOSED: [2017-02-15 Mi 20:22]

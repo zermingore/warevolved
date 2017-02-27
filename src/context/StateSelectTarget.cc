@@ -7,6 +7,7 @@
 #include <game/PathFinding.hh>
 #include <game/Cell.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <common/enums/attack_result.hh>
 
 
 StateSelectTarget::StateSelectTarget()
@@ -93,11 +94,15 @@ void StateSelectTarget::selectNextTarget() {
 
 void StateSelectTarget::validate()
 {
-  Status::battle()->map()->attack((*_targets)[_index_target]);
+  auto attackResult(Status::battle()->map()->attack((*_targets)[_index_target]));
   Status::clearStates();
 
   // move the unit
-  Status::battle()->map()->moveUnit(_attackLocation); /// \todo check if the unit survived
+  if (   attackResult != e_attack_result::ATTACKER_DIED
+      && attackResult != e_attack_result::BOTH_DIED)
+  {
+    Status::battle()->map()->moveUnit(_attackLocation);
+  }
 }
 
 

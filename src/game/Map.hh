@@ -9,6 +9,7 @@
 
 # include <common/include.hh>
 # include <common/using.hh>
+# include <common/enums/attack_result.hh>
 
 class Cell;
 class Unit;
@@ -133,17 +134,28 @@ public:
    */
   void endTurn();
 
+
+  /**
+   * \brief computes and return the result of the fight
+   * \param attacker_status attacker status after the fight
+   * \param defender_status defender status after the fight
+   * \return the attack result
+   */
+  e_attack_result attackResult(bool attacker_status, bool defender_status);
+
   /**
    * \brief Perform the attack of the _selectedUnit over the defender
    * \param defender Unit defending the attack
+   * \return the result of the attack (which unit died, if any)
    */
-  void attack(std::shared_ptr<Unit> defender);
+  e_attack_result attack(std::shared_ptr<Unit> defender);
 
   /**
    * \brief Perform the attack of the _selectedUnit on the target_cell
    * \param target_cell target of the attack (may contain an unit)
+   * \return the result of the attack (which unit died, if any)
    */
-  void attack(std::shared_ptr<Cell> target_cell);
+  e_attack_result attack(std::shared_ptr<Cell> target_cell);
 
   /**
    * \brief operator to allow getting a cell calling map[i][j]

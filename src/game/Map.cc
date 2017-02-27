@@ -110,18 +110,53 @@ void Map::newUnit(const e_unit type,
 }
 
 
-void Map::attack(std::shared_ptr<Unit> defender)
+e_attack_result Map::attackResult(bool attacker_status, bool defender_status)
 {
-  assert(_selectedUnit && defender);
-  defender->setHP(defender->hp() - _selectedUnit->attackValue());
-  _selectedUnit->setPlayed(true);
-
-  if (defender->hp() <= 0) {
-    _cells[defender->x()][defender->y()]->removeUnit();
+  /// \todo handle other status (unit down)
+  if (attacker_status == true && defender_status == true) {
+    return e_attack_result::BOTH_DIED;
   }
+
+  if (attacker_status == true) {
+    return e_attack_result::ATTACKER_DIED;
+  }
+
+  if (defender_status == true) {
+    return e_attack_result::DEFENDER_DIED;
+  }
+
+  return e_attack_result::NONE_DIED;
 }
 
-void Map::attack(std::shared_ptr<Cell> target_cell)
+
+e_attack_result Map::attack(std::shared_ptr<Unit> defender)
+{
+  assert(_selectedUnit && defender);
+
+  // getting defender status
+  defender->setHP(defender->hp() - _selectedUnit->attackValue());
+  bool defender_died = false;
+  if (defender->hp() <= 0)
+  {
+    _cells[defender->x()][defender->y()]->removeUnit();
+    defender_died = true;
+  }
+
+  // getting attacker status after strike back
+  _selectedUnit->setHP(_selectedUnit->hp() - defender->attackValue() / 2);
+  bool attacker_died = false;
+  if (_selectedUnit->hp() <= 0)
+  {
+    NOTICE("attacker died");
+    _cells[_selectedUnit->x()][_selectedUnit->y()]->removeUnit();
+    attacker_died = true;
+  }
+
+  return attackResult(attacker_died, defender_died);
+}
+
+
+e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
 {
   assert(_selectedUnit && target_cell);
 
@@ -129,16 +164,11 @@ void Map::attack(std::shared_ptr<Cell> target_cell)
   if (!defender)
   {
     NOTICE("Attacking empty cell");
-    return;
+    return e_attack_result::NONE_DIED;
   }
 
-  defender->setHP(defender->hp() - _selectedUnit->attackValue());
-
-  if (defender->hp() <= 0) {
-    _cells[defender->x()][defender->y()]->removeUnit();
-  }
+  return attack(defender);
 }
-
 
 
 void Map::dump()
