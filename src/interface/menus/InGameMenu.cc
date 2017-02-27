@@ -26,11 +26,11 @@ void InGameMenu::addCancelEntry(std::function<void()> cancel_callback)
 
 
 void InGameMenu::moveUp() {
-  incrementSelectedEntry();
+  decrementSelectedEntry();
 }
 
 void InGameMenu::moveDown() {
-  decrementSelectedEntry();
+  incrementSelectedEntry();
 }
 
 

@@ -278,7 +278,8 @@
    should use assert (state == MODE__MENU)
 
 * TODO Bugs / Features
-** TODO Menu selection up / down inverted
+** DONE Menu selection up / down inverted
+   CLOSED: [2017-02-27 Mo 08:07]
 ** DONE InterfaceElements are never removed
    CLOSED: [2016-11-15 Di 07:37]
 ** DONE The Cursor can exit the map (border right / bottom not effective)
