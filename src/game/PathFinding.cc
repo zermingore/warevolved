@@ -330,3 +330,62 @@ bool PathFinding::allowedAttack(std::shared_ptr<Unit> unit, Coords c)
 
   return false;
 }
+
+
+
+std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
+PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
+{
+  assert(unit && cell);
+
+  std::vector<std::shared_ptr<Cell>> targets_list;
+
+  // implicit cast into integer to handle negative values: unit_x - cell_x
+  int unit_x = cell->x();
+  int unit_y = cell->y();
+
+  std::stack<std::pair<int, int>> s;
+  s.push(std::pair<int, int>(unit_x, unit_y));
+
+  std::vector<std::pair<int, int>> checked; // already visited cells
+
+  while (!s.empty())
+  {
+    // getting Cell's coordinates (stack of Coordinates)
+    auto current_cell = s.top();
+    int x = current_cell.second;
+    int y = current_cell.first;
+    s.pop();
+
+    // check overflow, Manhattan distance and if we already marked the cell
+    size_t distance(std::abs(unit_x - x) + std::abs(unit_y - y));
+    if (   static_cast<size_t> (x) >= _map->nbColumns()
+        || static_cast<size_t> (y) >= _map->nbLines()
+        || distance < unit->minRange()
+        || distance > _maxLength + unit->maxRange()
+        || std::find(checked.begin(), checked.end(), current_cell) != checked.end())
+    {
+      // skipping invalid cells
+      continue;
+    }
+
+    checked.push_back(current_cell);
+
+    // updating target list
+    auto c = (*_map)[current_cell.second][current_cell.first];
+    if (c->unit())
+    {
+      if (c->unit()->playerId() != Status::player()->id()) {
+        targets_list.push_back(c);
+      }
+    }
+
+    // continuing with the four adjacent cells of the current one
+    s.emplace(x + 1, y    );
+    s.emplace(x    , y + 1);
+    s.emplace(x - 1, y    );
+    s.emplace(x    , y - 1);
+  }
+
+  return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets_list);
+}

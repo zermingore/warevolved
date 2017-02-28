@@ -105,6 +105,14 @@ public:
   /// Sets highlight and highlight color for reachable cells.
   static void highlightCells();
 
+  /**
+   * \brief compute and return list of available targets
+   * \param unit Unit used as attacker
+   * \param cell coordinates from where to get the targets
+   */
+  static std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
+  getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell);
+
 
 private:
   /**

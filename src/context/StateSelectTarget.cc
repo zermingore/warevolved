@@ -8,6 +8,8 @@
 #include <game/Cell.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <common/enums/attack_result.hh>
+#include <game/Player.hh>
+#include <interface/Cursor.hh>
 
 
 StateSelectTarget::StateSelectTarget()
@@ -20,9 +22,6 @@ StateSelectTarget::StateSelectTarget()
   _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { selectNextTarget();     });
   _evtMgr->registerEvent(e_input::SELECTION_1,  [=] { validate();             });
   _evtMgr->registerEvent(e_input::EXIT_1,       [=] { exit();                 });
-
-  _targets = PathFinding::getEnemyPositions();
-  assert(!_targets->empty() && "StateSelectTarget: no target available");
 
   // Graphical attributes initialization
   _targetHighlightImage = resources::ResourcesManager::getImage("cursor");
@@ -60,6 +59,11 @@ void StateSelectTarget::resume()
   if (_attributes.size()) {
     fetchAttributes();
   }
+
+  _targets = PathFinding::getTargets(Status::battle()->map()->selectedUnit(),
+                                     Status::battle()->map()->cell(_attackLocation));
+
+  assert(!_targets->empty() && "StateSelectTarget: no target available");
 }
 
 
@@ -103,6 +107,9 @@ void StateSelectTarget::validate()
   {
     Status::battle()->map()->moveUnit(_attackLocation);
   }
+
+  // move the cursor
+  Status::battle()->getCurrentPlayer()->cursor()->setPosition(_attackLocation);
 }
 
 

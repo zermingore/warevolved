@@ -5,7 +5,9 @@
 ** TODO Attack management
 *** DONE Handle attacker death
     CLOSED: [2017-02-27 Mo 08:00]
-*** TODO Allow to attack only targets in range of the attack
+*** DONE Allow to attack only targets in range of the attacker
+    CLOSED: [2017-02-28 Di 08:03]
+*** TODO Move the cursor where the attack happened (check StateSelection && State pop)
 ** DONE pathfinding re-integration
    CLOSED: [2017-02-15 Mi 20:22]
 ** DONE While moving a unit, fade or hide original unit sprite

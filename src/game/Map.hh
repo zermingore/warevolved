@@ -102,6 +102,13 @@ public:
   e_terrain getTerrain(const size_t line, const size_t column) const;
 
   /**
+   * \brief get the cell at given coordinates
+   * \param coords the coordinates of the Cell to retrieve
+   * \return The cell at coords coordinates
+   */
+  auto cell(Coords coords) const { return _cells[coords.y][coords.x]; }
+
+  /**
    * \brief _cells array getter.
    * \return The cells array.
    */
