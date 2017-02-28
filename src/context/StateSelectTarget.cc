@@ -98,10 +98,8 @@ void StateSelectTarget::selectNextTarget() {
 
 void StateSelectTarget::validate()
 {
+  // move the unit (if it's still alive)
   auto attackResult(Status::battle()->map()->attack((*_targets)[_index_target]));
-  Status::clearStates();
-
-  // move the unit
   if (   attackResult != e_attack_result::ATTACKER_DIED
       && attackResult != e_attack_result::BOTH_DIED)
   {
@@ -109,7 +107,9 @@ void StateSelectTarget::validate()
   }
 
   // move the cursor
-  Status::battle()->getCurrentPlayer()->cursor()->setPosition(_attackLocation);
+  Status::player()->cursor()->setCoords(_attackLocation);
+
+  Status::clearStates();
 }
 
 
