@@ -83,7 +83,7 @@ void StateSelectTarget::selectPreviousTarget()
 {
   if (_index_target == 0)
   {
-    _index_target = _targets->size();
+    _index_target = _targets->size() - 1;
     return;
   }
 
