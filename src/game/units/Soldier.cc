@@ -7,10 +7,10 @@ Soldier::Soldier()
   _fullName = "John Doe";
   _image = resources::ResourcesManager::getImage("soldiers");
 
-  _motionValue = 3;
+  _motionValue = 11;
   _hp = 10;
   _attackValue = 5;
 
-  _minRange = 1;
-  _maxRange = 2;
+  _minRange = 4;
+  _maxRange = 7;
 }

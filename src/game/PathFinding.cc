@@ -350,10 +350,10 @@ PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
   std::vector<std::pair<int, int>> checked; // already visited cells
 
   // adding the 4 cells adjacent to the attacker
-  s.emplace(unit_c + 1, unit_l    );
-  s.emplace(unit_c    , unit_l + 1);
-  s.emplace(unit_c - 1, unit_l    );
-  s.emplace(unit_c    , unit_l - 1);
+  s.emplace(unit_c + unit->minRange(), unit_l                   );
+  s.emplace(unit_c                   , unit_l + unit->minRange());
+  s.emplace(unit_c - unit->minRange(), unit_l                   );
+  s.emplace(unit_c                   , unit_l - unit->minRange());
 
   while (!s.empty())
   {
