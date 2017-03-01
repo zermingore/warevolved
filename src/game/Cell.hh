@@ -29,10 +29,10 @@ public:
    * Draw the cell without any Terrain (so no Texture either).
    * and without any Unit.
    *
-   * \param x x coordinate of the cell to create.
-   * \param y y coordinate of the cell to create.
+   * \param c column coordinate of the cell to create.
+   * \param l line   coordinate of the cell to create.
    */
-  Cell(size_t x, size_t y);
+  Cell(size_t c, size_t l);
 
   // __________________________ Getters / Setters __________________________ //
   /**
@@ -97,8 +97,22 @@ public:
   /**
    * \brief returns Cell's y coordinate.
    * \return cell y coordinate.
+   * \note l: line
+   */
+  size_t l() { return _coords.x; }
+
+  /**
+   * \brief returns Cell's y coordinate.
+   * \return cell y coordinate.
    */
   size_t y() { return _coords.y; }
+
+  /**
+   * \brief returns Cell's x coordinate.
+   * \return cell x coordinate.
+   * \note c: column
+   */
+  size_t c() { return _coords.y; }
 
   /**
    * \brief coords getter.
