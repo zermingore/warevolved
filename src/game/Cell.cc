@@ -2,12 +2,12 @@
 #include <common/enums/terrains.hh>
 
 
-Cell::Cell(size_t x, size_t y) :
+Cell::Cell(size_t c, size_t l) :
   _terrain(e_terrain::NONE),
   _unit(nullptr),
   _highlight(false),
   _highlightColor(255, 255, 255)
 {
-  _coords.x = x;
-  _coords.y = y;
+  _coords.x = c;
+  _coords.y = l;
 }
