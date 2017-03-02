@@ -78,8 +78,10 @@ void StateMenu::validate() {
 }
 
 
-void StateMenu::exit() {
+void StateMenu::exit()
+{
   Status::popCurrentState();
+  Status::currentState()->resume();
 }
 
 

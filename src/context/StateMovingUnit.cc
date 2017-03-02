@@ -26,8 +26,6 @@ StateMovingUnit::StateMovingUnit()
   // we need a selected unit to continue
   assert(player->updateSelectedUnit());
 
-  _holoUnitPosition = player->cursor()->coords();
-
   _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUnitUp();    });
   _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveUnitDown();  });
   _evtMgr->registerEvent(e_input::MOVE_LEFT_1,  [=] { moveUnitLeft();  });
@@ -45,10 +43,10 @@ StateMovingUnit::StateMovingUnit()
       exit();
     });
 
-
   // Graphical attributes initialization
   _holoUnit = resources::ResourcesManager::getImage("soldiers");
   _holoUnitSprite = _holoUnit->sprite();
+  _holoUnitPosition = player->cursor()->coords();
 
   // explicitly using some floats for the division
   float x = _holoUnitSprite->getTexture()->getSize().x;

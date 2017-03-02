@@ -53,9 +53,6 @@ void MenuAction::build()
     // _selectedUnit does not exits (another instance of MenuAction built it)
     _selectedUnit = Status::battle()->map()->selectedUnit();
 
-    // highlight every reachable targets
-    PathFinding::setOrigin(_coords, _selectedUnit);
-
     // add the attack entry only if a target is reachable from the current position
     auto cell(Status::battle()->map()->cell(_coords));
     if (PathFinding::getTargets(_selectedUnit, cell)->size() > 0)
