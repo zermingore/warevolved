@@ -254,24 +254,54 @@ void PathFinding::highlightCells()
   /// \todo check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
-  for (auto it: _reachableCells)
-  {
-    auto c = (*_map)[it->x()][it->y()];
 
-    c->setHighlight(true);
-    if (c->unit())
+  for (auto i(0u); i < _map->nbColumns(); ++i)
+  {
+    for (auto j(0u); j < _map->nbLines(); ++j)
     {
-      if (c->unit()->playerId() != Status::player()->id())
+      auto c = (*_map)[i][j];
+
+      // Compute manhattan distance of unit to every cell
+      auto distance(manhattan(c->coords(), _origin));
+
+      // Skip out of range cells
+      if (distance > _unit->motionValue() + _unit->maxRange()) {
+        continue;
+      }
+
+      // Highlight reachable cells, depending on content, if any
+      if (distance <= _unit->motionValue())
       {
-        c->setHighlightColor(sf::Color::Red);
-        _enemyPositions.push_back(c);
+        c->setHighlight(true);
+
+        // empty cell, highlight as reachable
+        auto u = c->unit();
+        if (!u)
+        {
+          c->setHighlightColor(sf::Color::Yellow);
+          continue;
+        }
+
+        if (u->playerId() == Status::player()->id()) {
+          c->setHighlightColor(sf::Color::Green);
+        }
+        else {
+          c->setHighlightColor(sf::Color::Red);
+        }
+
+        continue;
       }
-      else {
-        c->setHighlightColor(sf::Color::Green);
+
+      // cells only at shooting range
+      if (auto u = c->unit())
+      {
+        // unit out of moving range but at shooting range
+        if (u->playerId() != Status::player()->id())
+        {
+          c->setHighlight(true);
+          c->setHighlightColor(sf::Color::Red);
+        }
       }
-    }
-    else {
-      c->setHighlightColor(sf::Color::Yellow);
     }
   }
 }
@@ -394,4 +424,14 @@ PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
   }
 
   return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets_list);
+}
+
+
+size_t PathFinding::manhattan(Coords a, Coords b)
+{
+  // implicit cast into signed int
+  int dist_columns(a.x - b.x);
+  int dist_lines(a.y - b.y);
+
+  return std::abs(dist_columns) + std::abs(dist_lines);
 }

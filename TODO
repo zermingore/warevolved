@@ -2,10 +2,12 @@
 
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
-** TODO bugfix
+** DONE bugfix
+   CLOSED: [2017-03-02 Do 19:07]
 *** DONE cancel path finding / action menu should redraw the path
     CLOSED: [2017-03-02 Do 07:44]
-*** TODO highlight target: targets at range if attack range considered
+*** DONE highlight target: targets at range if attack range considered
+    CLOSED: [2017-03-02 Do 19:07]
 *** DONE move, cancel, move restart the move from the last cancel positon
     CLOSED: [2017-03-02 Do 07:44]
 ** DONE Attack management
@@ -24,6 +26,10 @@
    CLOSED: [2017-02-09 Do 19:07]
 ** TODO Clean
 *** TODO Coord type: x,y <- c,l
+** TODO PathFinding
+*** TODO Update for every move
+*** TODO Invoke action menu -> should still be displayed
+
 
 
 * DONE clean

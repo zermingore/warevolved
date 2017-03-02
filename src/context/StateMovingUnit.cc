@@ -130,13 +130,13 @@ void StateMovingUnit::moveUnitRight()
 
 void StateMovingUnit::draw()
 {
-  _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
-  _holoUnit->drawAtCell(_holoUnitPosition);
-
   /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnitSprite);
 
   PathFinding::computeAllowedPath();
   PathFinding::highlightCells();
   PathFinding::drawPath();
+
+  _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
+  _holoUnit->drawAtCell(_holoUnitPosition);
 }

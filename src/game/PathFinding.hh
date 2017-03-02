@@ -102,7 +102,12 @@ public:
    */
   static void computeAllowedPath();
 
-  /// Sets highlight and highlight color for reachable cells.
+  /**
+   * \brief Sets cells highlight as follow:
+   * - Highlight reachable cells (at moving range)
+   * - Highlight enemy units at shooting range
+   * - Highlight friendly units at moving range
+   */
   static void highlightCells();
 
   /**
@@ -146,6 +151,16 @@ private:
    *   according to the next direction (for smooth corners).
    */
   static e_path_shape getShape(size_t index);
+
+
+  /**
+   * \brief returns the Manhattan distance between two cells
+   * \param a first cell
+   * \param b second cell
+   * \return the distance between the two cells
+   */
+  static size_t manhattan(Coords a, Coords b);
+
 
   /// \todo make a relation map - path-finding
   static std::shared_ptr<Map> _map;   ///< Map of the battle.
