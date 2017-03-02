@@ -106,7 +106,7 @@ public:
    * \param coords the coordinates of the Cell to retrieve
    * \return The cell at coords coordinates
    */
-  auto cell(Coords coords) const { return _cells[coords.y][coords.x]; }
+  auto cell(Coords coords) const { return _cells[coords.x][coords.y]; }
 
   /**
    * \brief _cells array getter.
