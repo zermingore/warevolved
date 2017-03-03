@@ -10,7 +10,8 @@
     CLOSED: [2017-03-02 Do 19:07]
 *** DONE move, cancel, move restart the move from the last cancel positon
     CLOSED: [2017-03-02 Do 07:44]
-*** TODO Target selection does not allow to attack expected targets
+*** DONE Target selection does not allow to attack expected targets
+    CLOSED: [2017-03-03 Fr 18:31]
 ** DONE Attack management
    CLOSED: [2017-02-28 Di 18:33]
 *** DONE Handle attacker death

@@ -210,6 +210,7 @@ void PathFinding::addNextDirection(e_direction direction)
 void PathFinding::highlightCells()
 {
   _reachableCells.clear();
+  _enemyPositions.clear();
 
   /// \todo check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
@@ -251,8 +252,10 @@ void PathFinding::highlightCells()
           _reachableCells.push_back((*_map)[i][j]);
           c->setHighlightColor(sf::Color::Green);
         }
-        else {
+        else
+        {
           c->setHighlightColor(sf::Color::Red);
+          _enemyPositions.push_back(c);
         }
 
         continue;
@@ -266,6 +269,7 @@ void PathFinding::highlightCells()
         {
           c->setHighlight(true);
           c->setHighlightColor(sf::Color::Red);
+          _enemyPositions.push_back(c);
         }
       }
     }
@@ -295,37 +299,10 @@ bool PathFinding::allowedMove()
 
 bool PathFinding::allowedAttack(std::shared_ptr<Unit> unit, Coords c)
 {
-  if (_enemyPositions.empty()) {
-    return false;
-  }
-
-  // For every unit, if it's not in the same team as the given unit,
-  //   check if it's at attack range
-
-  // forcing signed values to allow negative values
-  int unit_x(c.x);
-  int unit_y(c.y);
-
-  for (auto cell: _enemyPositions)
-  {
-    /// \todo take into account min range
-
-    // Implicit cast into signed type to handle negative values
-    int x(cell->x());
-    int y(cell->y());
-
-    // checking Manhattan distance
-    if (std::abs(unit_x - x) + std::abs(unit_y - y)
-        > static_cast<int> (unit->maxRange()))
-    {
-      continue;
-    }
-
-    return true;
-  }
-
-  return false;
+  assert(!"allowed attack");
+  return (!_enemyPositions.empty());
 }
+
 
 
 
@@ -335,58 +312,13 @@ PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
   assert(unit && cell);
 
   std::vector<std::shared_ptr<Cell>> targets_list;
-
-  // implicit cast into integer to handle negative values: unit_c - cell_c
-  int unit_c = cell->c();
-  int unit_l = cell->l();
-
-  std::stack<std::pair<int, int>> s;
-  s.push(std::pair<int, int> (unit_c, unit_l));
-
-  std::vector<std::pair<int, int>> checked; // already visited cells
-
-  // adding the 4 cells adjacent to the attacker
-  s.emplace(unit_c + unit->minRange(), unit_l                   );
-  s.emplace(unit_c                   , unit_l + unit->minRange());
-  s.emplace(unit_c - unit->minRange(), unit_l                   );
-  s.emplace(unit_c                   , unit_l - unit->minRange());
-
-  while (!s.empty())
+  for (const auto c: _enemyPositions)
   {
-    // getting Cell's coordinates (stack of Coordinates)
-    auto current_cell = s.top();
-    int c = current_cell.first;
-    int l = current_cell.second;
-    s.pop();
-
-    // check overflow, Manhattan distance and if we already marked the cell
-    size_t distance(std::abs(unit_c - c) + std::abs(unit_l - l));
-    if (   static_cast<size_t> (c) >= _map->nbColumns()
-        || static_cast<size_t> (l) >= _map->nbLines()
-        || distance < unit->minRange()
-        || distance > unit->maxRange()
-        || std::find(checked.begin(), checked.end(), current_cell) != checked.end())
+    auto distance(manhattan(c->coords(), cell->coords()));
+    if (distance >= unit->minRange() && distance <= unit->maxRange())
     {
-      // skipping invalid cells
-      continue;
+      targets_list.push_back(c);
     }
-
-    checked.push_back(current_cell);
-
-    // updating target list
-    auto map_cell = (*_map)[c][l];
-    if (map_cell->unit())
-    {
-      if (map_cell->unit()->playerId() != Status::player()->id()) {
-        targets_list.push_back(map_cell);
-      }
-    }
-
-    // continuing with the four adjacent cells of the current one
-    s.emplace(c + 1, l    );
-    s.emplace(c    , l + 1);
-    s.emplace(c - 1, l    );
-    s.emplace(c    , l - 1);
   }
 
   return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets_list);
