@@ -98,4 +98,11 @@ void MenuAction::attackUnit()
 }
 
 
+void MenuAction::draw()
+{
+  PathFinding::drawPath();
+  InGameMenu::draw();
+}
+
+
 } // namespace interface

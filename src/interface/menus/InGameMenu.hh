@@ -59,7 +59,7 @@ public:
   /**
    * \brief Draw the entries of the menu
    */
-  void draw();
+  virtual void draw();
 
 
 

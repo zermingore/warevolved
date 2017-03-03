@@ -48,6 +48,11 @@ public:
    */
   void build() final;
 
+  /**
+   * \brief Draw the menu and the path finding
+   */
+  void draw() final;
+
 
 private:
   /**

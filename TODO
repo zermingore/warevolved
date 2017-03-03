@@ -29,7 +29,9 @@
 ** TODO PathFinding
 *** DONE Update for every move
     CLOSED: [2017-03-03 Fr 07:26]
-*** TODO Invoke action menu -> should still be displayed
+*** DONE Invoke action menu -> should still be displayed
+    CLOSED: [2017-03-03 Fr 07:45]
+*** TODO Clean (multiple functions seems to do the same thing [highlightCells, getTargets])
 
 
 
@@ -312,8 +314,8 @@
    (running for a long time ?)
    overflow trouble ?
    unseen for a long time (maybee fixed ?)
-** TODO In-game menu: Escape key <> Cancel entry
-** TODO Multiple keys maintained for more than a sec
+** [CLOSED] In-game menu: Escape key <> Cancel entry
+** [CLOSED: old version?] Multiple keys maintained for more than a sec
    probably a timer related
    confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
 ** DONE Attack a target without moving: unit deletion
@@ -363,6 +365,7 @@
     CLOSED: [2014-06-20 Fri 14:27]
 *** TODO Hide SFML "leaks"
     (current ref: Still reachable: 41,364 bytes in 425 blocks)
+** TODO segfault while quitting the game, moving a unit
 
 * TODO Suppress Warnings
 ** DONE incomplete Ctors initialisation
