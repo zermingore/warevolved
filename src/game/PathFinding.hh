@@ -97,12 +97,6 @@ public:
   static void removeUnit() { _unit.reset(); }
 
   /**
-   * \brief Highlights cells which selected unit (_unit) can cross.
-   * (uses a Flood Fill algorithm)
-   */
-  static void computeAllowedPath();
-
-  /**
    * \brief Sets cells highlight as follow:
    * - Highlight reachable cells (at moving range)
    * - Highlight enemy units at shooting range

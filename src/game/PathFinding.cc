@@ -41,7 +41,6 @@ void PathFinding::setOrigin(Coords coords, std::shared_ptr<Unit> unit)
   _currentLength = 0;
   _maxLength = unit->motionValue();
 
-  computeAllowedPath();
   highlightCells();
 }
 
@@ -208,50 +207,10 @@ void PathFinding::addNextDirection(e_direction direction)
 }
 
 
-void PathFinding::computeAllowedPath()
-{
-  // implicit cast into integer to handle negative values: unit_x - cell_x
-  int unit_x = _unit->x();
-  int unit_y = _unit->y();
-
-  std::stack<std::pair<int, int>> s;
-  s.push(std::pair<int, int>(unit_x, unit_y));
-
-  _reachableCells.clear();
-  std::vector<std::pair<int, int>> checked; // already visited cells
-
-  while (!s.empty())
-  {
-    // getting Cell's coordinates (stack of Coordinates)
-    auto current_cell = s.top();
-    int x = current_cell.first;
-    int y = current_cell.second;
-    s.pop();
-
-    // check overflow, Manhattan distance and if we already marked the cell
-    if (   static_cast<size_t> (x) >= _map->nbColumns()
-        || static_cast<size_t> (y) >= _map->nbLines()
-        || std::abs(unit_x - x) + std::abs(unit_y - y) > static_cast<int> (_maxLength)
-        || std::find(checked.begin(), checked.end(), current_cell) != checked.end())
-    {
-      // skipping invalid cells
-      continue;
-    }
-
-    _reachableCells.push_back((*_map)[x][y]);
-    checked.push_back(current_cell);
-
-    // continuing with the four adjacent cells of the current one
-    s.emplace(x + 1, y    );
-    s.emplace(x    , y + 1);
-    s.emplace(x - 1, y    );
-    s.emplace(x    , y - 1);
-  }
-}
-
-
 void PathFinding::highlightCells()
 {
+  _reachableCells.clear();
+
   /// \todo check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
@@ -282,11 +241,14 @@ void PathFinding::highlightCells()
         auto u = c->unit();
         if (!u)
         {
+          _reachableCells.push_back((*_map)[i][j]);
           c->setHighlightColor(sf::Color::Yellow);
           continue;
         }
 
-        if (u->playerId() == Status::player()->id()) {
+        if (u->playerId() == Status::player()->id())
+        {
+          _reachableCells.push_back((*_map)[i][j]);
           c->setHighlightColor(sf::Color::Green);
         }
         else {
