@@ -234,12 +234,12 @@ void PathFinding::highlightCells()
       }
 
       // Highlight reachable cells, depending on content, if any
+      auto u = c->unit();
       if (distance <= _unit->motionValue() - _currentLength)
       {
         c->setHighlight(true);
 
         // empty cell, highlight as reachable
-        auto u = c->unit();
         if (!u)
         {
           _reachableCells.push_back((*_map)[i][j]);
@@ -262,7 +262,7 @@ void PathFinding::highlightCells()
       }
 
       // cells only at shooting range
-      if (auto u = c->unit())
+      if (u && distance <= _unit->maxRange())
       {
         // unit out of moving range but at shooting range
         if (u->playerId() != Status::player()->id())
@@ -297,19 +297,13 @@ bool PathFinding::allowedMove()
 }
 
 
-bool PathFinding::allowedAttack(std::shared_ptr<Unit> unit, Coords c)
-{
-  assert(!"allowed attack");
-  return (!_enemyPositions.empty());
-}
-
-
-
 
 std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
 PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
 {
   assert(unit && cell);
+
+  highlightCells(); // update _enemyPositions if required
 
   std::vector<std::shared_ptr<Cell>> targets_list;
   for (const auto c: _enemyPositions)

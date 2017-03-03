@@ -56,14 +56,6 @@ public:
   static bool allowedMove();
 
   /**
-   * \brief allowed attack notifier
-   * \param unit Attacking unit
-   * \param c cell from which the unit attacks
-   * \return true if the unit can attack from coordinates (false otherwise)
-   */
-  static bool allowedAttack(std::shared_ptr<Unit> unit, Coords c);
-
-  /**
    * \brief adds the next element to the current path
    * \param direction of the element
    */
