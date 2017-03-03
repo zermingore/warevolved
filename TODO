@@ -27,7 +27,8 @@
 ** TODO Clean
 *** TODO Coord type: x,y <- c,l
 ** TODO PathFinding
-*** TODO Update for every move
+*** DONE Update for every move
+    CLOSED: [2017-03-03 Fr 07:26]
 *** TODO Invoke action menu -> should still be displayed
 
 
@@ -113,7 +114,9 @@
    CLOSED: [2014-06-18 Wed 00:10] (using a flood-fill)
 ** TODO Allow direct attack when a target is already at range
    (do not pass through move action)
-** TODO allow a unit to attack when a target become accessible (after moving)
+** DONE allow a unit to attack when a target become accessible (after moving)
+   CLOSED: [2017-03-03 Fr 07:27]
+** TODO Consider enemy units as uncrossable obstacles
 
 * TODO Code Design
 ** DONE [#A] really use Settings class (key repeat delay, ...) should be in it

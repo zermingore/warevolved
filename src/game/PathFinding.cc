@@ -204,6 +204,7 @@ void PathFinding::addNextDirection(e_direction direction)
 {
   _directions.push_back(direction);
   ++_currentLength;
+  highlightCells();
 }
 
 
@@ -254,23 +255,26 @@ void PathFinding::highlightCells()
   /// \todo check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
-
   for (auto i(0u); i < _map->nbColumns(); ++i)
   {
     for (auto j(0u); j < _map->nbLines(); ++j)
     {
       auto c = (*_map)[i][j];
 
+      // reset highlight for every cell
+      c->setHighlight(false);
+
       // Compute manhattan distance of unit to every cell
-      auto distance(manhattan(c->coords(), _origin));
+      auto distance(manhattan(c->coords(), _current));
 
       // Skip out of range cells
-      if (distance > _unit->motionValue() + _unit->maxRange()) {
+      if (distance > _unit->motionValue() + _unit->maxRange() - _currentLength)
+      {
         continue;
       }
 
       // Highlight reachable cells, depending on content, if any
-      if (distance <= _unit->motionValue())
+      if (distance <= _unit->motionValue() - _currentLength)
       {
         c->setHighlight(true);
 
