@@ -90,6 +90,9 @@ private:
   std::shared_ptr<sf::Sprite> _targetHighlight;
 
   Coords _attackLocation; ///< Cell from which the attack is performed
+
+  std::shared_ptr<resources::Image> _holoUnit; ///< 'holo' attacking unit
+  std::shared_ptr<sf::Sprite> _holoUnitSprite; ///< 'holo unit' sprite
 };
 
 

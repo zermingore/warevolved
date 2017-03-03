@@ -26,12 +26,20 @@ StateSelectTarget::StateSelectTarget()
   // Graphical attributes initialization
   _targetHighlightImage = resources::ResourcesManager::getImage("cursor");
   _targetHighlight = _targetHighlightImage->sprite();
+  _targetHighlight->setColor(sf::Color(255, 127, 127, 255));
 
   // explicitly using some floats for the division
   float x = _targetHighlight->getTexture()->getSize().x;
   float y = _targetHighlight->getTexture()->getSize().y;
   using p = graphics::MapGraphicsProperties;
   _targetHighlight->setScale(p::cellWidth()  / x, p::cellHeight() / y);
+
+  _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
+  _holoUnitSprite = _holoUnit->sprite();
+  _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
+  x = _holoUnitSprite->getTexture()->getSize().x;
+  y = _holoUnitSprite->getTexture()->getSize().y;
+  _holoUnitSprite->setScale(p::cellWidth()  / x, p::cellHeight() / y);
 }
 
 
@@ -71,8 +79,8 @@ void StateSelectTarget::draw()
 {
   assert(_targets && _targets->size() > 0 && _index_target <= _targets->size());
 
-  _targetHighlight->setColor(sf::Color(255, 127, 127, 255));
   _targetHighlightImage->drawAtCell((*_targets)[_index_target]->coords());
+  _holoUnit->drawAtCell(_attackLocation);
 }
 
 

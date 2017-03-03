@@ -44,7 +44,7 @@ StateMovingUnit::StateMovingUnit()
     });
 
   // Graphical attributes initialization
-  _holoUnit = resources::ResourcesManager::getImage("soldiers");
+  _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
   _holoUnitSprite = _holoUnit->sprite();
   _holoUnitPosition = player->cursor()->coords();
 
@@ -52,7 +52,7 @@ StateMovingUnit::StateMovingUnit()
   float x = _holoUnitSprite->getTexture()->getSize().x;
   float y = _holoUnitSprite->getTexture()->getSize().y;
   using p = graphics::MapGraphicsProperties;
-  _holoUnitSprite->setScale(p::cellWidth()  / x, p::cellHeight() / y);
+  _holoUnitSprite->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
   // Fading sprite at original position
   auto unit(Status::battle()->map()->unit(_originalCoords));
