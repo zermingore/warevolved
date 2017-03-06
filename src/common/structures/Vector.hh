@@ -21,16 +21,22 @@ class Vector2
 {
 public:
   /// Default constructor. Creates a Vector2(0, 0).
-  Vector2() : x(0), y(0)
-  {}
+  Vector2()
+    : x(0)
+    , y(0)
+  {
+  }
 
   /**
    * \brief Construct the vector with given coordinates.
    * \param a x coordinate.
    * \param b y coordinate.
    */
-  Vector2(const T& a, const T& b) : x(a), y(b)
-  {}
+  Vector2(const T& a, const T& b)
+    : x(a)
+    , y(b)
+  {
+  }
 
 
   /**
@@ -45,7 +51,8 @@ public:
   /**
    * \brief stream operator: display x and y coordinates.
    */
-  friend std::ostream& operator<<(std::ostream& os, const Vector2& v) {
+  friend std::ostream& operator<<(std::ostream& os, const Vector2& v)
+  {
     os << v.x << ", " << v.y;
     return os;
   }

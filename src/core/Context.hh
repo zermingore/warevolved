@@ -26,6 +26,12 @@ public:
   explicit Context(bool fullscreen);
 
 
+  /**
+   * \brief default destructor
+   */
+  ~Context() = default;
+
+
 private:
   /**
    * \brief Builds and sets the main window

@@ -28,12 +28,14 @@
    CLOSED: [2017-02-09 Do 19:07]
 ** TODO Clean
 *** TODO Coord type: x,y <- c,l
-** TODO PathFinding
+** DONE PathFinding
+   CLOSED: [2017-03-06 Mo 19:38]
 *** DONE Update for every move
     CLOSED: [2017-03-03 Fr 07:26]
 *** DONE Invoke action menu -> should still be displayed
     CLOSED: [2017-03-03 Fr 07:45]
-*** TODO Clean (multiple functions seems to do the same thing [highlightCells, getTargets])
+*** DONE Clean (multiple functions seems to do the same thing [highlightCells, getTargets])
+    CLOSED: [2017-03-06 Mo 07:35]
 
 
 
@@ -237,6 +239,7 @@
 ** 3D sound (using OpenAL)
 
 * TODO Interface
+** TODO Highlight possible targets when hovering a unit
 ** DONE draw selection menu
    CLOSED: [2013-04-21 Sun 11:17]
    position = f(selectedCell)
