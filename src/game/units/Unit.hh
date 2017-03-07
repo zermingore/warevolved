@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date May 3, 2013
+ * \author Zermingore
+ */
+
 #ifndef UNIT_HH_
 # define UNIT_HH_
 

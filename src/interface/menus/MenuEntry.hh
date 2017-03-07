@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date May 20, 2013
+ * \author Zermingore
+ */
+
 #ifndef MENU_ENTRY_HH_
 # define MENU_ENTRY_HH_
 

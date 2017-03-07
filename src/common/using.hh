@@ -1,8 +1,8 @@
-/*
- * common/using.hh
- *
- *  Created on: February 19, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date Feb 19, 2013
+ * \author Zermingore
+ * \brief Handy aliases on data structures
  */
 
 #ifndef USING_HH_
@@ -76,6 +76,7 @@ public: // explicitly specifying that these attributes are public
   size_t &c; ///< column coordinate
   size_t &l; ///< line   coordinate
 };
+
 
 
 #endif /* !USING_HH_ */

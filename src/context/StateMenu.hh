@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_MENU_HH_
-# define STATE_MENU_HH_
+#ifndef CONTEXT_STATE_MENU_HH_
+# define CONTEXT_STATE_MENU_HH_
 
 # include <context/State.hh>
 
@@ -95,4 +95,4 @@ private:
 };
 
 
-#endif /* !STATE_MENU_HH_ */
+#endif /* !CONTEXT_STATE_MENU_HH_ */

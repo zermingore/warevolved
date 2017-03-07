@@ -2,8 +2,7 @@
  * \file
  * \date January 26, 2017
  * \author Zermingore
- *
- * interface::MenuAction declaration
+ * \brief interface::MenuAction declaration
  */
 
 

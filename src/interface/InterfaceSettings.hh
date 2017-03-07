@@ -1,10 +1,12 @@
-#ifndef INTERFACESETTINGS_HH_
-# define INTERFACESETTINGS_HH_
-
 /**
  * \file
+ * \date Feb 23, 2016
+ * \author Zermingore
  * \brief Interface settings.
  */
+
+#ifndef INTERFACE_INTERFACE_SETTINGS_HH_
+# define INTERFACE_INTERFACE_SETTINGS_HH_
 
 # include <common/using.hh>
 
@@ -28,7 +30,6 @@ public:
    * \param player_color Player's main color.
    */
   explicit InterfaceSettings(Color player_color);
-
 
 
   /**
@@ -56,6 +57,7 @@ public:
   void setUnitsColor(Color color) { _unitsColor = color; }
 
 
+
 private:
   Color _cursorColor; ///< Color of the Player's Cursor.
   Color _unitsColor;  ///< Color of the Player's Units.
@@ -64,4 +66,4 @@ private:
 } // namespace interface
 
 
-#endif /* !INTERFACESETTINGS_HH_ */
+#endif /* !INTERFACE_INTERFACE_SETTINGS_HH_ */

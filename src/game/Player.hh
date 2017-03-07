@@ -1,7 +1,8 @@
 /**
- * \file Player definition.
+ * \file
  * \date August 1, 2013
  * \author Zermingore
+ * \brief Player definition.
  */
 
 #ifndef PLAYER_HH_

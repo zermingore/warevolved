@@ -1,14 +1,14 @@
-/*
- * game/Game.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
  */
 
 #ifndef GAME_HH_
 # define GAME_HH_
 
 /**
+ * \class Game
  * \brief Game is designed to hold the whole Game and not a single game.
  *
  * This way the Game class launches the main menu when needed.

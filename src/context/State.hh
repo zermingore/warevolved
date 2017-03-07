@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_HH_
-# define STATE_HH_
+#ifndef CONTEXT_STATE_HH_
+# define CONTEXT_STATE_HH_
 
 # include <memory>
 # include <vector>
@@ -128,4 +128,4 @@ protected:
 };
 
 
-#endif /* !STATE_HH_ */
+#endif /* !CONTEXT_STATE_HH_ */

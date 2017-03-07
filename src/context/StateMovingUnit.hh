@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_MOVING_UNIT_HH_
-# define STATE_MOVING_UNIT_HH_
+#ifndef CONTEXT_STATE_MOVING_UNIT_HH_
+# define CONTEXT_STATE_MOVING_UNIT_HH_
 
 # include <context/State.hh>
 # include <common/using.hh> // Coords
@@ -75,4 +75,4 @@ private:
 };
 
 
-#endif /* !STATE_MOVING_UNIT_HH_ */
+#endif /* !CONTEXT_STATE_MOVING_UNIT_HH_ */

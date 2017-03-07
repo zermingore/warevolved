@@ -1,5 +1,6 @@
 /**
  * \file
+ * \date Jan 11, 2015
  * \namespace interface
  * \brief InterfaceElement implementation
  */
@@ -29,7 +30,6 @@ void InterfaceElement::draw()
   PRINTF("interfaceelement::draw()", _img_name);
   graphics::GraphicsEngine::draw(_image->sprite());
 }
-
 
 
 } // namespace interface

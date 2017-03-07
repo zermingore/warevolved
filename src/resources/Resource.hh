@@ -1,26 +1,14 @@
+/**
+ * \file
+ * \date April 25, 2013
+ * \namespace interface
+ * \brief InterfaceElement implementation
+ */
+
 #ifndef RESOURCE_HH_
 # define RESOURCE_HH_
 
 # include <common/include.hh>
-
-// should split scopes ?
-// (menu_scopes) with main, end game, network
-
-
-/**
- * \brief various scopes to delimit resources lifetime
- * *Warning*: unused for now
- */
-enum e_scope
-{
-  E_SCOPE_MAIN_MENU,
-
-  E_SCOPE_ANY_GAME, ///< in-game_menu, cursor
-  E_SCOPE_SNOWY,
-  E_SCOPE_SUNNY,
-
-  E_SCOPE_ALL ///< the resource will be present in any scope
-};
 
 
 /**

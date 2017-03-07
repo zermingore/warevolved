@@ -1,8 +1,7 @@
 /**
  * \file
- *
- *  Created on: Jul 23, 2013
- *      Author: Zermingore
+ * \date Jul 23, 2013
+ * \author Zermingore
  */
 
 #ifndef DEBUG_HH_

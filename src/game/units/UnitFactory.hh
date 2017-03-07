@@ -5,7 +5,6 @@
  * \brief UnitFactory declaration: Unit creation
  */
 
-
 #ifndef UNIT_FACTORY_HH_
 # define UNIT_FACTORY_HH_
 

@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
+ */
+
 #ifndef ENUM_UNITS_HH_
 # define ENUM_UNITS_HH_
 

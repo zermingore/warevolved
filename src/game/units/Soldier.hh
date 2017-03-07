@@ -1,8 +1,7 @@
-/*
- * game/units/Soldier.hh
- *
- *  Created on: August 8, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date August 8, 2013
+ * \author Zermingore
  */
 
 #ifndef SOLDIER_HH_

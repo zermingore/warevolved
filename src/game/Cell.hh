@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
+ */
+
 #ifndef CELL_HH_
 # define CELL_HH_
 

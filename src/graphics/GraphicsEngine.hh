@@ -5,9 +5,8 @@
  * \brief Graphics related class / functions declarations
  */
 
-
-#ifndef GRAPHICSENGINE_HH_
-# define GRAPHICSENGINE_HH_
+#ifndef GRAPHICS_GRAPHICS_ENGINE_HH_
+# define GRAPHICS_GRAPHICS_ENGINE_HH_
 
 # include <common/include.hh>
 # include <common/using.hh> // Coords
@@ -137,4 +136,4 @@ private:
 
 } // namespace graphics
 
-#endif /* !GRAPHICSENGINE_HH_ */
+#endif /* !GRAPHICS_GRAPHICS_ENGINE_HH_ */

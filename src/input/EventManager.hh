@@ -1,5 +1,11 @@
-#ifndef EVENT_MANAGER_HH_
-# define EVENT_MANAGER_HH_
+/**
+ * \file
+ * \date April 17, 2013
+ * \author Zermingore
+ */
+
+#ifndef INPUT_EVENT_MANAGER_HH_
+# define INPUT_EVENT_MANAGER_HH_
 
 # include <map>
 # include <memory>
@@ -48,4 +54,4 @@ private:
 };
 
 
-#endif /* !EVENT_MANAGER_HH_ */
+#endif /* !INPUT_EVENT_MANAGER_HH_ */

@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef KEYMANAGER_HH_
-# define KEYMANAGER_HH_
+#ifndef INPUT_KEY_MANAGER_HH_
+# define INPUT_KEY_MANAGER_HH_
 
 # include <common/include.hh>
 
@@ -146,4 +146,4 @@ private:
 };
 
 
-#endif /* !KEYMANAGER_HH_ */
+#endif /* !INPUT_KEY_MANAGER_HH_ */

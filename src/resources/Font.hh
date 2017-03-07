@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date Apr 27, 2013
+ * \author Zermingore
+ */
+
 #ifndef RESOURCES_FONT_HH_
 # define RESOURCES_FONT_HH_
 
@@ -46,5 +52,7 @@ private:
 
 
 } // namespace resources
+
+
 
 #endif /* !RESOURCES_FONT_HH_ */

@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date Apr 25, 2013
+ * \author Zermingore
+ */
+
 #ifndef RESOURCES_IMAGE_HH_
 # define RESOURCES_IMAGE_HH_
 
@@ -9,8 +15,8 @@
 namespace resources {
 
 /**
- * \class Image Resource type
- * Derived from Resource
+ * \class Image
+ * \brief Resource type, Derived from Resource
  */
 class Image: public Resource
 {
@@ -30,6 +36,7 @@ public:
    * _loaded to false
    */
   Image(const std::string file_name, const std::string name);
+
 
   /**
    * \brief initializes _texture
@@ -107,7 +114,8 @@ public:
    */
   void setFileName(std::string file_name);
 
-  /** _sprite setter
+  /**
+   * \brief _sprite setter
    * \param sprite _sprite value
    */
   void setSprite(std::shared_ptr<sf::Sprite> sprite) { _sprite = sprite; }
@@ -148,6 +156,9 @@ private:
   std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
 };
 
+
 } // namespace resources
+
+
 
 #endif /* !RESOURCES_IMAGE_HH_ */

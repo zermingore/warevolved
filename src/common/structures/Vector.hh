@@ -2,6 +2,7 @@
  * \file
  * \date Jul 24, 2013
  * \author Zermingore
+ * \brief library independent 2 dimensions Vector
  */
 
 #ifndef VECTOR_HH_
@@ -58,6 +59,7 @@ public:
   }
 
 
+public: // explicitly specifying that these attributes are public
   T x; ///< X component of the vector
   T y; ///< Y component of the vector
 };

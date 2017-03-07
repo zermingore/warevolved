@@ -1,8 +1,7 @@
-/*
- * common/System.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
  */
 
 #ifndef SYSTEM_HH_
@@ -11,21 +10,21 @@
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
 
-/** \class System
- *
+/**
+ * \class System
  * \brief designed to fill bugs reports
  *
  * keeps software information
  *  - SFML version
  * keeps hardware information
  */
-
 class System
 {
 public:
   /// deleted Default Constructor
   System() = delete;
   System(unsigned int sfml_major, unsigned int sfml_minor);
+
 
   void setSfmlMajor(unsigned int major) { _sfmlMajor = major; }
   void setSfmlMinor(unsigned int minor) { _sfmlMinor = minor; }

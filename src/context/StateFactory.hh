@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_FACTORY_HH_
-# define STATE_FACTORY_HH_
+#ifndef CONTEXT_STATE_FACTORY_HH_
+# define CONTEXT_STATE_FACTORY_HH_
 
 # include <memory>
 # include <context/State.hh>
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif /* !STATE_FACTORY_HH_ */
+#endif /* !CONTEXT_STATE_FACTORY_HH_ */

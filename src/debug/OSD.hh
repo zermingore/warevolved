@@ -5,9 +5,8 @@
  * \brief On Screen Debug information display
  */
 
-
-#ifndef OSD_HH_
-# define OSD_HH_
+#ifndef DEBUG_OSD_HH_
+# define DEBUG_OSD_HH_
 
 # include <common/include.hh>
 # include <common/using.hh>
@@ -68,4 +67,4 @@ private:
 
 } // namespace debug
 
-#endif /* !OSD_HH_ */
+#endif /* !DEBUG_OSD_HH_ */

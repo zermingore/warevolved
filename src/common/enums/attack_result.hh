@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date February 27, 2017
+ * \author Zermingore
+ */
+
 #ifndef ATTACK_RESULT_HH_
 # define ATTACK_RESULT_HH_
 

@@ -1,6 +1,11 @@
 -*- mode:org -*-
 
 * TODO Roadmap
+** TODO dead code
+*** TODO InterfaceSettings ?
+*** TODO MenuMap ?
+*** TODO KeyManager::InputKey
+*** TODO macro.hh
 ** TODO Merge branches: feature with clean, then clean with master
 ** DONE bugfix
    CLOSED: [2017-03-02 Do 19:07]
@@ -28,6 +33,7 @@
    CLOSED: [2017-02-09 Do 19:07]
 ** TODO Clean
 *** TODO Coord type: x,y <- c,l
+*** TODO Add doxygen comments for every headers
 ** DONE PathFinding
    CLOSED: [2017-03-06 Mo 19:38]
 *** DONE Update for every move

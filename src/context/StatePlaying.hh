@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_PLAYING_HH_
-# define STATE_PLAYING_HH_
+#ifndef CONTEXT_STATE_PLAYING_HH_
+# define CONTEXT_STATE_PLAYING_HH_
 
 # include <context/State.hh>
 
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif /* !STATE_PLAYING_HH_ */
+#endif /* !CONTEXT_STATE_PLAYING_HH_ */

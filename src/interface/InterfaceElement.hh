@@ -1,11 +1,11 @@
-#ifndef INTERFACE_ELEMENT_HH_
-
-# define INTERFACE_ELEMENT_HH_
-
 /**
  * \file
+ * \date Jan 11, 2015
  * \author Zermingore
  */
+
+#ifndef INTERFACE_ELEMENT_HH_
+# define INTERFACE_ELEMENT_HH_
 
 # include <string>
 # include <memory>
@@ -79,9 +79,7 @@ public:
    * \brief position setter.
    * \param position cells coordinates to place the element.
    */
-  void setPosition(const Coords &position) {
-    _position = position;
-  }
+  void setPosition(const Coords &position) { _position = position; }
 
   /**
    * \brief scale setter.
@@ -113,10 +111,6 @@ public:
   void setRotation(const float &rotation) { _rotation = rotation; }
 
 
-  // no getter defined as the sprite is probably shared with another image
-  // std::shared_ptr<sf::Sprite> getSprite();
-
-
   /**
    * \brief Updates the graphical attributes of the elements before rendering
    */
@@ -125,8 +119,7 @@ public:
 
   /**
    * \brief Default InterfaceElement draw method.
-   *
-   * Calls the GraphicsEngine::draw() method with the sprite of _image
+   * \note Calls the GraphicsEngine::draw() method with the sprite of _image
    */
   virtual void draw();
 
@@ -143,5 +136,7 @@ protected:
 
 
 } // namespace interface
+
+
 
 #endif /* !INTERFACE_ELEMENT_HH_ */

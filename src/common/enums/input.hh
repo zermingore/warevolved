@@ -1,9 +1,8 @@
 /**
-  * \file
-  * \date March 05, 2016
-  * \author Zermingore
-  */
-
+ * \file
+ * \date March 5, 2016
+ * \author Zermingore
+ */
 
 #ifndef ENUM_INPUT_HH_
 # define ENUM_INPUT_HH_

@@ -1,8 +1,13 @@
-#ifndef RESOURCESMANAGER_HH_
-# define RESOURCESMANAGER_HH_
+/**
+ * \file
+ * \date Apr 25, 2013
+ * \author Zermingore
+ */
+
+#ifndef RESOURCES_RESOURCES_MANAGER_HH_
+# define RESOURCES_RESOURCES_MANAGER_HH_
 
 # include <common/include.hh>
-
 # include <resources/Font.hh>
 # include <resources/Image.hh>
 
@@ -126,4 +131,4 @@ private:
 } // namespace resources
 
 
-#endif /* !RESOURCESMANAGER_HH_ */
+#endif /* !RESOURCES_RESOURCES_MANAGER_HH_ */

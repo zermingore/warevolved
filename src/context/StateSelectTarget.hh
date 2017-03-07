@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_SELECT_TARGET_HH_
-# define STATE_SELECT_TARGET_HH_
+#ifndef CONTEXT_STATE_SELECT_TARGET_HH_
+# define CONTEXT_STATE_SELECT_TARGET_HH_
 
 # include <context/State.hh>
 
@@ -96,4 +96,4 @@ private:
 };
 
 
-#endif /* !STATE_SELECT_TARGET_HH_ */
+#endif /* !CONTEXT_STATE_SELECT_TARGET_HH_ */
