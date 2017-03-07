@@ -3,10 +3,12 @@
 * TODO Roadmap
 ** TODO dead code
 *** TODO InterfaceSettings ?
-*** TODO MenuMap ?
+*** DONE MenuMap ?
+    CLOSED: [2017-03-07 Di 20:03] (in use: menu invoked on the map, with next turn)
 *** DONE KeyManager::InputKey
     CLOSED: [2017-03-07 Di 19:58] (removed it, removed also timers and switches)
-*** TODO macro.hh
+*** DONE macro.hh
+    CLOSED: [2017-03-07 Di 20:05] (removed it, unused)
 ** TODO Merge branches: feature with clean, then clean with master
 ** DONE bugfix
    CLOSED: [2017-03-02 Do 19:07]
