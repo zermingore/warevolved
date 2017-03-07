@@ -1,8 +1,10 @@
 -*- mode:org -*-
 
 * TODO Roadmap
-** TODO dead code
-*** TODO InterfaceSettings ?
+** DONE dead code
+   CLOSED: [2017-03-07 Di 20:09]
+*** DONE InterfaceSettings ?
+    CLOSED: [2017-03-07 Di 20:09] (in use: graphical attributes getter in interface)
 *** DONE MenuMap ?
     CLOSED: [2017-03-07 Di 20:03] (in use: menu invoked on the map, with next turn)
 *** DONE KeyManager::InputKey
@@ -36,7 +38,8 @@
    CLOSED: [2017-02-09 Do 19:07]
 ** TODO Clean
 *** TODO Coord type: x,y <- c,l
-*** TODO Add doxygen comments for every headers
+*** DONE Add doxygen comments for every headers
+    CLOSED: [2017-03-07 Di 20:09]
 ** DONE PathFinding
    CLOSED: [2017-03-06 Mo 19:38]
 *** DONE Update for every move
