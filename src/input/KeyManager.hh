@@ -12,47 +12,6 @@
 enum class e_input;
 
 
-class InputKey
-{
-public:
-  InputKey(e_input input) { _input = input; }
-
-
-private:
-  e_input _input;
-};
-
-
-/**
- * \brief timer index list
- */
-enum e_timer
-{
-  E_TIMER_MOVE_UP = 0,
-  E_TIMER_MOVE_DOWN,
-  E_TIMER_MOVE_LEFT,
-  E_TIMER_MOVE_RIGHT,
-
-  E_TIMER_NB_TIMERS
-};
-
-
-/**
- * \brief switches keys. Do not allow key-repeatition (on /off).
- */
-enum e_switch
-{
-  E_SWITCH_SELECTION = 0, // in-game selection menu
-
-  E_SWITCH_MENUBAR,
-  E_SWITCH_PANEL,
-
-  E_SWITCH_EXIT, // exit request
-
-  E_SWITCH_NB_SWITCHES
-};
-
-
 /**
  * \brief Keys indexes allowing key repeating.
  */
@@ -102,8 +61,9 @@ class KeyManager
   sf::Keyboard::isKeyPressed(_keys[ x ##_2])*/
 
 public:
-  /// Default Constructor. Initializes the timers / switches
+  /// Default Constructor. Maps the keyboard input to keys
   KeyManager();
+
 
   void getEvent(sf::Keyboard::Key key);
 
@@ -137,9 +97,6 @@ private:
   std::multimap<sf::Keyboard::Key, e_key> _keys_mapping; ///< key mapping
   std::map<sf::Keyboard::Key, e_input> _events_mapping; ///< events mapping
   std::vector<e_input> _active_inputs; ///< current inputs (high level keys)
-  sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks (for key readiness)
-  bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
-  bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states
 
   sf::Clock _clock_events_freeze; ///< clock to manage events freezing
   int _events_freeze_duration;    ///< duration to deactivate events

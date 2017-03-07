@@ -19,7 +19,7 @@ KeyManager::KeyManager()
  _keys_mapping.insert({sf::Keyboard::Space,  e_key::E_KEY_SELECTION_1});
  _keys_mapping.insert({sf::Keyboard::Escape, e_key::E_KEY_EXIT_1});
 
-  // should be e_key -> e_input
+  /// \todo event mapping: should be e_key -> e_input
   // _events_mapping.insert({_keys_mapping[sf::Keyboard::Left], e_input::MOVE_LEFT_1});
 
   _events_mapping.insert({sf::Keyboard::Left,   e_input::MOVE_LEFT_1});

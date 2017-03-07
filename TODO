@@ -4,7 +4,8 @@
 ** TODO dead code
 *** TODO InterfaceSettings ?
 *** TODO MenuMap ?
-*** TODO KeyManager::InputKey
+*** DONE KeyManager::InputKey
+    CLOSED: [2017-03-07 Di 19:58] (removed it, removed also timers and switches)
 *** TODO macro.hh
 ** TODO Merge branches: feature with clean, then clean with master
 ** DONE bugfix
