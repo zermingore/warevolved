@@ -42,7 +42,7 @@ public:
    * \param b y, line   coordinate
    * \note Initializes the c and l references on Vector2 x y
    */
-  Coords(size_t a, size_t b)
+  Coords(const size_t a, const size_t b)
     : Vector2<size_t> (a, b)
     , c(x)
     , l(y)

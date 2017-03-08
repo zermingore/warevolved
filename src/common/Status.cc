@@ -23,7 +23,7 @@ Status::~Status()
 }
 
 
-void Status::blockInputs(size_t duration) {
+void Status::blockInputs(const size_t duration) {
   _inputProcessor->keyManager()->blockInputs(duration);
 }
 

@@ -23,14 +23,41 @@ class System
 public:
   /// deleted Default Constructor
   System() = delete;
-  System(unsigned int sfml_major, unsigned int sfml_minor);
+
+  /**
+   * \brief sets the SFML major and minor version numbers
+   */
+  System(const unsigned int sfml_major, const unsigned int sfml_minor);
+
+  /// default destructor
+  ~System() = default;
 
 
+  /**
+   * \brief SFML major version number setter
+   * \param major SFML major version number
+   */
   void setSfmlMajor(unsigned int major) { _sfmlMajor = major; }
+
+  /**
+   * \brief SFML minor version number setter
+   * \param major SFML minor version number
+   */
   void setSfmlMinor(unsigned int minor) { _sfmlMinor = minor; }
 
-  unsigned int sfmlMajor() { return _sfmlMajor; }
-  unsigned int sfmlMinor() { return _sfmlMinor; }
+
+  /**
+   * \brief SFML major version number getter
+   * \return SFML major version number
+   */
+  auto sfmlMajor() { return _sfmlMajor; }
+
+  /**
+   * \brief SFML minor version number getter
+   * \return SFML minor version number
+   */
+  auto sfmlMinor() { return _sfmlMinor; }
+
 
 private:
   unsigned int _sfmlMajor; ///< SFML major version (x.*)

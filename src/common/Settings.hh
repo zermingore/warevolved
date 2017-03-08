@@ -30,10 +30,9 @@ public:
    * \param stencil stencil value
    * \param antiAliasing anti aliasing coefficient
    */
-  static void initialize(unsigned int depth,
-                         unsigned int stencil,
-                         unsigned int antiAliasing);
-
+  static void initialize(const unsigned int depth,
+                         const unsigned int stencil,
+                         const unsigned int antiAliasing);
 
   /**
    * \brief graphic depth getter.
@@ -69,15 +68,15 @@ public:
    * \brief _keyRepeatDelay setter.
    * \param delay delay to consider a key as maintained, in ms
    */
-  static void setKeyRepeatDelay(size_t delay) { _keyRepeatDelay = delay; }
+  static void setKeyRepeatDelay(const size_t delay) { _keyRepeatDelay = delay; }
 
   // graphics settings setters
-  static void setDepth(size_t depth) { _depth = depth; }
-  static void setStencil(size_t stencil) { _stencil = stencil; }
-  static void setAntiAliasing(size_t aa) { _antiAliasing = aa; }
+  static void setDepth(const size_t depth)     { _depth = depth; }
+  static void setStencil(const size_t stencil) { _stencil = stencil; }
+  static void setAntiAliasing(const size_t aa) { _antiAliasing = aa; }
 
   // generic settings setters
-  static void setFullScreen(bool fullScreen) { _fullScreen = fullScreen; }
+  static void setFullScreen(const bool fullScreen) { _fullScreen = fullScreen; }
 
 
 private:
