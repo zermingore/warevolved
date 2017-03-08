@@ -2,7 +2,7 @@
  * \file
  * \date April 25, 2013
  * \namespace interface
- * \brief InterfaceElement implementation
+ * \brief InterfaceElement declaration
  */
 
 #ifndef RESOURCE_HH_
@@ -13,8 +13,7 @@
 
 /**
  * \brief generic Resource class
- * Resource is an abstract class
- * Its daughters are Image, Sound, ...
+ * \note Daughters classes: Image, Font, ...
  */
 class Resource
 {
@@ -22,54 +21,65 @@ public:
   /**
    * \brief Default Constructor
    */
-  Resource() {}
+  Resource() = default;
+
   /**
    * \brief Constructor
    * \param name resource name
    */
   explicit Resource(std::string name);
-  virtual ~Resource() {}
 
   /**
-   * \brief virtual method: resource loading
+   * \brief default destructor
+   */
+  virtual ~Resource() = default;
+
+
+  /**
+   * \brief resource loading
    */
   virtual bool load() = 0;
+
+  /**
+   * \brief unloads a resource
+   */
   virtual void unload() {}
 
-  bool getLoaded() { return _loaded; }
+  /**
+   * \brief _loaded boolean getter
+   * \return A boolean to know if the resource is already in RAM
+   */
+  auto getLoaded() const { return _loaded; }
 
   /**
    * \brief _fileName getter
    * \return _fileName : Resource full file name (with path and extension)
    */
-  std::string getFileName() const { return _fileName; }
+  auto getFileName() const { return _fileName; }
 
   /**
    * \brief _fileName setter
-   *   sets _fileName to file_name
-   * \param file_name Resource File Name to put into _fileName
+   * \param file_name New resource file name
    */
-  void setFileName(std::string file_name) { _fileName = file_name; }
+  void setFileName(const std::string file_name) { _fileName = file_name; }
 
   /**
    * \brief _name getter
-   * \return _name : Resource alias
-   *   _name could be an empty string
+   * \return _name: Resource alias
+   * \note _name could be an empty string
    */
-  std::string name() const { return _name; }
+  auto name() const { return _name; }
 
   /**
    * \brief _name setter
-   *   sets _name to name
-   * \param name Resource alias name to put into _name
+   * \param name New resource alias name
    */
-  void setName(std::string name) { _name = name; }
+  void setName(const std::string name) { _name = name; }
 
 
 protected:
-  std::string _name; ///< Resource alias name
-  bool _loaded; ///< is the resource already in RAM ?
-  //e_scope _scope; ///< resource scope (the context it belongs to)
+  std::string _name;     ///< Resource alias name
+  bool _loaded;          ///< is the resource already in RAM ?
   std::string _fileName; ///< Resource file name (with full path and extension)
 };
 

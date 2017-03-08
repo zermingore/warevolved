@@ -45,7 +45,7 @@ void ResourcesManager::initTypeNames()
 }
 
 
-bool ResourcesManager::addResource(e_resource_type type,
+bool ResourcesManager::addResource(const e_resource_type type,
                                    const std::string name,
                                    const std::string file_name)
 {

@@ -15,8 +15,8 @@ namespace resources {
 
 
 /**
- * \class Font Resource type
- * \brief Font class to draw text
+ * \class Font
+ * \brief Font resource type, used to draw text
  */
 class Font: public Resource
 {
@@ -40,8 +40,8 @@ public:
 
   /**
    * \brief _font getter
-   *   loads the requested Font if needed
    * \return _font value
+   * \note loads the requested Font if needed
    */
   std::shared_ptr<sf::Font> getFont();
 

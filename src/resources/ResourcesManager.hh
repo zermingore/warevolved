@@ -96,7 +96,7 @@ private:
    * \return true on success
    *   false otherwise
    */
-  static bool addResource(e_resource_type type,
+  static bool addResource(const e_resource_type type,
                           const std::string name,
                           const std::string file_name);
 

@@ -6,8 +6,7 @@
 namespace resources {
 
 
-Image::Image(const std::string file_name,
-             const std::string name)
+Image::Image(const std::string file_name, const std::string name)
 {
    /// \todo allocation only if needed (using a proxy)
   _rectangle = std::make_shared<sf::RectangleShape> ();
@@ -27,6 +26,7 @@ Image::Image(const std::string file_name,
   //_scope = E_SCOPE_ALL;
 }
 
+
 std::shared_ptr<sf::Texture> Image::getTexture()
 {
   if (!_texture)
@@ -39,6 +39,7 @@ std::shared_ptr<sf::Texture> Image::getTexture()
 
   return _texture;
 }
+
 
 void Image::initTexture()
 {
@@ -93,7 +94,6 @@ void Image::setFileName(std::string file_name)
 }
 
 
-
 void Image::setPosition(Coords position)
 {
   if (!_sprite) {
@@ -112,13 +112,13 @@ void Image::setPosition(size_t x, size_t y)
 }
 
 
-
 void Image::setSize(sf::Vector2f size)
 {
   auto old_size(_rectangle->getSize());
   _rectangle->setSize(size);
   _sprite->setScale(sf::Vector2f(size.x / old_size.x, size.y / old_size.y));
 }
+
 
 void Image::setSize(float width, float height)
 {
@@ -128,12 +128,12 @@ void Image::setSize(float width, float height)
 }
 
 
-
 void Image::setScale(sf::Vector2f size)
 {
   _rectangle->setScale(size);
   _sprite->setScale(size);
 }
+
 
 void Image::setScale(float width, float height)
 {
@@ -180,8 +180,6 @@ void Image::unload()
 # ifdef DEBUG
   _rectangle->setTexture(NULL);
 # endif
-
-  return;
 }
 
 
@@ -211,6 +209,7 @@ void Image::drawAtCell(const Coords c)
   if (load()) {
     graphics::GraphicsEngine::draw(_sprite);
   }
+
   graphics::GraphicsEngine::draw(_rectangle);
 }
 
