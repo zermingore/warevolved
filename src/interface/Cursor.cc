@@ -28,34 +28,34 @@ void Cursor::setLimits(size_t nb_columns, size_t nb_lines)
 // _____________________________ Cursor Motion _____________________________ //
 bool Cursor::moveUp()
 {
-  auto old(_coords.y);
-  _coords.y = std::min(_coords.y - 1, _coords.y);
+  auto old(_coords.l);
+  _coords.l = std::min(_coords.l - 1, _coords.l);
 
-  return (old != _coords.y);
+  return (old != _coords.l);
 }
 
 bool Cursor::moveDown()
 {
-  auto old(_coords.y);
-  _coords.y = std::min(_coords.y + 1, _nbLines - 1);
+  auto old(_coords.l);
+  _coords.l = std::min(_coords.l + 1, _nbLines - 1);
 
-  return (old != _coords.y);
+  return (old != _coords.l);
 }
 
 bool Cursor::moveLeft()
 {
-  auto old(_coords.x);
-  _coords.x = std::min(_coords.x, _coords.x - 1);
+  auto old(_coords.c);
+  _coords.c = std::min(_coords.c, _coords.c - 1);
 
-  return (old != _coords.x);
+  return (old != _coords.c);
 }
 
 bool Cursor::moveRight()
 {
-  auto old(_coords.x);
-  _coords.x = std::min(_coords.x + 1, _nbColumns - 1);
+  auto old(_coords.c);
+  _coords.c = std::min(_coords.c + 1, _nbColumns - 1);
 
-  return (old != _coords.x);
+  return (old != _coords.c);
 }
 
 
@@ -66,9 +66,9 @@ void Cursor::update()
   auto width(p::cellWidth());
   auto height(p::cellHeight());
 
-  _position.x = _coords.x * width +  p::gridOffsetX() + width / 2;
-  _position.y = _coords.y * height + p::gridOffsetY() + height / 2;
-  _image->sprite()->setPosition(_position.x, _position.y);
+  _position.c = _coords.c * width +  p::gridOffsetX() + width / 2;
+  _position.l = _coords.l * height + p::gridOffsetY() + height / 2;
+  _image->sprite()->setPosition(_position.c, _position.l);
 
   static float scale_factor = 1;
   static unsigned int angle = 0;

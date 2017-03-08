@@ -1,53 +1,9 @@
 -*- mode:org -*-
 
 * TODO Roadmap
-** DONE dead code
-   CLOSED: [2017-03-07 Di 20:09]
-*** DONE InterfaceSettings ?
-    CLOSED: [2017-03-07 Di 20:09] (in use: graphical attributes getter in interface)
-*** DONE MenuMap ?
-    CLOSED: [2017-03-07 Di 20:03] (in use: menu invoked on the map, with next turn)
-*** DONE KeyManager::InputKey
-    CLOSED: [2017-03-07 Di 19:58] (removed it, removed also timers and switches)
-*** DONE macro.hh
-    CLOSED: [2017-03-07 Di 20:05] (removed it, unused)
 ** TODO Merge branches: feature with clean, then clean with master
-** DONE bugfix
-   CLOSED: [2017-03-02 Do 19:07]
-*** DONE cancel path finding / action menu should redraw the path
-    CLOSED: [2017-03-02 Do 07:44]
-*** DONE highlight target: targets at range if attack range considered
-    CLOSED: [2017-03-02 Do 19:07]
-*** DONE move, cancel, move restart the move from the last cancel positon
-    CLOSED: [2017-03-02 Do 07:44]
-*** DONE Target selection does not allow to attack expected targets
-    CLOSED: [2017-03-03 Fr 18:31]
-** DONE Attack management
-   CLOSED: [2017-02-28 Di 18:33]
-*** DONE Handle attacker death
-    CLOSED: [2017-02-27 Mo 08:00]
-*** DONE Allow to attack only targets in range of the attacker
-    CLOSED: [2017-02-28 Di 08:03]
-*** DONE Move the cursor where the attack happened (check StateSelection && State pop)
-    CLOSED: [2017-02-28 Di 18:33]
-** DONE pathfinding re-integration
-   CLOSED: [2017-02-15 Mi 20:22]
-** DONE While moving a unit, fade or hide original unit sprite
-   CLOSED: [2017-02-13 Mo 19:25]
-** DONE Disallow move on unit
-   CLOSED: [2017-02-09 Do 19:07]
-** TODO Clean
-*** TODO Coord type: x,y <- c,l
-*** DONE Add doxygen comments for every headers
-    CLOSED: [2017-03-07 Di 20:09]
-** DONE PathFinding
-   CLOSED: [2017-03-06 Mo 19:38]
-*** DONE Update for every move
-    CLOSED: [2017-03-03 Fr 07:26]
-*** DONE Invoke action menu -> should still be displayed
-    CLOSED: [2017-03-03 Fr 07:45]
-*** DONE Clean (multiple functions seems to do the same thing [highlightCells, getTargets])
-    CLOSED: [2017-03-06 Mo 07:35]
+** TODO Feature
+*** TODO Check full screen still working
 
 
 
@@ -80,6 +36,30 @@
 
 
 * old roadmap
+** DONE Clean
+   CLOSED: [2017-03-08 Mi 07:41]
+*** DONE Coord type: x,y <- c,l
+    CLOSED: [2017-03-08 Mi 07:41]
+*** DONE Add doxygen comments for every headers
+    CLOSED: [2017-03-07 Di 20:09]
+** DONE PathFinding
+   CLOSED: [2017-03-06 Mo 19:38]
+*** DONE Update for every move
+    CLOSED: [2017-03-03 Fr 07:26]
+*** DONE Invoke action menu -> should still be displayed
+    CLOSED: [2017-03-03 Fr 07:45]
+*** DONE Clean (multiple functions seems to do the same thing [highlightCells, getTargets])
+    CLOSED: [2017-03-06 Mo 07:35]
+** DONE dead code
+   CLOSED: [2017-03-07 Di 20:09]
+*** DONE InterfaceSettings ?
+    CLOSED: [2017-03-07 Di 20:09] (in use: graphical attributes getter in interface)
+*** DONE MenuMap ?
+    CLOSED: [2017-03-07 Di 20:03] (in use: menu invoked on the map, with next turn)
+*** DONE KeyManager::InputKey
+    CLOSED: [2017-03-07 Di 19:58] (removed it, removed also timers and switches)
+*** DONE macro.hh
+    CLOSED: [2017-03-07 Di 20:05] (removed it, unused)
 ** DONE Free at exit
    CLOSED: [2016-12-21 Mi 19:58]
 ** DONE Map graphic update
@@ -109,6 +89,31 @@
    CLOSED: [2016-12-22 Do 07:28]
 ** DONE limit the cursor to the map
    CLOSED: [2016-12-22 Do 07:28]
+** DONE bugfix
+   CLOSED: [2017-03-02 Do 19:07]
+*** DONE cancel path finding / action menu should redraw the path
+    CLOSED: [2017-03-02 Do 07:44]
+*** DONE highlight target: targets at range if attack range considered
+    CLOSED: [2017-03-02 Do 19:07]
+*** DONE move, cancel, move restart the move from the last cancel positon
+    CLOSED: [2017-03-02 Do 07:44]
+*** DONE Target selection does not allow to attack expected targets
+    CLOSED: [2017-03-03 Fr 18:31]
+** DONE Attack management
+   CLOSED: [2017-02-28 Di 18:33]
+*** DONE Handle attacker death
+    CLOSED: [2017-02-27 Mo 08:00]
+*** DONE Allow to attack only targets in range of the attacker
+    CLOSED: [2017-02-28 Di 08:03]
+*** DONE Move the cursor where the attack happened (check StateSelection && State pop)
+    CLOSED: [2017-02-28 Di 18:33]
+** DONE pathfinding re-integration
+   CLOSED: [2017-02-15 Mi 20:22]
+** DONE While moving a unit, fade or hide original unit sprite
+   CLOSED: [2017-02-13 Mo 19:25]
+** DONE Disallow move on unit
+   CLOSED: [2017-02-09 Do 19:07]
+
 
 * DONE Git
   CLOSED: [2013-07-24 Wed 07:10]

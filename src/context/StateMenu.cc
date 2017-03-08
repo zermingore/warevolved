@@ -95,8 +95,8 @@ void StateMenu::fetchAttributes()
   }
 
   auto p = std::static_pointer_cast<Coords> (_attributes[0]);
-  _menuCoords.x = p->x;
-  _menuCoords.y = p->y;
+  _menuCoords.c = p->c;
+  _menuCoords.l = p->l;
 
   // reset the attributes vector
   _attributes.clear();

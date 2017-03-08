@@ -74,7 +74,7 @@ public:
    * \brief gets the unit at c's coordinates.
    * \param c targeted Cell's coordinates.
    * \return the enum index in e_unit matching the unit
-   *   located at coordinates (c.x, c.y).
+   *   located at coordinates (c.c, c.l).
    */
   std::shared_ptr<Unit> unit(const Coords& c) const;
 
@@ -98,7 +98,7 @@ public:
    * \param y Coordinates according to lines.
    *
    * \return the enum index in e_terrain matching the terrain
-   *   located at coordinates (x, y).
+   *   located at coordinates (c, l).
    */
   e_terrain getTerrain(const size_t line, const size_t column) const;
 
@@ -107,7 +107,7 @@ public:
    * \param coords the coordinates of the Cell to retrieve
    * \return The cell at coords coordinates
    */
-  auto cell(Coords coords) const { return _cells[coords.x][coords.y]; }
+  auto cell(Coords coords) const { return _cells[coords.c][coords.l]; }
 
   /**
    * \brief _cells array getter.

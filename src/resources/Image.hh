@@ -139,7 +139,7 @@ public:
   void reload(std::string file_name);
 
   /**
-   * \brief draws the Image in the cell coords.x, coords.y
+   * \brief draws the Image in the cell coords.c, coords.l
    * \param c coordinate to display the image
    */
   void drawAtCell(const Coords c);

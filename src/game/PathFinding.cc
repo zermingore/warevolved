@@ -75,19 +75,19 @@ void PathFinding::updateCurrentCell(e_direction direction)
   switch (direction)
   {
     case e_direction::UP:
-      --_current.y;
+      --_current.l;
       return;
 
     case e_direction::DOWN:
-      ++_current.y;
+      ++_current.l;
       return;
 
     case e_direction::LEFT:
-      --_current.x;
+      --_current.c;
       return;
 
     case e_direction::RIGHT:
-      ++_current.x;
+      ++_current.c;
       return;
 
     default:
@@ -191,8 +191,8 @@ std::shared_ptr<resources::Image> PathFinding::getImage(size_t index)
 
   // drawing at the middle of the cell
   sf::Vector2f pos(
-    _current.x * p::cellWidth()  + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
-    _current.y * p::cellHeight() + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
+    _current.c * p::cellWidth()  + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
+    _current.l * p::cellHeight() + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
 
   img->sprite()->setPosition(pos);
 
@@ -322,8 +322,8 @@ PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
 size_t PathFinding::manhattan(Coords a, Coords b)
 {
   // implicit cast into signed int
-  int dist_columns(a.x - b.x);
-  int dist_lines(a.y - b.y);
+  int dist_columns(a.c - b.c);
+  int dist_lines(a.l - b.l);
 
   return std::abs(dist_columns) + std::abs(dist_lines);
 }

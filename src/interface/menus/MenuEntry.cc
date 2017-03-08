@@ -32,13 +32,13 @@ void MenuEntry::update()
 {
   using p = graphics::MapGraphicsProperties;
   _image->setSize(p::cellWidth() * 2, p::cellHeight());
-  _label->setPosition(_position.x, _position.y);
+  _label->setPosition(_position.c, _position.l);
 }
 
 
 void MenuEntry::draw()
 {
-  _image->sprite()->setPosition(_position.x, _position.y);
+  _image->sprite()->setPosition(_position.c, _position.l);
 
   graphics::GraphicsEngine::draw(_label);
   graphics::GraphicsEngine::draw(_image->sprite());

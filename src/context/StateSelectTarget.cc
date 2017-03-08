@@ -53,8 +53,8 @@ void StateSelectTarget::fetchAttributes()
   }
 
   auto p = std::static_pointer_cast<Coords> (_attributes[0]);
-  _attackLocation.x = p->x;
-  _attackLocation.y = p->y;
+  _attackLocation.c = p->c;
+  _attackLocation.l = p->l;
 
   // reset the attributes vector
   _attributes.clear();

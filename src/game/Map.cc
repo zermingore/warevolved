@@ -43,7 +43,7 @@ std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const {
 }
 
 std::shared_ptr<Unit> Map::unit(const Coords& c) const {
-  return _cells[c.x][c.y]->unit();
+  return _cells[c.c][c.l]->unit();
 }
 
 e_terrain Map::getTerrain(const size_t column, const size_t line) const {
@@ -56,9 +56,9 @@ void Map::selectUnit(const Coords c)
   // allow to select another unit if already one is selected ?
   _selectedUnit = nullptr;
 
-  auto unit(_cells[c.x][c.y]->unit());
+  auto unit(_cells[c.c][c.l]->unit());
   if (!unit) {
-    ERROR("No unit to select at given coords", c.x, c.y);
+    ERROR("No unit to select at given coords", c.c, c.l);
   }
 
   _selectedUnit = unit;
@@ -69,17 +69,17 @@ void Map::moveUnit(const Coords c)
 {
   if (_selectedUnit->coords() == c)
   {
-    ERROR("Moving unit at coordinates:", c.x, c.y);
+    ERROR("Moving unit at coordinates:", c.c, c.l);
     assert("!move unit: src == dst");
   }
 
   Coords old(_selectedUnit->coords());
-  assert(_cells[old.x][old.y]->unit()->played() == false);
+  assert(_cells[old.c][old.l]->unit()->played() == false);
 
-  _cells[old.x][old.y]->unit()->setPlayed(true);
-  _cells[old.x][old.y]->removeUnit();
+  _cells[old.c][old.l]->unit()->setPlayed(true);
+  _cells[old.c][old.l]->removeUnit();
   _selectedUnit->setCellCoordinates(c);
-  _cells[c.x][c.y]->setUnit(_selectedUnit);
+  _cells[c.c][c.l]->setUnit(_selectedUnit);
 }
 
 
@@ -138,7 +138,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   bool defender_died = false;
   if (defender->hp() <= 0)
   {
-    _cells[defender->x()][defender->y()]->removeUnit();
+    _cells[defender->c()][defender->l()]->removeUnit();
     defender_died = true;
   }
 
@@ -148,7 +148,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   if (_selectedUnit->hp() <= 0)
   {
     NOTICE("attacker died");
-    _cells[_selectedUnit->x()][_selectedUnit->y()]->removeUnit();
+    _cells[_selectedUnit->c()][_selectedUnit->l()]->removeUnit();
     attacker_died = true;
   }
 

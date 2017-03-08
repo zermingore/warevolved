@@ -99,7 +99,7 @@ void Image::setPosition(Coords position)
   if (!_sprite) {
     initSprite();
   }
-  _sprite->setPosition(sf::Vector2f(position.x, position.y));
+  _sprite->setPosition(sf::Vector2f(position.c, position.l));
 }
 
 
@@ -204,8 +204,8 @@ void Image::drawAtCell(const Coords c)
 
   sf::Vector2f pos; // Sprite position
   using p = graphics::MapGraphicsProperties;
-  pos.x = c.x * p::cellWidth()  + p::gridOffsetX();
-  pos.y = c.y * p::cellHeight() + p::gridOffsetY();
+  pos.x = c.c * p::cellWidth()  + p::gridOffsetX();
+  pos.y = c.l * p::cellHeight() + p::gridOffsetY();
   _sprite->setPosition(pos);
 
   if (load()) {

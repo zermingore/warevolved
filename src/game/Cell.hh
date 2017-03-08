@@ -95,30 +95,16 @@ public:
   void removeUnit() { _unit = nullptr; }
 
   /**
-   * \brief returns Cell's x coordinate.
-   * \return cell x coordinate.
+   * \brief returns Cell's line coordinate.
+   * \return cell line coordinate.
    */
-  size_t x() { return _coords.x; }
+  size_t l() { return _coords.l; }
 
   /**
-   * \brief returns Cell's y coordinate.
-   * \return cell y coordinate.
-   * \note l: line
+   * \brief returns Cell's column coordinate.
+   * \return cell column coordinate.
    */
-  size_t l() { return _coords.x; }
-
-  /**
-   * \brief returns Cell's y coordinate.
-   * \return cell y coordinate.
-   */
-  size_t y() { return _coords.y; }
-
-  /**
-   * \brief returns Cell's x coordinate.
-   * \return cell x coordinate.
-   * \note c: column
-   */
-  size_t c() { return _coords.y; }
+  size_t c() { return _coords.c; }
 
   /**
    * \brief coords getter.

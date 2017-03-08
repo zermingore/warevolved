@@ -40,13 +40,13 @@ public:
    * \brief x coordinate on the map getter
    * \return x (column) coordinate on the map
    */
-  size_t x() { return _coords.x; }
+  size_t c() { return _coords.c; }
 
   /**
    * \brief x unit coordinate on the map getter
    * \return y (line) coordinate on the map
    */
-  size_t y() { return _coords.y; }
+  size_t l() { return _coords.l; }
 
   /**
    * \brief gets unit's position

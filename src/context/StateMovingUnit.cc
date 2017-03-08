@@ -93,36 +93,36 @@ void StateMovingUnit::resume()
 // _________________________  Graphical Units motion ________________________ //
 void StateMovingUnit::moveUnitUp()
 {
-  if (_holoUnitPosition.y > 0 && PathFinding::allowedMove())
+  if (_holoUnitPosition.l > 0 && PathFinding::allowedMove())
   {
-    --_holoUnitPosition.y;
+    --_holoUnitPosition.l;
     PathFinding::addNextDirection(e_direction::UP);
   }
 }
 
 void StateMovingUnit::moveUnitDown()
 {
-  if (_holoUnitPosition.y < _nbLines - 1 && PathFinding::allowedMove())
+  if (_holoUnitPosition.l < _nbLines - 1 && PathFinding::allowedMove())
   {
-    ++_holoUnitPosition.y;
+    ++_holoUnitPosition.l;
     PathFinding::addNextDirection(e_direction::DOWN);
   }
 }
 
 void StateMovingUnit::moveUnitLeft()
 {
-  if (_holoUnitPosition.x > 0 && PathFinding::allowedMove())
+  if (_holoUnitPosition.c > 0 && PathFinding::allowedMove())
   {
-    --_holoUnitPosition.x;
+    --_holoUnitPosition.c;
     PathFinding::addNextDirection(e_direction::LEFT);
   }
 }
 
 void StateMovingUnit::moveUnitRight()
 {
-  if (_holoUnitPosition.x < _nbColumns - 1 && PathFinding::allowedMove())
+  if (_holoUnitPosition.c < _nbColumns - 1 && PathFinding::allowedMove())
   {
-    ++_holoUnitPosition.x;
+    ++_holoUnitPosition.c;
     PathFinding::addNextDirection(e_direction::RIGHT);
   }
 }

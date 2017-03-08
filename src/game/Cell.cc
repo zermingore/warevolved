@@ -8,6 +8,6 @@ Cell::Cell(size_t c, size_t l) :
   _highlight(false),
   _highlightColor(255, 255, 255)
 {
-  _coords.x = c;
-  _coords.y = l;
+  _coords.c = c;
+  _coords.l = l;
 }
