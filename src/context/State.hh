@@ -12,9 +12,6 @@
 # include <common/using.hh>
 
 
-# include <debug/Debug.hh> // \todo remove !
-
-
 class EventManager;
 
 namespace interface {
@@ -53,7 +50,8 @@ public:
    * \param attributes rest of the attributes list
    */
   template<typename Head, typename... Tail>
-  void setAttributes(Head head, Tail... attributes) {
+  void setAttributes(Head head, Tail... attributes)
+  {
     setAttribute(head);
     setAttributes(attributes...);
   }
@@ -76,7 +74,7 @@ public:
   /**
    * \brief Fetch the attributes from the _attributes vector
    */
-  virtual void fetchAttributes() {} /// \todo =0
+  virtual void fetchAttributes() {}
 
 
   /**
@@ -95,7 +93,7 @@ public:
    * \brief event manager getter
    * \return event manager
    */
-  std::shared_ptr<EventManager> eventManager() { return _evtMgr; }
+  auto eventManager() { return _evtMgr; }
 
   /**
    * \brief returns the list of related interface elements
@@ -124,7 +122,8 @@ protected:
 
   Coords _cursorCoords; ///< Cursor's coordinates
 
-  std::vector<std::shared_ptr<void>> _attributes; ///< pointer on Abstract attribute
+  ///< pointer on Abstract attribute
+  std::vector<std::shared_ptr<void>> _attributes;
 };
 
 

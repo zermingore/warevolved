@@ -33,14 +33,14 @@ public:
    * \brief Constructor. Sets the Player's index to a unique value.
    * \param c color used by the player
    */
-  explicit Player(Color c);
+  explicit Player(const Color c);
 
 
   /**
    * \brief Player identifier getter.
    * \return Player's identifier.
    */
-  size_t id() { return _id; }
+  auto id() { return _id; }
 
 
   // Cursor motion
@@ -65,13 +65,13 @@ public:
    * \brief Player's interface getter.
    * \return Interface pointer.
    */
-  std::shared_ptr<interface::Interface> interface() { return _interface; }
+  auto interface() { return _interface; }
 
   /**
    * \brief Cursor getter.
    * \return a pointer to the player's cursor.
    */
-  std::shared_ptr<interface::Cursor> cursor() { return _cursor; }
+  auto cursor() { return _cursor; }
 
 
   bool updateSelectedUnit();

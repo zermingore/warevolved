@@ -44,7 +44,7 @@ std::shared_ptr<State> Status::currentState()
 }
 
 
-void Status::pushState(e_state state)
+void Status::pushState(const e_state state)
 {
   // suspend the current State
   if (!_states.empty()) {

@@ -16,8 +16,6 @@
 class Application
 {
 public:
-  virtual ~Application() {}
-
   virtual void buildMap() = 0; /// \todo should not be in the abstract class
 };
 

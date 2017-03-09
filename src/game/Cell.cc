@@ -2,7 +2,7 @@
 #include <common/enums/terrains.hh>
 
 
-Cell::Cell(size_t c, size_t l) :
+Cell::Cell(const size_t c, const size_t l) :
   _terrain(e_terrain::NONE),
   _unit(nullptr),
   _highlight(false),

@@ -45,11 +45,12 @@ public:
 
   // ________________________________ Battle ________________________________ //
   /// Battle getter
-  static std::shared_ptr<Battle> battle() { return _battle; }
+  static auto battle() { return _battle; }
 
   /// Battle setter
-  static void setBattle(std::shared_ptr<Battle> battle) { _battle = battle; }
-
+  static void setBattle(const std::shared_ptr<Battle> battle) {
+    _battle = battle;
+  }
 
   // ________________________________ Events ________________________________ //
   static void setInputProcessor(const std::shared_ptr<InputProcessor> processor)

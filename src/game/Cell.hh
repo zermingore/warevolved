@@ -38,20 +38,20 @@ public:
    * \param c column coordinate of the cell to create.
    * \param l line   coordinate of the cell to create.
    */
-  Cell(size_t c, size_t l);
+  Cell(const size_t c, const size_t l);
 
   // __________________________ Getters / Setters __________________________ //
   /**
    * \brief _unit getter.
    * \return cell's unit.
    */
-  std::shared_ptr<Unit> unit() { return _unit; }
+  auto unit() { return _unit; }
 
   /**
    * \brief _terrain getter.
    * \return cell's terrain.
    */
-  e_terrain terrain() { return _terrain; }
+  auto terrain() { return _terrain; }
 
   /**
    * \brief _unit setter. Sets the given Unit in the cell.
@@ -69,7 +69,7 @@ public:
    * \brief Highlight getter.
    * \return Highlight Boolean value.
    */
-  bool highlight() { return _highlight; }
+  auto highlight() { return _highlight; }
 
   /**
    * \brief Highlight setter.
@@ -81,7 +81,7 @@ public:
    * \brief Highlight color getter.
    * \return Highlight color value.
    */
-  Color highlightColor() { return _highlightColor; }
+  auto highlightColor() { return _highlightColor; }
 
   /**
    * \brief Highlight color setter.
@@ -98,18 +98,18 @@ public:
    * \brief returns Cell's line coordinate.
    * \return cell line coordinate.
    */
-  size_t l() { return _coords.l; }
+  auto l() { return _coords.l; }
 
   /**
    * \brief returns Cell's column coordinate.
    * \return cell column coordinate.
    */
-  size_t c() { return _coords.c; }
+  auto c() { return _coords.c; }
 
   /**
    * \brief coords getter.
    */
-  Coords coords() { return _coords; }
+  auto coords() { return _coords; }
 
 
 private:

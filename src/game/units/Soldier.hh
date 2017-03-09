@@ -26,6 +26,11 @@ public:
    */
   Soldier();
 
+  /**
+   * \brief Default destructor
+   */
+  ~Soldier() = default;
+
 
 private:
   std::string _fullName; ///< soldier's full name (first and last names)

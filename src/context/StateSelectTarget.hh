@@ -20,6 +20,10 @@ namespace resources {
 }
 
 
+/**
+ * \class StateSelectTarget
+ * \brief State in charge of the target selection
+ */
 class StateSelectTarget: public State
 {
 public:

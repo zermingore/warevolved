@@ -5,7 +5,7 @@
 #include <graphics/GraphicsEngine.hh>
 
 
-Context::Context(bool fullscreen)
+Context::Context(const bool fullscreen)
 {
   if (fullscreen) {
     Settings::initialize(24, 8, 4);
@@ -69,8 +69,4 @@ void Context::init()
   //_window->setIcon(64, 64, "icon");
 
   graphics::GraphicsEngine::setWindow(std::move(window));
-
-  // graphics::GraphicsEngine::setCellWidth(64);  /// \todo change dynamically (in px)
-  // graphics::GraphicsEngine::setCellHeight(64);  /// \todo change dynamically (in px)
-  // graphics::GraphicsEngine::setGridThickness(5);  /// \todo change dynamically (in px)
 }

@@ -38,31 +38,31 @@ public:
    * \brief graphic depth getter.
    * \return depth value.
    */
-  static unsigned int depth() { return _depth; }
+  static auto depth() { return _depth; }
 
   /**
    * \brief graphic stencil getter.
    * \return stencil value.
    */
-  static unsigned int stencil() { return _stencil; }
+  static auto stencil() { return _stencil; }
 
   /**
    * \brief Anti aliasing getter.
    * \return Anti aliasing coefficient.
    */
-  static unsigned int antiAliasing() { return _antiAliasing; }
+  static auto antiAliasing() { return _antiAliasing; }
 
   /**
    * \brief _fullScreen getter.
    * \return true if we're in full screen false otherwise.
    */
-  static bool fullScreen() { return _fullScreen; }
+  static auto fullScreen() { return _fullScreen; }
 
   /**
    * \brief _keyRepeatDelay getter.
    * \return the required time to consider a "second pressure" (in ms).
    */
-  static int keyRepeatDelay() { return _keyRepeatDelay; }
+  static auto keyRepeatDelay() { return _keyRepeatDelay; }
 
   /**
    * \brief _keyRepeatDelay setter.

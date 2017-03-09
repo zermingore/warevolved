@@ -34,9 +34,9 @@ public:
    * \brief Constuctor: Builds the menu, registers to callbacks
    * \param state: State which is currently built
    */
-  explicit StateMenu(e_state state);
+  explicit StateMenu(const e_state state);
 
-  /// Destructor
+  /// Default destructor
   ~StateMenu() = default;
 
 

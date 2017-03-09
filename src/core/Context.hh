@@ -14,7 +14,7 @@ class System;
 /**
  * \class Context
  * \brief Describes a graphical context
-*/
+ */
 class Context
 {
 public:
@@ -23,10 +23,10 @@ public:
 
   /**
    * \brief Constructor
-   * \param fullscreen equals true if we're in full screen
+   * \param fullscreen true if we're in full screen
    *   false if we're in windowed mode
    */
-  explicit Context(bool fullscreen);
+  explicit Context(const bool fullscreen);
 
   /**
    * \brief default destructor
@@ -42,5 +42,6 @@ private:
 
   std::shared_ptr<System> _system; ///< System settings (libraries version, ...)
 };
+
 
 #endif /* !CORE_CONTEXT_HH_ */

@@ -37,13 +37,13 @@ public:
    * \brief SFML major version number setter
    * \param major SFML major version number
    */
-  void setSfmlMajor(unsigned int major) { _sfmlMajor = major; }
+  void setSfmlMajor(const unsigned int major) { _sfmlMajor = major; }
 
   /**
    * \brief SFML minor version number setter
    * \param major SFML minor version number
    */
-  void setSfmlMinor(unsigned int minor) { _sfmlMinor = minor; }
+  void setSfmlMinor(const unsigned int minor) { _sfmlMinor = minor; }
 
 
   /**

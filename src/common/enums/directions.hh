@@ -10,8 +10,7 @@
 
 /**
  * \enum e_direction
- * \brief Stores vanilla directions.
- * used for paths
+ * \brief Stores vanilla directions. Used for paths
  */
 enum class e_direction
 {

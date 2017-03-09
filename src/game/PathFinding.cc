@@ -53,7 +53,7 @@ void PathFinding::drawPath()
   {
     updateCurrentCell(*it);
     /// \todo manage cache and image sprites
-    // _images[i++]->drawAtCell(_currentX, _currentY);
+
     getImage(i++)->draw(); /// \todo drawAtCell
   }
 }
@@ -154,7 +154,7 @@ e_path_shape PathFinding::getShape(size_t index)
 }
 
 
-std::shared_ptr<resources::Image> PathFinding::getImage(size_t index)
+std::shared_ptr<resources::Image> PathFinding::getImage(const size_t index)
 {
   std::shared_ptr<resources::Image> img;
   e_path_shape shape = getShape(index);
@@ -199,7 +199,7 @@ std::shared_ptr<resources::Image> PathFinding::getImage(size_t index)
   return img;
 }
 
-void PathFinding::addNextDirection(e_direction direction)
+void PathFinding::addNextDirection(const e_direction direction)
 {
   _directions.push_back(direction);
   ++_currentLength;
@@ -299,7 +299,8 @@ bool PathFinding::allowedMove()
 
 
 std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
+PathFinding::getTargets(const std::shared_ptr<Unit> unit,
+                        const std::shared_ptr<Cell> cell)
 {
   assert(unit && cell);
 
@@ -319,7 +320,7 @@ PathFinding::getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell)
 }
 
 
-size_t PathFinding::manhattan(Coords a, Coords b)
+size_t PathFinding::manhattan(const Coords a, const Coords b)
 {
   // implicit cast into signed int
   int dist_columns(a.c - b.c);

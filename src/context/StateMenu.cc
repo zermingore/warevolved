@@ -13,7 +13,7 @@
 
 
 
-StateMenu::StateMenu(e_state state)
+StateMenu::StateMenu(const e_state state)
   : State()
 {
   // browsing entries

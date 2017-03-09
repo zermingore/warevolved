@@ -2,13 +2,14 @@
 
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
-** TODO Feature
-*** TODO Check full screen still working
+** DONE Feature
+   CLOSED: [2017-03-08 Mi 18:35]
+*** DONE Check full screen still working
+    CLOSED: [2017-03-08 Mi 18:35]
 
 
 
-* DONE clean
-  CLOSED: [2017-02-02 Do 07:50]
+* TODO clean
 ** DONE Image / Font in namespace resources
    CLOSED: [2017-02-02 Do 07:24]
 ** DONE Move Debug in its own folder
@@ -20,6 +21,8 @@
    Make this class static ?
    Integrate in GraphicsEngine ?
 ** TODO Set trivial getter return type to auto
+** TODO Remove Application abstract class
+** TODO Remove game/items
 
 
 * TODO experimental

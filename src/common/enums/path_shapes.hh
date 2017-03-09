@@ -10,9 +10,8 @@
 
 /**
  * \enum e_path_shape
- * \brief Help matching which element we want to display,
- *   drawing the path
- * Values match needed sprite rotation angle.
+ * \brief Help matching which element we want to display, drawing the path
+ * \note Values match needed sprite rotation angle.
  */
 enum class e_path_shape
 {

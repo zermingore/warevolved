@@ -81,7 +81,7 @@ public:
    * \brief current Unit (_unit) getter
    * \return _unit
    */
-  std::shared_ptr<Unit> unit() { return _unit; }
+  auto unit() { return _unit; }
 
   /**
    * \brief releases (reset) _unit

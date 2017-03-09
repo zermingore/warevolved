@@ -58,11 +58,18 @@ public:
 
 
 private:
-  // Units motion
+  /// Move the unit up
   void moveUnitUp();
+
+  /// Move the unit down
   void moveUnitDown();
+
+  /// Move the unit left
   void moveUnitLeft();
+
+  /// Move the unit right
   void moveUnitRight();
+
 
   Coords _originalCoords;   ///< original unit coordinates
   Coords _holoUnitPosition; ///< Unit position 'cursor' (in cell)

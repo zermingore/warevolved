@@ -26,7 +26,10 @@ enum class e_unit;
 class Map
 {
 public:
-  /// \typedef player's units as a list
+  /**
+   * \typedef unit_list
+   * \brief list of units, per player
+   */
   using unit_list = std::map<size_t, std::list<std::shared_ptr<Unit>>>;
 
 
@@ -45,6 +48,10 @@ public:
    * \param nbLines Number of lines required
    */
   Map(const size_t nb_columns, const size_t nb_lines);
+
+  /// default destructor
+  ~Map() = default;
+
 
   /**
    * \brief _nbColumns getter
@@ -89,7 +96,7 @@ public:
    * \brief selected unit getter
    * \return a pointer on the currently selected unit, if any
    */
-  std::shared_ptr<Unit> selectedUnit() { return _selectedUnit; }
+  auto selectedUnit() { return _selectedUnit; }
 
   /**
    * \brief gets the terrain at coordinates (x, y).

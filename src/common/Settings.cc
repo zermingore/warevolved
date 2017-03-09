@@ -15,5 +15,5 @@ void Settings::initialize(const unsigned int depth,
 {
   _depth = depth;
   _stencil = stencil;
-  _antiAliasing= antiAliasing;
+  _antiAliasing = antiAliasing;
 }

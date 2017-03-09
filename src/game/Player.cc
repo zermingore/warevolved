@@ -10,7 +10,7 @@
 #include <game/applications/Battle.hh>
 
 
-Player::Player(Color c)
+Player::Player(const Color c)
 {
   static size_t static_id = 0;
   _id = static_id++;
