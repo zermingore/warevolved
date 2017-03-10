@@ -12,7 +12,7 @@
 namespace interface {
 
 
-MenuAction::MenuAction(e_state state, Coords clicked_cell)
+MenuAction::MenuAction(const e_state state, const Coords clicked_cell)
   : _state(state)
   , _clickedCell(clicked_cell)
 {
@@ -27,7 +27,8 @@ void MenuAction::build()
   {
     /// \todo use other coordinates than the menu ones
     _selectedUnit = map->unit(_coords);
-    if (!_selectedUnit->played() && _selectedUnit->playerId() == Status::player()->id())
+    if (!_selectedUnit->played() && _selectedUnit->playerId()
+        == Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
       entry->setCallback( [=] { moveUnit(); });
@@ -53,7 +54,7 @@ void MenuAction::build()
     // _selectedUnit does not exits (another instance of MenuAction built it)
     _selectedUnit = Status::battle()->map()->selectedUnit();
 
-    // add the attack entry only if a target is reachable from the current position
+    // add the attack entry if a target is reachable from the current position
     auto cell(Status::battle()->map()->cell(_coords));
     if (PathFinding::getTargets(_selectedUnit, cell)->size() > 0)
     {

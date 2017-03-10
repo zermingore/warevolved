@@ -17,6 +17,7 @@ namespace interface {
 
 
 /**
+ * \enum e_entry
  * \brief entries descriptors
  */
 enum class e_entry
@@ -51,12 +52,12 @@ public:
    * \brief Constructor
    * \param entry Entry type to build.
    */
-  explicit MenuEntry(e_entry entry);
+  explicit MenuEntry(const e_entry entry);
 
   /**
    * \brief returns entry Identifier, as a entries value
    */
-  e_entry id() { return _id; }
+  auto id() { return _id; }
 
   /**
    * \brief Executes the action matching the entry
@@ -67,7 +68,9 @@ public:
    * \brief _callback setter
    * \param callback Callback called when the menu entry is selected
    */
-  void setCallback(std::function<void()> callback) { _callback = callback; }
+  void setCallback(const std::function<void()> callback) {
+    _callback = callback;
+  }
 
   /**
    * \brief updates the graphical attributes of the entry

@@ -16,11 +16,12 @@ Menu::Menu()
   , _selectedEntry (0)
   , _imageSelection(resources::ResourcesManager::getImage("selection_menu_selection"))
 {
-  _entries = std::vector<std::shared_ptr<MenuEntry>> ();
 }
 
 
-void Menu::setOrigin(Coords origin) {
+void Menu::setOrigin(const Coords origin)
+{
+  /// \todo set the menu at optimal coordinates
   _origin = origin;
 }
 

@@ -1,9 +1,6 @@
 #include <graphics/MapGraphicsProperties.hh>
 
 
-#include <debug/Debug.hh>
-
-
 namespace graphics {
 
 

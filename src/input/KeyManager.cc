@@ -53,7 +53,7 @@ void KeyManager::populateEvents()
 
 
 
-void KeyManager::blockInputs(unsigned int duration)
+void KeyManager::blockInputs(const unsigned int duration)
 {
   // Clearing active inputs
   _active_inputs.clear();

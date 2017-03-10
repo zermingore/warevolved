@@ -18,7 +18,7 @@ Cursor::Cursor()
 }
 
 
-void Cursor::setLimits(size_t nb_columns, size_t nb_lines)
+void Cursor::setLimits(const size_t nb_columns, const size_t nb_lines)
 {
   _nbColumns = nb_columns;
   _nbLines = nb_lines;

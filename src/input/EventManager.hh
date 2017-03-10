@@ -28,7 +28,7 @@ public:
    * \brief executes the callback matching the given event, if any
    * \return true if a callback was executed
    */
-  bool process(e_input input);
+  bool process(const e_input input);
 
 
   /**
@@ -36,7 +36,7 @@ public:
    * \param key event name.
    * \param cb callback to associate to the event.
    */
-  void registerEvent(e_input input, std::function<void()> cb) {
+  void registerEvent(const e_input input, const std::function<void()> cb) {
     _callbacks[input] = cb;
   }
 

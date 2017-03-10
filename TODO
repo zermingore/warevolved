@@ -2,27 +2,22 @@
 
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
-** DONE Feature
-   CLOSED: [2017-03-08 Mi 18:35]
-*** DONE Check full screen still working
-    CLOSED: [2017-03-08 Mi 18:35]
-
-
-
-* TODO clean
-** DONE Image / Font in namespace resources
+** TODO clean
+*** DONE Image / Font in namespace resources
    CLOSED: [2017-02-02 Do 07:24]
-** DONE Move Debug in its own folder
+*** DONE Move Debug in its own folder
    CLOSED: [2017-02-02 Do 07:50]
-** DONE ResourcesManager enum -> enum class
+*** DONE ResourcesManager enum -> enum class
    CLOSED: [2017-02-02 Do 07:31]
-** DONE MapGraphicsProperties
+*** DONE MapGraphicsProperties
    CLOSED: [2017-02-15 Mi 07:38]
    Make this class static ?
    Integrate in GraphicsEngine ?
-** TODO Set trivial getter return type to auto
-** TODO Remove Application abstract class
-** TODO Remove game/items
+*** DONE Set trivial getter return type to auto
+   CLOSED: [2017-03-10 Fr 07:38]
+*** TODO Remove Application abstract class
+*** TODO Remove game/items
+*** TODO Review KeyManager
 
 
 * TODO experimental
@@ -39,6 +34,10 @@
 
 
 * old roadmap
+** DONE Feature
+   CLOSED: [2017-03-08 Mi 18:35]
+*** DONE Check full screen still working
+    CLOSED: [2017-03-08 Mi 18:35]
 ** DONE Clean
    CLOSED: [2017-03-08 Mi 07:41]
 *** DONE Coord type: x,y <- c,l

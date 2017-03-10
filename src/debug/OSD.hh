@@ -53,13 +53,13 @@ private:
    * \brief Builds and return an initialized label, to display text
    * \return a pointer to the new label
    */
-  static std::shared_ptr<sf::Text> text(std::string str);
+  static std::shared_ptr<sf::Text> text(const std::string str);
 
 
-  static unsigned int _fontSize; ///< text font size
+  static unsigned int _fontSize; ///< Text font size
   static Coords _dataPosition;   ///< Coordinates where to display data
 
-  ///< list of items to display
+  ///< List of items to display
   static std::vector<std::shared_ptr<sf::Drawable>> _drawables;
 };
 

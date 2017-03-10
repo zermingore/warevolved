@@ -34,7 +34,7 @@ public:
    * \brief Constructor
    * \param state State in which this menu will be used
    */
-  MenuAction(e_state state, Coords clicked_cell);
+  MenuAction(const e_state state, const Coords clicked_cell);
 
   /**
    * \brief default destructor

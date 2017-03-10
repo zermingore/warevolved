@@ -64,22 +64,22 @@ public:
   /// Default Constructor. Maps the keyboard input to keys
   KeyManager();
 
-
-  void getEvent(sf::Keyboard::Key key);
-
+  /**
+   * \brief Populates the _active_inputs events list
+   */
   void populateEvents();
 
   /**
    * \brief returns the list of available and non blocked inputs
    */
-  std::vector<e_input> activeInputs() { return _active_inputs; }
+  auto activeInputs() { return _active_inputs; }
 
 
   /**
    * \brief Blocks every input, active or not
    * \param duration Time in ms during which one events will be ignored
    */
-  void blockInputs(unsigned int duration = 100);
+  void blockInputs(const unsigned int duration = 100);
 
 
 

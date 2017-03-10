@@ -24,6 +24,10 @@ public:
   /// Instanciates a KeyManager
   InputProcessor();
 
+  /// Default destructor
+  ~InputProcessor() = default;
+
+
   /**
    * \brief process events.
    */

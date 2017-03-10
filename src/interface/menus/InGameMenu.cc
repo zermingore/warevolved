@@ -17,7 +17,7 @@ void InGameMenu::cancel() {
 }
 
 
-void InGameMenu::addCancelEntry(std::function<void()> cancel_callback)
+void InGameMenu::addCancelEntry(const std::function<void()> cancel_callback)
 {
   auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL));
   entry_cancel->setCallback( [=] { cancel_callback(); });
@@ -34,7 +34,8 @@ void InGameMenu::moveDown() {
 }
 
 
-void InGameMenu::validate() {
+void InGameMenu::validate()
+{
   // end validation (unit moved, ...) -> purge every menu
   _entries[_selectedEntry]->execute();
 }

@@ -29,31 +29,31 @@ public:
    * \brief cell width getter.
    * \return cell width in pixels.
    */
-  static size_t cellWidth() { return 64; }
+  static auto cellWidth() { return _cellWidth; }
 
   /**
    * \brief cell height getter.
    * \return cell height in pixels.
    */
-  static size_t cellHeight() { return 64; }
+  static auto cellHeight() { return _cellHeight; }
 
   /**
    * \brief grid thickness getter.
    * \return grid thickness in pixels.
    */
-  static size_t gridThickness() { return _gridThickness; }
+  static auto gridThickness() { return _gridThickness; }
 
   /**
    * \brief offset of the grid (from the left border of the window) getter.
    * \return grid offset, in x.
    */
-  static size_t gridOffsetX() { return _gridOffsetX; }
+  static auto gridOffsetX() { return _gridOffsetX; }
 
   /**
    * \brief offset of the grid (from the top border of the window) getter.
    * \return grid offset, in y.
    */
-  static size_t gridOffsetY() { return _gridOffsetY; }
+  static auto gridOffsetY() { return _gridOffsetY; }
 
   /**
    * \brief cell width setter.

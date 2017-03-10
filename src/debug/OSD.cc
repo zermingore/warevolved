@@ -45,7 +45,7 @@ void OSD::draw()
 }
 
 
-std::shared_ptr<sf::Text> OSD::text(std::string str)
+std::shared_ptr<sf::Text> OSD::text(const std::string str)
 {
   auto label(std::make_shared<sf::Text> (
                str,

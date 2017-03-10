@@ -16,7 +16,7 @@ namespace resources {
 
 /**
  * \class Image
- * \brief Resource type, Derived from Resource
+ * \brief Image type, Derived from Resource
  */
 class Image: public Resource
 {
@@ -36,6 +36,9 @@ public:
    * _loaded to false
    */
   Image(const std::string file_name, const std::string name);
+
+  /// Default destructor
+  ~Image() = default;
 
 
   /**

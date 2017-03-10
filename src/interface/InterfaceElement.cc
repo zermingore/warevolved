@@ -20,15 +20,6 @@ InterfaceElement::InterfaceElement(const std::string &image_name)
 {
   _scale.x = _image->sprite()->getTexture()->getSize().x;
   _scale.y = _image->sprite()->getTexture()->getSize().y;
-
-//  _image.sprite()->setScale(p->cellWidth() / _scale.x, p->cellHeight() / _scale.y);
-}
-
-
-void InterfaceElement::draw()
-{
-  PRINTF("interfaceelement::draw()", _img_name);
-  graphics::GraphicsEngine::draw(_image->sprite());
 }
 
 

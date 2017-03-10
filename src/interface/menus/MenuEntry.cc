@@ -8,7 +8,7 @@
 namespace interface {
 
 
-MenuEntry::MenuEntry(e_entry entry)
+MenuEntry::MenuEntry(const e_entry entry)
   : InterfaceElement("selection_menu_button")
   , _id (entry)
 {
@@ -52,7 +52,7 @@ void MenuEntry::execute() {
 
 
 
-void MenuEntry::setLabelName(e_entry entry)
+void MenuEntry::setLabelName(const e_entry entry)
 {
   switch (entry)
   {

@@ -87,14 +87,14 @@ std::shared_ptr<sf::Sprite> Image::sprite()
 }
 
 
-void Image::setFileName(std::string file_name)
+void Image::setFileName(const std::string file_name)
 {
   _fileName = file_name;
   _loaded = false;
 }
 
 
-void Image::setPosition(Coords position)
+void Image::setPosition(const Coords position)
 {
   if (!_sprite) {
     initSprite();
@@ -103,7 +103,7 @@ void Image::setPosition(Coords position)
 }
 
 
-void Image::setPosition(size_t x, size_t y)
+void Image::setPosition(const size_t x, const size_t y)
 {
   if (!_sprite) {
     initSprite();
@@ -112,7 +112,7 @@ void Image::setPosition(size_t x, size_t y)
 }
 
 
-void Image::setSize(sf::Vector2f size)
+void Image::setSize(const sf::Vector2f size)
 {
   auto old_size(_rectangle->getSize());
   _rectangle->setSize(size);
@@ -120,7 +120,7 @@ void Image::setSize(sf::Vector2f size)
 }
 
 
-void Image::setSize(float width, float height)
+void Image::setSize(const float width, const float height)
 {
   auto size(_texture->getSize());
   _rectangle->setSize(sf::Vector2f(width / size.x, height / size.y));
@@ -128,21 +128,21 @@ void Image::setSize(float width, float height)
 }
 
 
-void Image::setScale(sf::Vector2f size)
+void Image::setScale(const sf::Vector2f size)
 {
   _rectangle->setScale(size);
   _sprite->setScale(size);
 }
 
 
-void Image::setScale(float width, float height)
+void Image::setScale(const float width, const float height)
 {
   _rectangle->setScale(sf::Vector2f(width, height));
   _sprite->setScale(sf::Vector2f(width, height));
 }
 
 
-void Image::setScale(float ratio)
+void Image::setScale(const float ratio)
 {
   _rectangle->setScale(sf::Vector2f(ratio, ratio));
   _sprite->setScale(sf::Vector2f(ratio, ratio));
@@ -183,7 +183,7 @@ void Image::unload()
 }
 
 
-void Image::reload(std::string file_name)
+void Image::reload(const std::string file_name)
 {
   // if (_texture)
   //   delete _texture;
