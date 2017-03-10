@@ -15,8 +15,10 @@
    Integrate in GraphicsEngine ?
 *** DONE Set trivial getter return type to auto
    CLOSED: [2017-03-10 Fr 07:38]
-*** TODO Remove Application abstract class
-*** TODO Remove game/items
+*** DONE Remove Application abstract class
+    CLOSED: [2017-03-10 Fr 19:46]
+*** DONE Remove game/items
+    CLOSED: [2017-03-10 Fr 19:50] (only local garbage)
 *** TODO Review KeyManager
 
 

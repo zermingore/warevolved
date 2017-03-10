@@ -9,7 +9,6 @@
 
 # include <vector>
 # include <memory>
-# include <game/applications/Application.hh>
 # include <common/structures/Vector.hh>
 
 class Map;
@@ -22,7 +21,7 @@ enum class e_units;
  * \class Battle
  * \brief A battle is a game, launched from the Game class.
  */
-class Battle: public Application
+class Battle
 {
 public:
   /// \todo add filename XOr nb players, ...
