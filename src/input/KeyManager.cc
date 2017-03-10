@@ -11,13 +11,13 @@ KeyManager::KeyManager()
 
   /// \todo lambda / macro map_key(sf, e_key)
 
- // directions
- _keys_mapping.insert({sf::Keyboard::Left,   e_key::E_KEY_LEFT});
- _keys_mapping.insert({sf::Keyboard::Right,  e_key::E_KEY_RIGHT});
- _keys_mapping.insert({sf::Keyboard::Up,     e_key::E_KEY_UP});
- _keys_mapping.insert({sf::Keyboard::Down,   e_key::E_KEY_DOWN});
- _keys_mapping.insert({sf::Keyboard::Space,  e_key::E_KEY_SELECTION_1});
- _keys_mapping.insert({sf::Keyboard::Escape, e_key::E_KEY_EXIT_1});
+  // directions
+  _keys_mapping.insert({sf::Keyboard::Left,   e_key::LEFT});
+  _keys_mapping.insert({sf::Keyboard::Right,  e_key::RIGHT});
+  _keys_mapping.insert({sf::Keyboard::Up,     e_key::UP});
+  _keys_mapping.insert({sf::Keyboard::Down,   e_key::DOWN});
+  _keys_mapping.insert({sf::Keyboard::Space,  e_key::SELECTION_1});
+  _keys_mapping.insert({sf::Keyboard::Escape, e_key::EXIT_1});
 
   /// \todo event mapping: should be e_key -> e_input
   // _events_mapping.insert({_keys_mapping[sf::Keyboard::Left], e_input::MOVE_LEFT_1});

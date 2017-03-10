@@ -13,35 +13,36 @@ enum class e_input;
 
 
 /**
+ * \enum e_key
  * \brief Keys indexes allowing key repeating.
  */
-enum e_key
+enum class e_key
 {
   // // motion keys -> events !
-  // E_KEY_MOVE_UP_1 = 0,
-  // E_KEY_MOVE_UP_2,
-  // E_KEY_MOVE_DOWN_1,
-  // E_KEY_MOVE_DOWN_2,
-  // E_KEY_MOVE_LEFT_1,
-  // E_KEY_MOVE_LEFT_2,
-  // E_KEY_MOVE_RIGHT_1,
-  // E_KEY_MOVE_RIGHT_2,
+  // MOVE_UP_1 = 0,
+  // MOVE_UP_2,
+  // MOVE_DOWN_1,
+  // MOVE_DOWN_2,
+  // MOVE_LEFT_1,
+  // MOVE_LEFT_2,
+  // MOVE_RIGHT_1,
+  // MOVE_RIGHT_2,
 
   // // action keys
-  E_KEY_SELECTION_1,
-  // E_KEY_SELECTION_2,
+  SELECTION_1,
+  // SELECTION_2,
 
   // // exit requests
-  E_KEY_EXIT_1,
-  // E_KEY_EXIT_2,
+  EXIT_1,
+  // EXIT_2,
 
-  E_KEY_UP,
-  E_KEY_DOWN,
-  E_KEY_LEFT,
-  E_KEY_RIGHT,
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
 
 
-  E_KEY_NB_KEYS
+  NB_KEYS
 };
 
 
@@ -51,15 +52,6 @@ enum e_key
  */
 class KeyManager
 {
-  /**
-   * \brief SFML key detection
-   * \param feature key name auto expand _1 and _2 to this name
-   * \return true if one of the two possible binding
-   *   of a function has been triggered, false otherwise.
-   */
-# define PRESSED(x) true /*sf::Keyboard::isKeyPressed(_keys[ x ##_1]) || \
-  sf::Keyboard::isKeyPressed(_keys[ x ##_2])*/
-
 public:
   /// Default Constructor. Maps the keyboard input to keys
   KeyManager();
@@ -93,9 +85,8 @@ private:
   bool eventsFreezed();
 
 
-  //  std::pair<bool, sf::Keyboard::Key> _keys[E_KEY_NB_KEYS]; ///< keys list
   std::multimap<sf::Keyboard::Key, e_key> _keys_mapping; ///< key mapping
-  std::map<sf::Keyboard::Key, e_input> _events_mapping; ///< events mapping
+  std::map<sf::Keyboard::Key, e_input> _events_mapping;  ///< events mapping
   std::vector<e_input> _active_inputs; ///< current inputs (high level keys)
 
   sf::Clock _clock_events_freeze; ///< clock to manage events freezing
