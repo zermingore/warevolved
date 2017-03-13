@@ -18,29 +18,16 @@ enum class e_input;
  */
 enum class e_key
 {
-  // // motion keys -> events !
-  // MOVE_UP_1 = 0,
-  // MOVE_UP_2,
-  // MOVE_DOWN_1,
-  // MOVE_DOWN_2,
-  // MOVE_LEFT_1,
-  // MOVE_LEFT_2,
-  // MOVE_RIGHT_1,
-  // MOVE_RIGHT_2,
+  // action keys
+  SELECTION,
 
-  // // action keys
-  SELECTION_1,
-  // SELECTION_2,
-
-  // // exit requests
-  EXIT_1,
-  // EXIT_2,
+  // exit requests
+  EXIT,
 
   UP,
   DOWN,
   LEFT,
   RIGHT,
-
 
   NB_KEYS
 };
@@ -85,8 +72,9 @@ private:
   bool eventsFreezed();
 
 
-  std::multimap<sf::Keyboard::Key, e_key> _keys_mapping; ///< key mapping
-  std::map<sf::Keyboard::Key, e_input> _events_mapping;  ///< events mapping
+  std::multimap<e_key, sf::Keyboard::Key> _keys_mapping; ///< key mapping
+  std::map<const e_key, const e_input> _events_mapping;  ///< events mapping
+
   std::vector<e_input> _active_inputs; ///< current inputs (high level keys)
 
   sf::Clock _clock_events_freeze; ///< clock to manage events freezing

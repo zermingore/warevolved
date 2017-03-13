@@ -2,7 +2,8 @@
 
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
-** TODO clean
+** DONE clean
+   CLOSED: [2017-03-13 Mo 20:15]
 *** DONE Image / Font in namespace resources
    CLOSED: [2017-02-02 Do 07:24]
 *** DONE Move Debug in its own folder
@@ -19,7 +20,8 @@
     CLOSED: [2017-03-10 Fr 19:46]
 *** DONE Remove game/items
     CLOSED: [2017-03-10 Fr 19:50] (only local garbage)
-*** TODO Review KeyManager
+*** DONE Review KeyManager
+    CLOSED: [2017-03-13 Mo 20:10] (cleaned, properly using e_key)
 
 
 * TODO experimental

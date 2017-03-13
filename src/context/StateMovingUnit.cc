@@ -26,12 +26,12 @@ StateMovingUnit::StateMovingUnit()
   // we need a selected unit to continue
   assert(player->updateSelectedUnit());
 
-  _evtMgr->registerEvent(e_input::MOVE_UP_1,    [=] { moveUnitUp();    });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN_1,  [=] { moveUnitDown();  });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT_1,  [=] { moveUnitLeft();  });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { moveUnitRight(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { moveUnitUp();    });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { moveUnitDown();  });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { moveUnitLeft();  });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { moveUnitRight(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION_1,  [=] {
+  _evtMgr->registerEvent(e_input::SELECTION,  [=] {
       Status::pushState(e_state::ACTION_MENU);
 
       // giving the next state (action menu) the original unit position
@@ -39,9 +39,7 @@ StateMovingUnit::StateMovingUnit()
       Status::currentState()->resume();
     });
 
-  _evtMgr->registerEvent(e_input::EXIT_1, [=] {
-      exit();
-    });
+  _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
 
   // Graphical attributes initialization
   _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers

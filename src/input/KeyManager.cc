@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <input/KeyManager.hh>
 #include <common/Settings.hh>
 #include <common/enums/input.hh>
@@ -9,25 +8,24 @@ KeyManager::KeyManager()
 {
   /// \todo Read configuration file to retrieve these values (use Settings Class)
 
-  /// \todo lambda / macro map_key(sf, e_key)
+  // This mapping might be overloaded later, by the configuration management
+  // keyboard: user part; e_key binary part
+  // Map keyboard key -> e_key ('z' and '8' can be used for LEFT key)
+  _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::Left  });
+  _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::Right });
+  _keys_mapping.insert({e_key::UP        , sf::Keyboard::Up    });
+  _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::Down  });
+  _keys_mapping.insert({e_key::SELECTION , sf::Keyboard::Space });
+  _keys_mapping.insert({e_key::EXIT      , sf::Keyboard::Escape});
 
-  // directions
-  _keys_mapping.insert({sf::Keyboard::Left,   e_key::LEFT});
-  _keys_mapping.insert({sf::Keyboard::Right,  e_key::RIGHT});
-  _keys_mapping.insert({sf::Keyboard::Up,     e_key::UP});
-  _keys_mapping.insert({sf::Keyboard::Down,   e_key::DOWN});
-  _keys_mapping.insert({sf::Keyboard::Space,  e_key::SELECTION_1});
-  _keys_mapping.insert({sf::Keyboard::Escape, e_key::EXIT_1});
-
-  /// \todo event mapping: should be e_key -> e_input
-  // _events_mapping.insert({_keys_mapping[sf::Keyboard::Left], e_input::MOVE_LEFT_1});
-
-  _events_mapping.insert({sf::Keyboard::Left,   e_input::MOVE_LEFT_1});
-  _events_mapping.insert({sf::Keyboard::Right,  e_input::MOVE_RIGHT_1});
-  _events_mapping.insert({sf::Keyboard::Up,     e_input::MOVE_UP_1});
-  _events_mapping.insert({sf::Keyboard::Down,   e_input::MOVE_DOWN_1});
-  _events_mapping.insert({sf::Keyboard::Space,  e_input::SELECTION_1});
-  _events_mapping.insert({sf::Keyboard::Escape, e_input::EXIT_1});
+  // This event mapping is populated here but will then be read only
+  // These are the mapping key (dissociated from the keyboard) -> event
+  _events_mapping.insert({e_key::LEFT      , e_input::MOVE_LEFT });
+  _events_mapping.insert({e_key::RIGHT     , e_input::MOVE_RIGHT});
+  _events_mapping.insert({e_key::UP        , e_input::MOVE_UP   });
+  _events_mapping.insert({e_key::DOWN      , e_input::MOVE_DOWN });
+  _events_mapping.insert({e_key::SELECTION , e_input::SELECTION });
+  _events_mapping.insert({e_key::EXIT      , e_input::EXIT      });
 }
 
 
@@ -43,10 +41,10 @@ void KeyManager::populateEvents()
   }
 
   // Add every event which key is pressed
-  for (const auto& it: _events_mapping)
+  for (const auto& it: _keys_mapping)
   {
-    if (sf::Keyboard::isKeyPressed(it.first)) {
-      _active_inputs.push_back(it.second);
+    if (sf::Keyboard::isKeyPressed(it.second)) {
+      _active_inputs.push_back(_events_mapping[it.first]);
     }
   }
 }
