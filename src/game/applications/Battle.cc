@@ -40,9 +40,9 @@ void Battle::buildPlayers()
 void Battle::buildMap()
 {
   _map->newUnit(e_unit::SOLDIERS, 0, 0, 0);
-  _map->newUnit(e_unit::SOLDIERS, 0, 4, 0);
+  _map->newUnit(e_unit::SOLDIERS, 2, 0, 0);
 
-  _map->newUnit(e_unit::SOLDIERS, 1, 0, 1);
+  _map->newUnit(e_unit::SOLDIERS, 0, 4, 1);
   _map->newUnit(e_unit::SOLDIERS, 3, 0, 1);
   _map->newUnit(e_unit::SOLDIERS, 3, 2, 1);
 

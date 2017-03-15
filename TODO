@@ -2,9 +2,12 @@
 
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
-** TODO Debug
-*** TODO PathFinding
-**** TODO Do not allow to attack while over a unit
+** DONE Debug
+   CLOSED: [2017-03-15 Mi 20:07]
+*** DONE PathFinding
+    CLOSED: [2017-03-15 Mi 20:07]
+**** DONE Do not allow to attack while over a unit
+     CLOSED: [2017-03-15 Mi 20:07]
 **** DONE Do not allow to cross enemy cells
      CLOSED: [2017-03-15 Mi 19:53] (was not implemented)
 *** DONE KeyManager
@@ -23,6 +26,8 @@
      Found the 'feature': catching any events (released, pressed, focus, ...)
        but for alpha characters the extra 'TextEntered' event is generated
      Solution: Treat only 'KeyPressed' events (and 'Closed' for ending the game)
+** TODO Clean
+*** TODO Remove game/applications folder
 
 * TODO experimental
 ** DONE ResourcesManager

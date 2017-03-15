@@ -56,7 +56,7 @@ void MenuAction::build()
 
     // add the attack entry if a target is reachable from the current position
     auto cell(Status::battle()->map()->cell(_coords));
-    if (PathFinding::getTargets(_selectedUnit, cell)->size() > 0)
+    if (!target && PathFinding::getTargets(_selectedUnit, cell)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(); });

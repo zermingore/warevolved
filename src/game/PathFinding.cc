@@ -322,6 +322,7 @@ bool PathFinding::allowedMove(e_direction direction)
       return false;
   }
 
+  // do not allow to move over enemy units
   auto u(dst->unit());
   if (u && u->playerId() != Status::player()->id())
   {
