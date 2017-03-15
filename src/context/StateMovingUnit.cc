@@ -91,7 +91,7 @@ void StateMovingUnit::resume()
 // _________________________  Graphical Units motion ________________________ //
 void StateMovingUnit::moveUnitUp()
 {
-  if (_holoUnitPosition.l > 0 && PathFinding::allowedMove())
+  if (_holoUnitPosition.l > 0 && PathFinding::allowedMove(e_direction::UP))
   {
     --_holoUnitPosition.l;
     PathFinding::addNextDirection(e_direction::UP);
@@ -100,7 +100,8 @@ void StateMovingUnit::moveUnitUp()
 
 void StateMovingUnit::moveUnitDown()
 {
-  if (_holoUnitPosition.l < _nbLines - 1 && PathFinding::allowedMove())
+  if (_holoUnitPosition.l < _nbLines - 1
+      && PathFinding::allowedMove(e_direction::DOWN))
   {
     ++_holoUnitPosition.l;
     PathFinding::addNextDirection(e_direction::DOWN);
@@ -109,7 +110,7 @@ void StateMovingUnit::moveUnitDown()
 
 void StateMovingUnit::moveUnitLeft()
 {
-  if (_holoUnitPosition.c > 0 && PathFinding::allowedMove())
+  if (_holoUnitPosition.c > 0 && PathFinding::allowedMove(e_direction::LEFT))
   {
     --_holoUnitPosition.c;
     PathFinding::addNextDirection(e_direction::LEFT);
@@ -118,7 +119,8 @@ void StateMovingUnit::moveUnitLeft()
 
 void StateMovingUnit::moveUnitRight()
 {
-  if (_holoUnitPosition.c < _nbColumns - 1 && PathFinding::allowedMove())
+  if (_holoUnitPosition.c < _nbColumns - 1
+      && PathFinding::allowedMove(e_direction::RIGHT))
   {
     ++_holoUnitPosition.c;
     PathFinding::addNextDirection(e_direction::RIGHT);

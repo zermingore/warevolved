@@ -51,13 +51,15 @@ public:
 
   /**
    * \brief allowed move notifier
+   * \param direction direction towards the next cell
    * \return true if the move is allowed
+   * \note The map border checking must be done outside
    */
-  static bool allowedMove();
+  static bool allowedMove(e_direction direction);
 
   /**
    * \brief adds the next element to the current path
-   * \param direction of the element
+   * \param direction direction of the element
    */
   static void addNextDirection(e_direction direction);
 

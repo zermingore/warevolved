@@ -5,7 +5,8 @@
 ** TODO Debug
 *** TODO PathFinding
 **** TODO Do not allow to attack while over a unit
-**** TODO Do not allow to cross enemy cells
+**** DONE Do not allow to cross enemy cells
+     CLOSED: [2017-03-15 Mi 19:53] (was not implemented)
 *** DONE KeyManager
     CLOSED: [2017-03-15 Mi 07:30]
 **** DONE [#B] when another key binding is used, the event seems to be generated 2 times

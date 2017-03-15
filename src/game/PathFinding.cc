@@ -289,11 +289,46 @@ void PathFinding::hideAllowedPath()
 }
 
 
-bool PathFinding::allowedMove()
+bool PathFinding::allowedMove(e_direction direction)
 {
-  /// \todo complete receiving direction request
-  // at the moment it's only checking the path length
-  return _currentLength < _maxLength;
+  // If we reached the maximal length, the move won't be allowed
+  if (_currentLength >= _maxLength)
+  {
+    return false;
+  }
+
+  // Getting destination cell
+  std::shared_ptr<Cell> dst = nullptr;
+  switch (direction)
+  {
+    case e_direction::UP:
+      dst = _map->cell(Coords(_current.c, _current.l - 1));
+      break;
+
+    case e_direction::DOWN:
+      dst = _map->cell(Coords(_current.c, _current.l + 1));
+      break;
+
+    case e_direction::LEFT:
+      dst = _map->cell(Coords(_current.c - 1, _current.l));
+      break;
+
+    case e_direction::RIGHT:
+      dst = _map->cell(Coords(_current.c + 1, _current.l));
+      break;
+
+    default:
+      assert(!"Invalid direction");
+      return false;
+  }
+
+  auto u(dst->unit());
+  if (u && u->playerId() != Status::player()->id())
+  {
+    return false;
+  }
+
+  return true;
 }
 
 
