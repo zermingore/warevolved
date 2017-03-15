@@ -8,6 +8,7 @@
 # define INPUT_KEY_MANAGER_HH_
 
 # include <common/include.hh>
+# include <set>
 
 enum class e_input;
 
@@ -75,7 +76,7 @@ private:
   std::multimap<e_key, sf::Keyboard::Key> _keys_mapping; ///< key mapping
   std::map<const e_key, const e_input> _events_mapping;  ///< events mapping
 
-  std::vector<e_input> _active_inputs; ///< current inputs (high level keys)
+  std::set<e_input> _active_inputs; ///< current inputs (high level keys)
 
   sf::Clock _clock_events_freeze; ///< clock to manage events freezing
   int _events_freeze_duration;    ///< duration to deactivate events

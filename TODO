@@ -33,7 +33,8 @@
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
 ** TODO Cursor (interface) in its thread
-** TODO Support ~vi-like key mapping (neoi in workman)
+** DONE Support ~vi-like key mapping (neoi in workman)
+   CLOSED: [2017-03-15 Mi 07:38]
 
 
 * old roadmap

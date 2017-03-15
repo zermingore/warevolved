@@ -6,17 +6,26 @@
 
 KeyManager::KeyManager()
 {
-  /// \todo Read configuration file to retrieve these values (use Settings Class)
+  /// \todo Read configuration file to get these values (use Settings Class)
 
   // This mapping might be overloaded later, by the configuration management
   // keyboard: user part; e_key binary part
-  // Map keyboard key -> e_key ('z' and '8' can be used for LEFT key)
+  // _keys_mapping: keyboard -> e_key ('z' and '8' can be used for LEFT key)
+
   _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::Left  });
   _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::Right });
   _keys_mapping.insert({e_key::UP        , sf::Keyboard::Up    });
   _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::Down  });
+
+  // These don't seem natural (but makes sense with a Workman layout)
+  _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::N     });
+  _keys_mapping.insert({e_key::UP        , sf::Keyboard::E     });
+  _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::O     });
+  _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::I     });
+
   _keys_mapping.insert({e_key::SELECTION , sf::Keyboard::Space });
   _keys_mapping.insert({e_key::EXIT      , sf::Keyboard::Escape});
+
 
   // This event mapping is populated here but will then be read only
   // These are the mapping key (dissociated from the keyboard) -> event
@@ -43,8 +52,9 @@ void KeyManager::populateEvents()
   // Add every event which key is pressed
   for (const auto& it: _keys_mapping)
   {
-    if (sf::Keyboard::isKeyPressed(it.second)) {
-      _active_inputs.push_back(_events_mapping[it.first]);
+    if (sf::Keyboard::isKeyPressed(it.second))
+    {
+      _active_inputs.insert(_events_mapping[it.first]);
     }
   }
 }
