@@ -2,6 +2,41 @@
 
 * TODO Roadmap
 ** TODO Merge branches: feature with clean, then clean with master
+** TODO Debug
+*** TODO PathFinding
+**** TODO Do not allow to attack while over a unit
+**** TODO Do not allow to cross enemy cells
+*** DONE KeyManager
+    CLOSED: [2017-03-15 Mi 07:30]
+**** DONE [#B] when another key binding is used, the event seems to be generated 2 times
+     CLOSED: [2017-03-15 Mi 07:30]
+     Deactivated arrows, leaving other keys (neio) to move the cursor, the bug pesists
+     Inserting in the _active_input array only if not already present, same issue
+     The key is inserted two times when using 'meio' keys (but only one time when using arrows)
+     Using now a std::set (unique values)
+     populate events is called 1 time using the arrows, 2 otherwise
+     maped keyboard keys to a fake e_key -> same issue
+     same behavior with other keys ('system' [F7, space, ...] Vs 'alpha')
+     same issue with unmapped keys
+     2 events for pressed, 1 for release (should be 1, 1)
+     Found the 'feature': catching any events (released, pressed, focus, ...)
+       but for alpha characters the extra 'TextEntered' event is generated
+     Solution: Treat only 'KeyPressed' events (and 'Closed' for ending the game)
+
+* TODO experimental
+** DONE ResourcesManager
+   CLOSED: [2017-02-01 Mi 19:43]
+*** DONE _images: std::map<name, filename>
+    CLOSED: [2017-02-01 Mi 07:39]
+*** DONE getImage: return a newly allocated Image
+    CLOSED: [2017-02-01 Mi 07:39]
+** TODO drawInterface Vs drawState
+   drawState draws the interface ?
+** TODO Cursor (interface) in its thread
+** TODO Support ~vi-like key mapping (neoi in workman)
+
+
+* old roadmap
 ** DONE clean
    CLOSED: [2017-03-13 Mo 20:15]
 *** DONE Image / Font in namespace resources
@@ -22,22 +57,6 @@
     CLOSED: [2017-03-10 Fr 19:50] (only local garbage)
 *** DONE Review KeyManager
     CLOSED: [2017-03-13 Mo 20:10] (cleaned, properly using e_key)
-
-
-* TODO experimental
-** DONE ResourcesManager
-   CLOSED: [2017-02-01 Mi 19:43]
-*** DONE _images: std::map<name, filename>
-    CLOSED: [2017-02-01 Mi 07:39]
-*** DONE getImage: return a newly allocated Image
-    CLOSED: [2017-02-01 Mi 07:39]
-** TODO drawInterface Vs drawState
-   drawState draws the interface ?
-** TODO Cursor (interface) in its thread
-** TODO Support ~vi-like key mapping (neoi in workman)
-
-
-* old roadmap
 ** DONE Feature
    CLOSED: [2017-03-08 Mi 18:35]
 *** DONE Check full screen still working

@@ -68,5 +68,7 @@ void Context::init()
 #endif
   //_window->setIcon(64, 64, "icon");
 
+  window->setKeyRepeatEnabled(false);
+
   graphics::GraphicsEngine::setWindow(std::move(window));
 }

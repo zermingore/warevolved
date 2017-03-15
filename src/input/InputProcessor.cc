@@ -25,6 +25,12 @@ bool InputProcessor::process()
       return false;
     }
 
+    // skipping any non-relevant event
+    if (event.type != sf::Event::KeyPressed)
+    {
+      continue;
+    }
+
     _km->populateEvents();
     for (const auto& i: _km->activeInputs())
     {
