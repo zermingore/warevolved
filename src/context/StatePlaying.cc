@@ -1,7 +1,7 @@
 #include <context/StatePlaying.hh>
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <common/Status.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>

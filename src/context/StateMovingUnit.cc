@@ -7,7 +7,7 @@
 #include <interface/menus/InGameMenu.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <resources/Image.hh>
 #include <interface/Cursor.hh>
 #include <game/units/Unit.hh>

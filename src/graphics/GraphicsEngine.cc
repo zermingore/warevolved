@@ -3,7 +3,7 @@
 #include <common/constants.hh> // GRID_COLOR
 #include <common/Status.hh>
 #include <game/Cell.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/Player.hh>
 #include <debug/OSD.hh>
 #include <context/State.hh>

@@ -1,6 +1,6 @@
 #include <interface/menus/MenuEntry.hh>
 #include <common/Status.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 

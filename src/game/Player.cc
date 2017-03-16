@@ -7,7 +7,7 @@
 #include <common/enums/states.hh>
 #include <context/State.hh>
 #include <context/StateMenu.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 
 
 Player::Player(const Color c)

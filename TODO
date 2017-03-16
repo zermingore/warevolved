@@ -26,8 +26,10 @@
      Found the 'feature': catching any events (released, pressed, focus, ...)
        but for alpha characters the extra 'TextEntered' event is generated
      Solution: Treat only 'KeyPressed' events (and 'Closed' for ending the game)
-** TODO Clean
-*** TODO Remove game/applications folder
+** DONE Clean
+   CLOSED: [2017-03-16 Do 07:27]
+*** DONE Remove game/applications folder
+    CLOSED: [2017-03-16 Do 07:27]
 
 * TODO experimental
 ** DONE ResourcesManager

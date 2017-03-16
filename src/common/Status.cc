@@ -1,5 +1,5 @@
 #include <common/Status.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/Player.hh>
 #include <context/StateFactory.hh>
 #include <input/InputProcessor.hh>

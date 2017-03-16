@@ -4,7 +4,7 @@
 #include <common/Status.hh>
 #include <context/State.hh>
 #include <input/EventManager.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 

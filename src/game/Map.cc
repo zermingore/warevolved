@@ -9,7 +9,7 @@
 #include <common/Status.hh>
 #include <common/enums/terrains.hh>
 #include <common/enums/units.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/units/UnitFactory.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>

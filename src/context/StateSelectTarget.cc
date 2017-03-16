@@ -2,7 +2,7 @@
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
 #include <common/Status.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/Map.hh>
 #include <game/PathFinding.hh>
 #include <game/Cell.hh>

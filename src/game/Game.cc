@@ -1,6 +1,6 @@
 #include <game/Game.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <resources/ResourcesManager.hh>
 #include <input/InputProcessor.hh>
 #include <common/Status.hh>

@@ -57,7 +57,7 @@ input/InputProcessor.cc             \
 game/Game.cc                        \
 game/Map.cc                         \
 game/Cell.cc                        \
-game/applications/Battle.cc         \
+game/Battle.cc                      \
 game/units/Unit.cc                  \
 game/units/UnitFactory.cc           \
 game/units/Soldier.cc               \

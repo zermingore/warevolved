@@ -1,5 +1,5 @@
 #include <common/Status.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/units/Unit.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>

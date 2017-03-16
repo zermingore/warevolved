@@ -1,7 +1,7 @@
 #include <interface/menus/MenuAction.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/Status.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <context/State.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
