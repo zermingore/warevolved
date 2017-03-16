@@ -1,7 +1,17 @@
 -*- mode:org -*-
 
 * TODO Roadmap
+** TODO cmp with master (93d04b19bbc050c7729889c03cc02fc73c7b5f84)
+*** DONE InGameMenu was 'brighter' -> why ?
+    CLOSED: [2017-03-16 Do 20:42] MenuEntry::draw() drawing label then sprite
+*** DONE Cursor on selected target was rotating -> restore
+    CLOSED: [2017-03-16 Do 20:38]
+*** TODO auto-resize of the window no longer supported
+
+** TODO Clean this file (rm entries or mv in a TODO.legacy)
+
 ** TODO Merge branches: feature with clean, then clean with master
+
 ** DONE Debug
    CLOSED: [2017-03-15 Mi 20:07]
 *** DONE PathFinding
@@ -173,7 +183,8 @@
    (do not pass through move action)
 ** DONE allow a unit to attack when a target become accessible (after moving)
    CLOSED: [2017-03-03 Fr 07:27]
-** TODO Consider enemy units as uncrossable obstacles
+** DONE Consider enemy units as uncrossable obstacles
+   CLOSED: [2017-03-16 Do 07:30]
 
 * TODO Code Design
 ** DONE [#A] really use Settings class (key repeat delay, ...) should be in it
@@ -192,8 +203,10 @@
 **** TODO Shell Script
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
-** TODO [#A] GLOBAL static class
-** TODO [#A] Clean (truly use C++11-14)
+** DONE [#A] GLOBAL static class
+   CLOSED: [2017-03-16 Do 07:31]
+** DONE [#A] Clean (truly use C++11-14)
+   CLOSED: [2017-03-16 Do 07:31]
 *** TODO use reference
 *** TODO use const +/- whenever possible
 *** TODO use C++11 enum (type / size)
@@ -204,7 +217,8 @@
    CLOSED: [2014-06-22 Sun 10:59]
 ** TODO Hunt dead code
 ** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
-** TODO clean Status class (making a global class ?)
+** DONE clean Status class (making a static class ?)
+   CLOSED: [2017-03-16 Do 07:32]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
@@ -287,7 +301,7 @@
 	  only on simple move
 
 * TODO Sound
-** 3D sound (using OpenAL)
+** TODO 3D sound (using OpenAL)
 
 * TODO Interface
 ** TODO Highlight possible targets when hovering a unit

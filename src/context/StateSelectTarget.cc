@@ -10,6 +10,7 @@
 #include <common/enums/attack_result.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
+#include <graphics/GraphicsEngine.hh>
 
 
 StateSelectTarget::StateSelectTarget()
@@ -33,6 +34,7 @@ StateSelectTarget::StateSelectTarget()
   float y = _targetHighlight->getTexture()->getSize().y;
   using p = graphics::MapGraphicsProperties;
   _targetHighlight->setScale(p::cellWidth()  / x, p::cellHeight() / y);
+  _targetHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
   _holoUnitSprite = _holoUnit->sprite();
@@ -79,12 +81,28 @@ void StateSelectTarget::draw()
 {
   assert(_targets && _targets->size() > 0 && _index_target <= _targets->size());
 
-  _targetHighlightImage->drawAtCell((*_targets)[_index_target]->coords());
   _holoUnit->drawAtCell(_attackLocation);
+
+  // emphasis (scale and rotation) of the cursor over the target
+  static float scale_factor = 1;
+  static unsigned int angle = 0;
+  angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
+  ++angle;
+
+  using p = graphics::MapGraphicsProperties;
+  auto width(p::cellWidth());
+  auto height(p::cellHeight());
+
+  // target cell coordinates
+  auto coords((*_targets)[_index_target]->coords());
+  auto pos_c = coords.c * width  + p::gridOffsetX() + width  / 2;
+  auto pos_l = coords.l * height + p::gridOffsetY() + height / 2;
+  _targetHighlightImage->sprite()->setPosition(pos_c, pos_l);
+
+  _targetHighlight->setRotation(angle);
+
+  graphics::GraphicsEngine::draw(_targetHighlight);
 }
-
-
-// void StateSelectTarget::fetchAttributes() final;
 
 
 void StateSelectTarget::selectPreviousTarget()
