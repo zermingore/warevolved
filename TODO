@@ -1,16 +1,23 @@
 -*- mode:org -*-
 
 * TODO Roadmap
-** TODO cmp with master (93d04b19bbc050c7729889c03cc02fc73c7b5f84)
+** DONE cmp with master (93d04b19bbc050c7729889c03cc02fc73c7b5f84)
+   CLOSED: [2017-03-17 Fr 20:03]
 *** DONE InGameMenu was 'brighter' -> why ?
     CLOSED: [2017-03-16 Do 20:42] MenuEntry::draw() drawing label then sprite
 *** DONE Cursor on selected target was rotating -> restore
     CLOSED: [2017-03-16 Do 20:38]
-*** TODO auto-resize of the window no longer supported
+*** [CLOSED] auto-resize of the window no longer supported
+    start the game in windowed mode, put it in full screen -> display failure
+    (actually, there is the same issue on the master
+    . To solve this one need to pay attention to resize events)
+*** [CLOSED] panels / menu-bar 'handled' (only splitting the screen)
+    not relevant atm
 
 ** TODO Clean this file (rm entries or mv in a TODO.legacy)
 
 ** TODO Merge branches: feature with clean, then clean with master
+
 
 ** DONE Debug
    CLOSED: [2017-03-15 Mi 20:07]
@@ -53,6 +60,11 @@
 ** TODO Cursor (interface) in its thread
 ** DONE Support ~vi-like key mapping (neoi in workman)
    CLOSED: [2017-03-15 Mi 07:38]
+** TODO Find a way to keep track of a file accross branches (for this file)
+   (git sub-modules / git sub-tree ?)
+** TODO Handle external libs (pugixml) in submodules ?
+** TODO core/Context != context/*
+   (as core/Context handles only graphic properties, move in graphics ?)
 
 
 * old roadmap
@@ -348,6 +360,9 @@
 ** TODO Main menu
 
 * TODO Tools
+** TODO Events logger
+*** TODO Record every key pressed + timestamp (since the game was launched)
+*** TODO Replay recorded key logging
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
@@ -369,6 +384,7 @@
    Debug::assert(state, MODE__MENU)
    -> test if state equals to MODE__MENU and prints an error if not
    should use assert (state == MODE__MENU)
+** TODO Own assert with timestamp ?
 
 * TODO Bugs / Features
 ** DONE Menu selection up / down inverted
