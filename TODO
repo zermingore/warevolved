@@ -1,267 +1,60 @@
 -*- mode:org -*-
+#+OPTIONS: ^:nil
+
 
 * TODO Roadmap
-** DONE cmp with master (93d04b19bbc050c7729889c03cc02fc73c7b5f84)
-   CLOSED: [2017-03-17 Fr 20:03]
-*** DONE InGameMenu was 'brighter' -> why ?
-    CLOSED: [2017-03-16 Do 20:42] MenuEntry::draw() drawing label then sprite
-*** DONE Cursor on selected target was rotating -> restore
-    CLOSED: [2017-03-16 Do 20:38]
-*** [CLOSED] auto-resize of the window no longer supported
-    start the game in windowed mode, put it in full screen -> display failure
-    (actually, there is the same issue on the master
-    . To solve this one need to pay attention to resize events)
-*** [CLOSED] panels / menu-bar 'handled' (only splitting the screen)
-    not relevant atm
-
 ** TODO Clean this file (rm entries or mv in a TODO.legacy)
-
 ** TODO Merge branches: feature with clean, then clean with master
 
-
-** DONE Debug
-   CLOSED: [2017-03-15 Mi 20:07]
-*** DONE PathFinding
-    CLOSED: [2017-03-15 Mi 20:07]
-**** DONE Do not allow to attack while over a unit
-     CLOSED: [2017-03-15 Mi 20:07]
-**** DONE Do not allow to cross enemy cells
-     CLOSED: [2017-03-15 Mi 19:53] (was not implemented)
-*** DONE KeyManager
-    CLOSED: [2017-03-15 Mi 07:30]
-**** DONE [#B] when another key binding is used, the event seems to be generated 2 times
-     CLOSED: [2017-03-15 Mi 07:30]
-     Deactivated arrows, leaving other keys (neio) to move the cursor, the bug pesists
-     Inserting in the _active_input array only if not already present, same issue
-     The key is inserted two times when using 'meio' keys (but only one time when using arrows)
-     Using now a std::set (unique values)
-     populate events is called 1 time using the arrows, 2 otherwise
-     maped keyboard keys to a fake e_key -> same issue
-     same behavior with other keys ('system' [F7, space, ...] Vs 'alpha')
-     same issue with unmapped keys
-     2 events for pressed, 1 for release (should be 1, 1)
-     Found the 'feature': catching any events (released, pressed, focus, ...)
-       but for alpha characters the extra 'TextEntered' event is generated
-     Solution: Treat only 'KeyPressed' events (and 'Closed' for ending the game)
-** DONE Clean
-   CLOSED: [2017-03-16 Do 07:27]
-*** DONE Remove game/applications folder
-    CLOSED: [2017-03-16 Do 07:27]
-
 * TODO experimental
-** DONE ResourcesManager
-   CLOSED: [2017-02-01 Mi 19:43]
-*** DONE _images: std::map<name, filename>
-    CLOSED: [2017-02-01 Mi 07:39]
-*** DONE getImage: return a newly allocated Image
-    CLOSED: [2017-02-01 Mi 07:39]
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
 ** TODO Cursor (interface) in its thread
-** DONE Support ~vi-like key mapping (neoi in workman)
-   CLOSED: [2017-03-15 Mi 07:38]
 ** TODO Find a way to keep track of a file accross branches (for this file)
    (git sub-modules / git sub-tree ?)
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO core/Context != context/*
    (as core/Context handles only graphic properties, move in graphics ?)
 
-
-* old roadmap
-** DONE clean
-   CLOSED: [2017-03-13 Mo 20:15]
-*** DONE Image / Font in namespace resources
-   CLOSED: [2017-02-02 Do 07:24]
-*** DONE Move Debug in its own folder
-   CLOSED: [2017-02-02 Do 07:50]
-*** DONE ResourcesManager enum -> enum class
-   CLOSED: [2017-02-02 Do 07:31]
-*** DONE MapGraphicsProperties
-   CLOSED: [2017-02-15 Mi 07:38]
-   Make this class static ?
-   Integrate in GraphicsEngine ?
-*** DONE Set trivial getter return type to auto
-   CLOSED: [2017-03-10 Fr 07:38]
-*** DONE Remove Application abstract class
-    CLOSED: [2017-03-10 Fr 19:46]
-*** DONE Remove game/items
-    CLOSED: [2017-03-10 Fr 19:50] (only local garbage)
-*** DONE Review KeyManager
-    CLOSED: [2017-03-13 Mo 20:10] (cleaned, properly using e_key)
-** DONE Feature
-   CLOSED: [2017-03-08 Mi 18:35]
-*** DONE Check full screen still working
-    CLOSED: [2017-03-08 Mi 18:35]
-** DONE Clean
-   CLOSED: [2017-03-08 Mi 07:41]
-*** DONE Coord type: x,y <- c,l
-    CLOSED: [2017-03-08 Mi 07:41]
-*** DONE Add doxygen comments for every headers
-    CLOSED: [2017-03-07 Di 20:09]
-** DONE PathFinding
-   CLOSED: [2017-03-06 Mo 19:38]
-*** DONE Update for every move
-    CLOSED: [2017-03-03 Fr 07:26]
-*** DONE Invoke action menu -> should still be displayed
-    CLOSED: [2017-03-03 Fr 07:45]
-*** DONE Clean (multiple functions seems to do the same thing [highlightCells, getTargets])
-    CLOSED: [2017-03-06 Mo 07:35]
-** DONE dead code
-   CLOSED: [2017-03-07 Di 20:09]
-*** DONE InterfaceSettings ?
-    CLOSED: [2017-03-07 Di 20:09] (in use: graphical attributes getter in interface)
-*** DONE MenuMap ?
-    CLOSED: [2017-03-07 Di 20:03] (in use: menu invoked on the map, with next turn)
-*** DONE KeyManager::InputKey
-    CLOSED: [2017-03-07 Di 19:58] (removed it, removed also timers and switches)
-*** DONE macro.hh
-    CLOSED: [2017-03-07 Di 20:05] (removed it, unused)
-** DONE Free at exit
-   CLOSED: [2016-12-21 Mi 19:58]
-** DONE Map graphic update
-   CLOSED: [2016-10-24 Mo 21:19]
-** DONE Hide cursor while playing unit
-   CLOSED: [2017-02-06 Mo 20:04]
-** DONE Unit played
-   CLOSED: [2017-02-07 Di 19:47]
-** DONE Next turn: players switch
-   CLOSED: [2017-02-07 Di 19:47]
-** DONE While moving a unit, lock selection in the map
-   CLOSED: [2017-02-07 Di 07:27]
-** DONE A player must be able to move only its own Units
-   CLOSED: [2017-02-08 Mi 19:52]
-** DONE Implement the State daughter classes
-   CLOSED: [2016-10-19 Mi 07:17]
-** DONE Handle real events in the EventManager
-   CLOSED: [2016-10-19 Mi 07:17]
-** DONE Merge with clean
-   CLOSED: [2016-10-19 Mi 07:17]
-** DONE Multiturn attacks
-   CLOSED: [2014-07-01 Tue 20:17]
-** DONE Units: random names
-   CLOSED: [2014-06-29 Sun 17:04]
-   (tmp: use a filled vector and a static index when creating a Unit)
-** DONE fill in game menu entries (make them clickable)
-   CLOSED: [2016-12-22 Do 07:28]
-** DONE limit the cursor to the map
-   CLOSED: [2016-12-22 Do 07:28]
-** DONE bugfix
-   CLOSED: [2017-03-02 Do 19:07]
-*** DONE cancel path finding / action menu should redraw the path
-    CLOSED: [2017-03-02 Do 07:44]
-*** DONE highlight target: targets at range if attack range considered
-    CLOSED: [2017-03-02 Do 19:07]
-*** DONE move, cancel, move restart the move from the last cancel positon
-    CLOSED: [2017-03-02 Do 07:44]
-*** DONE Target selection does not allow to attack expected targets
-    CLOSED: [2017-03-03 Fr 18:31]
-** DONE Attack management
-   CLOSED: [2017-02-28 Di 18:33]
-*** DONE Handle attacker death
-    CLOSED: [2017-02-27 Mo 08:00]
-*** DONE Allow to attack only targets in range of the attacker
-    CLOSED: [2017-02-28 Di 08:03]
-*** DONE Move the cursor where the attack happened (check StateSelection && State pop)
-    CLOSED: [2017-02-28 Di 18:33]
-** DONE pathfinding re-integration
-   CLOSED: [2017-02-15 Mi 20:22]
-** DONE While moving a unit, fade or hide original unit sprite
-   CLOSED: [2017-02-13 Mo 19:25]
-** DONE Disallow move on unit
-   CLOSED: [2017-02-09 Do 19:07]
-
-
-* DONE Git
-  CLOSED: [2013-07-24 Wed 07:10]
-** DONE Merge ResourcesManager branch
-   CLOSED: [2013-06-07 Fri 17:58]
-** DONE Merge master & test (switch to std::shared_ptr)
-   CLOSED: [2014-06-22 Sun 13:50]
-
 * TODO Input
-** DONE make the cursor move
-   CLOSED: [2013-04-17 Wed 16:41]
 ** TODO use the mouse to make it move
-** DONE selection, pop panel / bar: no key repeat allowed
-   CLOSED: [2013-04-21 Sun 21:56]
-   set a boolean when pressed OR released
 
 * TODO Game Features
-** DONE [#A] Selection (drag and drop units)
-   CLOSED: [2013-08-06 Tue 22:46]
-** DONE path-finding
-   CLOSED: [2014-06-18 Wed 00:10] (using a flood-fill)
 ** TODO Allow direct attack when a target is already at range
    (do not pass through move action)
-** DONE allow a unit to attack when a target become accessible (after moving)
-   CLOSED: [2017-03-03 Fr 07:27]
-** DONE Consider enemy units as uncrossable obstacles
-   CLOSED: [2017-03-16 Do 07:30]
 
 * TODO Code Design
-** DONE [#A] really use Settings class (key repeat delay, ...) should be in it
-   CLOSED: [2013-05-07 Tue 13:08]
 ** TODO make an Event Manager test with boost signals (emulate callbacks)
-** DONE Resources Manager
-   CLOSED: [2013-05-07 Tue 13:08]
 ** TODO use size_t
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
-** DONE use Coords / Color / ... (or an int: high / low)
-   CLOSED: [2013-08-06 Tue 10:44]
-   not SFML dependant
 ** TODO auto-generate XML
 *** TODO OS-dependant in script language
 **** TODO Shell Script
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
-** DONE [#A] GLOBAL static class
-   CLOSED: [2017-03-16 Do 07:31]
-** DONE [#A] Clean (truly use C++11-14)
-   CLOSED: [2017-03-16 Do 07:31]
 *** TODO use reference
 *** TODO use const +/- whenever possible
 *** TODO use C++11 enum (type / size)
 ** TODO follow the C++ rule of 5
-** DONE remove non needed raw pointers
-   CLOSED: [2014-06-20 Fri 14:30]
-** DONE remove non needed new (use std::make_shared)
-   CLOSED: [2014-06-22 Sun 10:59]
 ** TODO Hunt dead code
 ** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
-** DONE clean Status class (making a static class ?)
-   CLOSED: [2017-03-16 Do 07:32]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
    could use typedef std::shared_ptr SP
-** DONE is inline still relevant in C++14 ?
-   CLOSED: [2016-02-16 Di 19:56]
 
 * TODO Graphics
-** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
-   CLOSED: [2013-04-18 Thu 14:47]
-   for now: rotation && re-sizing (linked together)
 ** TODO implement scrolling
 ** TODO Apply a background to the main window
-** DONE selection menu
-   CLOSED: [2013-04-21 Sun 21:50]
-*** DONE add texture to buttons
-	 CLOSED: [2013-04-21 Sun 21:50]
-*** DONE add text to buttons
-	 CLOSED: [2013-04-21 Sun 21:50]
 ** TODO Multiple graphics::Image share the same sprite
    -> require to re-set the sprite position, rotation, ... before drawing
    (is it an issue)
 
 * TODO Resources
 ** TODO Sprites
-*** DONE soldiers filters
-	 CLOSED: [2013-08-14 Wed 11:19]
-**** DONE attackable
-	 CLOSED: [2013-08-14 Wed 11:19]
-**** DONE played
-	 CLOSED: [2013-08-14 Wed 11:19]
+*** TODO Soldiers team
+*** TODO Jeep
 
 * TODO Gameplay
 ** TODO Meteo
@@ -317,9 +110,6 @@
 
 * TODO Interface
 ** TODO Highlight possible targets when hovering a unit
-** DONE draw selection menu
-   CLOSED: [2013-04-21 Sun 11:17]
-   position = f(selectedCell)
 ** TODO Informations Panel (cell type, ...)
 ** TODO Menu Bar
 ** TODO Configuration file
@@ -327,8 +117,6 @@
 ** TODO select between satellite or schematic view
 ** TODO unit selection -> 'flashing lights'
 ** TODO center text in in-game menu entries
-** DONE integrate Cursor
-   CLOSED: [2013-07-27 Sat 07:59]
 ** TODO Display last killed unit list
 
 * TODO Network
@@ -336,11 +124,11 @@
 ** TODO multi-players
 
 * TODO Multi-Platforms
-** DONE Linux (current ref: Arch Linux / Ubuntu)
-   CLOSED: [2014-06-20 Fri 14:29]
 ** TODO Windows
 ** TODO Unix (BSD)
 ** TODO Mac OS
+** TODO Phone ?
+*** TODO Android
 
 * TODO Graphic Engine
 ** TODO Units filter sprite
@@ -355,8 +143,6 @@
    1 theme -> 1 load, 1 free
 
 * TODO Menu
-** DONE Stack implementation
-   CLOSED: [2013-07-24 Wed 07:06]
 ** TODO Main menu
 
 * TODO Tools
@@ -368,103 +154,20 @@
 *** TODO auto-compile / launch for all build rules
 *** TODO auto generate documentation
 ** TODO non-regression tests
-*** TODO game scripts
-** [CLOSED] helper
-   header guards with same name
-   relevant ?
-** DONE generate Doxygen Doc
-   CLOSED: [2013-08-14 Wed 12:31]
+*** TODO game scripts (need to be able to use pre-recorded input)
 ** TODO auto resources XML generator
 ** TODO enum inspector
    print an enumeration name (token) from its value
-** [CLOSED] source file: auto fetch and insert commit id last modif
-   Irrelevant: pollute files, use git instead
-** [CLOSED] Debug::assert check only on debug if a condition is satisfied
-   CLOSED: [2017-01-18 Mi 07:33]
-   Debug::assert(state, MODE__MENU)
-   -> test if state equals to MODE__MENU and prints an error if not
-   should use assert (state == MODE__MENU)
 ** TODO Own assert with timestamp ?
 
 * TODO Bugs / Features
-** DONE Menu selection up / down inverted
-   CLOSED: [2017-02-27 Mo 08:07]
-** DONE InterfaceElements are never removed
-   CLOSED: [2016-11-15 Di 07:37]
-** DONE The Cursor can exit the map (border right / bottom not effective)
-   CLOSED: [2016-12-22 Do 07:30]
-** TODO Moving Unit
-   sometimes a unt can move too far (2 keys simultaneously pressed ?)
-** TODO Fix cursor size trouble
-   was too big
-   (running for a long time ?)
-   overflow trouble ?
-   unseen for a long time (maybee fixed ?)
-** [CLOSED] In-game menu: Escape key <> Cancel entry
-** [CLOSED: old version?] Multiple keys maintained for more than a sec
-   probably a timer related
-   confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
-** DONE Attack a target without moving: unit deletion
-   CLOSED: [2014-07-01 Tue 20:19]
-   was due to a move failure
-** DONE Selecct target mode
-   CLOSED: [2014-06-29 Sun 12:23]
-   Index value: tends to have more than nb entries possible values
-   -> tend to 'browse' a cell two times
-   targets array is not clear each time we select a unit (it should be)
-** DONE In-game menu: Escape key <> Cancel entry
-   CLOSED: [2014-06-29 Sun 12:08]
-   same comportement for Escape key and Cancel entry
-   (if cancel should unstack everything, it's not a bug)
-** DONE Floating Point Exception Failure
-   CLOSED: [2014-06-27 Fri 22:48]
-   (bug while building menu -> 0 entries, failed on modulo 0)
-** DONE [#A] Fix in-game menu pop-up and location
-   CLOSED: [2013-07-25 Thu 17:20]
-** DONE Font Cleanup segfault (launched from a terminal)
-   CLOSED: [2014-06-04 Wed 08:40]
-** DONE Panel (F2) malfunction
-   CLOSED: [2014-06-21 Sat 21:04]
-   only in fullscreen mode
-   due to an overflow in _panelX value
-   Fixed using another default offset value in full screen
-   Fixed another linked bug: left and right panel sizes weren't the same
-   -> applied grid thickness twice
-** DONE Font load resource segfault
-   CLOSED: [2014-06-04 Wed 08:40]
-   without valgrind
-   multi-folder in xml file sections
-** DONE [#B] Add Doxygen Comments in headers
-   CLOSED: [2013-04-19 Fri 16:33]
-   not perfect but does the job for now
-** DONE [#B] Allow Manual Key Repetition
-   CLOSED: [2013-04-19 Fri 01:32]
-** DONE [#A] More than one key pressed and reset timer trouble
-   CLOSED: [2013-04-19 Fri 01:33]
-** DONE map initialisation failure
-   CLOSED: [2013-04-19 Fri 16:33]
-   was a rendering zone room trouble
 ** TODO Memory Leaks / Errors
-*** DONE Definitely Lost
-    CLOSED: [2014-06-20 Fri 14:27]
-*** DONE Read errors
-    CLOSED: [2014-06-20 Fri 14:27]
 *** TODO Hide SFML "leaks"
     (current ref: Still reachable: 41,364 bytes in 425 blocks)
 ** TODO segfault while quitting the game, moving a unit
 
-* TODO Suppress Warnings
-** DONE incomplete Ctors initialisation
-   CLOSED: [2014-06-20 Fri 14:28]
-
 * TODO [#C] Optimization
 -> Profile <-
-** DONE retreive a Resource
-   CLOSED: [2013-07-30 Tue 07:55]
-   benchmark between
-     manually store an ID, : factor 1
-     use a std::map <const char*, unsigned int> : factor 2
-	 use a std::map <std::string, unsigned int> : factor 4
 ** TODO improve InGameMenu stack usage
    Do *NOT* rebuild all entries each frame...
 ** TODO Sprites
