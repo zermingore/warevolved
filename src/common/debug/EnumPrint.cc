@@ -11,12 +11,12 @@ void printState(e_state state)
       PRINTF("STATE: NONE");
       break;
 
-    case e_state::MENU:
-      PRINTF("STATE: MENU");
-      break;
-
     case e_state::PLAYING:
       PRINTF("STATE: PLAYING");
+      break;
+
+    case e_state::MAP_MENU:
+      PRINTF("STATE: MAP_MENU");
       break;
 
     case e_state::SELECTION_UNIT:
@@ -31,12 +31,8 @@ void printState(e_state state)
       PRINTF("STATE: ACTION_MENU");
       break;
 
-    case e_state::COMMANDING_UNIT:
-      PRINTF("STATE: COMMANDING_UNIT");
-      break;
-
-    case e_state::SELECTING_TARGET:
-      PRINTF("STATE: SELECTING_TARGET");
+    case e_state::SELECT_TARGET:
+      PRINTF("STATE: SELECT_TARGET");
       break;
 
     default:

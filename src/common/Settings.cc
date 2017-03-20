@@ -9,11 +9,11 @@ bool Settings::_fullScreen;
 unsigned int Settings::_keyRepeatDelay;
 
 
-void Settings::initialize(unsigned int depth,
-                          unsigned int stencil,
-                          unsigned int antiAliasing)
+void Settings::initialize(const unsigned int depth,
+                          const unsigned int stencil,
+                          const unsigned int antiAliasing)
 {
   _depth = depth;
   _stencil = stencil;
-  _antiAliasing= antiAliasing;
+  _antiAliasing = antiAliasing;
 }

@@ -29,14 +29,15 @@ pugixml/pugixml.cpp                 \
 core/Context.cc                     \
 \
 graphics/GraphicsEngine.cc          \
+graphics/MapGraphicsProperties.cc   \
 \
 resources/ResourcesManager.cc       \
 resources/Resource.cc               \
 resources/Image.cc                  \
 resources/Font.cc                   \
 \
-common/debug/Debug.cc               \
-common/debug/OSD.cc                 \
+debug/Debug.cc                      \
+debug/OSD.cc                        \
 common/debug/EnumPrint.cc           \
 \
 common/System.cc                    \
@@ -48,6 +49,7 @@ context/StateFactory.cc             \
 context/StatePlaying.cc             \
 context/StateMenu.cc                \
 context/StateMovingUnit.cc          \
+context/StateSelectTarget.cc        \
 \
 input/KeyManager.cc                 \
 input/EventManager.cc               \
@@ -56,17 +58,19 @@ input/InputProcessor.cc             \
 game/Game.cc                        \
 game/Map.cc                         \
 game/Cell.cc                        \
-game/applications/Battle.cc         \
+game/Battle.cc                      \
 game/units/Unit.cc                  \
+game/units/UnitFactory.cc           \
 game/units/Soldier.cc               \
 game/Player.cc                      \
+game/PathFinding.cc                 \
 \
 interface/Interface.cc              \
 interface/InterfaceSettings.cc      \
+interface/InterfaceElement.cc       \
 interface/Cursor.cc                 \
 interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc        \
-interface/InterfaceElement.cc       \
-interface/menus/InGameMenu.cc
-
-# game/PathFinding.cc
+interface/menus/InGameMenu.cc       \
+interface/menus/MenuMap.cc          \
+interface/menus/MenuAction.cc

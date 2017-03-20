@@ -22,7 +22,7 @@ enum class e_path_shape;
 
 /**
  * \class PathFinding
- * \brief Computes and display path finded.
+ * \brief Computes and display found path.
  *
  * Display reachable cells and possible targets for the selected unit.
  * Display user's path input and check it's validity.
@@ -31,66 +31,80 @@ class PathFinding
 {
 public:
   /**
-   * \brief removed default Constructor (as we need a map)
+   * \brief _map setter
    */
-  PathFinding() = delete;
-
-  /**
-   * \brief constructor
-   * \param map map to execute the path-finding on
-   */
-  PathFinding(std::shared_ptr<Map> map);
-
-  /**
-   * \brief Destructor
-   */
-  ~PathFinding() { deleteImagesVector(); }
+  static void setMap(std::shared_ptr<Map> map) { _map = map; }
 
   /**
    * \brief sets the origin of the path
    *   also updates _current position
    */
-  void setOrigin(Coords coords, std::shared_ptr<Unit> unit);
+  static void setOrigin(Coords coords, std::shared_ptr<Unit> unit);
+
+  /**
+   * \brief _enemyPositions getter
+   * \return a pointer on the vector of enemy positions
+   */
+  static std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getEnemyPositions() {
+    return std::make_shared<std::vector<std::shared_ptr<Cell>>> (_enemyPositions);
+  }
 
   /**
    * \brief allowed move notifier
+   * \param direction direction towards the next cell
    * \return true if the move is allowed
+   * \note The map border checking must be done outside
    */
-  bool allowedMove()  /// \todo send direction request
-  { return _currentLength < _maxLength; }
+  static bool allowedMove(e_direction direction);
 
   /**
    * \brief adds the next element to the current path
-   * \param direction of the element
+   * \param direction direction of the element
    */
-  void addNextDirection(e_direction direction);
+  static void addNextDirection(e_direction direction);
 
   /**
    * \brief uses _graphicPath to draw the current path
    */
-  void drawPath();
+  static void drawPath();
 
   /**
    * \brief clears current path
    * calls deleteImagesVector, freeing images
    */
-  void clearPath();
+  static void clearPath();
 
   /**
    * \brief hides crossable cells
    */
-  void hideAllowedPath() const;
+  static void hideAllowedPath();
 
   /**
    * \brief current Unit (_unit) getter
    * \return _unit
    */
-  std::shared_ptr<Unit> unit() { return _unit; }
+  auto unit() { return _unit; }
 
   /**
    * \brief releases (reset) _unit
    */
-  void removeUnit() { _unit.reset(); }
+  static void removeUnit() { _unit.reset(); }
+
+  /**
+   * \brief Sets cells highlight as follow:
+   * - Highlight reachable cells (at moving range)
+   * - Highlight enemy units at shooting range
+   * - Highlight friendly units at moving range
+   */
+  static void highlightCells();
+
+  /**
+   * \brief compute and return list of available targets
+   * \param unit Unit used as attacker
+   * \param cell coordinates from where to get the targets
+   */
+  static std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
+  getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell);
 
 
 private:
@@ -99,24 +113,24 @@ private:
    * does the rotation if needed
    * \return the image matching e_path_shape
    */
-  graphics::Image getImage(size_t index);
+  static std::shared_ptr<resources::Image> getImage(size_t index);
 
   /**
    * \brief builds Images* Vector (_images)
    */
-  void buildImageVector();  /// \todo use (cache management)
+  static void buildImageVector();  /// \todo use (cache management)
 
   /**
    * \brief clears _images Vector
    */
-  void deleteImagesVector() { _images.clear(); }
+  static void deleteImagesVector() { _images.clear(); }
 
   /**
    * \brief updates current cell coordinates
    *   according to \param direction
    * \param direction current move direction
    */
-  void updateCurrentCell(e_direction direction);
+  static void updateCurrentCell(e_direction direction);
 
   /**
    * \brief returns shape matching _direction (index parameter)
@@ -124,31 +138,40 @@ private:
    * \return shape of _direction[\param index]
    *   according to the next direction (for smooth corners).
    */
-  e_path_shape getShape(size_t index);
+  static e_path_shape getShape(size_t index);
+
 
   /**
-   * \brief Highlights cells which selected unit (_unit) can cross.
-   * (uses a Flood Fill algorithm)
+   * \brief returns the Manhattan distance between two cells
+   * \param a first cell
+   * \param b second cell
+   * \return the distance between the two cells
    */
-  void showAllowedPath();
+  static size_t manhattan(Coords a, Coords b);
 
-  /// Sets highlight and highlight color for reachable cells.
-  void highlightCells();
 
   /// \todo make a relation map - path-finding
-  std::shared_ptr<Map> _map; ///< Map of the battle.
-  std::shared_ptr<Unit> _unit; ///< The selected Unit.
-  Coords _origin; ///< Origin cell coordinates.
-  Coords _current; ///< Current cell coordinates.
-  int _maxLength; ///< Path max length.
-  int _currentLength; ///< Path current length.
+  static std::shared_ptr<Map> _map;   ///< Map of the battle.
+  static std::shared_ptr<Unit> _unit; ///< The selected Unit.
+
+  static Coords _origin;  ///< Origin cell coordinates.
+  static Coords _current; ///< Current cell coordinates.
+
+  static size_t _maxLength;     ///< Path max length.
+  static size_t _currentLength; ///< Path current length.
 
   ///< List of path directions filled through addNextDirection.
-  std::vector<e_direction> _directions;
-  std::vector<graphics::Image> _images; ///< Images of the path vector.
+  static std::vector<e_direction> _directions;
+
+  ///< Images of the path vector.
+  static std::vector<std::shared_ptr<resources::Image>> _images;
 
   ///< list of reachable cells for the selected unit
-  std::vector<std::shared_ptr<Cell>> _reachableCells;
+  static std::vector<std::shared_ptr<Cell>> _reachableCells;
+
+  ///< list of cells occupied by an enemy unit
+  static std::vector<std::shared_ptr<Cell>> _enemyPositions;
 };
+
 
 #endif /* !PATHFINDING_HH_ */

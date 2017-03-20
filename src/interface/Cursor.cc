@@ -7,6 +7,7 @@
 
 #include <interface/Cursor.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 namespace interface {
@@ -17,7 +18,7 @@ Cursor::Cursor()
 }
 
 
-void Cursor::setLimits(size_t nb_columns, size_t nb_lines)
+void Cursor::setLimits(const size_t nb_columns, const size_t nb_lines)
 {
   _nbColumns = nb_columns;
   _nbLines = nb_lines;
@@ -27,65 +28,66 @@ void Cursor::setLimits(size_t nb_columns, size_t nb_lines)
 // _____________________________ Cursor Motion _____________________________ //
 bool Cursor::moveUp()
 {
-  auto old(_coords.y);
-  _coords.y = std::min(_coords.y - 1, _coords.y);
+  auto old(_coords.l);
+  _coords.l = std::min(_coords.l - 1, _coords.l);
 
-  return (old != _coords.y);
+  return (old != _coords.l);
 }
 
 bool Cursor::moveDown()
 {
-  auto old(_coords.y);
-  _coords.y = std::min(_coords.y + 1, _nbLines - 1);
+  auto old(_coords.l);
+  _coords.l = std::min(_coords.l + 1, _nbLines - 1);
 
-  return (old != _coords.y);
+  return (old != _coords.l);
 }
 
 bool Cursor::moveLeft()
 {
-  auto old(_coords.x);
-  _coords.x = std::min(_coords.x, _coords.x - 1);
+  auto old(_coords.c);
+  _coords.c = std::min(_coords.c, _coords.c - 1);
 
-  return (old != _coords.x);
+  return (old != _coords.c);
 }
 
 bool Cursor::moveRight()
 {
-  auto old(_coords.x);
-  _coords.x = std::min(_coords.x + 1, _nbColumns - 1);
+  auto old(_coords.c);
+  _coords.c = std::min(_coords.c + 1, _nbColumns - 1);
 
-  return (old != _coords.x);
+  return (old != _coords.c);
 }
 
 
-void Cursor::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
+void Cursor::update()
 {
-  auto width(properties->cellWidth());
-  auto height(properties->cellHeight());
+  using p = graphics::MapGraphicsProperties;
 
-  _position.x = _coords.x * width + properties->gridOffsetX() + width / 2;
-  _position.y = _coords.y * height + properties->gridOffsetY() + height / 2;
-  _image.sprite()->setPosition(_position.x, _position.y);
+  auto width(p::cellWidth());
+  auto height(p::cellHeight());
+
+  _position.c = _coords.c * width +  p::gridOffsetX() + width / 2;
+  _position.l = _coords.l * height + p::gridOffsetY() + height / 2;
+  _image->sprite()->setPosition(_position.c, _position.l);
 
   static float scale_factor = 1;
   static unsigned int angle = 0;
   angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
-  _image.setScale(scale_factor, scale_factor);
+  _image->setScale(scale_factor, scale_factor);
   ++angle;
 
 
   // The origin of the sprite is the middle of the cell
-  _image.sprite()->setOrigin(width / 2, height / 2);
-  _image.sprite()->setRotation(angle);
-  _image.setScale(scale_factor, scale_factor);
+  _image->sprite()->setOrigin(width / 2, height / 2);
+  _image->sprite()->setRotation(angle);
+  _image->setScale(scale_factor, scale_factor);
 
-  _image.sprite()->setColor(_color);
+  _image->sprite()->setColor(_color);
 }
 
 
-void Cursor::draw()
-{
-  graphics::GraphicsEngine::draw(_image.sprite());
+void Cursor::draw() {
+  graphics::GraphicsEngine::draw(_image->sprite());
 }
 
 

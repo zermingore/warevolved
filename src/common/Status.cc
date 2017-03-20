@@ -1,5 +1,5 @@
 #include <common/Status.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/Player.hh>
 #include <context/StateFactory.hh>
 #include <input/InputProcessor.hh>
@@ -23,6 +23,11 @@ Status::~Status()
 }
 
 
+void Status::blockInputs(const size_t duration) {
+  _inputProcessor->keyManager()->blockInputs(duration);
+}
+
+
 e_state Status::state()
 {
   assert(!_states.empty() && "_states stack is empty, exiting...");
@@ -39,31 +44,29 @@ std::shared_ptr<State> Status::currentState()
 }
 
 
-void Status::pushState(e_state state)
+void Status::pushState(const e_state state)
 {
-  _states.push({state, StateFactory::createState(state)});
+  // suspend the current State
+  if (!_states.empty()) {
+    _states.top().second->suspend();
+  }
 
-  PRINTF(">> new State:", (int) state);
+  // push a new State
+  auto new_state(StateFactory::createState(state));
+  _states.push({state, new_state});
 
   // Force ignoring current active inputs
-  _inputProcessor->keyManager()->blockInputs();
+  Status::blockInputs();
 }
 
 
 void Status::popCurrentState()
 {
+  assert(!_states.empty() && "No State found trying to pop States");
   _states.pop();
 
   // Force ignoring current active inputs
-  _inputProcessor->keyManager()->blockInputs();
-
-
-  if (!_states.empty()) {
-    PRINTF("<< new State:", (int) _states.top().first);
-  }
-  else {
-    PRINTF("<< empty states stack");
-  }
+  Status::blockInputs();
 }
 
 
@@ -71,12 +74,25 @@ void Status::clearStates()
 {
   assert(!_states.empty() && "clearStates called with empty stack");
 
-  while (_states.top().first != e_state::PLAYING)
-  {
-    _states.pop();
-    assert(!_states.empty() && "clearStates stack did not contain expected state");
+  while (_states.top().first != e_state::PLAYING) {
+    popCurrentState();
   }
 }
+
+
+void Status::nextPlayer()
+{
+  Status::blockInputs();
+
+  // Clearing states, totaly
+  _battle->nextPlayer();
+  clearStates();
+  popCurrentState();
+
+  /// \todo manage IA case: do not push a new state playing
+  pushState(e_state::PLAYING);
+}
+
 
 
 std::shared_ptr<Player> Status::player() {

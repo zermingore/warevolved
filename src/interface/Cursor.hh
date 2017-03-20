@@ -32,7 +32,7 @@ public:
    * \param nb_columns number of columns in the map
    * \param nb_lines number of lines in the map
    */
-  void setLimits(size_t nb_columns, size_t nb_lines);
+  void setLimits(const size_t nb_columns, const size_t nb_lines);
 
 
   // ____________________________ Cursor Motion ____________________________ //
@@ -65,7 +65,7 @@ public:
    * \brief Updates the graphics properties of the cursor
    * \param properties map graphics properties to use
    */
-  void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
+  void update();
 
 
   void draw() final;

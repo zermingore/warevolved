@@ -1,8 +1,7 @@
-/*
- * common/Debug.hh
- *
- *  Created on: Jul 23, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date Jul 23, 2013
+ * \author Zermingore
  */
 
 #ifndef DEBUG_HH_
@@ -23,7 +22,7 @@
 #   define LOG_FILENAME_OLD "LOG_old.txt"
 # endif
 
-
+/// \def Print colors
 # ifdef __unix__
 #   define COLOR_NORMAL  "\x1B[0m"
 #   define COLOR_RED     "\x1B[31m"
@@ -44,10 +43,12 @@
 #   define COLOR_WHITE   ""
 # endif
 
+/// \def Messages specific colors
 # define COLOR_ERROR   COLOR_RED
 # define COLOR_WARNING COLOR_YELLOW
 # define COLOR_SUCCESS COLOR_GREEN
 # define COLOR_VERBOSE COLOR_BLUE
+# define COLOR_NOTICE  COLOR_CYAN
 
 
 /**
@@ -75,7 +76,8 @@
 # endif
 
 
-# define ERROR Debug::error
+# define ERROR  Debug::error
+# define NOTICE Debug::notice
 
 /// \todo in release, printf should print in a log
 # ifdef DEBUG
@@ -87,11 +89,15 @@
 
 
 
+/**
+ * \class Debug
+ * \brief Regroups handy methods to help debugging (print, log)
+ */
 class Debug
 {
 public:
   template<typename T, typename... Tail>
-  static void logPrintf(T head, Tail... tail)
+  static void logPrintf(const T head, const Tail... tail)
   {
     std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
 
@@ -105,8 +111,13 @@ public:
     printf(head, tail...);
   }
 
+  /**
+   * \brief Print the given element into the log file
+   * \parm head element to print in the log
+   * \note head must override the << stream operator
+   */
   template<typename T>
-  static void printLog(T head)
+  static void printLog(const T head)
   {
     *_log << " " << head;
   }
@@ -118,7 +129,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void error(T head, Tail... tail)
+  static void error(const T head, const Tail... tail)
   {
     time_t now = time(0);
 	struct tm *full_date = localtime(&now);
@@ -133,12 +144,24 @@ public:
   }
 
   /**
+   * \brief print as error given parameters on standard output
+   * \param head: element to print right now
+   * \param tail eventually, rest of given arguments list
+   */
+  template<typename T, typename... Tail>
+  static void notice(const T head, const Tail... tail)
+  {
+	std::cout << COLOR_NOTICE;
+	printf(head, tail...);
+  }
+
+  /**
    * \brief print given parameters on standard output
    * \param head: element to print right now
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void printf(T head, Tail... tail)
+  static void printf(const T head, const Tail... tail)
   {
 	std::cout << head << " ";
 	printf(tail...);
@@ -146,14 +169,19 @@ public:
 
 
 private:
+  /**
+   * \brief prints every argument to the console and to the log
+   * \param head First argument
+   * \param tail Eventual following arguments
+   */
   template<typename T, typename... Tail>
-  static void bodylogprintf(T head, Tail... tail)
+  static void bodylogprintf(const T head, const Tail... tail)
   {
 	printLog(head);
 	bodylogprintf(tail...);
   }
 
-  /// execute after the last argument
+  /// Execute after the last argument
   static void bodylogprintf();
 
   /// appends a new line after last parameter

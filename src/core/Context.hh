@@ -1,17 +1,20 @@
-/*
- * core/Context.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
  */
 
-#ifndef CONTEXT_HH_
-# define CONTEXT_HH_
+#ifndef CORE_CONTEXT_HH_
+# define CORE_CONTEXT_HH_
 
 # include <memory>
 
 class System;
 
+/**
+ * \class Context
+ * \brief Describes a graphical context
+ */
 class Context
 {
 public:
@@ -20,10 +23,15 @@ public:
 
   /**
    * \brief Constructor
-   * \param fullscreen equals true if we're in full screen
+   * \param fullscreen true if we're in full screen
    *   false if we're in windowed mode
    */
-  explicit Context(bool fullscreen);
+  explicit Context(const bool fullscreen);
+
+  /**
+   * \brief default destructor
+   */
+  ~Context() = default;
 
 
 private:
@@ -32,7 +40,8 @@ private:
    */
   void init();
 
-  std::shared_ptr<System> _system; ///< System settings (SFML version, ...)
+  std::shared_ptr<System> _system; ///< System settings (libraries version, ...)
 };
 
-#endif /* !CONTEXT_HH_ */
+
+#endif /* !CORE_CONTEXT_HH_ */

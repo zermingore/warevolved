@@ -1,10 +1,12 @@
-#ifndef INTERFACESETTINGS_HH_
-# define INTERFACESETTINGS_HH_
-
 /**
  * \file
+ * \date Feb 23, 2016
+ * \author Zermingore
  * \brief Interface settings.
  */
+
+#ifndef INTERFACE_INTERFACE_SETTINGS_HH_
+# define INTERFACE_INTERFACE_SETTINGS_HH_
 
 # include <common/using.hh>
 
@@ -27,33 +29,36 @@ public:
    *
    * \param player_color Player's main color.
    */
-  explicit InterfaceSettings(Color player_color);
+  explicit InterfaceSettings(const Color player_color);
 
+  /// Default destructor
+  ~InterfaceSettings() = default;
 
 
   /**
    * \brief Cursor color getter.
    * \return Color of the cursor.
    */
-  Color cursorColor() { return _cursorColor; }
+  auto cursorColor() { return _cursorColor; }
 
   /**
    * \brief Player's units color getter.
    * \return Units color.
    */
-  Color unitsColor() { return _unitsColor; }
+  auto unitsColor() { return _unitsColor; }
 
   /**
    * \brief sets cursor color.
    * \param color _cursorColor value.
    */
-  void setCursorColor(Color color) { _cursorColor = color; }
+  void setCursorColor(const Color color) { _cursorColor = color; }
 
   /**
    * \brief sets units color.
    * \param color units color.
    */
-  void setUnitsColor(Color color) { _unitsColor = color; }
+  void setUnitsColor(const Color color) { _unitsColor = color; }
+
 
 
 private:
@@ -64,4 +69,4 @@ private:
 } // namespace interface
 
 
-#endif /* !INTERFACESETTINGS_HH_ */
+#endif /* !INTERFACE_INTERFACE_SETTINGS_HH_ */

@@ -5,16 +5,14 @@
  * \brief Graphics related class / functions declarations
  */
 
-
-#ifndef GRAPHICSENGINE_HH_
-# define GRAPHICSENGINE_HH_
+#ifndef GRAPHICS_GRAPHICS_ENGINE_HH_
+# define GRAPHICS_GRAPHICS_ENGINE_HH_
 
 # include <common/include.hh>
 # include <common/using.hh> // Coords
 
 
 class Map;
-class MapGraphicsProperties;
 class Cell;
 class Unit;
 class Battle;
@@ -41,7 +39,14 @@ public:
   static void drawScene(const std::shared_ptr<Battle> battle);
 
   /**
+   * \brief Draw the interface of the current Player.
+   * \note called by a State
+   */
+  static void drawInterface();
+
+  /**
    * \brief _window setter.
+   * \note Takes the ownership of the given unique pointer
    */
   static void setWindow(std::unique_ptr<sf::RenderWindow> window);
 
@@ -49,7 +54,7 @@ public:
    * \brief Sets current fps to the given value.
    * \param fps Frame per second value.
    */
-  static void setCurrentFPS(float fps) { _currentFPS = fps; }
+  static void setCurrentFPS(const float fps) { _currentFPS = fps; }
 
   /**
    * \brief Returns current number of generated frames per Seconds.
@@ -58,15 +63,15 @@ public:
    *   the frame rate will be limited to 60
    *   it will be unlimited otherwise
    */
-  static float currentFPS() { return _currentFPS; }
+  static auto currentFPS() { return _currentFPS; }
 
   static void setGridOffset(const std::shared_ptr<Map> map);
 
   static void closeWindow() { _window->close(); }
 
-  static bool windowIsOpen() { return _window->isOpen(); }
+  static auto windowIsOpen() { return _window->isOpen(); }
 
-  static bool pollEvent(sf::Event& event) { return _window->pollEvent(event); }
+  static auto pollEvent(sf::Event& event) { return _window->pollEvent(event); }
 
 
   /**
@@ -74,7 +79,7 @@ public:
    * \param drawable shared pointer to an item to draw
    */
   template <typename T>
-  static void draw(std::shared_ptr<T> drawable) {
+  static void draw(const std::shared_ptr<T> drawable) {
     _window->draw(*drawable);
   }
 
@@ -83,7 +88,7 @@ public:
    * \param drawable item to draw
    */
   template <typename T>
-  static void draw(T drawable) {
+  static void draw(const T drawable) {
     _window->draw(drawable);
   }
 
@@ -94,12 +99,6 @@ public:
 private:
   /// Draw the map background.
   static void drawBackground();
-
-  /**
-   * \brief Draw the interface of the current Player.
-   * \param battle Battle to get the current Player.
-   */
-  static void drawInterface(const std::shared_ptr<Battle> battle);
 
   /**
    * \brief Draws cells content (terrain, unit).
@@ -118,8 +117,7 @@ private:
    * \param unit Unit to draw.
    * \param battle Battle to get the graphics properties of the current Player.
    */
-  static void drawUnit(const std::shared_ptr<Battle> battle,
-                       const std::shared_ptr<Unit> unit);
+  static void drawUnit(const std::shared_ptr<Unit> unit);
 
   /**
    * \brief Draws the elements related to the given State
@@ -139,4 +137,4 @@ private:
 
 } // namespace graphics
 
-#endif /* !GRAPHICSENGINE_HH_ */
+#endif /* !GRAPHICS_GRAPHICS_ENGINE_HH_ */

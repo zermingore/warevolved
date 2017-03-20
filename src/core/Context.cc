@@ -5,7 +5,7 @@
 #include <graphics/GraphicsEngine.hh>
 
 
-Context::Context(bool fullscreen)
+Context::Context(const bool fullscreen)
 {
   if (fullscreen) {
     Settings::initialize(24, 8, 4);
@@ -22,11 +22,11 @@ Context::Context(bool fullscreen)
 
 void Context::init()
 {
-# ifdef DEBUG
-  if (_system->sfmlMajor() < 2) {
-    std::cerr << "SFML version not officially supported" << std::endl;
+  if (_system->sfmlMajor() < 2)
+  {
+    ERROR("SFML version not officially supported");
+    assert(!"SFML version not supported, aborting in debug");
   }
-# endif
 
   sf::ContextSettings contextSettings(Settings::depth(),
                                       Settings::stencil(),
@@ -51,7 +51,7 @@ void Context::init()
 
     if (!video_mode.isValid())
     {
-      std::cerr << "Unsupported Video Mode, falling back" << std::endl;
+      ERROR("Unsupported Video Mode, falling back");
       video_mode = sf::VideoMode::getDesktopMode(); // falling back to desktop mode
       if (!video_mode.isValid()) {
         std::exit(-1); // This time we quit  /// \todo browse all supported modes
@@ -68,9 +68,7 @@ void Context::init()
 #endif
   //_window->setIcon(64, 64, "icon");
 
-  graphics::GraphicsEngine::setWindow(std::move(window));
+  window->setKeyRepeatEnabled(false);
 
-  // graphics::GraphicsEngine::setCellWidth(64);  /// \todo change dynamically (in px)
-  // graphics::GraphicsEngine::setCellHeight(64);  /// \todo change dynamically (in px)
-  // graphics::GraphicsEngine::setGridThickness(5);  /// \todo change dynamically (in px)
+  graphics::GraphicsEngine::setWindow(std::move(window));
 }

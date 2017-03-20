@@ -1,8 +1,7 @@
-/*
- * game/units/Soldier.hh
- *
- *  Created on: August 8, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date August 8, 2013
+ * \author Zermingore
  */
 
 #ifndef SOLDIER_HH_
@@ -15,25 +14,22 @@
 class Item;
 
 
-/** \class This class describes a Soldier, not a unit
- * a Soldier has a name, an inventory, ...
+/**
+ * \class Soldier
+ * \brief Specialization of Unit class
  */
 class Soldier: public Unit
 {
 public:
   /**
-   * \brief Default Constructor
-   *
-   * Creates a Soldier (random name, characteristics, ...)
+   * \brief Default Constructor. Initializes characteristics motion, hp, ...
    */
   Soldier();
 
   /**
-   * \brief gets name and add grade abbreviated
-   * \return a string composed of the unit name and it's grade,
-   *   separated by a space
+   * \brief Default destructor
    */
-  std::string name() { return _name; }
+  ~Soldier() = default;
 
 
 private:

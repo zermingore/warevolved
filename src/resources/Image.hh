@@ -1,24 +1,22 @@
-#ifndef IMAGE_HH_
-# define IMAGE_HH_
+/**
+ * \file
+ * \date Apr 25, 2013
+ * \author Zermingore
+ */
+
+#ifndef RESOURCES_IMAGE_HH_
+# define RESOURCES_IMAGE_HH_
 
 # include <resources/Resource.hh>
 # include <common/include.hh>
+# include <common/using.hh>
 
 
-/// \todo forward declaration of Map::MapGraphicsProperties
-# include <game/Map.hh>
-
-// class Map;
-// class Map::MapGraphicsProperties;
-
-
-
-namespace graphics {
-
+namespace resources {
 
 /**
- * \class Image Resource type
- * Derived from Resource
+ * \class Image
+ * \brief Image type, Derived from Resource
  */
 class Image: public Resource
 {
@@ -37,8 +35,11 @@ public:
    * sets _texture to NULL
    * _loaded to false
    */
-  Image(const std::string file_name,
-        const std::string name);
+  Image(const std::string file_name, const std::string name);
+
+  /// Default destructor
+  ~Image() = default;
+
 
   /**
    * \brief initializes _texture
@@ -66,12 +67,18 @@ public:
    */
   std::shared_ptr<sf::Sprite> sprite();
 
+
   /**
    * \brief sets _sprite position
    * \param position: _sprite vector position
    */
-  void setPosition(sf::Vector2f position);
-  void setPosition(Coords position);
+  void setPosition(const Coords position);
+
+  /**
+   * \brief sets _sprite position
+   * \param position: _sprite vector position components
+   */
+  void setPosition(const size_t x, const size_t y);
 
 
   /**
@@ -79,7 +86,7 @@ public:
    *
    * The new size of the object depends on the cell size
    */
-  void setSize(sf::Vector2f size);
+  void setSize(const sf::Vector2f size);
 
   /**
    * \brief sets _rectangle and _sprite size
@@ -87,13 +94,13 @@ public:
    * \param width: image width
    * \param height: image height
    */
-  void setSize(float width, float height);
+  void setSize(const float width, const float height);
 
 
   /**
    * \brief sets _rectangle and _sprite scale
    */
-  void setScale(sf::Vector2f scale);
+  void setScale(const sf::Vector2f scale);
 
   /**
    * \brief sets _rectangle and _sprite scale
@@ -101,25 +108,26 @@ public:
    * \param width: image width
    * \param height: image height
    */
-  void setScale(float width, float height);
+  void setScale(const float width, const float height);
 
   /**
    * \brief sets _rectangle and _sprite scale
    *   builds a sf::Vector2f to apply the ratio for the width and height
    * \param ratio: Scale ratio
    */
-  void setScale(float ratio);
+  void setScale(const float ratio);
 
   /**
    * \brief sets _fileName to file_name
    *   sets _loaded to false
    */
-  void setFileName(std::string file_name);
+  void setFileName(const std::string file_name);
 
-  /** _sprite setter
+  /**
+   * \brief _sprite setter
    * \param sprite _sprite value
    */
-  void setSprite(std::shared_ptr<sf::Sprite> sprite) { _sprite = sprite; }
+  void setSprite(const std::shared_ptr<sf::Sprite> sprite) { _sprite = sprite; }
 
   /**
    * \brief load Image texture to (V)RAM if necessary
@@ -137,14 +145,13 @@ public:
   /**
    * \brief Reloads the texture (unload the previous one if any)
    */
-  void reload(std::string file_name);
+  void reload(const std::string file_name);
 
   /**
-   * \brief draws the Image in the cell coords.x, coords.y
+   * \brief draws the Image in the cell coords.c, coords.l
    * \param c coordinate to display the image
-   * \param p Map Graphics Properties (cells size, grid thickness, ...)
    */
-  void drawAtCell(const Coords c, const std::shared_ptr<Map::MapGraphicsProperties> p);
+  void drawAtCell(const Coords c);
 
   /**
    * \brief draws the Image at _sprite's position
@@ -154,10 +161,13 @@ public:
 
 private:
   std::shared_ptr<sf::Texture> _texture; ///< texture data pointer
-  std::shared_ptr<sf::Sprite> _sprite; ///< Image sprite, allowing transformations
+  std::shared_ptr<sf::Sprite> _sprite;   ///< Image sprite, for transformations
   std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
 };
 
-} // namespace graphics
 
-#endif /* !IMAGE_HH_ */
+} // namespace resources
+
+
+
+#endif /* !RESOURCES_IMAGE_HH_ */

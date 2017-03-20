@@ -1,5 +1,6 @@
 /**
  * \file
+ * \date April 19, 2013
  * \author Zermingore
  * \brief Map class definition.
  */
@@ -9,6 +10,7 @@
 
 # include <common/include.hh>
 # include <common/using.hh>
+# include <common/enums/attack_result.hh>
 
 class Cell;
 class Unit;
@@ -24,91 +26,11 @@ enum class e_unit;
 class Map
 {
 public:
-  /// \typedef player's units as a list
-  using unit_list = std::map<size_t, std::list<std::shared_ptr<Unit>>>;
-
   /**
-   * \class MapGraphicsProperties
-   * \brief Graphics properties of the Map (cell sizes, grid thickness, ...)
+   * \typedef unit_list
+   * \brief list of units, per player
    */
-  class MapGraphicsProperties
-  {
-  public:
-    /**
-     * \brief Constructor
-     *
-     * Initialize attributes with default values.
-     */
-    MapGraphicsProperties();
-
-    /**
-     * \brief cell width getter.
-     * \return cell width in pixels.
-     */
-    size_t cellWidth() const { return _cellWidth; }
-
-    /**
-     * \brief cell height getter.
-     * \return cell height in pixels.
-     */
-    size_t cellHeight() const { return _cellHeight; }
-
-    /**
-     * \brief grid thickness getter.
-     * \return grid thickness in pixels.
-     */
-    size_t gridThickness() const { return _gridThickness; }
-
-    /**
-     * \brief offset of the grid (from the left border of the window) getter.
-     * \return grid offset, in x.
-     */
-    size_t gridOffsetX() const { return _gridOffsetX; }
-
-    /**
-     * \brief offset of the grid (from the top border of the window) getter.
-     * \return grid offset, in y.
-     */
-    size_t gridOffsetY() const { return _gridOffsetY; }
-
-    /**
-     * \brief cell width setter.
-     * \param width cell width in pixels.
-     */
-    void setCellWidth(size_t width) { _cellWidth = width; }
-
-    /**
-     * \brief cell height setter.
-     * \param height cell height in pixels.
-     */
-    void setCellHeight(size_t height) { _cellHeight = height; }
-
-    /**
-     * \brief grid thickness setter.
-     * \param thickness of the grid in pixels.
-     */
-    void setGridThickness(size_t thickness) { _gridThickness = thickness; }
-
-    /**
-     * \brief offset of the grid (from the left border of the window) setter.
-     * \param x offset.
-     */
-    void setGridOffsetX(size_t grid_offset_x) { _gridOffsetX = grid_offset_x; }
-
-    /**
-     * \brief offset of the grid (from the top border of the window) setter.
-     * \param y offset.
-     */
-    void setGridOffsetY(size_t grid_offset_y) { _gridOffsetY = grid_offset_y; }
-
-
-  private:
-     size_t _cellWidth;     ///< cells width in pixels
-     size_t _cellHeight;    ///< cells height in pixels
-     size_t _gridThickness; ///< thickness of the grid
-     size_t _gridOffsetX;   ///< X grid offset (from the window left border)
-     size_t _gridOffsetY;   ///< Y grid offset (from the window top border)
-  };
+  using unit_list = std::map<size_t, std::list<std::shared_ptr<Unit>>>;
 
 
   /// remove default constructor as we need the dimensions of the map
@@ -127,6 +49,10 @@ public:
    */
   Map(const size_t nb_columns, const size_t nb_lines);
 
+  /// default destructor
+  ~Map() = default;
+
+
   /**
    * \brief _nbColumns getter
    *
@@ -139,15 +65,6 @@ public:
    * \return number of lines
    */
   size_t nbLines() const { return _nbLines; }
-
-  /**
-   * \brief Graphics properties getter
-   * \return a pointer on the graphics properties class
-   */
-  std::shared_ptr<MapGraphicsProperties> graphicsProperties() const {
-    return _graphicsProperties;
-  }
-
 
   /**
    * \brief gets the unit at coordinates (x, y)
@@ -164,18 +81,22 @@ public:
    * \brief gets the unit at c's coordinates.
    * \param c targeted Cell's coordinates.
    * \return the enum index in e_unit matching the unit
-   *   located at coordinates (c.x, c.y).
+   *   located at coordinates (c.c, c.l).
    */
   std::shared_ptr<Unit> unit(const Coords& c) const;
 
   /**
    * \brief Marks the Unit located at the given coordinates as selected.
    * \param c coordinates where the Unit to select is located
-   * \return a pointer to the updated selected unit on success
-   *   returns nullptr and sets the selected unit to nullptr otherwise
-   *   (this happens if no unit was found at the given coordinates)
+   * \note A unit must be located at given coordinates
    */
-  std::shared_ptr<Unit> selectUnit(const Coords c);
+  void selectUnit(const Coords c);
+
+  /**
+   * \brief selected unit getter
+   * \return a pointer on the currently selected unit, if any
+   */
+  auto selectedUnit() { return _selectedUnit; }
 
   /**
    * \brief gets the terrain at coordinates (x, y).
@@ -184,9 +105,16 @@ public:
    * \param y Coordinates according to lines.
    *
    * \return the enum index in e_terrain matching the terrain
-   *   located at coordinates (x, y).
+   *   located at coordinates (c, l).
    */
   e_terrain getTerrain(const size_t line, const size_t column) const;
+
+  /**
+   * \brief get the cell at given coordinates
+   * \param coords the coordinates of the Cell to retrieve
+   * \return The cell at coords coordinates
+   */
+  auto cell(Coords coords) const { return _cells[coords.c][coords.l]; }
 
   /**
    * \brief _cells array getter.
@@ -200,23 +128,49 @@ public:
    * \param type type of the new unit
    * \param line line to set the new unit
    * \param column column to set the new unit
+   * \param player_id player to which the unit belongs to
+   *
+   * \note player_id defaults to -1
+   *   In this case, the unit is assigned to the current player
    */
-  void newUnit(const e_unit type, const size_t column, const size_t line);
+  void newUnit(const e_unit type,
+               const size_t column,
+               const size_t line,
+               int player_id = -1);
 
   /**
-   * \brief moves the selected unit to the current cursor location
+   * \brief moves the _selectedUnit to the given coordinates
+   * \param c Destination coordinates
    */
-  void moveUnit();
-
-  /**
-   * \brief moves given unit to the given coordinates
-   */
-  void moveUnit(std::shared_ptr<Unit> u, const Coords c);
+  void moveUnit(const Coords c);
 
   /**
    * \brief reset all units played boolean to false
    */
   void endTurn();
+
+
+  /**
+   * \brief computes and return the result of the fight
+   * \param attacker_status attacker status after the fight
+   * \param defender_status defender status after the fight
+   * \return the attack result
+   */
+  e_attack_result attackResult(bool attacker_status, bool defender_status);
+
+  /**
+   * \brief Perform the attack of the _selectedUnit over the defender
+   * \param defender Unit defending the attack
+   * \return the result of the attack (which unit died, if any)
+   */
+  e_attack_result attack(std::shared_ptr<Unit> defender);
+
+  /**
+   * \brief Perform the attack of the _selectedUnit on the target_cell
+   * \param target_cell target of the attack (may contain an unit)
+   * \return the result of the attack (which unit died, if any)
+   */
+  e_attack_result attack(std::shared_ptr<Cell> target_cell);
 
   /**
    * \brief operator to allow getting a cell calling map[i][j]
@@ -245,9 +199,6 @@ private:
 
   /// map of units: <player, unit_list>
   unit_list _units;
-
-  /// list of map graphics properties (cells size, grid thickness, ...)
-  std::shared_ptr<Map::MapGraphicsProperties> _graphicsProperties;
 
   /// Current selected unit
   std::shared_ptr<Unit> _selectedUnit;

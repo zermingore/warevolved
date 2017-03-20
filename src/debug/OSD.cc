@@ -1,4 +1,4 @@
-#include <common/debug/OSD.hh>
+#include <debug/OSD.hh>
 #include <resources/ResourcesManager.hh>
 #include <common/Status.hh>
 #include <interface/Interface.hh>
@@ -45,7 +45,7 @@ void OSD::draw()
 }
 
 
-std::shared_ptr<sf::Text> OSD::text(std::string str)
+std::shared_ptr<sf::Text> OSD::text(const std::string str)
 {
   auto label(std::make_shared<sf::Text> (
                str,
@@ -59,4 +59,4 @@ std::shared_ptr<sf::Text> OSD::text(std::string str)
 }
 
 
-}; // namespace debug
+} // namespace debug

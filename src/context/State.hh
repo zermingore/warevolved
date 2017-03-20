@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_HH_
-# define STATE_HH_
+#ifndef CONTEXT_STATE_HH_
+# define CONTEXT_STATE_HH_
 
 # include <memory>
 # include <vector>
@@ -39,15 +39,61 @@ public:
   State();
 
   /**
-   * \brief Destructor.
+   * \brief Default destructor
    */
   ~State() = default;
+
+
+  /**
+   * \brief Set specific State's attributes
+   * \param head head of the attributes list
+   * \param attributes rest of the attributes list
+   */
+  template<typename Head, typename... Tail>
+  void setAttributes(Head head, Tail... attributes)
+  {
+    setAttribute(head);
+    setAttributes(attributes...);
+  }
+
+  /**
+   * \brief Set the current attribute of the attributes list
+   * \param head current head of the list
+   */
+  template<typename Attribute>
+  void setAttribute(std::shared_ptr<Attribute> head) {
+    _attributes.push_back(head);
+  }
+
+  /**
+   * \brief Set attribute tail recursion (attributes list empty)
+   */
+  void setAttributes() {}
+
+
+  /**
+   * \brief Fetch the attributes from the _attributes vector
+   */
+  virtual void fetchAttributes() {}
+
+
+  /**
+   * \brief Function to call when the State is resumed
+   * (or executed for the first time)
+   */
+  virtual void resume() {} /// \todo =0
+
+  /**
+   * \brief Function to call when the State is suspended
+   */
+  virtual void suspend() {} /// \todo =0
+
 
   /**
    * \brief event manager getter
    * \return event manager
    */
-  std::shared_ptr<EventManager> eventManager() { return _evtMgr; }
+  auto eventManager() { return _evtMgr; }
 
   /**
    * \brief returns the list of related interface elements
@@ -75,7 +121,10 @@ protected:
   std::vector<std::shared_ptr<interface::InterfaceElement>> _interfaceElements;
 
   Coords _cursorCoords; ///< Cursor's coordinates
+
+  ///< pointer on Abstract attribute
+  std::vector<std::shared_ptr<void>> _attributes;
 };
 
 
-#endif /* !STATE_HH_ */
+#endif /* !CONTEXT_STATE_HH_ */

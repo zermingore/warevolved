@@ -1,113 +1,24 @@
 #include <common/Status.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/units/Unit.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/enums/states.hh>
-
 #include <common/debug/EnumPrint.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 namespace interface {
 
 
-void InGameMenu::build()
-{
-  debug::printState(Status::state());
-
-  // Saving current state
-  _cursorCoords = Status::player()->cursor()->coords();
-  _unit = Status::battle()->map()->unit(_coords);
-
-
-  switch (Status::state())
-  {
-    case e_state::ACTION_MENU:
-    {
-      PRINTF("-= Action menu =-");
-      /// \todo check if there is a target
-      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
-      entry->setCallback( [=] { waitUnit(); });
-      _entries.push_back(entry);
-
-      /// \todo separate actions (move / attack / ...)
-      // as they may have different cancel actions
-      /// Could add a flag in the state: restoration point
-      /// -> pop until restoration point
-      /// (and execute resume function -> default selected entry)
-      addCancelEntry( [=] { actionCancel(); } );
-      break;
-    }
-
-    case e_state::MOVING_UNIT:
-    {
-      PRINTF("-= Action menu =-");
-      /// \todo check if there is a target
-      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
-      entry->setCallback( [=] { waitUnit(); });
-      _entries.push_back(entry);
-
-      /// \todo separate actions (move / attack / ...)
-      // as they may have different cancel actions
-      addCancelEntry( [=] { actionCancel(); } );
-      break;
-    }
-
-    case e_state::SELECTION_UNIT:
-      PRINTF("-= Selection menu =-");
-      // if ((_unit = Status::battle()->map()->unit(_coords)))
-      if (Status::battle()->map()->unit(_coords))
-      {
-        auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
-        entry->setCallback( [=] { moveUnit(); });
-        _entries.push_back(entry);
-      }
-      addCancelEntry( [=] { defaultCancel(); } );
-      break;
-
-    case e_state::PLAYING:
-      /// \todo next player
-      addCancelEntry( [=] { defaultCancel(); } );
-      break;
-
-    default:
-      Debug::error("InGameMenu::build Invalid State:", (int) Status::state());
-      std::exit(1);
-      assert(!"Invalid state found building menu");
-      break;
-  }
-
-  PRINTF("nb entries:", _entries.size());
-}
-
-
-void InGameMenu::defaultCancel() {
+void InGameMenu::cancel() {
   Status::popCurrentState();
 }
 
 
-void InGameMenu::actionCancel()
-{
-  PRINTF("Canceling current action");
-
-  // from StateMovingUnit
-  // Status::interface()->element("cursor")->setCoords(_cursorCoords);
-
-  Status::clearStates();
-
-  while (Status::state() != e_state::PLAYING) {
-    PRINTF("State:", (int) Status::state());
-    Status::popCurrentState();
-  }
-
-  // purge saved data
-  // _unit = nullptr;
-}
-
-
-void InGameMenu::addCancelEntry(std::function<void()> cancel_callback)
+void InGameMenu::addCancelEntry(const std::function<void()> cancel_callback)
 {
   auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL));
   entry_cancel->setCallback( [=] { cancel_callback(); });
@@ -116,57 +27,41 @@ void InGameMenu::addCancelEntry(std::function<void()> cancel_callback)
 
 
 void InGameMenu::moveUp() {
-  incrementSelectedEntry();
-}
-
-void InGameMenu::moveDown() {
   decrementSelectedEntry();
 }
 
+void InGameMenu::moveDown() {
+  incrementSelectedEntry();
+}
 
-void InGameMenu::validate() {
+
+void InGameMenu::validate()
+{
   // end validation (unit moved, ...) -> purge every menu
   _entries[_selectedEntry]->execute();
 }
 
 
-void InGameMenu::moveUnit()
+
+void InGameMenu::update()
 {
-  // Building a new menu in the MOVING_UNIT State
-  Status::pushState(e_state::MOVING_UNIT);
-}
-
-
-void InGameMenu::waitUnit()
-{
-  PRINTF("order: wait unit");
-  ERROR("TODO move unit");
-
-  /// \todo move unit
-  // Status::battle()->map()->moveUnit(_selectedUnit, _cursorCoords);
-  Status::clearStates();
-}
-
-
-void InGameMenu::update(const std::shared_ptr<Map::MapGraphicsProperties> properties)
-{
-  auto width(properties->cellWidth());
-  auto height(properties->cellHeight());
+  using p = graphics::MapGraphicsProperties;
 
   // _coords is filled by the player, with cursor coordinates
-  _position.x = _coords.x * width  + properties->gridOffsetX();
-  _position.y = _coords.y * height + properties->gridOffsetY();
+  _position.c = _coords.c * p::cellWidth()  + p::gridOffsetX();
+  _position.l = _coords.l * p::cellHeight() + p::gridOffsetY();
 
   // highlighting current selection
-  Coords selected_entry_pos(_position.x, _position.y + height * _selectedEntry);
-  _imageSelection.setPosition(selected_entry_pos);
+  _imageSelection->setPosition(_position.c,
+                               _position.l + p::cellHeight() * _selectedEntry);
 
   // update entries positions
   auto entry_index(0);
   for (auto entry: _entries)
   {
-    entry->setPosition(Coords(_position.x, _position.y + height * entry_index));
-    entry->update(properties);
+    entry->setPosition(Coords(_position.c,
+                              _position.l + p::cellHeight() * entry_index));
+    entry->update();
     ++entry_index;
   }
 }
@@ -184,16 +79,15 @@ void InGameMenu::close()
 }
 
 
-void InGameMenu::draw() {
-  update(Status::battle()->map()->graphicsProperties());
+void InGameMenu::draw()
+{
+  update();
 
   for (auto entry: _entries) {
     entry->draw();
-    std::cout << ".";
   }
-  std::cout << std::endl;
 
-  _imageSelection.draw();
+  _imageSelection->draw();
 }
 
 

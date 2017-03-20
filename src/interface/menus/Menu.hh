@@ -26,7 +26,9 @@ namespace interface {
 class Menu: public InterfaceElement
 {
 public:
-  /// \brief Constructor.
+  /**
+   * \brief Default constructor. Initializes the graphic attributes
+   */
   Menu();
 
   /**
@@ -45,7 +47,7 @@ public:
    * \brief sets origin menu to the right cursor relative position
    * \todo set the menu at optimal position
    */
-  virtual void setOrigin(Coords origin);
+  virtual void setOrigin(const Coords origin);
 
   /**
    * \brief draws the menu its entries and the current entry highlighter
@@ -120,7 +122,8 @@ protected:
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
 
-  graphics::Image _imageSelection; ///< Emphasis of the selected entry
+  ///< Emphasis of the selected entry
+  std::shared_ptr<resources::Image> _imageSelection;
 };
 
 

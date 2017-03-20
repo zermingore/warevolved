@@ -6,7 +6,7 @@
 #   error "abort, should not be compiled in release"
 # endif
 
-# include <common/debug/Debug.hh>
+# include <debug/Debug.hh>
 # include <common/enums/states.hh>
 
 

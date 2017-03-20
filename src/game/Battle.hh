@@ -9,7 +9,6 @@
 
 # include <vector>
 # include <memory>
-# include <game/applications/Application.hh>
 # include <common/structures/Vector.hh>
 
 class Map;
@@ -22,7 +21,7 @@ enum class e_units;
  * \class Battle
  * \brief A battle is a game, launched from the Game class.
  */
-class Battle: public Application
+class Battle
 {
 public:
   /// \todo add filename XOr nb players, ...
@@ -42,14 +41,11 @@ public:
    */
   void initializeMap();
 
-
   /**
    * \brief Players vector getter.
    * \return Players list.
    */
-  const std::vector<std::shared_ptr<Player>> players() const {
-    return _players;
-  }
+  auto players() const { return _players; }
 
   /**
    * \brief _players[id] getter.
@@ -64,7 +60,7 @@ public:
    * \brief Map getter.
    * \return A pointer to the map.
    */
-  std::shared_ptr<Map> map() { return _map; }
+  auto map() { return _map; }
 
   /// End Player turns. Switch to the next player.
   void nextPlayer();
@@ -84,7 +80,7 @@ public:
    * \brief current player's identifier getter
    * \return Current player's identifier.
    */
-  size_t currentPlayer() { return _currentPlayer; }
+  auto currentPlayer() { return _currentPlayer; }
 
   /**
    * \brief sets _currentPlayer

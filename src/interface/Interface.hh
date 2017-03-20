@@ -1,5 +1,6 @@
 /**
  * \file
+ * \date May 21, 2013
  * \author Zermingore
  * \brief Interface class definition.
  *
@@ -28,9 +29,9 @@ public:
   Interface() = delete;
 
   /// Constructor. Initializes interface settings (colors, ...)
-  explicit Interface(Color c);
+  explicit Interface(const Color c);
 
-  /// Destructor
+  /// Default destructor
   ~Interface() = default;
 
 
@@ -45,19 +46,19 @@ public:
    * \brief Adds an InterfaceElement to manage
    * \param elt Element to add to the interface
    */
-  void addElement(std::shared_ptr<InterfaceElement> elt);
+  void addElement(const std::shared_ptr<InterfaceElement> elt);
 
   /**
    * \brief Remove a managed InterfaceElement
    * \param elt Element to remove from the interface.
    */
-  void removeElement(std::shared_ptr<InterfaceElement> elt);
+  void removeElement(const std::shared_ptr<InterfaceElement> elt);
 
   /**
    * \brief Interface elements vector getter.
    * \return Elements of the interface.
    */
-  std::vector<std::shared_ptr<InterfaceElement>>& elements() { return _elts; }
+  auto& elements() { return _elts; }
 
 
   /**
@@ -65,7 +66,7 @@ public:
    * \param name name of the InterfaceElement to retrieve
    * \return a pointer to the matching InterfaceElement, nullptr if there is none
    */
-  const std::shared_ptr<InterfaceElement> element(const std::string id);
+  std::shared_ptr<InterfaceElement> element(const std::string id);
 
   /**
    * \brief Cursor color getter.
@@ -77,7 +78,7 @@ public:
    * \brief sets cursor color.
    * \param color _cursorColor value.
    */
-  void setCursorColor(Color color) { _settings->setCursorColor(color); }
+  void setCursorColor(const Color color) { _settings->setCursorColor(color); }
 
 
   /**
@@ -90,7 +91,7 @@ public:
    * \brief sets units color.
    * \param color units color.
    */
-  void setUnitsColor(Color color) { _settings->setUnitsColor(color); }
+  void setUnitsColor(const Color color) { _settings->setUnitsColor(color); }
 
 
 private:

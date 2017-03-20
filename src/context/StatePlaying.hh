@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_PLAYING_HH_
-# define STATE_PLAYING_HH_
+#ifndef CONTEXT_STATE_PLAYING_HH_
+# define CONTEXT_STATE_PLAYING_HH_
 
 # include <context/State.hh>
 
@@ -19,7 +19,16 @@ class StatePlaying: public State
 public:
   /// registers to callbacks
   StatePlaying();
+
+  /// Default destructor
+  ~StatePlaying() = default;
+
+
+  /**
+   * \brief Draw the player interface
+   */
+  virtual void draw();
 };
 
 
-#endif /* !STATE_PLAYING_HH_ */
+#endif /* !CONTEXT_STATE_PLAYING_HH_ */

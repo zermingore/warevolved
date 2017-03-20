@@ -1,10 +1,11 @@
-#ifndef INTERFACEELEMENT_HH_
-# define INTERFACEELEMENT_HH_
-
 /**
  * \file
+ * \date Jan 11, 2015
  * \author Zermingore
  */
+
+#ifndef INTERFACE_ELEMENT_HH_
+# define INTERFACE_ELEMENT_HH_
 
 # include <string>
 # include <memory>
@@ -15,12 +16,12 @@
 # include <resources/ResourcesManager.hh>
 
 
-
 namespace interface {
 
 /**
  * \class InterfaceElement
  * \brief Represents an element of the interface (cursor, menu entry, ...).
+ * \note Abstract class
  */
 class InterfaceElement
 {
@@ -36,37 +37,40 @@ public:
    */
   explicit InterfaceElement(const std::string& image_name);
 
+  /// Default destructor
+  virtual ~InterfaceElement() = default;
+
 
   // ___________________________ Getters / Setters _________________________ //
   /**
    * \brief image name getter.
    * \return name of the image resource.
    */
-  std::string name() const { return _img_name; }
+  auto name() const { return _img_name; }
 
   /**
    * \brief position getter.
    * \return Position of the element in the absolute frame.
    */
-  Coords position() const { return _position; }
+  auto position() const { return _position; }
 
   /**
    * \brief _coords getter
    * \return _coords value in the grid frame
    */
-  Coords coords() { return _coords; }
+  auto coords() { return _coords; }
 
   /**
    * \brief scale getter.
    * \return scale of the element, related to cells size.
    */
-  Vector2<float> scale() const { return _scale; }
+  auto scale() const { return _scale; }
 
   /**
    * \brief rotation getter.
    * \return Rotation of the element in grid frame.
    */
-  float rotation() const { return _rotation; }
+  auto rotation() const { return _rotation; }
 
   /**
    * \brief position setter.
@@ -78,9 +82,7 @@ public:
    * \brief position setter.
    * \param position cells coordinates to place the element.
    */
-  void setPosition(const Coords &position) {
-    _position = position;
-  }
+  void setPosition(const Coords &position) { _position = position; }
 
   /**
    * \brief scale setter.
@@ -112,34 +114,32 @@ public:
   void setRotation(const float &rotation) { _rotation = rotation; }
 
 
-  std::shared_ptr<sf::Sprite> getSprite();
-
-
   /**
    * \brief Updates the graphical attributes of the elements before rendering
    */
-  virtual void update(const std::shared_ptr<Map::MapGraphicsProperties> properties) = 0;
+  virtual void update() = 0;
 
 
   /**
    * \brief Default InterfaceElement draw method.
-   *
-   * Calls the GraphicsEngine::draw() method with the sprite of _image
+   * \note Calls the GraphicsEngine::draw() method with the sprite of _image
    */
-  virtual void draw();
+  virtual void draw() = 0;
 
 
 
 protected:
-  std::string _img_name;   ///< Associated image name
-  graphics::Image& _image; ///< Associated image
-  Coords _position;        ///< Element position (in pixels)
-  Coords _coords;          ///< Element position (in cells; not always filled)
-  Vector2<float> _scale;   ///< Element scale (related to a Cell size)
-  float _rotation;         ///< Element rotation
+  std::string _img_name;                    ///< Associated image name
+  std::shared_ptr<resources::Image> _image; ///< Associated image
+  Coords _position;                         ///< Element position (in pixels)
+  Coords _coords;                           ///< Position (in cells; not always filled)
+  Vector2<float> _scale;                    ///< Element scale (related to a Cell size)
+  float _rotation;                          ///< Element rotation
 };
 
 
 } // namespace interface
 
-#endif /* !INTERFACEELEMENT_HH_ */
+
+
+#endif /* !INTERFACE_ELEMENT_HH_ */

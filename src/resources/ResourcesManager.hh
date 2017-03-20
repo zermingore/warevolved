@@ -1,31 +1,35 @@
-#ifndef RESOURCESMANAGER_HH_
-# define RESOURCESMANAGER_HH_
+/**
+ * \file
+ * \date Apr 25, 2013
+ * \author Zermingore
+ */
+
+#ifndef RESOURCES_RESOURCES_MANAGER_HH_
+# define RESOURCES_RESOURCES_MANAGER_HH_
 
 # include <common/include.hh>
-
-//# include <resources/Resource.hh>
 # include <resources/Font.hh>
 # include <resources/Image.hh>
 
 
-/** \enum enum matching every resource types
+/**
+ * \enum enum matching every resource types
  */
-enum e_resource_type
+enum class e_resource_type: int
 {
-  E_RESOURCE_TYPE_NONE = 0,
+  NONE = 0,
 
-  E_RESOURCE_TYPE_IMAGE,
-  E_RESOURCE_TYPE_FONT,
-  E_RESOURCE_TYPE_SOUND,  /// \todo sound management
-
-  E_RESOURCE_TYPE_NB
+  IMAGE,
+  FONT,
+  SOUND,  /// \todo sound management
 };
 
 
 namespace resources {
 
 
-/** \class ResourcesManager
+/**
+ * \class ResourcesManager
  * uses a XML file, containing all resources data:
  *   their path, name and specific attributes
  * it manages:
@@ -48,22 +52,24 @@ public:
   static void initialize(const std::string file_name);
 
   /**
-   * \brief Retrieve an Image from _images map
-   * if the Image does not exist, print an error and return the default one
+   * \brief If an image with the given name exists, return the matching Image
+   * \return A new Image matching the given name.
+   *   If the Image does not exist, print an error and return the default one
    */
-  static graphics::Image& getImage(const std::string name);
-
-  /**
-   * \brief Retrieve a Font from _fonts map and return it's graphical font
-   * if the Font does not exist, print an error and return the default one
-   */
-  static sf::Font& font(const std::string name);
+  static std::shared_ptr<resources::Image> getImage(const std::string name);
 
   /**
    * \brief Retrieve a Font from _fonts map
    * if the Font does not exist, print an error and return the default one
    */
-  static Font& getFont(const std::string name);
+  static sf::Font& font(const std::string name);
+
+  /**
+   * \brief If a font with the given name exists, return the matching Font
+   * \return A new Font matching the given name.
+   *   If the Font does not exist, print an error and return the default one
+   */
+  static resources::Font& getFont(const std::string name);
 
 
 private:
@@ -90,7 +96,7 @@ private:
    * \return true on success
    *   false otherwise
    */
-  static bool addResource(e_resource_type type,
+  static bool addResource(const e_resource_type type,
                           const std::string name,
                           const std::string file_name);
 
@@ -112,11 +118,11 @@ private:
   static void listResources();
 # endif
 
-  ///< Images list (accessed by their name)
-  static std::map<std::string, std::shared_ptr<graphics::Image>> _images;
+  ///< Fonts list (name [identifier] -> image file name)
+  static std::map<std::string, std::string> _images;
 
-  ///< Fonts list (accessed by their name)
-  static std::map<std::string, std::shared_ptr<Font>> _fonts;
+  ///< Fonts list (name [identifier] -> font file name)
+  static std::map<std::string, std::shared_ptr<resources::Font>> _fonts;
 
   ///< map categories names matching e_resource_type
   static std::map<e_resource_type, std::string> _typeNames;
@@ -125,4 +131,4 @@ private:
 } // namespace resources
 
 
-#endif /* !RESOURCESMANAGER_HH_ */
+#endif /* !RESOURCES_RESOURCES_MANAGER_HH_ */

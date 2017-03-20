@@ -7,7 +7,7 @@
 #include <graphics/GraphicsEngine.hh>
 
 
-bool EventManager::process(e_input input)
+bool EventManager::process(const e_input input)
 {
   if (_callbacks.find(input) == _callbacks.end())
   {

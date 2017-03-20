@@ -1,10 +1,11 @@
 #include <context/StatePlaying.hh>
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <common/Status.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
+#include <graphics/GraphicsEngine.hh>
 
 
 StatePlaying::StatePlaying()
@@ -14,12 +15,17 @@ StatePlaying::StatePlaying()
   // should these functions return booleans to consume events ?
 
   auto player(Status::player());
-  _evtMgr->registerEvent(e_input::MOVE_UP_1, [=] { player->moveCursorUp(); });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN_1, [=] { player->moveCursorDown(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT_1, [=] { player->moveCursorLeft(); });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT_1, [=] { player->moveCursorRight(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { player->moveCursorUp(); });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { player->moveCursorDown(); });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { player->moveCursorLeft(); });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { player->moveCursorRight(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION_1, [=] { player->select(); });
+  _evtMgr->registerEvent(e_input::SELECTION,  [=] { player->select(); });
 
   addInterfaceElement(player->cursor());
+}
+
+
+void StatePlaying::draw() {
+  graphics::GraphicsEngine::drawInterface();
 }

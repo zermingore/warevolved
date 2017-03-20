@@ -1,5 +1,6 @@
 /**
  * \file
+ * \date April 19, 2013
  * \author Zermingore
  * \brief Map class implementation.
  */
@@ -8,28 +9,17 @@
 #include <common/Status.hh>
 #include <common/enums/terrains.hh>
 #include <common/enums/units.hh>
-#include <game/applications/Battle.hh>
-#include <game/units/Soldier.hh>
+#include <game/Battle.hh>
+#include <game/units/UnitFactory.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
 
-
-Map::MapGraphicsProperties::MapGraphicsProperties()
-  : _cellWidth(64)
-  , _cellHeight(64)
-  , _gridThickness(5)
-  , _gridOffsetX(0)
-  , _gridOffsetY(0)
-{
-}
 
 
 Map::Map(const size_t nb_columns, const size_t nb_lines)
   : _nbColumns(nb_columns)
   , _nbLines(nb_lines)
 {
-  _graphicsProperties = std::make_shared<Map::MapGraphicsProperties> ();
-
   for (auto col(0u); col < _nbColumns; ++col)
   {
     std::vector<std::shared_ptr<Cell>> vec(_nbLines);
@@ -54,7 +44,7 @@ std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const {
 }
 
 std::shared_ptr<Unit> Map::unit(const Coords& c) const {
-  return _cells[c.x][c.y]->unit();
+  return _cells[c.c][c.l]->unit();
 }
 
 e_terrain Map::getTerrain(const size_t column, const size_t line) const {
@@ -62,36 +52,35 @@ e_terrain Map::getTerrain(const size_t column, const size_t line) const {
 }
 
 
-std::shared_ptr<Unit> Map::selectUnit(const Coords c)
+void Map::selectUnit(const Coords c)
 {
+  // allow to select another unit if already one is selected ?
   _selectedUnit = nullptr;
 
-  auto unit(_cells[c.x][c.y]->unit());
-  if (!unit)
-  {
-    Debug::error("No unit to select at given coords", c.x, c.y);
-    return nullptr;
+  auto unit(_cells[c.c][c.l]->unit());
+  if (!unit) {
+    ERROR("No unit to select at given coords", c.c, c.l);
   }
 
   _selectedUnit = unit;
-  return _selectedUnit;
 }
 
 
-void Map::moveUnit(std::shared_ptr<Unit> unit, const Coords c)
+void Map::moveUnit(const Coords c)
 {
-  PRINTF("# Move unit order");
-
-  if (unit->coords() == c)
+  if (_selectedUnit->coords() == c)
   {
-    Debug::error("move unit: src == dst");
-    return;
+    ERROR("Moving unit at coordinates:", c.c, c.l);
+    assert("!move unit: src == dst");
   }
 
-  Coords old(unit->coords());
-  _cells[old.x][old.y]->removeUnit();
-  unit->setCellCoordinates(c);
-  _cells[c.x][c.y]->setUnit(unit);
+  Coords old(_selectedUnit->coords());
+  assert(_cells[old.c][old.l]->unit()->played() == false);
+
+  _cells[old.c][old.l]->unit()->setPlayed(true);
+  _cells[old.c][old.l]->removeUnit();
+  _selectedUnit->setCellCoordinates(c);
+  _cells[c.c][c.l]->setUnit(_selectedUnit);
 }
 
 
@@ -103,28 +92,84 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(const e_unit type, const size_t column, const size_t line)
+void Map::newUnit(const e_unit type,
+                  const size_t column,
+                  const size_t line,
+                  int player_id)
 {
-  std::shared_ptr<Unit> new_unit;
+  auto new_unit(UnitFactory::createUnit(type));
 
-  switch (type)
-  {
-    case e_unit::SOLDIERS:
-      new_unit = std::make_shared<Soldier> ();
-      break;
-
-    default:
-      assert(!"Unable to match this unit type");
-      return;
+  // assign the unit to the given player or to the current one
+  if (player_id == -1) {
+    player_id = Status::battle()->currentPlayer();
   }
 
-  auto player_id = Status::battle()->currentPlayer();
   new_unit->setCellCoordinates(Coords(column, line));
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
 }
 
+
+e_attack_result Map::attackResult(bool attacker_status, bool defender_status)
+{
+  /// \todo handle other status (unit down)
+  if (attacker_status == true && defender_status == true) {
+    return e_attack_result::BOTH_DIED;
+  }
+
+  if (attacker_status == true) {
+    return e_attack_result::ATTACKER_DIED;
+  }
+
+  if (defender_status == true) {
+    return e_attack_result::DEFENDER_DIED;
+  }
+
+  return e_attack_result::NONE_DIED;
+}
+
+
+e_attack_result Map::attack(std::shared_ptr<Unit> defender)
+{
+  assert(_selectedUnit && defender);
+
+  // getting defender status
+  defender->setHP(defender->hp() - _selectedUnit->attackValue());
+  bool defender_died = false;
+  if (defender->hp() <= 0)
+  {
+    _cells[defender->c()][defender->l()]->removeUnit();
+    defender_died = true;
+  }
+
+  // getting attacker status after strike back
+  _selectedUnit->setHP(_selectedUnit->hp() - defender->attackValue() / 2);
+  bool attacker_died = false;
+  if (_selectedUnit->hp() <= 0)
+  {
+    NOTICE("attacker died");
+    _cells[_selectedUnit->c()][_selectedUnit->l()]->removeUnit();
+    attacker_died = true;
+  }
+
+  return attackResult(attacker_died, defender_died);
+}
+
+
+e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
+{
+  assert(_selectedUnit && target_cell);
+
+  auto defender = target_cell->unit();
+  if (!defender)
+  {
+    NOTICE("Attacking empty cell");
+    return e_attack_result::NONE_DIED;
+  }
+
+  return attack(defender);
+}
 
 
 void Map::dump()

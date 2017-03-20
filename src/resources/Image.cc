@@ -1,12 +1,12 @@
 #include <resources/Image.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
-namespace graphics {
+namespace resources {
 
 
-Image::Image(const std::string file_name,
-             const std::string name)
+Image::Image(const std::string file_name, const std::string name)
 {
    /// \todo allocation only if needed (using a proxy)
   _rectangle = std::make_shared<sf::RectangleShape> ();
@@ -26,6 +26,7 @@ Image::Image(const std::string file_name,
   //_scope = E_SCOPE_ALL;
 }
 
+
 std::shared_ptr<sf::Texture> Image::getTexture()
 {
   if (!_texture)
@@ -38,6 +39,7 @@ std::shared_ptr<sf::Texture> Image::getTexture()
 
   return _texture;
 }
+
 
 void Image::initTexture()
 {
@@ -85,38 +87,40 @@ std::shared_ptr<sf::Sprite> Image::sprite()
 }
 
 
-void Image::setFileName(std::string file_name)
+void Image::setFileName(const std::string file_name)
 {
   _fileName = file_name;
   _loaded = false;
 }
 
 
-void Image::setPosition(sf::Vector2f position)
+void Image::setPosition(const Coords position)
 {
-  if (!_sprite)
+  if (!_sprite) {
     initSprite();
-  _sprite->setPosition(position);
+  }
+  _sprite->setPosition(sf::Vector2f(position.c, position.l));
 }
 
 
-void Image::setPosition(Coords position)
+void Image::setPosition(const size_t x, const size_t y)
 {
-  if (!_sprite)
+  if (!_sprite) {
     initSprite();
-  _sprite->setPosition(sf::Vector2f(position.x, position.y));
+  }
+  _sprite->setPosition(sf::Vector2f(x, y));
 }
 
 
-
-void Image::setSize(sf::Vector2f size)
+void Image::setSize(const sf::Vector2f size)
 {
   auto old_size(_rectangle->getSize());
   _rectangle->setSize(size);
   _sprite->setScale(sf::Vector2f(size.x / old_size.x, size.y / old_size.y));
 }
 
-void Image::setSize(float width, float height)
+
+void Image::setSize(const float width, const float height)
 {
   auto size(_texture->getSize());
   _rectangle->setSize(sf::Vector2f(width / size.x, height / size.y));
@@ -124,21 +128,21 @@ void Image::setSize(float width, float height)
 }
 
 
-
-void Image::setScale(sf::Vector2f size)
+void Image::setScale(const sf::Vector2f size)
 {
   _rectangle->setScale(size);
   _sprite->setScale(size);
 }
 
-void Image::setScale(float width, float height)
+
+void Image::setScale(const float width, const float height)
 {
   _rectangle->setScale(sf::Vector2f(width, height));
   _sprite->setScale(sf::Vector2f(width, height));
 }
 
 
-void Image::setScale(float ratio)
+void Image::setScale(const float ratio)
 {
   _rectangle->setScale(sf::Vector2f(ratio, ratio));
   _sprite->setScale(sf::Vector2f(ratio, ratio));
@@ -176,12 +180,10 @@ void Image::unload()
 # ifdef DEBUG
   _rectangle->setTexture(NULL);
 # endif
-
-  return;
 }
 
 
-void Image::reload(std::string file_name)
+void Image::reload(const std::string file_name)
 {
   // if (_texture)
   //   delete _texture;
@@ -192,22 +194,22 @@ void Image::reload(std::string file_name)
 }
 
 
-void Image::drawAtCell(const Coords c,
-                       const std::shared_ptr<Map::MapGraphicsProperties> p)
+void Image::drawAtCell(const Coords c)
 {
   if (!_sprite) {
     sprite();
   }
 
-  // Sprite position
-  sf::Vector2f pos;
-  pos.x = c.x * p->cellWidth()  + p->gridOffsetX();
-  pos.y = c.y * p->cellHeight() + p->gridOffsetY();
+  sf::Vector2f pos; // Sprite position
+  using p = graphics::MapGraphicsProperties;
+  pos.x = c.c * p::cellWidth()  + p::gridOffsetX();
+  pos.y = c.l * p::cellHeight() + p::gridOffsetY();
   _sprite->setPosition(pos);
 
   if (load()) {
     graphics::GraphicsEngine::draw(_sprite);
   }
+
   graphics::GraphicsEngine::draw(_rectangle);
 }
 
@@ -228,4 +230,4 @@ void Image::draw()
 }
 
 
-} // namespace graphics
+} // namespace resources

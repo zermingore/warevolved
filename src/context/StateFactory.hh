@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef STATE_FACTORY_HH_
-# define STATE_FACTORY_HH_
+#ifndef CONTEXT_STATE_FACTORY_HH_
+# define CONTEXT_STATE_FACTORY_HH_
 
 # include <memory>
 # include <context/State.hh>
@@ -25,8 +25,8 @@ public:
    * \param state: The state identifier
    * \return A pointer to the matching State
    */
-  static std::shared_ptr<State> createState(e_state& state);
+  static std::shared_ptr<State> createState(const e_state& state);
 };
 
 
-#endif /* !STATE_FACTORY_HH_ */
+#endif /* !CONTEXT_STATE_FACTORY_HH_ */

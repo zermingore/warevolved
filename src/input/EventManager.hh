@@ -1,5 +1,11 @@
-#ifndef EVENT_MANAGER_HH_
-# define EVENT_MANAGER_HH_
+/**
+ * \file
+ * \date April 17, 2013
+ * \author Zermingore
+ */
+
+#ifndef INPUT_EVENT_MANAGER_HH_
+# define INPUT_EVENT_MANAGER_HH_
 
 # include <map>
 # include <memory>
@@ -22,7 +28,7 @@ public:
    * \brief executes the callback matching the given event, if any
    * \return true if a callback was executed
    */
-  bool process(e_input input);
+  bool process(const e_input input);
 
 
   /**
@@ -30,7 +36,7 @@ public:
    * \param key event name.
    * \param cb callback to associate to the event.
    */
-  void registerEvent(e_input input, std::function<void()> cb) {
+  void registerEvent(const e_input input, const std::function<void()> cb) {
     _callbacks[input] = cb;
   }
 
@@ -48,4 +54,4 @@ private:
 };
 
 
-#endif /* !EVENT_MANAGER_HH_ */
+#endif /* !INPUT_EVENT_MANAGER_HH_ */

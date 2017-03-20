@@ -1,13 +1,22 @@
-#ifndef FONT_HH_
-# define FONT_HH_
+/**
+ * \file
+ * \date Apr 27, 2013
+ * \author Zermingore
+ */
+
+#ifndef RESOURCES_FONT_HH_
+# define RESOURCES_FONT_HH_
 
 # include <resources/Resource.hh>
 # include <common/include.hh>
 
 
+namespace resources {
+
+
 /**
- * \class Font Resource type
- * \brief Font class to draw text
+ * \class Font
+ * \brief Font resource type, used to draw text
  */
 class Font: public Resource
 {
@@ -31,8 +40,8 @@ public:
 
   /**
    * \brief _font getter
-   *   loads the requested Font if needed
    * \return _font value
+   * \note loads the requested Font if needed
    */
   std::shared_ptr<sf::Font> getFont();
 
@@ -42,4 +51,8 @@ private:
 };
 
 
-#endif /* !FONT_HH_ */
+} // namespace resources
+
+
+
+#endif /* !RESOURCES_FONT_HH_ */

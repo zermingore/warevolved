@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
+ */
+
 #ifndef CELL_HH_
 # define CELL_HH_
 
@@ -29,23 +35,23 @@ public:
    * Draw the cell without any Terrain (so no Texture either).
    * and without any Unit.
    *
-   * \param x x coordinate of the cell to create.
-   * \param y y coordinate of the cell to create.
+   * \param c column coordinate of the cell to create.
+   * \param l line   coordinate of the cell to create.
    */
-  Cell(size_t x, size_t y);
+  Cell(const size_t c, const size_t l);
 
   // __________________________ Getters / Setters __________________________ //
   /**
    * \brief _unit getter.
    * \return cell's unit.
    */
-  std::shared_ptr<Unit> unit() { return _unit; }
+  auto unit() { return _unit; }
 
   /**
    * \brief _terrain getter.
    * \return cell's terrain.
    */
-  e_terrain terrain() { return _terrain; }
+  auto terrain() { return _terrain; }
 
   /**
    * \brief _unit setter. Sets the given Unit in the cell.
@@ -63,7 +69,7 @@ public:
    * \brief Highlight getter.
    * \return Highlight Boolean value.
    */
-  bool highlight() { return _highlight; }
+  auto highlight() { return _highlight; }
 
   /**
    * \brief Highlight setter.
@@ -75,7 +81,7 @@ public:
    * \brief Highlight color getter.
    * \return Highlight color value.
    */
-  Color highlightColor() { return _highlightColor; }
+  auto highlightColor() { return _highlightColor; }
 
   /**
    * \brief Highlight color setter.
@@ -89,21 +95,21 @@ public:
   void removeUnit() { _unit = nullptr; }
 
   /**
-   * \brief returns Cell's x coordinate.
-   * \return cell x coordinate.
+   * \brief returns Cell's line coordinate.
+   * \return cell line coordinate.
    */
-  size_t x() { return _coords.x; }
+  auto l() { return _coords.l; }
 
   /**
-   * \brief returns Cell's y coordinate.
-   * \return cell y coordinate.
+   * \brief returns Cell's column coordinate.
+   * \return cell column coordinate.
    */
-  size_t y() { return _coords.y; }
+  auto c() { return _coords.c; }
 
   /**
    * \brief coords getter.
    */
-  Coords coords() { return _coords; }
+  auto coords() { return _coords; }
 
 
 private:

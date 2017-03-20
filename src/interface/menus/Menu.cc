@@ -1,11 +1,10 @@
 #include <interface/menus/Menu.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/constants.hh>
-#include <common/macros.hh>
 #include <common/Status.hh>
 #include <context/State.hh>
 #include <input/EventManager.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 
@@ -17,11 +16,12 @@ Menu::Menu()
   , _selectedEntry (0)
   , _imageSelection(resources::ResourcesManager::getImage("selection_menu_selection"))
 {
-  _entries = std::vector<std::shared_ptr<MenuEntry>> ();
 }
 
 
-void Menu::setOrigin(Coords origin) {
+void Menu::setOrigin(const Coords origin)
+{
+  /// \todo set the menu at optimal coordinates
   _origin = origin;
 }
 

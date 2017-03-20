@@ -70,3 +70,11 @@ state: unique state
 event manager: confirm pressed -> special action (can overload browse map though)
 
 => 1 state <-> 1 event manager ?
+
+
+
+resume() / suspend()
+
+StateMenu: ~generic class
+cannot rely on player cursor (should not be altered, only by StatePlaying)
+-> define StateSelectTarget ...

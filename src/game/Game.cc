@@ -1,11 +1,12 @@
 #include <game/Game.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <resources/ResourcesManager.hh>
 #include <input/InputProcessor.hh>
 #include <common/Status.hh>
 #include <common/enums/states.hh>
 #include <input/KeyManager.hh>
+#include <context/State.hh>
 
 
 void Game::run()
@@ -22,6 +23,7 @@ void Game::run()
   Status::setInputProcessor(input_processor);
 
   Status::pushState(e_state::PLAYING);
+  Status::currentState()->resume();
 
   // Game loop: processing events, updating display
   while (GraphicsEngine::windowIsOpen() && input_processor->process()) {

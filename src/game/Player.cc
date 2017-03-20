@@ -7,13 +7,15 @@
 #include <common/enums/states.hh>
 #include <context/State.hh>
 #include <context/StateMenu.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 
 
-Player::Player(Color c)
+Player::Player(const Color c)
 {
   static size_t static_id = 0;
   _id = static_id++;
+
+  _color = c;
 
   // Cursor
   _cursor = std::make_shared<interface::Cursor> ();
@@ -45,44 +47,14 @@ void Player::moveCursorRight() {
 void Player::select()
 {
   /// \todo check selectable before push
-  Status::pushState(e_state::SELECTION_UNIT);
 
-  // auto menu(std::make_shared<interface::InGameMenu> ());
-  // menu->setCoords(_cursor->coords());
-  // menu->build();
-  // _interface->pushMenu(menu);
-}
-
-// void Player::move()
-// {
-//   ERROR("Player::select");
-//   Status::pushState(e_state::SELECTION_UNIT);
-//   auto menu(std::make_shared<interface::InGameMenu> ());
-//   menu->setCoords(_cursor->coords());
-//   menu->build();
-//   _interface->pushMenu(menu);
-// }
-
-
-
-
-// _____________________________  Units motion _____________________________ //
-
-// tmp
-void Player::moveUnitUp() {
-  moveCursorUp();
-}
-
-void Player::moveUnitDown() {
-  moveCursorDown();
-}
-
-void Player::moveUnitLeft() {
-  moveCursorLeft();
-}
-
-void Player::moveUnitRight() {
-  moveCursorRight();
+  if (Status::battle()->map()->unit(_cursor->coords())) {
+    Status::pushState(e_state::SELECTION_UNIT);
+  }
+  else {
+    Status::pushState(e_state::MAP_MENU);
+  }
+  Status::currentState()->resume();
 }
 
 
@@ -90,10 +62,7 @@ bool Player::updateSelectedUnit()
 {
   // Update the Map selected Unit
   auto coords(Status::player()->cursor()->coords());
-  if (!(_selectedUnit = Status::battle()->map()->selectUnit(coords))) {
-    Debug::error("Unable to select a unit");
-    return false;
-  }
+  Status::battle()->map()->selectUnit(coords);
 
   // \todo highlight the unit
   // \todo save in the class a copy of the unit sprite

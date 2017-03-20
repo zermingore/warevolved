@@ -27,61 +27,55 @@ public:
   /**
    * \brief Builds the selection menu, filling the entries.
    */
-  void build() final;
-
-
-  void moveUp();
-  void moveDown();
-
-  /**
-   * \brief updates the graphics attributes of the menu
-   */
-  void update(const std::shared_ptr<Map::MapGraphicsProperties> properties);
-
-  /**
-   * \brief Highlights the selected entry
-   */
-  void draw();
-
+  virtual void build() = 0;
 
   /**
    * \brief Closes the current menu, clearing its interface elements
    */
-  void close();
+  virtual void close();
 
 
+  /**
+   * \brief Cursor motion: up
+   */
+  void moveUp();
+
+  /**
+   * \brief Cursor motion: down
+   */
+  void moveDown();
+
+  /**
+   * \brief Validate selected entry
+   */
   void validate();
 
 
-  /// \todo should not be there
-  void moveUnit();
+  /**
+   * \brief updates the graphics attributes of the menu
+   */
+  void update();
 
-  void waitUnit();
+  /**
+   * \brief Draw the entries of the menu
+   */
+  virtual void draw();
 
 
 
-private:
+protected:
   /**
    * \brief Default cancel entry callback (pops the menu)
    */
-  void defaultCancel();
+  virtual void cancel();
 
   /**
-   * \brief Action cancel entry callback
+   * \brief Adds a cancel entry into the menu
    */
-  void actionCancel();
-
-  /**
-   * \brief Restore menu to its previous state
-   */
-  void restore();
-
-  /**
-   * \brief Adds a standard cancel entry into the menu
-   */
-  void addCancelEntry(std::function<void()> cancel_callback);
+  void addCancelEntry(const std::function<void()> cancel_callback);
 
 
+  // \todo RM _cursorCoords / _unit
   // state data
   Coords _cursorCoords; ///< Saved cursor coordinates
   std::shared_ptr<Unit> _unit; ///< Saved unit

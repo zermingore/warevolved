@@ -1,7 +1,8 @@
 /**
- * \file Player definition.
+ * \file
  * \date August 1, 2013
  * \author Zermingore
+ * \brief Player definition.
  */
 
 #ifndef PLAYER_HH_
@@ -32,14 +33,14 @@ public:
    * \brief Constructor. Sets the Player's index to a unique value.
    * \param c color used by the player
    */
-  explicit Player(Color c);
+  explicit Player(const Color c);
 
 
   /**
    * \brief Player identifier getter.
    * \return Player's identifier.
    */
-  size_t id() { return _id; }
+  auto id() { return _id; }
 
 
   // Cursor motion
@@ -48,12 +49,6 @@ public:
   void moveCursorLeft();
   void moveCursorRight();
 
-  // Unit motion
-  void moveUnitUp();
-  void moveUnitDown();
-  void moveUnitLeft();
-  void moveUnitRight();
-
   /**
    * \brief callback when a cell is clicked.
    * \note only used when no unit is selected / menu opened
@@ -61,16 +56,22 @@ public:
   void select();
 
   /**
+   * \brief color getter
+   * \return the color associated to the player
+   */
+  auto color() { return _color; }
+
+  /**
    * \brief Player's interface getter.
    * \return Interface pointer.
    */
-  std::shared_ptr<interface::Interface> interface() { return _interface; }
+  auto interface() { return _interface; }
 
   /**
    * \brief Cursor getter.
    * \return a pointer to the player's cursor.
    */
-  std::shared_ptr<interface::Cursor> cursor() { return _cursor; }
+  auto cursor() { return _cursor; }
 
 
   bool updateSelectedUnit();
@@ -86,6 +87,8 @@ private:
   std::shared_ptr<interface::Cursor>     _cursor;    ///< Map Cursor
 
   std::shared_ptr<Unit> _selectedUnit; ///< current selected unit
+
+  sf::Color _color; ///< player's color
 };
 
 

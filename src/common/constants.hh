@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
+ */
+
 #ifndef CONSTANTS_HH_
 # define CONSTANTS_HH_
 

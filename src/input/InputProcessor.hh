@@ -1,5 +1,11 @@
-#ifndef INPUT_PROCESSOR_HH_
-# define INPUT_PROCESSOR_HH_
+/**
+ * \file
+ * \date October 6, 2016
+ * \author Zermingore
+ */
+
+#ifndef INPUT_INPUT_PROCESSOR_HH_
+# define INPUT_INPUT_PROCESSOR_HH_
 
 # include <memory>
 # include <queue>
@@ -17,6 +23,10 @@ class InputProcessor
 public:
   /// Instanciates a KeyManager
   InputProcessor();
+
+  /// Default destructor
+  ~InputProcessor() = default;
+
 
   /**
    * \brief process events.
@@ -38,4 +48,4 @@ private:
 };
 
 
-#endif /* INPUT_PROCESSOR_HH_ */
+#endif /* INPUT_INPUT_PROCESSOR_HH_ */

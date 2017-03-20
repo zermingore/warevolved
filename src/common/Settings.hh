@@ -30,54 +30,53 @@ public:
    * \param stencil stencil value
    * \param antiAliasing anti aliasing coefficient
    */
-  static void initialize(unsigned int depth,
-                         unsigned int stencil,
-                         unsigned int antiAliasing);
-
+  static void initialize(const unsigned int depth,
+                         const unsigned int stencil,
+                         const unsigned int antiAliasing);
 
   /**
    * \brief graphic depth getter.
    * \return depth value.
    */
-  static unsigned int depth() { return _depth; }
+  static auto depth() { return _depth; }
 
   /**
    * \brief graphic stencil getter.
    * \return stencil value.
    */
-  static unsigned int stencil() { return _stencil; }
+  static auto stencil() { return _stencil; }
 
   /**
    * \brief Anti aliasing getter.
    * \return Anti aliasing coefficient.
    */
-  static unsigned int antiAliasing() { return _antiAliasing; }
+  static auto antiAliasing() { return _antiAliasing; }
 
   /**
    * \brief _fullScreen getter.
    * \return true if we're in full screen false otherwise.
    */
-  static bool fullScreen() { return _fullScreen; }
+  static auto fullScreen() { return _fullScreen; }
 
   /**
    * \brief _keyRepeatDelay getter.
    * \return the required time to consider a "second pressure" (in ms).
    */
-  static int keyRepeatDelay() { return _keyRepeatDelay; }
+  static auto keyRepeatDelay() { return _keyRepeatDelay; }
 
   /**
    * \brief _keyRepeatDelay setter.
    * \param delay delay to consider a key as maintained, in ms
    */
-  static void setKeyRepeatDelay(size_t delay) { _keyRepeatDelay = delay; }
+  static void setKeyRepeatDelay(const size_t delay) { _keyRepeatDelay = delay; }
 
   // graphics settings setters
-  static void setDepth(size_t depth) { _depth = depth; }
-  static void setStencil(size_t stencil) { _stencil = stencil; }
-  static void setAntiAliasing(size_t aa) { _antiAliasing = aa; }
+  static void setDepth(const size_t depth)     { _depth = depth; }
+  static void setStencil(const size_t stencil) { _stencil = stencil; }
+  static void setAntiAliasing(const size_t aa) { _antiAliasing = aa; }
 
   // generic settings setters
-  static void setFullScreen(bool fullScreen) { _fullScreen = fullScreen; }
+  static void setFullScreen(const bool fullScreen) { _fullScreen = fullScreen; }
 
 
 private:

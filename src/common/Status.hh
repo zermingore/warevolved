@@ -45,14 +45,16 @@ public:
 
   // ________________________________ Battle ________________________________ //
   /// Battle getter
-  static std::shared_ptr<Battle> battle() { return _battle; }
+  static auto battle() { return _battle; }
 
   /// Battle setter
-  static void setBattle(std::shared_ptr<Battle> battle) { _battle = battle; }
-
+  static void setBattle(const std::shared_ptr<Battle> battle) {
+    _battle = battle;
+  }
 
   // ________________________________ Events ________________________________ //
-  static void setInputProcessor(std::shared_ptr<InputProcessor> processor) {
+  static void setInputProcessor(const std::shared_ptr<InputProcessor> processor)
+  {
     _inputProcessor = processor;
   }
 
@@ -74,7 +76,7 @@ public:
    * \brief stacks a new state on _states
    * \param state state we just entered
    */
-  static void pushState(e_state state);
+  static void pushState(const e_state state);
 
   /**
    * \brief pops _states and blocks the inputs
@@ -86,6 +88,12 @@ public:
    * \note The stack must not be empty and must contain e_state::PLAYING
    */
   static void clearStates();
+
+
+  /**
+   * \brief Switch to the next Player
+   */
+  static void nextPlayer();
 
 
   // _______________________________ Wrappers _______________________________ //
@@ -104,6 +112,14 @@ public:
 
 
 private:
+  /**
+   * \brief Ignore every input for a short time period (default: 100ms)
+   * \param duration Delay in ms before re-considering input
+   * \note Useful when changing State to ignore involuntary but valid input
+   */
+  static void blockInputs(const size_t duration = 100);
+
+
   ///< States stack: storing a pointer to the state and its (more specific) type
   static std::stack<std::pair<e_state, std::shared_ptr<State>>> _states;
 

@@ -1,8 +1,9 @@
-/*
- * common/include.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \brief usual includes (graphic library, debug, data structures, STL).
+ * \note It should not be included systematically
  */
 
 #ifndef INCLUDE_HH_
@@ -17,7 +18,7 @@
 # include <memory>
 # include <cassert>
 
-# include <common/debug/Debug.hh>
+# include <debug/Debug.hh>
 # include <common/structures/Vector.hh>
 
 # include <SFML/Graphics.hpp>

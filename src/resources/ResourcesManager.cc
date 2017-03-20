@@ -5,16 +5,17 @@
 #include <resources/Font.hh>
 
 
-namespace resources
-{
+namespace resources {
+
 // Static Variables definition
-std::map<std::string, std::shared_ptr<graphics::Image>> ResourcesManager::_images;
-std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
+std::map<std::string, std::string> ResourcesManager::_images;
+std::map<std::string, std::shared_ptr<resources::Font>> ResourcesManager::_fonts;
 std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
 
 // default resources paths
 const std::string DEFAULT_IMAGE_PATH = "resources/defaults/image.png";
-const std::string DEFAULT_FONT_PATH = "resources/defaults/font.ttf";
+const std::string DEFAULT_FONT_PATH  = "resources/defaults/font.ttf";
+
 
 
 void ResourcesManager::initialize(const std::string file_name)
@@ -31,36 +32,34 @@ void ResourcesManager::initialize(const std::string file_name)
 
 void ResourcesManager::initializeDefaultResources()
 {
-  _images["default"] = std::make_shared<graphics::Image> (DEFAULT_IMAGE_PATH, "default");
-  _fonts["default"] = std::make_shared<Font> (DEFAULT_FONT_PATH, "default");
+  _images["default"] = DEFAULT_IMAGE_PATH;
+  _fonts["default"]  = std::make_shared<resources::Font> (DEFAULT_FONT_PATH, "defaut");
 }
 
 void ResourcesManager::initTypeNames()
 {
-  _typeNames[E_RESOURCE_TYPE_NONE]  = "none";
-  _typeNames[E_RESOURCE_TYPE_IMAGE] = "images";
-  _typeNames[E_RESOURCE_TYPE_FONT]  = "fonts";
-  _typeNames[E_RESOURCE_TYPE_SOUND] = "sounds";
+  _typeNames[e_resource_type::NONE]  = "none";
+  _typeNames[e_resource_type::IMAGE] = "images";
+  _typeNames[e_resource_type::FONT]  = "fonts";
+  _typeNames[e_resource_type::SOUND] = "sounds";
 }
 
 
-bool ResourcesManager::addResource(e_resource_type type,
+bool ResourcesManager::addResource(const e_resource_type type,
                                    const std::string name,
                                    const std::string file_name)
 {
   switch (type)
   {
-    case E_RESOURCE_TYPE_IMAGE:
-      _images[name] = std::make_shared<graphics::Image> (file_name, name);
+    case e_resource_type::IMAGE:
+      _images[name] = file_name;
       return true;
 
-    case E_RESOURCE_TYPE_FONT:
-    {
-      _fonts[name] = std::make_shared<Font> (file_name, name);
+    case e_resource_type::FONT:
+      _fonts[name] = std::make_shared<resources::Font> (file_name, name);
       return true;
-    }
 
-    // case E_RESOURCE_TYPE_SOUND:
+    // case e_resource_type::SOUND:
     //   _sounds[name] = std::make_shared<Sound> (file_name, name);
     //   return true;
 
@@ -76,11 +75,11 @@ bool ResourcesManager::parseXML(const std::string file_name)
   pugi::xml_document doc;
   if (!doc.load_file(file_name.c_str()))
   {
-    Debug::error("unable to load file");
+    ERROR("unable to load file");
     return false;
   }
 
-  e_resource_type type = static_cast<e_resource_type>(E_RESOURCE_TYPE_NONE + 1);
+  auto type = static_cast<e_resource_type>(static_cast<int> (e_resource_type::NONE) + 1);
   pugi::xml_node category = doc.child("resources").child(_typeNames[type].c_str());
 
   // for all categories > browse folders > for all files > get their infos
@@ -93,12 +92,13 @@ bool ResourcesManager::parseXML(const std::string file_name)
         std::string tmp = folder.attribute("path").value();
         tmp += file.attribute("filename").value();
 
-        for (pugi::xml_node child: file.children())
+        for (pugi::xml_node child: file.children()) {
           addResource(type, child.text().get(), tmp);
+        }
       }
     }
 
-    type = static_cast<e_resource_type>(type + 1);
+    type = static_cast<e_resource_type>(static_cast<int> (type) + 1);
     category = category.next_sibling();
   }
 
@@ -110,28 +110,42 @@ bool ResourcesManager::parseXML(const std::string file_name)
 void ResourcesManager::listResources()
 {
   PRINTF("\t\t__________Resources List__________");
-  for (auto it : _images)
+  for (auto it : _images) {
     Debug::logPrintf(it.second->name());
+  }
 
-  for (auto it : _fonts)
+  for (auto it : _fonts) {
     Debug::logPrintf(it.second->name());
+  }
 }
-#endif
+#endif // DEBUG_XML
 
 
-graphics::Image& ResourcesManager::getImage(const std::string name)
+std::shared_ptr<resources::Image> ResourcesManager::getImage(const std::string name)
 {
-  if (_images.find(name) != _images.end())
-    return *_images[name];
+  if (_images.find(name) != _images.end()) {
+    return std::make_shared<resources::Image> (_images[name], name);
+  }
 
-  Debug::error("Unable to find image: ", name);
-# ifdef DEBUG
-  assert(! "Image not found");
-# endif
+  ERROR("Unable to find image:", name);
+  assert(!"Image not found");
 
-  return *_images["default"];
+  return std::make_shared<resources::Image> (DEFAULT_IMAGE_PATH, "default");
 }
 
+
+
+resources::Font& ResourcesManager::getFont(const std::string name)
+{
+  if (_fonts.find(name) != _fonts.end()) {
+    return *_fonts[name];
+  }
+
+  ERROR("Unable to find font: ", name);
+  assert(!"Font not found");
+
+  return *_fonts["default"];
+}
 
 
 sf::Font& ResourcesManager::font(const std::string name)
@@ -141,20 +155,7 @@ sf::Font& ResourcesManager::font(const std::string name)
   }
 
   Debug::logPrintf("Unable to find font: ", name);
-
   return *(_fonts["default"]->getFont());
-}
-
-
-Font& ResourcesManager::getFont(const std::string name)
-{
-  if (_fonts.find(name) != _fonts.end()) {
-    return *_fonts[name];
-  }
-
-  Debug::logPrintf("Unable to find font: ", name);
-
-  return *_fonts["default"];
 }
 
 

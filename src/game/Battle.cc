@@ -1,24 +1,28 @@
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
 #include <common/enums/units.hh>
 #include <common/structures/Vector.hh>
 #include <common/Status.hh>
 #include <game/Player.hh>
 #include <game/Map.hh>
 #include <interface/Cursor.hh>
+#include <graphics/MapGraphicsProperties.hh>
+#include <game/PathFinding.hh>
 
 
 Battle::Battle() :
   _currentPlayer (0)
 {
   /// \todo map size is hard-coded
-  _map = std::make_shared<Map> (8, 5);
+  _map = std::make_shared<Map> (8, 5); /// \todo move in buildMap
 }
 
 
 void Battle::initializeMap()
 {
+  graphics::MapGraphicsProperties::initialize();
   buildPlayers();
   buildMap();
+  PathFinding::setMap(_map);
 }
 
 
@@ -35,12 +39,12 @@ void Battle::buildPlayers()
 /// \todo generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  /// \todo delegate to a factory
-  _map->newUnit(e_unit::SOLDIERS, 0, 1);
-  // _map->newUnit(e_unit::SOLDIERS, 4, 2);
+  _map->newUnit(e_unit::SOLDIERS, 0, 0, 0);
+  _map->newUnit(e_unit::SOLDIERS, 2, 0, 0);
 
-  // _map->newUnit(e_unit::SOLDIERS, 3, 4);
-  // _map->newUnit(e_unit::SOLDIERS, 3, 1);
+  _map->newUnit(e_unit::SOLDIERS, 0, 4, 1);
+  _map->newUnit(e_unit::SOLDIERS, 3, 0, 1);
+  _map->newUnit(e_unit::SOLDIERS, 3, 2, 1);
 
   /// \todo set terrain
 
