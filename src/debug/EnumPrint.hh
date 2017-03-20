@@ -1,3 +1,9 @@
+/**
+ * \file
+ * \date January 13, 2017
+ * \author Zermingore
+ */
+
 #ifndef DEBUG_ENUM_PRINT_HH_
 # define DEBUG_ENUM_PRINT_HH_
 

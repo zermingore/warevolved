@@ -38,7 +38,7 @@ resources/Font.cc                   \
 \
 debug/Debug.cc                      \
 debug/OSD.cc                        \
-common/debug/EnumPrint.cc           \
+debug/EnumPrint.cc                  \
 \
 common/System.cc                    \
 common/Settings.cc                  \

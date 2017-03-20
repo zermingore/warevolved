@@ -1,4 +1,4 @@
-#include <common/debug/EnumPrint.hh>
+#include <debug/EnumPrint.hh>
 
 
 namespace debug {
@@ -36,8 +36,8 @@ void printState(e_state state)
       break;
 
     default:
+      ERROR("Debug enum print failure", static_cast<int> (state));
       exit(1);
-//        assert(!"Debug printing failure (e_state)");
   }
 }
 
