@@ -12,14 +12,18 @@
 #   error "abort, should not be compiled in release"
 # endif
 
+# include <string>
 # include <debug/Debug.hh>
 # include <common/enums/states.hh>
+# include <common/enums/input.hh>
 
 
 /// \todo static class
 
 namespace debug {
   void printState(e_state state);
+
+  std::string printInput(e_input input);
 } // namespace debug
 
 

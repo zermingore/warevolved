@@ -11,7 +11,7 @@
 InputProcessor::InputProcessor()
   : _km(std::make_shared<KeyManager> ())
 {
-  EventsLogger::initialize("LOG_EVENTS");
+  debug::EventsLogger::initialize("LOG_EVENTS");
 }
 
 
@@ -20,7 +20,7 @@ bool InputProcessor::process()
   sf::Event event;
   while (graphics::GraphicsEngine::pollEvent(event))
   {
-    EventsLogger::log(event);
+    debug::EventsLogger::log(event);
 
 
     // Close window: exit request
@@ -41,7 +41,7 @@ bool InputProcessor::process()
     {
       if (Status::currentState()->eventManager()->process(i))
       {
-        EventsLogger::logProcessedEvent(i);
+        debug::EventsLogger::logProcessedEvent(i);
         // PRINTF("processed:", (int) i,
         //        "in current state", Status::currentState());
       }

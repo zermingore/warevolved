@@ -1,6 +1,11 @@
-#include <debug/EventsLogger.hh>
 #include <fstream>
 #include <chrono>
+
+#include <debug/EventsLogger.hh>
+#include <debug/EnumPrint.hh>
+
+
+namespace debug {
 
 // static attributes definition
 std::string EventsLogger::_logFileName;
@@ -32,5 +37,8 @@ void EventsLogger::log(sf::Event event)
 void EventsLogger::logProcessedEvent(e_input input)
 {
   std::chrono::duration<double> time_elapsed(std::chrono::steady_clock::now() - _creationTime);
-  *_log << time_elapsed.count() << "| input: " << static_cast<int> (input) << '\n';
+  *_log << time_elapsed.count() << "| input: " << printInput(input) << '\n';
 }
+
+
+} // namespace debug

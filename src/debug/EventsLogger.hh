@@ -14,6 +14,8 @@
 # include <common/enums/input.hh>
 
 
+namespace debug {
+
 /**
  * \class EventLogger
  * \brief Log events since the class creation
@@ -48,6 +50,9 @@ private:
   ///< log creation timestamp
   static std::chrono::steady_clock::time_point _creationTime;
 };
+
+
+} //  namespace debug
 
 
 #endif /* !EVENTS_LOGGER_HH_ */

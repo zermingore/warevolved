@@ -41,4 +41,20 @@ void printState(e_state state)
   }
 }
 
+
+std::string printInput(e_input input)
+{
+  switch (input)
+  {
+    case e_input::MOVE_RIGHT:
+      return "MOVE_RIGHT";
+
+    default:
+      return "unknown";
+  }
+
+  return "unknown";
+}
+
+
 } // namespace debug
