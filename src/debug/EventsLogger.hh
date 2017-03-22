@@ -26,12 +26,6 @@ public:
   static void initialize(std::string filename);
 
   /**
-   * \brief log file name setter
-   * \param file_name log file name (eventually with path)
-   */
-//  static void setFileName(std::string file_name) { _logFileName = file_name; }
-
-  /**
    * \brief Add the given event to the log, with a timestamp
    * \param event Event to log
    */
@@ -39,9 +33,6 @@ public:
 
 
 private:
-  ///< Time elapsed since construction of the EventLogger
-//  std::chrono::duration _timestamp;
-
   static std::string _logFileName; ///< log file name (may contain the path)
 
   static std::unique_ptr<std::ofstream> _log; ///< log file
