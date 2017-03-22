@@ -4,6 +4,7 @@
 *.o
 *.in
 LOG
+LOG_EVENTS
 *\#
 *user
 

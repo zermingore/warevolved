@@ -4,12 +4,14 @@
 #include <context/State.hh>
 #include <input/KeyManager.hh>
 #include <common/enums/input.hh>
+#include <debug/EventsLogger.hh>
 
 
 
 InputProcessor::InputProcessor()
   : _km(std::make_shared<KeyManager> ())
 {
+  EventsLogger::initialize("LOG_EVENTS");
 }
 
 
@@ -18,6 +20,9 @@ bool InputProcessor::process()
   sf::Event event;
   while (graphics::GraphicsEngine::pollEvent(event))
   {
+    EventsLogger::log(event);
+
+
     // Close window: exit request
     if (event.type == sf::Event::Closed)
     {
