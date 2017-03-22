@@ -11,6 +11,8 @@
 # include <chrono>
 # include <SFML/Window.hpp>
 
+# include <common/enums/input.hh>
+
 
 /**
  * \class EventLogger
@@ -30,6 +32,12 @@ public:
    * \param event Event to log
    */
   static void log(sf::Event event);
+
+  /**
+   * \brief Add the given high level input to the log, with a timestamp
+   * \param input input event to log
+   */
+  static void logProcessedEvent(e_input input);
 
 
 private:

@@ -27,3 +27,10 @@ void EventsLogger::log(sf::Event event)
   std::chrono::duration<double> time_elapsed(std::chrono::steady_clock::now() - _creationTime);
   *_log << time_elapsed.count() << "| " << static_cast<int> (event.type) << '\n';
 }
+
+
+void EventsLogger::logProcessedEvent(e_input input)
+{
+  std::chrono::duration<double> time_elapsed(std::chrono::steady_clock::now() - _creationTime);
+  *_log << time_elapsed.count() << "| input: " << static_cast<int> (input) << '\n';
+}
