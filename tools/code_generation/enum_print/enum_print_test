@@ -1,0 +1,12 @@
+enum class match_me
+enum class me_too // not this
+enum should_complain
+enum class valid /* comment // weird */
+enum class keep // /* multiple */ comments // here
+/* comment */ enum class preceded
+// not an enum class not_matchf
+/* still not an enum class not_match */
+
+of course, skip this
+
+and that
