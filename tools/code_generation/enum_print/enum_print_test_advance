@@ -7,6 +7,8 @@ enum class keep // /* multiple */ comments // here
 // not an enum class not_matchf
 /* still not an enum class not_match */
 
+enum class ok: int
+
 /*
 enum class will_not_work__shd_not_appear
 */
