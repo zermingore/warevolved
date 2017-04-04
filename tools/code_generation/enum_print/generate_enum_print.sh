@@ -118,5 +118,6 @@ generate_print "$enums"
 
 # bash: multiple return values: prototype and function
 
+# handle comments with gcc -E
 # use awk -> enum names and values
 # see also xmacros
