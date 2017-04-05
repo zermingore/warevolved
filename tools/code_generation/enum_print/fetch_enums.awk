@@ -20,19 +20,42 @@ BEGIN {
 
 END {
   print "____________ done fetching enums _____________\n"
+  print ""
+  print ""
+  print ""
+
+
+  # Adding required headers
+  printf("#include <string>\n")
+  print ""
+
+  # Generating prototypes
+  for (enums in res)
+  {
+    # print enums
+    printf("std::string get%sString(%s entry);\n", enums, enums)
+  }
+  print ""
 
 
   for (enums in res)
   {
-    print enums
+    # print enums
+    printf("std::string get%sString(%s entry)\n", enums, enums)
+    printf "{\n"
+    printf("  switch (entry)\n")
+    printf "  {\n"
     for (values in res[enums])
     {
-      for (fields in res[enums][values])
-      {
-        printf "%s ", res[enums][values][fields]
-      }
-      print ""
+      printf "    case %s:\n", res[enums][values]["entry"]
+      printf "      return \"%s\";\n", res[enums][values]["value"]
     }
+
+    printf "    default:\n"
+    printf "      return \"entry not matched\";\n"
+
+    printf "  }\n"
+    printf "}\n"
   }
 
 
