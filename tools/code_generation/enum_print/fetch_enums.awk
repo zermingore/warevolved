@@ -26,6 +26,11 @@ END {
 
 
   # Adding required headers
+  printf("// auto-generated code, edit at your own risks\n")
+  printf("// generator: %s\n", ARGV[1])
+  printf("// generated on: %s\n", strftime())
+  print ""
+  print ""
   printf("#include <string>\n")
   print ""
 
