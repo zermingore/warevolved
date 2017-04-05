@@ -1,14 +1,10 @@
 #!/bin/bash
 
+
 # Generates a mapping enum value -> enum value name as a string
 #
-# NOTE: does not handle block comments over multiple lines
-#       (if they contain the string 'enum class')
-#
-# /*
-# enum class test*/
-# will consider the enum test*/
-# though /* enum class test */ will be ignored, as expected
+# NOTE: The given enum file must be compilable
+#       and preprocessed, using gcc -E for instance
 #
 
 
@@ -107,9 +103,19 @@ function generate_switch_cases()
 # parse_files "$enums_file_list"
 
 
-enums=$(extract_enums tools/enum_print_test)
+# enums=$(extract_enums tools/enum_print_test)
 
-generate_print "$enums"
+# generate_print "$enums"
+
+
+# find . -name ...
+files=$(find . -name enum_print_test)
+for f in $files; do
+    echo "Processing enums in $f"
+    g++ -x c++ -E $f > /tmp/$(basename $f)
+    awk --lint -f $(dirname $0)/fetch_enums.awk /tmp/$(basename $f)
+done
+
 
 
 # gen getter / print / operator ?

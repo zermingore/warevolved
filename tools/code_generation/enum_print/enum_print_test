@@ -8,25 +8,25 @@ enum class match_me: int
 extract_me /* just a
  random
  comment */ me too
-ABORT
+
 
 enum class me_too // not this
 {
     find_me
     me_too = 2, // this not though
-    block_comment, /* comment */
+    another_enum_value, /* comment */
     // commented
   }; // end enum
 
-enum should_complain
-enum class valid /* comment // weird */
+// enum should_complain
+// enum class valid /* comment // weird */
     // just a comment not starting at column 0
     /* another offseted comment one */
-enum class keep // /* multiple */ comments // here
+// enum class keep // /* multiple */ comments // here
 /* comment */ enum class preceded
 // not an enum class not_matchf
 /* still not an enum class not_match */
 
-of course, skip this
+// of course, skip this
 
-and that
+// and that
