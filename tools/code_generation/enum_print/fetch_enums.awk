@@ -13,7 +13,7 @@
 
 
 BEGIN {
-  print "_______________ Fetching enums _______________\n\n"
+  # print "_______________ Fetching enums _______________\n\n"
   in_enum = 0    # Currently parsing an enum
   enum_name = "" # Current enum name
 
@@ -23,10 +23,7 @@ BEGIN {
 
 
 END {
-  print "____________ done fetching enums _____________\n"
-  print ""
-  print ""
-  print ""
+  # print "____________ done fetching enums _____________\n\n"
 
 
   # Adding required headers
@@ -108,7 +105,7 @@ END {
   gsub("enum class *","")
   enum_name = $1
 
-  printf ">> Found enum |%s|\n", enum_name
+  # printf ">> Found enum |%s|\n", enum_name
 
   # Restore the current field separator
   FS = old_fs
@@ -123,7 +120,7 @@ END {
 
 # Enum end
 /.*};.*/ {
-  printf "<< End enum |%s|\n\n", enum_name
+  # printf "<< End enum |%s|\n\n", enum_name
 
   in_enum = 0
   enum_name = ""
@@ -144,7 +141,7 @@ END {
 
   if ($0 ~ " *{ *")
   {
-    print "---------- Values ----------"
+    # print "---------- Values ----------"
     next
   }
 

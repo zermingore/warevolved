@@ -19,49 +19,9 @@ function locate_enums_files
 }
 
 
-# Extracts the enums class name in the given file
-# $1: filename
-function extract_enums
-{
-    if [[ $# -ne 1 ]]; then
-        echo "${FUNCNAME[0]}: Expecting 1 filename, received: $@"
-        exit 1
-    fi
-
-    file="$1"
-
-    # extract relevant lines, remove 'enum class', block then inline comments
-    enums=$(grep enum\ class\  "$file" \
-                   | sed s~\ *enum\ class\ ~~ \
-                   | sed s~'/\*.*\*/'~~g \
-                   | sed s~//.*~~g)
-
-    for e in $(echo "$enums"); do
-        echo "$e"
-    done
-}
-
-
-# Parse the given files, finding the enums
-# $1 list of enums files to parse
-function parse_files
-{
-    if [[ $# -ne 1 ]]; then
-        echo "${FUNCNAME[0]}: Expecting 1 filename, received: $@"
-        exit 1
-    fi
-
-    enums_files_list="$1"
-
-    for file in "$enums_files_list"; do
-        echo "Found: $file"
-        grep -d skip enum\ class "$file"
-    done
-}
-
 
 # Generate the printEnum(e_enum value); function
-# $1 list of enum names
+# $1 list of enum files
 function generate_print()
 {
     if [[ $# -ne 1 ]]; then
@@ -71,59 +31,27 @@ function generate_print()
 
     enums_list="$1"
 
-    for enum in $(echo "$enums_list"); do
-        echo ">> generating code for $enum"
 
-        # prototype
-        echo "void print${enum^}(e_$enum $enum);"
+    for f in $enums_file_list; do
+        echo "Processing enums in $f"
 
-        # function
-        echo "void print${enum^}(e_$enum $enum)"
-        echo "{"
-        echo "  switch($enum)"
-        echo "  {"
-        generate_switch_cases "$enum"
-        echo "  {"
-        echo "}"
+        # Trim comments
+        g++ -x c++ -E $f > /tmp/$(basename $f)
+
+        # Invoke the awk script, generating the code
+        awk -f $(dirname $0)/fetch_enums.awk /tmp/$(basename $f) \
+            > /tmp/genrated_$(basename $f) # --lint
     done
-}
 
-
-# Generates the body of the switch for a given enum
-# $1 enum name
-function generate_switch_cases()
-{
-    echo "___"
 }
 
 
 
 # ___________________________________ main ___________________________________ #
-# enums_file_list=$(locate_enums_files)
-# parse_files "$enums_file_list"
+enums_file_list=$(locate_enums_files)
 
-
-# enums=$(extract_enums tools/enum_print_test)
-
-# generate_print "$enums"
-
-
-# find . -name ...
-files=$(find . -name enum_print_test)
-for f in $files; do
-    echo "Processing enums in $f"
-    g++ -x c++ -E $f > /tmp/$(basename $f)
-    awk -f $(dirname $0)/fetch_enums.awk /tmp/$(basename $f) # --lint
-done
-
+generate_print "$enums"
 
 
 # gen getter / print / operator ?
-
 # return an array: {enum_name, val1, val2, ... } ?
-
-# bash: multiple return values: prototype and function
-
-# handle comments with gcc -E
-# use awk -> enum names and values
-# see also xmacros
