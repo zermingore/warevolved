@@ -28,19 +28,20 @@ function generate_print()
         echo "${FUNCNAME[0]}: Expecting 1 filename, received: $@"
         exit 1
     fi
-
     enums_list="$1"
 
+    output_dir=/tmp/generated
+    mkdir -p "$output_dir"
 
     for f in $enums_file_list; do
         echo "Processing enums in $f"
 
         # Trim comments
-        g++ -x c++ -E $f > /tmp/$(basename $f)
+        g++ -x c++ -E "$f" > /tmp/$(basename "$f")
 
         # Invoke the awk script, generating the code
-        awk -f $(dirname $0)/fetch_enums.awk /tmp/$(basename $f) \
-            > /tmp/genrated_$(basename $f) # --lint
+        awk -f $(dirname "$0")/fetch_enums.awk /tmp/$(basename "$f") \
+            > "${output_dir}"/genrated_$(basename "$f" .hh).cc # --lint
     done
 
 }
