@@ -57,7 +57,17 @@ END {
     for (values in res[enums])
     {
       printf "    case %s:\n", res[enums][values]["entry"]
-      printf "      return \"%s\";\n", res[enums][values]["value"]
+      printf "      return \"%s", res[enums][values]["entry"]
+
+      # if (res[enums][values]["value"] != "")
+      if (length(res[enums][values]) > 1)
+      {
+        printf " (%s)", res[enums][values]["value"]
+      }
+      else
+        printf " (no explicit value)"
+
+      printf "\";\n"
     }
 
     printf "    default:\n"
@@ -124,7 +134,12 @@ END {
 
 # enum values
 /.*/ {
+  # skip everything as long as we're not in an enum
   if (in_enum != 1)
+    next
+
+  # remove empty line
+  if ($0 ~ /^[:blank:]*$/)
     next
 
   if ($0 ~ " *{ *")
@@ -140,22 +155,27 @@ END {
 
   # get the enum entry
   gsub("*","")
-  value = $3
 
   entry = $1
   printf "|%s|_", $1 >> "enum_res"
 
-  # get the value, excluding the eventual ','
-  tab["empty"] = 1
-  if (match(value, "(.*),", tab) == 0)
-    val = $3
-  else
-    val = tab[1]
+  if ($3)
+  {
+    value = $3
 
-  printf "|%s|\n", val >> "enum_res"
+    # get the value, excluding the eventual ','
+    tab["empty"] = 1
+    if (match(value, "(.*),", tab) == 0)
+      val = $3
+    else
+      val = tab[1]
+
+    printf "|%s|\n", val >> "enum_res"
+
+    res[enum_name][nb_val]["value"] = val
+  }
 
   res[enum_name][nb_val]["entry"] = entry
-  res[enum_name][nb_val]["value"] = val
 
   nb_val++
 

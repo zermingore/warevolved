@@ -113,7 +113,7 @@ files=$(find . -name enum_print_test)
 for f in $files; do
     echo "Processing enums in $f"
     g++ -x c++ -E $f > /tmp/$(basename $f)
-    awk --lint -f $(dirname $0)/fetch_enums.awk /tmp/$(basename $f)
+    awk -f $(dirname $0)/fetch_enums.awk /tmp/$(basename $f) # --lint
 done
 
 
