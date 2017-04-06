@@ -2,6 +2,9 @@
 # The file must not contain any comments. Use g++ -E or equivalent to remove them
 # before calling this script (or else the behaviour is undefined)
 #
+# NOTE:
+#   Does not handle one-liner enums ('enum class test { a, b, c };')
+#
 # Arguments:
 #   $1: source file name containing the enums
 #
@@ -124,7 +127,7 @@ END {
   if (in_enum != 1)
     next
 
-  if ($0 == "{")
+  if ($0 ~ " *{ *")
   {
     print "---------- Values ----------"
     next
