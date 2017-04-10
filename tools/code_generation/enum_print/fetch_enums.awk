@@ -4,6 +4,7 @@
 #
 # NOTE:
 #   Does not handle one-liner enums ('enum class test { a, b, c };')
+#   This script is called by generate_enum_print.sh
 #
 # Arguments:
 #   $1: source file name containing the enums
