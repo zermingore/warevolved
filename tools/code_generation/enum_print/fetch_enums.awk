@@ -33,7 +33,7 @@ END {
   printf("// generated on: %s\n", strftime())
   print ""
   print ""
-  printf("#include <string>\n")
+  printf("# include <string>\n")
   print ""
 
   # Generating prototypes
