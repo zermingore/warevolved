@@ -29,7 +29,7 @@ END {
 
   # Adding required headers
   printf("// auto-generated code, edit at your own risks\n")
-  printf("// generator: %s\n", ARGV[1])
+  printf("// generator: \n")
   printf("// generated on: %s\n", strftime())
   print ""
   print ""

@@ -145,6 +145,9 @@ function generate_print()
         # Add the include of the enum file
         local include_enum="#include <common/enum/$(basename $f)>"
         sed -i s%'\(include.*\)'%"\1\n$include_enum"% "$awk_gen"
+
+        # Fix the generator field in the comment
+        sed -i s%'// generator:'%'// generator: '"$0"% "$awk_gen"
     done
 }
 
