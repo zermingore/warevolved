@@ -7,14 +7,19 @@
 #
 
 
-WE_PATH=..
+if [[ $# -ne 1 ]]; then
+    echo "$0: expected one argument: project root folder"
+    exit 1
+fi
+
+WE_PATH=$(readlink -f "$1")
 OUTPUT_DIR=/tmp/generated
 
 
 # Builds a list of enum files (headers in enums/ folder)
 function locate_enums_files()
 {
-    find $(find "${WE_PATH}" -name enums -type d) -name *.h*
+    find $(find "${WE_PATH}/src" -name enums -type d) -name *.h*
 }
 
 
@@ -144,15 +149,28 @@ function generate_print()
 }
 
 
+# Inegrate the generated code into the project folder
+function integrate_generation()
+{
+    local generated_folder="$WE_PATH"/src/generated/
+    rm -rf "$generated_folder"
+    mkdir -p "$generated_folder"
+    cp -av "$OUTPUT_DIR"/* "$generated_folder"
+}
+
+
 
 # ___________________________________ main ___________________________________ #
 function main()
 {
+    rm -rf "$OUTPUT_DIR"
     mkdir -p "$OUTPUT_DIR"
 
     local enums=$(locate_enums_files)
     generate_print "$enums"
     handle_prototypes
+
+    integrate_generation
 }
 
 main
