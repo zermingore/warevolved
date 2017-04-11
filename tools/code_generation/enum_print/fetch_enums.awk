@@ -54,6 +54,9 @@ END {
     printf "  {\n"
     for (values in res[enums])
     {
+      # Removing eventual coma in the enum entry name
+      gsub(",", "", res[enums][values]["entry"])
+
       printf "    case %s:\n", res[enums][values]["entry"]
       printf "      return \"%s", res[enums][values]["entry"]
 
