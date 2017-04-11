@@ -33,14 +33,14 @@ END {
   printf("// generated on: %s\n", strftime())
   print ""
   print ""
-  printf("# include <string>\n")
+  printf("#include <string>\n")
   print ""
 
   # Generating prototypes
   for (enums in res)
   {
-    # print enums
-    printf("std::string get%sString(%s entry);\n", enums, enums)
+    # Prototype
+    printf("std::string %s_string(%s entry);\n", enums, enums)
   }
   print ""
 
@@ -48,7 +48,7 @@ END {
   for (enums in res)
   {
     # print enums
-    printf("std::string get%sString(%s entry)\n", enums, enums)
+    printf("std::string %s_string(%s entry)\n", enums, enums)
     printf "{\n"
     printf("  switch (entry)\n")
     printf "  {\n"

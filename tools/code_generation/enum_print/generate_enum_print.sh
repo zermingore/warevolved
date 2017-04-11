@@ -90,8 +90,18 @@ function handle_prototypes()
     print_prototypes_head "$prototypes" > "$prototypes"
 
 
-    # Copy the prototypes from the generated code
+    # Copy the includes from the generated code (enum declarations)
     local gen_files=$(find "$OUTPUT_DIR" -name *.cc)
+    echo '#include <string>' >> "$prototypes"
+    for f in $gen_files; do
+        grep -rh '# *include' "$f" | grep -v string >> "$prototypes"
+    done
+
+    # Include identation
+    sed -i s/'#'/'# '/g "$prototypes"
+    echo -e "\n" >> "$prototypes"
+
+    # Copy the prototypes from the generated code
     for f in $gen_files; do
         grep -rh std::string.*\; "$f" >> "$prototypes"
     done
@@ -128,7 +138,7 @@ function generate_print()
             > "$awk_gen" # --lint
 
         # Add the include of the enum file
-        local include_enum="# include <common/enum/$(basename $f)>"
+        local include_enum="#include <common/enum/$(basename $f)>"
         sed -i s%'\(include.*\)'%"\1\n$include_enum"% "$awk_gen"
     done
 }
