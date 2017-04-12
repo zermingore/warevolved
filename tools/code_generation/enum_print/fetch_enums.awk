@@ -57,8 +57,8 @@ END {
       # Removing eventual coma in the enum entry name
       gsub(",", "", res[enums][values]["entry"])
 
-      printf "    case %s:\n", res[enums][values]["entry"]
-      printf "      return \"%s", res[enums][values]["entry"]
+      printf "    case %s::%s:\n", enums, res[enums][values]["entry"]
+      printf "      return \"%s::%s", enums, res[enums][values]["entry"]
 
       # if (res[enums][values]["value"] != "")
       if (length(res[enums][values]) > 1)

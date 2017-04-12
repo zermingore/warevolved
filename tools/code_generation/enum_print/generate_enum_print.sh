@@ -144,7 +144,7 @@ function generate_print()
             > "$awk_gen" # --lint
 
         # Add the include of the enum file
-        local include_enum="#include <common/enum/$(basename $f)>"
+        local include_enum="#include <common/enums/$(basename $f)>"
         sed -i s%'\(include.*\)'%"\1\n$include_enum"% "$awk_gen"
 
         # Fix the generator field in the comment
