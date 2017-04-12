@@ -35,6 +35,8 @@ END {
   print ""
   printf("#include <string>\n")
   print ""
+  print "namespace debug {"
+  print ""
 
   # Generating prototypes
   for (enums in res)
@@ -78,6 +80,8 @@ END {
     printf "}\n"
   }
 
+  print ""
+  print "} // namespace debug"
 
   close("enum_res")
 }

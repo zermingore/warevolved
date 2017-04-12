@@ -80,10 +80,6 @@ function print_prototypes_head()
     echo "#ifndef $guard"
     echo "# define $guard"
     echo ""
-
-    # Debug namespace
-    echo "namespace debug {"
-    echo ""
 }
 
 
@@ -94,7 +90,6 @@ function handle_prototypes()
 
     # Put the doxygen header comment
     print_prototypes_head "$prototypes" > "$prototypes"
-
 
     # Copy the includes from the generated code (enum declarations)
     local gen_files=$(find "$OUTPUT_DIR" -name *.cc)
@@ -107,11 +102,13 @@ function handle_prototypes()
     sed -i s/'#'/'# '/g "$prototypes"
     echo -e "\n" >> "$prototypes"
 
+    # Debug namespace
+    echo -e "namespace debug {\n" >> "$prototypes"
+
     # Copy the prototypes from the generated code
     for f in $gen_files; do
         grep -rh std::string.*\; "$f" >> "$prototypes"
     done
-
 
     # Close the namespace
     echo -e "\n} // namespace debug\n" >> "$prototypes"
