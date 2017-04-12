@@ -4,6 +4,7 @@
 # Generates a mapping enum value -> enum value name as a string
 #
 # NOTE: The given enum file must be compilable
+# NOTE: This script will wipe the src/generated/ folder
 #
 
 
@@ -155,12 +156,35 @@ function generate_print()
 # Inegrate the generated code into the project folder
 function integrate_generation()
 {
-    local generated_folder="$WE_PATH"/src/generated/
+    local generated_folder="$WE_PATH"/src/generated
     rm -rf "$generated_folder"
     mkdir -p "$generated_folder"
-    cp -av "$OUTPUT_DIR"/* "$generated_folder"
+    cp -a "$OUTPUT_DIR"/* "$generated_folder"
+
+    print_generated_list "$generated_folder"
 }
 
+
+# Print the list of files to build (to add in src/Makefile.am)
+#
+# $1 folder where generated files are
+#
+function print_generated_list()
+{
+    # Expecting folder containing the generated files
+    if [[ $# -ne 1 ]]; then
+        echo "${FUNCNAME[0]}: Expecting 1 folder name, received: $@"
+        exit 1
+    fi
+    local generated_folder="$1"
+
+    echo -e "You can build the following files (add them in src/Makefile.am)\n"
+
+    local source_list=$(find "$generated_folder" -name \*.c\*)
+    for f in $source_list; do
+        echo "generated/"$(basename "$f")
+    done
+}
 
 
 # ___________________________________ main ___________________________________ #
