@@ -4,7 +4,6 @@
 # Generates a mapping enum value -> enum value name as a string
 #
 # NOTE: The given enum file must be compilable
-# NOTE: This script will wipe the src/generated/ folder
 #
 
 
@@ -153,7 +152,7 @@ function generate_print()
 # Inegrate the generated code into the project folder
 function integrate_generation()
 {
-    local generated_folder="$WE_PATH"/src/generated
+    local generated_folder="$WE_PATH"/src/generated/enum_print
     rm -rf "$generated_folder"
     mkdir -p "$generated_folder"
     cp -a "$OUTPUT_DIR"/* "$generated_folder"
@@ -179,7 +178,7 @@ function print_generated_list()
 
     local source_list=$(find "$generated_folder" -name \*.c\*)
     for f in $source_list; do
-        echo "generated/"$(basename "$f")
+        echo "generated/enum_print/"$(basename "$f")
     done
 }
 
