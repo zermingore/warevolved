@@ -99,7 +99,7 @@ function handle_prototypes()
     done
 
     # Include identation
-    sed -i s/'#'/'# '/g "$prototypes"
+    sed -i s/'#include'/'# include'/g "$prototypes"
     echo -e "\n" >> "$prototypes"
 
     # Debug namespace
