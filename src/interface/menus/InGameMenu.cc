@@ -6,7 +6,6 @@
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/enums/states.hh>
-#include <debug/EnumPrint.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
 

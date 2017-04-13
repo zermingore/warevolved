@@ -2,7 +2,7 @@
 #include <chrono>
 
 #include <debug/EventsLogger.hh>
-#include <debug/EnumPrint.hh>
+#include <generated/enum_print/enum_print_prototypes.hh>
 
 
 namespace debug {
@@ -37,7 +37,7 @@ void EventsLogger::log(sf::Event event)
 void EventsLogger::logProcessedEvent(e_input input)
 {
   std::chrono::duration<double> time_elapsed(std::chrono::steady_clock::now() - _creationTime);
-  *_log << time_elapsed.count() << "| input: " << printInput(input) << '\n';
+  *_log << time_elapsed.count() << "| input: " << e_input_string(input) << '\n';
 }
 
 
