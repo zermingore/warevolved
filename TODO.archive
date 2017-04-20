@@ -207,6 +207,8 @@
    CLOSED: [2013-06-07 Fri 17:58]
 ** DONE Merge master & test (switch to std::shared_ptr)
    CLOSED: [2014-06-22 Sun 13:50]
+** DONE Merge branches: feature with clean, then clean with master
+   CLOSED: [2017-04-13 Do 08:03]
 
 
 * Game Features

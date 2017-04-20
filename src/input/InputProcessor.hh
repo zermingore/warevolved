@@ -7,6 +7,7 @@
 #ifndef INPUT_INPUT_PROCESSOR_HH_
 # define INPUT_INPUT_PROCESSOR_HH_
 
+# include <chrono>
 # include <memory>
 # include <queue>
 # include <input/EventManager.hh>
@@ -22,7 +23,7 @@ class InputProcessor
 {
 public:
   /// Instanciates a KeyManager
-  InputProcessor();
+  InputProcessor(bool replay);
 
   /// Default destructor
   ~InputProcessor() = default;
@@ -32,6 +33,12 @@ public:
    * \brief process events.
    */
   bool process();
+
+  /**
+   * \brief process events from a replay
+   */
+  bool replay();
+
 
   /**
    * \brief key manager getter
@@ -45,6 +52,9 @@ private:
 
   /// Key Manager to handle Hardware input
   std::shared_ptr<KeyManager> _km;
+
+  /// Events contained in the replay (with timestamps)
+  std::vector<std::pair<std::chrono::duration<double>, int>> _replayEvents;
 };
 
 

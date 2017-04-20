@@ -14,6 +14,8 @@
 # include <common/enums/input.hh>
 
 
+using events_list = std::vector<std::pair<std::chrono::duration<double>, int>>;
+
 namespace debug {
 
 /**
@@ -28,6 +30,12 @@ public:
    * \brief initialize the log file and the relative timestamp
    */
   static void initialize(std::string filename);
+
+  /**
+   * \brief fetch events from the replay
+   * \return a list of events and their associated timestamps
+   */
+  static events_list fetchEventsReplay();
 
   /**
    * \brief Add the given event to the log, with a timestamp

@@ -5,7 +5,6 @@
 * TODO Roadmap
 ** DONE Clean this file (rm entries or mv in a TODO.legacy)
    CLOSED: [2017-03-19 So 11:00]
-** TODO Merge branches: feature with clean, then clean with master
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
@@ -148,7 +147,8 @@
 
 * TODO Tools
 ** TODO Events logger
-*** TODO Record every key pressed + timestamp (since the game was launched)
+*** DONE Record every key pressed + timestamp (since the game was launched)
+    CLOSED: [2017-04-20 Do 20:36]
 *** TODO Replay recorded key logging
 ** TODO Commit checker
 *** TODO memory leaks checker before commit

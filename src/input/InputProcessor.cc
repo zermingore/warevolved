@@ -8,10 +8,13 @@
 
 
 
-InputProcessor::InputProcessor()
+InputProcessor::InputProcessor(bool replay)
   : _km(std::make_shared<KeyManager> ())
 {
-  debug::EventsLogger::initialize("LOG_EVENTS");
+  if (replay)
+    _replayEvents = debug::EventsLogger::fetchEventsReplay();
+  else
+    debug::EventsLogger::initialize("LOG_EVENTS");
 }
 
 
@@ -49,4 +52,12 @@ bool InputProcessor::process()
   }
 
   return true;
+}
+
+
+bool InputProcessor::replay()
+{
+  // for each event in the replay, wait for the associated timestamp
+
+  return false;
 }

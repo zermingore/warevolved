@@ -73,7 +73,10 @@ interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc        \
 interface/menus/InGameMenu.cc       \
 interface/menus/MenuMap.cc          \
-interface/menus/MenuAction.cc
+interface/menus/MenuAction.cc       \
+\
+tools/StringParser.cc
+
 
 
 # Generated files

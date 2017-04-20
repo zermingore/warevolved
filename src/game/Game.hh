@@ -20,8 +20,9 @@ public:
    * \brief contains the game loop which calls
    *   event processing
    *   window rendering
+   * \param replay true to start a replay, false otherwise
    */
-  void run();
+  void run(bool replay);
 };
 
 #endif /* !GAME_HH_ */

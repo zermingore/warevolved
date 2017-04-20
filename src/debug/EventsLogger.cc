@@ -1,8 +1,12 @@
 #include <fstream>
 #include <chrono>
+#include <map>
 
+#include <debug/Debug.hh>
 #include <debug/EventsLogger.hh>
 #include <generated/enum_print/enum_print_prototypes.hh>
+
+#include <tools/StringParser.hh>
 
 
 namespace debug {
@@ -27,17 +31,55 @@ void EventsLogger::initialize(std::string filename)
 }
 
 
+events_list EventsLogger::fetchEventsReplay()
+{
+  auto filename("test_log");
+
+
+  // list of events, with timestamps
+  events_list recorded_events;
+
+  char line[256];
+  std::ifstream stream(filename, std::ios_base::in);
+  while (stream.getline(line, 256))
+  {
+    // getting the input events only from the log
+    auto entry(StringParser::split(line, " \\| input:"));
+
+    auto timestamp(std::chrono::duration<double> (atol(entry.front().c_str())));
+    auto input(StringParser::split(entry[1], "val="));
+    if (input.size() < 2)
+    {
+      std::cerr << "input malformed: expected input: val=x str=x" << std::endl;
+      continue;
+    }
+
+    // everything between the '=' and ' ' is the value
+    auto value(StringParser::split(input[1], " ")[0]);
+
+    recorded_events.push_back({timestamp, atoi(value.c_str())});
+    std::cout << "input: @" << timestamp.count()
+              << ": " << recorded_events.back().second << std::endl;
+  }
+
+  return recorded_events;
+}
+
+
 void EventsLogger::log(sf::Event event)
 {
-  std::chrono::duration<double> time_elapsed(std::chrono::steady_clock::now() - _creationTime);
-  *_log << time_elapsed.count() << "| " << static_cast<int> (event.type) << '\n';
+  auto time_elapsed(std::chrono::steady_clock::now() - _creationTime);
+  *_log << time_elapsed.count()
+        << " | event type: " << static_cast<int> (event.type) << '\n';
 }
 
 
 void EventsLogger::logProcessedEvent(e_input input)
 {
-  std::chrono::duration<double> time_elapsed(std::chrono::steady_clock::now() - _creationTime);
-  *_log << time_elapsed.count() << "| input: " << e_input_string(input) << '\n';
+  auto time_elapsed(std::chrono::steady_clock::now() - _creationTime);
+  *_log << time_elapsed.count() << "| input:"
+        << " val=" << static_cast<int> (input)
+        << " str=" << e_input_string(input) << '\n';
 }
 
 

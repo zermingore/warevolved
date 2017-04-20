@@ -9,7 +9,7 @@
 #include <context/State.hh>
 
 
-void Game::run()
+void Game::run(bool replay)
 {
   using namespace graphics; // function scope
 
@@ -19,7 +19,7 @@ void Game::run()
   Status::setBattle(battle);
   battle->initializeMap();
 
-  auto input_processor(std::make_shared<InputProcessor> ());
+  auto input_processor(std::make_shared<InputProcessor> (replay));
   Status::setInputProcessor(input_processor);
 
   Status::pushState(e_state::PLAYING);
