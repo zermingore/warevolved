@@ -45,6 +45,11 @@ events_list EventsLogger::fetchEventsReplay()
   {
     // getting the input events only from the log
     auto entry(StringParser::split(line, " \\| input:"));
+    if (entry.size() == 1) // no result
+    {
+      std::cerr << "skipping line: " << line << std::endl;
+      continue;
+    }
 
     auto timestamp(std::chrono::duration<double> (atol(entry.front().c_str())));
     auto input(StringParser::split(entry[1], "val="));
