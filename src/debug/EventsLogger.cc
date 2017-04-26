@@ -51,7 +51,7 @@ events_list EventsLogger::fetchEventsReplay()
       continue;
     }
 
-    auto timestamp(std::chrono::duration<double> (atol(entry.front().c_str())));
+    auto timestamp(std::chrono::duration<double> (atof(entry.front().c_str())));
     auto input(StringParser::split(entry[1], "val="));
     if (input.size() < 2)
     {
@@ -62,7 +62,7 @@ events_list EventsLogger::fetchEventsReplay()
     // everything between the '=' and ' ' is the value
     auto value(StringParser::split(input[1], " ")[0]);
 
-    recorded_events.push_back({timestamp, atoi(value.c_str())});
+    recorded_events.push_back({timestamp, atof(value.c_str())});
     std::cout << "input: @" << timestamp.count()
               << ": " << recorded_events.back().second << std::endl;
   }
