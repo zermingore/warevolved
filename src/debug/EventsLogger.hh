@@ -23,7 +23,7 @@ namespace debug {
  * \brief Log events since the class creation
  * \todo do not write to disk at every log
  */
-class EventsLogger
+class EventsLogger // \todo no longer in debug namespace (as it's used for replays)
 {
 public:
   /**
