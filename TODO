@@ -5,6 +5,8 @@
 * TODO Roadmap
 ** DONE Clean this file (rm entries or mv in a TODO.legacy)
    CLOSED: [2017-03-19 So 11:00]
+** DONE EventsLogger Retrieve events and timestamps (as floats)
+   CLOSED: [2017-04-27 Do 07:54]
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
@@ -149,7 +151,8 @@
 ** TODO Events logger
 *** DONE Record every key pressed + timestamp (since the game was launched)
     CLOSED: [2017-04-20 Do 20:36]
-*** TODO Replay recorded key logging
+*** DONE Replay recorded key logging
+    CLOSED: [2017-04-27 Do 07:55]
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules

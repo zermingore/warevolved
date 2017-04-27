@@ -30,12 +30,22 @@ public:
 
 
   /**
-   * \brief process events.
+   * \brief Process events
+   * \return false if the window was closed
+   * \return true if the event was processed (or ignored)
    */
   bool process();
 
   /**
+   * \brief process one event
+   * \param event Event to process
+   * \return false if the window was closed
+   */
+  bool processEvent(sf::Event event);
+
+  /**
    * \brief process events from a replay
+   * \todo run in its thread
    */
   bool replay();
 
@@ -55,6 +65,11 @@ private:
 
   /// Events contained in the replay (with timestamps)
   std::vector<std::pair<std::chrono::duration<double>, int>> _replayEvents;
+
+  bool _replay; ///< Use input from a replay file
+
+  /// creation timestamp
+  std::chrono::steady_clock::time_point _creationTime;
 };
 
 

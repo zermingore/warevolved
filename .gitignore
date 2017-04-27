@@ -7,6 +7,7 @@ LOG
 LOG_EVENTS
 *\#
 *user
+build/
 
 # Autotools output
 .dirstamp
