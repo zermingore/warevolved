@@ -64,6 +64,9 @@ StateMovingUnit::StateMovingUnit()
 
 StateMovingUnit::~StateMovingUnit()
 {
+  // could write an assert checking if Status::battle() is still valid
+  // (to avoid segfault exiting the game while moving a unit)
+
   auto unit(Status::battle()->map()->unit(_originalCoords));
 
   // if the unit was moved, it is no longer existing at these original coordinates

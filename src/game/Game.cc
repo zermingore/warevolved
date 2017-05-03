@@ -5,8 +5,8 @@
 #include <input/InputProcessor.hh>
 #include <common/Status.hh>
 #include <common/enums/states.hh>
-#include <input/KeyManager.hh>
 #include <context/State.hh>
+
 
 
 void Game::run(bool replay)
