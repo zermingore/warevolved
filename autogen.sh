@@ -4,10 +4,10 @@
 
 BUILD_DIR=build # build destination
 
-autoreconf --force --install
+autoreconf --force --install --warnings=all
 
 rm -rf "$BUILD_DIR"
-mkdir "$BUILD_DIR"
+mkdir -p "$BUILD_DIR"
 pushd "$BUILD_DIR"
 
 ../configure # TODO find the configure wherever the build folder is
