@@ -5,6 +5,7 @@
 #include <input/KeyManager.hh>
 #include <common/enums/input.hh>
 #include <debug/EventsLogger.hh>
+#include <input/EventManager.hh>
 
 
 

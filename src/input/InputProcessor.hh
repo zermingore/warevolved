@@ -9,8 +9,8 @@
 
 # include <chrono>
 # include <memory>
-# include <queue>
-# include <input/EventManager.hh>
+# include <SFML/Window/Event.hpp>
+
 
 class KeyManager;
 
@@ -57,9 +57,6 @@ public:
 
 
 private:
-  /// Event managers queue
-  std::deque<std::shared_ptr<EventManager>> _managers;
-
   /// Key Manager to handle Hardware input
   std::shared_ptr<KeyManager> _km;
 
