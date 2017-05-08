@@ -84,7 +84,7 @@
 #   define PRINTF Debug::printf
 # else
 #   define PRINTF do { \
-    } while (0)
+    } while (0);
 # endif
 
 
