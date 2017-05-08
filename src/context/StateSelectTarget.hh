@@ -42,19 +42,19 @@ public:
   /**
    * \brief re-build the menu.
    */
-  void resume();
+  void resume() override final;
 
   /**
    * \brief Draws the menu associated to the State
    */
-  void draw();
+  void draw() override final;
 
   /**
    * \brief Fetch the attribute from thle list
    * \note Expects one attribute: menu coordinates.
    * \note Aborts if no attribute was found
    */
-  void fetchAttributes() final;
+  void fetchAttributes() override final;
 
 
 private:

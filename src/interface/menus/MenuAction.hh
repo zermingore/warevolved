@@ -45,12 +45,12 @@ public:
   /**
    * \brief Builds an action menu according to its State
    */
-  void build() final;
+  void build() override final;
 
   /**
    * \brief Draw the menu and the path finding
    */
-  void draw() final;
+  void draw() override final;
 
 
 private:
@@ -58,7 +58,7 @@ private:
    * \brief Closes the action menu
    *   rolls back to the previous action menu if any, or pops every State
    */
-  void cancel() final;
+  void cancel() override final;
 
   /**
    * \brief Does the move (if possible)

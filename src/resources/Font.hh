@@ -36,7 +36,7 @@ public:
    * \return true if the font was already loaded
    *   false if it was loaded during this call
    */
-  bool load();
+  bool load() override final;
 
   /**
    * \brief _font getter

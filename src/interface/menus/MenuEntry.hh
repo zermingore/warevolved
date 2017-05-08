@@ -75,12 +75,12 @@ public:
   /**
    * \brief updates the graphical attributes of the entry
    */
-  void update();
+  void update() override final;
 
   /**
    * \brief Draws label and sprite of the entry, calling the graphics engine
    */
-  void draw();
+  void draw() override final;
 
 
 

@@ -27,7 +27,7 @@ public:
   /**
    * \brief Draw the player interface
    */
-  virtual void draw();
+  virtual void draw() override final;
 };
 
 

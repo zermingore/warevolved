@@ -52,7 +52,7 @@ public:
   /**
    * \brief draws the menu its entries and the current entry highlighter
    */
-  void draw();
+  void draw() override;
 
   /**
    * \brief sets _selectedEntry to 0

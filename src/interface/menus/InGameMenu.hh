@@ -27,39 +27,39 @@ public:
   /**
    * \brief Builds the selection menu, filling the entries.
    */
-  virtual void build() = 0;
+  virtual void build() override = 0;
 
   /**
    * \brief Closes the current menu, clearing its interface elements
    */
-  virtual void close();
+  virtual void close() override;
 
 
   /**
    * \brief Cursor motion: up
    */
-  void moveUp();
+  void moveUp() override final;
 
   /**
    * \brief Cursor motion: down
    */
-  void moveDown();
+  void moveDown() override final;
 
   /**
    * \brief Validate selected entry
    */
-  void validate();
+  void validate()override final;
 
 
   /**
    * \brief updates the graphics attributes of the menu
    */
-  void update();
+  void update() override final;
 
   /**
    * \brief Draw the entries of the menu
    */
-  virtual void draw();
+  virtual void draw() override;
 
 
 

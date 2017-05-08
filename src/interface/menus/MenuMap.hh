@@ -18,7 +18,7 @@ namespace interface {
 class MenuMap: public InGameMenu
 {
 public:
-  void build();
+  void build() override final;
 };
 
 

@@ -44,17 +44,17 @@ public:
    * \brief Save the menu coordinates.
    * \todo suspend() should also save selected entry.
    */
-  void suspend();
+  void suspend() override final;
 
   /**
    * \brief re-build the menu.
    */
-  void resume();
+  void resume() override final;
 
   /**
    * \brief Draws the menu associated to the State
    */
-  void draw();
+  void draw() override final;
 
 
   /**
@@ -62,7 +62,7 @@ public:
    * \note Expects one attribute: menu coordinates.
    * \note Aborts if no attribute was found
    */
-  void fetchAttributes() final;
+  void fetchAttributes() override final;
 
 
 

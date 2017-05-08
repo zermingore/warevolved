@@ -48,13 +48,13 @@ public:
   /**
    * \brief Draw the holo unit (shadow of the unit) at _holoUnitPosition
    */
-  virtual void draw();
+  virtual void draw() override final;
 
 
   /**
    * \brief Resumes the menu. Updates its copy of the map dimensions
    */
-  void resume() final;
+  void resume() override final;
 
 
 private:

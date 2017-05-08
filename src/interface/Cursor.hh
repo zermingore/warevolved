@@ -65,10 +65,10 @@ public:
    * \brief Updates the graphics properties of the cursor
    * \param properties map graphics properties to use
    */
-  void update();
+  void update() override final;
 
 
-  void draw() final;
+  void draw() override final;
 
 
   void setColor(Color color) { _color = color; }

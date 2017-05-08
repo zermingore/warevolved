@@ -135,12 +135,12 @@ public:
    *
    * \return true if Image was loaded; false otherwise
    */
-  bool load();
+  bool load() override final;
 
   /**
    * \brief remove Image file from (V)RAM
    */
-  void unload();
+  void unload() override final;
 
   /**
    * \brief Reloads the texture (unload the previous one if any)
