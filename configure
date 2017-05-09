@@ -3535,7 +3535,7 @@ else
   am__fastdepCXX_FALSE=
 fi
 
- # g++
+ # clang++
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_HEADER_STDBOOL6
