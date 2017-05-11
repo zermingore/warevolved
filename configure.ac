@@ -21,7 +21,7 @@ AM_INIT_AUTOMAKE([subdir-objects color-tests -Wall -Werror foreign])
 
 # By default, let "make" hide the compilation command and display a
 # "GEN ..." message, unless V=1 is passed to "make".
-AM_SILENT_RULES
+AM_SILENT_RULES([yes])
 
 # Checks for programs.
 AC_PROG_CXX([g++]) # clang++
