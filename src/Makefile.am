@@ -117,7 +117,7 @@ __top_srcdir__we_CPPFLAGS += -Wcast-qual                        # Warn about cas
 # __top_srcdir__we_CPPFLAGS += -Wchkp                             # Warn about memory access errors found by Pointer Bounds Checker
 # __top_srcdir__we_CPPFLAGS += -Wconditionally-supported          # Warn for conditionally-supported constructs
 # __top_srcdir__we_CPPFLAGS += -Wconversion                       # Warn for implicit type conversions that may change a value
-# __top_srcdir__we_CPPFLAGS += -Wconversion-null                  # Warn for converting NULL from/to a non-pointer type
+__top_srcdir__we_CPPFLAGS += -Wconversion-null                  # Warn for converting NULL from/to a non-pointer type
 # __top_srcdir__we_CPPFLAGS += -Wcoverage-mismatch                # Warn in case profiles in -fprofile-use do not match
 # __top_srcdir__we_CPPFLAGS += -Wcpp                              # Warn when a # warning directive is encountered # meaning
 # __top_srcdir__we_CPPFLAGS += -Wctor-dtor-privacy                # Warn when all constructors and destructors are private
@@ -202,7 +202,7 @@ __top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about fun
 # __top_srcdir__we_CPPFLAGS += -Wvirtual-move-assign              # Warn if a virtual base has a non-trivial move assignment operator
 # __top_srcdir__we_CPPFLAGS += -Wvla                              # Warn if a variable length array is used
 __top_srcdir__we_CPPFLAGS += -Wwrite-strings                    # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.
-# __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
+__top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
 
 
 

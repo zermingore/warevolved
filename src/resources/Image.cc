@@ -15,9 +15,9 @@ Image::Image(const std::string file_name, const std::string name)
 
    /// \todo in debug, load an ugly texture to help noticing it
 # ifdef DEBUG
-  _rectangle->setTexture(NULL);
+  _rectangle->setTexture(nullptr);
 # else
-  _rectangle->setTexture(NULL);
+  _rectangle->setTexture(nullptr);
 # endif
 
   _fileName = file_name;
@@ -178,7 +178,7 @@ void Image::unload()
   _loaded = false;
 
 # ifdef DEBUG
-  _rectangle->setTexture(NULL);
+  _rectangle->setTexture(nullptr);
 # endif
 }
 

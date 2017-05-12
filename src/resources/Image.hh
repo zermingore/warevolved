@@ -32,7 +32,7 @@ public:
    *   (with full path and extension)
    * \param name Image alias name
    *
-   * sets _texture to NULL
+   * sets _texture to nullptr
    * _loaded to false
    */
   Image(const std::string file_name, const std::string name);

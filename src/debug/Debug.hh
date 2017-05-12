@@ -101,7 +101,7 @@ public:
   {
     std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
 
-	time_t now = time(0);
+	time_t now = time(nullptr);
 	struct tm *full_date = localtime(&now);
 	char buf[80] = {0};
 
@@ -131,7 +131,7 @@ public:
   template<typename T, typename... Tail>
   static void error(const T head, const Tail... tail)
   {
-    time_t now = time(0);
+    time_t now = time(nullptr);
 	struct tm *full_date = localtime(&now);
 	char buf[80] = {0};
 

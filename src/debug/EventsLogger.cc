@@ -21,7 +21,7 @@ void EventsLogger::initialize(std::string filename)
 {
   _log = std::make_unique<std::ofstream> (filename, std::ios_base::out);
 
-  time_t now = time(0);
+  time_t now = time(nullptr);
   struct tm *full_date = localtime(&now);
   char buf[80] = {0};
   strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
