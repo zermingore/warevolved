@@ -104,17 +104,17 @@ __top_srcdir__we_CPPFLAGS += -Wpedantic                         # Issue all the 
 # __top_srcdir__we_CPPFLAGS += -Waggregate-return                 # Warn about returning structures, unions or arrays
 # __top_srcdir__we_CPPFLAGS += -Waggressive-loop-optimizations    # Warn if a loop with constant number of iterations triggers undefined behavior
 __top_srcdir__we_CPPFLAGS += -Wformat=2                         # Warn about printf/scanf/strftime/strfmon format string anomalies
-# __top_srcdir__we_CPPFLAGS += -Wformat-contains-nul              # Warn about format strings that contain NUL bytes
-# __top_srcdir__we_CPPFLAGS += -Wformat-extra-args                # Warn if passing too many arguments to a function for its format string
-# __top_srcdir__we_CPPFLAGS += -Wformat-signedness                # Warn about sign differences with format functions
-# __top_srcdir__we_CPPFLAGS += -Wformat-zero-length               # Warn about zero-length formats
+__top_srcdir__we_CPPFLAGS += -Wformat-contains-nul              # Warn about format strings that contain NUL bytes
+__top_srcdir__we_CPPFLAGS += -Wformat-extra-args                # Warn if passing too many arguments to a function for its format string
+__top_srcdir__we_CPPFLAGS += -Wformat-signedness                # Warn about sign differences with format functions
+__top_srcdir__we_CPPFLAGS += -Wformat-zero-length               # Warn about zero-length formats
 # __top_srcdir__we_CPPFLAGS += -Warray-bounds=2                   # Warn if an array is accessed out of bounds # level 1 activated by -Wall (only with -O2); level2: also in structures
 # __top_srcdir__we_CPPFLAGS += -Wattributes                       # Warn about inappropriate attribute usage
 # __top_srcdir__we_CPPFLAGS += -Wbool-compare                     # Warn about boolean expression compared with an integer value different from true/false
 # __top_srcdir__we_CPPFLAGS += -Wbuiltin-macro-redefined          # Warn when a built-in preprocessor macro is undefined or redefined
 __top_srcdir__we_CPPFLAGS += -Wcast-align                       # Warn about pointer casts which increase alignment
 __top_srcdir__we_CPPFLAGS += -Wcast-qual                        # Warn about casts which discard qualifiers
-# __top_srcdir__we_CPPFLAGS += -Wchkp                             # Warn about memory access errors found by Pointer Bounds Checker
+__top_srcdir__we_CPPFLAGS += -Wchkp                             # Warn about memory access errors found by Pointer Bounds Checker
 # __top_srcdir__we_CPPFLAGS += -Wconditionally-supported          # Warn for conditionally-supported constructs
 # __top_srcdir__we_CPPFLAGS += -Wconversion                       # Warn for implicit type conversions that may change a value
 __top_srcdir__we_CPPFLAGS += -Wconversion-null                  # Warn for converting NULL from/to a non-pointer type
@@ -165,7 +165,7 @@ __top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about fun
 # __top_srcdir__we_CPPFLAGS += -Wpragmas                          # Warn about misuses of pragmas
 # __top_srcdir__we_CPPFLAGS += -Wredundant-decls                  # Warn about multiple declarations of the same object
 # __top_srcdir__we_CPPFLAGS += -Wreturn-local-addr                # Warn about returning a pointer/reference to a local or temporary variable.
-# __top_srcdir__we_CPPFLAGS += -Wshadow                           # Warn when one local variable shadows another
+__top_srcdir__we_CPPFLAGS += -Wshadow                           # Warn when one local variable shadows another
 # __top_srcdir__we_CPPFLAGS += -Wshift-count-negative             # Warn if shift count is negative
 # __top_srcdir__we_CPPFLAGS += -Wshift-count-overflow             # Warn if shift count >= width of type
 # __top_srcdir__we_CPPFLAGS += -Wsign-promo                       # Warn when overload promotes from unsigned to signed
