@@ -101,8 +101,7 @@ __top_srcdir__we_CPPFLAGS += -Og -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS
 __top_srcdir__we_CPPFLAGS += -Wall                              # Enable most warning messages
 __top_srcdir__we_CPPFLAGS += -Wextra                            # Print extra (possibly unwanted) warnings
 __top_srcdir__we_CPPFLAGS += -Wpedantic                         # Issue all the warnings demanded by strict ISO C and ISO C++
-# __top_srcdir__we_CPPFLAGS += -Waggregate-return                 # Warn about returning structures, unions or arrays
-# __top_srcdir__we_CPPFLAGS += -Waggressive-loop-optimizations    # Warn if a loop with constant number of iterations triggers undefined behavior
+__top_srcdir__we_CPPFLAGS += -Waggressive-loop-optimizations    # Warn if a loop with constant number of iterations triggers undefined behavior
 __top_srcdir__we_CPPFLAGS += -Wformat=2                         # Warn about printf/scanf/strftime/strfmon format string anomalies
 __top_srcdir__we_CPPFLAGS += -Wformat-contains-nul              # Warn about format strings that contain NUL bytes
 __top_srcdir__we_CPPFLAGS += -Wformat-extra-args                # Warn if passing too many arguments to a function for its format string
@@ -159,7 +158,6 @@ __top_srcdir__we_CPPFLAGS += -Wold-style-cast                   # Warn if a C-st
 # __top_srcdir__we_CPPFLAGS += -Woverloaded-virtual               # Warn about overloaded virtual function names
 # __top_srcdir__we_CPPFLAGS += -Wpacked                           # Warn when the packed attribute has no effect on struct layout
 # __top_srcdir__we_CPPFLAGS += -Wpacked-bitfield-compat           # Warn about packed bit-fields whose offset changed in GCC 4.4
-# __top_srcdir__we_CPPFLAGS += -Wpedantic                         # Issue warnings needed for strict compliance to the standard
 # __top_srcdir__we_CPPFLAGS += -Wpmf-conversions                  # Warn when converting the type of pointers to member functions
 __top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about function pointer arithmetic
 # __top_srcdir__we_CPPFLAGS += -Wpragmas                          # Warn about misuses of pragmas
@@ -261,6 +259,7 @@ __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 # Deactivated warnings
 # -Wundef                            # Warn if an undefined macro is used in an # if directive
 # -Wsystem-headers                   # Do not suppress warnings from system headers
+# -Waggregate-return                 # Warn about returning structures, unions or arrays
 
 # Deactivated warnings (unsure about the relevance in this context)
 # -Wpadded                           # Warn when padding is required to align structure members
