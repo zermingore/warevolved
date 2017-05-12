@@ -135,7 +135,7 @@ __top_srcdir__we_CPPFLAGS += -Wfloat-equal                      # Warn if testin
 # __top_srcdir__we_CPPFLAGS += -Winherited-variadic-ctor          # Warn about C++11 inheriting constructors when the base has a variadic constructor
 # __top_srcdir__we_CPPFLAGS += -Winit-self                        # Warn about variables which are initialized to themselves
 # __top_srcdir__we_CPPFLAGS += -Winline                           # Warn when an inlined function cannot be inlined
-# __top_srcdir__we_CPPFLAGS += -Wint-to-pointer-cast              # Warn when there is a cast to a pointer from an integer of a different size
+__top_srcdir__we_CPPFLAGS += -Wint-to-pointer-cast              # Warn when there is a cast to a pointer from an integer of a different size
 # __top_srcdir__we_CPPFLAGS += -Winvalid-memory-model             # Warn when an atomic memory model parameter is known to be outside the valid range.
 # __top_srcdir__we_CPPFLAGS += -Winvalid-offsetof                 # Warn about invalid uses of the "offsetof" macro
 # __top_srcdir__we_CPPFLAGS += -Winvalid-pch                      # Warn about PCH files that are found but not used
@@ -153,7 +153,7 @@ __top_srcdir__we_CPPFLAGS += -Wmissing-declarations             # Warn about glo
 # __top_srcdir__we_CPPFLAGS += -Wnon-virtual-dtor                 # Warn about non-virtual destructors
 # __top_srcdir__we_CPPFLAGS += -Wnormalized                       # Warn about non-normalised Unicode strings
 # __top_srcdir__we_CPPFLAGS += -Wodr                              # Warn about some C++ One Definition Rule violations during link time optimization
-# __top_srcdir__we_CPPFLAGS += -Wold-style-cast                   # Warn if a C-style cast is used in a program
+__top_srcdir__we_CPPFLAGS += -Wold-style-cast                   # Warn if a C-style cast is used in a program
 # __top_srcdir__we_CPPFLAGS += -Woverflow                         # Warn about overflow in arithmetic expressions
 # __top_srcdir__we_CPPFLAGS += -Woverlength-strings               # Warn if a string is longer than the maximum portable length specified by the standard
 # __top_srcdir__we_CPPFLAGS += -Woverloaded-virtual               # Warn about overloaded virtual function names
@@ -174,7 +174,7 @@ __top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about fun
 # __top_srcdir__we_CPPFLAGS += -Wsizeof-pointer-memaccess         # Warn about suspicious length parameters to certain string functions if the argument uses sizeof
 # __top_srcdir__we_CPPFLAGS += -Wstack-protector                  # Warn when not issuing stack smashing protection for some reason
 # __top_srcdir__we_CPPFLAGS += -Wstack-usage=4096                 # Warn if stack usage might be larger than specified amount
-# __top_srcdir__we_CPPFLAGS += -Wstrict-null-sentinel             # Warn about uncasted NULL used as sentinel
+__top_srcdir__we_CPPFLAGS += -Wstrict-null-sentinel             # Warn about uncasted NULL used as sentinel
 # __top_srcdir__we_CPPFLAGS += -Wstrict-overflow=5                # Warn about optimizations that assume that signed overflow is undefined # (5: overkill ?)
 # __top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=const          # Warn about functions which might be candidates for __attribute__((const))
 # __top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=format         # Warn about functions which might be candidates for format attributes
@@ -195,7 +195,7 @@ __top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about fun
 # __top_srcdir__we_CPPFLAGS += -Wunused-local-typedefs            # Warn when typedefs locally defined in a function are not used
 # __top_srcdir__we_CPPFLAGS += -Wunused-macros                    # Warn about macros defined in the main file that are not used
 # __top_srcdir__we_CPPFLAGS += -Wunused-result                    # Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value
-# __top_srcdir__we_CPPFLAGS += -Wuseless-cast                     # Warn about useless casts
+__top_srcdir__we_CPPFLAGS += -Wuseless-cast                     # Warn about useless casts
 # __top_srcdir__we_CPPFLAGS += -Wvarargs                          # Warn about questionable usage of the macros used to retrieve variable arguments
 # __top_srcdir__we_CPPFLAGS += -Wvariadic-macros                  # Warn about using variadic macros
 # __top_srcdir__we_CPPFLAGS += -Wvector-operation-performance     # Warn when a vector operation is compiled outside the SIMD

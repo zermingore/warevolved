@@ -12,7 +12,7 @@ std::shared_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
       return std::make_shared<Soldier> ();
 
     default:
-      ERROR("Trying to create unit", (int) unit);
+      ERROR("Trying to create unit", static_cast<int> (unit));
       assert(!"Unable to create the unit with the given name");
       return nullptr;
   }

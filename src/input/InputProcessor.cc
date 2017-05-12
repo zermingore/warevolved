@@ -100,7 +100,7 @@ bool InputProcessor::replay()
         std::chrono::steady_clock::now() - _creationTime);
     }
 
-    Status::currentState()->eventManager()->process((e_input) it.second);
+    Status::currentState()->eventManager()->process(static_cast<e_input> (it.second));
 
     std::cout << "played event after: " << time_elapsed.count() / 1000000. << std::endl;
   }

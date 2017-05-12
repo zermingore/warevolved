@@ -91,7 +91,7 @@ void PathFinding::updateCurrentCell(e_direction direction)
       return;
 
     default:
-      ERROR("Invalid direction", (int) direction);
+      ERROR("Invalid direction", static_cast<int> (direction));
       std::exit(1);
   }
 }

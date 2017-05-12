@@ -38,7 +38,7 @@ StateMenu::StateMenu(const e_state state)
       break;
 
     default:
-      ERROR("StateMenu() called with State", (int) Status::state());
+      ERROR("StateMenu called with State", static_cast<int> (Status::state()));
       assert(!"State is not a menu");
       break;
   }

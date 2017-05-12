@@ -55,7 +55,7 @@ void Image::initTexture()
 
   _texture = std::make_shared<sf::Texture> ();
   _texture->loadFromFile(_fileName);
-  _rectangle->setTexture((sf::Texture *) (_texture.get()));
+  _rectangle->setTexture(_texture.get());
   _loaded = true;
 }
 
