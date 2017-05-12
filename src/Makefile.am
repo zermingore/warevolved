@@ -1,11 +1,18 @@
-bin_PROGRAMS = $(top_srcdir)/we
+bin_PROGRAMS = $(top_srcdir)/we # $(top_srcdir)/pugixml $(top_srcdir)/we
+
+# Build pugixml as a library, allowing to pass another set of flags
+# than the one used for the rest of the project
+__top_srcdir__we_LDADD = libpugixml.a
+noinst_LIBRARIES = libpugixml.a
+libpugixml_a_SOURCES = pugixml/pugixml.cpp
+libpugixml_a_CPPFLAGS = -Ofast
+
 
 
 # Source files
 __top_srcdir__we_SOURCES =          \
 main.cc                             \
 \
-pugixml/pugixml.cpp                 \
 \
 core/Context.cc                     \
 \
@@ -73,9 +80,8 @@ generated/enum_print/generated_units.cc
 
 
 # ------------------------------------ Compiler configuration ------------------------------------ #
-# Standard version (setting the __top_srcdir__we_CPPFLAGS variable)
-__top_srcdir__we_CPPFLAGS = -std=c++14
-
+# setting the __top_srcdir__we_CPPFLAGS variable
+__top_srcdir__we_CPPFLAGS =
 
 # Release flags:
 # -s -O3 -DNDEBUG # -Ofast
@@ -153,7 +159,6 @@ __top_srcdir__we_CPPFLAGS += -Woverlength-strings               # Warn if a stri
 __top_srcdir__we_CPPFLAGS += -Woverloaded-virtual               # Warn about overloaded virtual function names
 __top_srcdir__we_CPPFLAGS += -Wpacked                           # Warn when the packed attribute has no effect on struct layout
 __top_srcdir__we_CPPFLAGS += -Wpacked-bitfield-compat           # Warn about packed bit-fields whose offset changed in GCC 4.4
-__top_srcdir__we_CPPFLAGS += -Wpadded                           # Warn when padding is required to align structure members
 __top_srcdir__we_CPPFLAGS += -Wpedantic                         # Issue warnings needed for strict compliance to the standard
 __top_srcdir__we_CPPFLAGS += -Wpmf-conversions                  # Warn when converting the type of pointers to member functions
 __top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about function pointer arithmetic
@@ -256,3 +261,6 @@ __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 # Deactivated warnings
 # -Wundef                            # Warn if an undefined macro is used in an # if directive
 # -Wsystem-headers                   # Do not suppress warnings from system headers
+
+# Deactivated warnings (unsure about the relevance in this context)
+# -Wpadded                           # Warn when padding is required to align structure members

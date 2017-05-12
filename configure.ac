@@ -6,7 +6,7 @@ AC_INIT([ms], [1.0])
 AC_CONFIG_AUX_DIR([build-aux])
 
 # forcing c++14 usage (must be before AC_PROG_CXX)
-CXXFLAGS="$CXXFLAGS -std=c++1y"
+CXXFLAGS="$CXXFLAGS -std=c++14"
 
 
 if [[ -n "$SFML_PATH" ]]
@@ -25,6 +25,11 @@ AM_SILENT_RULES([yes])
 
 # Checks for programs.
 AC_PROG_CXX([g++]) # clang++
+
+# use ranlib and ar to build the pugixml library
+AC_PROG_RANLIB
+AM_PROG_AR
+
 
 # Checks for typedefs, structures, and compiler characteristics.
 # AC_HEADER_STDBOOL6
