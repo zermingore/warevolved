@@ -1,5 +1,5 @@
 #include <resources/ResourcesManager.hh>
-#include <pugixml/pugixml.hpp>
+#include <lib/pugixml.hh>
 #include <common/constants.hh>
 #include <resources/Image.hh>
 #include <resources/Font.hh>

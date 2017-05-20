@@ -87,7 +87,7 @@ __top_srcdir__we_CPPFLAGS =
 # -s -O3 -DNDEBUG # -Ofast
 
 # Debug flags (no optimization, debug symbols, defines):
-__top_srcdir__we_CPPFLAGS += -Og -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS
+__top_srcdir__we_CPPFLAGS += -O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS # -Og: not clang compliant
 
 # Advance Debug
 # -DDEBUG_XML
@@ -180,7 +180,7 @@ __top_srcdir__we_CPPFLAGS += -Wstrict-null-sentinel             # Warn about unc
 # __top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=pure           # Warn about functions which might be candidates for __attribute__((pure))
 # __top_srcdir__we_CPPFLAGS += -Wsuggest-final-methods            # Warn about C++ virtual methods where adding final keyword would improve code quality
 # __top_srcdir__we_CPPFLAGS += -Wsuggest-final-types              # Warn about C++ polymorphic types where adding final keyword would improve code quality
-# __top_srcdir__we_CPPFLAGS += -Wsuggest-override                 # Suggest that the override keyword be used when the declaration of a virtual function overrides another.
+__top_srcdir__we_CPPFLAGS += -Wsuggest-override                 # Suggest that the override keyword be used when the declaration of a virtual function overrides another.
 # __top_srcdir__we_CPPFLAGS += -Wswitch-bool                      # Warn about switches with boolean controlling expression
 # __top_srcdir__we_CPPFLAGS += -Wswitch-default                   # Warn about enumerated switches missing a "default:" statement
 # __top_srcdir__we_CPPFLAGS += -Wswitch-enum                      # Warn about all enumerated switches missing a specific case
