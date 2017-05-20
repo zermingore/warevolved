@@ -634,6 +634,7 @@ CC
 ac_ct_AR
 AR
 RANLIB
+ARFLAGS
 am__fastdepCXX_FALSE
 am__fastdepCXX_TRUE
 CXXDEPMODE
@@ -3539,6 +3540,11 @@ else
 fi
 
  # clang++
+
+
+# Silence warning "ar: 'u' modifier ignored since 'D' is the default"
+ARFLAGS=cr
+
 
 # use ranlib and ar to build the pugixml library
 if test -n "$ac_tool_prefix"; then

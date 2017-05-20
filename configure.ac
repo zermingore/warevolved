@@ -26,6 +26,10 @@ AM_SILENT_RULES([yes])
 # Checks for programs.
 AC_PROG_CXX([g++]) # clang++
 
+
+# Silence warning "ar: 'u' modifier ignored since 'D' is the default"
+AC_SUBST(ARFLAGS, [cr])
+
 # use ranlib and ar to build the pugixml library
 AC_PROG_RANLIB
 AM_PROG_AR
