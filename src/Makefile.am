@@ -97,6 +97,7 @@ __top_srcdir__we_CPPFLAGS += -O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS # -Og: not cla
 # export GLIBCXX_FORCE_NEW
 
 
+
 # Append Warning flags
 __top_srcdir__we_CPPFLAGS += -Wall                              # Enable most warning messages
 __top_srcdir__we_CPPFLAGS += -Wextra                            # Print extra (possibly unwanted) warnings
@@ -188,6 +189,10 @@ __top_srcdir__we_CPPFLAGS += -Wvector-operation-performance     # Warn when a ve
 __top_srcdir__we_CPPFLAGS += -Wvirtual-move-assign              # Warn if a virtual base has a non-trivial move assignment operator
 __top_srcdir__we_CPPFLAGS += -Wwrite-strings                    # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.
 __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
+
+
+__top_srcdir__we_CPPFLAGS += -Wno-unknown-warning-option        # Keep clang silent when finding g++ specific flags
+
 
 
 
