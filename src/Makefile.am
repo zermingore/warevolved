@@ -107,98 +107,93 @@ __top_srcdir__we_CPPFLAGS += -Wformat-contains-nul              # Warn about for
 __top_srcdir__we_CPPFLAGS += -Wformat-extra-args                # Warn if passing too many arguments to a function for its format string
 __top_srcdir__we_CPPFLAGS += -Wformat-signedness                # Warn about sign differences with format functions
 __top_srcdir__we_CPPFLAGS += -Wformat-zero-length               # Warn about zero-length formats
-# __top_srcdir__we_CPPFLAGS += -Warray-bounds=2                   # Warn if an array is accessed out of bounds # level 1 activated by -Wall (only with -O2); level2: also in structures
-# __top_srcdir__we_CPPFLAGS += -Wattributes                       # Warn about inappropriate attribute usage
-# __top_srcdir__we_CPPFLAGS += -Wbool-compare                     # Warn about boolean expression compared with an integer value different from true/false
-# __top_srcdir__we_CPPFLAGS += -Wbuiltin-macro-redefined          # Warn when a built-in preprocessor macro is undefined or redefined
+__top_srcdir__we_CPPFLAGS += -Warray-bounds=2                   # Warn if an array is accessed out of bounds # level 1 activated by -Wall (only with -O2); level2: also in structures
+__top_srcdir__we_CPPFLAGS += -Wattributes                       # Warn about inappropriate attribute usage
+__top_srcdir__we_CPPFLAGS += -Wbool-compare                     # Warn about boolean expression compared with an integer value different from true/false
+__top_srcdir__we_CPPFLAGS += -Wbuiltin-macro-redefined          # Warn when a built-in preprocessor macro is undefined or redefined
 __top_srcdir__we_CPPFLAGS += -Wcast-align                       # Warn about pointer casts which increase alignment
 __top_srcdir__we_CPPFLAGS += -Wcast-qual                        # Warn about casts which discard qualifiers
 __top_srcdir__we_CPPFLAGS += -Wchkp                             # Warn about memory access errors found by Pointer Bounds Checker
-# __top_srcdir__we_CPPFLAGS += -Wconditionally-supported          # Warn for conditionally-supported constructs
+__top_srcdir__we_CPPFLAGS += -Wconditionally-supported          # Warn for conditionally-supported constructs
 # __top_srcdir__we_CPPFLAGS += -Wconversion                       # Warn for implicit type conversions that may change a value
 __top_srcdir__we_CPPFLAGS += -Wconversion-null                  # Warn for converting NULL from/to a non-pointer type
-# __top_srcdir__we_CPPFLAGS += -Wcoverage-mismatch                # Warn in case profiles in -fprofile-use do not match
-# __top_srcdir__we_CPPFLAGS += -Wcpp                              # Warn when a # warning directive is encountered # meaning
-# __top_srcdir__we_CPPFLAGS += -Wctor-dtor-privacy                # Warn when all constructors and destructors are private
-# __top_srcdir__we_CPPFLAGS += -Wdate-time                        # Warn about __TIME__, __DATE__ and __TIMESTAMP__ usage
-# __top_srcdir__we_CPPFLAGS += -Wdelete-incomplete                # Warn when deleting a pointer to incomplete type
-# __top_srcdir__we_CPPFLAGS += -Wdeprecated                       # Warn if a deprecated compiler feature, class, method, or field is used
-# __top_srcdir__we_CPPFLAGS += -Wdeprecated-declarations          # Warn about uses of __attribute__((deprecated)) declarations
-# __top_srcdir__we_CPPFLAGS += -Wdisabled-optimization            # Warn when an optimization pass is disabled
-# __top_srcdir__we_CPPFLAGS += -Wdiv-by-zero                      # Warn about compile-time integer division by zero
-# __top_srcdir__we_CPPFLAGS += -Wdouble-promotion                 # Warn about implicit conversions from "float" to "double"
+__top_srcdir__we_CPPFLAGS += -Wctor-dtor-privacy                # Warn when all constructors and destructors are private
+__top_srcdir__we_CPPFLAGS += -Wdate-time                        # Warn about __TIME__, __DATE__ and __TIMESTAMP__ usage
+__top_srcdir__we_CPPFLAGS += -Wdelete-incomplete                # Warn when deleting a pointer to incomplete type
+__top_srcdir__we_CPPFLAGS += -Wdeprecated                       # Warn if a deprecated compiler feature, class, method, or field is used
+__top_srcdir__we_CPPFLAGS += -Wdeprecated-declarations          # Warn about uses of __attribute__((deprecated)) declarations
+__top_srcdir__we_CPPFLAGS += -Wdisabled-optimization            # Warn when an optimization pass is disabled
+__top_srcdir__we_CPPFLAGS += -Wdiv-by-zero                      # Warn about compile-time integer division by zero
+__top_srcdir__we_CPPFLAGS += -Wdouble-promotion                 # Warn about implicit conversions from "float" to "double"
 # __top_srcdir__we_CPPFLAGS += -Weffc++                           # Warn about violations of Effective C++ style rules
-# __top_srcdir__we_CPPFLAGS += -Wendif-labels                     # Warn about stray tokens after # elif and # endif
+__top_srcdir__we_CPPFLAGS += -Wendif-labels                     # Warn about stray tokens after # elif and # endif
 __top_srcdir__we_CPPFLAGS += -Wfloat-equal                      # Warn if testing floating point numbers for equality
-# __top_srcdir__we_CPPFLAGS += -Wfree-nonheap-object              # Warn when attempting to free a non-heap object
-# __top_srcdir__we_CPPFLAGS += -Winherited-variadic-ctor          # Warn about C++11 inheriting constructors when the base has a variadic constructor
-# __top_srcdir__we_CPPFLAGS += -Winit-self                        # Warn about variables which are initialized to themselves
-# __top_srcdir__we_CPPFLAGS += -Winline                           # Warn when an inlined function cannot be inlined
+__top_srcdir__we_CPPFLAGS += -Wfree-nonheap-object              # Warn when attempting to free a non-heap object
+__top_srcdir__we_CPPFLAGS += -Winherited-variadic-ctor          # Warn about C++11 inheriting constructors when the base has a variadic constructor
+__top_srcdir__we_CPPFLAGS += -Winit-self                        # Warn about variables which are initialized to themselves
+__top_srcdir__we_CPPFLAGS += -Winline                           # Warn when an inlined function cannot be inlined
 __top_srcdir__we_CPPFLAGS += -Wint-to-pointer-cast              # Warn when there is a cast to a pointer from an integer of a different size
-# __top_srcdir__we_CPPFLAGS += -Winvalid-memory-model             # Warn when an atomic memory model parameter is known to be outside the valid range.
-# __top_srcdir__we_CPPFLAGS += -Winvalid-offsetof                 # Warn about invalid uses of the "offsetof" macro
-# __top_srcdir__we_CPPFLAGS += -Winvalid-pch                      # Warn about PCH files that are found but not used
-# __top_srcdir__we_CPPFLAGS += -Wlarger-than=4096                 # Warn if an object is larger than <number> bytes
-# __top_srcdir__we_CPPFLAGS += -Wliteral-suffix                   # Warn when a string or character literal is followed by a ud-suffix which does not begin with an underscore.
-# __top_srcdir__we_CPPFLAGS += -Wlogical-not-parentheses          # Warn when logical not is used on the left hand side operand of a comparison
-# __top_srcdir__we_CPPFLAGS += -Wlogical-op                       # Warn when a logical operator is suspiciously always evaluating to true or false
-# __top_srcdir__we_CPPFLAGS += -Wlong-long                        # Do not warn about using "long long" when -pedantic
-# __top_srcdir__we_CPPFLAGS += -Wmemset-transposed-args           # Warn about suspicious calls to memset where the third argument is constant literal zero and the second is not
+__top_srcdir__we_CPPFLAGS += -Winvalid-memory-model             # Warn when an atomic memory model parameter is known to be outside the valid range.
+__top_srcdir__we_CPPFLAGS += -Winvalid-offsetof                 # Warn about invalid uses of the "offsetof" macro
+__top_srcdir__we_CPPFLAGS += -Winvalid-pch                      # Warn about PCH files that are found but not used
+__top_srcdir__we_CPPFLAGS += -Wlarger-than=4096                 # Warn if an object is larger than <number> bytes
+__top_srcdir__we_CPPFLAGS += -Wliteral-suffix                   # Warn when a string or character literal is followed by a ud-suffix which does not begin with an underscore.
+__top_srcdir__we_CPPFLAGS += -Wlogical-not-parentheses          # Warn when logical not is used on the left hand side operand of a comparison
+__top_srcdir__we_CPPFLAGS += -Wlogical-op                       # Warn when a logical operator is suspiciously always evaluating to true or false
+__top_srcdir__we_CPPFLAGS += -Wlong-long                        # Do not warn about using "long long" when -pedantic
+__top_srcdir__we_CPPFLAGS += -Wmemset-transposed-args           # Warn about suspicious calls to memset where the third argument is constant literal zero and the second is not
 __top_srcdir__we_CPPFLAGS += -Wmissing-declarations             # Warn about global functions without previous declarations
-# __top_srcdir__we_CPPFLAGS += -Wmissing-include-dirs             # Warn about user-specified include directories that do not exist
-# __top_srcdir__we_CPPFLAGS += -Wmultichar                        # Warn about use of multi-character character constants
-# __top_srcdir__we_CPPFLAGS += -Wnoexcept                         # Warn when a noexcept expression evaluates to false even though the expression can # 't actually throw
-# __top_srcdir__we_CPPFLAGS += -Wnon-template-friend              # Warn when non-templatized friend functions are declared within a template
+__top_srcdir__we_CPPFLAGS += -Wmissing-include-dirs             # Warn about user-specified include directories that do not exist
+__top_srcdir__we_CPPFLAGS += -Wnoexcept                         # Warn when a noexcept expression evaluates to false even though the expression can't actually throw
+__top_srcdir__we_CPPFLAGS += -Wnon-template-friend              # Warn when non-templatized friend functions are declared within a template
 # __top_srcdir__we_CPPFLAGS += -Wnon-virtual-dtor                 # Warn about non-virtual destructors
-# __top_srcdir__we_CPPFLAGS += -Wnormalized                       # Warn about non-normalised Unicode strings
-# __top_srcdir__we_CPPFLAGS += -Wodr                              # Warn about some C++ One Definition Rule violations during link time optimization
+__top_srcdir__we_CPPFLAGS += -Wnormalized                       # Warn about non-normalised Unicode strings
+__top_srcdir__we_CPPFLAGS += -Wodr                              # Warn about some C++ One Definition Rule violations during link time optimization
 __top_srcdir__we_CPPFLAGS += -Wold-style-cast                   # Warn if a C-style cast is used in a program
-# __top_srcdir__we_CPPFLAGS += -Woverflow                         # Warn about overflow in arithmetic expressions
-# __top_srcdir__we_CPPFLAGS += -Woverlength-strings               # Warn if a string is longer than the maximum portable length specified by the standard
-# __top_srcdir__we_CPPFLAGS += -Woverloaded-virtual               # Warn about overloaded virtual function names
-# __top_srcdir__we_CPPFLAGS += -Wpacked                           # Warn when the packed attribute has no effect on struct layout
-# __top_srcdir__we_CPPFLAGS += -Wpacked-bitfield-compat           # Warn about packed bit-fields whose offset changed in GCC 4.4
-# __top_srcdir__we_CPPFLAGS += -Wpmf-conversions                  # Warn when converting the type of pointers to member functions
+__top_srcdir__we_CPPFLAGS += -Woverflow                         # Warn about overflow in arithmetic expressions
+__top_srcdir__we_CPPFLAGS += -Woverlength-strings               # Warn if a string is longer than the maximum portable length specified by the standard
+__top_srcdir__we_CPPFLAGS += -Woverloaded-virtual               # Warn about overloaded virtual function names
+__top_srcdir__we_CPPFLAGS += -Wpacked                           # Warn when the packed attribute has no effect on struct layout
+__top_srcdir__we_CPPFLAGS += -Wpacked-bitfield-compat           # Warn about packed bit-fields whose offset changed in GCC 4.4
+__top_srcdir__we_CPPFLAGS += -Wpmf-conversions                  # Warn when converting the type of pointers to member functions
 __top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about function pointer arithmetic
-# __top_srcdir__we_CPPFLAGS += -Wpragmas                          # Warn about misuses of pragmas
-# __top_srcdir__we_CPPFLAGS += -Wredundant-decls                  # Warn about multiple declarations of the same object
-# __top_srcdir__we_CPPFLAGS += -Wreturn-local-addr                # Warn about returning a pointer/reference to a local or temporary variable.
+__top_srcdir__we_CPPFLAGS += -Wpragmas                          # Warn about misuses of pragmas
+__top_srcdir__we_CPPFLAGS += -Wredundant-decls                  # Warn about multiple declarations of the same object
+__top_srcdir__we_CPPFLAGS += -Wreturn-local-addr                # Warn about returning a pointer/reference to a local or temporary variable.
 __top_srcdir__we_CPPFLAGS += -Wshadow                           # Warn when one local variable shadows another
-# __top_srcdir__we_CPPFLAGS += -Wshift-count-negative             # Warn if shift count is negative
-# __top_srcdir__we_CPPFLAGS += -Wshift-count-overflow             # Warn if shift count >= width of type
-# __top_srcdir__we_CPPFLAGS += -Wsign-promo                       # Warn when overload promotes from unsigned to signed
-# __top_srcdir__we_CPPFLAGS += -Wsized-deallocation               # Warn about missing sized deallocation functions
-# __top_srcdir__we_CPPFLAGS += -Wsizeof-array-argument            # Warn when sizeof is applied on a parameter declared as an array
-# __top_srcdir__we_CPPFLAGS += -Wsizeof-pointer-memaccess         # Warn about suspicious length parameters to certain string functions if the argument uses sizeof
-# __top_srcdir__we_CPPFLAGS += -Wstack-protector                  # Warn when not issuing stack smashing protection for some reason
-# __top_srcdir__we_CPPFLAGS += -Wstack-usage=4096                 # Warn if stack usage might be larger than specified amount
+__top_srcdir__we_CPPFLAGS += -Wshift-count-negative             # Warn if shift count is negative
+__top_srcdir__we_CPPFLAGS += -Wshift-count-overflow             # Warn if shift count >= width of type
+__top_srcdir__we_CPPFLAGS += -Wsign-promo                       # Warn when overload promotes from unsigned to signed
+__top_srcdir__we_CPPFLAGS += -Wsized-deallocation               # Warn about missing sized deallocation functions
+__top_srcdir__we_CPPFLAGS += -Wsizeof-array-argument            # Warn when sizeof is applied on a parameter declared as an array
+__top_srcdir__we_CPPFLAGS += -Wsizeof-pointer-memaccess         # Warn about suspicious length parameters to certain string functions if the argument uses sizeof
+__top_srcdir__we_CPPFLAGS += -Wstack-protector                  # Warn when not issuing stack smashing protection for some reason
 __top_srcdir__we_CPPFLAGS += -Wstrict-null-sentinel             # Warn about uncasted NULL used as sentinel
-# __top_srcdir__we_CPPFLAGS += -Wstrict-overflow=5                # Warn about optimizations that assume that signed overflow is undefined # (5: overkill ?)
-# __top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=const          # Warn about functions which might be candidates for __attribute__((const))
-# __top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=format         # Warn about functions which might be candidates for format attributes
-# __top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=noreturn       # Warn about functions which might be candidates for __attribute__((noreturn))
-# __top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=pure           # Warn about functions which might be candidates for __attribute__((pure))
-# __top_srcdir__we_CPPFLAGS += -Wsuggest-final-methods            # Warn about C++ virtual methods where adding final keyword would improve code quality
-# __top_srcdir__we_CPPFLAGS += -Wsuggest-final-types              # Warn about C++ polymorphic types where adding final keyword would improve code quality
+__top_srcdir__we_CPPFLAGS += -Wstrict-overflow=5                # Warn about optimizations that assume that signed overflow is undefined # (5: overkill ?)
+__top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=const          # Warn about functions which might be candidates for __attribute__((const))
+__top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=format         # Warn about functions which might be candidates for format attributes
+__top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=noreturn       # Warn about functions which might be candidates for __attribute__((noreturn))
+__top_srcdir__we_CPPFLAGS += -Wsuggest-attribute=pure           # Warn about functions which might be candidates for __attribute__((pure))
+__top_srcdir__we_CPPFLAGS += -Wsuggest-final-methods            # Warn about C++ virtual methods where adding final keyword would improve code quality
+__top_srcdir__we_CPPFLAGS += -Wsuggest-final-types              # Warn about C++ polymorphic types where adding final keyword would improve code quality
 __top_srcdir__we_CPPFLAGS += -Wsuggest-override                 # Suggest that the override keyword be used when the declaration of a virtual function overrides another.
-# __top_srcdir__we_CPPFLAGS += -Wswitch-bool                      # Warn about switches with boolean controlling expression
-# __top_srcdir__we_CPPFLAGS += -Wswitch-default                   # Warn about enumerated switches missing a "default:" statement
+__top_srcdir__we_CPPFLAGS += -Wswitch-bool                      # Warn about switches with boolean controlling expression
+__top_srcdir__we_CPPFLAGS += -Wswitch-default                   # Warn about enumerated switches missing a "default:" statement
 # __top_srcdir__we_CPPFLAGS += -Wswitch-enum                      # Warn about all enumerated switches missing a specific case
-# __top_srcdir__we_CPPFLAGS += -Wsync-nand                        # Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used
-# __top_srcdir__we_CPPFLAGS += -Wsynth                            # Deprecated.  This switch has no effect
-# __top_srcdir__we_CPPFLAGS += -Wtrampolines                      # Warn whenever a trampoline is generated
-# __top_srcdir__we_CPPFLAGS += -Wunsafe-loop-optimizations        # Warn if the loop cannot be optimized due to nontrivial assumptions.
-# __top_srcdir__we_CPPFLAGS += -Wunused                           # Enable all -Wunused- warnings
-# __top_srcdir__we_CPPFLAGS += -Wunused-but-set-variable          # Warn when a variable is only set, otherwise unused
-# __top_srcdir__we_CPPFLAGS += -Wunused-local-typedefs            # Warn when typedefs locally defined in a function are not used
-# __top_srcdir__we_CPPFLAGS += -Wunused-macros                    # Warn about macros defined in the main file that are not used
-# __top_srcdir__we_CPPFLAGS += -Wunused-result                    # Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value
+__top_srcdir__we_CPPFLAGS += -Wsync-nand                        # Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used
+__top_srcdir__we_CPPFLAGS += -Wtrampolines                      # Warn whenever a trampoline is generated
+__top_srcdir__we_CPPFLAGS += -Wunsafe-loop-optimizations        # Warn if the loop cannot be optimized due to nontrivial assumptions.
+__top_srcdir__we_CPPFLAGS += -Wunused                           # Enable all -Wunused- warnings
+__top_srcdir__we_CPPFLAGS += -Wunused-but-set-variable          # Warn when a variable is only set, otherwise unused
+__top_srcdir__we_CPPFLAGS += -Wunused-local-typedefs            # Warn when typedefs locally defined in a function are not used
+__top_srcdir__we_CPPFLAGS += -Wunused-macros                    # Warn about macros defined in the main file that are not used
+__top_srcdir__we_CPPFLAGS += -Wunused-result                    # Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value
 __top_srcdir__we_CPPFLAGS += -Wuseless-cast                     # Warn about useless casts
-# __top_srcdir__we_CPPFLAGS += -Wvarargs                          # Warn about questionable usage of the macros used to retrieve variable arguments
-# __top_srcdir__we_CPPFLAGS += -Wvariadic-macros                  # Warn about using variadic macros
-# __top_srcdir__we_CPPFLAGS += -Wvector-operation-performance     # Warn when a vector operation is compiled outside the SIMD
-# __top_srcdir__we_CPPFLAGS += -Wvirtual-move-assign              # Warn if a virtual base has a non-trivial move assignment operator
-# __top_srcdir__we_CPPFLAGS += -Wvla                              # Warn if a variable length array is used
+__top_srcdir__we_CPPFLAGS += -Wvarargs                          # Warn about questionable usage of the macros used to retrieve variable arguments
+__top_srcdir__we_CPPFLAGS += -Wvariadic-macros                  # Warn about using variadic macros
+__top_srcdir__we_CPPFLAGS += -Wvector-operation-performance     # Warn when a vector operation is compiled outside the SIMD
+__top_srcdir__we_CPPFLAGS += -Wvirtual-move-assign              # Warn if a virtual base has a non-trivial move assignment operator
+__top_srcdir__we_CPPFLAGS += -Wvla                              # Warn if a variable length array is used
 __top_srcdir__we_CPPFLAGS += -Wwrite-strings                    # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.
 __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
 
@@ -236,6 +231,7 @@ __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 # -Wvolatile-register-var     Warn when a register variable is declared volatile
 # -Wstrict-aliasing           Warn about code which might break strict aliasing rules
 # -Wstrict-overflow           Warn about optimizations that assume that signed overflow is undefined
+# -Wmultichar                 Warn about use of multi-character character constants
 #
 #
 #  Activated by -Wextra (C++ relevant):
@@ -263,3 +259,5 @@ __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 
 # Deactivated warnings (unsure about the relevance in this context)
 # -Wpadded                           # Warn when padding is required to align structure members
+# -Wcpp                              # Warn when a # warning directive is encountered (seems active by default)
+# -Wstack-usage=4096                 # Warn if stack usage might be larger than specified amount

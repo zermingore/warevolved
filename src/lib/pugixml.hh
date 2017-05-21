@@ -9,6 +9,7 @@
 
 # pragma GCC diagnostic push
 #  pragma GCC diagnostic ignored "-Wsuggest-override"
+#  pragma GCC diagnostic ignored "-Wlong-long"
 #  include <pugixml/pugixml.hpp>
 # pragma GCC diagnostic pop
 
