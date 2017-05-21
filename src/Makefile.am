@@ -151,12 +151,10 @@ __top_srcdir__we_CPPFLAGS += -Wnormalized                       # Warn about non
 __top_srcdir__we_CPPFLAGS += -Wodr                              # Warn about some C++ One Definition Rule violations during link time optimization
 __top_srcdir__we_CPPFLAGS += -Wold-style-cast                   # Warn if a C-style cast is used in a program
 __top_srcdir__we_CPPFLAGS += -Woverflow                         # Warn about overflow in arithmetic expressions
-__top_srcdir__we_CPPFLAGS += -Woverlength-strings               # Warn if a string is longer than the maximum portable length specified by the standard
 __top_srcdir__we_CPPFLAGS += -Woverloaded-virtual               # Warn about overloaded virtual function names
 __top_srcdir__we_CPPFLAGS += -Wpacked                           # Warn when the packed attribute has no effect on struct layout
 __top_srcdir__we_CPPFLAGS += -Wpacked-bitfield-compat           # Warn about packed bit-fields whose offset changed in GCC 4.4
 __top_srcdir__we_CPPFLAGS += -Wpmf-conversions                  # Warn when converting the type of pointers to member functions
-__top_srcdir__we_CPPFLAGS += -Wpointer-arith                    # Warn about function pointer arithmetic
 __top_srcdir__we_CPPFLAGS += -Wpragmas                          # Warn about misuses of pragmas
 __top_srcdir__we_CPPFLAGS += -Wredundant-decls                  # Warn about multiple declarations of the same object
 __top_srcdir__we_CPPFLAGS += -Wreturn-local-addr                # Warn about returning a pointer/reference to a local or temporary variable.
@@ -183,17 +181,11 @@ __top_srcdir__we_CPPFLAGS += -Wswitch-default                   # Warn about enu
 __top_srcdir__we_CPPFLAGS += -Wsync-nand                        # Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used
 __top_srcdir__we_CPPFLAGS += -Wtrampolines                      # Warn whenever a trampoline is generated
 __top_srcdir__we_CPPFLAGS += -Wunsafe-loop-optimizations        # Warn if the loop cannot be optimized due to nontrivial assumptions.
-__top_srcdir__we_CPPFLAGS += -Wunused                           # Enable all -Wunused- warnings
-__top_srcdir__we_CPPFLAGS += -Wunused-but-set-variable          # Warn when a variable is only set, otherwise unused
-__top_srcdir__we_CPPFLAGS += -Wunused-local-typedefs            # Warn when typedefs locally defined in a function are not used
 __top_srcdir__we_CPPFLAGS += -Wunused-macros                    # Warn about macros defined in the main file that are not used
-__top_srcdir__we_CPPFLAGS += -Wunused-result                    # Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value
 __top_srcdir__we_CPPFLAGS += -Wuseless-cast                     # Warn about useless casts
 __top_srcdir__we_CPPFLAGS += -Wvarargs                          # Warn about questionable usage of the macros used to retrieve variable arguments
-__top_srcdir__we_CPPFLAGS += -Wvariadic-macros                  # Warn about using variadic macros
 __top_srcdir__we_CPPFLAGS += -Wvector-operation-performance     # Warn when a vector operation is compiled outside the SIMD
 __top_srcdir__we_CPPFLAGS += -Wvirtual-move-assign              # Warn if a virtual base has a non-trivial move assignment operator
-__top_srcdir__we_CPPFLAGS += -Wvla                              # Warn if a variable length array is used
 __top_srcdir__we_CPPFLAGS += -Wwrite-strings                    # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.
 __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
 
@@ -220,10 +212,13 @@ __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 # -Wreturn-type               Warn whenever a function's return type defaults to "int" (C), or about inconsistent return types (C++)
 # -Wsequence-point            Warn about possible violations of sequence point rules
 # -Wsign-compare              Warn about signed-unsigned comparisons
+# -Wunused                    Enable all -Wunused- warnings
 # -Wunused-variable           Warn when a variable is unused
 # -Wunused-function           Warn when a function is unused
 # -Wunused-value              Warn when an expression value is unused
 # -Wunused-label              Warn when a label is unused
+# -Wunused-local-typedefs     Warn when typedefs locally defined in a function are not used
+# -Wunused-but-set-variable   Warn when a variable is only set, otherwise unused
 # -Wswitch                    Warn about enumerated switches, with no default, missing a case
 # -Wtrigraphs                 Warn if trigraphs are encountered that might affect the meaning of the program
 # -Wuninitialized             Warn about uninitialized automatic variables
@@ -244,6 +239,14 @@ __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 # -Wtype-limits               Warn if a comparison is always true or always false due to the limited range of the data type
 # -Wunused-parameter          Warn when a function parameter is unused
 # -Wunused-but-set-parameter  Warn when a function parameter is only set, otherwise unused
+#
+#
+#  Activated by -Wpedantic (C++ relevant):
+#  ---------------------------------------
+# -Wvla                       Warn if a variable length array is used
+# -Wpointer-arith             Warn about function pointer arithmetic
+# -Woverlength-strings        Warn if a string is longer than the maximum portable length specified by the standard
+
 
 
 # Note:
