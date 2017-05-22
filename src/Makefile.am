@@ -126,7 +126,6 @@ __top_srcdir__we_CPPFLAGS += -Wdeprecated-declarations          # Warn about use
 __top_srcdir__we_CPPFLAGS += -Wdisabled-optimization            # Warn when an optimization pass is disabled
 __top_srcdir__we_CPPFLAGS += -Wdiv-by-zero                      # Warn about compile-time integer division by zero
 __top_srcdir__we_CPPFLAGS += -Wdouble-promotion                 # Warn about implicit conversions from "float" to "double"
-# __top_srcdir__we_CPPFLAGS += -Weffc++                           # Warn about violations of Effective C++ style rules
 __top_srcdir__we_CPPFLAGS += -Wendif-labels                     # Warn about stray tokens after # elif and # endif
 __top_srcdir__we_CPPFLAGS += -Wfloat-equal                      # Warn if testing floating point numbers for equality
 __top_srcdir__we_CPPFLAGS += -Wfree-nonheap-object              # Warn when attempting to free a non-heap object
@@ -178,7 +177,6 @@ __top_srcdir__we_CPPFLAGS += -Wsuggest-final-types              # Warn about C++
 __top_srcdir__we_CPPFLAGS += -Wsuggest-override                 # Suggest that the override keyword be used when the declaration of a virtual function overrides another.
 __top_srcdir__we_CPPFLAGS += -Wswitch-bool                      # Warn about switches with boolean controlling expression
 __top_srcdir__we_CPPFLAGS += -Wswitch-default                   # Warn about enumerated switches missing a "default:" statement
-# __top_srcdir__we_CPPFLAGS += -Wswitch-enum                      # Warn about all enumerated switches missing a specific case
 __top_srcdir__we_CPPFLAGS += -Wsync-nand                        # Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used
 __top_srcdir__we_CPPFLAGS += -Wtrampolines                      # Warn whenever a trampoline is generated
 __top_srcdir__we_CPPFLAGS += -Wunsafe-loop-optimizations        # Warn if the loop cannot be optimized due to nontrivial assumptions.
@@ -258,14 +256,17 @@ __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 # -W is deprecated: use -Wextra
 # -Wunreachable-code seems to have been removed
 # Clang has a -Weverything not g++
+# -Wnon-virtual-dtor is activated by -Weffc++ (unfortunately the latest gives too many false-positives so far)
 
 
 # Deactivated warnings
-# -Wundef                            # Warn if an undefined macro is used in an # if directive
-# -Wsystem-headers                   # Do not suppress warnings from system headers
-# -Waggregate-return                 # Warn about returning structures, unions or arrays
+# -Wundef                     Warn if an undefined macro is used in an # if directive
+# -Wsystem-headers            Do not suppress warnings from system headers
+# -Waggregate-return          Warn about returning structures, unions or arrays
+# -Wswitch-enum               Warn about all enumerated switches missing a specific case (even if a 'default' is present)
+# -Weffc++                    Warn about violations of Effective C++ style rules (05/2017: too many false positives [std::string default constructor])
 
 # Deactivated warnings (unsure about the relevance in this context)
-# -Wpadded                           # Warn when padding is required to align structure members
-# -Wcpp                              # Warn when a # warning directive is encountered (seems active by default)
-# -Wstack-usage=4096                 # Warn if stack usage might be larger than specified amount
+# -Wpadded                    Warn when padding is required to align structure members
+# -Wcpp                       Warn when a # warning directive is encountered (seems active by default)
+# -Wstack-usage=4096          Warn if stack usage might be larger than specified amount
