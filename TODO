@@ -3,10 +3,9 @@
 
 
 * TODO Roadmap
-** DONE Clean this file (rm entries or mv in a TODO.legacy)
-   CLOSED: [2017-03-19 So 11:00]
-** DONE EventsLogger Retrieve events and timestamps (as floats)
-   CLOSED: [2017-04-27 Do 07:54]
+** TODO Build: make clean should not remove the pugixml library
+** TODO Build: activate 'all' warning flags
+** TODO Doc: track this file across branches
 
 * TODO experimental
 ** TODO drawInterface Vs drawState

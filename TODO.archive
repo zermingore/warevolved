@@ -2,6 +2,10 @@
 #+OPTIONS: ^:nil
 
 * old Roadmap
+** DONE Clean this file (rm entries or mv in a TODO.legacy)
+   CLOSED: [2017-03-19 So 11:00]
+** DONE EventsLogger Retrieve events and timestamps (as floats)
+   CLOSED: [2017-04-27 Do 07:54]
 ** DONE clean
    CLOSED: [2017-03-13 Mo 20:15]
 *** DONE Image / Font in namespace resources

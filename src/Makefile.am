@@ -1,4 +1,4 @@
-bin_PROGRAMS = $(top_srcdir)/we # $(top_srcdir)/pugixml $(top_srcdir)/we
+bin_PROGRAMS = $(top_srcdir)/we
 
 # Build pugixml as a library, allowing to pass another set of flags
 # than the one used for the rest of the project
@@ -147,7 +147,7 @@ __top_srcdir__we_CPPFLAGS += -Wmissing-declarations             # Warn about glo
 __top_srcdir__we_CPPFLAGS += -Wmissing-include-dirs             # Warn about user-specified include directories that do not exist
 __top_srcdir__we_CPPFLAGS += -Wnoexcept                         # Warn when a noexcept expression evaluates to false even though the expression can't actually throw
 __top_srcdir__we_CPPFLAGS += -Wnon-template-friend              # Warn when non-templatized friend functions are declared within a template
-# __top_srcdir__we_CPPFLAGS += -Wnon-virtual-dtor                 # Warn about non-virtual destructors
+__top_srcdir__we_CPPFLAGS += -Wnon-virtual-dtor                 # Warn about non-virtual destructors
 __top_srcdir__we_CPPFLAGS += -Wnormalized                       # Warn about non-normalised Unicode strings
 __top_srcdir__we_CPPFLAGS += -Wodr                              # Warn about some C++ One Definition Rule violations during link time optimization
 __top_srcdir__we_CPPFLAGS += -Wold-style-cast                   # Warn if a C-style cast is used in a program
@@ -191,7 +191,7 @@ __top_srcdir__we_CPPFLAGS += -Wwrite-strings                    # In C++, nonzer
 __top_srcdir__we_CPPFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
 
 
-__top_srcdir__we_CPPFLAGS += -Wno-unknown-warning-option        # Keep clang silent when finding g++ specific flags
+# __top_srcdir__we_CPPFLAGS += -Wno-unknown-warning-option        # Keep clang silent when finding g++ specific flags
 
 
 

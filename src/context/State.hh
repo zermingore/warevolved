@@ -41,7 +41,7 @@ public:
   /**
    * \brief Default destructor
    */
-  ~State() = default;
+  virtual ~State() = default;
 
 
   /**
