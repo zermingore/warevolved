@@ -47,10 +47,11 @@ StateMovingUnit::StateMovingUnit()
   _holoUnitPosition = player->cursor()->coords();
 
   // explicitly using some floats for the division
-  float x = _holoUnitSprite->getTexture()->getSize().x;
-  float y = _holoUnitSprite->getTexture()->getSize().y;
+  float x = static_cast<float> (_holoUnitSprite->getTexture()->getSize().x);
+  float y = static_cast<float> (_holoUnitSprite->getTexture()->getSize().y);
   using p = graphics::MapGraphicsProperties;
-  _holoUnitSprite->setScale(p::cellWidth() / x, p::cellHeight() / y);
+  _holoUnitSprite->setScale(static_cast<float> (p::cellWidth()) / x,
+                            static_cast<float> (p::cellHeight()) / y);
 
   // Fading sprite at original position
   auto unit(Status::battle()->map()->unit(_originalCoords));

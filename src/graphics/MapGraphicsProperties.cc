@@ -5,11 +5,11 @@ namespace graphics {
 
 
 // Static class attributes definition
-size_t MapGraphicsProperties::_cellWidth;
-size_t MapGraphicsProperties::_cellHeight;
-size_t MapGraphicsProperties::_gridThickness;
-size_t MapGraphicsProperties::_gridOffsetX;
-size_t MapGraphicsProperties::_gridOffsetY;
+float MapGraphicsProperties::_cellWidth;
+float MapGraphicsProperties::_cellHeight;
+float MapGraphicsProperties::_gridThickness;
+float MapGraphicsProperties::_gridOffsetX;
+float MapGraphicsProperties::_gridOffsetY;
 
 
 void MapGraphicsProperties::initialize()

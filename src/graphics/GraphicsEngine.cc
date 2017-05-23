@@ -102,35 +102,38 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 
 
   // for each line, draw a rectangle
-  auto offset_x(MapGraphicsProperties::gridOffsetX());
-  auto offset_y(MapGraphicsProperties::gridOffsetY());
+  using p = MapGraphicsProperties;
+  auto offset_x(p::gridOffsetX());
+  auto offset_y(p::gridOffsetY());
   for (auto i(0u); i < map->nbLines(); ++i)
   {
     rectangle.setPosition(offset_x, offset_y);
-    rectangle.setSize(sf::Vector2f(MapGraphicsProperties::cellWidth() * map->nbColumns(),
-                                   MapGraphicsProperties::cellHeight()));
+
+    rectangle.setSize({
+        p::cellWidth() * static_cast<float> (map->nbColumns()),
+        p::cellHeight()});
 
     _window->draw(rectangle);
 
     // skipping to next line
-    offset_y += MapGraphicsProperties::cellHeight(); /// \todo - grid thickness in y / 2
+    offset_y += p::cellHeight(); /// \todo - grid thickness in y / 2
   }
 
 
   // for each column draw a rectangle
   // resetting offsets
-  offset_x = MapGraphicsProperties::gridOffsetX();
-  offset_y = MapGraphicsProperties::gridOffsetY();
+  offset_x = p::gridOffsetX();
+  offset_y = p::gridOffsetY();
   for (auto col(0u); col < map->nbColumns(); ++col)
   {
     rectangle.setPosition(offset_x, offset_y);
-    rectangle.setSize(sf::Vector2f(MapGraphicsProperties::cellWidth(),
-                                   MapGraphicsProperties::cellHeight() * map->nbLines()));
+    rectangle.setSize({p::cellWidth(),
+                       p::cellHeight() * static_cast<float> (map->nbLines())});
 
     _window->draw(rectangle);
 
     // skipping to next column
-    offset_x += MapGraphicsProperties::cellWidth(); /// \todo - grid thickness in x / 2
+    offset_x += p::cellWidth(); /// \todo - grid thickness in x / 2
   }
 }
 
@@ -138,17 +141,18 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 
 void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
 {
-  auto sprite(unit->sprite());
+  using p = MapGraphicsProperties;
 
   // image.sprite()->setColor(Status::player()->unitsColor());
-
-  float x = sprite->getTexture()->getSize().x;
-  float y = sprite->getTexture()->getSize().y;
-  sprite->setScale(MapGraphicsProperties::cellWidth() / x, MapGraphicsProperties::cellHeight() / y);
+  auto sprite(unit->sprite());
+  auto x(sprite->getTexture()->getSize().x);
+  auto y(sprite->getTexture()->getSize().y);
+  sprite->setScale(p::cellWidth() / static_cast<float> (x),
+                   p::cellHeight() / static_cast<float> (y));
 
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
-  if (x < MapGraphicsProperties::cellWidth() || y < MapGraphicsProperties::cellHeight()) {
+  if (x < p::cellWidth() || y < p::cellHeight()) {
     ERROR("Sprite scale failure");
   }
 # endif
@@ -184,11 +188,14 @@ void GraphicsEngine::setWindow(std::unique_ptr<sf::RenderWindow> window) {
 
 void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
 {
+  using p = MapGraphicsProperties;
+
   // offset = 1/2 left room
-  MapGraphicsProperties::setGridOffsetX(
-    (_window->getSize().x - MapGraphicsProperties::cellWidth() * map->nbColumns()) / 2);
-  MapGraphicsProperties::setGridOffsetY(
-    (_window->getSize().y - MapGraphicsProperties::cellHeight() * map->nbLines()) / 2);
+  p::setGridOffsetX((static_cast<float> (_window->getSize().x) - p::cellWidth()
+                     * static_cast<float> (map->nbColumns())) / 2);
+
+  p::setGridOffsetY((static_cast<float> (_window->getSize().y) - p::cellHeight()
+                     * static_cast<float> (map->nbLines())) / 2);
 }
 
 

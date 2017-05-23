@@ -33,7 +33,7 @@ public:
 
   /**
    * \brief increments _selectedEntry modulo number of Entries
-   *   allowing cycling
+   * \note Allow cycling
    */
   void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
@@ -111,14 +111,14 @@ protected:
    * \note this function is used to retrieve
    *   informations from menu stack (see \class Status)
    */
-  unsigned int selectedEntry() { return _selectedEntry; }
+  size_t selectedEntry() { return _selectedEntry; }
 
 
 
   std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list
   Coords _origin; ///< menu origin
 
-  unsigned int _selectedEntry; ///< Current selected entry
+  size_t _selectedEntry; ///< Current selected entry
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
 

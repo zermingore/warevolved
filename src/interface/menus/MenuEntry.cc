@@ -19,7 +19,7 @@ MenuEntry::MenuEntry(const e_entry entry)
 
   /// \todo better calculus, ratio dependent, eventually, text length dependent
   using p = graphics::MapGraphicsProperties;
-  _label->setCharacterSize((p::cellWidth() + p::cellHeight()) / 4);
+  _label->setCharacterSize(static_cast<unsigned int> ((p::cellWidth() + p::cellHeight()) / 4));
 
   /// \todo set font and label using a DB
   _font = resources::ResourcesManager::getFont("font_army");

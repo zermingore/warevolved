@@ -78,7 +78,7 @@ public:
    * \brief sets _sprite position
    * \param position: _sprite vector position components
    */
-  void setPosition(const size_t x, const size_t y);
+  void setPosition(const float x, const float y);
 
 
   /**

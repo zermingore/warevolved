@@ -99,16 +99,18 @@ void Image::setPosition(const Coords position)
   if (!_sprite) {
     initSprite();
   }
-  _sprite->setPosition(sf::Vector2f(position.c, position.l));
+
+  _sprite->setPosition({static_cast<float> (position.c),
+                        static_cast<float> (position.l)});
 }
 
 
-void Image::setPosition(const size_t x, const size_t y)
+void Image::setPosition(const float x, const float y)
 {
   if (!_sprite) {
     initSprite();
   }
-  _sprite->setPosition(sf::Vector2f(x, y));
+  _sprite->setPosition({x, y});
 }
 
 
@@ -116,15 +118,15 @@ void Image::setSize(const sf::Vector2f size)
 {
   auto old_size(_rectangle->getSize());
   _rectangle->setSize(size);
-  _sprite->setScale(sf::Vector2f(size.x / old_size.x, size.y / old_size.y));
+  _sprite->setScale({size.x / old_size.x, size.y / old_size.y});
 }
 
 
 void Image::setSize(const float width, const float height)
 {
-  auto size(_texture->getSize());
-  _rectangle->setSize(sf::Vector2f(width / size.x, height / size.y));
-  _sprite->setScale(sf::Vector2f(width / size.x, height / size.y));
+  sf::Vector2f size(_texture->getSize()); // explicit Vector2f for -Wconversion
+  _rectangle->setSize({width / size.x, height / size.y});
+  _sprite->setScale({width / size.x, height / size.y});
 }
 
 
@@ -200,11 +202,11 @@ void Image::drawAtCell(const Coords c)
     sprite();
   }
 
-  sf::Vector2f pos; // Sprite position
+  // Set the sprite position
   using p = graphics::MapGraphicsProperties;
-  pos.x = c.c * p::cellWidth()  + p::gridOffsetX();
-  pos.y = c.l * p::cellHeight() + p::gridOffsetY();
-  _sprite->setPosition(pos);
+  _sprite->setPosition(
+    {static_cast<float> (c.c) * p::cellWidth()  + p::gridOffsetX(),
+     static_cast<float> (c.l) * p::cellHeight() + p::gridOffsetY()});
 
   if (load()) {
     graphics::GraphicsEngine::draw(_sprite);

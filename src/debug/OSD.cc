@@ -51,7 +51,9 @@ std::shared_ptr<sf::Text> OSD::text(const std::string str)
                resources::ResourcesManager::font("font_army"),
                _fontSize));
 
-  label->setPosition(_dataPosition.x, _dataPosition.y);
+  label->setPosition(static_cast<float> (_dataPosition.x),
+                     static_cast<float> (_dataPosition.y));
+
   _dataPosition.y += _fontSize + 5;
 
   return label;
