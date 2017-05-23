@@ -71,9 +71,9 @@ public:
   static void setKeyRepeatDelay(const size_t delay) { _keyRepeatDelay = delay; }
 
   // graphics settings setters
-  static void setDepth(const size_t depth)     { _depth = depth; }
-  static void setStencil(const size_t stencil) { _stencil = stencil; }
-  static void setAntiAliasing(const size_t aa) { _antiAliasing = aa; }
+  static void setDepth(const unsigned int depth)     { _depth = depth; }
+  static void setStencil(const unsigned int stencil) { _stencil = stencil; }
+  static void setAntiAliasing(const unsigned int aa) { _antiAliasing = aa; }
 
   // generic settings setters
   static void setFullScreen(const bool fullScreen) { _fullScreen = fullScreen; }
@@ -88,7 +88,8 @@ private:
   // generic settings
   static bool _fullScreen; ///< Notify if we're running in full screen.
 
-  static unsigned int _keyRepeatDelay; ///< Required time to consider a "second pressure" in ms.
+  ///< Required time to consider a "second pressure" in ms.
+  static size_t _keyRepeatDelay;
 };
 
 

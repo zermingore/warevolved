@@ -4,7 +4,8 @@
 
 * TODO Roadmap
 ** TODO Build: make clean should not remove the pugixml library
-** TODO Build: activate 'all' warning flags
+** DONE Build: activate 'all' warning flags
+   CLOSED: [2017-05-22 Mo 19:50]
 ** TODO Doc: track this file across branches
 
 * TODO experimental

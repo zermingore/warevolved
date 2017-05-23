@@ -6,7 +6,7 @@ unsigned int Settings::_depth;
 unsigned int Settings::_stencil;
 unsigned int Settings::_antiAliasing;
 bool Settings::_fullScreen;
-unsigned int Settings::_keyRepeatDelay;
+size_t Settings::_keyRepeatDelay;
 
 
 void Settings::initialize(const unsigned int depth,

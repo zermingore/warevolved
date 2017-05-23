@@ -63,7 +63,7 @@ public:
   /**
    * \brief _playerId getter
    */
-  unsigned int playerId() { return _playerId; }
+  size_t playerId() { return _playerId; }
 
   /**
    * \brief _played getter
@@ -82,7 +82,7 @@ public:
    * \brief sets Unit's player belonging
    * \param player_id player's identifier
    */
-  void setPlayerId(unsigned int player_id) { _playerId = player_id; }
+  void setPlayerId(size_t player_id) { _playerId = player_id; }
 
   /**
    * \brief _played setter

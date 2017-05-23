@@ -6,6 +6,8 @@
 
 
 Context::Context(const bool fullscreen)
+  :  _system(std::make_unique<System> (2, 1)) // SFML version: 2.1
+
 {
   if (fullscreen) {
     Settings::initialize(24, 8, 4);
@@ -15,7 +17,6 @@ Context::Context(const bool fullscreen)
   }
 
   Settings::setFullScreen(fullscreen);
-  _system = std::make_unique<System> (2, 1); // SFML version: 2.1
   init();
 }
 
