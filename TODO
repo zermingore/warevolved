@@ -178,6 +178,8 @@
    - Find a way to 'destruct' static classes in a defined order
    - As the static classes may be removed one day this would solve the issue
 
+* TODO Build
+** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
 * TODO [#C] Optimization
 -> Profile <-
 ** TODO improve InGameMenu stack usage
