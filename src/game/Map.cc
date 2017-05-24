@@ -101,7 +101,7 @@ void Map::newUnit(const e_unit type,
 
   // assign the unit to the given player or to the current one
   if (player_id == -1) {
-    player_id = Status::battle()->currentPlayer();
+    player_id = static_cast<int> (Status::battle()->currentPlayer());
   }
 
   new_unit->setCellCoordinates(Coords(column, line));
@@ -135,7 +135,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   assert(_selectedUnit && defender);
 
   // getting defender status
-  defender->setHP(defender->hp() - _selectedUnit->attackValue());
+  defender->setHP(defender->hp() - static_cast<int> (_selectedUnit->attackValue()));
   bool defender_died = false;
   if (defender->hp() <= 0)
   {
@@ -144,7 +144,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   }
 
   // getting attacker status after strike back
-  _selectedUnit->setHP(_selectedUnit->hp() - defender->attackValue() / 2);
+  _selectedUnit->setHP(_selectedUnit->hp() - static_cast<int> (defender->attackValue()) / 2);
   bool attacker_died = false;
   if (_selectedUnit->hp() <= 0)
   {

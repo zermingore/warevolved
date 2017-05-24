@@ -18,8 +18,8 @@ InterfaceElement::InterfaceElement(const std::string &image_name)
   : _img_name(image_name)
   , _image(resources::ResourcesManager::getImage(_img_name))
 {
-  _scale.x = _image->sprite()->getTexture()->getSize().x;
-  _scale.y = _image->sprite()->getTexture()->getSize().y;
+  _scale.x = static_cast<float> (_image->sprite()->getTexture()->getSize().x);
+  _scale.y = static_cast<float> (_image->sprite()->getTexture()->getSize().y);
 }
 
 

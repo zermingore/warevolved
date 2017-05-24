@@ -3,12 +3,6 @@
 
 
 * TODO Roadmap
-** DONE Build: make clean should not remove the pugixml library
-   (use make mostlyclean instead)
-   CLOSED: [2017-05-23 Di 19:05]
-** TODO Build: Fix conversions warnings
-** DONE Build: activate 'all' warning flags
-   CLOSED: [2017-05-22 Mo 19:50]
 ** TODO Doc: track this file across branches
 
 * TODO experimental
@@ -22,6 +16,8 @@
    (as core/Context handles only graphic properties, move in graphics ?)
 ** TODO Use a using for graphic types (SFML: floats for positions)
 ** TODO Different types for coords on the map and graphic coordinates ? [size_t Vs float]
+   (ie continue Vector2<float> idea)
+** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 
 * TODO Input
 ** TODO use the mouse to make it move

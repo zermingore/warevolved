@@ -186,15 +186,18 @@ std::shared_ptr<resources::Image> PathFinding::getImage(const size_t index)
   using p = graphics::MapGraphicsProperties;
 
   unsigned int angle(static_cast<int> (shape) % 360);
-  img->sprite()->setRotation(angle);
+  img->sprite()->setRotation(static_cast<float> (angle));
   img->sprite()->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   // drawing at the middle of the cell
   sf::Vector2f pos(
-    _current.c * p::cellWidth()  + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
-    _current.l * p::cellHeight() + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
+    );
 
-  img->sprite()->setPosition(pos);
+  img->sprite()->setPosition({
+      static_cast<float> (_current.c) * p::cellWidth()
+        + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
+      static_cast<float> (_current.l) * p::cellHeight()
+        + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2});
 
   return img;
 }
@@ -359,8 +362,8 @@ PathFinding::getTargets(const std::shared_ptr<Unit> unit,
 size_t PathFinding::manhattan(const Coords a, const Coords b)
 {
   // implicit cast into signed int
-  int dist_columns(a.c - b.c);
-  int dist_lines(a.l - b.l);
+  int dist_columns(static_cast<int> (a.c - b.c));
+  int dist_lines(  static_cast<int> (a.l - b.l));
 
   return std::abs(dist_columns) + std::abs(dist_lines);
 }

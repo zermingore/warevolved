@@ -61,7 +61,7 @@ void KeyManager::populateEvents()
 
 
 
-void KeyManager::blockInputs(const unsigned int duration)
+void KeyManager::blockInputs(const size_t duration)
 {
   // Clearing active inputs
   _active_inputs.clear();
@@ -77,5 +77,5 @@ bool KeyManager::eventsFreezed()
 {
   // Check if the events were blocked for a minimal duration
   return (_clock_events_freeze.getElapsedTime().asMilliseconds()
-          < _events_freeze_duration);
+          < static_cast<int> (_events_freeze_duration));
 }

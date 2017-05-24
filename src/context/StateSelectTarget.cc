@@ -29,19 +29,21 @@ StateSelectTarget::StateSelectTarget()
   _targetHighlight = _targetHighlightImage->sprite();
   _targetHighlight->setColor(sf::Color(255, 127, 127, 255));
 
-  // explicitly using some floats for the division
-  float x = _targetHighlight->getTexture()->getSize().x;
-  float y = _targetHighlight->getTexture()->getSize().y;
   using p = graphics::MapGraphicsProperties;
+
+  // explicitly using some floats for the division
+  float x(static_cast<float> (_targetHighlight->getTexture()->getSize().x));
+  float y(static_cast<float> (_targetHighlight->getTexture()->getSize().y));
   _targetHighlight->setScale(p::cellWidth()  / x, p::cellHeight() / y);
   _targetHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
   _holoUnitSprite = _holoUnit->sprite();
   _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
-  x = _holoUnitSprite->getTexture()->getSize().x;
-  y = _holoUnitSprite->getTexture()->getSize().y;
-  _holoUnitSprite->setScale(p::cellWidth()  / x, p::cellHeight() / y);
+
+  x = static_cast<float> (_holoUnitSprite->getTexture()->getSize().x);
+  y = static_cast<float> (_holoUnitSprite->getTexture()->getSize().y);
+  _holoUnitSprite->setScale(p::cellWidth() / x, p::cellHeight() / y);
 }
 
 
@@ -85,9 +87,9 @@ void StateSelectTarget::draw()
 
   // emphasis (scale and rotation) of the cursor over the target
   static float scale_factor = 1;
-  static unsigned int angle = 0;
+  static size_t angle = 0;
   angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
-  ++angle;
+  ++angle; // \todo angle will overflow
 
   using p = graphics::MapGraphicsProperties;
   auto width(p::cellWidth());
@@ -95,11 +97,11 @@ void StateSelectTarget::draw()
 
   // target cell coordinates
   auto coords((*_targets)[_index_target]->coords());
-  auto pos_c = coords.c * width  + p::gridOffsetX() + width  / 2;
-  auto pos_l = coords.l * height + p::gridOffsetY() + height / 2;
+  auto pos_c(static_cast<float> (coords.c) * width  + p::gridOffsetX() + width  / 2);
+  auto pos_l(static_cast<float> (coords.l) * height + p::gridOffsetY() + height / 2);
   _targetHighlightImage->sprite()->setPosition(pos_c, pos_l);
 
-  _targetHighlight->setRotation(angle);
+  _targetHighlight->setRotation(static_cast<float> (angle));
 
   graphics::GraphicsEngine::draw(_targetHighlight);
 }

@@ -59,7 +59,7 @@ public:
    * \brief Blocks every input, active or not
    * \param duration Time in ms during which one events will be ignored
    */
-  void blockInputs(const unsigned int duration = 100);
+  void blockInputs(const size_t duration = 100);
 
 
 
@@ -79,7 +79,7 @@ private:
   std::set<e_input> _active_inputs; ///< current inputs (high level keys)
 
   sf::Clock _clock_events_freeze; ///< clock to manage events freezing
-  int _events_freeze_duration;    ///< duration to deactivate events
+  size_t _events_freeze_duration; ///< duration to deactivate events
 };
 
 

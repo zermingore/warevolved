@@ -102,7 +102,7 @@ bool InputProcessor::replay()
 
     Status::currentState()->eventManager()->process(static_cast<e_input> (it.second));
 
-    std::cout << "played event after: " << time_elapsed.count() / 1000000. << std::endl;
+    std::cout << "played event after: " << time_elapsed.count() / 1000000l << std::endl;
   }
 
   return false;

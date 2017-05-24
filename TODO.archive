@@ -2,6 +2,13 @@
 #+OPTIONS: ^:nil
 
 * old Roadmap
+** DONE Build: make clean should not remove the pugixml library
+   (use make mostlyclean instead)
+   CLOSED: [2017-05-23 Di 19:05]
+** DONE Build: Fix conversions warnings
+   CLOSED: [2017-05-24 Mi 08:10]
+** DONE Build: activate 'all' warning flags
+   CLOSED: [2017-05-22 Mo 19:50]
 ** DONE Clean this file (rm entries or mv in a TODO.legacy)
    CLOSED: [2017-03-19 So 11:00]
 ** DONE EventsLogger Retrieve events and timestamps (as floats)

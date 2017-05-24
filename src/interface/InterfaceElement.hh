@@ -82,7 +82,7 @@ public:
    * \brief position setter.
    * \param position cells coordinates to place the element.
    */
-  void setPosition(const Coords &position) { _position = position; }
+  void setPosition(const Vector2<float> &position) { _position = position; }
 
   /**
    * \brief scale setter.
@@ -131,7 +131,7 @@ public:
 protected:
   std::string _img_name;                    ///< Associated image name
   std::shared_ptr<resources::Image> _image; ///< Associated image
-  Coords _position;                         ///< Element position (in pixels)
+  Vector2<float> _position;                 ///< Element position (in pixels)
   Coords _coords;                           ///< Position (in cells; not always filled)
   Vector2<float> _scale;                    ///< Element scale (related to a Cell size)
   float _rotation;                          ///< Element rotation

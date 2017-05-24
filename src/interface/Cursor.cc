@@ -66,20 +66,20 @@ void Cursor::update()
   auto width(p::cellWidth());
   auto height(p::cellHeight());
 
-  _position.c = _coords.c * width +  p::gridOffsetX() + width / 2;
-  _position.l = _coords.l * height + p::gridOffsetY() + height / 2;
-  _image->sprite()->setPosition(_position.c, _position.l);
+  _position.x = static_cast<float> (_coords.c) * width  +  p::gridOffsetX() + width  / 2;
+  _position.y = static_cast<float> (_coords.l) * height  + p::gridOffsetY() + height / 2;
+  _image->sprite()->setPosition(_position.x, _position.y);
 
   static float scale_factor = 1;
   static unsigned int angle = 0;
   angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
   _image->setScale(scale_factor, scale_factor);
-  ++angle;
+  ++angle; // \todo angle will overflow
 
 
   // The origin of the sprite is the middle of the cell
-  _image->sprite()->setOrigin(width / 2, height / 2);
-  _image->sprite()->setRotation(angle);
+  _image->sprite()->setOrigin(width / 2.f, height / 2.f);
+  _image->sprite()->setRotation(static_cast<float> (angle));
   _image->setScale(scale_factor, scale_factor);
 
   _image->sprite()->setColor(_color);
