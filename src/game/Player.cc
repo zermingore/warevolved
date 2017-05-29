@@ -58,14 +58,7 @@ void Player::select()
 }
 
 
-bool Player::updateSelectedUnit()
+void Player::updateSelectedUnit()
 {
-  // Update the Map selected Unit
-  auto coords(Status::player()->cursor()->coords());
-  Status::battle()->map()->selectUnit(coords);
-
-  // \todo highlight the unit
-  // \todo save in the class a copy of the unit sprite
-
-  return true;
+  Status::battle()->map()->selectUnit(_cursor->coords());
 }

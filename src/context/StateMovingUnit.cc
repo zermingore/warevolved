@@ -24,7 +24,7 @@ StateMovingUnit::StateMovingUnit()
   auto player(Status::player());
 
   // we need a selected unit to continue
-  assert(player->updateSelectedUnit());
+  player->updateSelectedUnit();
 
   _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { moveUnitUp();    });
   _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { moveUnitDown();  });

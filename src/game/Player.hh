@@ -74,8 +74,10 @@ public:
   auto cursor() { return _cursor; }
 
 
-  bool updateSelectedUnit();
-
+  /**
+   * \brief Update the Map selected Unit
+   */
+  void updateSelectedUnit();
 
 
 private:
