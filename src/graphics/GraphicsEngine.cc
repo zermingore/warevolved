@@ -110,7 +110,7 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
     rectangle.setPosition(offset_x, offset_y);
 
     rectangle.setSize({
-        p::cellWidth() * static_cast<float> (map->nbColumns()),
+        p::cellWidth() * static_cast<component> (map->nbColumns()),
         p::cellHeight()});
 
     _window->draw(rectangle);
@@ -128,7 +128,7 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   {
     rectangle.setPosition(offset_x, offset_y);
     rectangle.setSize({p::cellWidth(),
-                       p::cellHeight() * static_cast<float> (map->nbLines())});
+                       p::cellHeight() * static_cast<component> (map->nbLines())});
 
     _window->draw(rectangle);
 
@@ -147,8 +147,8 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
   auto sprite(unit->sprite());
   auto x(sprite->getTexture()->getSize().x);
   auto y(sprite->getTexture()->getSize().y);
-  sprite->setScale(p::cellWidth() / static_cast<float> (x),
-                   p::cellHeight() / static_cast<float> (y));
+  sprite->setScale(p::cellWidth() / static_cast<component> (x),
+                   p::cellHeight() / static_cast<component> (y));
 
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
@@ -191,11 +191,11 @@ void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
   using p = MapGraphicsProperties;
 
   // offset = 1/2 left room
-  p::setGridOffsetX((static_cast<float> (_window->getSize().x) - p::cellWidth()
-                     * static_cast<float> (map->nbColumns())) / 2);
+  p::setGridOffsetX((static_cast<component> (_window->getSize().x) - p::cellWidth()
+                     * static_cast<component> (map->nbColumns())) / 2);
 
-  p::setGridOffsetY((static_cast<float> (_window->getSize().y) - p::cellHeight()
-                     * static_cast<float> (map->nbLines())) / 2);
+  p::setGridOffsetY((static_cast<component> (_window->getSize().y) - p::cellHeight()
+                     * static_cast<component> (map->nbLines())) / 2);
 }
 
 

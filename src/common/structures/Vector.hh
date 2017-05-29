@@ -42,8 +42,7 @@ public:
 
   /**
    * \brief equality operator: compare x and y coordinates.
-   *
-   * Warning: Should not be used when the class is templated with floats !
+   * \warning Should not be used when the class is templated with floats !
    */
   bool operator==(const Vector2& b) {
     return (x == b.x && y == b.y);

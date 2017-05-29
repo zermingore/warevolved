@@ -10,7 +10,7 @@
 #include <game/Battle.hh>
 
 
-Player::Player(const Color c)
+Player::Player(const graphics::Color c)
 {
   static size_t static_id = 0;
   _id = static_id++;
@@ -48,10 +48,12 @@ void Player::select()
 {
   /// \todo check selectable before push
 
-  if (Status::battle()->map()->unit(_cursor->coords())) {
+  if (Status::battle()->map()->unit(_cursor->coords()))
+  {
     Status::pushState(e_state::SELECTION_UNIT);
   }
-  else {
+  else
+  {
     Status::pushState(e_state::MAP_MENU);
   }
   Status::currentState()->resume();

@@ -3,7 +3,7 @@
  * \date April 15, 2013
  * \author Zermingore
  * \brief usual includes (graphic library, debug, data structures, STL).
- * \note It should not be included systematically
+ * \warning deprecated
  */
 
 #ifndef INCLUDE_HH_

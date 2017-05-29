@@ -28,10 +28,10 @@ void Battle::initializeMap()
 
 void Battle::buildPlayers()
 {
-  auto player1 = std::make_shared<Player> (Color(0, 127, 127));
+  auto player1 = std::make_shared<Player> (graphics::Color(0, 127, 127));
   _players.push_back(player1);
 
-  auto player2 = std::make_shared<Player> (Color(227, 227, 0));
+  auto player2 = std::make_shared<Player> (graphics::Color(227, 227, 0));
   _players.push_back(player2);
 }
 

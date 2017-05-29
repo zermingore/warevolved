@@ -33,7 +33,7 @@ public:
    * \brief Constructor. Sets the Player's index to a unique value.
    * \param c color used by the player
    */
-  explicit Player(const Color c);
+  explicit Player(const graphics::Color c);
 
 
   /**
@@ -90,7 +90,7 @@ private:
 
   std::shared_ptr<Unit> _selectedUnit; ///< current selected unit
 
-  sf::Color _color; ///< player's color
+  graphics::Color _color; ///< player's color
 };
 
 

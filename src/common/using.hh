@@ -10,11 +10,7 @@
 
 # include <cstddef> // size_t
 # include <common/structures/Vector.hh>
-# include <SFML/Graphics/Color.hpp>
 
-
-/// Handy using for a color, only here dependent from a graphic library
-using Color = sf::Color; // SFML dependent
 
 
 /**

@@ -29,7 +29,7 @@ public:
   Interface() = delete;
 
   /// Constructor. Initializes interface settings (colors, ...)
-  explicit Interface(const Color c);
+  explicit Interface(const graphics::Color c);
 
   /// Default destructor
   ~Interface() = default;
@@ -72,26 +72,30 @@ public:
    * \brief Cursor color getter.
    * \return Color of the cursor.
    */
-  Color cursorColor() const { return _settings->cursorColor(); }
+  auto cursorColor() const { return _settings->cursorColor(); }
 
   /**
    * \brief sets cursor color.
    * \param color _cursorColor value.
    */
-  void setCursorColor(const Color color) { _settings->setCursorColor(color); }
+  void setCursorColor(const graphics::Color color) {
+    _settings->setCursorColor(color);
+  }
 
 
   /**
    * \brief Player's units color getter.
    * \return Units color.
    */
-  Color unitsColor() const { return _settings->unitsColor(); }
+  auto unitsColor() const { return _settings->unitsColor(); }
 
   /**
    * \brief sets units color.
    * \param color units color.
    */
-  void setUnitsColor(const Color color) { _settings->setUnitsColor(color); }
+  void setUnitsColor(const graphics::Color color) {
+    _settings->setUnitsColor(color);
+  }
 
 
 private:

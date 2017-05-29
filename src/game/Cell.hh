@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef CELL_HH_
-# define CELL_HH_
+#ifndef GAME_CELL_HH_
+# define GAME_CELL_HH_
 
 # include <game/units/Unit.hh>
 
@@ -87,12 +87,7 @@ public:
    * \brief Highlight color setter.
    * \param color Color of Cell's highlight.
    */
-  void setHighlightColor(Color color) { _highlightColor = color; }
-
-  /**
-   * \brief Removes the unit in this cell.
-   */
-  void removeUnit() { _unit = nullptr; }
+  void setHighlightColor(graphics::Color color) { _highlightColor = color; }
 
   /**
    * \brief returns Cell's line coordinate.
@@ -112,13 +107,20 @@ public:
   auto coords() { return _coords; }
 
 
+  /**
+   * \brief Removes the unit in this cell.
+   */
+  void removeUnit() { _unit = nullptr; }
+
+
 private:
   Coords _coords;              ///< Cell's coordinates.
   e_terrain _terrain;          ///< Terrain type index (matching terrains).
   std::shared_ptr<Unit> _unit; ///< Unit type index (matching terrains).
 
-  bool _highlight;       ///< True if the cell needs to be highlighted.
-  Color _highlightColor; ///< Color of the cell's highlight.
+  bool _highlight;                 ///< Does the cell needs to be highlighted ?
+  graphics::Color _highlightColor; ///< Color of the cell's highlight.
 };
 
-#endif /* !CELL_HH_ */
+
+#endif /* !GAME_CELL_HH_ */

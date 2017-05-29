@@ -4,6 +4,8 @@
 
 * TODO Roadmap
 ** TODO Doc: track this file across branches
+** TODO Remove common/include.hh
+** TODO Use component type
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
@@ -180,6 +182,7 @@
 
 * TODO Build
 ** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
+** TODO Move pugixml in a lib/ folder at the root
 * TODO [#C] Optimization
 -> Profile <-
 ** TODO improve InGameMenu stack usage
