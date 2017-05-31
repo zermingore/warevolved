@@ -8,7 +8,7 @@
 # define CURSOR_HH_
 
 # include <cstddef> // size_t
-# include <graphics/graphics.hh>
+# include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>
 
 

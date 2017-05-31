@@ -8,7 +8,7 @@
 #include <interface/InterfaceElement.hh>
 #include <resources/Image.hh>
 #include <resources/ResourcesManager.hh>
-#include <graphics/graphics.hh>
+#include <graphics/graphic_types.hh>
 
 
 namespace interface {

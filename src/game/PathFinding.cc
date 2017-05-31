@@ -7,7 +7,7 @@
 #include <common/Status.hh>
 #include <common/enums/directions.hh>
 #include <common/enums/path_shapes.hh>
-#include <graphics/graphics.hh>
+#include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
 

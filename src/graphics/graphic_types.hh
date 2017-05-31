@@ -5,8 +5,8 @@
  * \brief InterfaceElement implementation
  */
 
-#ifndef GRAPHICS_GRAPHICS_HH_
-# define GRAPHICS_GRAPHICS_HH_
+#ifndef GRAPHICS_GRAPHIC_TYPES_HH_
+# define GRAPHICS_GRAPHIC_TYPES_HH_
 
 # include <SFML/System/Vector2.hpp>
 # include <SFML/Graphics/Color.hpp>
@@ -36,4 +36,4 @@ using Font = sf::Font;
 }
 
 
-#endif /* !GRAPHICS_GRAPHICS_HH_ */
+#endif /* !GRAPHICS_GRAPHIC_TYPES_HH_ */

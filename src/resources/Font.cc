@@ -1,5 +1,5 @@
 #include <resources/Font.hh>
-#include <graphics/graphics.hh>
+#include <graphics/graphic_types.hh>
 
 
 namespace resources {

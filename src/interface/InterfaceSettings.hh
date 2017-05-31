@@ -8,7 +8,7 @@
 #ifndef INTERFACE_INTERFACE_SETTINGS_HH_
 # define INTERFACE_INTERFACE_SETTINGS_HH_
 
-# include <graphics/graphics.hh> // Color
+# include <graphics/graphic_types.hh> // Color
 
 
 namespace interface {

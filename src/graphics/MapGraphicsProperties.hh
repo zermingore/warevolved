@@ -8,7 +8,7 @@
 #ifndef MAP_GRAPHICS_PROPERTIES_HH_
 # define MAP_GRAPHICS_PROPERTIES_HH_
 
-# include <graphics/graphics.hh>
+# include <graphics/graphic_types.hh>
 
 namespace graphics {
 
