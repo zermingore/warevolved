@@ -7,6 +7,7 @@
 #include <common/Status.hh>
 #include <common/enums/directions.hh>
 #include <common/enums/path_shapes.hh>
+#include <graphics/graphics.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
 
@@ -190,13 +191,10 @@ std::shared_ptr<resources::Image> PathFinding::getImage(const size_t index)
   img->sprite()->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   // drawing at the middle of the cell
-  sf::Vector2f pos(
-    );
-
   img->sprite()->setPosition({
-      static_cast<float> (_current.c) * p::cellWidth()
+      static_cast<graphics::component> (_current.c) * p::cellWidth()
         + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
-      static_cast<float> (_current.l) * p::cellHeight()
+      static_cast<graphics::component> (_current.l) * p::cellHeight()
         + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2});
 
   return img;
@@ -246,18 +244,18 @@ void PathFinding::highlightCells()
         if (!u)
         {
           _reachableCells.push_back((*_map)[i][j]);
-          c->setHighlightColor(sf::Color::Yellow);
+          c->setHighlightColor(graphics::Color::Yellow);
           continue;
         }
 
         if (u->playerId() == Status::player()->id())
         {
           _reachableCells.push_back((*_map)[i][j]);
-          c->setHighlightColor(sf::Color::Green);
+          c->setHighlightColor(graphics::Color::Green);
         }
         else
         {
-          c->setHighlightColor(sf::Color::Red);
+          c->setHighlightColor(graphics::Color::Red);
           _enemyPositions.push_back(c);
         }
 
@@ -271,7 +269,7 @@ void PathFinding::highlightCells()
         if (u->playerId() != Status::player()->id())
         {
           c->setHighlight(true);
-          c->setHighlightColor(sf::Color::Red);
+          c->setHighlightColor(graphics::Color::Red);
           _enemyPositions.push_back(c);
         }
       }
