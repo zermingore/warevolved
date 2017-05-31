@@ -13,10 +13,11 @@
 # include <SFML/Graphics.hpp>
 
 
+
 namespace graphics {
 
-// SFML: Using float.
-// Because, from the SFML sources (SFML/System/Vector2.hpp):
+// SFML: Using float for positions and sizes
+// because, from the SFML sources (SFML/System/Vector2.hpp):
 // Note: although texture coordinates are supposed to be an integer
 // amount of pixels, their type is float because of some buggy graphics
 // drivers that are not able to process integer coordinates correctly.
@@ -31,6 +32,7 @@ using Color = sf::Color;
 using Sprite = sf::Sprite;
 using Texture = sf::Texture;
 using RectangleShape = sf::RectangleShape;
+using Font = sf::Font;
 }
 
 

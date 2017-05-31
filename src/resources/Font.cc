@@ -1,5 +1,6 @@
 #include <resources/Font.hh>
-#include <common/constants.hh>
+#include <graphics/graphics.hh>
+
 
 namespace resources {
 
@@ -19,7 +20,7 @@ bool Font::load()
     return true;
   }
 
-  _font = std::make_shared<sf::Font> ();
+  _font = std::make_shared<graphics::Font> ();
   _font->loadFromFile(_fileName);
   _loaded = true;
 
@@ -27,7 +28,7 @@ bool Font::load()
 }
 
 
-std::shared_ptr<sf::Font> Font::getFont()
+std::shared_ptr<graphics::Font> Font::getFont()
 {
   if (!_loaded) {
     this->load();

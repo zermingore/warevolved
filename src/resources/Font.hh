@@ -7,8 +7,11 @@
 #ifndef RESOURCES_FONT_HH_
 # define RESOURCES_FONT_HH_
 
+# include <string>
+# include <memory>
+
 # include <resources/Resource.hh>
-# include <common/include.hh>
+# include <graphics/graphics.hh>
 
 
 namespace resources {
@@ -43,11 +46,11 @@ public:
    * \return _font value
    * \note loads the requested Font if needed
    */
-  std::shared_ptr<sf::Font> getFont();
+  std::shared_ptr<graphics::Font> getFont();
 
 
 private:
-  std::shared_ptr<sf::Font> _font; ///< current Font
+  std::shared_ptr<graphics::Font> _font; ///< current Font
 };
 
 
