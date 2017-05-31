@@ -44,22 +44,26 @@ void InGameMenu::validate()
 
 void InGameMenu::update()
 {
-  using p = graphics::MapGraphicsProperties;
+  using namespace graphics;
+  using p = MapGraphicsProperties;
 
   // _coords is filled by the player, with cursor coordinates
-  _position.x = static_cast<float> (_coords.c) * p::cellWidth()  + p::gridOffsetX();
-  _position.y = static_cast<float> (_coords.l) * p::cellHeight() + p::gridOffsetY();
+  _position = {
+    static_cast<component> (_coords.c) * p::cellWidth()  + p::gridOffsetX(),
+    static_cast<component> (_coords.l) * p::cellHeight() + p::gridOffsetY()};
 
   // highlighting current selection
-  _imageSelection->setPosition(_position.x,
-                               _position.y + p::cellHeight() * static_cast<float> (_selectedEntry));
+  _imageSelection->setPosition(
+    _position.x,
+    _position.y + p::cellHeight() * static_cast<component> (_selectedEntry));
 
   // update entries positions
   auto entry_index(0);
   for (auto entry: _entries)
   {
-    entry->setPosition({_position.x,
-                        _position.y + p::cellHeight() * static_cast<float> (entry_index)});
+    entry->setPosition({
+      _position.x,
+      _position.y + p::cellHeight() * static_cast<component> (entry_index)});
     entry->update();
     ++entry_index;
   }

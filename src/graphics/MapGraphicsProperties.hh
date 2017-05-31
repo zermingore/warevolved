@@ -8,6 +8,7 @@
 #ifndef MAP_GRAPHICS_PROPERTIES_HH_
 # define MAP_GRAPHICS_PROPERTIES_HH_
 
+# include <graphics/graphics.hh>
 
 namespace graphics {
 
@@ -57,39 +58,39 @@ public:
    * \brief cell width setter.
    * \param width cell width in pixels.
    */
-  static void setCellWidth(float width) { _cellWidth = width; }
+  static void setCellWidth(component width) { _cellWidth = width; }
 
   /**
    * \brief cell height setter.
    * \param height cell height in pixels.
    */
-  static void setCellHeight(float height) { _cellHeight = height; }
+  static void setCellHeight(component height) { _cellHeight = height; }
 
   /**
    * \brief grid thickness setter.
    * \param thickness of the grid in pixels.
    */
-  static void setGridThickness(float thickness) { _gridThickness = thickness; }
+  static void setGridThickness(component thickness) { _gridThickness = thickness; }
 
   /**
    * \brief offset of the grid (from the left border of the window) setter.
    * \param x offset.
    */
-  static void setGridOffsetX(float grid_offset_x) { _gridOffsetX = grid_offset_x; }
+  static void setGridOffsetX(component grid_offset_x) { _gridOffsetX = grid_offset_x; }
 
   /**
    * \brief offset of the grid (from the top border of the window) setter.
    * \param y offset.
    */
-  static void setGridOffsetY(float grid_offset_y) { _gridOffsetY = grid_offset_y; }
+  static void setGridOffsetY(component grid_offset_y) { _gridOffsetY = grid_offset_y; }
 
 
 private:
-  static float _cellWidth;     ///< cells width in pixels
-  static float _cellHeight;    ///< cells height in pixels
-  static float _gridThickness; ///< thickness of the grid
-  static float _gridOffsetX;   ///< X grid offset (from the window left border)
-  static float _gridOffsetY;   ///< Y grid offset (from the window top border)
+  static component _cellWidth;     ///< cells width in pixels
+  static component _cellHeight;    ///< cells height in pixels
+  static component _gridThickness; ///< thickness of the grid
+  static component _gridOffsetX;   ///< X grid offset (from the window left border)
+  static component _gridOffsetY;   ///< Y grid offset (from the window top border)
 };
 
 

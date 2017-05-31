@@ -9,7 +9,7 @@
 
 # include <string>
 # include <memory>
-# include <common/using.hh>
+# include <graphics/graphics.hh>
 # include <common/structures/Vector.hh>
 # include <interface/InterfaceSettings.hh>
 # include <game/Map.hh>
@@ -76,21 +76,20 @@ public:
    * \brief position setter.
    * \param position cells coordinates to place the element.
    */
-  void setCoords(const Coords &coords) { _coords = coords; }
+  void setCoords(const Coords& coords) { _coords = coords; }
 
   /**
    * \brief position setter.
    * \param position cells coordinates to place the element.
    */
-  void setPosition(const Vector2<float> &position) { _position = position; }
+  void setPosition(const graphics::Pos2& position) { _position = position; }
 
   /**
    * \brief scale setter.
    * \param scale_x scale in x related to cells size.
    * \param scale_y scale in y related to cells size.
    */
-  void setScale(const float &scale_x, const float &scale_y)
-  {
+  void setScale(const float& scale_x, const float& scale_y) {
     _scale.x = scale_x;
     _scale.y = scale_y;
   }
@@ -99,7 +98,7 @@ public:
    * \brief scale setter.
    * \param scale scale to apply in x and y related to cells size.
    */
-  void setScale(const float &scale) { setScale(scale, scale); }
+  void setScale(const float& scale) { setScale(scale, scale); }
 
   /**
    * \brief rotation setter.
@@ -111,7 +110,7 @@ public:
    *
    * \param rotation angle of the rotation.
    */
-  void setRotation(const float &rotation) { _rotation = rotation; }
+  void setRotation(const float& rotation) { _rotation = rotation; }
 
 
   /**
@@ -131,10 +130,11 @@ public:
 protected:
   std::string _img_name;                    ///< Associated image name
   std::shared_ptr<resources::Image> _image; ///< Associated image
-  Vector2<float> _position;                 ///< Element position (in pixels)
-  Coords _coords;                           ///< Position (in cells; not always filled)
-  Vector2<float> _scale;                    ///< Element scale (related to a Cell size)
-  float _rotation;                          ///< Element rotation
+
+  graphics::Pos2 _position; ///< Element position (in pixels)
+  Coords _coords;           ///< Position (in cells; not always filled)
+  Vector2<float> _scale;    ///< Element scale (related to a Cell size)
+  float _rotation;          ///< Element rotation
 };
 
 

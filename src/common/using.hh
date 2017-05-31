@@ -5,8 +5,8 @@
  * \brief Handy aliases on data structures
  */
 
-#ifndef USING_HH_
-# define USING_HH_
+#ifndef COMMON_USING_HH_
+# define COMMON_USING_HH_
 
 # include <cstddef> // size_t
 # include <common/structures/Vector.hh>
@@ -75,4 +75,4 @@ public: // explicitly specifying that these attributes are public
 
 
 
-#endif /* !USING_HH_ */
+#endif /* !COMMON_USING_HH_ */

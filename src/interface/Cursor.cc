@@ -61,13 +61,15 @@ bool Cursor::moveRight()
 
 void Cursor::update()
 {
-  using p = graphics::MapGraphicsProperties;
+  using namespace graphics;
+  using p = MapGraphicsProperties;
 
   auto width(p::cellWidth());
   auto height(p::cellHeight());
 
-  _position.x = static_cast<float> (_coords.c) * width  +  p::gridOffsetX() + width  / 2;
-  _position.y = static_cast<float> (_coords.l) * height  + p::gridOffsetY() + height / 2;
+  _position = {
+    static_cast<component> (_coords.c) * width  + p::gridOffsetX() + width  / 2,
+    static_cast<component> (_coords.l) * height + p::gridOffsetY() + height / 2};
   _image->sprite()->setPosition(_position.x, _position.y);
 
   static float scale_factor = 1;

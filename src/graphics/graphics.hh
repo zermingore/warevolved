@@ -20,7 +20,8 @@ namespace graphics {
 // amount of pixels, their type is float because of some buggy graphics
 // drivers that are not able to process integer coordinates correctly.
 
-using Pos = sf::Vector2f;
+using Pos2 = sf::Vector2f;
+using Size2 = sf::Vector2f;
 using component = float;  // component of Pos
 
 using Color = sf::Color;
