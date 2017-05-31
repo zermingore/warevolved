@@ -22,8 +22,6 @@ class Interface;
 namespace graphics {
 
 
-typedef sf::Sprite Sprite;
-
 /**
  * \class GraphicsEngine
  * \brief Manages the display of a scene.
