@@ -5,7 +5,8 @@
 * TODO Roadmap
 ** TODO Doc: track this file across branches
 ** TODO Remove common/include.hh
-** TODO Use component type
+** DONE Use component type
+   CLOSED: [2017-05-31 Mi 08:03]
 
 * TODO experimental
 ** TODO drawInterface Vs drawState

@@ -1,17 +1,17 @@
 /**
  * \file
  * \date April 25, 2013
- * \namespace interface
- * \brief InterfaceElement declaration
+ * \brief Resource abstract class declaration
  */
 
-#ifndef RESOURCE_HH_
-# define RESOURCE_HH_
+#ifndef RESOURCES_RESOURCE_HH_
+# define RESOURCES_RESOURCE_HH_
 
-# include <common/include.hh>
+# include <string>
 
 
 /**
+ * \class Resource
  * \brief generic Resource class
  * \note Daughters classes: Image, Font, ...
  */
@@ -43,7 +43,7 @@ public:
   /**
    * \brief unloads a resource
    */
-  virtual void unload() {}
+  virtual void unload() {} /// \todo = 0
 
   /**
    * \brief _loaded boolean getter
@@ -83,4 +83,4 @@ protected:
   std::string _fileName; ///< Resource file name (with full path and extension)
 };
 
-#endif /* !RESOURCE_HH_ */
+#endif /* !RESOURCES_RESOURCE_HH_ */
