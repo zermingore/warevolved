@@ -8,9 +8,11 @@
 #ifndef GRAPHICS_GRAPHICS_ENGINE_HH_
 # define GRAPHICS_GRAPHICS_ENGINE_HH_
 
-# include <common/include.hh>
-# include <common/using.hh> // Coords
+# include <memory>
+# include <SFML/Graphics/RenderWindow.hpp>
+# include <SFML/Window/Event.hpp>
 
+# include <graphics/graphic_types.hh>
 
 class Map;
 class Cell;
@@ -46,7 +48,7 @@ public:
    * \brief _window setter.
    * \note Takes the ownership of the given unique pointer
    */
-  static void setWindow(std::unique_ptr<sf::RenderWindow> window);
+  static void setWindow(std::unique_ptr<RenderWindow> window);
 
   /**
    * \brief Sets current fps to the given value.
@@ -90,8 +92,7 @@ public:
     _window->draw(drawable);
   }
 
-  /// \todo use a Window type: union with sfml, opengl, dx, ascii windows, ...
-  static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
+  static std::unique_ptr<RenderWindow> _window; ///< graphics window
 
 
 private:

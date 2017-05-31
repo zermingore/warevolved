@@ -1,7 +1,8 @@
 #include <resources/Image.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
-
+#include <debug/Debug.hh>
+#include <cassert>
 
 namespace resources {
 

@@ -1,4 +1,5 @@
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <common/constants.hh> // GRID_COLOR
 #include <common/Status.hh>
@@ -12,7 +13,7 @@
 namespace graphics {
 
 // Static Variables definition
-std::unique_ptr<sf::RenderWindow> GraphicsEngine::_window;
+std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 float GraphicsEngine::_currentFPS;
 
 
@@ -95,8 +96,8 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
 
 void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 {
-  sf::RectangleShape rectangle;
-  rectangle.setFillColor(sf::Color::Transparent);
+  RectangleShape rectangle;
+  rectangle.setFillColor(Color::Transparent);
   rectangle.setOutlineColor(GRID_COLOR);
   rectangle.setOutlineThickness(MapGraphicsProperties::gridThickness());
 
@@ -161,7 +162,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
   sprite->setColor(players[unit->playerId()]->color());
 
   if (unit->played()) {
-    sprite->setColor(sf::Color(127, 127, 127, 150));
+    sprite->setColor(Color(127, 127, 127, 150));
   }
 
   unit->image()->drawAtCell(unit->coords());
@@ -181,7 +182,7 @@ void GraphicsEngine::drawInterface()
 }
 
 
-void GraphicsEngine::setWindow(std::unique_ptr<sf::RenderWindow> window) {
+void GraphicsEngine::setWindow(std::unique_ptr<RenderWindow> window) {
   _window = std::move(window);
 }
 

@@ -22,6 +22,8 @@ namespace graphics {
 // amount of pixels, their type is float because of some buggy graphics
 // drivers that are not able to process integer coordinates correctly.
 
+using RenderWindow = sf::RenderWindow;
+
 using Pos2 = sf::Vector2f;
 using Size2 = sf::Vector2f;
 using Scale2 = sf::Vector2f;
