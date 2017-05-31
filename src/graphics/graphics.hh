@@ -10,6 +10,7 @@
 
 # include <SFML/System/Vector2.hpp>
 # include <SFML/Graphics/Color.hpp>
+# include <SFML/Graphics.hpp>
 
 
 namespace graphics {
@@ -22,9 +23,14 @@ namespace graphics {
 
 using Pos2 = sf::Vector2f;
 using Size2 = sf::Vector2f;
-using component = float;  // component of Pos
+using Scale2 = sf::Vector2f;
+using component = float;  // component of Pos, Size (Scale is logically float)
 
 using Color = sf::Color;
+
+using Sprite = sf::Sprite;
+using Texture = sf::Texture;
+using RectangleShape = sf::RectangleShape;
 }
 
 

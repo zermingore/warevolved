@@ -9,9 +9,9 @@ namespace resources {
 Image::Image(const std::string file_name, const std::string name)
 {
    /// \todo allocation only if needed (using a proxy)
-  _rectangle = std::make_shared<sf::RectangleShape> ();
-  _rectangle->setPosition(sf::Vector2f(0, 0));
-  _rectangle->setSize(sf::Vector2f(0, 0));
+  _rectangle = std::make_shared<graphics::RectangleShape> ();
+  _rectangle->setPosition(graphics::Pos2(0, 0));
+  _rectangle->setSize(graphics::Size2(0, 0));
 
    /// \todo in debug, load an ugly texture to help noticing it
 # ifdef DEBUG
@@ -27,11 +27,11 @@ Image::Image(const std::string file_name, const std::string name)
 }
 
 
-std::shared_ptr<sf::Texture> Image::getTexture()
+std::shared_ptr<graphics::Texture> Image::getTexture()
 {
   if (!_texture)
   {
-    _texture = std::make_shared<sf::Texture> ();
+    _texture = std::make_shared<graphics::Texture> ();
     _texture->loadFromFile(_fileName);
     _rectangle->setTexture(_texture.get());
     _loaded = true;
@@ -53,7 +53,7 @@ void Image::initTexture()
 
   assert(_fileName != "");
 
-  _texture = std::make_shared<sf::Texture> ();
+  _texture = std::make_shared<graphics::Texture> ();
   _texture->loadFromFile(_fileName);
   _rectangle->setTexture(_texture.get());
   _loaded = true;
@@ -64,18 +64,18 @@ void Image::initSprite()
 {
   if (!_texture)
   {
-    _texture = std::make_shared<sf::Texture> ();
+    _texture = std::make_shared<graphics::Texture> ();
     _texture->loadFromFile(_fileName);
     _rectangle->setTexture(_texture.get());
     _loaded = true;
   }
 
-  _sprite = std::make_shared<sf::Sprite> (*_texture);
+  _sprite = std::make_shared<graphics::Sprite> (*_texture);
   _loaded = true;
 }
 
 
-std::shared_ptr<sf::Sprite> Image::sprite()
+std::shared_ptr<graphics::Sprite> Image::sprite()
 {
   if (!_texture)
     initTexture();
@@ -100,12 +100,12 @@ void Image::setPosition(const Coords position)
     initSprite();
   }
 
-  _sprite->setPosition({static_cast<float> (position.c),
-                        static_cast<float> (position.l)});
+  _sprite->setPosition({static_cast<graphics::component> (position.c),
+                        static_cast<graphics::component> (position.l)});
 }
 
 
-void Image::setPosition(const float x, const float y)
+void Image::setPosition(const graphics::component x, const graphics::component y)
 {
   if (!_sprite) {
     initSprite();
@@ -114,7 +114,7 @@ void Image::setPosition(const float x, const float y)
 }
 
 
-void Image::setSize(const sf::Vector2f size)
+void Image::setSize(const graphics::Size2 size)
 {
   auto old_size(_rectangle->getSize());
   _rectangle->setSize(size);
@@ -122,32 +122,33 @@ void Image::setSize(const sf::Vector2f size)
 }
 
 
-void Image::setSize(const float width, const float height)
+void Image::setSize(const graphics::component width,
+                    const graphics::component height)
 {
-  sf::Vector2f size(_texture->getSize()); // explicit Vector2f for -Wconversion
+  graphics::Size2 size(_texture->getSize()); // explicit Vector2f for -Wconversion
   _rectangle->setSize({width / size.x, height / size.y});
   _sprite->setScale({width / size.x, height / size.y});
 }
 
 
-void Image::setScale(const sf::Vector2f size)
+void Image::setScale(const graphics::Scale2 scale)
 {
-  _rectangle->setScale(size);
-  _sprite->setScale(size);
+  _rectangle->setScale(scale);
+  _sprite->setScale(scale);
 }
 
 
 void Image::setScale(const float width, const float height)
 {
-  _rectangle->setScale(sf::Vector2f(width, height));
-  _sprite->setScale(sf::Vector2f(width, height));
+  _rectangle->setScale({width, height});
+  _sprite->setScale({width, height});
 }
 
 
 void Image::setScale(const float ratio)
 {
-  _rectangle->setScale(sf::Vector2f(ratio, ratio));
-  _sprite->setScale(sf::Vector2f(ratio, ratio));
+  _rectangle->setScale({ratio, ratio});
+  _sprite->setScale({ratio, ratio});
 }
 
 
@@ -158,7 +159,7 @@ bool Image::load()
   }
 
   if (!_texture) {
-    _texture = std::make_shared<sf::Texture> ();
+    _texture = std::make_shared<graphics::Texture> ();
   }
 
   _rectangle->setTexture(_texture.get(), true);
@@ -203,16 +204,17 @@ void Image::drawAtCell(const Coords c)
   }
 
   // Set the sprite position
-  using p = graphics::MapGraphicsProperties;
+  using namespace graphics;
+  using p = MapGraphicsProperties;
   _sprite->setPosition(
-    {static_cast<float> (c.c) * p::cellWidth()  + p::gridOffsetX(),
-     static_cast<float> (c.l) * p::cellHeight() + p::gridOffsetY()});
+    {static_cast<component> (c.c) * p::cellWidth()  + p::gridOffsetX(),
+     static_cast<component> (c.l) * p::cellHeight() + p::gridOffsetY()});
 
   if (load()) {
-    graphics::GraphicsEngine::draw(_sprite);
+    GraphicsEngine::draw(_sprite);
   }
 
-  graphics::GraphicsEngine::draw(_rectangle);
+  GraphicsEngine::draw(_rectangle);
 }
 
 
