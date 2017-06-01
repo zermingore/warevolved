@@ -2,17 +2,18 @@
 
 #include <debug/Debug.hh>
 #include <common/enums/input.hh>
-#include <input/EventManager.hh>
 #include <common/Status.hh>
+#include <common/enums/attack_result.hh>
+#include <input/EventManager.hh>
+#include <interface/Cursor.hh>
 #include <game/Battle.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>
+#include <game/Player.hh>
 #include <game/PathFinding.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <common/enums/attack_result.hh>
-#include <game/Player.hh>
-#include <interface/Cursor.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/graphic_types.hh>
 
 
 
@@ -30,7 +31,7 @@ StateSelectTarget::StateSelectTarget()
   // Graphical attributes initialization
   _targetHighlightImage = resources::ResourcesManager::getImage("cursor");
   _targetHighlight = _targetHighlightImage->sprite();
-  _targetHighlight->setColor(sf::Color(255, 127, 127, 255));
+  _targetHighlight->setColor(graphics::Color(255, 127, 127, 255));
 
   using p = graphics::MapGraphicsProperties;
 
@@ -42,7 +43,7 @@ StateSelectTarget::StateSelectTarget()
 
   _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
   _holoUnitSprite = _holoUnit->sprite();
-  _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
+  _holoUnitSprite->setColor(graphics::Color(255, 127, 127, 255));
 
   x = static_cast<float> (_holoUnitSprite->getTexture()->getSize().x);
   y = static_cast<float> (_holoUnitSprite->getTexture()->getSize().y);

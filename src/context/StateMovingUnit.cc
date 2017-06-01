@@ -5,17 +5,19 @@
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <common/Status.hh>
-#include <game/Player.hh>
 #include <common/enums/states.hh>
+#include <common/enums/directions.hh>
+#include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
+#include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <game/Battle.hh>
 #include <resources/Image.hh>
-#include <interface/Cursor.hh>
+#include <game/Battle.hh>
+#include <game/Player.hh>
 #include <game/units/Unit.hh>
 #include <game/PathFinding.hh>
-#include <common/enums/directions.hh>
+
 
 
 StateMovingUnit::StateMovingUnit()
@@ -48,16 +50,18 @@ StateMovingUnit::StateMovingUnit()
   _holoUnitSprite = _holoUnit->sprite();
   _holoUnitPosition = player->cursor()->coords();
 
+
+  using namespace graphics;
+  auto x(static_cast<component> (_holoUnitSprite->getTexture()->getSize().x));
   // explicitly using some floats for the division
-  float x = static_cast<float> (_holoUnitSprite->getTexture()->getSize().x);
   float y = static_cast<float> (_holoUnitSprite->getTexture()->getSize().y);
-  using p = graphics::MapGraphicsProperties;
+  using p = MapGraphicsProperties;
   _holoUnitSprite->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
   // Fading sprite at original position
   auto unit(Status::battle()->map()->unit(_originalCoords));
   assert(unit);
-  unit->sprite()->setColor(sf::Color(255, 255, 255, 160));
+  unit->sprite()->setColor(Color(255, 255, 255, 160));
 
   // Path finding
   PathFinding::setOrigin(_originalCoords, unit);
@@ -73,7 +77,7 @@ StateMovingUnit::~StateMovingUnit()
 
   // if the unit was moved, it is no longer existing at these original coordinates
   if (unit) {
-    unit->sprite()->setColor(sf::Color(255, 255, 255, 255));
+    unit->sprite()->setColor(graphics::Color(255, 255, 255, 255));
   }
 
   PathFinding::clearPath();
@@ -141,6 +145,6 @@ void StateMovingUnit::draw()
   PathFinding::highlightCells();
   PathFinding::drawPath();
 
-  _holoUnitSprite->setColor(sf::Color(255, 127, 127, 255));
+  _holoUnitSprite->setColor(graphics::Color(255, 127, 127, 255));
   _holoUnit->drawAtCell(_holoUnitPosition);
 }

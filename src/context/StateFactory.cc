@@ -1,9 +1,11 @@
 #include <context/StateFactory.hh>
+
+#include <debug/Debug.hh>
 #include <context/StatePlaying.hh>
 #include <context/StateMovingUnit.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateMenu.hh>
-#include <debug/Debug.hh>
+
 
 
 std::shared_ptr<State> StateFactory::createState(const e_state& state)

@@ -9,6 +9,7 @@
 
 # include <context/State.hh>
 # include <common/using.hh> // Coords
+# include <graphics/graphic_types.hh>
 
 
 namespace sf {
@@ -18,6 +19,7 @@ namespace sf {
 namespace resources {
   class Image;
 }
+
 
 
 /**
@@ -75,7 +77,7 @@ private:
   Coords _holoUnitPosition; ///< Unit position 'cursor' (in cell)
 
   std::shared_ptr<resources::Image> _holoUnit; ///< 'cursor' moving unit
-  std::shared_ptr<sf::Sprite> _holoUnitSprite; ///< 'cursor' sprite
+  std::shared_ptr<graphics::Sprite> _holoUnitSprite; ///< 'cursor' sprite
 
   size_t _nbColumns; ///< map number of columns
   size_t _nbLines;   ///< map number of lines

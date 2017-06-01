@@ -8,6 +8,7 @@
 # define CONTEXT_STATE_SELECT_TARGET_HH_
 
 # include <context/State.hh>
+# include <graphics/graphic_types.hh>
 
 class Cell;
 
@@ -91,12 +92,12 @@ private:
   std::shared_ptr<resources::Image> _targetHighlightImage;
 
   ///< sprite associated to the highlight of the selected target
-  std::shared_ptr<sf::Sprite> _targetHighlight;
+  std::shared_ptr<graphics::Sprite> _targetHighlight;
 
   Coords _attackLocation; ///< Cell from which the attack is performed
 
   std::shared_ptr<resources::Image> _holoUnit; ///< 'holo' attacking unit
-  std::shared_ptr<sf::Sprite> _holoUnitSprite; ///< 'holo unit' sprite
+  std::shared_ptr<graphics::Sprite> _holoUnitSprite; ///< 'holo unit' sprite
 };
 
 
