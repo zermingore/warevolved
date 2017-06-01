@@ -2,7 +2,6 @@
 
 #include <debug/Debug.hh>
 #include <interface/menus/MenuEntry.hh>
-#include <common/constants.hh>
 #include <common/Status.hh>
 #include <context/State.hh>
 #include <input/EventManager.hh>

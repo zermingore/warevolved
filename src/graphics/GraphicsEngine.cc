@@ -3,7 +3,6 @@
 #include <debug/Debug.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <common/constants.hh> // GRID_COLOR
 #include <common/Status.hh>
 #include <game/Cell.hh>
 #include <game/Battle.hh>
@@ -14,6 +13,9 @@
 
 
 namespace graphics {
+
+const sf::Color GRID_COLOR(202, 124, 0);
+
 
 // Static Variables definition
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
