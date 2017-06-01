@@ -4,10 +4,7 @@
 
 * TODO Roadmap
 ** TODO Doc: track this file across branches
-** DONE Remove common/include.hh
-   CLOSED: [2017-06-01 Do 19:19]
-** DONE Use component type
-   CLOSED: [2017-05-31 Mi 08:03]
+   Bonus: drop TODO.archive
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
@@ -19,20 +16,18 @@
 ** TODO core/Context != context/*
    (as core/Context handles only graphic properties, move in graphics ?)
 ** TODO Use a using for graphic types (SFML: floats for positions)
-** TODO Different types for coords on the map and graphic coordinates ? [size_t Vs float]
-   (ie continue Vector2<float> idea)
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 
 * TODO Input
-** TODO use the mouse to make it move
+** TODO Use a fifo of inputs
+   InputProcessor::process() in its own thread
+** TODO Use the mouse to move the cursor, browse menus...
 
 * TODO Game Features
 ** TODO Allow direct attack when a target is already at range
    (do not pass through move action)
 
 * TODO Code Design
-** TODO make an Event Manager test with boost signals (emulate callbacks)
-** TODO use size_t
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
 ** TODO auto-generate XML
@@ -40,9 +35,6 @@
 **** TODO Shell Script
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
-*** TODO use reference
-*** TODO use const +/- whenever possible
-*** TODO use C++11 enum (type / size)
 ** TODO follow the C++ rule of 5
 ** TODO Hunt dead code
 ** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
@@ -52,7 +44,7 @@
    could use typedef std::shared_ptr SP
 
 * TODO Graphics
-** TODO implement scrolling
+** TODO Implement cell scrolling (too many cells to fit on the screen)
 ** TODO Apply a background to the main window
 ** TODO Multiple graphics::Image share the same sprite
    -> require to re-set the sprite position, rotation, ... before drawing
@@ -162,13 +154,17 @@
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
 *** TODO auto generate documentation
-** TODO non-regression tests
-*** TODO game scripts (need to be able to use pre-recorded input)
 ** TODO auto resources XML generator
-** DONE enum inspector
-   CLOSED: [2017-04-28 Fr 07:19]
-   print an enumeration name (token) from its value
-** TODO Own assert with timestamp ?
+** TODO Options parser
+   replay play / record (-r [file] / --record [new_file])
+   framerate (useful ?)
+
+* TODO non-regression tests
+** TODO game scripts (need to be able to use pre-recorded input)
+** TODO Use an ascii map to check fight behavior
+** TODO Use screenshots for the interface
+   ex: SELECTION key was pressed -> save the video buffer, a menu must be open
+   Use OpenCV to get the distance between the images
 
 * TODO Bugs / Features
 ** TODO Memory Leaks / Errors
@@ -186,11 +182,11 @@
 ** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
 ** TODO Move pugixml in a lib/ folder at the root
 * TODO [#C] Optimization
--> Profile <-
+  -> *Profile* <-
 ** TODO improve InGameMenu stack usage
    Do *NOT* rebuild all entries each frame...
 ** TODO Sprites
    Every cell doesn't need to have it's own highlight sprite
    -> common sprites (1 per situation [move, attack])
-** TODO [#C] refresh only needed cells
+** TODO [#C] refresh only needed cells (do we care ?)
    check mouse motion, cursor / units animation

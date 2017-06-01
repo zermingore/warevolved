@@ -2,6 +2,10 @@
 #+OPTIONS: ^:nil
 
 * old Roadmap
+** DONE Remove common/include.hh
+   CLOSED: [2017-06-01 Do 19:19]
+** DONE Use component type
+   CLOSED: [2017-05-31 Mi 08:03]
 ** DONE Build: make clean should not remove the pugixml library
    (use make mostlyclean instead)
    CLOSED: [2017-05-23 Di 19:05]
@@ -211,6 +215,14 @@
     CLOSED: [2017-02-01 Mi 07:39]
 ** DONE Support ~vi-like key mapping (neoi in workman)
    CLOSED: [2017-03-15 Mi 07:38]
+** DONE Different types for coords on the map and graphic coordinates ? [size_t Vs float]
+   CLOSED: [2017-06-01 Do 19:27]
+   (ie continue Vector2<float> idea) -> 'own' graphic type (float behind) and size_t
+** DONE Different types for coords on the map and graphic coordinates ? [size_t Vs float]
+   CLOSED: [2017-06-01 Do 19:27]
+   (ie continue Vector2<float> idea) -> 'own' graphic type (float behind) and size_t for coords
+** [DROPPED] make an Event Manager test with boost signals (emulate callbacks)
+   using lambda
 
 
 * Git
@@ -253,9 +265,12 @@
    CLOSED: [2017-03-16 Do 07:31]
 ** DONE [#A] Clean (truly use C++11-14)
    CLOSED: [2017-03-16 Do 07:31]
-*** TODO use reference
-*** TODO use const +/- whenever possible
-*** TODO use C++11 enum (type / size)
+*** DONE use reference
+    CLOSED: [2017-03-16 Do 07:31]
+*** DONE use const +/- whenever possible
+    CLOSED: [2017-03-16 DO 07:31]
+*** DONE use C++11 enum (type / size)
+    CLOSED: [2017-03-16 DO 07:31]
 ** DONE remove non needed raw pointers
    CLOSED: [2014-06-20 Fri 14:30]
 ** DONE remove non needed new (use std::make_shared)
@@ -264,8 +279,10 @@
    CLOSED: [2017-03-18 Sa 09:37]
 ** DONE clean Status class (making a static class ?)
    CLOSED: [2017-03-16 Do 07:32]
-** DONE is inline still relevant in C++14 ?
+** DONE is inline still relevant in C++14 ? (~was not since modern compilers...)
    CLOSED: [2016-02-16 Di 19:56]
+** DONE use size_t
+   CLOSED: [2017-06-01 Do 19:24]
 
 * Graphics
 ** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
@@ -315,6 +332,10 @@
    Debug::assert(state, MODE__MENU)
    -> test if state equals to MODE__MENU and prints an error if not
    should use assert (state == MODE__MENU)
+** [DROPPED] Own assert with timestamp ? -> irrelevant (aborts the execution)
+** DONE enum inspector
+   CLOSED: [2017-04-28 Fr 07:19]
+   print an enumeration name (token) from its value
 
 * Memory Leaks / Errors
 *** DONE Definitely Lost
