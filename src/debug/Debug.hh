@@ -11,6 +11,7 @@
 # include <iostream>
 # include <fstream>
 # include <sstream>
+# include <cassert> // not needed here, just for modules including this file
 
 
 /// \def Log file name

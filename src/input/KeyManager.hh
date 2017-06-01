@@ -7,8 +7,11 @@
 #ifndef INPUT_KEY_MANAGER_HH_
 # define INPUT_KEY_MANAGER_HH_
 
-# include <common/include.hh>
+# include <map>
 # include <set>
+
+# include <SFML/System/Clock.hpp> /// \todo use std::clock instead
+# include <SFML/Window/Keyboard.hpp>
 
 enum class e_input;
 

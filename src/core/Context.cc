@@ -1,8 +1,10 @@
-#include <common/include.hh>
 #include <core/Context.hh>
+
 #include <common/System.hh>
 #include <common/Settings.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <debug/Debug.hh>
+
 
 
 Context::Context(const bool fullscreen)

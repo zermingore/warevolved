@@ -1,4 +1,6 @@
 #include <game/PathFinding.hh>
+
+#include <debug/Debug.hh>
 #include <game/Player.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>

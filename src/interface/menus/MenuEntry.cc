@@ -1,4 +1,5 @@
 #include <interface/menus/MenuEntry.hh>
+#include <debug/Debug.hh>
 #include <common/Status.hh>
 #include <game/Battle.hh>
 #include <graphics/GraphicsEngine.hh>

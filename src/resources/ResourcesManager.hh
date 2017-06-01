@@ -7,7 +7,6 @@
 #ifndef RESOURCES_RESOURCES_MANAGER_HH_
 # define RESOURCES_RESOURCES_MANAGER_HH_
 
-# include <common/include.hh>
 # include <resources/Font.hh>
 # include <resources/Image.hh>
 

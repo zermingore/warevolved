@@ -7,7 +7,10 @@
 #ifndef MENU_ENTRY_HH_
 # define MENU_ENTRY_HH_
 
-# include <common/include.hh>
+# include <string>
+# include <memory>
+# include <functional>
+
 # include <resources/Image.hh>
 # include <resources/Font.hh>
 # include <interface/InterfaceElement.hh>

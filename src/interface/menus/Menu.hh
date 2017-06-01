@@ -7,7 +7,9 @@
 #ifndef MENU_HH_
 # define MENU_HH_
 
-# include <common/include.hh>
+# include <memory>
+# include <vector>
+
 # include <resources/Image.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <interface/InterfaceElement.hh>

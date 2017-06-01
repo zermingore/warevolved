@@ -1,4 +1,6 @@
 #include <graphics/GraphicsEngine.hh>
+
+#include <debug/Debug.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <common/constants.hh> // GRID_COLOR
@@ -8,6 +10,7 @@
 #include <game/Player.hh>
 #include <debug/OSD.hh>
 #include <context/State.hh>
+
 
 
 namespace graphics {

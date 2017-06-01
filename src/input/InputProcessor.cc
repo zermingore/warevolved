@@ -1,10 +1,13 @@
-#include <common/Status.hh>
 #include <input/InputProcessor.hh>
+
+#include <iostream>
+
+#include <debug/EventsLogger.hh>
+#include <common/Status.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <context/State.hh>
 #include <input/KeyManager.hh>
 #include <common/enums/input.hh>
-#include <debug/EventsLogger.hh>
 #include <input/EventManager.hh>
 
 

@@ -1,4 +1,6 @@
 #include <interface/menus/Menu.hh>
+
+#include <debug/Debug.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/constants.hh>
 #include <common/Status.hh>

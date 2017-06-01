@@ -5,8 +5,8 @@
  * \brief Global game status accessor, including current Player, State, ...
  */
 
-#ifndef STATUS_HH_
-# define STATUS_HH_
+#ifndef COMMON_STATUS_HH_
+# define COMMON_STATUS_HH_
 
 # include <memory>
 # include <stack>
@@ -130,4 +130,4 @@ private:
 };
 
 
-#endif /* !STATUS_HH_ */
+#endif /* !COMMON_STATUS_HH_ */

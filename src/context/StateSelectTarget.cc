@@ -1,16 +1,19 @@
 #include <context/StateSelectTarget.hh>
+
+#include <debug/Debug.hh>
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
 #include <common/Status.hh>
 #include <game/Battle.hh>
 #include <game/Map.hh>
-#include <game/PathFinding.hh>
 #include <game/Cell.hh>
+#include <game/PathFinding.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <common/enums/attack_result.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <graphics/GraphicsEngine.hh>
+
 
 
 StateSelectTarget::StateSelectTarget()

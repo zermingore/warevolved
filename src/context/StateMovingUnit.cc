@@ -1,4 +1,7 @@
 #include <context/StateMovingUnit.hh>
+
+#include <cassert>
+
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <common/Status.hh>
@@ -13,7 +16,6 @@
 #include <game/units/Unit.hh>
 #include <game/PathFinding.hh>
 #include <common/enums/directions.hh>
-
 
 
 StateMovingUnit::StateMovingUnit()

@@ -1,4 +1,7 @@
 #include <common/Status.hh>
+
+#include <cassert>
+
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <context/StateFactory.hh>

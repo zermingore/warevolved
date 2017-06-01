@@ -8,7 +8,13 @@
 #ifndef DEBUG_OSD_HH_
 # define DEBUG_OSD_HH_
 
-# include <common/include.hh>
+# include <string>
+# include <memory>
+# include <vector>
+
+# include <SFML/Graphics/Drawable.hpp>
+# include <SFML/Graphics/Text.hpp>
+
 # include <common/using.hh>
 
 

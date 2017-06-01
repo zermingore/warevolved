@@ -6,6 +6,8 @@
  */
 
 #include <game/Map.hh>
+
+#include <debug/Debug.hh>
 #include <common/Status.hh>
 #include <common/enums/terrains.hh>
 #include <common/enums/units.hh>

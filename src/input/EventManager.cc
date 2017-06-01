@@ -1,4 +1,5 @@
 #include <input/EventManager.hh>
+#include <debug/Debug.hh>
 #include <common/enums/states.hh>
 #include <input/KeyManager.hh>
 #include <common/Status.hh>
@@ -11,7 +12,7 @@ bool EventManager::process(const e_input input)
 {
   if (_callbacks.find(input) == _callbacks.end())
   {
-    Debug::error("callback not found for input", static_cast<int> (input));
+    ERROR("callback not found for input", static_cast<int> (input));
     return false;
   }
 

@@ -8,6 +8,8 @@
  */
 
 #include <interface/Interface.hh>
+
+#include <debug/Debug.hh>
 #include <common/Status.hh>
 
 
@@ -47,7 +49,7 @@ std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
   }
 
 # ifdef DEBUG
-  Debug::error("Interface: invalid element name request: ", id);
+  ERROR("Interface: invalid element name request: ", id);
   PRINTF("displaying", _elts.size(), "element names");
   for (const auto it: _elts) {
     PRINTF(" >", id);

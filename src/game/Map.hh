@@ -5,10 +5,15 @@
  * \brief Map class definition.
  */
 
-#ifndef MAP_HH_
-# define MAP_HH_
+#ifndef GAME_MAP_HH_
+# define GAME_MAP_HH_
 
-# include <common/include.hh>
+# include <memory>
+# include <vector>
+# include <list>
+# include <map>
+# include <cstddef>
+
 # include <common/using.hh>
 # include <common/enums/attack_result.hh>
 
@@ -205,4 +210,4 @@ private:
 };
 
 
-#endif /* !MAP_HH_ */
+#endif /* !GAME_MAP_HH_ */

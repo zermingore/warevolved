@@ -1,4 +1,6 @@
 #include <context/StateMenu.hh>
+
+#include <debug/Debug.hh>
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <common/enums/states.hh>

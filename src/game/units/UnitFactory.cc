@@ -1,4 +1,6 @@
 #include <game/units/UnitFactory.hh>
+
+#include <debug/Debug.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Soldier.hh>
 
@@ -13,7 +15,7 @@ std::shared_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
 
     default:
       ERROR("Trying to create unit", static_cast<int> (unit));
-      assert(!"Unable to create the unit with the given name");
+      assert(!"Unable to create the given unit");
       return nullptr;
   }
 }
