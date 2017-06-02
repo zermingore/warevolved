@@ -24,7 +24,9 @@ AM_INIT_AUTOMAKE([subdir-objects color-tests -Wall -Werror foreign])
 AM_SILENT_RULES([yes])
 
 # Checks for programs.
-AC_PROG_CXX([g++]) # clang++
+# clang++ is no longer fully supported (as some g++ specific flags are used)
+# one can use clang++ deactivating these specific flags in src/Makefile.am
+AC_PROG_CXX([g++])
 
 
 # Silence warning "ar: 'u' modifier ignored since 'D' is the default"

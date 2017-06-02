@@ -2842,6 +2842,8 @@ AM_BACKSLASH='\'
 
 
 # Checks for programs.
+# clang++ is no longer fully supported (as some g++ specific flags are used)
+# one can use clang++ deactivating these specific flags in src/Makefile.am
 ac_ext=cpp
 ac_cpp='$CXXCPP $CPPFLAGS'
 ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -3539,7 +3541,7 @@ else
   am__fastdepCXX_FALSE=
 fi
 
- # clang++
+
 
 
 # Silence warning "ar: 'u' modifier ignored since 'D' is the default"

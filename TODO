@@ -177,6 +177,10 @@
    To solve this, one can for instance:
    - Find a way to 'destruct' static classes in a defined order
    - As the static classes may be removed one day this would solve the issue
+** TODO Attack seems not possible without moving (on a different cell)
+** TODO Sometimes, moving over an enemy unit is possible
+   Seems to appear when two keys are pressed at the same time
+   Unable to wait on an occupied cell though
 
 * TODO Build
 ** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)

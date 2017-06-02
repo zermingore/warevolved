@@ -1,31 +1,84 @@
 #!/bin/bash
 
 # configure the projects, and build in a specific directory
-
-NO_BUILD=$1
-
-BUILD_DIR=build # build destination
-
-autoreconf --force --install --warnings=all
-ret_code=$?
-if [[ $ret_code -ne 0 ]]; then
-    exit $ret_code
-fi
+#
+# Return codes:
+#   0: no error occurred
+#   3: invalid argument
 
 
-rm -rf "$BUILD_DIR"
-mkdir -p "$BUILD_DIR"
-pushd "$BUILD_DIR"
+function main
+{
+    NO_BUILD=$1
 
-../configure # TODO find the configure wherever the build folder is
-ret_code=$?
-if [[ $ret_code -ne 0 ]]; then
-    exit $ret_code
-fi
+    BUILD_DIR=build # build destination
+
+    autoreconf --force --install --warnings=all
+    ret_code=$?
+    if [[ $ret_code -ne 0 ]]; then
+        exit $ret_code
+    fi
 
 
-if [[ "$NO_BUILD" == "" ]]; then
-   make
-fi
+    rm -rf "$BUILD_DIR"
+    mkdir -p "$BUILD_DIR"
+    pushd "$BUILD_DIR"
 
-popd # "$BUILD_DIR"
+    ../configure # TODO find the configure wherever the build folder is
+    ret_code=$?
+    if [[ $ret_code -ne 0 ]]; then
+        exit $ret_code
+    fi
+
+
+    if [[ "$NO_BUILD" == "" ]]; then
+        make
+    fi
+
+    popd # "$BUILD_DIR"
+}
+
+
+
+# Display the script usage
+function usage
+{
+    echo ""
+    echo "Usage:"
+    echo "  $0 [--no-build]"
+    echo ""
+    echo "Options:"
+    echo "  --no-build: configure the project only, do not run make"
+    echo ""
+    echo "War Evolved build script. Version 1.0"
+    echo ""
+}
+
+
+# Checks the command line arguments
+# $@: command line arguments
+function check_args
+{
+    if [[ $# -gt 1 ]]; then
+        echo "Too many arguments"
+        usage
+        exit 3
+    fi
+
+    # TODO: don't expect help to be at a defined position
+    if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+        usage
+        exit 0
+    fi
+
+    if [[ "$1" && "$1" != "--no-build" ]]; then
+        echo "Invalid argument $1"
+        usage
+        exit 3
+    fi
+}
+
+
+# ___________________________________ main ___________________________________ #
+check_args "$@"
+main "$@"
