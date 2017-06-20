@@ -20,7 +20,7 @@
 
 * TODO Input
 ** TODO Use a fifo of inputs
-   InputProcessor::process() in its own thread
+   InputProcessor::process() in its own thread (InputsListener / EventsProcessor)
 ** TODO Use the mouse to move the cursor, browse menus...
 
 * TODO Game Features
@@ -181,6 +181,9 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
+** TODO bootstrap
+   The return value is 0 in case of build failure
+   preventing stuff like ./boostrap && ./we
 
 * TODO Build
 ** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)

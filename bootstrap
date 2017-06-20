@@ -5,6 +5,9 @@
 # Return codes:
 #   0: no error occurred
 #   3: invalid argument
+#
+# BUG:
+#   Returns 0 if the build fails, it should return the build return value
 
 
 function main
