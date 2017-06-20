@@ -1,0 +1,93 @@
+threads:
+--------
+
+main:
+- launches events reader and events processor threads
+
+InputsListener:
+- listen to user events
+- populates the events fifo
+
+EventsProcessor:
+- consume events from the events fifo
+
+
+________________________________________________________________________________
+current classes:
+----------------
+(based on version fc26d38412a01b827f9422204875ca2f4d66c7b3)
+
+InputProcessor:
+- polls the events
+- calls the EventManager to treat the events
+
+EventManager:
+- binds events to callbacks
+- executes the callback
+
+KeyManager:
+- binds keys to events
+
+States (StateMovingUnit, StateMenu, ...)
+- has an EventManager
+- binds events to callbacks (using its EventManager)
+
+
+expected changes:
+-----------------
+
+split the InputProcessor
+
+InputsListener:
+- polls events
+- populates an events fifo
+
+EventsProcessor:
+- consumes events from the fifo
+- calls the EventManager to treat the events
+
+
+EventManager: unchanged
+KeyManager:   unchanged
+States:       unchanged
+
+
+
+
+________________________________________________________________________________
+
+
+
+main
+ |
+ |\
+ | \___________________
+ |  \                  |
+ | InputsListener  EventsProcessor
+ |        |            |
+ |        | -> fifo -> |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |        |            |
+ |  ______|            |
+ | /___________________|
+ |/
+ |
+ |
+exit
