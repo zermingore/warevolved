@@ -9,7 +9,7 @@
 # define COMMON_USING_HH_
 
 # include <cstddef> // size_t
-# include <common/structures/Vector.hh>
+# include <structures/Vector.hh>
 
 
 

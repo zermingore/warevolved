@@ -1,4 +1,4 @@
-#include <common/structures/ThreadSafeQueue.hh>
+#include <structures/ThreadSafeQueue.hh>
 
 #include <thread>
 

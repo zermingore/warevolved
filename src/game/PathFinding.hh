@@ -9,7 +9,7 @@
 
 # include <vector>
 # include <memory>
-# include <common/structures/Vector.hh>
+# include <structures/Vector.hh>
 # include <resources/Image.hh>
 
 class Map;

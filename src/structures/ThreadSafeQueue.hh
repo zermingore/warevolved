@@ -78,6 +78,6 @@ private:
 };
 
 
-# include <common/structures/ThreadSafeQueue.hxx>
+# include <structures/ThreadSafeQueue.hxx>
 
 #endif /* !STRUCTURES_THREAD_SAFE_QUEUE_HH_ */

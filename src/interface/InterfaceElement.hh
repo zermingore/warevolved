@@ -10,7 +10,7 @@
 # include <string>
 # include <memory>
 # include <graphics/graphic_types.hh>
-# include <common/structures/Vector.hh>
+# include <structures/Vector.hh>
 # include <interface/InterfaceSettings.hh>
 # include <game/Map.hh>
 # include <resources/ResourcesManager.hh>
