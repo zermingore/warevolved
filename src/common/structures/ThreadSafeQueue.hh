@@ -14,6 +14,16 @@ class ThreadSafeQueue
 {
 public:
   /**
+   * \brief Default constructor
+   */
+  ThreadSafeQueue() = default;
+
+  /**
+   * \brief Destructor. Empty the queue
+   */
+  ~ThreadSafeQueue();
+
+  /**
    * \brief Deleted copy constructor
    */
   ThreadSafeQueue(const ThreadSafeQueue& queue) = delete;

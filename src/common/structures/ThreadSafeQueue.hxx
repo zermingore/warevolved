@@ -4,6 +4,20 @@
 
 
 template <typename T>
+ThreadSafeQueue<T>::~ThreadSafeQueue<T>()
+{
+  std::unique_lock<std::mutex> lock(_lock);
+  while (!_queue.empty())
+  {
+    _queue.pop();
+  }
+
+  // not unlocking the mutex
+}
+
+
+
+template <typename T>
 void ThreadSafeQueue<T>::push(const T& element)
 {
   std::unique_lock<std::mutex> lock(_lock);
@@ -51,4 +65,11 @@ void ThreadSafeQueue<T>::pop(T& element)
 
   element = _queue.front();
   _queue.pop();
+}
+
+
+template <typename T>
+bool ThreadSafeQueue<T>::empty() const
+{
+  return _queue.empty();
 }
