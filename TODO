@@ -22,6 +22,8 @@
 ** TODO Use a fifo of inputs
    InputProcessor::process() in its own thread (InputsListener / EventsProcessor)
 ** TODO Use the mouse to move the cursor, browse menus...
+** TODO Re-enable replays recording
+** TODO Support replays reading
 
 * TODO Game Features
 ** TODO Allow direct attack when a target is already at range

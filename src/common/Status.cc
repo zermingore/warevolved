@@ -5,7 +5,6 @@
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <context/StateFactory.hh>
-#include <input/InputProcessor.hh>
 #include <input/KeyManager.hh>
 
 
@@ -27,7 +26,7 @@ Status::~Status()
 
 
 void Status::blockInputs(const size_t duration) {
-  _inputProcessor->keyManager()->blockInputs(duration);
+  assert(!"blockInputs called...");
 }
 
 
