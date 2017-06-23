@@ -10,8 +10,11 @@
 # include <map>
 # include <set>
 
+# include <SFML/Window/Event.hpp>
 # include <SFML/System/Clock.hpp> /// \todo use std::clock instead
 # include <SFML/Window/Keyboard.hpp>
+# include <structures/ThreadSafeQueue.hh>
+
 
 enum class e_input;
 
@@ -47,15 +50,26 @@ public:
   /// Default Constructor. Maps the keyboard input to keys
   KeyManager();
 
+
+  /**
+   * \brief Push the event matching the given input into the events queue
+   * \param input Input used to match the event to push in the queue
+   */
+  void pushEvent(const sf::Event& input);
+
+
+  /**
+   * \brief Retrieve the oldest event from the events queue
+   * \return The poped event
+   * \note Blocks until an event is found in the queue
+   */
+  sf::Event& popEvent();
+
+
   /**
    * \brief Populates the _active_inputs events list
    */
   void populateEvents();
-
-  /**
-   * \brief returns the list of available and non blocked inputs
-   */
-  auto activeInputs() { return _active_inputs; }
 
 
   /**
@@ -79,7 +93,7 @@ private:
   std::multimap<e_key, sf::Keyboard::Key> _keys_mapping; ///< key mapping
   std::map<const e_key, const e_input> _events_mapping;  ///< events mapping
 
-  std::set<e_input> _active_inputs; ///< current inputs (high level keys)
+  ThreadSafeQueue<e_input> _active_inputs; ///< current inputs (high level keys)
 
   sf::Clock _clock_events_freeze; ///< clock to manage events freezing
   size_t _events_freeze_duration; ///< duration to deactivate events

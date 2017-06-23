@@ -12,6 +12,18 @@ EventsProcessor:
 - consume events from the events fifo
 
 
+Note:
+  The InputsListener could launch the EventsProcessor thread.
+  So that, the InputsListener
+     - Owns the KeyManager instance
+     - Can kill the EventsProcessor thread on exit event detection
+     - Only one input handler thread from the main thread point of view
+
+
+  Replay handling:
+  Write replay file when pushing events into the fifo (KeyManager)
+  Read replay events in the pop (KeyManager)
+
 ________________________________________________________________________________
 current classes:
 ----------------

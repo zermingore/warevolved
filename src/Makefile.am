@@ -41,7 +41,8 @@ context/StateSelectTarget.cc        \
 \
 input/KeyManager.cc                 \
 input/EventManager.cc               \
-input/InputProcessor.cc             \
+input/EventsProcessor.cc            \
+input/InputsListener.cc             \
 \
 game/Game.cc                        \
 game/Map.cc                         \

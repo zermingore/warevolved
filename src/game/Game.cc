@@ -19,14 +19,16 @@ void Game::run(bool replay)
   Status::setBattle(battle);
   battle->initializeMap();
 
-  auto input_processor(std::make_shared<InputProcessor> (replay));
-  Status::setInputProcessor(input_processor);
+  // auto input_processor(std::make_shared<InputProcessor> (replay));
+  // Status::setInputProcessor(input_processor);
 
   Status::pushState(e_state::PLAYING);
   Status::currentState()->resume();
 
+  /// \todo launch the InputsListener thread
+
   // Game loop: processing events, updating display
-  while (GraphicsEngine::windowIsOpen() && input_processor->process()) {
+  while (GraphicsEngine::windowIsOpen()) {
     GraphicsEngine::drawScene(battle);
   }
 }

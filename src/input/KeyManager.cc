@@ -1,6 +1,8 @@
 #include <input/KeyManager.hh>
+
 #include <common/Settings.hh>
 #include <common/enums/input.hh>
+#include <debug/Debug.hh>
 
 
 
@@ -39,10 +41,25 @@ KeyManager::KeyManager()
 
 
 
+void KeyManager::pushEvent(const sf::Event& input)
+{
+  /// \todo Still useful ?
+  if (eventsFreezed()) {
+    PRINTF("Freezed events (why?)");
+    return;
+  }
+
+  // push the e_input matching the event
+  // _active_inputs.push(_events_mapping[_keys_mapping[input]]);
+
+  // _active_inputs.push(input);
+}
+
+
 void KeyManager::populateEvents()
 {
   // Clear the active inputs list
-  _active_inputs.clear();
+  // _active_inputs.clear();
 
   // If the inputs are disabled, return, leaving an empty active input array
   if (eventsFreezed()) {
@@ -54,21 +71,33 @@ void KeyManager::populateEvents()
   {
     if (sf::Keyboard::isKeyPressed(it.second))
     {
-      _active_inputs.insert(_events_mapping[it.first]);
+      // push the matching event in the queue
+      // _active_inputs.push(_events_mapping[it.first]);
     }
   }
 }
 
 
+sf::Event& KeyManager::popEvent()
+{
+  sf::Event tmp;
+  return tmp;
+
+  // return _active_inputs.pop();
+}
+
 
 void KeyManager::blockInputs(const size_t duration)
 {
-  // Clearing active inputs
-  _active_inputs.clear();
+  PRINTF("Blocking inputs, why ?");
+  return;
 
-  // Relaunching the clock
-  _events_freeze_duration = duration;
-  _clock_events_freeze.restart();
+  // // Clearing active inputs
+  // _active_inputs.clear();
+
+  // // Relaunching the clock
+  // _events_freeze_duration = duration;
+  // _clock_events_freeze.restart();
 }
 
 
