@@ -6,7 +6,7 @@ AC_INIT([ms], [1.0])
 AC_CONFIG_AUX_DIR([build-aux])
 
 # forcing c++14 usage (must be before AC_PROG_CXX)
-CXXFLAGS="$CXXFLAGS -std=c++14"
+CXXFLAGS="$CXXFLAGS -std=c++14 -pthread"
 
 
 if [[ -n "$SFML_PATH" ]]
