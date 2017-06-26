@@ -27,44 +27,31 @@ class InputsListener
 {
 public:
   /**
-   * \brief Instanciates a KeyManager
-   * \param replay \true to set the InputsListener in replay mode,
-   *   reading events from a file instead of the keyboard
-   * \see KeyManager
+   * \brief Polls events until the exit event was found
+   * \note Infinite loop polling events, populating the KeyManager events queue
+   * \note Instantiate a KeyManager
    */
-  InputsListener(bool replay);
-
-  /**
-   * \brief Default destructor
-   */
-  ~InputsListener() = default;
-
+  static void listen();
 
   /**
    * \brief KeyManager getter
    * \return A pointer on the KeyManager
    */
-  auto keyManager() { return _km; }
+  static auto keyManager() { return _km; }
 
-
-  /**
-   * \brief Polls events until the exit event was found
-   * \note infinit loop polling events, populating the KeyManager events queue
-   */
-  void pollEvents();
 
 
 private:
   /// Key Manager to handle Hardware input
-  std::shared_ptr<KeyManager> _km;
+  static std::shared_ptr<KeyManager> _km;
 
   /// Events contained in the replay (with timestamps)
-  std::vector<std::pair<std::chrono::duration<double>, int>> _replayEvents;
+  // std::vector<std::pair<std::chrono::duration<double>, int>> _replayEvents;
 
-  bool _replay; ///< Use input from a replay file
+  // bool _replay; ///< Use input from a replay file
 
-  /// Creation of the InputsListener timestamp
-  std::chrono::steady_clock::time_point _creationTime;
+  // /// Creation of the InputsListener timestamp
+  // std::chrono::steady_clock::time_point _creationTime;
 };
 
 

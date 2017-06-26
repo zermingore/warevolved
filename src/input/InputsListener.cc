@@ -1,7 +1,5 @@
 #include <input/InputsListener.hh>
 
-#include <iostream>
-
 #include <debug/EventsLogger.hh>
 #include <common/Status.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -11,22 +9,15 @@
 #include <input/EventManager.hh>
 
 
+std::shared_ptr<KeyManager> InputsListener::_km;
 
-InputsListener::InputsListener(bool replay)
-  : _km(std::make_shared<KeyManager> ())
-  , _replay(replay)
+
+void InputsListener::listen()
 {
-  // if (_replay)
-  //   _replayEvents = debug::EventsLogger::fetchEventsReplay();
-  // else
-  //   debug::EventsLogger::initialize("LOG_EVENTS");
+  // Initialize the KeyManager
+  _km = std::make_shared<KeyManager> ();
 
-  _creationTime = std::chrono::steady_clock::now();
-}
-
-
-void InputsListener::pollEvents()
-{
+  // Listen for events until the window close event is found
   for (;;)
   {
     // Listen to input, convert them into events and push them in the fifo

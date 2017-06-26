@@ -58,7 +58,7 @@ void Status::pushState(const e_state state)
   _states.push({state, new_state});
 
   // Force ignoring current active inputs
-  Status::blockInputs();
+  // Status::blockInputs();
 }
 
 
@@ -68,7 +68,7 @@ void Status::popCurrentState()
   _states.pop();
 
   // Force ignoring current active inputs
-  Status::blockInputs();
+  // Status::blockInputs();
 }
 
 
@@ -84,7 +84,7 @@ void Status::clearStates()
 
 void Status::nextPlayer()
 {
-  Status::blockInputs();
+  // Status::blockInputs();
 
   // Clearing states, totaly
   _battle->nextPlayer();

@@ -50,7 +50,7 @@ void KeyManager::pushEvent(const sf::Event& input)
   }
 
   // push the e_input matching the event
-  // _active_inputsepush(_events_mapping[_keys_mapping[input]]);
+  // _active_inputs.push(_events_mapping[_keys_mapping[input]]);
 
   // _active_inputs.push(input);
 }
