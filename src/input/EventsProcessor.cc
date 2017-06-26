@@ -7,11 +7,8 @@
 #include <input/KeyManager.hh>
 
 
+std::shared_ptr<KeyManager> EventsProcessor::_km;
 
-EventsProcessor::EventsProcessor(std::shared_ptr<KeyManager> km)
-  : _km(km)
-{
-}
 
 void EventsProcessor::process()
 {

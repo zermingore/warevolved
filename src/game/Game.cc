@@ -3,6 +3,7 @@
 #include <future>
 
 #include <input/InputsListener.hh>
+#include <input/EventsProcessor.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <game/Battle.hh>
 #include <resources/ResourcesManager.hh>
@@ -26,6 +27,7 @@ void Game::run(bool replay)
   // Status::setInputProcessor(input_processor);
 
   std::future<void> inputs_listener = std::async(InputsListener::listen);
+  std::future<void> events_processor = std::async(EventsProcessor::process);
 
   Status::pushState(e_state::PLAYING);
   Status::currentState()->resume();

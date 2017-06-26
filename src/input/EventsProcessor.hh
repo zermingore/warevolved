@@ -25,33 +25,15 @@ class EventsProcessor
 {
 public:
   /**
-   * \brief Initializes the KeyManager
-   * \param km KeyManager initialized by the InputListener
-   * \see KeyManager
-   * \see InputListener
-   */
-  explicit EventsProcessor(std::shared_ptr<KeyManager> km);
-
-  /**
-   * \brief Deleted default constructor
-   */
-  EventsProcessor() = delete;
-
-  /**
-   * \brief Default destructor
-   */
-  ~EventsProcessor() = default;
-
-
-  /**
    * \brief Process events from the events queue
    */
-  void process();
+  static void process();
+
 
 
 private:
   /// Key Manager to handle Hardware input
-  std::shared_ptr<KeyManager> _km;
+  static std::shared_ptr<KeyManager> _km;
 };
 
 

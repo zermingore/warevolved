@@ -24,6 +24,7 @@
 ** TODO Use the mouse to move the cursor, browse menus...
 ** TODO Re-enable replays recording
 ** TODO Support replays reading
+** TODO Clear the events fifo on State changes
 
 * TODO Game Features
 ** TODO Allow direct attack when a target is already at range
