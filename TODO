@@ -25,6 +25,7 @@
 ** TODO Re-enable replays recording
 ** TODO Support replays reading
 ** TODO Clear the events fifo on State changes
+** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
 
 * TODO Game Features
 ** TODO Allow direct attack when a target is already at range

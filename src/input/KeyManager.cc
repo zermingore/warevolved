@@ -5,28 +5,40 @@
 #include <debug/Debug.hh>
 
 
+// Static members definition
+std::multimap<const sf::Keyboard::Key, const e_key> KeyManager::_keys_mapping;
+std::map<const e_key, const e_input> KeyManager::_events_mapping;
+ThreadSafeQueue<e_input> KeyManager::_active_inputs;
+sf::Clock KeyManager::_clock_events_freeze;
+size_t KeyManager::_events_freeze_duration;
 
-KeyManager::KeyManager()
+
+
+void KeyManager::Initialize()
 {
   /// \todo Read configuration file to get these values (use Settings Class)
 
   // This mapping might be overloaded later, by the configuration management
   // keyboard: user part; e_key binary part
   // _keys_mapping: keyboard -> e_key ('z' and '8' can be used for LEFT key)
+  // e_key -> keyboard (allow duplicated keys)
 
-  _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::Left  });
-  _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::Right });
-  _keys_mapping.insert({e_key::UP        , sf::Keyboard::Up    });
-  _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::Down  });
+  _keys_mapping.insert({sf::Keyboard::Left, e_key::LEFT});
 
-  // These don't seem natural (but makes sense with a Workman layout)
-  _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::N     });
-  _keys_mapping.insert({e_key::UP        , sf::Keyboard::E     });
-  _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::O     });
-  _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::I     });
 
-  _keys_mapping.insert({e_key::SELECTION , sf::Keyboard::Space });
-  _keys_mapping.insert({e_key::EXIT      , sf::Keyboard::Escape});
+  // _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::Left  });
+  // _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::Right });
+  // _keys_mapping.insert({e_key::UP        , sf::Keyboard::Up    });
+  // _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::Down  });
+
+  // // These don't seem natural (but makes sense with a Workman layout)
+  // _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::N     });
+  // _keys_mapping.insert({e_key::UP        , sf::Keyboard::E     });
+  // _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::O     });
+  // _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::I     });
+
+  // _keys_mapping.insert({e_key::SELECTION , sf::Keyboard::Space });
+  // _keys_mapping.insert({e_key::EXIT      , sf::Keyboard::Escape});
 
 
   // This event mapping is populated here but will then be read only
@@ -41,49 +53,38 @@ KeyManager::KeyManager()
 
 
 
-void KeyManager::pushEvent(const sf::Event& input)
+void KeyManager::pushEvent(const sf::Keyboard::Key& key)
 {
+  PRINTF("pushing event");
+  // PRINTF((*_keys_mapping.find(sf::Keyboard::Left)).second);
+
+  // getting the logical key
+  auto logical_key_it(_keys_mapping.find(key));
+  if (logical_key_it == _keys_mapping.end())
+  {
+    PRINTF("Dropping unrecognized key", static_cast<int> (key));
+    return;
+  }
+  auto logical_key(logical_key_it->second);
+
+
+  _active_inputs.push(_events_mapping[logical_key]);
+
+
   /// \todo Still useful ?
   if (eventsFreezed()) {
     PRINTF("Freezed events (why?)");
     return;
   }
-
-  // push the e_input matching the event
-  // _active_inputs.push(_events_mapping[_keys_mapping[input]]);
-
-  // _active_inputs.push(input);
 }
 
 
-void KeyManager::populateEvents()
+
+e_input KeyManager::popEvent()
 {
-  // Clear the active inputs list
-  // _active_inputs.clear();
+  PRINTF("poping event...");
 
-  // If the inputs are disabled, return, leaving an empty active input array
-  if (eventsFreezed()) {
-    return;
-  }
-
-  // Add every event which key is pressed
-  for (const auto& it: _keys_mapping)
-  {
-    if (sf::Keyboard::isKeyPressed(it.second))
-    {
-      // push the matching event in the queue
-      // _active_inputs.push(_events_mapping[it.first]);
-    }
-  }
-}
-
-
-sf::Event& KeyManager::popEvent()
-{
-  sf::Event tmp;
-  return tmp;
-
-  // return _active_inputs.pop();
+  return _active_inputs.pop();
 }
 
 

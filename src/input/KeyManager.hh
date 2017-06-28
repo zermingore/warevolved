@@ -47,15 +47,18 @@ enum class e_key
 class KeyManager
 {
 public:
-  /// Default Constructor. Maps the keyboard input to keys
-  KeyManager();
+  /**
+   * \brief Initialize the mappings keys -> keyboard_inputs
+   * and keys -> high_level_inputs
+   */
+  static void Initialize();
 
 
   /**
    * \brief Push the event matching the given input into the events queue
    * \param input Input used to match the event to push in the queue
    */
-  void pushEvent(const sf::Event& input);
+  static void pushEvent(const sf::Keyboard::Key& key);
 
 
   /**
@@ -63,20 +66,14 @@ public:
    * \return The poped event
    * \note Blocks until an event is found in the queue
    */
-  sf::Event& popEvent();
-
-
-  /**
-   * \brief Populates the _active_inputs events list
-   */
-  void populateEvents();
+  static e_input popEvent();
 
 
   /**
    * \brief Blocks every input, active or not
    * \param duration Time in ms during which one events will be ignored
    */
-  void blockInputs(const size_t duration = 100);
+  static void blockInputs(const size_t duration = 100);
 
 
 
@@ -87,16 +84,19 @@ private:
    * If they are not, they will be available in max _clock_events_freeze ms
    *   (unless a call to blockInputs is made)
    */
-  bool eventsFreezed();
+  static bool eventsFreezed();
 
+  /// Hardware / logical keys mapping
+  static std::multimap<const sf::Keyboard::Key, const e_key> _keys_mapping;
 
-  std::multimap<e_key, sf::Keyboard::Key> _keys_mapping; ///< key mapping
-  std::map<const e_key, const e_input> _events_mapping;  ///< events mapping
+  /// events mapping
+  static std::map<const e_key, const e_input> _events_mapping;
 
-  ThreadSafeQueue<e_input> _active_inputs; ///< current inputs (high level keys)
+  /// current inputs (high level keys)
+  static ThreadSafeQueue<e_input> _active_inputs;
 
-  sf::Clock _clock_events_freeze; ///< clock to manage events freezing
-  size_t _events_freeze_duration; ///< duration to deactivate events
+  static sf::Clock _clock_events_freeze; ///< clock to manage events freezing
+  static size_t _events_freeze_duration; ///< duration to deactivate events
 };
 
 
