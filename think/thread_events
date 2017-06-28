@@ -1,3 +1,19 @@
+data:
+-----
+
+KeyManager
+InputsListener
+EventsProcessor
+
+sf::Event
+sf::Keyboard
+e_key
+e_input
+
+sf::Keyboard <> e_key -> not relevants here
+e_key <> e_input
+
+
 threads:
 --------
 

@@ -9,20 +9,20 @@
 #include <input/EventManager.hh>
 
 
-std::shared_ptr<KeyManager> InputsListener::_km;
+#include <debug/Debug.hh> // rm
 
 
 void InputsListener::listen()
 {
-  // Initialize the KeyManager
-  _km = std::make_shared<KeyManager> ();
+  KeyManager::Initialize();
 
   // Listen for events until the window close event is found
   for (;;)
   {
+    PRINTF('.');
     // Listen to input, convert them into events and push them in the fifo
     sf::Event event;
-    while (graphics::GraphicsEngine::pollEvent(event))
+    while (graphics::GraphicsEngine::waitEvent(event))
     {
       // Close window: exit request
       if (event.type == sf::Event::Closed)
@@ -37,8 +37,8 @@ void InputsListener::listen()
         continue;
       }
 
-      // Loosy: for all register event, push the matching ones
-      _km->populateEvents();
+      // Push e_key matching the sf::Event
+      KeyManager::pushEvent(event.key.code);
     }
   }
 }

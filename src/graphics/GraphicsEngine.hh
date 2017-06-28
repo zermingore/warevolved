@@ -71,7 +71,7 @@ public:
 
   static auto windowIsOpen() { return _window->isOpen(); }
 
-  static auto pollEvent(sf::Event& event) { return _window->pollEvent(event); }
+  static auto waitEvent(sf::Event& event) { return _window->waitEvent(event); }
 
 
   /**

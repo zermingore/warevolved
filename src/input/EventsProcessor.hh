@@ -28,12 +28,6 @@ public:
    * \brief Process events from the events queue
    */
   static void process();
-
-
-
-private:
-  /// Key Manager to handle Hardware input
-  static std::shared_ptr<KeyManager> _km;
 };
 
 
