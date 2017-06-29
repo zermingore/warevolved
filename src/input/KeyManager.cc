@@ -23,22 +23,19 @@ void KeyManager::Initialize()
   // _keys_mapping: keyboard -> e_key ('z' and '8' can be used for LEFT key)
   // e_key -> keyboard (allow duplicated keys)
 
-  _keys_mapping.insert({sf::Keyboard::Left, e_key::LEFT});
+  _keys_mapping.insert({sf::Keyboard::Left,  e_key::LEFT});
+  _keys_mapping.insert({sf::Keyboard::Right, e_key::RIGHT});
+  _keys_mapping.insert({sf::Keyboard::Up,    e_key::UP});
+  _keys_mapping.insert({sf::Keyboard::Down,  e_key::DOWN});
 
+  // These don't seem natural (but makes sense with a Workman layout)
+  _keys_mapping.insert({sf::Keyboard::N, e_key::LEFT });
+  _keys_mapping.insert({sf::Keyboard::E, e_key::UP   });
+  _keys_mapping.insert({sf::Keyboard::O, e_key::DOWN });
+  _keys_mapping.insert({sf::Keyboard::I, e_key::RIGHT});
 
-  // _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::Left  });
-  // _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::Right });
-  // _keys_mapping.insert({e_key::UP        , sf::Keyboard::Up    });
-  // _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::Down  });
-
-  // // These don't seem natural (but makes sense with a Workman layout)
-  // _keys_mapping.insert({e_key::LEFT      , sf::Keyboard::N     });
-  // _keys_mapping.insert({e_key::UP        , sf::Keyboard::E     });
-  // _keys_mapping.insert({e_key::DOWN      , sf::Keyboard::O     });
-  // _keys_mapping.insert({e_key::RIGHT     , sf::Keyboard::I     });
-
-  // _keys_mapping.insert({e_key::SELECTION , sf::Keyboard::Space });
-  // _keys_mapping.insert({e_key::EXIT      , sf::Keyboard::Escape});
+  _keys_mapping.insert({sf::Keyboard::Space,  e_key::SELECTION});
+  _keys_mapping.insert({sf::Keyboard::Escape, e_key::EXIT});
 
 
   // This event mapping is populated here but will then be read only
