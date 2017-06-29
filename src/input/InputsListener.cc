@@ -14,6 +14,7 @@
 
 void InputsListener::listen()
 {
+  PRINTF("Initializing the KeyManager");
   KeyManager::Initialize();
 
   // Listen for events until the window close event is found

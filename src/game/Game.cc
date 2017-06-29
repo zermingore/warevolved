@@ -12,6 +12,8 @@
 #include <context/State.hh>
 
 
+#include <debug/Debug.hh>
+
 
 void Game::run(bool replay)
 {
@@ -26,8 +28,11 @@ void Game::run(bool replay)
   // auto input_processor(std::make_shared<InputProcessor> (replay));
   // Status::setInputProcessor(input_processor);
 
-  std::future<void> inputs_listener = std::async(InputsListener::listen);
-  std::future<void> events_processor = std::async(EventsProcessor::process);
+  PRINTF("launching the inputs listener");
+  auto inputs_listen(std::async(std::launch::async, InputsListener::listen));
+
+  PRINTF("launching the events processor");
+  auto events_process(std::async(std::launch::async, EventsProcessor::process));
 
   Status::pushState(e_state::PLAYING);
   Status::currentState()->resume();
