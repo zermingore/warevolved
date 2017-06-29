@@ -1,5 +1,7 @@
 #include <input/InputsListener.hh>
 
+#include <future>
+
 #include <debug/EventsLogger.hh>
 #include <common/Status.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -7,20 +9,20 @@
 #include <input/KeyManager.hh>
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
+#include <input/EventsProcessor.hh>
 
-
-#include <debug/Debug.hh> // rm
 
 
 void InputsListener::listen()
 {
-  PRINTF("Initializing the KeyManager");
   KeyManager::Initialize();
+
+  // Launch the events processor in its own thread
+  std::thread(EventsProcessor::process).detach();
 
   // Listen for events until the window close event is found
   for (;;)
   {
-    PRINTF('.');
     // Listen to input, convert them into events and push them in the fifo
     sf::Event event;
     while (graphics::GraphicsEngine::waitEvent(event))

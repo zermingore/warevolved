@@ -19,7 +19,8 @@
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 
 * TODO Input
-** TODO Use a fifo of inputs
+** DONE Use a fifo of inputs
+   CLOSED: [2017-06-29 Do 07:51]
    InputProcessor::process() in its own thread (InputsListener / EventsProcessor)
 ** TODO Use the mouse to move the cursor, browse menus...
 ** TODO Re-enable replays recording
