@@ -85,21 +85,6 @@ e_input KeyManager::popEvent()
 }
 
 
-void KeyManager::blockInputs(const size_t duration)
-{
-  PRINTF("Blocking inputs, why ?");
-  return;
-
-  // // Clearing active inputs
-  // _active_inputs.clear();
-
-  // // Relaunching the clock
-  // _events_freeze_duration = duration;
-  // _clock_events_freeze.restart();
-}
-
-
-
 bool KeyManager::eventsFreezed()
 {
   // Check if the events were blocked for a minimal duration

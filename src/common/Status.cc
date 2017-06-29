@@ -25,11 +25,6 @@ Status::~Status()
 }
 
 
-void Status::blockInputs(const size_t duration) {
-  assert(!"blockInputs called...");
-}
-
-
 e_state Status::state()
 {
   assert(!_states.empty() && "_states stack is empty, exiting...");
@@ -56,9 +51,6 @@ void Status::pushState(const e_state state)
   // push a new State
   auto new_state(StateFactory::createState(state));
   _states.push({state, new_state});
-
-  // Force ignoring current active inputs
-  // Status::blockInputs();
 }
 
 
@@ -66,9 +58,6 @@ void Status::popCurrentState()
 {
   assert(!_states.empty() && "No State found trying to pop States");
   _states.pop();
-
-  // Force ignoring current active inputs
-  // Status::blockInputs();
 }
 
 
@@ -84,8 +73,6 @@ void Status::clearStates()
 
 void Status::nextPlayer()
 {
-  // Status::blockInputs();
-
   // Clearing states, totaly
   _battle->nextPlayer();
   clearStates();

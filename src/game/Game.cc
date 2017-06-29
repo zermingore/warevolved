@@ -1,6 +1,7 @@
 #include <game/Game.hh>
 
 #include <future>
+#include <cassert>
 
 #include <input/InputsListener.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -14,6 +15,8 @@
 
 void Game::run(bool replay)
 {
+  assert(!replay && "No longer supported replay mode atm");
+
   using namespace graphics; // function scope
 
   resources::ResourcesManager::initialize("resources.xml");

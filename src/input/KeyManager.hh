@@ -69,13 +69,6 @@ public:
   static e_input popEvent();
 
 
-  /**
-   * \brief Blocks every input, active or not
-   * \param duration Time in ms during which one events will be ignored
-   */
-  static void blockInputs(const size_t duration = 100);
-
-
 
 private:
   /**
