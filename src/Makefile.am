@@ -189,6 +189,8 @@ __top_srcdir__we_CXXFLAGS += -Wvirtual-move-assign              # Warn if a virt
 __top_srcdir__we_CXXFLAGS += -Wwrite-strings                    # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.
 __top_srcdir__we_CXXFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
 
+__top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
+
 
 # __top_srcdir__we_CXXFLAGS += -Wno-unknown-warning-option        # Keep clang silent when finding g++ specific flags
 

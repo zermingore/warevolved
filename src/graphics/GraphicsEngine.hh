@@ -131,6 +131,7 @@ private:
    *   it will be unlimited otherwise
    */
   static float _currentFPS;
+  static float _elapsedTime;
 };
 
 

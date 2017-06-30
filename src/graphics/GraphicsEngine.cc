@@ -9,6 +9,7 @@
 #include <game/Player.hh>
 #include <debug/OSD.hh>
 #include <context/State.hh>
+#include <chrono>
 
 
 
@@ -22,9 +23,13 @@ std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 float GraphicsEngine::_currentFPS;
 
 
+std::vector<long int> frames_generation;
+
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
+  std::chrono::steady_clock::time_point draw_start = std::chrono::steady_clock::now();
+
   drawBackground();
   drawMap(battle);
 
@@ -34,10 +39,27 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   drawState();
 
   // draw the debug data, eventually over everything (at last)
+  debug::OSD::addData(_currentFPS);
   debug::OSD::draw();
+  ++_currentFPS;
 
   // update the window
   _window->display();
+
+  auto draw_time(std::chrono::steady_clock::now() - draw_start);
+  frames_generation.push_back(draw_time.count());
+
+  if (frames_generation.size() % 60 == 0)
+  {
+    long int total_time = 0;
+    for (const auto& it: frames_generation)
+    {
+      total_time += it;
+    }
+
+    PRINTF("time to generate 60 frames (ms):", total_time / 1000000);
+    frames_generation.clear();
+  }
 }
 
 

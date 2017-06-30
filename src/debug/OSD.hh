@@ -12,10 +12,14 @@
 # include <memory>
 # include <vector>
 
-# include <SFML/Graphics/Drawable.hpp>
-# include <SFML/Graphics/Text.hpp>
-
 # include <common/using.hh>
+
+
+namespace sf
+{
+  class Drawable;
+  class Text;
+}
 
 
 namespace debug {
@@ -52,6 +56,14 @@ public:
    * \brief Draw added data, calling the Graphics Engine
    */
   static void draw();
+
+  // template<typename T>
+  // static void addData(const T data)
+  // {
+  //   auto label(text(std::to_string(data)));
+  //   _drawables.push_back(&data);
+  // }
+
 
 
 private:

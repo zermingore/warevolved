@@ -28,12 +28,6 @@ void OSD::addData(const int value)
 }
 
 
-// template<typename T>
-// void OSD::addData(T data) {
-//   _drawables.push_back(data);
-// }
-
-
 void OSD::draw()
 {
   /// \todo draw a background
@@ -41,6 +35,9 @@ void OSD::draw()
   for (auto it: _drawables) {
     graphics::GraphicsEngine::draw(it);
   }
+
+  _drawables.clear();
+  _dataPosition.y = 0;
 }
 
 
