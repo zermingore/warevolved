@@ -47,6 +47,9 @@ AC_FUNC_ERROR_AT_LINE
 
 AC_LANG_PUSH([C++])
 
+AC_CHECK_LIB([X11], [main], ,
+AC_MSG_ERROR([Unable to find X11 library]))
+
 AC_CHECK_LIB([sfml-system], [main], ,
 AC_MSG_ERROR([Unable to find SFML System]))
 AC_CHECK_HEADERS([SFML/System.hpp], ,
