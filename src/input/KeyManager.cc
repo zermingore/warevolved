@@ -52,14 +52,10 @@ void KeyManager::Initialize()
 
 void KeyManager::pushEvent(const sf::Keyboard::Key& key)
 {
-  PRINTF("pushing event");
-  // PRINTF((*_keys_mapping.find(sf::Keyboard::Left)).second);
-
   // getting the logical key
   auto logical_key_it(_keys_mapping.find(key));
   if (logical_key_it == _keys_mapping.end())
   {
-    PRINTF("Dropping unrecognized key", static_cast<int> (key));
     return;
   }
   auto logical_key(logical_key_it->second);
@@ -69,7 +65,8 @@ void KeyManager::pushEvent(const sf::Keyboard::Key& key)
 
 
   /// \todo Still useful ?
-  if (eventsFreezed()) {
+  if (eventsFreezed())
+  {
     PRINTF("Freezed events (why?)");
     return;
   }

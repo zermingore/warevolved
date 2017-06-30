@@ -9,7 +9,7 @@
 
 
 
-void EventsProcessor::process()
+[[ noreturn ]] void EventsProcessor::process()
 {
   for (;;)
   {

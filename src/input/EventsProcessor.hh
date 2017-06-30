@@ -11,6 +11,7 @@
 
 # include <memory>
 # include <SFML/Window/Event.hpp>
+# include <stdnoreturn.h>
 
 
 class KeyManager;
@@ -26,6 +27,7 @@ class EventsProcessor
 public:
   /**
    * \brief Process events from the events queue
+   * \note does not return
    */
   static void process();
 };
