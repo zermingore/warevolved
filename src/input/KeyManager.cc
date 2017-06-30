@@ -9,8 +9,6 @@
 std::multimap<const sf::Keyboard::Key, const e_key> KeyManager::_keys_mapping;
 std::map<const e_key, const e_input> KeyManager::_events_mapping;
 ThreadSafeQueue<e_input> KeyManager::_active_inputs;
-sf::Clock KeyManager::_clock_events_freeze;
-size_t KeyManager::_events_freeze_duration;
 
 
 
@@ -62,29 +60,11 @@ void KeyManager::pushEvent(const sf::Keyboard::Key& key)
 
 
   _active_inputs.push(_events_mapping[logical_key]);
-
-
-  /// \todo Still useful ?
-  if (eventsFreezed())
-  {
-    PRINTF("Freezed events (why?)");
-    return;
-  }
 }
 
 
 
 e_input KeyManager::popEvent()
 {
-  PRINTF("poping event...");
-
   return _active_inputs.pop();
-}
-
-
-bool KeyManager::eventsFreezed()
-{
-  // Check if the events were blocked for a minimal duration
-  return (_clock_events_freeze.getElapsedTime().asMilliseconds()
-          < static_cast<int> (_events_freeze_duration));
 }

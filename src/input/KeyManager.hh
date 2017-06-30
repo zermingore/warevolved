@@ -71,14 +71,6 @@ public:
 
 
 private:
-  /**
-   * \brief Returns a boolean to know if the inputs are available
-   *
-   * If they are not, they will be available in max _clock_events_freeze ms
-   *   (unless a call to blockInputs is made)
-   */
-  static bool eventsFreezed();
-
   /// Hardware / logical keys mapping
   static std::multimap<const sf::Keyboard::Key, const e_key> _keys_mapping;
 
@@ -87,9 +79,6 @@ private:
 
   /// current inputs (high level keys)
   static ThreadSafeQueue<e_input> _active_inputs;
-
-  static sf::Clock _clock_events_freeze; ///< clock to manage events freezing
-  static size_t _events_freeze_duration; ///< duration to deactivate events
 };
 
 

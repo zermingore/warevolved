@@ -14,9 +14,9 @@
   for (;;)
   {
     // process KeyManager events queue
-    if (Status::currentState()->eventManager()->process(KeyManager::popEvent()))
+    if (!Status::currentState()->eventManager()->process(KeyManager::popEvent()))
     {
-      PRINTF("Processed: event in current state", Status::currentState());
+      PRINTF("Event not processed");
     }
   }
 }
