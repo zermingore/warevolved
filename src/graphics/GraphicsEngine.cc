@@ -44,16 +44,16 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   drawState();
 
   // draw the debug data, eventually over everything (at last)
-  debug::OSD::addStr("FPS:");
-
-  auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
-  debug::OSD::addPod(computeFps(_nbFramesGenerated, time_elapsed.count()));
   ++_nbFramesGenerated;
+  auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
+  debug::OSD::addPod(computeFps(_nbFramesGenerated, time_elapsed.count()),
+                     "FPS (from nb generated frames)");
 
   // Get the fps from the time needed to generate one frame
   auto draw_time(std::chrono::steady_clock::now() - draw_start);
-  debug::OSD::addPod(1.f
-                      / (static_cast<float> (draw_time.count()) / 1000000000.f));
+  debug::OSD::addPod(
+    1.f / (static_cast<float> (draw_time.count()) / 1000000000.f)
+    , "FPS (from one frame generation time)");
 
   debug::OSD::draw();
 

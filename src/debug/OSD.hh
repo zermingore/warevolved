@@ -39,18 +39,22 @@ class OSD
 public:
   /**
    * \brief Adds data as a string to display, placing it automatically
-   * \param str string to display
+   * \param str String to display
+   * \param description Optional argument to put in front of the data string
    * \note The placement is made according to _dataPosition
+   * \note If the description is given, it will be followed by the string ": "
    */
-  static void addStr(const std::string str);
+  static void addStr(const std::string str, const std::string description = "");
 
   /**
    * \brief Adds data as a Plain Old Data to display, placing it automatically
    * \param value value to display *must* be an integral, Plain Old Data type
+   * \param description Optional argument to put in front of the data
    * \note The placement is made according to _dataPosition
+   * \note If the description is given, it will be followed by the string ": "
    */
   template<typename T>
-  static void addPod(const T& value);
+  static void addPod(const T& value, const std::string description = "");
 
   /**
    * \brief Draw added data, calling the Graphics Engine
@@ -75,12 +79,18 @@ private:
 
 
 template<typename T>
-void OSD::addPod(const T& value)
+void OSD::addPod(const T& value, const std::string description)
 {
   static_assert(std::is_pod<T>::value,
                 "OSD::addPod supports only Plain Old Data");
 
-  auto label(text(std::to_string(value)));
+  std::string desc;
+  if (description != "")
+  {
+    desc = description + ": ";
+  }
+
+  auto label(text(desc + std::to_string(value)));
   _drawables.push_back(label);
 }
 
