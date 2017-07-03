@@ -8,14 +8,17 @@
 int main(int ac, const char **av)
 {
   // Initialize the Xlib support for concurrent threads.
-  XInitThreads(); /// \todo don't really know why it cannot be in the Context
+  XInitThreads(); /// \todo Explain why it cannot be in the Context
 
-  /// \todo use getopt, support: resolution, graphic engine ({2,3}D, ASCII), ...
-  PRINTF(av);
+  // 'argument parsing'
+  /// \todo use an options parser, support: replay, resolution, ...
+  auto replay(av && av[1] && av[1][0] == 'r');
+  auto fullscreen(av && av[1][0] == 'f');
+  if (ac && replay)
+  {
+    NOTICE("Replay mode");
+  }
 
-  bool replay = false; // (av && av[1] && av[1][0] == 'r');
-
-  auto fullscreen(ac > 1);
   Context context(fullscreen);
 
   /// \todo main menu (pushState or the like)
