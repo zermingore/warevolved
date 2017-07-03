@@ -14,7 +14,7 @@ unsigned int OSD::_fontSize = 20;
 
 
 
-void OSD::addData(const std::string str)
+void OSD::addStr(const std::string str)
 {
   auto label(text(str));
   _drawables.push_back(label);

@@ -11,6 +11,7 @@
 # include <string>
 # include <memory>
 # include <vector>
+# include <type_traits>
 
 # include <common/using.hh>
 
@@ -38,20 +39,18 @@ class OSD
 public:
   /**
    * \brief Adds data as a string to display, placing it automatically
-   *
-   * The placement is made according to _dataPosition
    * \param str string to display
+   * \note The placement is made according to _dataPosition
    */
-  static void addData(const std::string str);
+  static void addStr(const std::string str);
 
   /**
-   * \brief Adds data as an integer to display, placing it automatically
-   *
-   * The placement is made according to _dataPosition
-   * \param value value to display
+   * \brief Adds data as a Plain Old Data to display, placing it automatically
+   * \param value value to display *must* be an integral, Plain Old Data type
+   * \note The placement is made according to _dataPosition
    */
   template<typename T>
-  static void addData(const T& value);
+  static void addPod(const T& value);
 
   /**
    * \brief Draw added data, calling the Graphics Engine
@@ -76,8 +75,11 @@ private:
 
 
 template<typename T>
-void OSD::addData(const T& value)
+void OSD::addPod(const T& value)
 {
+  static_assert(std::is_pod<T>::value,
+                "OSD::addPod supports only Plain Old Data");
+
   auto label(text(std::to_string(value)));
   _drawables.push_back(label);
 }
