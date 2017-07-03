@@ -50,21 +50,6 @@ public:
    */
   static void setWindow(std::unique_ptr<RenderWindow> window);
 
-  /**
-   * \brief Sets current fps to the given value.
-   * \param fps Frame per second value.
-   */
-  static void setCurrentFPS(const float fps) { _currentFPS = fps; }
-
-  /**
-   * \brief Returns current number of generated frames per Seconds.
-   * \return Number of fps.
-   * \note If the compilation flag DEBUG_PERFS is not set
-   *   the frame rate will be limited to 60
-   *   it will be unlimited otherwise
-   */
-  static auto currentFPS() { return _currentFPS; }
-
   static void setGridOffset(const std::shared_ptr<Map> map);
 
   static void closeWindow() { _window->close(); }
@@ -125,13 +110,12 @@ private:
 
 
   /**
-   * \brief current number of generated frames per Seconds
+   * \brief current number of generated frames
    * \note if the compilation flag DEBUG_PERFS is not set
    *   the frame rate will be limited to 60
    *   it will be unlimited otherwise
    */
-  static float _currentFPS;
-  static float _elapsedTime;
+  static size_t _nbFramesGenerated;
 };
 
 

@@ -20,16 +20,21 @@ const sf::Color GRID_COLOR(202, 124, 0);
 
 // Static Variables definition
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
-float GraphicsEngine::_currentFPS;
+size_t GraphicsEngine::_nbFramesGenerated;
 
 
-std::vector<long int> frames_generation;
+constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns)
+{
+  return static_cast<float> (nb_frames_generated)
+    / (static_cast<float> (time_elapsed_ns) / 1000000000.f);
+}
 
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
-  std::chrono::steady_clock::time_point draw_start = std::chrono::steady_clock::now();
+  static auto graphics_start(std::chrono::steady_clock::now()); // Ctor
 
+  auto draw_start(std::chrono::steady_clock::now());
   drawBackground();
   drawMap(battle);
 
@@ -39,27 +44,19 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   drawState();
 
   // draw the debug data, eventually over everything (at last)
-  debug::OSD::addData(_currentFPS);
+  auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
+  debug::OSD::addData(computeFps(_nbFramesGenerated, time_elapsed.count()));
+  ++_nbFramesGenerated;
+
+  // Get the fps from the time needed to generate one frame
+  auto draw_time(std::chrono::steady_clock::now() - draw_start);
+  debug::OSD::addData(1.f
+                      / (static_cast<float> (draw_time.count()) / 1000000000.f));
+
   debug::OSD::draw();
-  ++_currentFPS;
 
   // update the window
   _window->display();
-
-  auto draw_time(std::chrono::steady_clock::now() - draw_start);
-  frames_generation.push_back(draw_time.count());
-
-  if (frames_generation.size() % 60 == 0)
-  {
-    long int total_time = 0;
-    for (const auto& it: frames_generation)
-    {
-      total_time += it;
-    }
-
-    PRINTF("time to generate 60 frames (ms):", total_time / 1000000);
-    frames_generation.clear();
-  }
 }
 
 
