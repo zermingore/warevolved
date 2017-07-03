@@ -50,20 +50,13 @@ public:
    * The placement is made according to _dataPosition
    * \param value value to display
    */
-  static void addData(const int value);
+  template<typename T>
+  static void addData(const T& value);
 
   /**
    * \brief Draw added data, calling the Graphics Engine
    */
   static void draw();
-
-  // template<typename T>
-  // static void addData(const T data)
-  // {
-  //   auto label(text(std::to_string(data)));
-  //   _drawables.push_back(&data);
-  // }
-
 
 
 private:
@@ -81,6 +74,13 @@ private:
   static std::vector<std::shared_ptr<sf::Drawable>> _drawables;
 };
 
+
+template<typename T>
+void OSD::addData(const T& value)
+{
+  auto label(text(std::to_string(value)));
+  _drawables.push_back(label);
+}
 
 
 } // namespace debug

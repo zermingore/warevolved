@@ -21,13 +21,6 @@ void OSD::addData(const std::string str)
 }
 
 
-void OSD::addData(const int value)
-{
-  auto label(text(std::to_string(value)));
-  _drawables.push_back(label);
-}
-
-
 void OSD::draw()
 {
   /// \todo draw a background
