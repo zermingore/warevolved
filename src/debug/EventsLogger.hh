@@ -13,6 +13,7 @@
 
 # include <common/enums/input.hh>
 
+enum class e_key;
 
 using events_list = std::vector<std::pair<std::chrono::duration<double>, int>>;
 
@@ -42,6 +43,12 @@ public:
    * \param event Event to log
    */
   static void log(sf::Event event);
+
+  /**
+   * \brief Add the given event to the log, with a timestamp
+   * \param event Event to log
+   */
+  static void log(const e_key& event);
 
   /**
    * \brief Add the given high level input to the log, with a timestamp
