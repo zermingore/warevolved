@@ -23,7 +23,8 @@ void Game::run(bool replay)
   Status::setBattle(battle);
   battle->initializeMap();
 
-  auto inputs_listen(std::async(std::launch::async, InputsListener::listen));
+  auto inputs_listen(
+    std::async(std::launch::async, InputsListener::listen, replay));
 
   Status::pushState(e_state::PLAYING);
   Status::currentState()->resume();

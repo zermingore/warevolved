@@ -19,6 +19,7 @@ std::chrono::steady_clock::time_point EventsLogger::_creationTime;
 
 void EventsLogger::initialize(std::string filename)
 {
+  PRINTF("Initializing log", filename);
   _log = std::make_unique<std::ofstream> (filename, std::ios_base::out);
 
   time_t now = time(nullptr);

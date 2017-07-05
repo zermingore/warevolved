@@ -43,15 +43,20 @@ enum class e_key
 /**
  * \class KeyManager
  * \brief maps the raw input keys into events.
+ *   It has a fifo filled by the \see InputsListener
+ *   and read by the EventsProcessor.
+ *   Logs the events if necessary (in non replay mode)
  */
 class KeyManager
 {
 public:
   /**
-   * \brief Initialize the mappings keys -> keyboard_inputs
-   * and keys -> high_level_inputs
+   * \brief Initialize the mappings keyboard_inputs -> keys
+   *   and keys -> high_level_inputs
+   * \param replay \true if we are in replay mode
+   * \note if \param replay is \false the events will be logged
    */
-  static void Initialize();
+  static void Initialize(bool replay);
 
 
   /**
@@ -60,6 +65,11 @@ public:
    */
   static void pushEvent(const sf::Keyboard::Key& key);
 
+  /**
+   * \brief Push a key as is in the fifo (which should be from the replay)
+   * \param key key to push in the fifo
+   */
+  static void pushKeyFromReplay(const e_key& key);
 
   /**
    * \brief Retrieve the oldest event from the events queue
@@ -79,6 +89,8 @@ private:
 
   /// current inputs (high level keys)
   static ThreadSafeQueue<e_input> _active_inputs;
+
+  static bool _replay; ///< \false -> we need to log every event
 };
 
 

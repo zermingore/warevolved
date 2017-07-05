@@ -3,17 +3,21 @@
 #include <common/Settings.hh>
 #include <common/enums/input.hh>
 #include <debug/Debug.hh>
+#include <debug/EventsLogger.hh>
 
 
 // Static members definition
 std::multimap<const sf::Keyboard::Key, const e_key> KeyManager::_keys_mapping;
 std::map<const e_key, const e_input> KeyManager::_events_mapping;
 ThreadSafeQueue<e_input> KeyManager::_active_inputs;
+bool KeyManager::_replay;
 
 
-
-void KeyManager::Initialize()
+void KeyManager::Initialize(bool replay)
 {
+  _replay = replay;
+
+
   /// \todo Read configuration file to get these values (use Settings Class)
 
   // This mapping might be overloaded later, by the configuration management
@@ -58,10 +62,20 @@ void KeyManager::pushEvent(const sf::Keyboard::Key& key)
   }
   auto logical_key(logical_key_it->second);
 
+  // Logging only 'useful' events
+  if (!_replay)
+  {
+    debug::EventsLogger::log(logical_key);
+  }
 
   _active_inputs.push(_events_mapping[logical_key]);
 }
 
+
+void KeyManager::pushKeyFromReplay(const e_key& key)
+{
+  _active_inputs.push(_events_mapping[key]);
+}
 
 
 e_input KeyManager::popEvent()
