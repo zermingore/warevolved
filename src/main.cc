@@ -13,7 +13,7 @@ int main(int ac, const char **av)
   // 'argument parsing'
   /// \todo use an options parser, support: replay, resolution, ...
   auto replay(av && av[1] && av[1][0] == 'r');
-  auto fullscreen(av && av[1][0] == 'f');
+  auto fullscreen(av && av[1] && av[1][0] == 'f');
   if (ac && replay)
   {
     NOTICE("Replay mode");
