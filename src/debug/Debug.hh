@@ -77,8 +77,9 @@
 # endif
 
 
-# define ERROR  Debug::error
-# define NOTICE Debug::notice
+# define ERROR   Debug::error
+# define NOTICE  Debug::notice
+# define WARNING Debug::warning
 
 /// \todo in release, printf should print in a log
 # ifdef DEBUG
@@ -148,11 +149,25 @@ public:
    * \brief print as error given parameters on standard output
    * \param head: element to print right now
    * \param tail eventually, rest of given arguments list
+   * \todo log notices and warnings
    */
   template<typename T, typename... Tail>
   static void notice(const T head, const Tail... tail)
   {
 	std::cout << COLOR_NOTICE;
+	printf(head, tail...);
+  }
+
+  /**
+   * \brief print as error given parameters on standard output
+   * \param head: element to print right now
+   * \param tail eventually, rest of given arguments list
+   * \todo log notices and warnings
+   */
+  template<typename T, typename... Tail>
+  static void warning(const T head, const Tail... tail)
+  {
+	std::cout << COLOR_WARNING;
 	printf(head, tail...);
   }
 
