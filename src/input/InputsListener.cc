@@ -12,7 +12,7 @@
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
 #include <input/EventsProcessor.hh>
-
+#include <tools/StringParser.hh>
 
 // static members definition
 std::vector<std::pair<std::chrono::duration<double>, int>>
@@ -20,16 +20,42 @@ std::vector<std::pair<std::chrono::duration<double>, int>>
 
 
 
+void InputsListener::getReplayKeys(const std::string& filename)
+{
+  NOTICE("Parsing replay", filename);
+
+  char line[256];
+  std::ifstream stream(filename, std::ios_base::in);
+  while (stream.getline(line, 256))
+  {
+    // getting the input events only from the log
+    auto entry(StringParser::split(line, " "));
+    if (entry.size() != 2) // not the expected format: timestamp e_key
+    {
+      WARNING("Skipping line:", line);
+      continue;
+    }
+
+    auto ts = std::chrono::nanoseconds{ atol(entry.front().c_str()) };
+    auto key(entry[1]);
+    _replayEvents.push_back({ ts, atoi(key.c_str()) });
+    std::cout << "input: @" << ts.count()
+              << ": " << _replayEvents.back().second << std::endl;
+  }
+}
+
+
 void InputsListener::listen(bool replay)
 {
+  auto replay_filename("test_log");
   // Initialize the replay mode as required (Read XOr Write)
   if (!replay)
   {
-    debug::EventsLogger::initialize("test_log");
+    debug::EventsLogger::initialize(replay_filename);
   }
   else
   {
-    debug::EventsLogger::fetchEventsReplay();
+    getReplayKeys(replay_filename);
   }
 
   KeyManager::Initialize(replay);

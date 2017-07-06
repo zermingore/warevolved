@@ -97,7 +97,7 @@ void EventsLogger::log(const e_key& event)
 
   auto time_elapsed(std::chrono::steady_clock::now() - _creationTime);
   *_log << time_elapsed.count()
-        << " | event type: " << static_cast<int> (event) << '\n';
+        << " " << static_cast<int> (event) << '\n';
 }
 
 
