@@ -11,13 +11,13 @@
 # include <chrono>
 # include <SFML/Window.hpp>
 
-# include <common/enums/input.hh>
+enum class e_input;
 
-enum class e_key;
+
+namespace debug {
 
 using events_list = std::vector<std::pair<std::chrono::duration<double>, int>>;
 
-namespace debug {
 
 /**
  * \class EventLogger
@@ -33,28 +33,22 @@ public:
   static void initialize(std::string filename);
 
   /**
-   * \brief fetch events from the replay
-   * \return a list of events and their associated timestamps
-   */
-  static events_list fetchEventsReplay();
-
-  /**
    * \brief Add the given event to the log, with a timestamp
    * \param event Event to log
    */
   static void log(sf::Event event);
 
   /**
-   * \brief Add the given event to the log, with a timestamp
-   * \param event Event to log
+   * \brief fetch events from the replay
+   * \return a list of events and their associated timestamps
    */
-  static void log(const e_key& event);
+  static events_list fetchLoggedEvents();
 
   /**
    * \brief Add the given high level input to the log, with a timestamp
    * \param input input event to log
    */
-  static void logProcessedEvent(e_input input);
+  static void logProcessedEvent(e_input& input);
 
 
 private:

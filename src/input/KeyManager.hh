@@ -9,6 +9,8 @@
 
 # include <map>
 # include <set>
+# include <string>
+# include <chrono>
 
 # include <SFML/Window/Event.hpp>
 # include <SFML/System/Clock.hpp> /// \todo use std::clock instead
@@ -58,6 +60,12 @@ public:
    */
   static void Initialize(bool replay);
 
+  /**
+   * \brief Append the givent key to the end of the replay file
+   * \param key Key to log in the replay file
+   * \return a list of events and their associated timestamps
+   */
+  static void replayStoreKey(const e_key& key);
 
   /**
    * \brief Push the event matching the given input into the events queue
@@ -90,7 +98,12 @@ private:
   /// current inputs (high level keys)
   static ThreadSafeQueue<e_input> _active_inputs;
 
-  static bool _replay; ///< \false -> we need to log every event
+  static bool _replay; ///< \false -> need to log every event
+
+  static std::unique_ptr<std::ofstream> _replayFile; ///< Replay file
+
+  ///< Creation time of the replay file
+  static std::chrono::steady_clock::time_point _replayCreationTime;
 };
 
 

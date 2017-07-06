@@ -32,7 +32,7 @@ void EventsLogger::initialize(std::string filename)
 }
 
 
-events_list EventsLogger::fetchEventsReplay()
+events_list EventsLogger::fetchLoggedEvents()
 {
   auto filename("test_log");
 
@@ -86,22 +86,7 @@ void EventsLogger::log(sf::Event event)
 }
 
 
-void EventsLogger::log(const e_key& event)
-{
-  /// checking for initialization \todo no longer static class
-  if (!_log)
-  {
-    ERROR("log not initialized");
-    return;
-  }
-
-  auto time_elapsed(std::chrono::steady_clock::now() - _creationTime);
-  *_log << time_elapsed.count()
-        << " " << static_cast<int> (event) << '\n';
-}
-
-
-void EventsLogger::logProcessedEvent(e_input input)
+void EventsLogger::logProcessedEvent(e_input& input)
 {
   /// checking for initialization \todo no longer static class
   if (!_log)
