@@ -40,6 +40,7 @@ context/StateMovingUnit.cc          \
 context/StateSelectTarget.cc        \
 \
 input/KeyManager.cc                 \
+input/ReplayManager.cc              \
 input/EventManager.cc               \
 input/EventsProcessor.cc            \
 input/InputsListener.cc             \

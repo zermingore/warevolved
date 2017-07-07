@@ -8,10 +8,11 @@
 #ifndef INPUT_INPUTS_LISTENER_HH_
 # define INPUT_INPUTS_LISTENER_HH_
 
-# include <string>
-# include <utility> // std::pair
+# include <memory>
 # include <vector>
 # include <chrono>
+
+class ReplayManager;
 
 
 /**
@@ -43,14 +44,9 @@ private:
   /**
    * \brief Push the replay events in the KeyManager events queue
    *  at their recorded time
+   * \param replay_manager Pointer on the replay manager
    */
-  static void replay();
-
-
-  using EventsList = std::vector<std::pair<std::chrono::duration<double>, int>>;
-
-  /// List of events recorded during a previous game
-  static EventsList _replayEvents;
+  static void replay(std::shared_ptr<ReplayManager> replay_manager);
 };
 
 

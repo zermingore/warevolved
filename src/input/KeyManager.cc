@@ -3,23 +3,22 @@
 #include <common/Settings.hh>
 #include <common/enums/input.hh>
 #include <debug/Debug.hh>
-#include <debug/EventsLogger.hh>
+#include <input/ReplayManager.hh>
 
 
 // Static members definition
 std::multimap<const sf::Keyboard::Key, const e_key> KeyManager::_keys_mapping;
 std::map<const e_key, const e_input> KeyManager::_events_mapping;
 ThreadSafeQueue<e_input> KeyManager::_active_inputs;
-bool KeyManager::_replay;
-std::unique_ptr<std::ofstream> KeyManager::_replayFile;
-std::chrono::steady_clock::time_point KeyManager::_replayCreationTime;
+std::shared_ptr<ReplayManager> KeyManager::_replay;
 
 
 
-
-void KeyManager::Initialize(bool replay)
+void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
 {
   _replay = replay;
+
+  std::cout << "_replay: " << _replay << std::endl;
 
 
   /// \todo Read configuration file to get these values (use Settings Class)
@@ -52,27 +51,6 @@ void KeyManager::Initialize(bool replay)
   _events_mapping.insert({e_key::DOWN      , e_input::MOVE_DOWN });
   _events_mapping.insert({e_key::SELECTION , e_input::SELECTION });
   _events_mapping.insert({e_key::EXIT      , e_input::EXIT      });
-
-
-  _replayFile = std::make_unique<std::ofstream> ("test_log",
-                                                 std::ios_base::out);
-  _replayCreationTime = std::chrono::steady_clock::now();
-}
-
-
-
-void KeyManager::replayStoreKey(const e_key& key)
-{
-  /// checking for initialization \todo no longer in this static class
-  if (!_replayFile)
-  {
-    ERROR("log not initialized");
-    return;
-  }
-
-  auto time_elapsed(std::chrono::steady_clock::now() - _replayCreationTime);
-  *_replayFile << time_elapsed.count()
-               << " " << static_cast<int> (key) << '\n';
 }
 
 
@@ -87,10 +65,15 @@ void KeyManager::pushEvent(const sf::Keyboard::Key& key)
   }
 
   auto logical_key(logical_key_it->second);
+
   if (!_replay)
+    std::cout << "NO REPLAY" << std::endl;
+  std::cerr << "replay mode: " << static_cast<int> (_replay->mode()) << '\n';
+
+  if (_replay && _replay->mode() == e_replay_mode::RECORD)
   {
     // Logging only 'useful' events
-    replayStoreKey(logical_key);
+    _replay->storeKey(logical_key);
   }
 
   _active_inputs.push(_events_mapping[logical_key]);

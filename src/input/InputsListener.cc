@@ -12,56 +12,34 @@
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
 #include <input/EventsProcessor.hh>
+#include <input/ReplayManager.hh>
 #include <tools/StringParser.hh>
 
-// static members definition
-std::vector<std::pair<std::chrono::duration<double>, int>>
-  InputsListener::_replayEvents;
-
-
-
-void InputsListener::getReplayKeys(const std::string& filename)
-{
-  NOTICE("Parsing replay", filename);
-
-  char line[256];
-  std::ifstream stream(filename, std::ios_base::in);
-  while (stream.getline(line, 256))
-  {
-    // getting the input events only from the log
-    auto entry(StringParser::split(line, " "));
-    if (entry.size() != 2) // not the expected format: timestamp e_key
-    {
-      WARNING("Skipping line:", line);
-      continue;
-    }
-
-    auto ts = std::chrono::nanoseconds{ atol(entry.front().c_str()) };
-    auto key(entry[1]);
-    _replayEvents.push_back({ ts, atoi(key.c_str()) });
-    std::cout << "input: @" << ts.count()
-              << ": " << _replayEvents.back().second << std::endl;
-  }
-}
 
 
 void InputsListener::listen(bool replay)
 {
   auto replay_filename("test_log");
   // Initialize the replay mode as required (Read XOr Write)
-  if (!replay)
+
+  auto replay_manager = std::make_shared<ReplayManager> ();
+  if (replay)
   {
-    debug::EventsLogger::initialize(replay_filename);
+    replay_manager->setMode(e_replay_mode::READ);
+    replay_manager->prepareReplayKeys(replay_filename);
   }
   else
   {
-    getReplayKeys(replay_filename);
+    replay_manager->setMode(e_replay_mode::RECORD);
+    replay_manager->setReplayFile(replay_filename);
   }
 
-  KeyManager::Initialize(replay);
+  KeyManager::Initialize(replay_manager);
 
   // Launch the events processor in its own thread
   std::thread(EventsProcessor::process).detach();
+
+  std::thread(InputsListener::replay, replay_manager).detach();
 
   // Listen for events until the window close event is found
   for (;;)
@@ -91,13 +69,14 @@ void InputsListener::listen(bool replay)
 
 
 
-void InputsListener::replay()
+void InputsListener::replay(std::shared_ptr<ReplayManager> replay_manager)
 {
   using namespace std::chrono;
   auto current_time(std::chrono::steady_clock::now());
 
   // Read replay events, from the pre-filled replay events map
-  for (const auto& logged_event: _replayEvents)
+  auto events(replay_manager->events());
+  for (const auto& logged_event: events)
   {
     // Wait for the event recorded time to push it in the fifo
     std::chrono::duration<double, std::milli> wait_time(logged_event.first);

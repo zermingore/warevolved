@@ -10,6 +10,7 @@
 # include <map>
 # include <set>
 # include <string>
+# include <memory>
 # include <chrono>
 
 # include <SFML/Window/Event.hpp>
@@ -17,7 +18,7 @@
 # include <SFML/Window/Keyboard.hpp>
 # include <structures/ThreadSafeQueue.hh>
 
-
+class ReplayManager;
 enum class e_input;
 
 
@@ -58,7 +59,7 @@ public:
    * \param replay \true if we are in replay mode
    * \note if \param replay is \false the events will be logged
    */
-  static void Initialize(bool replay);
+  static void Initialize(std::shared_ptr<ReplayManager> replay);
 
   /**
    * \brief Append the givent key to the end of the replay file
@@ -98,12 +99,8 @@ private:
   /// current inputs (high level keys)
   static ThreadSafeQueue<e_input> _active_inputs;
 
-  static bool _replay; ///< \false -> need to log every event
-
-  static std::unique_ptr<std::ofstream> _replayFile; ///< Replay file
-
-  ///< Creation time of the replay file
-  static std::chrono::steady_clock::time_point _replayCreationTime;
+  ///< Pointer on the replay manager to add keys to a replay being created
+  static std::shared_ptr<ReplayManager> _replay;
 };
 
 
