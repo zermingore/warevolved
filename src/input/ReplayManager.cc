@@ -76,8 +76,7 @@ void ReplayManager::setReplayFile(const std::string& filename)
 {
   _filename = filename;
 
-  //_file.reset(new (std::ofstream), _filename, std::ios_base::out);
-  /// \todo proper reset
+  _file.reset();
   _file = std::make_unique<std::ofstream> (_filename, std::ios_base::out);
 }
 
