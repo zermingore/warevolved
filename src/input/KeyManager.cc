@@ -18,9 +18,6 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
 {
   _replay = replay;
 
-  std::cout << "_replay: " << _replay << std::endl;
-
-
   /// \todo Read configuration file to get these values (use Settings Class)
 
   // This mapping might be overloaded later, by the configuration management
@@ -65,11 +62,6 @@ void KeyManager::pushEvent(const sf::Keyboard::Key& key)
   }
 
   auto logical_key(logical_key_it->second);
-
-  if (!_replay)
-    std::cout << "NO REPLAY" << std::endl;
-  std::cerr << "replay mode: " << static_cast<int> (_replay->mode()) << '\n';
-
   if (_replay && _replay->mode() == e_replay_mode::RECORD)
   {
     // Logging only 'useful' events

@@ -4,18 +4,12 @@
 #include <input/KeyManager.hh>
 
 
-// ReplayManager::ReplayManager(e_replay_mode mode)
-//   : _mode(mode)
-// {
-//   _creationTime = std::chrono::steady_clock::now();
-// }
 
 ReplayManager::ReplayManager()
   : _mode(e_replay_mode::DEACTIVATED)
 {
   _creationTime = std::chrono::steady_clock::now();
 }
-
 
 
 void ReplayManager::prepareReplayKeys(const std::string& filename)
@@ -45,7 +39,6 @@ void ReplayManager::prepareReplayKeys(const std::string& filename)
 }
 
 
-
 void ReplayManager::storeKey(const e_key& key)
 {
   /// checking for initialization \todo no longer in this static class
@@ -61,16 +54,17 @@ void ReplayManager::storeKey(const e_key& key)
 }
 
 
-
 e_replay_mode ReplayManager::mode() const
 {
   return _mode;
 }
 
+
 void ReplayManager::setMode(const e_replay_mode mode)
 {
   _mode = mode;
 }
+
 
 void ReplayManager::setReplayFile(const std::string& filename)
 {
@@ -80,11 +74,12 @@ void ReplayManager::setReplayFile(const std::string& filename)
   _file = std::make_unique<std::ofstream> (_filename, std::ios_base::out);
 }
 
+
 EventsList& ReplayManager::events()
 {
   if (_events.empty())
   {
-   prepareReplayKeys(_filename);
+    prepareReplayKeys(_filename);
   }
 
   return _events;
