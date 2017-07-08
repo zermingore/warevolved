@@ -11,7 +11,7 @@
 enum class e_key;
 
 
-using EventsList = std::vector<std::pair<std::chrono::duration<double>, int>>;
+using EventsList = std::vector<std::pair<double, int>>;
 
 enum class e_replay_mode: int8_t
 {
@@ -39,6 +39,10 @@ public:
   /// List of events recorded during a previous game
   void prepareReplayKeys(const std::string&);
 
+  /**
+   * \brief Register the given key in the replay file
+   * \param key Key to add to the replay file
+   */
   void storeKey(const e_key& key);
 
   /**
@@ -73,7 +77,7 @@ private:
   /// Replay file creation time
   std::chrono::steady_clock::time_point _creationTime;
 
-  EventsList _events;
+  EventsList _events; ///< List of events extracted from the replay
 };
 
 

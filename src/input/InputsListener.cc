@@ -76,28 +76,26 @@ void InputsListener::replay(std::shared_ptr<ReplayManager> replay_manager)
 
   // Read replay events, from the pre-filled replay events map
   auto events(replay_manager->events());
+  auto start(std::chrono::steady_clock::now());
   for (const auto& logged_event: events)
   {
     // Wait for the event recorded time to push it in the fifo
-    std::chrono::duration<double, std::milli> wait_time(logged_event.first);
-    // std::chrono::duration<double, std::milli> duration_start(current_time);
-
-
-    auto start(std::chrono::steady_clock::now());
+    duration<double, std::milli> event_time(logged_event.first);
     for (;;)
     {
-      duration<double, std::milli> duration_time_point_ms =
-        duration_cast<duration<double>> (steady_clock::now() - start);
+      auto time_now = steady_clock::now();
 
-      // std::cout << "elapsed: " << duration_time_point_ms.count() - ms.count() << std::endl;
-      if (duration_time_point_ms.count() > wait_time.count())
+      duration<double, std::chrono::milliseconds::period> time_elapsed =
+        duration_cast<duration<double, std::milli>> (time_now - start);
+
+      if (time_elapsed.count() > event_time.count())
       {
         break;
       }
-      // std::this_thread::sleep_for(std::chrono::millisecond(1));
+
+      // std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
-    PRINTF("pushing event ");
     KeyManager::pushKeyFromReplay(static_cast<e_key> (logged_event.second));
   }
 

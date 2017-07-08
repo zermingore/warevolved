@@ -28,9 +28,9 @@ void ReplayManager::prepareReplayKeys(const std::string& filename)
       continue;
     }
 
-    auto ts = std::chrono::nanoseconds{ atol(entry.front().c_str()) };
+    auto ts = std::chrono::milliseconds{ atol(entry.front().c_str()) };
     auto key(entry[1]);
-    _events.push_back({ ts, atoi(key.c_str()) });
+    _events.push_back({ ts.count(), atof(key.c_str()) });
     PRINTF("input: @", ts.count(), ": ", _events.back().second);
   }
 
@@ -48,7 +48,13 @@ void ReplayManager::storeKey(const e_key& key)
     return;
   }
 
-  auto time_elapsed(std::chrono::steady_clock::now() - _creationTime);
+  using namespace std::chrono;
+  auto time_now = steady_clock::now();
+
+  auto time_elapsed(duration_cast<duration<double, std::milli>> (
+                      time_now - _creationTime));
+
+
   *_file << time_elapsed.count()
                << " " << static_cast<int> (key) << '\n';
 }
