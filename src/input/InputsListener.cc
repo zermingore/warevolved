@@ -27,6 +27,7 @@ void InputsListener::listen(bool replay)
   {
     replay_manager->setMode(e_replay_mode::READ);
     replay_manager->prepareReplayKeys(replay_filename);
+    std::thread(InputsListener::replay, replay_manager).detach();
   }
   else
   {
@@ -38,8 +39,6 @@ void InputsListener::listen(bool replay)
 
   // Launch the events processor in its own thread
   std::thread(EventsProcessor::process).detach();
-
-  std::thread(InputsListener::replay, replay_manager).detach();
 
   // Listen for events until the window close event is found
   for (;;)
