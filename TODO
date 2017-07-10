@@ -23,8 +23,10 @@
    CLOSED: [2017-06-29 Do 07:51]
    InputProcessor::process() in its own thread (InputsListener / EventsProcessor)
 ** TODO Use the mouse to move the cursor, browse menus...
-** TODO Re-enable replays recording
-** TODO Support replays reading
+** DONE Re-enable replays recording
+   CLOSED: [2017-07-10 Mo 08:08]
+** DONE Support replays reading
+   CLOSED: [2017-07-10 Mo 08:08]
 ** TODO Clear the events fifo on State changes
 ** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
 
