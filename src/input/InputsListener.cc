@@ -71,24 +71,19 @@ void InputsListener::listen(bool replay)
 void InputsListener::replay(std::shared_ptr<ReplayManager> replay_manager)
 {
   using namespace std::chrono;
+  using dur_milli = duration<double, std::chrono::milliseconds::period>;
   auto current_time(std::chrono::steady_clock::now());
 
   // Read replay events, from the pre-filled replay events map
   auto events(replay_manager->events());
   auto start(std::chrono::steady_clock::now());
-  duration<double, std::chrono::milliseconds::period> time_elapsed;
+  dur_milli time_elapsed;
   for (const auto& logged_event: events)
   {
     // Wait for the event recorded time to push it in the fifo
-    duration<double, std::milli> event_time(logged_event.first);
-    do
-    {
-      time_elapsed = duration_cast<duration<double, std::milli>> (
-        steady_clock::now() - start);
-
-      // std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-    while (time_elapsed.count() < event_time.count());
+    std::this_thread::sleep_for(
+      dur_milli (logged_event.first)
+      - duration_cast<dur_milli> (steady_clock::now() - start));
 
     KeyManager::pushKeyFromReplay(static_cast<e_key> (logged_event.second));
   }
