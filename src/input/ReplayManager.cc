@@ -30,8 +30,8 @@ void ReplayManager::prepareReplayKeys(const std::string& filename)
 
     auto ts = std::chrono::milliseconds{ atol(entry.front().c_str()) };
     auto key(entry[1]);
-    _events.push_back({ ts.count(), atof(key.c_str()) });
-    PRINTF("input: @", ts.count(), ": ", _events.back().second);
+    _events[ts.count()] = atoi(key.c_str());
+    PRINTF("input: @", ts.count(), ": ", key);
   }
 
   // Reset the clock after retrieving the events

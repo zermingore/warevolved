@@ -1,8 +1,7 @@
 #ifndef REPLAY_MANAGER_HH_
 # define REPLAY_MANAGER_HH_
 
-# include <utility>
-# include <vector>
+# include <map>
 # include <string>
 # include <memory>
 # include <fstream>
@@ -11,7 +10,7 @@
 enum class e_key;
 
 
-using EventsList = std::vector<std::pair<double, int>>;
+using EventsList = std::map<long int, int>;
 
 enum class e_replay_mode: int8_t
 {
