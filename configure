@@ -2207,8 +2207,8 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 
 
 
-# forcing c++14 usage (must be before AC_PROG_CXX)
-CXXFLAGS="$CXXFLAGS -std=c++14 -pthread"
+# forcing c++17 usage (must be before AC_PROG_CXX)
+CXXFLAGS="$CXXFLAGS -std=c++17 -pthread"
 
 
 if [ -n "$SFML_PATH" ]

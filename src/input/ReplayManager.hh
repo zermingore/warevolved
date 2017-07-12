@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date July 7, 2017
+ * \author Zermingore
+ * \brief Records replay files and retrieve the written events
+ */
+
 #ifndef REPLAY_MANAGER_HH_
 # define REPLAY_MANAGER_HH_
 
@@ -10,6 +17,7 @@
 enum class e_key;
 
 
+/// EventsList is a map of timestamp, key pressed
 using EventsList = std::map<long int, int>;
 
 enum class e_replay_mode: int8_t
