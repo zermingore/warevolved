@@ -2,8 +2,8 @@ War Evolved is a simple 2D tactical RPG
 
 To re-configure it, you'll need autotools.
 
-To compile it, you'll need, make, SFML2+ and g++ with full C++17 support
-(as this standard is recent, you may have to install g++ from its sources)
+To compile it, you'll need, make, SFML2+ and a compiler with full C++17 support
+(as this standard is recent, you may have to install it from its sources)
 
 
 To reconfigure and build, run
