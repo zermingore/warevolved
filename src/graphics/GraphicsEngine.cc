@@ -179,7 +179,9 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
 
 # ifdef DEBUG
   // we suppose the sprite is always larger than the cell
-  if (x < p::cellWidth() || y < p::cellHeight()) {
+  if (   static_cast<component> (x) < p::cellWidth()
+      || static_cast<component> (y) < p::cellHeight())
+  {
     ERROR("Sprite scale failure");
   }
 # endif
