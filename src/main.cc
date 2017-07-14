@@ -2,6 +2,7 @@
 #include <core/Context.hh>
 #include <game/Game.hh>
 #include <debug/Debug.hh>
+#include <tools/OptionsParser.hh>
 
 
 
@@ -9,6 +10,8 @@ int main(int ac, const char **av)
 {
   // Initialize the Xlib support for concurrent threads.
   XInitThreads(); /// \todo Explain why it cannot be in the Context
+
+  OptionsParser p(ac, av);
 
   // 'argument parsing'
   /// \todo use an options parser, support: replay, resolution, ...

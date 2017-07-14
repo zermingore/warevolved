@@ -65,7 +65,8 @@ interface/menus/InGameMenu.cc       \
 interface/menus/MenuMap.cc          \
 interface/menus/MenuAction.cc       \
 \
-tools/StringParser.cc
+tools/StringParser.cc               \
+tools/OptionsParser.cc
 
 
 # Generated sources files
