@@ -4,6 +4,7 @@
 #include <algorithm>
 
 
+
 OptionsParser::OptionsParser(int ac, const char** av)
 {
   // Build a copy of the forwarded argument vector
@@ -12,11 +13,12 @@ OptionsParser::OptionsParser(int ac, const char** av)
     _av.push_back(av[i]);
   }
 
+  // Expecting at least the program name; The arguments count must be consistent
   auto nb_args(_av.size());
   if (!nb_args || static_cast<int> (nb_args) != ac)
   {
-    /// \todo own exception invalid arg
-    throw std::logic_error("opus"); // Invalid arguments (expecting at least the program name)
+    // Should never happen
+    throw ArgumentsException("Ill-formed arguments list.");
   }
 
   // Build the supported options list

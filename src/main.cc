@@ -22,12 +22,12 @@ int main(int ac, const char **av)
   }
   catch (const ArgumentsException& e)
   {
-    NOTICE("caught: ", e.what());
+    ERROR("Invalid arguments:", e.what());
     return 1;
   }
   catch (const std::exception& e)
   {
-    NOTICE("caught: ", e.what());
+    ERROR("caught:", e.what());
     return 2;
   }
   catch (...)
