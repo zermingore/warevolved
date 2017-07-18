@@ -46,7 +46,16 @@ OptionsParser::OptionsParser(int ac, const char** av)
 
 void OptionsParser::displayVersion() const
 {
-  std::cout << _av[0] << ": version " << _version << '\n' << std::endl;
+  std::cout << _av[0] << ": version ";
+
+  // Print the version numbers, each number separated by a dot
+  std::cout << *(_version.begin());
+  for (auto it = _version.begin() + 1; it != _version.end(); ++it)
+  {
+    std::cout << '.' << *it;
+  }
+
+  std::cout << std::endl;
 }
 
 

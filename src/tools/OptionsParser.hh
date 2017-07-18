@@ -123,7 +123,8 @@ public:
 private:
   std::vector<std::string> _av; ///< mapping of the C arguments vector
 
-  std::string _version = "0.0.1"; ///< Game's version
+  ///< Game's version (major, minor, bugfix)
+  const std::vector<size_t> _version = {0, 1, 0};
 
   /// List of supported options (map["help"] = {"-h", "--help"})
   options_list _supportedOptions;
