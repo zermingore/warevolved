@@ -2,7 +2,8 @@
  * \file
  * \date July 7, 2017
  * \author Zermingore
- * \brief Tool to parse options (from the command line)
+ * \brief Tool to parse options (from the command line),
+ *   including the associated exceptions definitions
  */
 
 #ifndef OPTIONS_PARSER_HH_
@@ -10,9 +11,52 @@
 
 # include <map>
 # include <vector>
+# include <utility>
+# include <string>
+# include <exception>
 
-/// The options prefix as a constant to handle Windows options, one day
-const char OPTIONS_PREFIX = '-';
+
+/**
+ * \class ArgumentsException
+ * \brief Exception thrown if the provided are invalid
+ */
+class ArgumentsException: public std::exception
+{
+public:
+  /**
+   * \brief Default constructor
+   */
+  ArgumentsException() = default;
+
+  /**
+   * \brief Constructor, initializing the exception message
+   * \param msg Exception message (returned by exc.what())
+   */
+  explicit ArgumentsException(const std::string msg)
+    : _exc(msg)
+  {
+  }
+
+  /**
+   * \brief Standard exception what() override
+   *   Displays the provided error message through the constructor
+   */
+  const char *what() const noexcept override { return _exc.c_str(); };
+
+private:
+  /// Error message displayed by exc.what()
+  std::string _exc = "Arguments exception";
+};
+
+
+/**
+ * \class ArgumentsHelpVersionException
+ * \brief Exception thrown if help or version argument were given
+ */
+class ArgumentsHelpVersionException: public std::exception
+{
+};
+
 
 
 /**
@@ -64,19 +108,25 @@ public:
   /**
    * \brief Check the existence of a given option
    * \param option Check the existence of this option
+   * \note Skip the first element of the argument vector (the program name)
    * \return \true if the option exists
    */
-  bool optionExists(std::string& option) const;
+  bool optionExists(const std::string option);
 
+  /// Options list type: list["help"] = { {"-h", "--help"}, "display help" }
+  using options_list =
+    std::map<std::string, std::pair<std::vector<std::string>, std::string>>;
+  // could add a callback in the options_list
+  //   (maybe use a class instead of map['help'] = { {-h}, "show help", f })
 
 
 private:
   std::vector<std::string> _av; ///< mapping of the C arguments vector
 
-  /// Options with arguments map[option] == {arguments list}
-  std::map<std::string, std::vector<std::string>> _options;
+  std::string _version = "0.0.1"; ///< Game's version
 
-  std::string _version; ///< Game's version
+  /// List of supported options (map["help"] = {"-h", "--help"})
+  options_list _supportedOptions;
 };
 
 #endif /* !OPTIONS_PARSER_HH_ */
