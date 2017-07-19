@@ -22,9 +22,15 @@ OptionsParser::OptionsParser(int ac, const char** av)
   }
 
   // Build the supported options list
-  _supportedOptions["help"] = { { "-h", "--help" }, "show this help" };
+  _supportedOptions["help"] = { { "-h", "--help" }, "Show this help" };
   _supportedOptions["version"] = {
-    { "-v", "--version" }, "display " + _av[0] + " version" };
+    { "-v", "--version" }, "Display " + _av[0] + " version" };
+
+  _supportedOptions["fullscreen"] = { { "-f", "--fullscreen", "--full-screen" },
+                                      "Launch the game in full screen" };
+
+  _supportedOptions["replay"] = {
+    { "-r", "--replay" }, "Replay the last replay file" };
 
 
   // Fetch help or version option

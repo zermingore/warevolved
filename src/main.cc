@@ -12,9 +12,13 @@ int main(int ac, const char **av)
   // Initialize the Xlib support for concurrent threads.
   XInitThreads(); /// \todo Explain why it cannot be in the Context
 
+  auto fullscreen = false;
+  auto replay = false;
   try
   {
     OptionsParser p(ac, av);
+    replay = p.optionExists("replay");
+    fullscreen = p.optionExists("fullscreen");
   }
   catch (const ArgumentsHelpVersionException& e)
   {
@@ -36,14 +40,6 @@ int main(int ac, const char **av)
     return 3;
   }
 
-  // 'argument parsing'
-  /// \todo use an options parser, support: replay, resolution, ...
-  auto replay(av && av[1] && av[1][0] == 'r');
-  auto fullscreen(av && av[1] && av[1][0] == 'f');
-  if (ac && replay)
-  {
-    NOTICE("Replay mode");
-  }
 
   Context context(fullscreen);
 
