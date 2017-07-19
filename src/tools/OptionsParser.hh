@@ -96,16 +96,6 @@ public:
 
 
   /**
-   * \brief Outputs the game's version
-   */
-  void displayVersion() const;
-
-  /**
-   * \brief Outputs the usage message
-   */
-  void displayHelp() const;
-
-  /**
    * \brief Check the existence of a given option
    * \param option Check the existence of this option
    * \note Skip the first element of the argument vector (the program name)
@@ -121,6 +111,17 @@ public:
 
 
 private:
+  /**
+   * \brief Outputs the game's version
+   */
+  void displayVersion() const;
+
+  /**
+   * \brief Outputs the usage message
+   */
+  void displayHelp() const;
+
+
   std::vector<std::string> _av; ///< mapping of the C arguments vector
 
   ///< Game's version (major, minor, bugfix)
