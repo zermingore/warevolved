@@ -63,10 +63,19 @@ void OptionsParser::displayHelp() const
 {
   displayVersion();
   std::cout << '\n'
-            << "Usage:" << '\n'
-            << "\n  " << "-h --help    " << "display this help"
-            << "\n  " << "-v --version " << "display War Evolved version"
-            << '\n' << std::endl;
+            << "Usage:" << '\n';
+
+  for (const auto& opt: _supportedOptions)
+  {
+    std::cout << "\n  ";
+    for (const auto str: opt.second.first)
+    {
+      std::cout << str << " ";
+    }
+    std::cout << "\t\t" << opt.second.second;
+  }
+
+  std::cout << '\n' << std::endl;
 }
 
 
