@@ -3,6 +3,8 @@
 #include <iostream>
 #include <algorithm>
 
+#include <debug/Debug.hh>
+
 
 
 OptionsParser::OptionsParser(int ac, const char** av)
@@ -45,12 +47,12 @@ OptionsParser::OptionsParser(int ac, const char** av)
     throw ArgumentsHelpVersionException();
   }
 
-
-  /// \todo For given options, check if they exist and their argument
+  // Check the given arguments validity
+  validArguments();
 }
 
 
-void OptionsParser::displayVersion() const
+void OptionsParser::displayVersion() const noexcept
 {
   std::cout << _av[0] << ": version ";
 
@@ -65,7 +67,7 @@ void OptionsParser::displayVersion() const
 }
 
 
-void OptionsParser::displayHelp() const
+void OptionsParser::displayHelp() const noexcept
 {
   displayVersion();
   std::cout << '\n'
@@ -83,6 +85,45 @@ void OptionsParser::displayHelp() const
 
   std::cout << '\n' << std::endl;
 }
+
+
+
+
+/// \todo refactor the options list (or at least the search)
+void OptionsParser::validArguments() const
+{
+  bool invalid_args = false;
+
+  // For each argument, check if it matches any option
+  // +1: skip program name
+  for (auto arg = _av.begin() + 1; arg != _av.end(); ++arg)
+  {
+    // Search the argument in the supported options list
+    bool arg_valid = false;
+    for (const auto& opt: _supportedOptions)
+    {
+      if (std::find(opt.second.first.begin(), opt.second.first.end(), *arg)
+          != opt.second.first.end())
+      {
+        arg_valid = true;
+        break;
+      }
+    }
+
+    if (!arg_valid)
+    {
+      ERROR("Invalid argument", *arg);
+      invalid_args = true;
+    }
+  }
+
+  if (invalid_args)
+  {
+    displayHelp();
+    throw ArgumentsException();
+  }
+}
+
 
 
 bool OptionsParser::optionExists(const std::string option)

@@ -114,12 +114,21 @@ private:
   /**
    * \brief Outputs the game's version
    */
-  void displayVersion() const;
+  void displayVersion() const noexcept;
 
   /**
    * \brief Outputs the usage message
    */
-  void displayHelp() const;
+  void displayHelp() const noexcept;
+
+
+  /**
+   * \brief Test the provided arguments validity
+   *   Check if the arguments match supported options
+   * \todo support options with arguments (--replay filename)
+   * \note throws if at least one argument is invalid
+   */
+  void validArguments() const;
 
 
   std::vector<std::string> _av; ///< mapping of the C arguments vector

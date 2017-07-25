@@ -163,8 +163,10 @@
 *** TODO auto generate documentation
 ** TODO auto resources XML generator
 ** TODO Options parser
-   replay play / record (-r [file] / --record [new_file])
-   framerate (useful ?)
+*** TODO Replay play / record (-r [file] / --record [new_file])
+*** TODO Framerate (useful ?)
+*** DONE Throw on unrecognized option
+    CLOSED: [2017-07-25 Di 08:03]
 
 * TODO non-regression tests
 ** TODO game scripts (need to be able to use pre-recorded input)
