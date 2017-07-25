@@ -12,6 +12,7 @@ int main(int ac, const char **av)
   // Initialize the Xlib support for concurrent threads.
   XInitThreads(); /// \todo Explain why it cannot be in the Context
 
+  // Options parsing
   auto fullscreen = false;
   auto replay = false;
   try
@@ -28,16 +29,6 @@ int main(int ac, const char **av)
   {
     ERROR("Invalid arguments:", e.what());
     return 1;
-  }
-  catch (const std::exception& e)
-  {
-    ERROR("caught:", e.what());
-    return 2;
-  }
-  catch (...)
-  {
-    ERROR("caught unexpected exception");
-    return 3;
   }
 
 
