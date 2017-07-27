@@ -4,9 +4,10 @@
  * \author Zermingore
  */
 
-#ifndef CONTEXT_STATE_MENU_HH_
-# define CONTEXT_STATE_MENU_HH_
+#ifndef STATE_MENU_HH_
+# define STATE_MENU_HH_
 
+# include <memory>
 # include <context/State.hh>
 
 enum class e_state;
@@ -95,4 +96,4 @@ private:
 };
 
 
-#endif /* !CONTEXT_STATE_MENU_HH_ */
+#endif /* !STATE_MENU_HH_ */

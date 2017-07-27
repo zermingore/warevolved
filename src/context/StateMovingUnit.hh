@@ -4,17 +4,13 @@
  * \author Zermingore
  */
 
-#ifndef CONTEXT_STATE_MOVING_UNIT_HH_
-# define CONTEXT_STATE_MOVING_UNIT_HH_
+#ifndef STATE_MOVING_UNIT_HH_
+# define STATE_MOVING_UNIT_HH_
 
+# include <memory>
 # include <context/State.hh>
 # include <common/using.hh> // Coords
 # include <graphics/graphic_types.hh>
-
-
-namespace sf {
-  class Sprite;
-}
 
 namespace resources {
   class Image;
@@ -30,8 +26,7 @@ class StateMovingUnit: public State
 {
 public:
   /**
-   * \brief registers to callbacks
-   * \param cursor_coords cursor coordinates
+   * \brief registers to callbacks. Initializes the graphical attributes
    */
   StateMovingUnit();
 
@@ -84,4 +79,4 @@ private:
 };
 
 
-#endif /* !CONTEXT_STATE_MOVING_UNIT_HH_ */
+#endif /* !STATE_MOVING_UNIT_HH_ */
