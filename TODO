@@ -5,6 +5,7 @@
 * TODO Roadmap
 ** TODO Doc: track this file across branches
    Bonus: drop TODO.archive
+** TODO Test: Save the map in a file
 
 * TODO experimental
 ** TODO drawInterface Vs drawState

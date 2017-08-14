@@ -9,9 +9,6 @@
 
 int main(int ac, const char **av)
 {
-  // Initialize the Xlib support for concurrent threads.
-  XInitThreads(); /// \todo Explain why it cannot be in the Context
-
   // Options parsing
   auto fullscreen = false;
   auto replay = false;
@@ -31,6 +28,8 @@ int main(int ac, const char **av)
     return 1;
   }
 
+  // Initialize the Xlib support for concurrent threads.
+  XInitThreads(); /// \todo Explain why it cannot be in the Context
 
   Context context(fullscreen);
 
