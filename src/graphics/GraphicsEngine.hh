@@ -9,6 +9,7 @@
 # define GRAPHICS_GRAPHICS_ENGINE_HH_
 
 # include <memory>
+# include <mutex>
 # include <SFML/Graphics/RenderWindow.hpp>
 # include <SFML/Window/Event.hpp>
 
@@ -80,6 +81,12 @@ public:
   static std::unique_ptr<RenderWindow> _window; ///< graphics window
 
 
+  /**
+   * \brief Save the current rendered image to a file
+   */
+  static void screenshot();
+
+
 private:
   /// Draw the map background.
   static void drawBackground();
@@ -116,6 +123,9 @@ private:
    *   it will be unlimited otherwise
    */
   static size_t _nbFramesGenerated;
+
+
+  static std::mutex mutexRenderWindow;
 };
 
 

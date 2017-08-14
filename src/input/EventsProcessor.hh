@@ -20,7 +20,7 @@ class KeyManager;
 /**
  * \class EventsProcessor
  * \brief Processes events through the States EventManagers
- * \note Is a thread
+ * \note Is a thread (and a static class)
  */
 class EventsProcessor
 {

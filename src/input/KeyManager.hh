@@ -31,6 +31,9 @@ enum class e_key
   // action keys
   SELECTION,
 
+  // Global actions
+  SCREENSHOT,
+
   // exit requests
   EXIT,
 

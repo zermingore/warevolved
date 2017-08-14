@@ -21,6 +21,8 @@ const sf::Color GRID_COLOR(202, 124, 0);
 // Static Variables definition
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 size_t GraphicsEngine::_nbFramesGenerated;
+std::mutex GraphicsEngine::mutexRenderWindow;
+
 
 
 constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns)
@@ -32,6 +34,8 @@ constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
+  mutexRenderWindow.lock();
+
   static auto graphics_start(std::chrono::steady_clock::now()); // Ctor
 
   auto draw_start(std::chrono::steady_clock::now());
@@ -59,12 +63,37 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
   // update the window
   _window->display();
+
+  mutexRenderWindow.unlock();
 }
 
 
 
-void GraphicsEngine::drawState() {
+void GraphicsEngine::drawState()
+{
   Status::currentState()->draw();
+}
+
+
+
+void GraphicsEngine::screenshot()
+{
+  auto screenshot_path {"/tmp/we_screenshot.png"};
+  NOTICE("screenshot");
+
+  mutexRenderWindow.lock();
+
+  // Save the image to a file
+  auto image {_window->capture()};
+  if (!image.saveToFile(screenshot_path))
+  {
+    ERROR("Unable to save the screenshot; given path: ", screenshot_path);
+    return;
+  }
+
+  mutexRenderWindow.unlock();
+
+  NOTICE("... screenshot saved");
 }
 
 

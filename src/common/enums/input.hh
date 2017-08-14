@@ -23,6 +23,9 @@ enum class e_input
   // action keys
   SELECTION,
 
+  // Global inputs
+  SCREENSHOT,
+
   // exit requests
   EXIT,
 

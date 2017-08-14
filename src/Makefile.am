@@ -33,6 +33,7 @@ common/Settings.cc                  \
 common/Status.cc                    \
 \
 context/State.cc                    \
+context/StateGlobal.cc              \
 context/StateFactory.cc             \
 context/StatePlaying.cc             \
 context/StateMenu.cc                \
