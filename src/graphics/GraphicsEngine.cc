@@ -1,15 +1,17 @@
 #include <graphics/GraphicsEngine.hh>
 
+#include <chrono>
+#include <ctime> // strftime
+
 #include <debug/Debug.hh>
+#include <debug/OSD.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <common/Status.hh>
 #include <game/Cell.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <debug/OSD.hh>
 #include <context/State.hh>
-#include <chrono>
 
 
 
@@ -78,22 +80,26 @@ void GraphicsEngine::drawState()
 
 void GraphicsEngine::screenshot()
 {
-  auto screenshot_path {"/tmp/we_screenshot.png"};
-  NOTICE("screenshot");
+  // Build the screenshot file name with the date
+  time_t now = time(nullptr);
+  struct tm *date = localtime(&now);
+  char path[80] = {0};
+  strftime(path, 80, "/tmp/./we_screenshot__%Y_%m_%d__%H_%M_%S.png", date);
 
+
+  NOTICE("screenshot: getting image");
   mutexRenderWindow.lock();
+  auto image {_window->capture()};
+  mutexRenderWindow.unlock();
 
   // Save the image to a file
-  auto image {_window->capture()};
-  if (!image.saveToFile(screenshot_path))
+  if (!image.saveToFile(path))
   {
-    ERROR("Unable to save the screenshot; given path: ", screenshot_path);
+    ERROR("Unable to save the screenshot; given path: ", path);
     return;
   }
 
-  mutexRenderWindow.unlock();
-
-  NOTICE("... screenshot saved");
+  NOTICE("Screenshot saved as", path);
 }
 
 
