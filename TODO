@@ -42,7 +42,7 @@
 **** TODO Shell Script
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
-** TODO follow the C++ rule of 5
+** TODO follow the C++ rule of 0
 ** TODO Hunt dead code
 ** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
 ** TODO think about cleaning some types names
@@ -193,6 +193,12 @@
 ** TODO bootstrap
    The return value is 0 in case of build failure
    preventing stuff like ./boostrap && ./we
+* TODO X11 and multi-threading
+  The XInitThreads() function must be called before the creation of the threads using X
+  The include Xlib.h defines a macro 'NONE' conflicting with a value in the sf::Style enum
+  -> the Xlib.h must be included after the SFML ones
+  the Xlib.h also defines a Status symbol conflicting with the Status class of War Evolved
+
 
 * TODO Build
 ** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
