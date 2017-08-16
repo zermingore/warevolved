@@ -1,11 +1,6 @@
 #include <input/EventManager.hh>
 #include <debug/Debug.hh>
 #include <common/enums/states.hh>
-#include <input/KeyManager.hh>
-#include <common/Status.hh>
-#include <config/Settings.hh>
-#include <interface/Interface.hh>
-#include <graphics/GraphicsEngine.hh>
 
 
 bool EventManager::process(const e_input input)

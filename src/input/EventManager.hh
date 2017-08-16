@@ -4,13 +4,12 @@
  * \author Zermingore
  */
 
-#ifndef INPUT_EVENT_MANAGER_HH_
-# define INPUT_EVENT_MANAGER_HH_
+#ifndef EVENT_MANAGER_HH_
+# define EVENT_MANAGER_HH_
 
 # include <map>
 # include <memory>
 # include <functional>
-# include <SFML/Window/Event.hpp>
 
 
 class KeyManager;
@@ -54,4 +53,4 @@ private:
 };
 
 
-#endif /* !INPUT_EVENT_MANAGER_HH_ */
+#endif /* !EVENT_MANAGER_HH_ */
