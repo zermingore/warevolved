@@ -1,5 +1,5 @@
-#include <X11/Xlib.h> // to initialize the Xlib mutli-threads support
 #include <core/Context.hh>
+#include <X11/Xlib.h> // to initialize the Xlib mutli-threads support
 #include <game/Game.hh>
 #include <debug/Debug.hh>
 #include <tools/OptionsParser.hh>

@@ -1,6 +1,5 @@
 #include <input/KeyManager.hh>
 
-#include <config/Settings.hh>
 #include <common/enums/input.hh>
 #include <debug/Debug.hh>
 #include <input/ReplayManager.hh>

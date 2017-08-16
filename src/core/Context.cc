@@ -1,6 +1,5 @@
 #include <core/Context.hh>
 
-#include <common/System.hh>
 #include <config/Settings.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <debug/Debug.hh>
@@ -8,17 +7,10 @@
 
 
 Context::Context(const bool fullscreen)
-  :  _system(std::make_unique<System> (2, 1)) // SFML version: 2.1
-
+  : _system(std::make_unique<System> (2, 1)) // SFML version: 2.1
+  , _settings(std::make_shared<Settings> ())
 {
-  if (fullscreen) {
-    Settings::initialize(24, 8, 4);
-  }
-  else {
-    Settings::initialize(0, 0, 0); // vanilla (debug) mode
-  }
-
-  Settings::setFullScreen(fullscreen);
+  _settings->setFullScreen(fullscreen);
   init();
 }
 
@@ -31,15 +23,15 @@ void Context::init()
     assert(!"SFML version not supported, aborting in debug");
   }
 
-  sf::ContextSettings contextSettings(Settings::depth(),
-                                      Settings::stencil(),
-                                      Settings::antiAliasing(),
+  sf::ContextSettings contextSettings(_settings->depth(),
+                                      _settings->stencil(),
+                                      _settings->antiAliasing(),
                                       _system->sfmlMajor(),
                                       _system->sfmlMinor());
 
   // getting right resolution, from desktop
   std::unique_ptr<sf::RenderWindow> window;
-  if (Settings::fullScreen())
+  if (_settings->fullScreen())
   {
     window = std::make_unique<sf::RenderWindow> (sf::VideoMode::getDesktopMode(),
                                                  "War Evolved",

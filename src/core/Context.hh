@@ -8,8 +8,10 @@
 # define CORE_CONTEXT_HH_
 
 # include <memory>
+# include <common/System.hh>
 
-class System;
+class Settings;
+
 
 /**
  * \class Context
@@ -18,7 +20,9 @@ class System;
 class Context
 {
 public:
-  /// \brief deleted default Constructor
+  /**
+   * \brief Deleted default constructor
+   */
   Context() = delete;
 
   /**
@@ -29,7 +33,7 @@ public:
   explicit Context(const bool fullscreen);
 
   /**
-   * \brief default destructor
+   * \brief Default destructor
    */
   ~Context() = default;
 
@@ -40,7 +44,8 @@ private:
    */
   void init();
 
-  std::shared_ptr<System> _system; ///< System settings (libraries version, ...)
+  std::shared_ptr<Settings> _settings; ///< generic settings (options, ...)
+  std::unique_ptr<System> _system;     ///< System settings (libs versions, ...)
 };
 
 

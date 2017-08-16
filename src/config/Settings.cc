@@ -1,17 +1,26 @@
 #include <config/Settings.hh>
 
 
-// static fields definitions
-unsigned int Settings::_depth;
-unsigned int Settings::_stencil;
-unsigned int Settings::_antiAliasing;
-bool Settings::_fullScreen;
-size_t Settings::_keyRepeatDelay;
 
 
-void Settings::initialize(const unsigned int depth,
-                          const unsigned int stencil,
-                          const unsigned int antiAliasing)
+void Settings::setFullScreen(const bool fullScreen)
+{
+  _fullScreen = fullScreen;
+
+  if (fullScreen)
+  {
+    setGraphics(24, 8, 4);
+  }
+  else
+  {
+    setGraphics(0, 0, 0); // vanilla (debug) mode
+  }
+}
+
+
+void Settings::setGraphics(const unsigned int depth,
+                           const unsigned int stencil,
+                           const unsigned int antiAliasing)
 {
   _depth = depth;
   _stencil = stencil;
