@@ -1,7 +1,7 @@
 #include <input/EventsProcessor.hh>
 
 #include <debug/Debug.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <context/State.hh>
 #include <input/KeyManager.hh>
 #include <input/EventManager.hh>

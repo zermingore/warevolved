@@ -3,7 +3,7 @@
 #include <interface/InterfaceElement.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <common/enums/states.hh>
 #include <context/State.hh>
 #include <context/StateMenu.hh>

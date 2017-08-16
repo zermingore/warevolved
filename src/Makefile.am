@@ -29,7 +29,6 @@ debug/OSD.cc                        \
 debug/EventsLogger.cc               \
 \
 common/System.cc                    \
-common/Status.cc                    \
 \
 config/Settings.cc                  \
 \
@@ -47,6 +46,7 @@ input/EventsProcessor.cc            \
 input/InputsListener.cc             \
 \
 game/Game.cc                        \
+game/Status.cc                      \
 game/Map.cc                         \
 game/Cell.cc                        \
 game/Battle.cc                      \

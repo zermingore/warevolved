@@ -4,7 +4,7 @@
 
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <common/enums/states.hh>
 #include <common/enums/directions.hh>
 #include <interface/Cursor.hh>

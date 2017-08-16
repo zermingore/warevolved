@@ -3,7 +3,7 @@
 #include <debug/Debug.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <game/Cell.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>

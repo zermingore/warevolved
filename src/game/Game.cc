@@ -7,7 +7,7 @@
 #include <graphics/GraphicsEngine.hh>
 #include <game/Battle.hh>
 #include <resources/ResourcesManager.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <common/enums/states.hh>
 #include <context/State.hh>
 

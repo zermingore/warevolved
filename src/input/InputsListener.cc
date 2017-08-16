@@ -5,7 +5,7 @@
 
 #include <debug/Debug.hh>
 #include <debug/EventsLogger.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <context/State.hh>
 #include <input/KeyManager.hh>

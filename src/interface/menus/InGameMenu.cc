@@ -1,4 +1,4 @@
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/units/Unit.hh>
 #include <game/Player.hh>

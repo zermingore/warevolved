@@ -1,4 +1,4 @@
-#include <common/Status.hh>
+#include <game/Status.hh>
 
 #include <cassert>
 

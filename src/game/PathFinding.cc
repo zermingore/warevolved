@@ -6,7 +6,7 @@
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
 #include <resources/Image.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <common/enums/directions.hh>
 #include <common/enums/path_shapes.hh>
 #include <graphics/graphic_types.hh>

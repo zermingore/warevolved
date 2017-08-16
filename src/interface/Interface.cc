@@ -10,7 +10,7 @@
 #include <interface/Interface.hh>
 
 #include <debug/Debug.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 
 
 namespace interface {

@@ -2,7 +2,7 @@
 
 #include <debug/Debug.hh>
 #include <interface/menus/MenuEntry.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 #include <context/State.hh>
 #include <input/EventManager.hh>
 #include <game/Battle.hh>

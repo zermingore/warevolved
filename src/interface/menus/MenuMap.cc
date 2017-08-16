@@ -1,5 +1,5 @@
 #include <interface/menus/MenuMap.hh>
-#include <common/Status.hh>
+#include <game/Status.hh>
 
 
 namespace interface {
