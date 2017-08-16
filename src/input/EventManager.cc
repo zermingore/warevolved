@@ -3,7 +3,7 @@
 #include <common/enums/states.hh>
 #include <input/KeyManager.hh>
 #include <common/Status.hh>
-#include <common/Settings.hh>
+#include <config/Settings.hh>
 #include <interface/Interface.hh>
 #include <graphics/GraphicsEngine.hh>
 

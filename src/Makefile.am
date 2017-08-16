@@ -29,8 +29,9 @@ debug/OSD.cc                        \
 debug/EventsLogger.cc               \
 \
 common/System.cc                    \
-common/Settings.cc                  \
 common/Status.cc                    \
+\
+config/Settings.cc                  \
 \
 context/State.cc                    \
 context/StateFactory.cc             \

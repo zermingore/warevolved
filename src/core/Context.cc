@@ -1,7 +1,7 @@
 #include <core/Context.hh>
 
 #include <common/System.hh>
-#include <common/Settings.hh>
+#include <config/Settings.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <debug/Debug.hh>
 

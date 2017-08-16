@@ -1,4 +1,4 @@
-#include <common/Settings.hh>
+#include <config/Settings.hh>
 
 
 // static fields definitions
