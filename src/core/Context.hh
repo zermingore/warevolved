@@ -44,8 +44,8 @@ private:
    */
   void init();
 
-  std::shared_ptr<Settings> _settings; ///< generic settings (options, ...)
   std::unique_ptr<System> _system;     ///< System settings (libs versions, ...)
+  std::shared_ptr<Settings> _settings; ///< generic settings (options, ...)
 };
 
 
