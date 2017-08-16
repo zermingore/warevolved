@@ -25,6 +25,9 @@ namespace interface {
 enum class e_state;
 
 
+
+namespace game {
+
 /**
  * \class Status
  * \brief stores game status information such as current player, battle, ...
@@ -128,6 +131,9 @@ private:
   static Coords _selectedUnitPosition; ///< current selected Unit's coordinates
   static std::shared_ptr<InputProcessor> _inputProcessor; ///< input processor
 };
+
+
+} // namespace game
 
 
 #endif /* !COMMON_STATUS_HH_ */

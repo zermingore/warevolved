@@ -88,7 +88,7 @@ void Map::moveUnit(const Coords c)
 
 void Map::endTurn()
 {
-  for (auto& it: _units[Status::battle()->currentPlayer()]) {
+  for (auto& it: _units[game::Status::battle()->currentPlayer()]) {
     it->setPlayed(false);
   }
 }
@@ -103,7 +103,7 @@ void Map::newUnit(const e_unit type,
 
   // assign the unit to the given player or to the current one
   if (player_id == -1) {
-    player_id = static_cast<int> (Status::battle()->currentPlayer());
+    player_id = static_cast<int> (game::Status::battle()->currentPlayer());
   }
 
   new_unit->setCellCoordinates(Coords(column, line));

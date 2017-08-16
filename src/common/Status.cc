@@ -8,6 +8,9 @@
 #include <input/KeyManager.hh>
 
 
+namespace game {
+
+
 // Static class attributes definition
 std::stack<std::pair<e_state, std::shared_ptr<State>>> Status::_states;
 std::shared_ptr<Battle> Status::_battle;
@@ -91,3 +94,6 @@ std::shared_ptr<Player> Status::player() {
 std::shared_ptr<interface::Interface> Status::interface() {
   return _battle->getCurrentPlayer()->interface();
 }
+
+
+} // namespace game

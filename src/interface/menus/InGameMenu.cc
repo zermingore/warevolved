@@ -13,7 +13,7 @@ namespace interface {
 
 
 void InGameMenu::cancel() {
-  Status::popCurrentState();
+  game::Status::popCurrentState();
 }
 
 
@@ -73,7 +73,7 @@ void InGameMenu::update()
 /// \todo move in Dtor ?
 void InGameMenu::close()
 {
-  // auto interface(Status::interface());
+  // auto interface(game::Status::interface());
   // for (auto entry: _entries) {
   //   interface->removeElement(entry);
   // }

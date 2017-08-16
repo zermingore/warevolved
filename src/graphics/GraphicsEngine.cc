@@ -64,7 +64,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
 
 void GraphicsEngine::drawState() {
-  Status::currentState()->draw();
+  game::Status::currentState()->draw();
 }
 
 
@@ -170,7 +170,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
 {
   using p = MapGraphicsProperties;
 
-  // image.sprite()->setColor(Status::player()->unitsColor());
+  // image.sprite()->setColor(game::Status::player()->unitsColor());
   auto sprite(unit->sprite());
   auto x(sprite->getTexture()->getSize().x);
   auto y(sprite->getTexture()->getSize().y);
@@ -186,7 +186,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
   }
 # endif
 
-  auto players = Status::battle()->players();
+  auto players = game::Status::battle()->players();
   sprite->setColor(players[unit->playerId()]->color());
 
   if (unit->played()) {
@@ -199,7 +199,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
 
 void GraphicsEngine::drawInterface()
 {
-  auto interface(Status::interface());
+  auto interface(game::Status::interface());
 
   // Draw every interface elements related to the current context
   for (const auto& elt: interface->elements())

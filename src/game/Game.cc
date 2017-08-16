@@ -20,14 +20,14 @@ void Game::run(bool replay)
   resources::ResourcesManager::initialize("resources.xml");
 
   auto battle(std::make_shared<Battle> ());
-  Status::setBattle(battle);
+  game::Status::setBattle(battle);
   battle->initializeMap();
 
   auto inputs_listen(
     std::async(std::launch::async, InputsListener::listen, replay));
 
-  Status::pushState(e_state::PLAYING);
-  Status::currentState()->resume();
+  game::Status::pushState(e_state::PLAYING);
+  game::Status::currentState()->resume();
 
   // Game loop: processing events, updating display
   while (GraphicsEngine::windowIsOpen())

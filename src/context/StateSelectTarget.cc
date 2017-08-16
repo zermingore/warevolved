@@ -76,8 +76,8 @@ void StateSelectTarget::resume()
     fetchAttributes();
   }
 
-  _targets = PathFinding::getTargets(Status::battle()->map()->selectedUnit(),
-                                     Status::battle()->map()->cell(_attackLocation));
+  _targets = PathFinding::getTargets(game::Status::battle()->map()->selectedUnit(),
+                                     game::Status::battle()->map()->cell(_attackLocation));
 
   assert(!_targets->empty() && "StateSelectTarget: no target available");
 }
@@ -131,21 +131,21 @@ void StateSelectTarget::selectNextTarget() {
 void StateSelectTarget::validate()
 {
   // move the unit (if it's still alive)
-  auto attackResult(Status::battle()->map()->attack((*_targets)[_index_target]));
+  auto attackResult(game::Status::battle()->map()->attack((*_targets)[_index_target]));
   if (   attackResult != e_attack_result::ATTACKER_DIED
       && attackResult != e_attack_result::BOTH_DIED)
   {
-    Status::battle()->map()->moveUnit(_attackLocation);
+    game::Status::battle()->map()->moveUnit(_attackLocation);
   }
 
   // move the cursor
-  Status::player()->cursor()->setCoords(_attackLocation);
+  game::Status::player()->cursor()->setCoords(_attackLocation);
 
-  Status::clearStates();
+  game::Status::clearStates();
 }
 
 
 void StateSelectTarget::exit()
 {
-  Status::popCurrentState();
+  game::Status::popCurrentState();
 }

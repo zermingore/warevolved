@@ -21,14 +21,14 @@ MenuAction::MenuAction(const e_state state, const Coords clicked_cell)
 
 void MenuAction::build()
 {
-  auto map(Status::battle()->map());
+  auto map(game::Status::battle()->map());
 
   if (_state == e_state::SELECTION_UNIT)
   {
     /// \todo use other coordinates than the menu ones
     _selectedUnit = map->unit(_coords);
     if (!_selectedUnit->played() && _selectedUnit->playerId()
-        == Status::player()->id())
+        == game::Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
       entry->setCallback( [=] { moveUnit(); });
@@ -52,10 +52,10 @@ void MenuAction::build()
     /// \todo use other coordinates than the menu ones
 
     // _selectedUnit does not exits (another instance of MenuAction built it)
-    _selectedUnit = Status::battle()->map()->selectedUnit();
+    _selectedUnit = game::Status::battle()->map()->selectedUnit();
 
     // add the attack entry if a target is reachable from the current position
-    auto cell(Status::battle()->map()->cell(_coords));
+    auto cell(game::Status::battle()->map()->cell(_coords));
     if (!target && PathFinding::getTargets(_selectedUnit, cell)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
@@ -69,33 +69,33 @@ void MenuAction::build()
 
 
 void MenuAction::cancel() {
-  Status::clearStates();
+  game::Status::clearStates();
 }
 
 
 void MenuAction::moveUnit()
 {
-  Status::pushState(e_state::MOVING_UNIT);
-  Status::currentState()->resume();
+  game::Status::pushState(e_state::MOVING_UNIT);
+  game::Status::currentState()->resume();
 }
 
 
 void MenuAction::waitUnit()
 {
   /// \todo use other coordinates as the menu ones
-  Status::battle()->map()->moveUnit(_coords);
-  Status::clearStates();
+  game::Status::battle()->map()->moveUnit(_coords);
+  game::Status::clearStates();
 
   // setting the cursor over the freshly moved unit
-  Status::player()->cursor()->setCoords(_coords);
+  game::Status::player()->cursor()->setCoords(_coords);
 }
 
 
 void MenuAction::attackUnit()
 {
-  Status::pushState(e_state::SELECT_TARGET);
-  Status::currentState()->setAttributes(std::make_shared<Coords> (_coords));
-  Status::currentState()->resume();
+  game::Status::pushState(e_state::SELECT_TARGET);
+  game::Status::currentState()->setAttributes(std::make_shared<Coords> (_coords));
+  game::Status::currentState()->resume();
 }
 
 

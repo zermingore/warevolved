@@ -27,7 +27,7 @@ StateMenu::StateMenu(const e_state state)
 
 
   // Building the menu depending on the State
-  _menuCoords = Status::player()->cursor()->coords();
+  _menuCoords = game::Status::player()->cursor()->coords();
   switch (state)
   {
     case e_state::MAP_MENU:
@@ -40,7 +40,7 @@ StateMenu::StateMenu(const e_state state)
       break;
 
     default:
-      ERROR("StateMenu called with State", static_cast<int> (Status::state()));
+      ERROR("StateMenu called with State", static_cast<int> (game::Status::state()));
       assert(!"State is not a menu");
       break;
   }
@@ -82,8 +82,8 @@ void StateMenu::validate() {
 
 void StateMenu::exit()
 {
-  Status::popCurrentState();
-  Status::currentState()->resume();
+  game::Status::popCurrentState();
+  game::Status::currentState()->resume();
 }
 
 

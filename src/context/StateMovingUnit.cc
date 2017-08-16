@@ -22,10 +22,10 @@
 
 StateMovingUnit::StateMovingUnit()
   : State()
-  , _originalCoords(Status::interface()->element("cursor")->coords())
+  , _originalCoords(game::Status::interface()->element("cursor")->coords())
 {
   // used to get the cursor's coordinates and access to the callbacks
-  auto player(Status::player());
+  auto player(game::Status::player());
 
   // we need a selected unit to continue
   player->updateSelectedUnit();
@@ -36,11 +36,11 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { moveUnitRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION,  [=] {
-      Status::pushState(e_state::ACTION_MENU);
+      game::Status::pushState(e_state::ACTION_MENU);
 
       // giving the next state (action menu) the original unit position
-      Status::currentState()->setAttributes(std::make_shared<Coords> (_holoUnitPosition));
-      Status::currentState()->resume();
+      game::Status::currentState()->setAttributes(std::make_shared<Coords> (_holoUnitPosition));
+      game::Status::currentState()->resume();
     });
 
   _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
@@ -59,7 +59,7 @@ StateMovingUnit::StateMovingUnit()
   _holoUnitSprite->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
   // Fading sprite at original position
-  auto unit(Status::battle()->map()->unit(_originalCoords));
+  auto unit(game::Status::battle()->map()->unit(_originalCoords));
   assert(unit);
   unit->sprite()->setColor(Color(255, 255, 255, 160));
 
@@ -70,10 +70,10 @@ StateMovingUnit::StateMovingUnit()
 
 StateMovingUnit::~StateMovingUnit()
 {
-  // could write an assert checking if Status::battle() is still valid
+  // could write an assert checking if game::Status::battle() is still valid
   // (to avoid segfault exiting the game while moving a unit)
 
-  auto unit(Status::battle()->map()->unit(_originalCoords));
+  auto unit(game::Status::battle()->map()->unit(_originalCoords));
 
   // if the unit was moved, it is no longer existing at these original coordinates
   if (unit) {
@@ -87,13 +87,13 @@ StateMovingUnit::~StateMovingUnit()
 void StateMovingUnit::exit()
 {
   /// \todo kill the path finding (needed ?)
-  Status::popCurrentState();
+  game::Status::popCurrentState();
 }
 
 void StateMovingUnit::resume()
 {
-  _nbColumns = Status::battle()->map()->nbColumns();
-  _nbLines = Status::battle()->map()->nbLines();
+  _nbColumns = game::Status::battle()->map()->nbColumns();
+  _nbLines = game::Status::battle()->map()->nbLines();
 }
 
 

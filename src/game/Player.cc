@@ -48,19 +48,19 @@ void Player::select()
 {
   /// \todo check selectable before push
 
-  if (Status::battle()->map()->unit(_cursor->coords()))
+  if (game::Status::battle()->map()->unit(_cursor->coords()))
   {
-    Status::pushState(e_state::SELECTION_UNIT);
+    game::Status::pushState(e_state::SELECTION_UNIT);
   }
   else
   {
-    Status::pushState(e_state::MAP_MENU);
+    game::Status::pushState(e_state::MAP_MENU);
   }
-  Status::currentState()->resume();
+  game::Status::currentState()->resume();
 }
 
 
 void Player::updateSelectedUnit()
 {
-  Status::battle()->map()->selectUnit(_cursor->coords());
+  game::Status::battle()->map()->selectUnit(_cursor->coords());
 }

@@ -49,7 +49,7 @@ void Menu::draw()
 
 
 void Menu::resume() {
-  Status::player()->cursor()->setCoords(_coords);
+  game::Status::player()->cursor()->setCoords(_coords);
 }
 
 

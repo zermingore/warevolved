@@ -27,7 +27,7 @@ class StateMenu: public State
 public:
   /**
    * \brief Deleted default constuctor as we need to know in which state we are
-   *   We cannot use Status::state() as the State is under construction
+   *   We cannot use game::Status::state() as the State is under construction
    */
   StateMenu() = delete;
 

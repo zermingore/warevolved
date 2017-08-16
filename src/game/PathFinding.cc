@@ -250,7 +250,7 @@ void PathFinding::highlightCells()
           continue;
         }
 
-        if (u->playerId() == Status::player()->id())
+        if (u->playerId() == game::Status::player()->id())
         {
           _reachableCells.push_back((*_map)[i][j]);
           c->setHighlightColor(graphics::Color::Green);
@@ -268,7 +268,7 @@ void PathFinding::highlightCells()
       if (u && distance <= _unit->maxRange())
       {
         // unit out of moving range but at shooting range
-        if (u->playerId() != Status::player()->id())
+        if (u->playerId() != game::Status::player()->id())
         {
           c->setHighlight(true);
           c->setHighlightColor(graphics::Color::Red);
@@ -327,7 +327,7 @@ bool PathFinding::allowedMove(e_direction direction)
 
   // do not allow to move over enemy units
   auto u(dst->unit());
-  if (u && u->playerId() != Status::player()->id())
+  if (u && u->playerId() != game::Status::player()->id())
   {
     return false;
   }

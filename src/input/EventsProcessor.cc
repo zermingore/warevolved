@@ -14,7 +14,7 @@
   for (;;)
   {
     // process KeyManager events queue
-    if (!Status::currentState()->eventManager()->process(KeyManager::popEvent()))
+    if (!game::Status::currentState()->eventManager()->process(KeyManager::popEvent()))
     {
       PRINTF("Event not processed");
     }
