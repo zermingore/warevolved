@@ -1,15 +1,17 @@
 #include <graphics/GraphicsEngine.hh>
 
+#include <chrono>
+#include <ctime> // strftime
+
 #include <debug/Debug.hh>
+#include <debug/OSD.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <game/Status.hh>
 #include <game/Cell.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <debug/OSD.hh>
 #include <context/State.hh>
-#include <chrono>
 
 
 
@@ -21,6 +23,8 @@ const sf::Color GRID_COLOR(202, 124, 0);
 // Static Variables definition
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 size_t GraphicsEngine::_nbFramesGenerated;
+std::mutex GraphicsEngine::mutexRenderWindow;
+
 
 
 constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns)
@@ -32,6 +36,8 @@ constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
+  mutexRenderWindow.lock();
+
   static auto graphics_start(std::chrono::steady_clock::now()); // Ctor
 
   auto draw_start(std::chrono::steady_clock::now());
@@ -59,12 +65,38 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
   // update the window
   _window->display();
+
+  mutexRenderWindow.unlock();
 }
 
 
-
-void GraphicsEngine::drawState() {
+void GraphicsEngine::drawState()
+{
   game::Status::currentState()->draw();
+}
+
+
+void GraphicsEngine::screenshot()
+{
+  // Build the screenshot file name with the date
+  time_t now = time(nullptr);
+  struct tm *date = localtime(&now);
+  char path[80] = {0};
+  strftime(path, 80, "/tmp/./we_screenshot__%Y_%m_%d__%H_%M_%S.png", date);
+
+  NOTICE("screenshot: getting image");
+  mutexRenderWindow.lock();
+  auto image {_window->capture()};
+  mutexRenderWindow.unlock();
+
+  // Save the image to a file
+  if (!image.saveToFile(path))
+  {
+    ERROR("Unable to save the screenshot; given path: ", path);
+    return;
+  }
+
+  NOTICE("Screenshot saved as", path);
 }
 
 

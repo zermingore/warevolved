@@ -5,6 +5,7 @@
 #include <context/StateMovingUnit.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateMenu.hh>
+#include <context/StateGlobal.hh>
 
 
 

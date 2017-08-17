@@ -38,6 +38,9 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
   _keys_mapping.insert({sf::Keyboard::Space,  e_key::SELECTION});
   _keys_mapping.insert({sf::Keyboard::Escape, e_key::EXIT});
 
+  // Accessible features whatever the state is
+  _keys_mapping.insert({sf::Keyboard::Delete, e_key::SCREENSHOT});
+
 
   // This event mapping is populated here but will then be read only
   // These are the mapping key (dissociated from the keyboard) -> event
@@ -47,6 +50,7 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
   _events_mapping.insert({e_key::DOWN      , e_input::MOVE_DOWN });
   _events_mapping.insert({e_key::SELECTION , e_input::SELECTION });
   _events_mapping.insert({e_key::EXIT      , e_input::EXIT      });
+  _events_mapping.insert({e_key::SCREENSHOT, e_input::SCREENSHOT});
 }
 
 

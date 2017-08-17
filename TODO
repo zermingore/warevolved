@@ -6,6 +6,7 @@
 ** TODO Doc: track this file across branches
    Bonus: drop TODO.archive
    Is it really worth it? (a doc branch tracking the TODO is not enough?)
+** TODO Test: Save the map in a file
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
