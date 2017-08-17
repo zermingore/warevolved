@@ -4,12 +4,16 @@
 #include <graphics/GraphicsEngine.hh>
 #include <debug/Debug.hh>
 
+#include <X11/Xlib.h> // Must be included after SMFL includes
 
 
 Context::Context(const bool fullscreen)
   : _system(std::make_unique<System> (2, 1)) // SFML version: 2.1
   , _settings(std::make_shared<Settings> ())
 {
+  // Initialize the Xlib support for concurrent threads.
+  XInitThreads();
+
   _settings->setFullScreen(fullscreen);
   init();
 }

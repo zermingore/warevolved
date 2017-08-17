@@ -193,11 +193,13 @@
 ** TODO bootstrap
    The return value is 0 in case of build failure
    preventing stuff like ./boostrap && ./we
-* TODO X11 and multi-threading
-  The XInitThreads() function must be called before the creation of the threads using X
-  The include Xlib.h defines a macro 'NONE' conflicting with a value in the sf::Style enum
-  -> the Xlib.h must be included after the SFML ones
-  the Xlib.h also defines a Status symbol conflicting with the Status class of War Evolved
+** DONE X11 and multi-threading
+   CLOSED: [2017-08-17 Do 07:21]
+   The XInitThreads() function must be called before the creation of the threads using X
+   The include Xlib.h defines a macro 'NONE' conflicting with a value in the sf::Style enum
+   -> the Xlib.h must be included after the SFML ones
+   the Xlib.h also defines a Status symbol conflicting with the Status class of War Evolved
+   (to avoid conflicts, the Status class was moved in a namespace)
 
 
 * TODO Build
