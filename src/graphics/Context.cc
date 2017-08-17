@@ -1,10 +1,13 @@
-#include <core/Context.hh>
+#include <graphics/Context.hh>
 
 #include <config/Settings.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <debug/Debug.hh>
 
 #include <X11/Xlib.h> // Must be included after SMFL includes
+
+
+namespace graphics {
 
 
 Context::Context(const bool fullscreen)
@@ -71,3 +74,6 @@ void Context::init()
 
   graphics::GraphicsEngine::setWindow(std::move(window));
 }
+
+
+} // namespace graphics

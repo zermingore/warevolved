@@ -13,10 +13,8 @@ libpugixml_a_CXXFLAGS = -Ofast
 __top_srcdir__we_SOURCES =          \
 main.cc                             \
 \
-\
-core/Context.cc                     \
-\
 graphics/GraphicsEngine.cc          \
+graphics/Context.cc                 \
 graphics/MapGraphicsProperties.cc   \
 \
 resources/ResourcesManager.cc       \

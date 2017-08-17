@@ -13,6 +13,8 @@
 class Settings;
 
 
+namespace graphics {
+
 /**
  * \class Context
  * \brief Describes a graphical context
@@ -47,6 +49,9 @@ private:
   std::unique_ptr<System> _system;     ///< System settings (libs versions, ...)
   std::shared_ptr<Settings> _settings; ///< generic settings (options, ...)
 };
+
+
+} // namespace graphics
 
 
 #endif /* !CORE_CONTEXT_HH_ */

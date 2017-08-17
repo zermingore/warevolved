@@ -3,7 +3,7 @@
 #include <future>
 #include <cassert>
 
-#include <core/Context.hh>
+#include <graphics/Context.hh>
 #include <input/InputsListener.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <game/Battle.hh>
@@ -15,7 +15,7 @@
 
 Game::Game(bool fullscreen)
 {
-  Context context(fullscreen);
+  graphics::Context context(fullscreen);
 }
 
 
