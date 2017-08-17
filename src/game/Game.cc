@@ -3,6 +3,7 @@
 #include <future>
 #include <cassert>
 
+#include <core/Context.hh>
 #include <input/InputsListener.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <game/Battle.hh>
@@ -12,10 +13,17 @@
 #include <context/State.hh>
 
 
+Game::Game()
+{
+  Context context(true);
+}
+
 
 void Game::run(bool replay)
 {
   using namespace graphics; // function scope
+
+  /// \todo main menu (pushState or the like)
 
   resources::ResourcesManager::initialize("resources.xml");
 

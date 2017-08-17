@@ -17,6 +17,14 @@ class Game
 {
 public:
   /**
+   * \brief Initializes the graphical context
+   */
+  Game();
+
+  ~Game() = default;
+
+
+  /**
    * \brief contains the game loop which calls
    *   event processing
    *   window rendering

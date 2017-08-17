@@ -1,9 +1,9 @@
-#include <core/Context.hh>
+#include <exception>
 
 #include <game/Game.hh>
 #include <debug/Debug.hh>
 #include <tools/OptionsParser.hh>
-#include <exception>
+
 
 
 int main(int ac, const char **av)
@@ -19,19 +19,15 @@ int main(int ac, const char **av)
   }
   catch (const ArgumentsHelpVersionException& e)
   {
-    return 0;
+    return EXIT_SUCCESS;
   }
   catch (const ArgumentsException& e)
   {
     ERROR("Invalid arguments:", e.what());
-    return 1;
+    return EXIT_FAILURE;
   }
 
-
-  Context context(fullscreen);
-
-  /// \todo main menu (pushState or the like)
-
+  // Launch the game
   Game game;
   game.run(replay);
 
