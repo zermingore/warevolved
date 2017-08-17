@@ -10,14 +10,15 @@
 #   Returns 0 if the build fails, it should return the build return value
 
 
+BUILD_DIR=./build # build destination
+
+
 function main
 {
-    NO_BUILD=$1
-
-    BUILD_DIR=build # build destination
+    local no_build=$1
 
     autoreconf --force --install --warnings=all
-    ret_code=$?
+    local ret_code=$?
     if [[ $ret_code -ne 0 ]]; then
         exit $ret_code
     fi
@@ -25,23 +26,22 @@ function main
 
     rm -rf "$BUILD_DIR"
     mkdir -p "$BUILD_DIR"
+
     pushd "$BUILD_DIR"
-
-    ../configure # TODO find the configure wherever the build folder is
-    ret_code=$?
-    if [[ $ret_code -ne 0 ]]; then
-        exit $ret_code
-    fi
-
-
-    if [[ "$NO_BUILD" == "" ]]; then
-        make
-        ret_code=$?
+        ../configure # TODO find the configure wherever the build folder is
+        local ret_code=$?
         if [[ $ret_code -ne 0 ]]; then
             exit $ret_code
         fi
-    fi
 
+
+        if [[ "$no_build" == "" ]]; then
+            make
+            local ret_code=$?
+            if [[ $ret_code -ne 0 ]]; then
+                exit $ret_code
+            fi
+        fi
     popd # "$BUILD_DIR"
 }
 
