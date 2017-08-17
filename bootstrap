@@ -36,6 +36,10 @@ function main
 
     if [[ "$NO_BUILD" == "" ]]; then
         make
+        ret_code=$?
+        if [[ $ret_code -ne 0 ]]; then
+            exit $ret_code
+        fi
     fi
 
     popd # "$BUILD_DIR"

@@ -191,7 +191,8 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** TODO bootstrap
+** DONE bootstrap
+   CLOSED: [2017-08-17 Do 07:53]
    The return value is 0 in case of build failure
    preventing stuff like ./boostrap && ./we
 ** DONE X11 and multi-threading
