@@ -28,7 +28,7 @@ int main(int ac, const char **av)
   }
 
   // Launch the game
-  Game game;
+  Game game(fullscreen);
   game.run(replay);
 
   return EXIT_SUCCESS;

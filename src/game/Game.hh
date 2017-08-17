@@ -17,10 +17,20 @@ class Game
 {
 public:
   /**
-   * \brief Initializes the graphical context
+   * \brief Deleted default constructor: the options are required
    */
-  Game();
+  Game() = delete;
 
+  /**
+   * \brief Initializes the graphical context
+   * \param fullscreen Initialize a full screen or windowed graphical context
+   * \see Context
+   */
+  explicit Game(bool fullscreen);
+
+  /**
+   * \brief Defaulted destructor: the Context doesn't need to be deleted
+   */
   ~Game() = default;
 
 

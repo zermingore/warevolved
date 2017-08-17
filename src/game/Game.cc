@@ -13,9 +13,9 @@
 #include <context/State.hh>
 
 
-Game::Game()
+Game::Game(bool fullscreen)
 {
-  Context context(true);
+  Context context(fullscreen);
 }
 
 
