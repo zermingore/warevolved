@@ -1,0 +1,1291 @@
+# Generated from the valgrind output checking leaks for a basic SFML Window example
+# valgrind --show-reachable=yes --track-origins=yes --leak-check=full -v --gen-suppressions=all ./leak_sfml
+
+# Complete example:
+#
+# #include <SFML/System/Vector2.hpp>
+# #include <SFML/Graphics.hpp>
+# #include <SFML/Graphics/RenderWindow.hpp>
+# #include <SFML/Graphics/Color.hpp>
+# #include <SFML/Window.hpp>
+# #include <SFML/Window/Event.hpp>
+# #include <SFML/Window/Keyboard.hpp>
+# #include <SFML/Window/Event.hpp>
+#
+#
+# int main()
+# {
+#   sf::Window window(sf::VideoMode(800, 600), "SFML window");
+#
+#   // Limit the framerate to 60 frames per second (this step is optional)
+#   window.setFramerateLimit(60);
+#
+#   // The main loop - ends as soon as the window is closed
+#   while (window.isOpen())
+#   {
+#     // Event processing
+#     sf::Event event;
+#     while (window.pollEvent(event))
+#     {
+#       // Request for closing the window
+#       if (event.type == sf::Event::Closed)
+#         window.close();
+#     }
+#
+#     // Activate the window for OpenGL rendering
+#     window.setActive();
+#
+#     // OpenGL drawing commands go here...
+#
+#     // End the current frame and display its contents on screen
+#     window.display();
+#   }
+#
+#   return 0;
+# }
+
+# NOTE: These leaks can safely be ignored: the resources are freed on exit
+#       and there is no reason for the concerned libraries to free everything by default
+#
+# NOTE: These leak suppressions rely on specific versions / paths of SFML, OpenGL, X11, ...
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:_XlcResolveLocaleName
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XimOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   fun:glXGetConfig
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:open_path
+   fun:_dl_map_object
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_dl_new_object
+   fun:_dl_map_object_from_fd
+   fun:_dl_map_object
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:expand_dynamic_string_token
+   fun:_dl_map_object
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_dl_new_object
+   fun:_dl_map_object_from_fd
+   fun:_dl_map_object
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XrmInternalStringToQuark
+   fun:_XlcGetCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcAddUtf8Converters
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcAddUtf8Converters
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcAddUtf8Converters
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcAddUtf8Converters
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcAddUtf8Converters
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcAddUtf8Converters
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcSetConverter
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_dl_check_map_versions
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:_dl_load_cache_lookup
+   fun:_dl_map_object
+   fun:openaux
+   fun:_dl_catch_error
+   fun:_dl_map_object_deps
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_dl_new_object
+   fun:_dl_map_object_from_fd
+   fun:_dl_map_object
+   fun:openaux
+   fun:_dl_catch_error
+   fun:_dl_map_object_deps
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcCreateDefaultCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcDefaultLoader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:add_to_global
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcAddCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcCreateDefaultCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_dl_new_object
+   fun:_dl_map_object_from_fd
+   fun:_dl_map_object
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/dri/i965_dri.so
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_dl_new_object
+   fun:_dl_map_object_from_fd
+   fun:_dl_map_object
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_dl_check_map_versions
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcCreateLocaleDataBase
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_XlcCreateDefaultCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/lib/x86_64-linux-gnu/libudev.so.1.6.4
+   obj:/lib/x86_64-linux-gnu/libudev.so.1.6.4
+   obj:/lib/x86_64-linux-gnu/libudev.so.1.6.4
+   obj:/lib/x86_64-linux-gnu/libudev.so.1.6.4
+   obj:/lib/x86_64-linux-gnu/libudev.so.1.6.4
+   fun:udev_device_new_from_devnum
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+   obj:/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1.2.0
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/lib/x86_64-linux-gnu/libudev.so.1.6.4
+   obj:/lib/x86_64-linux-gnu/libudev.so.1.6.4
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:_ZN2sf6WindowC1ENS_9VideoModeERKNS_6StringEjRKNS_15ContextSettingsE
+   fun:main
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_XrmInternalStringToQuark
+   fun:_XlcGetCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+   obj:/usr/lib/x86_64-linux-gnu/libsfml-window.so.2.3.2
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XrmInternalStringToQuark
+   fun:_XlcGetCharSet
+   fun:_XlcAddCT
+   fun:_XlcInitCTInfo
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+   fun:_XlcCreateLC
+   fun:_XlcUtf8Loader
+   fun:_XOpenLC
+   fun:XOpenIM
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:_dl_new_object
+   fun:_dl_map_object_from_fd
+   fun:_dl_map_object
+   fun:openaux
+   fun:_dl_catch_error
+   fun:_dl_map_object_deps
+   fun:dl_open_worker
+   fun:_dl_catch_error
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_error
+}
+
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   obj:/lib/x86_64-linux-gnu/ld-2.23.so
+}
