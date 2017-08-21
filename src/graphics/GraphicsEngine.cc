@@ -38,6 +38,8 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   mutexRenderWindow.lock();
 
+  _window->setActive();
+
   static auto graphics_start(std::chrono::steady_clock::now()); // Ctor
 
   auto draw_start(std::chrono::steady_clock::now());
