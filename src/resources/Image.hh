@@ -44,30 +44,15 @@ public:
 
 
   /**
-   * \brief initializes _texture
-   *   set _loaded to true
-   */
-  void initTexture();
-
-  /**
-   * \brief initializes _sprite
-   *   set _loaded to true
-   */
-  void initSprite();
-
-  /**
    * \brief _texture getter
-   * loads the texture (and set _loaded flag) if _loaded was false
    * \return _texture
    */
-  std::shared_ptr<graphics::Texture> getTexture();
+  std::shared_ptr<graphics::Texture> getTexture() { return _texture; }
 
   /**
    * \brief _sprite getter
-   * loads the texture if needed (through initTexture)
-   * allocates _sprites if needed (through initSprite)
    */
-  std::shared_ptr<graphics::Sprite> sprite();
+  std::shared_ptr<graphics::Sprite> sprite() { return _sprite; }
 
 
   /**
@@ -119,36 +104,12 @@ public:
   void setScale(const float ratio);
 
   /**
-   * \brief _fileName setter
-   * \param file_name new image file name
-   * \note Set _loaded to false
-   */
-  void setFileName(const std::string file_name);
-
-  /**
    * \brief _sprite setter
    * \param sprite _sprite value
    */
   void setSprite(const std::shared_ptr<graphics::Sprite> sprite) {
     _sprite = sprite;
   }
-
-  /**
-   * \brief load Image texture to (V)RAM if necessary
-   * \note Set _rectangle->texture to the new _texture
-   * \return true if Image was loaded; false otherwise
-   */
-  bool load() override final;
-
-  /**
-   * \brief remove Image file from (V)RAM
-   */
-  void unload() override final;
-
-  /**
-   * \brief Reloads the texture (unload the previous one if any)
-   */
-  void reload(const std::string file_name);
 
   /**
    * \brief draws the Image in the cell coords.c, coords.l

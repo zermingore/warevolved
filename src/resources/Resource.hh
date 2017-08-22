@@ -38,7 +38,7 @@ public:
   /**
    * \brief resource loading
    */
-  virtual bool load() = 0;
+  virtual bool load() { return false; } /// \todo remove (must be in the Ctor)
 
   /**
    * \brief unloads a resource
