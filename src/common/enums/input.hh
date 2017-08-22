@@ -14,19 +14,22 @@
  */
 enum class e_input
 {
-  // motion keys
+  // Motion keys
   MOVE_UP = 0,
   MOVE_DOWN,
   MOVE_LEFT,
   MOVE_RIGHT,
 
-  // action keys
+  // Action keys
   SELECTION,
+
+  // Interface keys
+  TOGGLE_PANEL,
 
   // Global inputs
   SCREENSHOT,
 
-  // exit requests
+  // Exit requests
   EXIT,
 
   NB_KEYS

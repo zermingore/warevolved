@@ -39,6 +39,11 @@ public:
    * \brief Saves the current rendered image into a file
    */
   void screenshot();
+
+  /**
+   * \brief Toggles the side panel position
+   */
+  void togglePanel();
 };
 
 

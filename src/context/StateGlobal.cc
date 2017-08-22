@@ -10,12 +10,18 @@
 StateGlobal::StateGlobal()
   : State()
 {
-  _evtMgr->registerEvent(e_input::SCREENSHOT,  [=] { screenshot(); });
+  _evtMgr->registerEvent(e_input::SCREENSHOT,   [=] { screenshot(); });
+  _evtMgr->registerEvent(e_input::TOGGLE_PANEL, [=] { togglePanel(); });
 }
 
 
 void StateGlobal::screenshot()
 {
-  NOTICE("SCREENSHOT");
   graphics::GraphicsEngine::screenshot();
+}
+
+
+void StateGlobal::togglePanel()
+{
+  graphics::GraphicsEngine::togglePanel();
 }

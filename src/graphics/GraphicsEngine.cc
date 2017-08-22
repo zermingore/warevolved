@@ -24,6 +24,7 @@ const sf::Color GRID_COLOR(202, 124, 0);
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 size_t GraphicsEngine::_nbFramesGenerated;
 std::mutex GraphicsEngine::mutexRenderWindow;
+panel_pos GraphicsEngine::_panelPosition;
 
 
 
@@ -38,9 +39,9 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   mutexRenderWindow.lock();
 
+  static auto graphics_start(std::chrono::steady_clock::now());
   _window->setActive();
 
-  static auto graphics_start(std::chrono::steady_clock::now()); // Ctor
 
   auto draw_start(std::chrono::steady_clock::now());
   drawBackground();
@@ -51,18 +52,18 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
   drawState();
 
+  drawPanel();
+
   // draw the debug data, eventually over everything (at last)
   ++_nbFramesGenerated;
   auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
   debug::OSD::addPod(computeFps(_nbFramesGenerated, time_elapsed.count()),
                      "FPS (from nb generated frames)");
-
   // Get the fps from the time needed to generate one frame
   auto draw_time(std::chrono::steady_clock::now() - draw_start);
   debug::OSD::addPod(
     1.f / (static_cast<float> (draw_time.count()) / 1000000000.f)
     , "FPS (from one frame generation time)");
-
   debug::OSD::draw();
 
   // update the window
@@ -102,10 +103,43 @@ void GraphicsEngine::screenshot()
 }
 
 
+void GraphicsEngine::togglePanel()
+{
+  _panelPosition = static_cast<panel_pos> ((static_cast<int> (_panelPosition) + 1) % 3);
+}
+
+
+
 void GraphicsEngine::drawBackground()
 {
   _window->clear();
   /// \todo draw map background
+}
+
+
+void GraphicsEngine::drawPanel()
+{
+  if (_panelPosition == panel_pos::DEACTIVATED)
+  {
+    return;
+  }
+
+  auto img(resources::ResourcesManager::getImage("selection_menu_selection"));
+
+  auto window_size {_window->getSize()};
+  img->setSize(static_cast<float> (window_size.x) / 2.f,
+               static_cast<float> (window_size.y));
+
+  if (_panelPosition == panel_pos::LEFT)
+  {
+    img->setPosition(10, 100);
+  }
+  else
+  {
+    img->setPosition(window_size.x / 2, 100);
+  }
+
+  img->draw();
 }
 
 

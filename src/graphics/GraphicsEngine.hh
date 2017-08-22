@@ -26,6 +26,17 @@ namespace graphics {
 
 
 /**
+ * \enum e_panel_pos
+ * \brief List the possible locations of the side panel
+ */
+enum class panel_pos {
+  DEACTIVATED = 0,
+  LEFT,
+  RIGHT,
+};
+
+
+/**
  * \class GraphicsEngine
  * \brief Manages the display of a scene.
  */
@@ -86,10 +97,23 @@ public:
    */
   static void screenshot();
 
+  /**
+   * \brief Toggles the side panel
+   */
+  static void togglePanel();
+
+
 
 private:
-  /// Draw the map background.
+  /**
+   * \brief Draw the map background
+   */
   static void drawBackground();
+
+  /**
+   * \brief Draw the panel, if activated
+   */
+  static void drawPanel();
 
   /**
    * \brief Draws cells content (terrain, unit).
@@ -115,7 +139,6 @@ private:
    */
   static void drawState();
 
-
   /**
    * \brief current number of generated frames
    * \note if the compilation flag DEBUG_PERFS is not set
@@ -126,6 +149,8 @@ private:
 
 
   static std::mutex mutexRenderWindow;
+
+  static panel_pos _panelPosition; ///< position of the side panel
 };
 
 

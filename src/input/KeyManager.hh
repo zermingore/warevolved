@@ -34,6 +34,9 @@ enum class e_key
   // Global actions
   SCREENSHOT,
 
+  // Interface keys
+  TOGGLE_PANEL,
+
   // exit requests
   EXIT,
 

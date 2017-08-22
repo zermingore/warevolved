@@ -20,7 +20,10 @@ StatePlaying::StatePlaying()
   _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { player->moveCursorLeft(); });
   _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { player->moveCursorRight(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION,  [=] { player->select(); });
+  _evtMgr->registerEvent(e_input::SELECTION, [=] { player->select(); });
+
+  _evtMgr->registerEvent(e_input::TOGGLE_PANEL,
+                         [=] { graphics::GraphicsEngine::togglePanel(); });
 
   addInterfaceElement(player->cursor());
 }

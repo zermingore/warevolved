@@ -24,33 +24,35 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
   // _keys_mapping: keyboard -> e_key ('z' and '8' can be used for LEFT key)
   // e_key -> keyboard (allow duplicated keys)
 
-  _keys_mapping.insert({sf::Keyboard::Left,  e_key::LEFT});
-  _keys_mapping.insert({sf::Keyboard::Right, e_key::RIGHT});
-  _keys_mapping.insert({sf::Keyboard::Up,    e_key::UP});
-  _keys_mapping.insert({sf::Keyboard::Down,  e_key::DOWN});
+  _keys_mapping.insert({sf::Keyboard::Left,   e_key::LEFT});
+  _keys_mapping.insert({sf::Keyboard::Right,  e_key::RIGHT});
+  _keys_mapping.insert({sf::Keyboard::Up,     e_key::UP});
+  _keys_mapping.insert({sf::Keyboard::Down,   e_key::DOWN});
 
   // These don't seem natural (but makes sense with a Workman layout)
-  _keys_mapping.insert({sf::Keyboard::N, e_key::LEFT });
-  _keys_mapping.insert({sf::Keyboard::E, e_key::UP   });
-  _keys_mapping.insert({sf::Keyboard::O, e_key::DOWN });
-  _keys_mapping.insert({sf::Keyboard::I, e_key::RIGHT});
+  _keys_mapping.insert({sf::Keyboard::N,      e_key::LEFT });
+  _keys_mapping.insert({sf::Keyboard::E,      e_key::UP   });
+  _keys_mapping.insert({sf::Keyboard::O,      e_key::DOWN });
+  _keys_mapping.insert({sf::Keyboard::I,      e_key::RIGHT});
 
   _keys_mapping.insert({sf::Keyboard::Space,  e_key::SELECTION});
   _keys_mapping.insert({sf::Keyboard::Escape, e_key::EXIT});
 
   // Accessible features whatever the state is
   _keys_mapping.insert({sf::Keyboard::Delete, e_key::SCREENSHOT});
+  _keys_mapping.insert({sf::Keyboard::F3,     e_key::TOGGLE_PANEL});
 
 
   // This event mapping is populated here but will then be read only
   // These are the mapping key (dissociated from the keyboard) -> event
-  _events_mapping.insert({e_key::LEFT      , e_input::MOVE_LEFT });
-  _events_mapping.insert({e_key::RIGHT     , e_input::MOVE_RIGHT});
-  _events_mapping.insert({e_key::UP        , e_input::MOVE_UP   });
-  _events_mapping.insert({e_key::DOWN      , e_input::MOVE_DOWN });
-  _events_mapping.insert({e_key::SELECTION , e_input::SELECTION });
-  _events_mapping.insert({e_key::EXIT      , e_input::EXIT      });
-  _events_mapping.insert({e_key::SCREENSHOT, e_input::SCREENSHOT});
+  _events_mapping.insert({e_key::LEFT,         e_input::MOVE_LEFT   });
+  _events_mapping.insert({e_key::RIGHT,        e_input::MOVE_RIGHT  });
+  _events_mapping.insert({e_key::UP,           e_input::MOVE_UP     });
+  _events_mapping.insert({e_key::DOWN,         e_input::MOVE_DOWN   });
+  _events_mapping.insert({e_key::SELECTION,    e_input::SELECTION   });
+  _events_mapping.insert({e_key::EXIT,         e_input::EXIT        });
+  _events_mapping.insert({e_key::TOGGLE_PANEL, e_input::TOGGLE_PANEL});
+  _events_mapping.insert({e_key::SCREENSHOT,   e_input::SCREENSHOT  });
 }
 
 
