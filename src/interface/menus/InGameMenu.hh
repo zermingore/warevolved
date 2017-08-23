@@ -48,7 +48,7 @@ public:
   /**
    * \brief Validate selected entry
    */
-  void validate()override final;
+  void validate() override final;
 
 
   /**

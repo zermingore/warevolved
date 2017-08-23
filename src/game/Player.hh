@@ -9,14 +9,16 @@
 # define PLAYER_HH_
 
 # include <memory>
-# include <interface/Interface.hh>
+# include <graphics/graphic_types.hh>
 
 
 namespace interface {
   class Interface;
   class Cursor;
-  class InGameMenu;
+  class Panel;
 }
+
+class Unit;
 
 
 /**
@@ -85,8 +87,9 @@ private:
   mutable size_t _id; ///< Player's identifier
 
   // interface
-  std::shared_ptr<interface::Interface>  _interface; ///< User Interface
-  std::shared_ptr<interface::Cursor>     _cursor;    ///< Map Cursor
+  std::shared_ptr<interface::Interface> _interface; ///< User Interface
+  std::shared_ptr<interface::Cursor>    _cursor;    ///< Map Cursor
+  std::shared_ptr<interface::Panel>     _panel;     ///< Side panel
 
   std::shared_ptr<Unit> _selectedUnit; ///< current selected unit
 

@@ -1,13 +1,16 @@
 #include <game/Player.hh>
+
+#include <common/enums/states.hh>
+#include <game/Battle.hh>
+#include <game/Status.hh>
 #include <game/units/Soldier.hh>
+#include <interface/Interface.hh>
 #include <interface/InterfaceElement.hh>
 #include <interface/Cursor.hh>
+#include <interface/Panel.hh>
 #include <interface/menus/InGameMenu.hh>
-#include <game/Status.hh>
-#include <common/enums/states.hh>
 #include <context/State.hh>
 #include <context/StateMenu.hh>
-#include <game/Battle.hh>
 
 
 Player::Player(const graphics::Color c)
@@ -17,13 +20,15 @@ Player::Player(const graphics::Color c)
 
   _color = c;
 
-  // Cursor
+  // Interface elements
+  _interface = std::make_shared<interface::Interface> (c);
+
   _cursor = std::make_shared<interface::Cursor> ();
   _cursor->setColor(c);
-
-  // Interface
-  _interface = std::make_shared<interface::Interface> (c);
   _interface->addElement(_cursor);
+
+  _panel = std::make_shared<interface::Panel> ();
+  _interface->addElement(_panel);
 }
 
 

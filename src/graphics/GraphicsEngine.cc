@@ -7,6 +7,7 @@
 #include <debug/OSD.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <interface/Interface.hh>
 #include <game/Status.hh>
 #include <game/Cell.hh>
 #include <game/Battle.hh>
@@ -127,16 +128,16 @@ void GraphicsEngine::drawPanel()
   auto img(resources::ResourcesManager::getImage("selection_menu_selection"));
 
   auto window_size {_window->getSize()};
-  img->setSize(static_cast<float> (window_size.x) / 2.f,
+  img->setSize(static_cast<float> (window_size.x) / 4.f,
                static_cast<float> (window_size.y));
 
   if (_panelPosition == panel_pos::LEFT)
   {
-    img->setPosition(10, 100);
+    img->setPosition(0, 100);
   }
   else
   {
-    img->setPosition(window_size.x / 2, 100);
+    img->setPosition(static_cast<float> (window_size.x) / 4.f, 100.f);
   }
 
   img->draw();

@@ -7,6 +7,7 @@
 #include <game/Status.hh>
 #include <common/enums/states.hh>
 #include <common/enums/directions.hh>
+#include <interface/Interface.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <graphics/graphic_types.hh>
@@ -17,7 +18,6 @@
 #include <game/Player.hh>
 #include <game/units/Unit.hh>
 #include <game/PathFinding.hh>
-
 
 
 StateMovingUnit::StateMovingUnit()
