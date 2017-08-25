@@ -39,16 +39,16 @@ void Image::setPosition(const graphics::component x, const graphics::component y
 
 void Image::setSize(const graphics::Size2 size)
 {
-  auto old_size(_rectangle->getSize());
-  _rectangle->setSize(size);
-  _sprite->setScale({size.x / old_size.x, size.y / old_size.y});
+  graphics::Size2 texture_size(_texture->getSize());
+  _rectangle->setSize({size.x / texture_size.x, size.y / texture_size.y});
+  _sprite->setScale({size.x / texture_size.x, size.y / texture_size.y});
 }
 
 
 void Image::setSize(const graphics::component width,
                     const graphics::component height)
 {
-  graphics::Size2 size(_texture->getSize()); // explicit Vector2f for -Wconversion
+  graphics::Size2 size(_texture->getSize());
   _rectangle->setSize({width / size.x, height / size.y});
   _sprite->setScale({width / size.x, height / size.y});
 }
