@@ -37,9 +37,6 @@ void Game::run(bool replay)
   game::Status::pushState(e_state::PLAYING);
   game::Status::currentState()->resume();
 
-  // Game loop: processing events, updating display
-  while (GraphicsEngine::windowIsOpen())
-  {
-    GraphicsEngine::drawScene(battle);
-  }
+  // Drawing loop
+  GraphicsEngine::drawScene(battle);
 }

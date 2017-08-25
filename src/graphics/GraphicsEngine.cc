@@ -37,37 +37,40 @@ constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
-  mutexRenderWindow.lock();
+  while (_window->isOpen())
+  {
+    mutexRenderWindow.lock();
 
-  static auto graphics_start(std::chrono::steady_clock::now());
-  _window->setActive();
+    static auto graphics_start(std::chrono::steady_clock::now());
+    _window->setActive();
 
 
-  auto draw_start(std::chrono::steady_clock::now());
-  drawBackground();
-  drawMap(battle);
+    auto draw_start(std::chrono::steady_clock::now());
+    drawBackground();
+    drawMap(battle);
 
-  // draw the interface of current_player
-  drawGrid(battle->map());
+    // draw the interface of current_player
+    drawGrid(battle->map());
 
-  drawState();
+    drawState();
 
-  // draw the debug data, eventually over everything (at last)
-  ++_nbFramesGenerated;
-  auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
-  debug::OSD::addPod(computeFps(_nbFramesGenerated, time_elapsed.count()),
-                     "FPS (from nb generated frames)");
-  // Get the fps from the time needed to generate one frame
-  auto draw_time(std::chrono::steady_clock::now() - draw_start);
-  debug::OSD::addPod(
-    1.f / (static_cast<float> (draw_time.count()) / 1000000000.f)
-    , "FPS (from one frame generation time)");
-  debug::OSD::draw();
+    // draw the debug data, eventually over everything (at last)
+    ++_nbFramesGenerated;
+    auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
+    debug::OSD::addPod(computeFps(_nbFramesGenerated, time_elapsed.count()),
+                       "FPS (from nb generated frames)");
+    // Get the fps from the time needed to generate one frame
+    auto draw_time(std::chrono::steady_clock::now() - draw_start);
+    debug::OSD::addPod(
+      1.f / (static_cast<float> (draw_time.count()) / 1000000000.f)
+      , "FPS (from one frame generation time)");
+    debug::OSD::draw();
 
-  // update the window
-  _window->display();
+    // update the window
+    _window->display();
 
-  mutexRenderWindow.unlock();
+    mutexRenderWindow.unlock();
+  }
 }
 
 
@@ -241,11 +244,6 @@ void GraphicsEngine::drawInterface()
     elt->update();
     elt->draw();
   }
-}
-
-
-void GraphicsEngine::setWindow(std::unique_ptr<RenderWindow> window) {
-  _window = std::move(window);
 }
 
 

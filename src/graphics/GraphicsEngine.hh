@@ -23,12 +23,13 @@ class Battle;
 class Interface;
 
 
+
 namespace graphics {
 
 
 /**
  * \class GraphicsEngine
- * \brief Manages the display of a scene.
+ * \brief Manages the display of the scene
  */
 class GraphicsEngine
 {
@@ -37,6 +38,7 @@ public:
    * \brief Draws the whole scene.
    *   - calls others drawing functions
    *   - updates the window
+   * \note Drawing while the window is not closed
    */
   static void drawScene(const std::shared_ptr<Battle> battle);
 
@@ -50,17 +52,36 @@ public:
    * \brief _window setter.
    * \note Takes the ownership of the given unique pointer
    */
-  static void setWindow(std::unique_ptr<RenderWindow> window);
+  static void setWindow(std::unique_ptr<RenderWindow> window) {
+    _window = std::move(window);
+  }
 
+  /**
+   * \brief Set the offset between the window border and the grid
+   * \param map Used to get the number of columns and lines of the map
+   */
   static void setGridOffset(const std::shared_ptr<Map> map);
 
-  static void closeWindow() { _window->close(); }
+  /**
+   * \brief Close the window
+   */
+  static void closeWindow() {
+    _window->close();
+  }
 
-  static auto windowIsOpen() { return _window->isOpen(); }
+  /**
+   * \brief Wait and return the next event on the window
+   */
+  static auto waitEvent(sf::Event& event) {
+    return _window->waitEvent(event);
+  }
 
-  static auto waitEvent(sf::Event& event) { return _window->waitEvent(event); }
-
-  static auto windowSize() { return _window->getSize(); }
+  /**
+   * \brief Window size getter
+   */
+  static auto windowSize() {
+    return _window->getSize();
+  }
 
   /**
    * \brief Draws the given element
@@ -79,9 +100,6 @@ public:
   static void draw(const T drawable) {
     _window->draw(drawable);
   }
-
-  static std::unique_ptr<RenderWindow> _window; ///< graphics window  // public ?
-
 
   /**
    * \brief Save the current rendered image to a file
@@ -125,6 +143,7 @@ private:
    */
   static void drawState();
 
+
   /**
    * \brief current number of generated frames
    * \note if the compilation flag DEBUG_PERFS is not set
@@ -133,6 +152,7 @@ private:
    */
   static size_t _nbFramesGenerated;
 
+  static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
 
   ///< Mutex to lock the window while drawing XOr taking a screenshot
   static std::mutex mutexRenderWindow;
