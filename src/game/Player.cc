@@ -20,7 +20,7 @@ Player::Player(const graphics::Color c)
 
   _color = c;
 
-  // Interface elements
+  // Interface and elements
   _interface = std::make_shared<interface::Interface> (c);
 
   _cursor = std::make_shared<interface::Cursor> ();
@@ -32,6 +32,7 @@ Player::Player(const graphics::Color c)
 }
 
 
+// Interface elements
 void Player::moveCursorUp() {
   _cursor->moveUp();
 }
@@ -46,6 +47,10 @@ void Player::moveCursorLeft() {
 
 void Player::moveCursorRight() {
   _cursor->moveRight();
+}
+
+void Player::togglePanel() {
+  _panel->toggleStatus();
 }
 
 

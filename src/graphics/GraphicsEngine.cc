@@ -25,7 +25,6 @@ const sf::Color GRID_COLOR(202, 124, 0);
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 size_t GraphicsEngine::_nbFramesGenerated;
 std::mutex GraphicsEngine::mutexRenderWindow;
-panel_pos GraphicsEngine::_panelPosition;
 
 
 
@@ -52,8 +51,6 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   drawGrid(battle->map());
 
   drawState();
-
-  drawPanel();
 
   // draw the debug data, eventually over everything (at last)
   ++_nbFramesGenerated;
@@ -104,43 +101,11 @@ void GraphicsEngine::screenshot()
 }
 
 
-void GraphicsEngine::togglePanel()
-{
-  _panelPosition = static_cast<panel_pos> ((static_cast<int> (_panelPosition) + 1) % 3);
-}
-
-
 
 void GraphicsEngine::drawBackground()
 {
   _window->clear();
   /// \todo draw map background
-}
-
-
-void GraphicsEngine::drawPanel()
-{
-  if (_panelPosition == panel_pos::DEACTIVATED)
-  {
-    return;
-  }
-
-  auto img(resources::ResourcesManager::getImage("selection_menu_selection"));
-
-  auto window_size {_window->getSize()};
-  img->setSize(static_cast<float> (window_size.x) / 4.f,
-               static_cast<float> (window_size.y));
-
-  if (_panelPosition == panel_pos::LEFT)
-  {
-    img->setPosition(0, 100);
-  }
-  else
-  {
-    img->setPosition(static_cast<float> (window_size.x) / 4.f, 100.f);
-  }
-
-  img->draw();
 }
 
 

@@ -11,7 +11,7 @@
 
 # include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>
-
+# include <common/enums/panel_status.hh>
 
 namespace resources {
   class Image;
@@ -41,12 +41,26 @@ public:
 
 
   /**
+   * \brief Toggle the side panel status (Left, Right, Deactivated)
+   */
+  void toggleStatus();
+
+  /**
    * \brief Origin setter
    * \param origin New panel origin
    */
   void setOrigin(const graphics::Pos2 origin) { _origin = origin; }
 
+  /**
+   * \brief Updates the window size
+   *   Updates the Panel components size accordingly
+   */
+  void setWindowSize(const graphics::Size2& size);
 
+
+  /**
+   * \brief Update the panel before drawing
+   */
   virtual void update() override final;
 
 
@@ -57,16 +71,14 @@ public:
 
 
 private:
-  ///< Panel's image origin: top left or top right corner
-  graphics::Pos2 _origin = {0, 0};
+  graphics::Size2 _windowSize; ///< Drawing space size
 
-  ///< (A ratio of the horizontal space) x (window height)
-  graphics::Size2 _size;
+  graphics::Pos2 _origin = {0, 0}; ///< Top left or top right corner - width
+  graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
   std::shared_ptr<resources::Image> _background; ///< Panel's background
 
-  ///< Image containing the panel elements
-  std::shared_ptr<resources::Image> _image;
+  e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
 };
 
 

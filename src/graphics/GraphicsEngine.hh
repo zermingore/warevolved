@@ -10,6 +10,7 @@
 
 # include <memory>
 # include <mutex>
+
 # include <SFML/Graphics/RenderWindow.hpp>
 # include <SFML/Window/Event.hpp>
 
@@ -23,17 +24,6 @@ class Interface;
 
 
 namespace graphics {
-
-
-/**
- * \enum e_panel_pos
- * \brief List the possible locations of the side panel
- */
-enum class panel_pos {
-  DEACTIVATED = 0,
-  LEFT,
-  RIGHT,
-};
 
 
 /**
@@ -70,6 +60,7 @@ public:
 
   static auto waitEvent(sf::Event& event) { return _window->waitEvent(event); }
 
+  static auto windowSize() { return _window->getSize(); }
 
   /**
    * \brief Draws the given element
@@ -89,18 +80,13 @@ public:
     _window->draw(drawable);
   }
 
-  static std::unique_ptr<RenderWindow> _window; ///< graphics window
+  static std::unique_ptr<RenderWindow> _window; ///< graphics window  // public ?
 
 
   /**
    * \brief Save the current rendered image to a file
    */
   static void screenshot();
-
-  /**
-   * \brief Toggles the side panel
-   */
-  static void togglePanel();
 
 
 
@@ -148,9 +134,8 @@ private:
   static size_t _nbFramesGenerated;
 
 
+  ///< Mutex to lock the window while drawing XOr taking a screenshot
   static std::mutex mutexRenderWindow;
-
-  static panel_pos _panelPosition; ///< position of the side panel
 };
 
 

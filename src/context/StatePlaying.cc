@@ -23,7 +23,7 @@ StatePlaying::StatePlaying()
   _evtMgr->registerEvent(e_input::SELECTION, [=] { player->select(); });
 
   _evtMgr->registerEvent(e_input::TOGGLE_PANEL,
-                         [=] { graphics::GraphicsEngine::togglePanel(); });
+                         [=] { player->togglePanel(); });
 
   addInterfaceElement(player->cursor());
 }

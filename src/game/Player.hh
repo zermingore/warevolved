@@ -75,6 +75,12 @@ public:
    */
   auto cursor() { return _cursor; }
 
+  /**
+   * \brief Toggle the side panel status (Left, Right, Deactivated)
+   * \note The request is forwarded to the Panel itself
+   */
+  void togglePanel();
+
 
   /**
    * \brief Update the Map selected Unit
