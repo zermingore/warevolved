@@ -6,10 +6,9 @@ To build the project, at the root, run
 autotools, make, g++ (with C++14 support) and SFML (2.3+) are required
 The binary file (we) should be created at the root
 
-________________________________________________________________________________
 If you experience any problem,
 please refer to the HELP text file at the root of the project
-________________________________________________________________________________
+
 
 To generate the documentation, at the root, run
 > doxygen
@@ -17,8 +16,6 @@ To generate the documentation, at the root, run
 you will need:
 - graphviz to generate caller graphs
 - doxygen
-run
-
 
 
 This project is under GPL license though uses PugiXML,
@@ -32,7 +29,7 @@ to make sure you have the latest version
 
 
 War Evolved is still under developpement (and not yet designed to be played)
-but please repport any bug, feature request, ...
+but please report any bug, feature request, ...
 
 
 Have Fun and Thank You for downloading / playing
