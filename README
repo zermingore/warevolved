@@ -1,23 +1,24 @@
 War Evolved is a simple 2D tactical RPG
 
-to compile it, you'll need autotools, make, g++ and SFML2+ (2.3)
-run
+To build the project, at the root, run
 > ./bootstrap
 
+autotools, make, g++ (with C++14 support) and SFML (2.3+) are required
 The binary file (we) should be created at the root
 
+________________________________________________________________________________
+If you experience any problem,
+please refer to the HELP text file at the root of the project
+________________________________________________________________________________
 
-To generate the documentation, you will need:
+To generate the documentation, at the root, run
+> doxygen
+
+you will need:
 - graphviz to generate caller graphs
 - doxygen
+run
 
-
-NOTE: to install SFML
-You can install the following packages in your packet manager:
-libsfml-dev libsfml-graphics2.3v5 (names / versions may vary)
-As an alternative, you can download it from it's official website
-and copy the library files into in /usr/lib
-(the path depends on your system / configuration)
 
 
 This project is under GPL license though uses PugiXML,
