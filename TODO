@@ -185,7 +185,8 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** TODO Taking a screenshot takes forever
+** DONE Taking a screenshot takes forever
+   CLOSED: [2017-08-27 So 14:02]
    the delay is not constant -> probably a synchronization issue
 
 
