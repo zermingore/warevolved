@@ -106,7 +106,7 @@ public:
    * \brief Only performs a screenshot request
    *   The boolean is check at each frame (instead of locking the window)
    */
-  static void takeScreenshot() {
+  static void screenshotRequest() {
     _takeScreenshot = true;
   }
 
@@ -162,7 +162,7 @@ private:
 
   static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
 
-  static bool _takeScreenshot;
+  static bool _takeScreenshot; ///< \true when a screenshot is requested
 };
 
 

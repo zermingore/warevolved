@@ -17,5 +17,5 @@ StateGlobal::StateGlobal()
 
 void StateGlobal::screenshot()
 {
-  graphics::GraphicsEngine::takeScreenshot();
+  graphics::GraphicsEngine::screenshotRequest();
 }
