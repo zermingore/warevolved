@@ -24,8 +24,7 @@ const sf::Color GRID_COLOR(202, 124, 0);
 // Static Variables definition
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 size_t GraphicsEngine::_nbFramesGenerated;
-std::mutex GraphicsEngine::mutexRenderWindow;
-
+bool GraphicsEngine::_takeScreenshot;
 
 
 constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns)
@@ -37,13 +36,11 @@ constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
+  _window->setActive();
+  _takeScreenshot = false;
   while (_window->isOpen())
   {
-    mutexRenderWindow.lock();
-
     static auto graphics_start(std::chrono::steady_clock::now());
-    _window->setActive();
-
 
     auto draw_start(std::chrono::steady_clock::now());
     drawBackground();
@@ -66,10 +63,14 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
       , "FPS (from one frame generation time)");
     debug::OSD::draw();
 
+    // Handle screenshot request, if any
+    if (_takeScreenshot)
+    {
+        screenshot();
+    }
+
     // update the window
     _window->display();
-
-    mutexRenderWindow.unlock();
   }
 }
 
@@ -88,10 +89,13 @@ void GraphicsEngine::screenshot()
   char path[80] = {0};
   strftime(path, 80, "/tmp/./we_screenshot__%Y_%m_%d__%H_%M_%S.png", date);
 
+  // Get the screenshot
   NOTICE("screenshot: getting image");
-  mutexRenderWindow.lock();
-  auto image {_window->capture()};
-  mutexRenderWindow.unlock();
+  auto size {_window->getSize()};
+  Texture texture;
+  texture.create(size.x, size.y);
+  texture.update(*_window);
+  auto image {texture.copyToImage()};
 
   // Save the image to a file
   if (!image.saveToFile(path))
@@ -101,6 +105,8 @@ void GraphicsEngine::screenshot()
   }
 
   NOTICE("Screenshot saved as", path);
+
+  _takeScreenshot = false;
 }
 
 

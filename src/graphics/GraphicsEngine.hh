@@ -9,7 +9,6 @@
 # define GRAPHICS_GRAPHICS_ENGINE_HH_
 
 # include <memory>
-# include <mutex>
 
 # include <SFML/Graphics/RenderWindow.hpp>
 # include <SFML/Window/Event.hpp>
@@ -49,11 +48,13 @@ public:
   static void drawInterface();
 
   /**
-   * \brief _window setter.
+   * \brief _window setter. Disable the screenshot request, if any
+   *   (used for initialization)
    * \note Takes the ownership of the given unique pointer
    */
   static void setWindow(std::unique_ptr<RenderWindow> window) {
     _window = std::move(window);
+    _takeScreenshot = false;
   }
 
   /**
@@ -102,10 +103,12 @@ public:
   }
 
   /**
-   * \brief Save the current rendered image to a file
+   * \brief Only performs a screenshot request
+   *   The boolean is check at each frame (instead of locking the window)
    */
-  static void screenshot();
-
+  static void takeScreenshot() {
+    _takeScreenshot = true;
+  }
 
 
 private:
@@ -143,6 +146,11 @@ private:
    */
   static void drawState();
 
+  /**
+   * \brief Save the current rendered image to a file
+   */
+  static void screenshot();
+
 
   /**
    * \brief current number of generated frames
@@ -154,8 +162,7 @@ private:
 
   static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
 
-  ///< Mutex to lock the window while drawing XOr taking a screenshot
-  static std::mutex mutexRenderWindow;
+  static bool _takeScreenshot;
 };
 
 
