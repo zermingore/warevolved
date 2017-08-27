@@ -1,0 +1,47 @@
+-*- mode: org -*-
+
+* INSTALL
+
+** Build tools
+You will need
+- Autotools / automake
+- make
+- A recent C++ compiler (ideally with C++17 support, at least C++14).
+The code is often only compiled with g++ and some gcc specific warnings are used
+
+
+** SFML installation
+As a minimal, the version 2.0 is strongly recommended
+If your package manager supports it, you can directly install the sfml meta-package
+
+Or else, you can install the following packages in your package manager:
+libsfml-dev libsfml-graphics2.3v5 (names / versions may vary)
+As an alternative, you can download it from it's official website
+and copy the library files into in /usr/lib
+(the path depends on your system / configuration)
+
+
+
+** Troubleshooting
+
+*** Can't exec "aclocal"
+Install automake
+
+Can't exec "aclocal": No such file or directory at /usr/share/autoconf/Autom4te/FileUtils.pm line 326.
+autoreconf: failed to run aclocal: No such file or directory
+
+
+*** Unable to find SFML
+Install the SFML with your package manager
+
+configure: error: Unable to find SFML System
+
+
+*** Make seems to loop forever complaining about modification time
+Your system date might have change between the checkout of the sources and the build
+
+ cd ../.. && /bin/sh /path/to/_warevolved/build-aux/missing automake-1.15 --foreign src/Makefile
+ cd .. && /bin/sh ./config.status src/Makefile depfiles
+config.status: creating src/Makefile
+config.status: executing depfiles commands
+make[1]: Warning: File '../../src/Makefile.am' has modification time 6672 s in the future
