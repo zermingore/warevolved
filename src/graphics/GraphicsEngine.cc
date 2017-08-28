@@ -27,10 +27,10 @@ size_t GraphicsEngine::_nbFramesGenerated;
 bool GraphicsEngine::_takeScreenshot;
 
 
-constexpr double computeFps(size_t nb_frames_generated, long int time_elapsed_ns)
+constexpr double computeFps(size_t nb_frames, long int ns_elapsed)
 {
-  return static_cast<float> (nb_frames_generated)
-    / (static_cast<float> (time_elapsed_ns) / 1000000000.f);
+  return (  static_cast<float> (nb_frames)
+          / static_cast<float> (ns_elapsed) * 1000000000.f);
 }
 
 
@@ -197,8 +197,9 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   for (auto col(0u); col < map->nbColumns(); ++col)
   {
     rectangle.setPosition(offset_x, offset_y);
-    rectangle.setSize({p::cellWidth(),
-                       p::cellHeight() * static_cast<component> (map->nbLines())});
+    rectangle.setSize(
+      {p::cellWidth(),
+       p::cellHeight() * static_cast<component> (map->nbLines())});
 
     _window->draw(rectangle);
 
@@ -256,15 +257,14 @@ void GraphicsEngine::drawInterface()
 void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
 {
   using p = MapGraphicsProperties;
+  using components = std::pair<component, component>;
 
   // offset = 1/2 left room
-  p::setGridOffsetX((static_cast<component> (_window->getSize().x) - p::cellWidth()
-                     * static_cast<component> (map->nbColumns())) / 2);
-
-  p::setGridOffsetY((static_cast<component> (_window->getSize().y) - p::cellHeight()
-                     * static_cast<component> (map->nbLines())) / 2);
+  components size {_window->getSize().x, _window->getSize().y};
+  components dims {map->nbColumns(), map->nbLines()};
+  p::setGridOffsetX((size.first  - p::cellWidth()  * dims.first)  / 2);
+  p::setGridOffsetY((size.second - p::cellHeight() * dims.second) / 2);
 }
-
 
 
 } // namespace graphics
