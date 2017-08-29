@@ -20,9 +20,6 @@
 	  <file filename='highlight.png'>
 		<name>highlight</name>
 	  </file>
-	  <file filename='side_panel.png'>
-		<name>side_panel</name>
-	  </file>
 	</folder>
 	<folder path='resources/interface/in_game_menu/'>
 	  <file filename='selection_menu_button.png'>
@@ -41,6 +38,11 @@
 	  </file>
 	  <file filename='path_corner.png'>
 		<name>path_corner</name>
+	  </file>
+	</folder>
+	<folder path='resources/interface/panel/'>
+	  <file filename='side_panel.png'>
+		<name>side_panel</name>
 	  </file>
 	</folder>
   </images>
