@@ -17,6 +17,9 @@ namespace interface {
 Panel::Panel()
   : InterfaceElement("side_panel")
   , _background(resources::ResourcesManager::getImage(_img_name))
+  , _frameMinimap(resources::ResourcesManager::getImage("frame_minimap"))
+  , _frameCell(resources::ResourcesManager::getImage("frame_cell"))
+  , _frameUnit(resources::ResourcesManager::getImage("frame_unit"))
   , _status(e_panel_status::DEACTIVATED)
 {
   setWindowSize(

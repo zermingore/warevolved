@@ -49,7 +49,9 @@ public:
    * \brief Origin setter
    * \param origin New panel origin
    */
-  void setOrigin(const graphics::Pos2 origin) { _origin = origin; }
+  void setOrigin(const graphics::Pos2 origin) {
+    _origin = origin;
+  }
 
   /**
    * \brief Updates the window size
@@ -76,7 +78,10 @@ private:
   graphics::Pos2 _origin = {0, 0}; ///< Top left or top right corner - width
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
-  std::shared_ptr<resources::Image> _background; ///< Panel's background
+  std::shared_ptr<resources::Image> _background;   ///< Panel's background
+  std::shared_ptr<resources::Image> _frameMinimap; ///< Frame for the Minimap
+  std::shared_ptr<resources::Image> _frameCell;    ///< Hovered cell's frame
+  std::shared_ptr<resources::Image> _frameUnit;    ///< Hovered unit's frame
 
   e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
 };
