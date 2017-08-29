@@ -45,13 +45,13 @@ public:
    * \brief _unit getter.
    * \return cell's unit.
    */
-  auto unit() { return _unit; }
+  const auto unit() const { return _unit; }
 
   /**
    * \brief _terrain getter.
    * \return cell's terrain.
    */
-  auto terrain() { return _terrain; }
+  const auto terrain() const { return _terrain; }
 
   /**
    * \brief _unit setter. Sets the given Unit in the cell.
@@ -69,42 +69,44 @@ public:
    * \brief Highlight getter.
    * \return Highlight Boolean value.
    */
-  auto highlight() { return _highlight; }
+  const auto highlight() const { return _highlight; }
 
   /**
    * \brief Highlight setter.
    * \param Highlight true if we want to highlight the Cell.
    */
-  void setHighlight(bool highlight) { _highlight = highlight; }
+  void setHighlight(const bool highlight) { _highlight = highlight; }
 
   /**
    * \brief Highlight color getter.
    * \return Highlight color value.
    */
-  auto highlightColor() { return _highlightColor; }
+  const auto highlightColor() const { return _highlightColor; }
 
   /**
    * \brief Highlight color setter.
    * \param color Color of Cell's highlight.
    */
-  void setHighlightColor(graphics::Color color) { _highlightColor = color; }
+  void setHighlightColor(const graphics::Color color) {
+    _highlightColor = color;
+  }
 
   /**
    * \brief returns Cell's line coordinate.
    * \return cell line coordinate.
    */
-  auto l() { return _coords.l; }
+  const auto l() const { return _coords.l; }
 
   /**
    * \brief returns Cell's column coordinate.
    * \return cell column coordinate.
    */
-  auto c() { return _coords.c; }
+  const auto c() const { return _coords.c; }
 
   /**
    * \brief coords getter.
    */
-  auto coords() { return _coords; }
+  const auto coords() const { return _coords; }
 
 
   /**
