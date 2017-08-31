@@ -60,6 +60,7 @@ interface/InterfaceSettings.cc      \
 interface/InterfaceElement.cc       \
 interface/Cursor.cc                 \
 interface/Panel.cc                  \
+interface/MiniMap.cc                \
 interface/menus/Menu.cc             \
 interface/menus/MenuEntry.cc        \
 interface/menus/InGameMenu.cc       \

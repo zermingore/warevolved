@@ -7,17 +7,23 @@
 
 
 #include <interface/Panel.hh>
+#include <interface/Cursor.hh>
+#include <interface/MiniMap.hh>
 #include <resources/Image.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <debug/Debug.hh>
 
+# include <game/Map.hh>
+# include <interface/Cursor.hh>
+
 
 namespace interface {
 
-Panel::Panel()
+Panel::Panel(std::shared_ptr<const Map> map,
+             std::shared_ptr<const Cursor> cursor)
   : InterfaceElement("side_panel")
+  , _playerCursor(cursor)
   , _background(resources::ResourcesManager::getImage(_img_name))
-  , _frameMinimap(resources::ResourcesManager::getImage("frame_minimap"))
   , _frameCell(resources::ResourcesManager::getImage("frame_cell"))
   , _frameUnit(resources::ResourcesManager::getImage("frame_unit"))
   , _status(e_panel_status::DEACTIVATED)
@@ -26,6 +32,14 @@ Panel::Panel()
       {static_cast<float> (graphics::GraphicsEngine::windowSize().x),
        static_cast<float> (graphics::GraphicsEngine::windowSize().y)}
     );
+
+  std::pair<size_t, size_t> size {_size.x, _size.y};
+  _minimap = std::make_unique<MiniMap> (size, map, cursor);
+}
+
+
+Panel::~Panel()
+{
 }
 
 
@@ -37,6 +51,7 @@ void Panel::setWindowSize(const graphics::Size2& size)
   _size.y = _windowSize.y;
   _background->setSize(_size);
 }
+
 
 
 void Panel::toggleStatus()
@@ -58,10 +73,13 @@ void Panel::toggleStatus()
 }
 
 
+
 void Panel::update()
 {
   _background->setSize(_size);
+  _minimap->update();
 }
+
 
 
 void Panel::draw()
@@ -73,6 +91,7 @@ void Panel::draw()
 
   update();
   _background->draw();
+  _minimap->draw();
 }
 
 
