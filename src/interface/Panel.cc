@@ -60,16 +60,17 @@ void Panel::toggleStatus()
     (static_cast<int> (_status) + 1)
     % static_cast<int> (e_panel_status::NB_PANEL_STATUS));
 
+  Coords background_position {0, 0};
   if (_status == e_panel_status::POSITION_RIGHT)
   {
-    _background->setPosition(3 * _windowSize.x / 4.f, 0);
-  }
-  else
-  {
-    _background->setPosition(0, 0);
+    background_position = {static_cast<size_t> (3 * _windowSize.x / 4.f), 0};
+    _background->setPosition(background_position);
   }
 
   _background->setSize(_size);
+
+  _minimap->setPosition({background_position.x,
+                         static_cast<size_t> (_windowSize.y / 2)});
 }
 
 

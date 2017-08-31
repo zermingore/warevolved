@@ -16,9 +16,10 @@
 # include <interface/InterfaceElement.hh>
 
 # include <game/Map.hh>
+# include <common/using.hh>
 # include <interface/Cursor.hh>
 
-/// class Map;
+// class Map;
 
 
 
@@ -56,9 +57,16 @@ public:
   void draw() override final;
 
 
+  /**
+   * \brief Set the MiniMap position
+   * \param pos New position
+   */
+  void setPosition(Coords pos);
+
 
 private:
   std::pair<const size_t, const size_t> _frameSize; ///< Draw area size
+  Coords _position;                                 ///< Draw area position
 
   std::shared_ptr<const Map> _map; ///< Pointer on the game's map
 
