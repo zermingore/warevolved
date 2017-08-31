@@ -14,18 +14,15 @@
 # include <utility>
 
 # include <interface/InterfaceElement.hh>
-
-# include <game/Map.hh>
 # include <common/using.hh>
-# include <interface/Cursor.hh>
 
-// class Map;
+class Map;
 
 
 
 namespace interface {
 
-// class Cursor;
+class Cursor;
 
 
 /**
