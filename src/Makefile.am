@@ -230,6 +230,7 @@ __top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
 # -Wstrict-aliasing           Warn about code which might break strict aliasing rules
 # -Wstrict-overflow           Warn about optimizations that assume that signed overflow is undefined
 # -Wmultichar                 Warn about use of multi-character character constants
+# -Wmisleading-indentation    Warn about miss-leading identation (with blocks without braces)
 #
 #
 #  Activated by -Wextra (C++ relevant):
