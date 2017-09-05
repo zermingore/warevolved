@@ -1,26 +1,25 @@
 -*- mode:org -*-
 #+OPTIONS: ^:nil
 
-# NOTE: This file should be only commited on the doc branch
+# NOTE: This file should be only commited on the doc branch (only)
 
 
 * TODO Roadmap
-** TODO Doc: track this file across branches
-   Bonus: drop TODO.archive
-   Is it really worth it? (a doc branch tracking the TODO is not enough?)
-   Test: committing it only on the doc branch, regulary merging with the master
 ** TODO Test: Save the map in a file
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
 ** TODO Cursor (interface) in its thread
-** TODO Find a way to keep track of a file accross branches (for this file)
-   (git sub-modules / git sub-tree ?)
+** CLOSED Find a way to keep track of a file accross branches (for this file)
+   CLOSED: [2017-08-29 Di 07:34]
+   git sub-tree would do the job transparently but involve another repo
+   this seems overkill for a small set of files
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO core/Context != context/*
    (as core/Context handles only graphic properties, move in graphics ?)
-** TODO Use a using for graphic types (SFML: floats for positions)
+** DONE Use a using for graphic types (SFML: floats for positions)
+   CLOSED: [2017-08-29 Di 07:37]
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 
 * TODO Input
@@ -42,7 +41,8 @@
 *** TODO non-OS dependant (in C++)
 ** TODO follow the C++ rule of 0
 ** TODO Hunt dead code
-** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
+** DONE split 'own' code and libs (easier to grep, cleaner, distincts warning)
+   CLOSED: [2017-09-05 Di 20:29]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
