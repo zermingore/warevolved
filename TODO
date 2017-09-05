@@ -41,7 +41,8 @@
 *** TODO non-OS dependant (in C++)
 ** TODO follow the C++ rule of 0
 ** TODO Hunt dead code
-** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
+** DONE split 'own' code and libs (easier to grep, cleaner, distincts warning)
+   CLOSED: [2017-09-05 Di 20:29]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
