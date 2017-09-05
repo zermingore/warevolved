@@ -64,8 +64,12 @@ void Panel::toggleStatus()
   if (_status == e_panel_status::POSITION_RIGHT)
   {
     background_position = {static_cast<size_t> (3 * _windowSize.x / 4.f), 0};
-    _background->setPosition(background_position);
   }
+  else
+  {
+    background_position = {0, 0};
+  }
+  _background->setPosition(background_position);
 
   _background->setSize(_size);
 
