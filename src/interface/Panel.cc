@@ -33,7 +33,7 @@ Panel::Panel(std::shared_ptr<const Map> map,
        static_cast<float> (graphics::GraphicsEngine::windowSize().y)}
     );
 
-  std::pair<size_t, size_t> size {_size.x, _size.y};
+  std::pair<size_t, size_t> size {_size.x, _size.y / 4};
   _minimap = std::make_unique<MiniMap> (size, map, cursor);
 }
 
