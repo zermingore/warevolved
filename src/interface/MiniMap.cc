@@ -2,6 +2,8 @@
 #include <interface/Cursor.hh>
 #include <game/Map.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/graphic_types.hh>
+#include <game/Cell.hh>
 
 
 
@@ -21,15 +23,40 @@ MiniMap::MiniMap(std::pair<size_t, size_t> size,
 
 void MiniMap::update()
 {
-  _image->sprite()->setPosition(static_cast<float> (_position.x),
-                                static_cast<float> (_position.y));
 }
 
 
 
 void MiniMap::draw()
 {
-  graphics::GraphicsEngine::draw(_image->sprite());
+  // Computing the size of a cell (using explicit size type)
+  const size_t size_column(_frameSize.first / _map->nbColumns());
+  const size_t size_line(_frameSize.second  / _map->nbLines());
+
+  const auto cells(_map->cells());
+  for (auto col(0u); col < _map->nbColumns(); ++col)
+  {
+    for (auto line(0u); line < _map->nbLines(); ++line)
+    {
+      const auto c {cells[col][line]};
+      switch (c->terrain())
+      {
+        default:
+          auto img(resources::ResourcesManager::getImage("forest"));
+          img->setPosition({ _position.c + size_column * col,
+                             _position.l + size_line * line });
+          img->setSize(static_cast<graphics::component> (size_column),
+                       static_cast<graphics::component> (size_line));
+          img->draw();
+          break;
+      }
+
+      // if (c->unit()) {
+      //   drawUnit(c->unit());
+      // }
+    }
+  }
+
 }
 
 
