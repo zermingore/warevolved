@@ -1,12 +1,7 @@
 bin_PROGRAMS = $(top_srcdir)/we
 
-# Build pugixml as a library, allowing to pass another set of flags
-# than the one used for the rest of the project
-__top_srcdir__we_LDADD = libpugixml.a
-noinst_LIBRARIES = libpugixml.a
-libpugixml_a_SOURCES = pugixml/pugixml.cpp
-libpugixml_a_CXXFLAGS = -Ofast
-
+# Link against pugixml
+__top_srcdir__we_LDADD = ${abs_top_builddir}/lib/libpugixml.a
 
 
 # Source files
@@ -85,7 +80,7 @@ generated/enum_print/generated_units.cc
 
 # ------------------------------------ Compiler configuration ------------------------------------ #
 # setting the __top_srcdir__we_CXXFLAGS variable
-__top_srcdir__we_CXXFLAGS =
+__top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
 
 # Release flags:
 # -s -O3 -DNDEBUG # -Ofast
@@ -236,6 +231,7 @@ __top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
 # -Wstrict-aliasing           Warn about code which might break strict aliasing rules
 # -Wstrict-overflow           Warn about optimizations that assume that signed overflow is undefined
 # -Wmultichar                 Warn about use of multi-character character constants
+# -Wmisleading-indentation    Warn about miss-leading identation (with blocks without braces)
 #
 #
 #  Activated by -Wextra (C++ relevant):
