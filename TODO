@@ -16,7 +16,8 @@
    git sub-tree would do the job transparently but involve another repo
    this seems overkill for a small set of files
 ** TODO Handle external libs (pugixml) in submodules ?
-** TODO core/Context != context/*
+** DONE core/Context != context/*
+   CLOSED: [2017-09-05 Di 20:34]
    (as core/Context handles only graphic properties, move in graphics ?)
 ** DONE Use a using for graphic types (SFML: floats for positions)
    CLOSED: [2017-08-29 Di 07:37]
