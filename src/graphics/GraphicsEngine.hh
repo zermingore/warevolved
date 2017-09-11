@@ -61,7 +61,7 @@ public:
    * \brief Set the offset between the window border and the grid
    * \param map Used to get the number of columns and lines of the map
    */
-  static void setGridOffset(const std::shared_ptr<Map> map);
+  static void setGridOffset(const std::shared_ptr<const Map> map);
 
   /**
    * \brief Close the window

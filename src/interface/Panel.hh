@@ -6,19 +6,28 @@
  */
 
 
-#ifndef PANEL_HH_
-# define PANEL_HH_
+#ifndef INTERFACE_PANEL_HH_
+# define INTERFACE_PANEL_HH_
 
 # include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>
 # include <common/enums/panel_status.hh>
+
+# include <game/Map.hh>
+# include <interface/Cursor.hh>
+
+class Map;
 
 namespace resources {
   class Image;
 }
 
 
+
 namespace interface {
+
+class Cursor;
+class MiniMap;
 
 
 /**
@@ -32,12 +41,19 @@ public:
   /**
    * \brief Default constructor: call InterfaceElement constructor
    */
-  Panel();
+  Panel() = delete;
+
+  /**
+   * \brief Constructor: needs the Map and Cursor to check what is hovered
+   * \param map Game's map
+   * \param cursor Cursor of the player (the interface owner)
+   */
+  Panel(std::shared_ptr<const Map> map, std::shared_ptr<const Cursor> cursor);
 
   /**
    * \brief Defaulted destructor
    */
-  ~Panel() = default;
+  ~Panel();
 
 
   /**
@@ -49,7 +65,9 @@ public:
    * \brief Origin setter
    * \param origin New panel origin
    */
-  void setOrigin(const graphics::Pos2 origin) { _origin = origin; }
+  void setOrigin(const graphics::Pos2 origin) {
+    _origin = origin;
+  }
 
   /**
    * \brief Updates the window size
@@ -76,7 +94,13 @@ private:
   graphics::Pos2 _origin = {0, 0}; ///< Top left or top right corner - width
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
-  std::shared_ptr<resources::Image> _background; ///< Panel's background
+  std::shared_ptr<const Cursor> _playerCursor; ///< Used to get what is hovered
+
+  std::unique_ptr<MiniMap> _minimap; ///< Minimap to display in its frame
+
+  std::shared_ptr<resources::Image> _background;   ///< Panel's background
+  std::shared_ptr<resources::Image> _frameCell;    ///< Hovered cell's frame
+  std::shared_ptr<resources::Image> _frameUnit;    ///< Hovered unit's frame
 
   e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
 };
@@ -84,4 +108,4 @@ private:
 
 } // namespace interface
 
-#endif /* !PANEL_HH_ */
+#endif /* !INTERFACE_PANEL_HH_ */

@@ -56,11 +56,6 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
     auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
     debug::OSD::addPod(computeFps(_nbFramesGenerated, time_elapsed.count()),
                        "FPS (from nb generated frames)");
-    // Get the fps from the time needed to generate one frame
-    auto draw_time(std::chrono::steady_clock::now() - draw_start);
-    debug::OSD::addPod(
-      1.f / (static_cast<float> (draw_time.count()) / 1000000000.f)
-      , "FPS (from one frame generation time)");
     debug::OSD::draw();
 
     // Handle screenshot request, if any
@@ -120,7 +115,7 @@ void GraphicsEngine::drawBackground()
 
 void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
 {
-  const std::shared_ptr<Map> map(battle->map());
+  const auto map(battle->map());
 
   // re-checking grid offsets
   setGridOffset(map);
@@ -137,8 +132,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
     for (auto line(0u); line < map->nbLines(); ++line)
     {
       /// \todo check if we print the cell (scroll case)
-      const std::shared_ptr<Cell> c = cells[col][line];
-
+      const auto c {cells[col][line]};
       switch (c->terrain())
       {
         default:
@@ -218,7 +212,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
   auto sprite(unit->sprite());
   auto x(sprite->getTexture()->getSize().x);
   auto y(sprite->getTexture()->getSize().y);
-  sprite->setScale(p::cellWidth() / static_cast<component> (x),
+  sprite->setScale(p::cellWidth()  / static_cast<component> (x),
                    p::cellHeight() / static_cast<component> (y));
 
 # ifdef DEBUG
@@ -230,7 +224,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
   }
 # endif
 
-  auto players = game::Status::battle()->players();
+  auto players {game::Status::battle()->players()};
   sprite->setColor(players[unit->playerId()]->color());
 
   if (unit->played()) {
@@ -254,10 +248,10 @@ void GraphicsEngine::drawInterface()
 }
 
 
-void GraphicsEngine::setGridOffset(const std::shared_ptr<Map> map)
+void GraphicsEngine::setGridOffset(const std::shared_ptr<const Map> map)
 {
   using p = MapGraphicsProperties;
-  using components = std::pair<component, component>;
+  using components = const std::pair<const component, const component>;
 
   // offset = 1/2 left room
   components size {_window->getSize().x, _window->getSize().y};
