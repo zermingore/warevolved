@@ -35,7 +35,9 @@ using Sprite = sf::Sprite;
 using Texture = sf::Texture;
 using RectangleShape = sf::RectangleShape;
 using Font = sf::Font;
-}
+
+
+} // namespace graphics
 
 
 #endif /* !GRAPHICS_GRAPHIC_TYPES_HH_ */

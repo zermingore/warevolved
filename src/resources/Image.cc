@@ -75,6 +75,13 @@ void Image::setScale(const float ratio)
 }
 
 
+void Image::setColor(const graphics::Color& color)
+{
+  _sprite->setColor(color);
+}
+
+
+
 void Image::drawAtCell(const Coords c)
 {
   if (!_sprite) {

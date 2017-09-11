@@ -65,11 +65,11 @@ void MiniMap::draw()
 
         // Using the color of the Player owning unit this Unit
         auto players {game::Status::battle()->players()};
-        img->sprite()->setColor(players[c->unit()->playerId()]->color());
+        img->setColor(players[c->unit()->playerId()]->color());
 
         if (c->unit()->played())
         {
-          img->sprite()->setColor(graphics::Color(127, 127, 127, 150));
+          img->setColor(graphics::Color(127, 127, 127, 150));
         }
 
         img->draw();

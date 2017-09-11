@@ -84,11 +84,12 @@ void Cursor::update()
   _image->sprite()->setRotation(static_cast<float> (angle));
   _image->setScale(scale_factor, scale_factor);
 
-  _image->sprite()->setColor(_color);
+  _image->setColor(_color);
 }
 
 
-void Cursor::draw() {
+void Cursor::draw()
+{
   graphics::GraphicsEngine::draw(_image->sprite());
 }
 

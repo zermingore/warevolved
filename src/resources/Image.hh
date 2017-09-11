@@ -104,6 +104,12 @@ public:
   void setScale(const float ratio);
 
   /**
+   * \brief set the Image 'global' Color
+   * \param color Color to set
+   */
+  void setColor(const graphics::Color& color);
+
+  /**
    * \brief _sprite setter
    * \param sprite _sprite value
    */
