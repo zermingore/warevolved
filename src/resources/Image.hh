@@ -39,20 +39,17 @@ public:
    */
   Image(const std::string file_name, const std::string name);
 
-  /// Default destructor
-  ~Image() = default;
-
 
   /**
    * \brief _texture getter
    * \return _texture
    */
-  std::shared_ptr<graphics::Texture> getTexture() { return _texture; }
+  const auto getTexture() { return _texture; }
 
   /**
    * \brief _sprite getter
    */
-  std::shared_ptr<graphics::Sprite> sprite() { return _sprite; }
+  const auto sprite() { return _sprite; }
 
 
   /**
