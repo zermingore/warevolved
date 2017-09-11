@@ -4,6 +4,9 @@
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/graphic_types.hh>
 #include <game/Cell.hh>
+#include <game/Status.hh>
+#include <game/Battle.hh>
+#include <game/Player.hh>
 
 
 
@@ -51,9 +54,26 @@ void MiniMap::draw()
           break;
       }
 
-      // if (c->unit()) {
-      //   drawUnit(c->unit());
-      // }
+      if (c->unit())
+      {
+        auto img(resources::ResourcesManager::getImage("minimap_unit"));
+        img->setPosition({_position.c + size_column * col,
+                          _position.l + size_line * line});
+        img->setSize(static_cast<graphics::component> (size_column),
+                     static_cast<graphics::component> (size_line));
+
+
+        // Using the color of the Player owning unit this Unit
+        auto players {game::Status::battle()->players()};
+        img->sprite()->setColor(players[c->unit()->playerId()]->color());
+
+        if (c->unit()->played())
+        {
+          img->sprite()->setColor(graphics::Color(127, 127, 127, 150));
+        }
+
+        img->draw();
+      }
     }
   }
 

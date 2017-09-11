@@ -53,6 +53,9 @@
 	  <file filename='frame_unit.png'>
 		<name>frame_unit</name>
 	  </file>
+	  <file filename='minimap_unit.png'>
+		<name>minimap_unit</name>
+	  </file>
 	</folder>
   </images>
   <fonts>
