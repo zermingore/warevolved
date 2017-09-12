@@ -7,6 +7,12 @@
 * TODO Roadmap
 ** TODO Test: Save the map in a file
 
+* TODO Clean
+** TODO Put the Resource class in the resources namespace
+** TODO ResourcesManager::getFont should return a unique_ptr
+** TODO Avoid casts to graphic types, overriding some methods
+** TODO Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
+
 * TODO experimental
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
