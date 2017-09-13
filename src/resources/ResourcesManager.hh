@@ -58,17 +58,11 @@ public:
   static std::shared_ptr<resources::Image> getImage(const std::string name);
 
   /**
-   * \brief Retrieve a Font from _fonts map
-   * if the Font does not exist, print an error and return the default one
-   */
-  static sf::Font& font(const std::string name);
-
-  /**
    * \brief If a font with the given name exists, return the matching Font
    * \return A new Font matching the given name.
    *   If the Font does not exist, print an error and return the default one
    */
-  static resources::Font& getFont(const std::string name);
+  static std::shared_ptr<resources::Font> getFont(const std::string name);
 
 
 private:

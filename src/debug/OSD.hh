@@ -19,8 +19,12 @@
 namespace sf
 {
   class Drawable;
+}
+
+namespace resources {
   class Text;
 }
+
 
 
 namespace debug {
@@ -67,7 +71,7 @@ private:
    * \brief Builds and return an initialized label, to display text
    * \return a pointer to the new label
    */
-  static std::shared_ptr<sf::Text> text(const std::string str);
+  static void addText(const std::string str);
 
 
   static unsigned int _fontSize; ///< Text font size
@@ -76,6 +80,7 @@ private:
   ///< List of items to display
   static std::vector<std::shared_ptr<sf::Drawable>> _drawables;
 };
+
 
 
 template<typename T>
@@ -90,11 +95,11 @@ void OSD::addPod(const T& value, const std::string description)
     desc = description + ": ";
   }
 
-  auto label(text(desc + std::to_string(value)));
-  _drawables.push_back(label);
+  addText(desc + std::to_string(value));
 }
 
 
 } // namespace debug
+
 
 #endif /* !DEBUG_OSD_HH_ */

@@ -16,6 +16,7 @@ resources/ResourcesManager.cc       \
 resources/Resource.cc               \
 resources/Image.cc                  \
 resources/Font.cc                   \
+resources/Text.cc                   \
 \
 debug/Debug.cc                      \
 debug/OSD.cc                        \

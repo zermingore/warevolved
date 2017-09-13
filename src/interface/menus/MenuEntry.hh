@@ -94,10 +94,10 @@ private:
    */
   void setLabelName(e_entry entry);
 
-  e_entry _id;                      ///< entry identifier
-  std::shared_ptr<sf::Text> _label; ///< button label text
-  std::string _labelName;           ///< menu entry text
-  resources::Font _font;            ///< button label font
+  e_entry _id;                            ///< entry identifier
+  std::shared_ptr<sf::Text> _label;       ///< button label text
+  std::string _labelName;                 ///< menu entry text
+  std::shared_ptr<resources::Font> _font; ///< button label font
 
   /// callback executed when the entry is selected
   std::function<void()> _callback;

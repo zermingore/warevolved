@@ -130,35 +130,23 @@ std::shared_ptr<resources::Image> ResourcesManager::getImage(const std::string n
   }
 
   ERROR("Unable to find image:", name);
-  assert(!"Image not found");
 
   return std::make_shared<resources::Image> (DEFAULT_IMAGE_PATH, "default");
 }
 
 
 
-resources::Font& ResourcesManager::getFont(const std::string name)
+std::shared_ptr<resources::Font> ResourcesManager::getFont(const std::string name)
 {
   if (_fonts.find(name) != _fonts.end()) {
-    return *_fonts[name];
+    return _fonts[name];
   }
 
-  ERROR("Unable to find font: ", name);
-  assert(!"Font not found");
+  // ERROR("Unable to find font: ", name);
 
-  return *_fonts["default"];
+  return _fonts["default"];
 }
 
-
-sf::Font& ResourcesManager::font(const std::string name)
-{
-  if (_fonts.find(name) != _fonts.end()) {
-    return *(_fonts[name]->getFont());
-  }
-
-  Debug::logPrintf("Unable to find font: ", name);
-  return *(_fonts["default"]->getFont());
-}
 
 
 } // namespace resources

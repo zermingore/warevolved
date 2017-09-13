@@ -24,7 +24,7 @@ MenuEntry::MenuEntry(const e_entry entry)
 
   /// \todo set font and label using a DB
   _font = resources::ResourcesManager::getFont("font_army");
-  _label->setFont(*(_font.getFont()));
+  _label->setFont(*(_font->getFont()));
   _label->setString(_labelName);
 }
 

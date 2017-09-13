@@ -1,5 +1,6 @@
 #include <debug/OSD.hh>
 #include <resources/ResourcesManager.hh>
+#include <resources/Text.hh>
 #include <interface/Interface.hh>
 #include <graphics/GraphicsEngine.hh>
 
@@ -22,8 +23,7 @@ void OSD::addStr(const std::string str, const std::string description)
     desc = description + ": ";
   }
 
-  auto label(text(desc + str));
-  _drawables.push_back(label);
+  addText(desc + str);
 }
 
 
@@ -40,19 +40,14 @@ void OSD::draw()
 }
 
 
-std::shared_ptr<sf::Text> OSD::text(const std::string str)
+void OSD::addText(const std::string str)
 {
-  auto label(std::make_shared<sf::Text> (
-               str,
-               resources::ResourcesManager::font("font_army"),
-               _fontSize));
+  graphics::Pos2 pos { static_cast<graphics::component> (_dataPosition.x),
+                       static_cast<graphics::component> (_dataPosition.y) };
 
-  label->setPosition(static_cast<float> (_dataPosition.x),
-                     static_cast<float> (_dataPosition.y));
-
+  auto label = std::make_shared<resources::Text> (str, _fontSize, pos);
+  _drawables.push_back(label->graphicalText());
   _dataPosition.y += _fontSize + 5;
-
-  return label;
 }
 
 
