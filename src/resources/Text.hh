@@ -46,18 +46,25 @@ public:
 
 
   /**
-   * \brief Position setter. Does not call draw automatically
+   * \brief Position setter
+   * \note Does not call draw automatically
    * \param pos New position
    */
-  void setPosition(graphics::Pos2 pos) { _position = pos; }
+  void setPosition(graphics::Pos2 pos);
 
+  /**
+   * \brief Position setter
+   * \note Does not call draw automatically
+   * \param x New column position
+   * \param y New line position
+   */
+  void setPosition(graphics::component x, graphics::component y);
 
   /**
    * \brief Graphic text getter
    * \return The graphical element containing the Text
    */
   auto graphicalText() const { return _text; }
-
 
   /**
    * \brief Draw the Text
@@ -69,7 +76,6 @@ public:
 private:
   std::string _string;             ///< Text content
   size_t _size;                    ///< Text size (in pixels)
-  graphics::Pos2 _position;        ///< Position on the screen
   std::shared_ptr<Font> _font;     ///< Graphical Font used to draw the text
   std::shared_ptr<sf::Text> _text; ///< Graphical object representing the Text
 };

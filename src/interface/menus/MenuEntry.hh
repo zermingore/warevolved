@@ -11,9 +11,12 @@
 # include <memory>
 # include <functional>
 
-# include <resources/Image.hh>
-# include <resources/Font.hh>
 # include <interface/InterfaceElement.hh>
+
+
+namespace resources {
+  class Text;
+}
 
 
 namespace interface {
@@ -95,9 +98,8 @@ private:
   void setLabelName(e_entry entry);
 
   e_entry _id;                            ///< entry identifier
-  std::shared_ptr<sf::Text> _label;       ///< button label text
+  std::shared_ptr<resources::Text> _label;       ///< button label text
   std::string _labelName;                 ///< menu entry text
-  std::shared_ptr<resources::Font> _font; ///< button label font
 
   /// callback executed when the entry is selected
   std::function<void()> _callback;

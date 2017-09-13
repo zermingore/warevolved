@@ -4,6 +4,7 @@
 #include <game/Battle.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <resources/Text.hh>
 
 
 namespace interface {
@@ -16,17 +17,14 @@ MenuEntry::MenuEntry(const e_entry entry)
   setLabelName(entry);
 
   // label initialization
-  _label = std::make_shared<sf::Text> ();
-
-  /// \todo better calculus, ratio dependent, eventually, text length dependent
+  /// \todo the size should be ratio dependent, eventually text length dependent
   using p = graphics::MapGraphicsProperties;
-  _label->setCharacterSize(static_cast<unsigned int> ((p::cellWidth() + p::cellHeight()) / 4));
+  auto size { (p::cellWidth() + p::cellHeight()) / 4 };
 
-  /// \todo set font and label using a DB
-  _font = resources::ResourcesManager::getFont("font_army");
-  _label->setFont(*(_font->getFont()));
-  _label->setString(_labelName);
+  _label = std::make_shared<resources::Text> (
+    _labelName, size, graphics::Pos2(0, 0), "font_army");
 }
+
 
 
 void MenuEntry::update()
@@ -37,17 +35,20 @@ void MenuEntry::update()
 }
 
 
+
 void MenuEntry::draw()
 {
-  _image->sprite()->setPosition(_position.x, _position.y);
+  // Drawing the text before to have a kind of fade effect
+  _label->draw();
 
-  graphics::GraphicsEngine::draw(_label);
+  _image->sprite()->setPosition(_position.x, _position.y);
   graphics::GraphicsEngine::draw(_image->sprite());
 }
 
 
 
-void MenuEntry::execute() {
+void MenuEntry::execute()
+{
   _callback();
 }
 
@@ -55,6 +56,7 @@ void MenuEntry::execute() {
 
 void MenuEntry::setLabelName(const e_entry entry)
 {
+  /// \todo set string using a DB
   switch (entry)
   {
     case e_entry::MOVE:

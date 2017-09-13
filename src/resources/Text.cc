@@ -11,7 +11,6 @@ namespace resources {
 Text::Text(std::string str, int size, graphics::Pos2 pos, std::string font)
   : _string(str)
   , _size(size)
-  , _position(pos)
 {
   _font = ResourcesManager::getFont(font);
   _text = std::make_shared<sf::Text> (str, *(_font->getFont()), _size);
@@ -23,6 +22,19 @@ Text::Text(std::string str, int size, graphics::Pos2 pos, std::string font)
 void Text::draw()
 {
   graphics::GraphicsEngine::draw(_text);
+}
+
+
+
+void Text::setPosition(graphics::Pos2 pos)
+{
+  _text->setPosition(pos);
+}
+
+
+void Text::setPosition(graphics::component x, graphics::component y)
+{
+  _text->setPosition({x, y});
 }
 
 
