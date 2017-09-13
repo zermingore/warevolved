@@ -1,15 +1,16 @@
 -*- mode:org -*-
 #+OPTIONS: ^:nil
 
-# NOTE: This file should be only commited on the doc branch (only)
+# NOTE: This file should be only commited on the doc or master branches (only)
 
 
 * TODO Roadmap
 ** TODO Test: Save the map in a file
 
 * TODO Clean
-** TODO Put the Resource class in the resources namespace
-** TODO ResourcesManager::getFont should return a unique_ptr
+** TODO Put the ResourcesManager class in the resources namespace
+** DONE ResourcesManager::getFont should return a shared_ptr
+   CLOSED: [2017-09-13 Mi 19:05]
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
 
@@ -134,12 +135,12 @@
 ** TODO Chat
 ** TODO multi-players
 
-* TODO Multi-Platforms
-** TODO Windows
-** TODO Unix (BSD)
-** TODO Mac OS
-** TODO Phone ?
-*** TODO Android
+* TODO [#C] Multi-Platforms
+** TODO [#C] Windows
+** TODO [#B] Unix (BSD)
+** TODO [#C] Mac OS
+** TODO [#B] Phone ?
+*** TODO [#B] Android
 
 * TODO Graphic Engine
 ** TODO Units filter sprite
@@ -147,8 +148,8 @@
    only graphic attribute ?
    use while moving a unit (default: look ahead, can check a side)
 ** TODO Libraries
-*** TODO switch 'on demand' (at compilation time)
-	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
+*** TODO [#C] switch 'on demand' (at compilation time)
+    use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 ** TODO Sprites management
    merge on common themes
    1 theme -> 1 load, 1 free
