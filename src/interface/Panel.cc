@@ -7,11 +7,15 @@
 
 
 #include <interface/Panel.hh>
+
+#include <debug/Debug.hh>
+#include <game/Map.hh>
+#include <game/Cell.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
 #include <resources/Image.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <debug/Debug.hh>
+#include <common/enums/terrains.hh>
 
 
 
@@ -22,6 +26,7 @@ namespace interface {
 Panel::Panel(std::shared_ptr<const Map> map,
              std::shared_ptr<const Cursor> cursor)
   : InterfaceElement("side_panel")
+  , _map(map)
   , _playerCursor(cursor)
   , _background(resources::ResourcesManager::getImage(_img_name))
   , _frameCell(resources::ResourcesManager::getImage("cursor"))
@@ -37,10 +42,6 @@ Panel::Panel(std::shared_ptr<const Map> map,
   _minimap = std::make_unique<MiniMap> (size, map, cursor);
 }
 
-
-Panel::~Panel()
-{
-}
 
 
 void Panel::setWindowSize(const graphics::Size2& size)
@@ -85,6 +86,27 @@ void Panel::update()
 {
   _background->setSize(_size);
   _frameCell->setSize({ _size.x, _size.y / 4 });
+
+  const auto cell(_map->cell(_playerCursor->coords()));
+
+  const auto terrain(cell->terrain());
+  auto image();
+  switch (terrain)
+  {
+    case e_terrain::FOREST:
+    {
+      auto img(resources::ResourcesManager::getImage("forest"));
+      img->setPosition(0, 0);
+      img->draw();
+      break;
+    }
+
+    default:
+      // Not using the enum printer here as the terrains will be a class
+      ERROR("Terrain is invalid", static_cast<int> (cell->terrain()));
+      break;
+  }
+
   _minimap->update();
 }
 

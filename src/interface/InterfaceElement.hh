@@ -58,7 +58,7 @@ public:
    * \brief _coords getter
    * \return _coords value in the grid frame
    */
-  auto coords() { return _coords; }
+  auto coords() const { return _coords; }
 
   /**
    * \brief scale getter.

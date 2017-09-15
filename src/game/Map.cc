@@ -73,7 +73,7 @@ void Map::moveUnit(const Coords c)
   if (_selectedUnit->coords() == c)
   {
     ERROR("Moving unit at coordinates:", c.c, c.l);
-    assert("!move unit: src == dst");
+    assert(!"move unit: src == dst");
   }
 
   Coords old(_selectedUnit->coords());

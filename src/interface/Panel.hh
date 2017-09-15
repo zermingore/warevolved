@@ -15,6 +15,7 @@
 
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
+# include <interface/MiniMap.hh>
 
 class Map;
 
@@ -27,7 +28,6 @@ namespace resources {
 namespace interface {
 
 class Cursor;
-class MiniMap;
 
 
 /**
@@ -49,11 +49,6 @@ public:
    * \param cursor Cursor of the player (the interface owner)
    */
   Panel(std::shared_ptr<const Map> map, std::shared_ptr<const Cursor> cursor);
-
-  /**
-   * \brief Defaulted destructor
-   */
-  ~Panel();
 
 
   /**
@@ -94,6 +89,7 @@ private:
   graphics::Pos2 _origin = {0, 0}; ///< Top left or top right corner - width
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
+  std::shared_ptr<const Map> _map; ///< Get terrain and unit under the Cursor
   std::shared_ptr<const Cursor> _playerCursor; ///< Used to get what is hovered
 
   std::unique_ptr<MiniMap> _minimap; ///< Minimap to display in its frame
