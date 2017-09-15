@@ -13,18 +13,18 @@
 #include <graphics/GraphicsEngine.hh>
 #include <debug/Debug.hh>
 
-# include <game/Map.hh>
-# include <interface/Cursor.hh>
 
 
 namespace interface {
 
+
+/// \todo make frame_cell, frame_unit and frame minimap textures
 Panel::Panel(std::shared_ptr<const Map> map,
              std::shared_ptr<const Cursor> cursor)
   : InterfaceElement("side_panel")
   , _playerCursor(cursor)
   , _background(resources::ResourcesManager::getImage(_img_name))
-  , _frameCell(resources::ResourcesManager::getImage("frame_cell"))
+  , _frameCell(resources::ResourcesManager::getImage("cursor"))
   , _frameUnit(resources::ResourcesManager::getImage("frame_unit"))
   , _status(e_panel_status::DEACTIVATED)
 {
@@ -70,11 +70,13 @@ void Panel::toggleStatus()
     background_position = {0, 0};
   }
   _background->setPosition(background_position);
-
   _background->setSize(_size);
 
   _minimap->setPosition({background_position.x,
                          static_cast<size_t> (_windowSize.y / 2)});
+
+  _frameCell->setPosition({background_position.x, 0});
+  _frameCell->setSize(_size);
 }
 
 
@@ -82,6 +84,7 @@ void Panel::toggleStatus()
 void Panel::update()
 {
   _background->setSize(_size);
+  _frameCell->setSize({ _size.x, _size.y / 4 });
   _minimap->update();
 }
 
@@ -97,6 +100,7 @@ void Panel::draw()
   update();
   _background->draw();
   _minimap->draw();
+  _frameCell->draw();
 }
 
 
