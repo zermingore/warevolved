@@ -3,6 +3,8 @@
 
 
 Interface::Interface() :
+  _panelPosition (E_PANEL_DEACTIVATED),
+  _menuBarPosition (E_MENU_BAR_DEACTIVATED),
   _modificationPanel (true),
   _modificationMenuBar (true)
 {
@@ -13,24 +15,21 @@ Interface::Interface() :
   _menuBar = std::make_shared<MenuBar> ();
 }
 
-
-void Interface::nextPanelPosition()
+void Interface::incrementPanelPosition()
 {
-  // stores the actual one, before actualising
-  _lastPanelPosition = _panel->incrementPosition();
+  _panelPosition = static_cast<e_panel_position> ((_panelPosition + 1) % E_PANEL_NB_POSITIONS);
   _modificationPanel = true;
 }
 
-void Interface::nextMenuBarPosition()
+void Interface::incrementMenuBarPosition()
 {
-  // stores the actual one, before actualising
-  _lastMenuBarPosition = _menuBar->incrementPosition();
+  _menuBarPosition = static_cast<e_menu_bar_position> ((_menuBarPosition + 1) % E_MENU_BAR_NB_POSITIONS);
   _modificationMenuBar = true;
 }
 
 void Interface::setSidePanel()
 {
-  if (_panel->position() == Panel_position::DEACTIVATED)
+  if (_panelPosition == E_PANEL_DEACTIVATED)
   {
     g_status->setRenderX(WINDOW_SIZE_X);
     g_status->setGridOffsetX((WINDOW_SIZE_X - CELL_WIDTH * NB_COLUMNS) / 2);
@@ -51,7 +50,7 @@ void Interface::setSidePanel()
     (float) WINDOW_SIZE_Y
   };
 
-  if (_panel->position() == Panel_position::LEFT)
+  if (_panelPosition == E_PANEL_LEFT)
   {
     g_status->setGridOffsetX(offset + GRID_THICKNESS);
   }
@@ -62,12 +61,12 @@ void Interface::setSidePanel()
     origin.x = WINDOW_SIZE_X - size.x;
   }
 
-  if (_menuBar->position() == MenuBar_position::TOP)
+  if (_menuBarPosition == E_MENU_BAR_TOP)
   {
 //    size.y -= _menuBar->size().y;
     origin.y += _menuBar->size().y;
   }
-  if (_menuBar->position() == MenuBar_position::BOTTOM)
+  if (_menuBarPosition == E_MENU_BAR_BOTTOM)
   {
     size.y -= _menuBar->size().y;
   }
@@ -80,7 +79,7 @@ void Interface::setSidePanel()
 
 void Interface::setMenuBar()
 {
-  if (_menuBar->position() == MenuBar_position::DEACTIVATED)
+  if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
   {
     g_status->setRenderY(WINDOW_SIZE_Y);
     g_status->setGridOffsetY((WINDOW_SIZE_Y - CELL_HEIGHT * NB_LINES) / 2);
@@ -94,7 +93,7 @@ void Interface::setMenuBar()
   g_status->setRenderY(WINDOW_SIZE_Y - render_y);
 
   unsigned int offset = (render_y - CELL_HEIGHT * NB_LINES) / 2;
-  if (_menuBar->position() == MenuBar_position::TOP)
+  if (_menuBarPosition == E_MENU_BAR_TOP)
   {
     g_status->setGridOffsetY(offset + CELL_HEIGHT / 2 - GRID_THICKNESS);
     sf::Vector2f size(WINDOW_SIZE_X, CELL_HEIGHT / 2);
@@ -117,7 +116,7 @@ void Interface::setMenuBar()
 
 void Interface::drawSidePanel()
 {
-  if (_panel->position() == Panel_position::DEACTIVATED)
+  if (_panelPosition == E_PANEL_DEACTIVATED)
     return;
 
   _panel->draw();
@@ -126,7 +125,7 @@ void Interface::drawSidePanel()
 
 void Interface::drawMenuBar()
 {
-  if (_menuBar->position() == MenuBar_position::DEACTIVATED)
+  if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
     return;
 
   _menuBar->draw();

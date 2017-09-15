@@ -2,18 +2,19 @@
 #include <common/globals.hh>
 #include <common/macros.hh>
 #include <interface/panels/SidePanel.hh>
-#include <interface/panels/SidePanel.hxx>
 
-SidePanel::SidePanel() :
-  _position (Panel_position::DEACTIVATED)
+
+SidePanel::SidePanel()
 {
+  _origin = {0, 0};
+  _size = {0, 0};
 }
 
 void SidePanel::draw()
 {
   // showing selection rectangle
-  _background = GETIMAGE("panel_background");
-  _background.setSize(_size);
+  _background = GETIMAGE("selection_menu_selection");
+  _background.setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
   _background.setPosition(_origin);
   _background.draw();
 
@@ -35,14 +36,4 @@ void SidePanel::draw()
   auto unit(MAP.unit(CURSOR->coords()));
   if (unit)
     PRINTF(unit->name());
-}
-
-
-
-Panel_position SidePanel::incrementPosition()
-{
-  Panel_position old = _position;
-  _position++;
-
-  return old;
 }

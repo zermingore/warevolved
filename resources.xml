@@ -29,11 +29,6 @@
 		<name>selection_menu_selection</name>
 	  </file>
 	</folder>
-	<folder path='resources/interface/panels/'>
-	  <file filename='panel_background.png'>
-		<name>panel_background</name>
-	  </file>
-	</folder>
 	<folder path='resources/interface/path/'>
 	  <file filename='path_shape.png'>
 		<name>path_shape</name>
