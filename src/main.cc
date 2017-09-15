@@ -1,27 +1,35 @@
-#include <common/include.hh>
-#include <core/Context.hh>
-#include <interface/Interface.hh>
+#include <exception>
+
 #include <game/Game.hh>
+#include <debug/Debug.hh>
+#include <tools/OptionsParser.hh>
 
-
-std::unique_ptr<Status> g_status(std::make_unique<Status> ());
-std::unique_ptr<ResourcesManager> g_rm(std::make_unique<ResourcesManager> ("resources.xml"));
-std::unique_ptr<Interface> g_interface(std::make_unique<Interface> ());
-std::unique_ptr<sf::RenderWindow> g_window(std::make_unique<sf::RenderWindow> ());
-std::unique_ptr<Text> g_text(std::make_unique<Text> ());
 
 
 int main(int ac, const char **av)
 {
-  // TODO use getopt -> support: resolution, graphic engine ({2,3}D, ASCII), ...
-  PRINTF(av);
+  // Options parsing
+  auto fullscreen = false;
+  auto replay = false;
+  try
+  {
+    OptionsParser p(ac, av);
+    replay = p.optionExists("replay");
+    fullscreen = p.optionExists("fullscreen");
+  }
+  catch (const ArgumentsHelpVersionException& e)
+  {
+    return EXIT_SUCCESS;
+  }
+  catch (const ArgumentsException& e)
+  {
+    ERROR("Invalid arguments:", e.what());
+    return EXIT_FAILURE;
+  }
 
-  bool fullscreen = ac > 1;
-  Context context(fullscreen);
-  g_status->pushMode(E_MODE_PLAYING); // TODO a main menu
-
-  Game game;
-  game.run();
+  // Launch the game
+  Game game(fullscreen);
+  game.run(replay);
 
   return EXIT_SUCCESS;
 }

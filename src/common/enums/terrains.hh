@@ -1,14 +1,22 @@
-#ifndef TERRAINS_HH_
-# define TERRAINS_HH_
-
-/** \enum listing of all terrains
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
  */
-enum e_terrain
-{
-  E_TERRAIN_NONE = 0,
-  E_TERRAIN_FOREST,
 
-  E_TERRAIN_NB_TERRAIN
+#ifndef ENUM_TERRAINS_HH_
+# define ENUM_TERRAINS_HH_
+
+/**
+ * \enum e_terrain
+ * \brief Listing of all terrains
+ */
+enum class e_terrain
+{
+  NONE = 0,
+  FOREST,
+
+  NB_TERRAIN
 };
 
 #endif /* !TERRAINS_HH_ */

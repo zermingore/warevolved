@@ -1,10 +1,16 @@
 #		-*- mode:sh -*-			#
 
+# temporary files
 *.o
 *.in
 LOG
+LOG_EVENTS
+*\#
+*user
+build/
 
 # Autotools output
+configure
 .dirstamp
 Makefile
 aclocal.m4
@@ -13,6 +19,7 @@ build-aux/
 config.log
 config.status
 *.deps/
+*.am.user*
 
 # personal files
 valgrind_log*
@@ -31,10 +38,11 @@ etags
 .project
 .settings
 
+# Qt Creator files
+warevolved.*
+
 # Doxygen
-html/
-latex/
-man/
+doc/doxygen/
 
 # Perf
 perf.data*

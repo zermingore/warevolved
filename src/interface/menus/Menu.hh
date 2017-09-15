@@ -1,111 +1,134 @@
-/*
- * interface/menus/Menu.hh
- *
- *  Created on: July 24, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 24, 2013
+ * \author Zermingore
  */
 
 #ifndef MENU_HH_
 # define MENU_HH_
 
-# include <common/include.hh>
+# include <memory>
+# include <vector>
+
 # include <resources/Image.hh>
-# include <interface/panels/Panel.hh>
 # include <interface/menus/MenuEntry.hh>
-# include <game/PathFinding.hh>
-# include <common/enums/modes.hh>
+# include <interface/InterfaceElement.hh>
+
+enum class e_state;
 
 
-/** \class Menu: generic Menu class
- ** mother of \class InGameMenu
+namespace interface {
+
+
+/**
+ * \class Menu
+ * \brief Generic Menu (abstract class)
+ * mother of \class InGameMenu
  */
-class Menu
+class Menu: public InterfaceElement
 {
 public:
-  /** \brief default Ctor
+  /**
+   * \brief Default constructor. Initializes the graphic attributes
    */
   Menu();
 
-  /** \brief allows to build a menu which entries are \param entries
-   **   sets _origin according to current Cursor position
-   **   and _selectedEntry to 0
+  /**
+   * \brief increments _selectedEntry modulo number of Entries
+   * \note Allow cycling
    */
-  explicit Menu(std::vector<MenuEntry> &entries);
+  void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
 
-  // TODO: merge and use a single function for all (4) directions
-  /** \brief increments _selectedEntry modulo number of Entries
-   **  allowing cycling
-   */
-  inline void incrementSelectedEntry() { ++_selectedEntry %= _entries.size(); }
-
-  /** \brief decrements _selectedEntry modulo _nbEntries
-   **  allowing cycling
+  /**
+   * \brief decrements _selectedEntry modulo _nbEntries
+   *   allowing cycling
    */
   void decrementSelectedEntry();
 
-  /** \brief sets origin menu to the right cursor relative position
+  /**
+   * \brief sets origin menu to the right cursor relative position
+   * \todo set the menu at optimal position
    */
-  void setOrigin(); // TODO sets the menu at optimal position
+  virtual void setOrigin(const Coords origin);
 
-  /** \brief sets origin menu to the right cursor relative position
+  /**
+   * \brief draws the menu its entries and the current entry highlighter
    */
-  virtual void setOrigin(sf::Vector2f origin); // TODO sets the menu at optimal position
+  void draw() override;
 
-  /** \brief draws the menu
-   ** with its entries and the current entry highlighter
+  /**
+   * \brief sets _selectedEntry to 0
    */
-  void draw();
+  void resetSelectedEntry() { _selectedEntry = 0; }
 
-  /** \brief sets _selectedEntry to 0
+  /**
+   * \brief builds the selection menu, filling _entries
+   * \param state The state we're about to push
    */
-  inline void resetSelectedEntry() { _selectedEntry = 0; }
+  virtual void build() = 0;
 
-  /** \brief builds the selection menu, filling _entries
-   ** \param mode The mode we're about to push
-   */
-  virtual void build(e_mode mode) = 0;
 
-  /** \brief executes action matching _selectedEntry
-   */
-  virtual void executeEntry() = 0;
+  // Selection motion
+  virtual void moveUp()    {}
+  virtual void moveDown()  {}
+  virtual void moveLeft()  {}
+  virtual void moveRight() {}
 
-  /** \brief loads a previously saved menu
-   ** \param menu menu to load
+
+  /**
+   * \brief Removes the entries of the menu
    */
-  void loadMenu();
+  virtual void clear() { _entries.clear(); }
+
+  /**
+   * \brief Callback for closing the menu
+   */
+  virtual void close() = 0;
+
+  /**
+   * \brief executes action matching _selectedEntry
+   */
+  virtual void validate() = 0;
+
+  /**
+   * \brief Resume the current menu
+   *   as a default behavior, updates the cursor coordinates to the menu ones
+   */
+  virtual void resume();
+
 
 
 protected:
-  /** \brief initializes the menu
-   ** called by this->build()
+  /**
+   * \brief list of entries getter
+   * \return a pointer over _entries array
+   * \note this function is used to retrieve
+   *   informations from menu stack (see \class Status)
    */
-  void init();
+  auto getEntries() const { return _entries; }
 
-  /** \brief list of entries getter
-   ** \return a pointer over _entries array
-   ** \note this function is used to retrieve
-   **   informations from menu stack (see \class Status)
+  /**
+   * \brief selected entry getter
+   * \return current selected entry
+   * \note this function is used to retrieve
+   *   informations from menu stack (see \class Status)
    */
-  // inline const std::vector<std::shared_ptr<MenuEntry>> &getEntries() const
-  // { return *_entries; }
+  size_t selectedEntry() { return _selectedEntry; }
 
-  inline std::vector<MenuEntry> getEntries() const
-  { return _entries; }
 
-  /** \brief selected entry getter
-   ** \return current selected entry
-   ** \note this function is used to retrieve
-   **   informations from menu stack (see \class Status)
-   */
-  inline unsigned int selectedEntry() { return _selectedEntry; }
 
-  unsigned int _selectedEntry; ///< Current selected entry
+  std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list
+  Coords _origin; ///< menu origin
+
+  size_t _selectedEntry; ///< Current selected entry
                                ///< the first entry, is at the bottom,
                                ///< it has the index 0
 
-  std::vector<MenuEntry> _entries; ///< Entries list
-  Image _imageSelection; ///< Background image (entry)
-  sf::Vector2f _origin; ///< menu origin
+  ///< Emphasis of the selected entry
+  std::shared_ptr<resources::Image> _imageSelection;
 };
+
+
+} // namespace interface
 
 #endif /* !MENU_HH_ */

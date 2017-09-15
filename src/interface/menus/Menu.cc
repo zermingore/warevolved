@@ -1,59 +1,40 @@
 #include <interface/menus/Menu.hh>
+
+#include <debug/Debug.hh>
 #include <interface/menus/MenuEntry.hh>
-#include <common/constants.hh>
-#include <common/globals.hh>
-#include <common/macros.hh>
+#include <game/Status.hh>
+#include <context/State.hh>
+#include <input/EventManager.hh>
+#include <game/Battle.hh>
+#include <game/Player.hh>
+#include <interface/Cursor.hh>
+
+namespace interface {
 
 
-Menu::Menu() :
-  _selectedEntry (0)
+Menu::Menu()
+  : InterfaceElement("selection_menu_button")
+  , _selectedEntry (0)
+  , _imageSelection(resources::ResourcesManager::getImage("selection_menu_selection"))
 {
-  _entries = std::vector<MenuEntry> ();
-  _origin = {0, 0};
 }
 
 
-Menu::Menu(std::vector<MenuEntry> &entries) :
-  _selectedEntry (0)
+void Menu::setOrigin(const Coords origin)
 {
-  _entries = std::vector<MenuEntry> (entries);
-
-  _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
-  _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
-}
-
-void Menu::init()
-{
-  setOrigin();
-  _entries.clear();
-}
-
-void Menu::loadMenu()
-{
-  auto menu = g_status->popCurrentMode().menu();
-  _entries = menu->getEntries();
-  _selectedEntry = menu->selectedEntry();
-  setOrigin();
-}
-
-void Menu::setOrigin()
-{
-  // TODO sets the menu at right (cursor-relative) position
-  _origin.x = (CURSOR->x() + 1) * CELL_WIDTH + GRID_OFFSET_X;
-  _origin.y = CURSOR->y() * CELL_HEIGHT + GRID_OFFSET_Y;
-}
-
-void Menu::setOrigin(sf::Vector2f origin)
-{
+  /// \todo set the menu at optimal coordinates
   _origin = origin;
 }
 
+
 void Menu::decrementSelectedEntry()
 {
-  if (_selectedEntry)
+  if (_selectedEntry) {
     _selectedEntry = (_selectedEntry - 1) % (_entries.size() - 1);
-  else
+  }
+  else {
     _selectedEntry = _entries.size() - 1;
+  }
 }
 
 
@@ -62,20 +43,14 @@ void Menu::draw()
   if (_entries.size() == 0)
   {
     PRINTF("on demand build");
-    build(CURRENT_MODE); // use a cache (when pushing state)
+    build(); // use a cache (when pushing state)
   }
-
-  setOrigin();
-  sf::Vector2f v_rect(_origin);
-  for (auto it: _entries)
-  {
-    it.draw(v_rect);
-    v_rect -= sf::Vector2f(0, CELL_HEIGHT);
-  }
-
-  // showing selection rectangle
-  _imageSelection = GETIMAGE("selection_menu_selection");
-  _imageSelection.setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-  _imageSelection.setPosition(_origin - sf::Vector2f(0, CELL_HEIGHT * _selectedEntry));
-  _imageSelection.draw();
 }
+
+
+void Menu::resume() {
+  game::Status::player()->cursor()->setCoords(_coords);
+}
+
+
+} // namespace interface

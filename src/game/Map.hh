@@ -1,111 +1,213 @@
-#ifndef MAP_HH_
-# define MAP_HH_
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
+ * \brief Map class definition.
+ */
 
-# include <common/include.hh>
-# include <common/enums/units.hh>
-# include <common/enums/terrains.hh>
-# include <game/Cell.hh>
-# include <game/units/Unit.hh>
-# include <resources/ResourcesManager.hh>
-# include <game/Player.hh>
+#ifndef GAME_MAP_HH_
+# define GAME_MAP_HH_
+
+# include <memory>
+# include <vector>
+# include <list>
+# include <map>
+# include <cstddef>
+
+# include <common/using.hh>
+# include <common/enums/attack_result.hh>
+
+class Cell;
+class Unit;
+
+enum class e_terrain;
+enum class e_unit;
 
 
-/** \class represents the game map
+/**
+ * \class Map
+ * \brief Represents the game map.
  */
 class Map
 {
 public:
-  /** \brief Constructs a map of nbColumns x nbLines
-   ** \param nbColumns Number of columns required
-   ** \param nbLines Number of lines required
-   ** calls this->init() to initialize a fresh Map
+  /**
+   * \typedef unit_list
+   * \brief list of units, per player
    */
-  Map(unsigned int nbColumns, unsigned int nbLines);
+  using unit_list = std::map<size_t, std::list<std::shared_ptr<Unit>>>;
 
-  /** \brief Initializes the map
-   **   Puts units where needed;
-   **   Sets right Terrains;
-   **   Asks ResourcesManager to loads needed Resources
-   */
-  void init();
 
-  /** \brief _nbColumns getter
-   ** \return number of columns
-   */
-  inline unsigned int nbColumns() const { return _nbColumns; }
+  /// remove default constructor as we need the dimensions of the map
+  Map() = delete;
 
-  /** \brief _nbLines getter
-   ** \return number of lines
+  /**
+   * \brief Constructs a map of nbColumns x nbLines
+   *
+   * Initializes the map as follow:
+   *   Puts units where needed;
+   *   Sets right Terrains;
+   *   Asks ResourcesManager to loads needed Resources
+   *
+   * \param nbColumns Number of columns required
+   * \param nbLines Number of lines required
    */
-  inline unsigned int nbLines() const { return _nbLines; }
+  Map(const size_t nb_columns, const size_t nb_lines);
 
-  /** \brief gets the unit at coordinates (x, y)
-   **
-   ** \param x Coordinates according to columns
-   ** \param y Coordinates according to lines
-   **
-   ** \return the enum index in e_unit matching the unit
-   **   located at coordinates (x, y)
-   */
-  std::shared_ptr<Unit> unit(unsigned int x, unsigned int y)
-  { return _cells[x][y]->unit(); }
+  /// default destructor
+  ~Map() = default;
 
-  /** \brief gets the unit at c's coordinates
-   **
-   ** \param c targeted Cell's coordinates
-   **
-   ** \return the enum index in e_unit matching the unit
-   **   located at coordinates (c.x, c.y)
-   */
-  std::shared_ptr<Unit> unit(Coords c) { return _cells[c.x][c.y]->unit(); }
 
-  /** \brief gets the terrain at coordinates (x, y)
-   **
-   ** \param x Coordinates according to columns
-   ** \param y Coordinates according to lines
-   **
-   ** \return the enum index in e_terrain matching the terrain
-   **   located at coordinates (x, y)
+  /**
+   * \brief _nbColumns getter
+   *
+   * \return number of columns
    */
-  e_terrain getTerrain(unsigned int x, unsigned int y)
-  { return _cells[x][y]->terrain(); }
+  size_t nbColumns() const { return _nbColumns; }
 
-  /** \brief _cells array getter
-   ** \return a reference over the cells array
+  /**
+   * \brief _nbLines getter
+   * \return number of lines
    */
-  inline std::vector<std::vector<std::shared_ptr<Cell>>> cells() { return _cells; }
+  size_t nbLines() const { return _nbLines; }
 
-  /** \brief returns the Cell which coordinates are x and y
-   ** \param x requested Cell x coordinate
-   ** \param y requested Cell y coordinate
-   ** \return a pointer over the requested Cell
+  /**
+   * \brief gets the unit at coordinates (x, y)
+   *
+   * \param x Coordinates according to columns
+   * \param y Coordinates according to lines
+   *
+   * \return the enum index in e_unit matching the unit
+   *   located at coordinates (x, y)
    */
-  inline std::shared_ptr<Cell> cell(unsigned int x, unsigned int y)
-  { return _cells[x][y]; }
+  std::shared_ptr<Unit> unit(const size_t line, const size_t column) const;
 
-  /** \brief sets the given unit in the cells array
-   ** \param unit to set
+  /**
+   * \brief gets the unit at c's coordinates.
+   * \param c targeted Cell's coordinates.
+   * \return the enum index in e_unit matching the unit
+   *   located at coordinates (c.c, c.l).
    */
-  void setUnit(std::shared_ptr<Unit> u)
-  { _cells[u->x()][u->y()]->setUnit(u); }
+  std::shared_ptr<Unit> unit(const Coords& c) const;
 
-  /** \brief moves the selected unit to the current cursor location
+  /**
+   * \brief Marks the Unit located at the given coordinates as selected.
+   * \param c coordinates where the Unit to select is located
+   * \note A unit must be located at given coordinates
    */
-  void moveUnit();
-  /** \brief moves given unit to the given coordinates
+  void selectUnit(const Coords c);
+
+  /**
+   * \brief selected unit getter
+   * \return a pointer on the currently selected unit, if any
    */
-  void moveUnit(std::shared_ptr<Unit> u, Coords c);
+  auto selectedUnit() { return _selectedUnit; }
+
+  /**
+   * \brief gets the terrain at coordinates (x, y).
+   *
+   * \param x Coordinates according to columns.
+   * \param y Coordinates according to lines.
+   *
+   * \return the enum index in e_terrain matching the terrain
+   *   located at coordinates (c, l).
+   */
+  e_terrain getTerrain(const size_t line, const size_t column) const;
+
+  /**
+   * \brief get the cell at given coordinates
+   * \param coords the coordinates of the Cell to retrieve
+   * \return The cell at coords coordinates
+   */
+  auto cell(Coords coords) const { return _cells[coords.c][coords.l]; }
+
+  /**
+   * \brief _cells array getter.
+   * \return The cells array.
+   */
+  auto cells() const { return _cells; }
+
+  /**
+   * \brief builds a new unit of type \param unit
+   *
+   * \param type type of the new unit
+   * \param line line to set the new unit
+   * \param column column to set the new unit
+   * \param player_id player to which the unit belongs to
+   *
+   * \note player_id defaults to -1
+   *   In this case, the unit is assigned to the current player
+   */
+  void newUnit(const e_unit type,
+               const size_t column,
+               const size_t line,
+               int player_id = -1);
+
+  /**
+   * \brief moves the _selectedUnit to the given coordinates
+   * \param c Destination coordinates
+   */
+  void moveUnit(const Coords c);
+
+  /**
+   * \brief reset all units played boolean to false
+   */
+  void endTurn();
+
+
+  /**
+   * \brief computes and return the result of the fight
+   * \param attacker_status attacker status after the fight
+   * \param defender_status defender status after the fight
+   * \return the attack result
+   */
+  e_attack_result attackResult(bool attacker_status, bool defender_status);
+
+  /**
+   * \brief Perform the attack of the _selectedUnit over the defender
+   * \param defender Unit defending the attack
+   * \return the result of the attack (which unit died, if any)
+   */
+  e_attack_result attack(std::shared_ptr<Unit> defender);
+
+  /**
+   * \brief Perform the attack of the _selectedUnit on the target_cell
+   * \param target_cell target of the attack (may contain an unit)
+   * \return the result of the attack (which unit died, if any)
+   */
+  e_attack_result attack(std::shared_ptr<Cell> target_cell);
+
+  /**
+   * \brief operator to allow getting a cell calling map[i][j]
+   * returns a vector of pointers to Cell
+   * To get the requested cell, use the second coordinate as vector index
+   *
+   * \param line requested Cell coordinate
+   *
+   * \return a vector of pointers to Cell
+   */
+  auto operator[] (const size_t column) { return _cells[column]; }
+
+  /**
+   * \brief ascii art dump of the map
+   */
+  void dump();
+
 
 
 private:
-  unsigned int _nbColumns; ///< number of columns (x coordinate)
-  unsigned int _nbLines; ///< number of lines (y coordinate)
+  size_t _nbColumns; ///< number of columns (x coordinate)
+  size_t _nbLines;   ///< number of lines (y coordinate)
 
-  ///< 2D Array of every cells of the map
+  /// 2D Array of every cells of the map
   std::vector<std::vector<std::shared_ptr<Cell>>> _cells;
 
-  ///< players in this battle
-  std::shared_ptr<std::vector<std::shared_ptr<Player>>> _players;
+  /// map of units: <player, unit_list>
+  unit_list _units;
+
+  /// Current selected unit
+  std::shared_ptr<Unit> _selectedUnit;
 };
 
-#endif /* !MAP_HH_ */
+
+#endif /* !GAME_MAP_HH_ */

@@ -1,74 +1,89 @@
 #include <input/KeyManager.hh>
-#include <common/globals.hh>
+
+#include <common/enums/input.hh>
+#include <debug/Debug.hh>
+#include <input/ReplayManager.hh>
 
 
-KeyManager::KeyManager()
+// Static members definition
+std::multimap<const sf::Keyboard::Key, const e_key> KeyManager::_keys_mapping;
+std::map<const e_key, const e_input> KeyManager::_events_mapping;
+ThreadSafeQueue<e_input> KeyManager::_active_inputs;
+std::shared_ptr<ReplayManager> KeyManager::_replay;
+
+
+
+void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
 {
-  for (auto i = 0; i < E_TIMER_NB_TIMERS; ++i)
-    _ready[i] = true;
+  _replay = replay;
 
-  for (auto i = 0; i < E_SWITCH_NB_SWITCHES; ++i)
-	_switches[i] = false;
+  /// \todo Read configuration file to get these values (use Settings Class)
 
-  mapKeys();
+  // This mapping might be overloaded later, by the configuration management
+  // keyboard: user part; e_key binary part
+  // _keys_mapping: keyboard -> e_key ('z' and '8' can be used for LEFT key)
+  // e_key -> keyboard (allow duplicated keys)
+
+  _keys_mapping.insert({sf::Keyboard::Left,   e_key::LEFT});
+  _keys_mapping.insert({sf::Keyboard::Right,  e_key::RIGHT});
+  _keys_mapping.insert({sf::Keyboard::Up,     e_key::UP});
+  _keys_mapping.insert({sf::Keyboard::Down,   e_key::DOWN});
+
+  // These don't seem natural (but makes sense with a Workman layout)
+  _keys_mapping.insert({sf::Keyboard::N,      e_key::LEFT });
+  _keys_mapping.insert({sf::Keyboard::E,      e_key::UP   });
+  _keys_mapping.insert({sf::Keyboard::O,      e_key::DOWN });
+  _keys_mapping.insert({sf::Keyboard::I,      e_key::RIGHT});
+
+  _keys_mapping.insert({sf::Keyboard::Space,  e_key::SELECTION});
+  _keys_mapping.insert({sf::Keyboard::Escape, e_key::EXIT});
+
+  // Accessible features whatever the state is
+  _keys_mapping.insert({sf::Keyboard::Delete, e_key::SCREENSHOT});
+  _keys_mapping.insert({sf::Keyboard::F3,     e_key::TOGGLE_PANEL});
+
+
+  // This event mapping is populated here but will then be read only
+  // These are the mapping key (dissociated from the keyboard) -> event
+  _events_mapping.insert({e_key::LEFT,         e_input::MOVE_LEFT   });
+  _events_mapping.insert({e_key::RIGHT,        e_input::MOVE_RIGHT  });
+  _events_mapping.insert({e_key::UP,           e_input::MOVE_UP     });
+  _events_mapping.insert({e_key::DOWN,         e_input::MOVE_DOWN   });
+  _events_mapping.insert({e_key::SELECTION,    e_input::SELECTION   });
+  _events_mapping.insert({e_key::EXIT,         e_input::EXIT        });
+  _events_mapping.insert({e_key::TOGGLE_PANEL, e_input::TOGGLE_PANEL});
+  _events_mapping.insert({e_key::SCREENSHOT,   e_input::SCREENSHOT  });
 }
 
 
-void KeyManager::mapKeys()
+
+void KeyManager::pushEvent(const sf::Keyboard::Key& key)
 {
-  // read configuration file to retrieve these values
-  // use Settings Class
-  _keys[E_KEY_MOVE_UP_1] = sf::Keyboard::Up;
-  _keys[E_KEY_MOVE_UP_2] = sf::Keyboard::W;
-  _keys[E_KEY_MOVE_DOWN_1] = sf::Keyboard::Down;
-  _keys[E_KEY_MOVE_DOWN_2] = sf::Keyboard::S;
-  _keys[E_KEY_MOVE_LEFT_1] = sf::Keyboard::Left;
-  _keys[E_KEY_MOVE_LEFT_2] = sf::Keyboard::A;
-  _keys[E_KEY_MOVE_RIGHT_1] = sf::Keyboard::Right;
-  _keys[E_KEY_MOVE_RIGHT_2] = sf::Keyboard::D;
+  // getting the logical key
+  auto logical_key_it(_keys_mapping.find(key));
+  if (logical_key_it == _keys_mapping.end())
+  {
+    return;
+  }
 
-  // action keys
-  _keys[E_KEY_SELECTION_1] = sf::Keyboard::Space;
-  _keys[E_KEY_SELECTION_2] = sf::Keyboard::Return;
+  auto logical_key(logical_key_it->second);
+  if (_replay && _replay->mode() == e_replay_mode::RECORD)
+  {
+    // Logging only 'useful' events
+    _replay->storeKey(logical_key);
+  }
 
-  // menu keys
-  _keys[E_KEY_MENUBAR_1] = sf::Keyboard::F3;
-  _keys[E_KEY_MENUBAR_2] = sf::Keyboard::F3;
-  _keys[E_KEY_PANEL_1] = sf::Keyboard::F2;
-  _keys[E_KEY_PANEL_2] = sf::Keyboard::F2;
-
-  // exit request keys
-  _keys[E_KEY_EXIT_1] = sf::Keyboard::Escape;
-  _keys[E_KEY_EXIT_2] = sf::Keyboard::Escape;
-}
-
-bool KeyManager::ready(e_timer index)
-{
-  if (_clocks[index].getElapsedTime().asMilliseconds() > g_settings->keyRepeatDelay())
-    restartTimer(index);
-
-  return (_ready[index]);
+  _active_inputs.push(_events_mapping[logical_key]);
 }
 
 
-void KeyManager::restartTimer(e_timer index)
+void KeyManager::pushKeyFromReplay(const e_key& key)
 {
-  _clocks[index].restart();
-  _ready[index] = true;
+  _active_inputs.push(_events_mapping[key]);
 }
 
 
-void KeyManager::resetSwitches()
+e_input KeyManager::popEvent()
 {
-  if (!PRESSED(E_KEY_SELECTION))
-    _switches[E_SWITCH_SELECTION] = OFF;
-
-  if (!PRESSED(E_KEY_MENUBAR))
-    _switches[E_SWITCH_MENUBAR] = OFF;
-
-  if (!PRESSED(E_KEY_PANEL))
-    _switches[E_SWITCH_PANEL] = OFF;
-
-  if (!PRESSED(E_KEY_EXIT))
-    _switches[E_SWITCH_EXIT] = OFF;
+  return _active_inputs.pop();
 }

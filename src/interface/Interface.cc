@@ -1,156 +1,63 @@
+/**
+ * \file
+ * \date May 21, 2013
+ * \author Zermingore
+ * \brief Interface class definition.
+ *
+ * Manages the User Interface.
+ */
+
 #include <interface/Interface.hh>
-#include <common/globals.hh>
+
+#include <debug/Debug.hh>
+#include <game/Status.hh>
 
 
-Interface::Interface() :
-  _panelPosition (E_PANEL_DEACTIVATED),
-  _menuBarPosition (E_MENU_BAR_DEACTIVATED),
-  _modificationPanel (true),
-  _modificationMenuBar (true)
-{
-  _cursor = std::make_shared<Cursor> ();
-  _path = std::make_shared<PathFinding> ();
-  _inGameMenu = std::make_shared<InGameMenu> ();
-  _panel = std::make_shared<SidePanel> ();
-  _menuBar = std::make_shared<MenuBar> ();
-}
+namespace interface {
 
-void Interface::incrementPanelPosition()
-{
-  _panelPosition = static_cast<e_panel_position> ((_panelPosition + 1) % E_PANEL_NB_POSITIONS);
-  _modificationPanel = true;
-}
 
-void Interface::incrementMenuBarPosition()
-{
-  _menuBarPosition = static_cast<e_menu_bar_position> ((_menuBarPosition + 1) % E_MENU_BAR_NB_POSITIONS);
-  _modificationMenuBar = true;
-}
-
-void Interface::setSidePanel()
-{
-  if (_panelPosition == E_PANEL_DEACTIVATED)
-  {
-    g_status->setRenderX(WINDOW_SIZE_X);
-    g_status->setGridOffsetX((WINDOW_SIZE_X - CELL_WIDTH * NB_COLUMNS) / 2);
-    _modificationPanel = false;
-
-    return;
-  }
-
-  auto offset = 4 * CELL_WIDTH; // panel_width
-  if (g_settings->fullScreen())
-    offset *= 2;
-
-  auto render_x = WINDOW_SIZE_X - offset;
-  g_status->setRenderX(render_x);
-  sf::Vector2f origin {0, 0};
-  sf::Vector2f size = {
-    (float) WINDOW_SIZE_X - render_x - (render_x - CELL_WIDTH * NB_COLUMNS) / 2,
-    (float) WINDOW_SIZE_Y
-  };
-
-  if (_panelPosition == E_PANEL_LEFT)
-  {
-    g_status->setGridOffsetX(offset + GRID_THICKNESS);
-  }
-  else
-  {
-    g_status->setGridOffsetX(
-      (render_x - CELL_WIDTH * NB_COLUMNS) / 2 - 2 * GRID_THICKNESS);
-    origin.x = WINDOW_SIZE_X - size.x;
-  }
-
-  if (_menuBarPosition == E_MENU_BAR_TOP)
-  {
-//    size.y -= _menuBar->size().y;
-    origin.y += _menuBar->size().y;
-  }
-  if (_menuBarPosition == E_MENU_BAR_BOTTOM)
-  {
-    size.y -= _menuBar->size().y;
-  }
-
-  _panel->setSize(size);
-  _panel->setOrigin(origin);
-  _modificationPanel = false;
+Interface::Interface(const graphics::Color c) {
+  _settings = std::make_unique<InterfaceSettings> (c);
 }
 
 
-void Interface::setMenuBar()
-{
-  if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
-  {
-    g_status->setRenderY(WINDOW_SIZE_Y);
-    g_status->setGridOffsetY((WINDOW_SIZE_Y - CELL_HEIGHT * NB_LINES) / 2);
-    _modificationMenuBar = false;
+void Interface::addElement(const std::shared_ptr<InterfaceElement> elt) {
+  _elts.push_back(elt);
+}
 
-    // redraw side panel if needed
-    return;
+
+void Interface::removeElement(const std::shared_ptr<InterfaceElement> elt)
+{
+  // Locating the right element to remove
+  /// \todo (do not remove a graphical element based on its sprite name)
+  for (auto it: _elts)
+  {
+    if (it->name() == elt->name()) {
+      _elts.pop_back();
+    }
+  }
+}
+
+
+std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
+{
+  for (const auto it: _elts)
+  {
+    if (it->name() == id) {
+      return it;
+    }
   }
 
-  unsigned int render_y = WINDOW_SIZE_Y - CELL_HEIGHT / 2;
-  g_status->setRenderY(WINDOW_SIZE_Y - render_y);
-
-  unsigned int offset = (render_y - CELL_HEIGHT * NB_LINES) / 2;
-  if (_menuBarPosition == E_MENU_BAR_TOP)
-  {
-    g_status->setGridOffsetY(offset + CELL_HEIGHT / 2 - GRID_THICKNESS);
-    sf::Vector2f size(WINDOW_SIZE_X, CELL_HEIGHT / 2);
-    _menuBar->setSize(size);
-    sf::Vector2f origin(0, 0);
-    _menuBar->setOrigin(origin);
+# ifdef DEBUG
+  ERROR("Interface: invalid element name request: ", id);
+  PRINTF("displaying", _elts.size(), "element names");
+  for (const auto it: _elts) {
+    PRINTF(" >", id);
   }
-  else
-  {
-    g_status->setGridOffsetY(offset - GRID_THICKNESS);
-    sf::Vector2f size(WINDOW_SIZE_X, CELL_HEIGHT / 2);
-    _menuBar->setSize(size);
-    sf::Vector2f origin(0, WINDOW_SIZE_Y - size.y);
-    _menuBar->setOrigin(origin);
-  }
+# endif // DEBUG
 
-  _modificationMenuBar = false;
+  return nullptr;
 }
 
 
-void Interface::drawSidePanel()
-{
-  if (_panelPosition == E_PANEL_DEACTIVATED)
-    return;
-
-  _panel->draw();
-}
-
-
-void Interface::drawMenuBar()
-{
-  if (_menuBarPosition == E_MENU_BAR_DEACTIVATED)
-    return;
-
-  _menuBar->draw();
-}
-
-
-void Interface::draw()
-{
-  if (_modificationPanel)
-    setSidePanel();
-
-  if (_modificationMenuBar)
-    setMenuBar();
-
-  // if (_cursor->getVisible())
-  _cursor->sprite(GRID_OFFSET_X, GRID_OFFSET_Y);
-  _cursor->draw();
-
-  drawSidePanel();
-  drawMenuBar();
-
-  if (CURRENT_MODE == E_MODE_MOVING_UNIT || CURRENT_MODE == E_MODE_ACTION_MENU)
-    _path->drawPath();
-
-  // TODO get right inGameMenu
-  if (CURRENT_MODE == E_MODE_SELECTION_MENU || CURRENT_MODE == E_MODE_ACTION_MENU)
-    _inGameMenu->draw();
-}
+} // namespace interface

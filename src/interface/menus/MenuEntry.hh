@@ -1,60 +1,112 @@
-#ifndef MENUENTRY_HH_
-# define MENUENTRY_HH_
-
-# include <common/include.hh>
-# include <resources/Image.hh>
-# include <resources/Font.hh>
-
-
-// TODO add execute method given to ctor
-
-/** \brief entries descriptors
+/**
+ * \file
+ * \date May 20, 2013
+ * \author Zermingore
  */
-enum e_entry
+
+#ifndef MENU_ENTRY_HH_
+# define MENU_ENTRY_HH_
+
+# include <string>
+# include <memory>
+# include <functional>
+
+# include <interface/InterfaceElement.hh>
+
+
+namespace resources {
+  class Text;
+}
+
+
+namespace interface {
+
+
+/**
+ * \enum e_entry
+ * \brief entries descriptors
+ */
+enum class e_entry
 {
-  E_ENTRY_NONE = 0, // invalid selected entry
+  NONE = 0, // invalid selected entry
 
-  E_ENTRY_MOVE, // motion order
-  E_ENTRY_STOP, // motion order
-  E_ENTRY_NEXT_TURN,
-  E_ENTRY_ATTACK,
+  MOVE, // motion order
+  WAIT, // motion order
+  NEXT_TURN,
+  ATTACK,
 
-  E_ENTRY_CANCEL
+  CANCEL
 };
 
 
-class MenuEntry
+
+/**
+ * \class MenuEntry
+ * \brief One entry (a clickable item) of a menu
+ *
+ * Its position is relative to the menu it belongs to.
+ */
+class MenuEntry: public InterfaceElement
 {
 public:
-  /** \brief Constructor
+  /**
+   * \brief deleted default constructor
    */
-  // TODO use this one (auto label completion, using a DB)
-  explicit MenuEntry(e_entry &entry);
+  MenuEntry() = delete;
 
-  /** \brief Constructor
-   ** \deprecated use MenuEntry(e_entries entry); with auto label completion
+  /**
+   * \brief Constructor
+   * \param entry Entry type to build.
    */
-  MenuEntry(std::string label_name, e_entry entry);
+  explicit MenuEntry(const e_entry entry);
 
-  /** \brief returns entry Identifier, as a e_entries value
+  /**
+   * \brief returns entry Identifier, as a entries value
    */
-  inline e_entry id() { return _id; }
+  auto id() { return _id; }
 
-  /** \brief displays the entry at position
-   ** \param position where the entry will be display
-   */
-  void draw(sf::Vector2f position);
-
-  /** \brief Executes the action matching the entry
+  /**
+   * \brief Executes the action matching the entry
    */
   void execute();
 
+  /**
+   * \brief _callback setter
+   * \param callback Callback called when the menu entry is selected
+   */
+  void setCallback(const std::function<void()> callback) {
+    _callback = callback;
+  }
+
+  /**
+   * \brief updates the graphical attributes of the entry
+   */
+  void update() override final;
+
+  /**
+   * \brief Draws label and sprite of the entry, calling the graphics engine
+   */
+  void draw() override final;
+
+
 
 private:
-  Image _background; ///< background image
-  std::shared_ptr<sf::Text> _label; ///< button label text
-  Font _font; ///< button label font
-  e_entry _id; ///< entry identifier
+  /**
+   * \brief Initializes the label name
+   * \param entry entry which associated name will be used
+   */
+  void setLabelName(e_entry entry);
+
+  e_entry _id;                            ///< entry identifier
+  std::shared_ptr<resources::Text> _label;       ///< button label text
+  std::string _labelName;                 ///< menu entry text
+
+  /// callback executed when the entry is selected
+  std::function<void()> _callback;
 };
 
-#endif /* !MENUENTRY_HH_ */
+
+} // namespace interface
+
+
+#endif /* !MENU_ENTRY_HH_ */

@@ -1,119 +1,109 @@
+/**
+ * \file
+ * \date May 21, 2013
+ * \author Zermingore
+ * \brief Interface class definition.
+ *
+ * Manages the User Interface.
+ */
+
 #ifndef INTERFACE_HH_
 # define INTERFACE_HH_
 
-# include <interface/Cursor.hh>
-# include <interface/menus/InGameMenu.hh>
-# include <interface/panels/SidePanel.hh>
-# include <interface/panels/MenuBar.hh>
-# include <game/PathFinding.hh>
+# include <vector>
+# include <interface/InterfaceElement.hh>
+# include <interface/InterfaceSettings.hh>
 
 
-/** \brief Side Panel possible positions
- */
-enum e_panel_position
-{
-  E_PANEL_DEACTIVATED = 0,
-  E_PANEL_LEFT,
-  E_PANEL_RIGHT,
-
-  E_PANEL_NB_POSITIONS // useful with modulo (++position % nb)
-};
-
-/** \brief Menu Bar possible positions
- */
-enum e_menu_bar_position
-{
-  E_MENU_BAR_DEACTIVATED = 0,
-  E_MENU_BAR_TOP,
-  E_MENU_BAR_BOTTOM, // not sure we'll allow this
-
-  E_MENU_BAR_NB_POSITIONS // useful with modulo (++position % nb)
-};
+namespace interface {
 
 
-// TODO method draw: path, menus
-
-/** \brief Interface class
- ** keeps data relative to the user's interface
- ** draws the user's interface
+/**
+ * \class Interface
+ * \brief Keeps data relative to the user's interface.
  */
 class Interface
 {
 public:
-  /** Default Constructor
-   ** Initializes in-game menu
-   */
-  Interface();
+  /// Deleted default constructor.
+  Interface() = delete;
 
-  /** \brief _cursor getter
-   */
-  inline std::shared_ptr<Cursor> cursor() { return _cursor; }
+  /// Constructor. Initializes interface settings (colors, ...)
+  explicit Interface(const graphics::Color c);
 
-  /** \brief side panel position getter
-   */
-  inline e_panel_position panelPosition() { return _panelPosition; }
+  /// Default destructor
+  ~Interface() = default;
 
-  /** \brief side panel position getter
-   */
-  inline e_menu_bar_position menuBarPosition() { return _menuBarPosition; }
 
-  /** \brief sets panel position to the next position
-   ** loops over the E_PANEL_NB_POSITIONS possibilities
+  /**
+   * \brief Sets all element to draw.
+   *
+   * Sets coordinates of each elements.
    */
-  void incrementPanelPosition();
+  void buildElements();
 
-  /** \brief sets menu bar position to the next position
-   ** loops over the E_MENU_BAR_NB_POSITIONS possibilities
+  /**
+   * \brief Adds an InterfaceElement to manage
+   * \param elt Element to add to the interface
    */
-  void incrementMenuBarPosition();
+  void addElement(const std::shared_ptr<InterfaceElement> elt);
 
-  /** \brief in-game menu getter
-   ** \return _inGameMenu
+  /**
+   * \brief Remove a managed InterfaceElement
+   * \param elt Element to remove from the interface.
    */
-  inline std::shared_ptr<InGameMenu> inGameMenu() const { return _inGameMenu; }
+  void removeElement(const std::shared_ptr<InterfaceElement> elt);
 
-  /** \brief PathFinding getter
-   ** \return _path current path
+  /**
+   * \brief Interface elements vector getter.
+   * \return Elements of the interface.
    */
-  inline std::shared_ptr<PathFinding> path() { return _path; }
+  auto& elements() { return _elts; }
 
-  /** \brief sets the path origin
-   ** meaning the cell from where it starts
-   */
-  inline void setPathOrigin(Coords coords) { _path->setOrigin(coords); }
 
-  /** \brief draws all element relative to the user's interface
-   ** meaning: in-game menus, panels and path (from path-finding)
+  /**
+   * \brief Returns the first InterfaceElement which name is name
+   * \param name name of the InterfaceElement to retrieve
+   * \return a pointer to the matching InterfaceElement, nullptr if there is none
    */
-  void draw();
+  std::shared_ptr<InterfaceElement> element(const std::string id);
+
+  /**
+   * \brief Cursor color getter.
+   * \return Color of the cursor.
+   */
+  auto cursorColor() const { return _settings->cursorColor(); }
+
+  /**
+   * \brief sets cursor color.
+   * \param color _cursorColor value.
+   */
+  void setCursorColor(const graphics::Color color) {
+    _settings->setCursorColor(color);
+  }
+
+
+  /**
+   * \brief Player's units color getter.
+   * \return Units color.
+   */
+  auto unitsColor() const { return _settings->unitsColor(); }
+
+  /**
+   * \brief sets units color.
+   * \param color units color.
+   */
+  void setUnitsColor(const graphics::Color color) {
+    _settings->setUnitsColor(color);
+  }
 
 
 private:
-  /** \brief Initializes Panel position
-   */
-  void setSidePanel();
-
-  /** \brief Initializes Menu bar position
-   */
-  void setMenuBar();
-
-  /** \brief Draw side panel
-   */
-  void drawSidePanel();
-
-  /** \brief Draw menu bar
-   */
-  void drawMenuBar();
-
-  std::shared_ptr<Cursor> _cursor; ///< Map Cursor
-  std::shared_ptr<InGameMenu> _inGameMenu; ///< in game menu
-  std::shared_ptr<SidePanel> _panel; ///< side menu
-  std::shared_ptr<MenuBar> _menuBar; ///< menuBar
-  std::shared_ptr<PathFinding> _path; ///< current path
-  e_panel_position _panelPosition; ///< Side panel position (if any)
-  e_menu_bar_position _menuBarPosition; ///< Menu Bar position (if any)
-  bool _modificationPanel; ///< notification: panel status changed
-  bool _modificationMenuBar; ///< notification: menu bar status changed
+  std::vector<std::shared_ptr<InterfaceElement>> _elts; ///< list of elements
+  std::unique_ptr<InterfaceSettings> _settings;         ///< interface settings
 };
+
+
+} // namespace interface
 
 #endif /* !INTERFACE_HH_ */

@@ -1,0 +1,49 @@
+Interface
+
+Player:
+- has an Interface
+- has some InterfaceElement
+
+InterfaceElement
+::update
+-> update position, graphics attributes
+
+Interface::update()
+call update() on every InterfaceElement
+
+
+Which element to draw ?
+(playing -> cursor; select -> menu, no more cursor)
+(menu; sub-menu -> menu and sub-menu)
+
+State push / pop
+-> interface push / pop
+
+StateManager ?
+push / pop States and InterfaceElements
+-> when push / pop
+-> has an EventManager ?
+-> access to Interface, Player, Menu, ...
+
+Each State manages the transition to the new one.
+
+
+
+
+unit selection managed by the interface ?
+  interface / player can do everything
+  when done, call map to check and do the move / attack
+
+study (broken ATM)
+  pf: left -> push, right -> pop ...
+  1 2 4 8 -> 0001 & 0001 -> push / pop
+  left 0001 0010 right
+
+
+
+Ergonomy
+--------
+
+resume moving unit -> inteface::popMenu ?
+(resume move)
+  or osef, more practical with escape -> fu ?

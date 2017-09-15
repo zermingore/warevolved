@@ -1,12 +1,26 @@
+/**
+ * \file
+ * \date Jan 11, 2015
+ * \namespace interface
+ * \brief InterfaceElement implementation
+ */
+
 #include <interface/InterfaceElement.hh>
-#include <common/globals.hh>
+#include <resources/Image.hh>
+#include <resources/ResourcesManager.hh>
+#include <graphics/graphic_types.hh>
 
 
-void InterfaceElement::draw()
+namespace interface {
+
+
+InterfaceElement::InterfaceElement(const std::string &image_name)
+  : _img_name(image_name)
+  , _image(resources::ResourcesManager::getImage(_img_name))
 {
-  _background.setPosition(_position);
-  _label->setPosition(_position);
-
-  _background.draw();
-  g_window->draw(*_label);
+  _scale.x = static_cast<float> (_image->sprite()->getTexture()->getSize().x);
+  _scale.y = static_cast<float> (_image->sprite()->getTexture()->getSize().y);
 }
+
+
+} // namespace interface

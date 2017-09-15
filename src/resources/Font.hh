@@ -1,36 +1,61 @@
-#ifndef FONT_HH_
-# define FONT_HH_
+/**
+ * \file
+ * \date Apr 27, 2013
+ * \author Zermingore
+ */
+
+#ifndef RESOURCES_FONT_HH_
+# define RESOURCES_FONT_HH_
+
+# include <string>
+# include <memory>
 
 # include <resources/Resource.hh>
-# include <common/include.hh>
+# include <graphics/graphic_types.hh>
 
 
-/** \class Font Resource type
- ** Derived from Resource
+namespace resources {
+
+
+/**
+ * \class Font
+ * \brief Font resource type, used to draw text
  */
-class Font : public Resource
+class Font: public Resource
 {
 public:
   /// \brief default constructor
-  Font() {}
+  Font() = default;
 
-  /** \brief Constructor
-   ** \param file_name font file name
-   ** \param name font alias
+  /**
+   * \brief Constructor
+   * \param file_name font file name
+   * \param name font alias
    */
-  Font(const std::string file_name,
-       const std::string name);
+  Font(const std::string file_name, const std::string name);
 
-  bool load();
-
-  /** \brief _font getter
-   **   loads the requested Font if needed
-   ** \return _font value
+  /**
+   * \brief Loads a font, if needed
+   * \return true if the font was already loaded
+   *   false if it was loaded during this call
    */
-  std::shared_ptr<sf::Font> getFont();
+  bool load() override final;
+
+  /**
+   * \brief _font getter
+   * \return _font value
+   * \note loads the requested Font if needed
+   */
+  std::shared_ptr<graphics::Font> getFont();
+
 
 private:
-  std::shared_ptr<sf::Font> _font; ///< current Font
+  std::shared_ptr<graphics::Font> _font; ///< current Font
 };
 
-#endif /* !FONT_HH_ */
+
+} // namespace resources
+
+
+
+#endif /* !RESOURCES_FONT_HH_ */

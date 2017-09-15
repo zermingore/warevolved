@@ -1,8 +1,7 @@
-/*
- * common/System.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
  */
 
 #ifndef SYSTEM_HH_
@@ -11,30 +10,58 @@
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
 
-/** \class System storage class
- ** designed to fill bugs reports
- ** keeps software information
- **  - SFML version
- ** keeps hardware informations
+/**
+ * \class System
+ * \brief designed to fill bugs reports
+ *
+ * keeps software information
+ *  - SFML version
+ * keeps hardware information
  */
-
 class System
 {
 public:
-  /** \brief Default Constructor
-   */
+  /// deleted Default Constructor
   System() = delete;
-  System(unsigned int sfml_major, unsigned int sfml_minor);
 
-  inline void setSfmlMajor(unsigned int major) { _sfmlMajor = major; }
-  inline void setSfmlMinor(unsigned int minor) { _sfmlMinor = minor; }
+  /**
+   * \brief sets the SFML major and minor version numbers
+   */
+  System(const unsigned int sfml_major, const unsigned int sfml_minor);
 
-  inline unsigned int sfmlMajor() { return _sfmlMajor; }
-  inline unsigned int sfmlMinor() { return _sfmlMinor; }
+  /// default destructor
+  ~System() = default;
+
+
+  /**
+   * \brief SFML major version number setter
+   * \param major SFML major version number
+   */
+  void setSfmlMajor(const unsigned int major) { _sfmlMajor = major; }
+
+  /**
+   * \brief SFML minor version number setter
+   * \param major SFML minor version number
+   */
+  void setSfmlMinor(const unsigned int minor) { _sfmlMinor = minor; }
+
+
+  /**
+   * \brief SFML major version number getter
+   * \return SFML major version number
+   */
+  auto sfmlMajor() { return _sfmlMajor; }
+
+  /**
+   * \brief SFML minor version number getter
+   * \return SFML minor version number
+   */
+  auto sfmlMinor() { return _sfmlMinor; }
+
 
 private:
   unsigned int _sfmlMajor; ///< SFML major version (x.*)
   unsigned int _sfmlMinor; ///< SFML minor version (*.x)
 };
 
-#endif /* !COMMON_HH_ */
+#endif /* !SYSTEM_HH_ */

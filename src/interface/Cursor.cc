@@ -1,73 +1,97 @@
+/**
+ * \file
+ * \brief Cursor class definition.
+ *
+ * User Interface's Cursor
+ */
+
 #include <interface/Cursor.hh>
-#include <common/globals.hh>
+#include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
-Cursor::Cursor() :
-  _nbColumns (0),
-  _nbLines (0)
+namespace interface {
+
+Cursor::Cursor()
+  : InterfaceElement("cursor")
 {
-  _image = GETIMAGE("cursor");
-  _sprite = _image.sprite();
-  _sprite->setColor(sf::Color(255, 0, 0, 255));
-  _middle.x = _image.getTexture()->getSize().x / 2;
-  _middle.y = _image.getTexture()->getSize().y / 2;
 }
 
 
-std::shared_ptr<sf::Sprite> Cursor::sprite(int offset_x, int offset_y)
+void Cursor::setLimits(const size_t nb_columns, const size_t nb_lines)
 {
-  static unsigned int angle = 0;
-  _sprite->setOrigin(_middle);
-  _sprite->setRotation(angle++);
-
-  // scale is function of rotation
-  // TODO setup a timer to dissociate rotation and scale
-  static float scale_factor = 1;
-  angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
-  _sprite->setScale(scale_factor, scale_factor);
-
-  // finally, replace the cursor at it's true position before returning it
-  _sprite->setPosition(_coords.x * CELL_WIDTH + offset_x + _middle.x,
-                       _coords.y * CELL_HEIGHT + offset_y + _middle.y);
-
-  return _sprite;
+  _nbColumns = nb_columns;
+  _nbLines = nb_lines;
 }
 
-void Cursor::setLimits(unsigned int nbColumns, unsigned int nbLines)
-{
-  _nbColumns = nbColumns;
-  _nbLines = nbLines;
-}
 
 // _____________________________ Cursor Motion _____________________________ //
 bool Cursor::moveUp()
 {
-  unsigned int old = _coords.y;
-  _coords.y = std::min(_coords.y - 1, _coords.y);
+  auto old(_coords.l);
+  _coords.l = std::min(_coords.l - 1, _coords.l);
 
-  return (old != _coords.y);
+  return (old != _coords.l);
 }
 
 bool Cursor::moveDown()
 {
-  unsigned int old = _coords.y;
-  _coords.y = std::min(_coords.y + 1, _nbLines - 1);
+  auto old(_coords.l);
+  _coords.l = std::min(_coords.l + 1, _nbLines - 1);
 
-  return (old != _coords.y);
+  return (old != _coords.l);
 }
 
 bool Cursor::moveLeft()
 {
-  unsigned int old = _coords.x;
-  _coords.x = std::min(_coords.x, _coords.x - 1);
+  auto old(_coords.c);
+  _coords.c = std::min(_coords.c, _coords.c - 1);
 
-  return (old != _coords.x);
+  return (old != _coords.c);
 }
 
 bool Cursor::moveRight()
 {
-  unsigned int old = _coords.x;
-  _coords.x = std::min(_coords.x + 1, _nbColumns - 1);
+  auto old(_coords.c);
+  _coords.c = std::min(_coords.c + 1, _nbColumns - 1);
 
-  return (old != _coords.x);
+  return (old != _coords.c);
 }
+
+
+void Cursor::update()
+{
+  using namespace graphics;
+  using p = MapGraphicsProperties;
+
+  auto width(p::cellWidth());
+  auto height(p::cellHeight());
+
+  _position = {
+    static_cast<component> (_coords.c) * width  + p::gridOffsetX() + width  / 2,
+    static_cast<component> (_coords.l) * height + p::gridOffsetY() + height / 2};
+  _image->sprite()->setPosition(_position.x, _position.y);
+
+  static float scale_factor = 1;
+  static unsigned int angle = 0;
+  angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
+  _image->setScale(scale_factor, scale_factor);
+  ++angle; // \todo angle will overflow
+
+
+  // The origin of the sprite is the middle of the cell
+  _image->sprite()->setOrigin(width / 2.f, height / 2.f);
+  _image->sprite()->setRotation(static_cast<float> (angle));
+  _image->setScale(scale_factor, scale_factor);
+
+  _image->setColor(_color);
+}
+
+
+void Cursor::draw()
+{
+  graphics::GraphicsEngine::draw(_image->sprite());
+}
+
+
+} // namespace interface

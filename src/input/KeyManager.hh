@@ -1,144 +1,113 @@
-/*
- * input/keyManager.hh
- *
- *  Created on: April 17, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 17, 2013
+ * \author Zermingore
  */
 
-#ifndef KEYMANAGER_HH_
-# define KEYMANAGER_HH_
+#ifndef INPUT_KEY_MANAGER_HH_
+# define INPUT_KEY_MANAGER_HH_
 
-# include <common/include.hh>
-# include <common/constants.hh>
-# include <common/globals.hh>
+# include <map>
+# include <set>
+# include <string>
+# include <memory>
+# include <chrono>
 
-/** \brief timer index list
+# include <SFML/Window/Event.hpp>
+# include <SFML/System/Clock.hpp> /// \todo use std::clock instead
+# include <SFML/Window/Keyboard.hpp>
+# include <structures/ThreadSafeQueue.hh>
+
+class ReplayManager;
+enum class e_input;
+
+
+/**
+ * \enum e_key
+ * \brief Keys indexes allowing key repeating.
  */
-enum e_timer
+enum class e_key
 {
-  E_TIMER_MOVE_UP = 0,
-  E_TIMER_MOVE_DOWN,
-  E_TIMER_MOVE_LEFT,
-  E_TIMER_MOVE_RIGHT,
-
-  E_TIMER_NB_TIMERS
-};
-
-
-/** \brief switches (on /off) keys
- ** they don't allow key-repeating
- */
-enum e_switch
-{
-  E_SWITCH_SELECTION = 0, // in-game selection menu
-
-  E_SWITCH_MENUBAR,
-  E_SWITCH_PANEL,
-
-  E_SWITCH_EXIT, // exit request
-
-  E_SWITCH_NB_SWITCHES
-};
-
-
-/** \brief Keys indexes
- ** allowing key repeating
- */
-enum e_key
-{
-  // motion keys
-  E_KEY_MOVE_UP_1 = 0,
-  E_KEY_MOVE_UP_2,
-  E_KEY_MOVE_DOWN_1,
-  E_KEY_MOVE_DOWN_2,
-  E_KEY_MOVE_LEFT_1,
-  E_KEY_MOVE_LEFT_2,
-  E_KEY_MOVE_RIGHT_1,
-  E_KEY_MOVE_RIGHT_2,
-
   // action keys
-  E_KEY_SELECTION_1,
-  E_KEY_SELECTION_2,
+  SELECTION,
 
-  // menu keys
-  E_KEY_MENUBAR_1,
-  E_KEY_MENUBAR_2,
-  E_KEY_PANEL_1,
-  E_KEY_PANEL_2,
+  // Global actions
+  SCREENSHOT,
+
+  // Interface keys
+  TOGGLE_PANEL,
 
   // exit requests
-  E_KEY_EXIT_1,
-  E_KEY_EXIT_2,
+  EXIT,
 
-  E_KEY_NB_KEYS
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
+
+  NB_KEYS
 };
 
 
+/**
+ * \class KeyManager
+ * \brief maps the raw input keys into events.
+ *   It has a fifo filled by the \see InputsListener
+ *   and read by the EventsProcessor.
+ *   Logs the events if necessary (in non replay mode)
+ */
 class KeyManager
 {
 public:
-  /** \brief Default Constructor
+  /**
+   * \brief Initialize the mappings keyboard_inputs -> keys
+   *   and keys -> high_level_inputs
+   * \param replay \true if we are in replay mode
+   * \note if \param replay is \false the events will be logged
    */
-  KeyManager();
+  static void Initialize(std::shared_ptr<ReplayManager> replay);
 
-  inline bool up() { return (PRESSED(E_KEY_MOVE_UP)); }
-  inline bool down() { return (PRESSED(E_KEY_MOVE_DOWN)); }
-  inline bool left() { return (PRESSED(E_KEY_MOVE_LEFT)); }
-  inline bool right() { return (PRESSED(E_KEY_MOVE_RIGHT)); }
-  inline bool selection() { return (PRESSED(E_KEY_SELECTION)); }
-  inline bool menubar() { return (PRESSED(E_KEY_MENUBAR)); }
-  inline bool panel() { return (PRESSED(E_KEY_PANEL)); }
-  inline bool exit() { return (PRESSED(E_KEY_EXIT)); }
-
-  /** \brief Maps keyboard keys to function
+  /**
+   * \brief Append the givent key to the end of the replay file
+   * \param key Key to log in the replay file
+   * \return a list of events and their associated timestamps
    */
-  void mapKeys();
+  static void replayStoreKey(const e_key& key);
 
-  /** \brief timer value getter
-   ** \param function Function associated to the the timer we're looking for
-   ** \return Timer number index value (in ms)
+  /**
+   * \brief Push the event matching the given input into the events queue
+   * \param input Input used to match the event to push in the queue
    */
-  inline int getTime(e_timer function)
-  { return _clocks[function].getElapsedTime().asMilliseconds(); }
+  static void pushEvent(const sf::Keyboard::Key& key);
 
-  /** \brief switch getter
-   ** \param index _switches index to retrieve
-   ** \return switch status
+  /**
+   * \brief Push a key as is in the fifo (which should be from the replay)
+   * \param key key to push in the fifo
    */
-  inline bool switchStatus(e_switch index) { return _switches[index]; }
+  static void pushKeyFromReplay(const e_key& key);
 
-  /** \brief switch getter
-   ** \param s Switch to retrieve
-   ** \return switch status
+  /**
+   * \brief Retrieve the oldest event from the events queue
+   * \return The poped event
+   * \note Blocks until an event is found in the queue
    */
-  inline void setSwitchStatus(e_switch index, bool status)
-  { _switches[index] = status; }
+  static e_input popEvent();
 
-  /** \brief resets _switches status, if needed
-   */
-  void resetSwitches();
-
-  /** \brief returns true if the key matching index is ready
-   ** \return true if the key matching index is ready
-   **   false otherwise
-   */
-  bool ready(e_timer index);
-
-  /** \brief notify a key as 'ready'
-   **   meaning being considered as pressed again
-   */
-  inline void setReady(e_timer index, bool state) { _ready[index] = state; }
-
-  /** \brief restarts the clock \param index and sets _timers[index] to 0
-   */
-  void restartTimer(e_timer index);
 
 
 private:
-  sf::Keyboard::Key _keys[E_KEY_NB_KEYS]; ///< keys list
-  sf::Clock _clocks[E_TIMER_NB_TIMERS]; ///< internals clocks (for key readiness)
-  bool _ready[E_TIMER_NB_TIMERS]; ///< keys states
-  bool _switches[E_SWITCH_NB_SWITCHES]; ///< switches states
+  /// Hardware / logical keys mapping
+  static std::multimap<const sf::Keyboard::Key, const e_key> _keys_mapping;
+
+  /// events mapping
+  static std::map<const e_key, const e_input> _events_mapping;
+
+  /// current inputs (high level keys)
+  static ThreadSafeQueue<e_input> _active_inputs;
+
+  ///< Pointer on the replay manager to add keys to a replay being created
+  static std::shared_ptr<ReplayManager> _replay;
 };
 
-#endif /* !KEYMANAGER_HH_ */
+
+#endif /* !INPUT_KEY_MANAGER_HH_ */

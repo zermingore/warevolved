@@ -1,42 +1,63 @@
 #include <game/PathFinding.hh>
-#include <common/macros.hh>
-#include <common/globals.hh>
+
+#include <debug/Debug.hh>
+#include <game/Player.hh>
+#include <game/Map.hh>
+#include <game/Cell.hh>
+#include <game/units/Unit.hh>
+#include <resources/Image.hh>
+#include <game/Status.hh>
+#include <common/enums/directions.hh>
+#include <common/enums/path_shapes.hh>
+#include <graphics/graphic_types.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
-PathFinding::PathFinding() :
-  _origin (0, 0),
-  _current (0, 0),
-  _maxLength (0),
-  _currentLength (0)
+// static members definition
+std::shared_ptr<Map> PathFinding::_map;
+std::shared_ptr<Unit> PathFinding::_unit;
+
+Coords PathFinding::_origin;
+Coords PathFinding::_current;
+
+size_t PathFinding::_maxLength;
+size_t PathFinding::_currentLength;
+
+std::vector<e_direction> PathFinding::_directions;
+std::vector<std::shared_ptr<resources::Image>> PathFinding::_images;
+std::vector<std::shared_ptr<Cell>> PathFinding::_reachableCells;
+std::vector<std::shared_ptr<Cell>> PathFinding::_enemyPositions;
+
+
+
+void PathFinding::setOrigin(Coords coords, std::shared_ptr<Unit> unit)
 {
-}
+  assert(unit && "PathFinding: No unit provided");
 
-void PathFinding::setOrigin(Coords coords)
-{
   clearPath();
 
-  _unit = MAP.unit(coords);
-  _unit->setTargetIndex(0);
+  _enemyPositions.clear();
 
+  _unit = unit;
   _origin = coords;
   _current = coords;
   _currentLength = 0;
-  _maxLength = _unit->motionValue();
+  _maxLength = unit->motionValue();
 
-  showAllowedPath();
+  highlightCells();
 }
 
 
 void PathFinding::drawPath()
 {
   _current = _origin;
-  unsigned int i = 0;
-  for (auto it = _directions.begin(); it != _directions.end(); ++it)
+  size_t i = 0;
+  for (auto it(_directions.begin()); it != _directions.end(); ++it)
   {
     updateCurrentCell(*it);
-    // TODO manage cache and image sprites
-    // _images[i++]->drawAtCell(_currentX, _currentY);
-    getImage(i++).draw();
+    /// \todo manage cache and image sprites
+
+    getImage(i++)->draw(); /// \todo drawAtCell
   }
 }
 
@@ -47,7 +68,7 @@ void PathFinding::clearPath()
   deleteImagesVector();
   hideAllowedPath();
 
-  // TODO clear only if we made a path request on a new cell
+  /// \todo clear only if we made a path request on a new cell
   // (to avoid clearing the path on selecting the same unit two times in a row)
 }
 
@@ -56,24 +77,25 @@ void PathFinding::updateCurrentCell(e_direction direction)
 {
   switch (direction)
   {
-    case E_DIRECTION_UP:
-      --_current.y;
+    case e_direction::UP:
+      --_current.l;
       return;
 
-    case E_DIRECTION_DOWN:
-      ++_current.y;
+    case e_direction::DOWN:
+      ++_current.l;
       return;
 
-    case E_DIRECTION_LEFT:
-      --_current.x;
+    case e_direction::LEFT:
+      --_current.c;
       return;
 
-    case E_DIRECTION_RIGHT:
-      ++_current.x;
+    case e_direction::RIGHT:
+      ++_current.c;
       return;
 
     default:
-      return;
+      ERROR("Invalid direction", static_cast<int> (direction));
+      std::exit(1);
   }
 }
 
@@ -82,171 +104,266 @@ void PathFinding::buildImageVector()
   // manage 'riding' the path (increment a global index)
   // deleteImagesVector();
 
-  unsigned int i = 0;
-  for (auto it = _directions.begin(); it != _directions.end(); ++it)
-    _images.push_back(getImage(i++));
+  for (auto i(0u); i < _directions.size(); ++i) {
+    _images.push_back(getImage(i));
+  }
 }
 
 
-e_path_shape PathFinding::getShape(unsigned int index)
+e_path_shape PathFinding::getShape(size_t index)
 {
   // last element case
   if (index + 1 == _directions.size())
-    return (static_cast <e_path_shape> (_directions[index] - 360));
+  {
+    return (static_cast <e_path_shape> (
+              static_cast<int> (_directions[index]) - 360));
+  }
 
   e_direction next = _directions[index + 1];
 
   // same element as next case
-  if (_directions[index] == next)
+  if (_directions[index] == next) {
     return (static_cast <e_path_shape> (_directions[index]));
+  }
 
   // reverse
-  if (std::abs(_directions[index] - next) == 180)
+  if (std::abs(static_cast<int> (_directions[index]) - static_cast<int> (next)) == 180) {
     return (static_cast <e_path_shape> (next));
+  }
 
   // from here, we know the direction changed
   switch (_directions[index])
   {
-    case E_DIRECTION_UP:
-      if (next == E_DIRECTION_RIGHT)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT));
+    case e_direction::UP:
+      return next == e_direction::RIGHT
+        ? e_path_shape::CORNER_RIGHT_DOWN
+        : e_path_shape::CORNER_DOWN_LEFT;
 
-    case E_DIRECTION_DOWN:
-      if (next == E_DIRECTION_RIGHT)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP));
+    case e_direction::DOWN:
+      return next == e_direction::RIGHT
+        ? e_path_shape::CORNER_UP_RIGHT
+        : e_path_shape::CORNER_LEFT_UP;
 
-    case E_DIRECTION_LEFT:
-      if (next == E_DIRECTION_UP)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_UP_RIGHT));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_RIGHT_DOWN));
+    case e_direction::LEFT:
+      return next == e_direction::UP
+        ? e_path_shape::CORNER_UP_RIGHT
+        : e_path_shape::CORNER_RIGHT_DOWN;
 
     default:
-      if (next == E_DIRECTION_UP)
-        return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_LEFT_UP));
-      return (static_cast <e_path_shape> (E_PATH_SHAPE_CORNER_DOWN_LEFT));
+      return next == e_direction::UP
+        ? e_path_shape::CORNER_LEFT_UP
+        : e_path_shape::CORNER_DOWN_LEFT;
     }
 }
 
 
-Image PathFinding::getImage(unsigned int index)
+std::shared_ptr<resources::Image> PathFinding::getImage(const size_t index)
 {
-  Image img; // TODO use a copy Ctor (avoid rotating all sprites)
-  unsigned int angle = 0;
+  std::shared_ptr<resources::Image> img;
   e_path_shape shape = getShape(index);
 
   switch (shape)
   {
      // Rectangles
-     case E_PATH_SHAPE_UP:
-     case E_PATH_SHAPE_DOWN:
-     case E_PATH_SHAPE_LEFT:
-     case E_PATH_SHAPE_RIGHT:
-       img = GETIMAGE("path_shape");
+     case e_path_shape::UP:
+     case e_path_shape::DOWN:
+     case e_path_shape::LEFT:
+     case e_path_shape::RIGHT:
+       img = resources::ResourcesManager::getImage("path_shape");
        break;
 
      // Arrows
-     case E_PATH_SHAPE_LAST_UP:
-     case E_PATH_SHAPE_LAST_DOWN:
-     case E_PATH_SHAPE_LAST_LEFT:
-     case E_PATH_SHAPE_LAST_RIGHT:
-       img = GETIMAGE("path_arrow");
+     case e_path_shape::LAST_UP:
+     case e_path_shape::LAST_DOWN:
+     case e_path_shape::LAST_LEFT:
+     case e_path_shape::LAST_RIGHT:
+       img = resources::ResourcesManager::getImage("path_arrow");
        break;
 
      // Corners
      default:
-       img = GETIMAGE("path_corner");
+       img = resources::ResourcesManager::getImage("path_corner");
        break;
   }
 
-  angle = static_cast <unsigned int> (shape % 360);
-  img.sprite()->setRotation(angle);
-  img.sprite()->setOrigin(CELL_WIDTH / 2, CELL_HEIGHT / 2);
+  using p = graphics::MapGraphicsProperties;
+
+  unsigned int angle(static_cast<int> (shape) % 360);
+  img->sprite()->setRotation(static_cast<float> (angle));
+  img->sprite()->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   // drawing at the middle of the cell
-  sf::Vector2f pos;
-  pos.x = _current.x * CELL_WIDTH + GRID_THICKNESS + GRID_OFFSET_X + CELL_WIDTH / 2;
-  pos.y = _current.y * CELL_HEIGHT + GRID_THICKNESS + GRID_OFFSET_Y + CELL_HEIGHT / 2;
-  img.sprite()->setPosition(pos);
+  img->sprite()->setPosition({
+      static_cast<graphics::component> (_current.c) * p::cellWidth()
+        + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
+      static_cast<graphics::component> (_current.l) * p::cellHeight()
+        + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2});
 
   return img;
 }
 
-void PathFinding::addNextDirection(e_direction direction)
+void PathFinding::addNextDirection(const e_direction direction)
 {
   _directions.push_back(direction);
   ++_currentLength;
-}
-
-
-void PathFinding::showAllowedPath()
-{
-  std::stack<std::pair<int, int>> s;
-  s.push(std::pair<int, int>(_unit->x(), _unit->y()));
-  _reachableCells.clear();
-  std::vector<std::pair<int, int>> checked;
-
-  while (!s.empty())
-  {
-    // getting Cell's coordinates (stack of Coordinates)
-    int x = s.top().first;
-    int y = s.top().second;
-    s.pop();
-
-    // check overflow, Manhattan distance and if we already marked the cell
-    if (x < 0 || y < 0 || x > (int) NB_COLUMNS - 1 || y > (int) NB_LINES - 1
-        || std::abs((int) _unit->x() - x) + std::abs((int) _unit->y() - y) > _maxLength
-        || std::find(checked.begin(), checked.end(), std::pair<int, int>(x, y)) != checked.end())
-    {
-      continue;
-    }
-
-    auto cells = CELLS;
-    _reachableCells.push_back(cells[x][y]);
-    checked.push_back(std::pair<int, int>(x, y));
-
-    s.emplace(std::pair<int, int>(x + 1, y));
-    s.emplace(std::pair<int, int>(x, y + 1));
-    s.emplace(std::pair<int, int>(x - 1, y));
-    s.emplace(std::pair<int, int>(x, y - 1));
-  }
-
   highlightCells();
 }
 
 
 void PathFinding::highlightCells()
 {
-  // TODO check _unit's inventory
+  _reachableCells.clear();
+  _enemyPositions.clear();
+
+  /// \todo check _unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
-  for (auto it: _reachableCells)
+  for (auto i(0u); i < _map->nbColumns(); ++i)
   {
-    std::shared_ptr<Cell> c = CELLS[it->x()][it->y()];
-
-    c->setHighlight(true);
-    if (c->unit())
+    for (auto j(0u); j < _map->nbLines(); ++j)
     {
-     if (c->unit()->playerId() != g_status->currentPlayer())
-     {
-       c->setHighlightColor(sf::Color::Red);
-       _unit->targets()->push_back(c);
-     }
-     else
-       c->setHighlightColor(sf::Color::Green);
+      auto c = (*_map)[i][j];
+
+      // reset highlight for every cell
+      c->setHighlight(false);
+
+      // Compute manhattan distance of unit to every cell
+      auto distance(manhattan(c->coords(), _current));
+
+      // Skip out of range cells
+      if (distance > _unit->motionValue() + _unit->maxRange() - _currentLength)
+      {
+        continue;
+      }
+
+      // Highlight reachable cells, depending on content, if any
+      auto u = c->unit();
+      if (distance <= _unit->motionValue() - _currentLength)
+      {
+        c->setHighlight(true);
+
+        // empty cell, highlight as reachable
+        if (!u)
+        {
+          _reachableCells.push_back((*_map)[i][j]);
+          c->setHighlightColor(graphics::Color::Yellow);
+          continue;
+        }
+
+        if (u->playerId() == game::Status::player()->id())
+        {
+          _reachableCells.push_back((*_map)[i][j]);
+          c->setHighlightColor(graphics::Color::Green);
+        }
+        else
+        {
+          c->setHighlightColor(graphics::Color::Red);
+          _enemyPositions.push_back(c);
+        }
+
+        continue;
+      }
+
+      // cells only at shooting range
+      if (u && distance <= _unit->maxRange())
+      {
+        // unit out of moving range but at shooting range
+        if (u->playerId() != game::Status::player()->id())
+        {
+          c->setHighlight(true);
+          c->setHighlightColor(graphics::Color::Red);
+          _enemyPositions.push_back(c);
+        }
+      }
     }
-    else
-      c->setHighlightColor(sf::Color::Yellow);
   }
 }
 
 
-void PathFinding::hideAllowedPath() const
+void PathFinding::hideAllowedPath()
 {
   // cleaning displayed move possibilities
-  std::vector<std::vector<std::shared_ptr<Cell>>> cells = CELLS;
-  for (unsigned int i = 0; i < NB_COLUMNS; ++i)
-    for (unsigned int j = 0; j < NB_LINES; ++j)
-      cells[i][j]->setHighlight(false);
+  for (auto i(0u); i < _map->nbColumns(); ++i)
+  {
+    for (auto j(0u); j < _map->nbLines(); ++j) {
+      (*_map)[i][j]->setHighlight(false);
+    }
+  }
+}
+
+
+bool PathFinding::allowedMove(e_direction direction)
+{
+  // If we reached the maximal length, the move won't be allowed
+  if (_currentLength >= _maxLength)
+  {
+    return false;
+  }
+
+  // Getting destination cell
+  std::shared_ptr<Cell> dst = nullptr;
+  switch (direction)
+  {
+    case e_direction::UP:
+      dst = _map->cell(Coords(_current.c, _current.l - 1));
+      break;
+
+    case e_direction::DOWN:
+      dst = _map->cell(Coords(_current.c, _current.l + 1));
+      break;
+
+    case e_direction::LEFT:
+      dst = _map->cell(Coords(_current.c - 1, _current.l));
+      break;
+
+    case e_direction::RIGHT:
+      dst = _map->cell(Coords(_current.c + 1, _current.l));
+      break;
+
+    default:
+      assert(!"Invalid direction");
+      return false;
+  }
+
+  // do not allow to move over enemy units
+  auto u(dst->unit());
+  if (u && u->playerId() != game::Status::player()->id())
+  {
+    return false;
+  }
+
+  return true;
+}
+
+
+
+std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
+PathFinding::getTargets(const std::shared_ptr<Unit> unit,
+                        const std::shared_ptr<Cell> cell)
+{
+  assert(unit && cell);
+
+  highlightCells(); // update _enemyPositions if required
+
+  std::vector<std::shared_ptr<Cell>> targets_list;
+  for (const auto c: _enemyPositions)
+  {
+    auto distance(manhattan(c->coords(), cell->coords()));
+    if (distance >= unit->minRange() && distance <= unit->maxRange())
+    {
+      targets_list.push_back(c);
+    }
+  }
+
+  return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets_list);
+}
+
+
+size_t PathFinding::manhattan(const Coords a, const Coords b)
+{
+  // implicit cast into signed int
+  int dist_columns(static_cast<int> (a.c - b.c));
+  int dist_lines(  static_cast<int> (a.l - b.l));
+
+  return std::abs(dist_columns) + std::abs(dist_lines);
 }

@@ -1,97 +1,106 @@
-/*
- * game/Player.hh
- *
- *  Created on: August 1, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date August 1, 2013
+ * \author Zermingore
+ * \brief Player definition.
  */
 
 #ifndef PLAYER_HH_
 # define PLAYER_HH_
 
-# include <common/enums/units.hh>
-# include <common/enums/factions.hh>
-# include <game/units/Unit.hh>
+# include <memory>
+# include <graphics/graphic_types.hh>
 
 
-/** \class Player class
- ** a player can be control by human or AI
+namespace interface {
+  class Interface;
+  class Cursor;
+  class Panel;
+}
+
+class Unit;
+
+
+/**
+ * \class Player
+ * \brief A player can be controled by a human or an AI.
  */
 class Player
 {
 public:
-  /** \brief Constructor
-   ** sets the Player's index to a unique value
-   */
-  Player();
+  /// deleted default constructor
+  Player() = delete;
 
-  // __________________________ Getters / Setters __________________________ //
-  /** \brief cursor last known position getter
-   ** \return _lastCursorPosition
+  /**
+   * \brief Constructor. Sets the Player's index to a unique value.
+   * \param c color used by the player
    */
-  inline Coords lastCursorPosition() { return _lastCursorPosition; }
+  explicit Player(const graphics::Color c);
 
-  /** \brief cursor color getter
-   ** \return color of the cursor (_cursorColor)
-   */
-  inline Color cursorColor() { return _cursorColor; }
 
-  /** \brief units color getter
-   ** \return units color (_unitsColor)
+  /**
+   * \brief Player identifier getter.
+   * \return Player's identifier.
    */
-  inline Color unitsColor() { return _unitsColor; }
+  auto id() { return _id; }
 
-  /** \brief Units list getter
-   ** \return list of player's units (_units)
-   */
-  std::vector<std::shared_ptr<Unit>> units() { return _units; }
 
-  /** \brief sets cursor color
-   ** \param color _cursorColor value
-   */
-  inline void setCursorColor(Color color) { _cursorColor = color; }
+  // Cursor motion
+  void moveCursorUp();
+  void moveCursorDown();
+  void moveCursorLeft();
+  void moveCursorRight();
 
-  /** \brief sets units color
-   ** \param color units color
+  /**
+   * \brief callback when a cell is clicked.
+   * \note only used when no unit is selected / menu opened
    */
-  inline void setUnitsColor(Color color) { _unitsColor = color; }
+  void select();
 
-  // __________________________ Member Functions __________________________ //
-  /** \brief Saves current cursor position
+  /**
+   * \brief color getter
+   * \return the color associated to the player
    */
-  void saveCursorPosition();
+  auto color() { return _color; }
 
-  /** \brief Finished the turn of the player
-   ** sets all of it's units played flag to false
+  /**
+   * \brief Player's interface getter.
+   * \return Interface pointer.
    */
-  void endTurn();
+  auto interface() { return _interface; }
 
-  /** \brief adds a unit to the player's units list
-   ** \param unit unit to add to the player's list
+  /**
+   * \brief Cursor getter.
+   * \return a pointer to the player's cursor.
    */
-  void addUnit(std::shared_ptr<Unit> unit) { _units.push_back(unit); }
+  auto cursor() { return _cursor; }
 
-  /** \brief builds a new Unit and adds it to the player's units list
-   ** \param unit type of the unit to add to the player's list
-   ** \param column column location of the new Unit
-   ** \param line line location of the new Unit
+  /**
+   * \brief Toggle the side panel status (Left, Right, Deactivated)
+   * \note The request is forwarded to the Panel itself
    */
-  std::shared_ptr<Unit> newUnit(e_unit unit,
-                                unsigned int column = 0, unsigned int line = 0);
+  void togglePanel();
 
-  /** \brief removes a unit to the player's units list
-   ** \param unit unit to remove from the player's list
+
+  /**
+   * \brief Update the Map selected Unit
    */
-  void removeUnit(std::shared_ptr<Unit> unit);
+  void updateSelectedUnit();
 
 
 private:
-  unsigned int _index; ///< player's index in the Battle _players array
-  Color _cursorColor; ///< cursor's color
-  Color _unitsColor; ///< units color
-  Coords _lastCursorPosition; ///< position to remember each time we hit Next Turn
-  std::vector<std::shared_ptr<Unit>> _units; ///< units vector
-  bool _isDead; ///< is the player still playing
-  //e_faction _faction; ///< player's faction
+  // (logicaly const, cannot be initialized by a static variable)
+  mutable size_t _id; ///< Player's identifier
+
+  // interface
+  std::shared_ptr<interface::Interface> _interface; ///< User Interface
+  std::shared_ptr<interface::Cursor>    _cursor;    ///< Map Cursor
+  std::shared_ptr<interface::Panel>     _panel;     ///< Side panel
+
+  std::shared_ptr<Unit> _selectedUnit; ///< current selected unit
+
+  graphics::Color _color; ///< player's color
 };
+
 
 #endif /* !PLAYER_HH_ */

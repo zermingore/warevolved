@@ -1,45 +1,42 @@
 #include <game/Game.hh>
+
+#include <future>
+#include <cassert>
+
+#include <graphics/Context.hh>
+#include <input/InputsListener.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <input/Event.hh>
-#include <common/globals.hh>
-#include <game/applications/Battle.hh>
+#include <game/Battle.hh>
+#include <resources/ResourcesManager.hh>
+#include <game/Status.hh>
+#include <common/enums/states.hh>
+#include <context/State.hh>
 
 
-void Game::run()
+Game::Game(bool fullscreen)
 {
-  auto graphics = std::make_shared<GraphicsEngine> ();
-  auto km = std::make_shared<KeyManager> ();
-  _event = std::make_shared<Event> (km, graphics);
+  graphics::Context context(fullscreen);
+}
 
-# ifdef DEBUG_PERFS
-  sf::Clock timer;
-  std::vector<sf::Int64> frame_generation;
-# endif
 
-  Battle b;
-  g_status->setBattle(b);
-  graphics->initRoom();
+void Game::run(bool replay)
+{
+  using namespace graphics; // function scope
 
-  // Game loop
-  while (g_window->isOpen() && _event->process())
-  {
-    graphics->drawScene();
-    g_window->display(); // Update the window
+  /// \todo main menu (pushState or the like)
 
-#   ifdef DEBUG_PERFS
-    g_status->setCurrentFPS(1000000 / timer.getElapsedTime().asMicroseconds());
-    // storing all values, avoiding syscalls
-    frame_generation.push_back(timer.getElapsedTime().asMicroseconds());
-    timer.restart();
-#   endif
-  }
+  resources::ResourcesManager::initialize("resources.xml");
 
-  // finished the main loop, displaying performances
-# ifdef DEBUG_PERFS
-  for (unsigned int i = 0; i < frame_generation.size(); ++i)
-  {
-    PRINTF("frame generation:", frame_generation[i],
-           "\tFPS:", 1000000 / frame_generation[i]);
-  }
-# endif
+  auto battle(std::make_shared<Battle> ());
+  game::Status::setBattle(battle);
+  battle->initializeMap();
+
+  auto inputs_listen(
+    std::async(std::launch::async, InputsListener::listen, replay));
+
+  game::Status::pushState(e_state::PLAYING);
+  game::Status::currentState()->resume();
+
+  // Drawing loop
+  GraphicsEngine::drawScene(battle);
 }

@@ -1,37 +1,88 @@
-/*
- * interface/menus/InGameMenu.hh
- *
- *  Created on: July 25, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date July 25, 2013
+ * \author Zermingore
  */
 
-#ifndef INGAMEMENU_HH_
-# define INGAMEMENU_HH_
+#ifndef IN_GAME_MENU_HH_
+# define IN_GAME_MENU_HH_
 
 # include <interface/menus/Menu.hh>
-# include <game/units/Unit.hh>
-# include <game/applications/Battle.hh>
 
-/** \brief in game menu class
- ** refers to the menu called when
- **   you pick a unit
- **   click on a void cell
+enum class e_state;
+
+class Unit;
+
+namespace interface {
+
+/**
+ * \class InGameMenu
+ * \brief Refers to the menu called when
+ *   A unit is picked
+ *   A void cell is clicked
  */
 class InGameMenu: public Menu
 {
 public:
-  /** \brief Default Constructor
+  /**
+   * \brief Builds the selection menu, filling the entries.
    */
-  InGameMenu() {}
+  virtual void build() override = 0;
 
-  /** \brief builds the selection menu, filling _entries
-   ** \param mode The mode we're about to push
+  /**
+   * \brief Closes the current menu, clearing its interface elements
    */
-  void build(e_mode mode);
+  virtual void close() override;
 
-  /** \brief executes action matching Menu::_selectedEntry
+
+  /**
+   * \brief Cursor motion: up
    */
-  void executeEntry();
+  void moveUp() override final;
+
+  /**
+   * \brief Cursor motion: down
+   */
+  void moveDown() override final;
+
+  /**
+   * \brief Validate selected entry
+   */
+  void validate() override final;
+
+
+  /**
+   * \brief updates the graphics attributes of the menu
+   */
+  void update() override final;
+
+  /**
+   * \brief Draw the entries of the menu
+   */
+  virtual void draw() override;
+
+
+
+protected:
+  /**
+   * \brief Default cancel entry callback (pops the menu)
+   */
+  virtual void cancel();
+
+  /**
+   * \brief Adds a cancel entry into the menu
+   */
+  void addCancelEntry(const std::function<void()> cancel_callback);
+
+
+  // \todo RM _cursorCoords / _unit
+  // state data
+  Coords _cursorCoords; ///< Saved cursor coordinates
+  std::shared_ptr<Unit> _unit; ///< Saved unit
 };
 
-#endif /* !INGAMEMENU_HH_ */
+
+} // namespace interface
+
+
+#endif /* !IN_GAME_MENU_HH_ */

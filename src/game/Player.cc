@@ -1,57 +1,77 @@
 #include <game/Player.hh>
-#include <common/globals.hh>
+
+#include <common/enums/states.hh>
+#include <game/Battle.hh>
+#include <game/Status.hh>
 #include <game/units/Soldier.hh>
+#include <interface/Interface.hh>
+#include <interface/InterfaceElement.hh>
+#include <interface/Cursor.hh>
+#include <interface/Panel.hh>
+#include <interface/menus/InGameMenu.hh>
+#include <context/State.hh>
+#include <context/StateMenu.hh>
 
 
-Player::Player() :
-  _isDead (false)
+Player::Player(const graphics::Color c)
 {
-  static unsigned int static_id = 0;
-  _index = static_id++;
+  static size_t static_id = 0;
+  _id = static_id++;
+
+  _color = c;
+
+  // Interface and elements
+  _interface = std::make_shared<interface::Interface> (c);
+
+  _cursor = std::make_shared<interface::Cursor> ();
+  _cursor->setColor(c);
+  _interface->addElement(_cursor);
+
+  _panel = std::make_shared<interface::Panel> (game::Status::battle()->map(),
+                                               _cursor);
+  _interface->addElement(_panel);
 }
 
-void Player::saveCursorPosition() {
-  _lastCursorPosition = CURSOR->coords();
+
+// Interface elements
+void Player::moveCursorUp() {
+  _cursor->moveUp();
 }
 
-void Player::endTurn()
-{
-  for (auto it: _units)
-    it->setPlayed(false);
+void Player::moveCursorDown() {
+  _cursor->moveDown();
 }
 
-std::shared_ptr<Unit> Player::newUnit(e_unit unit,
-                                      unsigned int line, unsigned int column)
+void Player::moveCursorLeft() {
+  _cursor->moveLeft();
+}
+
+void Player::moveCursorRight() {
+  _cursor->moveRight();
+}
+
+void Player::togglePanel() {
+  _panel->toggleStatus();
+}
+
+
+void Player::select()
 {
-  std::shared_ptr<Unit> new_unit;
-  switch (unit)
+  /// \todo check selectable before push
+
+  if (game::Status::battle()->map()->unit(_cursor->coords()))
   {
-    case E_UNIT_SOLDIERS:
-      new_unit = std::make_shared<Soldier> ();
-      break;
-
-    default:
-      PRINTF("Unable to match this unit type");
-      return nullptr;
+    game::Status::pushState(e_state::SELECTION_UNIT);
   }
-
-  new_unit->setCellCoordinates(Coords(line, column));
-  new_unit->setPlayerId(_index);
-  _units.push_back(new_unit);
-
-  return new_unit;
+  else
+  {
+    game::Status::pushState(e_state::MAP_MENU);
+  }
+  game::Status::currentState()->resume();
 }
 
 
-void Player::removeUnit(std::shared_ptr<Unit> unit)
+void Player::updateSelectedUnit()
 {
-  auto u = std::find(_units.begin(), _units.end(), unit);
-  if (u == _units.end())
-  {
-    PRINTF("Unit not found");
-    return;
-  }
-
-  _units.erase(u);
-  _isDead = _isDead || _units.empty();
+  game::Status::battle()->map()->selectUnit(_cursor->coords());
 }

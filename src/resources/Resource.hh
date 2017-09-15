@@ -1,79 +1,86 @@
-#ifndef RESOURCE_HH_
-# define RESOURCE_HH_
-
-# include <common/include.hh>
-
-// should split scopes ?
-// (menu_scopes) with main, end game, network
-
-
-/** \brief various scopes to delimit resources lifetime
- ** *Warning*: unused for now
+/**
+ * \file
+ * \date April 25, 2013
+ * \brief Resource abstract class declaration
  */
-enum e_scope
-{
-  E_SCOPE_MAIN_MENU,
 
-  E_SCOPE_ANY_GAME, ///< in-game_menu, cursor
-  E_SCOPE_SNOWY,
-  E_SCOPE_SUNNY,
+#ifndef RESOURCES_RESOURCE_HH_
+# define RESOURCES_RESOURCE_HH_
 
-  E_SCOPE_ALL ///< the resource will be present in any scope
-};
+# include <string>
 
 
-/** \brief generic Resource class
- ** Resource is an abstract class
- ** Its daughters are Image, Sound, ...
+/**
+ * \class Resource
+ * \brief generic Resource class
+ * \note Daughters classes: Image, Font, ...
  */
 class Resource
 {
 public:
-  /** \brief Default Constructor
+  /**
+   * \brief Default Constructor
    */
-  Resource() {}
-  /** \brief Constructor
-   ** \param name resource name
-   */
-  explicit Resource(std::string name);
-  virtual ~Resource() {}
+  Resource() = default;
 
-  /** \brief virtual method: resource loading
+  /**
+   * \brief Constructor
+   * \param name resource name
    */
-  virtual bool load() = 0;
-  virtual void unload() {};
+  explicit Resource(const std::string name);
 
-  bool getLoaded() { return _loaded; }
-
-  /** \brief _fileName getter
-   ** \return _fileName : Resource full file name (with path and extension)
+  /**
+   * \brief default destructor
    */
-  std::string getFileName() const { return _fileName; }
+  virtual ~Resource() = default;
 
-  /** \brief _fileName setter
-   **   sets _fileName to file_name
-   ** \param file_name Resource File Name to put into _fileName
-   */
-  void setFileName(std::string file_name) { _fileName = file_name; }
 
-  /** \brief _name getter
-   ** \return _name : Resource alias
-   **   _name could be an empty string
+  /**
+   * \brief resource loading
    */
-  std::string name() const { return _name; }
+  virtual bool load() { return false; } /// \todo remove (must be in the Ctor)
 
-  /** \brief _name setter
-   **   sets _name to name
-   ** \param name Resource alias name to put into _name
+  /**
+   * \brief unloads a resource
    */
-  void setName(std::string name) { _name = name; }
+  virtual void unload() {} /// \todo = 0
+
+  /**
+   * \brief _loaded boolean getter
+   * \return A boolean to know if the resource is already in RAM
+   */
+  auto getLoaded() const { return _loaded; }
+
+  /**
+   * \brief _fileName getter
+   * \return _fileName : Resource full file name (with path and extension)
+   */
+  auto getFileName() const { return _fileName; }
+
+  /**
+   * \brief _fileName setter
+   * \param file_name New resource file name
+   */
+  void setFileName(const std::string file_name) { _fileName = file_name; }
+
+  /**
+   * \brief _name getter
+   * \return _name: Resource alias
+   * \note _name could be an empty string
+   */
+  auto name() const { return _name; }
+
+  /**
+   * \brief _name setter
+   * \param name New resource alias name
+   */
+  void setName(const std::string name) { _name = name; }
 
 
 protected:
+  std::string _name;     ///< Resource alias name
+  bool _loaded;          ///< is the resource already in RAM ?
   std::string _fileName; ///< Resource file name (with full path and extension)
-  std::string _name; ///< Resource alias name
-  bool _loaded; ///< is the resource already in RAM ?
-  //e_scope _scope; ///< resource scope (the context it belongs to)
 };
 
-#endif /* !RESOURCE_HH_ */
+#endif /* !RESOURCES_RESOURCE_HH_ */

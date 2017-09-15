@@ -1,106 +1,87 @@
 #include <interface/menus/MenuEntry.hh>
-#include <common/include.hh>
-#include <common/globals.hh>
-#include <common/Status.hh>
-#include <common/macros.hh>
+#include <debug/Debug.hh>
+#include <game/Status.hh>
+#include <game/Battle.hh>
+#include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
+#include <resources/Text.hh>
 
 
-MenuEntry::MenuEntry(e_entry &entry) :
-  _id (entry)
+namespace interface {
+
+
+MenuEntry::MenuEntry(const e_entry entry)
+  : InterfaceElement("selection_menu_button")
+  , _id (entry)
 {
-  PRINTF("NOT yet implemented MenuEntry Ctor");
-
-  _background = GETIMAGE("selection_menu_button");
-  _background.setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
-
-  // TODO set font and label using a DB
-}
-
-
-MenuEntry::MenuEntry(std::string label_name, e_entry entry)
-{
-  _background = GETIMAGE("selection_menu_button");
-  _background.setSize(sf::Vector2f(2 * CELL_WIDTH, CELL_HEIGHT));
+  setLabelName(entry);
 
   // label initialization
-  // TODO better calculus, ratio dependent, eventually, text length dependent
-  _label = std::make_shared<sf::Text> ();
-  _label->setCharacterSize((CELL_WIDTH + CELL_HEIGHT) / 4);
+  /// \todo the size should be ratio dependent, eventually text length dependent
+  using p = graphics::MapGraphicsProperties;
+  auto size { (p::cellWidth() + p::cellHeight()) / 4 };
 
-  _font = g_rm->getFont("font_army");
-  _label->setFont(*(_font.getFont()));
-  _label->setString(label_name);
-
-  _id = entry;
+  _label = std::make_shared<resources::Text> (
+    _labelName, size, graphics::Pos2(0, 0), "font_army");
 }
 
 
-void MenuEntry::draw(sf::Vector2f position)
+
+void MenuEntry::update()
 {
-  _background.setPosition(position);
-  _label->setPosition(position);
-
-  _background.draw();
-  g_window->draw(*_label);
+  using p = graphics::MapGraphicsProperties;
+  _image->setSize(p::cellWidth() * 2, p::cellHeight());
+  _label->setPosition(_position.x, _position.y);
 }
+
+
+
+void MenuEntry::draw()
+{
+  // Drawing the text before to have a kind of fade effect
+  _label->draw();
+
+  _image->sprite()->setPosition(_position.x, _position.y);
+  graphics::GraphicsEngine::draw(_image->sprite());
+}
+
 
 
 void MenuEntry::execute()
 {
-  switch (_id)
+  _callback();
+}
+
+
+
+void MenuEntry::setLabelName(const e_entry entry)
+{
+  /// \todo set string using a DB
+  switch (entry)
   {
-    case E_ENTRY_ATTACK:
-    {
-      g_status->pushMode(E_MODE_ATTACK);
-      auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
-      auto targets (selectedUnit->targets());
-      selectedUnit->setAttackCoords(CURSOR->coords());
-      CURSOR->setCoords((*targets)[0]->getCoords());
+    case e_entry::MOVE:
+      _labelName = "Move";
       break;
-    }
-
-    case E_ENTRY_STOP:
-    {
-      auto selectedUnit (MAP.unit(g_status->selectedUnitPosition()));
-      selectedUnit->setCoords(CURSOR->coords());
-      if (g_status->selectedUnitPosition() != CURSOR->coords())
-        MAP.moveUnit();
-
-      g_status->exitToMode(E_MODE_PLAYING, true);
-      g_interface->path()->hideAllowedPath();
+    case e_entry::WAIT:
+      _labelName = "Wait";
       break;
-    }
-
-    case E_ENTRY_MOVE:
-    {
-      g_status->pushMode(E_MODE_MOVING_UNIT);
-      g_status->setSelectedUnitPosition(CURSOR->coords());
-      g_interface->setPathOrigin(CURSOR->coords());
+    case e_entry::NEXT_TURN:
+      _labelName = "Next\n  Turn";
       break;
-    }
-
-    case E_ENTRY_NEXT_TURN:
-      BATTLE->nextPlayer();
-      g_status->exitCurrentMode(true);
+    case e_entry::ATTACK:
+      _labelName = "Attack";
       break;
-
-    case E_ENTRY_CANCEL:
-    {
-      auto old_mode (CURRENT_MODE);
-      g_interface->inGameMenu()->loadMenu();
-
-      // if we were dealing with orders, return to the unit position
-      if (old_mode == E_MODE_ACTION_MENU && CURRENT_MODE == E_MODE_MOVING_UNIT)
-      {
-        g_status->exitCurrentMode();
-        // re-build menu at selection state
-        g_interface->inGameMenu()->build(CURRENT_MODE);
-      }
+    case e_entry::CANCEL:
+      _labelName = "Cancel";
       break;
-    }
 
     default:
-      Debug::logPrintf("unable to match selection menu entry");
+      _labelName = "## NOT FOUND ##";
+      ERROR("No label found for e_entry", static_cast<int> (entry));
+      assert(!"No label found");
       break;
   }
 }
+
+
+} // namespace interface

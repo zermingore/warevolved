@@ -1,114 +1,140 @@
-#ifndef IMAGE_HH_
-# define IMAGE_HH_
-
-# include <resources/Resource.hh>
-# include <common/include.hh>
-
-
-/** \class Image Resource type
- ** Derived from Resource
+/**
+ * \file
+ * \date Apr 25, 2013
+ * \author Zermingore
  */
-class Image : public Resource
+
+#ifndef RESOURCES_IMAGE_HH_
+# define RESOURCES_IMAGE_HH_
+
+# include <string>
+# include <memory>
+# include <graphics/graphic_types.hh>
+# include <common/using.hh>
+# include <resources/Resource.hh>
+
+
+namespace resources {
+
+/**
+ * \class Image
+ * \brief Image type, Derived from Resource
+ */
+class Image: public Resource
 {
 public:
-  /** \brief Image default Constructor
+  /**
+   * \brief Image default Constructor
    */
-  Image() {}
+  Image() = default;
 
-  /** \brief Image Constructor
-   ** \param file_name Image complete file name
-   **   (with full path and extension)
-   ** \param name Image alias name
-   **
-   ** sets _texture to NULL
-   ** _loaded to false
+  /**
+   * \brief Image Constructor
+   * \param file_name Image complete file name
+   *   (with full path and extension)
+   * \param name Image alias name
+   *
+   * set _texture to nullptr
+   * _loaded to false
    */
-  Image(const std::string file_name,
-        const std::string name);
+  Image(const std::string file_name, const std::string name);
 
-  /** \brief initializes _texture
-   **   sets _loaded to true
+
+  /**
+   * \brief _texture getter
+   * \return _texture
    */
-  void initTexture();
+  const auto getTexture() { return _texture; }
 
-  /** \brief initializes _sprite
-   **   sets _loaded to true
+  /**
+   * \brief _sprite getter
    */
-  void initSprite();
+  const auto sprite() { return _sprite; }
 
-  /** \brief _texture getter
-   ** loads the texture (and sets _loaded flag) if _loaded was false
-   ** \return _texture
+
+  /**
+   * \brief set _sprite position
+   * \param position: _sprite vector position
    */
-  std::shared_ptr<sf::Texture> getTexture();
+  void setPosition(const Coords position);
 
-  /** \brief _sprite getter
-   ** loads the texture if needed (through initTexture)
-   ** allocates _sprites if needed (through initSprite)
+  /**
+   * \brief set _sprite position
+   * \param position: _sprite vector position components
    */
-  std::shared_ptr<sf::Sprite> sprite();
+  void setPosition(const graphics::component x, const graphics::component y);
 
-  /** \brief sets _rectangle size
+
+  /**
+   * \brief Set _rectangle and _sprite size.
+   * \note The new size of the object depends on the cell size
    */
-  void setSize(sf::Vector2f size);
+  void setSize(const graphics::Size2 size);
 
-  /** \brief sets _rectangle size
-   **   builds a sf::Vector2f
-   ** \param width: image width
-   ** \param height: image height
+  /**
+   * \brief set _rectangle and _sprite size
+   * \param width: image width
+   * \param height: image height
    */
-  void setSize(float width, float height);
+  void setSize(const graphics::component width,
+               const graphics::component height);
 
-  /** \brief sets _sprite position
-   ** \param position: _sprite vector position
+
+  /**
+   * \brief set _rectangle and _sprite scale
+   * \param scale new rectangle and sprite scale
    */
-  void setPosition(sf::Vector2f position);
+  void setScale(const graphics::Scale2 scale);
 
-  /** \brief sets _fileName to file_name
-   **   sets _loaded to false
+  /**
+   * \brief set _rectangle and _sprite scale
+   * \param width: image width
+   * \param height: image height
    */
-  void setFileName(std::string file_name);
+  void setScale(const graphics::component width,
+                const graphics::component height);
 
-  /** _sprite setter
-   ** \param sprite _sprite value
+  /**
+   * \brief set _rectangle and _sprite scale using the same ratio
+   * \param ratio: Scale ratio
    */
-  inline void setSprite(std::shared_ptr<sf::Sprite> sprite) { _sprite = sprite; }
+  void setScale(const float ratio);
 
-  /** \brief load Image texture to (V)RAM if necessary
-   ** sets _rectangle->texture to the new _texture
-   **
-   ** \return true if Image was loaded; false otherwise
+  /**
+   * \brief set the Image 'global' Color
+   * \param color Color to set
    */
-  bool load();
+  void setColor(const graphics::Color& color);
 
-  /** \brief remove Image file from (V)RAM
+  /**
+   * \brief _sprite setter
+   * \param sprite _sprite value
    */
-  void unload();
+  void setSprite(const std::shared_ptr<graphics::Sprite> sprite) {
+    _sprite = sprite;
+  }
 
-  /** \brief Reloads the texture (unload the previous one if any)
+  /**
+   * \brief draws the Image in the cell coords.c, coords.l
+   * \param c coordinate to display the image
    */
-  void reload(std::string file_name);
+  void drawAtCell(const Coords c);
 
-  /** \brief draws the Image in the cell i, j
-   ** \param i x cell's coordinate to display the image (column)
-   ** \param j y cell's coordinate to display the image (row)
-   */
-  void drawAtCell(unsigned int i, unsigned int j);
-
-  /** \brief draws the Image in the cell coords.x, coords.y
-   ** \param c coordinate to display the image
-   */
-  void drawAtCell(Coords c);
-
-  /** \brief draws the Image at _sprite's position
+  /**
+   * \brief draws the Image at _sprite's position
    */
   void draw();
 
 
 private:
-  std::shared_ptr<sf::Texture> _texture; ///< texture data pointer
-  std::shared_ptr<sf::Sprite> _sprite; ///< Image sprite, allowing transformations
-  std::shared_ptr<sf::RectangleShape> _rectangle; ///< image position
+  std::shared_ptr<graphics::Texture> _texture;          ///< Texture data
+  std::shared_ptr<graphics::Sprite> _sprite;            ///< Used to transform
+  std::shared_ptr<graphics::RectangleShape> _rectangle; ///< image position
 };
 
-#endif /* !IMAGE_HH_ */
+
+} // namespace resources
+
+
+
+#endif /* !RESOURCES_IMAGE_HH_ */

@@ -1,0 +1,84 @@
+KeyManager
+----------
+Link HW
+Event keyboard -> Token (event)
+'a' -> EVENT_LEFT
+'a' -> EVENT_CHAR_A
+builds the list of current active events
+
+
+InputProcessor
+--------------
+Submit current events to the EventManagers
+for every event e
+  for every EventManagers EM do // only for the top of the States stack
+    if EM->process(e)
+       break
+
+
+EventManager
+------------
+Final class
+process(event)
+List of processable events
+
+
+State
+-----
+Has an EventManager
+
+
+Game
+----
+Stack of States
+
+
+1st: Could implement pause:
+Consume every event to prevent execution by others
+
+
+# semantic
+HW  > HW abstraction > usable event
+key > input          > event
+
+
+delay between keys
+handle by the EventManagers
+(receive the event every frame, choose to process or not)
+
+
+where to register in EventManager
+(or else everything in state...)
+-> specialized States ?
+
+
+State:
+Abstract class
+MapState / MenuState / ...
+has ist own EventManager
+(will be deleted / created at every push / pop but we don't care for now)
+
+
+
+
+Ex:
+StatePlaying: event left -> cursor left
+-> how ?
+
+call battle / map -> change_cursor or the like ?
+
+
+Lambda
+------
+
+std::function<void> () = [=] Class::method()
+// or = std::bind(&Class::method, this)
+
+
+
+
+menu entries callbacks
+----------------------
+assign callback in the menu -> dependencies to everything
+implement everything in menu -> crappy design
+group callbacks in separate files [units, map, ...]: broken design ?

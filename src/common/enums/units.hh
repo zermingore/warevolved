@@ -1,12 +1,24 @@
-#ifndef UNITS_HH_
-# define UNITS_HH_
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
+ */
 
-enum e_unit
+#ifndef ENUM_UNITS_HH_
+# define ENUM_UNITS_HH_
+
+
+/**
+ * \enum e_unit
+ * \brief Different units types.
+ */
+enum class e_unit
 {
-  E_UNIT_SOLDIERS = 0,
+  SOLDIERS = 0,
 
-  E_UNIT_NB_UNITS,
-  E_UNIT_NONE
+  NB_UNITS,
+  NONE
 };
 
-#endif /* !UNITS_HH_ */
+
+#endif /* !ENUM_UNITS_HH_ */

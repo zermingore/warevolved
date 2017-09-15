@@ -1,30 +1,46 @@
-/*
- * game/Game.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
  */
 
 #ifndef GAME_HH_
 # define GAME_HH_
 
-# include <input/Event.hh>
-
-/** \brief Game is designed to hold the whole Game and not a single game
- **   This way the Game class launches the main menu when needed
+/**
+ * \class Game
+ * \brief Game is designed to hold the whole Game and not a single game.
+ *
+ * This way the Game class launches the main menu when needed.
  */
 class Game
 {
 public:
-  /** \brief contains the game loop which calls
-   **   event processing
-   **   window rendering
+  /**
+   * \brief Deleted default constructor: the options are required
    */
-  void run();
+  Game() = delete;
+
+  /**
+   * \brief Initializes the graphical context
+   * \param fullscreen Initialize a full screen or windowed graphical context
+   * \see Context
+   */
+  explicit Game(bool fullscreen);
+
+  /**
+   * \brief Defaulted destructor: the Context doesn't need to be deleted
+   */
+  ~Game() = default;
 
 
-private:
-  std::shared_ptr<Event> _event; ///< Events management
+  /**
+   * \brief contains the game loop which calls
+   *   event processing
+   *   window rendering
+   * \param replay true to start a replay, false otherwise
+   */
+  void run(bool replay);
 };
 
 #endif /* !GAME_HH_ */

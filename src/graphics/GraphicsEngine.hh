@@ -1,42 +1,171 @@
-/*
- * graphics/GraphicsEngine.hh
- *
- *  Created on: April 15, 2013
- *      Author: Zermingore
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \brief Graphics related class / functions declarations
  */
 
-#ifndef GRAPHICSENGINE_HH_
-# define GRAPHICSENGINE_HH_
+#ifndef GRAPHICS_GRAPHICS_ENGINE_HH_
+# define GRAPHICS_GRAPHICS_ENGINE_HH_
+
+# include <memory>
+
+# include <SFML/Graphics/RenderWindow.hpp>
+# include <SFML/Window/Event.hpp>
+
+# include <graphics/graphic_types.hh>
+
+class Map;
+class Cell;
+class Unit;
+class Battle;
+class Interface;
 
 
-/** \brief Graphics Engine class
- ** manages the display of a scene
+
+namespace graphics {
+
+
+/**
+ * \class GraphicsEngine
+ * \brief Manages the display of the scene
  */
 class GraphicsEngine
 {
 public:
-  /** \brief Draws the whole scene
-   **   calls others drawing functions
+  /**
+   * \brief Draws the whole scene.
+   *   - calls others drawing functions
+   *   - updates the window
+   * \note Drawing while the window is not closed
    */
-  void drawScene();
+  static void drawScene(const std::shared_ptr<Battle> battle);
 
-  /** \brief Initializes drawable zone limits
-   **   by setting g_status gridOffsets
+  /**
+   * \brief Draw the interface of the current Player.
+   * \note called by a State
    */
-  void initRoom();
+  static void drawInterface();
+
+  /**
+   * \brief _window setter. Disable the screenshot request, if any
+   *   (used for initialization)
+   * \note Takes the ownership of the given unique pointer
+   */
+  static void setWindow(std::unique_ptr<RenderWindow> window) {
+    _window = std::move(window);
+    _takeScreenshot = false;
+  }
+
+  /**
+   * \brief Set the offset between the window border and the grid
+   * \param map Used to get the number of columns and lines of the map
+   */
+  static void setGridOffset(const std::shared_ptr<const Map> map);
+
+  /**
+   * \brief Close the window
+   */
+  static void closeWindow() {
+    _window->close();
+  }
+
+  /**
+   * \brief Wait and return the next event on the window
+   */
+  static auto waitEvent(sf::Event& event) {
+    return _window->waitEvent(event);
+  }
+
+  /**
+   * \brief Window size getter
+   */
+  static auto windowSize() {
+    return _window->getSize();
+  }
+
+  /**
+   * \brief Draws the given element
+   * \param drawable shared pointer to an item to draw
+   */
+  template <typename T>
+  static void draw(const std::shared_ptr<T> drawable) {
+    _window->draw(*drawable);
+  }
+
+  /**
+   * \brief Draws the given element
+   * \param drawable item to draw
+   */
+  template <typename T>
+  static void draw(const T drawable) {
+    _window->draw(drawable);
+  }
+
+  /**
+   * \brief Only performs a screenshot request
+   *   The boolean is check at each frame (instead of locking the window)
+   */
+  static void screenshotRequest() {
+    _takeScreenshot = true;
+  }
 
 
 private:
-  /** \brief Draws the map background
+  /**
+   * \brief Draw the map background
    */
-  void drawBackground();
+  static void drawBackground();
 
-  /** \brief Draws cell content (terrain, unit)
+  /**
+   * \brief Draw the panel, if activated
    */
-  void drawCells();
+  static void drawPanel();
 
-  /// \brief in case there are too many cells to display
-  void drawGrid();
+  /**
+   * \brief Draws cells content (terrain, unit).
+   * \param battle Battle content to draw.
+   */
+  static void drawMap(const std::shared_ptr<Battle> battle);
+
+  /**
+   * \brief Draws the grid, graphic cells separator.
+   * \param Map for which we draw the grid.
+   */
+  static void drawGrid(const std::shared_ptr<Map> map);
+
+  /**
+   * \brief Draws the given Unit.
+   * \param unit Unit to draw.
+   * \param battle Battle to get the graphics properties of the current Player.
+   */
+  static void drawUnit(const std::shared_ptr<Unit> unit);
+
+  /**
+   * \brief Draws the elements related to the given State
+   */
+  static void drawState();
+
+  /**
+   * \brief Save the current rendered image to a file
+   */
+  static void screenshot();
+
+
+  /**
+   * \brief current number of generated frames
+   * \note if the compilation flag DEBUG_PERFS is not set
+   *   the frame rate will be limited to 60
+   *   it will be unlimited otherwise
+   */
+  static size_t _nbFramesGenerated;
+
+  static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
+
+  static bool _takeScreenshot; ///< \true when a screenshot is requested
 };
 
-#endif /* !GRAPHICSENGINE_HH_ */
+
+} // namespace graphics
+
+#endif /* !GRAPHICS_GRAPHICS_ENGINE_HH_ */

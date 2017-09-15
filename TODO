@@ -1,96 +1,72 @@
 -*- mode:org -*-
+#+OPTIONS: ^:nil
+
+# NOTE: This file should be only commited on the doc or master branches (only)
+
 
 * TODO Roadmap
-  (should be no more than 2 commits ahead)
+** TODO Test: Save the map in a file
 
-* old roadmap
-** DONE Multiturn attacks
-   CLOSED: [2014-07-01 Tue 20:17]
-** DONE Units: random names
-   CLOSED: [2014-06-29 Sun 17:04]
-   (tmp: use a filled vector and a static index when creating a Unit)
+* TODO Clean
+** TODO Put the ResourcesManager class in the resources namespace
+** DONE ResourcesManager::getFont should return a shared_ptr
+   CLOSED: [2017-09-13 Mi 19:05]
+** TODO Avoid casts to graphic types, overriding some methods
+** TODO Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
 
-* DONE Git
-  CLOSED: [2013-07-24 Wed 07:10]
-** DONE Merge ResourcesManager branch
-   CLOSED: [2013-06-07 Fri 17:58]
-** DONE Merge master & test (switch to std::shared_ptr)
-   CLOSED: [2014-06-22 Sun 13:50]
+* TODO experimental
+** TODO drawInterface Vs drawState
+   drawState draws the interface ?
+** TODO Cursor (interface) in its thread
+** CLOSED Find a way to keep track of a file accross branches (for this file)
+   CLOSED: [2017-08-29 Di 07:34]
+   git sub-tree would do the job transparently but involve another repo
+   this seems overkill for a small set of files
+** TODO Handle external libs (pugixml) in submodules ?
+** DONE core/Context != context/*
+   CLOSED: [2017-09-05 Di 20:34]
+   (as core/Context handles only graphic properties, move in graphics ?)
+** DONE Use a using for graphic types (SFML: floats for positions)
+   CLOSED: [2017-08-29 Di 07:37]
+** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 
-* TODO keys
-** DONE make the cursor move
-   CLOSED: [2013-04-17 Wed 16:41]
-** TODO use the mouse to make it move
-** DONE selection, pop panel / bar: no key repeat allowed
-   CLOSED: [2013-04-21 Sun 21:56]
-   set a boolean when pressed OR released
+* TODO Input
+** TODO Use the mouse to move the cursor, browse menus...
+** TODO Clear the events fifo on State changes
+** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
 
 * TODO Game Features
-** DONE [#A] Selection (drag and drop units)
-   CLOSED: [2013-08-06 Tue 22:46]
-** DONE path-finding
-   CLOSED: [2014-06-18 Wed 00:10] (using a flood-fill)
 ** TODO Allow direct attack when a target is already at range
    (do not pass through move action)
-** TODO allow a unit to attack when a target become accessible (after moving)
 
 * TODO Code Design
-** DONE [#A] really use Settings class (key repeat delay, ...) should be in it
-   CLOSED: [2013-05-07 Tue 13:08]
-** TODO make an Event Manager test with boost signals (emulate callbacks)
-** DONE Resources Manager
-   CLOSED: [2013-05-07 Tue 13:08]
-** TODO use size_t
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
-** DONE use Coords / Color / ... (or an int: high / low)
-   CLOSED: [2013-08-06 Tue 10:44]
-   not SFML dependant
 ** TODO auto-generate XML
 *** TODO OS-dependant in script language
 **** TODO Shell Script
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
-** TODO [#A] GLOBAL static class
-** TODO [#A] Clean (truly use C++11-14)
-*** TODO use reference
-*** TODO use const +/- whenever possible
-*** TODO use C++11 enum (type / size)
-** TODO follow the C++ rule of 5
-** DONE remove non needed raw pointers
-   CLOSED: [2014-06-20 Fri 14:30]
-** DONE remove non needed new (use std::make_shared)
-   CLOSED: [2014-06-22 Sun 10:59]
+** TODO follow the C++ rule of 0
 ** TODO Hunt dead code
-** TODO split 'own' code and libs (easier to grep, cleaner, distincts warning)
-** TODO clean Status class (making a global class ?)
+** DONE split 'own' code and libs (easier to grep, cleaner, distincts warning)
+   CLOSED: [2017-09-05 Di 20:29]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
    could use typedef std::shared_ptr SP
-** TODO is inline still relevant in C++14 ?
 
 * TODO Graphics
-** DONE make the cursor pulse (each 1/10e sec, re-scale, .5 sec, then decrease)
-   CLOSED: [2013-04-18 Thu 14:47]
-   for now: rotation && re-sizing (linked together)
-** TODO implement scrolling
+** TODO Implement cell scrolling (too many cells to fit on the screen)
 ** TODO Apply a background to the main window
-** DONE selection menu
-   CLOSED: [2013-04-21 Sun 21:50]
-*** DONE add texture to buttons
-	 CLOSED: [2013-04-21 Sun 21:50]
-*** DONE add text to buttons
-	 CLOSED: [2013-04-21 Sun 21:50]
+** TODO Multiple graphics::Image share the same sprite
+   -> require to re-set the sprite position, rotation, ... before drawing
+   (is it an issue)
 
 * TODO Resources
 ** TODO Sprites
-*** DONE soldiers filters
-	 CLOSED: [2013-08-14 Wed 11:19]
-**** DONE attackable
-	 CLOSED: [2013-08-14 Wed 11:19]
-**** DONE played
-	 CLOSED: [2013-08-14 Wed 11:19]
+*** TODO Soldiers team
+*** TODO Jeep
 
 * TODO Gameplay
 ** TODO Meteo
@@ -142,12 +118,10 @@
 	  only on simple move
 
 * TODO Sound
-** 3D sound (using OpenAL)
+** TODO 3D sound (using OpenAL)
 
 * TODO Interface
-** DONE draw selection menu
-   CLOSED: [2013-04-21 Sun 11:17]
-   position = f(selectedCell)
+** TODO Highlight possible targets when hovering a unit
 ** TODO Informations Panel (cell type, ...)
 ** TODO Menu Bar
 ** TODO Configuration file
@@ -155,20 +129,18 @@
 ** TODO select between satellite or schematic view
 ** TODO unit selection -> 'flashing lights'
 ** TODO center text in in-game menu entries
-** DONE integrate Cursor
-   CLOSED: [2013-07-27 Sat 07:59]
 ** TODO Display last killed unit list
 
 * TODO Network
 ** TODO Chat
 ** TODO multi-players
 
-* TODO Multi-Platforms
-** DONE Linux (current ref: Arch Linux)
-   CLOSED: [2014-06-20 Fri 14:29]
-** TODO Windows
-** TODO Unix (BSD)
-** TODO Mac OS
+* TODO [#C] Multi-Platforms
+** TODO [#C] Windows
+** TODO [#B] Unix (BSD)
+** TODO [#C] Mac OS
+** TODO [#B] Phone ?
+*** TODO [#B] Android
 
 * TODO Graphic Engine
 ** TODO Units filter sprite
@@ -176,109 +148,66 @@
    only graphic attribute ?
    use while moving a unit (default: look ahead, can check a side)
 ** TODO Libraries
-*** TODO switch 'on demand' (at compilation time)
-	use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
+*** TODO [#C] switch 'on demand' (at compilation time)
+    use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 ** TODO Sprites management
    merge on common themes
    1 theme -> 1 load, 1 free
 
 * TODO Menu
-** DONE Stack implementation
-   CLOSED: [2013-07-24 Wed 07:06]
 ** TODO Main menu
 
 * TODO Tools
+** TODO Global log
+*** TODO Merge every log entries, by timestamps
+*** TODO html / xml output
+*** TODO css / xmlss
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
 *** TODO auto generate documentation
-** TODO non-regression tests
-*** TODO game scripts
-** TODO helper
-   header guards with same name
-** DONE generate Doxygen Doc
-   CLOSED: [2013-08-14 Wed 12:31]
 ** TODO auto resources XML generator
-** TODO source file: auto fetch and insert commit id last modif
-** TODO Debug::assert check only on debug if a condition is satisfied
-   Debug::assert(state, MODE__MENU)
-   -> test if state equals to MODE__MENU and prints an error if not
+** TODO Options parser
+*** TODO Options structure to initialize the Game
+*** TODO Framerate (useful ?)
+
+* TODO non-regression tests
+** TODO game scripts (need to be able to use pre-recorded input)
+** TODO Use an ascii map to check fight behavior
+** TODO Use screenshots for the interface
+   ex: SELECTION key was pressed -> save the video buffer, a menu must be open
+   Use OpenCV to get the distance between the images
 
 * TODO Bugs / Features
-** TODO Moving Unit
-   sometimes a unt can move too far (2 keys simultaneously pressed ?)
-** TODO Fix cursor size trouble
-   was too big
-   (running for a long time ?)
-   overflow trouble ?
-   unseen for a long time (maybee fixed ?)
-** TODO In-game menu: Escape key <> Cancel entry
-** TODO Multiple keys maintained for more than a sec
-   probably a timer related
-   confirmed on bcea8d5b60cf5a8375bbbdc08a5f8d5ddf93e184 (June, 2 2014) probably older
-** DONE Attack a target without moving: unit deletion
-   CLOSED: [2014-07-01 Tue 20:19]
-   was due to a move failure
-** DONE Selecct target mode
-   CLOSED: [2014-06-29 Sun 12:23]
-   Index value: tends to have more than nb entries possible values
-   -> tend to 'browse' a cell two times
-   targets array is not clear each time we select a unit (it should be)
-** DONE In-game menu: Escape key <> Cancel entry
-   CLOSED: [2014-06-29 Sun 12:08]
-   same comportement for Escape key and Cancel entry
-   (if cancel should unstack everything, it's not a bug)
-** DONE Floating Point Exception Failure
-   CLOSED: [2014-06-27 Fri 22:48]
-   (bug while building menu -> 0 entries, failed on modulo 0)
-** DONE [#A] Fix in-game menu pop-up and location
-   CLOSED: [2013-07-25 Thu 17:20]
-** DONE Font Cleanup segfault (launched from a terminal)
-   CLOSED: [2014-06-04 Wed 08:40]
-** DONE Panel (F2) malfunction
-   CLOSED: [2014-06-21 Sat 21:04]
-   only in fullscreen mode
-   due to an overflow in _panelX value
-   Fixed using another default offset value in full screen
-   Fixed another linked bug: left and right panel sizes weren't the same
-   -> applied grid thickness twice
-** DONE Font load resource segfault
-   CLOSED: [2014-06-04 Wed 08:40]
-   without valgrind
-   multi-folder in xml file sections
-** DONE [#B] Add Doxygen Comments in headers
-   CLOSED: [2013-04-19 Fri 16:33]
-   not perfect but does the job for now
-** DONE [#B] Allow Manual Key Repetition
-   CLOSED: [2013-04-19 Fri 01:32]
-** DONE [#A] More than one key pressed and reset timer trouble
-   CLOSED: [2013-04-19 Fri 01:33]
-** DONE map initialisation failure
-   CLOSED: [2013-04-19 Fri 16:33]
-   was a rendering zone room trouble
 ** TODO Memory Leaks / Errors
-*** DONE Definitely Lost
-    CLOSED: [2014-06-20 Fri 14:27]
-*** DONE Read errors
-    CLOSED: [2014-06-20 Fri 14:27]
 *** TODO Hide SFML "leaks"
     (current ref: Still reachable: 41,364 bytes in 425 blocks)
+** TODO segfault while quitting the game, moving a unit
+   This happen because every static classes get 'destructed', exiting the main
+   Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
+     The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
+   To solve this, one can for instance:
+   - Find a way to 'destruct' static classes in a defined order
+   - As the static classes may be removed one day this would solve the issue
+** TODO Attack seems not possible without moving (on a different cell)
+** TODO Sometimes, moving over an enemy unit is possible
+   Seems to appear when two keys are pressed at the same time
+   Unable to wait on an occupied cell though
+** DONE Taking a screenshot takes forever
+   CLOSED: [2017-08-27 So 14:02]
+   the delay is not constant -> probably a synchronization issue
 
-* TODO Suppress Warnings
-** DONE incomplete Ctors initialisation
-   CLOSED: [2014-06-20 Fri 14:28]
+
+* TODO Build
+** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
+** TODO Move pugixml in a lib/ folder at the root
 
 * TODO [#C] Optimization
-** DONE retreive a Resource
-   CLOSED: [2013-07-30 Tue 07:55]
-   benchmark between
-     manually store an ID, : factor 1
-     use a std::map <const char*, unsigned int> : factor 2
-	 use a std::map <std::string, unsigned int> : factor 4
+  -> *Profile* <-
 ** TODO improve InGameMenu stack usage
    Do *NOT* rebuild all entries each frame...
 ** TODO Sprites
    Every cell doesn't need to have it's own highlight sprite
    -> common sprites (1 per situation [move, attack])
-** TODO [#C] refresh only needed cells
+** TODO [#C] refresh only needed cells (do we care ?)
    check mouse motion, cursor / units animation
