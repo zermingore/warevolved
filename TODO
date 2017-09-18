@@ -10,8 +10,6 @@
 
 * TODO Clean
 ** TODO Put the ResourcesManager class in the resources namespace
-** DONE ResourcesManager::getFont should return a shared_ptr
-   CLOSED: [2017-09-13 Mi 19:05]
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
 
@@ -19,16 +17,7 @@
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
 ** TODO Cursor (interface) in its thread
-** CLOSED Find a way to keep track of a file accross branches (for this file)
-   CLOSED: [2017-08-29 Di 07:34]
-   git sub-tree would do the job transparently but involve another repo
-   this seems overkill for a small set of files
 ** TODO Handle external libs (pugixml) in submodules ?
-** DONE core/Context != context/*
-   CLOSED: [2017-09-05 Di 20:34]
-   (as core/Context handles only graphic properties, move in graphics ?)
-** DONE Use a using for graphic types (SFML: floats for positions)
-   CLOSED: [2017-08-29 Di 07:37]
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 
 * TODO Input
@@ -50,8 +39,6 @@
 *** TODO non-OS dependant (in C++)
 ** TODO follow the C++ rule of 0
 ** TODO Hunt dead code
-** DONE split 'own' code and libs (easier to grep, cleaner, distincts warning)
-   CLOSED: [2017-09-05 Di 20:29]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
@@ -194,9 +181,6 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** DONE Taking a screenshot takes forever
-   CLOSED: [2017-08-27 So 14:02]
-   the delay is not constant -> probably a synchronization issue
 
 
 * TODO Build
