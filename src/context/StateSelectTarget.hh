@@ -15,7 +15,7 @@
 class Cell;
 
 namespace resources {
-  class Image;
+  class Sprite;
 }
 
 

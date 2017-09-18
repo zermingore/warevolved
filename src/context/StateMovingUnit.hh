@@ -13,7 +13,7 @@
 # include <graphics/graphic_types.hh>
 
 namespace resources {
-  class Image;
+  class Sprite;
 }
 
 
