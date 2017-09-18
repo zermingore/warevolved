@@ -39,7 +39,7 @@ class Panel: public InterfaceElement
 {
 public:
   /**
-   * \brief Default constructor: call InterfaceElement constructor
+   * \brief Deleted default constructor: The Map and Cursor are required
    */
   Panel() = delete;
 

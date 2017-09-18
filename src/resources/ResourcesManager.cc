@@ -1,5 +1,6 @@
 #include <resources/ResourcesManager.hh>
 
+#include <graphics/graphic_types.hh>
 #include <lib/pugixml.hh>
 #include <resources/Sprite.hh>
 #include <resources/Font.hh>
@@ -9,10 +10,14 @@
 
 namespace resources {
 
+
 // Static Variables definition
 std::map<std::string, std::string> ResourcesManager::_images;
-std::map<std::string, std::shared_ptr<resources::Font>> ResourcesManager::_fonts;
+std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
 std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
+std::map<std::string, std::shared_ptr<graphics::Texture>>
+  ResourcesManager::_textures;
+
 
 // default resources paths
 const std::string DEFAULT_IMAGE_PATH = "resources/defaults/image.png";
@@ -123,22 +128,48 @@ void ResourcesManager::listResources()
 #endif // DEBUG_XML
 
 
-std::shared_ptr<resources::Sprite> ResourcesManager::getSprite(const std::string name)
+std::shared_ptr<resources::Sprite>
+ResourcesManager::getSprite(const std::string name)
 {
-  if (_images.find(name) != _images.end()) {
+  if (_images.find(name) != _images.end())
+  {
     return std::make_shared<resources::Sprite> (_images[name], name);
   }
 
-  ERROR("Unable to find image:", name);
+  ERROR("Unable to find texture", name);
 
   return std::make_shared<resources::Sprite> (DEFAULT_IMAGE_PATH, "default");
 }
 
 
 
+std::shared_ptr<const graphics::Texture>
+ResourcesManager::getTexture(std::string name)
+{
+  if (_textures.find(name) != _textures.end())
+  {
+    return _textures[name];
+  }
+
+  // Try to load the given texture name if it was not loaded yet
+  std::shared_ptr<graphics::Texture> texture;
+  if (texture->loadFromFile(_images[name]))
+  {
+    _textures[name] = texture;
+    return texture;
+  }
+
+  ERROR("Unable to find texture:", name);
+
+  return _textures["default"];
+}
+
+
+
 std::shared_ptr<resources::Font> ResourcesManager::getFont(const std::string name)
 {
-  if (_fonts.find(name) != _fonts.end()) {
+  if (_fonts.find(name) != _fonts.end())
+  {
     return _fonts[name];
   }
 
