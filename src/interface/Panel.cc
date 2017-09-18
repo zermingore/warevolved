@@ -13,7 +13,7 @@
 #include <game/Cell.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
-#include <resources/Image.hh>
+#include <resources/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <common/enums/terrains.hh>
 

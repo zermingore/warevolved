@@ -10,7 +10,7 @@
 # include <vector>
 # include <memory>
 # include <structures/Vector.hh>
-# include <resources/Image.hh>
+# include <resources/Sprite.hh>
 
 class Map;
 class Unit;

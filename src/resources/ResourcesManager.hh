@@ -8,7 +8,7 @@
 # define RESOURCES_RESOURCES_MANAGER_HH_
 
 # include <resources/Font.hh>
-# include <resources/Image.hh>
+# include <resources/Sprite.hh>
 
 
 /**

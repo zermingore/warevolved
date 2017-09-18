@@ -85,7 +85,8 @@ void Sprite::setColor(const graphics::Color& color)
 
 void Sprite::drawAtCell(const Coords c)
 {
-  if (!_sprite) {
+  if (!_sprite)
+  {
     sprite();
   }
 
@@ -102,7 +103,8 @@ void Sprite::drawAtCell(const Coords c)
 
 void Sprite::draw()
 {
-  if (!_sprite) {
+  if (!_sprite)
+  {
     sprite();
   }
 

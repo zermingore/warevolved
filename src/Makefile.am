@@ -14,7 +14,7 @@ graphics/MapGraphicsProperties.cc   \
 \
 resources/ResourcesManager.cc       \
 resources/Resource.cc               \
-resources/Image.cc                  \
+resources/Sprite.cc                 \
 resources/Font.cc                   \
 resources/Text.cc                   \
 \

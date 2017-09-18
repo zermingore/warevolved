@@ -5,7 +5,7 @@
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
-#include <resources/Image.hh>
+#include <resources/Sprite.hh>
 #include <game/Status.hh>
 #include <common/enums/directions.hh>
 #include <common/enums/path_shapes.hh>

@@ -6,7 +6,7 @@
  */
 
 #include <interface/InterfaceElement.hh>
-#include <resources/Image.hh>
+#include <resources/Sprite.hh>
 #include <resources/ResourcesManager.hh>
 #include <graphics/graphic_types.hh>
 

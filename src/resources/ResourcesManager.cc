@@ -1,7 +1,7 @@
 #include <resources/ResourcesManager.hh>
 
 #include <lib/pugixml.hh>
-#include <resources/Image.hh>
+#include <resources/Sprite.hh>
 #include <resources/Font.hh>
 #include <debug/Debug.hh>
 
