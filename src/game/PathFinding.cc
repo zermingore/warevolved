@@ -24,7 +24,7 @@ size_t PathFinding::_maxLength;
 size_t PathFinding::_currentLength;
 
 std::vector<e_direction> PathFinding::_directions;
-std::vector<std::shared_ptr<resources::Image>> PathFinding::_images;
+std::vector<std::shared_ptr<resources::Sprite>> PathFinding::_images;
 std::vector<std::shared_ptr<Cell>> PathFinding::_reachableCells;
 std::vector<std::shared_ptr<Cell>> PathFinding::_enemyPositions;
 
@@ -157,9 +157,9 @@ e_path_shape PathFinding::getShape(size_t index)
 }
 
 
-std::shared_ptr<resources::Image> PathFinding::getImage(const size_t index)
+std::shared_ptr<resources::Sprite> PathFinding::getImage(const size_t index)
 {
-  std::shared_ptr<resources::Image> img;
+  std::shared_ptr<resources::Sprite> img;
   e_path_shape shape = getShape(index);
 
   switch (shape)

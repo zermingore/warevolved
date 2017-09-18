@@ -123,15 +123,15 @@ void ResourcesManager::listResources()
 #endif // DEBUG_XML
 
 
-std::shared_ptr<resources::Image> ResourcesManager::getImage(const std::string name)
+std::shared_ptr<resources::Sprite> ResourcesManager::getImage(const std::string name)
 {
   if (_images.find(name) != _images.end()) {
-    return std::make_shared<resources::Image> (_images[name], name);
+    return std::make_shared<resources::Sprite> (_images[name], name);
   }
 
   ERROR("Unable to find image:", name);
 
-  return std::make_shared<resources::Image> (DEFAULT_IMAGE_PATH, "default");
+  return std::make_shared<resources::Sprite> (DEFAULT_IMAGE_PATH, "default");
 }
 
 

@@ -113,7 +113,7 @@ private:
    * does the rotation if needed
    * \return the image matching e_path_shape
    */
-  static std::shared_ptr<resources::Image> getImage(size_t index);
+  static std::shared_ptr<resources::Sprite> getImage(size_t index);
 
   /**
    * \brief builds Images* Vector (_images)
@@ -164,7 +164,7 @@ private:
   static std::vector<e_direction> _directions;
 
   ///< Images of the path vector.
-  static std::vector<std::shared_ptr<resources::Image>> _images;
+  static std::vector<std::shared_ptr<resources::Sprite>> _images;
 
   ///< list of reachable cells for the selected unit
   static std::vector<std::shared_ptr<Cell>> _reachableCells;
