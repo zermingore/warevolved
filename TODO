@@ -1,5 +1,6 @@
 -*- mode:org -*-
 #+OPTIONS: ^:nil
+#+STARTUP: showeverything
 
 # NOTE: This file should be only commited on the doc or master branches (only)
 
