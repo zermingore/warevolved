@@ -1,13 +1,14 @@
-#include <resources/Image.hh>
+#include <resources/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <debug/Debug.hh>
 
 
+
 namespace resources {
 
 
-Image::Image(const std::string file_name, const std::string name)
+Sprite::Sprite(const std::string file_name, const std::string name)
 {
   _name = name;
   _fileName = file_name;
@@ -24,20 +25,20 @@ Image::Image(const std::string file_name, const std::string name)
 }
 
 
-void Image::setPosition(const Coords position)
+void Sprite::setPosition(const Coords position)
 {
   _sprite->setPosition({static_cast<graphics::component> (position.c),
                         static_cast<graphics::component> (position.l)});
 }
 
 
-void Image::setPosition(const graphics::component x, const graphics::component y)
+void Sprite::setPosition(const graphics::component x, const graphics::component y)
 {
   _sprite->setPosition({x, y});
 }
 
 
-void Image::setSize(const graphics::Size2 size)
+void Sprite::setSize(const graphics::Size2 size)
 {
   graphics::Size2 texture_size(_texture->getSize());
   _rectangle->setSize({size.x / texture_size.x, size.y / texture_size.y});
@@ -45,7 +46,7 @@ void Image::setSize(const graphics::Size2 size)
 }
 
 
-void Image::setSize(const graphics::component width,
+void Sprite::setSize(const graphics::component width,
                     const graphics::component height)
 {
   graphics::Size2 size(_texture->getSize());
@@ -54,35 +55,35 @@ void Image::setSize(const graphics::component width,
 }
 
 
-void Image::setScale(const graphics::Scale2 scale)
+void Sprite::setScale(const graphics::Scale2 scale)
 {
   _rectangle->setScale(scale);
   _sprite->setScale(scale);
 }
 
 
-void Image::setScale(const float width, const float height)
+void Sprite::setScale(const float width, const float height)
 {
   _rectangle->setScale({width, height});
   _sprite->setScale({width, height});
 }
 
 
-void Image::setScale(const float ratio)
+void Sprite::setScale(const float ratio)
 {
   _rectangle->setScale({ratio, ratio});
   _sprite->setScale({ratio, ratio});
 }
 
 
-void Image::setColor(const graphics::Color& color)
+void Sprite::setColor(const graphics::Color& color)
 {
   _sprite->setColor(color);
 }
 
 
 
-void Image::drawAtCell(const Coords c)
+void Sprite::drawAtCell(const Coords c)
 {
   if (!_sprite) {
     sprite();
@@ -99,7 +100,7 @@ void Image::drawAtCell(const Coords c)
 }
 
 
-void Image::draw()
+void Sprite::draw()
 {
   if (!_sprite) {
     sprite();

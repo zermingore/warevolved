@@ -9,6 +9,7 @@
 
 # include <string>
 # include <memory>
+
 # include <graphics/graphic_types.hh>
 # include <common/using.hh>
 # include <resources/Resource.hh>
@@ -17,27 +18,28 @@
 namespace resources {
 
 /**
- * \class Image
- * \brief Image type, Derived from Resource
+ * \class Sprite
+ * \brief A Sprite is a Texture + a rectangle
+ * \note Derived from Resource
  */
-class Image: public Resource
+class Sprite: public Resource
 {
 public:
   /**
-   * \brief Image default Constructor
+   * \brief Sprite default Constructor
    */
-  Image() = default;
+  Sprite() = default;
 
   /**
-   * \brief Image Constructor
-   * \param file_name Image complete file name
+   * \brief Sprite Constructor
+   * \param file_name Sprite complete file name
    *   (with full path and extension)
-   * \param name Image alias name
+   * \param name Sprite alias name
    *
    * set _texture to nullptr
    * _loaded to false
    */
-  Image(const std::string file_name, const std::string name);
+  Sprite(const std::string file_name, const std::string name);
 
 
   /**
@@ -73,8 +75,8 @@ public:
 
   /**
    * \brief set _rectangle and _sprite size
-   * \param width: image width
-   * \param height: image height
+   * \param width: sprite width
+   * \param height: sprite height
    */
   void setSize(const graphics::component width,
                const graphics::component height);
@@ -88,8 +90,8 @@ public:
 
   /**
    * \brief set _rectangle and _sprite scale
-   * \param width: image width
-   * \param height: image height
+   * \param width: sprite width
+   * \param height: sprite height
    */
   void setScale(const graphics::component width,
                 const graphics::component height);
@@ -101,7 +103,7 @@ public:
   void setScale(const float ratio);
 
   /**
-   * \brief set the Image 'global' Color
+   * \brief set the Sprite 'global' Color
    * \param color Color to set
    */
   void setColor(const graphics::Color& color);
@@ -115,13 +117,13 @@ public:
   }
 
   /**
-   * \brief draws the Image in the cell coords.c, coords.l
-   * \param c coordinate to display the image
+   * \brief draws the Sprite in the cell coords.c, coords.l
+   * \param c coordinate to display the sprite
    */
   void drawAtCell(const Coords c);
 
   /**
-   * \brief draws the Image at _sprite's position
+   * \brief draws the Sprite at _sprite's position
    */
   void draw();
 
@@ -129,7 +131,7 @@ public:
 private:
   std::shared_ptr<graphics::Texture> _texture;          ///< Texture data
   std::shared_ptr<graphics::Sprite> _sprite;            ///< Used to transform
-  std::shared_ptr<graphics::RectangleShape> _rectangle; ///< image position
+  std::shared_ptr<graphics::RectangleShape> _rectangle; ///< sprite position
 };
 
 
@@ -137,4 +139,4 @@ private:
 
 
 
-#endif /* !RESOURCES_IMAGE_HH_ */
+#endif /* !RESOURCES_SPRITE_HH_ */
