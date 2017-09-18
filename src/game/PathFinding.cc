@@ -57,7 +57,7 @@ void PathFinding::drawPath()
     updateCurrentCell(*it);
     /// \todo manage cache and image sprites
 
-    getImage(i++)->draw(); /// \todo drawAtCell
+    getSprite(i++)->draw(); /// \todo drawAtCell
   }
 }
 
@@ -105,7 +105,7 @@ void PathFinding::buildImageVector()
   // deleteImagesVector();
 
   for (auto i(0u); i < _directions.size(); ++i) {
-    _images.push_back(getImage(i));
+    _images.push_back(getSprite(i));
   }
 }
 
@@ -157,7 +157,7 @@ e_path_shape PathFinding::getShape(size_t index)
 }
 
 
-std::shared_ptr<resources::Sprite> PathFinding::getImage(const size_t index)
+std::shared_ptr<resources::Sprite> PathFinding::getSprite(const size_t index)
 {
   std::shared_ptr<resources::Sprite> img;
   e_path_shape shape = getShape(index);
@@ -169,7 +169,7 @@ std::shared_ptr<resources::Sprite> PathFinding::getImage(const size_t index)
      case e_path_shape::DOWN:
      case e_path_shape::LEFT:
      case e_path_shape::RIGHT:
-       img = resources::ResourcesManager::getImage("path_shape");
+       img = resources::ResourcesManager::getSprite("path_shape");
        break;
 
      // Arrows
@@ -177,12 +177,12 @@ std::shared_ptr<resources::Sprite> PathFinding::getImage(const size_t index)
      case e_path_shape::LAST_DOWN:
      case e_path_shape::LAST_LEFT:
      case e_path_shape::LAST_RIGHT:
-       img = resources::ResourcesManager::getImage("path_arrow");
+       img = resources::ResourcesManager::getSprite("path_arrow");
        break;
 
      // Corners
      default:
-       img = resources::ResourcesManager::getImage("path_corner");
+       img = resources::ResourcesManager::getSprite("path_corner");
        break;
   }
 

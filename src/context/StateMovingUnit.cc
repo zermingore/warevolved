@@ -46,7 +46,7 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
 
   // Graphical attributes initialization
-  _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
+  _holoUnit = resources::ResourcesManager::getSprite("soldiers"); /// \todo hard-coded soldiers
   _holoUnitSprite = _holoUnit->sprite();
   _holoUnitPosition = player->cursor()->coords();
 

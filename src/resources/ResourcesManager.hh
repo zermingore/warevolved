@@ -55,7 +55,7 @@ public:
    * \return A new Image matching the given name.
    *   If the Image does not exist, print an error and return the default one
    */
-  static std::shared_ptr<resources::Sprite> getImage(const std::string name);
+  static std::shared_ptr<resources::Sprite> getSprite(const std::string name);
 
   /**
    * \brief If a font with the given name exists, return the matching Font

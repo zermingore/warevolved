@@ -123,7 +123,7 @@ void ResourcesManager::listResources()
 #endif // DEBUG_XML
 
 
-std::shared_ptr<resources::Sprite> ResourcesManager::getImage(const std::string name)
+std::shared_ptr<resources::Sprite> ResourcesManager::getSprite(const std::string name)
 {
   if (_images.find(name) != _images.end()) {
     return std::make_shared<resources::Sprite> (_images[name], name);

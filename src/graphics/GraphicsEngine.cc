@@ -136,14 +136,14 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
       switch (c->terrain())
       {
         default:
-          auto img(resources::ResourcesManager::getImage("forest"));
+          auto img(resources::ResourcesManager::getSprite("forest"));
           img->drawAtCell(c->coords());
           break;
       }
 
       if (c->highlight())
       {
-        auto highlight = resources::ResourcesManager::getImage("highlight");
+        auto highlight = resources::ResourcesManager::getSprite("highlight");
         highlight->sprite()->setColor(c->highlightColor());
         highlight->drawAtCell(c->coords());
       }

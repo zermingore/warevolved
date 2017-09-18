@@ -28,9 +28,9 @@ Panel::Panel(std::shared_ptr<const Map> map,
   : InterfaceElement("side_panel")
   , _map(map)
   , _playerCursor(cursor)
-  , _background(resources::ResourcesManager::getImage(_img_name))
-  , _frameCell(resources::ResourcesManager::getImage("cursor"))
-  , _frameUnit(resources::ResourcesManager::getImage("frame_unit"))
+  , _background(resources::ResourcesManager::getSprite(_img_name))
+  , _frameCell(resources::ResourcesManager::getSprite("cursor"))
+  , _frameUnit(resources::ResourcesManager::getSprite("frame_unit"))
   , _status(e_panel_status::DEACTIVATED)
 {
   setWindowSize(
@@ -95,7 +95,7 @@ void Panel::update()
   {
     case e_terrain::FOREST:
     {
-      auto img(resources::ResourcesManager::getImage("forest"));
+      auto img(resources::ResourcesManager::getSprite("forest"));
       img->setPosition(0, 0);
       img->draw();
       break;

@@ -56,7 +56,7 @@ void MiniMap::draw()
       switch (c->terrain())
       {
         default:
-          auto img { resources::ResourcesManager::getImage("forest") };
+          auto img { resources::ResourcesManager::getSprite("forest") };
           img->setPosition(pos);
           img->setSize(cell_size);
           img->draw();
@@ -67,7 +67,7 @@ void MiniMap::draw()
       const auto unit {c->unit()};
       if (unit)
       {
-        auto img { resources::ResourcesManager::getImage("minimap_unit") };
+        auto img { resources::ResourcesManager::getSprite("minimap_unit") };
         img->setPosition(pos);
         img->setSize(cell_size);
 

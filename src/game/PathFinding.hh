@@ -113,7 +113,7 @@ private:
    * does the rotation if needed
    * \return the image matching e_path_shape
    */
-  static std::shared_ptr<resources::Sprite> getImage(size_t index);
+  static std::shared_ptr<resources::Sprite> getSprite(size_t index);
 
   /**
    * \brief builds Images* Vector (_images)

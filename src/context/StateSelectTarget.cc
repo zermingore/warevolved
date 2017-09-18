@@ -29,7 +29,7 @@ StateSelectTarget::StateSelectTarget()
   _evtMgr->registerEvent(e_input::EXIT,       [=] { exit();                 });
 
   // Graphical attributes initialization
-  _targetHighlightImage = resources::ResourcesManager::getImage("cursor");
+  _targetHighlightImage = resources::ResourcesManager::getSprite("cursor");
   _targetHighlight = _targetHighlightImage->sprite();
   _targetHighlight->setColor(graphics::Color(255, 127, 127, 255));
 
@@ -41,7 +41,7 @@ StateSelectTarget::StateSelectTarget()
   _targetHighlight->setScale(p::cellWidth()  / x, p::cellHeight() / y);
   _targetHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
-  _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
+  _holoUnit = resources::ResourcesManager::getSprite("soldiers"); /// \todo hard-coded soldiers
   _holoUnitSprite = _holoUnit->sprite();
   _holoUnitSprite->setColor(graphics::Color(255, 127, 127, 255));
 
