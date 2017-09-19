@@ -1,5 +1,7 @@
 #include <resources/ResourcesManager.hh>
 
+#include <exception>
+
 #include <graphics/graphic_types.hh>
 #include <lib/pugixml.hh>
 #include <resources/Sprite.hh>
@@ -37,11 +39,23 @@ void ResourcesManager::initialize(const std::string file_name)
 }
 
 
+
 void ResourcesManager::initializeDefaultResources()
 {
   _images["default"] = DEFAULT_IMAGE_PATH;
   _fonts["default"]  = std::make_shared<resources::Font> (DEFAULT_FONT_PATH, "defaut");
+
+  // Load a default Texture
+  auto texture = std::make_shared<graphics::Texture> ();
+  if (!texture->loadFromFile(_images["default"]))
+  {
+    ERROR("Unable to load default texture");
+    assert(!"Unable to load default texture, aborting");
+  }
+  _textures["default"] = texture;
 }
+
+
 
 void ResourcesManager::initTypeNames()
 {
@@ -50,6 +64,7 @@ void ResourcesManager::initTypeNames()
   _typeNames[e_resource_type::FONT]  = "fonts";
   _typeNames[e_resource_type::SOUND] = "sounds";
 }
+
 
 
 bool ResourcesManager::addResource(const e_resource_type type,
@@ -75,6 +90,7 @@ bool ResourcesManager::addResource(const e_resource_type type,
       return false;
   }
 }
+
 
 
 bool ResourcesManager::parseXML(const std::string file_name)
@@ -111,6 +127,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
 
   return true;
 }
+
 
 
 #ifdef DEBUG_XML
