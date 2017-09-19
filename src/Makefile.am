@@ -90,13 +90,8 @@ __top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
 # Debug flags (no optimization, debug symbols, defines):
 __top_srcdir__we_CXXFLAGS += -O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS # -Og: not clang compliant
 
-# Advance Debug
-# -DDEBUG_XML
-# -DEBUG_XML_FULL
-# -DDEBUG_PERFS
 
 # export GLIBCXX_FORCE_NEW
-
 
 
 # Append Warning flags
@@ -189,7 +184,11 @@ __top_srcdir__we_CXXFLAGS += -Wvirtual-move-assign              # Warn if a virt
 __top_srcdir__we_CXXFLAGS += -Wwrite-strings                    # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.
 __top_srcdir__we_CXXFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
 
-__top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
+
+# Advance Debug
+# __top_srcdir__we_CXXFLAGS += -DDEBUG_XML
+# __top_srcdir__we_CXXFLAGS += -DDEBUG_XML_FULL
+# __top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
 
 
 # __top_srcdir__we_CXXFLAGS += -Wno-unknown-warning-option        # Keep clang silent when finding g++ specific flags
