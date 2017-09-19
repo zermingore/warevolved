@@ -42,9 +42,11 @@ input/InputsListener.cc             \
 \
 game/Game.cc                        \
 game/Status.cc                      \
+game/Battle.cc                      \
 game/Map.cc                         \
 game/Cell.cc                        \
-game/Battle.cc                      \
+game/Terrain.cc                     \
+game/TerrainsHandler.cc             \
 game/units/Unit.cc                  \
 game/units/UnitFactory.cc           \
 game/units/Soldier.cc               \
