@@ -123,9 +123,6 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
   // drawing cells (their background and their content)
   const auto cells(map->cells());
 
-  /// \todo [Optimization] fetch every terrain first
-  /// (but not here, in MapGraphicsProperties ?)
-
   // draw column by column (as the cells are stored by column)
   for (auto col(0u); col < map->nbColumns(); ++col)
   {

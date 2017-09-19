@@ -41,15 +41,20 @@ Map::Map(const size_t nb_columns, const size_t nb_lines)
 
 
 
-std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const {
+std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const
+{
   return _cells[line][column]->unit();
 }
 
-std::shared_ptr<Unit> Map::unit(const Coords& c) const {
+
+std::shared_ptr<Unit> Map::unit(const Coords& c) const
+{
   return _cells[c.c][c.l]->unit();
 }
 
-e_terrain Map::getTerrain(const size_t column, const size_t line) const {
+
+e_terrain Map::getTerrain(const size_t column, const size_t line) const
+{
   return _cells[column][line]->terrain();
 }
 
@@ -70,10 +75,8 @@ void Map::selectUnit(const Coords c)
 
 void Map::moveUnit(const Coords c)
 {
-  if (_selectedUnit->coords() == c)
-  {
-    ERROR("Moving unit at coordinates:", c.c, c.l);
-    assert(!"move unit: src == dst");
+  if (_selectedUnit->coords() == c) {
+    ERROR("Moving unit: src == dst: coordinates:", c.c, c.l);
   }
 
   Coords old(_selectedUnit->coords());
@@ -166,7 +169,7 @@ e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
   auto defender = target_cell->unit();
   if (!defender)
   {
-    NOTICE("Attacking empty cell");
+    ERROR("Attacking empty cell");
     return e_attack_result::NONE_DIED;
   }
 
@@ -189,12 +192,12 @@ void Map::dump()
     {
       // std::cout << "|  " << j << "," << i << " ";
       auto unit = _cells[col][line]->unit();
-      if (unit) {
-        unit == _selectedUnit ? std::cout << "#" : std::cout << "X";
-      }
-      else {
+      if (!unit)
+      {
         std::cout << ".";
+        continue;
       }
+      unit == _selectedUnit ? std::cout << "#" : std::cout << "X";
     }
 
     std::cout << "|" << std::endl;
