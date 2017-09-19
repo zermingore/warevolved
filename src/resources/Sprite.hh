@@ -15,6 +15,7 @@
 # include <resources/Resource.hh>
 
 
+
 namespace resources {
 
 /**
@@ -35,11 +36,17 @@ public:
    * \param file_name Sprite complete file name
    *   (with full path and extension)
    * \param name Sprite alias name
-   *
-   * set _texture to nullptr
-   * _loaded to false
    */
   Sprite(const std::string file_name, const std::string name);
+
+
+  /**
+   * \brief Sprite Constructor, using an already loaded Texture
+   * \param texture Pointer on an already loaded Texture to use
+   * \param name Sprite alias name
+   */
+  Sprite(std::shared_ptr<graphics::Texture> texture,
+         const std::string name);
 
 
   /**

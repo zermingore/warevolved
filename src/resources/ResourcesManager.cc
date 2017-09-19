@@ -145,17 +145,12 @@ void ResourcesManager::listResources()
 #endif // DEBUG_XML
 
 
+
 std::shared_ptr<resources::Sprite>
 ResourcesManager::getSprite(const std::string name)
 {
-  if (_images.find(name) != _images.end())
-  {
-    return std::make_shared<resources::Sprite> (_images[name], name);
-  }
-
-  ERROR("Unable to find texture", name);
-
-  return std::make_shared<resources::Sprite> (DEFAULT_IMAGE_PATH, "default");
+  auto texture(getTexture(name));
+  return std::make_shared<resources::Sprite> (_textures[name], name);
 }
 
 
@@ -169,11 +164,11 @@ ResourcesManager::getTexture(std::string name)
   }
 
   // Try to load the given texture name if it was not loaded yet
-  std::shared_ptr<graphics::Texture> texture;
-  if (texture->loadFromFile(_images[name]))
+  graphics::Texture texture;
+  if (texture.loadFromFile(_images[name]))
   {
-    _textures[name] = texture;
-    return texture;
+    _textures[name] = std::make_shared<graphics::Texture> (texture);
+    return _textures[name];
   }
 
   ERROR("Unable to find texture:", name);

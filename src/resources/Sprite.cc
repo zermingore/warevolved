@@ -1,4 +1,6 @@
 #include <resources/Sprite.hh>
+
+#include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <debug/Debug.hh>
@@ -23,6 +25,25 @@ Sprite::Sprite(const std::string file_name, const std::string name)
 
   _sprite = std::make_shared<graphics::Sprite> (*_texture);
 }
+
+
+
+Sprite::Sprite(std::shared_ptr<graphics::Texture> texture,
+               const std::string name)
+{
+  _name = name;
+  _fileName = "texture init";
+
+   _rectangle = std::make_shared<graphics::RectangleShape> ();
+  _rectangle->setPosition(graphics::Pos2(0, 0));
+  _rectangle->setSize(graphics::Size2(0, 0));
+
+  _texture = texture;
+  _rectangle->setTexture(_texture.get());
+
+  _sprite = std::make_shared<graphics::Sprite> (*_texture);
+}
+
 
 
 void Sprite::setPosition(const Coords position)

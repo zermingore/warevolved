@@ -49,6 +49,7 @@ public:
 
   /**
    * \brief If an image with the given name exists, return the matching Image
+   * \param name File name of the texture to associate with the sprite
    * \return A new Image matching the given name.
    *   If the Image does not exist, print an error and return the default one
    */
