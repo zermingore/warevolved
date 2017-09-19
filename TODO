@@ -12,6 +12,8 @@
 ** TODO Put the ResourcesManager class in the resources namespace
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
+** TODO [Git] Remove useless merged branches (stash_feature input_handling refactoring)
+** TODO Terrain should be a class, instead of an enum
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
@@ -53,8 +55,18 @@
 
 * TODO Resources
 ** TODO Sprites
-*** TODO Soldiers team
-*** TODO Jeep
+*** TODO Interface
+**** TODO Side panel
+***** TODO Frontground (plastic cover like)
+***** TODO Minimap frame
+***** TODO Terrain frame
+***** TODO Cell frame
+***** TODO [#B] New background matching the frontground
+*** TODO Units
+**** TODO Soldiers team
+**** TODO Jeep
+*** TODO Terrain
+**** TODO Mountain
 
 * TODO Gameplay
 ** TODO Meteo
