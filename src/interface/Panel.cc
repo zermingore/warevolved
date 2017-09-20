@@ -86,9 +86,24 @@ void Panel::update()
 {
   _background->setSize(_size);
   _frameCell->setSize({ _size.x, _size.y / 4 });
+  _minimap->update();
+}
+
+
+
+void Panel::draw()
+{
+  if (_status == e_panel_status::DEACTIVATED)
+  {
+    return;
+  }
+
+  update();
+  _background->draw();
+  _minimap->draw();
+  _frameCell->draw();
 
   const auto cell(_map->cell(_playerCursor->coords()));
-
   const auto terrain(cell->terrain());
   auto image();
   switch (terrain)
@@ -106,23 +121,6 @@ void Panel::update()
       ERROR("Terrain is invalid", static_cast<int> (cell->terrain()));
       break;
   }
-
-  _minimap->update();
-}
-
-
-
-void Panel::draw()
-{
-  if (_status == e_panel_status::DEACTIVATED)
-  {
-    return;
-  }
-
-  update();
-  _background->draw();
-  _minimap->draw();
-  _frameCell->draw();
 }
 
 
