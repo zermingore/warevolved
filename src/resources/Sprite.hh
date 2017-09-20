@@ -60,6 +60,10 @@ public:
    */
   const auto sprite() { return _sprite; }
 
+  /**
+   * \brief _position getter
+   */
+  graphics::Pos2 position();
 
   /**
    * \brief set _sprite position
@@ -73,6 +77,11 @@ public:
    */
   void setPosition(const graphics::component x, const graphics::component y);
 
+
+  /**
+   * \brief Returns the size of the sprite
+   */
+  graphics::Size2 size();
 
   /**
    * \brief Set _rectangle and _sprite size.

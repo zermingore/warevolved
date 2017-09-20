@@ -34,7 +34,7 @@ Sprite::Sprite(std::shared_ptr<graphics::Texture> texture,
   _name = name;
   _fileName = "texture init";
 
-   _rectangle = std::make_shared<graphics::RectangleShape> ();
+  _rectangle = std::make_shared<graphics::RectangleShape> ();
   _rectangle->setPosition(graphics::Pos2(0, 0));
   _rectangle->setSize(graphics::Size2(0, 0));
 
@@ -44,6 +44,12 @@ Sprite::Sprite(std::shared_ptr<graphics::Texture> texture,
   _sprite = std::make_shared<graphics::Sprite> (*_texture);
 }
 
+
+
+graphics::Pos2 Sprite::position()
+{
+  return _sprite->getPosition();
+}
 
 
 void Sprite::setPosition(const Coords position)
@@ -59,20 +65,27 @@ void Sprite::setPosition(const graphics::component x, const graphics::component 
 }
 
 
+
+graphics::Size2 Sprite::size()
+{
+  return _rectangle->getSize();
+}
+
+
 void Sprite::setSize(const graphics::Size2 size)
 {
   graphics::Size2 texture_size(_texture->getSize());
-  _rectangle->setSize({size.x / texture_size.x, size.y / texture_size.y});
-  _sprite->setScale({size.x / texture_size.x, size.y / texture_size.y});
+  _rectangle->setSize({ size.x, size.y });
+  _sprite->setScale({ size.x / texture_size.x, size.y / texture_size.y });
 }
 
 
 void Sprite::setSize(const graphics::component width,
-                    const graphics::component height)
+                     const graphics::component height)
 {
   graphics::Size2 size(_texture->getSize());
-  _rectangle->setSize({width / size.x, height / size.y});
-  _sprite->setScale({width / size.x, height / size.y});
+  _rectangle->setSize({ width, height });
+  _sprite->setScale({ width / size.x, height / size.y });
 }
 
 

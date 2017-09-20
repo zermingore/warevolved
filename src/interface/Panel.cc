@@ -111,7 +111,9 @@ void Panel::draw()
     case e_terrain::FOREST:
     {
       auto img(resources::ResourcesManager::getSprite("forest"));
-      img->setPosition(0, 0);
+      /// \todo Draw at position + offset (frame thickness) + adapt scale
+      img->setPosition(_frameCell->position().x, _frameCell->position().y);
+      img->setSize(_frameCell->size());
       img->draw();
       break;
     }
