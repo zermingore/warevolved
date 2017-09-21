@@ -17,7 +17,7 @@ TerrainsHandler::TerrainsHandler()
 
 
 
-std::shared_ptr<Terrain> TerrainsHandler::getTerrain(e_terrain id)
+std::shared_ptr<const Terrain> TerrainsHandler::getTerrain(e_terrain id)
 {
   return _terrains[id]; /// \todo error handling
 }

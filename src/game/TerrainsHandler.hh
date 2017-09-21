@@ -31,7 +31,7 @@ public:
   /**
    * \brief Return the Terrain of the list matching the given id
    */
-  std::shared_ptr<Terrain> getTerrain(e_terrain id);
+  std::shared_ptr<const Terrain> getTerrain(e_terrain id);
 
 private:
   std::map<e_terrain, std::shared_ptr<Terrain>> _terrains;

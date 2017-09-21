@@ -32,6 +32,12 @@ public:
   Terrain(int defense, std::shared_ptr<const graphics::Texture> texture);
 
 
+  /**
+   * \brief Texture getter
+   */
+  auto texture() const { return _texture; }
+
+
 private:
   int _defense; ///< Defense value
   std::shared_ptr<const graphics::Texture> _texture; ///< Graphical image
