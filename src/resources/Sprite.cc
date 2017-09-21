@@ -54,8 +54,8 @@ graphics::Pos2 Sprite::position()
 
 void Sprite::setPosition(const Coords position)
 {
-  _sprite->setPosition({static_cast<graphics::component> (position.c),
-                        static_cast<graphics::component> (position.l)});
+  _sprite->setPosition({ static_cast<graphics::component> (position.c),
+                         static_cast<graphics::component> (position.l) });
 }
 
 
@@ -119,17 +119,12 @@ void Sprite::setColor(const graphics::Color& color)
 
 void Sprite::drawAtCell(const Coords c)
 {
-  if (!_sprite)
-  {
-    sprite();
-  }
-
   // Set the sprite position
   using namespace graphics;
   using p = MapGraphicsProperties;
   _sprite->setPosition(
-    {static_cast<component> (c.c) * p::cellWidth()  + p::gridOffsetX(),
-     static_cast<component> (c.l) * p::cellHeight() + p::gridOffsetY()});
+    { static_cast<component> (c.c) * p::cellWidth()  + p::gridOffsetX(),
+      static_cast<component> (c.l) * p::cellHeight() + p::gridOffsetY() });
 
   GraphicsEngine::draw(_sprite);
 }
@@ -137,13 +132,7 @@ void Sprite::drawAtCell(const Coords c)
 
 void Sprite::draw()
 {
-  if (!_sprite)
-  {
-    sprite();
-  }
-
   _rectangle->setPosition(_sprite->getPosition());
-
   graphics::GraphicsEngine::draw(_sprite);
 }
 

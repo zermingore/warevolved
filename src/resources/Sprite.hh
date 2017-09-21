@@ -27,9 +27,9 @@ class Sprite: public Resource
 {
 public:
   /**
-   * \brief Sprite default Constructor
+   * \brief Deleted default Constructor
    */
-  Sprite() = default;
+  Sprite() = delete;
 
   /**
    * \brief Sprite Constructor
@@ -38,7 +38,6 @@ public:
    * \param name Sprite alias name
    */
   Sprite(const std::string file_name, const std::string name);
-
 
   /**
    * \brief Sprite Constructor, using an already loaded Texture
