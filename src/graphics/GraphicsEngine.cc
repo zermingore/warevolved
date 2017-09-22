@@ -7,12 +7,14 @@
 #include <debug/OSD.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <context/State.hh>
 #include <interface/Interface.hh>
 #include <game/Status.hh>
 #include <game/Cell.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <context/State.hh>
+#include <game/Terrain.hh>
+#include <game/TerrainsHandler.hh>
 
 
 
@@ -25,6 +27,7 @@ const sf::Color GRID_COLOR(202, 124, 0);
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 size_t GraphicsEngine::_nbFramesGenerated;
 bool GraphicsEngine::_takeScreenshot;
+std::unique_ptr<TerrainsHandler> GraphicsEngine::_terrainsHandler;
 
 
 constexpr double computeFps(size_t nb_frames, long int ns_elapsed)
@@ -38,6 +41,8 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   _window->setActive();
   _takeScreenshot = false;
+  _terrainsHandler = std::make_unique<TerrainsHandler> ();
+
   while (_window->isOpen())
   {
     static auto graphics_start(std::chrono::steady_clock::now());
@@ -129,14 +134,10 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
     for (auto line(0u); line < map->nbLines(); ++line)
     {
       /// \todo check if we print the cell (scroll case)
-      const auto c {cells[col][line]};
-      switch (c->terrain())
-      {
-        default:
-          auto img(resources::ResourcesManager::getSprite("forest"));
-          img->drawAtCell(c->coords());
-          break;
-      }
+      const auto c { cells[col][line] };
+      auto terrain(_terrainsHandler->getTerrain(c->terrain()));
+      resources::Sprite img(terrain->texture(), "terrain");
+      img.drawAtCell(c->coords());
 
       if (c->highlight())
       {
@@ -145,7 +146,8 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
         highlight->drawAtCell(c->coords());
       }
 
-      if (c->unit()) {
+      if (c->unit())
+      {
         drawUnit(c->unit());
       }
     }

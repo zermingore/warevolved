@@ -155,7 +155,7 @@ ResourcesManager::getSprite(const std::string name)
 
 
 
-std::shared_ptr<const graphics::Texture>
+std::shared_ptr<graphics::Texture>
 ResourcesManager::getTexture(std::string name)
 {
   if (_textures.find(name) != _textures.end())

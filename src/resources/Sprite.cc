@@ -28,7 +28,7 @@ Sprite::Sprite(const std::string file_name, const std::string name)
 
 
 
-Sprite::Sprite(std::shared_ptr<graphics::Texture> texture,
+Sprite::Sprite(const std::shared_ptr<graphics::Texture> texture,
                const std::string name)
 {
   _name = name;

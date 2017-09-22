@@ -44,7 +44,7 @@ public:
    * \param texture Pointer on an already loaded Texture to use
    * \param name Sprite alias name
    */
-  Sprite(std::shared_ptr<graphics::Texture> texture,
+  Sprite(const std::shared_ptr<graphics::Texture> texture,
          const std::string name);
 
 

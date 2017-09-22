@@ -60,7 +60,7 @@ public:
    * \return A new Image matching the given name.
    * \note If the Texture doesn't exist, print an error and return a default one
    */
-  static std::shared_ptr<const graphics::Texture> getTexture(std::string name);
+  static std::shared_ptr<graphics::Texture> getTexture(std::string name);
 
   /**
    * \brief If a font with the given name exists, return the matching Font

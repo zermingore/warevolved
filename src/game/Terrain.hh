@@ -29,7 +29,7 @@ public:
    * \param defense How much cover the terrain offers
    * \param texture Terrain's associated texture
    */
-  Terrain(int defense, std::shared_ptr<const graphics::Texture> texture);
+  Terrain(int defense, std::shared_ptr<graphics::Texture> texture);
 
 
   /**
@@ -40,7 +40,7 @@ public:
 
 private:
   int _defense; ///< Defense value
-  std::shared_ptr<const graphics::Texture> _texture; ///< Graphical image
+  std::shared_ptr<graphics::Texture> _texture; ///< Graphical image
 };
 
 
