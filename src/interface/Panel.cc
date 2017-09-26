@@ -74,7 +74,7 @@ void Panel::toggleStatus()
   _background->setSize(_size);
 
   _minimap->setPosition({ background_position.x,
-                          static_cast<size_t> (_windowSize.y / 2) });
+                          static_cast<size_t> (2 * _windowSize.y / 3) });
 
   _frameCell->setPosition(background_position.x, 0ul);
   _frameCell->setSize(_size);
