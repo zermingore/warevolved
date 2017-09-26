@@ -64,17 +64,17 @@ void Panel::toggleStatus()
   Coords background_position {0, 0};
   if (_status == e_panel_status::POSITION_RIGHT)
   {
-    background_position = {static_cast<size_t> (3 * _windowSize.x / 4.f), 0};
+    background_position = { static_cast<size_t> (3 * _windowSize.x / 4.f), 0 };
   }
   else
   {
-    background_position = {0, 0};
+    background_position = { 0, 0 };
   }
   _background->setPosition(background_position);
   _background->setSize(_size);
 
-  _minimap->setPosition({background_position.x,
-                         static_cast<size_t> (_windowSize.y / 2)});
+  _minimap->setPosition({ background_position.x,
+                          static_cast<size_t> (_windowSize.y / 2) });
 
   _frameCell->setPosition(background_position.x, 0ul);
   _frameCell->setSize(_size);
@@ -111,8 +111,10 @@ void Panel::draw()
     case e_terrain::FOREST:
     {
       auto img(resources::ResourcesManager::getSprite("forest"));
-      /// \todo Draw at position + offset (frame thickness) + adapt scale
-      img->setPosition(_frameCell->position().x + 5, _frameCell->position().y + 5);
+      /// \todo Do not hard-code the offset (frame thickness) + adapt scale
+      img->setPosition(_frameCell->position().x + 5,
+                       _frameCell->position().y + 5);
+
       auto size(_frameCell->size());
       size.x -= 10;
       size.y -= 10;

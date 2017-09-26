@@ -64,9 +64,8 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
     debug::OSD::draw();
 
     // Handle screenshot request, if any
-    if (_takeScreenshot)
-    {
-        screenshot();
+    if (_takeScreenshot) {
+      screenshot();
     }
 
     // update the window
@@ -146,8 +145,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
         highlight->drawAtCell(c->coords());
       }
 
-      if (c->unit())
-      {
+      if (c->unit()) {
         drawUnit(c->unit());
       }
     }
@@ -172,9 +170,9 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   {
     rectangle.setPosition(offset_x, offset_y);
 
-    rectangle.setSize({
-        p::cellWidth() * static_cast<component> (map->nbColumns()),
-        p::cellHeight()});
+    rectangle.setSize(
+      { p::cellWidth() * static_cast<component> (map->nbColumns()),
+        p::cellHeight() });
 
     _window->draw(rectangle);
 
@@ -191,8 +189,8 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   {
     rectangle.setPosition(offset_x, offset_y);
     rectangle.setSize(
-      {p::cellWidth(),
-       p::cellHeight() * static_cast<component> (map->nbLines())});
+      { p::cellWidth(),
+        p::cellHeight() * static_cast<component> (map->nbLines()) });
 
     _window->draw(rectangle);
 
