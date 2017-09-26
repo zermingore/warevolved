@@ -59,6 +59,7 @@ public:
    */
   const auto sprite() { return _sprite; }
 
+
   /**
    * \brief _position getter
    */
@@ -72,21 +73,21 @@ public:
 
   /**
    * \brief set _sprite position
-   * \param position: _sprite vector position components
-   */
-  void setPosition(const size_t c, const size_t l);
-
-  /**
-   * \brief set _sprite position
    * \param position: _sprite vector position
    */
   void setPosition(const graphics::Pos2 position);
 
   /**
-   * \brief set _sprite position
-   * \param position: _sprite vector position components
+   * \brief set _sprite position from 2 components
+   * \param c column, x component of the sprite position
+   * \param l line, y component of the sprite position
    */
-  void setPosition(const graphics::component x, const graphics::component y);
+  template<typename T>
+  void setPosition(const T c, const T l)
+  {
+    _sprite->setPosition({ static_cast<graphics::component> (c),
+                           static_cast<graphics::component> (l) });
+  }
 
 
   /**
@@ -105,8 +106,13 @@ public:
    * \param width: sprite width
    * \param height: sprite height
    */
-  void setSize(const graphics::component width,
-               const graphics::component height);
+  template <typename T>
+  void setSize(const T width, const T height)
+  {
+    graphics::Size2 size(_texture->getSize());
+    _rectangle->setSize({ width, height });
+    _sprite->setScale({ width / size.x, height / size.y });
+  }
 
 
   /**
@@ -120,8 +126,13 @@ public:
    * \param width: sprite width
    * \param height: sprite height
    */
-  void setScale(const graphics::component width,
-                const graphics::component height);
+  template <typename T>
+  void setScale(const T width, const T height)
+  {
+    _rectangle->setScale({ width, height });
+    _sprite->setScale({ width, height });
+  }
+
 
   /**
    * \brief set _rectangle and _sprite scale using the same ratio

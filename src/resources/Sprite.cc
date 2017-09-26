@@ -52,11 +52,6 @@ graphics::Pos2 Sprite::position()
 }
 
 
-void Sprite::setPosition(size_t x, size_t y)
-{
-  _sprite->setPosition({ static_cast<graphics::component> (x),
-                         static_cast<graphics::component> (y) });
-}
 
 void Sprite::setPosition(const Coords position)
 {
@@ -64,10 +59,10 @@ void Sprite::setPosition(const Coords position)
                          static_cast<graphics::component> (position.l) });
 }
 
-void Sprite::setPosition(const graphics::component c, const graphics::component l)
-{
-  _sprite->setPosition({ c, l });
-}
+// void Sprite::setPosition(const graphics::component c, const graphics::component l)
+// {
+//   _sprite->setPosition({ c, l });
+// }
 
 void Sprite::setPosition(const graphics::Pos2 position)
 {
@@ -89,14 +84,6 @@ void Sprite::setSize(const graphics::Size2 size)
 }
 
 
-void Sprite::setSize(const graphics::component width,
-                     const graphics::component height)
-{
-  graphics::Size2 size(_texture->getSize());
-  _rectangle->setSize({ width, height });
-  _sprite->setScale({ width / size.x, height / size.y });
-}
-
 
 void Sprite::setScale(const graphics::Scale2 scale)
 {
@@ -105,17 +92,10 @@ void Sprite::setScale(const graphics::Scale2 scale)
 }
 
 
-void Sprite::setScale(const float width, const float height)
-{
-  _rectangle->setScale({width, height});
-  _sprite->setScale({width, height});
-}
-
-
 void Sprite::setScale(const float ratio)
 {
-  _rectangle->setScale({ratio, ratio});
-  _sprite->setScale({ratio, ratio});
+  _rectangle->setScale({ ratio, ratio });
+  _sprite->setScale({ ratio, ratio });
 }
 
 
