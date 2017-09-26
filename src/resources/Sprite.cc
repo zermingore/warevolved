@@ -52,18 +52,27 @@ graphics::Pos2 Sprite::position()
 }
 
 
+void Sprite::setPosition(size_t x, size_t y)
+{
+  _sprite->setPosition({ static_cast<graphics::component> (x),
+                         static_cast<graphics::component> (y) });
+}
+
 void Sprite::setPosition(const Coords position)
 {
   _sprite->setPosition({ static_cast<graphics::component> (position.c),
                          static_cast<graphics::component> (position.l) });
 }
 
-
-void Sprite::setPosition(const graphics::component x, const graphics::component y)
+void Sprite::setPosition(const graphics::component c, const graphics::component l)
 {
-  _sprite->setPosition({x, y});
+  _sprite->setPosition({ c, l });
 }
 
+void Sprite::setPosition(const graphics::Pos2 position)
+{
+  _sprite->setPosition({ position.x, position.y });
+}
 
 
 graphics::Size2 Sprite::size()

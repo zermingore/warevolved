@@ -74,6 +74,18 @@ public:
    * \brief set _sprite position
    * \param position: _sprite vector position components
    */
+  void setPosition(const size_t c, const size_t l);
+
+  /**
+   * \brief set _sprite position
+   * \param position: _sprite vector position
+   */
+  void setPosition(const graphics::Pos2 position);
+
+  /**
+   * \brief set _sprite position
+   * \param position: _sprite vector position components
+   */
   void setPosition(const graphics::component x, const graphics::component y);
 
 
