@@ -29,8 +29,8 @@ Panel::Panel(std::shared_ptr<const Map> map,
   , _map(map)
   , _playerCursor(cursor)
   , _background(resources::ResourcesManager::getSprite(_img_name))
-  , _frameCell(resources::ResourcesManager::getSprite("cursor"))
-  , _frameUnit(resources::ResourcesManager::getSprite("frame_unit"))
+  , _frameCell(resources::ResourcesManager::getSprite("frame_thumbnail"))
+  , _frameUnit(resources::ResourcesManager::getSprite("frame_thumbnail"))
   , _status(e_panel_status::DEACTIVATED)
 {
   setWindowSize(
@@ -38,7 +38,7 @@ Panel::Panel(std::shared_ptr<const Map> map,
        static_cast<float> (graphics::GraphicsEngine::windowSize().y)}
     );
 
-  std::pair<size_t, size_t> size {_size.x, _size.y / 4};
+  graphics::Size2 size { _size.x, _size.y / 4 };
   _minimap = std::make_unique<MiniMap> (size, map, cursor);
 }
 
@@ -112,8 +112,11 @@ void Panel::draw()
     {
       auto img(resources::ResourcesManager::getSprite("forest"));
       /// \todo Draw at position + offset (frame thickness) + adapt scale
-      img->setPosition(_frameCell->position().x, _frameCell->position().y);
-      img->setSize(_frameCell->size());
+      img->setPosition(_frameCell->position().x + 5, _frameCell->position().y + 5);
+      auto size(_frameCell->size());
+      size.x -= 10;
+      size.y -= 10;
+      img->setSize(size);
       img->draw();
       break;
     }

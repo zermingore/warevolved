@@ -13,6 +13,7 @@
 # include <vector>
 # include <utility>
 
+# include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>
 # include <common/using.hh>
 
@@ -38,7 +39,7 @@ public:
    * \param map Game's map
    * \param cursor Cursor of the player (needed to put a mark on the minimap)
    */
-  MiniMap(std::pair<size_t, size_t> size,
+  MiniMap(graphics::Size2 size,
           std::shared_ptr<const Map> map,
           std::shared_ptr<const Cursor> cursor);
 
@@ -62,8 +63,8 @@ public:
 
 
 private:
-  std::pair<const size_t, const size_t> _frameSize; ///< Draw area size
-  Coords _position;                                 ///< Draw area position
+  graphics::Size2 _frameSize; ///< Draw area size
+  graphics::Pos2  _position;  ///< Draw area position
 
   std::shared_ptr<const Map> _map; ///< Pointer on the game's map
 
