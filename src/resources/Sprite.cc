@@ -46,11 +46,10 @@ Sprite::Sprite(const std::shared_ptr<graphics::Texture> texture,
 
 
 
-graphics::Pos2 Sprite::position()
+graphics::Pos2 const Sprite::position()
 {
   return _sprite->getPosition();
 }
-
 
 
 void Sprite::setPosition(const Coords position)
@@ -59,10 +58,6 @@ void Sprite::setPosition(const Coords position)
                          static_cast<graphics::component> (position.l) });
 }
 
-// void Sprite::setPosition(const graphics::component c, const graphics::component l)
-// {
-//   _sprite->setPosition({ c, l });
-// }
 
 void Sprite::setPosition(const graphics::Pos2 position)
 {
@@ -70,11 +65,11 @@ void Sprite::setPosition(const graphics::Pos2 position)
 }
 
 
-graphics::Size2 Sprite::size()
+
+graphics::Size2 const Sprite::size()
 {
   return _rectangle->getSize();
 }
-
 
 void Sprite::setSize(const graphics::Size2 size)
 {
@@ -91,12 +86,12 @@ void Sprite::setScale(const graphics::Scale2 scale)
   _sprite->setScale(scale);
 }
 
-
 void Sprite::setScale(const float ratio)
 {
   _rectangle->setScale({ ratio, ratio });
   _sprite->setScale({ ratio, ratio });
 }
+
 
 
 void Sprite::setColor(const graphics::Color& color)

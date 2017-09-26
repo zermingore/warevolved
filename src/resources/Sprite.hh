@@ -52,18 +52,18 @@ public:
    * \brief _texture getter
    * \return _texture
    */
-  const auto getTexture() { return _texture; }
+  const auto getTexture() const { return _texture; }
 
   /**
    * \brief _sprite getter
    */
-  const auto sprite() { return _sprite; }
+  const auto sprite() const { return _sprite; }
 
 
   /**
    * \brief _position getter
    */
-  graphics::Pos2 position();
+  graphics::Pos2 const position();
 
   /**
    * \brief set _sprite position
@@ -93,7 +93,7 @@ public:
   /**
    * \brief Returns the size of the sprite
    */
-  graphics::Size2 size();
+  graphics::Size2 const size();
 
   /**
    * \brief Set _rectangle and _sprite size.
