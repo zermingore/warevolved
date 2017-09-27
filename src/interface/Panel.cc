@@ -167,26 +167,34 @@ void Panel::draw()
 
 
     // Unit data
-    auto pos (_unitDataPos);
-    auto hp = std::make_shared<resources::Text> (
-      "hp: " + std::to_string(unit->hp()), _fontSize, pos);
-    pos.y += static_cast<graphics::component> (_fontSize) + 2;
-    graphics::GraphicsEngine::draw(hp->graphicalText());
+    addUnitData("hp:     " + std::to_string(unit->hp()));
+    addUnitData("motion: " + std::to_string(unit->motionValue()));
+    addUnitData("attack: " + std::to_string(unit->attackValue()));
 
-    auto motion = std::make_shared<resources::Text> (
-      "motion: " + std::to_string(unit->motionValue()), _fontSize, pos);
-    pos.y += static_cast<graphics::component> (_fontSize) + 2;
-    graphics::GraphicsEngine::draw(motion->graphicalText());
-
-    auto attack = std::make_shared<resources::Text> (
-      "attack: " + std::to_string(unit->attackValue()), _fontSize, pos);
-    pos.y += static_cast<graphics::component> (_fontSize) + 2;
-    graphics::GraphicsEngine::draw(attack->graphicalText());
-}
+    drawUnitData();
+  }
 
 
   // MiniMap
   _minimap->draw();
+}
+
+
+
+void Panel::addUnitData(const std::string content)
+{
+  _unitDataText += content + '\n';
+}
+
+
+
+void Panel::drawUnitData()
+{
+  auto text = std::make_shared<resources::Text> (
+    _unitDataText, _fontSize, _unitDataPos);
+
+  _unitDataText.clear();
+  graphics::GraphicsEngine::draw(text->graphicalText());
 }
 
 

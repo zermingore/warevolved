@@ -83,6 +83,23 @@ public:
   virtual void draw() override final;
 
 
+  /**
+   * \brief Add some informative text related to the hovered Unit
+   * \param content Text to append tho the _unitDataText buffer
+   * \note This function draws nothing, it just buffers the given string
+   * \see drawUnitData
+   */
+  void addUnitData(const std::string content);
+
+
+  /**
+   * \brief Draw the buffered Unit data
+   * \note clear the _unitDataText buffer
+   */
+  void drawUnitData();
+
+
+
 private:
   graphics::Size2 _windowSize; ///< Drawing space size
 
@@ -102,6 +119,7 @@ private:
 
   size_t _fontSize;            ///< Text font size (for the Unit HP, ...)
   graphics::Pos2 _unitDataPos; ///< Unit data text position (top-left corner)
+  std::string _unitDataText;   ///< Unit data text content
 };
 
 
