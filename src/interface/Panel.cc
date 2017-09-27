@@ -169,10 +169,20 @@ void Panel::draw()
     // Unit data
     auto pos (_unitDataPos);
     auto hp = std::make_shared<resources::Text> (
-      "hp:" + std::to_string(unit->hp()), _fontSize, pos);
+      "hp: " + std::to_string(unit->hp()), _fontSize, pos);
     pos.y += static_cast<graphics::component> (_fontSize) + 2;
     graphics::GraphicsEngine::draw(hp->graphicalText());
-  }
+
+    auto motion = std::make_shared<resources::Text> (
+      "motion: " + std::to_string(unit->motionValue()), _fontSize, pos);
+    pos.y += static_cast<graphics::component> (_fontSize) + 2;
+    graphics::GraphicsEngine::draw(motion->graphicalText());
+
+    auto attack = std::make_shared<resources::Text> (
+      "attack: " + std::to_string(unit->attackValue()), _fontSize, pos);
+    pos.y += static_cast<graphics::component> (_fontSize) + 2;
+    graphics::GraphicsEngine::draw(attack->graphicalText());
+}
 
 
   // MiniMap
