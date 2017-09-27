@@ -73,11 +73,17 @@ void Panel::toggleStatus()
   _background->setPosition(background_position);
   _background->setSize(_size);
 
+
+  // Terrain
+  _frameCell->setPosition(background_position.x, 0ul);
+
+  // Unit
+  _frameUnit->setPosition(background_position.x,
+                          static_cast<size_t> (_size.y / 3));
+
+  // MiniMap
   _minimap->setPosition({ background_position.x,
                           static_cast<size_t> (2 * _windowSize.y / 3) });
-
-  _frameCell->setPosition(background_position.x, 0ul);
-  _frameCell->setSize(_size);
 }
 
 
@@ -86,6 +92,7 @@ void Panel::update()
 {
   _background->setSize(_size);
   _frameCell->setSize({ _size.x, _size.y / 4 });
+  _frameUnit->setSize({ _size.x, _size.y / 4 });
   _minimap->update();
 }
 
@@ -93,17 +100,18 @@ void Panel::update()
 
 void Panel::draw()
 {
-  if (_status == e_panel_status::DEACTIVATED)
-  {
+  if (_status == e_panel_status::DEACTIVATED) {
     return;
   }
 
   update();
   _background->draw();
-  _minimap->draw();
-  _frameCell->draw();
 
+  // Map Cell under the Cursor
   const auto cell(_map->cell(_playerCursor->coords()));
+
+  // Terrain
+  _frameCell->draw();
   const auto terrain(cell->terrain());
   auto image();
   switch (terrain)
@@ -128,6 +136,28 @@ void Panel::draw()
       ERROR("Terrain is invalid", static_cast<int> (cell->terrain()));
       break;
   }
+
+
+  // Unit
+  const auto unit(cell->unit());
+  if (unit)
+  {
+    _frameUnit->draw();
+    auto img(unit->image());
+    img->setPosition(_frameUnit->position().x + 5,
+                     _frameUnit->position().y + 5);
+
+    auto size(_frameUnit->size());
+    size.x -= 10;
+    size.y -= 10;
+    img->setSize(size);
+
+    img->draw();
+  }
+
+
+  // MiniMap
+  _minimap->draw();
 }
 
 
