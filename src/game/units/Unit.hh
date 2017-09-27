@@ -13,11 +13,9 @@
 # include <interface/menus/MenuEntry.hh>
 
 class Team;
-class Cell;
 
- /// \todo add Cell
 
- /// \todo abstract factory ?
+/// \todo abstract factory ?
 // (each Unit have its own sprite [for rotation], but shared texture)
 
 /**
@@ -31,28 +29,22 @@ public:
   Unit();
 
   /**
-   * \brief Default destructor
-   */
-  ~Unit() = default;
-
-
-  /**
    * \brief x coordinate on the map getter
    * \return x (column) coordinate on the map
    */
-  size_t c() { return _coords.c; }
+  auto c() { return _coords.c; }
 
   /**
    * \brief x unit coordinate on the map getter
    * \return y (line) coordinate on the map
    */
-  size_t l() { return _coords.l; }
+  auto l() { return _coords.l; }
 
   /**
    * \brief gets unit's position
    * \return unit's cell coordinates
    */
-  Coords coords() { return _coords; }
+  auto coords() { return _coords; }
 
   /**
    * \brief sets unit's position and _played to true (we moved the unit)
@@ -63,14 +55,14 @@ public:
   /**
    * \brief _playerId getter
    */
-  size_t playerId() { return _playerId; }
+  auto playerId() { return _playerId; }
 
   /**
    * \brief _played getter
    * \return true if the unit has already been played
    *   false otherwise
    */
-  bool played() { return _played; }
+  auto played() { return _played; }
 
   /**
    * \brief sets Unit's coordinates
@@ -100,13 +92,13 @@ public:
    * \brief _hp getter
    * \return health points
    */
-  int hp() { return _hp; }
+  auto hp() { return _hp; }
 
   /**
    * \brief _attackValue getter
    * \return attack value in hit points
    */
-  size_t attackValue() { return _attackValue; }
+  auto attackValue() { return _attackValue; }
 
   /**
    * \brief _motionValue getter
