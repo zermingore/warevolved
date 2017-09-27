@@ -99,6 +99,9 @@ private:
   std::shared_ptr<resources::Sprite> _frameUnit;  ///< Hovered unit's frame
 
   e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
+
+  size_t _fontSize;            ///< Text font size (for the Unit HP, ...)
+  graphics::Pos2 _unitDataPos; ///< Unit data text position (top-left corner)
 };
 
 

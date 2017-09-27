@@ -14,6 +14,7 @@
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
 #include <resources/Sprite.hh>
+#include <resources/Text.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <common/enums/terrains.hh>
 
@@ -32,6 +33,7 @@ Panel::Panel(std::shared_ptr<const Map> map,
   , _frameCell(resources::ResourcesManager::getSprite("frame_thumbnail"))
   , _frameUnit(resources::ResourcesManager::getSprite("frame_thumbnail"))
   , _status(e_panel_status::DEACTIVATED)
+  , _fontSize(20)
 {
   setWindowSize(
       {static_cast<float> (graphics::GraphicsEngine::windowSize().x),
@@ -91,8 +93,16 @@ void Panel::toggleStatus()
 void Panel::update()
 {
   _background->setSize(_size);
+
+  // Terrain
   _frameCell->setSize({ _size.x, _size.y / 4 });
-  _frameUnit->setSize({ _size.x, _size.y / 4 });
+
+  // Unit
+  _frameUnit->setSize({ _size.x / 2, _size.y / 8 });
+  _unitDataPos = { _frameUnit->position().x + _frameUnit->size().x + 5,
+                   _frameUnit->position().y + 5 };
+
+  // MiniMap
   _minimap->update();
 }
 
@@ -138,10 +148,11 @@ void Panel::draw()
   }
 
 
-  // Unit
+  // Unit frame
   const auto unit(cell->unit());
   if (unit)
   {
+    // Unit sprite
     _frameUnit->draw();
     auto img(unit->image());
     img->setPosition(_frameUnit->position().x + 5,
@@ -153,6 +164,14 @@ void Panel::draw()
     img->setSize(size);
 
     img->draw();
+
+
+    // Unit data
+    auto pos (_unitDataPos);
+    auto hp = std::make_shared<resources::Text> (
+      "hp:" + std::to_string(unit->hp()), _fontSize, pos);
+    pos.y += static_cast<graphics::component> (_fontSize) + 2;
+    graphics::GraphicsEngine::draw(hp->graphicalText());
   }
 
 
