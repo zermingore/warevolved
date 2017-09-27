@@ -65,12 +65,6 @@ public:
   auto played() { return _played; }
 
   /**
-   * \brief sets Unit's coordinates
-   * \param coords Unit's new coordinates
-   */
-  void setCellCoordinates(Coords coords) { _coords = coords; }
-
-  /**
    * \brief sets Unit's player belonging
    * \param player_id player's identifier
    */
