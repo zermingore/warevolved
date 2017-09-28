@@ -31,6 +31,11 @@ public:
   Unit();
 
   /**
+   * \brief virtual default destructor
+   */
+  virtual ~Unit() = default;
+
+  /**
    * \brief x coordinate on the map getter
    * \return x (column) coordinate on the Map
    */
