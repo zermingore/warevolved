@@ -27,7 +27,7 @@ public:
    * \return a pointer to the freshly created Unit,
    *   nullptr if the name was invalid
    */
-  static std::shared_ptr<Unit> createUnit(const e_unit& unit);
+  static std::unique_ptr<Unit> createUnit(const e_unit& unit);
 };
 
 #endif /* !UNIT_FACTORY_HH_ */

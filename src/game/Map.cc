@@ -99,7 +99,8 @@ void Map::endTurn()
 
 void Map::newUnit(e_unit type, size_t column, size_t line, int player_id)
 {
-  auto new_unit(UnitFactory::createUnit(type));
+  // Explicitly using a shared_ptr
+  std::shared_ptr<Unit> new_unit(std::move(UnitFactory::createUnit(type)));
 
   // assign the unit to the given player or to the current one
   if (player_id == -1) {

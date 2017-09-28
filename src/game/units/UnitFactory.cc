@@ -6,15 +6,15 @@
 
 
 
-std::shared_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
+std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
 {
   switch (unit)
   {
     case e_unit::SOLDIERS:
-      return std::make_shared<Soldier> ();
+      return std::make_unique<Soldier> ();
 
     default:
-      ERROR("Trying to create unit", static_cast<int> (unit));
+      ERROR("Tried to create unit", static_cast<int> (unit));
       assert(!"Unable to create the given unit");
       return nullptr;
   }
