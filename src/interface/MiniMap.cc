@@ -32,24 +32,24 @@ void MiniMap::update()
 
 void MiniMap::draw()
 {
+  using namespace graphics;
+
   // Draw the frame
   _image->setPosition(_position.x, _position.y);
   _image->setSize(_frameSize);
-  graphics::GraphicsEngine::draw(_image->sprite());
+  GraphicsEngine::draw(_image->sprite());
 
 
   // Computing the size of a cell
   const auto size_col((_frameSize.x - 10)
-                      / static_cast<graphics::component> (_map->nbColumns()));
+                      / static_cast<component> (_map->nbColumns()));
   const auto size_line((_frameSize.y - 10)
-                       / static_cast<graphics::component> (_map->nbLines()));
+                       / static_cast<component> (_map->nbLines()));
 
   // List of players to get their color
   const auto players { game::Status::battle()->players() };
 
-  using namespace graphics;
-  const Size2 cell_size(static_cast<component> (size_col),
-                        static_cast<component> (size_line));
+  const Size2 cell_size(size_col, size_line);
 
 
   const auto cells(_map->cells());
@@ -58,8 +58,10 @@ void MiniMap::draw()
     for (auto line(0u); line < _map->nbLines(); ++line)
     {
       const auto c { cells[col][line] };
-      const graphics::Pos2 pos { 5 + _position.x + size_col  * static_cast<component> (col),
-                                 5 + _position.y + size_line * static_cast<component> (line) };
+      const Pos2 pos {
+        5 + _position.x + size_col  * static_cast<component> (col),
+        5 + _position.y + size_line * static_cast<component> (line)
+      };
 
       // Draw the terrain
       switch (c->terrain())
