@@ -52,7 +52,7 @@ public:
    * \param nbColumns Number of columns required
    * \param nbLines Number of lines required
    */
-  Map(const size_t nb_columns, const size_t nb_lines);
+  Map(size_t nb_columns, size_t nb_lines);
 
   /// default destructor
   ~Map() = default;
@@ -80,7 +80,7 @@ public:
    * \return the enum index in e_unit matching the unit
    *   located at coordinates (x, y)
    */
-  std::shared_ptr<Unit> unit(const size_t line, const size_t column) const;
+  std::shared_ptr<Unit> unit(size_t line, size_t column) const;
 
   /**
    * \brief gets the unit at c's coordinates.
@@ -95,7 +95,7 @@ public:
    * \param c coordinates where the Unit to select is located
    * \note A unit must be located at given coordinates
    */
-  void selectUnit(const Coords c);
+  void selectUnit(const Coords& c);
 
   /**
    * \brief selected unit getter
@@ -112,7 +112,7 @@ public:
    * \return the enum index in e_terrain matching the terrain
    *   located at coordinates (c, l).
    */
-  e_terrain getTerrain(const size_t line, const size_t column) const;
+  e_terrain getTerrain(size_t line, size_t column) const;
 
   /**
    * \brief get the cell at given coordinates
@@ -138,16 +138,13 @@ public:
    * \note player_id defaults to -1
    *   In this case, the unit is assigned to the current player
    */
-  void newUnit(const e_unit type,
-               const size_t column,
-               const size_t line,
-               int player_id = -1);
+  void newUnit(e_unit type, size_t column, size_t line, int player_id = -1);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates
    * \param c Destination coordinates
    */
-  void moveUnit(const Coords c);
+  void moveUnit(const Coords& c);
 
   /**
    * \brief reset all units played boolean to false
@@ -186,7 +183,7 @@ public:
    *
    * \return a vector of pointers to Cell
    */
-  auto operator[] (const size_t column) { return _cells[column]; }
+  auto operator[] (size_t column) { return _cells[column]; }
 
   /**
    * \brief ascii art dump of the map

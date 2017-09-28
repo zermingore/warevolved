@@ -18,7 +18,7 @@
 
 
 
-Map::Map(const size_t nb_columns, const size_t nb_lines)
+Map::Map(size_t nb_columns, size_t nb_lines)
   : _nbColumns(nb_columns)
   , _nbLines(nb_lines)
 {
@@ -41,7 +41,7 @@ Map::Map(const size_t nb_columns, const size_t nb_lines)
 
 
 
-std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const
+std::shared_ptr<Unit> Map::unit(size_t column, size_t line) const
 {
   return _cells[line][column]->unit();
 }
@@ -53,13 +53,13 @@ std::shared_ptr<Unit> Map::unit(const Coords& c) const
 }
 
 
-e_terrain Map::getTerrain(const size_t column, const size_t line) const
+e_terrain Map::getTerrain(size_t column, size_t line) const
 {
   return _cells[column][line]->terrain();
 }
 
 
-void Map::selectUnit(const Coords c)
+void Map::selectUnit(const Coords& c)
 {
   // allow to select another unit if already one is selected ?
   _selectedUnit = nullptr;
@@ -73,7 +73,7 @@ void Map::selectUnit(const Coords c)
 }
 
 
-void Map::moveUnit(const Coords c)
+void Map::moveUnit(const Coords& c)
 {
   if (_selectedUnit->coords() == c) {
     ERROR("Moving unit: src == dst: coordinates:", c.c, c.l);
@@ -97,10 +97,7 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(const e_unit type,
-                  const size_t column,
-                  const size_t line,
-                  int player_id)
+void Map::newUnit(e_unit type, size_t column, size_t line, int player_id)
 {
   auto new_unit(UnitFactory::createUnit(type));
 
