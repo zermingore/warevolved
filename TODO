@@ -1,7 +1,9 @@
 -*- mode:org -*-
 #+OPTIONS: ^:nil
 
-# NOTE: This file should be only commited on the doc or master branches (only)
+# NOTE:
+# - A task can be removed only on the master
+# - A task can be added or marked as done on any branch
 
 
 * TODO Roadmap
@@ -180,7 +182,8 @@
 
 * TODO Bugs / Features
 ** TODO Memory Leaks / Errors
-*** TODO Hide SFML "leaks"
+*** DONE Hide SFML "leaks"
+    CLOSED: [2017-09-28 Do 08:08]
     (current ref: Still reachable: 41,364 bytes in 425 blocks)
 ** TODO segfault while quitting the game, moving a unit
    This happen because every static classes get 'destructed', exiting the main
@@ -200,7 +203,8 @@
 
 * TODO Build
 ** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
-** TODO Move pugixml in a lib/ folder at the root
+** DONE Move pugixml in a lib/ folder at the root
+   CLOSED: [2017-09-28 Do 08:08]
 
 * TODO [#C] Optimization
   -> *Profile* <-
