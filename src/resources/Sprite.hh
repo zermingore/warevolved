@@ -35,17 +35,14 @@ public:
    * \brief Sprite Constructor
    * \param file_name Sprite complete file name
    *   (with full path and extension)
-   * \param name Sprite alias name
    */
-  Sprite(const std::string file_name, const std::string name);
+  Sprite(const std::string file_name);
 
   /**
    * \brief Sprite Constructor, using an already loaded Texture
    * \param texture Pointer on an already loaded Texture to use
-   * \param name Sprite alias name
    */
-  Sprite(const std::shared_ptr<graphics::Texture> texture,
-         const std::string name);
+  Sprite(const std::shared_ptr<graphics::Texture> texture);
 
 
   /**

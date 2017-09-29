@@ -150,7 +150,7 @@ std::shared_ptr<resources::Sprite>
 ResourcesManager::getSprite(const std::string name)
 {
   auto texture(getTexture(name));
-  return std::make_shared<resources::Sprite> (_textures[name], name);
+  return std::make_shared<resources::Sprite> (_textures[name]);
 }
 
 

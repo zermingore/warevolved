@@ -135,7 +135,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
       /// \todo check if we print the cell (scroll case)
       const auto c { cells[col][line] };
       auto terrain(_terrainsHandler->getTerrain(c->terrain()));
-      resources::Sprite img(terrain->texture(), "terrain");
+      resources::Sprite img(terrain->texture());
       img.drawAtCell(c->coords());
 
       if (c->highlight())

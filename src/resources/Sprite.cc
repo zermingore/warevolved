@@ -10,9 +10,8 @@
 namespace resources {
 
 
-Sprite::Sprite(const std::string file_name, const std::string name)
+Sprite::Sprite(const std::string file_name)
 {
-  _name = name;
   _fileName = file_name;
 
   _rectangle = std::make_shared<graphics::RectangleShape> ();
@@ -28,10 +27,8 @@ Sprite::Sprite(const std::string file_name, const std::string name)
 
 
 
-Sprite::Sprite(const std::shared_ptr<graphics::Texture> texture,
-               const std::string name)
+Sprite::Sprite(const std::shared_ptr<graphics::Texture> texture)
 {
-  _name = name;
   _fileName = "texture init";
 
   _rectangle = std::make_shared<graphics::RectangleShape> ();
