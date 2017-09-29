@@ -125,7 +125,7 @@ protected:
                                ///< it has the index 0
 
   ///< Emphasis of the selected entry
-  std::shared_ptr<resources::Sprite> _imageSelection;
+  std::shared_ptr<graphics::Sprite> _imageSelection;
 };
 
 

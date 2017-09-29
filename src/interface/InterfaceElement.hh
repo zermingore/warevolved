@@ -129,7 +129,7 @@ public:
 
 protected:
   std::string _img_name;                     ///< Associated image name
-  std::shared_ptr<resources::Sprite> _image; ///< Associated image
+  std::shared_ptr<graphics::Sprite> _image; ///< Associated image
 
   graphics::Pos2 _position; ///< Element position (in pixels)
   Coords _coords;           ///< Position (in cells; not always filled)
