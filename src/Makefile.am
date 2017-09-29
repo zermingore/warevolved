@@ -11,10 +11,10 @@ main.cc                             \
 graphics/GraphicsEngine.cc          \
 graphics/Context.cc                 \
 graphics/MapGraphicsProperties.cc   \
+graphics/Sprite.cc                  \
 \
 resources/ResourcesManager.cc       \
 resources/Resource.cc               \
-resources/Sprite.cc                 \
 resources/Font.cc                   \
 resources/Text.cc                   \
 \

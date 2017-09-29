@@ -10,7 +10,7 @@
 # include <vector>
 # include <memory>
 # include <structures/Vector.hh>
-# include <resources/Sprite.hh>
+# include <graphics/Sprite.hh>
 
 class Map;
 class Unit;
@@ -18,6 +18,7 @@ class Cell;
 
 enum class e_direction;
 enum class e_path_shape;
+
 
 
 /**

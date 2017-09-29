@@ -10,7 +10,7 @@
 # include <memory>
 # include <vector>
 
-# include <resources/Sprite.hh>
+# include <graphics/Sprite.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <interface/InterfaceElement.hh>
 

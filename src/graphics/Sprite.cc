@@ -1,4 +1,4 @@
-#include <resources/Sprite.hh>
+#include <graphics/Sprite.hh>
 
 #include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>

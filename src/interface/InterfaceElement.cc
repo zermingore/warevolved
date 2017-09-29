@@ -6,9 +6,9 @@
  */
 
 #include <interface/InterfaceElement.hh>
-#include <resources/Sprite.hh>
 #include <resources/ResourcesManager.hh>
 #include <graphics/graphic_types.hh>
+#include <graphics/Sprite.hh>
 
 
 namespace interface {

@@ -9,7 +9,7 @@
 
 # include <graphics/graphic_types.hh>
 # include <resources/Font.hh>
-# include <resources/Sprite.hh>
+# include <graphics/Sprite.hh>
 
 
 

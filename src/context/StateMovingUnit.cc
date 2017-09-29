@@ -13,7 +13,7 @@
 #include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <resources/Sprite.hh>
+#include <graphics/Sprite.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <game/units/Unit.hh>

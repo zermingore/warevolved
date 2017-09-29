@@ -4,7 +4,7 @@
 
 #include <graphics/graphic_types.hh>
 #include <lib/pugixml.hh>
-#include <resources/Sprite.hh>
+#include <graphics/Sprite.hh>
 #include <resources/Font.hh>
 #include <debug/Debug.hh>
 
