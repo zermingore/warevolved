@@ -9,7 +9,6 @@
 
 # include <graphics/graphic_types.hh>
 # include <resources/Font.hh>
-# include <graphics/Sprite.hh>
 
 
 
@@ -46,14 +45,6 @@ public:
    * \param file_name XML file name to parse
    */
   static void initialize(const std::string file_name);
-
-  /**
-   * \brief If an image with the given name exists, return the matching Image
-   * \param name File name of the texture to associate with the sprite
-   * \return A new Image matching the given name.
-   *   If the Image does not exist, print an error and return the default one
-   */
-  static std::shared_ptr<resources::Sprite> getSprite(const std::string name);
 
   /**
    * \brief If a Texture with the given name exists, return it

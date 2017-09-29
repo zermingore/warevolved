@@ -4,7 +4,6 @@
 
 #include <graphics/graphic_types.hh>
 #include <lib/pugixml.hh>
-#include <graphics/Sprite.hh>
 #include <resources/Font.hh>
 #include <debug/Debug.hh>
 
@@ -143,15 +142,6 @@ void ResourcesManager::listResources()
   }
 }
 #endif // DEBUG_XML
-
-
-
-std::shared_ptr<resources::Sprite>
-ResourcesManager::getSprite(const std::string name)
-{
-  auto texture(getTexture(name));
-  return std::make_shared<resources::Sprite> (_textures[name]);
-}
 
 
 
