@@ -23,7 +23,7 @@ namespace resources {
  * \brief A Sprite is a Texture + a rectangle
  * \note Derived from Resource
  */
-class Sprite: public Resource
+class Sprite
 {
 public:
   /**
@@ -36,13 +36,13 @@ public:
    * \param file_name Sprite complete file name
    *   (with full path and extension)
    */
-  Sprite(const std::string file_name);
+  explicit Sprite(const std::string file_name);
 
   /**
    * \brief Sprite Constructor, using an already loaded Texture
    * \param texture Pointer on an already loaded Texture to use
    */
-  Sprite(const std::shared_ptr<graphics::Texture> texture);
+  explicit Sprite(const std::shared_ptr<graphics::Texture> texture);
 
 
   /**

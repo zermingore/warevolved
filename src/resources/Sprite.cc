@@ -12,14 +12,12 @@ namespace resources {
 
 Sprite::Sprite(const std::string file_name)
 {
-  _fileName = file_name;
-
   _rectangle = std::make_shared<graphics::RectangleShape> ();
   _rectangle->setPosition(graphics::Pos2(0, 0));
   _rectangle->setSize(graphics::Size2(0, 0));
 
   _texture = std::make_shared<graphics::Texture> ();
-  _texture->loadFromFile(_fileName);
+  _texture->loadFromFile(file_name);
   _rectangle->setTexture(_texture.get());
 
   _sprite = std::make_shared<graphics::Sprite> (*_texture);
@@ -29,8 +27,6 @@ Sprite::Sprite(const std::string file_name)
 
 Sprite::Sprite(const std::shared_ptr<graphics::Texture> texture)
 {
-  _fileName = "texture init";
-
   _rectangle = std::make_shared<graphics::RectangleShape> ();
   _rectangle->setPosition(graphics::Pos2(0, 0));
   _rectangle->setSize(graphics::Size2(0, 0));
