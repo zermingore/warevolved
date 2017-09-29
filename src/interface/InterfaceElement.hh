@@ -58,7 +58,7 @@ public:
    * \brief _coords getter
    * \return _coords value in the grid frame
    */
-  auto coords() { return _coords; }
+  auto coords() const { return _coords; }
 
   /**
    * \brief scale getter.
@@ -89,7 +89,7 @@ public:
    * \param scale_x scale in x related to cells size.
    * \param scale_y scale in y related to cells size.
    */
-  void setScale(const float& scale_x, const float& scale_y) {
+  void setScale(const float scale_x, const float scale_y) {
     _scale.x = scale_x;
     _scale.y = scale_y;
   }
@@ -98,7 +98,7 @@ public:
    * \brief scale setter.
    * \param scale scale to apply in x and y related to cells size.
    */
-  void setScale(const float& scale) { setScale(scale, scale); }
+  void setScale(const float scale) { setScale(scale, scale); }
 
   /**
    * \brief rotation setter.
@@ -110,7 +110,7 @@ public:
    *
    * \param rotation angle of the rotation.
    */
-  void setRotation(const float& rotation) { _rotation = rotation; }
+  void setRotation(const float rotation) { _rotation = rotation; }
 
 
   /**
@@ -128,8 +128,8 @@ public:
 
 
 protected:
-  std::string _img_name;                    ///< Associated image name
-  std::shared_ptr<resources::Image> _image; ///< Associated image
+  std::string _img_name;                     ///< Associated image name
+  std::shared_ptr<resources::Sprite> _image; ///< Associated image
 
   graphics::Pos2 _position; ///< Element position (in pixels)
   Coords _coords;           ///< Position (in cells; not always filled)

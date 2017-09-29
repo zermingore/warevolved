@@ -13,6 +13,7 @@
 #include <context/StateMenu.hh>
 
 
+
 Player::Player(const graphics::Color c)
 {
   static size_t static_id = 0;

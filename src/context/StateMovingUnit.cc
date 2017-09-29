@@ -13,7 +13,7 @@
 #include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <resources/Image.hh>
+#include <resources/Sprite.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <game/units/Unit.hh>
@@ -46,7 +46,7 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
 
   // Graphical attributes initialization
-  _holoUnit = resources::ResourcesManager::getImage("soldiers"); /// \todo hard-coded soldiers
+  _holoUnit = resources::ResourcesManager::getSprite("soldiers"); /// \todo hard-coded soldiers
   _holoUnitSprite = _holoUnit->sprite();
   _holoUnitPosition = player->cursor()->coords();
 

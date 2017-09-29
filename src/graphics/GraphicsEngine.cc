@@ -7,12 +7,14 @@
 #include <debug/OSD.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <context/State.hh>
 #include <interface/Interface.hh>
 #include <game/Status.hh>
 #include <game/Cell.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <context/State.hh>
+#include <game/Terrain.hh>
+#include <game/TerrainsHandler.hh>
 
 
 
@@ -25,6 +27,7 @@ const sf::Color GRID_COLOR(202, 124, 0);
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 size_t GraphicsEngine::_nbFramesGenerated;
 bool GraphicsEngine::_takeScreenshot;
+std::unique_ptr<TerrainsHandler> GraphicsEngine::_terrainsHandler;
 
 
 constexpr double computeFps(size_t nb_frames, long int ns_elapsed)
@@ -38,6 +41,8 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   _window->setActive();
   _takeScreenshot = false;
+  _terrainsHandler = std::make_unique<TerrainsHandler> ();
+
   while (_window->isOpen())
   {
     static auto graphics_start(std::chrono::steady_clock::now());
@@ -59,9 +64,8 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
     debug::OSD::draw();
 
     // Handle screenshot request, if any
-    if (_takeScreenshot)
-    {
-        screenshot();
+    if (_takeScreenshot) {
+      screenshot();
     }
 
     // update the window
@@ -123,27 +127,20 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
   // drawing cells (their background and their content)
   const auto cells(map->cells());
 
-  /// \todo [Optimization] fetch every terrain first
-  /// (but not here, in MapGraphicsProperties ?)
-
   // draw column by column (as the cells are stored by column)
   for (auto col(0u); col < map->nbColumns(); ++col)
   {
     for (auto line(0u); line < map->nbLines(); ++line)
     {
       /// \todo check if we print the cell (scroll case)
-      const auto c {cells[col][line]};
-      switch (c->terrain())
-      {
-        default:
-          auto img(resources::ResourcesManager::getImage("forest"));
-          img->drawAtCell(c->coords());
-          break;
-      }
+      const auto c { cells[col][line] };
+      auto terrain(_terrainsHandler->getTerrain(c->terrain()));
+      resources::Sprite img(terrain->texture(), "terrain");
+      img.drawAtCell(c->coords());
 
       if (c->highlight())
       {
-        auto highlight = resources::ResourcesManager::getImage("highlight");
+        auto highlight = resources::ResourcesManager::getSprite("highlight");
         highlight->sprite()->setColor(c->highlightColor());
         highlight->drawAtCell(c->coords());
       }
@@ -173,9 +170,9 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   {
     rectangle.setPosition(offset_x, offset_y);
 
-    rectangle.setSize({
-        p::cellWidth() * static_cast<component> (map->nbColumns()),
-        p::cellHeight()});
+    rectangle.setSize(
+      { p::cellWidth() * static_cast<component> (map->nbColumns()),
+        p::cellHeight() });
 
     _window->draw(rectangle);
 
@@ -192,8 +189,8 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
   {
     rectangle.setPosition(offset_x, offset_y);
     rectangle.setSize(
-      {p::cellWidth(),
-       p::cellHeight() * static_cast<component> (map->nbLines())});
+      { p::cellWidth(),
+        p::cellHeight() * static_cast<component> (map->nbLines()) });
 
     _window->draw(rectangle);
 

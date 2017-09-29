@@ -7,8 +7,10 @@
 #ifndef RESOURCES_RESOURCES_MANAGER_HH_
 # define RESOURCES_RESOURCES_MANAGER_HH_
 
+# include <graphics/graphic_types.hh>
 # include <resources/Font.hh>
-# include <resources/Image.hh>
+# include <resources/Sprite.hh>
+
 
 
 /**
@@ -40,11 +42,6 @@ class ResourcesManager
 {
 public:
   /**
-   * \brief removing default constructor as we need a resources file
-   */
-  ResourcesManager() = delete;
-
-  /**
    * \brief Initialization, parses the XML, calling buildFromXML()
    * \param file_name XML file name to parse
    */
@@ -52,10 +49,18 @@ public:
 
   /**
    * \brief If an image with the given name exists, return the matching Image
+   * \param name File name of the texture to associate with the sprite
    * \return A new Image matching the given name.
    *   If the Image does not exist, print an error and return the default one
    */
-  static std::shared_ptr<resources::Image> getImage(const std::string name);
+  static std::shared_ptr<resources::Sprite> getSprite(const std::string name);
+
+  /**
+   * \brief If a Texture with the given name exists, return it
+   * \return A new Image matching the given name.
+   * \note If the Texture doesn't exist, print an error and return a default one
+   */
+  static std::shared_ptr<graphics::Texture> getTexture(std::string name);
 
   /**
    * \brief If a font with the given name exists, return the matching Font
@@ -84,7 +89,6 @@ private:
    * \param type Resource media type (image, sound, ...)
    * \param name Resource name (more or less an alias)
    * \param file_name Complete file name (including path and extension)
-   * \param id Unique resource id
    *
    * \return true on success
    *   false otherwise
@@ -111,8 +115,11 @@ private:
   static void listResources();
 # endif
 
-  ///< Fonts list (name [identifier] -> image file name)
+  ///< Images files list (name [identifier] -> image file name)
   static std::map<std::string, std::string> _images;
+
+  ///< Textures list (name [identifier] -> pointer on the Texture)
+  static std::map<std::string, std::shared_ptr<graphics::Texture>> _textures;
 
   ///< Fonts list (name [identifier] -> font file name)
   static std::map<std::string, std::shared_ptr<resources::Font>> _fonts;

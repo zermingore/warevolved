@@ -18,7 +18,7 @@
 
 
 
-Map::Map(const size_t nb_columns, const size_t nb_lines)
+Map::Map(size_t nb_columns, size_t nb_lines)
   : _nbColumns(nb_columns)
   , _nbLines(nb_lines)
 {
@@ -28,7 +28,7 @@ Map::Map(const size_t nb_columns, const size_t nb_lines)
 
     // Allocate each Cell of the column
     for (auto line(0u); line < _nbLines; ++line) {
-      vec[line] = std::make_shared<Cell> (col, line);
+      vec[line] = std::make_shared<Cell> (col, line, e_terrain::FOREST);
     }
 
     // _cells is a vector of columns
@@ -41,20 +41,25 @@ Map::Map(const size_t nb_columns, const size_t nb_lines)
 
 
 
-std::shared_ptr<Unit> Map::unit(const size_t column, const size_t line) const {
+std::shared_ptr<Unit> Map::unit(size_t column, size_t line) const
+{
   return _cells[line][column]->unit();
 }
 
-std::shared_ptr<Unit> Map::unit(const Coords& c) const {
+
+std::shared_ptr<Unit> Map::unit(const Coords& c) const
+{
   return _cells[c.c][c.l]->unit();
 }
 
-e_terrain Map::getTerrain(const size_t column, const size_t line) const {
+
+e_terrain Map::getTerrain(size_t column, size_t line) const
+{
   return _cells[column][line]->terrain();
 }
 
 
-void Map::selectUnit(const Coords c)
+void Map::selectUnit(const Coords& c)
 {
   // allow to select another unit if already one is selected ?
   _selectedUnit = nullptr;
@@ -68,12 +73,10 @@ void Map::selectUnit(const Coords c)
 }
 
 
-void Map::moveUnit(const Coords c)
+void Map::moveUnit(const Coords& c)
 {
-  if (_selectedUnit->coords() == c)
-  {
-    ERROR("Moving unit at coordinates:", c.c, c.l);
-    assert("!move unit: src == dst");
+  if (_selectedUnit->coords() == c) {
+    ERROR("Moving unit: src == dst: coordinates:", c.c, c.l);
   }
 
   Coords old(_selectedUnit->coords());
@@ -81,7 +84,7 @@ void Map::moveUnit(const Coords c)
 
   _cells[old.c][old.l]->unit()->setPlayed(true);
   _cells[old.c][old.l]->removeUnit();
-  _selectedUnit->setCellCoordinates(c);
+  _selectedUnit->setCoords(c);
   _cells[c.c][c.l]->setUnit(_selectedUnit);
 }
 
@@ -94,19 +97,17 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(const e_unit type,
-                  const size_t column,
-                  const size_t line,
-                  int player_id)
+void Map::newUnit(e_unit type, size_t column, size_t line, int player_id)
 {
-  auto new_unit(UnitFactory::createUnit(type));
+  // Explicitly using a shared_ptr
+  std::shared_ptr<Unit> new_unit(std::move(UnitFactory::createUnit(type)));
 
   // assign the unit to the given player or to the current one
   if (player_id == -1) {
     player_id = static_cast<int> (game::Status::battle()->currentPlayer());
   }
 
-  new_unit->setCellCoordinates(Coords(column, line));
+  new_unit->setCoords({ column, line });
   new_unit->setPlayerId(player_id);
   _units[player_id].push_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
@@ -137,7 +138,8 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   assert(_selectedUnit && defender);
 
   // getting defender status
-  defender->setHP(defender->hp() - static_cast<int> (_selectedUnit->attackValue()));
+  defender->setHP(defender->hp()
+                  - static_cast<int> (_selectedUnit->attackValue()));
   bool defender_died = false;
   if (defender->hp() <= 0)
   {
@@ -146,7 +148,8 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   }
 
   // getting attacker status after strike back
-  _selectedUnit->setHP(_selectedUnit->hp() - static_cast<int> (defender->attackValue()) / 2);
+  _selectedUnit->setHP(_selectedUnit->hp()
+                       - static_cast<int> (defender->attackValue()) / 2);
   bool attacker_died = false;
   if (_selectedUnit->hp() <= 0)
   {
@@ -166,7 +169,7 @@ e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
   auto defender = target_cell->unit();
   if (!defender)
   {
-    NOTICE("Attacking empty cell");
+    ERROR("Attacking empty cell");
     return e_attack_result::NONE_DIED;
   }
 
@@ -189,12 +192,12 @@ void Map::dump()
     {
       // std::cout << "|  " << j << "," << i << " ";
       auto unit = _cells[col][line]->unit();
-      if (unit) {
-        unit == _selectedUnit ? std::cout << "#" : std::cout << "X";
-      }
-      else {
+      if (!unit)
+      {
         std::cout << ".";
+        continue;
       }
+      unit == _selectedUnit ? std::cout << "#" : std::cout << "X";
     }
 
     std::cout << "|" << std::endl;

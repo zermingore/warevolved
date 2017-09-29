@@ -44,14 +44,8 @@
 	  <file filename='side_panel.png'>
 		<name>side_panel</name>
 	  </file>
-	  <file filename='frame_minimap.png'>
-		<name>frame_minimap</name>
-	  </file>
-	  <file filename='frame_cell.png'>
-		<name>frame_cell</name>
-	  </file>
-	  <file filename='frame_unit.png'>
-		<name>frame_unit</name>
+	  <file filename='frame_thumbnail.png'>
+		<name>frame_thumbnail</name>
 	  </file>
 	  <file filename='minimap_unit.png'>
 		<name>minimap_unit</name>

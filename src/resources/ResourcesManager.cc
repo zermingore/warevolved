@@ -1,7 +1,10 @@
 #include <resources/ResourcesManager.hh>
 
+#include <exception>
+
+#include <graphics/graphic_types.hh>
 #include <lib/pugixml.hh>
-#include <resources/Image.hh>
+#include <resources/Sprite.hh>
 #include <resources/Font.hh>
 #include <debug/Debug.hh>
 
@@ -9,10 +12,14 @@
 
 namespace resources {
 
+
 // Static Variables definition
 std::map<std::string, std::string> ResourcesManager::_images;
-std::map<std::string, std::shared_ptr<resources::Font>> ResourcesManager::_fonts;
+std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
 std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
+std::map<std::string, std::shared_ptr<graphics::Texture>>
+  ResourcesManager::_textures;
+
 
 // default resources paths
 const std::string DEFAULT_IMAGE_PATH = "resources/defaults/image.png";
@@ -32,11 +39,23 @@ void ResourcesManager::initialize(const std::string file_name)
 }
 
 
+
 void ResourcesManager::initializeDefaultResources()
 {
   _images["default"] = DEFAULT_IMAGE_PATH;
   _fonts["default"]  = std::make_shared<resources::Font> (DEFAULT_FONT_PATH, "defaut");
+
+  // Load a default Texture
+  auto texture = std::make_shared<graphics::Texture> ();
+  if (!texture->loadFromFile(_images["default"]))
+  {
+    ERROR("Unable to load default texture");
+    assert(!"Unable to load default texture, aborting");
+  }
+  _textures["default"] = texture;
 }
+
+
 
 void ResourcesManager::initTypeNames()
 {
@@ -45,6 +64,7 @@ void ResourcesManager::initTypeNames()
   _typeNames[e_resource_type::FONT]  = "fonts";
   _typeNames[e_resource_type::SOUND] = "sounds";
 }
+
 
 
 bool ResourcesManager::addResource(const e_resource_type type,
@@ -70,6 +90,7 @@ bool ResourcesManager::addResource(const e_resource_type type,
       return false;
   }
 }
+
 
 
 bool ResourcesManager::parseXML(const std::string file_name)
@@ -108,6 +129,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
 }
 
 
+
 #ifdef DEBUG_XML
 void ResourcesManager::listResources()
 {
@@ -123,22 +145,43 @@ void ResourcesManager::listResources()
 #endif // DEBUG_XML
 
 
-std::shared_ptr<resources::Image> ResourcesManager::getImage(const std::string name)
+
+std::shared_ptr<resources::Sprite>
+ResourcesManager::getSprite(const std::string name)
 {
-  if (_images.find(name) != _images.end()) {
-    return std::make_shared<resources::Image> (_images[name], name);
+  auto texture(getTexture(name));
+  return std::make_shared<resources::Sprite> (_textures[name], name);
+}
+
+
+
+std::shared_ptr<graphics::Texture>
+ResourcesManager::getTexture(std::string name)
+{
+  if (_textures.find(name) != _textures.end())
+  {
+    return _textures[name];
   }
 
-  ERROR("Unable to find image:", name);
+  // Try to load the given texture name if it was not loaded yet
+  graphics::Texture texture;
+  if (texture.loadFromFile(_images[name]))
+  {
+    _textures[name] = std::make_shared<graphics::Texture> (texture);
+    return _textures[name];
+  }
 
-  return std::make_shared<resources::Image> (DEFAULT_IMAGE_PATH, "default");
+  ERROR("Unable to find texture:", name);
+
+  return _textures["default"];
 }
 
 
 
 std::shared_ptr<resources::Font> ResourcesManager::getFont(const std::string name)
 {
-  if (_fonts.find(name) != _fonts.end()) {
+  if (_fonts.find(name) != _fonts.end())
+  {
     return _fonts[name];
   }
 

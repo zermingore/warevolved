@@ -10,7 +10,7 @@
 # include <memory>
 # include <vector>
 
-# include <resources/Image.hh>
+# include <resources/Sprite.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <interface/InterfaceElement.hh>
 
@@ -125,7 +125,7 @@ protected:
                                ///< it has the index 0
 
   ///< Emphasis of the selected entry
-  std::shared_ptr<resources::Image> _imageSelection;
+  std::shared_ptr<resources::Sprite> _imageSelection;
 };
 
 

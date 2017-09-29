@@ -15,7 +15,7 @@ namespace interface {
 Menu::Menu()
   : InterfaceElement("selection_menu_button")
   , _selectedEntry (0)
-  , _imageSelection(resources::ResourcesManager::getImage("selection_menu_selection"))
+  , _imageSelection(resources::ResourcesManager::getSprite("selection_menu_selection"))
 {
 }
 

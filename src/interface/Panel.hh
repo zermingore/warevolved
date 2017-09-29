@@ -15,11 +15,12 @@
 
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
+# include <interface/MiniMap.hh>
 
 class Map;
 
 namespace resources {
-  class Image;
+  class Sprite;
 }
 
 
@@ -27,7 +28,6 @@ namespace resources {
 namespace interface {
 
 class Cursor;
-class MiniMap;
 
 
 /**
@@ -39,7 +39,7 @@ class Panel: public InterfaceElement
 {
 public:
   /**
-   * \brief Default constructor: call InterfaceElement constructor
+   * \brief Deleted default constructor: The Map and Cursor are required
    */
   Panel() = delete;
 
@@ -49,11 +49,6 @@ public:
    * \param cursor Cursor of the player (the interface owner)
    */
   Panel(std::shared_ptr<const Map> map, std::shared_ptr<const Cursor> cursor);
-
-  /**
-   * \brief Defaulted destructor
-   */
-  ~Panel();
 
 
   /**
@@ -88,21 +83,43 @@ public:
   virtual void draw() override final;
 
 
+  /**
+   * \brief Add some informative text related to the hovered Unit
+   * \param content Text to append tho the _unitDataText buffer
+   * \note This function draws nothing, it just buffers the given string
+   * \see drawUnitData
+   */
+  void addUnitData(const std::string content);
+
+
+  /**
+   * \brief Draw the buffered Unit data
+   * \note clear the _unitDataText buffer
+   */
+  void drawUnitData();
+
+
+
 private:
   graphics::Size2 _windowSize; ///< Drawing space size
 
   graphics::Pos2 _origin = {0, 0}; ///< Top left or top right corner - width
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
+  std::shared_ptr<const Map> _map; ///< Get terrain and unit under the Cursor
   std::shared_ptr<const Cursor> _playerCursor; ///< Used to get what is hovered
 
   std::unique_ptr<MiniMap> _minimap; ///< Minimap to display in its frame
 
-  std::shared_ptr<resources::Image> _background;   ///< Panel's background
-  std::shared_ptr<resources::Image> _frameCell;    ///< Hovered cell's frame
-  std::shared_ptr<resources::Image> _frameUnit;    ///< Hovered unit's frame
+  std::shared_ptr<resources::Sprite> _background; ///< Panel's background
+  std::shared_ptr<resources::Sprite> _frameCell;  ///< Hovered cell's frame
+  std::shared_ptr<resources::Sprite> _frameUnit;  ///< Hovered unit's frame
 
   e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
+
+  size_t _fontSize;            ///< Text font size (for the Unit HP, ...)
+  graphics::Pos2 _unitDataPos; ///< Unit data text position (top-left corner)
+  std::string _unitDataText;   ///< Unit data text content
 };
 
 

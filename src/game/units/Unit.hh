@@ -13,11 +13,9 @@
 # include <interface/menus/MenuEntry.hh>
 
 class Team;
-class Cell;
 
- /// \todo add Cell
 
- /// \todo abstract factory ?
+/// \todo abstract factory ?
 // (each Unit have its own sprite [for rotation], but shared texture)
 
 /**
@@ -27,56 +25,51 @@ class Cell;
 class Unit
 {
 public:
-  ///< \brief Default Constructor
+  /**
+   * \brief Initialize the attributes with default values
+   */
   Unit();
 
   /**
-   * \brief Default destructor
+   * \brief virtual default destructor
    */
-  ~Unit() = default;
-
+  virtual ~Unit() = default;
 
   /**
    * \brief x coordinate on the map getter
-   * \return x (column) coordinate on the map
+   * \return x (column) coordinate on the Map
    */
-  size_t c() { return _coords.c; }
+  auto c() { return _coords.c; }
 
   /**
    * \brief x unit coordinate on the map getter
-   * \return y (line) coordinate on the map
+   * \return y (line) coordinate on the Map
    */
-  size_t l() { return _coords.l; }
+  auto l() { return _coords.l; }
 
   /**
    * \brief gets unit's position
-   * \return unit's cell coordinates
+   * \return unit's Cell coordinates
    */
-  Coords coords() { return _coords; }
+  auto coords() { return _coords; }
 
   /**
-   * \brief sets unit's position and _played to true (we moved the unit)
-   * \param coords: cell's coordinates to set unit's position
+   * \brief sets unit's position
+   * \param coords New unit Cell's coordinates
    */
   void setCoords(const Coords coords) { _coords = coords; }
 
   /**
    * \brief _playerId getter
+   * \return Id of the Player owning this Unit
    */
-  size_t playerId() { return _playerId; }
+  auto playerId() { return _playerId; }
 
   /**
    * \brief _played getter
-   * \return true if the unit has already been played
-   *   false otherwise
+   * \return true if the unit has already been played, false otherwise
    */
-  bool played() { return _played; }
-
-  /**
-   * \brief sets Unit's coordinates
-   * \param coords Unit's new coordinates
-   */
-  void setCellCoordinates(Coords coords) { _coords = coords; }
+  auto played() { return _played; }
 
   /**
    * \brief sets Unit's player belonging
@@ -100,26 +93,29 @@ public:
    * \brief _hp getter
    * \return health points
    */
-  int hp() { return _hp; }
+  auto hp() { return _hp; }
 
   /**
    * \brief _attackValue getter
-   * \return attack value in hit points
+   * \return Attack value in hit points
    */
-  size_t attackValue() { return _attackValue; }
+  auto attackValue() { return _attackValue; }
 
   /**
    * \brief _motionValue getter
+   * \return The number of Cells a Unit can cross in one turn
    */
   auto motionValue() { return _motionValue; }
 
   /**
-   * \brief minimal attack range getter
+   * \brief _minRange getter
+   * \return Minimal attack range (in Cells)
    */
   auto minRange() { return _minRange; }
 
   /**
-   * \brief maximal attack range getter
+   * \brief _maxRange getter
+   * \return Maximal attack range getter (in Cells)
    */
   auto maxRange() { return _maxRange; }
 
@@ -148,7 +144,7 @@ protected:
   size_t _minRange;    ///< Minimal required range for a unit to attack
   size_t _maxRange;    ///< Maximal range to attack a unit
 
-  std::shared_ptr<resources::Image> _image; ///< Unit Image
+  std::shared_ptr<resources::Sprite> _image; ///< Unit Image
 };
 
 

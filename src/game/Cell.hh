@@ -31,14 +31,11 @@ public:
 
   /**
    * \brief Constructor. Creates an empty Cell at given coordinates.
-   *
-   * Draw the cell without any Terrain (so no Texture either).
-   * and without any Unit.
-   *
    * \param c column coordinate of the cell to create.
    * \param l line   coordinate of the cell to create.
+   * \param terrain id of the terrain associated to the cell
    */
-  Cell(const size_t c, const size_t l);
+  Cell(size_t c, size_t l, e_terrain terrain);
 
   // __________________________ Getters / Setters __________________________ //
   /**

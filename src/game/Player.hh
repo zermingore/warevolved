@@ -89,7 +89,7 @@ public:
 
 
 private:
-  // (logicaly const, cannot be initialized by a static variable)
+  // (logically const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player's identifier
 
   // interface

@@ -20,6 +20,7 @@ class Cell;
 class Unit;
 class Battle;
 class Interface;
+class TerrainsHandler;
 
 
 
@@ -163,6 +164,8 @@ private:
   static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
 
   static bool _takeScreenshot; ///< \true when a screenshot is requested
+
+  static std::unique_ptr<TerrainsHandler> _terrainsHandler; ///< Terrains list
 };
 
 

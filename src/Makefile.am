@@ -14,7 +14,7 @@ graphics/MapGraphicsProperties.cc   \
 \
 resources/ResourcesManager.cc       \
 resources/Resource.cc               \
-resources/Image.cc                  \
+resources/Sprite.cc                 \
 resources/Font.cc                   \
 resources/Text.cc                   \
 \
@@ -42,9 +42,11 @@ input/InputsListener.cc             \
 \
 game/Game.cc                        \
 game/Status.cc                      \
+game/Battle.cc                      \
 game/Map.cc                         \
 game/Cell.cc                        \
-game/Battle.cc                      \
+game/Terrain.cc                     \
+game/TerrainsHandler.cc             \
 game/units/Unit.cc                  \
 game/units/UnitFactory.cc           \
 game/units/Soldier.cc               \
@@ -90,13 +92,8 @@ __top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
 # Debug flags (no optimization, debug symbols, defines):
 __top_srcdir__we_CXXFLAGS += -O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS # -Og: not clang compliant
 
-# Advance Debug
-# -DDEBUG_XML
-# -DEBUG_XML_FULL
-# -DDEBUG_PERFS
 
 # export GLIBCXX_FORCE_NEW
-
 
 
 # Append Warning flags
@@ -189,6 +186,10 @@ __top_srcdir__we_CXXFLAGS += -Wvirtual-move-assign              # Warn if a virt
 __top_srcdir__we_CXXFLAGS += -Wwrite-strings                    # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.
 __top_srcdir__we_CXXFLAGS += -Wzero-as-null-pointer-constant    # Warn when a literal '0' is used as null pointer
 
+
+# Advance Debug
+# __top_srcdir__we_CXXFLAGS += -DDEBUG_XML
+# __top_srcdir__we_CXXFLAGS += -DDEBUG_XML_FULL
 __top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
 
 

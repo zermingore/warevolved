@@ -5,7 +5,7 @@ Soldier::Soldier()
   : Unit()
 {
   _fullName = "John Doe";
-  _image = resources::ResourcesManager::getImage("soldiers");
+  _image = resources::ResourcesManager::getSprite("soldiers");
 
   _motionValue = 3;
   _hp = 10;
