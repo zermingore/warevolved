@@ -14,8 +14,10 @@
 ** TODO Put the ResourcesManager class in the resources namespace
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
-** TODO [Git] Remove useless merged branches (stash_feature input_handling refactoring)
-** TODO Terrain should be a class, instead of an enum
+** DONE [Git] Remove useless merged branches (stash_feature input_handling refactoring)
+   CLOSED: [2017-09-29 Fr 07:33]
+** DONE Terrain should be a class, instead of an enum
+   CLOSED: [2017-09-29 Fr 07:33]
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
@@ -60,9 +62,13 @@
 *** TODO Interface
 **** TODO Side panel
 ***** TODO Frontground (plastic cover like)
-***** TODO Minimap frame
-***** TODO Terrain frame
-***** TODO Cell frame
+***** DONE Minimap frame
+      CLOSED: [2017-09-29 Fr 07:38]
+      (Using a common frame for Terrain, Cell, MiniMap)
+***** DONE Terrain frame
+      CLOSED: [2017-09-29 Fr 07:37]
+***** DONE Cell frame
+      CLOSED: [2017-09-29 Fr 07:37]
 ***** TODO [#B] New background matching the frontground
 *** TODO Units
 **** TODO Soldiers team
@@ -189,10 +195,16 @@
    To solve this, one can for instance:
    - Find a way to 'destruct' static classes in a defined order
    - As the static classes may be removed one day this would solve the issue
-** TODO Attack seems not possible without moving (on a different cell)
+** TODO Attacking without moving is not possible
+   Prior to attack, a move on another cell is required
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
+** TODO Spurious "Invalid direction" while moving a Unit
+   saw it with direction 0 (picked a unit, moved it down 2 times)
+** TODO Attacking a Unit can lead to a crash
+   Assertion !_targets->empty() && "StateSelectTarget: no target available" failed
+
 
 
 * TODO Build
@@ -205,5 +217,8 @@
 ** TODO Sprites
    Every cell doesn't need to have it's own highlight sprite
    -> common sprites (1 per situation [move, attack])
-** TODO [#C] refresh only needed cells (do we care ?)
+** DROPPED refresh only needed cells (do we care ?)
    check mouse motion, cursor / units animation
+   DROPPED:
+   - This optimization would add many tests (cursor on / next to this cell, no unit, ...)
+   - This optimization forbid a global particle engine (dust particles on a desert map, snow, rain, ...)
