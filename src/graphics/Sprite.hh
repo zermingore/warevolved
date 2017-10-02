@@ -51,13 +51,7 @@ public:
    * \brief _texture getter
    * \return _texture
    */
-  const auto getTexture() const { return _texture; }
-
-  /**
-   * \brief _sprite getter
-   */
-  const auto sprite() const { return _sprite; }
-
+  const auto texture() const { return _texture; }
 
   /**
    * \brief _position getter
@@ -113,6 +107,21 @@ public:
     _sprite->setScale({ width / size.x, height / size.y });
   }
 
+  /**
+   * \brief Set the Sprite origin for transformations
+   * \param x X, column coordinate of the new origin
+   * \param x X, column coordinate of the new origin
+   */
+  void setOrigin(float x, float y);
+
+
+  /**
+   * \brief Sets the rotation angle
+   * \param angle Rotation angle in degrees
+   * \note The rotation is done clockwise
+   */
+  void setRotation(float angle);
+
 
   /**
    * \brief set _rectangle and _sprite scale
@@ -131,7 +140,6 @@ public:
     _rectangle->setScale({ width, height });
     _sprite->setScale({ width, height });
   }
-
 
   /**
    * \brief set _rectangle and _sprite scale using the same ratio

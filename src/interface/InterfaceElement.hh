@@ -9,11 +9,16 @@
 
 # include <string>
 # include <memory>
-# include <graphics/graphic_types.hh>
+
 # include <structures/Vector.hh>
+# include <graphics/graphic_types.hh>
 # include <interface/InterfaceSettings.hh>
 # include <game/Map.hh>
 # include <resources/ResourcesManager.hh>
+
+namespace graphics {
+  class Sprite;
+}
 
 
 namespace interface {
@@ -41,12 +46,11 @@ public:
   virtual ~InterfaceElement() = default;
 
 
-  // ___________________________ Getters / Setters _________________________ //
   /**
    * \brief image name getter.
    * \return name of the image resource.
    */
-  auto name() const { return _img_name; }
+  auto name() const { return _imgName; }
 
   /**
    * \brief position getter.
@@ -123,13 +127,14 @@ public:
    * \brief Default InterfaceElement draw method.
    * \note Calls the GraphicsEngine::draw() method with the sprite of _image
    */
+
   virtual void draw() = 0;
 
 
 
 protected:
-  std::string _img_name;                     ///< Associated image name
-  std::shared_ptr<graphics::Sprite> _image; ///< Associated image
+  std::string _imgName;                      ///< Associated image name
+  std::shared_ptr<graphics::Sprite> _sprite; ///< Associated sprite
 
   graphics::Pos2 _position; ///< Element position (in pixels)
   Coords _coords;           ///< Position (in cells; not always filled)

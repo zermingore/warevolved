@@ -169,7 +169,7 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
      case e_path_shape::DOWN:
      case e_path_shape::LEFT:
      case e_path_shape::RIGHT:
-       img = resources::ResourcesManager::getSprite("path_shape");
+       img = std::make_shared<graphics::Sprite> ("path_shape");
        break;
 
      // Arrows
@@ -177,27 +177,27 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
      case e_path_shape::LAST_DOWN:
      case e_path_shape::LAST_LEFT:
      case e_path_shape::LAST_RIGHT:
-       img = resources::ResourcesManager::getSprite("path_arrow");
+       img = std::make_shared<graphics::Sprite> ("path_arrow");
        break;
 
      // Corners
      default:
-       img = resources::ResourcesManager::getSprite("path_corner");
+       img = std::make_shared<graphics::Sprite> ("path_corner");
        break;
   }
 
   using p = graphics::MapGraphicsProperties;
 
   unsigned int angle(static_cast<int> (shape) % 360);
-  img->sprite()->setRotation(static_cast<float> (angle));
-  img->sprite()->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
+  img->setRotation(static_cast<float> (angle));
+  img->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   // drawing at the middle of the cell
-  img->sprite()->setPosition({
+  img->setPosition(
       static_cast<graphics::component> (_current.c) * p::cellWidth()
         + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
       static_cast<graphics::component> (_current.l) * p::cellHeight()
-        + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2});
+        + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
 
   return img;
 }

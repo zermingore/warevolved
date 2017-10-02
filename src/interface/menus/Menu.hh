@@ -120,9 +120,8 @@ protected:
   std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list
   Coords _origin; ///< menu origin
 
-  size_t _selectedEntry; ///< Current selected entry
-                               ///< the first entry, is at the bottom,
-                               ///< it has the index 0
+  /// Current selected entry (the first entry [index 0], is at the bottom)
+  size_t _selectedEntry;
 
   ///< Emphasis of the selected entry
   std::shared_ptr<graphics::Sprite> _imageSelection;

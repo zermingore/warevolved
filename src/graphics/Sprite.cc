@@ -1,9 +1,10 @@
 #include <graphics/Sprite.hh>
 
+#include <debug/Debug.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <debug/Debug.hh>
+#include <resources/ResourcesManager.hh>
 
 
 
@@ -16,11 +17,10 @@ Sprite::Sprite(const std::string file_name)
   _rectangle->setPosition(Pos2(0, 0));
   _rectangle->setSize(Size2(0, 0));
 
-  _texture = std::make_shared<Texture> ();
-  _texture->loadFromFile(file_name);
+  _texture = resources::ResourcesManager::getTexture(file_name);
   _rectangle->setTexture(_texture.get());
 
-  _sprite = std::make_shared<Sprite> (*_texture);
+  _sprite = std::make_shared<sf::Sprite> (*_texture);
 }
 
 
@@ -34,7 +34,7 @@ Sprite::Sprite(const std::shared_ptr<Texture> texture)
   _texture = texture;
   _rectangle->setTexture(_texture.get());
 
-  _sprite = std::make_shared<Sprite> (*_texture);
+  _sprite = std::make_shared<sf::Sprite> (*_texture);
 }
 
 
@@ -71,6 +71,18 @@ void Sprite::setSize(const Size2 size)
   _sprite->setScale({ size.x / texture_size.x, size.y / texture_size.y });
 }
 
+
+
+void Sprite::setOrigin(float x, float y)
+{
+  _sprite->setOrigin(x, y);
+}
+
+
+void Sprite::setRotation(float angle)
+{
+  _sprite->setRotation(angle);
+}
 
 
 void Sprite::setScale(const Scale2 scale)

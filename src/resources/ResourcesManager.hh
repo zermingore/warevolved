@@ -61,6 +61,7 @@ public:
   static std::shared_ptr<resources::Font> getFont(const std::string name);
 
 
+
 private:
   /**
    * \brief initializes _typeNames array

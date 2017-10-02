@@ -12,7 +12,6 @@
 #include <game/Player.hh>
 #include <game/PathFinding.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <graphics/GraphicsEngine.hh>
 #include <graphics/graphic_types.hh>
 
 
@@ -29,25 +28,24 @@ StateSelectTarget::StateSelectTarget()
   _evtMgr->registerEvent(e_input::EXIT,       [=] { exit();                 });
 
   // Graphical attributes initialization
-  _targetHighlightImage = resources::ResourcesManager::getSprite("cursor");
-  _targetHighlight = _targetHighlightImage->sprite();
+  _targetHighlight = std::make_shared<graphics::Sprite> ("cursor");
   _targetHighlight->setColor(graphics::Color(255, 127, 127, 255));
 
   using p = graphics::MapGraphicsProperties;
 
   // explicitly using some floats for the division
-  float x(static_cast<float> (_targetHighlight->getTexture()->getSize().x));
-  float y(static_cast<float> (_targetHighlight->getTexture()->getSize().y));
+  float x(static_cast<float> (_targetHighlight->texture()->getSize().x));
+  float y(static_cast<float> (_targetHighlight->texture()->getSize().y));
   _targetHighlight->setScale(p::cellWidth()  / x, p::cellHeight() / y);
   _targetHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
-  _holoUnit = resources::ResourcesManager::getSprite("soldiers"); /// \todo hard-coded soldiers
-  _holoUnitSprite = _holoUnit->sprite();
-  _holoUnitSprite->setColor(graphics::Color(255, 127, 127, 255));
+  /// \todo hard-coded soldiers
+  _holoUnit = std::make_shared<graphics::Sprite> ("soldiers");
+  _holoUnit->setColor(graphics::Color(255, 127, 127, 255));
 
-  x = static_cast<float> (_holoUnitSprite->getTexture()->getSize().x);
-  y = static_cast<float> (_holoUnitSprite->getTexture()->getSize().y);
-  _holoUnitSprite->setScale(p::cellWidth() / x, p::cellHeight() / y);
+  x = static_cast<float> (_holoUnit->texture()->getSize().x);
+  y = static_cast<float> (_holoUnit->texture()->getSize().y);
+  _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 }
 
 
@@ -76,8 +74,9 @@ void StateSelectTarget::resume()
     fetchAttributes();
   }
 
-  _targets = PathFinding::getTargets(game::Status::battle()->map()->selectedUnit(),
-                                     game::Status::battle()->map()->cell(_attackLocation));
+  _targets = PathFinding::getTargets(
+    game::Status::battle()->map()->selectedUnit(),
+    game::Status::battle()->map()->cell(_attackLocation));
 
   assert(!_targets->empty() && "StateSelectTarget: no target available");
 }
@@ -101,13 +100,15 @@ void StateSelectTarget::draw()
 
   // target cell coordinates
   auto coords((*_targets)[_index_target]->coords());
-  auto pos_c(static_cast<float> (coords.c) * width  + p::gridOffsetX() + width  / 2);
-  auto pos_l(static_cast<float> (coords.l) * height + p::gridOffsetY() + height / 2);
-  _targetHighlightImage->sprite()->setPosition(pos_c, pos_l);
+  auto pos_c(static_cast<float> (coords.c) * width
+             + p::gridOffsetX() + width  / 2);
+  auto pos_l(static_cast<float> (coords.l) * height
+             + p::gridOffsetY() + height / 2);
 
+  _targetHighlight->setPosition(pos_c, pos_l);
   _targetHighlight->setRotation(static_cast<float> (angle));
 
-  graphics::GraphicsEngine::draw(_targetHighlight);
+  _targetHighlight->draw();
 }
 
 
@@ -131,7 +132,9 @@ void StateSelectTarget::selectNextTarget() {
 void StateSelectTarget::validate()
 {
   // move the unit (if it's still alive)
-  auto attackResult(game::Status::battle()->map()->attack((*_targets)[_index_target]));
+  auto attackResult(game::Status::battle()->map()->attack(
+                      (*_targets)[_index_target]));
+
   if (   attackResult != e_attack_result::ATTACKER_DIED
       && attackResult != e_attack_result::BOTH_DIED)
   {

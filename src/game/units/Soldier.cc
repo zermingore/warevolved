@@ -1,11 +1,12 @@
 #include <game/units/Soldier.hh>
+#include <graphics/Sprite.hh>
 
 
 Soldier::Soldier()
   : Unit()
 {
   _fullName = "John Doe";
-  _image = resources::ResourcesManager::getSprite("soldiers");
+  _sprite = std::make_shared<graphics::Sprite> ("soldiers");
 
   _motionValue = 3;
   _hp = 10;

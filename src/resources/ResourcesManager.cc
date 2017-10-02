@@ -42,7 +42,8 @@ void ResourcesManager::initialize(const std::string file_name)
 void ResourcesManager::initializeDefaultResources()
 {
   _images["default"] = DEFAULT_IMAGE_PATH;
-  _fonts["default"]  = std::make_shared<resources::Font> (DEFAULT_FONT_PATH, "defaut");
+  _fonts["default"]  = std::make_shared<resources::Font> (
+    DEFAULT_FONT_PATH, "defaut");
 
   // Load a default Texture
   auto texture = std::make_shared<graphics::Texture> ();

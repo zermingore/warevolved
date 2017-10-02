@@ -46,17 +46,18 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
 
   // Graphical attributes initialization
-  _holoUnit = resources::ResourcesManager::getSprite("soldiers"); /// \todo hard-coded soldiers
-  _holoUnitSprite = _holoUnit->sprite();
+  using namespace graphics;
+
+  /// \todo No longer hard-code soldiers sprite
+  _holoUnit = std::make_shared<graphics::Sprite> ("soldiers");
   _holoUnitPosition = player->cursor()->coords();
 
 
-  using namespace graphics;
-  auto x(static_cast<component> (_holoUnitSprite->getTexture()->getSize().x));
+  auto x(static_cast<component> (_holoUnit->size().x));
   // explicitly using some floats for the division
-  float y = static_cast<float> (_holoUnitSprite->getTexture()->getSize().y);
+  float y = static_cast<float> (_holoUnit->size().y);
   using p = MapGraphicsProperties;
-  _holoUnitSprite->setScale(p::cellWidth() / x, p::cellHeight() / y);
+  _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
   // Fading sprite at original position
   auto unit(game::Status::battle()->map()->unit(_originalCoords));
@@ -140,11 +141,11 @@ void StateMovingUnit::moveUnitRight()
 void StateMovingUnit::draw()
 {
   /// \todo should only the graphics engine be allowed to draw ?
-  // graphics::GraphicsEngine::draw(_holoUnitSprite);
+  // graphics::GraphicsEngine::draw(_holoUnit);
 
   PathFinding::highlightCells();
   PathFinding::drawPath();
 
-  _holoUnitSprite->setColor(graphics::Color(255, 127, 127, 255));
+  _holoUnit->setColor(graphics::Color(255, 127, 127, 255));
   _holoUnit->drawAtCell(_holoUnitPosition);
 }
