@@ -5,6 +5,7 @@
 
 #include <debug/Debug.hh>
 #include <debug/OSD.hh>
+#include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <context/State.hh>
@@ -135,13 +136,13 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
       /// \todo check if we print the cell (scroll case)
       const auto c { cells[col][line] };
       auto terrain(_terrainsHandler->getTerrain(c->terrain()));
-      resources::Sprite img(terrain->texture(), "terrain");
+      graphics::Sprite img(terrain->texture());
       img.drawAtCell(c->coords());
 
       if (c->highlight())
       {
-        auto highlight = resources::ResourcesManager::getSprite("highlight");
-        highlight->sprite()->setColor(c->highlightColor());
+        auto highlight = std::make_shared<Sprite> ("highlight");
+        highlight->setColor(c->highlightColor());
         highlight->drawAtCell(c->coords());
       }
 
@@ -207,8 +208,8 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
 
   // image.sprite()->setColor(game::Status::player()->unitsColor());
   auto sprite(unit->sprite());
-  auto x(sprite->getTexture()->getSize().x);
-  auto y(sprite->getTexture()->getSize().y);
+  auto x(sprite->texture()->getSize().x);
+  auto y(sprite->texture()->getSize().y);
   sprite->setScale(p::cellWidth()  / static_cast<component> (x),
                    p::cellHeight() / static_cast<component> (y));
 
@@ -228,7 +229,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
     sprite->setColor(Color(127, 127, 127, 150));
   }
 
-  unit->image()->drawAtCell(unit->coords());
+  unit->sprite()->drawAtCell(unit->coords());
 }
 
 

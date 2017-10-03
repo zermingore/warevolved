@@ -70,27 +70,33 @@ public:
    * \brief grid thickness setter.
    * \param thickness of the grid in pixels.
    */
-  static void setGridThickness(component thickness) { _gridThickness = thickness; }
+  static void setGridThickness(component thickness) {
+    _gridThickness = thickness;
+  }
 
   /**
    * \brief offset of the grid (from the left border of the window) setter.
    * \param x offset.
    */
-  static void setGridOffsetX(component grid_offset_x) { _gridOffsetX = grid_offset_x; }
+  static void setGridOffsetX(component grid_offset_x) {
+    _gridOffsetX = grid_offset_x;
+  }
 
   /**
    * \brief offset of the grid (from the top border of the window) setter.
    * \param y offset.
    */
-  static void setGridOffsetY(component grid_offset_y) { _gridOffsetY = grid_offset_y; }
+  static void setGridOffsetY(component grid_offset_y) {
+    _gridOffsetY = grid_offset_y;
+  }
 
 
 private:
   static component _cellWidth;     ///< cells width in pixels
   static component _cellHeight;    ///< cells height in pixels
   static component _gridThickness; ///< thickness of the grid
-  static component _gridOffsetX;   ///< X grid offset (from the window left border)
-  static component _gridOffsetY;   ///< Y grid offset (from the window top border)
+  static component _gridOffsetX;   ///< X offset (from the window left border)
+  static component _gridOffsetY;   ///< Y offset (from the window top border)
 };
 
 

@@ -9,7 +9,6 @@
 
 # include <graphics/graphic_types.hh>
 # include <resources/Font.hh>
-# include <resources/Sprite.hh>
 
 
 
@@ -48,14 +47,6 @@ public:
   static void initialize(const std::string file_name);
 
   /**
-   * \brief If an image with the given name exists, return the matching Image
-   * \param name File name of the texture to associate with the sprite
-   * \return A new Image matching the given name.
-   *   If the Image does not exist, print an error and return the default one
-   */
-  static std::shared_ptr<resources::Sprite> getSprite(const std::string name);
-
-  /**
    * \brief If a Texture with the given name exists, return it
    * \return A new Image matching the given name.
    * \note If the Texture doesn't exist, print an error and return a default one
@@ -68,6 +59,7 @@ public:
    *   If the Font does not exist, print an error and return the default one
    */
   static std::shared_ptr<resources::Font> getFont(const std::string name);
+
 
 
 private:

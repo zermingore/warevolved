@@ -31,7 +31,6 @@ using component = float;  // component of Pos, Size (Scale is logically float)
 
 using Color = sf::Color;
 
-using Sprite = sf::Sprite;
 using Texture = sf::Texture;
 using RectangleShape = sf::RectangleShape;
 using Font = sf::Font;

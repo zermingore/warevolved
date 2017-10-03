@@ -15,12 +15,20 @@ StatePlaying::StatePlaying()
   // should these functions return booleans to consume events ?
 
   auto player(game::Status::player());
-  _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { player->moveCursorUp(); });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { player->moveCursorDown(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { player->moveCursorLeft(); });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { player->moveCursorRight(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP,
+                         [=] { player->moveCursorUp(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION, [=] { player->select(); });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN,
+                         [=] { player->moveCursorDown(); });
+
+  _evtMgr->registerEvent(e_input::MOVE_LEFT,
+                         [=] { player->moveCursorLeft(); });
+
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT,
+                         [=] { player->moveCursorRight(); });
+
+  _evtMgr->registerEvent(e_input::SELECTION,
+                         [=] { player->select(); });
 
   _evtMgr->registerEvent(e_input::TOGGLE_PANEL,
                          [=] { player->togglePanel(); });
@@ -29,6 +37,7 @@ StatePlaying::StatePlaying()
 }
 
 
-void StatePlaying::draw() {
+void StatePlaying::draw()
+{
   graphics::GraphicsEngine::drawInterface();
 }

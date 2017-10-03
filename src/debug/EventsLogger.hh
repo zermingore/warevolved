@@ -14,6 +14,7 @@
 enum class e_input;
 
 
+/// \todo EventLogger no longer in debug namespace (as it's used for replays)
 namespace debug {
 
 using events_list = std::vector<std::pair<std::chrono::duration<double>, int>>;
@@ -24,7 +25,7 @@ using events_list = std::vector<std::pair<std::chrono::duration<double>, int>>;
  * \brief Log events since the class creation
  * \todo do not write to disk at every log
  */
-class EventsLogger // \todo no longer in debug namespace (as it's used for replays)
+class EventsLogger
 {
 public:
   /**

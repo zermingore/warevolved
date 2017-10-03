@@ -13,7 +13,7 @@
 #include <game/Cell.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
-#include <resources/Sprite.hh>
+#include <graphics/Sprite.hh>
 #include <resources/Text.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <common/enums/terrains.hh>
@@ -29,16 +29,17 @@ Panel::Panel(std::shared_ptr<const Map> map,
   : InterfaceElement("side_panel")
   , _map(map)
   , _playerCursor(cursor)
-  , _background(resources::ResourcesManager::getSprite(_img_name))
-  , _frameCell(resources::ResourcesManager::getSprite("frame_thumbnail"))
-  , _frameUnit(resources::ResourcesManager::getSprite("frame_thumbnail"))
   , _status(e_panel_status::DEACTIVATED)
   , _fontSize(20)
 {
+  _background = std::make_shared<graphics::Sprite> (_imgName);
+  _frameCell = std::make_shared<graphics::Sprite> ("frame_thumbnail");
+  _frameUnit = std::make_shared<graphics::Sprite> ("frame_thumbnail");
+
   setWindowSize(
       {static_cast<float> (graphics::GraphicsEngine::windowSize().x),
        static_cast<float> (graphics::GraphicsEngine::windowSize().y)}
-    );
+  );
 
   graphics::Size2 size { _size.x, _size.y / 4 };
   _minimap = std::make_unique<MiniMap> (size, map, cursor);
@@ -128,7 +129,7 @@ void Panel::draw()
   {
     case e_terrain::FOREST:
     {
-      auto img(resources::ResourcesManager::getSprite("forest"));
+      auto img(std::make_shared<graphics::Sprite> ("forest"));
       /// \todo Do not hard-code the offset (frame thickness) + adapt scale
       img->setPosition(_frameCell->position().x + 5,
                        _frameCell->position().y + 5);
@@ -154,16 +155,16 @@ void Panel::draw()
   {
     // Unit sprite
     _frameUnit->draw();
-    auto img(unit->image());
-    img->setPosition(_frameUnit->position().x + 5,
-                     _frameUnit->position().y + 5);
+    auto sprite(unit->sprite());
+    sprite->setPosition(_frameUnit->position().x + 5,
+                        _frameUnit->position().y + 5);
 
     auto size(_frameUnit->size());
     size.x -= 10;
     size.y -= 10;
-    img->setSize(size);
+    sprite->setSize(size);
 
-    img->draw();
+    sprite->draw();
 
 
     // Unit data

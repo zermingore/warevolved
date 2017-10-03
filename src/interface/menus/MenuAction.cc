@@ -94,7 +94,9 @@ void MenuAction::waitUnit()
 void MenuAction::attackUnit()
 {
   game::Status::pushState(e_state::SELECT_TARGET);
-  game::Status::currentState()->setAttributes(std::make_shared<Coords> (_coords));
+  game::Status::currentState()->setAttributes(
+    std::make_shared<Coords> (_coords));
+
   game::Status::currentState()->resume();
 }
 

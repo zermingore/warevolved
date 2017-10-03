@@ -10,7 +10,7 @@
 # include <vector>
 # include <memory>
 # include <structures/Vector.hh>
-# include <resources/Sprite.hh>
+# include <graphics/Sprite.hh>
 
 class Map;
 class Unit;
@@ -18,6 +18,7 @@ class Cell;
 
 enum class e_direction;
 enum class e_path_shape;
+
 
 
 /**
@@ -45,8 +46,8 @@ public:
    * \brief _enemyPositions getter
    * \return a pointer on the vector of enemy positions
    */
-  static std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getEnemyPositions() {
-    return std::make_shared<std::vector<std::shared_ptr<Cell>>> (_enemyPositions);
+  static auto getEnemyPositions() {
+    return _enemyPositions;
   }
 
   /**
@@ -113,7 +114,7 @@ private:
    * does the rotation if needed
    * \return the image matching e_path_shape
    */
-  static std::shared_ptr<resources::Sprite> getSprite(size_t index);
+  static std::shared_ptr<graphics::Sprite> getSprite(size_t index);
 
   /**
    * \brief builds Images* Vector (_images)
@@ -164,7 +165,7 @@ private:
   static std::vector<e_direction> _directions;
 
   ///< Images of the path vector.
-  static std::vector<std::shared_ptr<resources::Sprite>> _images;
+  static std::vector<std::shared_ptr<graphics::Sprite>> _images;
 
   ///< list of reachable cells for the selected unit
   static std::vector<std::shared_ptr<Cell>> _reachableCells;

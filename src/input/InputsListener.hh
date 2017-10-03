@@ -27,7 +27,7 @@ public:
    * \param replay \true if we're in replay mode
    * \note Infinite loop polling events, populating the KeyManager events queue
    * \note Initialize the KeyManager
-   * \note In replay mode, launches another thread reading inputs from the replay
+   * \note In replay mode, launch another thread reading inputs from the replay
    */
   static void listen(bool replay);
 

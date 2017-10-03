@@ -2,6 +2,7 @@
 #include <debug/Debug.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
+#include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <resources/Text.hh>
@@ -30,7 +31,7 @@ MenuEntry::MenuEntry(const e_entry entry)
 void MenuEntry::update()
 {
   using p = graphics::MapGraphicsProperties;
-  _image->setSize(p::cellWidth() * 2, p::cellHeight());
+  _sprite->setSize(p::cellWidth() * 2, p::cellHeight());
   _label->setPosition(_position.x, _position.y);
 }
 
@@ -41,8 +42,8 @@ void MenuEntry::draw()
   // Drawing the text before to have a kind of fade effect
   _label->draw();
 
-  _image->sprite()->setPosition(_position.x, _position.y);
-  graphics::GraphicsEngine::draw(_image->sprite());
+  _sprite->setPosition(_position.x, _position.y);
+  _sprite->draw();
 }
 
 

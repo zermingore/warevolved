@@ -10,9 +10,8 @@
 # include <memory>
 # include <context/State.hh>
 # include <common/using.hh> // Coords
-# include <graphics/graphic_types.hh>
 
-namespace resources {
+namespace graphics {
   class Sprite;
 }
 
@@ -71,8 +70,7 @@ private:
   Coords _originalCoords;   ///< original unit coordinates
   Coords _holoUnitPosition; ///< Unit position 'cursor' (in cell)
 
-  std::shared_ptr<resources::Sprite> _holoUnit;      ///< 'cursor' moving unit
-  std::shared_ptr<graphics::Sprite> _holoUnitSprite; ///< 'cursor' sprite
+  std::shared_ptr<graphics::Sprite> _holoUnit; ///< 'cursor' moving unit
 
   size_t _nbColumns; ///< map number of columns
   size_t _nbLines;   ///< map number of lines

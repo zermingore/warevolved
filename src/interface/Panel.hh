@@ -111,9 +111,9 @@ private:
 
   std::unique_ptr<MiniMap> _minimap; ///< Minimap to display in its frame
 
-  std::shared_ptr<resources::Sprite> _background; ///< Panel's background
-  std::shared_ptr<resources::Sprite> _frameCell;  ///< Hovered cell's frame
-  std::shared_ptr<resources::Sprite> _frameUnit;  ///< Hovered unit's frame
+  std::shared_ptr<graphics::Sprite> _background; ///< Panel's background
+  std::shared_ptr<graphics::Sprite> _frameCell;  ///< Hovered cell's frame
+  std::shared_ptr<graphics::Sprite> _frameUnit;  ///< Hovered unit's frame
 
   e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
 

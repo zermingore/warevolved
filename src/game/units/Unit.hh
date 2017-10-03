@@ -14,6 +14,10 @@
 
 class Team;
 
+namespace graphics {
+  class Sprite;
+}
+
 
 /// \todo abstract factory ?
 // (each Unit have its own sprite [for rotation], but shared texture)
@@ -123,13 +127,7 @@ public:
    * \brief sprite getter
    * \return a pointer on the Unit's sprite
    */
-  auto sprite() { return _image->sprite(); }
-
-  /**
-   * \brief image getter
-   * \return a pointer on the Unit's image
-   */
-  auto image() { return _image; }
+  auto sprite() { return _sprite; }
 
 
 protected:
@@ -144,7 +142,7 @@ protected:
   size_t _minRange;    ///< Minimal required range for a unit to attack
   size_t _maxRange;    ///< Maximal range to attack a unit
 
-  std::shared_ptr<resources::Sprite> _image; ///< Unit Image
+  std::shared_ptr<graphics::Sprite> _sprite; ///< Unit Sprite
 };
 
 

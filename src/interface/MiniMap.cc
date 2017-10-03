@@ -2,7 +2,7 @@
 #include <interface/Cursor.hh>
 #include <game/Map.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/graphic_types.hh>
+#include <graphics/Sprite.hh>
 #include <game/Cell.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
@@ -35,9 +35,9 @@ void MiniMap::draw()
   using namespace graphics;
 
   // Draw the frame
-  _image->setPosition(_position.x, _position.y);
-  _image->setSize(_frameSize);
-  GraphicsEngine::draw(_image->sprite());
+  _sprite->setPosition(_position.x, _position.y);
+  _sprite->setSize(_frameSize);
+  _sprite->draw();
 
 
   // Computing the size of a cell
@@ -67,7 +67,7 @@ void MiniMap::draw()
       switch (c->terrain())
       {
         default:
-          auto img { resources::ResourcesManager::getSprite("forest") };
+          auto img { std::make_shared<Sprite> ("forest") };
           img->setPosition(pos.x, pos.y);
           img->setSize(cell_size);
           img->draw();
@@ -78,7 +78,7 @@ void MiniMap::draw()
       const auto unit {c->unit()};
       if (unit)
       {
-        auto img { resources::ResourcesManager::getSprite("minimap_unit") };
+        auto img { std::make_shared<Sprite> ("minimap_unit") };
         img->setPosition(pos.x, pos.y);
         img->setSize(cell_size);
 

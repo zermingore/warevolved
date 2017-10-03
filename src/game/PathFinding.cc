@@ -5,10 +5,10 @@
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
-#include <resources/Sprite.hh>
 #include <game/Status.hh>
 #include <common/enums/directions.hh>
 #include <common/enums/path_shapes.hh>
+#include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
@@ -24,7 +24,7 @@ size_t PathFinding::_maxLength;
 size_t PathFinding::_currentLength;
 
 std::vector<e_direction> PathFinding::_directions;
-std::vector<std::shared_ptr<resources::Sprite>> PathFinding::_images;
+std::vector<std::shared_ptr<graphics::Sprite>> PathFinding::_images;
 std::vector<std::shared_ptr<Cell>> PathFinding::_reachableCells;
 std::vector<std::shared_ptr<Cell>> PathFinding::_enemyPositions;
 
@@ -127,7 +127,9 @@ e_path_shape PathFinding::getShape(size_t index)
   }
 
   // reverse
-  if (std::abs(static_cast<int> (_directions[index]) - static_cast<int> (next)) == 180) {
+  if (std::abs(static_cast<int> (_directions[index]) - static_cast<int> (next))
+      == 180)
+  {
     return (static_cast <e_path_shape> (next));
   }
 
@@ -157,9 +159,9 @@ e_path_shape PathFinding::getShape(size_t index)
 }
 
 
-std::shared_ptr<resources::Sprite> PathFinding::getSprite(const size_t index)
+std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
 {
-  std::shared_ptr<resources::Sprite> img;
+  std::shared_ptr<graphics::Sprite> img;
   e_path_shape shape = getShape(index);
 
   switch (shape)
@@ -169,7 +171,7 @@ std::shared_ptr<resources::Sprite> PathFinding::getSprite(const size_t index)
      case e_path_shape::DOWN:
      case e_path_shape::LEFT:
      case e_path_shape::RIGHT:
-       img = resources::ResourcesManager::getSprite("path_shape");
+       img = std::make_shared<graphics::Sprite> ("path_shape");
        break;
 
      // Arrows
@@ -177,27 +179,27 @@ std::shared_ptr<resources::Sprite> PathFinding::getSprite(const size_t index)
      case e_path_shape::LAST_DOWN:
      case e_path_shape::LAST_LEFT:
      case e_path_shape::LAST_RIGHT:
-       img = resources::ResourcesManager::getSprite("path_arrow");
+       img = std::make_shared<graphics::Sprite> ("path_arrow");
        break;
 
      // Corners
      default:
-       img = resources::ResourcesManager::getSprite("path_corner");
+       img = std::make_shared<graphics::Sprite> ("path_corner");
        break;
   }
 
   using p = graphics::MapGraphicsProperties;
 
   unsigned int angle(static_cast<int> (shape) % 360);
-  img->sprite()->setRotation(static_cast<float> (angle));
-  img->sprite()->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
+  img->setRotation(static_cast<float> (angle));
+  img->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   // drawing at the middle of the cell
-  img->sprite()->setPosition({
+  img->setPosition(
       static_cast<graphics::component> (_current.c) * p::cellWidth()
         + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
       static_cast<graphics::component> (_current.l) * p::cellHeight()
-        + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2});
+        + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
 
   return img;
 }

@@ -10,20 +10,22 @@
 # include <string>
 # include <memory>
 
+# include <SFML/Graphics.hpp>
+
 # include <graphics/graphic_types.hh>
 # include <common/using.hh>
 # include <resources/Resource.hh>
 
 
 
-namespace resources {
+namespace graphics {
 
 /**
  * \class Sprite
  * \brief A Sprite is a Texture + a rectangle
  * \note Derived from Resource
  */
-class Sprite: public Resource
+class Sprite
 {
 public:
   /**
@@ -35,35 +37,26 @@ public:
    * \brief Sprite Constructor
    * \param file_name Sprite complete file name
    *   (with full path and extension)
-   * \param name Sprite alias name
    */
-  Sprite(const std::string file_name, const std::string name);
+  explicit Sprite(const std::string file_name);
 
   /**
    * \brief Sprite Constructor, using an already loaded Texture
    * \param texture Pointer on an already loaded Texture to use
-   * \param name Sprite alias name
    */
-  Sprite(const std::shared_ptr<graphics::Texture> texture,
-         const std::string name);
+  explicit Sprite(const std::shared_ptr<Texture> texture);
 
 
   /**
    * \brief _texture getter
    * \return _texture
    */
-  const auto getTexture() const { return _texture; }
-
-  /**
-   * \brief _sprite getter
-   */
-  const auto sprite() const { return _sprite; }
-
+  const auto texture() const { return _texture; }
 
   /**
    * \brief _position getter
    */
-  graphics::Pos2 const position();
+  Pos2 const position();
 
   /**
    * \brief set _sprite position
@@ -75,7 +68,7 @@ public:
    * \brief set _sprite position
    * \param position: _sprite vector position
    */
-  void setPosition(const graphics::Pos2 position);
+  void setPosition(const Pos2 position);
 
   /**
    * \brief set _sprite position from 2 components
@@ -85,21 +78,21 @@ public:
   template<typename T>
   void setPosition(const T c, const T l)
   {
-    _sprite->setPosition({ static_cast<graphics::component> (c),
-                           static_cast<graphics::component> (l) });
+    _sprite->setPosition({ static_cast<component> (c),
+                           static_cast<component> (l) });
   }
 
 
   /**
    * \brief Returns the size of the sprite
    */
-  graphics::Size2 const size();
+  Size2 const size();
 
   /**
    * \brief Set _rectangle and _sprite size.
    * \note The new size of the object depends on the cell size
    */
-  void setSize(const graphics::Size2 size);
+  void setSize(const Size2 size);
 
   /**
    * \brief set _rectangle and _sprite size
@@ -109,17 +102,32 @@ public:
   template <typename T>
   void setSize(const T width, const T height)
   {
-    graphics::Size2 size(_texture->getSize());
+    Size2 size(_texture->getSize());
     _rectangle->setSize({ width, height });
     _sprite->setScale({ width / size.x, height / size.y });
   }
+
+  /**
+   * \brief Set the Sprite origin for transformations
+   * \param x X, column coordinate of the new origin
+   * \param x X, column coordinate of the new origin
+   */
+  void setOrigin(float x, float y);
+
+
+  /**
+   * \brief Sets the rotation angle
+   * \param angle Rotation angle in degrees
+   * \note The rotation is done clockwise
+   */
+  void setRotation(float angle);
 
 
   /**
    * \brief set _rectangle and _sprite scale
    * \param scale new rectangle and sprite scale
    */
-  void setScale(const graphics::Scale2 scale);
+  void setScale(const Scale2 scale);
 
   /**
    * \brief set _rectangle and _sprite scale
@@ -133,7 +141,6 @@ public:
     _sprite->setScale({ width, height });
   }
 
-
   /**
    * \brief set _rectangle and _sprite scale using the same ratio
    * \param ratio: Scale ratio
@@ -144,15 +151,7 @@ public:
    * \brief set the Sprite 'global' Color
    * \param color Color to set
    */
-  void setColor(const graphics::Color& color);
-
-  /**
-   * \brief _sprite setter
-   * \param sprite _sprite value
-   */
-  void setSprite(const std::shared_ptr<graphics::Sprite> sprite) {
-    _sprite = sprite;
-  }
+  void setColor(const Color& color);
 
   /**
    * \brief draws the Sprite in the cell coords.c, coords.l
@@ -167,13 +166,13 @@ public:
 
 
 private:
-  std::shared_ptr<graphics::Texture> _texture;          ///< Texture data
-  std::shared_ptr<graphics::Sprite> _sprite;            ///< Used to transform
-  std::shared_ptr<graphics::RectangleShape> _rectangle; ///< sprite position
+  std::shared_ptr<Texture> _texture;          ///< Texture data
+  std::shared_ptr<sf::Sprite> _sprite;        ///< Used to transform
+  std::shared_ptr<RectangleShape> _rectangle; ///< sprite position
 };
 
 
-} // namespace resources
+} // namespace graphics
 
 
 
