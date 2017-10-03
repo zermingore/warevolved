@@ -8,16 +8,21 @@
 
 
 * TODO Roadmap
-** TODO Test: Save the map in a file
+** TODO Allow a Unit to attack without moving
+** TODO The interface panel should not be dependent of the current State
+
 
 * TODO Clean
-** TODO Put the ResourcesManager class in the resources namespace
+** DONE Put the ResourcesManager class in the resources namespace
+   CLOSED: [2017-10-03 Di 11:19]
 ** TODO Avoid casts to graphic types, overriding some methods
-** TODO Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
+** DONE Consider the naming confusion: Image Vs sf::Texture sf::Sprite sf::Image
+   CLOSED: [2017-10-03 Di 11:20]
 ** DONE [Git] Remove useless merged branches (stash_feature input_handling refactoring)
    CLOSED: [2017-09-29 Fr 07:33]
 ** DONE Terrain should be a class, instead of an enum
    CLOSED: [2017-09-29 Fr 07:33]
+
 
 * TODO experimental
 ** TODO drawInterface Vs drawState
@@ -180,6 +185,7 @@
 *** TODO Framerate (useful ?)
 
 * TODO non-regression tests
+** TODO Test: Save the map in a file
 ** TODO game scripts (need to be able to use pre-recorded input)
 ** TODO Use an ascii map to check fight behavior
 ** TODO Use screenshots for the interface
