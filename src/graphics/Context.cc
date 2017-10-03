@@ -40,9 +40,10 @@ void Context::init()
   std::unique_ptr<sf::RenderWindow> window;
   if (_settings->fullScreen())
   {
-    window = std::make_unique<sf::RenderWindow> (sf::VideoMode::getDesktopMode(),
-                                                 "War Evolved",
-                                                 sf::Style::Fullscreen);
+    window = std::make_unique<sf::RenderWindow>
+      (sf::VideoMode::getDesktopMode(),
+       "War Evolved",
+       sf::Style::Fullscreen);
   }
   else
   {
@@ -54,9 +55,9 @@ void Context::init()
     if (!video_mode.isValid())
     {
       ERROR("Unsupported Video Mode, falling back");
-      video_mode = sf::VideoMode::getDesktopMode(); // falling back to desktop mode
+      video_mode = sf::VideoMode::getDesktopMode(); // falling back mode
       if (!video_mode.isValid()) {
-        std::exit(-1); // This time we quit  /// \todo browse all supported modes
+        std::exit(-1); /// \todo try all supported modes
       }
     }
 

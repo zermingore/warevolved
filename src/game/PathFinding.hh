@@ -46,8 +46,8 @@ public:
    * \brief _enemyPositions getter
    * \return a pointer on the vector of enemy positions
    */
-  static std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getEnemyPositions() {
-    return std::make_shared<std::vector<std::shared_ptr<Cell>>> (_enemyPositions);
+  static auto getEnemyPositions() {
+    return _enemyPositions;
   }
 
   /**

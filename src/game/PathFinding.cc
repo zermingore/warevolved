@@ -127,7 +127,9 @@ e_path_shape PathFinding::getShape(size_t index)
   }
 
   // reverse
-  if (std::abs(static_cast<int> (_directions[index]) - static_cast<int> (next)) == 180) {
+  if (std::abs(static_cast<int> (_directions[index]) - static_cast<int> (next))
+      == 180)
+  {
     return (static_cast <e_path_shape> (next));
   }
 

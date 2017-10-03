@@ -37,9 +37,6 @@ public:
    */
   explicit StateMenu(const e_state state);
 
-  /// Default destructor
-  ~StateMenu() = default;
-
 
   /**
    * \brief Save the menu coordinates.
@@ -91,8 +88,8 @@ private:
   void exit();
 
 
-  std::shared_ptr<interface::InGameMenu> _menu; ///< menu associated to the state
-  Coords _menuCoords;                           ///> menu coordinates
+  std::shared_ptr<interface::InGameMenu> _menu; ///< associated menu
+  Coords _menuCoords;                           ///< menu coordinates
 };
 
 

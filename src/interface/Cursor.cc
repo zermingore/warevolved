@@ -65,12 +65,12 @@ void Cursor::update()
   using namespace graphics;
   using p = MapGraphicsProperties;
 
-  auto width(p::cellWidth());
-  auto height(p::cellHeight());
+  auto w(p::cellWidth());
+  auto h(p::cellHeight());
 
   _position = {
-    static_cast<component> (_coords.c) * width  + p::gridOffsetX() + width  / 2,
-    static_cast<component> (_coords.l) * height + p::gridOffsetY() + height / 2};
+    static_cast<component> (_coords.c) * w + p::gridOffsetX() + w / 2,
+    static_cast<component> (_coords.l) * h + p::gridOffsetY() + h / 2};
   _sprite->setPosition(_position.x, _position.y);
 
   static float scale_factor = 1;
@@ -81,7 +81,7 @@ void Cursor::update()
 
 
   // The origin of the sprite is the middle of the cell
-  _sprite->setOrigin(width / 2.f, height / 2.f);
+  _sprite->setOrigin(w / 2.f, h / 2.f);
   _sprite->setRotation(static_cast<float> (angle));
   _sprite->setScale(scale_factor, scale_factor);
 

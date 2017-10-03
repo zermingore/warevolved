@@ -39,7 +39,8 @@ StateMovingUnit::StateMovingUnit()
       game::Status::pushState(e_state::ACTION_MENU);
 
       // giving the next state (action menu) the original unit position
-      game::Status::currentState()->setAttributes(std::make_shared<Coords> (_holoUnitPosition));
+      game::Status::currentState()->setAttributes(
+        std::make_shared<Coords> (_holoUnitPosition));
       game::Status::currentState()->resume();
     });
 
@@ -55,7 +56,7 @@ StateMovingUnit::StateMovingUnit()
 
   auto x(static_cast<component> (_holoUnit->size().x));
   // explicitly using some floats for the division
-  float y = static_cast<float> (_holoUnit->size().y);
+  float y = _holoUnit->size().y;
   using p = MapGraphicsProperties;
   _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
@@ -75,8 +76,6 @@ StateMovingUnit::~StateMovingUnit()
   // (to avoid segfault exiting the game while moving a unit)
 
   auto unit(game::Status::battle()->map()->unit(_originalCoords));
-
-  // if the unit was moved, it is no longer existing at these original coordinates
   if (unit) {
     unit->sprite()->setColor(graphics::Color(255, 255, 255, 255));
   }

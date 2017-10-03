@@ -31,9 +31,6 @@ public:
   /// Constructor. Initializes interface settings (colors, ...)
   explicit Interface(const graphics::Color c);
 
-  /// Default destructor
-  ~Interface() = default;
-
 
   /**
    * \brief Sets all element to draw.
@@ -64,7 +61,7 @@ public:
   /**
    * \brief Returns the first InterfaceElement which name is name
    * \param name name of the InterfaceElement to retrieve
-   * \return a pointer to the matching InterfaceElement, nullptr if there is none
+   * \return Pointer to the matching InterfaceElement, nullptr if there is none
    */
   std::shared_ptr<InterfaceElement> element(const std::string id);
 
