@@ -1,4 +1,5 @@
 #include <context/StatePlaying.hh>
+
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
 #include <game/Battle.hh>
@@ -6,6 +7,7 @@
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <graphics/GraphicsEngine.hh>
+
 
 
 StatePlaying::StatePlaying()
@@ -30,14 +32,10 @@ StatePlaying::StatePlaying()
   _evtMgr->registerEvent(e_input::SELECTION,
                          [=] { player->select(); });
 
-  _evtMgr->registerEvent(e_input::TOGGLE_PANEL,
-                         [=] { player->togglePanel(); });
-
   addInterfaceElement(player->cursor());
 }
 
 
 void StatePlaying::draw()
 {
-  graphics::GraphicsEngine::drawInterface();
 }

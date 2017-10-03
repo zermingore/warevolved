@@ -56,6 +56,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
     drawGrid(battle->map());
 
     drawState();
+    drawInterface();
 
     // draw the debug data, eventually over everything (at last)
     ++_nbFramesGenerated;
