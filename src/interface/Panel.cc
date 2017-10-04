@@ -17,6 +17,7 @@
 #include <resources/Text.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <common/enums/terrains.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 
@@ -64,15 +65,23 @@ void Panel::toggleStatus()
     (static_cast<int> (_status) + 1)
     % static_cast<int> (e_panel_status::NB_PANEL_STATUS));
 
-  Coords background_position {0, 0};
-  if (_status == e_panel_status::POSITION_RIGHT)
+  Coords background_position { 0, 0 };
+  auto draw_offset(0.f); // rendering room offset
+  switch (_status)
   {
-    background_position = { static_cast<size_t> (3 * _windowSize.x / 4.f), 0 };
+    case e_panel_status::POSITION_LEFT:
+      draw_offset = _windowSize.x / 4.f;
+      break;
+
+    case e_panel_status::POSITION_RIGHT:
+      draw_offset = -_windowSize.x / 4.f;
+      background_position.x = { static_cast<size_t> (3 * _windowSize.x / 4.f) };
+      break;
+
+    default:
+      break;
   }
-  else
-  {
-    background_position = { 0, 0 };
-  }
+
   _background->setPosition(background_position);
   _background->setSize(_size);
 
@@ -87,6 +96,14 @@ void Panel::toggleStatus()
   // MiniMap
   _minimap->setPosition({ background_position.x,
                           static_cast<size_t> (2 * _windowSize.y / 3) });
+
+
+  // Set the grid offset (map rendering zone size: 1/2 left room)
+  using namespace graphics;
+  using p = MapGraphicsProperties;
+  auto size = static_cast<component> (GraphicsEngine::windowSize().x);
+  auto nb_col = static_cast<component> (_map->nbColumns());
+  p::setGridOffsetX((draw_offset + size - p::cellWidth() * nb_col) / 2);
 }
 
 

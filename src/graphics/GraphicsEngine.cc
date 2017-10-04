@@ -43,6 +43,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   _window->setActive();
   _takeScreenshot = false;
   _terrainsHandler = std::make_unique<TerrainsHandler> ();
+  setGridOffset(battle->map());
 
   while (_window->isOpen())
   {
@@ -122,9 +123,6 @@ void GraphicsEngine::drawBackground()
 void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
 {
   const auto map(battle->map());
-
-  // re-checking grid offsets
-  setGridOffset(map);
 
   // drawing cells (their background and their content)
   const auto cells(map->cells());

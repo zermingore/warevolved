@@ -9,7 +9,8 @@
 
 * TODO Roadmap
 ** TODO Allow a Unit to attack without moving
-** TODO The interface panel should not be dependent of the current State
+** DONE The interface panel should not be dependent of the current State
+   CLOSED: [2017-10-04 Mi 08:00]
 
 
 * TODO Clean
