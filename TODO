@@ -11,6 +11,15 @@
 ** TODO Allow a Unit to attack without moving
 ** DONE The interface panel should not be dependent of the current State
    CLOSED: [2017-10-04 Mi 08:00]
+** TODO Clean PathFinding
+   Highlighting cells when targets list requested (-> why?)
+   No origin explicitly selected -> crash dereferencing a NULL pointer
+   Does it worth it to have it static ?
+   - Should initialize a const origin on construction
+   - Should clear highlight on destruction
+   - Could belong to a State
+     -> scope under control and avoid destruction / construction when entering / exiting sub-states
+     selecting a target does not have any influence on the origin (state->pop: still valid)
 
 
 * TODO Clean
