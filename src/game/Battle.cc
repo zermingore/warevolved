@@ -6,7 +6,7 @@
 #include <game/Map.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <game/PathFinding.hh>
+
 
 
 Battle::Battle() :
@@ -22,7 +22,6 @@ void Battle::initializeMap()
   graphics::MapGraphicsProperties::initialize();
   buildPlayers();
   buildMap();
-  PathFinding::setMap(_map);
 }
 
 

@@ -11,6 +11,8 @@
 # include <context/State.hh>
 # include <common/using.hh> // Coords
 
+class PathFinding;
+
 namespace graphics {
   class Sprite;
 }
@@ -74,6 +76,9 @@ private:
 
   size_t _nbColumns; ///< map number of columns
   size_t _nbLines;   ///< map number of lines
+
+  ///< Used to display directions of the selected unit
+  std::unique_ptr<PathFinding> _pathFinding;
 };
 
 

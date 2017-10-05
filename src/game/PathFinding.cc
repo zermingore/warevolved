@@ -1,6 +1,8 @@
 #include <game/PathFinding.hh>
 
 #include <debug/Debug.hh>
+
+#include <game/Battle.hh>
 #include <game/Player.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>
@@ -13,44 +15,28 @@
 #include <graphics/MapGraphicsProperties.hh>
 
 
-// static members definition
-std::shared_ptr<Map> PathFinding::_map;
-std::shared_ptr<Unit> PathFinding::_unit;
 
-Coords PathFinding::_origin;
-Coords PathFinding::_current;
-
-size_t PathFinding::_maxLength;
-size_t PathFinding::_currentLength;
-
-std::vector<e_direction> PathFinding::_directions;
-std::vector<std::shared_ptr<graphics::Sprite>> PathFinding::_images;
-std::vector<std::shared_ptr<Cell>> PathFinding::_reachableCells;
-std::vector<std::shared_ptr<Cell>> PathFinding::_enemyPositions;
-
-
-
-void PathFinding::setOrigin(Coords coords, std::shared_ptr<Unit> unit)
+PathFinding::PathFinding(std::shared_ptr<Unit> origin)
+  : _currentLength(0)
 {
-  assert(unit && "PathFinding: No unit provided");
+  _origin = origin;
+  _current = origin->coords();
+  _maxLength = origin->motionValue();
 
+  _map = game::Status::battle()->map();
+}
+
+
+PathFinding::~PathFinding()
+{
   clearPath();
-
-  _enemyPositions.clear();
-
-  _unit = unit;
-  _origin = coords;
-  _current = coords;
-  _currentLength = 0;
-  _maxLength = unit->motionValue();
-
-  highlightCells();
 }
 
 
 void PathFinding::drawPath()
 {
-  _current = _origin;
+  _current = _origin->coords();
+
   size_t i = 0;
   for (auto it(_directions.begin()); it != _directions.end(); ++it)
   {
@@ -217,7 +203,7 @@ void PathFinding::highlightCells()
   _reachableCells.clear();
   _enemyPositions.clear();
 
-  /// \todo check _unit's inventory
+  /// \todo check unit's inventory
   //   (do not color enemies in red if we can't shoot them,
   //    color allies in a different color if we can heal them, ...)
   for (auto i(0u); i < _map->nbColumns(); ++i)
@@ -233,14 +219,14 @@ void PathFinding::highlightCells()
       auto distance(manhattan(c->coords(), _current));
 
       // Skip out of range cells
-      if (distance > _unit->motionValue() + _unit->maxRange() - _currentLength)
+      if (distance > _origin->motionValue() + _origin->maxRange() - _currentLength)
       {
         continue;
       }
 
       // Highlight reachable cells, depending on content, if any
       auto u = c->unit();
-      if (distance <= _unit->motionValue() - _currentLength)
+      if (distance <= _origin->motionValue() - _currentLength)
       {
         c->setHighlight(true);
 
@@ -267,7 +253,7 @@ void PathFinding::highlightCells()
       }
 
       // cells only at shooting range
-      if (u && distance <= _unit->maxRange())
+      if (u && distance <= _origin->maxRange())
       {
         // unit out of moving range but at shooting range
         if (u->playerId() != game::Status::player()->id())

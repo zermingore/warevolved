@@ -7,6 +7,7 @@
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
+#include <game/PathFinding.hh>
 #include <interface/menus/Menu.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuMap.hh>

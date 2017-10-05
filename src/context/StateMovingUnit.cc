@@ -66,7 +66,7 @@ StateMovingUnit::StateMovingUnit()
   unit->sprite()->setColor(Color(255, 255, 255, 160));
 
   // Path finding
-  PathFinding::setOrigin(_originalCoords, unit);
+  _pathFinding = std::make_unique<PathFinding> (unit);
 }
 
 
@@ -79,8 +79,6 @@ StateMovingUnit::~StateMovingUnit()
   if (unit) {
     unit->sprite()->setColor(graphics::Color(255, 255, 255, 255));
   }
-
-  PathFinding::clearPath();
 }
 
 
@@ -100,39 +98,39 @@ void StateMovingUnit::resume()
 // _________________________  Graphical Units motion ________________________ //
 void StateMovingUnit::moveUnitUp()
 {
-  if (_holoUnitPosition.l > 0 && PathFinding::allowedMove(e_direction::UP))
+  if (_holoUnitPosition.l > 0 && _pathFinding->allowedMove(e_direction::UP))
   {
     --_holoUnitPosition.l;
-    PathFinding::addNextDirection(e_direction::UP);
+    _pathFinding->addNextDirection(e_direction::UP);
   }
 }
 
 void StateMovingUnit::moveUnitDown()
 {
   if (_holoUnitPosition.l < _nbLines - 1
-      && PathFinding::allowedMove(e_direction::DOWN))
+      && _pathFinding->allowedMove(e_direction::DOWN))
   {
     ++_holoUnitPosition.l;
-    PathFinding::addNextDirection(e_direction::DOWN);
+    _pathFinding->addNextDirection(e_direction::DOWN);
   }
 }
 
 void StateMovingUnit::moveUnitLeft()
 {
-  if (_holoUnitPosition.c > 0 && PathFinding::allowedMove(e_direction::LEFT))
+  if (_holoUnitPosition.c > 0 && _pathFinding->allowedMove(e_direction::LEFT))
   {
     --_holoUnitPosition.c;
-    PathFinding::addNextDirection(e_direction::LEFT);
+    _pathFinding->addNextDirection(e_direction::LEFT);
   }
 }
 
 void StateMovingUnit::moveUnitRight()
 {
   if (_holoUnitPosition.c < _nbColumns - 1
-      && PathFinding::allowedMove(e_direction::RIGHT))
+      && _pathFinding->allowedMove(e_direction::RIGHT))
   {
     ++_holoUnitPosition.c;
-    PathFinding::addNextDirection(e_direction::RIGHT);
+    _pathFinding->addNextDirection(e_direction::RIGHT);
   }
 }
 
@@ -142,8 +140,8 @@ void StateMovingUnit::draw()
   /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnit);
 
-  PathFinding::highlightCells();
-  PathFinding::drawPath();
+  _pathFinding->highlightCells();
+  _pathFinding->drawPath();
 
   _holoUnit->setColor(graphics::Color(255, 127, 127, 255));
   _holoUnit->drawAtCell(_holoUnitPosition);

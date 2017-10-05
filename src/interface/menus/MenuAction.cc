@@ -8,6 +8,7 @@
 #include <game/units/Unit.hh>
 #include <game/PathFinding.hh>
 
+#include <debug/Debug.hh>
 
 namespace interface {
 
@@ -34,6 +35,16 @@ void MenuAction::build()
       entry->setCallback( [=] { moveUnit(); });
       _entries.push_back(entry);
     }
+
+    // add the attack entry if a target is reachable from the current position
+    auto cell(map->cell(_coords));
+    _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
+    if (_pathFinding->getTargets(_selectedUnit, cell)->size() > 0)
+    {
+      auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
+      entry->setCallback( [=] { attackUnit(); });
+      _entries.push_back(entry);
+    }
   }
 
   /// \todo add actions (not moved / ...)
@@ -53,10 +64,11 @@ void MenuAction::build()
 
     // _selectedUnit does not exits (another instance of MenuAction built it)
     _selectedUnit = game::Status::battle()->map()->selectedUnit();
+    _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
 
     // add the attack entry if a target is reachable from the current position
     auto cell(game::Status::battle()->map()->cell(_coords));
-    if (!target && PathFinding::getTargets(_selectedUnit, cell)->size() > 0)
+    if (!target && _pathFinding->getTargets(_selectedUnit, cell)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(); });
@@ -103,7 +115,10 @@ void MenuAction::attackUnit()
 
 void MenuAction::draw()
 {
-  PathFinding::drawPath();
+  if (_pathFinding) {
+    _pathFinding->drawPath();
+  }
+
   InGameMenu::draw();
 }
 

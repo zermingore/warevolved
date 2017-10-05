@@ -6,13 +6,16 @@
  */
 
 
-#ifndef MENU_MENU_ACTION_HH_
-# define MENU_MENU_ACTION_HH_
+#ifndef MENU_ACTION_HH_
+# define MENU_ACTION_HH_
 
 # include <interface/menus/InGameMenu.hh>
 # include <common/enums/states.hh>
 
 enum class e_state;
+
+class PathFinding;
+
 
 
 namespace interface {
@@ -76,13 +79,18 @@ private:
   void attackUnit();
 
 
+
   e_state _state;      ///< State related to this menu
   Coords _clickedCell; ///< Clicked cell where this menu was invoked
 
-  std::shared_ptr<Unit> _selectedUnit; ///< currently selected unit
+  std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
+
+
+  ///< Get targets list of the selected unit
+  std::unique_ptr<PathFinding> _pathFinding;
 };
 
 
 } // namespace interface
 
-#endif /* !MENU_MENU_ACTION_HH_ */
+#endif /* !MENU_ACTION_HH_ */
