@@ -219,7 +219,8 @@ void PathFinding::highlightCells()
       auto distance(manhattan(c->coords(), _current));
 
       // Skip out of range cells
-      if (distance > _origin->motionValue() + _origin->maxRange() - _currentLength)
+      if (distance
+          > _origin->motionValue() + _origin->maxRange() - _currentLength)
       {
         continue;
       }
@@ -326,18 +327,15 @@ bool PathFinding::allowedMove(e_direction direction)
 
 
 std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-PathFinding::getTargets(const std::shared_ptr<Unit> unit,
-                        const std::shared_ptr<Cell> cell)
+PathFinding::getTargets()
 {
-  assert(unit && cell);
-
   highlightCells(); // update _enemyPositions if required
 
   std::vector<std::shared_ptr<Cell>> targets_list;
   for (const auto c: _enemyPositions)
   {
-    auto distance(manhattan(c->coords(), cell->coords()));
-    if (distance >= unit->minRange() && distance <= unit->maxRange())
+    auto distance(manhattan(c->coords(), _current));
+    if (distance >= _origin->minRange() && distance <= _origin->maxRange())
     {
       targets_list.push_back(c);
     }

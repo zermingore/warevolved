@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef PATHFINDING_HH_
-# define PATHFINDING_HH_
+#ifndef PATH_FINDING_HH_
+# define PATH_FINDING_HH_
 
 # include <vector>
 # include <memory>
@@ -93,12 +93,10 @@ public:
   void highlightCells();
 
   /**
-   * \brief compute and return list of available targets
-   * \param unit Unit used as attacker
-   * \param cell coordinates from where to get the targets
+   * \brief Return the list of available targets
+   *   for the _origin unit, at the _current position
    */
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-  getTargets(std::shared_ptr<Unit> unit, std::shared_ptr<Cell> cell);
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getTargets();
 
 
 
@@ -168,4 +166,4 @@ private:
 };
 
 
-#endif /* !PATHFINDING_HH_ */
+#endif /* !PATH_FINDING_HH_ */
