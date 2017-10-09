@@ -2,6 +2,8 @@
 
 #include <cassert>
 
+#include <debug/Debug.hh>
+
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <game/Status.hh>
@@ -18,6 +20,7 @@
 #include <game/Player.hh>
 #include <game/units/Unit.hh>
 #include <game/PathFinding.hh>
+
 
 
 StateMovingUnit::StateMovingUnit()
@@ -38,6 +41,7 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::SELECTION,  [=] {
       game::Status::pushState(e_state::ACTION_MENU);
 
+      PRINTF("holo: StateMovingUnit:", _holoUnitPosition);
       // giving the next state (action menu) the original unit position
       game::Status::currentState()->setAttributes(
         std::make_shared<Coords> (_holoUnitPosition));

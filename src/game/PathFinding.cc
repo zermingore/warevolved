@@ -35,14 +35,14 @@ PathFinding::~PathFinding()
 
 void PathFinding::drawPath()
 {
+  _lastPosition = _current;
+//  PRINTF("_current in drawPath():", _lastPosition);
   _current = _origin->coords();
 
   size_t i = 0;
   for (auto it(_directions.begin()); it != _directions.end(); ++it)
   {
     updateCurrentCell(*it);
-    /// \todo manage cache and image sprites
-
     getSprite(i++)->draw(); /// \todo drawAtCell
   }
 }
@@ -327,27 +327,30 @@ bool PathFinding::allowedMove(e_direction direction)
 
 
 std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-PathFinding::getTargets()
+PathFinding::getTargets(Coords coords)
 {
-  highlightCells(); // update _enemyPositions if required
+  highlightCells(); // update _enemyPosition
 
   std::vector<std::shared_ptr<Cell>> targets_list;
   for (const auto c: _enemyPositions)
   {
-    auto distance(manhattan(c->coords(), _current));
+    auto distance(manhattan(c->coords(), coords));
     if (distance >= _origin->minRange() && distance <= _origin->maxRange())
     {
       targets_list.push_back(c);
     }
   }
 
+  PRINTF("Path finding: found", targets_list.size(), "targets from:", coords);
+
   return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets_list);
 }
 
 
+
 size_t PathFinding::manhattan(const Coords a, const Coords b)
 {
-  // implicit cast into signed int
+  // explicit cast into signed int
   int dist_columns(static_cast<int> (a.c - b.c));
   int dist_lines(  static_cast<int> (a.l - b.l));
 

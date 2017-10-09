@@ -220,6 +220,7 @@
    saw it with direction 0 (picked a unit, moved it down 2 times)
 ** TODO Attacking a Unit can lead to a crash
    Assertion !_targets->empty() && "StateSelectTarget: no target available" failed
+** TODO segfault poping states (pressed 'escape' on the map State, after canceling a move)
 
 
 

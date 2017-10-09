@@ -56,6 +56,7 @@ public:
   void draw() override final;
 
 
+
 private:
   /**
    * \brief Closes the action menu
@@ -84,7 +85,6 @@ private:
   Coords _clickedCell; ///< Clicked cell where this menu was invoked
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
-
 
   ///< Get targets list of the selected unit
   std::unique_ptr<PathFinding> _pathFinding;

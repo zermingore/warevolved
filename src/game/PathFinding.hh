@@ -95,8 +95,9 @@ public:
   /**
    * \brief Return the list of available targets
    *   for the _origin unit, at the _current position
+   * \param coords Coordinates where the attacker is located
    */
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getTargets();
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getTargets(Coords coords);
 
 
 
@@ -146,6 +147,7 @@ private:
 
   std::shared_ptr<Unit> _origin;  ///< Unit at the origin of the path
   Coords _current;                ///< Current cell coordinates.
+  Coords _lastPosition;           ///< Last position of the path
 
   size_t _maxLength;     ///< Path max length.
   size_t _currentLength; ///< Path current length.

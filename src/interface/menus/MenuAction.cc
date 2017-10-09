@@ -39,7 +39,7 @@ void MenuAction::build()
     // add the attack entry if a target is reachable from the current position
     auto cell(map->cell(_coords));
     _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
-    if (_pathFinding->getTargets()->size() > 0)
+    if (_pathFinding->getTargets(_coords)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(); });
@@ -47,18 +47,12 @@ void MenuAction::build()
     }
   }
 
-  /// \todo add actions (not moved / ...)
-  if (_state == e_state::ACTION_MENU)
+  // Forbidding to do an action on an occupied Cell
+  if (_state == e_state::ACTION_MENU && !map->unit(_coords))
   {
-    auto target = map->unit(_coords);
-
-    // forbid to move a unit over another one
-    if (!target) /// \todo use other coordinates as the menu ones
-    {
-      auto entry(std::make_shared<MenuEntry> (e_entry::WAIT));
-      entry->setCallback( [=] { waitUnit(); });
-      _entries.push_back(entry);
-    }
+    auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
+    entry_wait->setCallback( [=] { waitUnit(); });
+    _entries.push_back(entry_wait);
 
     /// \todo use other coordinates than the menu ones
 
@@ -66,9 +60,10 @@ void MenuAction::build()
     _selectedUnit = game::Status::battle()->map()->selectedUnit();
     _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
 
-    // add the attack entry if a target is reachable from the current position
+    PRINTF("MenuAction, attack: coords:", _coords);
+    // Add the attack entry if a target is reachable from the current position
     auto cell(game::Status::battle()->map()->cell(_coords));
-    if (!target && _pathFinding->getTargets()->size() > 0)
+    if (_pathFinding->getTargets(_coords)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(); });

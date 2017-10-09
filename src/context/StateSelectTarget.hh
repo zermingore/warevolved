@@ -22,6 +22,7 @@ namespace graphics {
 /**
  * \class StateSelectTarget
  * \brief State in charge of the target selection
+ * \note This State is active after the Attack has been given
  */
 class StateSelectTarget: public State
 {
