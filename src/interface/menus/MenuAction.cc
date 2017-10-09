@@ -39,7 +39,7 @@ void MenuAction::build()
     // add the attack entry if a target is reachable from the current position
     auto cell(map->cell(_coords));
     _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
-    if (_pathFinding->getTargets(_coords)->size() > 0)
+    if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(); });
@@ -63,7 +63,7 @@ void MenuAction::build()
     PRINTF("MenuAction, attack: coords:", _coords);
     // Add the attack entry if a target is reachable from the current position
     auto cell(game::Status::battle()->map()->cell(_coords));
-    if (_pathFinding->getTargets(_coords)->size() > 0)
+    if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=] { attackUnit(); });

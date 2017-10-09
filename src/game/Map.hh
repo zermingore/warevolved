@@ -54,13 +54,9 @@ public:
    */
   Map(size_t nb_columns, size_t nb_lines);
 
-  /// default destructor
-  ~Map() = default;
-
 
   /**
    * \brief _nbColumns getter
-   *
    * \return number of columns
    */
   size_t nbColumns() const { return _nbColumns; }

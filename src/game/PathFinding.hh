@@ -94,10 +94,11 @@ public:
 
   /**
    * \brief Return the list of available targets
-   *   for the _origin unit, at the _current position
+   * \param ref Unit for which and from where the targets will be seek
    * \param coords Coordinates where the attacker is located
    */
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getTargets(Coords coords);
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
+  getTargets(std::shared_ptr<Unit> ref, Coords coords);
 
 
 

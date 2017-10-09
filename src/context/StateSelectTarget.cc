@@ -76,7 +76,7 @@ void StateSelectTarget::resume()
 
   auto map(game::Status::battle()->map());
   PathFinding path(map->selectedUnit());
-  _targets = path.getTargets(map->selectedUnit()->coords());
+  _targets = path.getTargets(map->selectedUnit(), _attackLocation);
 
   assert(!_targets->empty() && "StateSelectTarget: no target available");
 }

@@ -218,16 +218,23 @@ void PathFinding::highlightCells()
       // Compute manhattan distance of unit to every cell
       auto distance(manhattan(c->coords(), _current));
 
-      // Skip out of range cells
-      if (distance
-          > _origin->motionValue() + _origin->maxRange() - _currentLength)
+      // Out of range cells
+      if (distance > _origin->motionValue() - _currentLength && !c->unit())
       {
+        // If the Unit can shoot at it, consider it, else skip it
+        if (distance
+            <= _origin->motionValue() + _origin->maxRange() - _currentLength)
+        {
+          c->setHighlightColor(graphics::Color::Red);
+          _enemyPositions.push_back(c);
+        }
         continue;
       }
 
       // Highlight reachable cells, depending on content, if any
       auto u = c->unit();
-      if (distance <= _origin->motionValue() - _currentLength)
+      if (distance
+          <= _origin->motionValue() + _origin->maxRange()  - _currentLength)
       {
         c->setHighlight(true);
 
@@ -327,23 +334,28 @@ bool PathFinding::allowedMove(e_direction direction)
 
 
 std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-PathFinding::getTargets(Coords coords)
+PathFinding::getTargets(std::shared_ptr<Unit> ref, Coords coords)
 {
-  highlightCells(); // update _enemyPosition
+  // Dummy: for every cell if unit && not one of the current player -> target
+  // (NOT considering the motion value)
+  std::vector<std::shared_ptr<Cell>> targets;
 
-  std::vector<std::shared_ptr<Cell>> targets_list;
-  for (const auto c: _enemyPositions)
+  for (auto i(0u); i < _map->nbColumns(); ++i)
   {
-    auto distance(manhattan(c->coords(), coords));
-    if (distance >= _origin->minRange() && distance <= _origin->maxRange())
+    for (auto j(0u); j < _map->nbLines(); ++j)
     {
-      targets_list.push_back(c);
+      const auto c = (*_map)[i][j];
+      const auto unit = c->unit();
+      if (   unit
+          && unit->playerId() != game::Status::player()->id()
+          && manhattan(c->coords(), coords) <= ref->maxRange())
+      {
+        targets.push_back(c);
+      }
     }
   }
 
-  PRINTF("Path finding: found", targets_list.size(), "targets from:", coords);
-
-  return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets_list);
+  return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets);
 }
 
 
