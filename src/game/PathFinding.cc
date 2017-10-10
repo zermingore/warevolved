@@ -29,7 +29,7 @@ PathFinding::PathFinding(std::shared_ptr<Unit> origin)
 
 PathFinding::~PathFinding()
 {
-  clearPath();
+  hideAllowedPath();
 }
 
 
@@ -46,12 +46,6 @@ void PathFinding::drawPath()
   }
 }
 
-
-void PathFinding::clearPath()
-{
-  _directions.clear();
-  hideAllowedPath();
-}
 
 
 void PathFinding::updateCurrentCell(e_direction direction)

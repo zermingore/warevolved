@@ -32,6 +32,8 @@
    CLOSED: [2017-09-29 Fr 07:33]
 ** DONE Terrain should be a class, instead of an enum
    CLOSED: [2017-09-29 Fr 07:33]
+** TODO Map iterator to access cells without explicit double loop
+   (Used in PathFinding GraphicsEngine Map MiniMap at least)
 
 
 * TODO experimental

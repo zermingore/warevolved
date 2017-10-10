@@ -43,16 +43,10 @@ public:
   PathFinding(std::shared_ptr<Unit> origin);
 
   /**
-   * \brief Destructor: clears the graphics attributes
+   * \brief Destructor: clears the Cells highlight properties
    */
   ~PathFinding();
 
-
-  /**
-   * \brief List of enemy positions getter
-   * \return a pointer on the vector of enemy positions
-   */
-  auto getEnemyPositions() { return _enemyPositions; }
 
   /**
    * \brief allowed move notifier
@@ -72,12 +66,6 @@ public:
    * \brief uses _graphicPath to draw the current path
    */
   void drawPath();
-
-  /**
-   * \brief clears current path
-   * calls deleteImagesVector, freeing images
-   */
-  void clearPath();
 
   /**
    * \brief hides crossable cells
