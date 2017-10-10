@@ -68,11 +68,6 @@ public:
   void drawPath();
 
   /**
-   * \brief hides crossable cells
-   */
-  void hideAllowedPath();
-
-  /**
    * \brief Sets cells highlight as follow:
    * - Highlight reachable cells (at moving range)
    * - Highlight enemy units at shooting range
@@ -91,6 +86,12 @@ public:
 
 
 private:
+  /**
+   * \brief hides crossable cells
+   */
+  void hideAllowedPath();
+
+
   /**
    * \brief returns the sprite matching e_path_shape
    * does the rotation if needed
