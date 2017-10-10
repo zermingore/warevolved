@@ -70,7 +70,7 @@ void PathFinding::updateCurrentCell(e_direction direction)
 
     default:
       ERROR("Invalid direction", static_cast<int> (direction));
-      assert("updateCurrentCell() directions vector invalid");
+      assert(!"updateCurrentCell() directions vector invalid");
   }
 }
 
