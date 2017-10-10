@@ -39,9 +39,9 @@ void PathFinding::drawPath()
   _current = _origin->coords();
 
   size_t i = 0;
-  for (auto it(_directions.begin()); it != _directions.end(); ++it)
+  for (const auto it: _directions)
   {
-    updateCurrentCell(*it);
+    updateCurrentCell(it);
     getSprite(i++)->draw(); /// \todo drawAtCell
   }
 }
