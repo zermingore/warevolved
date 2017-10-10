@@ -110,15 +110,6 @@ private:
    */
   std::shared_ptr<graphics::Sprite> getSprite(size_t index);
 
-  /**
-   * \brief builds Images* Vector (_images)
-   */
-  void buildImageVector();  /// \todo use (cache management)
-
-  /**
-   * \brief clears _images Vector
-   */
-  void deleteImagesVector() { _images.clear(); }
 
   /**
    * \brief updates current cell coordinates
@@ -157,9 +148,6 @@ private:
 
   ///< List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;
-
-  ///< Images of the path vector.
-  std::vector<std::shared_ptr<graphics::Sprite>> _images;
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;

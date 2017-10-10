@@ -36,7 +36,6 @@ PathFinding::~PathFinding()
 void PathFinding::drawPath()
 {
   _lastPosition = _current;
-//  PRINTF("_current in drawPath():", _lastPosition);
   _current = _origin->coords();
 
   size_t i = 0;
@@ -51,11 +50,7 @@ void PathFinding::drawPath()
 void PathFinding::clearPath()
 {
   _directions.clear();
-  deleteImagesVector();
   hideAllowedPath();
-
-  /// \todo clear only if we made a path request on a new cell
-  // (to avoid clearing the path on selecting the same unit two times in a row)
 }
 
 
@@ -81,19 +76,10 @@ void PathFinding::updateCurrentCell(e_direction direction)
 
     default:
       ERROR("Invalid direction", static_cast<int> (direction));
-      std::exit(1);
+      assert("updateCurrentCell() directions vector invalid");
   }
 }
 
-void PathFinding::buildImageVector()
-{
-  // manage 'riding' the path (increment a global index)
-  // deleteImagesVector();
-
-  for (auto i(0u); i < _directions.size(); ++i) {
-    _images.push_back(getSprite(i));
-  }
-}
 
 
 e_path_shape PathFinding::getShape(size_t index)
