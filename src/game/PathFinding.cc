@@ -256,6 +256,10 @@ void PathFinding::highlightCells()
       }
     }
   }
+
+  // Do not highlight the origin Cell nor the holo unit cell
+  _map->cell(_origin->coords())->setHighlight(false);
+  _map->cell(_current)->setHighlight(false);
 }
 
 
