@@ -127,7 +127,7 @@ e_path_shape PathFinding::getShape(size_t index)
       return next == e_direction::UP
         ? e_path_shape::CORNER_LEFT_UP
         : e_path_shape::CORNER_DOWN_LEFT;
-    }
+  }
 }
 
 
@@ -138,26 +138,26 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
 
   switch (shape)
   {
-     // Rectangles
-     case e_path_shape::UP:
-     case e_path_shape::DOWN:
-     case e_path_shape::LEFT:
-     case e_path_shape::RIGHT:
-       img = std::make_shared<graphics::Sprite> ("path_shape");
-       break;
+    // Rectangles
+    case e_path_shape::UP:
+    case e_path_shape::DOWN:
+    case e_path_shape::LEFT:
+    case e_path_shape::RIGHT:
+      img = std::make_shared<graphics::Sprite> ("path_shape");
+      break;
 
-     // Arrows
-     case e_path_shape::LAST_UP:
-     case e_path_shape::LAST_DOWN:
-     case e_path_shape::LAST_LEFT:
-     case e_path_shape::LAST_RIGHT:
-       img = std::make_shared<graphics::Sprite> ("path_arrow");
-       break;
+      // Arrows
+    case e_path_shape::LAST_UP:
+    case e_path_shape::LAST_DOWN:
+    case e_path_shape::LAST_LEFT:
+    case e_path_shape::LAST_RIGHT:
+      img = std::make_shared<graphics::Sprite> ("path_arrow");
+      break;
 
-     // Corners
-     default:
-       img = std::make_shared<graphics::Sprite> ("path_corner");
-       break;
+      // Corners
+    default:
+      img = std::make_shared<graphics::Sprite> ("path_corner");
+      break;
   }
 
   using p = graphics::MapGraphicsProperties;
@@ -168,13 +168,15 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
 
   // drawing at the middle of the cell
   img->setPosition(
-      static_cast<graphics::component> (_current.c) * p::cellWidth()
-        + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
-      static_cast<graphics::component> (_current.l) * p::cellHeight()
-        + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
+    static_cast<graphics::component> (_current.c) * p::cellWidth()
+      + p::gridThickness() + p::gridOffsetX() + p::cellWidth()  / 2,
+    static_cast<graphics::component> (_current.l) * p::cellHeight()
+      + p::gridThickness() + p::gridOffsetY() + p::cellHeight() / 2);
 
   return img;
 }
+
+
 
 void PathFinding::addNextDirection(const e_direction direction)
 {
@@ -182,6 +184,7 @@ void PathFinding::addNextDirection(const e_direction direction)
   ++_currentLength;
   highlightCells();
 }
+
 
 
 void PathFinding::highlightCells()
@@ -332,7 +335,7 @@ PathFinding::getTargets(std::shared_ptr<Unit> ref, Coords coords)
     {
       const auto c = (*_map)[i][j];
       const auto unit = c->unit();
-      if (   unit
+      if (unit
           && unit->playerId() != game::Status::player()->id()
           && manhattan(c->coords(), coords) <= ref->maxRange())
       {
