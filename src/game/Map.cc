@@ -75,10 +75,6 @@ void Map::selectUnit(const Coords& c)
 
 void Map::moveUnit(const Coords& c)
 {
-  if (_selectedUnit->coords() == c) {
-    ERROR("Moving unit: src == dst: coordinates:", c.c, c.l);
-  }
-
   Coords old(_selectedUnit->coords());
   assert(_cells[old.c][old.l]->unit()->played() == false);
 

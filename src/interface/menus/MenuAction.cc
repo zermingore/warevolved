@@ -61,7 +61,6 @@ void MenuAction::build()
     assert(_selectedUnit);
     _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
 
-    PRINTF("MenuAction, attack: coords:", _coords);
     // Add the attack entry if a target is reachable from the current position
     auto cell(game::Status::battle()->map()->cell(_coords));
     if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
