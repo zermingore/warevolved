@@ -28,8 +28,8 @@ void MenuAction::build()
   {
     /// \todo use other coordinates than the menu ones
     _selectedUnit = map->unit(_coords);
-    if (!_selectedUnit->played() && _selectedUnit->playerId()
-        == game::Status::player()->id())
+    if (!_selectedUnit->played()
+        && _selectedUnit->playerId() == game::Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
       entry->setCallback( [=] { moveUnit(); });
@@ -57,7 +57,8 @@ void MenuAction::build()
     /// \todo use other coordinates than the menu ones
 
     // _selectedUnit does not exits (another instance of MenuAction built it)
-    _selectedUnit = game::Status::battle()->map()->selectedUnit();
+    _selectedUnit = map->selectedUnit();
+    assert(_selectedUnit);
     _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
 
     PRINTF("MenuAction, attack: coords:", _coords);
