@@ -70,7 +70,9 @@ void PathFinding::updateCurrentCell(e_direction direction)
 
     default:
       ERROR("Invalid direction", static_cast<int> (direction));
+      ERROR("  (directions had", _directions.size(), "entries)");
       assert(!"updateCurrentCell() directions vector invalid");
+      break;
   }
 }
 
@@ -78,6 +80,8 @@ void PathFinding::updateCurrentCell(e_direction direction)
 
 e_path_shape PathFinding::getShape(size_t index)
 {
+  assert(index < _directions.size());
+
   // last element case
   if (index + 1 == _directions.size())
   {
@@ -140,7 +144,7 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
       img = std::make_shared<graphics::Sprite> ("path_shape");
       break;
 
-      // Arrows
+    // Arrows
     case e_path_shape::LAST_UP:
     case e_path_shape::LAST_DOWN:
     case e_path_shape::LAST_LEFT:
@@ -148,7 +152,7 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
       img = std::make_shared<graphics::Sprite> ("path_arrow");
       break;
 
-      // Corners
+    // Corners
     default:
       img = std::make_shared<graphics::Sprite> ("path_corner");
       break;

@@ -11,7 +11,8 @@
 ** TODO Allow a Unit to attack without moving
 ** DONE The interface panel should not be dependent of the current State
    CLOSED: [2017-10-04 Mi 08:00]
-** TODO Clean PathFinding
+** DONE Clean PathFinding
+   CLOSED: [2017-10-12 Do 08:04]
    Highlighting cells when targets list requested (-> why?)
    No origin explicitly selected -> crash dereferencing a NULL pointer
    Does it worth it to have it static ?
@@ -219,10 +220,13 @@
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
 ** TODO Spurious "Invalid direction" while moving a Unit
-   saw it with direction 0 (picked a unit, moved it down 2 times)
+   Saw it with direction 0 (picked a unit, moved it down 2 times)
 ** TODO Attacking a Unit can lead to a crash
    Assertion !_targets->empty() && "StateSelectTarget: no target available" failed
 ** TODO segfault poping states (pressed 'escape' on the map State, after canceling a move)
+** TODO The path finding displays cells as reachable when an enemy unit prevents its access
+** DONE It is possible to select enemy units
+   CLOSED: [2017-10-13 Fr 07:45]
 
 
 

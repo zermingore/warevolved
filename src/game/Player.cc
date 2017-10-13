@@ -58,9 +58,9 @@ void Player::togglePanel() {
 
 void Player::select()
 {
-  /// \todo check selectable before push
-
-  if (game::Status::battle()->map()->unit(_cursor->coords()))
+  // If there is a unit, which did not play and belong to us, allow to select it
+  auto unit(game::Status::battle()->map()->unit(_cursor->coords()));
+  if (unit && !unit->played() && unit->playerId() == _id)
   {
     game::Status::pushState(e_state::SELECTION_UNIT);
   }

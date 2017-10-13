@@ -30,7 +30,7 @@ Status::~Status()
 
 e_state Status::state()
 {
-  assert(!_states.empty() && "_states stack is empty, exiting...");
+  assert(!_states.empty() && "_states stack is empty");
 
   return _states.top().first;
 }
@@ -38,7 +38,7 @@ e_state Status::state()
 
 std::shared_ptr<State> Status::currentState()
 {
-  assert(!_states.empty() && "_states stack is empty, exiting...");
+  assert(!_states.empty() && "_states stack is empty");
 
   return _states.top().second;
 }
