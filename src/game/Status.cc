@@ -20,14 +20,6 @@ Coords Status::_selectedUnitPosition;
 
 
 
-Status::~Status()
-{
-  while (!_states.empty()) {
-    _states.pop(); // calls element destructor
-  }
-}
-
-
 e_state Status::state()
 {
   assert(!_states.empty() && "_states stack is empty");

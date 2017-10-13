@@ -28,6 +28,8 @@ enum class e_state;
 
 namespace game {
 
+/// \todo Status no longer static and destructor pops every States
+
 /**
  * \class Status
  * \brief stores game status information such as current player, battle, ...
@@ -35,18 +37,6 @@ namespace game {
 class Status
 {
 public:
-  /**
-   * \brief Default constructor.
-   */
-  Status() = default;
-
-  /**
-   * \brief Destructor. Pops every state
-   */
-  ~Status();
-
-
-  // ________________________________ Battle ________________________________ //
   /// Battle getter
   static auto battle() { return _battle; }
 
@@ -55,14 +45,12 @@ public:
     _battle = battle;
   }
 
-  // ________________________________ Events ________________________________ //
   static void setInputProcessor(const std::shared_ptr<InputProcessor> processor)
   {
     _inputProcessor = processor;
   }
 
 
-  // ________________________________ States ________________________________ //
   /**
    * \brief return current state
    * meaning, the top of _states stack
@@ -99,7 +87,7 @@ public:
   static void nextPlayer();
 
 
-  // _______________________________ Wrappers _______________________________ //
+
   /**
    * \brief wrapper to the battle to get the current player
    * \return current player
