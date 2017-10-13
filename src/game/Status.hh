@@ -103,6 +103,8 @@ public:
 
 
 private:
+  static bool _pushingState;
+
   /**
    * \brief Ignore every input for a short time period (default: 100ms)
    * \param duration Delay in ms before re-considering input

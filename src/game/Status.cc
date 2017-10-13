@@ -17,6 +17,7 @@ std::shared_ptr<Battle> Status::_battle;
 std::shared_ptr<InputProcessor> Status::_inputProcessor;
 Coords Status::_selectedCell;
 Coords Status::_selectedUnitPosition;
+bool Status::_pushingState = false;
 
 
 
@@ -30,6 +31,10 @@ e_state Status::state()
 
 std::shared_ptr<State> Status::currentState()
 {
+  // Active waiting...
+  while (_pushingState)
+    ;
+
   assert(!_states.empty() && "_states stack is empty");
 
   return _states.top().second;
@@ -38,6 +43,7 @@ std::shared_ptr<State> Status::currentState()
 
 void Status::pushState(const e_state state)
 {
+  _pushingState = true;
   // suspend the current State
   if (!_states.empty()) {
     _states.top().second->suspend();
@@ -46,6 +52,7 @@ void Status::pushState(const e_state state)
   // push a new State
   auto new_state(StateFactory::createState(state));
   _states.push({state, new_state});
+  _pushingState = false;
 }
 
 
