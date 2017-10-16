@@ -17,33 +17,37 @@ std::shared_ptr<Battle> Status::_battle;
 std::shared_ptr<InputProcessor> Status::_inputProcessor;
 Coords Status::_selectedCell;
 Coords Status::_selectedUnitPosition;
-bool Status::_pushingState = false;
-
+std::mutex Status::_lock;
 
 
 e_state Status::state()
 {
+  _lock.lock();
   assert(!_states.empty() && "_states stack is empty");
 
-  return _states.top().first;
+  auto state_index(_states.top().first);
+  _lock.unlock();
+
+  return state_index;
 }
 
 
 std::shared_ptr<State> Status::currentState()
 {
-  // Active waiting...
-  while (_pushingState)
-    ;
-
+  _lock.lock();
   assert(!_states.empty() && "_states stack is empty");
 
-  return _states.top().second;
+  auto state(_states.top().second);
+  _lock.unlock();
+
+  return state;
 }
 
 
 void Status::pushState(const e_state state)
 {
-  _pushingState = true;
+  _lock.lock();
+
   // suspend the current State
   if (!_states.empty()) {
     _states.top().second->suspend();
@@ -52,14 +56,19 @@ void Status::pushState(const e_state state)
   // push a new State
   auto new_state(StateFactory::createState(state));
   _states.push({state, new_state});
-  _pushingState = false;
+
+  _lock.unlock();
 }
 
 
 void Status::popCurrentState()
 {
+  _lock.lock();
+
   assert(!_states.empty() && "No State found trying to pop States");
   _states.pop();
+
+  _lock.unlock();
 }
 
 

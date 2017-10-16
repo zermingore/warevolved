@@ -8,6 +8,7 @@
 #ifndef COMMON_STATUS_HH_
 # define COMMON_STATUS_HH_
 
+# include <mutex>
 # include <memory>
 # include <stack>
 # include <common/using.hh>
@@ -103,7 +104,8 @@ public:
 
 
 private:
-  static bool _pushingState;
+  ///< Prevent from getting a State not fully built/destroyed
+  static std::mutex _lock;
 
   /**
    * \brief Ignore every input for a short time period (default: 100ms)
