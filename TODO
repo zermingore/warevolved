@@ -8,7 +8,8 @@
 
 
 * TODO Roadmap
-** TODO Allow a Unit to attack without moving
+** DONE Allow a Unit to attack without moving
+   CLOSED: [2017-10-16 Mo 08:08]
 ** DONE The interface panel should not be dependent of the current State
    CLOSED: [2017-10-04 Mi 08:00]
 ** DONE Clean PathFinding
@@ -50,7 +51,8 @@
 ** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
 
 * TODO Game Features
-** TODO Allow direct attack when a target is already at range
+** DONE Allow direct attack when a target is already at range
+   CLOSED: [2017-10-16 Mo 08:08]
    (do not pass through move action)
 
 * TODO Code Design
@@ -214,7 +216,8 @@
    To solve this, one can for instance:
    - Find a way to 'destruct' static classes in a defined order
    - As the static classes may be removed one day this would solve the issue
-** TODO Attacking without moving is not possible
+** DONE Attacking without moving is not possible
+   CLOSED: [2017-10-16 Mo 08:08]
    Prior to attack, a move on another cell is required
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
