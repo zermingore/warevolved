@@ -87,6 +87,10 @@ void StateSelectTarget::resume()
 
 void StateSelectTarget::draw()
 {
+  auto selected_unit(game::Status::battle()->map()->selectedUnit());
+  PathFinding path(selected_unit);
+  _targets = path.getTargets(selected_unit, _attackLocation);
+
   assert(_targets && _targets->size() > 0 && _index_target <= _targets->size());
 
   _holoUnit->drawAtCell(_attackLocation);
