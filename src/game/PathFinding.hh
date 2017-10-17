@@ -7,6 +7,7 @@
 #ifndef PATH_FINDING_HH_
 # define PATH_FINDING_HH_
 
+# include <mutex>
 # include <vector>
 # include <memory>
 # include <structures/Vector.hh>
@@ -64,6 +65,7 @@ public:
 
   /**
    * \brief uses _graphicPath to draw the current path
+   * \note While this method runs, a call to addNextDirection() can be executed
    */
   void drawPath();
 
@@ -137,6 +139,8 @@ private:
 
   ///< List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;
+
+  std::mutex _lockDirections; ///< Locking _directions while backing back
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;

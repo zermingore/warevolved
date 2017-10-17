@@ -38,12 +38,16 @@ void PathFinding::drawPath()
   _lastPosition = _current;
   _current = _origin->coords();
 
-  size_t i = 0;
+  // Locking as push_back() invalidates the end iterator;
+  // It is safe to access elements concurrently only if there is no relocation
+  auto i(0u);
+  _lockDirections.lock();
   for (const auto it: _directions)
   {
     updateCurrentCell(it);
     getSprite(i++)->draw(); /// \todo drawAtCell
   }
+  _lockDirections.unlock();
 }
 
 
@@ -70,8 +74,6 @@ void PathFinding::updateCurrentCell(e_direction direction)
 
     default:
       ERROR("Invalid direction", static_cast<int> (direction));
-      ERROR("  (directions had", _directions.size(), "entries)");
-      assert(!"updateCurrentCell() directions vector invalid");
       break;
   }
 }
@@ -178,7 +180,10 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
 
 void PathFinding::addNextDirection(const e_direction direction)
 {
+  _lockDirections.lock();
   _directions.push_back(direction);
+  _lockDirections.unlock();
+
   ++_currentLength;
   highlightCells();
 }
