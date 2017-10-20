@@ -16,6 +16,7 @@
 #include <game/Player.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
+#include <input/EventsProcessor.hh>
 
 
 
@@ -73,6 +74,9 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
     // update the window
     _window->display();
+
+
+    EventsProcessor::notifyFrame();
   }
 }
 

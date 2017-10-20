@@ -16,8 +16,8 @@ for every event e
        break
 
 
-EventManager
-------------
+EventsManager
+-------------
 Final class
 process(event)
 List of processable events
