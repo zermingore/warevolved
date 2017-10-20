@@ -1,6 +1,8 @@
 #include <game/PathFinding.hh>
 
 #include <exception>
+#include <thread> // debug: sleep
+#include <chrono> // debug: sleep duration
 
 #include <debug/Debug.hh>
 
@@ -30,7 +32,12 @@ PathFinding::PathFinding(std::shared_ptr<Unit> origin)
   _current = origin->coords();
   _maxLength = origin->motionValue();
 
+
+  PRINTF("Sleeping in PathFinding::PathFinding()");
+  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
   _map = game::Status::battle()->map();
+
+  PRINTF("PathFinding built");
 }
 
 
@@ -209,7 +216,10 @@ void PathFinding::highlightCells()
   {
     for (auto j(0u); j < _map->nbLines(); ++j)
     {
-      auto c = (*_map)[i][j];
+      auto c = (*_map)[i][j]; // _map->cells() NULL [Map() not constructed !?]
+      // (crashed getting cell with i == 2; j == 0)
+      // called by StateMovingUnit::draw()
+      // Saw also an invalid free here
 
       // reset highlight for every cell
       c->setHighlight(false);
