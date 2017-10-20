@@ -91,7 +91,16 @@ void StateSelectTarget::draw()
   PathFinding path(selected_unit);
   _targets = path.getTargets(selected_unit, _attackLocation);
 
-  assert(_targets && _targets->size() > 0 && _index_target <= _targets->size());
+  if (!_targets || !_targets->size())
+  {
+    ERROR("No target to select");
+    return;
+  }
+  if (_index_target > _targets->size())
+  {
+    ERROR("Invalid target index", _index_target, "size:", _targets->size());
+    return;
+  }
 
   _holoUnit->drawAtCell(_attackLocation);
 
@@ -148,7 +157,7 @@ void StateSelectTarget::validate()
     map->moveUnit(_attackLocation);
   }
 
-  // move the cursor
+  // Should lock the draw ? (without unlocking it ?)
   game::Status::player()->cursor()->setCoords(_attackLocation);
 
   game::Status::clearStates();

@@ -7,6 +7,7 @@
 #ifndef STATE_HH_
 # define STATE_HH_
 
+# include <mutex>
 # include <memory>
 # include <vector>
 # include <common/using.hh>
@@ -124,6 +125,9 @@ protected:
 
   ///< pointer on Abstract attribute
   std::vector<std::shared_ptr<void>> _attributes;
+
+
+  std::mutex _lockDraw; ///< Lock draw while suspending
 };
 
 

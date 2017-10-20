@@ -8,6 +8,7 @@
 #ifndef GAME_MAP_HH_
 # define GAME_MAP_HH_
 
+# include <mutex>
 # include <memory>
 # include <vector>
 # include <list>
@@ -200,6 +201,9 @@ private:
 
   /// Current selected unit
   std::shared_ptr<Unit> _selectedUnit;
+
+  ///< Locking while updating the selected unit
+  std::mutex _lockSelectedUnitUpdate;
 };
 
 

@@ -62,20 +62,22 @@ e_terrain Map::getTerrain(size_t column, size_t line) const
 
 void Map::selectUnit(const Coords& c)
 {
-  // allow to select another unit if already one is selected ?
-  _selectedUnit = nullptr;
-
+  // Retrieve the unit
   auto unit(_cells[c.c][c.l]->unit());
   if (!unit) {
     ERROR("No unit to select at given coords", c.c, c.l);
   }
 
+  _lockSelectedUnitUpdate.lock();
   _selectedUnit = unit;
+  _lockSelectedUnitUpdate.unlock();
 }
 
 
 void Map::moveUnit(const Coords& c)
 {
+  _lockSelectedUnitUpdate.lock();
+
   Coords old(_selectedUnit->coords());
   assert(_cells[old.c][old.l]->unit()->played() == false);
 
@@ -83,6 +85,8 @@ void Map::moveUnit(const Coords& c)
   _cells[old.c][old.l]->removeUnit();
   _selectedUnit->setCoords(c);
   _cells[c.c][c.l]->setUnit(_selectedUnit);
+
+  _lockSelectedUnitUpdate.unlock();
 }
 
 
@@ -132,6 +136,7 @@ e_attack_result Map::attackResult(bool attacker_status, bool defender_status)
 
 e_attack_result Map::attack(std::shared_ptr<Unit> defender)
 {
+  _lockSelectedUnitUpdate.lock();
   assert(_selectedUnit && defender);
 
   // getting defender status
@@ -155,14 +160,14 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
     attacker_died = true;
   }
 
+  _lockSelectedUnitUpdate.unlock();
+
   return attackResult(attacker_died, defender_died);
 }
 
 
 e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
 {
-  assert(_selectedUnit && target_cell);
-
   auto defender = target_cell->unit();
   if (!defender)
   {

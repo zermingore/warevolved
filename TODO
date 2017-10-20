@@ -8,6 +8,7 @@
 
 
 * TODO Roadmap
+** TODO Treat at most one input per frame
 ** DONE Allow a Unit to attack without moving
    CLOSED: [2017-10-16 Mo 08:08]
 ** DONE The interface panel should not be dependent of the current State

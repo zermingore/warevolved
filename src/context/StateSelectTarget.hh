@@ -90,6 +90,8 @@ private:
   Coords _attackLocation; ///< Cell from which the attack is performed
 
   std::shared_ptr<graphics::Sprite> _holoUnit; ///< 'holo' attacking unit sprite
+
+  std::mutex _lockDraw; ///< Lock the draw
 };
 
 

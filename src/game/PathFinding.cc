@@ -1,5 +1,7 @@
 #include <game/PathFinding.hh>
 
+#include <exception>
+
 #include <debug/Debug.hh>
 
 #include <game/Battle.hh>
@@ -19,6 +21,11 @@
 PathFinding::PathFinding(std::shared_ptr<Unit> origin)
   : _currentLength(0)
 {
+  if (!origin)
+  {
+    throw std::exception();
+  }
+
   _origin = origin;
   _current = origin->coords();
   _maxLength = origin->motionValue();

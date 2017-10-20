@@ -40,6 +40,7 @@ public:
   /**
    * \brief Instantiate a PathFinding based on the given origin unit
    * \param origin Unit origin of the path
+   * \note Throws if the given Unit is NULL
    */
   PathFinding(std::shared_ptr<Unit> origin);
 
@@ -140,7 +141,7 @@ private:
   ///< List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;
 
-  std::mutex _lockDirections; ///< Locking _directions while backing back
+  std::mutex _lockDirections; ///< Locking _directions while pushing back
 
   ///< list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
