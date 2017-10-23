@@ -50,19 +50,6 @@ public:
   auto fullScreen() { return _fullScreen; }
 
   /**
-   * \brief _keyRepeatDelay getter.
-   * \return the required time to consider a "second pressure" (in ms).
-   */
-  auto keyRepeatDelay() { return _keyRepeatDelay; }
-
-  /**
-   * \brief _keyRepeatDelay setter.
-   * \param delay delay to consider a key as maintained, in ms
-   */
-  void setKeyRepeatDelay(const size_t delay) { _keyRepeatDelay = delay; }
-
-
-  /**
    * \brief Sets the _fullScreen attribute
    * Adjust the concerned graphical attributes accordingly
    */
@@ -90,9 +77,6 @@ private:
 
   // generic settings
   bool _fullScreen; ///< Notify if we're running in full screen.
-
-  ///< Required time to consider a "second pressure" in ms.
-  size_t _keyRepeatDelay;
 };
 
 
