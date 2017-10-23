@@ -8,8 +8,8 @@ Soldier::Soldier()
   _fullName = "John Doe";
   _sprite = std::make_shared<graphics::Sprite> ("soldiers");
 
-  _motionValue = 13;
-  _hp = 1;
+  _motionValue = 3;
+  _hp = 10;
   _attackValue = 5;
 
   _minRange = 1;

@@ -1,8 +1,6 @@
 #include <game/PathFinding.hh>
 
 #include <exception>
-#include <thread> // debug: sleep
-#include <chrono> // debug: sleep duration
 
 #include <debug/Debug.hh>
 
@@ -31,13 +29,7 @@ PathFinding::PathFinding(std::shared_ptr<Unit> origin)
   _origin = origin;
   _current = origin->coords();
   _maxLength = origin->motionValue();
-
-
-  PRINTF("Sleeping in PathFinding::PathFinding()");
-  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
   _map = game::Status::battle()->map();
-
-  PRINTF("PathFinding built");
 }
 
 

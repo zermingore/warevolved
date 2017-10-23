@@ -207,6 +207,7 @@
 ** TODO Use screenshots for the interface
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
+** TODO The displayed fps should be computed only over a fixed period of time
 
 * TODO Bugs / Features
 ** TODO Memory Leaks / Errors
