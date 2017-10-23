@@ -1,0 +1,51 @@
+In this file is kept a list of fixed bugs
+-----------------------------------------
+
+
+** DONE It is possible to select enemy units
+   CLOSED: [2017-10-13 Fr 07:45]
+
+
+** DONE segfault poping states (pressed 'escape' on the map State, after canceling a move)
+   CLOSED: [2017-10-23 Mo 07:41]
+   Closing it as it seems solved by the new way to treat events (one per frame)
+
+
+** DONE Attacking without moving is not possible
+   CLOSED: [2017-10-16 Mo 08:08]
+   Prior to attack, a move on another cell is required
+
+
+** DONE Spurious "Invalid direction" while moving a Unit
+   CLOSED: [2017-10-23 Mo 07:39]
+   Saw it with direction 0 (picked a unit, moved it down 2 times)
+   Saw it giving the wait order (not while moving)
+   As now only one event maximum is used per frame, it should solve the issue
+
+   # Moving a Unit:
+   *** Error in `./we': free(): corrupted unsorted chunks: 0x000000000110f2a0 ***
+
+   To test the fix, some sleeps were added in the EventsProcessing, PathFinding and States,
+   to check the operations order consistency
+
+
+** DONE Attacking a Unit can lead to a crash
+   CLOSED: [2017-10-23 Mo 07:40]
+   Assertion !_targets->empty() && "StateSelectTarget: no target available" failed
+   As now only one event maximum is used per frame, it should solve the issue
+
+
+** DONE X11 and multi-threading
+   CLOSED: [2017-08-17 Do 07:21]
+   The XInitThreads() function must be called before the creation of the threads using X
+   The include Xlib.h defines a macro 'NONE' conflicting with a value in the sf::Style enum
+   -> the Xlib.h must be included after the SFML ones
+   the Xlib.h also defines a Status symbol conflicting with the Status class of War Evolved
+   (to avoid conflicts, the Status class was moved in a namespace)
+
+   X Error of failed request:  BadDrawable (invalid Pixmap or Window parameter)
+   Major opcode of failed request:  152 (DRI2)
+   Minor opcode of failed request:  8 (DRI2SwapBuffers     )
+   Resource id in failed request:  0xe00009
+   Serial number of failed request:  12382
+   Current serial number in output stream:  12383
