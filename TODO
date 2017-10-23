@@ -1,6 +1,6 @@
 -*- mode:org -*-
 #+OPTIONS: ^:nil
-#+STARTUP: showeverything
+#+STARTUP: content
 
 # NOTE:
 # - A task can be removed only on the master
@@ -8,7 +8,8 @@
 
 
 * TODO Roadmap
-** TODO Treat at most one input per frame
+** DONE Treat at most one input per frame
+   CLOSED: [2017-10-23 Mo 07:36]
 ** DONE Allow a Unit to attack without moving
    CLOSED: [2017-10-16 Mo 08:08]
 ** DONE The interface panel should not be dependent of the current State
@@ -46,15 +47,18 @@
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 
+
 * TODO Input
 ** TODO Use the mouse to move the cursor, browse menus...
 ** TODO Clear the events fifo on State changes
 ** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
 
+
 * TODO Game Features
 ** DONE Allow direct attack when a target is already at range
    CLOSED: [2017-10-16 Mo 08:08]
    (do not pass through move action)
+
 
 * TODO Code Design
 ** TODO use emplace[_back] with std::vector (C++11)
@@ -71,12 +75,14 @@
    could use using std::vector
    could use typedef std::shared_ptr SP
 
+
 * TODO Graphics
 ** TODO Implement cell scrolling (too many cells to fit on the screen)
 ** TODO Apply a background to the main window
 ** TODO Multiple graphics::Image share the same sprite
    -> require to re-set the sprite position, rotation, ... before drawing
    (is it an issue)
+
 
 * TODO Resources
 ** TODO Sprites
@@ -96,6 +102,7 @@
 **** TODO Jeep
 *** TODO Terrain
 **** TODO Mountain
+
 
 * TODO Gameplay
 ** TODO Meteo
@@ -146,8 +153,10 @@
 	  increase reactivity
 	  only on simple move
 
+
 * TODO Sound
 ** TODO 3D sound (using OpenAL)
+
 
 * TODO Interface
 ** TODO Highlight possible targets when hovering a unit
@@ -160,9 +169,11 @@
 ** TODO center text in in-game menu entries
 ** TODO Display last killed unit list
 
+
 * TODO Network
 ** TODO Chat
 ** TODO multi-players
+
 
 * TODO [#C] Multi-Platforms
 ** TODO [#C] Windows
@@ -170,6 +181,7 @@
 ** TODO [#C] Mac OS
 ** TODO [#B] Phone ?
 *** TODO [#B] Android
+
 
 * TODO Graphic Engine
 ** TODO Units filter sprite
@@ -183,8 +195,10 @@
    merge on common themes
    1 theme -> 1 load, 1 free
 
+
 * TODO Menu
 ** TODO Main menu
+
 
 * TODO Tools
 ** TODO Global log
@@ -200,6 +214,7 @@
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (useful ?)
 
+
 * TODO non-regression tests
 ** TODO Test: Save the map in a file
 ** TODO game scripts (need to be able to use pre-recorded input)
@@ -208,6 +223,7 @@
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
 ** TODO The displayed fps should be computed only over a fixed period of time
+
 
 * TODO Bugs / Features
 ** TODO Memory Leaks / Errors
@@ -224,19 +240,25 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** TODO Spurious "Invalid direction" while moving a Unit
+** DONE Spurious "Invalid direction" while moving a Unit
+   CLOSED: [2017-10-23 Mo 07:39]
    Saw it with direction 0 (picked a unit, moved it down 2 times)
-** TODO Attacking a Unit can lead to a crash
+   As now only one event maximum is used per frame, it should solve the issue
+** DONE Attacking a Unit can lead to a crash
+   CLOSED: [2017-10-23 Mo 07:40]
    Assertion !_targets->empty() && "StateSelectTarget: no target available" failed
-** TODO segfault poping states (pressed 'escape' on the map State, after canceling a move)
+   As now only one event maximum is used per frame, it should solve the issue
+** DONE segfault poping states (pressed 'escape' on the map State, after canceling a move)
+   CLOSED: [2017-10-23 Mo 07:41]
+   Closing it as it seems solved by the new way to treat events (one per frame)
 ** TODO The path finding displays cells as reachable when an enemy unit prevents its access
 ** DONE It is possible to select enemy units
    CLOSED: [2017-10-13 Fr 07:45]
 
 
-
 * TODO Build
 ** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
+
 
 * TODO [#C] Optimization
   -> *Profile* <-
