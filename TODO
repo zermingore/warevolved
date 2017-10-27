@@ -17,6 +17,8 @@
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Map iterator to access cells without explicit double loop
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
+** TODO Merge Cell highlight boolean and color (color::None)
+** TODO Do not pass shared pointers as parameter when not usefull
 
 
 * TODO experimental

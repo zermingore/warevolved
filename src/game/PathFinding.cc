@@ -1,6 +1,8 @@
 #include <game/PathFinding.hh>
 
 #include <exception>
+#include <algorithm>
+#include <stack>
 
 #include <debug/Debug.hh>
 
@@ -201,79 +203,157 @@ void PathFinding::highlightCells()
   _reachableCells.clear();
   _enemyPositions.clear();
 
-  /// \todo check unit's inventory
-  //   (do not color enemies in red if we can't shoot them,
-  //    color allies in a different color if we can heal them, ...)
-  for (auto i(0u); i < _map->nbColumns(); ++i)
+  // Flood fill
+  auto nb_col(static_cast<int> (_map->nbColumns())); // explicitly using int
+  auto nb_lines(static_cast<int> (_map->nbLines())); // for implicit conversions
+  auto origin_coords(_origin->coords());
+
+  auto length(0u);
+  std::stack<std::pair<int, int>> reachables;
+  reachables.push({ origin_coords.c, origin_coords.l });
+  std::vector<std::pair<int, int>> checked_cells;
+  while (!reachables.empty())
   {
-    for (auto j(0u); j < _map->nbLines(); ++j)
+    auto col(reachables.top().first);
+    auto line(reachables.top().second);
+
+    reachables.pop();
+
+    // Check map borders
+    if (col < 0 || line < 0 || col > nb_col || line > nb_lines) {
+      continue;
+    }
+
+    // Skip already visited cells
+    if (std::find(checked_cells.begin(),
+                  checked_cells.end(),
+                  std::pair<int, int> { col, line })
+        != checked_cells.end())
     {
-      auto c = (*_map)[i][j]; // _map->cells() NULL [Map() not constructed !?]
-      // (crashed getting cell with i == 2; j == 0)
-      // called by StateMovingUnit::draw()
-      // Saw also an invalid free here
+      continue;
+    }
 
-      // reset highlight for every cell
-      c->setHighlight(false);
+    // false && length >= _origin->motionValue()
+    if (manhattan(Coords(col, line), origin_coords) > _origin->motionValue())
+    {
+      // TODO The unit cannot reach the target but may shoot at it
+      // TODO -> The cells must be pushed depending on move + shoot range
+      continue;
+    }
 
-      // Compute manhattan distance of unit to every cell
-      auto distance(manhattan(c->coords(), _current));
+    // The cell is reachable
+    auto c = (*_map)[col][line];
+    c->setHighlight(true);
+    c->setHighlightColor(graphics::Color::Yellow);
 
-      // Out of range cells
-      if (distance > _origin->motionValue() - _currentLength && !c->unit())
+    auto u = c->unit();
+    if (u)
+    {
+      if (u->playerId() == game::Status::player()->id())
       {
-        // If the Unit can shoot at it, consider it, else skip it
-        if (distance
-            <= _origin->motionValue() + _origin->maxRange() - _currentLength)
-        {
-          c->setHighlightColor(graphics::Color::Red);
-          _enemyPositions.push_back(c);
-        }
-        continue;
+        _reachableCells.push_back((*_map)[col][line]);
+        c->setHighlightColor(graphics::Color::Green);
+
+        reachables.emplace(col + 1, line    );
+        reachables.emplace(col    , line + 1);
+        reachables.emplace(col - 1, line    );
+        reachables.emplace(col    , line - 1);
       }
-
-      // Highlight reachable cells, depending on content, if any
-      auto u = c->unit();
-      if (distance
-          <= _origin->motionValue() + _origin->maxRange()  - _currentLength)
+      else
       {
-        c->setHighlight(true);
-
-        // empty cell, highlight as reachable
-        if (!u)
-        {
-          _reachableCells.push_back((*_map)[i][j]);
-          c->setHighlightColor(graphics::Color::Yellow);
-          continue;
-        }
-
-        if (u->playerId() == game::Status::player()->id())
-        {
-          _reachableCells.push_back((*_map)[i][j]);
-          c->setHighlightColor(graphics::Color::Green);
-        }
-        else
-        {
-          c->setHighlightColor(graphics::Color::Red);
-          _enemyPositions.push_back(c);
-        }
-
-        continue;
-      }
-
-      // cells only at shooting range
-      if (u && distance <= _origin->maxRange())
-      {
-        // unit out of moving range but at shooting range
-        if (u->playerId() != game::Status::player()->id())
-        {
-          c->setHighlight(true);
-          c->setHighlightColor(graphics::Color::Red);
-          _enemyPositions.push_back(c);
-        }
+        c->setHighlightColor(graphics::Color::Red);
+        _enemyPositions.push_back(c);
       }
     }
+    else
+    {
+      reachables.emplace(col + 1, line    );
+      reachables.emplace(col    , line + 1);
+      reachables.emplace(col - 1, line    );
+      reachables.emplace(col    , line - 1);
+    }
+
+    // Mark the current Cell as checked and push the adjacent ones
+    checked_cells.push_back({ col, line });
+
+    ++length;
   }
+
+
+
+  // /// \todo check unit's inventory
+  // //   (do not color enemies in red if we can't shoot them,
+  // //    color allies in a different color if we can heal them, ...)
+  // for (auto i(0u); i < _map->nbColumns(); ++i)
+  // {
+  //   for (auto j(0u); j < _map->nbLines(); ++j)
+  //   {
+  //     auto c = (*_map)[i][j]; // _map->cells() NULL [Map() not constructed !?]
+  //     // (crashed getting cell with i == 2; j == 0)
+  //     // called by StateMovingUnit::draw()
+  //     // Saw also an invalid free here
+
+  //     // reset highlight for every cell
+  //     c->setHighlight(false);
+
+  //     // Compute manhattan distance of unit to every cell
+  //     auto distance(manhattan(c->coords(), _current));
+
+  //     // Out of range cells
+  //     if (distance > _origin->motionValue() - _currentLength && !c->unit())
+  //     {
+  //       // If the Unit can shoot at it, consider it, else skip it
+  //       if (distance
+  //           <= _origin->motionValue() + _origin->maxRange() - _currentLength)
+  //       {
+  //         c->setHighlightColor(graphics::Color::Red);
+  //         _enemyPositions.push_back(c);
+  //       }
+  //       continue;
+  //     }
+
+  //     // Highlight reachable cells, depending on content, if any
+  //     auto u = c->unit();
+  //     if (distance
+  //         <= _origin->motionValue() + _origin->maxRange()  - _currentLength)
+  //     {
+  //       c->setHighlight(true);
+
+  //       // empty cell, highlight as reachable
+  //       if (!u)
+  //       {
+  //         _reachableCells.push_back((*_map)[i][j]);
+  //         c->setHighlightColor(graphics::Color::Yellow);
+  //         continue;
+  //       }
+
+  //       if (u->playerId() == game::Status::player()->id())
+  //       {
+  //         _reachableCells.push_back((*_map)[i][j]);
+  //         c->setHighlightColor(graphics::Color::Green);
+  //       }
+  //       else
+  //       {
+  //         c->setHighlightColor(graphics::Color::Red);
+  //         _enemyPositions.push_back(c);
+  //       }
+
+  //       continue;
+  //     }
+
+  //     // cells only at shooting range
+  //     if (u && distance <= _origin->maxRange())
+  //     {
+  //       // unit out of moving range but at shooting range
+  //       if (u->playerId() != game::Status::player()->id())
+  //       {
+  //         c->setHighlight(true);
+  //         c->setHighlightColor(graphics::Color::Red);
+  //         _enemyPositions.push_back(c);
+  //       }
+  //     }
+  //   }
+  // }
 
   // Do not highlight the origin Cell nor the holo unit cell
   _map->cell(_origin->coords())->setHighlight(false);
