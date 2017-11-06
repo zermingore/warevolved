@@ -66,6 +66,16 @@ public:
   static void draw();
 
 
+  /**
+   * \brief Display the given string on the specified cell
+   * \param c Column of the Cell where to write
+   * \param l Line of the Cell where to write
+   * \param str String to display in the Cell
+   * \note The used origin of the cell is the top-left corner
+   */
+  static void writeOnCell(size_t c, size_t l, const std::string str);
+
+
 private:
   /**
    * \brief Builds and return an initialized label, to display text

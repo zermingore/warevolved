@@ -3,6 +3,7 @@
 #include <resources/Text.hh>
 #include <interface/Interface.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 namespace debug {
@@ -49,6 +50,22 @@ void OSD::addText(const std::string str)
   _drawables.push_back(label->graphicalText());
   _dataPosition.y += _fontSize + 5;
 }
+
+
+
+void OSD::writeOnCell(size_t c, size_t l, const std::string str)
+{
+  using p = graphics::MapGraphicsProperties;
+
+  graphics::Pos2 pos {
+    static_cast<graphics::component> (c) * p::cellWidth()  + p::gridOffsetX(),
+    static_cast<graphics::component> (l) * p::cellHeight() + p::gridOffsetY()
+  };
+
+  auto label = std::make_shared<resources::Text> (str, _fontSize, pos);
+  _drawables.push_back(label->graphicalText());
+}
+
 
 
 } // namespace debug
