@@ -231,16 +231,10 @@ void PathFinding::computeCosts()
     auto line(candidates.top().second);
     candidates.pop();
 
-    // Checking the cell content
+    // Skipping cells containing enemy units as we cannot cross them
     auto c = (*_map)[col][line];
-    auto u = c->unit();
-    if (u)
-    {
-      if (u->playerId() != game::Status::player()->id())
-      {
-        _costs[col][line] = out_of_reach;
-        continue;
-      }
+    if (c->unit() && c->unit()->playerId() != game::Status::player()->id()) {
+      continue;
     }
 
     // Considering adjacent Cells and minimizing their distance
