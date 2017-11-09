@@ -8,9 +8,11 @@
 
 
 * TODO Roadmap
-** TODO [BugFix] The PathFinding shows some Cells as reachable when they are not
+** DONE [BugFix] The PathFinding shows some Cells as reachable when they are not
+   CLOSED: [2017-11-09 Do 18:21]
    The enemy units must be considered as obstacles
 ** TODO [Git] Remove merged branches (clean_pathfinding && thread_safety)
+** TODO [Clean] Pointers parameters (should pass smart_ptr only when sharing the ownership)
 
 
 * TODO Clean
@@ -39,6 +41,7 @@
 
 
 * TODO Code Design
+** TODO Merge with the experimental and use C++17 everywhere
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
 ** TODO auto-generate XML
@@ -208,7 +211,8 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** TODO The path finding displays cells as reachable when an enemy unit prevents its access
+** DONE The path finding displays cells as reachable when an enemy unit prevents its access
+   CLOSED: [2017-11-09 Do 18:23]
 
 
 * TODO Build
