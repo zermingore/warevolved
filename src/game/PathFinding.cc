@@ -33,6 +33,12 @@ PathFinding::PathFinding(std::shared_ptr<Unit> origin)
   _current = origin->coords();
   _maxLength = origin->motionValue();
   _map = game::Status::battle()->map();
+
+  // miserable safety check
+  assert(   _costs.size() >= _map->nbColumns()
+         && _costs.size() >= _map->nbLines());
+
+  computeCosts();
 }
 
 
@@ -199,29 +205,24 @@ void PathFinding::addNextDirection(const e_direction direction)
 
 
 
-/// \todo Do not call at each frame: split path finding and highlight
-void PathFinding::highlightCells()
+void PathFinding::computeCosts()
 {
-  _reachableCells.clear();
-  _enemyPositions.clear();
-
-  const auto nb_col(static_cast<int> (_map->nbColumns())); // explicitly using int
-  const auto nb_lines(static_cast<int> (_map->nbLines())); // for implicit conversions
+  const auto nb_col(static_cast<int> (_map->nbColumns())); // using int
+  const auto nb_lines(static_cast<int> (_map->nbLines())); // for conversions
   const auto cells(_map->cells());
 
   // Setting the cost to every cell to infinity
   const auto out_of_reach(_origin->maxRange() + _origin->motionValue() + 1);
-  std::array<std::array<size_t, 10>, 10> costs;
   for (auto c(0); c < nb_col; ++c)
   {
-    costs[c].fill(out_of_reach);
+    _costs[c].fill(out_of_reach);
     for (auto l(0); l < nb_lines; ++l)
     {
       cells[c][l]->setHighlight(false);
     }
   }
 
-  costs[_origin->coords().c][_origin->coords().l] = 0;
+  _costs[_origin->coords().c][_origin->coords().l] = 0;
   std::stack<std::pair<int, int>> candidates;
   candidates.push({ _origin->coords().c, _origin->coords().l });
   while (!candidates.empty())
@@ -237,56 +238,83 @@ void PathFinding::highlightCells()
     {
       if (u->playerId() != game::Status::player()->id())
       {
-        costs[col][line] = out_of_reach;
+        _costs[col][line] = out_of_reach;
         continue;
       }
     }
 
     // Considering adjacent Cells and minimizing their distance
-    auto distance = costs[col][line];
-    if (col > 0 && distance + 1 < costs[col - 1][line])
+    auto distance = _costs[col][line];
+    if (col > 0 && distance + 1 < _costs[col - 1][line])
     {
-      costs[col - 1][line] = distance + 1;
+      _costs[col - 1][line] = distance + 1;
       candidates.emplace(col - 1, line);
     }
 
-    if (col < nb_col - 1 && distance + 1 < costs[col + 1][line])
+    if (col < nb_col - 1 && distance + 1 < _costs[col + 1][line])
     {
-      costs[col + 1][line] = distance + 1;
+      _costs[col + 1][line] = distance + 1;
       candidates.emplace(col + 1, line);
     }
 
-    if (line > 0 && distance + 1 < costs[col][line - 1])
+    if (line > 0 && distance + 1 < _costs[col][line - 1])
     {
-      costs[col][line - 1] = distance + 1;
+      _costs[col][line - 1] = distance + 1;
       candidates.emplace(col, line - 1);
     }
 
-    if (line < nb_lines - 1 && distance + 1 < costs[col][line + 1])
+    if (line < nb_lines - 1 && distance + 1 < _costs[col][line + 1])
     {
-      costs[col][line + 1] = distance + 1;
+      _costs[col][line + 1] = distance + 1;
       candidates.emplace(col, line + 1);
     }
   }
+}
 
 
-  /// \todo move in another function -> do not recompute the pathfinding
+
+void PathFinding::highlightCells()
+{
+  const auto nb_col(static_cast<int> (_map->nbColumns())); // using int
+  const auto nb_lines(static_cast<int> (_map->nbLines())); // for conversions
+  const auto out_of_reach(_origin->maxRange() + _origin->motionValue() + 1);
 
   // Highlight reachable cells
   for (auto c(0); c < nb_col; ++c)
   {
     for (auto l(0); l < nb_lines; ++l)
     {
-      debug::OSD::writeOnCell(c, l, std::to_string(costs[c][l]));
-      if (costs[c][l] < out_of_reach)
+      // Skipping unreachable cells
+      if (_costs[c][l] >= out_of_reach) {
+        continue;
+      }
+
+      debug::OSD::writeOnCell(c, l, std::to_string(_costs[c][l]));
+
+      // Highlight only reachable cells
+      auto cell = (*_map)[c][l];
+      auto unit = cell->unit();
+      if (_costs[c][l] <= _origin->motionValue())
       {
-        auto cell = (*_map)[c][l];
         cell->setHighlight(true);
         cell->setHighlightColor(graphics::Color::Yellow);
+
+        // Own units
+        if (unit && unit->playerId() == game::Status::player()->id())
+        {
+          cell->setHighlightColor(graphics::Color::Green);
+          continue; // there can be only one unit per cell
+        }
+      }
+
+      // Highlight reachable enemies (taking into account the Unit range)
+      if (unit && unit->playerId() != game::Status::player()->id())
+      {
+        cell->setHighlight(true);
+        cell->setHighlightColor(graphics::Color::Red);
       }
     }
   }
-
 
   // Do not highlight the origin Cell nor the holo unit cell
   _map->cell(_origin->coords())->setHighlight(false);

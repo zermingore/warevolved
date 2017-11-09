@@ -90,10 +90,15 @@ public:
 
 private:
   /**
+   * \brief Compute and store the costs to every cell
+   * \note Unreachable cells have a cost of motion + range + 1
+   */
+  void computeCosts();
+
+  /**
    * \brief hides crossable cells
    */
   void hideAllowedPath();
-
 
   /**
    * \brief returns the sprite matching e_path_shape
@@ -101,7 +106,6 @@ private:
    * \return the image matching e_path_shape
    */
   std::shared_ptr<graphics::Sprite> getSprite(size_t index);
-
 
   /**
    * \brief updates current cell coordinates
@@ -135,6 +139,9 @@ private:
 
   size_t _maxLength;     ///< Path max length.
   size_t _currentLength; ///< Path current length.
+
+  ///< Costs values to reach every cell
+  std::array<std::array<size_t, 10>, 10> _costs; /// \todo Size is hard-coded !
 
   std::shared_ptr<Map> _map; ///< Do not access Battle all the time
 
