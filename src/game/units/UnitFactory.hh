@@ -14,6 +14,9 @@
 class Unit;
 
 
+/// \todo investigate std::variant, could make things safer
+
+
 /**
  * \class Unitfactory
  * \brief Unit creation, using the factory design pattern
@@ -23,7 +26,7 @@ class UnitFactory
 public:
   /**
    * \brief Creates a specialized Unit based on the given name
-   * \param name Unit name to create
+   * \param unit Unit type to create
    * \return a pointer to the freshly created Unit,
    *   nullptr if the name was invalid
    */

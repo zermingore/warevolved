@@ -13,7 +13,7 @@
    The enemy units must be considered as obstacles
 ** TODO [Git] Remove merged branches (clean_pathfinding && thread_safety)
 ** TODO [Clean] Pointers parameters (should pass smart_ptr only when sharing the ownership)
-
+** TODO [Doc] Home page
 
 * TODO Clean
 ** TODO Avoid casts to graphic types, overriding some methods

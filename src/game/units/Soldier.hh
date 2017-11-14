@@ -7,7 +7,6 @@
 #ifndef SOLDIER_HH_
 # define SOLDIER_HH_
 
-# include <vector>
 # include <string>
 # include <game/units/Unit.hh>
 
@@ -25,11 +24,6 @@ public:
    * \brief Default Constructor. Initializes characteristics motion, hp, ...
    */
   Soldier();
-
-  /**
-   * \brief Default destructor
-   */
-  ~Soldier() = default;
 
 
 private:

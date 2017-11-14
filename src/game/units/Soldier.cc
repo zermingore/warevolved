@@ -1,5 +1,14 @@
+/**
+ * \file
+ * \date August 8, 2013
+ * \author Zermingore
+ * \brief Soldier class definition
+ */
+
 #include <game/units/Soldier.hh>
+
 #include <graphics/Sprite.hh>
+
 
 
 Soldier::Soldier()

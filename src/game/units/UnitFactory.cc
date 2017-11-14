@@ -1,7 +1,15 @@
+/**
+ * \file
+ * \date February 9, 2017
+ * \author Zermingore
+ * \brief UnitFactory class definition: build Units
+ */
+
 #include <game/units/UnitFactory.hh>
 
 #include <debug/Debug.hh>
 #include <game/units/Unit.hh>
+
 #include <game/units/Soldier.hh>
 
 

@@ -8,19 +8,15 @@
 # define UNIT_HH_
 
 # include <memory>
-# include <string>
+# include <cstddef> // size_t
+# include <common/using.hh> // Coords
 
-# include <interface/menus/MenuEntry.hh>
 
-class Team;
 
 namespace graphics {
   class Sprite;
 }
 
-
-/// \todo abstract factory ?
-// (each Unit have its own sprite [for rotation], but shared texture)
 
 /**
  * \class Unit

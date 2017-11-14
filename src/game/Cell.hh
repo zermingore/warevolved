@@ -8,6 +8,7 @@
 # define GAME_CELL_HH_
 
 # include <game/units/Unit.hh>
+# include <graphics/graphic_types.hh>
 
 enum class e_terrain;
 enum class e_unit;

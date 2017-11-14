@@ -1,5 +1,17 @@
+/**
+ * \file
+ * \date May 3, 2013
+ * \author Zermingore
+ * \brief Unit constructor definition
+ *
+ * The Unit constructor is used to delegate a part of the initialization
+ */
+
+
 #include <game/units/Unit.hh>
-#include <game/Cell.hh>
+
+#include <graphics/Sprite.hh> // Sprite is forward-declared in the header
+
 
 
 Unit::Unit()
@@ -8,7 +20,7 @@ Unit::Unit()
   , _motionValue(0)
   , _hp(1)
   , _attackValue(0)
-  , _minRange(1) // at the moment, forbidding to have 2 units on the same cell
+  , _minRange(0)
   , _maxRange(0)
 {
 }
