@@ -17,7 +17,7 @@
 namespace graphics {
 
 // SFML: Using float for positions and sizes
-// because, from the SFML sources (SFML/System/Vector2.hpp):
+// because, from the SFML sources (SFML/Graphics/Vertex.hpp [Version 2.3.2]):
 // Note: although texture coordinates are supposed to be an integer
 // amount of pixels, their type is float because of some buggy graphics
 // drivers that are not able to process integer coordinates correctly.
@@ -27,7 +27,7 @@ using RenderWindow = sf::RenderWindow;
 using Pos2 = sf::Vector2f;
 using Size2 = sf::Vector2f;
 using Scale2 = sf::Vector2f;
-using component = float;  // component of Pos, Size (Scale is logically float)
+using component = float; // component of Pos, Size (Scale is logically float)
 
 using Color = sf::Color;
 
