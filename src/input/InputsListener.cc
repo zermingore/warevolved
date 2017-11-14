@@ -78,14 +78,14 @@ void InputsListener::replay(std::shared_ptr<ReplayManager> replay_manager)
   auto events(replay_manager->events());
   auto start(std::chrono::steady_clock::now());
   dur_milli time_elapsed;
-  for (const auto& logged_event: events)
+  for (const auto& [ timestamp, key ] : events)
   {
     // Wait for the event recorded time to push it in the fifo
     std::this_thread::sleep_for(
-      dur_milli (logged_event.first)
+      dur_milli (timestamp)
       - duration_cast<dur_milli> (steady_clock::now() - start));
 
-    KeyManager::pushKeyFromReplay(static_cast<e_key> (logged_event.second));
+    KeyManager::pushKeyFromReplay(static_cast<e_key> (key));
   }
 
   NOTICE("End reading replay file");

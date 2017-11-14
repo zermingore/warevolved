@@ -1,13 +1,22 @@
 War Evolved is a simple 2D tactical RPG
 
-To build the project, at the root, run
+To build the project, the following are required:
+- autotools
+- make
+- A C++17 compliant compiler
+- The SFML (version >= 2.3)
+
+As the C++17 standard is recent, you may have to build a compiler from sources.
+
+
+At the root, run
 > ./bootstrap
 
-autotools, make, g++ (with C++14 support) and SFML (2.3+) are required
-The binary file (we) should be created at the root
+The binary file (we) should be created at the root of the project.
+
 
 If you experience any problem,
-please refer to the HELP text file at the root of the project
+please refer to the HELP text file at the root of the project.
 
 
 To generate the documentation, at the root, run

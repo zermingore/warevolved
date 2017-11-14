@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date July 7, 2017
+ * \author Zermingore
+ * \brief ReplayManager class implementation
+ */
+
 #include <input/ReplayManager.hh>
 #include <debug/Debug.hh>
 #include <tools/StringParser.hh>
@@ -48,14 +55,10 @@ void ReplayManager::storeKey(const e_key& key)
   }
 
   using namespace std::chrono;
-  auto time_now = steady_clock::now();
-
   auto time_elapsed(duration_cast<duration<double, std::milli>> (
-                      time_now - _creationTime));
+                      steady_clock::now() - _creationTime));
 
-
-  *_file << time_elapsed.count()
-               << " " << static_cast<int> (key) << '\n';
+  *_file << time_elapsed.count() << " " << static_cast<int> (key) << '\n';
 }
 
 

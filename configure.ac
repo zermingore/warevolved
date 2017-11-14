@@ -5,8 +5,8 @@ AC_INIT([ms], [1.0])
 
 AC_CONFIG_AUX_DIR([build-aux])
 
-# forcing c++14 usage (must be before AC_PROG_CXX)
-CXXFLAGS="$CXXFLAGS -std=c++14 -pthread"
+# forcing c++17 usage (must be before AC_PROG_CXX)
+CXXFLAGS="$CXXFLAGS -std=c++1z -pthread"
 
 
 if [[ -n "$SFML_PATH" ]]
@@ -26,7 +26,7 @@ AM_SILENT_RULES([yes])
 # Checks for programs.
 # clang++ is no longer fully supported (as some g++ specific flags are used)
 # one can use clang++ deactivating these specific flags in src/Makefile.am
-AC_PROG_CXX([g++])
+AC_PROG_CXX([g++ clang++])
 
 
 # Silence warning "ar: 'u' modifier ignored since 'D' is the default"
