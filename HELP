@@ -6,7 +6,7 @@
 You will need
 - Autotools / automake
 - make
-- A recent C++ compiler (ideally with C++17 support, at least C++14).
+- A C++17 compliant compiler
 The code is often only compiled with g++ and some gcc specific warnings are used
 
 
