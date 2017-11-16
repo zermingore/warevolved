@@ -68,7 +68,7 @@ private:
 
   std::shared_ptr<const Map> _map; ///< Pointer on the game's map
 
-  ///< The cursor's position is displayed on the minimap
+  /// The cursor's position is displayed on the minimap
   std::shared_ptr<const Cursor> _playerCursor;
 };
 

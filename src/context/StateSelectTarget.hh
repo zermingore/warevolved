@@ -79,12 +79,12 @@ private:
   void exit();
 
 
-  ///< targets list from the PathFinding
+  /// targets list from the PathFinding
   std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targets;
 
   size_t _index_target; ///< index of the selected target
 
-  ///< sprite associated to the highlight of the selected target
+  /// sprite associated to the highlight of the selected target
   std::shared_ptr<graphics::Sprite> _targetHighlight;
 
   Coords _attackLocation; ///< Cell from which the attack is performed

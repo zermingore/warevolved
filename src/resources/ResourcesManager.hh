@@ -102,21 +102,21 @@ private:
 # ifdef DEBUG_XML
   /**
    * \brief list all available Resources
-   * it displays resources lists, by categories
+   * \note Display resources lists, by categories
    */
   static void listResources();
 # endif
 
-  ///< Images files list (name [identifier] -> image file name)
+  /// Images files list (name [identifier] -> image file name)
   static std::map<std::string, std::string> _images;
 
-  ///< Textures list (name [identifier] -> pointer on the Texture)
+  /// Textures list (name [identifier] -> pointer on the Texture)
   static std::map<std::string, std::shared_ptr<graphics::Texture>> _textures;
 
-  ///< Fonts list (name [identifier] -> font file name)
+  /// Fonts list (name [identifier] -> font file name)
   static std::map<std::string, std::shared_ptr<resources::Font>> _fonts;
 
-  ///< map categories names matching e_resource_type
+  /// map categories names matching e_resource_type
   static std::map<e_resource_type, std::string> _typeNames;
 };
 

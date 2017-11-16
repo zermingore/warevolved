@@ -87,7 +87,7 @@ private:
   static unsigned int _fontSize; ///< Text font size
   static Coords _dataPosition;   ///< Coordinates where to display data
 
-  ///< List of items to display
+  /// List of items to display
   static std::vector<std::shared_ptr<sf::Drawable>> _drawables;
 };
 

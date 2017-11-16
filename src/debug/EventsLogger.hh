@@ -57,7 +57,7 @@ private:
 
   static std::unique_ptr<std::ofstream> _log; ///< log file
 
-  ///< log creation timestamp
+  /// log creation timestamp
   static std::chrono::steady_clock::time_point _creationTime;
 };
 

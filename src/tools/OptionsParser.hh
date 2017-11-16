@@ -133,7 +133,7 @@ private:
 
   std::vector<std::string> _av; ///< mapping of the C arguments vector
 
-  ///< Game's version (major, minor, bugfix)
+  /// Game's version (major, minor, bugfix)
   const std::vector<size_t> _version = {0, 1, 0};
 
   /// List of supported options (map["help"] = {"-h", "--help"})

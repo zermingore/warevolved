@@ -43,14 +43,13 @@ enum class e_entry
 /**
  * \class MenuEntry
  * \brief One entry (a clickable item) of a menu
- *
- * Its position is relative to the menu it belongs to.
+ * \note The entry position is relative to the menu it belongs to.
  */
 class MenuEntry: public InterfaceElement
 {
 public:
   /**
-   * \brief deleted default constructor
+   * \brief deleted default constructor: we need to know the entry
    */
   MenuEntry() = delete;
 
@@ -97,9 +96,9 @@ private:
    */
   void setLabelName(e_entry entry);
 
-  e_entry _id;                            ///< entry identifier
-  std::shared_ptr<resources::Text> _label;       ///< button label text
-  std::string _labelName;                 ///< menu entry text
+  e_entry _id;                             ///< entry identifier
+  std::shared_ptr<resources::Text> _label; ///< button label text
+  std::string _labelName;                  ///< menu entry text
 
   /// callback executed when the entry is selected
   std::function<void()> _callback;

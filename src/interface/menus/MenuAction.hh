@@ -80,13 +80,12 @@ private:
   void attackUnit();
 
 
-
   e_state _state;      ///< State related to this menu
   Coords _clickedCell; ///< Clicked cell where this menu was invoked
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
 
-  ///< Get targets list of the selected unit
+  /// Get targets list of the selected unit
   std::unique_ptr<PathFinding> _pathFinding;
 };
 

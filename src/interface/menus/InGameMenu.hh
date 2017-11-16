@@ -7,6 +7,9 @@
 #ifndef IN_GAME_MENU_HH_
 # define IN_GAME_MENU_HH_
 
+# include <memory>
+# include <functional>
+
 # include <interface/menus/Menu.hh>
 
 enum class e_state;
@@ -75,8 +78,7 @@ protected:
   void addCancelEntry(const std::function<void()> cancel_callback);
 
 
-  // \todo RM _cursorCoords / _unit
-  // state data
+  /// \todo RM _cursorCoords / _unit // state data
   Coords _cursorCoords; ///< Saved cursor coordinates
   std::shared_ptr<Unit> _unit; ///< Saved unit
 };

@@ -1,12 +1,15 @@
+#include <interface/menus/InGameMenu.hh>
+
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/units/Unit.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
-#include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <common/enums/states.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Sprite.hh>
+
 
 
 namespace interface {

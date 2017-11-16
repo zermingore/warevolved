@@ -118,12 +118,12 @@ public:
 protected:
   std::shared_ptr<EventManager> _evtMgr; ///< State related events
 
-  ///< Interface elements list
+  /// Interface elements list
   std::vector<std::shared_ptr<interface::InterfaceElement>> _interfaceElements;
 
   Coords _cursorCoords; ///< Cursor's coordinates
 
-  ///< pointer on Abstract attribute
+  /// pointer on Abstract attribute
   std::vector<std::shared_ptr<void>> _attributes;
 
 

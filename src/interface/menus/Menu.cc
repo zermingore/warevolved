@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date July 24, 2013
+ * \author Zermingore
+ * \brief Interface generic menu class implementation
+ */
+
 #include <interface/menus/Menu.hh>
 
 #include <debug/Debug.hh>
@@ -25,7 +32,7 @@ Menu::Menu()
 
 void Menu::setOrigin(const Coords origin)
 {
-  /// \todo set the menu at optimal coordinates
+  /// \todo Set the menu at optimal coordinates
   _origin = origin;
 }
 
@@ -46,7 +53,7 @@ void Menu::draw()
   if (_entries.size() == 0)
   {
     PRINTF("on demand build");
-    build(); // use a cache (when pushing state)
+    build(); /// \todo Use a cache (when pushing state)
   }
 }
 

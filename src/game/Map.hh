@@ -202,7 +202,7 @@ private:
   /// Current selected unit
   std::shared_ptr<Unit> _selectedUnit;
 
-  ///< Locking while updating the selected unit
+  /// Locking while updating the selected unit
   std::mutex _lockSelectedUnitUpdate;
 };
 

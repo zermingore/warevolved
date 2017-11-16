@@ -105,7 +105,7 @@ private:
   /// current inputs (high level keys)
   static ThreadSafeQueue<e_input> _active_inputs;
 
-  ///< Pointer on the replay manager to add keys to a replay being created
+  /// Pointer on the replay manager to add keys to a replay being created
   static std::shared_ptr<ReplayManager> _replay;
 };
 

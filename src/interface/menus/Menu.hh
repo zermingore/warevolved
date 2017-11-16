@@ -2,19 +2,30 @@
  * \file
  * \date July 24, 2013
  * \author Zermingore
+ * \brief Interface generic menu class declaration
  */
 
 #ifndef MENU_HH_
 # define MENU_HH_
 
+# include <cstddef>
 # include <memory>
 # include <vector>
 
-# include <graphics/Sprite.hh>
 # include <interface/menus/MenuEntry.hh>
 # include <interface/InterfaceElement.hh>
 
+
 enum class e_state;
+
+namespace graphics {
+  class Sprite;
+}
+
+namespace interface {
+  class MenuEntry;
+}
+
 
 
 namespace interface {
@@ -23,7 +34,7 @@ namespace interface {
 /**
  * \class Menu
  * \brief Generic Menu (abstract class)
- * mother of \class InGameMenu
+ * \note Mother of \class InGameMenu
  */
 class Menu: public InterfaceElement
 {
@@ -123,7 +134,7 @@ protected:
   /// Current selected entry (the first entry [index 0], is at the bottom)
   size_t _selectedEntry;
 
-  ///< Emphasis of the selected entry
+  /// Emphasis of the selected entry
   std::shared_ptr<graphics::Sprite> _imageSelection;
 };
 

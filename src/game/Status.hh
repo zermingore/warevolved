@@ -104,7 +104,7 @@ public:
 
 
 private:
-  ///< Prevent from getting a State not fully built/destroyed
+  /// Prevent from getting a State not fully built/destroyed
   static std::mutex _lock;
 
   /**
@@ -115,10 +115,10 @@ private:
   static void blockInputs(const size_t duration = 100);
 
 
-  ///< States stack: storing a pointer to the state and its (more specific) type
+  /// States stack: storing a pointer to the state and its (more specific) type
   static std::stack<std::pair<e_state, std::shared_ptr<State>>> _states;
 
-  ///< Global State handling inputs accessible everywhere
+  /// Global State handling inputs accessible everywhere
   static std::shared_ptr<State> _globalState;
 
   static std::shared_ptr<Battle> _battle; ///< pointer on Battle

@@ -140,20 +140,20 @@ private:
   size_t _maxLength;     ///< Path max length.
   size_t _currentLength; ///< Path current length.
 
-  ///< Costs values to reach every cell
+  /// Costs values to reach every cell
   std::array<std::array<size_t, 10>, 10> _costs; /// \todo Size is hard-coded !
 
   std::shared_ptr<Map> _map; ///< Do not access Battle all the time
 
-  ///< List of path directions filled through addNextDirection.
+  /// List of path directions filled through addNextDirection.
   std::vector<e_direction> _directions;
 
   std::mutex _lockDirections; ///< Locking _directions while pushing back
 
-  ///< list of reachable cells for the selected unit
+  /// list of reachable cells for the selected unit
   std::vector<std::shared_ptr<Cell>> _reachableCells;
 
-  ///< list of cells occupied by an enemy unit
+  /// list of cells occupied by an enemy unit
   std::vector<std::shared_ptr<Cell>> _enemyPositions;
 };
 
