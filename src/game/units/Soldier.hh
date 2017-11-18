@@ -2,6 +2,7 @@
  * \file
  * \date August 8, 2013
  * \author Zermingore
+ * \brief Soldier (specific Unit) class declaration
  */
 
 #ifndef SOLDIER_HH_
@@ -10,7 +11,6 @@
 # include <string>
 # include <game/units/Unit.hh>
 
-class Item;
 
 
 /**
@@ -24,10 +24,6 @@ public:
    * \brief Default Constructor. Initializes characteristics motion, hp, ...
    */
   Soldier();
-
-
-private:
-  std::string _fullName; ///< soldier's full name (first and last names)
 };
 
 #endif /* !SOLDIER_HH_ */

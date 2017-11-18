@@ -2,7 +2,7 @@
  * \file
  * \date August 8, 2013
  * \author Zermingore
- * \brief Soldier class definition
+ * \brief Soldier (specific Unit) class definition
  */
 
 #include <game/units/Soldier.hh>
@@ -14,7 +14,6 @@
 Soldier::Soldier()
   : Unit()
 {
-  _fullName = "John Doe";
   _sprite = std::make_shared<graphics::Sprite> ("soldiers");
 
   _motionValue = 3;
