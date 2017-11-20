@@ -2,6 +2,7 @@
  * \file
  * \date August 3, 2013
  * \author Zermingore
+ * \brief Battle class declaration
  */
 
 #ifndef BATTLE_HH_

@@ -71,12 +71,12 @@ void InputsListener::listen(bool replay)
 void InputsListener::replay(std::shared_ptr<ReplayManager> replay_manager)
 {
   using namespace std::chrono;
-  using dur_milli = duration<double, std::chrono::milliseconds::period>;
-  auto current_time(std::chrono::steady_clock::now());
+  using dur_milli = duration<double, milliseconds::period>;
+  auto current_time(steady_clock::now());
 
   // Read replay events, from the pre-filled replay events map
   auto events(replay_manager->events());
-  auto start(std::chrono::steady_clock::now());
+  auto start(steady_clock::now());
   dur_milli time_elapsed;
   for (const auto& [ timestamp, key ] : events)
   {

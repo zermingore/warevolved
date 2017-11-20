@@ -15,6 +15,7 @@
 ** TODO [Clean] Pointers parameters (should pass smart_ptr only when sharing the ownership)
 ** TODO [Doc] Home page
 
+
 * TODO Clean
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Map iterator to access cells without explicit double loop
