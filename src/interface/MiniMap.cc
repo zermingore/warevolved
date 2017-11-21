@@ -17,8 +17,8 @@ MiniMap::MiniMap(graphics::Size2 size,
                  std::shared_ptr<const Cursor> cursor)
   : InterfaceElement("frame_thumbnail")
   , _frameSize(size)
-  , _map(map)
-  , _playerCursor(cursor)
+  , _map(*map)
+  , _playerCursor(*cursor)
 {
 }
 
@@ -42,9 +42,9 @@ void MiniMap::draw()
 
   // Computing the size of a cell
   const auto size_col((_frameSize.x - 10)
-                      / static_cast<component> (_map->nbColumns()));
+                      / static_cast<component> (_map.nbColumns()));
   const auto size_line((_frameSize.y - 10)
-                       / static_cast<component> (_map->nbLines()));
+                       / static_cast<component> (_map.nbLines()));
 
   // List of players to get their color
   const auto players { game::Status::battle()->players() };
@@ -52,10 +52,10 @@ void MiniMap::draw()
   const Size2 cell_size(size_col, size_line);
 
 
-  const auto cells(_map->cells());
-  for (auto col(0u); col < _map->nbColumns(); ++col)
+  const auto cells(_map.cells());
+  for (auto col(0u); col < _map.nbColumns(); ++col)
   {
-    for (auto line(0u); line < _map->nbLines(); ++line)
+    for (auto line(0u); line < _map.nbLines(); ++line)
     {
       const auto c { cells[col][line] };
       const Pos2 pos {

@@ -66,10 +66,10 @@ private:
   graphics::Size2 _frameSize; ///< Draw area size
   graphics::Pos2  _position;  ///< Draw area position
 
-  std::shared_ptr<const Map> _map; ///< Pointer on the game's map
+  const Map& _map; ///< Pointer on the game's map
 
   /// The cursor's position is displayed on the minimap
-  std::shared_ptr<const Cursor> _playerCursor;
+  const Cursor& _playerCursor;
 };
 
 
