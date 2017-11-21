@@ -1,9 +1,15 @@
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \brief Global settings class definition.
+ */
+
 #include <config/Settings.hh>
 
 
 
-
-void Settings::setFullScreen(const bool fullScreen)
+void Settings::setFullScreen(bool fullScreen)
 {
   _fullScreen = fullScreen;
 
@@ -18,9 +24,10 @@ void Settings::setFullScreen(const bool fullScreen)
 }
 
 
-void Settings::setGraphics(const unsigned int depth,
-                           const unsigned int stencil,
-                           const unsigned int antiAliasing)
+
+void Settings::setGraphics(unsigned int depth,
+                           unsigned int stencil,
+                           unsigned int antiAliasing)
 {
   _depth = depth;
   _stencil = stencil;

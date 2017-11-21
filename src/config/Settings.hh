@@ -2,13 +2,12 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
- * \brief Global settings class definition.
+ * \brief Global settings class declaration.
  */
 
 #ifndef SETTINGS_HH_
 # define SETTINGS_HH_
 
-# include <stddef.h> // size_t
 
 
 /// \todo create subclasses: VideoSettings, GameSettings
@@ -53,7 +52,7 @@ public:
    * \brief Sets the _fullScreen attribute
    * Adjust the concerned graphical attributes accordingly
    */
-  void setFullScreen(const bool fullScreen);
+  void setFullScreen(bool fullScreen);
 
 
 
@@ -65,14 +64,14 @@ private:
    * \param stencil stencil value
    * \param antiAliasing anti aliasing coefficient
    */
-  void setGraphics(const unsigned int depth,
-                   const unsigned int stencil,
-                   const unsigned int antiAliasing);
+  void setGraphics(unsigned int depth,
+                   unsigned int stencil,
+                   unsigned int antiAliasing);
 
 
   // graphic settings
-  unsigned int _depth; ///< Depth buffer size.
-  unsigned int _stencil; ///< Stencil buffer size
+  unsigned int _depth;        ///< Depth buffer size.
+  unsigned int _stencil;      ///< Stencil buffer size
   unsigned int _antiAliasing; ///< Anti aliasing level.
 
   // generic settings
