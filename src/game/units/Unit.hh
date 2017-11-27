@@ -31,7 +31,7 @@ public:
   Unit();
 
   /**
-   * \brief virtual default destructor
+   * \brief Virtual default destructor
    */
   virtual ~Unit() = default;
 
@@ -39,19 +39,19 @@ public:
    * \brief x coordinate on the map getter
    * \return x (column) coordinate on the Map
    */
-  auto c() { return _coords.c; }
+  const auto c() const { return _coords.c; }
 
   /**
    * \brief x unit coordinate on the map getter
    * \return y (line) coordinate on the Map
    */
-  auto l() { return _coords.l; }
+  const auto l() const { return _coords.l; }
 
   /**
-   * \brief gets unit's position
-   * \return unit's Cell coordinates
+   * \brief Get unit's position
+   * \return Unit's Cell coordinates
    */
-  auto coords() { return _coords; }
+  const auto coords() const { return _coords; }
 
   /**
    * \brief sets unit's position
@@ -63,13 +63,13 @@ public:
    * \brief _playerId getter
    * \return Id of the Player owning this Unit
    */
-  auto playerId() { return _playerId; }
+  const auto playerId() const { return _playerId; }
 
   /**
    * \brief _played getter
    * \return true if the unit has already been played, false otherwise
    */
-  auto played() { return _played; }
+  const auto played() const { return _played; }
 
   /**
    * \brief sets Unit's player belonging
@@ -93,37 +93,37 @@ public:
    * \brief _hp getter
    * \return health points
    */
-  auto hp() { return _hp; }
+  const auto hp() const { return _hp; }
 
   /**
    * \brief _attackValue getter
    * \return Attack value in hit points
    */
-  auto attackValue() { return _attackValue; }
+  const auto attackValue() const { return _attackValue; }
 
   /**
    * \brief _motionValue getter
    * \return The number of Cells a Unit can cross in one turn
    */
-  auto motionValue() { return _motionValue; }
+  const auto motionValue() const { return _motionValue; }
 
   /**
    * \brief _minRange getter
    * \return Minimal attack range (in Cells)
    */
-  auto minRange() { return _minRange; }
+  const auto minRange() const { return _minRange; }
 
   /**
    * \brief _maxRange getter
    * \return Maximal attack range getter (in Cells)
    */
-  auto maxRange() { return _maxRange; }
+  const auto maxRange() const { return _maxRange; }
 
   /**
    * \brief sprite getter
    * \return a pointer on the Unit's sprite
    */
-  auto sprite() { return _sprite; }
+  const auto sprite() const { return _sprite; }
 
 
 protected:
