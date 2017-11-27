@@ -3,8 +3,6 @@
  * \date May 3, 2013
  * \author Zermingore
  * \brief Unit constructor definition
- *
- * The Unit constructor is used to delegate a part of the initialization
  */
 
 

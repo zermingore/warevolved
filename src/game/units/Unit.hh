@@ -27,6 +27,7 @@ class Unit
 public:
   /**
    * \brief Initialize the attributes with default values
+   * \note The constructor is used to delegate a part of the initialization
    */
   Unit();
 
@@ -42,7 +43,7 @@ public:
   const auto c() const { return _coords.c; }
 
   /**
-   * \brief x unit coordinate on the map getter
+   * \brief y unit coordinate on the map getter
    * \return y (line) coordinate on the Map
    */
   const auto l() const { return _coords.l; }
