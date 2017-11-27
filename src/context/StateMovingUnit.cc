@@ -48,23 +48,19 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
 
   // Graphical attributes initialization
-  using namespace graphics;
-
   /// \todo No longer hard-code soldiers sprite
   _holoUnit = std::make_shared<graphics::Sprite> ("soldiers");
   _holoUnitPosition = player->cursor()->coords();
 
-
-  auto x(static_cast<component> (_holoUnit->size().x));
-  // explicitly using some floats for the division
-  float y = _holoUnit->size().y;
-  using p = MapGraphicsProperties;
+  const auto x { static_cast<graphics::component> (_holoUnit->size().x) };
+  const auto y { static_cast<graphics::component> (_holoUnit->size().y) };
+  using p = graphics::MapGraphicsProperties;
   _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
   // Fading sprite at original position
   auto unit(game::Status::battle()->map()->unit(_originalCoords));
   assert(unit);
-  unit->sprite()->setColor(Color(255, 255, 255, 160));
+  unit->sprite()->setColor(graphics::Color(255, 255, 255, 160));
 
   // Path finding
   _pathFinding = std::make_unique<PathFinding> (unit);

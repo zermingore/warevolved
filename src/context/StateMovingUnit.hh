@@ -69,8 +69,8 @@ private:
   void moveUnitRight();
 
 
-  Coords _originalCoords;   ///< original unit coordinates
-  Coords _holoUnitPosition; ///< Unit position 'cursor' (in cell)
+  const Coords _originalCoords; ///< original unit coordinates
+  Coords _holoUnitPosition;     ///< Unit position 'cursor' (in cell)
 
   std::shared_ptr<graphics::Sprite> _holoUnit; ///< 'cursor' moving unit
 
