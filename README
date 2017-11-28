@@ -7,6 +7,8 @@ To build the project, the following are required:
 - The SFML (version >= 2.3)
 
 As the C++17 standard is recent, you may have to build a compiler from sources.
+You may also need to indicate the path to a recent libc to run the binary using:
+> LD_LIBRARY_PATH=/path/to/lib ./we
 
 
 At the root, run

@@ -1,4 +1,7 @@
 -*- mode: org -*-
+#+OPTIONS: ^:nil
+#+STARTUP: showall
+
 
 * INSTALL
 
@@ -40,8 +43,21 @@ configure: error: Unable to find SFML System
 *** Make seems to loop forever complaining about modification time
 Your system date might have change between the checkout of the sources and the build
 
- cd ../.. && /bin/sh /path/to/_warevolved/build-aux/missing automake-1.15 --foreign src/Makefile
- cd .. && /bin/sh ./config.status src/Makefile depfiles
+  /bin/sh /path/to/_warevolved/build-aux/missing automake-1.15 --foreign src/Makefile
+  /bin/sh ./config.status src/Makefile depfiles
 config.status: creating src/Makefile
 config.status: executing depfiles commands
 make[1]: Warning: File '../../src/Makefile.am' has modification time 6672 s in the future
+
+
+*** Unable to execute the binary because of the version of the libstdc++
+ISSUE:
+./we: /usr/lib/x86_64-linux-gnu/libstdc++.so.6: version `CXXABI_1.3.11' not found (required by ./we)
+./we: /usr/lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by ./we)
+
+SOLUTION:
+Your libstdc++ is not compatible with the version used by War Evolved
+(you might have to compile g++ to build the libstdc++)
+
+Run War Evolved specifying the path to the libstdc++ library:
+  LD_LIBRARY_PATH=/path/to/lib ./we
