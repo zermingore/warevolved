@@ -10,7 +10,7 @@
 # include <memory>
 # include <cstddef> // size_t
 # include <common/using.hh> // Coords
-
+# include <graphics/graphic_types.hh>
 
 
 namespace graphics {
@@ -89,6 +89,12 @@ public:
    * \note allows negative values
    */
   void setHP(int hp) { _hp = hp; }
+
+  /**
+   * \brief Sprite color setter
+   * \param color New Sprite color (RGBA)
+   */
+  void setColor(const graphics::Color& color);
 
   /**
    * \brief _hp getter

@@ -64,9 +64,8 @@ StateMovingUnit::StateMovingUnit()
   // Fading sprite at original position
   auto unit(map->unit(_originalCoords));
   assert(unit);
-  unit->sprite()->setColor({ 255, 255, 255, 60 });
+  unit->setColor({ 255, 0, 0, 255 });
 
-  // Path finding
   _pathFinding = std::make_unique<PathFinding> (unit);
 }
 
@@ -78,7 +77,7 @@ StateMovingUnit::~StateMovingUnit()
 
   auto unit(game::Status::battle()->map()->unit(_originalCoords));
   if (unit) {
-    unit->sprite()->setColor(graphics::Color(255, 255, 255, 255));
+    unit->setColor({ 255, 255, 255, 255 });
   }
 }
 
@@ -144,6 +143,6 @@ void StateMovingUnit::draw()
   _pathFinding->highlightCells();
   _pathFinding->drawPath();
 
-  _holoUnit->setColor(graphics::Color(255, 127, 127, 255));
+  _holoUnit->setColor({ 255, 127, 127, 255 });
   _holoUnit->drawAtCell(_holoUnitPosition);
 }

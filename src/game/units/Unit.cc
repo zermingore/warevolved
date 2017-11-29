@@ -22,3 +22,9 @@ Unit::Unit()
   , _maxRange(0)
 {
 }
+
+
+void Unit::setColor(const graphics::Color& color)
+{
+  _sprite->setColor(color);
+}
