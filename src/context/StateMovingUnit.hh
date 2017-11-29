@@ -72,7 +72,7 @@ private:
   const Coords _originalCoords; ///< original unit coordinates
   Coords _holoUnitPosition;     ///< Unit position 'cursor' (in cell)
 
-  std::shared_ptr<graphics::Sprite> _holoUnit; ///< 'cursor' moving unit
+  std::unique_ptr<graphics::Sprite> _holoUnit; ///< 'cursor' moving unit
 
   size_t _nbColumns; ///< map number of columns
   size_t _nbLines;   ///< map number of lines

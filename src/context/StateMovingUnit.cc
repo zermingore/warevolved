@@ -48,9 +48,13 @@ StateMovingUnit::StateMovingUnit()
   _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
 
   // Graphical attributes initialization
-  /// \todo No longer hard-code soldiers sprite
-  _holoUnit = std::make_shared<graphics::Sprite> ("soldiers");
-  _holoUnitPosition = player->cursor()->coords();
+  auto map { game::Status::battle()->map() };
+  auto cursor_coords { player->cursor()->coords() };
+
+  // Make a deep-copy of the Unit's Sprite
+  _holoUnit = std::make_unique<graphics::Sprite> (
+    *map->unit(cursor_coords)->sprite());
+  _holoUnitPosition = cursor_coords;
 
   const auto x { static_cast<graphics::component> (_holoUnit->size().x) };
   const auto y { static_cast<graphics::component> (_holoUnit->size().y) };
@@ -58,9 +62,9 @@ StateMovingUnit::StateMovingUnit()
   _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
   // Fading sprite at original position
-  auto unit(game::Status::battle()->map()->unit(_originalCoords));
+  auto unit(map->unit(_originalCoords));
   assert(unit);
-  unit->sprite()->setColor(graphics::Color(255, 255, 255, 160));
+  unit->sprite()->setColor({ 255, 255, 255, 60 });
 
   // Path finding
   _pathFinding = std::make_unique<PathFinding> (unit);
