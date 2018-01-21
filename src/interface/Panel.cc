@@ -24,7 +24,6 @@
 namespace interface {
 
 
-/// \todo make frame_cell, frame_unit and frame minimap textures
 Panel::Panel(std::shared_ptr<const Map> map,
              std::shared_ptr<const Cursor> cursor)
   : InterfaceElement("side_panel")
@@ -38,11 +37,11 @@ Panel::Panel(std::shared_ptr<const Map> map,
   _frameUnit = std::make_shared<graphics::Sprite> ("frame_thumbnail");
 
   setWindowSize(
-      {static_cast<float> (graphics::GraphicsEngine::windowSize().x),
-       static_cast<float> (graphics::GraphicsEngine::windowSize().y)}
+      { static_cast<float> (graphics::GraphicsEngine::windowSize().x),
+        static_cast<float> (graphics::GraphicsEngine::windowSize().y) }
   );
 
-  graphics::Size2 size { _size.x, _size.y / 4 };
+  graphics::Size2 size { _size.x - _margin * 2, _size.y / 4 };
   _minimap = std::make_unique<MiniMap> (size, map, cursor);
 }
 
@@ -87,21 +86,22 @@ void Panel::toggleStatus()
 
 
   // Terrain
-  _frameCell->setPosition(background_position.x, 0ul);
+  _frameCell->setPosition(background_position.x + static_cast<size_t> (_margin),
+                          static_cast<size_t> (_margin));
 
   // Unit
-  _frameUnit->setPosition(background_position.x,
+  _frameUnit->setPosition(background_position.x + static_cast<size_t> (_margin),
                           static_cast<size_t> (_size.y / 3));
 
   // MiniMap
-  _minimap->setPosition({ background_position.x,
+  _minimap->setPosition({ background_position.x + static_cast<size_t> (_margin),
                           static_cast<size_t> (2 * _windowSize.y / 3) });
 
 
   // Set the grid offset (map rendering zone size: 1/2 left room)
   using namespace graphics;
   using p = MapGraphicsProperties;
-  auto size = static_cast<component> (GraphicsEngine::windowSize().x);
+  auto size = static_cast<component> (GraphicsEngine::windowSize().x) - _margin;
   auto nb_col = static_cast<component> (_map->nbColumns());
   p::setGridOffsetX((draw_offset + size - p::cellWidth() * nb_col) / 2);
 }
@@ -113,12 +113,16 @@ void Panel::update()
   _background->setSize(_size);
 
   // Terrain
-  _frameCell->setSize({ _size.x, _size.y / 4 });
+  _frameCell->setSize({ _size.x / 2, _size.y / 4 });
 
   // Unit
   _frameUnit->setSize({ _size.x / 2, _size.y / 8 });
-  _unitDataPos = { _frameUnit->position().x + _frameUnit->size().x + 5,
-                   _frameUnit->position().y + 5 };
+  _unitDataPos = {
+    _frameUnit->position().x
+      + _frameUnit->size().x
+      + static_cast<float> (_margin),
+    _frameUnit->position().y + static_cast<float> (_margin)
+  };
 
   // MiniMap
   _minimap->update();
@@ -148,8 +152,8 @@ void Panel::draw()
     {
       auto img(std::make_shared<graphics::Sprite> ("forest"));
       /// \todo Do not hard-code the offset (frame thickness) + adapt scale
-      img->setPosition(_frameCell->position().x + 5,
-                       _frameCell->position().y + 5);
+      img->setPosition(_frameCell->position().x + _margin,
+                       _frameCell->position().y + _margin);
 
       auto size(_frameCell->size());
       size.x -= 10;
@@ -173,8 +177,8 @@ void Panel::draw()
     // Unit sprite
     _frameUnit->draw();
     auto sprite(unit->sprite());
-    sprite->setPosition(_frameUnit->position().x + 5,
-                        _frameUnit->position().y + 5);
+    sprite->setPosition(_frameUnit->position().x + _margin,
+                        _frameUnit->position().y + _margin);
 
     auto size(_frameUnit->size());
     size.x -= 10;

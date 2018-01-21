@@ -103,6 +103,7 @@ public:
 private:
   graphics::Size2 _windowSize; ///< Drawing space size
 
+  const graphics::component _margin = 5;
   graphics::Pos2 _origin = {0, 0}; ///< Top left or top right corner - width
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
