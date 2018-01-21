@@ -1,0 +1,7 @@
+create differed games: one player makes a turn, goes offline
+waits for the oponent to go online
+
+-> allow to play online with a browser ?
+
+allow to create up to 10 differed games,
+expire in 1 year if noone moves (though, allow to save locally)

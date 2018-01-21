@@ -1,0 +1,47 @@
+zoom on some area -> change time frame
+(full city -> 1h; 1 block -> 10 min; 1 street -> 30s; micro move: 10s)
+
+pick an area of 10 x 10 cells
+-> zoom inside ~full screen: 30x30
+
+allow to micro / macro
+(go from A to B: osef; street gunfight with few units: micro manage every ~10s)
+
+guard a door / building can easily last days; get out of a building: a few minutes
+
+
+beginning of the game:
+micro only, then ~blocked in semi macro
+then allow the user to switch live
+
+limit the number of order we can give (~1 every 10s ?)
+
+a tank moves from a city to another one: ~3h
+user A makes this move
+
+In the same turn, how to handle:
+allow to give orders like go from A to B (will last 1h)
+and give a soldier the order to cross a street (10s)
+
+move a plane from A to B (5 min)
+move a tank  from A to B (3 hours)
+
+
+could: give the order, the unit will move during some hours
+(multiple turns, can be interrupted)
+and hit next turn (default value / user definable ?)
+
+
+End turn -> everything start at once ?
+
+
+# resources
+consider stamina
+fetch salt -> fetch water
+fetch food
+can sell laptops, ...
+can buy car parts, backpack, ...
+~frequent rain
+radio: rain anouces; recruitment
+
+water scarce -> alchool
