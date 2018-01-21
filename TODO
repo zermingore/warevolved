@@ -8,10 +8,8 @@
 
 
 * TODO Roadmap
-** DONE [BugFix] The PathFinding shows some Cells as reachable when they are not
-   CLOSED: [2017-11-09 Do 18:21]
-   The enemy units must be considered as obstacles
-** TODO [Git] Remove merged branches (clean_pathfinding && thread_safety)
+** DONE [Git] Remove merged branches (clean_pathfinding && thread_safety)
+   CLOSED: [2018-01-21 So 10:48]
 ** TODO [Clean] Pointers parameters (should pass smart_ptr only when sharing the ownership)
 ** TODO [Doc] Home page
 
@@ -42,7 +40,8 @@
 
 
 * TODO Code Design
-** TODO Merge with the experimental and use C++17 everywhere
+** DONE Merge with the experimental and use C++17 everywhere
+   CLOSED: [2018-01-21 So 10:49]
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
 ** TODO auto-generate XML
