@@ -8,8 +8,6 @@
 
 
 * TODO Roadmap
-** DONE [Git] Remove merged branches (clean_pathfinding && thread_safety)
-   CLOSED: [2018-01-21 So 10:48]
 ** TODO [Clean] Pointers parameters (should pass smart_ptr only when sharing the ownership)
 ** TODO [Doc] Home page
 
@@ -40,8 +38,6 @@
 
 
 * TODO Code Design
-** DONE Merge with the experimental and use C++17 everywhere
-   CLOSED: [2018-01-21 So 10:49]
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
 ** TODO auto-generate XML
@@ -211,8 +207,6 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** DONE The path finding displays cells as reachable when an enemy unit prevents its access
-   CLOSED: [2017-11-09 Do 18:23]
 
 
 * TODO Build
@@ -226,8 +220,3 @@
 ** TODO Sprites
    Every cell doesn't need to have it's own highlight sprite
    -> common sprites (1 per situation [move, attack])
-** DROPPED refresh only needed cells (do we care ?)
-   check mouse motion, cursor / units animation
-   DROPPED:
-   - This optimization would add many tests (cursor on / next to this cell, no unit, ...)
-   - This optimization forbid a global particle engine (dust particles on a desert map, snow, rain, ...)
