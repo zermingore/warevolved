@@ -6,6 +6,12 @@
 # Global constants
 MAX_COLUMNS=81
 
+# Colors for fancy prints
+COLOR_RED=$(echo -e '\e[0;31m')
+COLOR_GREEN=$(echo -e '\e[0;32m')
+COLOR_YELLOW=$(echo -e '\e[0;33m')
+COLOR_NORMAL=$(echo -e '\e[0m')
+
 
 
 function usage()
@@ -73,7 +79,19 @@ function check_arguments()
 
 function check_lines_length()
 {
-    find "$1" -name \*.hh -o -name \*.cc | xargs grep -H ".\{${MAX_COLUMNS},\}"
+    local lines=$(find "$1" -name \*.hh -o -name \*.cc | xargs grep -H ".\{${MAX_COLUMNS},\}")
+    if [[ $lines != "" ]]; then
+        echo "${COLOR_RED}Too long lines detected:${COLOR_NORMAL}"
+
+        # Printing the too long lines
+        IFS=$'\n'
+        for l in $lines; do
+            echo "${COLOR_YELLOW}>${MAX_COLUMNS} col:${COLOR_NORMAL} $l"
+        done
+        unset IFS
+    else
+        echo "${COLOR_GREEN}Maximal line length respected ($MAX_COLUMNS columns with \\n)${COLOR_NORMAL}"
+    fi
 }
 
 
