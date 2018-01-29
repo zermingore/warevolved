@@ -65,14 +65,32 @@ public:
   }
 
   /**
-   * \brief equality operator: compare x and y coordinates.
-   * \warning Should not be used when the class is templated with floats !
+   * \brief Division assignment operator
+   * \param rhs Right member
+   * \return A reference on this
+   * \note Asserts on division by 0
    */
-  Vector2& operator/(const sf::Vector2f& sfml_vector) {
-    x = x / sfml_vector.x;
-    y = y / sfml_vector.y;
+  Vector2<T>& operator/=(const Vector2<T>& rhs)
+  {
+    x /= rhs.x;
+    y /= rhs.y;
     return *this;
   }
+
+  /**
+   * \brief Division operator.
+   * \param lhs Left member
+   * \param rhs Right member
+   * \return The result of (lhs.x / rhs.x; lhs.y / rhs.y)
+   * \note Implemented using the assignment operator
+   */
+  friend Vector2<T> operator/(Vector2<T> lhs, const Vector2<T>& rhs)
+  {
+    lhs /= rhs;
+    return lhs;
+  }
+
+
 
   /**
    * \brief stream operator: display x and y coordinates.
@@ -84,10 +102,14 @@ public:
   }
 
 
+  /**
+   * \brief cast to SFML vector operator
+   */
   operator sf::Vector2<T>()
   {
     return sf::Vector2f(x, y);
   }
+
 
 
 public: // explicitly specifying that these attributes are public
