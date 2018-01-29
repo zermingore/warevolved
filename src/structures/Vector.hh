@@ -64,11 +64,92 @@ public:
     return (x == b.x && y == b.y);
   }
 
+
+  // ___________________________________________________________________________
+  //                     Arithmetic Operators
+
+  /**
+   * \brief Addition assignment operator
+   * \param rhs Right member
+   * \return A reference on this
+   */
+  Vector2<T>& operator+=(const Vector2<T>& rhs)
+  {
+    x += rhs.x;
+    y += rhs.y;
+    return *this;
+  }
+
+  /**
+   * \brief Addition operator
+   * \param lhs Left member
+   * \param rhs Right member
+   * \return The result of (lhs.x + rhs.x; lhs.y + rhs.y)
+   * \note Implemented using the assignment operator
+   */
+  friend Vector2<T> operator+(Vector2<T> lhs, const Vector2<T>& rhs)
+  {
+    lhs += rhs;
+    return lhs;
+  }
+
+
+  /**
+   * \brief Subtraction assignment operator
+   * \param rhs Right member
+   * \return A reference on this
+   */
+  Vector2<T>& operator-=(const Vector2<T>& rhs)
+  {
+    x -= rhs.x;
+    y -= rhs.y;
+    return *this;
+  }
+
+  /**
+   * \brief Addition operator
+   * \param lhs Left member
+   * \param rhs Right member
+   * \return The result of (lhs.x - rhs.x; lhs.y - rhs.y)
+   * \note Implemented using the assignment operator
+   */
+  friend Vector2<T> operator-(Vector2<T> lhs, const Vector2<T>& rhs)
+  {
+    lhs -= rhs;
+    return lhs;
+  }
+
+  /**
+   * \brief Multiplication assignment operator
+   * \param rhs Right member
+   * \return A reference on this
+   */
+  Vector2<T>& operator*=(const Vector2<T>& rhs)
+  {
+    x *= rhs.x;
+    y *= rhs.y;
+    return *this;
+  }
+
+  /**
+   * \brief Multiplication operator
+   * \param lhs Left member
+   * \param rhs Right member
+   * \return The result of (lhs.x * rhs.x; lhs.y * rhs.y)
+   * \note Implemented using the assignment operator
+   */
+  friend Vector2<T> operator*(Vector2<T> lhs, const Vector2<T>& rhs)
+  {
+    lhs *= rhs;
+    return lhs;
+  }
+
+
   /**
    * \brief Division assignment operator
    * \param rhs Right member
    * \return A reference on this
-   * \note Asserts on division by 0
+   * \note Crashes with integers; Returns infinity with floats on division by 0
    */
   Vector2<T>& operator/=(const Vector2<T>& rhs)
   {
@@ -89,6 +170,8 @@ public:
     lhs /= rhs;
     return lhs;
   }
+
+  // ___________________________________________________________________________
 
 
 
