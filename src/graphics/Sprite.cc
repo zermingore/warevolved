@@ -14,7 +14,7 @@ namespace graphics {
 Sprite::Sprite(const std::string file_name)
 {
   _rectangle = std::make_shared<RectangleShape> ();
-  _rectangle->setPosition(Pos2(0, 0));
+  _rectangle->setPosition({0, 0});
   _rectangle->setSize(Size2(0, 0));
 
   _texture = resources::ResourcesManager::getTexture(file_name);
@@ -66,9 +66,9 @@ Size2 const Sprite::size()
 
 void Sprite::setSize(const Size2 size)
 {
-  Size2 texture_size(_texture->getSize());
   _rectangle->setSize({ size.x, size.y });
-  _sprite->setScale({ size.x / texture_size.x, size.y / texture_size.y });
+  _sprite->setScale(size.x / static_cast<float> (_texture->getSize().x),
+                    size.y / static_cast<float> (_texture->getSize().y));
 }
 
 
@@ -87,11 +87,11 @@ void Sprite::setRotation(float angle)
 
 void Sprite::setScale(const Scale2 scale)
 {
-  _rectangle->setScale(scale);
-  _sprite->setScale(scale);
+  _rectangle->setScale(scale.x, scale.y);
+  _sprite->setScale(scale.x, scale.y);
 }
 
-void Sprite::setScale(const float ratio)
+void Sprite::setScale(float ratio)
 {
   _rectangle->setScale({ ratio, ratio });
   _sprite->setScale({ ratio, ratio });

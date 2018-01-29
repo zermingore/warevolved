@@ -13,6 +13,8 @@
 # include <SFML/Graphics.hpp>
 
 
+# include <structures/Vector.hh>
+
 
 namespace graphics {
 
@@ -24,9 +26,9 @@ namespace graphics {
 
 using RenderWindow = sf::RenderWindow;
 
-using Pos2 = sf::Vector2f;
-using Size2 = sf::Vector2f;
-using Scale2 = sf::Vector2f;
+using Pos2 = Vector2<float>;
+using Size2 = Vector2<float>;
+using Scale2 = Vector2<float>;
 using component = float; // component of Pos, Size (Scale is logically float)
 
 using Color = sf::Color;

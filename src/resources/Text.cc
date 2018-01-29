@@ -14,7 +14,7 @@ Text::Text(std::string str, int size, graphics::Pos2 pos, std::string font)
 {
   _font = ResourcesManager::getFont(font);
   _text = std::make_shared<sf::Text> (str, *(_font->getFont()), _size);
-  _text->setPosition(pos);
+  _text->setPosition({pos.x, pos.y});
 }
 
 
@@ -28,7 +28,7 @@ void Text::draw()
 
 void Text::setPosition(graphics::Pos2 pos)
 {
-  _text->setPosition(pos);
+  _text->setPosition(pos.x, pos.y);
 }
 
 
