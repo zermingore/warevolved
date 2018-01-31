@@ -67,8 +67,7 @@ Size2 const Sprite::size()
 void Sprite::setSize(const Size2 size)
 {
   _rectangle->setSize({ size.x, size.y });
-  _sprite->setScale(size.x / static_cast<float> (_texture->getSize().x),
-                    size.y / static_cast<float> (_texture->getSize().y));
+  _sprite->setScale(size / _texture->getSize());
 }
 
 

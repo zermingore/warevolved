@@ -59,7 +59,7 @@ public:
    * \brief Set the MiniMap position
    * \param pos New position
    */
-  void setPosition(Coords pos);
+  void setPosition(graphics::Pos2 pos);
 
 
 private:

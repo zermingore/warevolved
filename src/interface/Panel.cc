@@ -13,6 +13,7 @@
 #include <game/Cell.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
+#include <graphics/graphic_types.hh>
 #include <graphics/Sprite.hh>
 #include <resources/Text.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -64,7 +65,8 @@ void Panel::toggleStatus()
     (static_cast<int> (_status) + 1)
     % static_cast<int> (e_panel_status::NB_PANEL_STATUS));
 
-  Coords background_position { 0, 0 };
+  // Coords background_position { 0, 0 };
+  graphics::Pos2 background_position;
   auto draw_offset(0.f); // rendering room offset
   switch (_status)
   {
@@ -74,7 +76,9 @@ void Panel::toggleStatus()
 
     case e_panel_status::POSITION_RIGHT:
       draw_offset = -_windowSize.x / 4.f;
-      background_position.x = { static_cast<size_t> (3 * _windowSize.x / 4.f) };
+      // g++ [g++ (GCC) 8.0.0 20170710 (experimental)] segfaults on the following
+      // background_position.x = { static_cast<size_t> (3 * _windowSize.x / 4.f) };
+      background_position.x = 3.f * _windowSize.x / 4.f;
       break;
 
     default:
@@ -86,16 +90,14 @@ void Panel::toggleStatus()
 
 
   // Terrain
-  _frameCell->setPosition(background_position.x + static_cast<size_t> (_margin),
-                          static_cast<size_t> (_margin));
+  _frameCell->setPosition(background_position.x + _margin, _margin);
 
   // Unit
-  _frameUnit->setPosition(background_position.x + static_cast<size_t> (_margin),
-                          static_cast<size_t> (_size.y / 3));
+  _frameUnit->setPosition(background_position.x + _margin, _size.y / 3);
 
   // MiniMap
-  _minimap->setPosition({ background_position.x + static_cast<size_t> (_margin),
-                          static_cast<size_t> (2 * _windowSize.y / 3) });
+  _minimap->setPosition({
+      background_position.x + _margin, 2 * _windowSize.y / 3 });
 
 
   // Set the grid offset (map rendering zone size: 1/2 left room)
@@ -118,10 +120,8 @@ void Panel::update()
   // Unit
   _frameUnit->setSize({ _size.x / 2, _size.y / 8 });
   _unitDataPos = {
-    _frameUnit->position().x
-      + _frameUnit->size().x
-      + static_cast<float> (_margin),
-    _frameUnit->position().y + static_cast<float> (_margin)
+    _frameUnit->position().x + _frameUnit->size().x + _margin,
+    _frameUnit->position().y + _margin
   };
 
   // MiniMap

@@ -100,10 +100,10 @@ void MiniMap::draw()
 
 
 
-void MiniMap::setPosition(Coords pos)
+void MiniMap::setPosition(graphics::Pos2 pos)
 {
-  _position = { static_cast<graphics::component> (pos.x),
-                static_cast<graphics::component> (pos.y) };
+  _position = pos;
 }
+
 
 } // namespace interface
