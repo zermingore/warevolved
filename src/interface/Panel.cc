@@ -14,7 +14,6 @@
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
 #include <graphics/graphic_types.hh>
-#include <graphics/Sprite.hh>
 #include <resources/Text.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <common/enums/terrains.hh>
@@ -33,15 +32,11 @@ Panel::Panel(std::shared_ptr<const Map> map,
   , _status(e_panel_status::DEACTIVATED)
   , _fontSize(20)
 {
-  _background = std::make_shared<graphics::Sprite> (_imgName);
-  _frameCell = std::make_shared<graphics::Sprite> ("frame_thumbnail");
-  _frameUnit = std::make_shared<graphics::Sprite> ("frame_thumbnail");
+  _background = std::make_unique<graphics::Sprite> (_imgName);
+  _frameCell = std::make_unique<graphics::Sprite> ("frame_thumbnail");
+  _frameUnit = std::make_unique<graphics::Sprite> ("frame_thumbnail");
 
-  setWindowSize(
-      { static_cast<float> (graphics::GraphicsEngine::windowSize().x),
-        static_cast<float> (graphics::GraphicsEngine::windowSize().y) }
-  );
-
+  setWindowSize(graphics::GraphicsEngine::windowSize());
   graphics::Size2 size { _size.x - _margin * 2, _size.y / 4 };
   _minimap = std::make_unique<MiniMap> (size, map, cursor);
 }
@@ -76,8 +71,6 @@ void Panel::toggleStatus()
 
     case e_panel_status::POSITION_RIGHT:
       draw_offset = -_windowSize.x / 4.f;
-      // g++ [g++ (GCC) 8.0.0 20170710 (experimental)] segfaults on the following
-      // background_position.x = { static_cast<size_t> (3 * _windowSize.x / 4.f) };
       background_position.x = 3.f * _windowSize.x / 4.f;
       break;
 
@@ -150,7 +143,7 @@ void Panel::draw()
   {
     case e_terrain::FOREST:
     {
-      auto img(std::make_shared<graphics::Sprite> ("forest"));
+      auto img(std::make_unique<graphics::Sprite> ("forest"));
       /// \todo Do not hard-code the offset (frame thickness) + adapt scale
       img->setPosition(_frameCell->position().x + _margin,
                        _frameCell->position().y + _margin);
@@ -187,7 +180,6 @@ void Panel::draw()
 
     sprite->draw();
 
-
     // Unit data
     addUnitData("hp:     " + std::to_string(unit->hp()));
     addUnitData("motion: " + std::to_string(unit->motionValue()));
@@ -195,7 +187,6 @@ void Panel::draw()
 
     drawUnitData();
   }
-
 
   // MiniMap
   _minimap->draw();
@@ -212,7 +203,7 @@ void Panel::addUnitData(const std::string content)
 
 void Panel::drawUnitData()
 {
-  auto text = std::make_shared<resources::Text> (
+  auto text = std::make_unique<resources::Text> (
     _unitDataText, _fontSize, _unitDataPos);
 
   _unitDataText.clear();

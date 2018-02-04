@@ -12,17 +12,13 @@
 # include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>
 # include <common/enums/panel_status.hh>
+# include <graphics/Sprite.hh>
 
 # include <game/Map.hh>
 # include <interface/Cursor.hh>
 # include <interface/MiniMap.hh>
 
 class Map;
-
-namespace resources {
-  class Sprite;
-}
-
 
 
 namespace interface {
@@ -112,9 +108,9 @@ private:
 
   std::unique_ptr<MiniMap> _minimap; ///< Minimap to display in its frame
 
-  std::shared_ptr<graphics::Sprite> _background; ///< Panel's background
-  std::shared_ptr<graphics::Sprite> _frameCell;  ///< Hovered cell's frame
-  std::shared_ptr<graphics::Sprite> _frameUnit;  ///< Hovered unit's frame
+  std::unique_ptr<graphics::Sprite> _background; ///< Panel's background
+  std::unique_ptr<graphics::Sprite> _frameCell;  ///< Hovered cell's frame
+  std::unique_ptr<graphics::Sprite> _frameUnit;  ///< Hovered unit's frame
 
   e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
 

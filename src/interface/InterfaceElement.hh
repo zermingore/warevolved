@@ -138,7 +138,7 @@ protected:
 
   graphics::Pos2 _position; ///< Element position (in pixels)
   Coords _coords;           ///< Position (in cells; not always filled)
-  Vector2<float> _scale;    ///< Element scale (related to a Cell size)
+  graphics::Scale2 _scale;  ///< Element scale (related to a Cell size)
   float _rotation;          ///< Element rotation
 };
 
