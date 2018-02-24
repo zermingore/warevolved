@@ -8,6 +8,8 @@
 
 #include <interface/Panel.hh>
 
+#include <algorithm> // std:min
+
 #include <debug/Debug.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>
@@ -107,11 +109,13 @@ void Panel::update()
 {
   _background->setSize(_size);
 
+  auto edge_len = std::min(_size.x / 2, _size.y / 4);
+
   // Terrain
-  _frameCell->setSize({ _size.x / 2, _size.y / 4 });
+  _frameCell->setSize({ edge_len, edge_len });
 
   // Unit
-  _frameUnit->setSize({ _size.x / 2, _size.y / 8 });
+  _frameUnit->setSize({ edge_len, edge_len });
   _unitDataPos = {
     _frameUnit->position().x + _frameUnit->size().x + _margin,
     _frameUnit->position().y + _margin
