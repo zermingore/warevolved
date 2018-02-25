@@ -74,10 +74,15 @@ void Cursor::update()
   _sprite->setPosition(_position.x, _position.y);
 
   static float scale_factor = 1;
-  static unsigned int angle = 0;
+  static uint16_t angle = 0;
   angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
+  if (angle % 360 == 0)
+  {
+    angle = 0;
+    scale_factor = 1;
+  }
   _sprite->setScale(scale_factor, scale_factor);
-  ++angle; // \todo angle will overflow
+  ++angle;
 
 
   // The origin of the sprite is the middle of the cell

@@ -207,9 +207,11 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** TODO The cursor sprite was too big (around 2 cells) [2018 Feb 24]
+** DONE The cursor sprite was too big (around 2 cells) [2018 Feb 24]
+   CLOSED: [2018-02-25 So 09:27]
    This appeared after leaving we ~20 minutes without input
    Seems reproducible (commit 2d2dc75a32ccca7a6e5353b75bd290ded0ee2860)
+   Fixed: Resetting the cursor scale factor after each complete rotation
 
 
 * TODO Build
