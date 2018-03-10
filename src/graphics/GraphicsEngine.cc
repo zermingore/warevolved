@@ -160,46 +160,32 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
 
 void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 {
-  RectangleShape rectangle;
-  rectangle.setFillColor(Color::Transparent);
-  rectangle.setOutlineColor(GRID_COLOR);
-  rectangle.setOutlineThickness(MapGraphicsProperties::gridThickness());
-
-
-  // for each line, draw a rectangle
   using p = MapGraphicsProperties;
-  auto offset_x(p::gridOffsetX());
+
+  // Lines
   auto offset_y(p::gridOffsetY());
-  for (auto i(0u); i < map->nbLines(); ++i)
+  const auto len = p::cellWidth() * static_cast<component> (map->nbColumns())
+    + p::gridThickness();
+  RectangleShape line({len, p::gridThickness()});
+  line.setFillColor(GRID_COLOR);
+  for (auto l(0u); l <= map->nbLines(); ++l)
   {
-    rectangle.setPosition(offset_x, offset_y);
-
-    rectangle.setSize(
-      { p::cellWidth() * static_cast<component> (map->nbColumns()),
-        p::cellHeight() });
-
-    _window->draw(rectangle);
-
-    // skipping to next line
-    offset_y += p::cellHeight(); /// \todo - grid thickness in y / 2
+    line.setPosition(p::gridOffsetX(), offset_y);
+    _window->draw(line);
+    offset_y += p::cellHeight();
   }
 
-
-  // for each column draw a rectangle
-  // resetting offsets
-  offset_x = p::gridOffsetX();
-  offset_y = p::gridOffsetY();
-  for (auto col(0u); col < map->nbColumns(); ++col)
+  // Columns
+  auto offset_x(p::gridOffsetX());
+  const auto height = p::cellHeight() * static_cast<component> (map->nbLines())
+    + p::gridThickness();
+  RectangleShape col({p::gridThickness(), height});
+  col.setFillColor(GRID_COLOR);
+  for (auto c(0u); c <= map->nbColumns(); ++c)
   {
-    rectangle.setPosition(offset_x, offset_y);
-    rectangle.setSize(
-      { p::cellWidth(),
-        p::cellHeight() * static_cast<component> (map->nbLines()) });
-
-    _window->draw(rectangle);
-
-    // skipping to next column
-    offset_x += p::cellWidth(); /// \todo - grid thickness in x / 2
+    col.setPosition(offset_x, p::gridOffsetY());
+    _window->draw(col);
+    offset_x += p::cellWidth();
   }
 }
 
