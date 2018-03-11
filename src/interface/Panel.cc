@@ -33,6 +33,7 @@ Panel::Panel(std::shared_ptr<const Map> map,
   , _playerCursor(cursor)
   , _status(e_panel_status::DEACTIVATED)
   , _fontSize(20)
+  , _dateWidth(0)
 {
   _background = std::make_unique<graphics::Sprite> (_imgName);
   _frameCell = std::make_unique<graphics::Sprite> ("frame_thumbnail");
@@ -121,6 +122,13 @@ void Panel::update()
     _frameUnit->position().y + _margin
   };
 
+  // Meta information
+  _metaInfoPos = {
+    _background->position().x + _size.x - _margin - _dateWidth,
+    _background->position().y + _size.y - _margin
+      - static_cast<float> (_fontSize)
+  };
+
   // MiniMap
   _minimap->update();
 }
@@ -192,6 +200,9 @@ void Panel::draw()
     drawUnitData();
   }
 
+  // Meta information
+  drawMetaInfo();
+
   // MiniMap
   _minimap->draw();
 }
@@ -212,6 +223,22 @@ void Panel::drawUnitData()
 
   _unitDataText.clear();
   graphics::GraphicsEngine::draw(text->graphicalText());
+}
+
+
+
+void Panel::drawMetaInfo()
+{
+  auto now = std::time(nullptr);
+  auto time = std::localtime(&now);
+  char buffer[6];
+  std::strftime(buffer, 6, "%H:%M", time);
+
+  _dateText = std::make_unique<resources::Text> (buffer, _fontSize, _metaInfoPos);
+  if (_dateWidth < 0.1f)
+    _dateWidth = _dateText->graphicalText()->getLocalBounds().width;
+
+  graphics::GraphicsEngine::draw(_dateText->graphicalText());
 }
 
 

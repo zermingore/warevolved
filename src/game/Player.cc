@@ -11,6 +11,7 @@
 #include <interface/menus/InGameMenu.hh>
 #include <context/State.hh>
 #include <context/StateMenu.hh>
+#include <resources/Text.hh>
 
 
 

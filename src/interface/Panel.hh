@@ -20,6 +20,10 @@
 
 class Map;
 
+namespace resources {
+  class Text;
+}
+
 
 namespace interface {
 
@@ -95,6 +99,12 @@ public:
   void drawUnitData();
 
 
+  /**
+   * \brief Draw meta-information (fps, time, ...)
+   */
+  void drawMetaInfo();
+
+
 
 private:
   graphics::Size2 _windowSize; ///< Drawing space size
@@ -117,6 +127,10 @@ private:
   size_t _fontSize;            ///< Text font size (for the Unit HP, ...)
   graphics::Pos2 _unitDataPos; ///< Unit data text position (top-left corner)
   std::string _unitDataText;   ///< Unit data text content
+
+  graphics::Pos2 _metaInfoPos;                ///< Meta-info position (fps, ...)
+  std::unique_ptr<resources::Text> _dateText; ///< Date as a graphical text
+  graphics::component _dateWidth;             ///< Date width, in pixels
 };
 
 
