@@ -5,6 +5,7 @@
 
 #include <debug/Debug.hh>
 #include <debug/OSD.hh>
+#include <tools/Fps.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>
@@ -24,19 +25,11 @@ namespace graphics {
 
 const sf::Color GRID_COLOR(202, 124, 0);
 
-
 // Static Variables definition
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
-size_t GraphicsEngine::_nbFramesGenerated;
 bool GraphicsEngine::_takeScreenshot;
 std::unique_ptr<TerrainsHandler> GraphicsEngine::_terrainsHandler;
 
-
-constexpr double computeFps(size_t nb_frames, long int ns_elapsed)
-{
-  return (  static_cast<float> (nb_frames)
-          / static_cast<float> (ns_elapsed) * 1000000000.f);
-}
 
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
@@ -48,9 +41,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
   while (_window->isOpen())
   {
-    static auto graphics_start(std::chrono::steady_clock::now());
-
-    auto draw_start(std::chrono::steady_clock::now());
+    auto graphics_start(std::chrono::steady_clock::now());
     drawBackground();
     drawMap(battle);
 
@@ -61,10 +52,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
     drawInterface();
 
     // draw the debug data, eventually over everything (at last)
-    ++_nbFramesGenerated;
-    auto time_elapsed(std::chrono::steady_clock::now() - graphics_start);
-    debug::OSD::addPod(computeFps(_nbFramesGenerated, time_elapsed.count()),
-                       "FPS (from nb generated frames)");
+    std::chrono::duration<double> time_elapsed = std::chrono::steady_clock::now() - graphics_start;
     debug::OSD::draw();
 
     // Handle screenshot request, if any
@@ -74,7 +62,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
     // update the window
     _window->display();
-
+    Fps::updateFps(time_elapsed.count());
 
     EventsProcessor::notifyFrame();
   }

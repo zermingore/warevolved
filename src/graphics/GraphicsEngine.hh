@@ -153,18 +153,8 @@ private:
   static void screenshot();
 
 
-  /**
-   * \brief current number of generated frames
-   * \note if the compilation flag DEBUG_PERFS is not set
-   *   the frame rate will be limited to 60
-   *   it will be unlimited otherwise
-   */
-  static size_t _nbFramesGenerated;
-
   static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
-
   static bool _takeScreenshot; ///< \true when a screenshot is requested
-
   static std::unique_ptr<TerrainsHandler> _terrainsHandler; ///< Terrains list
 };
 

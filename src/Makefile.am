@@ -66,7 +66,8 @@ interface/menus/MenuMap.cc          \
 interface/menus/MenuAction.cc       \
 \
 tools/StringParser.cc               \
-tools/OptionsParser.cc
+tools/OptionsParser.cc              \
+tools/Fps.cc
 
 
 # Generated sources files
