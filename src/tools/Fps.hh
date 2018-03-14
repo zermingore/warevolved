@@ -12,6 +12,8 @@
 # include <chrono>
 
 
+namespace tools {
+
 /**
  * \class Fps
  * \brief Store the time to draw the last frames and compute the resulting FPS
@@ -24,10 +26,14 @@ class Fps
 public:
   /**
    * \brief update the frames computation time history
-   * \return the average fps (based on the kept history)
    * \note During the first 128 frames creation, the returned fps value is wrong
    */
-  static double updateFps(double last_frame_duration);
+  static void updateFps(double last_frame_duration);
+
+  /*
+   * \return the average fps (based on the kept history)
+   */
+  static auto getFps() { return _fps; }
 
 
 private:
@@ -39,6 +45,10 @@ private:
   static bool _firstBurst;           ///< Initialization
   static double _computationTimeSum; ///< Cached sum
   static size_t _currentIndex;       ///< Frame array index
+  static double _fps;                ///< FPS, on average
 };
+
+
+} // namespace tools
 
 #endif /* !TOOLS_FPS_HH_ */

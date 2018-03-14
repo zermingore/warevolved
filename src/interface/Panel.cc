@@ -124,7 +124,7 @@ void Panel::update()
 
   // Meta information
   _metaInfoPos = {
-    _background->position().x + _size.x - _margin - _dateWidth,
+    _background->position().x + _margin,
     _background->position().y + _size.y - _margin
       - static_cast<float> (_fontSize)
   };
@@ -229,16 +229,31 @@ void Panel::drawUnitData()
 
 void Panel::drawMetaInfo()
 {
+  // Draw the FPS
+  std::stringstream fpsStream;
+  fpsStream << "fps: " << tools::Fps::getFps();
+
+  graphics::Pos2 fps_pos = _metaInfoPos;
+  auto fpsText = std::make_unique<resources::Text> (
+    fpsStream.str(), _fontSize, fps_pos);
+
+  graphics::GraphicsEngine::draw(fpsText->graphicalText());
+
+
+  // Draw the time
   auto now = std::time(nullptr);
   auto time = std::localtime(&now);
   char buffer[6];
   std::strftime(buffer, 6, "%H:%M", time);
 
-  auto dateText = std::make_unique<resources::Text> (
-    buffer, _fontSize, _metaInfoPos);
+  auto text_pos = _metaInfoPos;
+  auto dateText = std::make_unique<resources::Text> (buffer, _fontSize, text_pos);
 
   if (_dateWidth < 0.1f)
     _dateWidth = dateText->graphicalText()->getLocalBounds().width;
+
+  text_pos += { _size.x - 2 * _margin - _dateWidth, 0 };
+  dateText->setPosition(text_pos);
 
   graphics::GraphicsEngine::draw(dateText->graphicalText());
 }

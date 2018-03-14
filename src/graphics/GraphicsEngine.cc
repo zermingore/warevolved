@@ -58,7 +58,7 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
     }
 
     duration<double> time_elapsed = steady_clock::now() - graphics_start;
-    Fps::updateFps(time_elapsed.count());
+    tools::Fps::updateFps(time_elapsed.count());
 
     // draw the debug data, eventually over everything (at last)
     debug::OSD::draw();

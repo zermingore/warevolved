@@ -5,14 +5,17 @@
 #include <iostream>
 
 
+namespace tools {
+
 // Static attributes definition
 std::array<double, Fps::_nbFrames> Fps::_lastFramesDuration = {};
 double Fps::_computationTimeSum = 0.f;
 size_t Fps::_currentIndex = 0;
 bool Fps::_firstBurst = true;
+double Fps::_fps = 0;
 
 
-double Fps::updateFps(double last_frame_duration)
+void Fps::updateFps(double last_frame_duration)
 {
   // init: accumulating every element until the array is full
   if (_firstBurst)
@@ -26,10 +29,10 @@ double Fps::updateFps(double last_frame_duration)
     }
 
     // Explicit cast to size_t
-    auto fps = static_cast<double> (_currentIndex) / _computationTimeSum;
-    debug::OSD::addPod(fps, "FPS");
+    _fps = static_cast<double> (_currentIndex) / _computationTimeSum;
+    debug::OSD::addPod(_fps, "FPS");
 
-    return fps;
+    return;
   }
 
 
@@ -40,8 +43,9 @@ double Fps::updateFps(double last_frame_duration)
   _currentIndex = (_currentIndex + 1) % _nbFrames;
 
   // Explicit cast to size_t
-  auto fps = static_cast<double> (_nbFrames) / _computationTimeSum;
-  debug::OSD::addPod(fps, "FPS");
-
-  return fps;
+  _fps = static_cast<double> (_nbFrames) / _computationTimeSum;
+  debug::OSD::addPod(_fps, "FPS");
 }
+
+
+} // namespace tools

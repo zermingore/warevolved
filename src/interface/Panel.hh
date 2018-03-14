@@ -57,14 +57,6 @@ public:
   void toggleStatus();
 
   /**
-   * \brief Origin setter
-   * \param origin New panel origin
-   */
-  void setOrigin(const graphics::Pos2 origin) {
-    _origin = origin;
-  }
-
-  /**
    * \brief Updates the window size
    *   Updates the Panel components size accordingly
    */
@@ -110,7 +102,6 @@ private:
   graphics::Size2 _windowSize; ///< Drawing space size
 
   const graphics::component _margin = 5;
-  graphics::Pos2 _origin = {0, 0}; ///< Top left or top right corner - width
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
   std::shared_ptr<const Map> _map; ///< Get terrain and unit under the Cursor
@@ -130,6 +121,7 @@ private:
 
   graphics::Pos2 _metaInfoPos;    ///< Meta-info position (fps, ...)
   graphics::component _dateWidth; ///< Date width, in pixels
+  graphics::component _fpsWidth;  ///< Fps frame width, in pixels
 };
 
 
