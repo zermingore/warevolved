@@ -32,6 +32,7 @@ void Text::setPosition(graphics::Pos2 pos)
 }
 
 
+
 void Text::setPosition(graphics::component x, graphics::component y)
 {
   _text->setPosition({x, y});

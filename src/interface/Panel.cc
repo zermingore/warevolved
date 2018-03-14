@@ -246,12 +246,11 @@ void Panel::drawMetaInfo()
   char buffer[6];
   std::strftime(buffer, 6, "%H:%M", time);
 
-  auto text_pos = _metaInfoPos;
-  auto dateText = std::make_unique<resources::Text> (buffer, _fontSize, text_pos);
-
+  auto dateText = std::make_unique<resources::Text> (buffer, _fontSize);
   if (_dateWidth < 0.1f)
     _dateWidth = dateText->graphicalText()->getLocalBounds().width;
 
+  auto text_pos = _metaInfoPos;
   text_pos += { _size.x - 2 * _margin - _dateWidth, 0 };
   dateText->setPosition(text_pos);
 

@@ -32,8 +32,7 @@ public:
   /**
    * \brief Default Constructor
    */
-  Text() = default;
-
+  Text() = delete;
 
   /**
    * \brief Constructor. Initializes a Text, ready to draw
@@ -42,7 +41,7 @@ public:
    * \param pos Position of the text on the screen
    * \param font Optional font name used to retrieve the Font
    */
-  Text(std::string str, int size, graphics::Pos2 pos, std::string font = "");
+  Text(std::string str, int size, graphics::Pos2 pos = {0, 0}, std::string font = "");
 
 
   /**
