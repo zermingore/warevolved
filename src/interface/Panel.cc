@@ -229,15 +229,16 @@ void Panel::drawUnitData()
 
 void Panel::drawMetaInfo()
 {
-  // Draw the FPS
+  using namespace graphics;
+
+  // Draw the FPS /// \todo On release, display max(60, fps)
   std::stringstream fpsStream;
-  fpsStream << "fps: " << tools::Fps::getFps();
+  fpsStream << "fps: " << static_cast<int> (tools::Fps::getFps() + 0.5);
 
-  graphics::Pos2 fps_pos = _metaInfoPos;
   auto fpsText = std::make_unique<resources::Text> (
-    fpsStream.str(), _fontSize, fps_pos);
+    fpsStream.str(), _fontSize, _metaInfoPos);
 
-  graphics::GraphicsEngine::draw(fpsText->graphicalText());
+  GraphicsEngine::draw(fpsText->graphicalText());
 
 
   // Draw the time
@@ -250,11 +251,10 @@ void Panel::drawMetaInfo()
   if (_dateWidth < 0.1f)
     _dateWidth = dateText->graphicalText()->getLocalBounds().width;
 
-  auto text_pos = _metaInfoPos;
-  text_pos += { _size.x - 2 * _margin - _dateWidth, 0 };
+  auto text_pos = _metaInfoPos + Pos2{ _size.x - 2 * _margin - _dateWidth, 0 };
   dateText->setPosition(text_pos);
 
-  graphics::GraphicsEngine::draw(dateText->graphicalText());
+  GraphicsEngine::draw(dateText->graphicalText());
 }
 
 
