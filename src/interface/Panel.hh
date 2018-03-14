@@ -128,9 +128,8 @@ private:
   graphics::Pos2 _unitDataPos; ///< Unit data text position (top-left corner)
   std::string _unitDataText;   ///< Unit data text content
 
-  graphics::Pos2 _metaInfoPos;                ///< Meta-info position (fps, ...)
-  std::unique_ptr<resources::Text> _dateText; ///< Date as a graphical text
-  graphics::component _dateWidth;             ///< Date width, in pixels
+  graphics::Pos2 _metaInfoPos;    ///< Meta-info position (fps, ...)
+  graphics::component _dateWidth; ///< Date width, in pixels
 };
 
 

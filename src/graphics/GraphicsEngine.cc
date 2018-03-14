@@ -39,9 +39,10 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
   _terrainsHandler = std::make_unique<TerrainsHandler> ();
   setGridOffset(battle->map());
 
+  using namespace std::chrono;
   while (_window->isOpen())
   {
-    auto graphics_start(std::chrono::steady_clock::now());
+    auto graphics_start(steady_clock::now());
     drawBackground();
     drawMap(battle);
 
@@ -51,18 +52,19 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
     drawState();
     drawInterface();
 
-    // draw the debug data, eventually over everything (at last)
-    std::chrono::duration<double> time_elapsed = std::chrono::steady_clock::now() - graphics_start;
-    debug::OSD::draw();
-
     // Handle screenshot request, if any
     if (_takeScreenshot) {
       screenshot();
     }
 
+    duration<double> time_elapsed = steady_clock::now() - graphics_start;
+    Fps::updateFps(time_elapsed.count());
+
+    // draw the debug data, eventually over everything (at last)
+    debug::OSD::draw();
+
     // update the window
     _window->display();
-    Fps::updateFps(time_elapsed.count());
 
     EventsProcessor::notifyFrame();
   }

@@ -11,16 +11,16 @@
 #include <algorithm> // std:min
 
 #include <debug/Debug.hh>
+#include <tools/Fps.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>
+#include <common/enums/terrains.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
-#include <graphics/graphic_types.hh>
 #include <resources/Text.hh>
+#include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <common/enums/terrains.hh>
 #include <graphics/MapGraphicsProperties.hh>
-
 
 
 namespace interface {
@@ -234,11 +234,13 @@ void Panel::drawMetaInfo()
   char buffer[6];
   std::strftime(buffer, 6, "%H:%M", time);
 
-  _dateText = std::make_unique<resources::Text> (buffer, _fontSize, _metaInfoPos);
-  if (_dateWidth < 0.1f)
-    _dateWidth = _dateText->graphicalText()->getLocalBounds().width;
+  auto dateText = std::make_unique<resources::Text> (
+    buffer, _fontSize, _metaInfoPos);
 
-  graphics::GraphicsEngine::draw(_dateText->graphicalText());
+  if (_dateWidth < 0.1f)
+    _dateWidth = dateText->graphicalText()->getLocalBounds().width;
+
+  graphics::GraphicsEngine::draw(dateText->graphicalText());
 }
 
 
