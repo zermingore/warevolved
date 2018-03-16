@@ -23,7 +23,6 @@ class Interface;
 class TerrainsHandler;
 
 
-
 namespace graphics {
 
 

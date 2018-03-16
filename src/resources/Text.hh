@@ -38,11 +38,21 @@ public:
    * \brief Constructor. Initializes a Text, ready to draw
    * \param str Text content
    * \param size Size of the text, in pixels
-   * \param pos Position of the text on the screen
+   * \param pos Optional position of the text on the screen
    * \param font Optional font name used to retrieve the Font
    */
-  Text(std::string str, int size, graphics::Pos2 pos = {0, 0}, std::string font = "");
+  Text(std::string str,
+       int size,
+       graphics::Pos2 pos = {0, 0},
+       std::string font = "");
 
+
+  /**
+   * \note Entity's local bounding rectangle getter
+   * \return Graphical text 'size'
+   * \note Wrapper around sf::Text::getLocalBounds()
+   */
+  graphics::Size2 getSize();
 
   /**
    * \brief Position setter
@@ -63,7 +73,7 @@ public:
    * \brief Graphic text getter
    * \return The graphical element containing the Text
    */
-  auto graphicalText() const { return _text; }
+  const auto graphicalText() const { return _text; }
 
   /**
    * \brief Draw the Text

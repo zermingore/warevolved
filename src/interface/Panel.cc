@@ -222,7 +222,7 @@ void Panel::drawUnitData()
     _unitDataText, _fontSize, _unitDataPos);
 
   _unitDataText.clear();
-  graphics::GraphicsEngine::draw(text->graphicalText());
+  text->draw();
 }
 
 
@@ -238,7 +238,7 @@ void Panel::drawMetaInfo()
   auto fpsText = std::make_unique<resources::Text> (
     fpsStream.str(), _fontSize, _metaInfoPos);
 
-  GraphicsEngine::draw(fpsText->graphicalText());
+  fpsText->draw();
 
 
   // Draw the time
@@ -249,12 +249,12 @@ void Panel::drawMetaInfo()
 
   auto dateText = std::make_unique<resources::Text> (buffer, _fontSize);
   if (_dateWidth < 0.1f)
-    _dateWidth = dateText->graphicalText()->getLocalBounds().width;
+    _dateWidth = dateText->getSize().x;
 
   auto text_pos = _metaInfoPos + Pos2{ _size.x - 2 * _margin - _dateWidth, 0 };
   dateText->setPosition(text_pos);
 
-  GraphicsEngine::draw(dateText->graphicalText());
+  dateText->draw();
 }
 
 

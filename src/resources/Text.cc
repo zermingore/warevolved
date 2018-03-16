@@ -19,9 +19,9 @@ Text::Text(std::string str, int size, graphics::Pos2 pos, std::string font)
 
 
 
-void Text::draw()
+graphics::Size2 Text::getSize()
 {
-  graphics::GraphicsEngine::draw(_text);
+  return { _text->getLocalBounds().width, _text->getLocalBounds().height };
 }
 
 
@@ -38,6 +38,12 @@ void Text::setPosition(graphics::component x, graphics::component y)
   _text->setPosition({x, y});
 }
 
+
+
+void Text::draw()
+{
+  graphics::GraphicsEngine::draw(_text);
+}
 
 
 } // namespace resources

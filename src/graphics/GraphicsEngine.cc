@@ -212,6 +212,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
 }
 
 
+
 void GraphicsEngine::drawInterface()
 {
   auto interface(game::Status::interface());
@@ -223,6 +224,7 @@ void GraphicsEngine::drawInterface()
     elt->draw();
   }
 }
+
 
 
 void GraphicsEngine::setGridOffset(const std::shared_ptr<const Map> map)
