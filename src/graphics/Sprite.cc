@@ -39,6 +39,20 @@ Sprite::Sprite(const std::shared_ptr<Texture> texture)
 
 
 
+void Sprite::setTexture(const std::string file_name)
+{
+  _rectangle = std::make_shared<RectangleShape> ();
+  _rectangle->setPosition({0, 0});
+  _rectangle->setSize(Size2(0, 0));
+
+  _texture = resources::ResourcesManager::getTexture(file_name);
+  _rectangle->setTexture(_texture.get());
+
+  _sprite = std::make_shared<sf::Sprite> (*_texture);
+}
+
+
+
 Pos2 const Sprite::position()
 {
   return _sprite->getPosition();

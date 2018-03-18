@@ -15,6 +15,7 @@ enum class e_terrain
 {
   NONE = 0,
   FOREST,
+  PLAIN,
 
   NB_TERRAIN
 };

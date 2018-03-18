@@ -28,7 +28,7 @@ Map::Map(size_t nb_columns, size_t nb_lines)
 
     // Allocate each Cell of the column
     for (auto line(0u); line < _nbLines; ++line) {
-      vec[line] = std::make_shared<Cell> (col, line, e_terrain::FOREST);
+      vec[line] = std::make_shared<Cell> (col, line, e_terrain::PLAIN);
     }
 
     // _cells is a vector of columns

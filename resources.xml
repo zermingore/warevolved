@@ -12,6 +12,9 @@
 	  </file>
 	</folder>
 	<folder path='resources/terrains/'>
+	  <file filename='plain.png'>
+		<name>plain</name>
+	  </file>
 	  <file filename='forest.png'>
 		<name>forest</name>
 	  </file>

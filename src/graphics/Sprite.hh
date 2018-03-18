@@ -28,10 +28,7 @@ namespace graphics {
 class Sprite
 {
 public:
-  /**
-   * \brief Deleted default Constructor
-   */
-  Sprite() = delete;
+  Sprite() = default;
 
   /**
    * \brief Sprite Constructor
@@ -46,6 +43,13 @@ public:
    */
   explicit Sprite(const std::shared_ptr<Texture> texture);
 
+
+  /**
+   * \brief Initialize the texture
+   * \param file_name Sprite complete file name
+   *   (with full path and extension)
+   */
+  void setTexture(const std::string file_name);
 
   /**
    * \brief _texture getter

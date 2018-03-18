@@ -148,28 +148,32 @@ void Panel::draw()
   // Terrain
   _frameCell->draw();
   const auto terrain(cell->terrain());
-  auto image();
+  graphics::Sprite img;
   switch (terrain)
   {
-    case e_terrain::FOREST:
-    {
-      auto img(std::make_unique<graphics::Sprite> ("forest"));
-      img->setPosition(_frameCell->position().x + _margin,
-                       _frameCell->position().y + _margin);
-
-      auto size(_frameCell->size());
-      size.x -= 10;
-      size.y -= 10;
-      img->setSize(size);
-      img->draw();
+    case e_terrain::PLAIN:
+      img.setTexture("plain");
       break;
-    }
+
+    case e_terrain::FOREST:
+      img.setTexture("forest");
+      break;
 
     default:
       // Not using the enum printer here as the terrains will be a class
       ERROR("Terrain is invalid", static_cast<int> (cell->terrain()));
-      break;
+      return;
   }
+
+
+  img.setPosition(_frameCell->position().x + _margin,
+                   _frameCell->position().y + _margin);
+
+  auto sz(_frameCell->size());
+  sz.x -= 10;
+  sz.y -= 10;
+  img.setSize(sz);
+  img.draw();
 
 
   // Unit frame

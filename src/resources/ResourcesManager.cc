@@ -137,7 +137,7 @@ void ResourcesManager::listResources()
 {
   PRINTF("\t\t__________Resources List__________");
   for (auto it : _images) {
-    Debug::logPrintf(it.second->name());
+    Debug::logPrintf(it.second);
   }
 
   for (auto it : _fonts) {
