@@ -48,10 +48,8 @@ Panel::Panel(std::shared_ptr<const Map> map,
 
 void Panel::setWindowSize(const graphics::Size2& size)
 {
-  _windowSize = size;
-
-  _size.x = _windowSize.x / 4;
-  _size.y = _windowSize.y;
+  _size.x = size.x / 4;
+  _size.y = size.y;
   _background->setSize(_size);
 }
 
@@ -63,21 +61,21 @@ void Panel::toggleStatus()
     (static_cast<int> (_status) + 1)
     % static_cast<int> (e_panel_status::NB_PANEL_STATUS));
 
-  // Coords background_position { 0, 0 };
   graphics::Pos2 background_position;
   auto draw_offset(0.f); // rendering room offset
   switch (_status)
   {
     case e_panel_status::POSITION_LEFT:
-      draw_offset = _windowSize.x / 4.f;
+      draw_offset = _size.x;
       break;
 
     case e_panel_status::POSITION_RIGHT:
-      draw_offset = -_windowSize.x / 4.f;
-      background_position.x = 3.f * _windowSize.x / 4.f;
+      draw_offset = -_size.x;
+      background_position.x = 3.f * _size.x;
       break;
 
     default:
+      ERROR("Unexpected panel position");
       break;
   }
 
@@ -93,7 +91,7 @@ void Panel::toggleStatus()
 
   // MiniMap
   _minimap->setPosition({
-      background_position.x + _margin, 2 * _windowSize.y / 3 });
+      background_position.x + _margin, 2 * _size.y / 3 });
 
 
   // Set the grid offset (map rendering zone size: 1/2 left room)
@@ -156,7 +154,6 @@ void Panel::draw()
     case e_terrain::FOREST:
     {
       auto img(std::make_unique<graphics::Sprite> ("forest"));
-      /// \todo Do not hard-code the offset (frame thickness) + adapt scale
       img->setPosition(_frameCell->position().x + _margin,
                        _frameCell->position().y + _margin);
 

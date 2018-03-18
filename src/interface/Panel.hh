@@ -99,8 +99,6 @@ public:
 
 
 private:
-  graphics::Size2 _windowSize; ///< Drawing space size
-
   const graphics::component _margin = 5;
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
