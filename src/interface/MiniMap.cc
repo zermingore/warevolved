@@ -1,4 +1,7 @@
 #include <interface/MiniMap.hh>
+
+#include <debug/Debug.hh>
+#include <common/enums/terrains.hh>
 #include <interface/Cursor.hh>
 #include <game/Map.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -64,15 +67,26 @@ void MiniMap::draw()
       };
 
       // Draw the terrain
+      graphics::Sprite sprite;
       switch (c->terrain())
       {
-        default:
-          auto img { std::make_shared<Sprite> ("forest") };
-          img->setPosition(pos.x, pos.y);
-          img->setSize(cell_size);
-          img->draw();
+        case e_terrain::PLAIN:
+          sprite.setTexture("plain");
           break;
+
+        case e_terrain::FOREST:
+          sprite.setTexture("forest");
+          break;
+
+        default:
+          // Not using the enum printer here as the terrains will be a class
+          ERROR("Terrain is invalid", static_cast<int> (c->terrain()));
+          return;
       }
+      sprite.setPosition(pos.x, pos.y);
+      sprite.setSize(cell_size);
+      sprite.draw();
+
 
       // Draw the units
       const auto unit {c->unit()};
