@@ -15,6 +15,8 @@
 #include <game/units/UnitFactory.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
+#include <game/Terrain.hh>
+#include <game/TerrainsHandler.hh>
 
 
 
@@ -27,9 +29,12 @@ Map::Map(size_t nb_columns, size_t nb_lines)
     std::vector<std::shared_ptr<Cell>> vec(_nbLines);
 
     // Allocate each Cell of the column
-    for (auto line(0u); line < _nbLines; ++line) {
+    for (auto line(0u); line < _nbLines - 1; ++line) {
       vec[line] = std::make_shared<Cell> (col, line, e_terrain::PLAIN);
     }
+    vec[_nbLines - 1] =
+      std::make_shared<Cell> (col, _nbLines - 1, e_terrain::FOREST);
+
 
     // _cells is a vector of columns
     _cells.push_back(vec);
@@ -134,15 +139,49 @@ e_attack_result Map::attackResult(bool attacker_status, bool defender_status)
 }
 
 
+
+std::pair<size_t, size_t> Map::damageValues(const Unit& attacker,
+                                            const Unit& defender)
+{
+  auto th = TerrainsHandler();
+
+  // Compute attacker damages
+  auto def_cell = _cells[defender.c()][defender.l()];
+  auto def_terrain = th.getTerrain(def_cell->terrain());
+
+  int dmg_attack =
+    static_cast<int> (attacker.attackValue()) - def_terrain->cover();
+  auto attacker_damages = std::max(1, dmg_attack);
+
+
+  // No strike-back damages if the defender dies
+  if (defender.hp() - attacker_damages <= 0)
+    return { attacker_damages, 0 };
+
+
+  // Compute defender strike-back damages
+  auto att_cell = _cells[attacker.c()][attacker.l()];
+  auto att_terrain = th.getTerrain(att_cell->terrain());
+
+  int dmg_def =
+    static_cast<int> (defender.attackValue() / 2) - att_terrain->cover();
+  auto defender_damages = std::max(1, dmg_def);
+
+
+  return { attacker_damages, defender_damages };
+}
+
+
+
 e_attack_result Map::attack(std::shared_ptr<Unit> defender)
 {
   _lockSelectedUnitUpdate.lock();
   assert(_selectedUnit && defender);
 
-  // getting defender status
-  defender->setHP(defender->hp()
-                  - static_cast<int> (_selectedUnit->attackValue()));
+  auto damages = damageValues(*_selectedUnit, *defender);
+
   bool defender_died = false;
+  defender->setHP(defender->hp() - static_cast<int> (damages.first));
   if (defender->hp() <= 0)
   {
     _cells[defender->c()][defender->l()]->removeUnit();
@@ -150,8 +189,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   }
 
   // getting attacker status after strike back
-  _selectedUnit->setHP(_selectedUnit->hp()
-                       - static_cast<int> (defender->attackValue()) / 2);
+  _selectedUnit->setHP(_selectedUnit->hp() - static_cast<int> (damages.second));
   bool attacker_died = false;
   if (_selectedUnit->hp() <= 0)
   {
@@ -164,6 +202,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
 
   return attackResult(attacker_died, defender_died);
 }
+
 
 
 e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)

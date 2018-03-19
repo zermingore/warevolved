@@ -190,6 +190,18 @@ public:
 
 
 private:
+  /**
+   * \brief Helper function to compute the damages values
+   * \param attacker Attacking unit
+   * \param defender Unit under attack
+   * \return A couple: (attacker damages, defender damages)
+   * \note The defender damages is 0 if the attack is lethal
+   * \note The damages are in [| 1; +inf |]
+   */
+  std::pair<size_t, size_t> damageValues(const Unit& attacker,
+                                         const Unit& defender);
+
+
   size_t _nbColumns; ///< number of columns (x coordinate)
   size_t _nbLines;   ///< number of lines (y coordinate)
 

@@ -165,7 +165,6 @@ void Panel::draw()
       return;
   }
 
-
   img.setPosition(_frameCell->position().x + _margin,
                    _frameCell->position().y + _margin);
 

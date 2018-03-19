@@ -12,7 +12,7 @@ TerrainsHandler::TerrainsHandler()
 
   /// \todo Find a way to do a for-range on the e_terrain enum
   _terrains[e_terrain::FOREST] =
-    std::make_shared<Terrain> (1, ResourcesManager::getTexture("forest"));
+    std::make_shared<Terrain> (3, ResourcesManager::getTexture("forest"));
   _terrains[e_terrain::PLAIN] =
     std::make_shared<Terrain> (0, ResourcesManager::getTexture("plain"));
 }
