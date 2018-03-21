@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: tools/code_generation/enum_print/generate_enum_print.sh
-// generated on: Do Apr 13 07:34:09 CEST 2017
+// generated on: Mi Mär 21 18:22:27 CET 2018
 
 
 #include <string>
@@ -24,6 +24,10 @@ std::string e_input_string(e_input entry)
       return "e_input::MOVE_RIGHT (no explicit value)";
     case e_input::SELECTION:
       return "e_input::SELECTION (no explicit value)";
+    case e_input::TOGGLE_PANEL:
+      return "e_input::TOGGLE_PANEL (no explicit value)";
+    case e_input::SCREENSHOT:
+      return "e_input::SCREENSHOT (no explicit value)";
     case e_input::EXIT:
       return "e_input::EXIT (no explicit value)";
     case e_input::NB_KEYS:

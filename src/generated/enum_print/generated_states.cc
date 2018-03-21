@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: tools/code_generation/enum_print/generate_enum_print.sh
-// generated on: Do Apr 13 07:34:09 CEST 2017
+// generated on: Mi Mär 21 18:22:27 CET 2018
 
 
 #include <string>
@@ -16,6 +16,8 @@ std::string e_state_string(e_state entry)
   {
     case e_state::NONE:
       return "e_state::NONE (0)";
+    case e_state::GLOBAL:
+      return "e_state::GLOBAL (no explicit value)";
     case e_state::PLAYING:
       return "e_state::PLAYING (no explicit value)";
     case e_state::MAP_MENU:
