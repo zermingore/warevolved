@@ -166,7 +166,7 @@ void Panel::draw()
   }
 
   img.setPosition(_frameCell->position().x + _margin,
-                   _frameCell->position().y + _margin);
+                  _frameCell->position().y + _margin);
 
   auto sz(_frameCell->size());
   sz.x -= 10;

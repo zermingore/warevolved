@@ -26,25 +26,25 @@ public:
 
   /**
    * \brief Initializes the terrain with the given defense and texture
-   * \param defense How much cover the terrain offers
+   * \param cover How much protection the terrain offers
    * \param texture Terrain's associated texture
    */
-  Terrain(int defense, std::shared_ptr<graphics::Texture> texture);
+  Terrain(int cover, std::shared_ptr<graphics::Texture> texture);
+
 
   /**
    * \brief Defense value getter
    */
-  auto cover() const { return _defense; }
-
+  const auto cover() const { return _cover; }
 
   /**
    * \brief Texture getter
    */
-  auto texture() const { return _texture; }
+  const auto texture() const { return _texture; }
 
 
 private:
-  int _defense; ///< Defense value
+  int _cover; ///< Protection value
   std::shared_ptr<graphics::Texture> _texture; ///< Graphical image
 };
 
