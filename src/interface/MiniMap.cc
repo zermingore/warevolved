@@ -10,7 +10,8 @@
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-
+#include <game/Terrain.hh>
+#include <game/TerrainsHandler.hh>
 
 
 namespace interface {
@@ -68,21 +69,7 @@ void MiniMap::draw()
 
       // Draw the terrain
       graphics::Sprite sprite;
-      switch (c->terrain())
-      {
-        case e_terrain::PLAIN:
-          sprite.setTexture("plain");
-          break;
-
-        case e_terrain::FOREST:
-          sprite.setTexture("forest");
-          break;
-
-        default:
-          // Not using the enum printer here as the terrains will be a class
-          ERROR("Terrain is invalid", static_cast<int> (c->terrain()));
-          return;
-      }
+      sprite.setTexture(TerrainsHandler::get(c->terrain()).name());
       sprite.setPosition(pos.x, pos.y);
       sprite.setSize(cell_size);
       sprite.draw();

@@ -29,7 +29,7 @@ public:
    * \param cover How much protection the terrain offers
    * \param texture Terrain's associated texture
    */
-  Terrain(int cover, std::shared_ptr<graphics::Texture> texture);
+  Terrain(int cover, const std::string& texture_name);
 
 
   /**
@@ -42,9 +42,18 @@ public:
    */
   const auto texture() const { return _texture; }
 
+  /**
+   * \brief Identifier getter as a string
+   * \return The Texture name
+   * \note Used in the Panel to print the Terrain name or retrieve its texture
+   */
+  const std::string& name() const;
+
+
 
 private:
   int _cover; ///< Protection value
+  const std::string _textureName; ///< Texture name, also used as an id
   std::shared_ptr<graphics::Texture> _texture; ///< Graphical image
 };
 

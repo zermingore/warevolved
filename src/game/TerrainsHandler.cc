@@ -5,7 +5,6 @@
 
 #include <game/Terrain.hh>
 #include <graphics/graphic_types.hh>
-#include <resources/ResourcesManager.hh>
 
 
 std::map<e_terrain, const Terrain> TerrainsHandler::_terrains;
@@ -13,11 +12,9 @@ std::map<e_terrain, const Terrain> TerrainsHandler::_terrains;
 
 void TerrainsHandler::initialize()
 {
-  using namespace resources;
-
   TerrainsHandler::_terrains = {
-    { e_terrain::PLAIN,  {1, ResourcesManager::getTexture("plain")} },
-    { e_terrain::FOREST, {3, ResourcesManager::getTexture("forest")} }
+    { e_terrain::PLAIN,  {1, "plain"} },
+    { e_terrain::FOREST, {3, "forest"} }
   };
 }
 

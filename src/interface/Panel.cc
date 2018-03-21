@@ -14,6 +14,8 @@
 #include <tools/Fps.hh>
 #include <game/Map.hh>
 #include <game/Cell.hh>
+#include <game/Terrain.hh>
+#include <game/TerrainsHandler.hh>
 #include <common/enums/terrains.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
@@ -21,6 +23,7 @@
 #include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+
 
 
 namespace interface {
@@ -72,6 +75,9 @@ void Panel::toggleStatus()
     case e_panel_status::POSITION_RIGHT:
       draw_offset = -_size.x;
       background_position.x = 3.f * _size.x;
+      break;
+
+    case e_panel_status::DEACTIVATED:
       break;
 
     default:
@@ -148,23 +154,7 @@ void Panel::draw()
   // Terrain
   _frameCell->draw();
   const auto terrain(cell->terrain());
-  graphics::Sprite img;
-  switch (terrain)
-  {
-    case e_terrain::PLAIN:
-      img.setTexture("plain");
-      break;
-
-    case e_terrain::FOREST:
-      img.setTexture("forest");
-      break;
-
-    default:
-      // Not using the enum printer here as the terrains will be a class
-      ERROR("Terrain is invalid", static_cast<int> (cell->terrain()));
-      return;
-  }
-
+  graphics::Sprite img(TerrainsHandler::get(terrain).name());
   img.setPosition(_frameCell->position().x + _margin,
                   _frameCell->position().y + _margin);
 
