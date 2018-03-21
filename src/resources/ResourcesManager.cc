@@ -6,6 +6,7 @@
 #include <lib/pugixml.hh>
 #include <resources/Font.hh>
 #include <debug/Debug.hh>
+#include <game/TerrainsHandler.hh>
 
 
 
@@ -35,6 +36,8 @@ void ResourcesManager::initialize(const std::string file_name)
 # ifdef DEBUG_XML
   listResources();
 # endif
+
+  TerrainsHandler::initialize();
 }
 
 

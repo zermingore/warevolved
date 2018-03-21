@@ -143,14 +143,12 @@ e_attack_result Map::attackResult(bool attacker_status, bool defender_status)
 std::pair<size_t, size_t> Map::damageValues(const Unit& attacker,
                                             const Unit& defender)
 {
-  auto th = TerrainsHandler();
-
   // Compute attacker damages
   auto def_cell = _cells[defender.c()][defender.l()];
-  auto def_terrain = th.getTerrain(def_cell->terrain());
+  const auto def_terrain = TerrainsHandler::get(def_cell->terrain());
 
   int dmg_attack =
-    static_cast<int> (attacker.attackValue()) - def_terrain->cover();
+    static_cast<int> (attacker.attackValue()) - def_terrain.cover();
   auto attacker_damages = std::max(1, dmg_attack);
 
 
@@ -161,10 +159,10 @@ std::pair<size_t, size_t> Map::damageValues(const Unit& attacker,
 
   // Compute defender strike-back damages
   auto att_cell = _cells[attacker.c()][attacker.l()];
-  auto att_terrain = th.getTerrain(att_cell->terrain());
+  auto att_terrain = TerrainsHandler::get(att_cell->terrain());
 
   int dmg_def =
-    static_cast<int> (defender.attackValue() / 2) - att_terrain->cover();
+    static_cast<int> (defender.attackValue() / 2) - att_terrain.cover();
   auto defender_damages = std::max(1, dmg_def);
 
 

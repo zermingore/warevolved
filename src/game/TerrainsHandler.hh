@@ -5,15 +5,14 @@
  * \brief TerrainsHandler class declaration
  */
 
-
 #ifndef TERRAINS_HANDLER_HH_
 # define TERRAINS_HANDLER_HH_
 
 # include <map>
-# include <memory>
 # include <common/enums/terrains.hh>
 
 class Terrain;
+
 
 
 /**
@@ -27,18 +26,19 @@ public:
    * \brief Initializes the exhaustive terrains list
    *   with their respective Textures
    */
-  TerrainsHandler();
+  static void initialize();
 
   /**
    * \brief Return the Terrain of the list matching the given id
    * \param id Terrain identifier
    */
-  std::shared_ptr<const Terrain> getTerrain(e_terrain id);
+  static const Terrain& get(e_terrain id);
 
 
 private:
   /// Mapping Terrain identifier -> Terrain
-  std::map<e_terrain, std::shared_ptr<Terrain>> _terrains;
+  static std::map<e_terrain, const Terrain> _terrains;
 };
+
 
 #endif /* !TERRAINS_HANDLER_HH_ */
