@@ -76,19 +76,11 @@ public:
 
 
   /**
-   * \brief Add some informative text related to the hovered Unit
-   * \param content Text to append tho the _unitDataText buffer
-   * \note This function draws nothing, it just buffers the given string
-   * \see drawUnitData
+   * \brief Draw the given data
+   * \param data Text data to display
+   * \param pos Position where to draw
    */
-  void addUnitData(const std::string content);
-
-
-  /**
-   * \brief Draw the buffered Unit data
-   * \note clear the _unitDataText buffer
-   */
-  void drawUnitData();
+  void drawDataText(const std::string& data, const graphics::Pos2& pos);
 
 
   /**

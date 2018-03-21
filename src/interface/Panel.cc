@@ -193,11 +193,12 @@ void Panel::draw()
     sprite->draw();
 
     // Unit data
-    addUnitData("hp:     " + std::to_string(unit->hp()));
-    addUnitData("motion: " + std::to_string(unit->motionValue()));
-    addUnitData("attack: " + std::to_string(unit->attackValue()));
+    const auto& unit_data =
+      "hp:     " + std::to_string(unit->hp())          + '\n' +
+      "motion: " + std::to_string(unit->motionValue()) + '\n' +
+      "attack: " + std::to_string(unit->attackValue());
 
-    drawUnitData();
+    drawDataText(unit_data, _unitDataPos);
   }
 
   // Meta information
@@ -209,19 +210,9 @@ void Panel::draw()
 
 
 
-void Panel::addUnitData(const std::string content)
+void Panel::drawDataText(const std::string& data, const graphics::Pos2& pos)
 {
-  _unitDataText += content + '\n';
-}
-
-
-
-void Panel::drawUnitData()
-{
-  auto text = std::make_unique<resources::Text> (
-    _unitDataText, _fontSize, _unitDataPos);
-
-  _unitDataText.clear();
+  auto text = std::make_unique<resources::Text> (data, _fontSize, pos);
   text->draw();
 }
 
