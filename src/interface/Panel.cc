@@ -118,6 +118,10 @@ void Panel::update()
 
   // Terrain
   _frameCell->setSize({ edge_len, edge_len });
+  _terrainDataPos = {
+    _frameCell->position().x + _frameUnit->size().x + _margin,
+    _frameCell->position().y + _margin
+  };
 
   // Unit
   _frameUnit->setSize({ edge_len, edge_len });
@@ -153,8 +157,8 @@ void Panel::draw()
 
   // Terrain
   _frameCell->draw();
-  const auto terrain(cell->terrain());
-  graphics::Sprite img(TerrainsHandler::get(terrain).name());
+  const auto& terrain = TerrainsHandler::get(cell->terrain());
+  graphics::Sprite img(terrain.name());
   img.setPosition(_frameCell->position().x + _margin,
                   _frameCell->position().y + _margin);
 
@@ -163,6 +167,14 @@ void Panel::draw()
   sz.y -= 10;
   img.setSize(sz);
   img.draw();
+
+  // Terrain data
+  const auto& terrain_data =
+    terrain.name() + '\n' +
+    "cover: " + std::to_string(terrain.cover());
+
+  drawDataText(terrain_data, _terrainDataPos);
+
 
 
   // Unit frame

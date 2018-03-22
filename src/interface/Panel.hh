@@ -105,9 +105,9 @@ private:
 
   e_panel_status _status; ///< Position on the screen (Left, Right, Deactivated)
 
-  size_t _fontSize;            ///< Text font size (for the Unit HP, ...)
-  graphics::Pos2 _unitDataPos; ///< Unit data text position (top-left corner)
-  std::string _unitDataText;   ///< Unit data text content
+  size_t _fontSize;               ///< Text font size (for the Unit HP, ...)
+  graphics::Pos2 _unitDataPos;    ///< Unit data text position (top-left corner)
+  graphics::Pos2 _terrainDataPos; ///< Terrain data text position
 
   graphics::Pos2 _metaInfoPos;    ///< Meta-info position (fps, ...)
   graphics::component _dateWidth; ///< Date width, in pixels
