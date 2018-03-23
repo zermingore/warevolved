@@ -152,11 +152,26 @@ void Panel::draw()
   update();
   _background->draw();
 
+  // Frames
+  drawTerrainFrame();
+  drawUnitFrame();
+
+  // Meta information
+  drawMetaInfo();
+
+  // MiniMap
+  _minimap->draw();
+}
+
+
+
+void Panel::drawTerrainFrame()
+{
   // Map Cell under the Cursor
   const auto cell(_map->cell(_playerCursor->coords()));
 
-  // Terrain
   _frameCell->draw();
+
   const auto& terrain = TerrainsHandler::get(cell->terrain());
   graphics::Sprite img(terrain.name());
   img.setPosition(_frameCell->position().x + _margin,
@@ -168,46 +183,47 @@ void Panel::draw()
   img.setSize(sz);
   img.draw();
 
-  // Terrain data
+  // Terrain data text
   const auto& terrain_data =
     terrain.name() + '\n' +
     "cover: " + std::to_string(terrain.cover());
 
   drawDataText(terrain_data, _terrainDataPos);
+}
 
 
 
-  // Unit frame
+void Panel::drawUnitFrame()
+{
+  // Map Cell under the Cursor
+  const auto cell(_map->cell(_playerCursor->coords()));
   const auto unit(cell->unit());
-  if (unit)
+  if (!unit)
   {
-    // Unit sprite
-    _frameUnit->draw();
-    auto sprite(unit->sprite());
-    sprite->setPosition(_frameUnit->position().x + _margin,
-                        _frameUnit->position().y + _margin);
-
-    auto size(_frameUnit->size());
-    size.x -= 10;
-    size.y -= 10;
-    sprite->setSize(size);
-
-    sprite->draw();
-
-    // Unit data
-    const auto& unit_data =
-      "hp:     " + std::to_string(unit->hp())          + '\n' +
-      "motion: " + std::to_string(unit->motionValue()) + '\n' +
-      "attack: " + std::to_string(unit->attackValue());
-
-    drawDataText(unit_data, _unitDataPos);
+    // Draw nothing if no Unit is under the Cursor
+    return;
   }
 
-  // Meta information
-  drawMetaInfo();
+  // Unit sprite
+  _frameUnit->draw();
+  auto sprite(unit->sprite());
+  sprite->setPosition(_frameUnit->position().x + _margin,
+                      _frameUnit->position().y + _margin);
 
-  // MiniMap
-  _minimap->draw();
+  auto size(_frameUnit->size());
+  size.x -= 10;
+  size.y -= 10;
+  sprite->setSize(size);
+
+  sprite->draw();
+
+  // Unit data text
+  const auto& unit_data =
+    "hp:     " + std::to_string(unit->hp())          + '\n' +
+    "motion: " + std::to_string(unit->motionValue()) + '\n' +
+    "attack: " + std::to_string(unit->attackValue());
+
+  drawDataText(unit_data, _unitDataPos);
 }
 
 

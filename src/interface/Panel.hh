@@ -91,6 +91,17 @@ public:
 
 
 private:
+  /**
+   * \brief Draw the Terrain under current cursor position and its data
+   */
+  void drawTerrainFrame();
+
+  /**
+   * \brief Draw the Unit under current cursor position and its data
+   */
+  void drawUnitFrame();
+
+
   const graphics::component _margin = 5;
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
