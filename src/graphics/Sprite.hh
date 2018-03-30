@@ -55,7 +55,7 @@ public:
    * \brief _texture getter
    * \return _texture
    */
-  const auto texture() const { return _texture; }
+  const auto& texture() const { return _texture; }
 
   /**
    * \brief _position getter

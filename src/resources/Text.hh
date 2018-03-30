@@ -73,7 +73,7 @@ public:
    * \brief Graphic text getter
    * \return The graphical element containing the Text
    */
-  const auto graphicalText() const { return _text; }
+  const auto& graphicalText() const { return _text; }
 
   /**
    * \brief Draw the Text

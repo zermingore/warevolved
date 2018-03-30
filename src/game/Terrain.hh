@@ -35,12 +35,12 @@ public:
   /**
    * \brief Defense value getter
    */
-  const auto cover() const { return _cover; }
+  auto cover() const { return _cover; }
 
   /**
    * \brief Texture getter
    */
-  const auto texture() const { return _texture; }
+  auto texture() const { return _texture; }
 
   /**
    * \brief Identifier getter as a string

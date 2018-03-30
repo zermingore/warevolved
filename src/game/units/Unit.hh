@@ -40,19 +40,19 @@ public:
    * \brief x coordinate on the map getter
    * \return x (column) coordinate on the Map
    */
-  const auto c() const { return _coords.c; }
+  auto c() const { return _coords.c; }
 
   /**
    * \brief y unit coordinate on the map getter
    * \return y (line) coordinate on the Map
    */
-  const auto l() const { return _coords.l; }
+  auto l() const { return _coords.l; }
 
   /**
    * \brief Get unit's position
    * \return Unit's Cell coordinates
    */
-  const auto coords() const { return _coords; }
+  auto coords() const { return _coords; }
 
   /**
    * \brief sets unit's position
@@ -64,13 +64,13 @@ public:
    * \brief _playerId getter
    * \return Id of the Player owning this Unit
    */
-  const auto playerId() const { return _playerId; }
+  auto playerId() const { return _playerId; }
 
   /**
    * \brief _played getter
    * \return true if the unit has already been played, false otherwise
    */
-  const auto played() const { return _played; }
+  auto played() const { return _played; }
 
   /**
    * \brief sets Unit's player belonging
@@ -100,37 +100,37 @@ public:
    * \brief _hp getter
    * \return health points
    */
-  const auto hp() const { return _hp; }
+  auto hp() const { return _hp; }
 
   /**
    * \brief _attackValue getter
    * \return Attack value in hit points
    */
-  const auto attackValue() const { return _attackValue; }
+  auto attackValue() const { return _attackValue; }
 
   /**
    * \brief _motionValue getter
    * \return The number of Cells a Unit can cross in one turn
    */
-  const auto motionValue() const { return _motionValue; }
+  auto motionValue() const { return _motionValue; }
 
   /**
    * \brief _minRange getter
    * \return Minimal attack range (in Cells)
    */
-  const auto minRange() const { return _minRange; }
+  auto minRange() const { return _minRange; }
 
   /**
    * \brief _maxRange getter
    * \return Maximal attack range getter (in Cells)
    */
-  const auto maxRange() const { return _maxRange; }
+  auto maxRange() const { return _maxRange; }
 
   /**
    * \brief sprite getter
    * \return a pointer on the Unit's sprite
    */
-  const auto sprite() const { return _sprite; }
+  auto sprite() const { return _sprite; }
 
 
 protected:

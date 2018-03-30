@@ -43,13 +43,13 @@ public:
    * \brief _unit getter.
    * \return cell's unit.
    */
-  const auto unit() const { return _unit; }
+  auto unit() const { return _unit; }
 
   /**
    * \brief _terrain getter.
    * \return cell's terrain.
    */
-  const auto terrain() const { return _terrain; }
+  auto terrain() const { return _terrain; }
 
   /**
    * \brief _unit setter. Sets the given Unit in the cell.
@@ -67,7 +67,7 @@ public:
    * \brief Highlight getter.
    * \return Highlight Boolean value.
    */
-  const auto highlight() const { return _highlight; }
+  auto highlight() const { return _highlight; }
 
   /**
    * \brief Highlight setter.
@@ -79,7 +79,7 @@ public:
    * \brief Highlight color getter.
    * \return Highlight color value.
    */
-  const auto highlightColor() const { return _highlightColor; }
+  auto highlightColor() const { return _highlightColor; }
 
   /**
    * \brief Highlight color setter.
@@ -93,18 +93,18 @@ public:
    * \brief returns Cell's line coordinate.
    * \return cell line coordinate.
    */
-  const auto l() const { return _coords.l; }
+  auto l() const { return _coords.l; }
 
   /**
    * \brief returns Cell's column coordinate.
    * \return cell column coordinate.
    */
-  const auto c() const { return _coords.c; }
+  auto c() const { return _coords.c; }
 
   /**
    * \brief coords getter.
    */
-  const auto coords() const { return _coords; }
+  auto coords() const { return _coords; }
 
 
   /**
