@@ -122,7 +122,6 @@ private:
 
   graphics::Pos2 _metaInfoPos;    ///< Meta-info position (fps, ...)
   graphics::component _dateWidth; ///< Date width, in pixels
-  graphics::component _fpsWidth;  ///< Fps frame width, in pixels
 };
 
 
