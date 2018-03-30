@@ -8,6 +8,7 @@
 #ifndef VECTOR_HH_
 # define VECTOR_HH_
 
+# include <utility>
 # include <ostream>  // to overload the ostream operator
 # include <SFML/System/Vector2.hpp>
 
@@ -62,6 +63,21 @@ public:
    */
   bool operator==(const Vector2& b) {
     return (x == b.x && y == b.y);
+  }
+
+
+  /**
+   * \brief Copy assignment operator
+   * \param rhs Parameter to copy from
+   * \return A reference on this
+   * \note Copy and swap idiom
+   */
+  Vector2& operator=(Vector2 rhs)
+  {
+    std::swap(x, rhs.x);
+    std::swap(y, rhs.y);
+
+    return *this;
   }
 
 
