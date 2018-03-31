@@ -42,7 +42,7 @@ public:
    * \param font Optional font name used to retrieve the Font
    */
   Text(std::string str,
-       int size,
+       size_t size,
        graphics::Pos2 pos = {0, 0},
        std::string font = "");
 

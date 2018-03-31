@@ -131,11 +131,8 @@ public:
    * \param line line to set the new unit
    * \param column column to set the new unit
    * \param player_id player to which the unit belongs to
-   *
-   * \note player_id defaults to -1
-   *   In this case, the unit is assigned to the current player
    */
-  void newUnit(e_unit type, size_t column, size_t line, int player_id = -1);
+  void newUnit(e_unit type, size_t column, size_t line, size_t player_id);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates

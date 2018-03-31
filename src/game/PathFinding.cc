@@ -207,16 +207,16 @@ void PathFinding::addNextDirection(const e_direction direction)
 
 void PathFinding::computeCosts()
 {
-  const auto nb_col(static_cast<int> (_map->nbColumns())); // using int
-  const auto nb_lines(static_cast<int> (_map->nbLines())); // for conversions
+  const auto nb_col(static_cast<size_t> (_map->nbColumns()));
+  const auto nb_lines(static_cast<size_t> (_map->nbLines()));
   const auto cells(_map->cells());
 
   // Setting the cost to every cell to infinity
   const auto out_of_reach(_origin->maxRange() + _origin->motionValue() + 1);
-  for (auto c(0); c < nb_col; ++c)
+  for (auto c(0ul); c < nb_col; ++c)
   {
     _costs[c].fill(out_of_reach);
-    for (auto l(0); l < nb_lines; ++l)
+    for (auto l(0ul); l < nb_lines; ++l)
     {
       cells[c][l]->setHighlight(false);
     }
@@ -227,8 +227,8 @@ void PathFinding::computeCosts()
   candidates.push({ _origin->coords().c, _origin->coords().l });
   while (!candidates.empty())
   {
-    auto col(candidates.top().first);
-    auto line(candidates.top().second);
+    const auto col =  static_cast<size_t> (candidates.top().first);
+    const auto line = static_cast<size_t> (candidates.top().second);
     candidates.pop();
 
     // Skipping cells containing enemy units as we cannot cross them
@@ -269,14 +269,14 @@ void PathFinding::computeCosts()
 
 void PathFinding::highlightCells()
 {
-  const auto nb_col(static_cast<int> (_map->nbColumns())); // using int
-  const auto nb_lines(static_cast<int> (_map->nbLines())); // for conversions
+  const auto nb_col(static_cast<size_t> (_map->nbColumns()));
+  const auto nb_lines(static_cast<size_t> (_map->nbLines()));
   const auto out_of_reach(_origin->maxRange() + _origin->motionValue() + 1);
 
   // Highlight reachable cells
-  for (auto c(0); c < nb_col; ++c)
+  for (auto c(0ul); c < nb_col; ++c)
   {
-    for (auto l(0); l < nb_lines; ++l)
+    for (auto l(0ul); l < nb_lines; ++l)
     {
       // Skipping unreachable cells
       if (_costs[c][l] >= out_of_reach) {
@@ -406,5 +406,5 @@ size_t PathFinding::manhattan(const Coords a, const Coords b)
   int dist_columns(static_cast<int> (a.c - b.c));
   int dist_lines(  static_cast<int> (a.l - b.l));
 
-  return std::abs(dist_columns) + std::abs(dist_lines);
+  return static_cast<size_t> (std::abs(dist_columns) + std::abs(dist_lines));
 }
