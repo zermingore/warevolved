@@ -207,8 +207,8 @@ void PathFinding::addNextDirection(const e_direction direction)
 
 void PathFinding::computeCosts()
 {
-  const auto nb_col(static_cast<size_t> (_map->nbColumns()));
-  const auto nb_lines(static_cast<size_t> (_map->nbLines()));
+  const auto nb_col(_map->nbColumns());
+  const auto nb_lines(_map->nbLines());
   const auto cells(_map->cells());
 
   // Setting the cost to every cell to infinity
@@ -269,8 +269,8 @@ void PathFinding::computeCosts()
 
 void PathFinding::highlightCells()
 {
-  const auto nb_col(static_cast<size_t> (_map->nbColumns()));
-  const auto nb_lines(static_cast<size_t> (_map->nbLines()));
+  const auto nb_col(_map->nbColumns());
+  const auto nb_lines(_map->nbLines());
   const auto out_of_reach(_origin->maxRange() + _origin->motionValue() + 1);
 
   // Highlight reachable cells
