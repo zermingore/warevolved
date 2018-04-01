@@ -53,7 +53,7 @@ void ResourcesManager::initializeDefaultResources()
   if (!texture->loadFromFile(_images["default"]))
   {
     ERROR("Unable to load default texture");
-    assert(!"Unable to load default texture, aborting");
+    assert(false && "Unable to load default texture, aborting");
   }
   _textures["default"] = texture;
 }

@@ -357,7 +357,7 @@ bool PathFinding::allowedMove(e_direction direction)
       break;
 
     default:
-      assert(!"Invalid direction");
+      assert(false && "Invalid direction");
       return false;
   }
 

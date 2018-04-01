@@ -79,7 +79,7 @@ void MenuEntry::setLabelName(const e_entry entry)
     default:
       _labelName = "## NOT FOUND ##";
       ERROR("No label found for e_entry", static_cast<int> (entry));
-      assert(!"No label found");
+      assert(false && "No label found");
       break;
   }
 }

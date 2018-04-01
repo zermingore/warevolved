@@ -42,7 +42,7 @@ StateMenu::StateMenu(const e_state state)
 
     default:
       ERROR("StateMenu called with", static_cast<int> (game::Status::state()));
-      assert(!"State is not a menu");
+      assert(false && "State is not a menu");
       break;
   }
 }
@@ -93,7 +93,7 @@ void StateMenu::fetchAttributes()
   if (!_attributes.size())
   {
     ERROR("StateMenu::fetchAttributes called without available attributes");
-    assert(!"No attribute found");
+    assert(false && "No attribute found");
     return;
   }
 

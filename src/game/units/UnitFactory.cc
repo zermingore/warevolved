@@ -23,7 +23,7 @@ std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
 
     default:
       ERROR("Tried to create unit", static_cast<int> (unit));
-      assert(!"Unable to create the given unit");
+      assert(false && "Unable to create the given unit");
       return nullptr;
   }
 }

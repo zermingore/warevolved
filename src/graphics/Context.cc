@@ -27,7 +27,7 @@ void Context::init()
   if (_system->sfmlMajor() < 2)
   {
     ERROR("SFML version not officially supported");
-    assert(!"SFML version not supported, aborting in debug");
+    assert(false && "SFML version not supported, aborting in debug");
   }
 
   sf::ContextSettings contextSettings(_settings->depth(),
