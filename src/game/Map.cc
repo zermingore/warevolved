@@ -106,7 +106,7 @@ void Map::endTurn()
 void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id)
 {
   // Explicitly using a shared_ptr
-  std::shared_ptr<Unit> new_unit(std::move(UnitFactory::createUnit(type)));
+  std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
 
   new_unit->setCoords({ column, line });
   new_unit->setPlayerId(player_id);
