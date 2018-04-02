@@ -51,7 +51,7 @@ void MiniMap::draw()
                        / static_cast<component> (_map.nbLines()));
 
   // List of players to get their color
-  const auto players { game::Status::battle()->players() };
+  const auto players = game::Status::battle()->players();
 
   const Size2 cell_size(size_col, size_line);
 

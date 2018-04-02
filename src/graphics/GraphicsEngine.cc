@@ -201,7 +201,7 @@ void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
   }
 # endif
 
-  auto players {game::Status::battle()->players()};
+  auto players = game::Status::battle()->players();
   sprite->setColor(players[unit->playerId()]->color());
 
   if (unit->played()) {
