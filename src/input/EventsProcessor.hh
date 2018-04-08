@@ -12,7 +12,6 @@
 # include <condition_variable>
 # include <memory>
 # include <SFML/Window/Event.hpp>
-# include <stdnoreturn.h>
 
 
 class KeyManager;
@@ -30,7 +29,7 @@ public:
    * \brief Process events from the events queue
    * \note does not return
    */
-  static void process();
+  [[ noreturn ]] static void process() ;
 
   /**
    * \brief Notify the next frame by the GraphicsEngine
