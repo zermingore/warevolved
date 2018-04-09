@@ -1,5 +1,5 @@
 #                        -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
+
 
 AC_INIT([ms], [1.0])
 
@@ -12,8 +12,6 @@ CXXFLAGS="$CXXFLAGS -std=c++17 -pthread"
 if [[ -n "$SFML_PATH" ]]
 then
 CPPFLAGS="$CPPFLAGS -I$SFML_PATH -I$SFML_PATH/include/"
-else
-SFML_PATH=""
 fi
 
 # Automake.
@@ -36,10 +34,6 @@ AC_SUBST(ARFLAGS, [cr])
 AC_PROG_RANLIB
 AM_PROG_AR
 
-
-# Checks for typedefs, structures, and compiler characteristics.
-# AC_HEADER_STDBOOL6
-# AC_C_INLINE
 
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
@@ -74,6 +68,5 @@ AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile]) # check/Makefile
 AC_CONFIG_LINKS([lib/pugixml/pugixml.hpp:lib/pugixml/pugixml.hpp])
 AC_CONFIG_LINKS([lib/pugixml/pugiconfig.hpp:lib/pugixml/pugiconfig.hpp])
 
-# PKG_CHECK_MODULES([lsfmlwindow], [lsfml-window]) #-lsfml-graphics -lsfml-window -lsfml-system
 
 AC_OUTPUT
