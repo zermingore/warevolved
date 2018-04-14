@@ -194,9 +194,7 @@ __top_srcdir__we_CXXFLAGS += -Wzero-as-null-pointer-constant    # Warn when a li
 # __top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
 
 
-# __top_srcdir__we_CXXFLAGS += -Wno-unknown-warning-option        # Keep clang silent when finding g++ specific flags
-
-
+__top_srcdir__we_CXXFLAGS += ${WE_EXTRA_CXXFLAGS}               # Append user-defined flags (for instance -Wno-unknown-warning-option compiling with clang)
 
 
 

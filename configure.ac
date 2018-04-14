@@ -30,6 +30,7 @@ AC_PROG_CXX([g++ clang++])
 # Silence warning "ar: 'u' modifier ignored since 'D' is the default"
 AC_SUBST(ARFLAGS, [cr])
 
+
 # use ranlib and ar to build the pugixml library
 AC_PROG_RANLIB
 AM_PROG_AR
@@ -67,6 +68,9 @@ AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile]) # check/Makefile
 # Link or copy pugixml headers in the build folder
 AC_CONFIG_LINKS([lib/pugixml/pugixml.hpp:lib/pugixml/pugixml.hpp])
 AC_CONFIG_LINKS([lib/pugixml/pugiconfig.hpp:lib/pugixml/pugiconfig.hpp])
+
+
+AC_ARG_VAR(WE_EXTRA_FLAGS, Compilation flags (for the sources only, not the libraries))
 
 
 AC_OUTPUT
