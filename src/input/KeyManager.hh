@@ -63,26 +63,25 @@ public:
    * \brief Initialize the mappings keyboard_inputs -> keys
    *   and keys -> high_level_inputs
    * \param replay \true if we are in replay mode
-   * \note if \param replay is \false the events will be logged
+   * \note If replay is \false the events will be logged
    */
   static void Initialize(std::shared_ptr<ReplayManager> replay);
 
   /**
    * \brief Append the givent key to the end of the replay file
    * \param key Key to log in the replay file
-   * \return a list of events and their associated timestamps
    */
   static void replayStoreKey(const e_key& key);
 
   /**
    * \brief Push the event matching the given input into the events queue
-   * \param input Input used to match the event to push in the queue
+   * \param key Key used to fetch the Event to push in the queue
    */
   static void pushEvent(const sf::Keyboard::Key& key);
 
   /**
    * \brief Push a key as is in the fifo (which should be from the replay)
-   * \param key key to push in the fifo
+   * \param key Key to push in the fifo
    */
   static void pushKeyFromReplay(const e_key& key);
 
@@ -99,10 +98,10 @@ private:
   /// Hardware / logical keys mapping
   static std::multimap<const sf::Keyboard::Key, const e_key> _keys_mapping;
 
-  /// events mapping
+  /// Events mapping
   static std::map<const e_key, const e_input> _events_mapping;
 
-  /// current inputs (high level keys)
+  /// Current inputs (high level keys)
   static ThreadSafeQueue<e_input> _active_inputs;
 
   /// Pointer on the replay manager to add keys to a replay being created

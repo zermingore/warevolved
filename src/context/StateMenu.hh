@@ -33,7 +33,7 @@ public:
 
   /**
    * \brief Constuctor: Builds the menu, registers to callbacks
-   * \param state: State which is currently built
+   * \param state State which is currently built
    */
   explicit StateMenu(const e_state state);
 

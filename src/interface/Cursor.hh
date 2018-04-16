@@ -63,14 +63,17 @@ public:
 
   /**
    * \brief Updates the graphics properties of the cursor
-   * \param properties map graphics properties to use
    */
   void update() override final;
 
-
+  /**
+   * \brief Draw the Cursor
+   */
   void draw() override final;
 
-
+  /**
+   * \brief Set the Cursor color
+   */
   void setColor(graphics::Color color) { _color = color; }
 
 

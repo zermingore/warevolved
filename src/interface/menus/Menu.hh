@@ -74,15 +74,25 @@ public:
 
   /**
    * \brief builds the selection menu, filling _entries
-   * \param state The state we're about to push
    */
   virtual void build() = 0;
 
 
-  // Selection motion
+  /**
+   * \brief Move the selection cursor up
+   */
   virtual void moveUp()    {}
+  /**
+   * \brief Move the selection cursor down
+   */
   virtual void moveDown()  {}
+  /**
+   * \brief Move the selection cursor to the left
+   */
   virtual void moveLeft()  {}
+  /**
+   * \brief Move the selection cursor to the right
+   */
   virtual void moveRight() {}
 
 

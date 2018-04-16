@@ -103,13 +103,13 @@ public:
   /**
    * \brief gets the terrain at coordinates (x, y).
    *
-   * \param x Coordinates according to columns.
-   * \param y Coordinates according to lines.
+   * \param column Coordinates according to columns.
+   * \param line Coordinates according to lines.
    *
    * \return the enum index in e_terrain matching the terrain
    *   located at coordinates (c, l).
    */
-  e_terrain getTerrain(size_t line, size_t column) const;
+  e_terrain getTerrain(size_t column, size_t line) const;
 
   /**
    * \brief get the cell at given coordinates
@@ -172,8 +172,7 @@ public:
    * returns a vector of pointers to Cell
    * To get the requested cell, use the second coordinate as vector index
    *
-   * \param line requested Cell coordinate
-   *
+   * \param column requested Cell column coordinate
    * \return a vector of pointers to Cell
    */
   auto operator[] (size_t column) { return _cells[column]; }

@@ -22,7 +22,7 @@ public:
   /**
    * \brief Returns the State matching the given State identifier
    *   Aborts the execution if no State is found given this identifier
-   * \param state: The state identifier
+   * \param state The state identifier
    * \return A pointer to the matching State
    */
   static std::shared_ptr<State> createState(const e_state& state);

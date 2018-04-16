@@ -27,18 +27,20 @@ public:
   /**
    * \brief Initializes the terrain with the given defense and texture
    * \param cover How much protection the terrain offers
-   * \param texture Terrain's associated texture
+   * \param texture_name Terrain's associated texture
    */
   Terrain(int cover, const std::string& texture_name);
 
 
   /**
    * \brief Defense value getter
+   * \return Coverage value
    */
   auto cover() const { return _cover; }
 
   /**
    * \brief Texture getter
+   * \return A pointer on the Texture
    */
   auto texture() const { return _texture; }
 
