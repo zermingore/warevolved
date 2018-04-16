@@ -71,13 +71,13 @@ public:
 
   /**
    * \brief Highlight setter.
-   * \param Highlight true if we want to highlight the Cell.
+   * \param highlight true if we want to highlight the Cell.
    */
   void setHighlight(const bool highlight) { _highlight = highlight; }
 
   /**
    * \brief Highlight color getter.
-   * \return Highlight color value.
+   * \return highlight color value.
    */
   auto highlightColor() const { return _highlightColor; }
 

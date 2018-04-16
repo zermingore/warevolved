@@ -64,13 +64,13 @@ public:
 
   /**
    * \brief set _sprite position
-   * \param position: _sprite vector position
+   * \param position _sprite vector position
    */
   void setPosition(const Coords position);
 
   /**
    * \brief set _sprite position
-   * \param position: _sprite vector position
+   * \param position _sprite vector position
    */
   void setPosition(const Pos2 position);
 
@@ -100,8 +100,8 @@ public:
 
   /**
    * \brief set _rectangle and _sprite size
-   * \param width: sprite width
-   * \param height: sprite height
+   * \param width sprite width
+   * \param height sprite height
    */
   template <typename T>
   void setSize(const T width, const T height)
@@ -114,7 +114,7 @@ public:
   /**
    * \brief Set the Sprite origin for transformations
    * \param x X, column coordinate of the new origin
-   * \param x X, column coordinate of the new origin
+   * \param y Y, line coordinate of the new origin
    */
   void setOrigin(float x, float y);
 
@@ -135,8 +135,8 @@ public:
 
   /**
    * \brief set _rectangle and _sprite scale
-   * \param width: sprite width
-   * \param height: sprite height
+   * \param width sprite width
+   * \param height sprite height
    */
   template <typename T>
   void setScale(const T width, const T height)
@@ -147,7 +147,7 @@ public:
 
   /**
    * \brief set _rectangle and _sprite scale using the same ratio
-   * \param ratio: Scale ratio
+   * \param ratio Scale ratio
    */
   void setScale(const float ratio);
 

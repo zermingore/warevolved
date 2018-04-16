@@ -79,7 +79,6 @@ public:
 private:
   /**
    * \brief Builds and return an initialized label, to display text
-   * \return a pointer to the new label
    */
   static void addText(const std::string str);
 

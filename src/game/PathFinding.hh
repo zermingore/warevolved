@@ -108,8 +108,7 @@ private:
   std::shared_ptr<graphics::Sprite> getSprite(size_t index);
 
   /**
-   * \brief updates current cell coordinates
-   *   according to \param direction
+   * \brief updates current cell coordinates according to direction
    * \param direction current move direction
    */
   void updateCurrentCell(e_direction direction);
@@ -117,7 +116,7 @@ private:
   /**
    * \brief returns shape matching _direction (index parameter)
    * \param index index in _direction vector.
-   * \return shape of _direction[\param index]
+   * \return shape of _direction[index]
    *   according to the next direction (for smooth corners).
    */
   e_path_shape getShape(size_t index);

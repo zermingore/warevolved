@@ -130,14 +130,13 @@ private:
 
   /**
    * \brief Draws the grid, graphic cells separator.
-   * \param Map for which we draw the grid.
+   * \param map for which we draw the grid.
    */
   static void drawGrid(const std::shared_ptr<Map> map);
 
   /**
    * \brief Draws the given Unit.
    * \param unit Unit to draw.
-   * \param battle Battle to get the graphics properties of the current Player.
    */
   static void drawUnit(const std::shared_ptr<Unit> unit);
 

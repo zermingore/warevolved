@@ -76,7 +76,7 @@ public:
 
   /**
    * \brief offset of the grid (from the left border of the window) setter.
-   * \param x offset.
+   * \param grid_offset_x offset.
    */
   static void setGridOffsetX(component grid_offset_x) {
     _gridOffsetX = grid_offset_x;
@@ -84,7 +84,7 @@ public:
 
   /**
    * \brief offset of the grid (from the top border of the window) setter.
-   * \param y offset.
+   * \param grid_offset_y offset.
    */
   static void setGridOffsetY(component grid_offset_y) {
     _gridOffsetY = grid_offset_y;

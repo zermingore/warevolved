@@ -43,15 +43,15 @@ public:
   Map() = delete;
 
   /**
-   * \brief Constructs a map of nbColumns x nbLines
+   * \brief Constructs a map of nb_columns x nb_lines
    *
    * Initializes the map as follow:
    *   Puts units where needed;
    *   Sets right Terrains;
    *   Asks ResourcesManager to loads needed Resources
    *
-   * \param nbColumns Number of columns required
-   * \param nbLines Number of lines required
+   * \param nb_columns Number of columns required
+   * \param nb_lines Number of lines required
    */
   Map(size_t nb_columns, size_t nb_lines);
 
@@ -71,13 +71,13 @@ public:
   /**
    * \brief gets the unit at coordinates (x, y)
    *
-   * \param x Coordinates according to columns
-   * \param y Coordinates according to lines
+   * \param column Coordinates according to columns
+   * \param line Coordinates according to lines
    *
    * \return the enum index in e_unit matching the unit
    *   located at coordinates (x, y)
    */
-  std::shared_ptr<Unit> unit(size_t line, size_t column) const;
+  std::shared_ptr<Unit> unit(size_t column, size_t line) const;
 
   /**
    * \brief gets the unit at c's coordinates.
@@ -125,8 +125,7 @@ public:
   auto cells() const { return _cells; }
 
   /**
-   * \brief builds a new unit of type \param unit
-   *
+   * \brief builds and keep a new Unit
    * \param type type of the new unit
    * \param line line to set the new unit
    * \param column column to set the new unit

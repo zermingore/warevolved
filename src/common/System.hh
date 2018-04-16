@@ -34,19 +34,6 @@ public:
 
 
   /**
-   * \brief SFML major version number setter
-   * \param major SFML major version number
-   */
-  void setSfmlMajor(const unsigned int major) { _sfmlMajor = major; }
-
-  /**
-   * \brief SFML minor version number setter
-   * \param major SFML minor version number
-   */
-  void setSfmlMinor(const unsigned int minor) { _sfmlMinor = minor; }
-
-
-  /**
    * \brief SFML major version number getter
    * \return SFML major version number
    */

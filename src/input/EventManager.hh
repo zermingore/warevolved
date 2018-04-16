@@ -32,7 +32,7 @@ public:
 
   /**
    * \brief Associates a callback to an event identified by key.
-   * \param key event name.
+   * \param input event to link with the callback.
    * \param cb callback to associate to the event.
    */
   void registerEvent(const e_input input, const std::function<void()> cb) {
@@ -43,12 +43,12 @@ public:
 private:
   /**
    * \brief Looks for any released key.
-   *   Reset the key timer matching the released key (if any)
-   *   Reset switches if needed
+   * \note Reset the key timer matching the released key (if any)
+   * \note Reset switches if needed
    */
   void releasedKeys();
 
-  /// callbacks / events association
+  /// Callbacks / events association
   std::map<e_input, std::function<void()>> _callbacks;
 };
 

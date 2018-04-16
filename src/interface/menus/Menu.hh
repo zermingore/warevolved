@@ -34,7 +34,7 @@ namespace interface {
 /**
  * \class Menu
  * \brief Generic Menu (abstract class)
- * \note Mother of \class InGameMenu
+ * \note Mother of InGameMenu class
  */
 class Menu: public InterfaceElement
 {
@@ -114,7 +114,7 @@ protected:
    * \brief list of entries getter
    * \return a pointer over _entries array
    * \note this function is used to retrieve
-   *   informations from menu stack (see \class Status)
+   *   informations from menu stack (see Status class)
    */
   auto getEntries() const { return _entries; }
 
@@ -122,7 +122,7 @@ protected:
    * \brief selected entry getter
    * \return current selected entry
    * \note this function is used to retrieve
-   *   informations from menu stack (see \class Status)
+   *   informations from menu stack (see Status class)
    */
   size_t selectedEntry() { return _selectedEntry; }
 

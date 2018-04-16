@@ -80,7 +80,7 @@ public:
 
   /**
    * \brief _played setter
-   * \param unit's played status
+   * \param played unit's played status
    */
   void setPlayed(bool played) { _played = played; }
 

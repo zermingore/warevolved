@@ -38,7 +38,7 @@ public:
 
   /**
    * \brief constructor. Initialize position, scale and rotation of the element.
-   * \param image_string name of the Image resource
+   * \param image_name name of the Image resource
    */
   explicit InterfaceElement(const std::string& image_name);
 
@@ -48,7 +48,7 @@ public:
 
   /**
    * \brief image name getter.
-   * \return name of the image resource.
+   * \return name of the Image resource.
    */
   auto name() const { return _imgName; }
 
@@ -78,7 +78,7 @@ public:
 
   /**
    * \brief position setter.
-   * \param position cells coordinates to place the element.
+   * \param coords cells coordinates to place the element.
    */
   void setCoords(const Coords& coords) { _coords = coords; }
 

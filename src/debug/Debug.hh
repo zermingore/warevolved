@@ -115,7 +115,7 @@ public:
 
   /**
    * \brief Print the given element into the log file
-   * \parm head element to print in the log
+   * \param head element to print in the log
    * \note head must override the << stream operator
    */
   template<typename T>
@@ -127,7 +127,7 @@ public:
 
   /**
    * \brief print as error given parameters on standard output
-   * \param head: element to print right now
+   * \param head element to print right now
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
@@ -147,7 +147,7 @@ public:
 
   /**
    * \brief print as error given parameters on standard output
-   * \param head: element to print right now
+   * \param head element to print right now
    * \param tail eventually, rest of given arguments list
    * \todo log notices and warnings
    */
@@ -160,7 +160,7 @@ public:
 
   /**
    * \brief print as error given parameters on standard output
-   * \param head: element to print right now
+   * \param head element to print right now
    * \param tail eventually, rest of given arguments list
    * \todo log notices and warnings
    */
@@ -173,7 +173,7 @@ public:
 
   /**
    * \brief print given parameters on standard output
-   * \param head: element to print right now
+   * \param head element to print right now
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
