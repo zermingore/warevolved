@@ -24,7 +24,7 @@ class InputsListener
 public:
   /**
    * \brief Polls events until the exit event was found
-   * \param replay \true if we're in replay mode
+   * \param replay true if we're in replay mode
    * \note Infinite loop polling events, populating the KeyManager events queue
    * \note Initialize the KeyManager
    * \note In replay mode, launch another thread reading inputs from the replay

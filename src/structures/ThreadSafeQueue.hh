@@ -66,7 +66,7 @@ public:
 
   /**
    * \brief Check if the queue is empty
-   * \return \true if the queue is empty
+   * \return true if the queue is empty
    */
   bool empty() const;
 

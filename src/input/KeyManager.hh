@@ -62,8 +62,8 @@ public:
   /**
    * \brief Initialize the mappings keyboard_inputs -> keys
    *   and keys -> high_level_inputs
-   * \param replay \true if we are in replay mode
-   * \note If replay is \false the events will be logged
+   * \param replay true if we are in replay mode
+   * \note If replay is false the events will be logged
    */
   static void Initialize(std::shared_ptr<ReplayManager> replay);
 

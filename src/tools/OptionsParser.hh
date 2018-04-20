@@ -99,7 +99,7 @@ public:
    * \brief Check the existence of a given option
    * \param option Check the existence of this option
    * \note Skip the first element of the argument vector (the program name)
-   * \return \true if the option exists
+   * \return true if the option exists
    */
   bool optionExists(const std::string option);
 
