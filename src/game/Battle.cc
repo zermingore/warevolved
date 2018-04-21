@@ -49,7 +49,8 @@ void Battle::buildMap()
 
 
   // Adjusting cursors limits
-  for (const auto player: _players) {
+  for (const auto& player: _players)
+  {
     player->cursor()->setLimits(_map->nbColumns(), _map->nbLines());
   }
 }
