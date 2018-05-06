@@ -17,7 +17,7 @@ int main(int ac, const char **av)
     replay = p.optionExists("replay");
     fullscreen = p.optionExists("fullscreen");
   }
-  catch (const ArgumentsHelpVersionException& e)
+  catch (const ArgumentsHelpVersionException&)
   {
     return EXIT_SUCCESS;
   }

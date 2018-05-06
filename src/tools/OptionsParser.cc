@@ -76,7 +76,7 @@ void OptionsParser::displayHelp() const noexcept
   for (const auto& opt: _supportedOptions)
   {
     std::cout << "\n  ";
-    for (const auto str: opt.second.first)
+    for (const auto& str: opt.second.first)
     {
       std::cout << str << " ";
     }

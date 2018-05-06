@@ -32,9 +32,7 @@ std::shared_ptr<State> StateFactory::createState(const e_state& state)
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
       std::exit(1);
-      break;
   }
 
   // never reached
-  return nullptr;
 }
