@@ -26,7 +26,7 @@ public:
   /**
    * \brief Default destructor
    */
-  ~StateGlobal() = default;
+  ~StateGlobal() override = default;
 
 
   /**

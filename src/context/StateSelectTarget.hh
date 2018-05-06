@@ -35,7 +35,7 @@ public:
   /**
    * \brief Default destructor
    */
-  ~StateSelectTarget() = default;
+  ~StateSelectTarget() override = default;
 
   /**
    * \brief re-build the menu.

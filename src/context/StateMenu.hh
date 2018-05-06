@@ -37,6 +37,11 @@ public:
    */
   explicit StateMenu(const e_state state);
 
+  /**
+   * \brief default destructor
+   */
+  ~StateMenu() override = default;
+
 
   /**
    * \brief Save the menu coordinates.

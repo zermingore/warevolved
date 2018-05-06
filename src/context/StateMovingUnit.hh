@@ -35,7 +35,7 @@ public:
    * \brief Resets the unit's sprite
    * \note It is necessary if the move was canceled
    */
-  ~StateMovingUnit();
+  ~StateMovingUnit() override;
 
   /**
    * \brief exits the current State

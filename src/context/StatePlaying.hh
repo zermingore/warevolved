@@ -17,11 +17,15 @@
 class StatePlaying: public State
 {
 public:
-  /// registers to callbacks
+  /**
+   * \brief registers to callbacks
+   */
   StatePlaying();
 
-  /// Default destructor
-  ~StatePlaying() = default;
+  /**
+   * \brief Default destructor
+   */
+  ~StatePlaying() override = default;
 
 
   /**

@@ -37,6 +37,11 @@ public:
    */
   virtual void close() override;
 
+  /**
+   * \brief default destructor
+   */
+  ~InGameMenu() override = default;
+
 
   /**
    * \brief Cursor motion: up

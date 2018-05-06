@@ -42,7 +42,7 @@ public:
   /**
    * \brief default destructor
    */
-  ~MenuAction() = default;
+  ~MenuAction() override = default;
 
 
   /**
