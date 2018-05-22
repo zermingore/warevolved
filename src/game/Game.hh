@@ -7,6 +7,9 @@
 #ifndef GAME_HH_
 # define GAME_HH_
 
+# include <string>
+
+
 /**
  * \class Game
  * \brief Game is designed to hold the whole Game and not a single game.
@@ -39,8 +42,9 @@ public:
    *   event processing
    *   window rendering
    * \param replay true to start a replay, false otherwise
+   * \param filename Replay filename to read
    */
-  void run(bool replay);
+  void run(bool replay, const std::string& filename = "replay_file");
 };
 
 #endif /* !GAME_HH_ */

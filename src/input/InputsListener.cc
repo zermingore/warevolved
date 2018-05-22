@@ -17,11 +17,9 @@
 
 
 
-void InputsListener::listen(bool replay)
+void InputsListener::listen(bool replay, const std::string& replay_filename)
 {
-  auto replay_filename("test_log");
   // Initialize the replay mode as required (Read XOr Write)
-
   auto replay_manager = std::make_shared<ReplayManager> ();
   if (replay)
   {

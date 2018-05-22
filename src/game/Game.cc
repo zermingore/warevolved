@@ -19,7 +19,7 @@ Game::Game(bool fullscreen)
 }
 
 
-void Game::run(bool replay)
+void Game::run(bool replay, const std::string& filename)
 {
   using namespace graphics; // function scope
 
@@ -32,7 +32,7 @@ void Game::run(bool replay)
   battle->initializeMap();
 
   auto inputs_listen(
-    std::async(std::launch::async, InputsListener::listen, replay));
+    std::async(std::launch::async, InputsListener::listen, replay, filename));
 
   game::Status::pushState(e_state::PLAYING);
   game::Status::currentState()->resume();
