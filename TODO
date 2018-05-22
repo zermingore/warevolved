@@ -215,7 +215,8 @@
 
 
 * TODO Build
-** TODO Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
+** DONE Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
+   CLOSED: [2018-05-16 Mi 19:13]
 
 
 * TODO [#C] Optimization
