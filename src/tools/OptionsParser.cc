@@ -1,5 +1,6 @@
 #include <tools/OptionsParser.hh>
 
+#include <iomanip>
 #include <iostream>
 #include <algorithm>
 
@@ -73,17 +74,45 @@ void OptionsParser::displayHelp() const noexcept
   std::cout << '\n'
             << "Usage:" << '\n';
 
+  std::vector<std::string> lines;
   for (const auto& opt: _supportedOptions)
   {
-    std::cout << "\n  ";
+    std::string line = "\n ";
     for (const auto& str: opt.second.first)
     {
-      std::cout << str << " ";
+      line.append(" ");
+      line.append(str);
+      if (str == "")
+      {
+        line.append("  ");
+      }
     }
-    std::cout << "\t\t" << opt.second.second;
+
+    lines.push_back(line);
+  }
+
+  // Get the longest line in order to align correctly the descriptions
+  auto max_length = 0ul;
+  for (const auto str: lines)
+  {
+    max_length = std::max(max_length, str.length());
+  }
+
+  auto i = 0;
+  for (const auto& opt: _supportedOptions)
+  {
+    auto line = lines[i++];
+    std::cout << line
+              << std::setfill(' ')
+              << std::setw(static_cast<int> (max_length - line.length() + 1))
+              << " "
+              << opt.second.second;
   }
 
   std::cout << '\n' << std::endl;
+
+
+  std::cout << max_length << std::endl;
 }
 
 
