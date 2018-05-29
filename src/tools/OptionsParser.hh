@@ -17,6 +17,19 @@
 
 
 /**
+ * \enum e_option_argument
+ * \brief Provides flags if an argument is expected, optional, ...
+ * \note For instance the --replay-file option expects a replay file
+ */
+enum class e_option_argument
+{
+  NONE = 0,
+  OPTIONAL,
+  REQUIRED,
+};
+
+
+/**
  * \class ArgumentsException
  * \brief Exception thrown if the provided are invalid
  */
@@ -103,11 +116,18 @@ public:
    */
   bool optionExists(const std::string option);
 
-  /// Options list type: list["help"] = { {"-h", "--help"}, "display help" }
+  /// Options list type:
+  /// list["help"] = {
+  ///                  { "-h", "--help" },
+  ///                  "display help",
+  ///                  e_option_argument::NONE
+  ///                }
   using options_list =
-    std::map<std::string, std::pair<std::vector<std::string>, std::string>>;
-  // could add a callback in the options_list
-  //   (maybe use a class instead of map['help'] = { {-h}, "show help", f })
+    std::map<std::string, std::tuple<std::vector<std::string>,
+                                     std::string,
+                                     e_option_argument>>;
+  /// \note could add a callback in the options_list
+  ///   (maybe use a class instead of map['help'] = { {-h}, "show help", f })
 
 
 private:

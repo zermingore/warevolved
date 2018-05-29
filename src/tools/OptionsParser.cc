@@ -25,15 +25,35 @@ OptionsParser::OptionsParser(int ac, const char** av)
   }
 
   // Build the supported options list
-  _supportedOptions["help"] = { { "-h", "--help" }, "Show this help" };
-  _supportedOptions["version"] = {
-    { "-v", "--version" }, "Display " + _av[0] + " version" };
+  _supportedOptions["help"] = {
+    { "-h", "--help" },
+    "Show this help",
+    e_option_argument::NONE
+  };
 
-  _supportedOptions["fullscreen"] = { { "-f", "--fullscreen", "--full-screen" },
-                                      "Launch the game in full screen" };
+  _supportedOptions["version"] = {
+    { "-v", "--version" },
+    "Display " + _av[0] + " version",
+    e_option_argument::NONE
+  };
+
+  _supportedOptions["fullscreen"] = {
+    { "-f", "--fullscreen", "--full-screen" },
+    "Launch the game in full screen",
+    e_option_argument::NONE
+  };
 
   _supportedOptions["replay"] = {
-    { "-r", "--replay" }, "Replay the last replay file" };
+    { "-r", "--replay" },
+    "Replay the last replay file",
+    e_option_argument::NONE
+  };
+
+  _supportedOptions["replay-file"] = {
+    { "", "--replay-file" },
+    "Replay file (recording or playing)",
+    e_option_argument::REQUIRED
+  };
 
 
   // Fetch help or version option
@@ -78,7 +98,7 @@ void OptionsParser::displayHelp() const noexcept
   for (const auto& opt: _supportedOptions)
   {
     std::string line = "\n ";
-    for (const auto& str: opt.second.first)
+    for (const auto& str: std::get<0>(opt.second))
     {
       line.append(" ");
       line.append(str);
@@ -106,7 +126,7 @@ void OptionsParser::displayHelp() const noexcept
               << std::setfill(' ')
               << std::setw(static_cast<int> (max_length - line.length() + 1))
               << " "
-              << opt.second.second;
+              << std::get<1>(opt.second);
   }
 
   std::cout << '\n' << std::endl;
@@ -131,8 +151,8 @@ void OptionsParser::validArguments() const
     bool arg_valid = false;
     for (const auto& opt: _supportedOptions)
     {
-      if (std::find(opt.second.first.begin(), opt.second.first.end(), *arg)
-          != opt.second.first.end())
+      auto flags = std::get<0>(opt.second);
+      if (std::find(flags.begin(), flags.end(), *arg) != flags.end())
       {
         arg_valid = true;
         break;
@@ -159,7 +179,7 @@ bool OptionsParser::optionExists(const std::string option)
 {
   // Try to find the option string, for each possibility in _supportedOptions
   //   ex: try to match "-h" or "--help" for the "help" option
-  for (auto& opt_str: _supportedOptions[option].first)
+  for (auto& opt_str: std::get<0>(_supportedOptions[option]))
   {
     // _av.begin() + 1: Skip the first element (program name)
     if (std::find(_av.begin() + 1, _av.end(), opt_str) != _av.end())
