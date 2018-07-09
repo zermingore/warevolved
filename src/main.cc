@@ -23,7 +23,7 @@ int main(int ac, const char **av)
   }
   catch (const ArgumentsException& e)
   {
-    ERROR("Invalid arguments:", e.what());
+    ERROR("Invalid arguments:\n", e.what());
     return EXIT_FAILURE;
   }
 

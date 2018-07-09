@@ -118,6 +118,7 @@ void OptionsParser::displayHelp() const noexcept
     max_length = std::max(max_length, str.length());
   }
 
+  // Print the descriptions
   auto i = 0;
   for (const auto& opt: _supportedOptions)
   {
@@ -130,9 +131,6 @@ void OptionsParser::displayHelp() const noexcept
   }
 
   std::cout << '\n' << std::endl;
-
-
-  std::cout << max_length << std::endl;
 }
 
 
@@ -141,35 +139,51 @@ void OptionsParser::displayHelp() const noexcept
 /// \todo refactor the options list (or at least the search)
 void OptionsParser::validArguments() const
 {
-  bool invalid_args = false;
+  std::string error_msg = ""; // Append any error to this variable
 
-  // For each argument, check if it matches any option
+  // For each command line argument, check if it matches any option
   // +1: skip program name
-  for (auto arg = _av.begin() + 1; arg != _av.end(); ++arg)
+  for (auto option = _av.begin() + 1; option != _av.end(); ++option)
   {
-    // Search the argument in the supported options list
-    bool arg_valid = false;
+    // Extract any argument associated to the current option
+    std::string argument = ""; /// \todo split arguments (--opt=arg1,arg2)
+    std::string op = *option;
+    if (auto pos = option->find('='); pos != std::string::npos)
+    {
+      argument = option->substr(pos + 1);
+      op = option->substr(0, pos);
+      std::cout << "opt " << op << ": args: " << argument << std::endl;
+    }
+
+    // Search the provided option in the supported options list
+    bool opt_valid = false;
     for (const auto& opt: _supportedOptions)
     {
       auto flags = std::get<0>(opt.second);
-      if (std::find(flags.begin(), flags.end(), *arg) != flags.end())
+      if (std::find(flags.begin(), flags.end(), op) != flags.end())
       {
-        arg_valid = true;
+        opt_valid = true;
+        if (std::get<2>(opt.second) == e_option_argument::REQUIRED)
+        {
+          if (!argument.length())
+          {
+            error_msg.append("\tOption " + op + " missing argument\n");
+          }
+        }
         break;
       }
     }
 
-    if (!arg_valid)
+    if (!opt_valid)
     {
-      ERROR("Invalid argument", *arg);
-      invalid_args = true;
+      error_msg.append("\tUnsupported option: " + op + '\n');
     }
   }
 
-  if (invalid_args)
+  if (error_msg != "")
   {
     displayHelp();
-    throw ArgumentsException();
+    throw ArgumentsException(error_msg);
   }
 }
 
