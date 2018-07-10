@@ -101,12 +101,19 @@ public:
    *   Builds the iterable vector of options from the command line options
    * \param ac Argument count
    * \param av Argument vector (C-style)
-   * \warning The provided argument vector must contain (at least) ac entries
+   * \warning The argument vector must contain ac entries (throws otherwise)
    * \note This parameters should be directly forwarded from the main
-   * \note Throw if the arguments are invalid
+   * \note Throws if no arguments is provided
    */
   OptionsParser(int ac, const char** av);
 
+
+  /**
+   * \brief Parse the options list, checking the arguments validity
+   * \note Throws if the help or version is requested (-h --help -v --version)
+   * \note Throws if the arguments are invalid (unrecognized option)
+   */
+  void parse();
 
   /**
    * \brief Check the existence of a given option

@@ -17,12 +17,13 @@ OptionsParser::OptionsParser(int ac, const char** av)
   }
 
   // Expecting at least the program name; The arguments count must be consistent
-  auto nb_args(_av.size());
+  const auto nb_args(_av.size());
   if (!nb_args || static_cast<int> (nb_args) != ac)
   {
     // Should never happen
     throw ArgumentsException("Ill-formed arguments list.");
   }
+
 
   // Build the supported options list
   _supportedOptions["help"] = {
@@ -54,8 +55,12 @@ OptionsParser::OptionsParser(int ac, const char** av)
     "Replay file (recording or playing)",
     e_option_argument::REQUIRED
   };
+}
 
 
+
+void OptionsParser::parse()
+{
   // Fetch help or version option
   if (optionExists("help"))
   {
@@ -73,6 +78,7 @@ OptionsParser::OptionsParser(int ac, const char** av)
 }
 
 
+
 void OptionsParser::displayVersion() const noexcept
 {
   std::cout << _av[0] << ": version ";
@@ -86,6 +92,7 @@ void OptionsParser::displayVersion() const noexcept
 
   std::cout << std::endl;
 }
+
 
 
 void OptionsParser::displayHelp() const noexcept
@@ -132,7 +139,6 @@ void OptionsParser::displayHelp() const noexcept
 
   std::cout << '\n' << std::endl;
 }
-
 
 
 

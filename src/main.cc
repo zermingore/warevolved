@@ -9,13 +9,10 @@
 int main(int ac, const char **av)
 {
   // Options parsing
-  auto fullscreen = false;
-  auto replay = false;
+  OptionsParser opt(ac, av);
   try
   {
-    OptionsParser p(ac, av);
-    replay = p.optionExists("replay");
-    fullscreen = p.optionExists("fullscreen");
+    opt.parse();
   }
   catch (const ArgumentsHelpVersionException&)
   {
@@ -26,6 +23,9 @@ int main(int ac, const char **av)
     ERROR("Invalid arguments:\n", e.what());
     return EXIT_FAILURE;
   }
+
+  const auto replay = opt.optionExists("replay");
+  const auto fullscreen = opt.optionExists("fullscreen");
 
   // Launch the game
   Game game(fullscreen);
