@@ -8,6 +8,10 @@
 # define GAME_HH_
 
 # include <string>
+# include <vector>
+
+
+class OptionsParser;
 
 
 /**
@@ -29,7 +33,7 @@ public:
    * \param fullscreen Initialize a full screen or windowed graphical context
    * \see Context
    */
-  explicit Game(bool fullscreen);
+  explicit Game(const OptionsParser& options_parser);
 
   /**
    * \brief Defaulted destructor: the Context doesn't need to be deleted
@@ -44,7 +48,12 @@ public:
    * \param replay true to start a replay, false otherwise
    * \param filename Replay filename to read
    */
-  void run(bool replay, const std::string& filename = "replay_file");
+  void run();
+
+
+private:
+  const OptionsParser& _optionsParser;
+  std::vector<std::string> _replayFiles;
 };
 
 #endif /* !GAME_HH_ */

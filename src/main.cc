@@ -24,12 +24,9 @@ int main(int ac, const char **av)
     return EXIT_FAILURE;
   }
 
-  const auto replay = opt.optionExists("replay");
-  const auto fullscreen = opt.optionExists("fullscreen");
-
   // Launch the game
-  Game game(fullscreen);
-  game.run(replay);
+  Game game(opt);
+  game.run();
 
   return EXIT_SUCCESS;
 }

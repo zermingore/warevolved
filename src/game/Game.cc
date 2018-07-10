@@ -3,6 +3,7 @@
 #include <future>
 #include <cassert>
 
+#include <tools/OptionsParser.hh>
 #include <graphics/Context.hh>
 #include <input/InputsListener.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -13,13 +14,14 @@
 #include <context/State.hh>
 
 
-Game::Game(bool fullscreen)
+Game::Game(const OptionsParser& options_parser)
+  : _optionsParser(options_parser)
 {
-  graphics::Context context(fullscreen);
+  graphics::Context context(options_parser.optionExists("fullscreen"));
 }
 
 
-void Game::run(bool replay, const std::string& filename)
+void Game::run()
 {
   using namespace graphics; // function scope
 
@@ -32,7 +34,7 @@ void Game::run(bool replay, const std::string& filename)
   battle->initializeMap();
 
   auto inputs_listen(
-    std::async(std::launch::async, InputsListener::listen, replay, filename));
+    std::async(std::launch::async, InputsListener::listen, false, ""));
 
   game::Status::pushState(e_state::PLAYING);
   game::Status::currentState()->resume();

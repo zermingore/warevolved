@@ -195,17 +195,25 @@ void OptionsParser::validArguments() const
 
 
 
-bool OptionsParser::optionExists(const std::string option)
+bool OptionsParser::optionExists(const std::string option) const
 {
   // Try to find the option string, for each possibility in _supportedOptions
   //   ex: try to match "-h" or "--help" for the "help" option
-  for (auto& opt_str: std::get<0>(_supportedOptions[option]))
+  try
   {
-    // _av.begin() + 1: Skip the first element (program name)
-    if (std::find(_av.begin() + 1, _av.end(), opt_str) != _av.end())
+    for (const auto& opt_str: std::get<0>(_supportedOptions.at(option)))
     {
-      return true;
+      // _av.begin() + 1: Skip the first element (program name)
+      if (std::find(_av.begin() + 1, _av.end(), opt_str) != _av.end())
+      {
+        return true;
+      }
     }
+  }
+  catch (std::out_of_range&)
+  {
+    ERROR("[IMPLEMENTATION ERROR] Unknown option", option);
+    std::exit(1);
   }
 
   return false;

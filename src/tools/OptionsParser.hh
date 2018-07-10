@@ -119,9 +119,10 @@ public:
    * \brief Check the existence of a given option
    * \param option Check the existence of this option
    * \note Skip the first element of the argument vector (the program name)
+   * \warning Aborts the execution if the provided option is not referenced
    * \return true if the option exists
    */
-  bool optionExists(const std::string option);
+  bool optionExists(const std::string option) const;
 
   /// Options list type:
   /// list["help"] = {
@@ -130,9 +131,9 @@ public:
   ///                  e_option_argument::NONE
   ///                }
   using options_list =
-    std::map<std::string, std::tuple<std::vector<std::string>,
-                                     std::string,
-                                     e_option_argument>>;
+    std::map<const std::string, std::tuple<std::vector<std::string>,
+                                std::string,
+                                e_option_argument>>;
   /// \note could add a callback in the options_list
   ///   (maybe use a class instead of map['help'] = { {-h}, "show help", f })
 
