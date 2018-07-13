@@ -3,7 +3,7 @@
 #include <future>
 #include <cassert>
 
-#include <tools/OptionsParser.hh>
+#include <tools/options/OptionsParser.hh>
 #include <graphics/Context.hh>
 #include <input/InputsListener.hh>
 #include <graphics/GraphicsEngine.hh>
