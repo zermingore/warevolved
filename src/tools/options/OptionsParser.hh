@@ -131,7 +131,7 @@ private:
    * \todo support options with arguments (--replay filename)
    * \note throws if at least one argument is invalid
    */
-  void validArguments() const;
+  void validArguments();
 
 
   std::vector<std::string> _av; ///< mapping of the C arguments vector

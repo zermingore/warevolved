@@ -61,7 +61,7 @@ OptionsParser::OptionsParser(int ac, const char** av)
 
   _supportedOptions.emplace_back(
     Option("replay-file",
-           "Replay file (recording or playing)",
+           "Replay file (recording or playing); --replay-file=example",
            { "", "--replay-file" },
            e_option_argument::REQUIRED
     )
@@ -72,6 +72,9 @@ OptionsParser::OptionsParser(int ac, const char** av)
 
 void OptionsParser::parse()
 {
+  // Check the given arguments validity
+  validArguments();
+
   // Fetch help or version option
   if (optionExists("help"))
   {
@@ -83,9 +86,6 @@ void OptionsParser::parse()
     displayVersion();
     throw ArgumentsHelpVersionException();
   }
-
-  // Check the given arguments validity
-  validArguments();
 }
 
 
@@ -153,7 +153,7 @@ void OptionsParser::displayHelp() const noexcept
 
 
 
-void OptionsParser::validArguments() const
+void OptionsParser::validArguments()
 {
   std::string error_msg = ""; // Append any error to this variable
 
@@ -173,11 +173,12 @@ void OptionsParser::validArguments() const
 
     // Search the provided option in the supported options list
     bool opt_valid = false;
-    for (const auto& opt: _supportedOptions)
+    for (auto& opt: _supportedOptions)
     {
       auto flags = opt.aliases();
       if (std::find(flags.begin(), flags.end(), op) != flags.end())
       {
+        opt.setProvided();
         opt_valid = true;
         if (opt.requiredArguments() == e_option_argument::REQUIRED)
         {
@@ -186,7 +187,6 @@ void OptionsParser::validArguments() const
             error_msg.append("\tOption " + op + " missing argument\n");
           }
         }
-        break;
       }
     }
 
@@ -212,17 +212,7 @@ bool OptionsParser::optionExists(const std::string option) const
   {
     if (opt.name() == option)
     {
-      // Checks if one of its argument was provided (ex: "-h" or "--help")
-      for (const auto& opt_alias: opt.aliases())
-      {
-        // _av.begin() + 1: Skip the first element (program name)
-        if (std::find(_av.begin() + 1, _av.end(), opt_alias) != _av.end())
-        {
-          return true;
-        }
-      }
-
-      return false;
+      return opt.provided();
     }
   }
 

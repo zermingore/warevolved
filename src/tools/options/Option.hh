@@ -58,7 +58,7 @@ public:
   /**
    * \brief _provided getter
    */
-  auto provided() { return _provided; }
+  auto provided() const { return _provided; }
 
   /**
    * \brief Sets the provided boolean to \true
@@ -66,7 +66,11 @@ public:
    */
   void setProvided() { _provided = true; }
 
+  /**
+   * \brief Full option name getter ("help" for instance)
+   */
   const auto name() const { return _name; }
+
   /**
    * \brief Command line aliases getter
    */
