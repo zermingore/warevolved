@@ -67,6 +67,7 @@ interface/menus/MenuAction.cc       \
 \
 tools/StringParser.cc               \
 tools/Fps.cc                        \
+tools/options/Option.cc             \
 tools/options/OptionsParser.cc
 
 

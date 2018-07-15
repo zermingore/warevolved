@@ -6,8 +6,8 @@
  *   including the associated exceptions definitions
  */
 
-#ifndef OPTIONS_PARSER_HH_
-# define OPTIONS_PARSER_HH_
+#ifndef TOOLS_OPTIONS_OPTIONS_PARSER_HH_
+# define TOOLS_OPTIONS_OPTIONS_PARSER_HH_
 
 # include <map>
 # include <vector>
@@ -15,18 +15,7 @@
 # include <string>
 # include <exception>
 
-
-/**
- * \enum e_option_argument
- * \brief Provides flags if an argument is expected, optional, ...
- * \note For instance the --replay-file option expects a replay file
- */
-enum class e_option_argument
-{
-  NONE = 0,
-  OPTIONAL,
-  REQUIRED,
-};
+# include <tools/options/Option.hh>
 
 
 /**
@@ -124,19 +113,6 @@ public:
    */
   bool optionExists(const std::string option) const;
 
-  /// Options list type:
-  /// list["help"] = {
-  ///                  { "-h", "--help" },
-  ///                  "display help",
-  ///                  e_option_argument::NONE
-  ///                }
-  using options_list =
-    std::map<const std::string, std::tuple<std::vector<std::string>,
-                                std::string,
-                                e_option_argument>>;
-  /// \note could add a callback in the options_list
-  ///   (maybe use a class instead of map['help'] = { {-h}, "show help", f })
-
 
 private:
   /**
@@ -148,7 +124,6 @@ private:
    * \brief Outputs the usage message
    */
   void displayHelp() const noexcept;
-
 
   /**
    * \brief Test the provided arguments validity
@@ -164,8 +139,8 @@ private:
   /// Game's version (major, minor, bugfix)
   const std::vector<size_t> _version = {0, 1, 0};
 
-  /// List of supported options (map["help"] = {"-h", "--help"})
-  options_list _supportedOptions;
+  /// List of supported options
+  std::vector<Option> _supportedOptions;
 };
 
-#endif /* !OPTIONS_PARSER_HH_ */
+#endif /* !TOOLS_OPTIONS_OPTIONS_PARSER_HH_ */

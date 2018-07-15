@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 
+#include <tools/options/Option.hh>
 #include <debug/Debug.hh>
 
 
@@ -26,35 +27,45 @@ OptionsParser::OptionsParser(int ac, const char** av)
 
 
   // Build the supported options list
-  _supportedOptions["help"] = {
-    { "-h", "--help" },
-    "Show this help",
-    e_option_argument::NONE
-  };
+  _supportedOptions.emplace_back(
+    Option("help",
+           "Show this help",
+           { "-h", "--help" },
+           e_option_argument::NONE
+    )
+  );
 
-  _supportedOptions["version"] = {
-    { "-v", "--version" },
-    "Display " + _av[0] + " version",
-    e_option_argument::NONE
-  };
+  _supportedOptions.emplace_back(
+    Option("version",
+           "Display " + _av[0] + " version",
+           { "-v", "--version" },
+           e_option_argument::NONE
+    )
+  );
 
-  _supportedOptions["fullscreen"] = {
-    { "-f", "--fullscreen", "--full-screen" },
-    "Launch the game in full screen",
-    e_option_argument::NONE
-  };
+  _supportedOptions.emplace_back(
+    Option("fullscreen",
+           "Launch the game in full screen",
+           { "-f", "--fullscreen", "--full-screen" },
+           e_option_argument::NONE
+    )
+  );
 
-  _supportedOptions["replay"] = {
-    { "-r", "--replay" },
-    "Replay the last replay file",
-    e_option_argument::NONE
-  };
+  _supportedOptions.emplace_back(
+    Option("replay",
+           "Replay the last replay file",
+           { "-r", "--replay" },
+           e_option_argument::NONE
+    )
+  );
 
-  _supportedOptions["replay-file"] = {
-    { "", "--replay-file" },
-    "Replay file (recording or playing)",
-    e_option_argument::REQUIRED
-  };
+  _supportedOptions.emplace_back(
+    Option("replay-file",
+           "Replay file (recording or playing)",
+           { "", "--replay-file" },
+           e_option_argument::REQUIRED
+    )
+  );
 }
 
 
@@ -105,7 +116,7 @@ void OptionsParser::displayHelp() const noexcept
   for (const auto& opt: _supportedOptions)
   {
     std::string line = "\n ";
-    for (const auto& str: std::get<0>(opt.second))
+    for (const auto& str: opt.aliases())
     {
       line.append(" ");
       line.append(str);
@@ -134,7 +145,7 @@ void OptionsParser::displayHelp() const noexcept
               << std::setfill(' ')
               << std::setw(static_cast<int> (max_length - line.length() + 1))
               << " "
-              << std::get<1>(opt.second);
+              << opt.description();
   }
 
   std::cout << '\n' << std::endl;
@@ -142,7 +153,6 @@ void OptionsParser::displayHelp() const noexcept
 
 
 
-/// \todo refactor the options list (or at least the search)
 void OptionsParser::validArguments() const
 {
   std::string error_msg = ""; // Append any error to this variable
@@ -165,11 +175,11 @@ void OptionsParser::validArguments() const
     bool opt_valid = false;
     for (const auto& opt: _supportedOptions)
     {
-      auto flags = std::get<0>(opt.second);
+      auto flags = opt.aliases();
       if (std::find(flags.begin(), flags.end(), op) != flags.end())
       {
         opt_valid = true;
-        if (std::get<2>(opt.second) == e_option_argument::REQUIRED)
+        if (opt.requiredArguments() == e_option_argument::REQUIRED)
         {
           if (!argument.length())
           {
@@ -197,24 +207,28 @@ void OptionsParser::validArguments() const
 
 bool OptionsParser::optionExists(const std::string option) const
 {
-  // Try to find the option string, for each possibility in _supportedOptions
-  //   ex: try to match "-h" or "--help" for the "help" option
-  try
+  // Find the considered option in _supportedOptions ("help" for instance)
+  for (const auto& opt: _supportedOptions)
   {
-    for (const auto& opt_str: std::get<0>(_supportedOptions.at(option)))
+    if (opt.name() == option)
     {
-      // _av.begin() + 1: Skip the first element (program name)
-      if (std::find(_av.begin() + 1, _av.end(), opt_str) != _av.end())
+      // Checks if one of its argument was provided (ex: "-h" or "--help")
+      for (const auto& opt_alias: opt.aliases())
       {
-        return true;
+        // _av.begin() + 1: Skip the first element (program name)
+        if (std::find(_av.begin() + 1, _av.end(), opt_alias) != _av.end())
+        {
+          return true;
+        }
       }
+
+      return false;
     }
   }
-  catch (std::out_of_range&)
-  {
-    ERROR("[IMPLEMENTATION ERROR] Unknown option", option);
-    std::exit(1);
-  }
+
+  // We should always find a given option
+  ERROR("[IMPLEMENTATION ERROR] Unknown option", option);
+  std::exit(1);
 
   return false;
 }
