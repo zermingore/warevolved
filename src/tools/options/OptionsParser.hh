@@ -106,10 +106,9 @@ public:
 
   /**
    * \brief Check the existence of a given option
-   * \param option Check the existence of this option
-   * \note Skip the first element of the argument vector (the program name)
+   * \param option Check if this specific option was provided
    * \warning Aborts the execution if the provided option is not referenced
-   * \return true if the option exists
+   * \return true if the option was provided, false otherwise
    */
   bool optionExists(const std::string option) const;
 
@@ -128,8 +127,10 @@ private:
   /**
    * \brief Test the provided arguments validity
    *   Check if the arguments match supported options
-   * \todo support options with arguments (--replay filename)
+   * \todo support store option arguments (--replay filename)
+   * \todo split options arguments (--replay filename1,filename2)
    * \note throws if at least one argument is invalid
+   * \note throws if the help or version option is provided
    */
   void validArguments();
 

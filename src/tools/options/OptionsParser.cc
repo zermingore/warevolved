@@ -179,6 +179,7 @@ void OptionsParser::validArguments()
       if (std::find(flags.begin(), flags.end(), op) != flags.end())
       {
         opt.setProvided();
+        opt.populateArguments(argument);
         opt_valid = true;
         if (opt.requiredArguments() == e_option_argument::REQUIRED)
         {
@@ -219,6 +220,4 @@ bool OptionsParser::optionExists(const std::string option) const
   // We should always find a given option
   ERROR("[IMPLEMENTATION ERROR] Unknown option", option);
   std::exit(1);
-
-  return false;
 }

@@ -86,6 +86,11 @@ public:
    */
   const auto requiredArguments() const { return _requiredArgs; }
 
+  /**
+   * \brief Append the given arguments to the arguments list
+   * \note Split the arguments using the ',' delimiter
+   */
+  void populateArguments(const std::string& arguments);
 
 
 private:
