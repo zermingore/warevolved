@@ -27,7 +27,8 @@ OptionsParser::OptionsParser(int ac, const char** av)
 
 
   // Build the supported options list
-  _supportedOptions.emplace_back(
+  _supportedOptions.emplace(
+    "help",
     Option("help",
            "Show this help",
            { "-h", "--help" },
@@ -35,7 +36,8 @@ OptionsParser::OptionsParser(int ac, const char** av)
     )
   );
 
-  _supportedOptions.emplace_back(
+  _supportedOptions.emplace(
+    "version",
     Option("version",
            "Display " + _av[0] + " version",
            { "-v", "--version" },
@@ -43,7 +45,8 @@ OptionsParser::OptionsParser(int ac, const char** av)
     )
   );
 
-  _supportedOptions.emplace_back(
+  _supportedOptions.emplace(
+    "fullscreen",
     Option("fullscreen",
            "Launch the game in full screen",
            { "-f", "--fullscreen", "--full-screen" },
@@ -51,7 +54,8 @@ OptionsParser::OptionsParser(int ac, const char** av)
     )
   );
 
-  _supportedOptions.emplace_back(
+  _supportedOptions.emplace(
+    "replay",
     Option("replay",
            "Replay the last replay file",
            { "-r", "--replay" },
@@ -59,7 +63,8 @@ OptionsParser::OptionsParser(int ac, const char** av)
     )
   );
 
-  _supportedOptions.emplace_back(
+  _supportedOptions.emplace(
+    "replay-file",
     Option("replay-file",
            "Replay file (recording or playing); --replay-file=example",
            { "", "--replay-file" },
@@ -113,7 +118,9 @@ void OptionsParser::displayHelp() const noexcept
             << "Usage:" << '\n';
 
   std::vector<std::string> lines;
-  for (const auto& opt: _supportedOptions)
+
+
+  for (const auto& [name, opt]: _supportedOptions)
   {
     std::string line = "\n ";
     for (const auto& str: opt.aliases())
@@ -138,7 +145,7 @@ void OptionsParser::displayHelp() const noexcept
 
   // Print the descriptions
   auto i = 0;
-  for (const auto& opt: _supportedOptions)
+  for (const auto& [name, opt]: _supportedOptions)
   {
     auto line = lines[i++];
     std::cout << line
@@ -162,7 +169,7 @@ void OptionsParser::validArguments()
   for (auto option = _av.begin() + 1; option != _av.end(); ++option)
   {
     // Extract any argument associated to the current option
-    std::string argument = ""; /// \todo split arguments (--opt=arg1,arg2)
+    std::string argument = "";
     std::string op = *option;
     if (auto pos = option->find('='); pos != std::string::npos)
     {
@@ -173,7 +180,7 @@ void OptionsParser::validArguments()
 
     // Search the provided option in the supported options list
     bool opt_valid = false;
-    for (auto& opt: _supportedOptions)
+    for (auto& [name, opt]: _supportedOptions)
     {
       auto flags = opt.aliases();
       if (std::find(flags.begin(), flags.end(), op) != flags.end())
@@ -209,7 +216,7 @@ void OptionsParser::validArguments()
 bool OptionsParser::optionExists(const std::string option) const
 {
   // Find the considered option in _supportedOptions ("help" for instance)
-  for (const auto& opt: _supportedOptions)
+  for (const auto& [name, opt]: _supportedOptions)
   {
     if (opt.name() == option)
     {

@@ -141,7 +141,8 @@ private:
   const std::vector<size_t> _version = {0, 1, 0};
 
   /// List of supported options
-  std::vector<Option> _supportedOptions;
+  std::map<std::string, Option> _supportedOptions;
 };
+
 
 #endif /* !TOOLS_OPTIONS_OPTIONS_PARSER_HH_ */

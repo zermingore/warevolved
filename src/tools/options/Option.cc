@@ -6,6 +6,7 @@
  */
 
 #include <tools/options/Option.hh>
+#include <debug/Debug.hh>
 
 
 Option::Option(const std::string name,
@@ -39,4 +40,13 @@ void Option::populateArguments(const std::string& arguments)
 
   // Handle last argument
   _arguments.push_back(args);
+
+
+  // Debug
+  NOTICE("Option", _name, "arguments: ");
+  for (const auto& arg: _arguments)
+  {
+    std::cout << arg << " ";
+  }
+  std::cout << std::endl;
 }

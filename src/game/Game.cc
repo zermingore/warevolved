@@ -18,6 +18,7 @@ Game::Game(const OptionsParser& options_parser)
   : _optionsParser(options_parser)
 {
   graphics::Context context(options_parser.optionExists("fullscreen"));
+ // _replayFiles = options_parser["replay-file"].arguments();
 }
 
 

@@ -87,6 +87,11 @@ public:
   const auto requiredArguments() const { return _requiredArgs; }
 
   /**
+   * \brief Arguments getter
+   */
+  const auto arguments() { return _arguments; }
+
+  /**
    * \brief Append the given arguments to the arguments list
    * \note Split the arguments using the ',' delimiter
    */
