@@ -53,7 +53,7 @@ public:
 
 private:
   const OptionsParser& _optionsParser;
-  std::vector<std::string> _replayFiles;
+  const std::vector<std::string> _replayFiles;
 };
 
 #endif /* !GAME_HH_ */

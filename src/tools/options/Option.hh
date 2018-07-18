@@ -89,7 +89,7 @@ public:
   /**
    * \brief Arguments getter
    */
-  const auto arguments() { return _arguments; }
+  const auto arguments() const { return _arguments; }
 
   /**
    * \brief Append the given arguments to the arguments list

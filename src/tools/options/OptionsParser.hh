@@ -112,6 +112,17 @@ public:
    */
   bool optionExists(const std::string option) const;
 
+  /**
+   * \brief Retrieve a given Option, by its name
+   * \param name Option name to retrieve
+   * \note throws std::out_of_range if the given option does not exist
+   * \return The associated option, if any
+   */
+  const auto operator[] (const std::string name) const noexcept(true)
+  {
+    return _supportedOptions.at(name);
+  }
+
 
 private:
   /**
