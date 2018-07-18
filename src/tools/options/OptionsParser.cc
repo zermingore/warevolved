@@ -75,6 +75,20 @@ OptionsParser::OptionsParser(int ac, const char** av)
 
 
 
+std::optional<const Option>
+OptionsParser::operator[] (const std::string name) const noexcept(true)
+{
+  const auto opt = _supportedOptions.at(name);
+  if (opt.provided())
+  {
+    return opt;
+  }
+
+  return {};
+}
+
+
+
 void OptionsParser::parse()
 {
   // Check the given arguments validity

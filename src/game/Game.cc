@@ -13,17 +13,21 @@
 #include <common/enums/states.hh>
 #include <context/State.hh>
 
-#include <debug/Debug.hh>
+
 
 Game::Game(const OptionsParser& options_parser)
   : _optionsParser(options_parser)
-  , _replayFiles(options_parser["replay-file"].arguments())
 {
-  graphics::Context context(options_parser.optionExists("fullscreen"));
-  for (const auto arg: _replayFiles)
+  if (options_parser["replay"])
   {
-    PRINTF("arg: ", arg);
+    if (auto opt = options_parser["replay-files"])
+    {
+      _replay = true;
+      _replayFiles = opt.value().arguments();
+    }
   }
+
+  graphics::Context context(options_parser.optionExists("fullscreen"));
 }
 
 

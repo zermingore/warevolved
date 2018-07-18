@@ -14,6 +14,7 @@
 # include <utility>
 # include <string>
 # include <exception>
+# include <optional>
 
 # include <tools/options/Option.hh>
 
@@ -118,10 +119,9 @@ public:
    * \note throws std::out_of_range if the given option does not exist
    * \return The associated option, if any
    */
-  const auto operator[] (const std::string name) const noexcept(true)
-  {
-    return _supportedOptions.at(name);
-  }
+  // std::optional<const std::vector<std::string>>
+  std::optional<const Option>
+  operator[] (const std::string name) const noexcept(true);
 
 
 private:

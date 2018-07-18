@@ -9,6 +9,7 @@
 
 # include <string>
 # include <vector>
+# include <optional>
 
 
 class OptionsParser;
@@ -53,7 +54,8 @@ public:
 
 private:
   const OptionsParser& _optionsParser;
-  const std::vector<std::string> _replayFiles;
+  bool _replay = false;
+  mutable std::vector<std::string> _replayFiles;
 };
 
 #endif /* !GAME_HH_ */
