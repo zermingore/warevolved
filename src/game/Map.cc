@@ -53,16 +53,19 @@ std::shared_ptr<Unit> Map::unit(size_t column, size_t line) const
 }
 
 
+
 std::shared_ptr<Unit> Map::unit(const Coords& c) const
 {
   return _cells[c.c][c.l]->unit();
 }
 
 
+
 e_terrain Map::getTerrain(size_t column, size_t line) const
 {
   return _cells[column][line]->terrain();
 }
+
 
 
 void Map::selectUnit(const Coords& c)
@@ -211,20 +214,26 @@ e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
 }
 
 
+
 void Map::dump()
 {
-  // Browsing the _cells array by line, even if the cells are stored by column
-  //   is only to make it clearer to see
-  //   (and easier to code, do not need to move the cursor manually)
-
+  // Header: Columns index
+  std::cout << "\n   ";
+  for (auto col(0u); col < _nbColumns; ++col)
+  {
+    std::cout << col;
+  }
   std::cout << std::endl;
+
+  // Browsing the _cells array by line, even if the cells are stored by column
+  //   It is only to make it clearer to see
+  //   (and easier to code, do not need to move the cursor manually)
   for (auto line(0u); line < _nbLines; ++line)
   {
     std::cout << line << " |";
 
     for (auto col(0u); col < _nbColumns; ++col)
     {
-      // std::cout << "|  " << j << "," << i << " ";
       auto unit = _cells[col][line]->unit();
       if (!unit)
       {
