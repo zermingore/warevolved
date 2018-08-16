@@ -33,6 +33,7 @@ enum class e_key
 
   // Global actions
   SCREENSHOT,
+  DUMP_MAP,
 
   // Interface keys
   TOGGLE_PANEL,

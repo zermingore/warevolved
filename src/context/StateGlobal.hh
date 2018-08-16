@@ -41,9 +41,9 @@ public:
   void screenshot();
 
   /**
-   * \brief Toggles the side panel position
+   * \brief Dumps the Map on the standard output
    */
-  void togglePanel();
+  void dumpMap();
 };
 
 

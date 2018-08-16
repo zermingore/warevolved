@@ -28,6 +28,7 @@ enum class e_input
 
   // Global inputs
   SCREENSHOT,
+  DUMP_MAP,
 
   // Exit requests
   EXIT,

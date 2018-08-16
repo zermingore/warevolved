@@ -6,21 +6,31 @@
 #include <graphics/GraphicsEngine.hh>
 #include <game/Status.hh>
 #include <game/Player.hh>
-
+#include <game/Map.hh>
+#include <game/Battle.hh>
 
 
 
 StateGlobal::StateGlobal()
   : State()
 {
-  _evtMgr->registerEvent(e_input::SCREENSHOT,   [=] { screenshot(); });
+  _evtMgr->registerEvent(e_input::SCREENSHOT, [=] { screenshot(); });
+  _evtMgr->registerEvent(e_input::DUMP_MAP,   [=] { dumpMap(); });
 
   _evtMgr->registerEvent(e_input::TOGGLE_PANEL,
                          [=] { game::Status::player()->togglePanel(); });
 }
 
 
+
 void StateGlobal::screenshot()
 {
   graphics::GraphicsEngine::screenshotRequest();
+}
+
+
+
+void StateGlobal::dumpMap()
+{
+  game::Status::battle()->map()->dump();
 }
