@@ -108,6 +108,17 @@ void Map::endTurn()
 
 void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id)
 {
+  // Sanity check: valid coordinates
+  if (column >= _nbColumns || line >= _nbLines)
+  {
+    std::stringstream sstr;
+    sstr << "In " << __PRETTY_FUNCTION__ << '\n'; /// \warning g++/clang++ only
+    sstr << "Invalid provided coordinates: (" << column << ", " << line << ") "
+         << "Exceed: (" << _nbColumns << ", " << _nbLines << ")";
+
+    throw std::out_of_range(sstr.str());
+  }
+
   // Explicitly using a shared_ptr
   std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
 

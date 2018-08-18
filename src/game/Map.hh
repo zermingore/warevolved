@@ -130,6 +130,7 @@ public:
    * \param line line to set the new unit
    * \param column column to set the new unit
    * \param player_id player to which the unit belongs to
+   * \note Throws if the column/line arguments are greater than the Map size
    */
   void newUnit(e_unit type, size_t column, size_t line, size_t player_id);
 
