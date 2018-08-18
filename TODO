@@ -8,11 +8,15 @@
 
 
 * TODO Roadmap
-** TODO [Clean] Pointers parameters (should pass smart_ptr only when sharing the ownership)
-** TODO [Doc] Home page
+** TODO Load Map from file
+** TODO Save Map to file
 
+
+* TODO Doc
+** TODO Home page
 
 * TODO Clean
+** TODO Pointer parameters (should pass smart_ptr only when sharing the ownership)
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Map iterator to access cells without explicit double loop
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
@@ -35,7 +39,8 @@
 
 
 * TODO Game Features
-
+** TODO Load Map from file
+** TODO Save Map to file
 
 * TODO Code Design
 ** TODO use emplace[_back] with std::vector (C++11)
@@ -181,6 +186,7 @@
 *** TODO auto generate documentation
 ** TODO auto resources XML generator
 ** TODO Options parser
+*** TODO Map file (load/save)
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (useful ?)
 
