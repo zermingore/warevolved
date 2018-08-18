@@ -114,7 +114,7 @@ void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id)
     std::stringstream sstr;
     sstr << "In " << __PRETTY_FUNCTION__ << '\n'; /// \warning g++/clang++ only
     sstr << "Invalid provided coordinates: (" << column << ", " << line << ") "
-         << "Exceed: (" << _nbColumns << ", " << _nbLines << ")";
+         << "Exceed: (" << _nbColumns - 1 << ", " << _nbLines - 1 << ")";
 
     throw std::out_of_range(sstr.str());
   }
