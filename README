@@ -29,10 +29,14 @@ you will need:
 - doxygen
 
 
-This project is under GPL license though uses PugiXML,
-a XML file parser which is under Boost license
+This project is under a fully permissive license.
+It means that you can do whatever you want with the code;
+A citation would be appreciated but is not required
+
+Though this software uses PugiXML, a XML file parser which is under Boost license
 I have not written any code in src/pugixml folder
 credits go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
+
 
 If you haven't downloaded War Evolved on GitHub,
 you still can find it there https://github.com/zermingore/warevolved
