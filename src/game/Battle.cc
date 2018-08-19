@@ -21,8 +21,8 @@ Battle::Battle() :
 void Battle::initializeMap()
 {
   graphics::MapGraphicsProperties::initialize();
-  buildPlayers();
   buildMap();
+  buildPlayers();
 }
 
 
@@ -33,6 +33,12 @@ void Battle::buildPlayers()
 
   auto player2 = std::make_shared<Player> (graphics::Color(227, 227, 0));
   _players.push_back(player2);
+
+  // Adjusting cursors limits
+  for (const auto& player: _players)
+  {
+    player->cursor()->setLimits(_map->nbColumns(), _map->nbLines());
+  }
 }
 
 
@@ -40,12 +46,6 @@ void Battle::buildPlayers()
 void Battle::buildMap()
 {
   _map = loadMap("map/map.xml");
-
-  // Adjusting cursors limits
-  for (const auto& player: _players)
-  {
-    player->cursor()->setLimits(_map->nbColumns(), _map->nbLines());
-  }
 }
 
 
