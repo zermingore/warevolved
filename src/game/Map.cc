@@ -69,7 +69,6 @@ void Map::setTerrain(size_t column, size_t line, e_terrain terrain)
 
 
 
-
 void Map::selectUnit(const Coords& c)
 {
   // Retrieve the unit
@@ -82,6 +81,7 @@ void Map::selectUnit(const Coords& c)
   _selectedUnit = unit;
   _lockSelectedUnitUpdate.unlock();
 }
+
 
 
 void Map::moveUnit(const Coords& c)
@@ -100,12 +100,14 @@ void Map::moveUnit(const Coords& c)
 }
 
 
+
 void Map::endTurn()
 {
   for (auto& it: _units[game::Status::battle()->currentPlayer()]) {
     it->setPlayed(false);
   }
 }
+
 
 
 void Map::newUnit(e_unit type,
@@ -134,6 +136,7 @@ void Map::newUnit(e_unit type,
   _units[player_id].push_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
 }
+
 
 
 e_attack_result Map::attackResult(bool attacker_status, bool defender_status)

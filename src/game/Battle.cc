@@ -18,12 +18,14 @@ Battle::Battle() :
 }
 
 
+
 void Battle::initializeMap()
 {
   graphics::MapGraphicsProperties::initialize();
   buildMap();
   buildPlayers();
 }
+
 
 
 void Battle::buildPlayers()
@@ -42,11 +44,13 @@ void Battle::buildPlayers()
 }
 
 
-/// \todo generate a random Map, read one from a file, ...
+
+/// \todo generate a random Map
 void Battle::buildMap()
 {
   _map = loadMap("map/map.xml");
 }
+
 
 
 void Battle::nextPlayer()

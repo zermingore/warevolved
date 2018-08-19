@@ -29,10 +29,11 @@ Player::Player(const graphics::Color c)
   _cursor->setColor(c);
   _interface->addElement(_cursor);
 
-  _panel = std::make_shared<interface::Panel> (game::Status::battle()->map(),
-                                               _cursor);
+  _panel = std::make_shared<interface::Panel> (
+    game::Status::battle()->map(), _cursor);
   _interface->addElement(_panel);
 }
+
 
 
 // Interface elements
@@ -57,6 +58,7 @@ void Player::togglePanel() {
 }
 
 
+
 void Player::select()
 {
   // If there is a unit, which did not play and belong to us, allow to select it
@@ -71,6 +73,7 @@ void Player::select()
   }
   game::Status::currentState()->resume();
 }
+
 
 
 void Player::updateSelectedUnit()
