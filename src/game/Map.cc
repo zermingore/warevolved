@@ -29,19 +29,13 @@ Map::Map(size_t nb_columns, size_t nb_lines)
     std::vector<std::shared_ptr<Cell>> vec(_nbLines);
 
     // Allocate each Cell of the column
-    for (auto line(0u); line < _nbLines - 1; ++line) {
+    for (auto line(0u); line < _nbLines; ++line) {
       vec[line] = std::make_shared<Cell> (col, line, e_terrain::PLAIN);
     }
-    vec[_nbLines - 1] =
-      std::make_shared<Cell> (col, _nbLines - 1, e_terrain::FOREST);
-
 
     // _cells is a vector of columns
     _cells.push_back(vec);
   }
-
-  /// \todo Read data from a map file to set the terrains
-  // (should be called from Battle)
 }
 
 
