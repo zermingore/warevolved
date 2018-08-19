@@ -8,7 +8,8 @@
 
 
 * TODO Roadmap
-** TODO Load Map from file
+** DONE Load Map from file
+   CLOSED: [2018-08-19 So 18:09]
 ** TODO Save Map to file
 
 
@@ -39,7 +40,8 @@
 
 
 * TODO Game Features
-** TODO Load Map from file
+** DONE Load Map from file
+   CLOSED: [2018-08-19 So 18:10]
 ** TODO Save Map to file
 
 * TODO Code Design
