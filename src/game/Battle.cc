@@ -40,7 +40,7 @@ void Battle::buildPlayers()
 void Battle::buildMap()
 {
   /// \todo map size is hard-coded
-  _map = loadMap("map.xml");
+  _map = loadMap("map/map.xml");
 
   // Adjusting cursors limits
   for (const auto& player: _players)
