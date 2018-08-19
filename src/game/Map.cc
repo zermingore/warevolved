@@ -126,7 +126,7 @@ void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id, int
 
   new_unit->setCoords({ column, line });
   new_unit->setPlayerId(player_id);
-  new_unit->setHP(hp);
+  new_unit->setHp(hp);
   _units[player_id].push_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
 }
@@ -191,7 +191,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   auto damages = damageValues(*_selectedUnit, *defender);
 
   bool defender_died = false;
-  defender->setHP(defender->hp() - static_cast<int> (damages.first));
+  defender->setHp(defender->hp() - static_cast<int> (damages.first));
   if (defender->hp() <= 0)
   {
     _cells[defender->c()][defender->l()]->removeUnit();
@@ -199,7 +199,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
   }
 
   // getting attacker status after strike back
-  _selectedUnit->setHP(_selectedUnit->hp() - static_cast<int> (damages.second));
+  _selectedUnit->setHp(_selectedUnit->hp() - static_cast<int> (damages.second));
   bool attacker_died = false;
   if (_selectedUnit->hp() <= 0)
   {

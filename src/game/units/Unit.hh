@@ -88,7 +88,7 @@ public:
    * \brief _hp setter
    * \note allows negative values
    */
-  void setHP(int hp) { _hp = hp; }
+  void setHp(int hp) { _hp = hp; }
 
   /**
    * \brief Sprite color setter
