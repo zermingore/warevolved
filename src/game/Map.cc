@@ -62,6 +62,14 @@ e_terrain Map::getTerrain(size_t column, size_t line) const
 
 
 
+void Map::setTerrain(size_t column, size_t line, e_terrain terrain)
+{
+  _cells[column][line]->setTerrain(terrain);
+}
+
+
+
+
 void Map::selectUnit(const Coords& c)
 {
   // Retrieve the unit
@@ -100,7 +108,7 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id)
+void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id, int hp)
 {
   // Sanity check: valid coordinates
   if (column >= _nbColumns || line >= _nbLines)
@@ -118,6 +126,7 @@ void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id)
 
   new_unit->setCoords({ column, line });
   new_unit->setPlayerId(player_id);
+  new_unit->setHP(hp);
   _units[player_id].push_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
 }

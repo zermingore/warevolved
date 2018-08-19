@@ -101,15 +101,21 @@ public:
   auto selectedUnit() { return _selectedUnit; }
 
   /**
-   * \brief gets the terrain at coordinates (x, y).
-   *
+   * \brief Get the terrain at given coordinates.
    * \param column Coordinates according to columns.
    * \param line Coordinates according to lines.
-   *
-   * \return the enum index in e_terrain matching the terrain
-   *   located at coordinates (c, l).
+   * \return The enum index in e_terrain matching the terrain
+   *   located at coordinates (column, line).
    */
   e_terrain getTerrain(size_t column, size_t line) const;
+
+  /**
+   * \brief sets the terrain at given coordinates
+   * \param column Coordinates according to columns.
+   * \param line Coordinates according to lines.
+   * \param terrain Terrain to assign for the designated Cell
+   */
+  void setTerrain(size_t column, size_t line, e_terrain terrain);
 
   /**
    * \brief get the cell at given coordinates
@@ -132,7 +138,7 @@ public:
    * \param player_id player to which the unit belongs to
    * \note Throws if the column/line arguments are greater than the Map size
    */
-  void newUnit(e_unit type, size_t column, size_t line, size_t player_id);
+  void newUnit(e_unit type, size_t column, size_t line, size_t player_id, int hp);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates

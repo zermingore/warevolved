@@ -7,11 +7,11 @@
   <cells>
     <cell>
 	  <coordinates col='0' line='0'></coordinates>
-	  <terrain>1</terrain>
+	  <terrain>2</terrain>
     </cell>
     <cell>
 	  <coordinates col='0' line='1'></coordinates>
-	  <terrain>1</terrain>
+	  <terrain>2</terrain>
       <unit
           type='0'
           player_id='0'
@@ -20,7 +20,7 @@
     </cell>
     <cell>
 	  <coordinates col='0' line='2'></coordinates>
-	  <terrain>1</terrain>
+	  <terrain>2</terrain>
       <unit
           type='0'
           player_id='1'
@@ -29,11 +29,11 @@
     </cell>
     <cell>
 	  <coordinates col='1' line='0'></coordinates>
-	  <terrain>1</terrain>
+	  <terrain>2</terrain>
       <unit
           type='0'
           player_id='0'
-          hp='5'>
+          hp='2'>
       </unit>
     </cell>
     <cell>

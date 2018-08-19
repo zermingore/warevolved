@@ -39,7 +39,6 @@ void Battle::buildPlayers()
 /// \todo generate a random Map, read one from a file, ...
 void Battle::buildMap()
 {
-  /// \todo map size is hard-coded
   _map = loadMap("map/map.xml");
 
   // Adjusting cursors limits
@@ -89,23 +88,18 @@ std::shared_ptr<Map> Battle::loadMap(const std::string& file_name)
       // Coordinates
       int col = cell.child("coordinates").attribute("col").as_int();
       int line = cell.child("coordinates").attribute("line").as_int();
-      std::cout << "coords: " << col << ", " << line << std::endl;
 
       // Terrain
       auto terrain = static_cast<e_terrain> (cell.child("terrain").text().as_int());
-      std::cout << "terrain: " << static_cast<int> (terrain) << std::endl;
-      /// \todo set terrain
+      map->setTerrain(col, line, terrain);
 
       // Unit
       for (pugi::xml_node unit: cell.children("unit"))
       {
         auto type = static_cast<e_unit> (unit.attribute("type").as_int());
         auto player_id = unit.attribute("player_id").as_int();
-        map->newUnit(type, col, line, player_id);
-
         auto hp = unit.attribute("hp").as_int();
-        std::cout << "hp: " << hp << std::endl;
-        /// \todo set hp
+        map->newUnit(type, col, line, player_id, hp);
       }
 
       cells = cells.next_sibling();
