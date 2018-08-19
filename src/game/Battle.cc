@@ -90,8 +90,8 @@ std::shared_ptr<Map> Battle::loadMap(const std::string& file_name)
       int line = cell.child("coordinates").attribute("line").as_int();
 
       // Terrain
-      auto terrain = static_cast<e_terrain> (cell.child("terrain").text().as_int());
-      map->setTerrain(col, line, terrain);
+      map->setTerrain(col, line, static_cast<e_terrain> (
+                        cell.child("terrain").text().as_int()));
 
       // Unit
       for (pugi::xml_node unit: cell.children("unit"))

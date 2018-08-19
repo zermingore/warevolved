@@ -138,7 +138,11 @@ public:
    * \param player_id player to which the unit belongs to
    * \note Throws if the column/line arguments are greater than the Map size
    */
-  void newUnit(e_unit type, size_t column, size_t line, size_t player_id, int hp);
+  void newUnit(e_unit type,
+               size_t column,
+               size_t line,
+               size_t player_id,
+               int hp);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates

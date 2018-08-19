@@ -108,7 +108,11 @@ void Map::endTurn()
 }
 
 
-void Map::newUnit(e_unit type, size_t column, size_t line, size_t player_id, int hp)
+void Map::newUnit(e_unit type,
+                  size_t column,
+                  size_t line,
+                  size_t player_id,
+                  int hp)
 {
   // Sanity check: valid coordinates
   if (column >= _nbColumns || line >= _nbLines)
