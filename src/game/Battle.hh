@@ -70,6 +70,20 @@ public:
   void buildMap();
 
   /**
+   * \brief Parse the given file in order to load the map
+   * \param file_name XML file to parse
+   * \return A pointer on the freshly created map
+   */
+  std::shared_ptr<Map> loadMap(const std::string& file_name);
+
+  /**
+   * \brief Save the current map in the given filename
+   * \param file_name file where to save the Map
+   */
+  void saveMap(const std::string& file_name);
+
+
+  /**
    * \brief current player getter
    * \return a pointer on the current player
    */
