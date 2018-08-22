@@ -291,6 +291,24 @@ void Map::dump()
   player.append_child(pugi::node_pcdata).set_value(player_str);
 
 
+  // 'cells' node
+  for (auto col(0u); col < _nbColumns; ++col)
+  {
+    for (auto line(0u); line < _nbLines; ++line)
+    {
+      auto cells = map.append_child("cells");
+
+      auto cell = cells.append_child("coordinates");
+      cell.append_attribute("col") = col;
+      cell.append_attribute("line") = line;
+
+      auto terrain_int = static_cast<int> (_cells[col][line]->terrain());
+      const auto terrain_str = std::to_string(terrain_int).c_str();
+      auto terrain = cells.append_child("terrain");
+      terrain.append_child(pugi::node_pcdata).set_value(terrain_str);
+    }
+  }
+
   // save
   if (!doc.save_file("gen_map.xml"))
   {
