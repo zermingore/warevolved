@@ -14,6 +14,7 @@
 Soldier::Soldier()
   : Unit()
 {
+  _type = e_unit::SOLDIERS;
   _sprite = std::make_shared<graphics::Sprite> ("soldiers");
 
   _motionValue = 3;

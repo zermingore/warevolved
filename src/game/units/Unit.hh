@@ -11,6 +11,7 @@
 # include <cstddef> // size_t
 # include <common/using.hh> // Coords
 # include <graphics/graphic_types.hh>
+# include <common/enums/units.hh>
 
 
 namespace graphics {
@@ -59,6 +60,12 @@ public:
    * \param coords New unit Cell's coordinates
    */
   void setCoords(const Coords coords) { _coords = coords; }
+
+  /**
+   * \brief x coordinate on the map getter
+   * \return x (column) coordinate on the Map
+   */
+  auto type() const { return _type; }
 
   /**
    * \brief _playerId getter
@@ -134,6 +141,7 @@ public:
 
 
 protected:
+  e_unit _type;        ///< Introspection; used for instance to save the Map
   Coords _coords;      ///< Unit's cell coordinates
   bool _played;        ///< notify if the unit has already played this turn
   size_t _playerId;    ///< the unit belongs to the player matching this id
