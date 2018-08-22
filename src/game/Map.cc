@@ -7,6 +7,7 @@
 
 #include <game/Map.hh>
 
+#include <lib/pugixml.hh>
 #include <debug/Debug.hh>
 #include <game/Status.hh>
 #include <common/enums/terrains.hh>
@@ -266,4 +267,36 @@ void Map::dump()
 
     std::cout << "|" << std::endl;
   }
+
+
+
+  pugi::xml_document doc;
+
+  // Main 'map' node
+  auto map = doc.append_child("map");
+
+
+  // 'metadata' node
+  auto metadata = map.append_child("metadata");
+
+  // Map size
+  auto map_size = metadata.append_child("map_size");
+  map_size.append_attribute("nb_columns") = static_cast<int> (_nbColumns);
+  map_size.append_attribute("nb_lines") = static_cast<int> (_nbLines);
+
+  // Current Player
+  const auto player_number = game::Status::battle()->currentPlayer();
+  const auto player_str = std::to_string(player_number).c_str();
+  auto player = metadata.append_child("current_player");
+  player.append_child(pugi::node_pcdata).set_value(player_str);
+
+
+  // save
+  if (!doc.save_file("gen_map.xml"))
+  {
+    ERROR("Unable to save XML");
+    return;
+  }
+
+  doc.print(std::cout); // debug
 }
