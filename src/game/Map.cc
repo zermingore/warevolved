@@ -292,27 +292,28 @@ void Map::dump()
 
 
   // 'cells' node
+  auto cells = map.append_child("cells");
   for (auto col(0u); col < _nbColumns; ++col)
   {
     for (auto line(0u); line < _nbLines; ++line)
     {
-      auto cells = map.append_child("cells");
+      auto cell = cells.append_child("cell");
 
       // Coordinates
-      auto cell = cells.append_child("coordinates");
-      cell.append_attribute("col") = col;
-      cell.append_attribute("line") = line;
+      auto coords = cell.append_child("coordinates");
+      coords.append_attribute("col") = col;
+      coords.append_attribute("line") = line;
 
       // Terrain
       auto terrain_int = static_cast<int> (_cells[col][line]->terrain());
       const auto terrain_str = std::to_string(terrain_int).c_str();
-      auto terrain = cells.append_child("terrain");
+      auto terrain = cell.append_child("terrain");
       terrain.append_child(pugi::node_pcdata).set_value(terrain_str);
 
       // Unit
       if (auto u = _cells[col][line]->unit())
       {
-        auto node = cells.append_child("unit");
+        auto node = cell.append_child("unit");
         node.append_attribute("type") = static_cast<int> (u->type());
         node.append_attribute("player_id") = static_cast<int> (u->playerId());
         node.append_attribute("hp") = u->hp();
