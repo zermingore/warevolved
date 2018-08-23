@@ -1,0 +1,50 @@
+nodes list with attributes:
+
+<?xml version?>  # XML format related
+  version
+
+<cell>           # A cell of the Map
+
+<cells>          # Regroups every cell of the Map
+
+<coordinates>    # Cell coordinates (col, line)
+  col="12"
+  line="34"
+
+<current_player> # Id of the Player currently playing
+
+<map>            # Map description
+
+<map_size>       # Map size (nb_columns x nb_lines)
+  nb_columns="123"
+  nb_lines="456"
+
+<metadata>       # Map metadata group
+
+<terrain>        # Terrain id of the Cell
+
+<unit>           # (optional) Eventual Unit on the associated Cell
+  type="12"
+  player_id="34"
+  hp="56"
+  played=true
+
+
+
+
+Hierarchy:
+
+<map>
+  <metadata>
+    <map_size nb_columns="123" nb_lines="456" />
+    <current_player>42<current_player/>
+  </metadata>
+
+  <cells>
+    <cell> <!-- repeated -->
+      <coordinates col="12" line="34"/>
+      <terrain>123</terrain>
+      <unit type="1" player_id="2" hp="3"> <!-- optionanl -->
+    </cell>
+  </cells>
+</map>
