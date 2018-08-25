@@ -27,7 +27,7 @@ nodes list with attributes:
   type="12"
   player_id="34"
   hp="56"
-  played=true
+  played="true"
 
 
 

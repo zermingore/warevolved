@@ -2,7 +2,7 @@
 <map>
   <metadata>
 	<map_size nb_columns='2' nb_lines='3'></map_size>
-	<current_player>1</current_player>
+	<current_player>0</current_player>
   </metadata>
   <cells>
     <cell>
@@ -15,7 +15,8 @@
       <unit
           type='0'
           player_id='0'
-          hp='5'>
+          hp='5'
+          played='false'>
       </unit>
     </cell>
     <cell>
@@ -24,7 +25,8 @@
       <unit
           type='0'
           player_id='1'
-          hp='7'>
+          hp='7'
+          played='false'>
       </unit>
     </cell>
     <cell>
@@ -33,7 +35,8 @@
       <unit
           type='0'
           player_id='0'
-          hp='2'>
+          hp='2'
+          played='true'>
       </unit>
     </cell>
     <cell>

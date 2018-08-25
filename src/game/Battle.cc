@@ -7,13 +7,14 @@
 #include <game/Status.hh>
 #include <game/Player.hh>
 #include <game/Map.hh>
+#include <game/units/Unit.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
 
 
 Battle::Battle() :
-  _currentPlayer (0)
+  _currentPlayer(0)
 {
 }
 
@@ -49,6 +50,7 @@ void Battle::buildPlayers()
 void Battle::buildMap()
 {
   _map = loadMap("map/map.xml");
+  // _map = loadMap("gen_map.xml");
 }
 
 
@@ -103,7 +105,8 @@ std::shared_ptr<Map> Battle::loadMap(const std::string& file_name)
         auto type = static_cast<e_unit> (unit.attribute("type").as_int());
         auto player_id = unit.attribute("player_id").as_int();
         auto hp = unit.attribute("hp").as_int();
-        map->newUnit(type, col, line, player_id, hp);
+        auto played = unit.attribute("played").as_bool();
+        map->newUnit(type, col, line, player_id, hp, played);
       }
 
       cells = cells.next_sibling();

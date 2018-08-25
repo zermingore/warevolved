@@ -115,7 +115,8 @@ void Map::newUnit(e_unit type,
                   size_t column,
                   size_t line,
                   size_t player_id,
-                  int hp)
+                  int hp,
+                  bool played)
 {
   // Sanity check: valid coordinates
   if (column >= _nbColumns || line >= _nbLines)
@@ -134,6 +135,7 @@ void Map::newUnit(e_unit type,
   new_unit->setCoords({ column, line });
   new_unit->setPlayerId(player_id);
   new_unit->setHp(hp);
+  new_unit->setPlayed(played);
   _units[player_id].push_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
 }
@@ -286,6 +288,7 @@ void Map::dump()
         node.append_attribute("type") = static_cast<int> (u->type());
         node.append_attribute("player_id") = static_cast<int> (u->playerId());
         node.append_attribute("hp") = u->hp();
+        node.append_attribute("played") = u->played();
       }
     }
   }

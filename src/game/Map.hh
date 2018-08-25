@@ -142,7 +142,8 @@ public:
                size_t column,
                size_t line,
                size_t player_id,
-               int hp);
+               int hp,
+               bool played);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates
