@@ -10,7 +10,8 @@
 * TODO Roadmap
 ** DONE Load Map from file
    CLOSED: [2018-08-19 So 18:09]
-** TODO Save Map to file
+** DONE Save Map to file
+   CLOSED: [2018-08-25 Sa 16:44]
 
 
 * TODO Doc
@@ -42,7 +43,8 @@
 * TODO Game Features
 ** DONE Load Map from file
    CLOSED: [2018-08-19 So 18:10]
-** TODO Save Map to file
+** DONE Save Map to file
+   CLOSED: [2018-08-25 Sa 16:44]
 
 * TODO Code Design
 ** TODO use emplace[_back] with std::vector (C++11)
