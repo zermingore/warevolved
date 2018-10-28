@@ -8,14 +8,13 @@
 
 
 * TODO Roadmap
-** DONE Load Map from file
-   CLOSED: [2018-08-19 So 18:09]
-** DONE Save Map to file
-   CLOSED: [2018-08-25 Sa 16:44]
+** TODO Load a random Map when none is provided
+** TODO Save Map to a specific file (cmd line argument)
 
 
 * TODO Doc
 ** TODO Home page
+
 
 * TODO Clean
 ** TODO Pointer parameters (should pass smart_ptr only when sharing the ownership)
@@ -45,6 +44,9 @@
    CLOSED: [2018-08-19 So 18:10]
 ** DONE Save Map to file
    CLOSED: [2018-08-25 Sa 16:44]
+** TODO Load a random Map when none is provided
+** TODO Save Map to a specific file (cmd line argument)
+
 
 * TODO Code Design
 ** TODO use emplace[_back] with std::vector (C++11)
@@ -81,6 +83,8 @@
 **** TODO Jeep
 *** TODO Terrain
 **** TODO Mountain
+*** TODO Buildings
+**** TODO Block
 
 
 * TODO Gameplay
@@ -97,7 +101,8 @@
    could use more than one plan (one for ground units, one for air units)
 *** TODO Tunnels
    could use different levels of zoom (micro-ing a soldier, macro-ing a tank)
-** TODO save / load from file (XML / own ?)
+** DONE save / load from file (XML / own ?)
+   CLOSED: [2018-10-28 So 08:43]
 ** TODO dual windows (main window / infos panel)
 ** TODO Customize gear
    (riffles, kevlar, silencer, vehicles options)
@@ -188,6 +193,7 @@
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
 *** TODO auto generate documentation
+*** TODO integration tests were runned
 ** TODO auto resources XML generator
 ** TODO Options parser
 *** TODO Map file (load/save)
@@ -196,13 +202,16 @@
 
 
 * TODO non-regression tests
-** TODO Test: Save the map in a file
+** TODO Integration Test process
+*** Load a map, a replay, save at the end; compare with a reference map
 ** TODO game scripts (need to be able to use pre-recorded input)
 ** TODO Use an ascii map to check fight behavior
 ** TODO Use screenshots for the interface
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
 ** TODO The displayed fps should be computed only over a fixed period of time
+** TODO Use git hooks in order to make sure the tests were considered
+** TODO Disable the graphics engine (speeding up testing)
 
 
 * TODO Bugs / Features
