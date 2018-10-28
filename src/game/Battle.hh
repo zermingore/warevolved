@@ -25,20 +25,20 @@ enum class e_units;
 class Battle
 {
 public:
-  /// \todo add filename XOr nb players, ...
+  /**
+   * \brief Deleted default Constructor
+   */
+  Battle() = delete;
 
   /**
-   * \brief Default Constructor
-   *
-   * Builds a random battle.
-   * with a random number of players, units, ...
-   * Calls buildPlayers(), buildMap()
+   * \brief Constructor; Loads the given map
    */
-  Battle();
+  explicit Battle(const std::string& load_map_file);
 
 
   /**
    * \brief Initialize a new map (including the players)
+   * \note Calls buildMap() buildPlayers()
    */
   void initializeMap();
 
@@ -66,15 +66,15 @@ public:
   /// End Player turns. Switch to the next player.
   void nextPlayer();
 
-  /// Initializes the map, adding the units.
+  /// Initializes the map, adding the terrains, units, ...
   void buildMap();
 
   /**
-   * \brief Parse the given file in order to load the map
-   * \param file_name XML file to parse
+   * \brief Parse the map file in order to load it
    * \return A pointer on the freshly created map
+   * \note Loads the _loadMapFile map
    */
-  std::shared_ptr<Map> loadMap(const std::string& file_name);
+  std::shared_ptr<Map> loadMap();
 
   /**
    * \brief Save the current map in the given filename
@@ -111,6 +111,7 @@ private:
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
   std::shared_ptr<Map> _map; ///< Map of this battle
   size_t _currentPlayer; ///< current player's id
+  const std::string _loadMapFile; ///< File from where the map will be loaded
 };
 
 #endif /* !BATTLE_HH_ */

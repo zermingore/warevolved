@@ -13,8 +13,9 @@
 
 
 
-Battle::Battle() :
-  _currentPlayer(0)
+Battle::Battle(const std::string& load_map_file)
+  : _currentPlayer(0)
+  , _loadMapFile(load_map_file)
 {
 }
 
@@ -29,6 +30,7 @@ void Battle::initializeMap()
 
 
 
+/// \todo include in buildMap()
 void Battle::buildPlayers()
 {
   auto player1 = std::make_shared<Player> (graphics::Color(0, 127, 127));
@@ -49,8 +51,7 @@ void Battle::buildPlayers()
 /// \todo generate a random Map
 void Battle::buildMap()
 {
-  _map = loadMap("map/map.xml");
-  // _map = loadMap("gen_map.xml");
+  _map = loadMap();
 }
 
 
@@ -64,12 +65,12 @@ void Battle::nextPlayer()
 
 
 
-std::shared_ptr<Map> Battle::loadMap(const std::string& file_name)
+std::shared_ptr<Map> Battle::loadMap()
 {
   pugi::xml_document doc;
-  if (!doc.load_file(file_name.c_str()))
+  if (!doc.load_file(_loadMapFile.c_str()))
   {
-    ERROR("unable to load file", file_name);
+    ERROR("unable to load file", _loadMapFile);
     return nullptr;
   }
 

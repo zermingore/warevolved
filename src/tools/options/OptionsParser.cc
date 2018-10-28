@@ -71,6 +71,15 @@ OptionsParser::OptionsParser(int ac, const char** av)
            e_option_argument::REQUIRED
     )
   );
+
+  _supportedOptions.emplace(
+    "load-map",
+    Option("load-map",
+           "Load the Map from the given file; --load-map=my_map",
+           { "", "--load-map" },
+           e_option_argument::REQUIRED
+    )
+  );
 }
 
 
