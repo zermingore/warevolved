@@ -111,7 +111,8 @@ private:
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
   std::shared_ptr<Map> _map; ///< Map of this battle
   size_t _currentPlayer; ///< current player's id
-  const std::string _loadMapFile; ///< File from where the map will be loaded
+  /// \todo  const _loadMapFile (after handling random Map generation)
+  std::string _loadMapFile; ///< File from where the map will be loaded
 };
 
 #endif /* !BATTLE_HH_ */

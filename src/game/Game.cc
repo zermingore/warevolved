@@ -39,7 +39,12 @@ void Game::run()
 
   resources::ResourcesManager::initialize("resources.xml");
 
-  auto battle(std::make_shared<Battle> ((_optionsParser["load-map"]).value().arguments()[0]));
+  std::string load_map = "";
+  if (const auto& opt = _optionsParser["load-map"])
+  {
+    load_map = opt.value().arguments()[0];
+  }
+  auto battle(std::make_shared<Battle> (load_map));
   game::Status::setBattle(battle);
   battle->initializeMap();
 

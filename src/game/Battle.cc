@@ -48,10 +48,16 @@ void Battle::buildPlayers()
 
 
 
-/// \todo generate a random Map
 void Battle::buildMap()
 {
-  _map = loadMap();
+  if (!_loadMapFile.empty())
+    _map = loadMap();
+  else
+  {
+    /// \todo generate a random Map
+    _loadMapFile = "map/map.xml";
+    _map = loadMap();
+  }
 }
 
 
