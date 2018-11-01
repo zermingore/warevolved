@@ -31,9 +31,11 @@ public:
   Battle() = delete;
 
   /**
-   * \brief Constructor; Loads the given map
+   * \brief Constructor; Loads the given map if any
+   * \param load_map_file Map to load
+   * \param saves_directory Path where to save games
    */
-  explicit Battle(const std::string& load_map_file);
+  Battle(const std::string& load_map_file, const std::string& saves_directory);
 
 
   /**
@@ -77,10 +79,11 @@ public:
   std::shared_ptr<Map> loadMap();
 
   /**
-   * \brief Save the current map in the given filename
-   * \param file_name file where to save the Map
+   * \brief Save the current map in the _savesDirectory folder
+   * \note _savesDirectory is the current folder (./) or,
+   *   if provided through command line arguments, in the saves_directory folder
    */
-  void saveMap(const std::string& file_name);
+  void saveMap();
 
 
   /**
@@ -113,6 +116,7 @@ private:
   size_t _currentPlayer; ///< current player's id
   /// \todo  const _loadMapFile (after handling random Map generation)
   std::string _loadMapFile; ///< File from where the map will be loaded
+  const std::string _savesDirectory; ///< Where to save maps
 };
 
 #endif /* !BATTLE_HH_ */

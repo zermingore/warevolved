@@ -80,6 +80,15 @@ OptionsParser::OptionsParser(int ac, const char** av)
            e_option_argument::REQUIRED
     )
   );
+
+  _supportedOptions.emplace(
+    "saves-directory",
+    Option("saves-directory",
+           "Save games directory; --saves-directory=~/.we/saves/",
+           { "", "--saves-directory" },
+           e_option_argument::REQUIRED
+    )
+  );
 }
 
 

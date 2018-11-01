@@ -42,6 +42,8 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
   _keys_mapping.insert({sf::Keyboard::Delete, e_key::SCREENSHOT});
   _keys_mapping.insert({sf::Keyboard::F3,     e_key::TOGGLE_PANEL});
   _keys_mapping.insert({sf::Keyboard::F12,    e_key::DUMP_MAP});
+  _keys_mapping.insert({sf::Keyboard::F8,     e_key::QUICK_LOAD});
+  _keys_mapping.insert({sf::Keyboard::F4,     e_key::QUICK_SAVE});
 
 
   // This event mapping is populated here but will then be read only
@@ -55,6 +57,8 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
   _events_mapping.insert({e_key::TOGGLE_PANEL, e_input::TOGGLE_PANEL});
   _events_mapping.insert({e_key::SCREENSHOT,   e_input::SCREENSHOT  });
   _events_mapping.insert({e_key::DUMP_MAP,     e_input::DUMP_MAP    });
+  _events_mapping.insert({e_key::QUICK_LOAD,   e_input::QUICK_LOAD  });
+  _events_mapping.insert({e_key::QUICK_SAVE,   e_input::QUICK_SAVE  });
 }
 
 

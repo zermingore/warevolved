@@ -13,9 +13,10 @@
 
 
 
-Battle::Battle(const std::string& load_map_file)
+Battle::Battle(const std::string& load_map_file, const std::string& saves_directory)
   : _currentPlayer(0)
   , _loadMapFile(load_map_file)
+  , _savesDirectory(saves_directory)
 {
 }
 
@@ -125,8 +126,9 @@ std::shared_ptr<Map> Battle::loadMap()
 
 
 
-void Battle::saveMap(const std::string& file_name)
+void Battle::saveMap()
 {
   /// \todo saveMap
-  std::cout << "filename: " << file_name << std::endl;
+  std::cout << "TODO Saving into: " << _savesDirectory << std::endl;
+  game::Status::battle()->map()->dump();
 }

@@ -10,6 +10,7 @@
 * TODO Roadmap
 ** TODO Load a random Map when none is provided
 ** TODO Save Map to a specific file (cmd line argument)
+** TODO Integrate the Players in the Map XML
 
 
 * TODO Doc

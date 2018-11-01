@@ -44,6 +44,16 @@ public:
    * \brief Dumps the Map on the standard output
    */
   void dumpMap();
+
+  /**
+   * \brief Save the current Map on the quick save file
+   */
+  void quickSave();
+
+  /**
+   * \brief Load the Map from the latest quick load file
+   */
+  void quickLoad();
 };
 
 

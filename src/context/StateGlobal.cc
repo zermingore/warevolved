@@ -16,6 +16,8 @@ StateGlobal::StateGlobal()
 {
   _evtMgr->registerEvent(e_input::SCREENSHOT, [=] { screenshot(); });
   _evtMgr->registerEvent(e_input::DUMP_MAP,   [=] { dumpMap(); });
+  _evtMgr->registerEvent(e_input::QUICK_SAVE, [=] { quickSave(); });
+  _evtMgr->registerEvent(e_input::QUICK_LOAD, [=] { quickLoad(); });
 
   _evtMgr->registerEvent(e_input::TOGGLE_PANEL,
                          [=] { game::Status::player()->togglePanel(); });
@@ -33,4 +35,15 @@ void StateGlobal::screenshot()
 void StateGlobal::dumpMap()
 {
   game::Status::battle()->map()->dump();
+}
+
+
+void StateGlobal::quickSave()
+{
+  game::Status::battle()->saveMap();
+}
+
+void StateGlobal::quickLoad()
+{
+  ERROR("quickLoad not implemented yet"); /// \todo
 }

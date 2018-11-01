@@ -31,6 +31,7 @@ Game::Game(const OptionsParser& options_parser)
 }
 
 
+
 void Game::run()
 {
   using namespace graphics; // function scope
@@ -39,12 +40,21 @@ void Game::run()
 
   resources::ResourcesManager::initialize("resources.xml");
 
+  // Fetch the Map to load, if any
   std::string load_map = "";
-  if (const auto& opt = _optionsParser["load-map"])
+  if (_optionsParser.optionExists("load-map"))
   {
-    load_map = opt.value().arguments()[0];
+    load_map = _optionsParser["load-map"].value().arguments()[0];
   }
-  auto battle(std::make_shared<Battle> (load_map));
+
+  // Fetch the quick save file name, if any
+  std::string saves_dir = "./";
+  if (_optionsParser.optionExists("saves-directory"))
+  {
+    saves_dir = _optionsParser["saves-directory"].value().arguments()[0];
+  }
+
+  auto battle(std::make_shared<Battle> (load_map, saves_dir));
   game::Status::setBattle(battle);
   battle->initializeMap();
 

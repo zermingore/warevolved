@@ -34,6 +34,8 @@ enum class e_key
   // Global actions
   SCREENSHOT,
   DUMP_MAP,
+  QUICK_SAVE,
+  QUICK_LOAD,
 
   // Interface keys
   TOGGLE_PANEL,
