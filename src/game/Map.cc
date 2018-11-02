@@ -7,7 +7,6 @@
 
 #include <game/Map.hh>
 
-#include <lib/pugixml.hh>
 #include <debug/Debug.hh>
 #include <game/Status.hh>
 #include <common/enums/terrains.hh>
@@ -239,9 +238,9 @@ e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
 
 
 
-void Map::dump()
+void Map::dump(pugi::xml_document& doc)
 {
-  pugi::xml_document doc;
+  // pugi::xml_document doc;
 
   // Main 'map' node
   auto map = doc.append_child("map");
@@ -292,13 +291,4 @@ void Map::dump()
       }
     }
   }
-
-  // save
-  if (!doc.save_file("gen_map.xml"))
-  {
-    ERROR("Unable to save XML");
-    return;
-  }
-
-  doc.print(std::cout); // debug
 }

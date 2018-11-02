@@ -1,5 +1,7 @@
 #include <context/StateGlobal.hh>
 
+#include <lib/pugixml.hh>
+
 #include <debug/Debug.hh>
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
@@ -34,7 +36,9 @@ void StateGlobal::screenshot()
 
 void StateGlobal::dumpMap()
 {
-  game::Status::battle()->map()->dump();
+  pugi::xml_document doc;
+  game::Status::battle()->map()->dump(doc);
+  doc.print(std::cout);
 }
 
 

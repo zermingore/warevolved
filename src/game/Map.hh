@@ -15,6 +15,8 @@
 # include <map>
 # include <cstddef>
 
+# include <lib/pugixml.hh>
+
 # include <common/using.hh>
 # include <common/enums/attack_result.hh>
 
@@ -190,9 +192,10 @@ public:
   auto operator[] (size_t column) { return _cells[column]; }
 
   /**
-   * \brief ascii art dump of the map
+   * \brief Dump the map, in an XML document
+   * \return the dumped map, in a new XML document
    */
-  void dump();
+  void dump(pugi::xml_document& doc);
 
 
 

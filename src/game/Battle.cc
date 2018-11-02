@@ -128,7 +128,13 @@ std::shared_ptr<Map> Battle::loadMap()
 
 void Battle::saveMap()
 {
-  /// \todo saveMap
-  std::cout << "TODO Saving into: " << _savesDirectory << std::endl;
-  game::Status::battle()->map()->dump();
+  pugi::xml_document doc;
+  game::Status::battle()->map()->dump(doc);
+
+  std::cout << "TODO Saving map into: " << _savesDirectory << std::endl;
+  if (!doc.save_file("./quick_save.xml"))
+  {
+    ERROR("Unable to save XML");
+    return;
+  }
 }
