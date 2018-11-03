@@ -131,8 +131,9 @@ void Battle::saveMap()
   pugi::xml_document doc;
   game::Status::battle()->map()->dump(doc);
 
-  std::cout << "TODO Saving map into: " << _savesDirectory << std::endl;
-  if (!doc.save_file("./quick_save.xml"))
+  std::string path = _savesDirectory + "quick_save.xml";
+  std::cout << "Saving map into: " << path << std::endl;
+  if (!doc.save_file(path.c_str()))
   {
     ERROR("Unable to save XML");
     return;
