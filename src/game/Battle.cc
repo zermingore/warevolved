@@ -122,6 +122,7 @@ std::shared_ptr<Map> Battle::generateRandomMap()
   std::uniform_int_distribution<> randMapSize(3, 15);
   std::uniform_int_distribution<> randTerrain(
     1, static_cast<int> (e_terrain::NB_TERRAIN) -1);
+  std::uniform_int_distribution<> randBool(0, 1);
 
 
   std::shared_ptr<Map> map; // return value
@@ -145,7 +146,10 @@ std::shared_ptr<Map> Battle::generateRandomMap()
         auto type = e_unit::SOLDIERS;
         auto player_id = randPlayer(gen);
         auto hp = 5; /// \todo
-        auto played = static_cast<bool> (1); /// \todo randBool
+
+        auto played = true;
+        if (static_cast<unsigned int> (player_id) == _currentPlayer)
+          played = static_cast<bool> (randBool(gen));
         map->newUnit(type, col, line, player_id, hp, played);
       }
     }
