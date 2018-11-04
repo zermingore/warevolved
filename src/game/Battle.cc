@@ -20,9 +20,30 @@ Battle::Battle(const std::string& load_map_file, const std::string& saves_dir)
   , _loadMapFile(load_map_file)
   , _savesDirectory(saves_dir)
 {
-  if (!std::filesystem::exists(saves_dir))
+  // Creating the saves_dir directory, if needed.
+  // Unfortunately, filesystem cannot create path with trailing separator
+  // Therefore, we canonize the path and trim the last separator, if needed
+
+  namespace fs = std::filesystem;
+  fs::path test = saves_dir;
+  auto dst = test.lexically_normal().string(); // clean the path
+  /// \note c++20 dst.ends_with(test.preferred_separator)
+  if (dst[dst.length() - 1] == test.preferred_separator)
   {
-    throw std::runtime_error("Provided directory does not exists");
+    dst.pop_back();
+  }
+
+  if (fs::exists(dst) && !fs::is_directory(dst))
+  {
+    // TODO opt exc
+    throw std::runtime_error("Save path exists but is not a directory");
+  }
+
+  if (!fs::exists(dst))
+  {
+    NOTICE("Creating saves directory ", dst);
+    fs::create_directories(dst); // may throw
+    //throw std::runtime_error("not able to create it");
   }
 }
 
