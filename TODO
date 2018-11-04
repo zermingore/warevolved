@@ -13,6 +13,7 @@
 ** DONE Save Map to a specific file (cmd line argument)
    CLOSED: [2018-11-04 So 18:11] // specific location, not filename
 ** TODO Integrate the Players in the Map XML
+** TODO --seed-gen=%d option to generate a random map with the given seed
 
 
 * TODO Doc

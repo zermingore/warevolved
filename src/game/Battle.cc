@@ -116,25 +116,38 @@ std::shared_ptr<Map> Battle::generateRandomMap()
   auto seed = rd();
   NOTICE("random seed:", seed);
   std::mt19937 gen(seed);
-  std::uniform_int_distribution<> dis(1, 100); // random numbers range
 # pragma GCC diagnostic pop
+  std::uniform_int_distribution<> rand100(1, 100);
+  std::uniform_int_distribution<> randPlayer(0, 1); /// \todo random nb players
+  std::uniform_int_distribution<> randMapSize(3, 15);
+  std::uniform_int_distribution<> randTerrain(
+    1, static_cast<int> (e_terrain::NB_TERRAIN) -1);
+
 
   std::shared_ptr<Map> map; // return value
 
   // Map size
-  const auto lines = dis(gen) % 10 + 2;
-  const auto cols = dis(gen) % 10 + 2;
+  const auto lines = randMapSize(gen);
+  const auto cols = randMapSize(gen);
   NOTICE("Generating a Map of", lines, "x", cols);
   map = std::make_shared<Map> (cols, lines);
 
   // Current Player
-  _currentPlayer = 0; /// \todo range
+  _currentPlayer = randPlayer(gen);
 
   for (auto col(0); col < cols; ++col)
   {
     for (auto line(0); line < lines; ++line)
     {
-      map->setTerrain(col, line, e_terrain::PLAIN); /// \todo range
+      map->setTerrain(col, line, static_cast<e_terrain> (randTerrain(gen)));
+      if (rand100(gen) > 80) /// \todo =f(map size)
+      {
+        auto type = e_unit::SOLDIERS;
+        auto player_id = randPlayer(gen);
+        auto hp = 5; /// \todo
+        auto played = static_cast<bool> (1); /// \todo randBool
+        map->newUnit(type, col, line, player_id, hp, played);
+      }
     }
   }
 
