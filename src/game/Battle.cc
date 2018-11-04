@@ -1,5 +1,6 @@
 #include <game/Battle.hh>
 
+#include <iomanip>
 #include <stdexcept>
 #include <filesystem>
 #include <lib/pugixml.hh>
@@ -167,7 +168,13 @@ void Battle::saveMap()
   pugi::xml_document doc;
   game::Status::battle()->map()->dump(doc);
 
-  std::string path = _savesDirectory + "/quick_save.xml";
+  // getting the current date as string
+  auto now = std::chrono::system_clock::now();
+  auto in_time_t = std::chrono::system_clock::to_time_t(now);
+  std::stringstream ss;
+  ss << std::put_time(std::localtime(&in_time_t), "%Y_%m_%d__%H_%M_%S__");
+
+  std::string path = _savesDirectory + "/" + ss.str() + "quick_save.xml";
   std::cout << "Saving map into: " << path << std::endl;
   if (!doc.save_file(path.c_str()))
   {
