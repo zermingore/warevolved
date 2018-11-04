@@ -81,6 +81,12 @@ public:
   std::shared_ptr<Map> loadMap();
 
   /**
+   * \brief Generates a random Map
+   * \return A pointer on the freshly created map
+   */
+  std::shared_ptr<Map> generateRandomMap();
+
+  /**
    * \brief Save the current map in the _savesDirectory folder
    * \note _savesDirectory is the current folder (./) or,
    *   if provided through command line arguments, in the saves_directory folder

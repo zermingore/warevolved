@@ -1,11 +1,13 @@
 #include <game/Battle.hh>
 
+#include <random>
 #include <iomanip>
 #include <stdexcept>
 #include <filesystem>
 #include <lib/pugixml.hh>
 #include <debug/Debug.hh>
 #include <common/enums/units.hh>
+#include <common/enums/terrains.hh>
 #include <structures/Vector.hh>
 #include <game/Status.hh>
 #include <game/Player.hh>
@@ -91,11 +93,7 @@ void Battle::buildMap()
   if (!_loadMapFile.empty())
     _map = loadMap();
   else
-  {
-    /// \todo generate a random Map
-    _loadMapFile = "map/map.xml";
-    _map = loadMap();
-  }
+    _map = generateRandomMap();
 }
 
 
@@ -105,6 +103,42 @@ void Battle::nextPlayer()
   _map->endTurn();
   ++_currentPlayer;
   _currentPlayer %= _players.size();
+}
+
+
+
+std::shared_ptr<Map> Battle::generateRandomMap()
+{
+  // Random initialization /// \todo somewhere else
+# pragma GCC diagnostic push // random_device and mt19937 are 5k on my machine
+# pragma GCC diagnostic ignored "-Wlarger-than="
+  std::random_device rd;
+  auto seed = rd();
+  NOTICE("random seed:", seed);
+  std::mt19937 gen(seed);
+  std::uniform_int_distribution<> dis(1, 100); // random numbers range
+# pragma GCC diagnostic pop
+
+  std::shared_ptr<Map> map; // return value
+
+  // Map size
+  const auto lines = dis(gen) % 10 + 2;
+  const auto cols = dis(gen) % 10 + 2;
+  NOTICE("Generating a Map of", lines, "x", cols);
+  map = std::make_shared<Map> (cols, lines);
+
+  // Current Player
+  _currentPlayer = 0; /// \todo range
+
+  for (auto col(0); col < cols; ++col)
+  {
+    for (auto line(0); line < lines; ++line)
+    {
+      map->setTerrain(col, line, e_terrain::PLAIN); /// \todo range
+    }
+  }
+
+  return map;
 }
 
 
