@@ -69,27 +69,27 @@ public:
   /**
    * \brief Full option name getter ("help" for instance)
    */
-  const auto name() const { return _name; }
+  auto name() const { return _name; }
 
   /**
    * \brief Command line aliases getter
    */
-  const auto aliases() const { return _aliases; }
+  auto aliases() const { return _aliases; }
 
   /**
    * \brief Description getter
    */
-  const auto description() const { return _description; }
+  auto description() const { return _description; }
 
   /**
    * \brief Argument status getter
    */
-  const auto requiredArguments() const { return _requiredArgs; }
+  auto requiredArguments() const { return _requiredArgs; }
 
   /**
    * \brief Arguments getter
    */
-  const auto arguments() const { return _arguments; }
+  auto arguments() const { return _arguments; }
 
   /**
    * \brief Append the given arguments to the arguments list
