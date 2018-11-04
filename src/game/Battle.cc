@@ -15,17 +15,26 @@
 
 
 
-Battle::Battle(const std::string& load_map_file, const std::string& saves_dir)
+Battle::Battle(const OptionsParser& options_parser)
   : _currentPlayer(0)
-  , _loadMapFile(load_map_file)
-  , _savesDirectory(saves_dir)
+  , _savesDirectory("./")
 {
-  // Creating the saves_dir directory, if needed.
+  // Fetch the Map to load and the save directory, if provided
+  if (options_parser.optionExists("load-map"))
+  {
+    _loadMapFile = options_parser["load-map"].value().arguments()[0];
+  }
+  if (options_parser.optionExists("saves-directory"))
+  {
+    _savesDirectory = options_parser["saves-directory"].value().arguments()[0];
+  }
+
+  // Create the saves_dir directory, if needed.
   // Unfortunately, filesystem cannot create path with trailing separator
-  // Therefore, we canonize the path and trim the last separator, if needed
+  // Therefore, we canonize the path and trim the last separator, if any
 
   namespace fs = std::filesystem;
-  fs::path test = saves_dir;
+  fs::path test = _savesDirectory;
   auto dst = test.lexically_normal().string(); // clean the path
   /// \note c++20 dst.ends_with(test.preferred_separator)
   if (dst[dst.length() - 1] == test.preferred_separator)

@@ -40,21 +40,8 @@ void Game::run()
 
   resources::ResourcesManager::initialize("resources.xml");
 
-  // Fetch the Map to load, if any
-  std::string load_map = "";
-  if (_optionsParser.optionExists("load-map"))
-  {
-    load_map = _optionsParser["load-map"].value().arguments()[0];
-  }
 
-  // Fetch the quick save file name, if any
-  std::string saves_dir = "./";
-  if (_optionsParser.optionExists("saves-directory"))
-  {
-    saves_dir = _optionsParser["saves-directory"].value().arguments()[0];
-  }
-
-  auto battle(std::make_shared<Battle> (load_map, saves_dir));
+  auto battle(std::make_shared<Battle> (_optionsParser));
   game::Status::setBattle(battle);
   battle->initializeMap();
 

@@ -11,6 +11,7 @@
 # include <vector>
 # include <memory>
 # include <structures/Vector.hh>
+# include <tools/options/OptionsParser.hh>
 
 class Map;
 class Player;
@@ -36,7 +37,7 @@ public:
    * \param saves_dir Path where to save games
    * \note Throws if the saves_dir does not exist
    */
-  Battle(const std::string& load_map_file, const std::string& saves_dir);
+  Battle(const OptionsParser& options_parser);
 
 
   /**
@@ -117,7 +118,7 @@ private:
   size_t _currentPlayer; ///< current player's id
   /// \todo  const _loadMapFile (after handling random Map generation)
   std::string _loadMapFile; ///< File from where the map will be loaded
-  const std::string _savesDirectory; ///< Where to save maps
+  mutable std::string _savesDirectory; ///< Where to save maps
 };
 
 #endif /* !BATTLE_HH_ */
