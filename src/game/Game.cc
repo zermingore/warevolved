@@ -51,7 +51,7 @@ void Game::run()
   std::string saves_dir = "./";
   if (_optionsParser.optionExists("saves-directory"))
   {
-    saves_dir = _optionsParser["saves-directory"].value().arguments()[0];
+    saves_dir = _optionsParser["saves-directory"].value().arguments()[0] + '/';
   }
 
   auto battle(std::make_shared<Battle> (load_map, saves_dir));

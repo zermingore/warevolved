@@ -33,9 +33,10 @@ public:
   /**
    * \brief Constructor; Loads the given map if any
    * \param load_map_file Map to load
-   * \param saves_directory Path where to save games
+   * \param saves_dir Path where to save games
+   * \note Throws if the saves_dir does not exist
    */
-  Battle(const std::string& load_map_file, const std::string& saves_directory);
+  Battle(const std::string& load_map_file, const std::string& saves_dir);
 
 
   /**

@@ -15,12 +15,12 @@
 
 
 
-Battle::Battle(const std::string& load_map_file, const std::string& saves_directory)
+Battle::Battle(const std::string& load_map_file, const std::string& saves_dir)
   : _currentPlayer(0)
   , _loadMapFile(load_map_file)
-  , _savesDirectory(saves_directory)
+  , _savesDirectory(saves_dir)
 {
-  if (!std::filesystem::exists(saves_directory))
+  if (!std::filesystem::exists(saves_dir))
   {
     throw std::runtime_error("Provided directory does not exists");
   }
