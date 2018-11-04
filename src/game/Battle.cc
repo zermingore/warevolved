@@ -1,5 +1,7 @@
 #include <game/Battle.hh>
 
+#include <stdexcept>
+#include <filesystem>
 #include <lib/pugixml.hh>
 #include <debug/Debug.hh>
 #include <common/enums/units.hh>
@@ -18,6 +20,10 @@ Battle::Battle(const std::string& load_map_file, const std::string& saves_direct
   , _loadMapFile(load_map_file)
   , _savesDirectory(saves_directory)
 {
+  if (!std::filesystem::exists(saves_directory))
+  {
+    throw std::runtime_error("Provided directory does not exists");
+  }
 }
 
 

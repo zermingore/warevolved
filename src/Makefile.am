@@ -1,7 +1,8 @@
 bin_PROGRAMS = $(top_srcdir)/we
 
 # Link against pugixml
-__top_srcdir__we_LDADD = ${abs_top_builddir}/lib/libpugixml.a
+__top_srcdir__we_LDADD  = ${abs_top_builddir}/lib/libpugixml.a
+__top_srcdir__we_LDADD += -lstdc++fs # filesystem
 
 
 # Source files
