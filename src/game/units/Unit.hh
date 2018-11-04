@@ -110,6 +110,12 @@ public:
   auto hp() const { return _hp; }
 
   /**
+   * \brief _maxHp getter
+   * \return Maximal health points
+   */
+  auto maxHp() const { return _maxHp; }
+
+  /**
    * \brief _attackValue getter
    * \return Attack value in hit points
    */
@@ -148,6 +154,7 @@ protected:
 
   size_t _motionValue; ///< Unit's motion value (not considering the terrains)
   int _hp;             ///< Health Points
+  int _maxHp;          ///< Max Health Points
   size_t _attackValue; ///< Amount of damages dealing to other units
 
   size_t _minRange;    ///< Minimal required range for a unit to attack

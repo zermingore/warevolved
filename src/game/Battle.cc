@@ -15,6 +15,7 @@
 #include <game/units/Unit.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <game/units/UnitFactory.hh>
 
 
 
@@ -145,9 +146,14 @@ std::shared_ptr<Map> Battle::generateRandomMap()
       {
         auto type = e_unit::SOLDIERS;
         auto player_id = randPlayer(gen);
-        auto hp = 5; /// \todo
-
         auto played = true;
+
+        // Creating an instance on the Unit only to get its max HP (I know...)
+        std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
+        auto max_hp = new_unit->maxHp();
+        std::uniform_int_distribution<> randHpSoldier(1, max_hp);
+        auto hp = randHpSoldier(gen);
+
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
           played = static_cast<bool> (randBool(gen));
         map->newUnit(type, col, line, player_id, hp, played);
