@@ -139,8 +139,7 @@ private:
   size_t _maxLength;     ///< Path max length.
   size_t _currentLength; ///< Path current length.
 
-  /// Costs values to reach every cell
-  std::array<std::array<size_t, 10>, 10> _costs; /// \todo Size is hard-coded !
+  std::vector<std::vector<size_t>> _costs; ///< Cost values to reach every cell
 
   std::shared_ptr<Map> _map; ///< Do not access Battle all the time
 

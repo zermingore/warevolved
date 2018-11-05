@@ -34,9 +34,18 @@ PathFinding::PathFinding(std::shared_ptr<Unit> origin)
   _maxLength = origin->motionValue();
   _map = game::Status::battle()->map();
 
-  // miserable safety check
-  assert(   _costs.size() >= _map->nbColumns()
-         && _costs.size() >= _map->nbLines());
+  // Setting the cost to every cell to infinity
+  const auto out_of_reach(_origin->maxRange() + _origin->motionValue() + 1);
+  const auto cells(_map->cells());
+  for (auto col(0u); col < _map->nbColumns(); ++col)
+  {
+    std::vector<size_t> vec(_map->nbLines(), out_of_reach);
+    for (auto line(0u); line < _map->nbLines(); ++line)
+    {
+      _costs.push_back(vec);
+      cells[col][line]->setHighlight(false);
+    }
+  }
 
   computeCosts();
 }
@@ -209,18 +218,6 @@ void PathFinding::computeCosts()
 {
   const auto nb_col(_map->nbColumns());
   const auto nb_lines(_map->nbLines());
-  const auto cells(_map->cells());
-
-  // Setting the cost to every cell to infinity
-  const auto out_of_reach(_origin->maxRange() + _origin->motionValue() + 1);
-  for (auto c(0ul); c < nb_col; ++c)
-  {
-    _costs[c].fill(out_of_reach);
-    for (auto l(0ul); l < nb_lines; ++l)
-    {
-      cells[c][l]->setHighlight(false);
-    }
-  }
 
   _costs[_origin->coords().c][_origin->coords().l] = 0;
   std::stack<std::pair<int, int>> candidates;
