@@ -204,9 +204,9 @@
 *** TODO Framerate (useful ?)
 
 
-* TODO non-regression tests
+* TODO Non-regression tests
 ** TODO Integration Test process
-*** Load a map, a replay, save at the end; compare with a reference map
+*** TODO Load a map, a replay, save at the end; compare with a reference map
 ** TODO game scripts (need to be able to use pre-recorded input)
 ** TODO Use an ascii map to check fight behavior
 ** TODO Use screenshots for the interface
@@ -232,6 +232,7 @@
 ** TODO Resizable window
    Start the game in a small window; put the window in full screen
    -> The resolution is broken
+
 
 * Build
 
