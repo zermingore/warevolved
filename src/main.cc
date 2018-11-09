@@ -1,3 +1,14 @@
+/** \mainpage War Evolved
+ * War Evolved is a simple 2D tactical RPG\n
+ * https://github.com/zermingore/warevolved\n
+ * Please report any bug, feature request, ...
+ *
+ * \file
+ * \date September 15 2010
+ * \author Zermingore
+ * \brief Entry point
+ */
+
 #include <exception>
 
 #include <game/Game.hh>
