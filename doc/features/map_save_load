@@ -1,0 +1,10 @@
+Map loading
+
+Without command line parameter:
+  Load a random map
+
+Wrong map file
+  Aborts the execution
+
+--load-map=map/test.xml
+  Loads the map test.xml
