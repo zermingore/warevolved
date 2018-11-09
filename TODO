@@ -10,15 +10,17 @@
 * TODO Roadmap
 ** DONE Load a random Map when none is provided
    CLOSED: [2018-11-04 So 21:01]
-** TODO Load the last save (with an optin flag?)
 ** DONE Save Map to a specific file (cmd line argument)
    CLOSED: [2018-11-04 So 18:11] // specific location, not filename
 ** TODO Integrate the Players in the Map XML
 ** TODO --seed-gen=%d option to generate a random map with the given seed
+** TODO Random generator as a service locator
 
 
 * TODO Doc
 ** TODO Home page
+** TODO Load/Save map
+** TODO Options
 
 
 * TODO Clean
@@ -49,8 +51,11 @@
    CLOSED: [2018-08-19 So 18:10]
 ** DONE Save Map to file
    CLOSED: [2018-08-25 Sa 16:44]
-** TODO Load a random Map when none is provided
-** TODO Save Map to a specific file (cmd line argument)
+** DONE Load a random Map when none is provided
+   CLOSED: [2018-11-04 So 21:01]
+** DONE Save Map to a specific file (cmd line argument)
+   CLOSED: [2018-11-04 So 18:11] // specific location, not filename
+** TODO Load the last save (with an option flag?)
 
 
 * TODO Code Design
@@ -236,7 +241,6 @@
    This appeared after leaving we ~20 minutes without input
    Seems reproducible (commit 2d2dc75a32ccca7a6e5353b75bd290ded0ee2860)
    Fixed: Resetting the cursor scale factor after each complete rotation
-
 
 * TODO Build
 ** DONE Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
