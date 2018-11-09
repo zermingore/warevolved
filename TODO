@@ -8,10 +8,6 @@
 
 
 * TODO Roadmap
-** DONE Load a random Map when none is provided
-   CLOSED: [2018-11-04 So 21:01]
-** DONE Save Map to a specific file (cmd line argument)
-   CLOSED: [2018-11-04 So 18:11] // specific location, not filename
 ** TODO Integrate the Players in the Map XML
 ** TODO --seed-gen=%d option to generate a random map with the given seed
 ** TODO Random generator as a service locator
@@ -19,8 +15,6 @@
 
 * TODO Doc
 ** TODO Home page
-** DONE Load/Save map
-   CLOSED: [2018-11-09 Fr 20:50]
 ** TODO Options
 
 
@@ -33,7 +27,7 @@
 ** TODO Do not pass shared pointers as parameter when not usefull
 
 
-* TODO experimental
+* TODO Experimental
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
 ** TODO Cursor (interface) in its thread
@@ -48,27 +42,22 @@
 
 
 * TODO Game Features
-** DONE Load Map from file
-   CLOSED: [2018-08-19 So 18:10]
-** DONE Save Map to file
-   CLOSED: [2018-08-25 Sa 16:44]
-** DONE Load a random Map when none is provided
-   CLOSED: [2018-11-04 So 21:01]
-** DONE Save Map to a specific file (cmd line argument)
-   CLOSED: [2018-11-04 So 18:11] // specific location, not filename
 ** TODO Load the last save (with an option flag?)
 
 
 * TODO Code Design
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
-** TODO auto-generate XML
+** TODO auto-generate Resources XML file
 *** TODO OS-dependant in script language
 **** TODO Shell Script
 **** TODO [#C] .bat
 *** TODO non-OS dependant (in C++)
 ** TODO follow the C++ rule of 0
-** TODO Hunt dead code
+** TODO Avoid vector of vector
+   (std::vector<std::vector<Cell>> for the Map)
+** DONE Hunt dead code
+   CLOSED: [2018-11-09 Fr 20:54]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
@@ -155,10 +144,12 @@
 
 * TODO Interface
 ** TODO Highlight possible targets when hovering a unit
-** TODO Informations Panel (cell type, ...)
+** DONE Informations Panel (cell type, ...)
+   CLOSED: [2018-11-09 Fr 20:57]
 ** TODO Menu Bar
 ** TODO Configuration file
-** TODO Mini-map
+** DONE Mini-map
+   CLOSED: [2018-11-09 Fr 20:57]
 ** TODO select between satellite or schematic view
 ** TODO unit selection -> 'flashing lights'
 ** TODO center text in in-game menu entries
@@ -207,7 +198,8 @@
 *** TODO integration tests were runned
 ** TODO auto resources XML generator
 ** TODO Options parser
-*** TODO Map file (load/save)
+*** DONE Map file (load/save)
+    CLOSED: [2018-11-09 Fr 20:53]
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (useful ?)
 
@@ -237,15 +229,11 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** DONE The cursor sprite was too big (around 2 cells) [2018 Feb 24]
-   CLOSED: [2018-02-25 So 09:27]
-   This appeared after leaving we ~20 minutes without input
-   Seems reproducible (commit 2d2dc75a32ccca7a6e5353b75bd290ded0ee2860)
-   Fixed: Resetting the cursor scale factor after each complete rotation
+** TODO Resizable window
+   Start the game in a small window; put the window in full screen
+   -> The resolution is broken
 
-* TODO Build
-** DONE Do not force CXXFLAGS value, let the user override it (use AM_CXXFLAGS ?)
-   CLOSED: [2018-05-16 Mi 19:13]
+* Build
 
 
 * TODO [#C] Optimization
