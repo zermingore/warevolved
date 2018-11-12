@@ -86,9 +86,9 @@ void Battle::initializePlayers()
 void Battle::buildMap()
 {
   if (!_loadMapFile.empty())
-    _map = loadMap();
+    loadMap();
   else
-    _map = generateRandomMap();
+    generateRandomMap();
 }
 
 
@@ -102,7 +102,7 @@ void Battle::nextPlayer()
 
 
 
-std::shared_ptr<Map> Battle::generateRandomMap()
+void Battle::generateRandomMap()
 {
   // Random initialization /// \todo somewhere else
 # pragma GCC diagnostic push // random_device and mt19937 are 5k on my machine
@@ -121,13 +121,11 @@ std::shared_ptr<Map> Battle::generateRandomMap()
   std::uniform_int_distribution<> randByte(0, 255);
 
 
-  std::shared_ptr<Map> map; // return value
-
   // Map size
   const auto lines = randMapSize(gen);
   const auto cols = randMapSize(gen);
   NOTICE("Generating a Map of", lines, "x", cols);
-  map = std::make_shared<Map> (cols, lines);
+  _map = std::make_shared<Map> (cols, lines);
 
   // Players list
   auto nb_players = randPlayer(gen);
@@ -147,8 +145,8 @@ std::shared_ptr<Map> Battle::generateRandomMap()
   {
     for (auto line(0); line < lines; ++line)
     {
-      map->setTerrain(col, line, static_cast<e_terrain> (randTerrain(gen)));
-      if (rand100(gen) > 80) /// \todo =f(map size)
+      _map->setTerrain(col, line, static_cast<e_terrain> (randTerrain(gen)));
+      if (rand100(gen) > 80)
       {
         auto type = e_unit::SOLDIERS;
         std::uniform_int_distribution<> rand_player(0, nb_players - 1);
@@ -163,32 +161,29 @@ std::shared_ptr<Map> Battle::generateRandomMap()
 
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
           played = static_cast<bool> (randBool(gen));
-        map->newUnit(type, col, line, player_id, hp, played);
+        _map->newUnit(type, col, line, player_id, hp, played);
       }
     }
   }
-
-  return map;
 }
 
 
 
-std::shared_ptr<Map> Battle::loadMap()
+void Battle::loadMap()
 {
   pugi::xml_document doc;
   if (!doc.load_file(_loadMapFile.c_str()))
   {
-    ERROR("unable to load file", _loadMapFile);
-    return nullptr;
+    ERROR("Unable to load file", _loadMapFile);
+    throw std::runtime_error("Unable to load map file; aborting...");
   }
 
-  std::shared_ptr<Map> map; // return value
   auto metadata = doc.child("map").child("metadata");
 
   // Map size
   int cols = metadata.child("map_size").attribute("nb_columns").as_int();
   int lines = metadata.child("map_size").attribute("nb_lines").as_int();
-  map = std::make_shared<Map> (cols, lines);
+  _map = std::make_shared<Map> (cols, lines);
 
   // Player
   auto players = metadata.child("players");
@@ -214,7 +209,7 @@ std::shared_ptr<Map> Battle::loadMap()
       int line = cell.child("coordinates").attribute("line").as_int();
 
       // Terrain
-      map->setTerrain(col, line, static_cast<e_terrain> (
+      _map->setTerrain(col, line, static_cast<e_terrain> (
                         cell.child("terrain").text().as_int()));
 
       // Unit
@@ -224,14 +219,12 @@ std::shared_ptr<Map> Battle::loadMap()
         auto player_id = unit.attribute("player_id").as_int();
         auto hp = unit.attribute("hp").as_int();
         auto played = unit.attribute("played").as_bool();
-        map->newUnit(type, col, line, player_id, hp, played);
+        _map->newUnit(type, col, line, player_id, hp, played);
       }
 
       cells = cells.next_sibling();
     }
   }
-
-  return map;
 }
 
 
@@ -239,7 +232,7 @@ std::shared_ptr<Map> Battle::loadMap()
 void Battle::saveMap()
 {
   pugi::xml_document doc;
-  game::Status::battle()->map()->dump(doc);
+  _map->dump(doc);
 
   // getting the current date as string
   auto now = std::chrono::system_clock::now();

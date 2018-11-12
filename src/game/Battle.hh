@@ -75,16 +75,16 @@ public:
 
   /**
    * \brief Parse the map file in order to load it
-   * \return A pointer on the freshly created map
    * \note Loads the _loadMapFile map
+   * \note Populates the _map
    */
-  std::shared_ptr<Map> loadMap();
+  void loadMap();
 
   /**
    * \brief Generates a random Map
-   * \return A pointer on the freshly created map
+   * \note Populates the _map
    */
-  std::shared_ptr<Map> generateRandomMap();
+  void generateRandomMap();
 
   /**
    * \brief Save the current map in the _savesDirectory folder
