@@ -11,10 +11,10 @@
 # include <vector>
 # include <memory>
 # include <structures/Vector.hh>
-# include <tools/options/OptionsParser.hh>
 
 class Map;
 class Player;
+class OptionsParser;
 
 enum class e_units;
 

@@ -4,8 +4,11 @@
 #include <iomanip>
 #include <stdexcept>
 #include <filesystem>
+
 #include <lib/pugixml.hh>
+
 #include <debug/Debug.hh>
+#include <tools/options/OptionsParser.hh>
 #include <common/enums/units.hh>
 #include <common/enums/terrains.hh>
 #include <structures/Vector.hh>
@@ -13,9 +16,9 @@
 #include <game/Player.hh>
 #include <game/Map.hh>
 #include <game/units/Unit.hh>
+#include <game/units/UnitFactory.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <game/units/UnitFactory.hh>
 
 
 
