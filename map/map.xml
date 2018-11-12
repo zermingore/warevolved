@@ -2,7 +2,15 @@
 <map>
   <metadata>
 	<map_size nb_columns='2' nb_lines='3'></map_size>
-	<current_player>0</current_player>
+    <players>
+	  <current_player>0</current_player>
+      <player>
+        <color r='0' g='127' b='127'/>
+      </player>
+      <player>
+        <color r='227' g='227' b='0'/>
+      </player>
+    </players>
   </metadata>
   <cells>
     <cell>

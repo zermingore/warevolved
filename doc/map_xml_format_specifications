@@ -1,4 +1,4 @@
-nodes list with attributes:
+nodes list with attributes (alphabetical order):
 
 <?xml version?>  # XML format related
   version
@@ -7,11 +7,20 @@ nodes list with attributes:
 
 <cells>          # Regroups every cell of the Map
 
+<color>          # Player color (red, green, blue format)
+  r="12"
+  g="34"
+  r="56"
+
 <coordinates>    # Cell coordinates (col, line)
   col="12"
   line="34"
 
 <current_player> # Id of the Player currently playing
+
+<player>         # Player attributes
+
+<players>        # Players group
 
 <map>            # Map description
 
@@ -37,7 +46,14 @@ Hierarchy:
 <map>
   <metadata>
     <map_size nb_columns="123" nb_lines="456" />
-    <current_player>42<current_player/>
+    <players>
+    <current_player>1<current_player/>
+    <player>
+      <color r="12" g="34" b="56">
+    </players>
+    <player>
+      <color r="78" g="90" b="12">
+    </players>
   </metadata>
 
   <cells>

@@ -21,6 +21,7 @@
 
 Battle::Battle(const OptionsParser& options_parser)
   : _currentPlayer(0)
+  , _nbPlayers(0)
   , _savesDirectory("./")
 {
   // Fetch the Map to load and the save directory, if provided
@@ -66,21 +67,14 @@ void Battle::initializeMap()
 {
   graphics::MapGraphicsProperties::initialize();
   buildMap();
-  buildPlayers();
+  initializePlayers();
 }
 
 
 
-/// \todo include in buildMap()
-void Battle::buildPlayers()
+void Battle::initializePlayers()
 {
-  auto player1 = std::make_shared<Player> (graphics::Color(0, 127, 127));
-  _players.push_back(player1);
-
-  auto player2 = std::make_shared<Player> (graphics::Color(227, 227, 0));
-  _players.push_back(player2);
-
-  // Adjusting cursors limits
+  // Adjusting cursors limits /// \todo dirty
   for (const auto& player: _players)
   {
     player->cursor()->setLimits(_map->nbColumns(), _map->nbLines());
@@ -103,7 +97,7 @@ void Battle::nextPlayer()
 {
   _map->endTurn();
   ++_currentPlayer;
-  _currentPlayer %= _players.size();
+  _currentPlayer %= _nbPlayers;
 }
 
 
@@ -183,9 +177,18 @@ std::shared_ptr<Map> Battle::loadMap()
   int lines = metadata.child("map_size").attribute("nb_lines").as_int();
   map = std::make_shared<Map> (cols, lines);
 
-  // Current Player
-  _currentPlayer = metadata.child("current_player").text().as_int();
-
+  // Player
+  auto players = metadata.child("players");
+  _currentPlayer = players.child("current_player").text().as_int();
+  for (auto player: players.children("player"))
+  {
+    auto color_node = player.child("color");
+    const auto r = static_cast<sf::Uint8> (color_node.attribute("r").as_int());
+    const auto g = static_cast<sf::Uint8> (color_node.attribute("g").as_int());
+    const auto b = static_cast<sf::Uint8> (color_node.attribute("b").as_int());
+    _players.emplace_back(std::make_shared<Player> (graphics::Color(r, g, b)));
+    ++_nbPlayers;
+  }
 
   // Cells
   auto cells = doc.child("map").child("cells");

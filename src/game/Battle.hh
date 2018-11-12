@@ -117,12 +117,12 @@ public:
 
 private:
   /// Initializes players.
-  void buildPlayers();
+  void initializePlayers();
 
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
-  std::shared_ptr<Map> _map; ///< Map of this battle
   size_t _currentPlayer; ///< current player's id
-  /// \todo  const _loadMapFile (after handling random Map generation)
+  size_t _nbPlayers; ///< Number of players
+  std::shared_ptr<Map> _map; ///< Map of this battle
   std::string _loadMapFile; ///< File from where the map will be loaded
   mutable std::string _savesDirectory; ///< Where to save maps
 };
