@@ -113,11 +113,12 @@ std::shared_ptr<Map> Battle::generateRandomMap()
   std::mt19937 gen(seed);
 # pragma GCC diagnostic pop
   std::uniform_int_distribution<> rand100(1, 100);
-  std::uniform_int_distribution<> randPlayer(0, 1); /// \todo random nb players
+  std::uniform_int_distribution<> randPlayer(3, 5);
   std::uniform_int_distribution<> randMapSize(3, 15);
   std::uniform_int_distribution<> randTerrain(
     1, static_cast<int> (e_terrain::NB_TERRAIN) -1);
   std::uniform_int_distribution<> randBool(0, 1);
+  std::uniform_int_distribution<> randByte(0, 255);
 
 
   std::shared_ptr<Map> map; // return value
@@ -128,9 +129,20 @@ std::shared_ptr<Map> Battle::generateRandomMap()
   NOTICE("Generating a Map of", lines, "x", cols);
   map = std::make_shared<Map> (cols, lines);
 
-  // Current Player
-  _currentPlayer = randPlayer(gen);
+  // Players list
+  auto nb_players = randPlayer(gen);
+  for (auto i = 0; i < nb_players; ++i)
+  {
+    const auto r = static_cast<sf::Uint8> (randByte(gen));
+    const auto g = static_cast<sf::Uint8> (randByte(gen));
+    const auto b = static_cast<sf::Uint8> (randByte(gen));
+    _players.emplace_back(std::make_shared<Player> (graphics::Color(r, g, b)));
+    ++_nbPlayers;
+  }
 
+  // Current Player
+  std::uniform_int_distribution<> randCurrentPlayer(0, nb_players - 1);
+  _currentPlayer = randCurrentPlayer(gen);
   for (auto col(0); col < cols; ++col)
   {
     for (auto line(0); line < lines; ++line)
@@ -139,8 +151,9 @@ std::shared_ptr<Map> Battle::generateRandomMap()
       if (rand100(gen) > 80) /// \todo =f(map size)
       {
         auto type = e_unit::SOLDIERS;
-        auto player_id = randPlayer(gen);
-        auto played = true;
+        std::uniform_int_distribution<> rand_player(0, nb_players - 1);
+        auto player_id = rand_player(gen);
+        auto played = false;
 
         // Creating an instance on the Unit only to get its max HP (I know...)
         std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
