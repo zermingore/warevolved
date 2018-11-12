@@ -29,7 +29,7 @@ CXXFLAGS="-O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS \
  -Wsuggest-final-types -Wsuggest-override -Wswitch-bool -Wswitch-default \
  -Wsync-nand -Wtrampolines -Wunsafe-loop-optimizations \
  -Wuseless-cast -Wvarargs -Wvector-operation-performance -Wvirtual-move-assign \
- -Wwrite-strings -Wzero-as-null-pointer-constant -std=c++14 -pthread"
+ -Wwrite-strings -Wzero-as-null-pointer-constant -std=c++17 -pthread"
 # removed -Wunused-macros to hide warnings about unused header guard
 
 
@@ -132,7 +132,7 @@ function main()
     cp -a "$1"/. "${tmp_src}"
 
     CXXINCLUDES="-I$1 -I$1/../lib/" # -I.
-    COMPILE="$CXX $CXXINCLUDES $CXXFLAGS -o "${tmp_src}"/unused_header"
+    COMPILE="$CXX $CXXINCLUDES $CXXFLAGS -o ${tmp_src}/unused_header"
     echo "Checking headers in $1"
     for header in $(find "$1" -name \*.hh); do
         echo -n "Checking $header ..."
@@ -154,7 +154,7 @@ function main()
 
     if [[ $ret_val -ne 0 ]]; then
         echo
-        echo "\t $COLOR_RED NOT EVERY INCLUDE PASSED THE TEST $COLOR_NORMAL"
+        echo -e "\t $COLOR_RED NOT EVERY INCLUDE PASSED THE TEST $COLOR_NORMAL"
         exit 1
     fi
 
