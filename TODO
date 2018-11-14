@@ -8,16 +8,10 @@
 
 
 * TODO Roadmap
-** DONE Integrate the Players in the Map XML
-   CLOSED: [2018-11-12 Mo 19:47]
-** DONE --seed-gen=%d option to generate a random map with the given seed
-   CLOSED: [2018-11-14 Mi 20:19]
 ** TODO Random generator as a service locator
 
 
 * TODO Doc
-** DONE Home page
-   CLOSED: [2018-11-09 Fr 21:29]
 ** TODO Options
 
 
@@ -59,8 +53,6 @@
 ** TODO follow the C++ rule of 0
 ** TODO Avoid vector of vector
    (std::vector<std::vector<Cell>> for the Map)
-** DONE Hunt dead code
-   CLOSED: [2018-11-09 Fr 20:54]
 ** TODO think about cleaning some types names
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
@@ -104,8 +96,6 @@
    could use more than one plan (one for ground units, one for air units)
 *** TODO Tunnels
    could use different levels of zoom (micro-ing a soldier, macro-ing a tank)
-** DONE save / load from file (XML / own ?)
-   CLOSED: [2018-10-28 So 08:43]
 ** TODO dual windows (main window / infos panel)
 ** TODO Customize gear
    (riffles, kevlar, silencer, vehicles options)
@@ -147,12 +137,8 @@
 
 * TODO Interface
 ** TODO Highlight possible targets when hovering a unit
-** DONE Informations Panel (cell type, ...)
-   CLOSED: [2018-11-09 Fr 20:57]
 ** TODO Menu Bar
 ** TODO Configuration file
-** DONE Mini-map
-   CLOSED: [2018-11-09 Fr 20:57]
 ** TODO select between satellite or schematic view
 ** TODO unit selection -> 'flashing lights'
 ** TODO center text in in-game menu entries
@@ -201,8 +187,6 @@
 *** TODO integration tests were runned
 ** TODO auto resources XML generator
 ** TODO Options parser
-*** DONE Map file (load/save)
-    CLOSED: [2018-11-09 Fr 20:53]
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (useful ?)
 
