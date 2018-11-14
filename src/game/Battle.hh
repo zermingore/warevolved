@@ -125,6 +125,7 @@ private:
   std::shared_ptr<Map> _map; ///< Map of this battle
   std::string _loadMapFile; ///< File from where the map will be loaded
   mutable std::string _savesDirectory; ///< Where to save maps
+  long unsigned int _randomSeed; ///< Seed to initialize the random generator
 };
 
 #endif /* !BATTLE_HH_ */

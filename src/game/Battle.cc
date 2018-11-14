@@ -26,6 +26,7 @@ Battle::Battle(const OptionsParser& options_parser)
   : _currentPlayer(0)
   , _nbPlayers(0)
   , _savesDirectory("./")
+  , _randomSeed(0) // randomize the seed
 {
   // Fetch the Map to load and the save directory, if provided
   if (options_parser.optionExists("load-map"))
@@ -61,6 +62,14 @@ Battle::Battle(const OptionsParser& options_parser)
     NOTICE("Creating saves directory ", dst);
     fs::create_directories(dst); // may throw
     //throw std::runtime_error("not able to create it");
+  }
+
+
+  // Extract the random seed, if provided
+  if (options_parser.optionExists("random-seed"))
+  {
+    _randomSeed = std::stoul(
+      options_parser["random-seed"].value().arguments()[0]);
   }
 }
 
@@ -111,9 +120,12 @@ void Battle::generateRandomMap()
 # pragma GCC diagnostic push // random_device and mt19937 are 5k on my machine
 # pragma GCC diagnostic ignored "-Wlarger-than="
   std::random_device rd;
-  auto seed = rd();
-  NOTICE("random seed:", seed);
-  std::mt19937 gen(seed);
+  if (!_randomSeed)
+  {
+    _randomSeed = rd();
+  }
+  NOTICE("Using random seed:", _randomSeed);
+  std::mt19937 gen(_randomSeed);
 # pragma GCC diagnostic pop
   std::uniform_int_distribution<> rand100(1, 100);
   std::uniform_int_distribution<> randPlayer(3, 5);
