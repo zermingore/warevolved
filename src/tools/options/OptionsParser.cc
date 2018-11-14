@@ -46,6 +46,16 @@ OptionsParser::OptionsParser(int ac, const char** av)
   );
 
   _supportedOptions.emplace(
+    "random-seed",
+    Option("random-seed",
+           "Initialize the random generator with the given seed;"
+           " --random-seed=123456789",
+           { "", "--random-seed" },
+           e_option_argument::REQUIRED
+    )
+  );
+
+  _supportedOptions.emplace(
     "fullscreen",
     Option("fullscreen",
            "Launch the game in full screen",

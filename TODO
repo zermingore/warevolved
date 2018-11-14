@@ -8,8 +8,10 @@
 
 
 * TODO Roadmap
-** TODO Integrate the Players in the Map XML
-** TODO --seed-gen=%d option to generate a random map with the given seed
+** DONE Integrate the Players in the Map XML
+   CLOSED: [2018-11-12 Mo 19:47]
+** DONE --seed-gen=%d option to generate a random map with the given seed
+   CLOSED: [2018-11-14 Mi 20:19]
 ** TODO Random generator as a service locator
 
 
