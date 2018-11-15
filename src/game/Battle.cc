@@ -146,10 +146,19 @@ void Battle::generateRandomMap()
   auto nb_players = randPlayer(gen);
   for (auto i = 0; i < nb_players; ++i)
   {
+    // Color
     const auto r = static_cast<sf::Uint8> (randByte(gen));
     const auto g = static_cast<sf::Uint8> (randByte(gen));
     const auto b = static_cast<sf::Uint8> (randByte(gen));
-    _players.emplace_back(std::make_shared<Player> (graphics::Color(r, g, b)));
+    auto& p = _players.emplace_back(
+      std::make_shared<Player> (graphics::Color(r, g, b)));
+
+    // Cursor location
+    std::uniform_int_distribution<> rand_col(0, cols - 1);
+    std::uniform_int_distribution<> rand_line(0, lines - 1);
+    p->cursor()->setCoords({ static_cast<size_t> (rand_col(gen)),
+                             static_cast<size_t> (rand_line(gen)) });
+
     ++_nbPlayers;
   }
 
@@ -205,11 +214,20 @@ void Battle::loadMap()
   _currentPlayer = players.child("current_player").text().as_int();
   for (auto player: players.children("player"))
   {
+    // Color
     auto color_node = player.child("color");
     const auto r = static_cast<sf::Uint8> (color_node.attribute("r").as_int());
     const auto g = static_cast<sf::Uint8> (color_node.attribute("g").as_int());
     const auto b = static_cast<sf::Uint8> (color_node.attribute("b").as_int());
-    _players.emplace_back(std::make_shared<Player> (graphics::Color(r, g, b)));
+    auto& p = _players.emplace_back(
+      std::make_shared<Player> (graphics::Color(r, g, b)));
+
+    // Cursor location
+    auto cursor_node = player.child("cursor");
+    const size_t col = cursor_node.attribute("col").as_int();
+    const size_t line = cursor_node.attribute("line").as_int();
+    p->cursor()->setCoords({col, line});
+
     ++_nbPlayers;
   }
 

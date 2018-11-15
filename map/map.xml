@@ -6,9 +6,11 @@
 	  <current_player>0</current_player>
       <player>
         <color r='0' g='127' b='127'/>
+        <cursor col='0' line='1'/>
       </player>
       <player>
         <color r='227' g='227' b='0'/>
+        <cursor col='1' line='2'/>
       </player>
     </players>
   </metadata>
