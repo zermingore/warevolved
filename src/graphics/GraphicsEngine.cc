@@ -240,4 +240,11 @@ void GraphicsEngine::setGridOffset(const std::shared_ptr<const Map> map)
 }
 
 
+
+void GraphicsEngine::exitRequest()
+{
+  _window->close();
+}
+
+
 } // namespace graphics

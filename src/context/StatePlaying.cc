@@ -32,6 +32,9 @@ StatePlaying::StatePlaying()
   _evtMgr->registerEvent(e_input::SELECTION,
                          [=] { player->select(); });
 
+  _evtMgr->registerEvent(e_input::EXIT,
+                         [=] { graphics::GraphicsEngine::exitRequest(); });
+
   addInterfaceElement(player->cursor());
 }
 

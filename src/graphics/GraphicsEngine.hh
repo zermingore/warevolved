@@ -64,6 +64,11 @@ public:
   static void setGridOffset(const std::shared_ptr<const Map> map);
 
   /**
+   * \brief Close the window on request; exiting the main loop
+   */
+  static void exitRequest();
+
+  /**
    * \brief Close the window
    */
   static void closeWindow() {

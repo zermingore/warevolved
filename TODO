@@ -14,8 +14,10 @@
 ** DONE Testing: Smoke tests draft
    CLOSED: [2018-11-18 So 17:35]
 ** TODO Testing: Integration tests draft
-** TODO Find a way to quit the game without closing the window
+** DONE Find a way to quit the game without closing the window
+   CLOSED: [2018-11-18 So 18:56]
    Just add a key; Support it only when a specific option is provided?
+** TODO Be sure to save the events_log before "closing" the game
 
 
 * TODO Doc
