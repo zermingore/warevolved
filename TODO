@@ -9,6 +9,9 @@
 
 * TODO Roadmap
 ** TODO Random generator as a service locator
+** TODO Testing: Launcher script
+** TODO Testing: Smoke tests draft
+** TODO Testing: Integration tests draft
 
 
 * TODO Doc
@@ -40,6 +43,7 @@
 
 * TODO Game Features
 ** TODO Load the last save (with an option flag?)
+   How to know where it's located
 
 
 * TODO Code Design
@@ -189,19 +193,31 @@
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (useful ?)
+** TODO The displayed fps should be computed only over a fixed period of time
 
 
-* TODO Non-regression tests
+* TODO Testing
+** TODO Smoke tests
+*** TODO Build
+    autoreconf && configure && make
+*** TODO Print the help
+*** TODO Launch the game, must not crash
+** TODO Non-regression tests process
+   Idealy, after each fixed bug
 ** TODO Integration Test process
 *** TODO Load a map, a replay, save at the end; compare with a reference map
-** TODO game scripts (need to be able to use pre-recorded input)
-** TODO Use an ascii map to check fight behavior
-** TODO Use screenshots for the interface
+*** TODO Game scripts (need to be able to use pre-recorded input)
+*** [DROPPED] Use an ascii map to check fight behavior
+   (use directly the xml Map instead)
+*** TODO Use screenshots for the interface
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
-** TODO The displayed fps should be computed only over a fixed period of time
+** TODO Unit tests
+   using google tests?
 ** TODO Use git hooks in order to make sure the tests were considered
-** TODO Disable the graphics engine (speeding up testing)
+** [DROPPED] Disable the graphics engine (speeding up testing)
+   May be considered later, if the process is indeed too slow because of it
+   (The build process still takes more than a minute)
 
 
 * TODO Bugs / Features
