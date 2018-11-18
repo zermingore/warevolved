@@ -204,7 +204,8 @@
 ** TODO Smoke tests
 *** TODO Build
     autoreconf && configure && make
-*** TODO Print the help
+*** DONE Print the help
+    CLOSED: [2018-11-18 So 17:43]
 *** TODO Launch the game, must not crash
 ** TODO Non-regression tests process
    Idealy, after each fixed bug

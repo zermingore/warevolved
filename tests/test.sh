@@ -10,35 +10,49 @@ BUILD_DIR=build
 . utils/log.sh
 
 
-rm -rf bin/ "$BUILD_DIR"
-mkdir -p "$BUILD_DIR"
 
-. utils/build.sh
+function build()
+{
+  rm -rf bin/ "$BUILD_DIR"
+  mkdir -p "$BUILD_DIR"
 
-build
-
-BIN_WE=${ROOT_TESTS}/$(find . -name we -type f -executable)
-if [ -z "$BIN_WE" ]; then
-  printError "Binary not found"
-  exit 2
-fi
+  . utils/build.sh
+  build_main
+}
 
 
 
-# Smoke Tests
-find smoke -type f -iname "*.sh" -print0 \
-  | while IFS= read -r -d $'\0' file
-do
-  echo -n "Testing ${file}... "
-  . "$file"
-  if [[ $? -ne 0 ]]; then # Aborting whatever the failure in a smoke test is
-    printError "Smoke tests failed; Aborting..."
-    exit 1
+function smoke_tests()
+{
+  find smoke -type f -iname "*.sh" -print0 \
+    | while IFS= read -r -d $'\0' file
+  do
+    echo -n "Testing ${file}... "
+    . "$file"
+    if [[ $? -ne 0 ]]; then # Aborting whatever the failure in a smoke test is
+      printError "[FAIL]\n  Smoke tests failed; Aborting..."
+      exit 1
+    fi
+
+    printSuccess "[done]"
+  done
+}
+
+
+
+
+# Entry point
+function main()
+{
+  build
+
+  BIN_WE=${ROOT_TESTS}/$(find . -name we -type f -executable)
+  if [ -z "$BIN_WE" ]; then
+    printError "Binary not found"
+    exit 2
   fi
 
-  printSuccess "[done]"
-done
+  smoke_tests
+}
 
-
-
-# TODO main
+main

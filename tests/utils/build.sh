@@ -41,7 +41,7 @@ function _standard_compilation()
 
 
 
-function build()
+function build_main()
 {
   _configure && _standard_compilation
 }
