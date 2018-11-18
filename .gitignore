@@ -21,6 +21,12 @@ config.status
 *.deps/
 *.am.user*
 
+
+# Testing
+tests/build
+tests/bin
+
+
 # personal files
 valgrind_log*
 valgrind_suppressions

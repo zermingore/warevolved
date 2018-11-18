@@ -9,7 +9,8 @@
 
 * TODO Roadmap
 ** TODO Random generator as a service locator
-** TODO Testing: Launcher script
+** DONE Testing: Launcher script
+   CLOSED: [2018-11-18 So 12:24]
 ** TODO Testing: Smoke tests draft
 ** TODO Testing: Integration tests draft
 
