@@ -11,8 +11,11 @@
 ** TODO Random generator as a service locator
 ** DONE Testing: Launcher script
    CLOSED: [2018-11-18 So 12:24]
-** TODO Testing: Smoke tests draft
+** DONE Testing: Smoke tests draft
+   CLOSED: [2018-11-18 So 17:35]
 ** TODO Testing: Integration tests draft
+** TODO Find a way to quit the game without closing the window
+   Just add a key; Support it only when a specific option is provided?
 
 
 * TODO Doc

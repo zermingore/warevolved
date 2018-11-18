@@ -12,3 +12,10 @@ function printError()
 {
   echo -e "${COLOR_ERROR}$1${COLOR_NORMAL}" 1>&2
 }
+
+
+
+function printSuccess()
+{
+  echo -e "${COLOR_SUCCESS}$1${COLOR_NORMAL}"
+}
