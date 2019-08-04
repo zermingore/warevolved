@@ -11,6 +11,11 @@
 		<name>soldiers</name>
 	  </file>
 	</folder>
+	<folder path='resources/units/'>
+	  <file filename='car.png'>
+		<name>car</name>
+	  </file>
+	</folder>
 	<folder path='resources/terrains/'>
 	  <file filename='plain.png'>
 		<name>plain</name>

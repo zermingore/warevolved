@@ -8,7 +8,7 @@
 
 
 * TODO Roadmap
-** TODO Random generator as a service locator
+** TODO Handle vehicles
 
 
 * TODO Doc
@@ -57,7 +57,7 @@
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
    could use typedef std::shared_ptr SP
-
+** TODO Random generator as a service locator
 
 * TODO Graphics
 ** TODO Implement cell scrolling (too many cells to fit on the screen)

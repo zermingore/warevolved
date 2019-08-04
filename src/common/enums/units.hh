@@ -15,6 +15,7 @@
 enum class e_unit
 {
   SOLDIERS = 0,
+  CAR,
 
   NB_UNITS,
   NONE

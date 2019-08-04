@@ -170,9 +170,26 @@ void Battle::generateRandomMap()
     for (auto line(0); line < lines; ++line)
     {
       _map->setTerrain(col, line, static_cast<e_terrain> (randTerrain(gen)));
-      if (rand100(gen) > 80)
+      if (rand100(gen) > 90)
       {
         auto type = e_unit::SOLDIERS;
+        std::uniform_int_distribution<> rand_player(0, nb_players - 1);
+        auto player_id = rand_player(gen);
+        auto played = false;
+
+        // Creating an instance on the Unit only to get its max HP (I know...)
+        std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
+        auto max_hp = new_unit->maxHp();
+        std::uniform_int_distribution<> randHpSoldier(1, max_hp);
+        auto hp = randHpSoldier(gen);
+
+        if (static_cast<unsigned int> (player_id) == _currentPlayer)
+          played = static_cast<bool> (randBool(gen));
+        _map->newUnit(type, col, line, player_id, hp, played);
+      }
+      if (rand100(gen) > 80)
+      {
+        auto type = e_unit::CAR;
         std::uniform_int_distribution<> rand_player(0, nb_players - 1);
         auto player_id = rand_player(gen);
         auto played = false;
