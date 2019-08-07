@@ -47,27 +47,49 @@ void MenuAction::build()
     }
   }
 
-  // Forbidding to do an action on an occupied Cell
-  if (_state == e_state::ACTION_MENU && !map->unit(_coords))
+  if (_state == e_state::ACTION_MENU)
   {
-    auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
-    entry_wait->setCallback( [=] { waitUnit(); });
-    _entries.push_back(entry_wait);
-
-    /// \todo use other coordinates than the menu ones
-
-    // _selectedUnit does not exits (another instance of MenuAction built it)
-    _selectedUnit = map->selectedUnit();
-    assert(_selectedUnit);
-    _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
-
-    // Add the attack entry if a target is reachable from the current position
-    auto cell(game::Status::battle()->map()->cell(_coords));
-    if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
+    auto unit(map->unit(_coords));
+    if (!unit) // Forbidding to do an action on an occupied Cell
     {
-      auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-      entry->setCallback( [=] { attackUnit(); });
-      _entries.push_back(entry);
+      auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
+      entry_wait->setCallback( [=] { waitUnit(); });
+      _entries.push_back(entry_wait);
+
+      /// \todo use other coordinates than the menu ones
+
+      // _selectedUnit does not exits (another instance of MenuAction built it)
+      _selectedUnit = map->selectedUnit();
+      assert(_selectedUnit);
+      _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
+
+      // Add the attack entry if a target is reachable from the current position
+      auto cell(game::Status::battle()->map()->cell(_coords));
+      if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
+      {
+        auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
+        entry->setCallback( [=] { attackUnit(); });
+        _entries.push_back(entry);
+      }
+    }
+    else
+    {
+      _selectedUnit = map->selectedUnit();
+      if (_selectedUnit->playerId() == unit->playerId())
+      {
+        if (_selectedUnit->type() == e_unit::CAR && unit->type() == e_unit::SOLDIERS)
+        {
+          auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
+          entry_group->setCallback( [=] { waitUnit(); }); // TODO
+          _entries.push_back(entry_group);
+        }
+        else if (_selectedUnit->type() == e_unit::SOLDIERS && unit->type() == e_unit::CAR)
+        {
+          auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));
+          entry_group->setCallback( [=] { waitUnit(); }); // TODO
+          _entries.push_back(entry_group);
+        }
+      }
     }
   }
 

@@ -66,6 +66,12 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::WAIT:
       _labelName = "Wait";
       break;
+    case e_entry::PICK_UP:
+      _labelName = "Pick\n  Up";
+      break;
+    case e_entry::BOARD:
+      _labelName = "Board";
+      break;
     case e_entry::NEXT_TURN:
       _labelName = "Next\n  Turn";
       break;

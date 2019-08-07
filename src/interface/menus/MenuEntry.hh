@@ -30,8 +30,10 @@ enum class e_entry
 {
   NONE = 0, // invalid selected entry
 
-  MOVE, // motion order
-  WAIT, // motion order
+  MOVE,    // motion order
+  WAIT,    // motion order
+  PICK_UP, // motion order
+  BOARD,   // motion order
   NEXT_TURN,
   ATTACK,
 
