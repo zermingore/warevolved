@@ -73,10 +73,18 @@ public:
 
   /**
    * \brief _callback setter
-   * \param callback Callback called when the menu entry is selected
+   * \param callbacks List of Callbacks called when the menu entry is selected
+   */
+  void setCallbacks(const std::vector<std::function<void()>> callbacks) {
+    _callbacks = callbacks;
+  }
+
+  /**
+   * \brief _callback setter
+   * \param callbacks List of Callbacks called when the menu entry is selected
    */
   void setCallback(const std::function<void()> callback) {
-    _callback = callback;
+    _callbacks = { callback };
   }
 
   /**
@@ -102,8 +110,8 @@ private:
   std::shared_ptr<resources::Text> _label; ///< button label text
   std::string _labelName;                  ///< menu entry text
 
-  /// callback executed when the entry is selected
-  std::function<void()> _callback;
+  /// callbacks list executed when the entry is selected
+  std::vector<std::function<void()>> _callbacks;
 };
 
 

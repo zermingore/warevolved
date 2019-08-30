@@ -50,7 +50,10 @@ void MenuEntry::draw()
 
 void MenuEntry::execute()
 {
-  _callback();
+  for (const auto& callback: _callbacks)
+  {
+	callback();
+  }
 }
 
 
