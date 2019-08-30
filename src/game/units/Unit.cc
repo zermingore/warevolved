@@ -33,7 +33,7 @@ void Unit::setColor(const graphics::Color& color)
 }
 
 
-void Unit::addToCrew(std::shared_ptr<Unit> unit)
+bool Unit::addToCrew(std::shared_ptr<Unit> unit)
 {
   ERROR("Invalid call to Unit::addToCrew -> abort.");
   ERROR("Called with", static_cast<int> (unit->type()));

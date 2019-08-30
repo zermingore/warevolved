@@ -150,7 +150,7 @@ public:
    * \brief Add the given \Unit to the crew (need to be overloaded to be used)
    * \note Aborts the execution if called with the base class definition
    */
-  [[ noreturn ]] virtual void addToCrew(std::shared_ptr<Unit> unit);
+  [[ noreturn ]] virtual bool addToCrew(std::shared_ptr<Unit> unit);
 
 
 

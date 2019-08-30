@@ -29,6 +29,12 @@ public:
    * \brief Can open fire depending on the presence of a co-pilot
    */
   bool canOpenFire() override;
+
+  /**
+   * \brief Add the given unit to the Car
+   * \note As default: The driver will be added; then the copilot and then passengers
+   */
+  bool addToCrew(std::shared_ptr<Unit> unit) override;
 };
 
 #endif /* !CAR_HH_ */
