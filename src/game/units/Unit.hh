@@ -146,6 +146,14 @@ public:
   auto sprite() const { return _sprite; }
 
 
+  /**
+   * \brief Add the given \Unit to the crew (need to be overloaded to be used)
+   * \note Aborts the execution if called with the base class definition
+   */
+  [[ noreturn ]] virtual void addToCrew(std::shared_ptr<Unit> unit);
+
+
+
 protected:
   e_unit _type;        ///< Introspection; used for instance to save the Map
   Coords _coords;      ///< Unit's cell coordinates

@@ -6,6 +6,7 @@
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <game/units/Unit.hh>
+#include <game/units/Vehicle.hh>
 #include <game/PathFinding.hh>
 
 #include <debug/Debug.hh>
@@ -80,13 +81,15 @@ void MenuAction::build()
         if (_selectedUnit->type() == e_unit::CAR && unit->type() == e_unit::SOLDIERS)
         {
           auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
-          entry_group->setCallback( [=] { waitUnit(); }); // TODO
+          entry_group->setCallback(
+			[=] { _selectedUnit->addToCrew(unit); });
           _entries.push_back(entry_group);
         }
         else if (_selectedUnit->type() == e_unit::SOLDIERS && unit->type() == e_unit::CAR)
         {
           auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));
-          entry_group->setCallback( [=] { waitUnit(); }); // TODO
+          entry_group->setCallback(
+			[=] { unit->addToCrew(_selectedUnit); });
           _entries.push_back(entry_group);
         }
       }

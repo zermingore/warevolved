@@ -12,7 +12,7 @@
 
 
 Car::Car()
-  : Unit()
+  : Vehicle()
 {
   _type = e_unit::CAR;
   _sprite = std::make_shared<graphics::Sprite> ("car"); // TODO multiple sprites
@@ -24,4 +24,13 @@ Car::Car()
 
   _minRange = 0;
   _maxRange = 0;
+
+  _maxCrewMembers = 5;
+}
+
+
+
+bool Car::canOpenFire()
+{
+  return _crew[e_unit_role::COPILOT] != nullptr;
 }
