@@ -95,11 +95,32 @@ function check_lines_length()
 }
 
 
+
+function check_tabs()
+{
+    local lines=$(grep -rn -P '\t' "$1" --exclude=*.in)
+    if [[ $lines != "" ]]; then
+        echo "${COLOR_RED}Tabs detected:${COLOR_NORMAL}"
+
+        # Printing faulty lines
+        IFS=$'\n'
+        for l in $lines; do
+            echo "$l"
+        done
+        unset IFS
+    else
+        echo "${COLOR_GREEN}No tab detected${COLOR_NORMAL}"
+    fi
+}
+
+
+
 function main()
 {
     check_arguments "$@"
 
     check_lines_length "$1"
+    check_tabs "$1"
 }
 
 
