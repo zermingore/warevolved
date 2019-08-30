@@ -219,6 +219,7 @@
 ** TODO Resizable window
    Start the game in a small window; put the window in full screen
    -> The resolution is broken
+** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 
 
 * Build

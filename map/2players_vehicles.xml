@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map>
+  <metadata>
+	<map_size nb_columns='6' nb_lines='6'></map_size>
+    <players>
+	  <current_player>0</current_player>
+      <player>
+        <color r='0' g='127' b='127'/>
+        <cursor col='0' line='0'/>
+      </player>
+      <player>
+        <color r='227' g='227' b='0'/>
+        <cursor col='0' line='1'/>
+      </player>
+    </players>
+  </metadata>
+  <cells>
+    <cell>
+	  <coordinates col='0' line='0'></coordinates>
+	  <terrain>2</terrain>
+      <unit
+		  type='1'
+          player_id='0'
+          hp='5'
+          played='false'>
+      </unit>
+	</cell>
+    <cell>
+	  <coordinates col='1' line='0'></coordinates>
+	  <terrain>2</terrain>
+      <unit
+          type='0'
+          player_id='0'
+          hp='5'
+          played='false'>
+      </unit>
+    </cell>
+    <cell>
+	  <coordinates col='2' line='0'></coordinates>
+	  <terrain>2</terrain>
+      <unit
+          type='0'
+          player_id='0'
+          hp='5'
+          played='false'>
+      </unit>
+    </cell>
+    <cell>
+	  <coordinates col='0' line='1'></coordinates>
+	  <terrain>2</terrain>
+      <unit
+          type='1'
+          player_id='1'
+          hp='7'
+          played='false'>
+      </unit>
+    </cell>
+    <cell>
+	  <coordinates col='1' line='1'></coordinates>
+	  <terrain>2</terrain>
+      <unit
+          type='0'
+          player_id='1'
+          hp='2'
+          played='false'>
+      </unit>
+    </cell>
+    <cell>
+	  <coordinates col='2' line='1'></coordinates>
+	  <terrain>2</terrain>
+      <unit
+          type='0'
+          player_id='1'
+          hp='2'
+          played='false'>
+      </unit>
+    </cell>
+    <cell>
+	  <coordinates col='1' line='1'></coordinates>
+	  <terrain>1</terrain>
+    </cell>
+    <cell>
+	  <coordinates col='1' line='2'></coordinates>
+	  <terrain>1</terrain>
+    </cell>
+  </cells>
+</map>
