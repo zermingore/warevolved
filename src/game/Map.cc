@@ -292,3 +292,10 @@ void Map::dump(pugi::xml_document& doc)
     }
   }
 }
+
+
+
+void Map::hideUnit(std::shared_ptr<Unit> unit)
+{
+  _cells[unit->c()][unit->l()]->removeUnit();
+}

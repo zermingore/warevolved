@@ -81,15 +81,23 @@ void MenuAction::build()
         if (_selectedUnit->type() == e_unit::CAR && unit->type() == e_unit::SOLDIERS)
         {
           auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
-          entry_group->setCallback(
-			[=] { _selectedUnit->addToCrew(unit); });
+          entry_group->setCallbacks(
+          {
+            [=] { _selectedUnit->addToCrew(unit); },
+            [=] { game::Status::battle()->map()->hideUnit(unit); },
+            [=] { waitUnit(); }
+          });
           _entries.push_back(entry_group);
         }
         else if (_selectedUnit->type() == e_unit::SOLDIERS && unit->type() == e_unit::CAR)
         {
           auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));
-          entry_group->setCallback(
-			[=] { unit->addToCrew(_selectedUnit); });
+          entry_group->setCallbacks(
+          {
+            [=] { unit->addToCrew(_selectedUnit); },
+            [=] { game::Status::battle()->map()->hideUnit(_selectedUnit); },
+            [=] { waitUnit(); }
+          });
           _entries.push_back(entry_group);
         }
       }
