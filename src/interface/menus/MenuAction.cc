@@ -78,7 +78,8 @@ void MenuAction::build()
       _selectedUnit = map->selectedUnit();
       if (_selectedUnit->playerId() == unit->playerId())
       {
-        if (_selectedUnit->type() == e_unit::CAR && unit->type() == e_unit::SOLDIERS)
+        if (   _selectedUnit->type() == e_unit::CAR
+            && unit->type() == e_unit::SOLDIERS)
         {
           auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
           entry_group->setCallbacks(
@@ -89,7 +90,8 @@ void MenuAction::build()
           });
           _entries.push_back(entry_group);
         }
-        else if (_selectedUnit->type() == e_unit::SOLDIERS && unit->type() == e_unit::CAR)
+        else if (  _selectedUnit->type() == e_unit::SOLDIERS
+                 && unit->type() == e_unit::CAR)
         {
           auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));
           entry_group->setCallbacks(

@@ -22,7 +22,7 @@ std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
     case e_unit::SOLDIERS:
       return std::make_unique<Soldier> ();
 
-	case e_unit::CAR:
+    case e_unit::CAR:
       return std::make_unique<Car> ();
 
     default:

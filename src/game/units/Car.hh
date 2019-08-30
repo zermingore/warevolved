@@ -32,7 +32,8 @@ public:
 
   /**
    * \brief Add the given unit to the Car
-   * \note As default: The driver will be added; then the copilot and then passengers
+   * \note As default: The driver will be added; then the copilot
+   * \todo Handle passengers
    */
   bool addToCrew(std::shared_ptr<Unit> unit) override;
 };

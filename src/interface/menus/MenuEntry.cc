@@ -52,7 +52,7 @@ void MenuEntry::execute()
 {
   for (const auto& callback: _callbacks)
   {
-	callback();
+    callback();
   }
 }
 

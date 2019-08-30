@@ -44,27 +44,27 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit)
   std::shared_ptr<Unit> copilot = nullptr;
   try
   {
-	driver = _crew.at(e_unit_role::DRIVER);
-	copilot = _crew.at(e_unit_role::COPILOT);
+    driver = _crew.at(e_unit_role::DRIVER);
+    copilot = _crew.at(e_unit_role::COPILOT);
   }
   catch (std::out_of_range& e)
   {
-	if (copilot)
-	{
-	  NOTICE("Driver and Copilot already on board");
-	  return false;
-	}
+    if (copilot)
+    {
+      NOTICE("Driver and Copilot already on board");
+      return false;
+    }
 
-	if (driver)
-	{
-	  _crew[e_unit_role::COPILOT] = unit;
-	  return true;
-	}
-	else // empty car
-	{
-	  _crew[e_unit_role::DRIVER] = unit;
-	  return true;
-	}
+    if (driver)
+    {
+      _crew[e_unit_role::COPILOT] = unit;
+      return true;
+    }
+    else // empty car
+    {
+      _crew[e_unit_role::DRIVER] = unit;
+      return true;
+    }
   }
 
 
