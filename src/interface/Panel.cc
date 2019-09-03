@@ -23,6 +23,7 @@
 #include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <game/units/Car.hh>
 
 
 
@@ -214,7 +215,6 @@ void Panel::drawUnitFrame()
   size.x -= 10;
   size.y -= 10;
   sprite->setSize(size);
-
   sprite->draw();
 
   // Unit data text
@@ -224,13 +224,67 @@ void Panel::drawUnitFrame()
     "attack: " + std::to_string(unit->attackValue());
 
   drawDataText(unit_data, _unitDataPos);
+
+  // Crew
+  if (unit->type() == e_unit::CAR)
+  {
+    const auto car = std::static_pointer_cast<Car> (unit);
+
+    // Compute crew member frame size
+    const graphics::Size2 crew_member_size({
+      size.x = (size.x - 2 * _margin) / 2,
+      size.y = (size.y - 2 * _margin) / 2
+    });
+
+    graphics::Pos2 crew_pos = {
+      _frameUnit->position().x,
+      _frameUnit->position().y + sprite->size().y + _margin * 2
+    };
+    drawDataText("Crew:", crew_pos);
+
+    // First crew member frame position
+    crew_pos.y += sprite->size().y + _margin * 2;
+
+    float i = 0.f; // count loop iterations in order to compute the offset position
+    for (const auto& member: car->getCrew())
+    {
+      _frameUnit->draw();
+
+      auto mbr_sprite(member.second->sprite());
+      mbr_sprite->setPosition(
+        _frameUnit->position().x + _margin + i * crew_member_size.x,
+        _frameUnit->position().y + _frameUnit->size().y + _margin);
+
+      mbr_sprite->setSize(crew_member_size);
+      mbr_sprite->draw();
+
+      // Unit data text
+      const std::string role = "Driver"; /// \todo Check role enum
+      const auto mbr_data =
+        "role:   " + role + '\n' +
+        "hp:     " + std::to_string(member.second->hp())          + '\n' +
+        "motion: " + std::to_string(member.second->motionValue()) + '\n' +
+        "attack: " + std::to_string(member.second->attackValue());
+
+      const auto pos(mbr_sprite->position());
+      drawDataText(mbr_data, { pos.x, pos.y + mbr_sprite->size().y + _margin }, 10);
+      ++i;
+    }
+  }
+
+  sprite->draw(); /// \todo remove me
 }
 
 
 
-void Panel::drawDataText(const std::string& data, const graphics::Pos2& pos)
+void Panel::drawDataText(const std::string data, const graphics::Pos2& pos)
 {
-  auto text = std::make_unique<resources::Text> (data, _fontSize, pos);
+  drawDataText(data, pos, _fontSize);
+}
+
+void Panel::drawDataText(const std::string data, const graphics::Pos2& pos, size_t size)
+{
+  auto text = std::make_unique<resources::Text> (data, size, pos);
   text->draw();
 }
 
