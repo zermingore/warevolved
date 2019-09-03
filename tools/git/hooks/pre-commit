@@ -1,0 +1,4 @@
+#!/bin/sh
+
+tools/coding_style.sh src/
+# tools/check_headers.sh src/

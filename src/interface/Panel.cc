@@ -243,9 +243,9 @@ void Panel::drawUnitFrame()
     drawDataText("Crew:", crew_pos);
 
     // First crew member frame position
-    crew_pos.y += sprite->size().y + _margin * 2;
+     crew_pos.y += sprite->size().y + _margin * 2;
 
-    float i = 0.f; // count loop iterations in order to compute the offset position
+    float i = 0.f; // loop iterations in order to compute the offset position
     for (const auto& member: car->getCrew())
     {
       _frameUnit->draw();
@@ -267,7 +267,8 @@ void Panel::drawUnitFrame()
         "attack: " + std::to_string(member.second->attackValue());
 
       const auto pos(mbr_sprite->position());
-      drawDataText(mbr_data, { pos.x, pos.y + mbr_sprite->size().y + _margin }, 10);
+      drawDataText(
+        mbr_data, { pos.x, pos.y + mbr_sprite->size().y + _margin }, 10);
       ++i;
     }
   }
@@ -282,7 +283,9 @@ void Panel::drawDataText(const std::string data, const graphics::Pos2& pos)
   drawDataText(data, pos, _fontSize);
 }
 
-void Panel::drawDataText(const std::string data, const graphics::Pos2& pos, size_t size)
+void Panel::drawDataText(const std::string data,
+                         const graphics::Pos2& pos,
+                         size_t size)
 {
   auto text = std::make_unique<resources::Text> (data, size, pos);
   text->draw();
