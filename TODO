@@ -9,6 +9,30 @@
 
 * TODO Roadmap
 ** TODO Handle vehicles
+*** TODO Pick Up / get in
+*** TODO Drop / get out
+
+
+* TODO Bugs / Features
+** TODO Memory Leaks / Errors
+** TODO segfault while quitting the game, moving a unit
+   This happen because every static classes get 'destructed', exiting the main
+   Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
+     The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
+   To solve this, one can for instance:
+   - Find a way to 'destruct' static classes in a defined order
+   - As the static classes may be removed one day this would solve the issue
+** TODO Sometimes, moving over an enemy unit is possible
+   Seems to appear when two keys are pressed at the same time
+   Unable to wait on an occupied cell though
+** TODO Resizable window
+   Start the game in a small window; put the window in full screen
+   -> The resolution is broken
+** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
+** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
+** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
+** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
+
 
 
 * TODO Doc
@@ -21,8 +45,6 @@
 ** TODO Map iterator to access cells without explicit double loop
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
 ** TODO Merge Cell highlight boolean and color (color::None)
-** TODO Do not pass shared pointers as parameter when not usefull
-
 
 * TODO Experimental
 ** TODO drawInterface Vs drawState
@@ -58,6 +80,7 @@
    could use using std::vector
    could use typedef std::shared_ptr SP
 ** TODO Random generator as a service locator
+
 
 * TODO Graphics
 ** TODO Implement cell scrolling (too many cells to fit on the screen)
@@ -129,6 +152,8 @@
 	Alt on a cell: unit rotation
 	  increase reactivity
 	  only on simple move
+** TODO Multi-Cells units?
+
 
 
 * TODO Sound
@@ -204,24 +229,6 @@
 ** TODO Disable the graphics engine (speeding up testing)
 
 
-* TODO Bugs / Features
-** TODO Memory Leaks / Errors
-** TODO segfault while quitting the game, moving a unit
-   This happen because every static classes get 'destructed', exiting the main
-   Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
-     The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
-   To solve this, one can for instance:
-   - Find a way to 'destruct' static classes in a defined order
-   - As the static classes may be removed one day this would solve the issue
-** TODO Sometimes, moving over an enemy unit is possible
-   Seems to appear when two keys are pressed at the same time
-   Unable to wait on an occupied cell though
-** TODO Resizable window
-   Start the game in a small window; put the window in full screen
-   -> The resolution is broken
-** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
-
-
 * Build
 
 
@@ -232,3 +239,5 @@
 ** TODO Sprites
    Every cell doesn't need to have it's own highlight sprite
    -> common sprites (1 per situation [move, attack])
+** TODO Panel Cache
+   The Panel is re-built at every frame
