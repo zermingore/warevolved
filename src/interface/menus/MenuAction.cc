@@ -98,7 +98,8 @@ void MenuAction::build()
           {
             [=] { unit->addToCrew(_selectedUnit); },
             [=] { game::Status::battle()->map()->hideUnit(_selectedUnit); },
-            [=] { waitUnit(); }
+            [=] { game::Status::clearStates(); },
+            [=] { game::Status::player()->cursor()->setCoords(_coords); }
           });
           _entries.push_back(entry_group);
         }
