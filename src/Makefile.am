@@ -50,6 +50,7 @@ game/Terrain.cc                     \
 game/TerrainsHandler.cc             \
 game/units/Unit.cc                  \
 game/units/UnitFactory.cc           \
+game/units/Vehicle.cc               \
 game/units/Car.cc                   \
 game/units/Soldier.cc               \
 game/Player.cc                      \

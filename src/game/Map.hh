@@ -187,8 +187,17 @@ public:
    * \warning The unit will no longer be accessible from the map / cells
    * \warning The unit will be deleted from the map => keep a pointer on it
    * \todo Handle crews in save/load mechanism
+   * \todo Rename (stash / unstash?)
    */
-  void hideUnit(std::shared_ptr<Unit> unit);
+  void hideUnit(const Unit& unit);
+
+  /**
+   * \brief builds and keep a new Unit
+   * \param unit Unit to add to the Map.
+   *   This is useful to break a group of Units
+   * \todo Rename (stash / unstash?)
+   */
+  void revealUnit(const Unit& unit);
 
 
   /**

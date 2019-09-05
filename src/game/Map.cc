@@ -295,7 +295,13 @@ void Map::dump(pugi::xml_document& doc)
 
 
 
-void Map::hideUnit(std::shared_ptr<Unit> unit)
+void Map::hideUnit(const Unit& unit)
 {
-  _cells[unit->c()][unit->l()]->removeUnit();
+  _cells[unit.c()][unit.l()]->removeUnit();
+}
+
+
+void Map::revealUnit(const Unit& unit)
+{
+  newUnit(unit.type(), unit.c(), unit.l(), unit.playerId(), unit.hp(), true);
 }

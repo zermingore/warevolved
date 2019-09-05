@@ -27,19 +27,26 @@ Car::Car()
   _maxRange = 0;
 
   _maxCrewMembers = 5;
+  _crewSize = 0;
 }
 
 
 
 bool Car::canOpenFire()
 {
-  return _crew[e_unit_role::COPILOT] != nullptr;
+  return _crew.find(e_unit_role::COPILOT) != _crew.end();
 }
 
 
 
 bool Car::addToCrew(std::shared_ptr<Unit> unit)
 {
+  if (_crewSize >= _maxCrewMembers)
+  {
+    ERROR("Called 'addToCrew()' with a full Vehicle");
+    return false;
+  }
+
   std::shared_ptr<Unit> driver = nullptr;
   std::shared_ptr<Unit> copilot = nullptr;
   try
@@ -47,9 +54,9 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit)
     driver = _crew.at(e_unit_role::DRIVER);
     copilot = _crew.at(e_unit_role::COPILOT);
   }
-  catch (std::out_of_range& e)
+  catch (const std::out_of_range& e)
   {
-    if (copilot)
+    if (copilot) /// \todo Take into account passengers
     {
       NOTICE("Driver and Copilot already on board");
       return false;
@@ -58,17 +65,17 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit)
     if (driver)
     {
       _crew[e_unit_role::COPILOT] = unit;
+      ++_crewSize;
       return true;
     }
     else // empty car
     {
       _crew[e_unit_role::DRIVER] = unit;
+      ++_crewSize;
       return true;
     }
   }
 
-
-  ERROR("IMPLEMENTATION ERROR Trying to add the given unit");
-
+  ERROR("[IMPLEMENTATION ERROR] Failed trying to add the unit to the crew");
   return false;
 }

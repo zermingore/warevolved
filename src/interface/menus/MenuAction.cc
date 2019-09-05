@@ -6,7 +6,7 @@
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <game/units/Unit.hh>
-#include <game/units/Vehicle.hh>
+#include <game/units/Car.hh>
 #include <game/PathFinding.hh>
 
 #include <debug/Debug.hh>
@@ -78,6 +78,34 @@ void MenuAction::build()
       _selectedUnit = map->selectedUnit();
       if (_selectedUnit->playerId() == unit->playerId())
       {
+        // Drop Off; todo 'copy-paste' in Selection mode
+        if (_selectedUnit->type() == e_unit::CAR)
+        {
+          const auto car = std::static_pointer_cast<Car> (_selectedUnit);
+          if (car->crewSize())
+          {
+            try
+            {
+               /// \todo select crew member
+              const auto member = car->getCrew().at(e_unit_role::DRIVER);
+              auto entry_group(std::make_shared<MenuEntry> (e_entry::DROP_OFF));
+
+              /// \todo select drop location
+              const Coords coords = { _coords.c + 1, _coords.l };
+              entry_group->setCallbacks(
+              {
+                [=] { car->dropOff(e_unit_role::DRIVER, coords); },
+                [=] { game::Status::battle()->map()->revealUnit(*member); },
+              });
+            _entries.push_back(entry_group);
+            }
+            catch (const std::out_of_range& e)
+            {
+              WARNING("No crew member has this role");
+            }
+          }
+        }
+
         if (   _selectedUnit->type() == e_unit::CAR
             && unit->type() == e_unit::SOLDIERS)
         {
@@ -85,7 +113,7 @@ void MenuAction::build()
           entry_group->setCallbacks(
           {
             [=] { _selectedUnit->addToCrew(unit); },
-            [=] { game::Status::battle()->map()->hideUnit(unit); },
+            [=] { game::Status::battle()->map()->hideUnit(*unit); },
             [=] { waitUnit(); }
           });
           _entries.push_back(entry_group);
@@ -97,7 +125,7 @@ void MenuAction::build()
           entry_group->setCallbacks(
           {
             [=] { unit->addToCrew(_selectedUnit); },
-            [=] { game::Status::battle()->map()->hideUnit(_selectedUnit); },
+            [=] { game::Status::battle()->map()->hideUnit(*_selectedUnit); },
             [=] { game::Status::clearStates(); },
             [=] { game::Status::player()->cursor()->setCoords(_coords); }
           });
@@ -123,7 +151,7 @@ void MenuAction::moveUnit()
 }
 
 
-void MenuAction::waitUnit()
+void MenuAction::waitUnit() /// \todo forbid move; authorize groupping
 {
   /// \todo use other coordinates as the menu ones
   game::Status::battle()->map()->moveUnit(_coords);

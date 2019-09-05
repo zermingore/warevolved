@@ -41,26 +41,31 @@ public:
 
   /**
    * \brief Returns crew list
+   * \todo rename to 'crew()'
    */
   const auto& getCrew() { return _crew; }
 
   /**
-   * \brief Add the given \Unit to the crew
+   * \brief Returns crew list
+   * \todo rename to 'crew()'
    */
-  // void addToCrew(std::shared_ptr<Unit> unit) override;
+  const auto crewSize() { return _crewSize; }
 
   /**
-   * \brief Unload the given Unit, at the given position
+   * \brief Drop the given unit off the Vehicle at the given position
+   * \param role Crew member occupying this role will be dropped off
+   * \param location Cell where to drop the unit off
+   * \return true on success; false otherwise (ex: non empty location)
    */
-  // void unload();
+  bool dropOff(e_unit_role role, Coords location);
 
   // size_t roleProtection(); ///< Ex: In a pick-up: Gunner vs passenger
 
 
-
 protected:
-  std::map<e_unit_role, std::shared_ptr<Unit>>_crew; ///< Crew list (const keys)
-  size_t _maxCrewMembers; ///< const; number of seats
+  std::map<e_unit_role, std::shared_ptr<Unit>> _crew; ///< Crew list (const key)
+  size_t _maxCrewMembers = 0; ///< Number of seats (constant)
+  size_t _crewSize = 0; ///< Current crew number
 };
 
 #endif /* !VEHICLE_HH_ */
