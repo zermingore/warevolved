@@ -86,7 +86,7 @@ void MenuAction::build()
           {
             try
             {
-               /// \todo select crew member
+              /// \todo select crew member
               const auto member = car->getCrew().at(e_unit_role::DRIVER);
               auto entry_group(std::make_shared<MenuEntry> (e_entry::DROP_OFF));
 
@@ -95,7 +95,6 @@ void MenuAction::build()
               entry_group->setCallbacks(
               {
                 [=] { car->dropOff(e_unit_role::DRIVER, coords); },
-                [=] { game::Status::battle()->map()->revealUnit(*member); },
               });
             _entries.push_back(entry_group);
             }
@@ -118,7 +117,7 @@ void MenuAction::build()
           });
           _entries.push_back(entry_group);
         }
-        else if (  _selectedUnit->type() == e_unit::SOLDIERS
+        else if (   _selectedUnit->type() == e_unit::SOLDIERS
                  && unit->type() == e_unit::CAR)
         {
           auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));

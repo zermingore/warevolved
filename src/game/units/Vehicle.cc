@@ -38,8 +38,10 @@ bool Vehicle::dropOff(e_unit_role role, Coords location)
   }
 
   auto unit = _crew.at(role);
+  unit->setCoords(location);
   map->revealUnit(*unit);
+  _crew.erase(role);
 
-  ERROR("[IMPLEMENTATION ERROR] Failed trying to add the unit to the crew");
+  ERROR("[IMPLEMENTATION ERROR] Failed trying to drop the unit off");
   return false;
 }
