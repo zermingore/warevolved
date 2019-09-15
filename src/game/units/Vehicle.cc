@@ -12,6 +12,8 @@
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Map.hh>
+#include <common/enums/states.hh>
+#include <context/State.hh>
 
 
 
@@ -28,6 +30,9 @@ bool Vehicle::dropOff(e_unit_role role, Coords location)
     ERROR("Role not occupied in the Vehicle");
     return false;
   }
+
+  game::Status::pushState(e_state::SELECTION_CREW);
+  game::Status::currentState()->resume();
 
   auto map = game::Status::battle()->map();
   if (map->unit(location) != nullptr)

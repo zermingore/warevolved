@@ -25,6 +25,8 @@ enum class e_state: int
   MOVING_UNIT,    ///< Move it
   ACTION_MENU,    ///< Give it an order (confirm move, switch to attack state)
 
+  SELECTION_CREW, ///< Select a member in a Unit crew
+
   SELECT_TARGET,  ///< Select a taget (attack, heal, ...)
 };
 

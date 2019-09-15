@@ -35,6 +35,7 @@ enum class e_entry
   PICK_UP, // motion order
   BOARD,   // motion order
   DROP_OFF,
+  GET_OUT,
   NEXT_TURN,
   ATTACK,
 

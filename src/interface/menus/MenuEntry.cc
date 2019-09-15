@@ -78,6 +78,9 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::DROP_OFF:
       _labelName = "Drop\n  Off";
       break;
+    case e_entry::GET_OUT:
+      _labelName = "Get\n  Out";
+      break;
     case e_entry::NEXT_TURN:
       _labelName = "Next\n  Turn";
       break;

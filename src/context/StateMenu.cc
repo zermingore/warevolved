@@ -37,6 +37,7 @@ StateMenu::StateMenu(const e_state state)
 
     case e_state::SELECTION_UNIT:
     case e_state::ACTION_MENU:
+    case e_state::SELECTION_CREW:
       _menu = std::make_shared<interface::MenuAction> (state, _menuCoords);
       break;
 

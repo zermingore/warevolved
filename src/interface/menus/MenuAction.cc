@@ -48,6 +48,38 @@ void MenuAction::build()
     }
   }
 
+  if (_state == e_state::SELECTION_CREW)
+  {
+    /// \todo use other coordinates than the menu ones
+    _selectedUnit = map->unit(_coords);
+    if (!_selectedUnit->played()
+        && _selectedUnit->playerId() == game::Status::player()->id())
+    {
+      const auto car = std::static_pointer_cast<Car> (_selectedUnit);
+      assert(car->crewSize() > 0 && "The selected unit has no crew");
+
+      // For every crew member, add an entry
+      const auto& crew = car->getCrew();
+      const Coords coords = { _coords.c + 1, _coords.l };
+      for (const auto& member: crew)
+      {
+        auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
+        entry->setCallback( [=] { car->dropOff(member.first, coords); });
+        _entries.push_back(entry);
+      }
+    }
+
+    // add the attack entry if a target is reachable from the current position
+    auto cell(map->cell(_coords));
+    _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
+    if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
+    {
+      auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
+      entry->setCallback( [=] { attackUnit(); });
+      _entries.push_back(entry);
+    }
+  }
+
   if (_state == e_state::ACTION_MENU)
   {
     auto unit(map->unit(_coords));
@@ -84,24 +116,13 @@ void MenuAction::build()
           const auto car = std::static_pointer_cast<Car> (_selectedUnit);
           if (car->crewSize())
           {
-            try
+            auto entry_group(std::make_shared<MenuEntry> (e_entry::DROP_OFF));
+            entry_group->setCallbacks(
             {
-              /// \todo select crew member
-              const auto member = car->getCrew().at(e_unit_role::DRIVER);
-              auto entry_group(std::make_shared<MenuEntry> (e_entry::DROP_OFF));
-
-              /// \todo select drop location
-              const Coords coords = { _coords.c + 1, _coords.l };
-              entry_group->setCallbacks(
-              {
-                [=] { car->dropOff(e_unit_role::DRIVER, coords); },
-              });
+              [=] { game::Status::pushState(e_state::SELECTION_CREW);
+                    game::Status::currentState()->resume(); },
+            });
             _entries.push_back(entry_group);
-            }
-            catch (const std::out_of_range& e)
-            {
-              WARNING("No crew member has this role");
-            }
           }
         }
 
