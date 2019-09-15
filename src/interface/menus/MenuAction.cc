@@ -14,9 +14,8 @@
 namespace interface {
 
 
-MenuAction::MenuAction(const e_state state, const Coords clicked_cell)
+MenuAction::MenuAction(const e_state state)
   : _state(state)
-  , _clickedCell(clicked_cell)
 {
 }
 

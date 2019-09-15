@@ -16,7 +16,7 @@ enum class e_state: int
 {
   NONE = 0,       ///< we should never be in this state
 
-  GLOBAL,        ///< Default state, handling inputs accessible everywhere
+  GLOBAL,         ///< Default state, handling inputs accessible everywhere
 
   PLAYING,        ///< Browsing the map
   MAP_MENU,       ///< Generic map menu: next turn, ...

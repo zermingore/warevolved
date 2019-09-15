@@ -37,7 +37,7 @@ public:
    * \brief Constructor
    * \param state State in which this menu will be used
    */
-  MenuAction(const e_state state, const Coords clicked_cell);
+  explicit MenuAction(const e_state state);
 
   /**
    * \brief default destructor
@@ -81,7 +81,6 @@ private:
 
 
   e_state _state;      ///< State related to this menu
-  Coords _clickedCell; ///< Clicked cell where this menu was invoked
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
 
