@@ -67,6 +67,7 @@ interface/menus/MenuEntry.cc        \
 interface/menus/InGameMenu.cc       \
 interface/menus/MenuMap.cc          \
 interface/menus/MenuAction.cc       \
+interface/menus/MenuCrew.cc         \
 \
 tools/StringParser.cc               \
 tools/Fps.cc                        \

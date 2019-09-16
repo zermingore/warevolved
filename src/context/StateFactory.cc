@@ -21,6 +21,7 @@ std::shared_ptr<State> StateFactory::createState(const e_state& state)
     case e_state::MAP_MENU:
     case e_state::ACTION_MENU:
     case e_state::SELECTION_UNIT:
+    case e_state::SELECTION_CREW:
       return std::make_shared<StateMenu> (state);
 
     case e_state::MOVING_UNIT:
@@ -28,9 +29,6 @@ std::shared_ptr<State> StateFactory::createState(const e_state& state)
 
     case e_state::SELECT_TARGET:
       return std::make_shared<StateSelectTarget> ();
-
-    case e_state::SELECTION_CREW:
-      return std::make_shared<StateMenu> (state);
 
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
