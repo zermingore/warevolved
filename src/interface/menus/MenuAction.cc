@@ -8,7 +8,6 @@
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <game/units/Unit.hh>
-#include <game/units/Car.hh>
 #include <game/PathFinding.hh>
 
 #include <debug/Debug.hh>

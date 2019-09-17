@@ -17,7 +17,7 @@
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <game/units/Unit.hh>
-#include <game/units/Car.hh>
+#include <game/units/Vehicle.hh>
 #include <game/PathFinding.hh>
 
 #include <debug/Debug.hh>
@@ -37,14 +37,14 @@ void MenuCrew::build()
     /// \todo check space available (and allow to select drop location)
     if (_selectedUnit->canHaveCrew())
     {
-      auto car = std::static_pointer_cast<Car> (_selectedUnit);
+      auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
-      for (auto& member: car->getCrew())
+      for (auto& member: vehicle->getCrew())
       {
         auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
         entry->setCallbacks(
         { /// \todo forbid move; allow further drops
-          [=] { car->dropOff(member.first, coords); },
+          [=] { vehicle->dropOff(member.first, coords); },
           [=] { game::Status::clearStates(); }
         });
 

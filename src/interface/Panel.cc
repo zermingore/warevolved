@@ -23,7 +23,7 @@
 #include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <game/units/Car.hh>
+#include <game/units/Vehicle.hh>
 
 
 
@@ -226,9 +226,9 @@ void Panel::drawUnitFrame()
   drawDataText(unit_data, _unitDataPos);
 
   // Crew
-  if (unit->type() == e_unit::CAR)
+  if (unit->canHaveCrew())
   {
-    const auto car = std::static_pointer_cast<Car> (unit);
+    const auto vehicle = std::static_pointer_cast<Vehicle> (unit);
 
     // Compute crew member frame size
     const graphics::Size2 crew_member_size({
@@ -246,7 +246,7 @@ void Panel::drawUnitFrame()
      crew_pos.y += sprite->size().y + _margin * 2;
 
     float i = 0.f; // loop iterations in order to compute the offset position
-    for (const auto& member: car->getCrew())
+    for (const auto& member: vehicle->getCrew())
     {
       _frameUnit->draw();
 
