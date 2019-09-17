@@ -80,6 +80,12 @@ public:
   auto played() const { return _played; }
 
   /**
+   * \brief _moved getter
+   * \return true if the unit has already been moved, false otherwise
+   */
+  auto moved() const { return _moved; }
+
+  /**
    * \brief sets Unit's player belonging
    * \param player_id player's identifier
    */
@@ -90,6 +96,12 @@ public:
    * \param played unit's played status
    */
   void setPlayed(bool played) { _played = played; }
+
+  /**
+   * \brief _played setter
+   * \param played unit's moved status
+   */
+  void setMoved(bool moved) { _moved = moved; }
 
   /**
    * \brief _hp setter
@@ -158,6 +170,7 @@ protected:
   e_unit _type;        ///< Introspection; used for instance to save the Map
   Coords _coords;      ///< Unit's cell coordinates
   bool _played;        ///< notify if the unit has already played this turn
+  bool _moved;         ///< notify if the unit has moved this turn
   size_t _playerId;    ///< the unit belongs to the player matching this id
 
   size_t _motionValue; ///< Unit's motion value (not considering the terrains)

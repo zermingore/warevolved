@@ -65,6 +65,14 @@ private:
   void cancel() override final;
 
   /**
+   * \brief Check if the unit is allowed to move. It is the case if
+   *   - the unit didn't play (end of its action)
+   *   - the unit didn't already moved
+   * \return true if it is allowed to move; false otherwise
+   */
+  bool allowMove();
+
+  /**
    * \brief Does the move (if possible)
    */
   void moveUnit();
@@ -80,7 +88,7 @@ private:
   void attackUnit();
 
 
-  e_state _state;      ///< State related to this menu
+  e_state _state; ///< State related to this menu
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
 

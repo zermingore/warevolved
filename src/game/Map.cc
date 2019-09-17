@@ -91,7 +91,7 @@ void Map::moveUnit(const Coords& c)
   Coords old(_selectedUnit->coords());
   assert(_cells[old.c][old.l]->unit()->played() == false);
 
-  _cells[old.c][old.l]->unit()->setPlayed(true);
+  _cells[old.c][old.l]->unit()->setMoved(true);
   _cells[old.c][old.l]->removeUnit();
   _selectedUnit->setCoords(c);
   _cells[c.c][c.l]->setUnit(_selectedUnit);
@@ -103,8 +103,10 @@ void Map::moveUnit(const Coords& c)
 
 void Map::endTurn()
 {
-  for (auto& it: _units[game::Status::battle()->currentPlayer()]) {
+  for (auto& it: _units[game::Status::battle()->currentPlayer()])
+  {
     it->setPlayed(false);
+    it->setMoved(false);
   }
 }
 

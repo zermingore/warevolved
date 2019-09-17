@@ -155,6 +155,7 @@ void StateSelectTarget::validate()
       && attackResult != e_attack_result::BOTH_DIED)
   {
     map->moveUnit(_attackLocation);
+    game::Status::battle()->map()->selectedUnit()->setPlayed(true);
   }
 
   // Should lock the draw ? (without unlocking it ?)

@@ -30,7 +30,7 @@ void MenuAction::build()
   {
     /// \todo use other coordinates than the menu ones
     _selectedUnit = map->unit(_coords);
-    if (!_selectedUnit->played()
+    if (allowMove()
         && _selectedUnit->playerId() == game::Status::player()->id())
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
@@ -88,8 +88,15 @@ void MenuAction::build()
 }
 
 
-void MenuAction::cancel() {
+void MenuAction::cancel()
+{
   game::Status::clearStates();
+}
+
+
+bool MenuAction::allowMove()
+{
+  return !_selectedUnit->played() && !_selectedUnit->moved();
 }
 
 
@@ -100,10 +107,11 @@ void MenuAction::moveUnit()
 }
 
 
-void MenuAction::waitUnit() /// \todo forbid move; authorize groupping
+void MenuAction::waitUnit() /// \todo forbid move; authorize grouping
 {
   /// \todo use other coordinates as the menu ones
   game::Status::battle()->map()->moveUnit(_coords);
+  _selectedUnit->setPlayed(true);
   game::Status::clearStates();
 
   // setting the cursor over the freshly moved unit

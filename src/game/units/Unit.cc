@@ -16,6 +16,7 @@
 Unit::Unit()
   : _type(e_unit::NONE)
   , _played(false)
+  , _moved(false)
   , _playerId(0)
   , _motionValue(0)
   , _hp(1)
