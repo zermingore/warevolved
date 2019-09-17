@@ -1,4 +1,3 @@
-
 /**
  * \file
  * \date September 5, 2019
@@ -14,6 +13,14 @@
 #include <game/Map.hh>
 #include <common/enums/states.hh>
 #include <context/State.hh>
+
+
+
+Vehicle::Vehicle()
+  : Unit()
+{
+  _canHaveCrew = true;
+}
 
 
 

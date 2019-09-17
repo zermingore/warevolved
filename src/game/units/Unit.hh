@@ -152,11 +152,16 @@ public:
   auto maxRange() const { return _maxRange; }
 
   /**
-   * \brief sprite getter
+   * \brief _sprite getter
    * \return a pointer on the Unit's sprite
    */
   auto sprite() const { return _sprite; }
 
+  /**
+   * \brief _canHaveCrew getter
+   * \return true if the Unit has a crew (eventually empty); false otherwise
+   */
+  auto canHaveCrew() const { return _canHaveCrew; }
 
   /**
    * \brief Add the given \Unit to the crew (need to be overloaded to be used)
@@ -173,6 +178,7 @@ protected:
   bool _moved;         ///< notify if the unit has moved this turn
   size_t _playerId;    ///< the unit belongs to the player matching this id
 
+  bool _canHaveCrew;   ///< Whether the Unit can host a crew
   size_t _motionValue; ///< Unit's motion value (not considering the terrains)
   int _hp;             ///< Health Points
   int _maxHp;          ///< Max Health Points

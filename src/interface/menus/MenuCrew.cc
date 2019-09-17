@@ -35,7 +35,7 @@ void MenuCrew::build()
   if (_selectedUnit->playerId() == unit->playerId())
   {
     /// \todo check space available (and allow to select drop location)
-    if (_selectedUnit->type() == e_unit::CAR)
+    if (_selectedUnit->canHaveCrew())
     {
       auto car = std::static_pointer_cast<Car> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
@@ -52,8 +52,7 @@ void MenuCrew::build()
       }
     }
 
-    if (   _selectedUnit->type() == e_unit::CAR
-        && unit->type() == e_unit::SOLDIERS)
+    if (_selectedUnit->canHaveCrew() && unit->type() == e_unit::SOLDIERS)
     {
       auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
       entry_group->setCallbacks(
@@ -66,8 +65,7 @@ void MenuCrew::build()
       });
       _entries.push_back(entry_group);
     }
-    else if (   _selectedUnit->type() == e_unit::SOLDIERS
-              && unit->type() == e_unit::CAR)
+    else if (_selectedUnit->type() == e_unit::SOLDIERS && unit->canHaveCrew())
     {
       auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));
       entry_group->setCallbacks(

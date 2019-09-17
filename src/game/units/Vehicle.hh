@@ -24,7 +24,7 @@ public:
   /**
    * \brief Constructor: Calling base class constructor
    */
-  Vehicle() : Unit() { }
+  Vehicle();
 
   /**
    * \brief Default desctructor
