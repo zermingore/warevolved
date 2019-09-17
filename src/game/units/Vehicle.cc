@@ -38,9 +38,6 @@ bool Vehicle::dropOff(e_unit_role role, Coords location)
     return false;
   }
 
-  game::Status::pushState(e_state::SELECTION_CREW);
-  game::Status::currentState()->resume();
-
   auto map = game::Status::battle()->map();
   if (map->unit(location) != nullptr)
   {
@@ -53,6 +50,22 @@ bool Vehicle::dropOff(e_unit_role role, Coords location)
   unit->setCoords(location);
   map->revealUnit(*unit);
   _crew.erase(role);
+
+  if (_crew.size() > 0)
+  {
+    NOTICE("Vehicle not empty");
+    game::Status::pushState(e_state::SELECTION_CREW);
+    game::Status::currentState()->resume();
+  }
+  else
+  {
+    // Vehicle empty, closing the menu
+    game::Status::clearStates();
+
+    /// \todo allow to move? (but reduce the move capacity)
+    /// \todo allow multiple moves?
+    _played = true;
+  }
 
   return true;
 }

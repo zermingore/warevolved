@@ -31,7 +31,9 @@ void MenuCrew::build()
 {
   auto map(game::Status::battle()->map());
   auto unit(map->unit(_coords));
+
   _selectedUnit = map->selectedUnit();
+  assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");
   if (_selectedUnit->playerId() == unit->playerId())
   {
     /// \todo check space available (and allow to select drop location)
@@ -45,7 +47,6 @@ void MenuCrew::build()
         entry->setCallbacks(
         { /// \todo forbid move; allow further drops
           [=] { vehicle->dropOff(member.first, coords); },
-          [=] { game::Status::clearStates(); }
         });
 
         _entries.push_back(entry);
