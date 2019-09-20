@@ -34,8 +34,12 @@ enum class e_entry
   WAIT,    // motion order
   PICK_UP, // motion order
   BOARD,   // motion order
+
+  // crew
   DROP_OFF,
   GET_OUT,
+  CREW,
+
   NEXT_TURN,
   ATTACK,
 

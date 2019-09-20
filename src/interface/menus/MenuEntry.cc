@@ -72,6 +72,9 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::PICK_UP:
       _labelName = "Pick\n  Up";
       break;
+    case e_entry::CREW:
+      _labelName = "Crew";
+      break;
     case e_entry::BOARD:
       _labelName = "Board";
       break;

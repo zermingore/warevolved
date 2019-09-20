@@ -46,6 +46,13 @@ void MenuAction::build()
       entry->setCallback( [=] { attackUnit(); });
       _entries.push_back(entry);
     }
+
+    if (_selectedUnit->canHaveCrew())
+    {
+      auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
+      entry_crew->setCallback( [=] { manageCrew(); });
+      _entries.push_back(entry_crew);
+    }
   }
 
   if (_state == e_state::ACTION_MENU)
@@ -116,6 +123,18 @@ void MenuAction::waitUnit() /// \todo forbid move; authorize grouping
   // setting the cursor over the freshly moved unit
   game::Status::player()->cursor()->setCoords(_coords);
 }
+
+
+
+void MenuAction::manageCrew()
+{
+  game::Status::pushState(e_state::SELECTION_CREW);
+  game::Status::currentState()->setAttributes(
+    std::make_shared<Coords> (_coords)
+  );
+  game::Status::currentState()->resume();
+}
+
 
 
 void MenuAction::attackUnit()

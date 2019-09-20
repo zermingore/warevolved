@@ -106,6 +106,8 @@ void StateMenu::fetchAttributes()
   _menuCoords.c = p->c;
   _menuCoords.l = p->l;
 
+  /// \todo fetch selected and hovered units?
+
   // reset the attributes vector
   _attributes.clear();
 }

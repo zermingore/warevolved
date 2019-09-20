@@ -88,6 +88,14 @@ private:
   void attackUnit();
 
 
+  /**
+   * \brief Handle the Unit Crew allowing to
+   *   - drop some unit
+   *   - change their role \todo
+   */
+  void manageCrew();
+
+
   e_state _state; ///< State related to this menu
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
