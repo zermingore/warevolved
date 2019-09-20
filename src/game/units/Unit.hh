@@ -169,6 +169,11 @@ public:
    */
   [[ noreturn ]] virtual bool addToCrew(std::shared_ptr<Unit> unit);
 
+  /**
+   * \brief Returns crew list
+   * \todo rename to 'crew()'
+   */
+  const auto crewSize() { return _crewSize; }
 
 
 protected:
@@ -178,6 +183,7 @@ protected:
   bool _moved;         ///< notify if the unit has moved this turn
   size_t _playerId;    ///< the unit belongs to the player matching this id
 
+  size_t _crewSize;    ///< Current crew number
   bool _canHaveCrew;   ///< Whether the Unit can host a crew
   size_t _motionValue; ///< Unit's motion value (not considering the terrains)
   int _hp;             ///< Health Points

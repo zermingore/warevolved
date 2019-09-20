@@ -46,12 +46,6 @@ public:
   const auto& getCrew() { return _crew; }
 
   /**
-   * \brief Returns crew list
-   * \todo rename to 'crew()'
-   */
-  const auto crewSize() { return _crewSize; }
-
-  /**
    * \brief Drop the given unit off the Vehicle at the given position
    * \param role Crew member occupying this role will be dropped off
    * \param location Cell where to drop the unit off
@@ -65,7 +59,6 @@ public:
 protected:
   std::map<e_unit_role, std::shared_ptr<Unit>> _crew; ///< Crew list (const key)
   size_t _maxCrewMembers = 0; ///< Number of seats (constant)
-  size_t _crewSize = 0; ///< Current crew number
 };
 
 #endif /* !VEHICLE_HH_ */

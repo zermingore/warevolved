@@ -47,7 +47,7 @@ void MenuAction::build()
       _entries.push_back(entry);
     }
 
-    if (_selectedUnit->canHaveCrew())
+    if (_selectedUnit->crewSize())
     {
       auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
       entry_crew->setCallback( [=] { manageCrew(); });

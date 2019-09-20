@@ -37,7 +37,7 @@ void MenuCrew::build()
   if (_selectedUnit->playerId() == unit->playerId())
   {
     /// \todo check space available (and allow to select drop location)
-    if (_selectedUnit->canHaveCrew())
+    if (_selectedUnit->crewSize())
     {
       auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
@@ -53,6 +53,7 @@ void MenuCrew::build()
       }
     }
 
+    /// \todo check if the vehicle is already full
     if (_selectedUnit->canHaveCrew() && unit->type() == e_unit::SOLDIERS)
     {
       auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
