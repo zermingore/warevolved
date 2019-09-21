@@ -23,71 +23,13 @@ MenuAction::MenuAction(const e_state state)
 
 void MenuAction::build()
 {
-  auto map(game::Status::battle()->map());
-
   if (_state == e_state::SELECTION_UNIT)
   {
-    /// \todo use other coordinates than the menu ones
-    _selectedUnit = map->unit(_coords);
-    if (allowMove()
-        && _selectedUnit->playerId() == game::Status::player()->id())
-    {
-      auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
-      entry->setCallback( [=] { moveUnit(); });
-      _entries.push_back(entry);
-    }
-
-    // add the attack entry if a target is reachable from the current position
-    auto cell(map->cell(_coords));
-    _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
-    if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
-    {
-      auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-      entry->setCallback( [=] { attackUnit(); });
-      _entries.push_back(entry);
-    }
-
-    if (_selectedUnit->crewSize())
-    {
-      auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
-      entry_crew->setCallback( [=] { manageCrew(); });
-      _entries.push_back(entry_crew);
-    }
+    buildMenuSelectionUnit();
   }
-
-  if (_state == e_state::ACTION_MENU)
+  else if (_state == e_state::ACTION_MENU)
   {
-    auto unit(map->unit(_coords));
-    if (!unit) // Forbidding to do an action on an occupied Cell
-    {
-      auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
-      entry_wait->setCallback( [=] { waitUnit(); });
-      _entries.push_back(entry_wait);
-
-      /// \todo use other coordinates than the menu ones
-
-      // _selectedUnit does not exits (another instance of MenuAction built it)
-      _selectedUnit = map->selectedUnit();
-      assert(_selectedUnit);
-      _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
-
-      // Add the attack entry if a target is reachable from the current position
-      auto cell(game::Status::battle()->map()->cell(_coords));
-      if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
-      {
-        auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-        entry->setCallback( [=] { attackUnit(); });
-        _entries.push_back(entry);
-      }
-    }
-    else
-    {
-      game::Status::pushState(e_state::SELECTION_CREW);
-      game::Status::currentState()->setAttributes(
-        std::make_shared<Coords> (_coords)
-      );
-      game::Status::currentState()->resume();
-    }
+    buildMenuAfterMovingUnit();
   }
 
   addCancelEntry( [=] { cancel(); } );
@@ -103,6 +45,77 @@ void MenuAction::cancel()
 bool MenuAction::allowMove()
 {
   return !_selectedUnit->played() && !_selectedUnit->moved();
+}
+
+
+
+void MenuAction::buildMenuSelectionUnit()
+{
+  auto map(game::Status::battle()->map());
+
+  /// \todo use other coordinates than the menu ones
+  _selectedUnit = map->unit(_coords);
+  if (allowMove()
+      && _selectedUnit->playerId() == game::Status::player()->id())
+  {
+    auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
+    entry->setCallback( [=] { moveUnit(); });
+    _entries.push_back(entry);
+  }
+
+  // add the attack entry if a target is reachable from the current position
+  auto cell(map->cell(_coords));
+  _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
+  if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
+  {
+    auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
+    entry->setCallback( [=] { attackUnit(); });
+    _entries.push_back(entry);
+  }
+
+  if (_selectedUnit->crewSize())
+  {
+    auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
+    entry_crew->setCallback( [=] { manageCrew(); });
+    _entries.push_back(entry_crew);
+  }
+}
+
+
+void MenuAction::buildMenuAfterMovingUnit()
+{
+  auto map(game::Status::battle()->map());
+  auto unit(map->unit(_coords));
+  if (!unit) // Specific action depending on the occupation
+  {
+    auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
+    entry_wait->setCallback( [=] { waitUnit(); });
+    _entries.push_back(entry_wait);
+
+    /// \todo use other coordinates than the menu ones
+
+    // _selectedUnit does not exits (another instance of MenuAction built it)
+    _selectedUnit = map->selectedUnit();
+    assert(_selectedUnit);
+    _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
+
+    // Add the attack entry if a target is reachable from the current position
+    auto cell(game::Status::battle()->map()->cell(_coords));
+    if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
+    {
+      auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
+      entry->setCallback( [=] { attackUnit(); });
+      _entries.push_back(entry);
+    }
+  }
+  else
+  {
+    game::Status::pushState(e_state::SELECTION_CREW);
+    game::Status::currentState()->setAttributes(
+      std::make_shared<Coords> (_coords)
+    );
+    game::Status::currentState()->resume();
+  }
 }
 
 

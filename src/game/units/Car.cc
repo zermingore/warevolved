@@ -16,7 +16,9 @@ Car::Car()
   : Vehicle()
 {
   _type = e_unit::CAR;
-  _sprite = std::make_shared<graphics::Sprite> ("car"); // TODO multiple sprites
+
+  /// \todo TODO multiple sprites
+  _sprite = std::make_shared<graphics::Sprite> ("car");
 
   _motionValue = 5;
   _hp = 30;
@@ -28,6 +30,12 @@ Car::Car()
 
   _maxCrewMembers = 5;
   _crewSize = 0;
+
+  /// \todo Initialize the map
+  // The keys should stay constant; only the values are adjusted
+  // _crew[e_unit_role::DRIVER] = nullptr;
+  // _crew[e_unit_role::COPILOT] = nullptr;
+  // _crew[e_unit_role::PASSENGER] = nullptr;
 }
 
 

@@ -65,6 +65,17 @@ private:
   void cancel() override final;
 
   /**
+   * \brief Build the menu when selecting a Unit
+   * \note Handle only the direct actions (without moving)
+   */
+  void buildMenuSelectionUnit();
+
+  /**
+   * \brief Build the menu specific entries after moving a Unit
+   */
+  void buildMenuAfterMovingUnit();
+
+  /**
    * \brief Check if the unit is allowed to move. It is the case if
    *   - the unit didn't play (end of its action)
    *   - the unit didn't already moved
