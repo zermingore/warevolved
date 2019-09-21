@@ -30,6 +30,7 @@ namespace interface {
 void MenuCrew::build()
 {
   auto map(game::Status::battle()->map());
+  game::Status::player()->updateSelectedUnit();
   auto unit(map->unit(_coords));
 
   _selectedUnit = map->selectedUnit();
