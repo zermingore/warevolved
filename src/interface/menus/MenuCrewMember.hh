@@ -31,6 +31,17 @@ public:
    * \brief Draw the menu next to the member
    */
   void draw() override final;
+
+  /**
+   * \brief _active setter
+   */
+  void setActive(bool active) {
+    _active = active;
+  }
+
+
+private:
+  bool _active = false; ///< True if the menu has the focus
 };
 
 

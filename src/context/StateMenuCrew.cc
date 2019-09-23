@@ -91,6 +91,7 @@ void StateMenuCrew::moveDown()
   if (_browseMembers)
   {
     _menuCrew->incrementSelectedEntry();
+    _menuMember->close();
   }
   else
   {
@@ -103,6 +104,8 @@ void StateMenuCrew::moveDown()
 void StateMenuCrew::moveRight()
 {
   _browseMembers = false;
+  _menuMember->setActive(true);
+  _menuCrew->setActive(false);
 }
 
 
@@ -110,6 +113,9 @@ void StateMenuCrew::moveRight()
 void StateMenuCrew::moveLeft()
 {
   _browseMembers = true;
+  _menuCrew->setActive(true);
+  _menuMember->setActive(false);
+  _menuMember->resetSelectedEntry();
 }
 
 
@@ -118,9 +124,10 @@ void StateMenuCrew::validate()
 {
   if (_browseMembers)
   {
-    _browseMembers = false;
+    moveRight(); // same behaviour
     return;
   }
+
   _menuMember->validate();
 }
 

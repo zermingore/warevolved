@@ -44,6 +44,13 @@ public:
    */
   void draw() override final;
 
+  /**
+   * \brief _active setter
+  */
+  void setActive(bool active) {
+    _active = active;
+  }
+
 
 
 private:
@@ -58,6 +65,8 @@ private:
    */
   void confirm();
 
+
+  bool _active = true; ///< True if the menu has the focus
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
 };

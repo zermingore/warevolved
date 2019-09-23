@@ -48,12 +48,12 @@ void MenuCrewBrowse::build()
     {
       auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
-      for (auto& member: vehicle->getCrew())
+      for (auto& mem: vehicle->getCrew())
       {
-        auto entry(std::make_shared<MenuEntryCrew> (member.first, member.second));
+        auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second));
         entry->setCallbacks(
         { /// \todo forbid move; allow further drops
-          [=] { vehicle->dropOff(member.first, coords); },
+          [=] { vehicle->dropOff(mem.first, coords); },
         });
 
         _entries.push_back(entry);
@@ -90,7 +90,17 @@ void MenuCrewBrowse::confirm()
 
 void MenuCrewBrowse::draw()
 {
-  InGameMenu::draw(); /// \todo draw units
+  update();
+
+  for (auto entry: _entries)
+  {
+    entry->draw();
+  }
+
+  if (_active)
+  {
+    _imageSelection->draw();
+  }
 }
 
 
