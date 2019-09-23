@@ -15,10 +15,22 @@
 namespace interface {
 
 
+/**
+ * \class MenuCrewMember
+ * \brief Menu handling the actions available for a crew member
+ */
 class MenuCrewMember: public InGameMenu
 {
 public:
+  /**
+   * \brief Add entries depending on the highlighted crew member
+   */
   void build() override final;
+
+  /**
+   * \brief Draw the menu next to the member
+   */
+  void draw() override final;
 };
 
 

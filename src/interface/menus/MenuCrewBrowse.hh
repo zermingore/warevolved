@@ -35,12 +35,12 @@ public:
 
 
   /**
-   * \brief Builds an action menu according to its State
+   * \brief Builds the menu, initializing the entries
    */
   void build() override final;
 
   /**
-   * \brief Draw the menu and the path finding
+   * \brief Draw the menu
    */
   void draw() override final;
 
@@ -48,10 +48,18 @@ public:
 
 private:
   /**
-   * \brief Closes the action menu
+   * \brief Closes the menu
    *   rolls back to the previous action menu if any, or pops every State
    */
   void cancel() override final;
+
+  /**
+   * \brief Closes the menu, confirming the crew management
+   */
+  void confirm();
+
+
+  std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
 };
 
 

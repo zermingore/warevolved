@@ -9,6 +9,7 @@
 #include <context/StateMenuCrew.hh>
 
 #include <debug/Debug.hh>
+
 #include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <common/enums/states.hh>
@@ -52,7 +53,6 @@ void StateMenuCrew::suspend()
 }
 
 
-
 void StateMenuCrew::resume()
 {
   // retrieve coordinates from the attributes
@@ -65,7 +65,7 @@ void StateMenuCrew::resume()
   _menuCrew->build();
 
   _menuMemberCoords = _menuCrewCoords;
-  _menuMemberCoords.x += 25; /// \todo hard-coded
+  _menuMemberCoords.x += 4; /// \todo hard-coded
   _menuMember->setCoords(_menuMemberCoords);
   _menuMember->build();
 }
@@ -76,11 +76,11 @@ void StateMenuCrew::moveUp()
 {
   if (_browseMembers)
   {
-    _menuCrew->incrementSelectedEntry();
+    _menuCrew->decrementSelectedEntry();
   }
   else
   {
-    _menuMember->incrementSelectedEntry();
+    _menuMember->decrementSelectedEntry();
   }
 }
 
@@ -145,7 +145,7 @@ void StateMenuCrew::fetchAttributes()
   if (!_attributes.size())
   {
     ERROR("StateMenu::fetchAttributes called without available attributes");
-    assert(false && "No attribute found");
+    assert(!"No attribute found");
     return;
   }
 
@@ -154,7 +154,7 @@ void StateMenuCrew::fetchAttributes()
   _menuCrewCoords.l = p->l;
 
   _menuMemberCoords = _menuCrewCoords;
-  _menuMemberCoords.x += 25; /// \todo hard-coded
+  _menuMemberCoords.x += 4; /// \todo hard-coded
 
   /// \todo fetch selected and hovered units?
 

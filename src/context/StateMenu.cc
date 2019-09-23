@@ -53,12 +53,15 @@ StateMenu::StateMenu(const e_state state)
 }
 
 
+
 void StateMenu::suspend()
 {
   /// \todo set menu at optimal coordinates (avoid hiding units for instance)
   _menuCoords = _menu->coords();
   /// \todo save selected entry
 }
+
+
 
 void StateMenu::resume()
 {
@@ -72,9 +75,11 @@ void StateMenu::resume()
 }
 
 
+
 void StateMenu::moveUp() {
   _menu->moveUp();
 }
+
 
 void StateMenu::moveDown() {
   _menu->moveDown();
