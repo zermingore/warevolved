@@ -32,6 +32,7 @@ context/StateGlobal.cc              \
 context/StateFactory.cc             \
 context/StatePlaying.cc             \
 context/StateMenu.cc                \
+context/StateMenuCrew.cc            \
 context/StateMovingUnit.cc          \
 context/StateSelectTarget.cc        \
 \
@@ -68,6 +69,8 @@ interface/menus/InGameMenu.cc       \
 interface/menus/MenuMap.cc          \
 interface/menus/MenuAction.cc       \
 interface/menus/MenuCrew.cc         \
+interface/menus/MenuCrewBrowse.cc   \
+interface/menus/MenuCrewMember.cc   \
 \
 tools/StringParser.cc               \
 tools/Fps.cc                        \

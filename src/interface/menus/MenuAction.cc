@@ -1,7 +1,6 @@
 #include <interface/menus/MenuAction.hh>
 
 #include <interface/menus/MenuEntry.hh>
-#include <interface/menus/MenuCrew.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <context/State.hh>
@@ -141,7 +140,7 @@ void MenuAction::waitUnit() /// \todo forbid move; authorize grouping
 
 void MenuAction::manageCrew()
 {
-  game::Status::pushState(e_state::SELECTION_CREW);
+  game::Status::pushState(e_state::CREW_MANAGEMENT);
   game::Status::currentState()->setAttributes(
     std::make_shared<Coords> (_coords)
   );
