@@ -11,7 +11,7 @@
 #include <cassert>
 #include <debug/Debug.hh>
 
-#include <interface/menus/MenuEntry.hh>
+#include <interface/menus/MenuEntryCrew.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <context/State.hh>
@@ -50,7 +50,7 @@ void MenuCrewBrowse::build()
       const Coords coords = { _coords.c + 1, _coords.l };
       for (auto& member: vehicle->getCrew())
       {
-        auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
+        auto entry(std::make_shared<MenuEntryCrew> (member.first, member.second));
         entry->setCallbacks(
         { /// \todo forbid move; allow further drops
           [=] { vehicle->dropOff(member.first, coords); },
@@ -63,7 +63,7 @@ void MenuCrewBrowse::build()
 
   NOTICE("Built MenuCrewBrowse");
 
-  auto entry_confirm(std::make_shared<MenuEntry> (e_entry::CREW_CONFIRM));
+  auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
   entry_confirm->setCallback( [=] { confirm(); });
   _entries.push_back(entry_confirm);
 

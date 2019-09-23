@@ -53,6 +53,7 @@ enum class e_entry
  * \class MenuEntry
  * \brief One entry (a clickable item) of a menu
  * \note The entry position is relative to the menu it belongs to.
+ * \note Motherclass of MenuEntryCrew
  */
 class MenuEntry: public InterfaceElement
 {
@@ -97,16 +98,16 @@ public:
   /**
    * \brief updates the graphical attributes of the entry
    */
-  void update() override final;
+  void update() override;
 
   /**
    * \brief Draws label and sprite of the entry, calling the graphics engine
    */
-  void draw() override final;
+  void draw() override;
 
 
 
-private:
+protected:
   /**
    * \brief Initializes the label name
    * \param entry entry which associated name will be used

@@ -63,6 +63,9 @@ void MenuEntry::setLabelName(const e_entry entry)
   /// \todo set string using a DB
   switch (entry)
   {
+    case e_entry::NONE:
+      _labelName = "Invalid";
+      break;
     case e_entry::MOVE:
       _labelName = "Move";
       break;
