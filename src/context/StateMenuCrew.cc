@@ -37,7 +37,7 @@ StateMenuCrew::StateMenuCrew()
   _evtMgr->registerEvent(e_input::SELECTION,  [=] { validate(); });
   _evtMgr->registerEvent(e_input::EXIT,       [=] { exit();     });
 
-  _menuCrew = std::make_unique<interface::MenuCrewBrowse> ();
+  _menuCrew   = std::make_unique<interface::MenuCrewBrowse> ();
   _menuMember = std::make_unique<interface::MenuCrewMember> ();
 }
 
@@ -71,9 +71,22 @@ void StateMenuCrew::resume()
 
 void StateMenuCrew::moveUp()
 {
+  using namespace interface;
+
   if (_browseMembers)
   {
     _menuCrew->decrementSelectedEntry();
+
+    // Hide or reveal the menu depending on the entry we currently hightlight
+    if (   _menuCrew->getCurrentSelection() == e_entry::CANCEL
+        || _menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
+    {
+      _menuMember->setHidden(true);
+    }
+    else
+    {
+      _menuMember->setHidden(false);
+    }
   }
   else
   {
@@ -85,10 +98,22 @@ void StateMenuCrew::moveUp()
 
 void StateMenuCrew::moveDown()
 {
+  using namespace interface;
+
   if (_browseMembers)
   {
     _menuCrew->incrementSelectedEntry();
-    _menuMember->close();
+
+    // Hide or reveal the menu depending on the entry we currently hightlight
+    if (   _menuCrew->getCurrentSelection() == e_entry::CANCEL
+        || _menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
+    {
+      _menuMember->setHidden(true);
+    }
+    else
+    {
+      _menuMember->setHidden(false);
+    }
   }
   else
   {
@@ -100,6 +125,13 @@ void StateMenuCrew::moveDown()
 
 void StateMenuCrew::moveRight()
 {
+  // No member menu next to 'Confirm' and 'Cancel'
+  if (   _menuCrew->getCurrentSelection() == interface::e_entry::CANCEL
+      || _menuCrew->getCurrentSelection() == interface::e_entry::CREW_CONFIRM)
+  {
+    return;
+  }
+
   _browseMembers = false;
   _menuMember->setActive(true);
   _menuCrew->setActive(false);

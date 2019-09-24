@@ -41,6 +41,11 @@ void MenuCrewMember::build()
 
 void MenuCrewMember::draw()
 {
+  if (_hidden)
+  {
+    return;
+  }
+
   update();
 
   for (auto entry: _entries)

@@ -39,9 +39,17 @@ public:
     _active = active;
   }
 
+  /**
+   * \brief _hidden setter
+   */
+  void setHidden(bool hide) {
+    _hidden = hide;
+  }
+
 
 private:
   bool _active = false; ///< True if the menu has the focus
+  bool _hidden = false; ///< True to not draw the menu
 };
 
 
