@@ -45,11 +45,17 @@ public:
   void draw() override final;
 
   /**
-   * \brief _active setter
+   * \brief _active (focus) setter
   */
   void setActive(bool active) {
     _active = active;
   }
+
+  /**
+   * \brief Get the currently highlighted entry
+   * \return Highlighted entry type
+   */
+  e_entry getCurrentSelection();
 
 
 

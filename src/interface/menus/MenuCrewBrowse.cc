@@ -90,6 +90,13 @@ void MenuCrewBrowse::confirm()
 
 
 
+e_entry MenuCrewBrowse::getCurrentSelection()
+{
+  return _entries[_selectedEntry]->id();
+}
+
+
+
 void MenuCrewBrowse::draw()
 {
   update();

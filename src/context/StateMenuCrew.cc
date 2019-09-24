@@ -15,14 +15,11 @@
 #include <common/enums/states.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
-#include <game/Player.hh>
-#include <game/PathFinding.hh>
+#include <game/units/Unit.hh>
 #include <interface/menus/Menu.hh>
 #include <interface/menus/InGameMenu.hh>
-#include <interface/menus/MenuMap.hh>
 #include <interface/menus/MenuCrewBrowse.hh>
 #include <interface/menus/MenuCrewMember.hh>
-#include <interface/Cursor.hh>
 
 
 
@@ -124,6 +121,20 @@ void StateMenuCrew::validate()
 {
   if (_browseMembers)
   {
+    if (_menuCrew->getCurrentSelection() == interface::e_entry::CANCEL)
+    {
+      exit();
+      return;
+    }
+
+    if (_menuCrew->getCurrentSelection() == interface::e_entry::CREW_CONFIRM)
+    {
+      game::Status::battle()->map()->selectedUnit()->setPlayed(true);
+      game::Status::popCurrentState();
+      game::Status::currentState()->resume();
+      return;
+    }
+
     moveRight(); // same behaviour
     return;
   }
