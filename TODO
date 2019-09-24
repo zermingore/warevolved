@@ -35,6 +35,7 @@
 ** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
 
 
+** TODO The PathFinding should not, as default, clear the cells highlight attributes
 
 * TODO Doc
 ** TODO Options

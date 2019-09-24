@@ -99,9 +99,8 @@ void StateSelectDropZone::resume()
 
 void StateSelectDropZone::draw()
 {
-  auto selected_unit(game::Status::battle()->map()->selectedUnit());
-  PathFinding path(selected_unit);
-  _zones = path.getDropZones(_vehicleLocation);
+  std::shared_ptr<Map> map = game::Status::battle()->map();
+  auto selected_unit(map->selectedUnit());
 
   if (!_zones.size())
   {
@@ -114,7 +113,8 @@ void StateSelectDropZone::draw()
     return;
   }
 
-  _holoUnit->drawAtCell(_vehicleLocation);
+  _holoUnit->drawAtCell(_zones[_indexZone]->coords());
+  _holoUnit->setColor({ 255, 255, 255, 127 });
 
   // emphasis (scale and rotation) of the cursor over the zone
   static float scale_factor = 1;
@@ -136,7 +136,11 @@ void StateSelectDropZone::draw()
   _zoneHighlight->setPosition(pos_c, pos_l);
   _zoneHighlight->setRotation(static_cast<float> (angle));
 
-  _zoneHighlight->draw();
+  for (auto& cell: _zones)
+  {
+    (*map)[cell->c()][cell->l()]->setHighlight(true);
+    (*map)[cell->c()][cell->l()]->setHighlightColor(graphics::Color::Green);
+  }
 }
 
 
