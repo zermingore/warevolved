@@ -12,14 +12,15 @@
 #include <debug/Debug.hh>
 
 #include <interface/menus/MenuEntryCrew.hh>
+#include <context/State.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
-#include <context/State.hh>
 #include <game/Player.hh>
 #include <game/units/Vehicle.hh>
-#include <interface/Cursor.hh>
 #include <game/units/Unit.hh>
 #include <game/PathFinding.hh>
+#include <interface/Cursor.hh>
+#include <graphics/MapGraphicsProperties.hh>
 
 
 
@@ -61,8 +62,6 @@ void MenuCrewBrowse::build()
     }
   }
 
-  NOTICE("Built MenuCrewBrowse");
-
   auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
   entry_confirm->setCallback( [=] { confirm(); });
   _entries.push_back(entry_confirm);
@@ -70,6 +69,11 @@ void MenuCrewBrowse::build()
   auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
   entry_cancel->setCallback( [=] { cancel(); });
   _entries.push_back(entry_cancel);
+
+  // increase highlight sprite
+  using namespace graphics;
+  using p = MapGraphicsProperties;
+  _imageSelection->setSize(p::cellWidth() * 4, p::cellHeight());
 }
 
 
