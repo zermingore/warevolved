@@ -67,7 +67,9 @@ void MenuCrewBrowse::build()
   entry_confirm->setCallback( [=] { confirm(); });
   _entries.push_back(entry_confirm);
 
-  addCancelEntry( [=] { cancel(); } );
+  auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
+  entry_cancel->setCallback( [=] { cancel(); });
+  _entries.push_back(entry_cancel);
 }
 
 

@@ -33,7 +33,7 @@ MenuEntryCrew::MenuEntryCrew(e_unit_role role,
   // label initialization
   /// \todo the size should be ratio dependent, eventually text length dependent
   using p = graphics::MapGraphicsProperties;
-  auto size { (p::cellWidth() + p::cellHeight()) / 4 };
+  auto size { (p::cellWidth() / 2 + p::cellHeight()) / 4 };
 
   _label = std::make_shared<resources::Text> (
     _labelName, size, graphics::Pos2(0, 0), "font_army");

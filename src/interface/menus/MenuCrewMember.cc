@@ -33,7 +33,6 @@ void MenuCrewMember::build()
   { /// \todo forbid move; allow further drops
     [=] { /* vehicle->dropOff(member.first, coords); */ },
   });
-
   _entries.push_back(entry);
 
   addCancelEntry( [=] { cancel(); } );
