@@ -123,15 +123,14 @@ void StateMenuCrew::validate()
   {
     if (_menuCrew->getCurrentSelection() == interface::e_entry::CANCEL)
     {
-      exit();
+      game::Status::clearStates();
       return;
     }
 
     if (_menuCrew->getCurrentSelection() == interface::e_entry::CREW_CONFIRM)
     {
       game::Status::battle()->map()->selectedUnit()->setPlayed(true);
-      game::Status::popCurrentState();
-      game::Status::currentState()->resume();
+      game::Status::clearStates();
       return;
     }
 
@@ -139,21 +138,28 @@ void StateMenuCrew::validate()
     return;
   }
 
+  if (_menuMember->getCurrentSelection() == interface::e_entry::CANCEL)
+  {
+    exit();
+  }
+
   _menuMember->validate();
 }
 
 
 
-void StateMenuCrew::exit()
+void StateMenuCrew::exit() // escape key
 {
   if (!_browseMembers)
   {
     _browseMembers = true;
+    _menuCrew->setActive(true);
+    _menuMember->setActive(false);
+    _menuMember->resetSelectedEntry();
     return;
   }
 
-  game::Status::popCurrentState();
-  game::Status::currentState()->resume();
+  game::Status::clearStates();
 }
 
 

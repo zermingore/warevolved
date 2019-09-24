@@ -85,6 +85,14 @@ void InGameMenu::close()
 }
 
 
+
+e_entry InGameMenu::getCurrentSelection()
+{
+  return _entries[_selectedEntry]->id();
+}
+
+
+
 void InGameMenu::draw()
 {
   update();

@@ -10,6 +10,7 @@
 
 #include <debug/Debug.hh>
 
+#include <context/State.hh>
 #include <game/Battle.hh>
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>

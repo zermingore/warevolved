@@ -80,19 +80,13 @@ void MenuCrewBrowse::cancel()
 }
 
 
+
 void MenuCrewBrowse::confirm()
 {
   WARNING("Confirming");
 
  _selectedUnit->setPlayed(true);
   game::Status::clearStates();
-}
-
-
-
-e_entry MenuCrewBrowse::getCurrentSelection()
-{
-  return _entries[_selectedEntry]->id();
 }
 
 

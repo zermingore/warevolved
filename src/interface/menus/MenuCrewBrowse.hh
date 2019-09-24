@@ -51,12 +51,6 @@ public:
     _active = active;
   }
 
-  /**
-   * \brief Get the currently highlighted entry
-   * \return Highlighted entry type
-   */
-  e_entry getCurrentSelection();
-
 
 
 private:
