@@ -10,6 +10,7 @@
 
 #include <debug/Debug.hh>
 
+#include <common/enums/states.hh>
 #include <context/State.hh>
 #include <game/Battle.hh>
 #include <game/Status.hh>
@@ -26,11 +27,12 @@ void MenuCrewMember::build()
   auto map(game::Status::battle()->map());
   const auto selectedUnit = map->selectedUnit();
   auto vehicle = std::static_pointer_cast<Vehicle> (selectedUnit);
+  _entries.clear();
 
   auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
   entry->setCallbacks(
   { /// \todo forbid move; allow further drops
-    [=] { /* vehicle->dropOff(member.first, coords); */ },
+    [=] { getOut(); },
   });
   _entries.push_back(entry);
 
@@ -59,6 +61,18 @@ void MenuCrewMember::draw()
   }
 }
 
+
+
+void MenuCrewMember::getOut()
+{
+  auto vehicle_coords(game::Status::battle()->map()->selectedUnit()->coords());
+
+  game::Status::pushState(e_state::SELECT_DROP_ZONE);
+  game::Status::currentState()->setAttributes(
+    std::make_shared<Coords> (vehicle_coords));
+
+  game::Status::currentState()->resume();
+}
 
 
 } // namespace interface

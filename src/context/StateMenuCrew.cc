@@ -65,6 +65,22 @@ void StateMenuCrew::resume()
   _menuMemberCoords.x += 4; /// \todo hard-coded
   _menuMember->setCoords(_menuMemberCoords);
   _menuMember->build();
+
+  if (   _menuCrew->getCurrentSelection() == interface::e_entry::CANCEL
+      || _menuCrew->getCurrentSelection() == interface::e_entry::CREW_CONFIRM)
+  {
+    _menuMember->setHidden(true);
+    _browseMembers = true;
+    _menuMember->setActive(false);
+    _menuCrew->setActive(true);
+  }
+  else
+  {
+    _menuMember->setHidden(false);
+    _browseMembers = false;
+    _menuMember->setActive(true);
+    _menuCrew->setActive(false);
+  }
 }
 
 

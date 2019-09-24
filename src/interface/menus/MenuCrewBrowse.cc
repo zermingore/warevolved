@@ -39,6 +39,7 @@ void MenuCrewBrowse::build()
   auto map(game::Status::battle()->map());
   game::Status::player()->updateSelectedUnit();
   auto unit(map->unit(_coords));
+  _entries.clear();
 
   _selectedUnit = map->selectedUnit();
   assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");

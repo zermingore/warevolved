@@ -57,15 +57,15 @@ bool Vehicle::dropOff(e_unit_role role, Coords location)
     game::Status::pushState(e_state::SELECTION_CREW);
     game::Status::currentState()->resume();
   }
-  else
-  {
-    // Vehicle empty, closing the menu
-    game::Status::clearStates();
+  // else
+  // {
+  //   // Vehicle empty, closing the menu
+  //   game::Status::clearStates();
 
-    /// \todo allow to move? (but reduce the move capacity)
-    /// \todo allow multiple moves?
-    _played = true;
-  }
+  //   /// \todo allow to move? (but reduce the move capacity)
+  //   /// \todo allow multiple moves?
+  //   _played = true;
+  // }
 
   return true;
 }

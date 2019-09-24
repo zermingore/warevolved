@@ -35,6 +35,7 @@ context/StateMenu.cc                \
 context/StateMenuCrew.cc            \
 context/StateMovingUnit.cc          \
 context/StateSelectTarget.cc        \
+context/StateSelectDropZone.cc      \
 \
 input/KeyManager.cc                 \
 input/ReplayManager.cc              \
