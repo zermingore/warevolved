@@ -24,8 +24,6 @@ namespace interface {
 void MenuCrewMember::build()
 {
   auto map(game::Status::battle()->map());
-  auto unit(map->unit(_coords));
-
   const auto selectedUnit = map->selectedUnit();
   auto vehicle = std::static_pointer_cast<Vehicle> (selectedUnit);
 
