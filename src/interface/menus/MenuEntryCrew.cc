@@ -11,11 +11,12 @@
 #include <debug/Debug.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
+#include <game/units/unit_roles.hh>
+#include <game/units/Vehicle.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <resources/Text.hh>
-#include <game/units/unit_roles.hh>
 
 
 namespace interface {
@@ -76,6 +77,20 @@ void MenuEntryCrew::draw()
 
   _sprite->setPosition(_position.x, _position.y);
   _sprite->draw();
+
+  // If any, draw the Unit and some of its statistics
+  if (_role != e_unit_role::NONE) // Cancel / Confirm don't apply
+  {
+    const auto selected_unit(game::Status::battle()->map()->selectedUnit());
+    const auto vehicle = std::static_pointer_cast<Vehicle> (selected_unit);
+    const auto dropping_unit = vehicle->getCrew().at(_role);
+
+    const auto sprite_unit(dropping_unit->sprite());
+    using p = graphics::MapGraphicsProperties;
+
+    sprite_unit->setPosition(_position.x + 2 * p::cellWidth(), _position.y);
+    sprite_unit->draw();
+  }
 }
 
 
