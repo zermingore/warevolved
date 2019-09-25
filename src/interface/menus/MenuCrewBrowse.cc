@@ -18,7 +18,7 @@
 #include <game/Player.hh>
 #include <game/units/Vehicle.hh>
 #include <game/units/Unit.hh>
-#include <game/PathFinding.hh>
+#include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
 

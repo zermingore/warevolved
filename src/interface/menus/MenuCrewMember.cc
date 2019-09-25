@@ -15,6 +15,7 @@
 #include <game/Battle.hh>
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>
+#include <game/PathFinding.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
 
@@ -29,12 +30,18 @@ void MenuCrewMember::build()
   auto vehicle = std::static_pointer_cast<Vehicle> (selectedUnit);
   _entries.clear();
 
-  auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
-  entry->setCallbacks(
-  { /// \todo forbid move; allow further drops
-    [=] { getOut(); },
-  });
-  _entries.push_back(entry);
+  // Add a get_out entry only if the unit can exit the vehicle
+  PathFinding path(vehicle);
+  const auto freeDropZones = path.getDropZones(vehicle->coords());
+  if (freeDropZones.size() > 0)
+  {
+    auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
+    entry->setCallbacks(
+    { /// \todo forbid move; allow further drops
+      [=] { getOut(); },
+    });
+    _entries.push_back(entry);
+  }
 
   addCancelEntry( [=] { cancel(); } );
 }
