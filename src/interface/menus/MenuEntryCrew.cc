@@ -81,6 +81,7 @@ void MenuEntryCrew::draw()
   // If any, draw the Unit and some of its statistics
   if (_role != e_unit_role::NONE) // Cancel / Confirm don't apply
   {
+    // Unit Sprite
     const auto selected_unit(game::Status::battle()->map()->selectedUnit());
     const auto vehicle = std::static_pointer_cast<Vehicle> (selected_unit);
     const auto dropping_unit = vehicle->getCrew().at(_role);
@@ -90,6 +91,23 @@ void MenuEntryCrew::draw()
 
     sprite_unit->setPosition(_position.x + 2 * p::cellWidth(), _position.y);
     sprite_unit->draw();
+
+
+    // Unit statistics
+    const auto& unit_data =
+    "hp:     " + std::to_string(dropping_unit->hp())          + '\n' +
+    "attack: " + std::to_string(dropping_unit->attackValue());
+
+    // 5: margin; 4: nb cells
+    const auto text_size = (p::cellWidth() - 5 * 2) / 4;
+
+    const graphics::Pos2 text_pos = {
+      _position.x + 3 * p::cellWidth(), // 3rd cell
+      _position.y
+    };
+
+    auto text = std::make_unique<resources::Text> (unit_data, text_size, text_pos);
+    text->draw();
   }
 }
 
