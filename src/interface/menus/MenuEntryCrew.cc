@@ -106,7 +106,9 @@ void MenuEntryCrew::draw()
       _position.y
     };
 
-    auto text = std::make_unique<resources::Text> (unit_data, text_size, text_pos);
+    auto text = std::make_unique<resources::Text> (
+      unit_data, text_size, text_pos
+    );
     text->draw();
   }
 }
