@@ -106,6 +106,14 @@ void MenuAction::buildMenuAfterMovingUnit()
       entry->setCallback( [=] { attackUnit(); });
       _entries.push_back(entry);
     }
+
+    auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
+    entry_crew->setCallback( [=] {
+      game::Status::battle()->map()->moveUnit(_coords);
+      game::Status::player()->cursor()->setCoords(_coords);
+      manageCrew();
+    });
+    _entries.push_back(entry_crew);
   }
   else
   {

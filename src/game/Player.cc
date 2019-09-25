@@ -32,28 +32,53 @@ Player::Player(const graphics::Color c)
   _panel = std::make_shared<interface::Panel> (
     game::Status::battle()->map(), _cursor);
   _interface->addElement(_panel);
+
+  resetCellCursorPosition();
 }
 
 
 
 // Interface elements
-void Player::moveCursorUp() {
+void Player::moveCursorUp()
+{
   _cursor->moveUp();
+  updateCellCursorPostion();
 }
 
-void Player::moveCursorDown() {
+void Player::moveCursorDown()
+{
   _cursor->moveDown();
+  updateCellCursorPostion();
 }
 
-void Player::moveCursorLeft() {
+void Player::moveCursorLeft()
+{
   _cursor->moveLeft();
+  updateCellCursorPostion();
 }
 
-void Player::moveCursorRight() {
+void Player::moveCursorRight()
+{
   _cursor->moveRight();
+  updateCellCursorPostion();
 }
 
-void Player::togglePanel() {
+void Player::resetCellCursorPosition()
+{
+  _cellCursorPosition = _cursor->coords();
+}
+
+
+void Player::updateCellCursorPostion()
+{
+  _cellCursorPosition.c = _cursor->coords().c;
+  _cellCursorPosition.l = _cursor->coords().l;
+}
+
+
+
+void Player::togglePanel()
+{
   _panel->toggleStatus();
 }
 

@@ -15,10 +15,11 @@
 #include <game/Battle.hh>
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>
+#include <game/Player.hh>
 #include <game/PathFinding.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
-
+#include <interface/Cursor.hh>
 
 namespace interface {
 
@@ -37,7 +38,7 @@ void MenuCrewMember::build()
   {
     auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
     entry->setCallbacks(
-    { /// \todo forbid move; allow further drops
+    {
       [=] { getOut(); },
     });
     _entries.push_back(entry);
@@ -72,7 +73,7 @@ void MenuCrewMember::draw()
 
 void MenuCrewMember::getOut()
 {
-  auto vehicle_coords(game::Status::battle()->map()->selectedUnit()->coords());
+  auto vehicle_coords(game::Status::player()->cellCursorPosition());
 
   game::Status::pushState(e_state::SELECT_DROP_ZONE);
   game::Status::currentState()->setAttributes(

@@ -46,7 +46,7 @@ public:
 
   /**
    * \brief _active (focus) setter
-  */
+   */
   void setActive(bool active) {
     _active = active;
   }

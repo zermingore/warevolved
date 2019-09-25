@@ -13,6 +13,7 @@
 
 #include <interface/menus/MenuEntryCrew.hh>
 #include <context/State.hh>
+#include <common/enums/states.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
@@ -43,21 +44,18 @@ void MenuCrewBrowse::build()
 
   _selectedUnit = map->selectedUnit();
   assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");
-  if (_selectedUnit->playerId() == unit->playerId())
+  if (_selectedUnit->canHaveCrew())
   {
-    /// \todo check space available (and allow to select drop location)
-    if (_selectedUnit->crewSize())
+    auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
+    if (vehicle->crewSize())
     {
-      auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
-      const Coords coords = { _coords.c + 1, _coords.l };
       for (auto& mem: vehicle->getCrew())
       {
         auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second));
         entry->setCallbacks(
         { /// \todo forbid move; allow further drops
-          [=] { vehicle->dropOff(mem.first, coords); },
+          [=] { vehicle->dropOff(mem.first, _coords); }
         });
-
         _entries.push_back(entry);
       }
     }
