@@ -135,8 +135,8 @@ public:
   /**
    * \brief builds and keep a new Unit
    * \param type type of the new unit
-   * \param line line to set the new unit
-   * \param column column to set the new unit
+   * \param line line where to set the new unit
+   * \param column column where to set the new unit
    * \param player_id player to which the unit belongs to
    * \note Throws if the column/line arguments are greater than the Map size
    */
@@ -146,6 +146,15 @@ public:
                size_t player_id,
                int hp,
                bool played);
+
+  /**
+   * \brief Keep a pointer on a Unit
+   * \param unit Unit to keep track of
+   * \param line line where to set the new unit
+   * \param column column where to set the new unit
+   * \note Throws if the column/line arguments are greater than the Map size
+   */
+  void newUnit(std::shared_ptr<Unit> unit, size_t column, size_t line);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates

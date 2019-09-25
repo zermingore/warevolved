@@ -204,6 +204,39 @@ void Battle::generateRandomMap()
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
           played = static_cast<bool> (randBool(gen));
         _map->newUnit(type, col, line, player_id, hp, played);
+
+        // crew
+        if (rand100(gen) > 40)
+        {
+          std::shared_ptr<Unit> member(
+            UnitFactory::createUnit(e_unit::SOLDIERS));
+
+          std::uniform_int_distribution<> randHpCrewMember(1, max_hp);
+          member->setHp(randHpCrewMember(gen));
+          member->setPlayed(false);
+          member->setPlayerId(player_id);
+
+          // Eventually placing a 2nd unit on a cell but move it in the vehicle
+          _map->newUnit(member, 0, 0);
+
+          const auto unit = _map->unit(line, col);
+          auto vehicle = std::static_pointer_cast<Vehicle> (unit);
+          vehicle->addToCrew(member);
+
+          // 2nd crew member
+          if (rand100(gen) > 75)
+          {
+            std::shared_ptr<Unit> member2(
+              UnitFactory::createUnit(e_unit::SOLDIERS));
+
+            member2->setHp(randHpCrewMember(gen));
+            member2->setPlayed(false);
+            member2->setPlayerId(player_id);
+            _map->newUnit(member2, 0, 0);
+
+            vehicle->addToCrew(member2);
+          }
+        }
       }
     }
   }

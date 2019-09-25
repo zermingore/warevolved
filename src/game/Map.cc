@@ -115,6 +115,26 @@ void Map::endTurn()
 
 
 
+void Map::newUnit(std::shared_ptr<Unit> unit, size_t column, size_t line)
+{
+  // Sanity check: valid coordinates
+  if (column >= _nbColumns || line >= _nbLines)
+  {
+    std::stringstream sstr;
+    sstr << "In " << __PRETTY_FUNCTION__ << '\n'; /// \warning g++/clang++ only
+    sstr << "Invalid provided coordinates: (" << column << ", " << line << ") "
+         << "Exceed: (" << _nbColumns - 1 << ", " << _nbLines - 1 << ")";
+
+    throw std::out_of_range(sstr.str());
+  }
+
+  unit->setCoords({ column, line });
+  _units[unit->playerId()].push_back(unit);
+  _cells[column][line]->setUnit(unit);
+}
+
+
+
 void Map::newUnit(e_unit type,
                   size_t column,
                   size_t line,
