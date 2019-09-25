@@ -117,9 +117,6 @@ public:
    */
   virtual void resume();
 
-
-
-protected:
   /**
    * \brief list of entries getter
    * \return a pointer over _entries array
@@ -137,7 +134,7 @@ protected:
   size_t selectedEntry() { return _selectedEntry; }
 
 
-
+protected:
   std::vector<std::shared_ptr<MenuEntry>> _entries; ///< Entries list
   Coords _origin; ///< menu origin
 

@@ -10,6 +10,7 @@
 # define MENU_CREW_MEMBER_HH_
 
 # include <interface/menus/InGameMenu.hh>
+# include <game/units/unit_roles.hh>
 
 
 namespace interface {
@@ -32,18 +33,20 @@ public:
    */
   void draw() override final;
 
-  /**
-   * \brief _active setter
-   */
+
+  /// _active setter
   void setActive(bool active) {
     _active = active;
   }
 
-  /**
-   * \brief _hidden setter
-   */
+  /// _hidden setter
   void setHidden(bool hide) {
     _hidden = hide;
+  }
+
+  /// _role setter
+  void setRole(e_unit_role role) {
+    _role = role;
   }
 
 
@@ -58,6 +61,7 @@ private:
 
   bool _active = false; ///< True if the menu has the focus
   bool _hidden = false; ///< True to not draw the menu
+  e_unit_role _role;    ///< Role concerned by this menu
 };
 
 

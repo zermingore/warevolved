@@ -59,7 +59,7 @@ public:
    * \brief returns entry Identifier, as an e_entry value
    * \return entry identifier
    */
-  auto id() { return _id; }
+  auto id() const { return _id; }
 
   /**
    * \brief Executes the action matching the entry
@@ -91,6 +91,10 @@ public:
    * \brief Draws label and sprite of the entry, calling the graphics engine
    */
   void draw() override final;
+
+
+  /// _role getter
+  e_unit_role role() const { return _role; }
 
 
 

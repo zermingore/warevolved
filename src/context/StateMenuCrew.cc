@@ -20,6 +20,7 @@
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuCrewBrowse.hh>
 #include <interface/menus/MenuCrewMember.hh>
+#include <interface/menus/MenuEntryCrew.hh>
 
 
 
@@ -69,17 +70,19 @@ void StateMenuCrew::resume()
   if (   _menuCrew->getCurrentSelection() == interface::e_entry::CANCEL
       || _menuCrew->getCurrentSelection() == interface::e_entry::CREW_CONFIRM)
   {
-    _menuMember->setHidden(true);
     _browseMembers = true;
-    _menuMember->setActive(false);
     _menuCrew->setActive(true);
+
+    _menuMember->setHidden(true);
+    _menuMember->setActive(false);
   }
   else
   {
-    _menuMember->setHidden(false);
     _browseMembers = false;
-    _menuMember->setActive(true);
     _menuCrew->setActive(false);
+
+    _menuMember->setHidden(false);
+    _menuMember->setActive(true);
   }
 }
 
@@ -101,6 +104,10 @@ void StateMenuCrew::moveUp()
     }
     else
     {
+      // Retrieve the Unit role matching the highlighted entry
+      auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
+      auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
+      _menuMember->setRole(e->role());
       _menuMember->setHidden(false);
     }
   }
@@ -128,6 +135,10 @@ void StateMenuCrew::moveDown()
     }
     else
     {
+      // Retrieve the Unit role matching the highlighted entry
+      auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
+      auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
+      _menuMember->setRole(e->role());
       _menuMember->setHidden(false);
     }
   }

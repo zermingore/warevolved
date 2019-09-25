@@ -12,6 +12,7 @@
 # include <memory>
 # include <context/State.hh>
 # include <graphics/graphic_types.hh>
+# include <game/units/unit_roles.hh>
 
 class Cell;
 
@@ -91,6 +92,8 @@ private:
   Coords _vehicleLocation; ///< Cell from which the drop is performed
 
   std::shared_ptr<graphics::Sprite> _holoUnit; ///< 'holo' dropping unit sprite
+
+  e_unit_role _role; ///< Concerned Unit's role
 };
 
 

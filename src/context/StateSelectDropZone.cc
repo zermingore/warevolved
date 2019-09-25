@@ -28,6 +28,7 @@
 StateSelectDropZone::StateSelectDropZone()
   : State()
   , _indexZone(0)
+  , _role(e_unit_role::NONE)
 {
   _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { selectNextZone();     });
   _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { selectPreviousZone(); });
@@ -68,9 +69,12 @@ void StateSelectDropZone::fetchAttributes()
     return;
   }
 
-  auto p = std::static_pointer_cast<Coords> (_attributes[0]);
-  _vehicleLocation.c = p->c;
-  _vehicleLocation.l = p->l;
+  auto pCoords = std::static_pointer_cast<Coords> (_attributes[0]);
+  _vehicleLocation.c = pCoords->c;
+  _vehicleLocation.l = pCoords->l;
+
+  auto pRole = std::static_pointer_cast<e_unit_role> (_attributes[1]);
+  _role = *pRole;
 
   // reset the attributes vector
   _attributes.clear();
@@ -107,7 +111,7 @@ void StateSelectDropZone::draw()
     ERROR("No drop zone to select");
     return;
   }
-  if (_indexZone > _zones.size())
+  if (_indexZone >= _zones.size())
   {
     ERROR("Invalid drop zone index", _indexZone, "size:", _zones.size());
     return;
@@ -175,7 +179,7 @@ void StateSelectDropZone::validate()
   auto unit = game::Status::battle()->map()->unit(_vehicleLocation);
   auto vehicle = std::static_pointer_cast<Vehicle> (unit);
 
-  vehicle->dropOff(e_unit_role::DRIVER, _zones[_indexZone]->coords());
+  vehicle->dropOff(_role, _zones[_indexZone]->coords());
 
   // Should lock the draw ? (without unlocking it ?)
   game::Status::player()->cursor()->setCoords(_vehicleLocation);

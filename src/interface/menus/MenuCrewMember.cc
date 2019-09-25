@@ -69,7 +69,9 @@ void MenuCrewMember::getOut()
 
   game::Status::pushState(e_state::SELECT_DROP_ZONE);
   game::Status::currentState()->setAttributes(
-    std::make_shared<Coords> (vehicle_coords));
+    std::make_shared<Coords> (vehicle_coords),
+    std::make_shared<e_unit_role> (_role)
+  );
 
   game::Status::currentState()->resume();
 }

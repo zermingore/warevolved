@@ -41,7 +41,7 @@
       <unit
           type='0'
           player_id='0'
-          hp='5'
+          hp='3'
           played='false'>
       </unit>
     </cell>
@@ -71,7 +71,7 @@
       <unit
           type='0'
           player_id='1'
-          hp='2'
+          hp='4'
           played='false'>
       </unit>
     </cell>
