@@ -45,8 +45,8 @@ Map::Map(size_t nb_columns, size_t nb_lines)
 
 std::shared_ptr<Unit> Map::unit(size_t column, size_t line) const
 {
-  assert(column < _nbColumns && line < _nbColumns);
-  return _cells[line][column]->unit(); /// \todo invert col / line
+  assert(column < _nbColumns && line < _nbLines);
+  return _cells[column][line]->unit();
 }
 
 

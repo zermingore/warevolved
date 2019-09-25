@@ -211,6 +211,9 @@ void Battle::generateRandomMap()
           std::shared_ptr<Unit> member(
             UnitFactory::createUnit(e_unit::SOLDIERS));
 
+          // Fetching the unit first as we may hide it with a temporary one
+          const auto unit = _map->unit(col, line);
+
           std::uniform_int_distribution<> randHpCrewMember(1, max_hp);
           member->setHp(randHpCrewMember(gen));
           member->setPlayed(false);
@@ -219,7 +222,6 @@ void Battle::generateRandomMap()
           // Eventually placing a 2nd unit on a cell but move it in the vehicle
           _map->newUnit(member, 0, 0);
 
-          const auto unit = _map->unit(line, col);
           auto vehicle = std::static_pointer_cast<Vehicle> (unit);
           vehicle->addToCrew(member);
 
@@ -308,7 +310,7 @@ void Battle::loadMap()
         // Crew
         for (pugi::xml_node mbr: unit.child("crew").children("member"))
         {
-          const auto u = _map->unit(line, col);
+          const auto u = _map->unit(col, line);
           assert(u->canHaveCrew() && "This unit cannot have a crew");
 
           auto t = static_cast<e_unit> (mbr.attribute("type").as_int());
