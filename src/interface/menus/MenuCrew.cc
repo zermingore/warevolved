@@ -37,8 +37,7 @@ void MenuCrew::build()
   assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");
   if (_selectedUnit->playerId() == unit->playerId())
   {
-    /// \todo check space available (and allow to select drop location)
-    if (_selectedUnit->crewSize())
+    if (!unit && _selectedUnit->crewSize())
     {
       auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
