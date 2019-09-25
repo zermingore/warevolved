@@ -16,7 +16,7 @@ enum class e_unit_role
 };
 
 
-const std::map<const e_unit_role, const std::string> unit_role_str =
+const std::map<const e_unit_role, const std::string> UNIT_ROLE_STR =
 {
     { e_unit_role::NONE,      "None" }
   , { e_unit_role::PASSENGER, "Passenger" }

@@ -240,10 +240,16 @@ void Panel::drawUnitFrame()
       _frameUnit->position().x,
       _frameUnit->position().y + sprite->size().y + _margin * 2
     };
+
+    if (unit->crewSize() <= 0)
+    {
+      drawDataText("No Crew", crew_pos);
+      return;
+    }
     drawDataText("Crew:", crew_pos);
 
     // First crew member frame position
-     crew_pos.y += sprite->size().y + _margin * 2;
+    crew_pos.y += sprite->size().y + _margin * 2;
 
     float i = 0.f; // loop iterations in order to compute the offset position
     for (const auto& member: vehicle->getCrew())
@@ -252,14 +258,14 @@ void Panel::drawUnitFrame()
 
       auto mbr_sprite(member.second->sprite());
       mbr_sprite->setPosition(
-        _frameUnit->position().x + _margin + i * crew_member_size.x,
-        _frameUnit->position().y + _frameUnit->size().y + _margin);
+        _frameUnit->position().x + _margin + 2 * i * crew_member_size.x,
+        _frameUnit->position().y + _frameUnit->size().y + 2 * _margin);
 
       mbr_sprite->setSize(crew_member_size);
       mbr_sprite->draw();
 
       // Unit data text
-      const std::string role = "Driver"; /// \todo Check role enum
+      const std::string role = UNIT_ROLE_STR.at(member.first);
       const auto mbr_data =
         "role:   " + role + '\n' +
         "hp:     " + std::to_string(member.second->hp())          + '\n' +

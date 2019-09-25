@@ -104,7 +104,7 @@ void MenuEntryCrew::setLabelName()
       return;
 
     default:
-      _labelName = unit_role_str.at(_role);
+      _labelName = UNIT_ROLE_STR.at(_role);
       break;
   }
 }
