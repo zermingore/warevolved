@@ -26,7 +26,7 @@
 
 StateMenuCrew::StateMenuCrew()
   : State()
-  , _menuCrewCoords(10,10)
+  , _menuCrewCoords(0, 0)
   , _browseMembers(true)
 {
   // browsing entries

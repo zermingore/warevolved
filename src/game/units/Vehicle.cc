@@ -50,6 +50,7 @@ bool Vehicle::dropOff(e_unit_role role, Coords location)
   unit->setCoords(location);
   map->revealUnit(*unit);
   _crew.erase(role);
+  --_crewSize;
 
   return true;
 }
