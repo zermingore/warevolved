@@ -77,6 +77,9 @@ void StateMenuCrew::resume()
   }
   else
   {
+    auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
+    auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
+    _menuMember->setRole(e->role());
     _menuMember->setHidden(false);
   }
 }
