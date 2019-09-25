@@ -26,7 +26,7 @@ Vehicle::Vehicle()
 
 bool Vehicle::dropOff(e_unit_role role, Coords location)
 {
-  if (_crewSize == 0)
+  if (_crew.size() == 0)
   {
     ERROR("Called 'dropOff()' with an empty Vehicle");
     return false;
@@ -50,7 +50,6 @@ bool Vehicle::dropOff(e_unit_role role, Coords location)
   unit->setCoords(location);
   map->revealUnit(*unit);
   _crew.erase(role);
-  --_crewSize;
 
   return true;
 }

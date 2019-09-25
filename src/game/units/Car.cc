@@ -29,7 +29,6 @@ Car::Car()
   _maxRange = 0;
 
   _maxCrewMembers = 5;
-  _crewSize = 0;
 
   /// \todo Initialize the map
   // The keys should stay constant; only the values are adjusted
@@ -49,7 +48,7 @@ bool Car::canOpenFire()
 
 bool Car::addToCrew(std::shared_ptr<Unit> unit)
 {
-  if (_crewSize >= _maxCrewMembers)
+  if (_crew.size() >= _maxCrewMembers)
   {
     ERROR("Called 'addToCrew()' with a full Vehicle");
     return false;
@@ -73,13 +72,11 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit)
     if (driver)
     {
       _crew[e_unit_role::COPILOT] = unit;
-      ++_crewSize;
       return true;
     }
     else // empty car
     {
       _crew[e_unit_role::DRIVER] = unit;
-      ++_crewSize;
       return true;
     }
   }

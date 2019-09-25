@@ -53,6 +53,12 @@ public:
    */
   bool dropOff(e_unit_role role, Coords location);
 
+  /**
+   * \brief _crew size getter
+   * \return number of crew members
+   */
+  size_t crewSize() const override final { return _crew.size(); }
+
   // size_t roleProtection(); ///< Ex: In a pick-up: Gunner vs passenger
 
 
