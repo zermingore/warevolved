@@ -19,10 +19,18 @@
 	  <coordinates col='0' line='0'></coordinates>
 	  <terrain>2</terrain>
       <unit
-		  type='1'
+          type='1'
           player_id='0'
           hp='5'
           played='false'>
+          <crew>
+              <member
+              role='2'
+              type='0'
+              player_id='0'
+              hp='5'
+              played='false' />
+          </crew>
       </unit>
 	</cell>
     <cell>

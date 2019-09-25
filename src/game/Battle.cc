@@ -17,6 +17,7 @@
 #include <game/Map.hh>
 #include <game/units/Unit.hh>
 #include <game/units/UnitFactory.hh>
+#include <game/units/Vehicle.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
@@ -270,6 +271,24 @@ void Battle::loadMap()
         auto hp = unit.attribute("hp").as_int();
         auto played = unit.attribute("played").as_bool();
         _map->newUnit(type, col, line, player_id, hp, played);
+
+        // Crew
+        for (pugi::xml_node mbr: unit.child("crew").children("member"))
+        {
+          const auto u = _map->unit(line, col);
+          assert(u->canHaveCrew() && "This unit cannot have a crew");
+
+          auto t = static_cast<e_unit> (mbr.attribute("type").as_int());
+          std::shared_ptr<Unit> m(UnitFactory::createUnit(t));
+
+          auto tst = mbr.attribute("role").as_int();
+          m->setPlayerId(mbr.attribute("player_id").as_int());
+          m->setHp(mbr.attribute("hp").as_int());
+          m->setPlayed(mbr.attribute("played").as_bool());
+
+          auto vehicle = std::static_pointer_cast<Vehicle> (u);
+          u->addToCrew(m); /// \todo way to specify the role
+        }
       }
 
       cells = cells.next_sibling();
