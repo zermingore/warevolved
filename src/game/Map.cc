@@ -19,6 +19,7 @@
 #include <game/Cell.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
+#include <interface/Cursor.hh>
 
 
 
@@ -258,11 +259,30 @@ void Map::dump(pugi::xml_document& doc)
   map_size.append_attribute("nb_columns") = static_cast<int> (_nbColumns);
   map_size.append_attribute("nb_lines") = static_cast<int> (_nbLines);
 
+  // Players
+  auto players = metadata.append_child("players");
+
   // Current Player
   const auto player_number = game::Status::battle()->currentPlayer();
   const auto player_str = std::to_string(player_number).c_str();
-  auto player = metadata.append_child("current_player");
-  player.append_child(pugi::node_pcdata).set_value(player_str);
+  auto current_player = players.append_child("current_player");
+  current_player.append_child(pugi::node_pcdata).set_value(player_str);
+
+  for (const auto& player: game::Status::battle()->players())
+  {
+    auto n_player = players.append_child("player");
+
+    auto n_color = n_player.append_child("color");
+    n_color.append_attribute("r") = static_cast<int> ( player->color().r);
+    n_color.append_attribute("g") = static_cast<int> (player->color().g);
+    n_color.append_attribute("b") = static_cast<int> (player->color().b);
+
+    auto n_cursor = n_player.append_child("cursor");
+    n_cursor.append_attribute("col")  =
+      static_cast<int> (player->cursor()->coords().c);
+    n_cursor.append_attribute("line") =
+      static_cast<int> (player->cursor()->coords().l);
+  }
 
 
   // 'cells' node

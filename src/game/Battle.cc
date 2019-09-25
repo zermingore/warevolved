@@ -281,7 +281,6 @@ void Battle::loadMap()
           auto t = static_cast<e_unit> (mbr.attribute("type").as_int());
           std::shared_ptr<Unit> m(UnitFactory::createUnit(t));
 
-          auto tst = mbr.attribute("role").as_int();
           m->setPlayerId(mbr.attribute("player_id").as_int());
           m->setHp(mbr.attribute("hp").as_int());
           m->setPlayed(mbr.attribute("played").as_bool());
