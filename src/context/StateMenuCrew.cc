@@ -88,26 +88,10 @@ void StateMenuCrew::resume()
 
 void StateMenuCrew::moveUp()
 {
-  using namespace interface;
-
   if (_browseMembers)
   {
     _menuCrew->decrementSelectedEntry();
-
-    // Hide or reveal the menu depending on the entry we currently hightlight
-    if (   _menuCrew->getCurrentSelection() == e_entry::CANCEL
-        || _menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
-    {
-      _menuMember->setHidden(true);
-    }
-    else
-    {
-      // Retrieve the Unit role matching the highlighted entry
-      auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
-      auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
-      _menuMember->setRole(e->role());
-      _menuMember->setHidden(false);
-    }
+    setFocusMenuMember();
   }
   else
   {
@@ -119,26 +103,10 @@ void StateMenuCrew::moveUp()
 
 void StateMenuCrew::moveDown()
 {
-  using namespace interface;
-
   if (_browseMembers)
   {
     _menuCrew->incrementSelectedEntry();
-
-    // Hide or reveal the menu depending on the entry we currently hightlight
-    if (   _menuCrew->getCurrentSelection() == e_entry::CANCEL
-        || _menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
-    {
-      _menuMember->setHidden(true);
-    }
-    else
-    {
-      // Retrieve the Unit role matching the highlighted entry
-      auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
-      auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
-      _menuMember->setRole(e->role());
-      _menuMember->setHidden(false);
-    }
+    setFocusMenuMember();
   }
   else
   {
@@ -146,6 +114,25 @@ void StateMenuCrew::moveDown()
   }
 }
 
+
+
+void StateMenuCrew::setFocusMenuMember()
+{
+  // Hide or reveal the menu depending on the entry we currently hightlight
+  if (   _menuCrew->getCurrentSelection() == interface::e_entry::CANCEL
+      || _menuCrew->getCurrentSelection() == interface::e_entry::CREW_CONFIRM)
+  {
+    _menuMember->setHidden(true);
+  }
+  else
+  {
+    // Retrieve the Unit role matching the highlighted entry
+    auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
+    auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
+    _menuMember->setRole(e->role());
+    _menuMember->setHidden(false);
+  }
+}
 
 
 void StateMenuCrew::moveRight()

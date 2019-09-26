@@ -107,6 +107,11 @@ private:
    */
   void exit();
 
+  /**
+   * \brief Adjust the menu member hidden flag
+   */
+  void setFocusMenuMember();
+
 
   std::shared_ptr<interface::MenuCrewBrowse> _menuCrew;   ///< Crew members
   std::shared_ptr<interface::MenuCrewMember> _menuMember; ///< Member actions
