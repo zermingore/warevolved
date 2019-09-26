@@ -114,6 +114,10 @@ public:
    */
   virtual void draw();
 
+  /// Cursor coordinates getter
+  auto cursorCoords() { return _cursorCoords; }
+
+
 
 protected:
   std::shared_ptr<EventManager> _evtMgr; ///< State related events

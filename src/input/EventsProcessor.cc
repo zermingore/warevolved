@@ -21,7 +21,7 @@ void EventsProcessor::process()
   for (;;)
   {
     // Wait to access an event
-    auto event(KeyManager::popEvent());
+    auto event(KeyManager::popEvent()); /// \todo if exit event -> exit
 
     // Waiting for the new frame, signaled by the Graphics Engine
     std::unique_lock<std::mutex> lock(_lock);

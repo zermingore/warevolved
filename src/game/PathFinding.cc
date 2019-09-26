@@ -397,6 +397,62 @@ PathFinding::getTargets(std::shared_ptr<Unit> ref, Coords coords)
 
 
 
+std::vector<std::shared_ptr<Cell>>
+PathFinding::getAdjacentCells(const Coords coords)
+{
+  std::vector<std::shared_ptr<Cell>> adjacents; // return value
+
+  const auto nb_col(_map->nbColumns());
+  const auto nb_lines(_map->nbLines());
+
+  if (coords.c > 0)
+  {
+    adjacents.emplace_back((*_map)[coords.c - 1][coords.l]);
+  }
+
+  if (coords.c < nb_col - 1)
+  {
+    adjacents.emplace_back((*_map)[coords.c + 1][coords.l]);
+  }
+
+  if (coords.l > 0)
+  {
+    adjacents.emplace_back((*_map)[coords.c][coords.l - 1]);
+  }
+
+  if (coords.l < nb_lines)
+  {
+    adjacents.emplace_back((*_map)[coords.c][coords.l + 1]);
+  }
+
+  return adjacents;
+}
+
+
+
+std::vector<std::shared_ptr<Cell>>
+PathFinding::getDropZones(const Coords coords)
+{
+  auto candidates = getAdjacentCells(coords);
+
+  // return value initialization
+  std::vector<std::shared_ptr<Cell>> dropZones(candidates.size());
+
+  auto it = std::copy_if(
+    candidates.begin(),
+    candidates.end(),
+    dropZones.begin(),
+    [] (std::shared_ptr<const Cell> c) { return !c->unit(); }
+  );
+
+  // shrink container to new size (necessary to drop invalid items)
+  dropZones.resize(std::distance(dropZones.begin(), it));
+
+  return dropZones;
+}
+
+
+
 size_t PathFinding::manhattan(const Coords a, const Coords b)
 {
   // explicit cast into signed int

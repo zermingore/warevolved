@@ -80,6 +80,12 @@ public:
   auto played() const { return _played; }
 
   /**
+   * \brief _moved getter
+   * \return true if the unit has already been moved, false otherwise
+   */
+  auto moved() const { return _moved; }
+
+  /**
    * \brief sets Unit's player belonging
    * \param player_id player's identifier
    */
@@ -90,6 +96,12 @@ public:
    * \param played unit's played status
    */
   void setPlayed(bool played) { _played = played; }
+
+  /**
+   * \brief _played setter
+   * \param played unit's moved status
+   */
+  void setMoved(bool moved) { _moved = moved; }
 
   /**
    * \brief _hp setter
@@ -140,18 +152,39 @@ public:
   auto maxRange() const { return _maxRange; }
 
   /**
-   * \brief sprite getter
+   * \brief _sprite getter
    * \return a pointer on the Unit's sprite
    */
   auto sprite() const { return _sprite; }
+
+  /**
+   * \brief _canHaveCrew getter
+   * \return true if the Unit has a crew (eventually empty); false otherwise
+   */
+  auto canHaveCrew() const { return _canHaveCrew; }
+
+  /**
+   * \brief Add the given \Unit to the crew (need to be overloaded to be used)
+   * \note Aborts the execution if called with the base class definition
+   */
+  [[ noreturn ]] virtual bool addToCrew(std::shared_ptr<Unit> unit);
+
+  /**
+   * \brief *Always* returns 0
+   * \return 0
+   * \note must be overriden in Units using a crew
+   */
+  size_t virtual crewSize() const { return 0; }
 
 
 protected:
   e_unit _type;        ///< Introspection; used for instance to save the Map
   Coords _coords;      ///< Unit's cell coordinates
   bool _played;        ///< notify if the unit has already played this turn
+  bool _moved;         ///< notify if the unit has moved this turn
   size_t _playerId;    ///< the unit belongs to the player matching this id
 
+  bool _canHaveCrew;   ///< Whether the Unit can host a crew
   size_t _motionValue; ///< Unit's motion value (not considering the terrains)
   int _hp;             ///< Health Points
   int _maxHp;          ///< Max Health Points

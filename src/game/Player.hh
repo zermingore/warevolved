@@ -9,6 +9,8 @@
 # define PLAYER_HH_
 
 # include <memory>
+
+# include <common/using.hh>
 # include <graphics/graphic_types.hh>
 
 
@@ -76,11 +78,31 @@ public:
   auto cursor() { return _cursor; }
 
   /**
+   * \brief _cellCursorPosition getter
+   * \note Is not always the interface cursor
+   * \note is not touched in a menu state (but in moving state for instance)
+   * \return Holographic cursor position getter
+   */
+  auto cellCursorPosition() const { return _cellCursorPosition; }
+
+  /**
+   * \brief Set the currently browsed cell position
+   * \note Useful, for instance, when moving a unit without moving the cursor
+   */
+  void setCellCursorPosition(const Coords coords) {
+    _cellCursorPosition = coords;
+  }
+
+  /**
+   * \brief Reset the currently browsed cell position
+   */
+  void resetCellCursorPosition();
+
+  /**
    * \brief Toggle the side panel status (Left, Right, Deactivated)
    * \note The request is forwarded to the Panel itself
    */
   void togglePanel();
-
 
   /**
    * \brief Update the Map selected Unit
@@ -89,6 +111,12 @@ public:
 
 
 private:
+  /**
+   * \brief Keep updated the real cursor position
+   */
+  void updateCellCursorPostion();
+
+
   // (logically const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player's identifier
 
@@ -97,7 +125,9 @@ private:
   std::shared_ptr<interface::Cursor>    _cursor;    ///< Map Cursor
   std::shared_ptr<interface::Panel>     _panel;     ///< Side panel
 
-  std::shared_ptr<Unit> _selectedUnit; ///< current selected unit
+  std::shared_ptr<Unit> _selectedUnit; ///< Current selected unit
+
+  Coords _cellCursorPosition; ///< Current browsed cell
 
   graphics::Color _color; ///< player's color
 };

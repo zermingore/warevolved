@@ -58,6 +58,11 @@ public:
    */
   void validate() override final;
 
+  /**
+   * \brief Get the currently highlighted entry
+   * \return Highlighted entry type
+   */
+  e_entry getCurrentSelection();
 
   /**
    * \brief updates the graphics attributes of the menu

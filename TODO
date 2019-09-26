@@ -18,6 +18,35 @@
    CLOSED: [2018-11-18 So 18:56]
    Just add a key; Support it only when a specific option is provided?
 ** TODO Be sure to save the events_log before "closing" the game
+** DONE Handle vehicles
+   CLOSED: [2019-09-26 Thu 07:02]
+*** DONE Pick Up / get in
+    CLOSED: [2019-09-05 Thu 19:13]
+*** DONE Drop / get out
+    CLOSED: [2019-09-26 Thu 07:02]
+
+
+* TODO Bugs / Features
+** TODO Memory Leaks / Errors
+** TODO segfault while quitting the game, moving a unit
+   This happen because every static classes get 'destructed', exiting the main
+   Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
+     The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
+   To solve this, one can for instance:
+   - Find a way to 'destruct' static classes in a defined order
+   - As the static classes may be removed one day this would solve the issue
+** TODO Sometimes, moving over an enemy unit is possible
+   Seems to appear when two keys are pressed at the same time
+   Unable to wait on an occupied cell though
+** TODO Resizable window
+   Start the game in a small window; put the window in full screen
+   -> The resolution is broken
+** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
+** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
+** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
+** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
+** TODO The PathFinding should not, as default, clear the cells highlight attributes
+>>>>>>> origin/master
 
 
 * TODO Doc
@@ -30,8 +59,6 @@
 ** TODO Map iterator to access cells without explicit double loop
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
 ** TODO Merge Cell highlight boolean and color (color::None)
-** TODO Do not pass shared pointers as parameter when not usefull
-
 
 * TODO Experimental
 ** TODO drawInterface Vs drawState
@@ -67,6 +94,7 @@
    (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
    could use using std::vector
    could use typedef std::shared_ptr SP
+** TODO Random generator as a service locator
 
 
 * TODO Graphics
@@ -139,6 +167,8 @@
 	Alt on a cell: unit rotation
 	  increase reactivity
 	  only on simple move
+** TODO Multi-Cells units?
+
 
 
 * TODO Sound
@@ -227,23 +257,6 @@
    (The build process still takes more than a minute)
 
 
-* TODO Bugs / Features
-** TODO Memory Leaks / Errors
-** TODO segfault while quitting the game, moving a unit
-   This happen because every static classes get 'destructed', exiting the main
-   Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
-     The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
-   To solve this, one can for instance:
-   - Find a way to 'destruct' static classes in a defined order
-   - As the static classes may be removed one day this would solve the issue
-** TODO Sometimes, moving over an enemy unit is possible
-   Seems to appear when two keys are pressed at the same time
-   Unable to wait on an occupied cell though
-** TODO Resizable window
-   Start the game in a small window; put the window in full screen
-   -> The resolution is broken
-
-
 * Build
 
 
@@ -254,3 +267,5 @@
 ** TODO Sprites
    Every cell doesn't need to have it's own highlight sprite
    -> common sprites (1 per situation [move, attack])
+** TODO Panel Cache
+   The Panel is re-built at every frame

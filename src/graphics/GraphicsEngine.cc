@@ -241,10 +241,20 @@ void GraphicsEngine::setGridOffset(const std::shared_ptr<const Map> map)
 
 
 
+void GraphicsEngine::resizeWindow(unsigned int width, unsigned int height)
+{
+  _window->setView(sf::View( {
+    0, 0, static_cast<float> (width), static_cast<float> (height)
+  }));
+}
+
+
+
 void GraphicsEngine::exitRequest()
 {
   _window->close();
 }
+
 
 
 } // namespace graphics

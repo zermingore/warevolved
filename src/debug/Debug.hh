@@ -103,13 +103,13 @@ public:
   {
     std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
 
-	time_t now = time(nullptr);
-	struct tm *full_date = localtime(&now);
-	char buf[80] = {0};
+    time_t now = time(nullptr);
+    struct tm *full_date = localtime(&now);
+    char buf[80] = {0};
 
-	strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
-	log << buf << "\t";
-	bodylogprintf(head, tail...);
+    strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
+    log << buf << "\t";
+    bodylogprintf(head, tail...);
     printf(head, tail...);
   }
 
@@ -134,15 +134,15 @@ public:
   static void error(const T head, const Tail... tail)
   {
     time_t now = time(nullptr);
-	struct tm *full_date = localtime(&now);
-	char buf[80] = {0};
+    struct tm *full_date = localtime(&now);
+    char buf[80] = {0};
 
-	strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
-	*_log << buf << "\t";
-	bodylogprintf(head, tail...);
+    strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
+    *_log << buf << "\t";
+    bodylogprintf(head, tail...);
 
-	std::cout << COLOR_ERROR;
-	printf(head, tail...);
+    std::cout << COLOR_ERROR;
+    printf(head, tail...);
   }
 
   /**
@@ -154,8 +154,8 @@ public:
   template<typename T, typename... Tail>
   static void notice(const T head, const Tail... tail)
   {
-	std::cout << COLOR_NOTICE;
-	printf(head, tail...);
+    std::cout << COLOR_NOTICE;
+    printf(head, tail...);
   }
 
   /**
@@ -167,8 +167,8 @@ public:
   template<typename T, typename... Tail>
   static void warning(const T head, const Tail... tail)
   {
-	std::cout << COLOR_WARNING;
-	printf(head, tail...);
+    std::cout << COLOR_WARNING;
+    printf(head, tail...);
   }
 
   /**
@@ -179,8 +179,8 @@ public:
   template<typename T, typename... Tail>
   static void printf(const T head, const Tail... tail)
   {
-	std::cout << head << " ";
-	printf(tail...);
+    std::cout << head << " ";
+    printf(tail...);
   }
 
 
@@ -193,8 +193,8 @@ private:
   template<typename T, typename... Tail>
   static void bodylogprintf(const T head, const Tail... tail)
   {
-	printLog(head);
-	bodylogprintf(tail...);
+    printLog(head);
+    bodylogprintf(tail...);
   }
 
   /// Execute after the last argument

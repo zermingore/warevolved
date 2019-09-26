@@ -55,6 +55,7 @@ StateMovingUnit::StateMovingUnit()
   _holoUnit = std::make_unique<graphics::Sprite> (
     *map->unit(cursor_coords)->sprite());
   _holoUnitPosition = cursor_coords;
+  player->setCellCursorPosition(cursor_coords);
 
   const auto x { static_cast<graphics::component> (_holoUnit->size().x) };
   const auto y { static_cast<graphics::component> (_holoUnit->size().y) };
@@ -86,6 +87,7 @@ void StateMovingUnit::exit()
 {
   /// \todo kill the path finding (needed ?)
   game::Status::popCurrentState();
+  game::Status::player()->resetCellCursorPosition();
 }
 
 void StateMovingUnit::resume()
@@ -101,6 +103,7 @@ void StateMovingUnit::moveUnitUp()
   if (_holoUnitPosition.l > 0 && _pathFinding->allowedMove(e_direction::UP))
   {
     --_holoUnitPosition.l;
+    game::Status::player()->setCellCursorPosition(_holoUnitPosition);
     _pathFinding->addNextDirection(e_direction::UP);
   }
 }
@@ -111,6 +114,7 @@ void StateMovingUnit::moveUnitDown()
       && _pathFinding->allowedMove(e_direction::DOWN))
   {
     ++_holoUnitPosition.l;
+    game::Status::player()->setCellCursorPosition(_holoUnitPosition);
     _pathFinding->addNextDirection(e_direction::DOWN);
   }
 }
@@ -120,6 +124,7 @@ void StateMovingUnit::moveUnitLeft()
   if (_holoUnitPosition.c > 0 && _pathFinding->allowedMove(e_direction::LEFT))
   {
     --_holoUnitPosition.c;
+    game::Status::player()->setCellCursorPosition(_holoUnitPosition);
     _pathFinding->addNextDirection(e_direction::LEFT);
   }
 }
@@ -130,6 +135,7 @@ void StateMovingUnit::moveUnitRight()
       && _pathFinding->allowedMove(e_direction::RIGHT))
   {
     ++_holoUnitPosition.c;
+    game::Status::player()->setCellCursorPosition(_holoUnitPosition);
     _pathFinding->addNextDirection(e_direction::RIGHT);
   }
 }

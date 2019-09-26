@@ -11,6 +11,7 @@
 #include <game/units/Unit.hh>
 
 #include <game/units/Soldier.hh>
+#include <game/units/Car.hh>
 
 
 
@@ -18,8 +19,11 @@ std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
 {
   switch (unit)
   {
-    case e_unit::SOLDIERS:
+    case e_unit::SOLDIER:
       return std::make_unique<Soldier> ();
+
+    case e_unit::CAR:
+      return std::make_unique<Car> ();
 
     default:
       ERROR("Tried to create unit", static_cast<int> (unit));

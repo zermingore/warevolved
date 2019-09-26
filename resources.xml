@@ -7,8 +7,13 @@
 	  </file>
 	</folder>
 	<folder path='resources/units/'>
-	  <file filename='soldiers.png'>
-		<name>soldiers</name>
+	  <file filename='soldier.png'>
+		<name>soldier</name>
+	  </file>
+	</folder>
+	<folder path='resources/units/'>
+	  <file filename='car.png'>
+		<name>car</name>
 	  </file>
 	</folder>
 	<folder path='resources/terrains/'>

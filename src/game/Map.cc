@@ -8,15 +8,18 @@
 #include <game/Map.hh>
 
 #include <debug/Debug.hh>
-#include <game/Status.hh>
+
 #include <common/enums/terrains.hh>
 #include <common/enums/units.hh>
+#include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/units/UnitFactory.hh>
+#include <game/units/Vehicle.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
+#include <interface/Cursor.hh>
 
 
 
@@ -42,8 +45,8 @@ Map::Map(size_t nb_columns, size_t nb_lines)
 
 std::shared_ptr<Unit> Map::unit(size_t column, size_t line) const
 {
-  assert(column < _nbColumns && line < _nbColumns);
-  return _cells[line][column]->unit();
+  assert(column < _nbColumns && line < _nbLines);
+  return _cells[column][line]->unit();
 }
 
 
@@ -91,7 +94,7 @@ void Map::moveUnit(const Coords& c)
   Coords old(_selectedUnit->coords());
   assert(_cells[old.c][old.l]->unit()->played() == false);
 
-  _cells[old.c][old.l]->unit()->setPlayed(true);
+  _cells[old.c][old.l]->unit()->setMoved(true);
   _cells[old.c][old.l]->removeUnit();
   _selectedUnit->setCoords(c);
   _cells[c.c][c.l]->setUnit(_selectedUnit);
@@ -103,9 +106,31 @@ void Map::moveUnit(const Coords& c)
 
 void Map::endTurn()
 {
-  for (auto& it: _units[game::Status::battle()->currentPlayer()]) {
+  for (auto& it: _units[game::Status::battle()->currentPlayer()])
+  {
     it->setPlayed(false);
+    it->setMoved(false);
   }
+}
+
+
+
+void Map::newUnit(std::shared_ptr<Unit> unit, size_t column, size_t line)
+{
+  // Sanity check: valid coordinates
+  if (column >= _nbColumns || line >= _nbLines)
+  {
+    std::stringstream sstr;
+    sstr << "In " << __PRETTY_FUNCTION__ << '\n'; /// \warning g++/clang++ only
+    sstr << "Invalid provided coordinates: (" << column << ", " << line << ") "
+         << "Exceed: (" << _nbColumns - 1 << ", " << _nbLines - 1 << ")";
+
+    throw std::out_of_range(sstr.str());
+  }
+
+  unit->setCoords({ column, line });
+  _units[unit->playerId()].push_back(unit);
+  _cells[column][line]->setUnit(unit);
 }
 
 
@@ -254,11 +279,30 @@ void Map::dump(pugi::xml_document& doc)
   map_size.append_attribute("nb_columns") = static_cast<int> (_nbColumns);
   map_size.append_attribute("nb_lines") = static_cast<int> (_nbLines);
 
+  // Players
+  auto players = metadata.append_child("players");
+
   // Current Player
   const auto player_number = game::Status::battle()->currentPlayer();
   const auto player_str = std::to_string(player_number).c_str();
-  auto player = metadata.append_child("current_player");
-  player.append_child(pugi::node_pcdata).set_value(player_str);
+  auto current_player = players.append_child("current_player");
+  current_player.append_child(pugi::node_pcdata).set_value(player_str);
+
+  for (const auto& player: game::Status::battle()->players())
+  {
+    auto n_player = players.append_child("player");
+
+    auto n_color = n_player.append_child("color");
+    n_color.append_attribute("r") = static_cast<int> ( player->color().r);
+    n_color.append_attribute("g") = static_cast<int> (player->color().g);
+    n_color.append_attribute("b") = static_cast<int> (player->color().b);
+
+    auto n_cursor = n_player.append_child("cursor");
+    n_cursor.append_attribute("col")  =
+      static_cast<int> (player->cursor()->coords().c);
+    n_cursor.append_attribute("line") =
+      static_cast<int> (player->cursor()->coords().l);
+  }
 
 
   // 'cells' node
@@ -281,14 +325,47 @@ void Map::dump(pugi::xml_document& doc)
       terrain.append_child(pugi::node_pcdata).set_value(terrain_str);
 
       // Unit
-      if (auto u = _cells[col][line]->unit())
+      if (const auto u = _cells[col][line]->unit())
       {
-        auto node = cell.append_child("unit");
-        node.append_attribute("type") = static_cast<int> (u->type());
-        node.append_attribute("player_id") = static_cast<int> (u->playerId());
-        node.append_attribute("hp") = u->hp();
-        node.append_attribute("played") = u->played();
+        auto unit = cell.append_child("unit");
+        unit.append_attribute("type") = static_cast<int> (u->type());
+        unit.append_attribute("player_id") = static_cast<int> (u->playerId());
+        unit.append_attribute("hp") = u->hp();
+        unit.append_attribute("played") = u->played();
+
+        // Crew
+        if (u->crewSize() <= 0)
+        {
+          continue; // no crew -> skip to the next unit
+        }
+
+        auto crew = unit.append_child("crew");
+        auto vehicle = std::static_pointer_cast<Vehicle> (u);
+        for (const auto& member: vehicle->getCrew())
+        {
+          auto n = crew.append_child("member");
+          n.append_attribute("role") = static_cast<int> (member.first);
+
+          const auto& m = member.second;
+          n.append_attribute("type") = static_cast<int> (m->type());
+          n.append_attribute("player_id") = static_cast<int> (m->playerId());
+          n.append_attribute("hp") = m->hp();
+          n.append_attribute("played") = m->played();
+        }
       }
     }
   }
+}
+
+
+
+void Map::hideUnit(const Unit& unit)
+{
+  _cells[unit.c()][unit.l()]->removeUnit();
+}
+
+
+void Map::revealUnit(const Unit& unit)
+{
+  newUnit(unit.type(), unit.c(), unit.l(), unit.playerId(), unit.hp(), true);
 }

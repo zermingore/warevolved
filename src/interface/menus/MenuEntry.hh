@@ -30,8 +30,17 @@ enum class e_entry
 {
   NONE = 0, // invalid selected entry
 
-  MOVE, // motion order
-  WAIT, // motion order
+  MOVE,    // motion order
+  WAIT,    // motion order
+  PICK_UP, // motion order
+  BOARD,   // motion order
+
+  // crew
+  DROP_OFF,
+  GET_OUT,
+  CREW,
+  CREW_CONFIRM, // Confirm the crew actions (not reversible)
+
   NEXT_TURN,
   ATTACK,
 
@@ -44,6 +53,7 @@ enum class e_entry
  * \class MenuEntry
  * \brief One entry (a clickable item) of a menu
  * \note The entry position is relative to the menu it belongs to.
+ * \note Motherclass of MenuEntryCrew
  */
 class MenuEntry: public InterfaceElement
 {
@@ -71,25 +81,33 @@ public:
 
   /**
    * \brief _callback setter
-   * \param callback Callback called when the menu entry is selected
+   * \param callbacks List of Callbacks called when the menu entry is selected
+   */
+  void setCallbacks(const std::vector<std::function<void()>> callbacks) {
+    _callbacks = callbacks;
+  }
+
+  /**
+   * \brief _callback setter
+   * \param callbacks List of Callbacks called when the menu entry is selected
    */
   void setCallback(const std::function<void()> callback) {
-    _callback = callback;
+    _callbacks = { callback };
   }
 
   /**
    * \brief updates the graphical attributes of the entry
    */
-  void update() override final;
+  void update() override;
 
   /**
    * \brief Draws label and sprite of the entry, calling the graphics engine
    */
-  void draw() override final;
+  void draw() override;
 
 
 
-private:
+protected:
   /**
    * \brief Initializes the label name
    * \param entry entry which associated name will be used
@@ -100,8 +118,8 @@ private:
   std::shared_ptr<resources::Text> _label; ///< button label text
   std::string _labelName;                  ///< menu entry text
 
-  /// callback executed when the entry is selected
-  std::function<void()> _callback;
+  /// callbacks list executed when the entry is selected
+  std::vector<std::function<void()>> _callbacks;
 };
 
 

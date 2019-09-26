@@ -50,7 +50,10 @@ void MenuEntry::draw()
 
 void MenuEntry::execute()
 {
-  _callback();
+  for (const auto& callback: _callbacks)
+  {
+    callback();
+  }
 }
 
 
@@ -60,11 +63,29 @@ void MenuEntry::setLabelName(const e_entry entry)
   /// \todo set string using a DB
   switch (entry)
   {
+    case e_entry::NONE:
+      _labelName = "Invalid";
+      break;
     case e_entry::MOVE:
       _labelName = "Move";
       break;
     case e_entry::WAIT:
       _labelName = "Wait";
+      break;
+    case e_entry::PICK_UP:
+      _labelName = "Pick\n  Up";
+      break;
+    case e_entry::CREW:
+      _labelName = "Crew";
+      break;
+    case e_entry::BOARD:
+      _labelName = "Board";
+      break;
+    case e_entry::DROP_OFF:
+      _labelName = "Drop\n  Off";
+      break;
+    case e_entry::GET_OUT:
+      _labelName = "Get\n  Out";
       break;
     case e_entry::NEXT_TURN:
       _labelName = "Next\n  Turn";
@@ -74,6 +95,9 @@ void MenuEntry::setLabelName(const e_entry entry)
       break;
     case e_entry::CANCEL:
       _labelName = "Cancel";
+      break;
+    case e_entry::CREW_CONFIRM:
+      _labelName = "Confirm";
       break;
 
     default:

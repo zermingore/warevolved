@@ -115,6 +115,13 @@ public:
     _takeScreenshot = true;
   }
 
+  /**
+   * \brief Resize the rendered view when the window get resized
+   * \param width New window width
+   * \param height New window height
+   */
+  static void resizeWindow(unsigned int width, unsigned int height);
+
 
 private:
   /**

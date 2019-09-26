@@ -37,7 +37,7 @@ public:
    * \brief Constructor
    * \param state State in which this menu will be used
    */
-  MenuAction(const e_state state, const Coords clicked_cell);
+  explicit MenuAction(const e_state state);
 
   /**
    * \brief default destructor
@@ -65,6 +65,25 @@ private:
   void cancel() override final;
 
   /**
+   * \brief Build the menu when selecting a Unit
+   * \note Handle only the direct actions (without moving)
+   */
+  void buildMenuSelectionUnit();
+
+  /**
+   * \brief Build the menu specific entries after moving a Unit
+   */
+  void buildMenuAfterMovingUnit();
+
+  /**
+   * \brief Check if the unit is allowed to move. It is the case if
+   *   - the unit didn't play (end of its action)
+   *   - the unit didn't already moved
+   * \return true if it is allowed to move; false otherwise
+   */
+  bool allowMove();
+
+  /**
    * \brief Does the move (if possible)
    */
   void moveUnit();
@@ -80,8 +99,15 @@ private:
   void attackUnit();
 
 
-  e_state _state;      ///< State related to this menu
-  Coords _clickedCell; ///< Clicked cell where this menu was invoked
+  /**
+   * \brief Handle the Unit Crew allowing to
+   *   - drop some unit
+   *   - change their role \todo
+   */
+  void manageCrew();
+
+
+  e_state _state; ///< State related to this menu
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
 

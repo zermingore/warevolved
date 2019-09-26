@@ -42,7 +42,7 @@ public:
    * \param origin Unit origin of the path
    * \note Throws if the given Unit is NULL
    */
-  PathFinding(std::shared_ptr<Unit> origin);
+  explicit PathFinding(std::shared_ptr<Unit> origin);
 
   /**
    * \brief Destructor: clears the Cells highlight properties
@@ -86,6 +86,14 @@ public:
   std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
   getTargets(std::shared_ptr<Unit> ref, Coords coords);
 
+  /**
+   * \brief Return the list of available drop locations
+   * \param ref Unit for which and from where the drop zones will be seek
+   * \param coords Coordinates where the vehicle is located
+   */
+  std::vector<std::shared_ptr<Cell>>
+  getDropZones(const Coords coords);
+
 
 
 private:
@@ -121,7 +129,6 @@ private:
    */
   e_path_shape getShape(size_t index);
 
-
   /**
    * \brief returns the Manhattan distance between two cells
    * \param a first cell
@@ -129,6 +136,14 @@ private:
    * \return the distance between the two cells
    */
   size_t manhattan(Coords a, Coords b);
+
+  /**
+   * \brief Get the list of valid adjacent cells
+   * \param coords Coordinates of the cell from where to check
+   * \return List of valid adjacent cells on the map
+   */
+  std::vector<std::shared_ptr<Cell>>
+  getAdjacentCells(const Coords coords);
 
 
 

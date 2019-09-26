@@ -17,6 +17,7 @@
 #include <game/Map.hh>
 #include <game/units/Unit.hh>
 #include <game/units/UnitFactory.hh>
+#include <game/units/Vehicle.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
@@ -128,7 +129,7 @@ void Battle::generateRandomMap()
   std::mt19937 gen(_randomSeed);
 # pragma GCC diagnostic pop
   std::uniform_int_distribution<> rand100(1, 100);
-  std::uniform_int_distribution<> randPlayer(3, 5);
+  std::uniform_int_distribution<> randPlayer(2, 4);
   std::uniform_int_distribution<> randMapSize(3, 15);
   std::uniform_int_distribution<> randTerrain(
     1, static_cast<int> (e_terrain::NB_TERRAIN) -1);
@@ -170,9 +171,9 @@ void Battle::generateRandomMap()
     for (auto line(0); line < lines; ++line)
     {
       _map->setTerrain(col, line, static_cast<e_terrain> (randTerrain(gen)));
-      if (rand100(gen) > 80)
+      if (rand100(gen) > 90)
       {
-        auto type = e_unit::SOLDIERS;
+        auto type = e_unit::SOLDIER;
         std::uniform_int_distribution<> rand_player(0, nb_players - 1);
         auto player_id = rand_player(gen);
         auto played = false;
@@ -186,6 +187,58 @@ void Battle::generateRandomMap()
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
           played = static_cast<bool> (randBool(gen));
         _map->newUnit(type, col, line, player_id, hp, played);
+      }
+      if (rand100(gen) > 80)
+      {
+        auto type = e_unit::CAR;
+        std::uniform_int_distribution<> rand_player(0, nb_players - 1);
+        auto player_id = rand_player(gen);
+        auto played = false;
+
+        // Creating an instance on the Unit only to get its max HP (I know...)
+        std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
+        auto max_hp = new_unit->maxHp();
+        std::uniform_int_distribution<> randHpSoldier(1, max_hp);
+        auto hp = randHpSoldier(gen);
+
+        if (static_cast<unsigned int> (player_id) == _currentPlayer)
+          played = static_cast<bool> (randBool(gen));
+        _map->newUnit(type, col, line, player_id, hp, played);
+
+        // crew
+        if (rand100(gen) > 40)
+        {
+          std::shared_ptr<Unit> member(
+            UnitFactory::createUnit(e_unit::SOLDIER));
+
+          // Fetching the unit first as we may hide it with a temporary one
+          const auto unit = _map->unit(col, line);
+
+          std::uniform_int_distribution<> randHpCrewMember(1, max_hp);
+          member->setHp(randHpCrewMember(gen));
+          member->setPlayed(false);
+          member->setPlayerId(player_id);
+
+          // Eventually placing a 2nd unit on a cell but move it in the vehicle
+          _map->newUnit(member, 0, 0);
+
+          auto vehicle = std::static_pointer_cast<Vehicle> (unit);
+          vehicle->addToCrew(member);
+
+          // 2nd crew member
+          if (rand100(gen) > 75)
+          {
+            std::shared_ptr<Unit> member2(
+              UnitFactory::createUnit(e_unit::SOLDIER));
+
+            member2->setHp(randHpCrewMember(gen));
+            member2->setPlayed(false);
+            member2->setPlayerId(player_id);
+            _map->newUnit(member2, 0, 0);
+
+            vehicle->addToCrew(member2);
+          }
+        }
       }
     }
   }
@@ -253,6 +306,23 @@ void Battle::loadMap()
         auto hp = unit.attribute("hp").as_int();
         auto played = unit.attribute("played").as_bool();
         _map->newUnit(type, col, line, player_id, hp, played);
+
+        // Crew
+        for (pugi::xml_node mbr: unit.child("crew").children("member"))
+        {
+          const auto u = _map->unit(col, line);
+          assert(u->canHaveCrew() && "This unit cannot have a crew");
+
+          auto t = static_cast<e_unit> (mbr.attribute("type").as_int());
+          std::shared_ptr<Unit> m(UnitFactory::createUnit(t));
+
+          m->setPlayerId(mbr.attribute("player_id").as_int());
+          m->setHp(mbr.attribute("hp").as_int());
+          m->setPlayed(mbr.attribute("played").as_bool());
+
+          auto vehicle = std::static_pointer_cast<Vehicle> (u);
+          u->addToCrew(m); /// \todo way to specify the role
+        }
       }
 
       cells = cells.next_sibling();

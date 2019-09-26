@@ -29,6 +29,10 @@ you will need:
 - doxygen
 
 
+On a debian system, you may run:
+> sudo apt-get install build-essential autoconf libx11-dev libsfml-dev graphviz doxygen
+
+
 This project is under a fully permissive license.
 It means that you can do whatever you want with the code;
 A citation would be appreciated but is not required

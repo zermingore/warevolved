@@ -4,7 +4,9 @@
 #include <context/StatePlaying.hh>
 #include <context/StateMovingUnit.hh>
 #include <context/StateSelectTarget.hh>
+#include <context/StateSelectDropZone.hh>
 #include <context/StateMenu.hh>
+#include <context/StateMenuCrew.hh>
 #include <context/StateGlobal.hh>
 
 
@@ -17,11 +19,15 @@ std::shared_ptr<State> StateFactory::createState(const e_state& state)
     case e_state::PLAYING:
       return std::make_shared<StatePlaying> ();
 
-    // Every menu share the same State
+    // These menus share the same State
     case e_state::MAP_MENU:
     case e_state::ACTION_MENU:
     case e_state::SELECTION_UNIT:
+    case e_state::SELECTION_CREW:
       return std::make_shared<StateMenu> (state);
+
+    case e_state::CREW_MANAGEMENT:
+      return std::make_shared<StateMenuCrew> ();
 
     case e_state::MOVING_UNIT:
       return std::make_shared<StateMovingUnit> ();
@@ -29,8 +35,12 @@ std::shared_ptr<State> StateFactory::createState(const e_state& state)
     case e_state::SELECT_TARGET:
       return std::make_shared<StateSelectTarget> ();
 
+    case e_state::SELECT_DROP_ZONE:
+      return std::make_shared<StateSelectDropZone> ();
+
     default:
-      ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager");
+      ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager",
+            static_cast<int> (state));
       std::exit(1);
   }
 
