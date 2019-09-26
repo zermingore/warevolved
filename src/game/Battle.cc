@@ -129,7 +129,7 @@ void Battle::generateRandomMap()
   std::mt19937 gen(_randomSeed);
 # pragma GCC diagnostic pop
   std::uniform_int_distribution<> rand100(1, 100);
-  std::uniform_int_distribution<> randPlayer(3, 5);
+  std::uniform_int_distribution<> randPlayer(2, 4);
   std::uniform_int_distribution<> randMapSize(3, 15);
   std::uniform_int_distribution<> randTerrain(
     1, static_cast<int> (e_terrain::NB_TERRAIN) -1);
