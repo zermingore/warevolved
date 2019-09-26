@@ -52,6 +52,13 @@ void InputsListener::listen(bool replay, const std::string& replay_filename)
         return;
       }
 
+      // Resize event
+      if (event.type == sf::Event::Resized)
+      {
+        graphics::GraphicsEngine::resizeWindow(event.size.width,
+                                               event.size.height);
+      }
+
       // Skipping any non-relevant event
       if (event.type != sf::Event::KeyPressed)
       {
