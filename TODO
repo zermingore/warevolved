@@ -8,10 +8,12 @@
 
 
 * TODO Roadmap
-** TODO Handle vehicles
+** DONE Handle vehicles
+   CLOSED: [2019-09-26 Thu 07:02]
 *** DONE Pick Up / get in
     CLOSED: [2019-09-05 Thu 19:13]
-*** TODO Drop / get out
+*** DONE Drop / get out
+    CLOSED: [2019-09-26 Thu 07:02]
 
 
 * TODO Bugs / Features
