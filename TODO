@@ -35,9 +35,8 @@
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
 ** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
-
-
 ** TODO The PathFinding should not, as default, clear the cells highlight attributes
+
 
 * TODO Doc
 ** TODO Options

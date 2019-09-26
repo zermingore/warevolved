@@ -19,7 +19,7 @@ std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
 {
   switch (unit)
   {
-    case e_unit::SOLDIERS:
+    case e_unit::SOLDIER:
       return std::make_unique<Soldier> ();
 
     case e_unit::CAR:

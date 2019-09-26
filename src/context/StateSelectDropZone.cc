@@ -49,8 +49,8 @@ StateSelectDropZone::StateSelectDropZone()
   _zoneHighlight->setScale(p::cellWidth()  / x, p::cellHeight() / y);
   _zoneHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
-  /// \todo hard-coded soldiers
-  _holoUnit = std::make_shared<graphics::Sprite> ("soldiers");
+  /// \todo hard-coded soldier
+  _holoUnit = std::make_shared<graphics::Sprite> ("soldier");
   _holoUnit->setColor(graphics::Color(127, 255, 127, 255));
 
   x = static_cast<float> (_holoUnit->texture()->getSize().x);

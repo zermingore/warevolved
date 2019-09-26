@@ -64,7 +64,7 @@ note: closer than a simulator than a game...
 
 
 * UNITS
-** SOLDIERS
+** SOLDIER
 *** clips
 *** wounds
 *** backpack / inventory (25 slots -> medkit / clips / ... / if dead -> allowed to pick it up)
@@ -115,7 +115,7 @@ train units
 
 
 * UPGRADES
-** Soldiers
+** Soldier
 *** Silencer
 *** Ad-Hoc communications
 	avoid shooting allies

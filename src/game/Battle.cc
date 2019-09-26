@@ -173,7 +173,7 @@ void Battle::generateRandomMap()
       _map->setTerrain(col, line, static_cast<e_terrain> (randTerrain(gen)));
       if (rand100(gen) > 90)
       {
-        auto type = e_unit::SOLDIERS;
+        auto type = e_unit::SOLDIER;
         std::uniform_int_distribution<> rand_player(0, nb_players - 1);
         auto player_id = rand_player(gen);
         auto played = false;
@@ -209,7 +209,7 @@ void Battle::generateRandomMap()
         if (rand100(gen) > 40)
         {
           std::shared_ptr<Unit> member(
-            UnitFactory::createUnit(e_unit::SOLDIERS));
+            UnitFactory::createUnit(e_unit::SOLDIER));
 
           // Fetching the unit first as we may hide it with a temporary one
           const auto unit = _map->unit(col, line);
@@ -229,7 +229,7 @@ void Battle::generateRandomMap()
           if (rand100(gen) > 75)
           {
             std::shared_ptr<Unit> member2(
-              UnitFactory::createUnit(e_unit::SOLDIERS));
+              UnitFactory::createUnit(e_unit::SOLDIER));
 
             member2->setHp(randHpCrewMember(gen));
             member2->setPlayed(false);

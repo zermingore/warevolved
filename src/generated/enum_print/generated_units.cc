@@ -14,8 +14,8 @@ std::string e_unit_string(e_unit entry)
 {
   switch (entry)
   {
-    case e_unit::SOLDIERS:
-      return "e_unit::SOLDIERS (0)";
+    case e_unit::SOLDIER:
+      return "e_unit::SOLDIER (0)";
     case e_unit::NB_UNITS:
       return "e_unit::NB_UNITS (no explicit value)";
     case e_unit::NONE:
