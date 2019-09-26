@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 
 . "${ROOT_TESTS}/utils/log.sh"
@@ -7,6 +7,8 @@
 # autoreconf && configure
 function _configure()
 {
+  beginSection "CONFIGURE"
+
   pushd "${ROOT_PROJECT}"
     autoreconf --force --install --warnings=all
     local ret_code=$?
@@ -24,6 +26,8 @@ function _configure()
       exit $ret_code
     fi
   popd # $BUILD_DIR
+
+  endSection
 }
 
 
@@ -31,12 +35,16 @@ function _configure()
 # compilation appending -Werror and installing
 function _standard_compilation()
 {
+  beginSection "BUILD"
+
   make -C "$BUILD_DIR" WE_EXTRA_CXXFLAGS=-Werror all install
   local ret_code=$?
   if [[ $ret_code -ne 0 ]]; then
     printError "Compilation error"
     exit $ret_code
   fi
+
+  endSection
 }
 
 

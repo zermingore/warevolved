@@ -24,6 +24,8 @@ function build()
 
 function smoke_tests()
 {
+  beginSection "SMOKE TESTS"
+
   find "${ROOT_TESTS}/smoke" -type f -iname "*.sh" -print0 \
     | while IFS= read -r -d $'\0' file
   do
@@ -36,17 +38,20 @@ function smoke_tests()
 
     printSuccess "[done]"
   done
+
+  endSection
 }
 
 
 
-
-# Entry point
+# ________________________________ Entry point _______________________________ #
 function main()
 {
   build
 
-  BIN_WE=$(find "${ROOT_TESTS}" -name we -type f -executable -exec readlink -f {} \;)
+  # Get the absolute path to the 'we' binary
+  BIN_WE=$(find "${ROOT_TESTS}" -name we -type f -executable \
+                -exec readlink -f {} \;)
   if [ -z "$BIN_WE" ]; then
     printError "Binary not found"
     exit 2
