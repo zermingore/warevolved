@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+tests/test.sh
+tools/check_headers.sh src/
