@@ -5,6 +5,7 @@
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <game/units/Unit.hh>
+#include <game/units/Vehicle.hh>
 #include <game/PathFinding.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/MenuEntry.hh>
@@ -35,15 +36,38 @@ void MenuAction::build()
 }
 
 
+
 void MenuAction::cancel()
 {
   game::Status::clearStates();
 }
 
 
+
 bool MenuAction::allowMove()
 {
-  return !_selectedUnit->played() && !_selectedUnit->moved();
+  // Move forbidden if already played or move
+  if (_selectedUnit->played() || _selectedUnit->moved())
+  {
+    return false;
+  }
+
+  // Move forbidden for a Vehicle without driver
+  if (_selectedUnit->type() == e_unit::CAR)
+  {
+    auto v = std::static_pointer_cast<Vehicle> (_selectedUnit);
+    try
+    {
+      v->getCrew().at(e_unit_role::DRIVER);
+      return true;
+    }
+    catch (const std::out_of_range& e)
+    {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 
@@ -79,6 +103,7 @@ void MenuAction::buildMenuSelectionUnit()
     _entries.push_back(entry_crew);
   }
 }
+
 
 
 void MenuAction::buildMenuAfterMovingUnit()
