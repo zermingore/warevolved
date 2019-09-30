@@ -169,6 +169,7 @@ void MenuAction::waitUnit() /// \todo forbid move; authorize grouping
   game::Status::clearStates();
 
   // setting the cursor over the freshly moved unit
+  _pathFinding->hideAllowedPath();
   game::Status::player()->cursor()->setCoords(_coords);
 }
 

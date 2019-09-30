@@ -51,11 +51,6 @@ PathFinding::PathFinding(std::shared_ptr<Unit> origin)
 }
 
 
-PathFinding::~PathFinding()
-{
-  hideAllowedPath();
-}
-
 
 void PathFinding::drawPath()
 {

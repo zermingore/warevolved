@@ -45,9 +45,9 @@ public:
   explicit PathFinding(std::shared_ptr<Unit> origin);
 
   /**
-   * \brief Destructor: clears the Cells highlight properties
+   * \brief Default destructor
    */
-  ~PathFinding();
+  ~PathFinding() = default;
 
 
   /**
@@ -79,6 +79,12 @@ public:
   void highlightCells();
 
   /**
+   * \brief hides crossable cells, targets and friendly units
+   * \note clears cells' _highlight flag
+   */
+  void hideAllowedPath();
+
+  /**
    * \brief Return the list of available targets
    * \param ref Unit for which and from where the targets will be seek
    * \param coords Coordinates where the attacker is located
@@ -102,11 +108,6 @@ private:
    * \note Unreachable cells have a cost of motion + range + 1
    */
   void computeCosts();
-
-  /**
-   * \brief hides crossable cells
-   */
-  void hideAllowedPath();
 
   /**
    * \brief returns the sprite matching e_path_shape

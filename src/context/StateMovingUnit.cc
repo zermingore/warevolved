@@ -71,11 +71,13 @@ StateMovingUnit::StateMovingUnit()
 }
 
 
+
 StateMovingUnit::~StateMovingUnit()
 {
   // could write an assert checking if game::Status::battle() is still valid
   // (to avoid segfault exiting the game while moving a unit)
 
+  _pathFinding->hideAllowedPath();
   auto unit(game::Status::battle()->map()->unit(_originalCoords));
   if (unit) {
     unit->setColor({ 255, 255, 255, 255 });
@@ -83,12 +85,15 @@ StateMovingUnit::~StateMovingUnit()
 }
 
 
+
 void StateMovingUnit::exit()
 {
-  /// \todo kill the path finding (needed ?)
+  _pathFinding->hideAllowedPath();
   game::Status::popCurrentState();
   game::Status::player()->resetCellCursorPosition();
 }
+
+
 
 void StateMovingUnit::resume()
 {
