@@ -38,14 +38,16 @@
 ** TODO Sometimes, moving over an enemy unit is possible
    Seems to appear when two keys are pressed at the same time
    Unable to wait on an occupied cell though
-** TODO Resizable window
+** DONE Resizable window
+   CLOSED: [2019-09-30 Mon 07:33]
    Start the game in a small window; put the window in full screen
    -> The resolution is broken
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
 ** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
-** TODO The PathFinding should not, as default, clear the cells highlight attributes
+** DONE The PathFinding should not, as default, clear the cells highlight attributes
+   CLOSED: [2019-09-30 Mon 07:33]
 
 
 * TODO Doc
@@ -58,6 +60,7 @@
 ** TODO Map iterator to access cells without explicit double loop
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
 ** TODO Merge Cell highlight boolean and color (color::None)
+
 
 * TODO Experimental
 ** TODO drawInterface Vs drawState
@@ -197,7 +200,7 @@
 *** TODO [#B] Android
 
 
-* TODO Graphic Engine
+* TODO Graphics Engine
 ** TODO Units filter sprite
 ** TODO Units orientation
    only graphic attribute ?
@@ -233,13 +236,14 @@
 
 * TODO Testing
 ** TODO Smoke tests
-*** TODO Build
+*** DONE Build
+    CLOSED: [2019-09-30 Mon 07:35]
     autoreconf && configure && make
 *** DONE Print the help
     CLOSED: [2018-11-18 So 17:43]
 *** TODO Launch the game, must not crash
 ** TODO Non-regression tests process
-   Idealy, after each fixed bug
+   Idealy, before each bug to fix
 ** TODO Integration Test process
 *** TODO Load a map, a replay, save at the end; compare with a reference map
 *** TODO Game scripts (need to be able to use pre-recorded input)
@@ -250,13 +254,15 @@
    Use OpenCV to get the distance between the images
 ** TODO Unit tests
    using google tests?
-** TODO Use git hooks in order to make sure the tests were considered
+** DONE Use git hooks in order to make sure the tests were considered
+   CLOSED: [2019-09-30 Mon 07:35]
 ** [DROPPED] Disable the graphics engine (speeding up testing)
    May be considered later, if the process is indeed too slow because of it
    (The build process still takes more than a minute)
 
 
-* Build
+* TODO Build
+** TODO C++20 && map.contains
 
 
 * TODO [#C] Optimization
