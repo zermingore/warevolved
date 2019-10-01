@@ -235,14 +235,17 @@
 
 
 * TODO Testing
-** TODO Smoke tests
+** DONE Smoke tests
+   CLOSED: [2019-10-01 Tue 17:19]
 *** DONE Build
     CLOSED: [2019-09-30 Mon 07:35]
     autoreconf && configure && make
 *** DONE Print the help
     CLOSED: [2018-11-18 So 17:43]
-*** TODO Launch the game, must not crash
-** TODO Non-regression tests process
+*** DONE Launch the game, must not crash
+    CLOSED: [2019-10-01 Tue 17:19]
+** DONE Non-regression tests process
+   CLOSED: [2019-10-01 Tue 16:55]
    Idealy, before each bug to fix
 ** TODO Integration Test process
 *** TODO Load a map, a replay, save at the end; compare with a reference map

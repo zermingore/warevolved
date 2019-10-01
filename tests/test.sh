@@ -46,11 +46,10 @@ function smoke_tests()
 
 function non_regression_tests()
 {
-  ret_val=0
+  local ret_val=0
   beginSection "NON REGRESSION TESTS"
 
-  find "${ROOT_TESTS}/regression" -type f -iname "*.sh" -print0 \
-    | while IFS= read -r -d $'\0' file
+  for file in $(find "${ROOT_TESTS}/regression" -type f -iname "*.sh")
   do
     echo -n "Testing ${file}... "
     . "$file"
@@ -60,10 +59,10 @@ function non_regression_tests()
     else
       printSuccess "[done]\n"
     fi
+    ret_val=1
   done
 
   endSection
-
   return $ret_val
 }
 
@@ -72,6 +71,8 @@ function non_regression_tests()
 # ________________________________ Entry point _______________________________ #
 function main()
 {
+  result=0
+
   build
 
   # Get the absolute path to the 'we' binary
@@ -82,8 +83,13 @@ function main()
     exit 2
   fi
 
-  smoke_tests
+  smoke_tests || exit $?
   non_regression_tests
+  if [[ $? -ne 0 ]]; then
+    result=1
+  fi
+
+  exit $result
 }
 
 main
