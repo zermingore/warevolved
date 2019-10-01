@@ -59,7 +59,6 @@ function non_regression_tests()
     else
       printSuccess "[done]\n"
     fi
-    ret_val=1
   done
 
   endSection
