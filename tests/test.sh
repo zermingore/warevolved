@@ -44,6 +44,31 @@ function smoke_tests()
 
 
 
+function non_regression_tests()
+{
+  ret_val=0
+  beginSection "NON REGRESSION TESTS"
+
+  find "${ROOT_TESTS}/regression" -type f -iname "*.sh" -print0 \
+    | while IFS= read -r -d $'\0' file
+  do
+    echo -n "Testing ${file}... "
+    . "$file"
+    if [[ $? -ne 0 ]]; then
+      printError "[FAIL]"
+      ret_val=1
+    else
+      printSuccess "[done]\n"
+    fi
+  done
+
+  endSection
+
+  return $ret_val
+}
+
+
+
 # ________________________________ Entry point _______________________________ #
 function main()
 {
@@ -58,6 +83,7 @@ function main()
   fi
 
   smoke_tests
+  non_regression_tests
 }
 
 main
