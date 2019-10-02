@@ -27,17 +27,34 @@
 
 
 * TODO Bugs / Features
-** TODO Memory Leaks / Errors
-** TODO segfault while quitting the game, moving a unit
-   This happen because every static classes get 'destructed', exiting the main
-   Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
-     The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
-   To solve this, one can for instance:
-   - Find a way to 'destruct' static classes in a defined order
-   - As the static classes may be removed one day this would solve the issue
-** TODO Sometimes, moving over an enemy unit is possible
-   Seems to appear when two keys are pressed at the same time
-   Unable to wait on an occupied cell though
+** TODO Misc
+*** TODO Cancel on map status -> segfault
+*** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
+** TODO Units
+*** TODO After moving a unit, only cancel is available (escape not binded)
+*** TODO Do not imply move after opening the crew menu
+*** TODO segfault while quitting the game, moving a unit
+    This happen because every static classes get 'destructed', exiting the main
+    Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
+      The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
+    To solve this, one can for instance:
+    - Find a way to 'destruct' static classes in a defined order
+    - As the static classes may be removed one day this would solve the issue
+*** TODO In crew menu, 'Confirm' should be available only on changes
+*** TODO Random map: every player should have at least one unit
+*** TODO Sometimes, moving over an enemy unit is possible
+    Seems to appear when two keys are pressed at the same time
+    Unable to wait on an occupied cell though
+*** TODO Crew 'Passenger' not used
+*** TODO Canceling in the crew menu after a (temporary) move does not work
+*** TODO Crew 'Drop Off' > 'Cancel' and 'Get Out' have the same behaviour
+    Picking 'Cancel' and trying to exit ('escape') leads to a segfault
+** TODO Graphics
+*** TODO Resize the window: center the map
+*** TODO Resize the window: propagate new panel positions
+*** TODO The cursor appears over the menus
+*** TODO Panel: Pilot and Co-Pilot fonts differ
+*** TODO Panel: Info font (next to the unit sprite) is too big
 ** DONE Resizable window
    CLOSED: [2019-09-30 Mon 07:33]
    Start the game in a small window; put the window in full screen
@@ -45,7 +62,6 @@
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
-** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
 ** DONE The PathFinding should not, as default, clear the cells highlight attributes
    CLOSED: [2019-09-30 Mon 07:33]
 
@@ -226,11 +242,12 @@
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
 *** TODO auto generate documentation
-*** TODO integration tests were runned
+*** DONE tests were runned
+    CLOSED: [2019-10-02 Wed 08:27]
 ** TODO auto resources XML generator
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
-*** TODO Framerate (useful ?)
+*** TODO Framerate (blocked to 60 in release; unlimited in debug)
 ** TODO The displayed fps should be computed only over a fixed period of time
 
 
@@ -262,6 +279,7 @@
 ** [DROPPED] Disable the graphics engine (speeding up testing)
    May be considered later, if the process is indeed too slow because of it
    (The build process still takes more than a minute)
+** TODO Memory Leaks / Errors: periodic controls
 
 
 * TODO Build
