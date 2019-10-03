@@ -29,6 +29,7 @@
 * TODO Bugs / Features
 ** TODO Misc
 *** TODO Cancel on map status -> segfault
+    Quitting is a feature; the segfault is due to the event magager
 *** TODO Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
 ** TODO Units
 *** TODO After moving a unit, only cancel is available (escape not binded)
