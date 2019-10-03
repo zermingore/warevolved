@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 
 . "${ROOT_TESTS}/utils/log.sh"
@@ -51,5 +51,8 @@ function _standard_compilation()
 
 function build_main()
 {
+  rm -rf bin/ "$BUILD_DIR"
+  mkdir -p "$BUILD_DIR"
+
   _configure && _standard_compilation
 }

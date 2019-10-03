@@ -17,15 +17,11 @@ BUILD_DIR=build
 
 . "${ROOT_TESTS}/utils/log.sh"
 . "${ROOT_TESTS}/utils/options_parser.sh"
-
+. "${ROOT_TESTS}/utils/build.sh"
 
 
 function build()
 {
-  rm -rf bin/ "$BUILD_DIR"
-  mkdir -p "$BUILD_DIR"
-
-  . "${ROOT_TESTS}/utils/build.sh"
   build_main
 }
 
