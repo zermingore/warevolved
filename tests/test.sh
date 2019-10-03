@@ -3,11 +3,20 @@
 set -o pipefail
 
 
+VERSION=0.0.1
+
+# Program options
+OPTIONS=hv
+OPTIONS_LONG=help,version
+
+# Paths
 ROOT_TESTS="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 ROOT_PROJECT="${ROOT_TESTS}/.."
 BUILD_DIR=build
 
+
 . "${ROOT_TESTS}/utils/log.sh"
+. "${ROOT_TESTS}/utils/options_parser.sh"
 
 
 
@@ -70,7 +79,9 @@ function non_regression_tests()
 # ________________________________ Entry point _______________________________ #
 function main()
 {
-  result=0
+  parse_options "$@"
+
+  local result=0
 
   build
 
@@ -91,4 +102,4 @@ function main()
   exit $result
 }
 
-main
+main "$@"
