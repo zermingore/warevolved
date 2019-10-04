@@ -17,6 +17,12 @@ function _help()
          "-h|--help"    "print this help and exit"
 
   printf "    %-${longest_opt}s%s\n"\
+         "-j|--parallel-build" "Run make in parallel (--jobs)"
+
+  printf "    %-${longest_opt}s%s\n"\
+         "-n|--no-configure" "Do not run autoreconf / configure (no clean)"
+
+  printf "    %-${longest_opt}s%s\n"\
          "-v|--version" "print the program version and exit"
 }
 
@@ -51,6 +57,16 @@ function parse_options()
         echo
         _version
         exit 0
+        ;;
+
+      -j|--parallel-build)
+        PARALLEL_BUILD="-j$(grep -c processor /proc/cpuinfo)"
+        shift
+        ;;
+
+      -n|--no-configure)
+        NO_CONFIGURE=1
+        shift
         ;;
 
       -v|--version)

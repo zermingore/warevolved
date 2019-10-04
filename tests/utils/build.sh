@@ -37,7 +37,8 @@ function _standard_compilation()
 {
   beginSection "BUILD"
 
-  make -C "$BUILD_DIR" WE_EXTRA_CXXFLAGS=-Werror all install
+  echo "$PARALLEL_BUILD"
+  make "$PARALLEL_BUILD" -C "$BUILD_DIR" WE_EXTRA_CXXFLAGS=-Werror all install
   local ret_code=$?
   if [[ $ret_code -ne 0 ]]; then
     printError "Compilation error"
@@ -51,8 +52,13 @@ function _standard_compilation()
 
 function build_main()
 {
-  rm -rf bin/ "$BUILD_DIR"
-  mkdir -p "$BUILD_DIR"
+  if [ $NO_CONFIGURE -eq 1 ]; then
+    printInfo "Skipping the configure"
+  else
+    rm -rf bin/ "$BUILD_DIR"
+    mkdir -p "$BUILD_DIR"
+    _configure
+  fi
 
-  _configure && _standard_compilation
+  _standard_compilation
 }

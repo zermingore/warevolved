@@ -6,8 +6,11 @@ set -o pipefail
 VERSION=0.0.1
 
 # Program options
-OPTIONS=hv
-OPTIONS_LONG=help,version
+OPTIONS=hjnv
+OPTIONS_LONG=help,parallel-build,no-configure,version
+
+PARALLEL_BUILD="-j1"
+NO_CONFIGURE=0
 
 # Paths
 ROOT_TESTS="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
