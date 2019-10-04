@@ -47,9 +47,10 @@ function parse_options()
 
   # Invoke getopt
   local ret_val_getopt
-  local opts=`getopt --options $OPTIONS \
-                     --long $OPTIONS_LONG \
-                     -- "$@"`
+  local opts
+  opts=$(getopt --options $OPTIONS \
+                --long $OPTIONS_LONG \
+                -- "$@")
   ret_val_getopt=$?
   if [ $ret_val_getopt -ne 0 ]; then
     printError "getopt returned ${ret_val_getopt}. Terminating..."
