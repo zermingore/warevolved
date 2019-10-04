@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NOTE: modern getopt and bash-compliant shell required
+
+
 set -o pipefail
 
 
@@ -14,6 +17,7 @@ parallel-build,\
 no-configure,\
 regression,\
 smoke,\
+tests:,\
 version
 
 # Program options associated variables
@@ -116,6 +120,12 @@ function main()
       result=1
     fi
   fi
+
+  # Handle --tests=list
+  for test_file in "${TESTS_LIST[@]}"
+  do
+    . $test_file
+  done
 
   exit $result
 }
