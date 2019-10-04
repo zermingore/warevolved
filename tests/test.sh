@@ -124,7 +124,7 @@ function main()
   # Handle --tests=list
   for test_file in "${TESTS_LIST[@]}"
   do
-    echo -n "Testing ${file}... "
+    echo -n "Testing ${test_file}... "
     . $test_file
     if [[ $? -ne 0 ]]; then
       printError "[FAIL]"
