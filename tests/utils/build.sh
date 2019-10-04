@@ -37,7 +37,6 @@ function _standard_compilation()
 {
   beginSection "BUILD"
 
-  echo "$PARALLEL_BUILD"
   make "$PARALLEL_BUILD" -C "$BUILD_DIR" WE_EXTRA_CXXFLAGS=-Werror all install
   local ret_code=$?
   if [[ $ret_code -ne 0 ]]; then

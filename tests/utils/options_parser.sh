@@ -8,11 +8,12 @@ function _version()
 function _help()
 {
   echo "Usage:"
-  echo "    $0 [-h] [-v]"
+  echo -n "    $0 [-s|--smoke] [-r|--regression] [-n|--no-configure]"
+  echo    " [-j|--parallel-build]"
   echo
   echo "Options:"
 
-  local longest_opt=15
+  local longest_opt=20
   printf "    %-${longest_opt}s%s\n"\
          "-h|--help"    "print this help and exit"
 
@@ -23,7 +24,14 @@ function _help()
          "-n|--no-configure" "Do not run autoreconf / configure (no clean)"
 
   printf "    %-${longest_opt}s%s\n"\
-         "-v|--version" "print the program version and exit"
+         "-r|--regression"\
+         "Run the regression tests (exclude other non specified types)"
+
+  printf "    %-${longest_opt}s%s\n"\
+         "-s|--smoke" "Run the smoke tests (exclude other non specified types)"
+
+  printf "    %-${longest_opt}s%s\n"\
+         "-v|--version" "print the program version ($VERSION) and exit"
 }
 
 
@@ -66,6 +74,18 @@ function parse_options()
 
       -n|--no-configure)
         NO_CONFIGURE=1
+        shift
+        ;;
+
+      -r|--regression)
+        RUN_ALL_TYPES=0
+        RUN_REGRESSION=1
+        shift
+        ;;
+
+      -s|--smoke)
+        RUN_ALL_TYPES=0
+        RUN_SMOKE=1
         shift
         ;;
 

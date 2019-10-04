@@ -3,14 +3,26 @@
 set -o pipefail
 
 
-VERSION=0.0.1
+VERSION=0.1.0
 
 # Program options
-OPTIONS=hjnv
-OPTIONS_LONG=help,parallel-build,no-configure,version
+OPTIONS=hjnrsv
+OPTIONS_LONG=\
+help,\
+no-configure,\
+parallel-build,\
+no-configure,\
+regression,\
+smoke,\
+version
 
+# Program options associated variables
 PARALLEL_BUILD="-j1"
 NO_CONFIGURE=0
+RUN_ALL_TYPES=1
+RUN_REGRESSION=0
+RUN_SMOKE=0
+
 
 # Paths
 ROOT_TESTS="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
@@ -92,10 +104,17 @@ function main()
     exit 2
   fi
 
-  smoke_tests || exit $?
-  non_regression_tests
-  if [[ $? -ne 0 ]]; then
-    result=1
+  # Smoke tests
+  if [[ $RUN_ALL_TYPES -eq 1 || $RUN_SMOKE -eq 1 ]]; then
+    smoke_tests || exit $?
+  fi
+
+  # Regression tests
+  if [[ $RUN_ALL_TYPES -eq 1 || $RUN_REGRESSION -eq 1 ]]; then
+    non_regression_tests
+    if [[ $? -ne 0 ]]; then
+      result=1
+    fi
   fi
 
   exit $result
