@@ -8,42 +8,15 @@
 
 
 * TODO Roadmap
-** TODO Random generator as a service locator
-** DONE Testing: Launcher script
-   CLOSED: [2018-11-18 So 12:24]
-** DONE Testing: Smoke tests draft
-   CLOSED: [2018-11-18 So 17:35]
 ** TODO Testing: Integration tests draft
-** DONE Find a way to quit the game without closing the window
-   CLOSED: [2018-11-18 So 18:56]
-   Just add a key; Support it only when a specific option is provided?
-** TODO Be sure to save the events_log before "closing" the game
-** DONE Handle vehicles
-   CLOSED: [2019-09-26 Thu 07:02]
-*** DONE Pick Up / get in
-    CLOSED: [2019-09-05 Thu 19:13]
-*** DONE Drop / get out
-    CLOSED: [2019-09-26 Thu 07:02]
+** TODO Fix Cancel drop unit
+** TODO Opening the crew menu should not imply 'move'
 
 
 * TODO Bugs / Features
-** TODO Misc
-*** DONE Cancel on map status -> segfault
-    CLOSED: [2019-10-04 Fri 19:41]
-    Quitting is a feature; the segfault is due to the event magager
-*** DONE Quitting the game (Win+Shift+q under i3) closes the window, not the game (which still waits for events)
-    CLOSED: [2019-10-04 Fri 19:41]
 ** TODO Units
 *** TODO After moving a unit, only cancel is available (escape not binded)
 *** TODO Do not imply move after opening the crew menu
-*** DONE segfault while quitting the game, moving a unit
-    CLOSED: [2019-10-04 Fri 19:49]
-    This happen because every static classes get 'destructed', exiting the main
-    Example: Status keeps a shared_ptr to a Battle and one to a StateMovingUnit.
-      The destructor of StateMovingUnit relies on the validity of the shared_ptr on Battle
-    To solve this, one can for instance:
-    - Find a way to 'destruct' static classes in a defined order
-    - As the static classes may be removed one day this would solve the issue
 *** TODO In crew menu, 'Confirm' should be available only on changes
 *** TODO Random map: every player should have at least one unit
 *** TODO Sometimes, moving over an enemy unit is possible
@@ -59,15 +32,9 @@
 *** TODO The cursor appears over the menus
 *** TODO Panel: Pilot and Co-Pilot fonts differ
 *** TODO Panel: Info font (next to the unit sprite) is too big
-** DONE Resizable window
-   CLOSED: [2019-09-30 Mon 07:33]
-   Start the game in a small window; put the window in full screen
-   -> The resolution is broken
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
-** DONE The PathFinding should not, as default, clear the cells highlight attributes
-   CLOSED: [2019-09-30 Mon 07:33]
 
 
 * TODO Doc
@@ -88,12 +55,14 @@
 ** TODO Cursor (interface) in its thread
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
+** TODO Random generator as a service locator
 
 
 * TODO Input
 ** TODO Use the mouse to move the cursor, browse menus...
 ** TODO Clear the events fifo on State changes
 ** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
+** TODO Make sure the events_log is saved before quitting the game
 
 
 * TODO Game Features
@@ -246,8 +215,6 @@
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
 *** TODO auto generate documentation
-*** DONE tests were runned
-    CLOSED: [2019-10-02 Wed 08:27]
 ** TODO auto resources XML generator
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
@@ -256,18 +223,6 @@
 
 
 * TODO Testing
-** DONE Smoke tests
-   CLOSED: [2019-10-01 Tue 17:19]
-*** DONE Build
-    CLOSED: [2019-09-30 Mon 07:35]
-    autoreconf && configure && make
-*** DONE Print the help
-    CLOSED: [2018-11-18 So 17:43]
-*** DONE Launch the game, must not crash
-    CLOSED: [2019-10-01 Tue 17:19]
-** DONE Non-regression tests process
-   CLOSED: [2019-10-01 Tue 16:55]
-   Idealy, before each bug to fix
 ** TODO Integration Test process
 *** TODO Load a map, a replay, save at the end; compare with a reference map
 *** TODO Game scripts (need to be able to use pre-recorded input)
@@ -278,9 +233,7 @@
    Use OpenCV to get the distance between the images
 ** TODO Unit tests
    using google tests?
-** DONE Use git hooks in order to make sure the tests were considered
-   CLOSED: [2019-09-30 Mon 07:35]
-** [DROPPED] Disable the graphics engine (speeding up testing)
+** TODO [#B] Disable the graphics engine (speeding up testing)
    May be considered later, if the process is indeed too slow because of it
    (The build process still takes more than a minute)
 ** TODO Memory Leaks / Errors: periodic controls
