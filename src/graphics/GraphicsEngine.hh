@@ -9,6 +9,7 @@
 # define GRAPHICS_GRAPHICS_ENGINE_HH_
 
 # include <memory>
+# include <mutex>
 
 # include <SFML/Graphics/RenderWindow.hpp>
 # include <SFML/Window/Event.hpp>
@@ -65,21 +66,15 @@ public:
 
   /**
    * \brief Close the window on request; exiting the main loop
+   * \note does not return
    */
-  static void exitRequest();
+  [[ noreturn ]] static void exitRequest();
 
   /**
-   * \brief Close the window
+   * \brief Return the next event on the window if any
    */
-  static void closeWindow() {
-    _window->close();
-  }
-
-  /**
-   * \brief Wait and return the next event on the window
-   */
-  static auto waitEvent(sf::Event& event) {
-    return _window->waitEvent(event);
+  static auto pollEvent(sf::Event& event) {
+    return _window->pollEvent(event);
   }
 
   /**
@@ -164,6 +159,7 @@ private:
 
 
   static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
+  static bool _exit;           ///< true: got request to quit
   static bool _takeScreenshot; ///< true when a screenshot is requested
   static std::unique_ptr<TerrainsHandler> _terrainsHandler; ///< Terrains list
 };

@@ -11,6 +11,7 @@
 # include <memory>
 # include <vector>
 # include <chrono>
+# include <atomic>
 
 class ReplayManager;
 
@@ -26,11 +27,14 @@ public:
    * \brief Polls events until the exit event was found
    * \param replay true if we're in replay mode
    * \param replay_filename Replay file (w/o relative or absolute path)
+   * \param stop_events_listener stop thread condition
    * \note Infinite loop polling events, populating the KeyManager events queue
    * \note Initialize the KeyManager
    * \note In replay mode, launch another thread reading inputs from the replay
    */
-  static void listen(bool replay, const std::string& replay_filename);
+  static void listen(bool replay,
+                     const std::string& replay_filename,
+                     const std::atomic_bool& stop_events_listener);
 
 
 private:

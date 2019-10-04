@@ -14,7 +14,6 @@ std::condition_variable EventsProcessor::_cv_new_frame;
 
 
 
-
 void EventsProcessor::process()
 {
   auto globalState { std::make_unique<StateGlobal> () };

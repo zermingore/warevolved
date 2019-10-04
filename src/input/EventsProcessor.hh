@@ -29,7 +29,7 @@ public:
    * \brief Process events from the events queue
    * \note does not return
    */
-  [[ noreturn ]] static void process() ;
+  [[ noreturn ]] static void process();
 
   /**
    * \brief Notify the next frame by the GraphicsEngine

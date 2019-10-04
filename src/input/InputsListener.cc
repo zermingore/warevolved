@@ -17,7 +17,9 @@
 
 
 
-void InputsListener::listen(bool replay, const std::string& replay_filename)
+void InputsListener::listen(bool replay,
+                            const std::string& replay_filename,
+                            const std::atomic_bool& stop_events_listener)
 {
   // Initialize the replay mode as required (Read XOr Write)
   auto replay_manager = std::make_shared<ReplayManager> ();
@@ -36,20 +38,22 @@ void InputsListener::listen(bool replay, const std::string& replay_filename)
   KeyManager::Initialize(replay_manager);
 
   // Launch the events processor in its own thread
-  std::thread(EventsProcessor::process).detach();
+  auto inputs = std::async(std::launch::async, EventsProcessor::process);
 
   // Listen for events until the window close event is found
-  for (;;)
+  while (!stop_events_listener)
   {
     // Listen to input, convert them into events and push them in the fifo
     sf::Event event;
-    while (graphics::GraphicsEngine::waitEvent(event))
+    while (graphics::GraphicsEngine::pollEvent(event))
     {
       // Close window: exit request
       if (event.type == sf::Event::Closed)
       {
-        graphics::GraphicsEngine::closeWindow();
-        return;
+        // Simulating a keyboard exit in order to terminate the input thread
+        game::Status::clearStates();
+        KeyManager::pushEvent(sf::Keyboard::Escape);
+        break;
       }
 
       // Resize event

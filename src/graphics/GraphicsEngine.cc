@@ -28,19 +28,20 @@ const sf::Color GRID_COLOR(202, 124, 0);
 // Static Variables definition
 std::unique_ptr<RenderWindow> GraphicsEngine::_window;
 bool GraphicsEngine::_takeScreenshot;
+bool GraphicsEngine::_exit;
 std::unique_ptr<TerrainsHandler> GraphicsEngine::_terrainsHandler;
-
 
 
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   _window->setActive();
+  _exit = false;
   _takeScreenshot = false;
   _terrainsHandler = std::make_unique<TerrainsHandler> ();
   setGridOffset(battle->map());
 
   using namespace std::chrono;
-  while (_window->isOpen())
+  while (_window->isOpen() && !_exit)
   {
     auto graphics_start(steady_clock::now());
     drawBackground();
@@ -68,6 +69,8 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 
     EventsProcessor::notifyFrame();
   }
+
+  WARNING("Quitting War Evolved");
 }
 
 
@@ -252,7 +255,12 @@ void GraphicsEngine::resizeWindow(unsigned int width, unsigned int height)
 
 void GraphicsEngine::exitRequest()
 {
-  _window->close();
+  _exit = true; // Terminate the 'DrawScene' thread
+
+  // NOT closing the window in order to prevent the event thread from crashing
+
+  // Terminate the main thread; Nothing will try to catch it
+  throw std::runtime_error("Exiting War Evolved");
 }
 
 

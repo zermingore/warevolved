@@ -2,6 +2,7 @@
 
 #include <future>
 #include <cassert>
+#include <atomic>
 
 #include <tools/options/OptionsParser.hh>
 #include <graphics/Context.hh>
@@ -51,12 +52,21 @@ void Game::run()
     replay_file = _replayFiles[0];
   }
 
+  std::atomic_bool stop_events_listener{false};
   auto inputs = std::async(
-    std::launch::async, InputsListener::listen, _replay, replay_file);
+    std::launch::async,
+    InputsListener::listen,
+    _replay,
+    replay_file,
+    std::ref(stop_events_listener)
+  );
 
   game::Status::pushState(e_state::PLAYING);
   game::Status::currentState()->resume();
 
   // Drawing loop
   GraphicsEngine::drawScene(battle);
+
+  // Exit request reached
+  stop_events_listener = true;
 }
