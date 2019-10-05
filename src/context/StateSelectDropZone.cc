@@ -120,11 +120,9 @@ void StateSelectDropZone::draw()
   _holoUnit->drawAtCell(_zones[_indexZone]->coords());
   _holoUnit->setColor({ 255, 255, 255, 127 });
 
-  // emphasis (scale and rotation) of the cursor over the zone
-  static float scale_factor = 1;
+  // emphasis (rotation) of the cursor over the zone
   static size_t angle = 0;
-  angle % 360 > 180 ? scale_factor -= 0.001f : scale_factor += 0.001f;
-  ++angle; // \todo angle will overflow
+  angle = (angle + 1) % 360;
 
   using p = graphics::MapGraphicsProperties;
   auto width(p::cellWidth());

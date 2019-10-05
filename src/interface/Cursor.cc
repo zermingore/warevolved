@@ -6,6 +6,7 @@
  */
 
 #include <interface/Cursor.hh>
+
 #include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
