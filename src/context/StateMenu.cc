@@ -93,7 +93,7 @@ void StateMenu::validate() {
 
 void StateMenu::exit()
 {
-  game::Status::popCurrentState();
+  game::Status::clearStates();
   game::Status::currentState()->resume();
 }
 

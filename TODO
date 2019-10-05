@@ -15,7 +15,8 @@
 
 * TODO Bugs / Features
 ** TODO Units
-*** TODO After moving a unit, only cancel is available (escape not binded)
+*** DONE After moving a unit, only cancel is available (escape not binded)
+    CLOSED: [2019-10-05 Sat 14:11]
 *** TODO Do not imply move after opening the crew menu
 *** TODO In crew menu, 'Confirm' should be available only on changes
 *** TODO Random map: every player should have at least one unit
