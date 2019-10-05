@@ -56,10 +56,22 @@ public:
   auto coords() const { return _coords; }
 
   /**
+   * \brief Get unit's position
+   * \return Unit's Cell coordinates
+   */
+  auto oldCoords() const { return _oldCoords; }
+
+  /**
    * \brief sets unit's position
    * \param coords New unit Cell's coordinates
    */
   void setCoords(const Coords coords) { _coords = coords; }
+
+  /**
+   * \brief sets old unit's position
+   * \note Can be used, for instance to save coordinates before being moved
+   */
+  void stashCoords() { _oldCoords = _coords; }
 
   /**
    * \brief x coordinate on the map getter
@@ -182,6 +194,7 @@ protected:
   Coords _coords;      ///< Unit's cell coordinates
   bool _played;        ///< notify if the unit has already played this turn
   bool _moved;         ///< notify if the unit has moved this turn
+  Coords _oldCoords;   ///< Coordinates before moving (valid if _moved is true)
   size_t _playerId;    ///< the unit belongs to the player matching this id
 
   bool _canHaveCrew;   ///< Whether the Unit can host a crew

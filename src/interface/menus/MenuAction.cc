@@ -161,7 +161,7 @@ void MenuAction::moveUnit()
 }
 
 
-void MenuAction::waitUnit() /// \todo forbid move; authorize grouping
+void MenuAction::waitUnit()
 {
   /// \todo use other coordinates as the menu ones
   game::Status::battle()->map()->moveUnit(_coords);

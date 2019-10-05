@@ -17,7 +17,8 @@
 ** TODO Units
 *** DONE After moving a unit, only cancel is available (escape not binded)
     CLOSED: [2019-10-05 Sat 14:11]
-*** TODO Do not imply move after opening the crew menu
+*** DONE Do not imply move after opening the crew menu
+    CLOSED: [2019-10-05 Sat 19:18]
 *** TODO In crew menu, 'Confirm' should be available only on changes
 *** TODO Random map: every player should have at least one unit
 *** TODO Sometimes, moving over an enemy unit is possible

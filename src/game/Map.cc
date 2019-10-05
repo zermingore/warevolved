@@ -93,6 +93,7 @@ void Map::moveUnit(const Coords& c)
 
   Coords old(_selectedUnit->coords());
   assert(_cells[old.c][old.l]->unit()->played() == false);
+  _cells[old.c][old.l]->unit()->stashCoords();
 
   _cells[old.c][old.l]->unit()->setMoved(true);
   _cells[old.c][old.l]->removeUnit();

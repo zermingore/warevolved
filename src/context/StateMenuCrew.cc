@@ -167,7 +167,7 @@ void StateMenuCrew::validate()
   {
     if (_menuCrew->getCurrentSelection() == interface::e_entry::CANCEL)
     {
-      game::Status::clearStates();
+      cancel();
       return;
     }
 
@@ -202,6 +202,20 @@ void StateMenuCrew::exit() // escape key
     _menuMember->setActive(false);
     _menuMember->resetSelectedEntry();
     return;
+  }
+
+  cancel();
+}
+
+
+
+void StateMenuCrew::cancel()
+{
+  auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
+  if (selectedUnit->moved())
+  {
+    game::Status::battle()->map()->moveUnit(selectedUnit->oldCoords());
+    selectedUnit->setMoved(false);
   }
 
   game::Status::clearStates();

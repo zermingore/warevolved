@@ -107,6 +107,14 @@ private:
    */
   void exit();
 
+
+  /**
+   * \brief Restore the Vehicle status. This includes
+   *   - The Vehicle coordinates
+   *   - The dropped crew members \todo
+   */
+  void cancel();
+
   /**
    * \brief Adjust the menu member hidden flag
    */
