@@ -9,18 +9,9 @@
 
 * TODO Roadmap
 ** TODO Testing: Integration tests draft
-** DONE Fix Cancel drop unit
-   CLOSED: [2019-10-05 Sat 20:13]
-** DONE Opening the crew menu should not imply 'move'
-   CLOSED: [2019-10-05 Sat 20:14]
-
 
 * TODO Bugs / Features
 ** TODO Units
-*** DONE After moving a unit, only cancel is available (escape not binded)
-    CLOSED: [2019-10-05 Sat 14:11]
-*** DONE Do not imply move after opening the crew menu
-    CLOSED: [2019-10-05 Sat 19:18]
 *** TODO In crew menu, 'Confirm' should be available only on changes
 *** TODO Random map: every player should have at least one unit
 *** TODO Sometimes, moving over an enemy unit is possible
@@ -28,12 +19,6 @@
     Unable to wait on an occupied cell though
     Cannot reproduce it (October 2019)
 *** TODO Crew 'Passenger' not used
-*** DONE Canceling in the crew menu after a (temporary) move does not work
-    CLOSED: [2019-10-05 Sat 20:14]
-*** DONE Crew 'Drop Off' > 'Cancel' and 'Get Out' have the same behaviour
-    CLOSED: [2019-10-05 Sat 14:54]
-    Picking 'Cancel' and trying to exit ('escape') leads to a segfault
-
 
 ** TODO Graphics
 *** TODO Resize the window: center the map
