@@ -24,32 +24,17 @@ Vehicle::Vehicle()
 
 
 
-bool Vehicle::dropOff(e_unit_role role, Coords location)
+void Vehicle::dropOff(e_unit_role role, Coords location)
 {
-  if (_crew.size() == 0)
-  {
-    ERROR("Called 'dropOff()' with an empty Vehicle");
-    return false;
-  }
-
-  if (_crew.find(role) == _crew.end())
-  {
-    ERROR("Role not occupied in the Vehicle");
-    return false;
-  }
+  assert(_crew.size() != 0 && "Called 'dropOff()' with an empty Vehicle");
+  assert(_crew.find(role) != _crew.end() && "Role not found in the Vehicle");
 
   auto map = game::Status::battle()->map();
-  if (map->unit(location) != nullptr)
-  {
-    /// \todo hanle transfer unit from one vehicle to another one
-    ERROR("Called 'dropOff()' with an occupied location");
-    return false;
-  }
+  assert(   map->unit(location) == nullptr
+         && "Called 'dropOff()' with an occupied location");
 
   auto unit = _crew.at(role);
   unit->setCoords(location);
   map->revealUnit(*unit);
   _crew.erase(role);
-
-  return true;
 }

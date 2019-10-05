@@ -49,9 +49,8 @@ public:
    * \brief Drop the given unit off the Vehicle at the given position
    * \param role Crew member occupying this role will be dropped off
    * \param location Cell where to drop the unit off
-   * \return true on success; false otherwise (ex: non empty location)
    */
-  bool dropOff(e_unit_role role, Coords location);
+  void dropOff(e_unit_role role, Coords location);
 
   /**
    * \brief _crew size getter
