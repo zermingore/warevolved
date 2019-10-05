@@ -28,7 +28,7 @@ public:
   /**
    * \brief Can open fire depending on the presence of a co-pilot
    */
-  bool canOpenFire() override;
+  bool canOpenFire() override final;
 
   /**
    * \brief Add the given unit to the Car
@@ -37,7 +37,7 @@ public:
    * \todo Handle passengers
    * \todo Check if the given Unit can get in (ex: a tank cannot get in a car)
    */
-  bool addToCrew(std::shared_ptr<Unit> unit) override;
+  bool addToCrew(std::shared_ptr<Unit> unit) override final;
 };
 
 #endif /* !CAR_HH_ */

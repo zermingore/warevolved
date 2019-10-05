@@ -16,6 +16,7 @@
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/units/Unit.hh>
+#include <game/units/Vehicle.hh>
 #include <interface/menus/Menu.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/MenuCrewBrowse.hh>
@@ -173,7 +174,12 @@ void StateMenuCrew::validate()
 
     if (_menuCrew->getCurrentSelection() == interface::e_entry::CREW_CONFIRM)
     {
-      game::Status::battle()->map()->selectedUnit()->setPlayed(true);
+      auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
+      selectedUnit->setPlayed(true);
+
+      auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
+      v->clearDroppedHistory();
+
       game::Status::clearStates();
       return;
     }
@@ -217,6 +223,11 @@ void StateMenuCrew::cancel()
     game::Status::battle()->map()->moveUnit(selectedUnit->oldCoords());
     selectedUnit->setMoved(false);
   }
+
+  // restore dropped unit
+  auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
+  v->restoreCrew();
+  v->clearDroppedHistory();
 
   game::Status::clearStates();
 }

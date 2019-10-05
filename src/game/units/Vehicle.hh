@@ -60,9 +60,29 @@ public:
 
   // size_t roleProtection(); ///< Ex: In a pick-up: Gunner vs passenger
 
+  /**
+   * \brief Restore the dropped crew members
+   * \note Called after cancelling the crew management
+   */
+  void restoreCrew();
+
+  /**
+   * \brief Clear the dropped crew members history
+   * \note Called after confirming the crew management
+   */
+  void clearDroppedHistory() {
+    _dropped.clear();
+  }
+
+
 
 protected:
   std::map<e_unit_role, std::shared_ptr<Unit>> _crew; ///< Crew list (const key)
+
+  /// Units dropped since the last cancel / beginning of the turn
+  /// Used in order to cancel the drop
+  std::map<e_unit_role, std::shared_ptr<Unit>> _dropped;
+
   size_t _maxCrewMembers = 0; ///< Number of seats (constant)
 };
 
