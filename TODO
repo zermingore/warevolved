@@ -23,10 +23,14 @@
 *** TODO Sometimes, moving over an enemy unit is possible
     Seems to appear when two keys are pressed at the same time
     Unable to wait on an occupied cell though
+    Cannot reproduce it (October 2019)
 *** TODO Crew 'Passenger' not used
 *** TODO Canceling in the crew menu after a (temporary) move does not work
-*** TODO Crew 'Drop Off' > 'Cancel' and 'Get Out' have the same behaviour
+*** DONE Crew 'Drop Off' > 'Cancel' and 'Get Out' have the same behaviour
+    CLOSED: [2019-10-05 Sat 14:54]
     Picking 'Cancel' and trying to exit ('escape') leads to a segfault
+
+
 ** TODO Graphics
 *** TODO Resize the window: center the map
 *** TODO Resize the window: propagate new panel positions

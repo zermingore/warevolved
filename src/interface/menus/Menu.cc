@@ -40,7 +40,7 @@ void Menu::setOrigin(const Coords origin)
 void Menu::decrementSelectedEntry()
 {
   if (_selectedEntry) {
-    _selectedEntry = (_selectedEntry - 1) % (_entries.size() - 1);
+    --_selectedEntry;
   }
   else {
     _selectedEntry = _entries.size() - 1;

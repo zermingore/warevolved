@@ -185,6 +185,7 @@ void StateMenuCrew::validate()
   if (_menuMember->getCurrentSelection() == interface::e_entry::CANCEL)
   {
     exit();
+    return;
   }
 
   _menuMember->validate();
