@@ -138,8 +138,7 @@ private:
   /**
    * \brief Test the provided arguments validity
    *   Check if the arguments match supported options
-   * \todo support store option arguments (--replay filename)
-   * \todo split options arguments (--replay filename1,filename2)
+   * \todo support store replay file name arguments
    * \note throws if at least one argument is invalid
    * \note throws if the help or version option is provided
    */

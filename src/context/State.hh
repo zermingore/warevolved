@@ -69,37 +69,46 @@ public:
   /**
    * \brief Set attribute tail recursion (attributes list empty)
    */
-  void setAttributes() {}
+  void setAttributes() { }
 
 
   /**
    * \brief Fetch the attributes from the _attributes vector
    */
-  virtual void fetchAttributes() {}
+  virtual void fetchAttributes() { }
 
 
   /**
    * \brief Function to call when the State is resumed
-   * (or executed for the first time)
+   *   (or executed for the first time)
+   * \todo virtual pure
    */
-  virtual void resume() {} /// \todo =0
+  virtual void resume() { }
+
 
   /**
    * \brief Function to call when the State is suspended
+   * \todo virtual pure
    */
-  virtual void suspend() {} /// \todo =0
+  virtual void suspend() { }
 
 
   /**
    * \brief event manager getter
    * \return event manager
    */
-  auto eventManager() { return _evtMgr; }
+  auto eventManager() {
+    return _evtMgr;
+  }
+
 
   /**
    * \brief returns the list of related interface elements
    */
-  auto& interfaceElements() { return _interfaceElements; }
+  auto& interfaceElements() {
+    return _interfaceElements;
+  }
+
 
   /**
    * \brief Adds an InterfaceElement to manage
@@ -109,13 +118,17 @@ public:
     _interfaceElements.push_back(elt);
   }
 
+
   /**
    * \brief Draw graphical elements related to the State.
    */
   virtual void draw();
 
+
   /// Cursor coordinates getter
-  auto cursorCoords() { return _cursorCoords; }
+  auto cursorCoords() {
+    return _cursorCoords;
+  }
 
 
 

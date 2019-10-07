@@ -23,7 +23,6 @@ using events_list = std::vector<std::pair<std::chrono::duration<double>, int>>;
 /**
  * \class EventLogger
  * \brief Log events since the class creation
- * \todo do not write to disk at every log
  */
 class EventsLogger
 {

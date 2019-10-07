@@ -40,7 +40,11 @@ public:
    */
   ReplayManager();
 
-  ~ReplayManager() = default; /// \todo flush / make sure the file is closed
+  /**
+   * \brief Default destructor
+   * \todo flush / make sure the file is closed
+   */
+  ~ReplayManager() = default;
 
 
   /// List of events recorded during a previous game

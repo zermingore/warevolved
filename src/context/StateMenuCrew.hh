@@ -111,7 +111,7 @@ private:
   /**
    * \brief Restore the Vehicle status. This includes
    *   - The Vehicle coordinates
-   *   - The dropped crew members \todo
+   *   - The dropped crew members
    */
   void cancel();
 

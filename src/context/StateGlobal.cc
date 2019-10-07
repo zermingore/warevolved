@@ -49,5 +49,5 @@ void StateGlobal::quickSave()
 
 void StateGlobal::quickLoad()
 {
-  ERROR("quickLoad not implemented yet"); /// \todo
+  ERROR("quickLoad not implemented yet"); /// \todo implement
 }

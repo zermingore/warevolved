@@ -17,7 +17,7 @@ Car::Car()
 {
   _type = e_unit::CAR;
 
-  /// \todo TODO multiple sprites
+  /// \todo Multiple sprites
   _sprite = std::make_shared<graphics::Sprite> ("car");
 
   _motionValue = 5;

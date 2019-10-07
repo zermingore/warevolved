@@ -34,18 +34,21 @@ commit
 LOG2
 VLOG*
 
-# Emacs TAGS
+
+# Editor files
+# Emacs
 TAGS
 etags
-
-# Eclipse files
+# Eclipse
 .autotools
 .cproject
 .project
 .settings
-
-# Qt Creator files
+# Qt Creator
 warevolved.*
+# vscode
+.vscode
+
 
 # Doxygen
 doc/doxygen/

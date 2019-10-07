@@ -45,7 +45,7 @@ void MenuCrew::build()
       {
         auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
         entry->setCallbacks(
-        { /// \todo forbid move; allow further drops
+        {
           [=] { vehicle->dropOff(member.first, coords); },
         });
 
