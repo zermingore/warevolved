@@ -119,6 +119,13 @@ private:
   /// Initializes players.
   void initializePlayers();
 
+  /**
+   * \brief Place each Player's Cursor on one of its Unit
+   *   make sure that every Player has at least 1 Unit which did not play yet
+   */
+  void randomMapRefine();
+
+
   std::vector<std::shared_ptr<Player>> _players; ///< players in this battle
   size_t _currentPlayer; ///< current player's id
   size_t _nbPlayers; ///< Number of players
