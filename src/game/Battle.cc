@@ -397,16 +397,17 @@ void Battle::randomMapRefine()
     // Sanity check: the map was full, without friendly unit for this player
     assert(found_free_cell || found_friendly_unit);
 
-    // Did not find any friendly Unit but a free Cell is available -> new Soldier
+    // No friendly Unit found but a free Cell is available -> new Soldier
     if (found_free_cell)
     {
       /// \todo Creating an instance on the Unit only to get its max HP
       auto new_unit{UnitFactory::createUnit(e_unit::SOLDIER)};
       auto max_hp{new_unit->maxHp()};
-      _map->newUnit(e_unit::SOLDIER, freeCoords.c, freeCoords.l, player->id(), max_hp, false);
+      _map->newUnit(e_unit::SOLDIER,
+                    freeCoords.c, freeCoords.l, player->id(), max_hp, false);
       player->cursor()->setCoords({freeCoords.c, freeCoords.l});
 
-      NOTICE("Creating a Unit at", freeCoords.c, freeCoords.l, "for", player->id());
+      NOTICE("New Unit at", freeCoords.c, freeCoords.l, "for", player->id());
     }
   } // For every Player
 }
