@@ -362,17 +362,16 @@ void Battle::randomMapRefine()
   const auto lines{_map->nbLines()};
   for (auto player: _players)
   {
-    size_t col{0};
-    size_t line{0};
     Coords freeCoords{0, 0};
     auto found_free_cell{false};
     auto found_friendly_unit{false};
-    while (col < cols && !found_friendly_unit)
+    for (auto col{0u}; col < cols && !found_friendly_unit; ++col)
     {
-      for (; line < lines; ++line)
+      for (auto line{0u}; line < lines; ++line)
       {
         // If the cell is occupied by a friendly unit, put the cursor on it
         auto unit{_map->unit(col, line)};
+
         if (   unit
             && unit->playerId() == player->id()
             && unit->type() == e_unit::SOLDIER)
@@ -390,15 +389,13 @@ void Battle::randomMapRefine()
           found_free_cell = true;
         }
       }
-
-      ++col;
     }
 
     // Sanity check: the map was full, without friendly unit for this player
     assert(found_free_cell || found_friendly_unit);
 
     // No friendly Unit found but a free Cell is available -> new Soldier
-    if (found_free_cell)
+    if (found_free_cell && !found_friendly_unit)
     {
       /// \todo Creating an instance on the Unit only to get its max HP
       auto new_unit{UnitFactory::createUnit(e_unit::SOLDIER)};
