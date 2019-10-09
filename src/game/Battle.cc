@@ -404,6 +404,7 @@ void Battle::randomMapRefine()
       auto new_unit{UnitFactory::createUnit(e_unit::SOLDIER)};
       auto max_hp{new_unit->maxHp()};
       _map->newUnit(e_unit::SOLDIER, freeCoords.c, freeCoords.l, player->id(), max_hp, false);
+      player->cursor()->setCoords({freeCoords.c, freeCoords.l});
 
       NOTICE("Creating a Unit at", freeCoords.c, freeCoords.l, "for", player->id());
     }
