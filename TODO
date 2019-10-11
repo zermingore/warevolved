@@ -234,9 +234,8 @@
 ** TODO Memory Leaks / Errors: periodic controls
 
 
-* Build
-** DONE C++20 && map.contains
-   CLOSED: [2019-10-11 Fri 06:40]
+* TODO Build
+** TODO C++20 && map.contains
 
 
 * TODO [#C] Optimization

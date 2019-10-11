@@ -56,16 +56,29 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit)
 
   std::shared_ptr<Unit> driver = nullptr;
   std::shared_ptr<Unit> copilot = nullptr;
-
-  if (!_crew.contains(e_unit_role::DRIVER))
+  try
   {
-    _crew[e_unit_role::DRIVER] = unit;
-    return true;
+    driver = _crew.at(e_unit_role::DRIVER);
+    copilot = _crew.at(e_unit_role::COPILOT);
   }
-  if (!_crew.contains(e_unit_role::COPILOT))
+  catch (const std::out_of_range& e)
   {
-    _crew[e_unit_role::COPILOT] = unit;
-    return true;
+    if (copilot) /// \todo Take into account passengers
+    {
+      NOTICE("Driver and Copilot already on board");
+      return false;
+    }
+
+    if (driver)
+    {
+      _crew[e_unit_role::COPILOT] = unit;
+      return true;
+    }
+    else // empty car
+    {
+      _crew[e_unit_role::DRIVER] = unit;
+      return true;
+    }
   }
 
   ERROR("[IMPLEMENTATION ERROR] Failed trying to add the unit to the crew");
