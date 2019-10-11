@@ -54,7 +54,7 @@ void MenuCrewBrowse::build()
         auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second));
         entry->setCallbacks(
         {
-          [&] { vehicle->dropOff(mem.first, _coords); }
+          [=] { vehicle->dropOff(mem.first, _coords); }
         });
         _entries.push_back(entry);
       }
@@ -62,11 +62,11 @@ void MenuCrewBrowse::build()
   }
 
   auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
-  entry_confirm->setCallback( [&] { confirm(); });
+  entry_confirm->setCallback( [=] { confirm(); });
   _entries.push_back(entry_confirm);
 
   auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
-  entry_cancel->setCallback( [&] { cancel(); });
+  entry_cancel->setCallback( [=] { cancel(); });
   _entries.push_back(entry_cancel);
 
   // increase highlight sprite

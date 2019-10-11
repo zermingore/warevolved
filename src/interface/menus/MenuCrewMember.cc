@@ -39,12 +39,12 @@ void MenuCrewMember::build()
     auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
     entry->setCallbacks(
     {
-      [&] { getOut(); },
+      [=] { getOut(); },
     });
     _entries.push_back(entry);
   }
 
-  addCancelEntry( [&] { cancel(); } );
+  addCancelEntry( [=] { cancel(); } );
 }
 
 

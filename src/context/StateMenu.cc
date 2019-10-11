@@ -21,11 +21,11 @@ StateMenu::StateMenu(const e_state state)
   : State()
 {
   // browsing entries
-  _evtMgr->registerEvent(e_input::MOVE_UP,   [&] { moveUp();   });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN, [&] { moveDown(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP,   [=] { moveUp();   });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN, [=] { moveDown(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION, [&] { validate(); });
-  _evtMgr->registerEvent(e_input::EXIT,      [&] { exit();     });
+  _evtMgr->registerEvent(e_input::SELECTION, [=] { validate(); });
+  _evtMgr->registerEvent(e_input::EXIT,      [=] { exit();     });
 
 
   // Building the menu depending on the State

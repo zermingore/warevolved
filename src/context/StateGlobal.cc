@@ -16,13 +16,13 @@
 StateGlobal::StateGlobal()
   : State()
 {
-  _evtMgr->registerEvent(e_input::SCREENSHOT, [&] { screenshot(); });
-  _evtMgr->registerEvent(e_input::DUMP_MAP,   [&] { dumpMap(); });
-  _evtMgr->registerEvent(e_input::QUICK_SAVE, [&] { quickSave(); });
-  _evtMgr->registerEvent(e_input::QUICK_LOAD, [&] { quickLoad(); });
+  _evtMgr->registerEvent(e_input::SCREENSHOT, [=] { screenshot(); });
+  _evtMgr->registerEvent(e_input::DUMP_MAP,   [=] { dumpMap(); });
+  _evtMgr->registerEvent(e_input::QUICK_SAVE, [=] { quickSave(); });
+  _evtMgr->registerEvent(e_input::QUICK_LOAD, [=] { quickLoad(); });
 
   _evtMgr->registerEvent(e_input::TOGGLE_PANEL,
-                         [&] { game::Status::player()->togglePanel(); });
+                         [=] { game::Status::player()->togglePanel(); });
 }
 
 
