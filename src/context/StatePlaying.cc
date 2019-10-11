@@ -18,22 +18,22 @@ StatePlaying::StatePlaying()
 
   auto player(game::Status::player());
   _evtMgr->registerEvent(e_input::MOVE_UP,
-                         [=] { player->moveCursorUp(); });
+                         [&] { player->moveCursorUp(); });
 
   _evtMgr->registerEvent(e_input::MOVE_DOWN,
-                         [=] { player->moveCursorDown(); });
+                         [&] { player->moveCursorDown(); });
 
   _evtMgr->registerEvent(e_input::MOVE_LEFT,
-                         [=] { player->moveCursorLeft(); });
+                         [&] { player->moveCursorLeft(); });
 
   _evtMgr->registerEvent(e_input::MOVE_RIGHT,
-                         [=] { player->moveCursorRight(); });
+                         [&] { player->moveCursorRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION,
-                         [=] { player->select(); });
+                         [&] { player->select(); });
 
   _evtMgr->registerEvent(e_input::EXIT,
-                         [=] { graphics::GraphicsEngine::exitRequest(); });
+                         [&] { graphics::GraphicsEngine::exitRequest(); });
 
   addInterfaceElement(player->cursor());
 }
