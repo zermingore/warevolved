@@ -5,8 +5,8 @@ AC_INIT([ms], [1.0])
 
 AC_CONFIG_AUX_DIR([build-aux])
 
-# forcing c++17 usage (must be before AC_PROG_CXX)
-CXXFLAGS="$CXXFLAGS -std=c++17 -pthread"
+# forcing c++2a usage (must be before AC_PROG_CXX)
+CXXFLAGS="$CXXFLAGS -std=c++2a -pthread"
 
 
 if [[ -n "$SFML_PATH" ]]
