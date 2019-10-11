@@ -3,10 +3,10 @@ War Evolved is a simple 2D tactical RPG
 To build the project, the following are required:
 - autotools
 - make
-- A C++17 compliant compiler
+- A C++ compiler with at least experimental C++20 support
 - The SFML (version >= 2.3)
 
-As the C++17 standard is recent, you may have to build a compiler from sources.
+As the C++20 standard is not yet released, you may have to build a compiler from sources.
 You may also need to indicate the path to a recent libc to run the binary using:
 > LD_LIBRARY_PATH=/path/to/lib ./we
 
