@@ -32,7 +32,7 @@ void MenuAction::build()
     buildMenuAfterMovingUnit();
   }
 
-  addCancelEntry( [=] { cancel(); } );
+  addCancelEntry( [=, this] { cancel(); } );
 }
 
 
@@ -82,7 +82,7 @@ void MenuAction::buildMenuSelectionUnit()
       && _selectedUnit->playerId() == game::Status::player()->id())
   {
     auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
-    entry->setCallback( [=] { moveUnit(); });
+    entry->setCallback( [=, this] { moveUnit(); });
     _entries.push_back(entry);
   }
 
@@ -92,14 +92,14 @@ void MenuAction::buildMenuSelectionUnit()
   if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
   {
     auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-    entry->setCallback( [=] { attackUnit(); });
+    entry->setCallback( [=, this] { attackUnit(); });
     _entries.push_back(entry);
   }
 
   if (_selectedUnit->crewSize())
   {
     auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
-    entry_crew->setCallback( [=] { manageCrew(); });
+    entry_crew->setCallback( [=, this] { manageCrew(); });
     _entries.push_back(entry_crew);
   }
 }
@@ -113,7 +113,7 @@ void MenuAction::buildMenuAfterMovingUnit()
   if (!unit) // Specific action depending on the occupation
   {
     auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
-    entry_wait->setCallback( [=] { waitUnit(); });
+    entry_wait->setCallback( [=, this] { waitUnit(); });
     _entries.push_back(entry_wait);
 
     /// \todo use other coordinates than the menu ones
@@ -128,14 +128,14 @@ void MenuAction::buildMenuAfterMovingUnit()
     if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-      entry->setCallback( [=] { attackUnit(); });
+      entry->setCallback( [=, this] { attackUnit(); });
       _entries.push_back(entry);
     }
 
     if (_selectedUnit->crewSize())
     {
       auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
-      entry_crew->setCallback( [=] {
+      entry_crew->setCallback( [=, this] {
         game::Status::battle()->map()->moveUnit(_coords);
         game::Status::player()->cursor()->setCoords(_coords);
         manageCrew();
