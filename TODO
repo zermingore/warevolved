@@ -43,6 +43,13 @@
 ** TODO Map iterator to access cells without explicit double loop
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
 ** TODO Merge Cell highlight boolean and color (color::None)
+** TODO Capture lambda as reference when possible
+** TODO Use the uniformed initialization
+** TODO Factories: return unique_ptr
+** TODO Find a way to have compile-time map keys (vehicle crews)
+** TODO Event logger no longer in debug namespace
+** TODO Dirty generated enum / not up to date
+** TODO Map random generation
 
 
 * TODO Experimental
@@ -52,6 +59,8 @@
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 ** TODO Random generator as a service locator
+** TODO Upgrade SFML
+** TODO Give clang-tidy a try
 
 
 * TODO Input
