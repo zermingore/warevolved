@@ -14,7 +14,8 @@
 * TODO Bugs / Features
 ** TODO Units
 *** TODO In crew menu, 'Confirm' should be available only on changes
-*** TODO Random map: every player should have at least one unit
+*** DONE Random map: every player should have at least one unit
+    CLOSED: [2019-10-11 Fri 19:17]
 *** TODO Sometimes, moving over an enemy unit is possible
     Seems to appear when two keys are pressed at the same time
     Unable to wait on an occupied cell though

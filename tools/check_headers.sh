@@ -10,7 +10,7 @@ CXXFLAGS="-O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS \
  -Wall -Wextra -Wpedantic -Waggressive-loop-optimizations -Wformat=2 \
  -Wformat-contains-nul -Wformat-extra-args -Wformat-signedness \
  -Wformat-zero-length -Warray-bounds=2 -Wattributes -Wbool-compare \
- -Wbuiltin-macro-redefined -Wcast-align -Wcast-qual -Wchkp \
+ -Wbuiltin-macro-redefined -Wcast-align -Wcast-qual \
  -Wconditionally-supported -Wconversion -Wconversion-null -Wctor-dtor-privacy \
  -Wdate-time -Wdelete-incomplete -Wdeprecated -Wdeprecated-declarations \
  -Wdisabled-optimization -Wdiv-by-zero -Wdouble-promotion -Wendif-labels \
