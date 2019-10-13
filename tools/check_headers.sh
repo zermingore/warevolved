@@ -6,7 +6,7 @@
 
 # Compiler and Flags
 CXX=g++
-CXXFLAGS="-O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS \
+CXXFLAGS="-O0 -DDEBUG -DDEBUG_LEAKS \
  -Wall -Wextra -Wpedantic -Waggressive-loop-optimizations -Wformat=2 \
  -Wformat-contains-nul -Wformat-extra-args -Wformat-signedness \
  -Wformat-zero-length -Warray-bounds=2 -Wattributes -Wbool-compare \
@@ -39,16 +39,25 @@ COLOR_GREEN=$(echo -e '\e[0;32m')
 COLOR_NORMAL=$(echo -e '\e[0m')
 # COLOR_YELLOW=$(echo -e '\e[0;33m')
 
+TMP_SRC=/tmp/check_headers
+CXXINCLUDES="-I$1 -I$1/../lib/" # -I.
+COMPILE="$CXX $CXXINCLUDES $CXXFLAGS -o ${TMP_SRC}/unused_header"
+
+
 
 function usage()
 {
   echo -e "\n\t./$(basename "$0") path_to_project_root"
 }
 
+
+
 function version()
 {
   echo -e "$(basename "$0") Version 1.0.0"
 }
+
+
 
 function help()
 {
@@ -119,37 +128,60 @@ function check_arguments()
 
 
 
+function check_header()
+{
+  # Sanity check
+  if [[ $# -ne 2 ]]; then
+    echo "$COLOR_RED" # new line
+    echo "IMPLEMENTATION ERROR: Invalid Arguments $*"
+    echo "One argument expected (header name)"
+    echo -n "$COLOR_NORMAL"
+    exit 2
+  fi
+
+  local ret_val=0
+  local header="$1"
+  local source="$2"
+
+  echo -n "Checking $header ..."
+
+  # Compiling the header in stand-alone
+  $COMPILE "$header"
+  local ret_val=$(($? + ret_val))
+
+  # Compiling a trivial main (with 2 inclusions to check the guards)
+  header_in_src=${header##$source}
+  test_header="${TMP_SRC}/test_header.cc"
+  echo "#include \"$header_in_src\"" > $test_header
+  echo "#include \"$header_in_src\"" >> $test_header
+  echo "int main() { return 0; }" >> $test_header
+  $COMPILE "$test_header"
+  if [ $? -eq 0 ]; then
+    echo -n "$COLOR_GREEN done"
+  else
+    echo -n "$COLOR_RED fail"
+  fi
+  echo "$COLOR_NORMAL"
+
+  return $ret_val
+}
+
+
+
 function main()
 {
   local ret_val=0 # Compilations return values accumulator
 
   check_arguments "$@"
 
-  tmp_src=/tmp/check_headers
-  test_header="${tmp_src}/test_header.cc"
-  rm -rf "${tmp_src}"
-  mkdir "${tmp_src}"
-  cp -a "$1"/. "${tmp_src}"
+  rm -rf "${TMP_SRC}"
+  mkdir "${TMP_SRC}"
+  cp -a "$1"/. "${TMP_SRC}"
 
-  CXXINCLUDES="-I$1 -I$1/../lib/" # -I.
-  COMPILE="$CXX $CXXINCLUDES $CXXFLAGS -o ${tmp_src}/unused_header"
   echo "Checking headers in $1"
   for header in $(find "$1" -name \*.hh); do
-    echo -n "Checking $header ..."
-
-    # Compiling the header in stand-alone
-    $COMPILE "$header"
+    check_header $header $1
     ret_val=$(($? + ret_val))
-
-    # Compiling a trivial main (with 2 inclusions to check the guards)
-    header_in_src=${header##$1}
-    echo "#include \"$header_in_src\"" > $test_header
-    echo "#include \"$header_in_src\"" >> $test_header
-    echo "int main() { return 0; }" >> $test_header
-    $COMPILE "$test_header"
-    ret_val=$(($? + ret_val))
-
-    echo "$COLOR_GREEN done $COLOR_NORMAL"
   done
 
   if [[ $ret_val -ne 0 ]]; then
