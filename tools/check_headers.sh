@@ -203,7 +203,7 @@ function main()
   if [[ $(cat $FAILED_LIST | wc -l) != "1" ]]; then
     echo
     echo -e "\t $COLOR_RED THE FOLLOWING INCLUDES FAILED THE TEST $COLOR_NORMAL"
-    head -n 1 $FAILED_LIST
+    tail -n 1 $FAILED_LIST
     exit 1
   fi
 
