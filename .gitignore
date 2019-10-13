@@ -8,6 +8,7 @@ LOG_EVENTS
 *\#
 *user
 build/
+*__quick_save.xml
 
 # Autotools output
 configure
@@ -21,11 +22,9 @@ config.status
 *.deps/
 *.am.user*
 
-
 # Testing
 tests/build
 tests/bin
-
 
 # personal files
 valgrind_log*
@@ -33,7 +32,6 @@ valgrind_suppressions
 commit
 LOG2
 VLOG*
-
 
 # Editor files
 # Emacs
@@ -48,7 +46,6 @@ etags
 warevolved.*
 # vscode
 .vscode
-
 
 # Doxygen
 doc/doxygen/
