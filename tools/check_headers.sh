@@ -152,7 +152,7 @@ function check_header()
   local -r source="$2"
 
   # Compiling the header in stand-alone
-  $COMPILE "$header" &
+  $COMPILE "$header"
 
   # Compiling a trivial main (with 2 inclusions to check the guards)
   header_in_src=${header##$source}
