@@ -6,7 +6,7 @@
 
 # Compiler and Flags
 CXX=g++
-CXXFLAGS="-O0 -DDEBUG -DDEBUG_LEAKS \
+CXXFLAGS="-O0 -pipe -DDEBUG -DDEBUG_LEAKS \
  -Wall -Wextra -Wpedantic -Waggressive-loop-optimizations -Wformat=2 \
  -Wformat-contains-nul -Wformat-extra-args -Wformat-signedness \
  -Wformat-zero-length -Warray-bounds=2 -Wattributes -Wbool-compare \
@@ -40,6 +40,7 @@ COLOR_NORMAL=$(echo -e '\e[0m')
 # COLOR_YELLOW=$(echo -e '\e[0;33m')
 
 TMP_SRC=/tmp/check_headers
+FAILED_LIST=${TMP_SRC}/__results__
 CXXINCLUDES="-I$1 -I$1/../lib/" # -I.
 COMPILE="$CXX $CXXINCLUDES $CXXFLAGS -o ${TMP_SRC}/unused_header"
 
@@ -128,6 +129,14 @@ function check_arguments()
 
 
 
+# Check if the given header can be compiled
+# Try to include it twice to check its idem-potency
+#
+# Arguments
+#   header file
+#   headers root
+#
+# Return nothing but write the file name in $FAILED_LIST on error
 function check_header()
 {
   # Sanity check
@@ -139,54 +148,62 @@ function check_header()
     exit 2
   fi
 
-  local ret_val=0
-  local header="$1"
-  local source="$2"
-
-  echo -n "Checking $header ..."
+  local -r header="$1"
+  local -r source="$2"
 
   # Compiling the header in stand-alone
-  $COMPILE "$header"
-  local ret_val=$(($? + ret_val))
+  $COMPILE "$header" &
 
   # Compiling a trivial main (with 2 inclusions to check the guards)
   header_in_src=${header##$source}
-  test_header="${TMP_SRC}/test_header.cc"
-  echo "#include \"$header_in_src\"" > $test_header
-  echo "#include \"$header_in_src\"" >> $test_header
-  echo "int main() { return 0; }" >> $test_header
+  local -r test_header="${TMP_SRC}/test_header__$(basename $header).cc"
+
+  cat << EOF > $test_header
+#include "$header_in_src"
+#include "$header_in_src"
+int main() { return 0; }
+EOF
   $COMPILE "$test_header"
   if [ $? -eq 0 ]; then
-    echo -n "$COLOR_GREEN done"
+    echo "${COLOR_GREEN}[PASS] ${COLOR_NORMAL}$header"
   else
-    echo -n "$COLOR_RED fail"
+    echo "${COLOR_RED}[FAIL] ${COLOR_NORMAL}$header"
+    echo "$header" >> $FAILED_LIST
   fi
-  echo "$COLOR_NORMAL"
-
-  return $ret_val
 }
 
 
 
 function main()
 {
-  local ret_val=0 # Compilations return values accumulator
-
   check_arguments "$@"
 
   rm -rf "${TMP_SRC}"
   mkdir "${TMP_SRC}"
+  echo "Any erroneous header will be listed here:" >> $FAILED_LIST
   cp -a "$1"/. "${TMP_SRC}"
 
+  local -r nb_core=$((2 * $(grep -c processor /proc/cpuinfo)))
   echo "Checking headers in $1"
+
+  # Run the checks themselves
   for header in $(find "$1" -name \*.hh); do
-    check_header $header $1
-    ret_val=$(($? + ret_val))
+    while [ $(jobs | wc -l) -ge $nb_core ]; do
+      sleep 0.1
+    done
+
+    check_header $header $1 &
   done
 
-  if [[ $ret_val -ne 0 ]]; then
+  # Wait for non-terminated jobs
+  while [ $(jobs | wc -l) -ne 1 ]; do
+    sleep 0.1
+  done
+
+  if [[ $(cat $FAILED_LIST | wc -l) != "1" ]]; then
     echo
-    echo -e "\t $COLOR_RED NOT EVERY INCLUDE PASSED THE TEST $COLOR_NORMAL"
+    echo -e "\t $COLOR_RED THE FOLLOWING INCLUDES FAILED THE TEST $COLOR_NORMAL"
+    head -n 1 $FAILED_LIST
     exit 1
   fi
 
