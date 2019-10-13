@@ -29,7 +29,7 @@ CXXFLAGS="-O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS \
  -Wsuggest-final-types -Wsuggest-override -Wswitch-bool -Wswitch-default \
  -Wsync-nand -Wtrampolines -Wunsafe-loop-optimizations \
  -Wuseless-cast -Wvarargs -Wvector-operation-performance -Wvirtual-move-assign \
- -Wwrite-strings -Wzero-as-null-pointer-constant -std=c++17 -pthread"
+ -Wwrite-strings -Wzero-as-null-pointer-constant -std=c++2a -pthread"
 # removed -Wunused-macros to hide warnings about unused header guard
 
 
