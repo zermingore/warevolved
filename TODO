@@ -14,8 +14,6 @@
 * TODO Bugs / Features
 ** TODO Units
 *** TODO In crew menu, 'Confirm' should be available only on changes
-*** DONE Random map: every player should have at least one unit
-    CLOSED: [2019-10-11 Fri 19:17]
 *** TODO Sometimes, moving over an enemy unit is possible
     Seems to appear when two keys are pressed at the same time
     Unable to wait on an occupied cell though
@@ -31,10 +29,13 @@
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
+** TODO Bootstrap: do not hard-code the path to the configure
 
 
 * TODO Doc
 ** TODO Options
+** TODO Clean the think/ folder
+** TODO Document the coding style
 
 
 * TODO Clean
@@ -50,6 +51,7 @@
 ** TODO Event logger no longer in debug namespace
 ** TODO Dirty generated enum / not up to date
 ** TODO Map random generation
+** TODO Do not put enums in common as default (+ sort them)
 
 
 * TODO Experimental
@@ -225,12 +227,15 @@
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (blocked to 60 in release; unlimited in debug)
 ** TODO The displayed fps should be computed only over a fixed period of time
+** TODO Check if the generated enums_printer need an update on commit/push
 
 
 * TODO Testing
 ** TODO Integration Test process
 *** TODO Load a map, a replay, save at the end; compare with a reference map
-*** TODO Game scripts (need to be able to use pre-recorded input)
+*** DONE Game scripts (need to be able to use pre-recorded input)
+    CLOSED: [2019-10-14 Mon 20:15]
+    Use a replay
 *** [DROPPED] Use an ascii map to check fight behavior
    (use directly the xml Map instead)
 *** TODO Use screenshots for the interface
@@ -245,8 +250,6 @@
 
 
 * Build
-** DONE C++20 && map.contains
-   CLOSED: [2019-10-11 Fri 06:40]
 
 
 * TODO [#C] Optimization
