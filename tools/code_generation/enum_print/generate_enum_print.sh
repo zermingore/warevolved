@@ -97,7 +97,7 @@ function handle_prototypes()
     grep -rh '# *include' "$f" | grep -v string >> "$prototypes"
   done
 
-  # Include identation
+  # Include indentation
   sed -i s/'#include'/'# include'/g "$prototypes"
   echo -e "\n" >> "$prototypes"
 
@@ -149,7 +149,7 @@ function generate_print()
 }
 
 
-# Inegrate the generated code into the project folder
+# Integrate the generated code into the project folder
 function integrate_generation()
 {
   local generated_folder="$WE_PATH"/src/generated/enum_print
