@@ -29,8 +29,11 @@ you will need:
 - doxygen
 
 
+In order to generate the enums, gawk is required
+
+
 On a debian system, you may run:
-> sudo apt-get install build-essential autoconf libx11-dev libsfml-dev graphviz doxygen
+> sudo apt-get install build-essential autoconf libx11-dev libsfml-dev graphviz doxygen gawk
 
 
 This project is under a fully permissive license.

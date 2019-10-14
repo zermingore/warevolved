@@ -136,7 +136,7 @@ function generate_print()
     g++ -x c++ -E "$f" > /tmp/$(basename "$f")
 
     # Invoke the awk script, generating the code
-    awk -f $(dirname "$0")/fetch_enums.awk /tmp/$(basename "$f") \
+    gawk -f $(dirname "$0")/fetch_enums.awk /tmp/$(basename "$f") \
         > "$awk_gen" # --lint
 
     # Add the include of the enum file
