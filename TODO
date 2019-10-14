@@ -233,11 +233,6 @@
 * TODO Testing
 ** TODO Integration Test process
 *** TODO Load a map, a replay, save at the end; compare with a reference map
-*** DONE Game scripts (need to be able to use pre-recorded input)
-    CLOSED: [2019-10-14 Mon 20:15]
-    Use a replay
-*** [DROPPED] Use an ascii map to check fight behavior
-   (use directly the xml Map instead)
 *** TODO Use screenshots for the interface
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
