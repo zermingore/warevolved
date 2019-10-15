@@ -4,7 +4,6 @@
 #include <chrono>
 
 #include <debug/Debug.hh>
-#include <debug/EventsLogger.hh>
 #include <game/Status.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <context/State.hh>

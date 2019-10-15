@@ -48,7 +48,8 @@
 ** TODO Use the uniformed initialization
 ** TODO Factories: return unique_ptr
 ** TODO Find a way to have compile-time map keys (vehicle crews)
-** TODO Event logger no longer in debug namespace
+** DONE Event logger no longer in debug namespace
+   CLOSED: [2019-10-15 Tue 18:44]
 ** TODO Dirty generated enum / not up to date
 ** TODO Map random generation
 ** TODO Do not put enums in common as default (+ sort them)

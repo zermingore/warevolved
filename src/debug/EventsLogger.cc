@@ -9,7 +9,6 @@
 #include <tools/StringParser.hh>
 
 
-namespace debug {
 
 // static attributes definition
 std::string EventsLogger::_logFileName;
@@ -30,6 +29,7 @@ void EventsLogger::initialize(std::string filename)
 
   _creationTime = std::chrono::steady_clock::now();
 }
+
 
 
 events_list EventsLogger::fetchLoggedEvents()
@@ -71,6 +71,7 @@ events_list EventsLogger::fetchLoggedEvents()
 }
 
 
+
 void EventsLogger::log(sf::Event event)
 {
   /// checking for initialization \todo no longer static class
@@ -86,6 +87,7 @@ void EventsLogger::log(sf::Event event)
 }
 
 
+
 void EventsLogger::logProcessedEvent(e_input& input)
 {
   /// checking for initialization \todo no longer static class
@@ -98,8 +100,5 @@ void EventsLogger::logProcessedEvent(e_input& input)
   auto time_elapsed(std::chrono::steady_clock::now() - _creationTime);
   *_log << time_elapsed.count() << "| input:"
         << " val=" << static_cast<int> (input)
-        << " str=" << e_input_string(input) << '\n';
+        << " str=" << debug::e_input_string(input) << '\n';
 }
-
-
-} // namespace debug

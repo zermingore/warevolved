@@ -14,8 +14,6 @@
 enum class e_input;
 
 
-/// \todo EventLogger no longer in debug namespace (as it's used for replays)
-namespace debug {
 
 using events_list = std::vector<std::pair<std::chrono::duration<double>, int>>;
 
@@ -59,9 +57,6 @@ private:
   /// log creation timestamp
   static std::chrono::steady_clock::time_point _creationTime;
 };
-
-
-} //  namespace debug
 
 
 #endif /* !EVENTS_LOGGER_HH_ */
