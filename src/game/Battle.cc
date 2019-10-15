@@ -61,8 +61,10 @@ Battle::Battle(const OptionsParser& options_parser)
   if (!fs::exists(dst))
   {
     NOTICE("Creating saves directory ", dst);
-    fs::create_directories(dst); // may throw
-    //throw std::runtime_error("not able to create it");
+    if (!fs::create_directories(dst)) // may throw
+    {
+      throw ArgumentsException("not able to create the saves directory");
+    }
   }
 
 
