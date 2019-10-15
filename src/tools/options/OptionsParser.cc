@@ -104,7 +104,7 @@ OptionsParser::OptionsParser(int ac, const char** av)
 
 
 std::optional<const Option>
-OptionsParser::operator[] (const std::string name) const noexcept(true)
+OptionsParser::operator[] (const std::string& name) const noexcept(true)
 {
   const auto opt = _supportedOptions.at(name);
   if (opt.provided())
@@ -255,7 +255,7 @@ void OptionsParser::validArguments()
 
 
 
-bool OptionsParser::optionExists(const std::string option) const
+bool OptionsParser::optionExists(const std::string& option) const
 {
   // Find the considered option in _supportedOptions ("help" for instance)
   for (const auto& [name, opt]: _supportedOptions)

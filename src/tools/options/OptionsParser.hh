@@ -35,7 +35,7 @@ public:
    * \brief Constructor, initializing the exception message
    * \param msg Exception message (returned by exc.what())
    */
-  explicit ArgumentsException(const std::string msg)
+  explicit ArgumentsException(const std::string& msg)
     : _exc(msg)
   {
   }
@@ -111,7 +111,7 @@ public:
    * \warning Aborts the execution if the provided option is not referenced
    * \return true if the option was provided, false otherwise
    */
-  bool optionExists(const std::string option) const;
+  bool optionExists(const std::string& option) const;
 
   /**
    * \brief Retrieve a given Option, by its name
@@ -121,7 +121,7 @@ public:
    */
   // std::optional<const std::vector<std::string>>
   std::optional<const Option>
-  operator[] (const std::string name) const noexcept(true);
+  operator[] (const std::string& name) const noexcept(true);
 
 
 private:
