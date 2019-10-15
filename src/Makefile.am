@@ -21,7 +21,6 @@ resources/Text.cc                   \
 \
 debug/Debug.cc                      \
 debug/OSD.cc                        \
-debug/EventsLogger.cc               \
 \
 common/System.cc                    \
 \
@@ -42,6 +41,7 @@ input/ReplayManager.cc              \
 input/EventManager.cc               \
 input/EventsProcessor.cc            \
 input/InputsListener.cc             \
+input/EventsLogger.cc               \
 \
 game/Game.cc                        \
 game/Status.cc                      \

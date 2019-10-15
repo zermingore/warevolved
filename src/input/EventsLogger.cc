@@ -3,7 +3,8 @@
 #include <map>
 
 #include <debug/Debug.hh>
-#include <debug/EventsLogger.hh>
+
+#include <input/EventsLogger.hh>
 #include <generated/enum_print/enum_print_prototypes.hh>
 
 #include <tools/StringParser.hh>
