@@ -55,8 +55,7 @@ Battle::Battle(const OptionsParser& options_parser)
 
   if (fs::exists(dst) && !fs::is_directory(dst))
   {
-    /// \todo option specific exception
-    throw std::runtime_error("Save path exists but is not a directory");
+    throw ArgumentsException("Save path exists but is not a directory");
   }
 
   if (!fs::exists(dst))
