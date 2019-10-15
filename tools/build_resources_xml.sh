@@ -12,29 +12,29 @@ export DEBUG
 
 add_file()
 {
-	# removing leading ./
-	FOLDER_PATH="${0#./}"
+  # removing leading ./
+  FOLDER_PATH="${0#./}"
 
-	echo "    <folder path='$FOLDER_PATH'>" >> $ROOT/autogen.xml
+  echo "    <folder path='$FOLDER_PATH'>" >> $ROOT/autogen.xml
 
 
-	echo "      <file filename = `basename "$1"`>" >> $ROOT/autogen.xml
-    # basename (without extension)
-	echo "        <name>"`basename -s .png "$1"`"</name>" >> $ROOT/autogen.xml
-	echo "      </file>" >> $ROOT/autogen.xml
+  echo "      <file filename = `basename "$1"`>" >> $ROOT/autogen.xml
+  # basename (without extension)
+  echo "        <name>"`basename -s .png "$1"`"</name>" >> $ROOT/autogen.xml
+  echo "      </file>" >> $ROOT/autogen.xml
 
-	echo "    </folder>" >> $ROOT/autogen.xml
+  echo "    </folder>" >> $ROOT/autogen.xml
 }
 
 
 export -f add_file
 
 # if [ !$1 ] ; then
-# 	echo "needed filename" ;
+#   echo "needed filename" ;
 # fi
 
 if [ $DEBUG = 1 ] ; then
-	echo "inserting head"
+  echo "inserting head"
 fi
 
 echo "<?xml version='1.0' encoding='utf-8'?>
@@ -54,6 +54,6 @@ echo "</resources>" >> $ROOT/autogen.xml
 
 # end script, printing result
 if [ $DEBUG = 1 ] ; then
-	echo "resulting XML:" ;
-	cat $ROOT/autogen.xml ;
+  echo "resulting XML:" ;
+  cat $ROOT/autogen.xml ;
 fi

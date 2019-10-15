@@ -14,7 +14,6 @@
 * TODO Bugs / Features
 ** TODO Units
 *** TODO In crew menu, 'Confirm' should be available only on changes
-*** TODO Random map: every player should have at least one unit
 *** TODO Sometimes, moving over an enemy unit is possible
     Seems to appear when two keys are pressed at the same time
     Unable to wait on an occupied cell though
@@ -30,10 +29,13 @@
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
+** TODO Bootstrap: do not hard-code the path to the configure
 
 
 * TODO Doc
 ** TODO Options
+** TODO Clean the think/ folder
+** TODO Document the coding style
 
 
 * TODO Clean
@@ -42,6 +44,14 @@
 ** TODO Map iterator to access cells without explicit double loop
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
 ** TODO Merge Cell highlight boolean and color (color::None)
+** TODO Capture lambda as reference when possible
+** TODO Use the uniformed initialization
+** TODO Factories: return unique_ptr
+** TODO Find a way to have compile-time map keys (vehicle crews)
+** TODO Event logger no longer in debug namespace
+** TODO Dirty generated enum / not up to date
+** TODO Map random generation
+** TODO Do not put enums in common as default (+ sort them)
 
 
 * TODO Experimental
@@ -51,6 +61,8 @@
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 ** TODO Random generator as a service locator
+** TODO Upgrade SFML
+** TODO Give clang-tidy a try
 
 
 * TODO Input
@@ -215,14 +227,12 @@
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (blocked to 60 in release; unlimited in debug)
 ** TODO The displayed fps should be computed only over a fixed period of time
+** TODO Check if the generated enums_printer need an update on commit/push
 
 
 * TODO Testing
 ** TODO Integration Test process
 *** TODO Load a map, a replay, save at the end; compare with a reference map
-*** TODO Game scripts (need to be able to use pre-recorded input)
-*** [DROPPED] Use an ascii map to check fight behavior
-   (use directly the xml Map instead)
 *** TODO Use screenshots for the interface
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
@@ -234,8 +244,7 @@
 ** TODO Memory Leaks / Errors: periodic controls
 
 
-* TODO Build
-** TODO C++20 && map.contains
+* Build
 
 
 * TODO [#C] Optimization

@@ -123,7 +123,6 @@ __top_srcdir__we_CXXFLAGS += -Wbool-compare                     # Warn about boo
 __top_srcdir__we_CXXFLAGS += -Wbuiltin-macro-redefined          # Warn when a built-in preprocessor macro is undefined or redefined
 __top_srcdir__we_CXXFLAGS += -Wcast-align                       # Warn about pointer casts which increase alignment
 __top_srcdir__we_CXXFLAGS += -Wcast-qual                        # Warn about casts which discard qualifiers
-__top_srcdir__we_CXXFLAGS += -Wchkp                             # Warn about memory access errors found by Pointer Bounds Checker
 __top_srcdir__we_CXXFLAGS += -Wconditionally-supported          # Warn for conditionally-supported constructs
 __top_srcdir__we_CXXFLAGS += -Wconversion                       # Warn for implicit type conversions that may change a value
 __top_srcdir__we_CXXFLAGS += -Wconversion-null                  # Warn for converting NULL from/to a non-pointer type

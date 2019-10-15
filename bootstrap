@@ -6,8 +6,9 @@
 #   0: no error occurred
 #   3: invalid argument
 #
-# BUG:
-#   Returns 0 if the build fails, it should return the build return value
+# TODO:
+#   Real options parser
+#   Path to the configure is hard-coded
 
 
 BUILD_DIR=./build # build destination
@@ -36,7 +37,7 @@ function main
 
 
         if [[ "$no_build" == "" ]]; then
-            make
+            make -j$(grep -c processor /proc/cpuinfo)
             local ret_code=$?
             if [[ $ret_code -ne 0 ]]; then
                 exit $ret_code

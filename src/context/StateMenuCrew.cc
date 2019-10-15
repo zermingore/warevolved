@@ -31,13 +31,13 @@ StateMenuCrew::StateMenuCrew()
   , _browseMembers(true)
 {
   // browsing entries
-  _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { moveUp();    });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { moveDown();  });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { moveLeft();  });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { moveRight(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP,    [=, this] { moveUp();    });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=, this] { moveDown();  });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=, this] { moveLeft();  });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=, this] { moveRight(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION,  [=] { validate(); });
-  _evtMgr->registerEvent(e_input::EXIT,       [=] { exit();     });
+  _evtMgr->registerEvent(e_input::SELECTION,  [=, this] { validate(); });
+  _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
 
   _menuCrew   = std::make_unique<interface::MenuCrewBrowse> ();
   _menuMember = std::make_unique<interface::MenuCrewMember> ();

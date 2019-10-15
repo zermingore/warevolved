@@ -9,7 +9,7 @@
 You will need
 - Autotools / automake
 - make
-- A C++17 compliant compiler
+- A compiler with C++20 experimental support
 The code is often only compiled with g++ and some gcc specific warnings are used
 
 

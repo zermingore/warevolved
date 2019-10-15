@@ -1,0 +1,50 @@
+TL;DR
+-----
+
+In order for a Pull Request to be accepted:
+- The tests should pass
+- The documentation should be updated
+- The coding style should be respected
+
+
+
+Getting started
+---------------
+
+Though a fairly up to date TODO exists,
+you may want to add your own feature / bug fix.
+As long as it does not conflict with the project philosophy, go for it;
+In doubt, ask the maintainer.
+
+If you face any difficulty building, testing, understanding the code, ...
+get in touch with the maintainer.
+
+
+
+Pull Request
+------------
+Before submitting a Pull Request, feel free to add your name/nickname
+in the AUTHORS file.
+
+In order to make your Pull Request easily accepted,
+have a look at the tools helping keeping the code functional / clean.
+
+These may help making sure the tests were considered.
+Furthermore, some points of the coding style are checked.
+
+You may run the following at the root of the project:
+$> tools/coding_style.sh src/
+$> tools/check_headers.sh src/
+$> tests/tests.sh
+
+If you're planning to commit regularly, you may use some git hooks
+(see the tools/git/hooks/ folder)
+
+Ideally, before fixing a bug, a non-regression test should be written.
+
+
+
+
+In any case, feel free to contact the maintainer on github.
+
+Thank you!

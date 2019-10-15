@@ -30,12 +30,18 @@ StateSelectDropZone::StateSelectDropZone()
   , _indexZone(0)
   , _role(e_unit_role::NONE)
 {
-  _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { selectNextZone();     });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { selectPreviousZone(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { selectPreviousZone(); });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { selectNextZone();     });
-  _evtMgr->registerEvent(e_input::SELECTION,  [=] { validate();           });
-  _evtMgr->registerEvent(e_input::EXIT,       [=] { exit();               });
+  _evtMgr->registerEvent(e_input::MOVE_UP,
+                         [=, this] { selectNextZone();     });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN,
+                         [=, this] { selectPreviousZone(); });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT,
+                         [=, this] { selectPreviousZone(); });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT,
+                         [=, this] { selectNextZone();     });
+  _evtMgr->registerEvent(e_input::SELECTION,
+                         [=, this] { validate();           });
+  _evtMgr->registerEvent(e_input::EXIT,
+                         [=, this] { exit();               });
 
   // Graphical attributes initialization
   _zoneHighlight = std::make_shared<graphics::Sprite> ("cursor");

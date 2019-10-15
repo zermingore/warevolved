@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: tools/code_generation/enum_print/generate_enum_print.sh
-// generated on: Mi Mär 21 18:22:27 CET 2018
+// generated on: Mon Oct 14 18:46:42 CEST 2019
 
 
 #include <string>
@@ -16,6 +16,8 @@ std::string e_unit_string(e_unit entry)
   {
     case e_unit::SOLDIER:
       return "e_unit::SOLDIER (0)";
+    case e_unit::CAR:
+      return "e_unit::CAR (no explicit value)";
     case e_unit::NB_UNITS:
       return "e_unit::NB_UNITS (no explicit value)";
     case e_unit::NONE:

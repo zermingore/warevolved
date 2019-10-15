@@ -21,7 +21,8 @@
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
 
-
+#include <thread>
+#include <chrono>
 
 Battle::Battle(const OptionsParser& options_parser)
   : _currentPlayer(0)
@@ -151,15 +152,9 @@ void Battle::generateRandomMap()
     const auto r = static_cast<sf::Uint8> (randByte(gen));
     const auto g = static_cast<sf::Uint8> (randByte(gen));
     const auto b = static_cast<sf::Uint8> (randByte(gen));
-    auto& p = _players.emplace_back(
-      std::make_shared<Player> (graphics::Color(r, g, b)));
+    _players.emplace_back(std::make_shared<Player> (graphics::Color(r, g, b)));
 
     // Cursor location
-    std::uniform_int_distribution<> rand_col(0, cols - 1);
-    std::uniform_int_distribution<> rand_line(0, lines - 1);
-    p->cursor()->setCoords({ static_cast<size_t> (rand_col(gen)),
-                             static_cast<size_t> (rand_line(gen)) });
-
     ++_nbPlayers;
   }
 
@@ -178,7 +173,7 @@ void Battle::generateRandomMap()
         auto player_id = rand_player(gen);
         auto played = false;
 
-        // Creating an instance on the Unit only to get its max HP (I know...)
+        /// \todo Creating an instance on the Unit only to get its max HP
         std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
         auto max_hp = new_unit->maxHp();
         std::uniform_int_distribution<> randHpSoldier(1, max_hp);
@@ -195,7 +190,7 @@ void Battle::generateRandomMap()
         auto player_id = rand_player(gen);
         auto played = false;
 
-        // Creating an instance on the Unit only to get its max HP (I know...)
+        /// \todo Creating an instance on the Unit only to get its max HP
         std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
         auto max_hp = new_unit->maxHp();
         std::uniform_int_distribution<> randHpSoldier(1, max_hp);
@@ -242,6 +237,8 @@ void Battle::generateRandomMap()
       }
     }
   }
+
+  randomMapRefine();
 }
 
 
@@ -350,4 +347,64 @@ void Battle::saveMap()
     ERROR("Unable to save XML");
     return;
   }
+}
+
+
+
+void Battle::randomMapRefine()
+{
+  /// \todo remove and explain this sleep
+  std::this_thread::sleep_for(
+    std::chrono::duration<double, std::chrono::seconds::period>(1));
+
+  // Give one extra Soldier to every player and set their cursor on it
+  const auto cols{_map->nbColumns()};
+  const auto lines{_map->nbLines()};
+  for (auto player: _players)
+  {
+    Coords freeCoords{0, 0};
+    auto found_free_cell{false};
+    auto found_friendly_unit{false};
+    for (auto col{0u}; col < cols && !found_friendly_unit; ++col)
+    {
+      for (auto line{0u}; line < lines; ++line)
+      {
+        // If the cell is occupied by a friendly unit, put the cursor on it
+        auto unit{_map->unit(col, line)};
+
+        if (   unit
+            && unit->playerId() == player->id()
+            && unit->type() == e_unit::SOLDIER)
+        {
+          player->cursor()->setCoords({col, line});
+          unit->setPlayed(false);
+          found_friendly_unit = true;
+          break;
+        }
+
+        // Update the free coordinates
+        if (!found_free_cell && !unit)
+        {
+          freeCoords = {col, line};
+          found_free_cell = true;
+        }
+      }
+    }
+
+    // Sanity check: the map was full, without friendly unit for this player
+    assert(found_free_cell || found_friendly_unit);
+
+    // No friendly Unit found but a free Cell is available -> new Soldier
+    if (found_free_cell && !found_friendly_unit)
+    {
+      /// \todo Creating an instance on the Unit only to get its max HP
+      auto new_unit{UnitFactory::createUnit(e_unit::SOLDIER)};
+      auto max_hp{new_unit->maxHp()};
+      _map->newUnit(e_unit::SOLDIER,
+                    freeCoords.c, freeCoords.l, player->id(), max_hp, false);
+      player->cursor()->setCoords({freeCoords.c, freeCoords.l});
+
+      NOTICE("New Unit at", freeCoords.c, freeCoords.l, "for", player->id());
+    }
+  } // For every Player
 }

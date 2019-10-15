@@ -46,7 +46,7 @@ void MenuCrew::build()
         auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
         entry->setCallbacks(
         {
-          [=] { vehicle->dropOff(member.first, coords); },
+          [=, this] { vehicle->dropOff(member.first, coords); },
         });
 
         _entries.push_back(entry);
@@ -59,11 +59,11 @@ void MenuCrew::build()
       auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
       entry_group->setCallbacks(
       {
-        [=] { _selectedUnit->addToCrew(unit); },
-        [=] { game::Status::battle()->map()->hideUnit(*unit); },
-        [=] { game::Status::battle()->map()->moveUnit(_coords); },
-        [=] { game::Status::clearStates(); },
-        [=] { game::Status::player()->cursor()->setCoords(_coords); }
+        [=, this] { _selectedUnit->addToCrew(unit); },
+        [=, this] { game::Status::battle()->map()->hideUnit(*unit); },
+        [=, this] { game::Status::battle()->map()->moveUnit(_coords); },
+        [=, this] { game::Status::clearStates(); },
+        [=, this] { game::Status::player()->cursor()->setCoords(_coords); }
       });
       _entries.push_back(entry_group);
     }
@@ -72,10 +72,10 @@ void MenuCrew::build()
       auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));
       entry_group->setCallbacks(
       {
-        [=] { unit->addToCrew(_selectedUnit); },
-        [=] { game::Status::battle()->map()->hideUnit(*_selectedUnit); },
-        [=] { game::Status::clearStates(); },
-        [=] { game::Status::player()->cursor()->setCoords(_coords); }
+        [=, this] { unit->addToCrew(_selectedUnit); },
+        [=, this] { game::Status::battle()->map()->hideUnit(*_selectedUnit); },
+        [=, this] { game::Status::clearStates(); },
+        [=, this] { game::Status::player()->cursor()->setCoords(_coords); }
       });
       _entries.push_back(entry_group);
     }
@@ -83,7 +83,7 @@ void MenuCrew::build()
     NOTICE("Build crew menu");
   }
 
-  addCancelEntry( [=] { cancel(); } );
+  addCancelEntry( [=, this] { cancel(); } );
 }
 
 

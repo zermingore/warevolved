@@ -31,12 +31,12 @@ StateMovingUnit::StateMovingUnit()
   // we need a selected unit to continue
   player->updateSelectedUnit();
 
-  _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { moveUnitUp();    });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { moveUnitDown();  });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { moveUnitLeft();  });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { moveUnitRight(); });
+  _evtMgr->registerEvent(e_input::MOVE_UP,    [=, this] { moveUnitUp();    });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=, this] { moveUnitDown();  });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=, this] { moveUnitLeft();  });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=, this] { moveUnitRight(); });
 
-  _evtMgr->registerEvent(e_input::SELECTION,  [=] {
+  _evtMgr->registerEvent(e_input::SELECTION,  [=, this] {
       game::Status::pushState(e_state::ACTION_MENU);
 
       // giving the next state (action menu) the original unit position
@@ -45,7 +45,7 @@ StateMovingUnit::StateMovingUnit()
       game::Status::currentState()->resume();
     });
 
-  _evtMgr->registerEvent(e_input::EXIT, [=] { exit(); });
+  _evtMgr->registerEvent(e_input::EXIT, [=, this] { exit(); });
 
   // Graphical attributes initialization
   auto map { game::Status::battle()->map() };

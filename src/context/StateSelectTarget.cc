@@ -20,12 +20,18 @@ StateSelectTarget::StateSelectTarget()
   : State()
   , _index_target(0)
 {
-  _evtMgr->registerEvent(e_input::MOVE_UP,    [=] { selectNextTarget();     });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN,  [=] { selectPreviousTarget(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=] { selectPreviousTarget(); });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=] { selectNextTarget();     });
-  _evtMgr->registerEvent(e_input::SELECTION,  [=] { validate();             });
-  _evtMgr->registerEvent(e_input::EXIT,       [=] { exit();                 });
+  _evtMgr->registerEvent(e_input::MOVE_UP,
+                         [=, this] { selectNextTarget();     });
+  _evtMgr->registerEvent(e_input::MOVE_DOWN,
+                         [=, this] { selectPreviousTarget(); });
+  _evtMgr->registerEvent(e_input::MOVE_LEFT,
+                         [=, this] { selectPreviousTarget(); });
+  _evtMgr->registerEvent(e_input::MOVE_RIGHT,
+                         [=, this] { selectNextTarget();     });
+  _evtMgr->registerEvent(e_input::SELECTION,
+                         [=, this] { validate();             });
+  _evtMgr->registerEvent(e_input::EXIT,
+                         [=, this] { exit();                 });
 
   // Graphical attributes initialization
   _targetHighlight = std::make_shared<graphics::Sprite> ("cursor");
