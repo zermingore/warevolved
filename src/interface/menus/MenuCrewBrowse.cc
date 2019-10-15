@@ -49,7 +49,7 @@ void MenuCrewBrowse::build()
     auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
     if (vehicle->crewSize())
     {
-      for (auto& mem: vehicle->getCrew())
+      for (auto& mem: vehicle->crew())
       {
         auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second));
         entry->setCallbacks(

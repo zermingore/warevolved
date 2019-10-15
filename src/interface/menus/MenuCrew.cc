@@ -41,7 +41,7 @@ void MenuCrew::build()
     {
       auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
-      for (auto& member: vehicle->getCrew())
+      for (auto& member: vehicle->crew())
       {
         auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
         entry->setCallbacks(

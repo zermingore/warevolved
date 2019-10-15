@@ -84,7 +84,7 @@ void MenuEntryCrew::draw()
     // Unit Sprite
     const auto selected_unit(game::Status::battle()->map()->selectedUnit());
     const auto vehicle = std::static_pointer_cast<Vehicle> (selected_unit);
-    const auto dropping_unit = vehicle->getCrew().at(_role);
+    const auto dropping_unit = vehicle->crew().at(_role);
 
     const auto sprite_unit(dropping_unit->sprite());
     using p = graphics::MapGraphicsProperties;

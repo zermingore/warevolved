@@ -342,7 +342,7 @@ void Map::dump(pugi::xml_document& doc)
 
         auto crew = unit.append_child("crew");
         auto vehicle = std::static_pointer_cast<Vehicle> (u);
-        for (const auto& member: vehicle->getCrew())
+        for (const auto& member: vehicle->crew())
         {
           auto n = crew.append_child("member");
           n.append_attribute("role") = static_cast<int> (member.first);

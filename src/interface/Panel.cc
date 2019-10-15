@@ -252,7 +252,7 @@ void Panel::drawUnitFrame()
     crew_pos.y += sprite->size().y + _margin * 2;
 
     float i = 0.f; // loop iterations in order to compute the offset position
-    for (const auto& member: vehicle->getCrew())
+    for (const auto& member: vehicle->crew())
     {
       _frameUnit->draw();
 

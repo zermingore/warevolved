@@ -43,7 +43,7 @@ public:
    * \brief Returns crew list
    * \todo rename to 'crew()'
    */
-  const auto& getCrew() { return _crew; }
+  const auto& crew() { return _crew; }
 
   /**
    * \brief Drop the given unit off the Vehicle at the given position

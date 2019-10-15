@@ -58,7 +58,7 @@ bool MenuAction::allowMove()
     auto v = std::static_pointer_cast<Vehicle> (_selectedUnit);
     try
     {
-      v->getCrew().at(e_unit_role::DRIVER);
+      v->crew().at(e_unit_role::DRIVER);
       return true;
     }
     catch (const std::out_of_range& e)
