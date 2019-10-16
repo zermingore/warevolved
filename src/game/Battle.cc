@@ -41,23 +41,13 @@ Battle::Battle(const OptionsParser& options_parser)
   }
 
   // Create the saves_dir directory, if needed.
-  // Unfortunately, filesystem cannot create path with trailing separator
-  // Therefore, we canonize the path and trim the last separator, if any
-
   namespace fs = std::filesystem;
   fs::path test = _savesDirectory;
-  auto dst = test.lexically_normal().string(); // clean the path
-  /// \note c++20 dst.ends_with(test.preferred_separator)
-  if (dst[dst.length() - 1] == test.preferred_separator)
-  {
-    dst.pop_back();
-  }
-
+  auto dst = test.lexically_normal().string(); // Canonize the path
   if (fs::exists(dst) && !fs::is_directory(dst))
   {
     throw ArgumentsException("Save path exists but is not a directory");
   }
-
   if (!fs::exists(dst))
   {
     NOTICE("Creating saves directory ", dst);
@@ -66,7 +56,6 @@ Battle::Battle(const OptionsParser& options_parser)
       throw ArgumentsException("not able to create the saves directory");
     }
   }
-
 
   // Extract the random seed, if provided
   if (options_parser.optionExists("random-seed"))
