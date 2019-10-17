@@ -12,6 +12,7 @@
 # include <fstream>
 # include <sstream>
 # include <cassert> // not needed here, just for modules including this file
+# include <iomanip>
 
 
 /// \def Log file name
@@ -102,13 +103,7 @@ public:
   static void logPrintf(const T head, const Tail... tail)
   {
     std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
-
-    time_t now = time(nullptr);
-    struct tm *full_date = localtime(&now);
-    char buf[80] = {0};
-
-    strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
-    log << buf << "\t";
+    logTime();
     bodylogprintf(head, tail...);
     printf(head, tail...);
   }
@@ -121,7 +116,7 @@ public:
   template<typename T>
   static void printLog(const T head)
   {
-    *_log << " " << head;
+    *_log << " " << head << COLOR_NORMAL;
   }
 
 
@@ -133,12 +128,8 @@ public:
   template<typename T, typename... Tail>
   static void error(const T head, const Tail... tail)
   {
-    time_t now = time(nullptr);
-    struct tm *full_date = localtime(&now);
-    char buf[80] = {0};
-
-    strftime(buf, 80, "%Y-%m-%d @ %T", full_date); // building date
-    *_log << buf << "\t";
+    logTime();
+    *_log << COLOR_ERROR;
     bodylogprintf(head, tail...);
 
     std::cout << COLOR_ERROR;
@@ -149,11 +140,14 @@ public:
    * \brief print as error given parameters on standard output
    * \param head element to print right now
    * \param tail eventually, rest of given arguments list
-   * \todo log notices and warnings
    */
   template<typename T, typename... Tail>
   static void notice(const T head, const Tail... tail)
   {
+    logTime();
+    *_log << COLOR_NOTICE;
+    bodylogprintf(head, tail...);
+
     std::cout << COLOR_NOTICE;
     printf(head, tail...);
   }
@@ -162,11 +156,14 @@ public:
    * \brief print as error given parameters on standard output
    * \param head element to print right now
    * \param tail eventually, rest of given arguments list
-   * \todo log notices and warnings
    */
   template<typename T, typename... Tail>
   static void warning(const T head, const Tail... tail)
   {
+    logTime();
+    *_log << COLOR_WARNING;
+    bodylogprintf(head, tail...);
+
     std::cout << COLOR_WARNING;
     printf(head, tail...);
   }
@@ -186,7 +183,7 @@ public:
 
 private:
   /**
-   * \brief prints every argument to the console and to the log
+   * \brief Prints every argument to the console and to the log
    * \param head First argument
    * \param tail Eventual following arguments
    */
@@ -196,6 +193,17 @@ private:
     printLog(head);
     bodylogprintf(tail...);
   }
+
+  /**
+   * \brief Prints the current time to the log
+   */
+  static void logTime()
+  {
+    auto now = std::time(nullptr);
+    auto full_date = *std::localtime(&now);
+    *_log << std::put_time(&full_date, "%F @ %T") << '\t';
+  }
+
 
   /// Execute after the last argument
   static void bodylogprintf();

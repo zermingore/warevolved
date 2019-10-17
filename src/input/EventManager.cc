@@ -7,7 +7,7 @@ bool EventManager::process(const e_input input)
 {
   if (_callbacks.find(input) == _callbacks.end())
   {
-    ERROR("callback not found for input", static_cast<int> (input));
+    ERROR("Callback not found for input", static_cast<int> (input));
     return false;
   }
 
