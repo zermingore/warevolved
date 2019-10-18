@@ -14,7 +14,6 @@ namespace game {
 // Static class attributes definition
 std::stack<std::pair<e_state, std::shared_ptr<State>>> Status::_states;
 std::shared_ptr<Battle> Status::_battle;
-std::shared_ptr<InputProcessor> Status::_inputProcessor;
 Coords Status::_selectedCell;
 Coords Status::_selectedUnitPosition;
 std::mutex Status::_lock;

@@ -86,20 +86,3 @@ void EventsLogger::log(sf::Event event)
   *_log << time_elapsed.count()
         << " | event type: " << static_cast<int> (event.type) << '\n';
 }
-
-
-
-void EventsLogger::logProcessedEvent(e_input& input)
-{
-  /// checking for initialization \todo no longer static class
-  if (!_log)
-  {
-    ERROR("log not initialized");
-    return;
-  }
-
-  auto time_elapsed(std::chrono::steady_clock::now() - _creationTime);
-  *_log << time_elapsed.count() << "| input:"
-        << " val=" << static_cast<int> (input)
-        << " str=" << debug::e_input_string(input) << '\n';
-}

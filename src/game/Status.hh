@@ -17,7 +17,6 @@
 class State;
 class Battle;
 class Player;
-class InputProcessor;
 
 namespace interface {
   class Interface;
@@ -44,11 +43,6 @@ public:
   /// Battle setter
   static void setBattle(const std::shared_ptr<Battle> battle) {
     _battle = battle;
-  }
-
-  static void setInputProcessor(const std::shared_ptr<InputProcessor> processor)
-  {
-    _inputProcessor = processor;
   }
 
 
@@ -124,7 +118,6 @@ private:
   static std::shared_ptr<Battle> _battle; ///< pointer on Battle
   static Coords _selectedCell; ///< coordinates of the selected cell
   static Coords _selectedUnitPosition; ///< current selected Unit's coordinates
-  static std::shared_ptr<InputProcessor> _inputProcessor; ///< input processor
 };
 
 

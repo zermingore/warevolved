@@ -42,12 +42,6 @@ public:
    */
   static events_list fetchLoggedEvents();
 
-  /**
-   * \brief Add the given high level input to the log, with a timestamp
-   * \param input input event to log
-   */
-  static void logProcessedEvent(e_input& input);
-
 
 private:
   static std::string _logFileName; ///< log file name (may contain the path)
