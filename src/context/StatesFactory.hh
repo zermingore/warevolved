@@ -13,10 +13,10 @@
 
 
 /**
- * \class StateFactory
+ * \class StatesFactory
  * \brief Creates States according to the factory design pattern
  */
-class StateFactory
+class StatesFactory
 {
 public:
   /**

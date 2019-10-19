@@ -28,7 +28,7 @@ config/Settings.cc                  \
 \
 context/State.cc                    \
 context/StateGlobal.cc              \
-context/StateFactory.cc             \
+context/StatesFactory.cc            \
 context/StatePlaying.cc             \
 context/StateMenu.cc                \
 context/StateMenuCrew.cc            \
@@ -51,7 +51,7 @@ game/Cell.cc                        \
 game/Terrain.cc                     \
 game/TerrainsHandler.cc             \
 game/units/Unit.cc                  \
-game/units/UnitFactory.cc           \
+game/units/UnitsFactory.cc          \
 game/units/Vehicle.cc               \
 game/units/Car.cc                   \
 game/units/Soldier.cc               \

@@ -13,7 +13,7 @@
 #include <common/enums/units.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
-#include <game/units/UnitFactory.hh>
+#include <game/units/UnitsFactory.hh>
 #include <game/units/Vehicle.hh>
 #include <game/Player.hh>
 #include <game/Cell.hh>
@@ -155,7 +155,7 @@ void Map::newUnit(e_unit type,
   }
 
   // Explicitly using a shared_ptr
-  std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
+  std::shared_ptr<Unit> new_unit(UnitsFactory::createUnit(type));
 
   new_unit->setCoords({ column, line });
   new_unit->setPlayerId(player_id);

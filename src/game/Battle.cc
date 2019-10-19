@@ -16,7 +16,7 @@
 #include <game/Player.hh>
 #include <game/Map.hh>
 #include <game/units/Unit.hh>
-#include <game/units/UnitFactory.hh>
+#include <game/units/UnitsFactory.hh>
 #include <game/units/Vehicle.hh>
 #include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
@@ -163,7 +163,7 @@ void Battle::generateRandomMap()
         auto player_id = rand_player(gen);
         auto played = false;
 
-        auto max_hp{UnitFactory::typeMaxHp(type)};
+        auto max_hp{UnitsFactory::typeMaxHp(type)};
         std::uniform_int_distribution<> randHpSoldier(1, max_hp);
         auto hp = randHpSoldier(gen);
 
@@ -178,7 +178,7 @@ void Battle::generateRandomMap()
         auto player_id = rand_player(gen);
         auto played = false;
 
-        auto max_hp{UnitFactory::typeMaxHp(type)};
+        auto max_hp{UnitsFactory::typeMaxHp(type)};
         std::uniform_int_distribution<> randHpSoldier(1, max_hp);
         auto hp = randHpSoldier(gen);
 
@@ -190,7 +190,7 @@ void Battle::generateRandomMap()
         if (rand100(gen) > 40)
         {
           std::shared_ptr<Unit> member(
-            UnitFactory::createUnit(e_unit::SOLDIER));
+            UnitsFactory::createUnit(e_unit::SOLDIER));
 
           // Fetching the unit first as we may hide it with a temporary one
           const auto unit = _map->unit(col, line);
@@ -210,7 +210,7 @@ void Battle::generateRandomMap()
           if (rand100(gen) > 75)
           {
             std::shared_ptr<Unit> member2(
-              UnitFactory::createUnit(e_unit::SOLDIER));
+              UnitsFactory::createUnit(e_unit::SOLDIER));
 
             member2->setHp(randHpCrewMember(gen));
             member2->setPlayed(false);
@@ -297,7 +297,7 @@ void Battle::loadMap()
           assert(u->canHaveCrew() && "This unit cannot have a crew");
 
           auto t = static_cast<e_unit> (mbr.attribute("type").as_int());
-          std::shared_ptr<Unit> m(UnitFactory::createUnit(t));
+          std::shared_ptr<Unit> m(UnitsFactory::createUnit(t));
 
           m->setPlayerId(mbr.attribute("player_id").as_int());
           m->setHp(mbr.attribute("hp").as_int());
@@ -383,7 +383,7 @@ void Battle::randomMapRefine()
     // No friendly Unit found but a free Cell is available -> new Soldier
     if (found_free_cell && !found_friendly_unit)
     {
-      auto max_hp{UnitFactory::typeMaxHp(e_unit::SOLDIER)};
+      auto max_hp{UnitsFactory::typeMaxHp(e_unit::SOLDIER)};
       _map->newUnit(e_unit::SOLDIER,
                     freeCoords.c, freeCoords.l, player->id(), max_hp, false);
       player->cursor()->setCoords({freeCoords.c, freeCoords.l});

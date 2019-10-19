@@ -3,7 +3,7 @@
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <context/StateFactory.hh>
+#include <context/StatesFactory.hh>
 #include <input/KeyManager.hh>
 #include <common/enums/input.hh>
 #include <input/EventManager.hh>
@@ -70,7 +70,7 @@ void Status::pushState(const e_state state)
   }
 
   // push a new State
-  _states.push({state, StateFactory::createState(state)});
+  _states.push({state, StatesFactory::createState(state)});
 
   _lock.unlock();
 }

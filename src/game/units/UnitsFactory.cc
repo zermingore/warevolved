@@ -2,10 +2,10 @@
  * \file
  * \date February 9, 2017
  * \author Zermingore
- * \brief UnitFactory class definition: build Units
+ * \brief UnitsFactory class definition: build Units
  */
 
-#include <game/units/UnitFactory.hh>
+#include <game/units/UnitsFactory.hh>
 
 #include <debug/Debug.hh>
 #include <game/units/Unit.hh>
@@ -15,7 +15,7 @@
 
 
 
-std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
+std::unique_ptr<Unit> UnitsFactory::createUnit(const e_unit& unit)
 {
   switch (unit)
   {
@@ -34,7 +34,7 @@ std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
 
 
 
-int UnitFactory::typeMaxHp(const e_unit& type)
+int UnitsFactory::typeMaxHp(const e_unit& type)
 {
   switch (type)
   {

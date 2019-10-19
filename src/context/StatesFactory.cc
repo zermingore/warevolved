@@ -1,4 +1,4 @@
-#include <context/StateFactory.hh>
+#include <context/StatesFactory.hh>
 
 #include <debug/Debug.hh>
 #include <context/StatePlaying.hh>
@@ -11,7 +11,7 @@
 
 
 
-std::unique_ptr<State> StateFactory::createState(const e_state& state)
+std::unique_ptr<State> StatesFactory::createState(const e_state& state)
 {
   // Factory Design Pattern
   switch (state)

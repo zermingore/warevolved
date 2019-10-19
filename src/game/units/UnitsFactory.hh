@@ -2,7 +2,7 @@
  * \file
  * \date February 9, 2017
  * \author Zermingore
- * \brief UnitFactory declaration: Unit creation
+ * \brief UnitsFactory declaration: Unit creation
  */
 
 #ifndef UNIT_FACTORY_HH_
@@ -18,10 +18,10 @@ class Unit;
 
 
 /**
- * \class Unitfactory
+ * \class UnitsFactory
  * \brief Unit creation, using the factory design pattern
  */
-class UnitFactory
+class UnitsFactory
 {
 public:
   /**
