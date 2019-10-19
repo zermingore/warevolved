@@ -64,7 +64,9 @@
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 ** TODO Random generator as a service locator
-** TODO Upgrade SFML
+** DROPPED Upgrade SFML
+   CLOSED: [2019-10-19 Sat 15:21]
+   Already using 2.5 (last 2.5.1)
 ** TODO Give clang-tidy a try
 
 
