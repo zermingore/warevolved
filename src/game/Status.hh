@@ -73,7 +73,8 @@ public:
   static bool processInput(const e_input& input);
 
   /**
-   * \brief returns the current state identifier
+   * \brief returns the current state
+   * \return Current state (top of the stack) identifier
    */
   static e_state state();
 
@@ -94,13 +95,10 @@ public:
    */
   static void clearStates();
 
-
   /**
    * \brief Switch to the next Player
    */
   static void nextPlayer();
-
-
 
   /**
    * \brief wrapper to the battle to get the current player
@@ -117,9 +115,6 @@ public:
 
 
 private:
-  /// Prevent from getting a State not fully built/destroyed
-  static std::mutex _lock;
-
   /**
    * \brief Ignore every input for a short time period (default: 100ms)
    * \param duration Delay in ms before re-considering input
@@ -127,6 +122,9 @@ private:
    */
   static void blockInputs(const size_t duration = 100);
 
+
+  /// Prevent from getting a State not fully built/destroyed
+  static std::mutex _lock;
 
   /// States stack: storing a pointer to the state and its (more specific) type
   static std::stack<std::pair<e_state, std::unique_ptr<State>>> _states;

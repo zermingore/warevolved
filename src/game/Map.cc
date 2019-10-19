@@ -135,11 +135,10 @@ void Map::newUnit(e_unit type,
                   int hp,
                   bool played)
 {
-  // Explicitly using a shared_ptr
   boundaryChecks(column, line);
 
+  // Explicitly using a shared_ptr
   std::shared_ptr<Unit> new_unit(UnitsFactory::createUnit(type));
-
   new_unit->setCoords({ column, line });
   new_unit->setPlayerId(player_id);
   new_unit->setHp(hp);
