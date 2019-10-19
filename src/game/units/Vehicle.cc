@@ -35,7 +35,7 @@ void Vehicle::dropOff(e_unit_role role, Coords location)
 
   auto unit = _crew.at(role);
   unit->setCoords(location);
-  map->revealUnit(*unit);
+  map->stashPopUnit(*unit);
   _crew.erase(role);
 
   _dropped[role] = unit;
@@ -48,6 +48,6 @@ void Vehicle::restoreCrew()
   {
     /// \todo Make sure the roles are properly restored
     addToCrew(member.second);
-    game::Status::battle()->map()->hideUnit(*(member.second));
+    game::Status::battle()->map()->stashUnit(*(member.second));
   }
 }

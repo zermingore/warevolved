@@ -360,13 +360,14 @@ void Map::dump(pugi::xml_document& doc)
 
 
 
-void Map::hideUnit(const Unit& unit)
+void Map::stashUnit(const Unit& unit)
 {
   _cells[unit.c()][unit.l()]->removeUnit();
 }
 
 
-void Map::revealUnit(const Unit& unit)
+
+void Map::stashPopUnit(const Unit& unit)
 {
   newUnit(unit.type(), unit.c(), unit.l(), unit.playerId(), unit.hp(), true);
 }

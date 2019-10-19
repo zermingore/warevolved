@@ -46,7 +46,8 @@
 ** TODO Merge Cell highlight boolean and color (color::None)
 ** TODO Capture lambda as reference when possible
 ** TODO Use the uniformed initialization
-** TODO Factories: return unique_ptr
+** DONE Factories: return unique_ptr
+   CLOSED: [2019-10-19 Sat 15:09]
 ** TODO Find a way to have compile-time map keys (vehicle crews)
 ** DONE Event logger no longer in debug namespace
    CLOSED: [2019-10-15 Tue 18:44]

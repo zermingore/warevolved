@@ -60,7 +60,7 @@ void MenuCrew::build()
       entry_group->setCallbacks(
       {
         [=, this] { _selectedUnit->addToCrew(unit); },
-        [=, this] { game::Status::battle()->map()->hideUnit(*unit); },
+        [=, this] { game::Status::battle()->map()->stashUnit(*unit); },
         [=, this] { game::Status::battle()->map()->moveUnit(_coords); },
         [=, this] { game::Status::clearStates(); },
         [=, this] { game::Status::player()->cursor()->setCoords(_coords); }
@@ -73,7 +73,7 @@ void MenuCrew::build()
       entry_group->setCallbacks(
       {
         [=, this] { unit->addToCrew(_selectedUnit); },
-        [=, this] { game::Status::battle()->map()->hideUnit(*_selectedUnit); },
+        [=, this] { game::Status::battle()->map()->stashUnit(*_selectedUnit); },
         [=, this] { game::Status::clearStates(); },
         [=, this] { game::Status::player()->cursor()->setCoords(_coords); }
       });
