@@ -235,6 +235,14 @@ private:
   std::pair<size_t, size_t> damageValues(const Unit& attacker,
                                          const Unit& defender);
 
+  /**
+   * \brief Valid coordinates sanity checks
+   * \param column must be <= _nbColumns
+   * \param line must be <= _nbLines
+   * \note Throws if the preconditions are not respected
+   */
+  constexpr void boundaryChecks(const size_t column, const size_t line);
+
 
   size_t _nbColumns; ///< number of columns (x coordinate)
   size_t _nbLines;   ///< number of lines (y coordinate)

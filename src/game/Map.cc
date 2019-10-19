@@ -119,16 +119,7 @@ void Map::endTurn()
 
 void Map::newUnit(std::shared_ptr<Unit> unit, size_t column, size_t line)
 {
-  // Sanity check: valid coordinates
-  if (column >= _nbColumns || line >= _nbLines)
-  {
-    std::stringstream sstr;
-    sstr << "In " << __PRETTY_FUNCTION__ << '\n'; /// \warning g++/clang++ only
-    sstr << "Invalid provided coordinates: (" << column << ", " << line << ") "
-         << "Exceed: (" << _nbColumns - 1 << ", " << _nbLines - 1 << ")";
-
-    throw std::out_of_range(sstr.str());
-  }
+  boundaryChecks(column, line);
 
   unit->setCoords({ column, line });
   _units[unit->playerId()].push_back(unit);
@@ -144,18 +135,9 @@ void Map::newUnit(e_unit type,
                   int hp,
                   bool played)
 {
-  // Sanity check: valid coordinates
-  if (column >= _nbColumns || line >= _nbLines)
-  {
-    std::stringstream sstr;
-    sstr << "In " << __PRETTY_FUNCTION__ << '\n'; /// \warning g++/clang++ only
-    sstr << "Invalid provided coordinates: (" << column << ", " << line << ") "
-         << "Exceed: (" << _nbColumns - 1 << ", " << _nbLines - 1 << ")";
-
-    throw std::out_of_range(sstr.str());
-  }
-
   // Explicitly using a shared_ptr
+  boundaryChecks(column, line);
+
   std::shared_ptr<Unit> new_unit(UnitsFactory::createUnit(type));
 
   new_unit->setCoords({ column, line });
@@ -272,7 +254,6 @@ std::unique_ptr<pugi::xml_document> Map::dump()
   // Main 'map' node
   auto map = doc->append_child("map");
 
-
   // 'metadata' node
   auto metadata = map.append_child("metadata");
 
@@ -373,4 +354,20 @@ void Map::stashUnit(const Unit& unit)
 void Map::stashPopUnit(const Unit& unit)
 {
   newUnit(unit.type(), unit.c(), unit.l(), unit.playerId(), unit.hp(), true);
+}
+
+
+
+constexpr void Map::boundaryChecks(size_t column, size_t line)
+{
+  if (column >= _nbColumns || line >= _nbLines)
+  {
+    /// \todo use string format.
+    /// \warning __PRETTY_FUNCTION__ g++/clang++ only
+    // std::stringstream sstr;
+    // sstr << "In " << __PRETTY_FUNCTION__ << '\n';
+    // sstr << "Invalid coordinates: (" << column << ", " << line << ") "
+    //      << "Exceed: (" << _nbColumns - 1 << ", " << _nbLines - 1 << ")";
+    throw std::out_of_range("Invalid provided coordinates");
+  }
 }
