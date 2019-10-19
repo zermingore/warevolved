@@ -5,6 +5,7 @@
 *.in
 LOG
 LOG_EVENTS
+events_log
 *\#
 *user
 build/
@@ -25,6 +26,7 @@ config.status
 # Testing
 tests/build
 tests/bin
+tests/we_replay_test_*
 
 # personal files
 valgrind_log*
