@@ -317,8 +317,7 @@ void Battle::loadMap()
 
 void Battle::saveMap()
 {
-  pugi::xml_document doc;
-  _map->dump(doc);
+  auto doc{_map->dump()};
 
   // getting the current date as string
   auto now = std::chrono::system_clock::now();
@@ -328,7 +327,7 @@ void Battle::saveMap()
 
   std::string path = _savesDirectory + "/" + ss.str() + "quick_save.xml";
   std::cout << "Saving map into: " << path << std::endl;
-  if (!doc.save_file(path.c_str()))
+  if (!doc->save_file(path.c_str()))
   {
     ERROR("Unable to save XML");
     return;

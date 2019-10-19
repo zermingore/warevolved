@@ -216,10 +216,10 @@ public:
   auto operator[] (size_t column) { return _cells[column]; }
 
   /**
-   * \brief Dump the map, in an XML document
+   * \brief Dump the map, in a XML document
    * \return the dumped map, in a new XML document
    */
-  void dump(pugi::xml_document& doc);
+  std::unique_ptr<pugi::xml_document> dump();
 
 
 

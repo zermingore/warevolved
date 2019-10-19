@@ -7,8 +7,9 @@
 
 #include <game/Map.hh>
 
-#include <debug/Debug.hh>
+#include <lib/pugixml.hh>
 
+#include <debug/Debug.hh>
 #include <common/enums/terrains.hh>
 #include <common/enums/units.hh>
 #include <game/Status.hh>
@@ -264,12 +265,12 @@ e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
 
 
 
-void Map::dump(pugi::xml_document& doc)
+std::unique_ptr<pugi::xml_document> Map::dump()
 {
-  // pugi::xml_document doc;
+  std::unique_ptr<pugi::xml_document> doc{new pugi::xml_document};
 
   // Main 'map' node
-  auto map = doc.append_child("map");
+  auto map = doc->append_child("map");
 
 
   // 'metadata' node
@@ -356,6 +357,8 @@ void Map::dump(pugi::xml_document& doc)
       }
     }
   }
+
+  return doc;
 }
 
 

@@ -36,9 +36,8 @@ void StateGlobal::screenshot()
 
 void StateGlobal::dumpMap()
 {
-  pugi::xml_document doc;
-  game::Status::battle()->map()->dump(doc);
-  doc.print(std::cout);
+  auto doc{game::Status::battle()->map()->dump()};
+  doc->print(std::cout);
 }
 
 
