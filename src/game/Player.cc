@@ -96,7 +96,7 @@ void Player::select()
   {
     game::Status::pushState(e_state::MAP_MENU);
   }
-  game::Status::currentState()->resume();
+  game::Status::resumeState();
 }
 
 

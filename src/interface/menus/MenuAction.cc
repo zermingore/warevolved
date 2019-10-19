@@ -146,10 +146,8 @@ void MenuAction::buildMenuAfterMovingUnit()
   else
   {
     game::Status::pushState(e_state::SELECTION_CREW);
-    game::Status::currentState()->setAttributes(
-      std::make_shared<Coords> (_coords)
-    );
-    game::Status::currentState()->resume();
+    game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
+    game::Status::resumeState();
   }
 }
 
@@ -157,7 +155,7 @@ void MenuAction::buildMenuAfterMovingUnit()
 void MenuAction::moveUnit()
 {
   game::Status::pushState(e_state::MOVING_UNIT);
-  game::Status::currentState()->resume();
+  game::Status::resumeState();
 }
 
 
@@ -178,10 +176,8 @@ void MenuAction::waitUnit()
 void MenuAction::manageCrew()
 {
   game::Status::pushState(e_state::CREW_MANAGEMENT);
-  game::Status::currentState()->setAttributes(
-    std::make_shared<Coords> (_coords)
-  );
-  game::Status::currentState()->resume();
+  game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
+  game::Status::resumeState();
 }
 
 
@@ -189,10 +185,8 @@ void MenuAction::manageCrew()
 void MenuAction::attackUnit()
 {
   game::Status::pushState(e_state::SELECT_TARGET);
-  game::Status::currentState()->setAttributes(
-    std::make_shared<Coords> (_coords));
-
-  game::Status::currentState()->resume();
+  game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
+  game::Status::resumeState();
 }
 
 

@@ -1,8 +1,8 @@
 /**
  * \file
- * \date April 18, 2013
- * \author Zermingore
  * \brief Global game status accessor, including current Player, State, ...
+ * \author Zermingore
+ * \date April 18, 2013
  */
 
 #ifndef COMMON_STATUS_HH_
@@ -23,6 +23,7 @@ namespace interface {
 }
 
 enum class e_state;
+enum class e_input;
 
 
 
@@ -47,11 +48,29 @@ public:
 
 
   /**
-   * \brief return current state
-   * meaning, the top of _states stack
-   * does *NOT* pop the stack
+   * \brief Resume the current state (at the top of _states stack)
+   * \note does *NOT* pop the stack
    */
-  static std::shared_ptr<State> currentState();
+  static void resumeState();
+
+  /**
+   * \brief Resume the current state (at the top of _states stack)
+   * \note does *NOT* pop the stack
+   */
+  template<typename... Attributes>
+  static void setStateAttributes(Attributes... attributes);
+
+  /**
+   * \brief Draw the current State
+   */
+  static void drawState();
+
+  /**
+   * \brief Process the given input
+   * \param input Input from the KeyManager to process
+   * \return \true if a callback was found; \false otherwise
+   */
+  static bool processInput(const e_input& input);
 
   /**
    * \brief returns the current state identifier
@@ -110,7 +129,7 @@ private:
 
 
   /// States stack: storing a pointer to the state and its (more specific) type
-  static std::stack<std::pair<e_state, std::shared_ptr<State>>> _states;
+  static std::stack<std::pair<e_state, std::unique_ptr<State>>> _states;
 
   /// Global State handling inputs accessible everywhere
   static std::shared_ptr<State> _globalState;
@@ -123,5 +142,7 @@ private:
 
 } // namespace game
 
+
+#include <game/Status.hxx>
 
 #endif /* !COMMON_STATUS_HH_ */

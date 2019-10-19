@@ -62,7 +62,7 @@ void Game::run()
   );
 
   game::Status::pushState(e_state::PLAYING);
-  game::Status::currentState()->resume();
+  game::Status::resumeState();
 
   // Drawing loop
   GraphicsEngine::drawScene(battle);

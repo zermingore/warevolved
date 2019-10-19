@@ -11,32 +11,32 @@
 
 
 
-std::shared_ptr<State> StateFactory::createState(const e_state& state)
+std::unique_ptr<State> StateFactory::createState(const e_state& state)
 {
   // Factory Design Pattern
   switch (state)
   {
     case e_state::PLAYING:
-      return std::make_shared<StatePlaying> ();
+      return std::make_unique<StatePlaying> ();
 
     // These menus share the same State
     case e_state::MAP_MENU:
     case e_state::ACTION_MENU:
     case e_state::SELECTION_UNIT:
     case e_state::SELECTION_CREW:
-      return std::make_shared<StateMenu> (state);
+      return std::make_unique<StateMenu> (state);
 
     case e_state::CREW_MANAGEMENT:
-      return std::make_shared<StateMenuCrew> ();
+      return std::make_unique<StateMenuCrew> ();
 
     case e_state::MOVING_UNIT:
-      return std::make_shared<StateMovingUnit> ();
+      return std::make_unique<StateMovingUnit> ();
 
     case e_state::SELECT_TARGET:
-      return std::make_shared<StateSelectTarget> ();
+      return std::make_unique<StateSelectTarget> ();
 
     case e_state::SELECT_DROP_ZONE:
-      return std::make_shared<StateSelectDropZone> ();
+      return std::make_unique<StateSelectDropZone> ();
 
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager",

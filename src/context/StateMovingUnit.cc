@@ -40,9 +40,9 @@ StateMovingUnit::StateMovingUnit()
       game::Status::pushState(e_state::ACTION_MENU);
 
       // giving the next state (action menu) the original unit position
-      game::Status::currentState()->setAttributes(
+      game::Status::setStateAttributes(
         std::make_shared<Coords> (_holoUnitPosition));
-      game::Status::currentState()->resume();
+      game::Status::resumeState();
     });
 
   _evtMgr->registerEvent(e_input::EXIT, [=, this] { exit(); });

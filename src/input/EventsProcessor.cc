@@ -20,15 +20,15 @@ void EventsProcessor::process()
   for (;;)
   {
     // Wait to access an event
-    auto event(KeyManager::popEvent());
+    auto input(KeyManager::popEvent());
 
     // Waiting for the new frame, signaled by the Graphics Engine
     std::unique_lock<std::mutex> lock(_lock);
     _cv_new_frame.wait(lock);
 
     // process KeyManager events queue
-    if (   !game::Status::currentState()->eventManager()->process(event)
-        && !globalState->eventManager()->process(event))
+    if (   !game::Status::processInput(input)
+        && !globalState->eventManager()->process(input))
     {
       PRINTF("Event not processed");
     }

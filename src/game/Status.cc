@@ -1,22 +1,25 @@
-#include <game/Status.hh>
-
 #include <cassert>
 
+#include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <context/StateFactory.hh>
 #include <input/KeyManager.hh>
+#include <common/enums/input.hh>
+#include <input/EventManager.hh>
+
 
 
 namespace game {
 
 
 // Static class attributes definition
-std::stack<std::pair<e_state, std::shared_ptr<State>>> Status::_states;
+std::stack<std::pair<e_state, std::unique_ptr<State>>> Status::_states;
 std::shared_ptr<Battle> Status::_battle;
 Coords Status::_selectedCell;
 Coords Status::_selectedUnitPosition;
 std::mutex Status::_lock;
+
 
 
 e_state Status::state()
@@ -31,16 +34,30 @@ e_state Status::state()
 }
 
 
-std::shared_ptr<State> Status::currentState()
+
+void Status::resumeState()
 {
   _lock.lock();
   assert(!_states.empty() && "_states stack is empty");
 
-  auto state(_states.top().second);
+  _states.top().second->resume();
   _lock.unlock();
-
-  return state;
 }
+
+
+
+void Status::drawState()
+{
+  _states.top().second->draw();
+}
+
+
+
+bool Status::processInput(const e_input& input)
+{
+  return _states.top().second->eventManager()->process(input);
+}
+
 
 
 void Status::pushState(const e_state state)
@@ -53,11 +70,11 @@ void Status::pushState(const e_state state)
   }
 
   // push a new State
-  auto new_state(StateFactory::createState(state));
-  _states.push({state, new_state});
+  _states.push({state, StateFactory::createState(state)});
 
   _lock.unlock();
 }
+
 
 
 void Status::popCurrentState()

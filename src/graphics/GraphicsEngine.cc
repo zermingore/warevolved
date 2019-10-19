@@ -32,6 +32,7 @@ bool GraphicsEngine::_exit;
 std::unique_ptr<TerrainsHandler> GraphicsEngine::_terrainsHandler;
 
 
+
 void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 {
   _window->setActive();
@@ -74,10 +75,12 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
 }
 
 
+
 void GraphicsEngine::drawState()
 {
-  game::Status::currentState()->draw();
+  game::Status::drawState();
 }
+
 
 
 void GraphicsEngine::screenshot()

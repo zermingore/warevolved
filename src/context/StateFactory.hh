@@ -25,7 +25,7 @@ public:
    * \param state The state identifier
    * \return A pointer to the matching State
    */
-  static std::shared_ptr<State> createState(const e_state& state);
+  static std::unique_ptr<State> createState(const e_state& state);
 };
 
 

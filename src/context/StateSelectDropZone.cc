@@ -184,7 +184,7 @@ void StateSelectDropZone::validate()
   game::Status::player()->cursor()->setCoords(_vehicleLocation);
 
   game::Status::popCurrentState();
-  game::Status::currentState()->resume();
+  game::Status::resumeState();
 }
 
 
