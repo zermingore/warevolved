@@ -13,7 +13,7 @@ std::map<e_terrain, const Terrain> TerrainsHandler::_terrains;
 void TerrainsHandler::initialize()
 {
   TerrainsHandler::_terrains = {
-    { e_terrain::PLAIN,  {1, "plain"} },
+    { e_terrain::PLAIN,  {1, "plain" } },
     { e_terrain::FOREST, {3, "forest"} }
   };
 }

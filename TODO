@@ -30,6 +30,7 @@
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
 ** TODO Bootstrap: do not hard-code the path to the configure
+** TODO Seed 3696412022 move unit && dead lock?
 
 
 * TODO Doc
