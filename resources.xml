@@ -70,6 +70,7 @@
 	  </file>
 	</folder>
   </fonts>
+  <!--
   <sounds>
 	<folder path='resources/          no/'>
 	  <file filename='sound.mplol'>
@@ -77,4 +78,5 @@
 	  </file>
 	</folder>
   </sounds>
+  -->
 </resources>
