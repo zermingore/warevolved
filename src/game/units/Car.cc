@@ -9,6 +9,7 @@
 
 #include <debug/Debug.hh>
 #include <graphics/Sprite.hh>
+#include <game/units/UnitFactory.hh>
 
 
 
@@ -21,8 +22,8 @@ Car::Car()
   _sprite = std::make_shared<graphics::Sprite> ("car");
 
   _motionValue = 5;
-  _hp = 30;
-  _maxHp = _hp;
+  _maxHp = UnitFactory::typeMaxHp(_type);
+  _hp = _maxHp;
   _attackValue = 0;
 
   _minRange = 0;

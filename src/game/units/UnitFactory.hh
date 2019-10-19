@@ -31,6 +31,13 @@ public:
    *   nullptr if the name was invalid
    */
   static std::unique_ptr<Unit> createUnit(const e_unit& unit);
+
+  /**
+   * \brief Get the maximal number of HP for the given Unit type
+   * \param type Unit type to get max HP
+   * \return Maximal health points for the given type
+   */
+  static int typeMaxHp(const e_unit& type);
 };
 
 #endif /* !UNIT_FACTORY_HH_ */

@@ -8,6 +8,7 @@
 #include <game/units/Soldier.hh>
 
 #include <graphics/Sprite.hh>
+#include <game/units/UnitFactory.hh>
 
 
 
@@ -18,8 +19,8 @@ Soldier::Soldier()
   _sprite = std::make_shared<graphics::Sprite> ("soldier");
 
   _motionValue = 3;
-  _hp = 10;
-  _maxHp = _hp;
+  _maxHp = UnitFactory::typeMaxHp(_type);
+  _hp = _maxHp;
   _attackValue = 5;
 
   _minRange = 1;

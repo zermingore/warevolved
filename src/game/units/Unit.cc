@@ -29,10 +29,12 @@ Unit::Unit()
 }
 
 
+
 void Unit::setColor(const graphics::Color& color)
 {
   _sprite->setColor(color);
 }
+
 
 
 bool Unit::addToCrew(std::shared_ptr<Unit> unit)

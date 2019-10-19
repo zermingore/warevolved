@@ -31,3 +31,22 @@ std::unique_ptr<Unit> UnitFactory::createUnit(const e_unit& unit)
       return nullptr;
   }
 }
+
+
+
+int UnitFactory::typeMaxHp(const e_unit& type)
+{
+  switch (type)
+  {
+    case e_unit::SOLDIER:
+      return 10;
+
+    case e_unit::CAR:
+      return 30;
+
+    default:
+      ERROR("Failed getting max hp for Unit type", static_cast<int> (type));
+      assert(false && "Unit type not found");
+      return -1;
+  }
+}

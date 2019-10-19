@@ -163,9 +163,7 @@ void Battle::generateRandomMap()
         auto player_id = rand_player(gen);
         auto played = false;
 
-        /// \todo Creating an instance on the Unit only to get its max HP
-        std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
-        auto max_hp = new_unit->maxHp();
+        auto max_hp{UnitFactory::typeMaxHp(type)};
         std::uniform_int_distribution<> randHpSoldier(1, max_hp);
         auto hp = randHpSoldier(gen);
 
@@ -180,9 +178,7 @@ void Battle::generateRandomMap()
         auto player_id = rand_player(gen);
         auto played = false;
 
-        /// \todo Creating an instance on the Unit only to get its max HP
-        std::shared_ptr<Unit> new_unit(UnitFactory::createUnit(type));
-        auto max_hp = new_unit->maxHp();
+        auto max_hp{UnitFactory::typeMaxHp(type)};
         std::uniform_int_distribution<> randHpSoldier(1, max_hp);
         auto hp = randHpSoldier(gen);
 
@@ -387,9 +383,7 @@ void Battle::randomMapRefine()
     // No friendly Unit found but a free Cell is available -> new Soldier
     if (found_free_cell && !found_friendly_unit)
     {
-      /// \todo Creating an instance on the Unit only to get its max HP
-      auto new_unit{UnitFactory::createUnit(e_unit::SOLDIER)};
-      auto max_hp{new_unit->maxHp()};
+      auto max_hp{UnitFactory::typeMaxHp(e_unit::SOLDIER)};
       _map->newUnit(e_unit::SOLDIER,
                     freeCoords.c, freeCoords.l, player->id(), max_hp, false);
       player->cursor()->setCoords({freeCoords.c, freeCoords.l});
