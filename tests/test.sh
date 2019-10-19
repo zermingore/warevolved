@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -E
+trap '[ "$?" -eq 123 ] && exit 123' ERR
+
+
 # NOTE: modern getopt and bash-compliant shell required
 
 
@@ -55,9 +59,9 @@ function smoke_tests()
   do
     echo -n "Testing ${file}... "
     . "$file"
-    if [[ $? -ne 0 ]]; then # Aborting whatever the failure in a smoke test is
+    if [[ $? -ne 0 ]]; then # Aborting whatever the failure is
       printError "[FAIL]\n  Smoke tests failed; Aborting..."
-      exit 1
+      exit 123
     fi
 
     printSuccess "[done]"
@@ -110,7 +114,7 @@ function main()
 
   # Smoke tests
   if [[ $RUN_ALL_TYPES -eq 1 || $RUN_SMOKE -eq 1 ]]; then
-    smoke_tests || exit $?
+    smoke_tests
   fi
 
   # Regression tests
