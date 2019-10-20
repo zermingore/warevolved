@@ -100,9 +100,8 @@ class Debug
 {
 public:
   template<typename T, typename... Tail>
-  static void logPrintf(const T head, const Tail... tail)
+  static void constexpr logPrintf(const T head, const Tail... tail)
   {
-    std::ofstream log(LOG_FILENAME, std::ios_base::out | std::ios_base::app);
     logTime();
     bodylogprintf(head, tail...);
     printf(head, tail...);
@@ -114,7 +113,7 @@ public:
    * \note head must override the << stream operator
    */
   template<typename T>
-  static void printLog(const T head)
+  static constexpr void printLog(const T head)
   {
     *_log << " " << head << COLOR_NORMAL;
   }
@@ -126,7 +125,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void error(const T head, const Tail... tail)
+  static void constexpr error(const T head, const Tail... tail)
   {
     logTime();
     *_log << COLOR_ERROR;
@@ -142,7 +141,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void notice(const T head, const Tail... tail)
+  static void constexpr notice(const T head, const Tail... tail)
   {
     logTime();
     *_log << COLOR_NOTICE;
@@ -158,7 +157,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void warning(const T head, const Tail... tail)
+  static void constexpr warning(const T head, const Tail... tail)
   {
     logTime();
     *_log << COLOR_WARNING;
@@ -174,7 +173,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void printf(const T head, const Tail... tail)
+  static void constexpr printf(const T head, const Tail... tail)
   {
     std::cout << head << " ";
     printf(tail...);
@@ -188,7 +187,7 @@ private:
    * \param tail Eventual following arguments
    */
   template<typename T, typename... Tail>
-  static void bodylogprintf(const T head, const Tail... tail)
+  static void constexpr bodylogprintf(const T head, const Tail... tail)
   {
     printLog(head);
     bodylogprintf(tail...);
@@ -199,8 +198,8 @@ private:
    */
   static void logTime()
   {
-    auto now = std::time(nullptr);
-    auto full_date = *std::localtime(&now);
+    const auto now{std::time(nullptr)};
+    const auto full_date{*std::localtime(&now)};
     *_log << std::put_time(&full_date, "%F @ %T") << '\t';
   }
 
