@@ -21,6 +21,7 @@
     Cannot reproduce it (October 2019)
 *** TODO Crew 'Passenger' not used
 
+
 ** TODO Graphics
 *** TODO Resize the window: center the map
 *** TODO Resize the window: propagate new panel positions
@@ -33,6 +34,7 @@
 ** TODO Bootstrap: do not hard-code the path to the configure
 ** TODO Seed 3696412022 move unit && dead lock?
    Seems to happen when trying to move an units without available adjacent free cell
+   Move a unit on itself
 
 
 * TODO Doc

@@ -234,8 +234,9 @@ void Battle::loadMap()
   pugi::xml_document doc;
   if (!doc.load_file(_loadMapFile.c_str()))
   {
-    ERROR("Unable to load file", _loadMapFile);
-    throw std::runtime_error("Unable to load map file; aborting...");
+    const std::string msg{"Unable to load file [" + _loadMapFile + "]"};
+    ERROR(msg);
+    throw std::runtime_error(msg);
   }
 
   auto metadata = doc.child("map").child("metadata");
