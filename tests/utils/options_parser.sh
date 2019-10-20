@@ -70,7 +70,9 @@ function _check_test_files_exist()
 function parse_options()
 {
   # Check getopt version compatible (GNU)
-  if [ getopt --test -ne 4 ]; then
+  local getopt_ret
+  getopt --test || getopt_ret=$?
+  if [ $getopt_ret -ne 4 ]; then
     printError "Non-supported getopt version"
     exit 1
   fi
