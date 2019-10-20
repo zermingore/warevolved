@@ -1,7 +1,7 @@
 Map loading
 
 Without command line parameter:
-  Load a random map
+  Load a random map (a seed can be provided with --seed)
 
 Wrong map file
   Aborts the execution

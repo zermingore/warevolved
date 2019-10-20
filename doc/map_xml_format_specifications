@@ -16,7 +16,13 @@ nodes list with attributes (alphabetical order):
   col="12"
   line="34"
 
+<crew>           # (optional) Vehicle crew
+
 <current_player> # Id of the Player currently playing
+
+<cursor>         # Player's cursor position
+  col="12"
+  col="34"
 
 <player>         # Player attributes
 
@@ -28,6 +34,13 @@ nodes list with attributes (alphabetical order):
   nb_columns="123"
   nb_lines="456"
 
+<member>         # (optional) Member of a vehicle crew
+  role="1"
+  type="2"
+  player_id="3"
+  hp="4"
+  played=false
+
 <metadata>       # Map metadata group
 
 <terrain>        # Terrain id of the Cell
@@ -37,7 +50,8 @@ nodes list with attributes (alphabetical order):
   player_id="34"
   hp="56"
   played="true"
-
+  <crew>
+    <member>
 
 
 
@@ -50,9 +64,11 @@ Hierarchy:
     <current_player>1<current_player/>
     <player>
       <color r="12" g="34" b="56">
+      <cursor col="12" line="34">
     </players>
     <player>
       <color r="78" g="90" b="12">
+      <cursor col="56" line="78">
     </players>
   </metadata>
 
@@ -60,7 +76,13 @@ Hierarchy:
     <cell> <!-- repeated -->
       <coordinates col="12" line="34"/>
       <terrain>123</terrain>
-      <unit type="1" player_id="2" hp="3"> <!-- optionanl -->
+      <unit type="1" player_id="2" hp="3"> <!-- optional -->
+      <unit type="1" player_id="2" hp="3"
+        <crew> <!-- optional -->
+          <member role="2" type="3" player_id="4" hp="5" played="false"/>
+          <member role="6" type="7" player_id="8" hp="9" played="true"/>
+        </crew>
+      </unit>
     </cell>
   </cells>
 </map>
