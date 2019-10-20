@@ -32,6 +32,7 @@
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
 ** TODO Bootstrap: do not hard-code the path to the configure
 ** TODO Seed 3696412022 move unit && dead lock?
+   Seems to happen when trying to move an units without available adjacent free cell
 
 
 * TODO Doc
@@ -56,7 +57,8 @@
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
 ** TODO Cursor (interface) in its thread
-** TODO Handle external libs (pugixml) in submodules ?
+** DONE Handle external libs (pugixml) in submodules ?
+   CLOSED: [2019-10-20 Sun 16:35]
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 ** TODO Random generator as a service locator
 ** TODO Give clang-tidy a try
