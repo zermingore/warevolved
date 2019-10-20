@@ -47,13 +47,7 @@
 ** TODO Merge Cell highlight boolean and color (color::None)
 ** TODO Capture lambda as reference when possible
 ** TODO Use the uniformed initialization
-** DONE Factories: return unique_ptr
-   CLOSED: [2019-10-19 Sat 15:09]
 ** TODO Find a way to have compile-time map keys (vehicle crews)
-** DONE Event logger no longer in debug namespace
-   CLOSED: [2019-10-15 Tue 18:44]
-** DONE Dirty generated enum / not up to date
-   CLOSED: [2019-10-19 Sat 08:52]
 ** TODO Map random generation
 ** TODO Do not put enums in common as default (+ sort them)
 
