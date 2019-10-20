@@ -1,31 +1,46 @@
-├── AUTHORS
-├── configure
-├── Makefile
-├── doc
-├── resources
-│   ├── cursors
-│   ├── defaults
-│   ├── fonts
-│   ├── interface
-│   │   ├── in_game_menu
-│   │   └── path
-│   ├── terrains
-│   └── units
-├── src
-│   ├── common
-│   │   ├── enums
-│   │   └── structures
-│   ├── core
-│   ├── game
-│   │   ├── applications
-│   │   ├── items
-│   │   │   └── guns
-│   │   └── units
-│   ├── graphics
-│   ├── input
-│   ├── interface
-│   │   └── menus
-│   ├── pugixml
-│   └── resources
-├── think
-└── tools
+ROOT                     # Project root
+├── AUTHORS              # Authors list
+├── configure            # Autotools-generated
+├── configure.ac         # Configure souce
+├── CONTRIBUTING         # How to contribute introduction
+├── Doxyfile             # Doxygen documentation template
+├── HELP                 # Installation / troubleshooting FAQ
+├── Makefile             # Autotools-generated
+├── Makefile.am          # Makefile source
+├── doc/                 # Project documentation
+│   ├── features/        # Documentation related to the game's features
+│   ├── legacy/          # Old pieces of documentation / tracked bugs
+│   └── think/           # Ideas / concepts reflections
+├── lib/                 # External libraries
+├── map                  # Map samples
+├── resources/           # Game's resources (fonts, images, ...)
+├── resources.xml        # Resources list
+├── README               # Project brief description
+├── src/                 # Source code
+├── tests                # Game's tests
+│   ├── regression/      # Non-regression test cases
+│   ├── smoke/           # Smoke test cases
+│   └── utils/           # Test suite internal tools
+├── TODO                 # To do list
+└── tools                # Various helper tools
+    ├── code_generation/ # Code generators
+    ├── git/             # Git hooks samples
+    └── valgrind/        # Memory-checker scripts
+
+SOURCES
+├── common/              # Source-agnostic helpers / frequently used types
+├── config/              # Game configuration
+├── context/             # Events handling context
+├── debug/               # Debug tools (OSD for instance)
+├── game/                # Game mechanics
+│   └── units/           # Units list
+├── generated/           # Generated files (edit them at your own risks)
+├── graphics/            # Graphics related
+├── input/               # Events handling
+├── interface/           # Game's interface
+│   └── menus/           # In-game menus
+├── lib/                 # Libraries wrappers
+├── Makefile.am          # Source files list (add new files here)
+├── resources/           # Assets related
+├── structures/          # Helper structures
+└── tools/               # Various utilities (options parser, ...)
