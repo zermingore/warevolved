@@ -5,6 +5,7 @@
 # NOTE:
 # - A task can be removed only on the master
 # - A task can be added or marked as done on any branch
+# - (Very) long term features are documented in the doc/think/concept file
 
 
 * TODO Roadmap
@@ -59,9 +60,6 @@
 ** TODO Handle external libs (pugixml) in submodules ?
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
 ** TODO Random generator as a service locator
-** DROPPED Upgrade SFML
-   CLOSED: [2019-10-19 Sat 15:21]
-   Already using 2.5 (last 2.5.1)
 ** TODO Give clang-tidy a try
 
 
@@ -81,10 +79,6 @@
 ** TODO use emplace[_back] with std::vector (C++11)
    (instead of create and push)
 ** TODO auto-generate Resources XML file
-*** TODO OS-dependant in script language
-**** TODO Shell Script
-**** TODO [#C] .bat
-*** TODO non-OS dependant (in C++)
 ** TODO follow the C++ rule of 0
 ** TODO Avoid vector of vector
    (std::vector<std::vector<Cell>> for the Map)
@@ -121,52 +115,7 @@
 * TODO Gameplay
 ** TODO Meteo
 *** TODO Graphics: add a snowy transparent sprite
-** TODO Fog of War
-*** TODO Vision
-*** TODO Field of View ?
-	Sniper: very good vision, poor field of view (angle)
-*** TODO field of hearing
-	know there's a unit nearby
-	avoid embushes
-** TODO more than one unit per cell (helicopter / soldier)
-   could use more than one plan (one for ground units, one for air units)
-*** TODO Tunnels
-   could use different levels of zoom (micro-ing a soldier, macro-ing a tank)
-** TODO dual windows (main window / infos panel)
-** TODO Customize gear
-   (riffles, kevlar, silencer, vehicles options)
-** TODO ammo management
-   by clip || bullet per bullet
-** TODO Genie
-   building Heliport, wounded evac
-   repair center
-   bury mines
-   dig
-   build bridges
-** TODO units ranks / promotion / leader
-** TODO Motion
-*** TODO Move Management
-   for each cell: simply move, shoot somewhere or sprint
-   could micro a 5 soldier team:
-     (5 cells max motion)
-     2 fires at cell #2 to the north, 3 fires at cell #3 to the south
-	 team regroup at #cell 4 (open fire costs 1 move)
-*** TODO Open Fire Management
-	while moving
-	Shift on a cell: sprint (increase move costs, reduces damages taken)
-	  [manage wounded whiles sprinting ?]
-	Control on a cell: open fire in mouse direction
-	  8 surrounding cells (less damages, even less for not 4 'direct' cells)
-	  ground unit: manage how many bullets per shot ?
-	  allow spamming ?
-	  vehicles: rotating turret required
-	    (else: fire more or less only straight shots)
-		(while moving ?)
-	Alt on a cell: unit rotation
-	  increase reactivity
-	  only on simple move
 ** TODO Multi-Cells units?
-
 
 
 * TODO Sound
@@ -183,27 +132,12 @@
 ** TODO Display last killed unit list
 
 
-* TODO Network
-** TODO Chat
-** TODO multi-players
-
-
-* TODO [#C] Multi-Platforms
-** TODO [#C] Windows
-** TODO [#B] Unix (BSD)
-** TODO [#C] Mac OS
-** TODO [#B] Phone ?
-*** TODO [#B] Android
-
 
 * TODO Graphics Engine
 ** TODO Units filter sprite
 ** TODO Units orientation
    only graphic attribute ?
    use while moving a unit (default: look ahead, can check a side)
-** TODO Libraries
-*** TODO [#C] switch 'on demand' (at compilation time)
-    use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 ** TODO Sprites management
    merge on common themes
    1 theme -> 1 load, 1 free
@@ -243,8 +177,6 @@
    (The build process still takes more than a minute)
 ** TODO Memory Leaks / Errors: periodic controls
 
-
-* Build
 
 
 * TODO [#C] Optimization

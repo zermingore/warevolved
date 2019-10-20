@@ -4,7 +4,13 @@
 
 * CORE
 ** multi-plateform
-** website
+*** Web
+*** Multi-Platforms
+*** Unix (BSD)
+*** Windows
+*** Mac OS
+*** Phone ?
+**** Android
 
 
 * GRAPHICS
@@ -12,6 +18,7 @@
 ** 2D / 3D / Mixx ? (2D maps with 3D units? xD)
 ** use of Strategy Design Pattern (3D, 2D, Ascii-Art) with templates (compile-time)
 ** background: satellite view
+** Multi-Windows (main window / infos panel)
 
 
 * GAMEPLAY
@@ -29,12 +36,21 @@
 ** action: velocity & ammo & aim Gauges
 ** map: buildings / tunnels, units can enter (change view [-> map])
 ** multi scale levels (microing a soldier [inside a building]), macroing a chopper
+*** more than one unit per cell (helicopter / soldier)
+    could use more than one plan (one for ground units, one for air units)
+*** tunnels
+    could use different levels of zoom (micro-ing a soldier, macro-ing a tank)
 ** macro scale: not sure where small units are (eventually, fires on more than one cell at a time)
    could use a delay between sight by micro units and sight by macro units
 ** gas stations / hospital / market control
 ** wind ?
 ** field of earing
-** field of view: only if day duration < 1 min (else: suppose units can check behind)
+   know there's a unit nearby
+   avoid embushes
+** Fog of war
+*** Vision
+*** Field of view: only if day duration < 1 min (else: suppose units can check behind)
+    Sniper: very good vision, poor field of view (angle)
 ** patrol
 ** motion
    a plane (carrier) cannot perform a 180
@@ -66,12 +82,41 @@ note: closer than a simulator than a game...
    fetch stuff on bodies (jacket -> get appearance, need Ad-Hoc to avoid friendly fire)
    blueprints
 
+** Motion
+*** Move Management
+    for each cell: simply move, shoot somewhere or sprint
+    could micro a 5 soldier team:
+    (5 cells max motion)
+    - 2 fires at cell #2 to the north, 3 fires at cell #3 to the south
+    - team regroup at #cell 4 (open fire costs 1 move)
+*** Open Fire Management
+    while moving
+    Shift on a cell: sprint (increase move costs, reduces damages taken)
+     [manage wounded whiles sprinting ?]
+    Control on a cell: open fire in mouse direction
+     8 surrounding cells (less damages, even less for not 4 'direct' cells)
+     ground unit: manage how many bullets per shot ?
+     allow spamming ?
+     vehicles: rotating turret required
+       (else: fire more or less only straight shots)
+       (while moving ?)
+     Alt on a cell: unit rotation
+       increase reactivity
+       only on simple move
+
 
 * UNITS
 ** SOLDIER
 *** clips
 *** wounds
 *** backpack / inventory (25 slots -> medkit / clips / ... / if dead -> allowed to pick it up)
+
+** GENIE
+*** building Heliport, wounded evac
+*** repair center
+*** bury mines
+*** dig
+*** build bridges
 
 ** VEHICULES
 *** fuel ?
@@ -80,6 +125,7 @@ note: closer than a simulator than a game...
 *** damages
 
 ** HEROES ?
+*** units ranks / promotion / leader
 
 ** FLYINGS
 *** PLANES: departure, target, arrival
@@ -100,6 +146,13 @@ train units
 * ITEMS
 ** Tools
    shovel toolbox
+** Customize gear
+   (riffles, kevlar, silencer, vehicles options)
+** ammo management
+   by clip || bullet per bullet
+
+
+
 
 * SCENARIO
 ** Humans Vs Humans ?
@@ -116,6 +169,10 @@ train units
 ** drones to harvest resources
 ** Fr nuclear plants failure ?
 
+
+* Network
+** Chat
+** multi-players
 
 
 * UPGRADES
@@ -144,4 +201,6 @@ train units
 *** hover unit: fps view
 **** allow focusing a target ?
 **** lights ON / OFF
+** Graphics library switch 'on demand' (at compilation time)
+   use SFML if available, else SDL, pure OpenGL, ASCII, DirectX, ...
 ** [#C] Manage fights with RODS
