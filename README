@@ -40,8 +40,8 @@ This project is under a fully permissive license.
 It means that you can do whatever you want with the code;
 A citation would be appreciated but is not required
 
-Though this software uses PugiXML, a XML file parser which is under Boost license
-I have not written any code in src/pugixml folder
+Though this software uses pugixml (v1.10), a XML file parser under MIT license
+I have not written any code in the src/pugixml folder
 credits go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
 
 
