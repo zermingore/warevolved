@@ -1,14 +1,18 @@
 -*- mode: org -*-
+#+OPTIONS: ^:nil
+#+STARTUP: showeverything
 
 * CORE
 ** multi-plateform
 ** website
+
 
 * GRAPHICS
 ** realist (satellite pictures ?) / dark
 ** 2D / 3D / Mixx ? (2D maps with 3D units? xD)
 ** use of Strategy Design Pattern (3D, 2D, Ascii-Art) with templates (compile-time)
 ** background: satellite view
+
 
 * GAMEPLAY
 ** multiples stairs
@@ -42,15 +46,15 @@
 ** attack coordination between two units
 ** map themes stopwatch (sinking submarine)
 ** fog of war: fake detonations (pull foes, allowing ambush with silencers)
-2+ Vs *: same faction plays simultaneously (allow packing units, ...) ?
-2+ Vs *: same day, different turn (only one attack at the end of the day)
-
-join 2 same type: minimum of both move left
-join soldier / vehicule packable: vehicule move left
-
+** Teams
+   2+ Vs *: same faction plays simultaneously (allow packing units, ...) ?
+   2+ Vs *: same day, different turn (only one attack at the end of the day)
+** Crews
+   join 2 same type: minimum of both move left
+   join soldier / vehicule packable: vehicule move left
 ** Terrains
    river (water strength, could need lifejacket, palms [1 per Soldier])
-   canyon rope needed (only one per team)
+   canyon rope needed (only one per crew)
 
 note: closer than a simulator than a game...
 -> dual modes ?
@@ -60,7 +64,7 @@ note: closer than a simulator than a game...
 ** loot
    fetch pieces on damaged vehicles
    fetch stuff on bodies (jacket -> get appearance, need Ad-Hoc to avoid friendly fire)
-   bleuprints
+   blueprints
 
 
 * UNITS
