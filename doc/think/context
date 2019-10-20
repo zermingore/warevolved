@@ -1,11 +1,17 @@
 State:
 Abstract class
+Particular state where a specific set of inputs will be taken into account
 
-PlayingState, ...
+StateDropZone     Dropping a Unit from a Vehicle
+StateGlobal       Try to treat not handled events (Chain of commands)
+StateMenu         Generic menu
+StateMenuCrew     Menu crew (allowing browsing left / right)
+StateMovingUnit   Moving a Unit
+StatePlaying      Active while browsing the map
+StateSelectTarget Active while browsing the map
 
 
-Interface, menus, ...
-link with menu
-
-menu is a kind of State ?
-Same eventManager for every Menu
+Stackables (StateGlobal is always active though (close the window, ...))
+^ StateSelectTarget
+| StateMenu
+| StatePlaying
