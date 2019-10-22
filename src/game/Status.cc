@@ -27,7 +27,7 @@ e_state Status::state()
   _lock.lock();
   assert(!_states.empty() && "_states stack is empty");
 
-  auto state_index(_states.top().first);
+  auto state_index{_states.top().first};
   _lock.unlock();
 
   return state_index;
@@ -39,9 +39,9 @@ void Status::resumeState()
 {
   _lock.lock();
   assert(!_states.empty() && "_states stack is empty");
+  _lock.unlock();
 
   _states.top().second->resume();
-  _lock.unlock();
 }
 
 
@@ -92,7 +92,8 @@ void Status::clearStates()
 {
   assert(!_states.empty() && "clearStates called with empty stack");
 
-  while (_states.top().first != e_state::PLAYING) {
+  while (_states.top().first != e_state::PLAYING)
+  {
     popCurrentState();
   }
 }
