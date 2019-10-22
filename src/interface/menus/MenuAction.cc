@@ -32,7 +32,7 @@ void MenuAction::build()
     buildMenuAfterMovingUnit();
   }
 
-  addCancelEntry( [=, this] { cancel(); } );
+  addCancelEntry([&] { cancel(); } );
 }
 
 
@@ -81,8 +81,8 @@ void MenuAction::buildMenuSelectionUnit()
   if (allowMove()
       && _selectedUnit->playerId() == game::Status::player()->id())
   {
-    auto entry(std::make_shared<MenuEntry> (e_entry::MOVE));
-    entry->setCallback( [=, this] { moveUnit(); });
+    auto entry{std::make_shared<MenuEntry> (e_entry::MOVE)};
+    entry->setCallback([&] { moveUnit(); });
     _entries.push_back(entry);
   }
 
@@ -91,15 +91,15 @@ void MenuAction::buildMenuSelectionUnit()
   _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
   if (_pathFinding->getTargets(_selectedUnit, _coords)->size() > 0)
   {
-    auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
-    entry->setCallback( [=, this] { attackUnit(); });
+    auto entry{std::make_shared<MenuEntry> (e_entry::ATTACK)};
+    entry->setCallback([&] { attackUnit(); });
     _entries.push_back(entry);
   }
 
   if (_selectedUnit->crewSize())
   {
-    auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
-    entry_crew->setCallback( [=, this] { manageCrew(); });
+    auto entry_crew{std::make_shared<MenuEntry> (e_entry::CREW)};
+    entry_crew->setCallback([&] { manageCrew(); });
     _entries.push_back(entry_crew);
   }
 }
