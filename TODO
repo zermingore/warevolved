@@ -32,7 +32,8 @@
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
 ** TODO Bootstrap: do not hard-code the path to the configure
-** TODO Seed 3696412022 move unit && dead lock?
+** DONE Seed 3696412022 move unit && dead lock?
+   CLOSED: [2019-11-01 Fri 13:38]
    Seems to happen when trying to move an units without available adjacent free cell
    Move a unit on itself
 
