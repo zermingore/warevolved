@@ -9,7 +9,7 @@ function _help()
 {
   echo "Usage:"
   echo -n "    $0 [--smoke] [--regression] [--no-configure]"
-  echo    " [--parallel-build] [--tests=TEST_1,...,TEST_N]"
+  echo    " [--parallel-build] [--tests=TEST_1,...,TEST_N] [--random-seed=VAL]"
 
   echo
   echo "Options:"
@@ -22,6 +22,10 @@ function _help()
 
   printf "    %-${longest_opt}s%s\n"\
          "-n|--no-configure" "Do not run autoreconf / configure (no clean)"
+
+  printf "    %-${longest_opt}s%s\n"\
+         "--random-seed=VALUE"\
+         "Use the given seed to initialize the random generator"
 
   printf "    %-${longest_opt}s%s\n"\
          "-r|--regression"\
@@ -108,6 +112,11 @@ function parse_options()
       -n|--no-configure)
         NO_CONFIGURE=1
         shift
+        ;;
+
+      --random-seed)
+        RANDOM_SEED=$2
+        shift 2
         ;;
 
       -r|--regression)

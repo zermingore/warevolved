@@ -19,6 +19,7 @@ help,\
 no-configure,\
 parallel-build,\
 no-configure,\
+random-seed:,\
 regression,\
 smoke,\
 tests:,\
@@ -30,6 +31,7 @@ NO_CONFIGURE=0
 RUN_ALL_TYPES=1
 RUN_REGRESSION=0
 RUN_SMOKE=0
+RANDOM_SEED=$(shuf -i 0-4294967296 -n 1)
 
 
 # Paths
@@ -100,10 +102,7 @@ function main()
 {
   parse_options "$@"
 
-  local result=0
-
   build
-
   # Get the absolute path to the 'we' binary
   BIN_WE=$(find "${ROOT_TESTS}" -name we -type f -executable \
                 -exec readlink -f {} \;)
@@ -111,6 +110,10 @@ function main()
     printError "Binary not found"
     exit 2
   fi
+
+
+  local result=0
+  echo "Using random seed: $RANDOM_SEED"
 
   # Smoke tests
   if [[ $RUN_ALL_TYPES -eq 1 || $RUN_SMOKE -eq 1 ]]; then

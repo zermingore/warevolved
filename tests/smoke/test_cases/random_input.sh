@@ -14,11 +14,9 @@ if [[ -z "$ROOT_TESTS" || -z "$BIN_WE" ]]; then
 fi
 
 
-#RANDOM_SEED=$(shuf -i 0-4294967296 -n 1)
-RANDOM_SEED=123456789 # TODO argument
 RANDOM=$RANDOM_SEED
-
 TMP="${ROOT_TESTS}/we_replay_test_random__$(date +'%Y_%m_%d__%H_%M_%S')"
+echo "# seed: $RANDOM_SEED" >> $TMP
 
 
 # Returns a random value belonging to the given range (inclusively)
@@ -53,8 +51,8 @@ done
 
 echo "Test file: $TMP"
 
-timeout 10 "${BIN_WE}" -r --replay-file="$TMP" >> /dev/null
-
+timeout 10 "${BIN_WE}" \
+        --random-seed="$RANDOM_SEED" -r --replay-file="$TMP" >> /dev/null
 if [ $? -eq 124 ]; then
   return 0
 fi
