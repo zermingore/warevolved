@@ -56,4 +56,6 @@ timeout 10 "${BIN_WE}" \
 if [ $? -eq 124 ]; then
   return 0
 fi
+
+chmod -w "$TMP"
 return 1
