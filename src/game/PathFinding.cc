@@ -13,8 +13,8 @@
 #include <game/Cell.hh>
 #include <game/units/Unit.hh>
 #include <game/Status.hh>
+#include <game/path_shapes.hh>
 #include <common/enums/directions.hh>
-#include <common/enums/path_shapes.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 #include <graphics/MapGraphicsProperties.hh>

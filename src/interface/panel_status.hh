@@ -4,8 +4,8 @@
  * \author Zermingore
  */
 
-#ifndef PANEL_STATUS_HH_
-# define PANEL_STATUS_HH_
+#ifndef ENUM_PANEL_STATUS_HH_
+# define ENUM_PANEL_STATUS_HH_
 
 
 /**
@@ -22,4 +22,4 @@ enum class e_panel_status
 };
 
 
-#endif /* !PANEL_STATUS_HH_ */
+#endif /* !ENUM_PANEL_STATUS_HH_ */

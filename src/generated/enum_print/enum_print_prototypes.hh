@@ -12,7 +12,6 @@
 # include <string>
 # include <common/enums/units.hh>
 # include <common/enums/terrains.hh>
-# include <common/enums/path_shapes.hh>
 # include <common/enums/attack_result.hh>
 # include <common/enums/directions.hh>
 # include <common/enums/states.hh>
@@ -23,7 +22,6 @@ namespace debug {
 
 std::string e_unit_string(e_unit entry);
 std::string e_terrain_string(e_terrain entry);
-std::string e_path_shape_string(e_path_shape entry);
 std::string e_attack_result_string(e_attack_result entry);
 std::string e_direction_string(e_direction entry);
 std::string e_state_string(e_state entry);
