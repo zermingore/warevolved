@@ -141,6 +141,6 @@ private:
 } // namespace game
 
 
-#include <game/Status.hxx>
+# include <game/Status.hxx>
 
 #endif /* !COMMON_STATUS_HH_ */

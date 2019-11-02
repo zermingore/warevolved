@@ -53,7 +53,8 @@
 ** TODO Use the uniformed initialization
 ** TODO Find a way to have compile-time map keys (vehicle crews)
 ** TODO Map random generation
-** TODO Do not put enums in common as default (+ sort them)
+** DONE Do not put enums in common as default (+ sort them)
+   CLOSED: [2019-11-02 Sat 19:38]
 
 
 * TODO Experimental
@@ -63,7 +64,6 @@
 ** DONE Handle external libs (pugixml) in submodules ?
    CLOSED: [2019-10-20 Sun 16:35]
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
-** TODO Random generator as a service locator
 ** TODO Give clang-tidy a try
 
 
