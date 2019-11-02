@@ -9,14 +9,15 @@
 #ifndef INTERFACE_PANEL_HH_
 # define INTERFACE_PANEL_HH_
 
-# include <graphics/graphic_types.hh>
-# include <interface/InterfaceElement.hh>
-# include <common/enums/panel_status.hh>
-# include <graphics/Sprite.hh>
-
-# include <game/Map.hh>
+# include <interface/panel_status.hh>
 # include <interface/Cursor.hh>
 # include <interface/MiniMap.hh>
+
+# include <graphics/graphic_types.hh>
+# include <graphics/Sprite.hh>
+# include <interface/InterfaceElement.hh>
+# include <game/Map.hh>
+
 
 class Map;
 

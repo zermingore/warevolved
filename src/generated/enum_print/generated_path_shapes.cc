@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: tools/code_generation/enum_print/generate_enum_print.sh
-// generated on: Mon Oct 14 18:46:42 CEST 2019
+// generated on: Sat Nov  2 11:34:22 CET 2019
 
 
 #include <string>
