@@ -125,15 +125,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void constexpr error(const T head, const Tail... tail)
-  {
-    logTime();
-    *_log << COLOR_ERROR;
-    bodylogprintf(head, tail...);
-
-    std::cout << COLOR_ERROR;
-    printf(head, tail...);
-  }
+  static void constexpr error(const T head, const Tail... tail);
 
   /**
    * \brief print as error given parameters on standard output
@@ -141,15 +133,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void constexpr notice(const T head, const Tail... tail)
-  {
-    logTime();
-    *_log << COLOR_NOTICE;
-    bodylogprintf(head, tail...);
-
-    std::cout << COLOR_NOTICE;
-    printf(head, tail...);
-  }
+  static void constexpr notice(const T head, const Tail... tail);
 
   /**
    * \brief print as error given parameters on standard output
@@ -157,15 +141,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void constexpr warning(const T head, const Tail... tail)
-  {
-    logTime();
-    *_log << COLOR_WARNING;
-    bodylogprintf(head, tail...);
-
-    std::cout << COLOR_WARNING;
-    printf(head, tail...);
-  }
+  static void constexpr warning(const T head, const Tail... tail);
 
   /**
    * \brief print given parameters on standard output
@@ -196,13 +172,7 @@ private:
   /**
    * \brief Prints the current time to the log
    */
-  static void logTime()
-  {
-    const auto now{std::time(nullptr)};
-    const auto full_date{*std::localtime(&now)};
-    *_log << std::put_time(&full_date, "%F @ %T") << '\t';
-  }
-
+  static void logTime();
 
   /// Execute after the last argument
   static void bodylogprintf();
@@ -214,5 +184,7 @@ private:
   static std::unique_ptr<std::ofstream> _log; ///< log file
 };
 
+
+# include <debug/Debug.hxx>
 
 #endif /* !DEBUG_HH_ */

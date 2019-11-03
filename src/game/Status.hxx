@@ -17,7 +17,7 @@ namespace game {
  * \note does *NOT* pop the stack
  */
 template<typename... Attributes>
-void game::Status::setStateAttributes(Attributes... attributes)
+void Status::setStateAttributes(Attributes... attributes)
 {
   _lock.lock();
   //assert(!_states.empty() && "_states stack is empty");
