@@ -32,6 +32,10 @@ function _help()
          "Run the regression tests (exclude other non specified types)"
 
   printf "    %-${longest_opt}s%s\n"\
+         "-i|--integration"\
+         "Run the integration tests (exclude other non specified types)"
+
+  printf "    %-${longest_opt}s%s\n"\
          "-s|--smoke" "Run the smoke tests (exclude other non specified types)"
 
   printf "    %-${longest_opt}s%s\n"\
@@ -117,6 +121,12 @@ function parse_options()
       --random-seed)
         RANDOM_SEED=$2
         shift 2
+        ;;
+
+      -i|--integration)
+        RUN_ALL_TYPES=0
+        RUN_INTEGRATION=1
+        shift
         ;;
 
       -r|--regression)

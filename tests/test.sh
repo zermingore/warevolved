@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 set -E
 trap '[ "$?" -eq 123 ] && exit 123' ERR
@@ -6,22 +6,22 @@ trap '[ "$?" -eq 123 ] && exit 123' ERR
 
 # NOTE: modern getopt and bash-compliant shell required
 
-
 set -o pipefail
 
 
 VERSION=0.1.0
 
 # Program options
-OPTIONS=hjnrsv
+OPTIONS=hjnrsvi
 OPTIONS_LONG=\
 help,\
 no-configure,\
 parallel-build,\
 no-configure,\
 random-seed:,\
-regression,\
 smoke,\
+regression,\
+integration,\
 tests:,\
 version
 
@@ -29,8 +29,9 @@ version
 PARALLEL_BUILD="-j1"
 NO_CONFIGURE=0
 RUN_ALL_TYPES=1
-RUN_REGRESSION=0
 RUN_SMOKE=0
+RUN_REGRESSION=0
+RUN_INTEGRATION=0
 RANDOM_SEED=$(shuf -i 0-4294967296 -n 1)
 
 
@@ -97,6 +98,29 @@ function non_regression_tests()
 
 
 
+function integration_tests()
+{
+  local ret_val=0
+  beginSection "INTEGRATION TESTS"
+
+  for file in $(find "${ROOT_TESTS}/integration" -type f -iname "*.sh")
+  do
+    echo -n "Testing ${file}... "
+    . "$file"
+    if [[ $? -ne 0 ]]; then
+      printError "[FAIL]"
+      ret_val=1
+    else
+      printSuccess "[done]\n"
+    fi
+  done
+
+  endSection
+  return $ret_val
+}
+
+
+
 # ________________________________ Entry point _______________________________ #
 function main()
 {
@@ -123,6 +147,14 @@ function main()
   # Regression tests
   if [[ $RUN_ALL_TYPES -eq 1 || $RUN_REGRESSION -eq 1 ]]; then
     non_regression_tests
+    if [[ $? -ne 0 ]]; then
+      result=1
+    fi
+  fi
+
+  # Integration tests
+  if [[ $RUN_ALL_TYPES -eq 1 || $RUN_INTEGRATION -eq 1 ]]; then
+    integration_tests
     if [[ $? -ne 0 ]]; then
       result=1
     fi

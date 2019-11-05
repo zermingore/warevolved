@@ -9,7 +9,8 @@
 
 
 * TODO Roadmap
-** TODO Testing: Integration tests draft
+** DONE Testing: Integration tests draft
+   CLOSED: [2019-11-05 Tue 22:10]
 
 
 * TODO Bugs / Features
@@ -170,7 +171,8 @@
 
 * TODO Testing
 ** TODO Integration Test process
-*** TODO Load a map, a replay, save at the end; compare with a reference map
+*** DONE Load a map, a replay, save at the end; compare with a reference map
+    CLOSED: [2019-11-05 Tue 22:10]
 *** TODO Use screenshots for the interface
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
