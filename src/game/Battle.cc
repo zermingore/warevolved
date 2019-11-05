@@ -327,7 +327,7 @@ void Battle::saveMap()
   ss << std::put_time(std::localtime(&in_time_t), "%Y_%m_%d__%H_%M_%S__");
 
   std::string path = _savesDirectory + "/" + ss.str() + "quick_save.xml";
-  std::cout << "Saving map into: " << path << std::endl;
+  NOTICE("Saving map into: ", path);
   if (!doc->save_file(path.c_str()))
   {
     ERROR("Unable to save XML");
