@@ -8,7 +8,7 @@
 # - Moving an empty vehicle
 
 
-timeout 5 "${BIN_WE}" \
+timeout 90 "${BIN_WE}" \
         -r --replay-file=${BASH_SOURCE%.*}.replay \
         --load-map=${BASH_SOURCE%.*}.map.ori \
         >> /dev/null
