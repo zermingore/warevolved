@@ -34,7 +34,7 @@ void MenuCrewMember::build()
   // Add a get_out entry only if the unit can exit the vehicle
   PathFinding path(vehicle);
   const auto freeDropZones = path.getDropZones(vehicle->coords());
-  if (freeDropZones.size() > 0)
+  if (!freeDropZones.empty())
   {
     auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
     entry->setCallbacks(

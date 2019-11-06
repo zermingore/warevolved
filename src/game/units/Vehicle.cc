@@ -26,7 +26,7 @@ Vehicle::Vehicle()
 
 void Vehicle::dropOff(e_unit_role role, Coords location)
 {
-  assert(_crew.size() != 0 && "Called 'dropOff()' with an empty Vehicle");
+  assert(!_crew.empty() && "Called 'dropOff()' with an empty Vehicle");
   assert(_crew.find(role) != _crew.end() && "Role not found in the Vehicle");
 
   auto map = game::Status::battle()->map();

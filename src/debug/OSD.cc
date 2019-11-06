@@ -19,7 +19,7 @@ unsigned int OSD::_fontSize = 20;
 void OSD::addStr(const std::string str, const std::string description)
 {
   std::string desc;
-  if (description != "")
+  if (!description.empty())
   {
     desc = description + ": ";
   }

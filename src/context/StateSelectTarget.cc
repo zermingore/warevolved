@@ -57,7 +57,7 @@ StateSelectTarget::StateSelectTarget()
 
 void StateSelectTarget::fetchAttributes()
 {
-  if (!_attributes.size())
+  if (_attributes.empty())
   {
     ERROR("fetchAttributes called without available attributes");
     assert(false && "No attribute found");
@@ -76,7 +76,7 @@ void StateSelectTarget::fetchAttributes()
 void StateSelectTarget::resume()
 {
   // retrieve attack coordinates from the attributes
-  if (_attributes.size()) {
+  if (!_attributes.empty()) {
     fetchAttributes();
   }
 
@@ -97,7 +97,7 @@ void StateSelectTarget::draw()
   PathFinding path(selected_unit);
   _targets = path.getTargets(selected_unit, _attackLocation);
 
-  if (!_targets || !_targets->size())
+  if (!_targets || _targets->empty())
   {
     ERROR("No target to select");
     return;

@@ -68,7 +68,7 @@ StateSelectDropZone::StateSelectDropZone()
 
 void StateSelectDropZone::fetchAttributes()
 {
-  if (!_attributes.size())
+  if (_attributes.empty())
   {
     ERROR("fetchAttributes called without available attributes");
     assert(false && "No attribute found");
@@ -91,7 +91,7 @@ void StateSelectDropZone::fetchAttributes()
 void StateSelectDropZone::resume()
 {
   // retrieve attack coordinates from the attributes
-  if (_attributes.size()) {
+  if (!_attributes.empty()) {
     fetchAttributes();
   }
 
@@ -112,7 +112,7 @@ void StateSelectDropZone::draw()
   std::shared_ptr<Map> map = game::Status::battle()->map();
   auto selected_unit(map->selectedUnit());
 
-  if (!_zones.size())
+  if (_zones.empty())
   {
     ERROR("No drop zone to select");
     return;

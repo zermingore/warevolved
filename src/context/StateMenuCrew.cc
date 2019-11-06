@@ -55,7 +55,7 @@ void StateMenuCrew::suspend()
 void StateMenuCrew::resume()
 {
   // retrieve coordinates from the attributes
-  if (_attributes.size())
+  if (!_attributes.empty())
   {
     fetchAttributes();
   }
@@ -236,7 +236,7 @@ void StateMenuCrew::cancel()
 
 void StateMenuCrew::fetchAttributes()
 {
-  if (!_attributes.size())
+  if (_attributes.empty())
   {
     ERROR("StateMenu::fetchAttributes called without available attributes");
     assert(!"No attribute found");
