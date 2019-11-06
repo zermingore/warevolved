@@ -1,7 +1,7 @@
 #!/bin/sh
 
 find src/ -name \*.cc -exec \
-     clang-tidy --checks=cppcoreguidelines,modernize,misc,performance {} \
+     clang-tidy --checks=* {} \
      -- -Ilib/ -Isrc/ -std=c++2a -DDEBUG \;
 
 
