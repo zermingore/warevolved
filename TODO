@@ -65,7 +65,8 @@
 ** DONE Handle external libs (pugixml) in submodules ?
    CLOSED: [2019-10-20 Sun 16:35]
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
-** TODO Give clang-tidy a try
+** DONE Give clang-tidy a try
+   CLOSED: [2019-11-06 Wed 18:39]
 
 
 * TODO Input

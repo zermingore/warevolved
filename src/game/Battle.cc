@@ -304,7 +304,6 @@ void Battle::loadMap()
           m->setHp(mbr.attribute("hp").as_int());
           m->setPlayed(mbr.attribute("played").as_bool());
 
-          auto vehicle = std::static_pointer_cast<Vehicle> (u);
           u->addToCrew(m); /// \todo way to specify the role
         }
       }
