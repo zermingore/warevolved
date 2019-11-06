@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 set -E
 trap '[ "$?" -eq 123 ] && exit 123' ERR
