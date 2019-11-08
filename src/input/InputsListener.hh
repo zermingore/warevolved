@@ -49,9 +49,9 @@ private:
   /**
    * \brief Push the replay events in the KeyManager events queue
    *  at their recorded time
-   * \param replay_manager Pointer on the replay manager
+   * \param replay_mgr Pointer on the replay manager
    */
-  static void replay(const std::shared_ptr<ReplayManager>& replay_manager);
+  static void replay(const std::shared_ptr<ReplayManager>& replay_mgr);
 };
 
 

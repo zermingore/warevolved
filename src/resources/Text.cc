@@ -8,7 +8,10 @@
 namespace resources {
 
 
-Text::Text(std::string str, size_t size, graphics::Pos2 pos, const std::string& font)
+Text::Text(std::string str,
+           size_t size,
+           graphics::Pos2 pos,
+           const std::string& font)
   : _string(str)
   , _size(size)
 {

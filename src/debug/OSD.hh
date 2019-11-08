@@ -48,7 +48,8 @@ public:
    * \note The placement is made according to _dataPosition
    * \note If the description is given, it will be followed by the string ": "
    */
-  static void addStr(const std::string& str, const std::string& description = "");
+  static void addStr(const std::string& str,
+                     const std::string& description = "");
 
   /**
    * \brief Adds data as a Plain Old Data to display, placing it automatically
