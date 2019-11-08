@@ -204,7 +204,7 @@ void OptionsParser::displayHelp() const noexcept
 
 void OptionsParser::validArguments()
 {
-  std::string error_msg = error_msg; // Append any error to this variable
+  std::string error_msg; // Append any error to this variable
 
   // For each command line argument, check if it matches any option
   // +1: skip program name
