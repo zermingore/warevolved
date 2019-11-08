@@ -1,11 +1,11 @@
 #include <input/EventsProcessor.hh>
 
-#include <debug/Debug.hh>
-#include <game/Status.hh>
 #include <context/State.hh>
 #include <context/StateGlobal.hh>
-#include <input/KeyManager.hh>
+#include <debug/Debug.hh>
+#include <game/Status.hh>
 #include <input/EventManager.hh>
+#include <input/KeyManager.hh>
 #include <input/KeyManager.hh>
 
 

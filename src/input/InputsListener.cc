@@ -1,16 +1,16 @@
 #include <input/InputsListener.hh>
 
-#include <future>
 #include <chrono>
+#include <future>
 
+#include <common/enums/input.hh>
+#include <context/State.hh>
 #include <debug/Debug.hh>
 #include <game/Status.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <context/State.hh>
-#include <input/KeyManager.hh>
-#include <common/enums/input.hh>
 #include <input/EventManager.hh>
 #include <input/EventsProcessor.hh>
+#include <input/KeyManager.hh>
 #include <input/ReplayManager.hh>
 #include <tools/StringParser.hh>
 
@@ -43,7 +43,7 @@ void InputsListener::listen(bool replay,
   while (!stop_events_listener)
   {
     // Listen to input, convert them into events and push them in the fifo
-    sf::Event event;
+    sf::Event event{};
     while (graphics::GraphicsEngine::pollEvent(event))
     {
       // Close window: exit request
@@ -76,7 +76,7 @@ void InputsListener::listen(bool replay,
 
 
 
-void InputsListener::replay(std::shared_ptr<ReplayManager> replay_manager)
+void InputsListener::replay(const std::shared_ptr<ReplayManager>& replay_manager)
 {
   using namespace std::chrono;
   using dur_milli = duration<double, milliseconds::period>;

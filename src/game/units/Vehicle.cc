@@ -7,24 +7,23 @@
 
 #include <game/units/Vehicle.hh>
 
-#include <debug/Debug.hh>
-#include <game/Status.hh>
-#include <game/Battle.hh>
-#include <game/Map.hh>
 #include <common/enums/states.hh>
 #include <context/State.hh>
+#include <debug/Debug.hh>
+#include <game/Battle.hh>
+#include <game/Map.hh>
+#include <game/Status.hh>
 
 
 
 Vehicle::Vehicle()
-  : Unit()
 {
   _canHaveCrew = true;
 }
 
 
 
-void Vehicle::dropOff(e_unit_role role, Coords location)
+void Vehicle::dropOff(e_unit_role role, const Coords& location)
 {
   assert(!_crew.empty() && "Called 'dropOff()' with an empty Vehicle");
   assert(_crew.find(role) != _crew.end() && "Role not found in the Vehicle");
@@ -44,7 +43,7 @@ void Vehicle::dropOff(e_unit_role role, Coords location)
 
 void Vehicle::restoreCrew()
 {
-  for (auto member: _dropped)
+  for (const auto& member: _dropped)
   {
     /// \todo Make sure the roles are properly restored
     addToCrew(member.second);

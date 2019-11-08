@@ -10,8 +10,8 @@
 #include <debug/Debug.hh>
 #include <game/units/Unit.hh>
 
-#include <game/units/Soldier.hh>
 #include <game/units/Car.hh>
+#include <game/units/Soldier.hh>
 
 
 

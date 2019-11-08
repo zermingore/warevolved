@@ -1,14 +1,14 @@
 #include <interface/menus/InGameMenu.hh>
 
-#include <game/Status.hh>
-#include <game/Battle.hh>
-#include <game/units/Unit.hh>
-#include <game/Player.hh>
-#include <interface/Cursor.hh>
-#include <interface/menus/MenuEntry.hh>
 #include <common/enums/states.hh>
+#include <game/Battle.hh>
+#include <game/Player.hh>
+#include <game/Status.hh>
+#include <game/units/Unit.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
+#include <interface/Cursor.hh>
+#include <interface/menus/MenuEntry.hh>
 
 
 
@@ -20,7 +20,7 @@ void InGameMenu::cancel() {
 }
 
 
-void InGameMenu::addCancelEntry(const std::function<void()> cancel_callback)
+void InGameMenu::addCancelEntry(const std::function<void()>& cancel_callback)
 {
   auto entry_cancel{std::make_shared<MenuEntry> (e_entry::CANCEL)};
   entry_cancel->setCallback([=, this] { cancel_callback(); });
@@ -28,13 +28,19 @@ void InGameMenu::addCancelEntry(const std::function<void()> cancel_callback)
 }
 
 
-void InGameMenu::moveUp() {
+
+void InGameMenu::moveUp()
+{
   decrementSelectedEntry();
 }
 
-void InGameMenu::moveDown() {
+
+
+void InGameMenu::moveDown()
+{
   incrementSelectedEntry();
 }
+
 
 
 void InGameMenu::validate()
@@ -62,7 +68,7 @@ void InGameMenu::update()
 
   // update entries positions
   auto entry_index(0);
-  for (auto entry: _entries)
+  for (const auto& entry: _entries)
   {
     entry->setPosition({
       _position.x,
@@ -97,7 +103,8 @@ void InGameMenu::draw()
 {
   update();
 
-  for (auto entry: _entries) {
+  for (const auto& entry: _entries)
+  {
     entry->draw();
   }
 

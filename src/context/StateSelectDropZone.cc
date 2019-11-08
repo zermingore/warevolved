@@ -9,25 +9,24 @@
 
 #include <debug/Debug.hh>
 
-#include <common/enums/input.hh>
-#include <game/Status.hh>
 #include <common/enums/attack_result.hh>
-#include <input/EventManager.hh>
-#include <interface/Cursor.hh>
+#include <common/enums/input.hh>
 #include <game/Battle.hh>
-#include <game/Map.hh>
 #include <game/Cell.hh>
-#include <game/Player.hh>
+#include <game/Map.hh>
 #include <game/PathFinding.hh>
+#include <game/Player.hh>
+#include <game/Status.hh>
 #include <game/units/Vehicle.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/graphic_types.hh>
+#include <input/EventManager.hh>
+#include <interface/Cursor.hh>
 
 
 
 StateSelectDropZone::StateSelectDropZone()
-  : State()
-  , _indexZone(0)
+  : _indexZone(0)
   , _role(e_unit_role::NONE)
 {
   _evtMgr->registerEvent(e_input::MOVE_UP,

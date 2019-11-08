@@ -5,10 +5,10 @@
  * \brief ReplayManager class implementation
  */
 
-#include <input/ReplayManager.hh>
 #include <debug/Debug.hh>
-#include <tools/StringParser.hh>
 #include <input/KeyManager.hh>
+#include <input/ReplayManager.hh>
+#include <tools/StringParser.hh>
 
 
 

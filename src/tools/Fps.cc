@@ -1,5 +1,5 @@
-#include <tools/Fps.hh>
 #include <debug/OSD.hh>
+#include <tools/Fps.hh>
 
 #include <cmath>
 #include <iostream>

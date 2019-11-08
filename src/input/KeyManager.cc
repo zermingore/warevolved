@@ -3,6 +3,7 @@
 #include <common/enums/input.hh>
 #include <debug/Debug.hh>
 #include <input/ReplayManager.hh>
+#include <utility>
 
 
 // Static members definition
@@ -15,7 +16,7 @@ std::shared_ptr<ReplayManager> KeyManager::_replay;
 
 void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
 {
-  _replay = replay;
+  _replay = std::move(replay);
 
   /// \todo Read configuration file to get these values (use Settings Class)
 

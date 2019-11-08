@@ -1,24 +1,23 @@
 #include <context/StateMenu.hh>
 
-#include <debug/Debug.hh>
-#include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <common/enums/states.hh>
-#include <game/Status.hh>
+#include <debug/Debug.hh>
 #include <game/Battle.hh>
-#include <game/Player.hh>
 #include <game/PathFinding.hh>
-#include <interface/menus/Menu.hh>
+#include <game/Player.hh>
+#include <game/Status.hh>
+#include <input/EventManager.hh>
+#include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
-#include <interface/menus/MenuMap.hh>
+#include <interface/menus/Menu.hh>
 #include <interface/menus/MenuAction.hh>
 #include <interface/menus/MenuCrew.hh>
-#include <interface/Cursor.hh>
+#include <interface/menus/MenuMap.hh>
 
 
 
 StateMenu::StateMenu(const e_state state)
-  : State()
 {
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP,   [=, this] { moveUp();   });
@@ -76,19 +75,24 @@ void StateMenu::resume()
 
 
 
-void StateMenu::moveUp() {
+void StateMenu::moveUp()
+{
   _menu->moveUp();
 }
 
 
-void StateMenu::moveDown() {
+void StateMenu::moveDown()
+{
   _menu->moveDown();
 }
 
 
-void StateMenu::validate() {
+
+void StateMenu::validate()
+{
   _menu->validate();
 }
+
 
 
 void StateMenu::exit()
@@ -96,6 +100,7 @@ void StateMenu::exit()
   game::Status::clearStates();
   game::Status::resumeState();
 }
+
 
 
 void StateMenu::fetchAttributes()
@@ -118,6 +123,8 @@ void StateMenu::fetchAttributes()
 }
 
 
-void StateMenu::draw() {
+
+void StateMenu::draw()
+{
   _menu->draw();
 }

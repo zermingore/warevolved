@@ -39,9 +39,9 @@ public:
    * \param map Game's map
    * \param cursor Cursor of the player (needed to put a mark on the minimap)
    */
-  MiniMap(graphics::Size2 size,
-          std::shared_ptr<const Map> map,
-          std::shared_ptr<const Cursor> cursor);
+  MiniMap(const graphics::Size2& size,
+          const std::shared_ptr<const Map>& map,
+          const std::shared_ptr<const Cursor>& cursor);
 
   /**
    * \brief Update the minimap content
@@ -59,7 +59,7 @@ public:
    * \brief Set the MiniMap position
    * \param pos New position
    */
-  void setPosition(graphics::Pos2 pos);
+  void setPosition(const graphics::Pos2& pos);
 
 
 private:

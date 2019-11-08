@@ -1,14 +1,14 @@
 #include <resources/Text.hh>
 
-#include <resources/ResourcesManager.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <resources/ResourcesManager.hh>
 
 
 
 namespace resources {
 
 
-Text::Text(std::string str, size_t size, graphics::Pos2 pos, std::string font)
+Text::Text(std::string str, size_t size, graphics::Pos2 pos, const std::string& font)
   : _string(str)
   , _size(size)
 {

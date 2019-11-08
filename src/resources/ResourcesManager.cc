@@ -2,11 +2,11 @@
 
 #include <exception>
 
+#include <debug/Debug.hh>
+#include <game/TerrainsHandler.hh>
 #include <graphics/graphic_types.hh>
 #include <lib/pugixml.hh>
 #include <resources/Font.hh>
-#include <debug/Debug.hh>
-#include <game/TerrainsHandler.hh>
 
 
 
@@ -27,7 +27,7 @@ const std::string DEFAULT_FONT_PATH  = "resources/defaults/font.ttf";
 
 
 
-void ResourcesManager::initialize(const std::string file_name)
+void ResourcesManager::initialize(const std::string& file_name)
 {
   initTypeNames();
   initializeDefaultResources();
@@ -71,8 +71,8 @@ void ResourcesManager::initTypeNames()
 
 
 bool ResourcesManager::addResource(const e_resource_type type,
-                                   const std::string name,
-                                   const std::string file_name)
+                                   const std::string& name,
+                                   const std::string& file_name)
 {
   switch (type)
   {
@@ -96,7 +96,7 @@ bool ResourcesManager::addResource(const e_resource_type type,
 
 
 
-bool ResourcesManager::parseXML(const std::string file_name)
+bool ResourcesManager::parseXML(const std::string& file_name)
 {
   pugi::xml_document doc;
   if (!doc.load_file(file_name.c_str()))
@@ -111,7 +111,7 @@ bool ResourcesManager::parseXML(const std::string file_name)
   auto category = doc.child("resources").child(_typeNames[type].c_str());
 
   // for all categories > browse folders > for all files > get their infos
-  while (category)
+  while (category != nullptr)
   {
     for (pugi::xml_node folder: category.children("folder"))
     {
@@ -152,7 +152,7 @@ void ResourcesManager::listResources()
 
 
 std::shared_ptr<graphics::Texture>
-ResourcesManager::getTexture(std::string name)
+ResourcesManager::getTexture(const std::string& name)
 {
   if (_textures.find(name) != _textures.end())
   {
@@ -175,7 +175,7 @@ ResourcesManager::getTexture(std::string name)
 
 
 std::shared_ptr<resources::Font>
-ResourcesManager::getFont(const std::string name)
+ResourcesManager::getFont(const std::string& name)
 {
   if (_fonts.find(name) != _fonts.end())
   {

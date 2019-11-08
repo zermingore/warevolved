@@ -1,11 +1,11 @@
 #include <tools/options/OptionsParser.hh>
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
-#include <algorithm>
 
-#include <tools/options/Option.hh>
 #include <debug/Debug.hh>
+#include <tools/options/Option.hh>
 
 
 
@@ -14,12 +14,12 @@ OptionsParser::OptionsParser(int ac, const char** av)
   // Build a copy of the forwarded argument vector
   for (int i = 0; i < ac; ++i)
   {
-    _av.push_back(av[i]);
+    _av.emplace_back(av[i]);
   }
 
   // Expecting at least the program name; The arguments count must be consistent
   const auto nb_args(_av.size());
-  if (!nb_args || static_cast<int> (nb_args) != ac)
+  if ((nb_args == 0u) || static_cast<int> (nb_args) != ac)
   {
     // Should never happen
     throw ArgumentsException("Ill-formed arguments list.");
@@ -169,7 +169,7 @@ void OptionsParser::displayHelp() const noexcept
     {
       line.append(" ");
       line.append(str);
-      if (str == "")
+      if (str.empty())
       {
         line.append("  ");
       }
@@ -180,7 +180,7 @@ void OptionsParser::displayHelp() const noexcept
 
   // Get the longest line in order to align correctly the descriptions
   auto max_length = 0ul;
-  for (const auto str: lines)
+  for (const auto& str: lines)
   {
     max_length = std::max(max_length, str.length());
   }
@@ -204,14 +204,14 @@ void OptionsParser::displayHelp() const noexcept
 
 void OptionsParser::validArguments()
 {
-  std::string error_msg = ""; // Append any error to this variable
+  std::string error_msg = error_msg; // Append any error to this variable
 
   // For each command line argument, check if it matches any option
   // +1: skip program name
   for (auto option = _av.begin() + 1; option != _av.end(); ++option)
   {
     // Extract any argument associated to the current option
-    std::string argument = "";
+    std::string argument;
     std::string op = *option;
     if (auto pos = option->find('='); pos != std::string::npos)
     {
@@ -232,7 +232,7 @@ void OptionsParser::validArguments()
         opt_valid = true;
         if (opt.requiredArguments() == e_option_argument::REQUIRED)
         {
-          if (!argument.length())
+          if (argument.length() == 0u)
           {
             error_msg.append("\tOption " + op + " missing argument\n");
           }
@@ -246,7 +246,7 @@ void OptionsParser::validArguments()
     }
   }
 
-  if (error_msg != "")
+  if (!error_msg.empty())
   {
     displayHelp();
     throw ArgumentsException(error_msg);

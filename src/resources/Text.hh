@@ -44,7 +44,7 @@ public:
   Text(std::string str,
        size_t size,
        graphics::Pos2 pos = {0, 0},
-       std::string font = "");
+       const std::string& font = "");
 
 
   /**

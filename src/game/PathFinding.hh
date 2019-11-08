@@ -42,7 +42,7 @@ public:
    * \param origin Unit origin of the path
    * \note Throws if the given Unit is NULL
    */
-  explicit PathFinding(std::shared_ptr<Unit> origin);
+  explicit PathFinding(const std::shared_ptr<Unit>& origin);
 
   /**
    * \brief Default destructor
@@ -90,7 +90,7 @@ public:
    * \param coords Coordinates where the attacker is located
    */
   std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-  getTargets(std::shared_ptr<Unit> ref, Coords coords);
+  getTargets(const std::shared_ptr<Unit>& ref, const Coords& coords);
 
   /**
    * \brief Return the list of available drop locations
@@ -98,7 +98,7 @@ public:
    * \param coords Coordinates where the vehicle is located
    */
   std::vector<std::shared_ptr<Cell>>
-  getDropZones(const Coords coords);
+  getDropZones(const Coords& coords);
 
 
 

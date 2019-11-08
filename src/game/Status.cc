@@ -1,12 +1,12 @@
 #include <cassert>
 
-#include <game/Status.hh>
+#include <common/enums/input.hh>
+#include <context/StatesFactory.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <context/StatesFactory.hh>
-#include <input/KeyManager.hh>
-#include <common/enums/input.hh>
+#include <game/Status.hh>
 #include <input/EventManager.hh>
+#include <input/KeyManager.hh>
 
 
 

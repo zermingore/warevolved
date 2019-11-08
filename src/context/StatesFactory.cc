@@ -1,13 +1,13 @@
 #include <context/StatesFactory.hh>
 
-#include <debug/Debug.hh>
-#include <context/StatePlaying.hh>
-#include <context/StateMovingUnit.hh>
-#include <context/StateSelectTarget.hh>
-#include <context/StateSelectDropZone.hh>
+#include <context/StateGlobal.hh>
 #include <context/StateMenu.hh>
 #include <context/StateMenuCrew.hh>
-#include <context/StateGlobal.hh>
+#include <context/StateMovingUnit.hh>
+#include <context/StatePlaying.hh>
+#include <context/StateSelectDropZone.hh>
+#include <context/StateSelectTarget.hh>
+#include <debug/Debug.hh>
 
 
 

@@ -3,8 +3,8 @@
 // generated on: Sat Nov  2 11:42:23 CET 2019
 
 
-#include <string>
 #include <common/enums/input.hh>
+#include <string>
 
 namespace debug {
 

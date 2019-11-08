@@ -10,15 +10,15 @@
 
 #include <debug/Debug.hh>
 
-#include <input/EventManager.hh>
 #include <common/enums/input.hh>
 #include <common/enums/states.hh>
-#include <game/Status.hh>
 #include <game/Battle.hh>
+#include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
-#include <interface/menus/Menu.hh>
+#include <input/EventManager.hh>
 #include <interface/menus/InGameMenu.hh>
+#include <interface/menus/Menu.hh>
 #include <interface/menus/MenuCrewBrowse.hh>
 #include <interface/menus/MenuCrewMember.hh>
 #include <interface/menus/MenuEntryCrew.hh>
@@ -26,8 +26,7 @@
 
 
 StateMenuCrew::StateMenuCrew()
-  : State()
-  , _menuCrewCoords(0, 0)
+  : _menuCrewCoords(0, 0)
   , _browseMembers(true)
 {
   // browsing entries

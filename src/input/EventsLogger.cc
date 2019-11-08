@@ -1,11 +1,11 @@
-#include <fstream>
 #include <chrono>
+#include <fstream>
 #include <map>
 
 #include <debug/Debug.hh>
 
-#include <input/EventsLogger.hh>
 #include <generated/enum_print/enum_print_prototypes.hh>
+#include <input/EventsLogger.hh>
 
 #include <tools/StringParser.hh>
 

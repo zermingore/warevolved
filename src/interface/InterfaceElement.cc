@@ -5,15 +5,16 @@
  * \brief InterfaceElement implementation
  */
 
+#include <graphics/Sprite.hh>
 #include <interface/InterfaceElement.hh>
 #include <resources/ResourcesManager.hh>
-#include <graphics/Sprite.hh>
+#include <utility>
 
 
 namespace interface {
 
 
-InterfaceElement::InterfaceElement(const std::string &image_name)
+InterfaceElement::InterfaceElement(const std::string& image_name)
   : _imgName(image_name)
 {
   _sprite = std::make_shared<graphics::Sprite> (_imgName);

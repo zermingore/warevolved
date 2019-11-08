@@ -21,12 +21,12 @@ Interface::Interface(const graphics::Color c) {
 }
 
 
-void Interface::addElement(const std::shared_ptr<InterfaceElement> elt) {
+void Interface::addElement(const std::shared_ptr<InterfaceElement>& elt) {
   _elts.push_back(elt);
 }
 
 
-void Interface::removeElement(const std::shared_ptr<InterfaceElement> elt)
+void Interface::removeElement(const std::shared_ptr<InterfaceElement>& elt)
 {
   // Locating the right element to remove
   /// \todo (do not remove a graphical element based on its sprite name)
@@ -39,7 +39,7 @@ void Interface::removeElement(const std::shared_ptr<InterfaceElement> elt)
 }
 
 
-std::shared_ptr<InterfaceElement> Interface::element(const std::string id)
+std::shared_ptr<InterfaceElement> Interface::element(const std::string& id)
 {
   for (const auto& it: _elts)
   {

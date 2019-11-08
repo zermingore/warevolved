@@ -13,7 +13,7 @@ State::State()
 
 void State::draw()
 {
-  for (auto it: _interfaceElements) {
+  for (const auto& it: _interfaceElements) {
     it->draw();
   }
 }

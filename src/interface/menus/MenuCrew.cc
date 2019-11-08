@@ -10,15 +10,15 @@
 
 #include <cassert>
 
-#include <interface/menus/MenuEntry.hh>
-#include <game/Status.hh>
-#include <game/Battle.hh>
 #include <context/State.hh>
+#include <game/Battle.hh>
+#include <game/PathFinding.hh>
 #include <game/Player.hh>
-#include <interface/Cursor.hh>
+#include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
-#include <game/PathFinding.hh>
+#include <interface/Cursor.hh>
+#include <interface/menus/MenuEntry.hh>
 
 #include <debug/Debug.hh>
 
@@ -37,7 +37,7 @@ void MenuCrew::build()
   assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");
   if (_selectedUnit->playerId() == unit->playerId())
   {
-    if (!unit && _selectedUnit->crewSize())
+    if (!unit && (_selectedUnit->crewSize() != 0u))
     {
       auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };

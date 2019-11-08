@@ -1,18 +1,18 @@
 #include <game/Game.hh>
 
-#include <future>
-#include <cassert>
 #include <atomic>
+#include <cassert>
+#include <future>
 
-#include <tools/options/OptionsParser.hh>
-#include <graphics/Context.hh>
-#include <input/InputsListener.hh>
-#include <graphics/GraphicsEngine.hh>
-#include <game/Battle.hh>
-#include <resources/ResourcesManager.hh>
-#include <game/Status.hh>
 #include <common/enums/states.hh>
 #include <context/State.hh>
+#include <game/Battle.hh>
+#include <game/Status.hh>
+#include <graphics/Context.hh>
+#include <graphics/GraphicsEngine.hh>
+#include <input/InputsListener.hh>
+#include <resources/ResourcesManager.hh>
+#include <tools/options/OptionsParser.hh>
 
 
 
@@ -47,7 +47,7 @@ void Game::run()
   battle->initializeMap();
 
   std::string replay_file = "events_log";
-  if (_replayFiles.size())
+  if (!_replayFiles.empty())
   {
     replay_file = _replayFiles[0];
   }

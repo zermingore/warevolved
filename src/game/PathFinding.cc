@@ -1,27 +1,27 @@
 #include <game/PathFinding.hh>
 
-#include <exception>
 #include <algorithm>
+#include <exception>
 #include <stack>
 
 #include <debug/Debug.hh>
 #include <debug/OSD.hh>
 
+#include <common/enums/directions.hh>
 #include <game/Battle.hh>
-#include <game/Player.hh>
-#include <game/Map.hh>
 #include <game/Cell.hh>
-#include <game/units/Unit.hh>
+#include <game/Map.hh>
+#include <game/Player.hh>
 #include <game/Status.hh>
 #include <game/path_shapes.hh>
-#include <common/enums/directions.hh>
+#include <game/units/Unit.hh>
+#include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
-#include <graphics/MapGraphicsProperties.hh>
 
 
 
-PathFinding::PathFinding(std::shared_ptr<Unit> origin)
+PathFinding::PathFinding(const std::shared_ptr<Unit>& origin)
   : _currentLength(0)
 {
   if (!origin)
@@ -354,19 +354,14 @@ bool PathFinding::allowedMove(e_direction direction)
   }
 
   // do not allow to move over enemy units
-  auto u(dst->unit());
-  if (u && u->playerId() != game::Status::player()->id())
-  {
-    return false;
-  }
-
-  return true;
+  auto u{dst->unit()};
+  return !u || u->playerId() == game::Status::player()->id();
 }
 
 
 
 std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-PathFinding::getTargets(std::shared_ptr<Unit> ref, Coords coords)
+PathFinding::getTargets(const std::shared_ptr<Unit>& ref, const Coords& coords)
 {
   // Dummy: for every cell if unit && not one of the current player -> target
   // (NOT considering the motion value)
@@ -426,7 +421,7 @@ PathFinding::getAdjacentCells(const Coords coords)
 
 
 std::vector<std::shared_ptr<Cell>>
-PathFinding::getDropZones(const Coords coords)
+PathFinding::getDropZones(const Coords& coords)
 {
   auto candidates = getAdjacentCells(coords);
 

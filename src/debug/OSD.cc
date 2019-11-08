@@ -1,9 +1,9 @@
 #include <debug/OSD.hh>
-#include <resources/ResourcesManager.hh>
-#include <resources/Text.hh>
-#include <interface/Interface.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <interface/Interface.hh>
+#include <resources/ResourcesManager.hh>
+#include <resources/Text.hh>
 
 
 namespace debug {
@@ -16,7 +16,7 @@ unsigned int OSD::_fontSize = 20;
 
 
 
-void OSD::addStr(const std::string str, const std::string description)
+void OSD::addStr(const std::string& str, const std::string& description)
 {
   std::string desc;
   if (!description.empty())
@@ -32,7 +32,7 @@ void OSD::draw()
 {
   /// \todo draw a background
 
-  for (auto it: _drawables) {
+  for (const auto& it: _drawables) {
     graphics::GraphicsEngine::draw(it);
   }
 
@@ -41,7 +41,7 @@ void OSD::draw()
 }
 
 
-void OSD::addText(const std::string str)
+void OSD::addText(const std::string& str)
 {
   const graphics::Pos2 pos {
     static_cast<graphics::component> (_dataPosition.x),
@@ -55,7 +55,7 @@ void OSD::addText(const std::string str)
 
 
 
-void OSD::writeOnCell(size_t c, size_t l, const std::string str)
+void OSD::writeOnCell(size_t c, size_t l, const std::string& str)
 {
   using p = graphics::MapGraphicsProperties;
 

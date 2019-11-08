@@ -1,16 +1,16 @@
 #include <game/Player.hh>
 
 #include <common/enums/states.hh>
+#include <context/State.hh>
+#include <context/StateMenu.hh>
 #include <game/Battle.hh>
 #include <game/Status.hh>
 #include <game/units/Soldier.hh>
+#include <interface/Cursor.hh>
 #include <interface/Interface.hh>
 #include <interface/InterfaceElement.hh>
-#include <interface/Cursor.hh>
 #include <interface/Panel.hh>
 #include <interface/menus/InGameMenu.hh>
-#include <context/State.hh>
-#include <context/StateMenu.hh>
 #include <resources/Text.hh>
 
 

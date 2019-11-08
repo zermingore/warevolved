@@ -9,14 +9,16 @@
 #include <interface/menus/MenuEntryCrew.hh>
 
 #include <debug/Debug.hh>
-#include <game/Status.hh>
 #include <game/Battle.hh>
-#include <game/units/unit_roles.hh>
+#include <game/Status.hh>
 #include <game/units/Vehicle.hh>
-#include <graphics/Sprite.hh>
+#include <game/units/unit_roles.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Sprite.hh>
 #include <resources/Text.hh>
+#include <utility>
+#include <utility>
 
 
 namespace interface {
@@ -26,7 +28,7 @@ MenuEntryCrew::MenuEntryCrew(e_unit_role role,
                              std::shared_ptr<const Unit> crew_member)
   : MenuEntry(e_entry::NONE)
   , _id(e_entry::NONE)
-  , _crewMember(crew_member)
+  , _crewMember(std::move(std::move(crew_member)))
   , _role(role)
 {
   setLabelName();

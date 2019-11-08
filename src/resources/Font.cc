@@ -1,11 +1,11 @@
-#include <resources/Font.hh>
 #include <graphics/graphic_types.hh>
+#include <resources/Font.hh>
 
 
 namespace resources {
 
 
-Font::Font(const std::string file_name, const std::string name)
+Font::Font(const std::string& file_name, const std::string& name)
   : _font (nullptr)
 {
   _fileName = file_name;

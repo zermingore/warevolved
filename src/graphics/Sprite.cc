@@ -1,9 +1,9 @@
 #include <graphics/Sprite.hh>
 
 #include <debug/Debug.hh>
-#include <graphics/graphic_types.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <graphics/graphic_types.hh>
 #include <resources/ResourcesManager.hh>
 
 
@@ -11,7 +11,7 @@
 namespace graphics {
 
 
-Sprite::Sprite(const std::string file_name)
+Sprite::Sprite(const std::string& file_name)
 {
   _rectangle = std::make_shared<RectangleShape> ();
   _rectangle->setPosition({0, 0});
@@ -25,7 +25,7 @@ Sprite::Sprite(const std::string file_name)
 
 
 
-Sprite::Sprite(const std::shared_ptr<Texture> texture)
+Sprite::Sprite(const std::shared_ptr<Texture>& texture)
 {
   _rectangle = std::make_shared<RectangleShape> ();
   _rectangle->setPosition(Pos2(0, 0));
@@ -39,7 +39,7 @@ Sprite::Sprite(const std::shared_ptr<Texture> texture)
 
 
 
-void Sprite::setTexture(const std::string file_name)
+void Sprite::setTexture(const std::string& file_name)
 {
   _rectangle = std::make_shared<RectangleShape> ();
   _rectangle->setPosition({0, 0});

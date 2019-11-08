@@ -48,7 +48,7 @@ public:
    * \note The placement is made according to _dataPosition
    * \note If the description is given, it will be followed by the string ": "
    */
-  static void addStr(const std::string str, const std::string description = "");
+  static void addStr(const std::string& str, const std::string& description = "");
 
   /**
    * \brief Adds data as a Plain Old Data to display, placing it automatically
@@ -73,14 +73,14 @@ public:
    * \param str String to display in the Cell
    * \note The used origin of the cell is the top-left corner
    */
-  static void writeOnCell(size_t c, size_t l, const std::string str);
+  static void writeOnCell(size_t c, size_t l, const std::string& str);
 
 
 private:
   /**
    * \brief Builds and return an initialized label, to display text
    */
-  static void addText(const std::string str);
+  static void addText(const std::string& str);
 
 
   static unsigned int _fontSize; ///< Text font size

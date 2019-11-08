@@ -81,7 +81,7 @@ public:
    * \param data Text data to display
    * \param pos Position where to draw
    */
-  void drawDataText(const std::string data, const graphics::Pos2& pos);
+  void drawDataText(const std::string& data, const graphics::Pos2& pos);
 
 
   /**
@@ -90,7 +90,7 @@ public:
    * \param pos Position where to draw
    * \param size Text size
    */
-  void drawDataText(const std::string data,
+  void drawDataText(const std::string& data,
                     const graphics::Pos2& pos,
                     size_t size);
 

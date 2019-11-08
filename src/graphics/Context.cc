@@ -1,8 +1,8 @@
 #include <graphics/Context.hh>
 
 #include <config/Settings.hh>
-#include <graphics/GraphicsEngine.hh>
 #include <debug/Debug.hh>
+#include <graphics/GraphicsEngine.hh>
 
 #include <X11/Xlib.h> // Must be included after SMFL includes
 

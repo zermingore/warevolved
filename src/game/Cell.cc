@@ -1,5 +1,5 @@
-#include <game/Cell.hh>
 #include <common/enums/terrains.hh>
+#include <game/Cell.hh>
 
 
 Cell::Cell(size_t c, size_t l, e_terrain terrain)

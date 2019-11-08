@@ -1,10 +1,10 @@
-#include <interface/menus/MenuEntry.hh>
 #include <debug/Debug.hh>
-#include <game/Status.hh>
 #include <game/Battle.hh>
-#include <graphics/Sprite.hh>
+#include <game/Status.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Sprite.hh>
+#include <interface/menus/MenuEntry.hh>
 #include <resources/Text.hh>
 
 

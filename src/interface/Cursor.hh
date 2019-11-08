@@ -80,8 +80,8 @@ public:
 
 private:
   // map attributes
-  size_t _nbColumns;      ///< number of columns in map
-  size_t _nbLines;        ///< number of Lines in map
+  size_t _nbColumns{};      ///< number of columns in map
+  size_t _nbLines{};        ///< number of Lines in map
   graphics::Color _color; ///< cursor's color
 };
 

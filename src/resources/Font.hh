@@ -32,7 +32,7 @@ public:
    * \param file_name font file name
    * \param name font alias
    */
-  Font(const std::string file_name, const std::string name);
+  Font(const std::string& file_name, const std::string& name);
 
   /**
    * \brief Loads a font, if needed

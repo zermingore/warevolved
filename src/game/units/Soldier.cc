@@ -7,13 +7,12 @@
 
 #include <game/units/Soldier.hh>
 
-#include <graphics/Sprite.hh>
 #include <game/units/UnitsFactory.hh>
+#include <graphics/Sprite.hh>
 
 
 
 Soldier::Soldier()
-  : Unit()
 {
   _type = e_unit::SOLDIER;
   _sprite = std::make_shared<graphics::Sprite> ("soldier");

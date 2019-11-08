@@ -9,17 +9,17 @@
 
 #include <lib/pugixml.hh>
 
-#include <debug/Debug.hh>
 #include <common/enums/terrains.hh>
 #include <common/enums/units.hh>
-#include <game/Status.hh>
+#include <debug/Debug.hh>
 #include <game/Battle.hh>
-#include <game/units/UnitsFactory.hh>
-#include <game/units/Vehicle.hh>
-#include <game/Player.hh>
 #include <game/Cell.hh>
+#include <game/Player.hh>
+#include <game/Status.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
+#include <game/units/UnitsFactory.hh>
+#include <game/units/Vehicle.hh>
 #include <interface/Cursor.hh>
 
 
@@ -33,7 +33,8 @@ Map::Map(size_t nb_columns, size_t nb_lines)
     std::vector<std::shared_ptr<Cell>> vec(_nbLines);
 
     // Allocate each Cell of the column
-    for (auto line(0u); line < _nbLines; ++line) {
+    for (auto line(0u); line < _nbLines; ++line)
+    {
       vec[line] = std::make_shared<Cell> (col, line, e_terrain::PLAIN);
     }
 
@@ -77,7 +78,8 @@ void Map::selectUnit(const Coords& c)
 {
   // Retrieve the unit
   auto unit(_cells[c.c][c.l]->unit());
-  if (!unit) {
+  if (!unit)
+  {
     ERROR("No unit to select at given coords", c.c, c.l);
   }
 
@@ -117,7 +119,7 @@ void Map::endTurn()
 
 
 
-void Map::newUnit(std::shared_ptr<Unit> unit, size_t column, size_t line)
+void Map::newUnit(const std::shared_ptr<Unit>& unit, size_t column, size_t line)
 {
   boundaryChecks(column, line);
 
@@ -152,15 +154,18 @@ void Map::newUnit(e_unit type,
 e_attack_result Map::attackResult(bool attacker_status, bool defender_status)
 {
   /// \todo handle other status (unit down)
-  if (attacker_status == true && defender_status == true) {
+  if (attacker_status && defender_status)
+  {
     return e_attack_result::BOTH_DIED;
   }
 
-  if (attacker_status == true) {
+  if (attacker_status)
+  {
     return e_attack_result::ATTACKER_DIED;
   }
 
-  if (defender_status == true) {
+  if (defender_status)
+  {
     return e_attack_result::DEFENDER_DIED;
   }
 
@@ -180,11 +185,11 @@ std::pair<size_t, size_t> Map::damageValues(const Unit& attacker,
     static_cast<int> (attacker.attackValue()) - def_terrain.cover();
   auto attacker_damages = std::max(1, dmg_attack);
 
-
   // No strike-back damages if the defender dies
   if (defender.hp() - attacker_damages <= 0)
+  {
     return { attacker_damages, 0 };
-
+  }
 
   // Compute defender strike-back damages
   auto att_cell = _cells[attacker.c()][attacker.l()];
@@ -200,7 +205,7 @@ std::pair<size_t, size_t> Map::damageValues(const Unit& attacker,
 
 
 
-e_attack_result Map::attack(std::shared_ptr<Unit> defender)
+e_attack_result Map::attack(const std::shared_ptr<Unit>& defender)
 {
   _lockSelectedUnitUpdate.lock();
   assert(_selectedUnit && defender);
@@ -232,7 +237,7 @@ e_attack_result Map::attack(std::shared_ptr<Unit> defender)
 
 
 
-e_attack_result Map::attack(std::shared_ptr<Cell> target_cell)
+e_attack_result Map::attack(const std::shared_ptr<Cell>& target_cell)
 {
   auto defender = target_cell->unit();
   if (!defender)

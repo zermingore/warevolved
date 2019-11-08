@@ -10,20 +10,20 @@
 
 #include <algorithm> // std:min
 
+#include <common/enums/terrains.hh>
 #include <debug/Debug.hh>
-#include <tools/Fps.hh>
-#include <game/Map.hh>
 #include <game/Cell.hh>
+#include <game/Map.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
-#include <common/enums/terrains.hh>
+#include <game/units/Vehicle.hh>
+#include <graphics/GraphicsEngine.hh>
+#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/graphic_types.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
 #include <resources/Text.hh>
-#include <graphics/graphic_types.hh>
-#include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
-#include <game/units/Vehicle.hh>
+#include <tools/Fps.hh>
 
 
 
@@ -146,7 +146,8 @@ void Panel::update()
 
 void Panel::draw()
 {
-  if (_status == e_panel_status::DEACTIVATED) {
+  if (_status == e_panel_status::DEACTIVATED)
+  {
     return;
   }
 
@@ -265,7 +266,7 @@ void Panel::drawUnitFrame()
       mbr_sprite->draw();
 
       // Unit data text
-      const std::string role = UNIT_ROLE_STR.at(member.first);
+      const std::string& role = UNIT_ROLE_STR.at(member.first);
       const auto mbr_data =
         "role:   " + role + '\n' +
         "hp:     " + std::to_string(member.second->hp())          + '\n' +
@@ -284,12 +285,12 @@ void Panel::drawUnitFrame()
 
 
 
-void Panel::drawDataText(const std::string data, const graphics::Pos2& pos)
+void Panel::drawDataText(const std::string& data, const graphics::Pos2& pos)
 {
   drawDataText(data, pos, _fontSize);
 }
 
-void Panel::drawDataText(const std::string data,
+void Panel::drawDataText(const std::string& data,
                          const graphics::Pos2& pos,
                          size_t size)
 {
@@ -321,7 +322,9 @@ void Panel::drawMetaInfo()
 
   auto dateText = std::make_unique<resources::Text> (buffer, _fontSize);
   if (_dateWidth < 0.1f)
+  {
     _dateWidth = dateText->getSize().x;
+  }
 
   auto text_pos = _metaInfoPos + Pos2{ _size.x - 2 * _margin - _dateWidth, 0 };
   dateText->setPosition(text_pos);

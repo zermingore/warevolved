@@ -13,10 +13,10 @@
 #include <common/enums/states.hh>
 #include <context/State.hh>
 #include <game/Battle.hh>
+#include <game/PathFinding.hh>
+#include <game/Player.hh>
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>
-#include <game/Player.hh>
-#include <game/PathFinding.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
@@ -58,7 +58,7 @@ void MenuCrewMember::draw()
 
   update();
 
-  for (auto entry: _entries)
+  for (const auto& entry: _entries)
   {
     entry->draw();
   }

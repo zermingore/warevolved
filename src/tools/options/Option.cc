@@ -5,17 +5,18 @@
  * \brief Option class implementation
  */
 
-#include <tools/options/Option.hh>
 #include <debug/Debug.hh>
+#include <tools/options/Option.hh>
+#include <utility>
 
 
-Option::Option(const std::string name,
-               const std::string description,
-               const std::vector<std::string> aliases,
+Option::Option(std::string  name,
+               std::string  description,
+               std::vector<std::string>  aliases,
                const e_option_argument required_arguments)
-  : _name(name)
-  , _description(description)
-  , _aliases(aliases)
+  : _name(std::move(name))
+  , _description(std::move(description))
+  , _aliases(std::move(aliases))
   , _requiredArgs(required_arguments)
   , _provided(false)
 {

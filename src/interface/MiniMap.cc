@@ -1,24 +1,24 @@
 #include <interface/MiniMap.hh>
 
-#include <debug/Debug.hh>
 #include <common/enums/terrains.hh>
-#include <interface/Cursor.hh>
-#include <game/Map.hh>
-#include <graphics/GraphicsEngine.hh>
-#include <graphics/Sprite.hh>
-#include <game/Cell.hh>
-#include <game/Status.hh>
+#include <debug/Debug.hh>
 #include <game/Battle.hh>
+#include <game/Cell.hh>
+#include <game/Map.hh>
 #include <game/Player.hh>
+#include <game/Status.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
+#include <graphics/GraphicsEngine.hh>
+#include <graphics/Sprite.hh>
+#include <interface/Cursor.hh>
 
 
 namespace interface {
 
-MiniMap::MiniMap(graphics::Size2 size,
-                 std::shared_ptr<const Map> map,
-                 std::shared_ptr<const Cursor> cursor)
+MiniMap::MiniMap(const graphics::Size2& size,
+                 const std::shared_ptr<const Map>& map,
+                 const std::shared_ptr<const Cursor>& cursor)
   : InterfaceElement("frame_thumbnail")
   , _frameSize(size)
   , _map(*map)
@@ -101,7 +101,7 @@ void MiniMap::draw()
 
 
 
-void MiniMap::setPosition(graphics::Pos2 pos)
+void MiniMap::setPosition(const graphics::Pos2& pos)
 {
   _position = pos;
 }

@@ -11,8 +11,8 @@
 
 #include <exception>
 
-#include <game/Game.hh>
 #include <debug/Debug.hh>
+#include <game/Game.hh>
 #include <tools/options/OptionsParser.hh>
 
 

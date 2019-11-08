@@ -1,12 +1,12 @@
 #include <interface/menus/MenuAction.hh>
 
 #include <context/State.hh>
-#include <game/Status.hh>
 #include <game/Battle.hh>
+#include <game/PathFinding.hh>
 #include <game/Player.hh>
+#include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
-#include <game/PathFinding.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/MenuEntry.hh>
 
@@ -96,7 +96,7 @@ void MenuAction::buildMenuSelectionUnit()
     _entries.push_back(entry);
   }
 
-  if (_selectedUnit->crewSize())
+  if (_selectedUnit->crewSize() != 0u)
   {
     auto entry_crew{std::make_shared<MenuEntry> (e_entry::CREW)};
     entry_crew->setCallback([=, this] { manageCrew(); });
@@ -132,7 +132,7 @@ void MenuAction::buildMenuAfterMovingUnit()
       _entries.push_back(entry);
     }
 
-    if (_selectedUnit->crewSize())
+    if (_selectedUnit->crewSize() != 0u)
     {
       auto entry_crew(std::make_shared<MenuEntry> (e_entry::CREW));
       entry_crew->setCallback( [=, this] {

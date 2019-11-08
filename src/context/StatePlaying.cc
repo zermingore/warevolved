@@ -1,17 +1,16 @@
 #include <context/StatePlaying.hh>
 
 #include <common/enums/input.hh>
-#include <input/EventManager.hh>
 #include <game/Battle.hh>
-#include <game/Status.hh>
 #include <game/Player.hh>
-#include <interface/Cursor.hh>
+#include <game/Status.hh>
 #include <graphics/GraphicsEngine.hh>
+#include <input/EventManager.hh>
+#include <interface/Cursor.hh>
 
 
 
 StatePlaying::StatePlaying()
-  : State()
 {
   // Add parameters in the lambda ?
   // should these functions return booleans to consume events ?

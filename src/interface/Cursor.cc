@@ -7,9 +7,9 @@
 
 #include <interface/Cursor.hh>
 
-#include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Sprite.hh>
 
 
 namespace interface {

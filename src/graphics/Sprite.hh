@@ -35,13 +35,13 @@ public:
    * \param file_name Sprite complete file name
    *   (with full path and extension)
    */
-  explicit Sprite(const std::string file_name);
+  explicit Sprite(const std::string& file_name);
 
   /**
    * \brief Sprite Constructor, using an already loaded Texture
    * \param texture Pointer on an already loaded Texture to use
    */
-  explicit Sprite(const std::shared_ptr<Texture> texture);
+  explicit Sprite(const std::shared_ptr<Texture>& texture);
 
 
   /**
@@ -49,7 +49,7 @@ public:
    * \param file_name Sprite complete file name
    *   (with full path and extension)
    */
-  void setTexture(const std::string file_name);
+  void setTexture(const std::string& file_name);
 
   /**
    * \brief _texture getter

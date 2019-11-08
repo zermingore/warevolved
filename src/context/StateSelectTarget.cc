@@ -1,24 +1,23 @@
 #include <context/StateSelectTarget.hh>
 
-#include <debug/Debug.hh>
-#include <common/enums/input.hh>
-#include <game/Status.hh>
 #include <common/enums/attack_result.hh>
-#include <input/EventManager.hh>
-#include <interface/Cursor.hh>
+#include <common/enums/input.hh>
+#include <debug/Debug.hh>
 #include <game/Battle.hh>
-#include <game/Map.hh>
 #include <game/Cell.hh>
-#include <game/Player.hh>
+#include <game/Map.hh>
 #include <game/PathFinding.hh>
+#include <game/Player.hh>
+#include <game/Status.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/graphic_types.hh>
+#include <input/EventManager.hh>
+#include <interface/Cursor.hh>
 
 
 
 StateSelectTarget::StateSelectTarget()
-  : State()
-  , _index_target(0)
+  : _index_target(0)
 {
   _evtMgr->registerEvent(e_input::MOVE_UP,
                          [=, this] { selectNextTarget();     });

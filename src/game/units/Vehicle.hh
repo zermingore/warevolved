@@ -50,7 +50,7 @@ public:
    * \param role Crew member occupying this role will be dropped off
    * \param location Cell where to drop the unit off
    */
-  void dropOff(e_unit_role role, Coords location);
+  void dropOff(e_unit_role role, const Coords& location);
 
   /**
    * \brief _crew size getter

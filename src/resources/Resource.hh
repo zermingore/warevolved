@@ -27,7 +27,7 @@ public:
    * \brief Constructor
    * \param name resource name
    */
-  explicit Resource(const std::string& name);
+  explicit Resource(std::string  name);
 
   /**
    * \brief default destructor

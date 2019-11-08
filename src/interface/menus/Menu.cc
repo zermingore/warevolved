@@ -7,15 +7,15 @@
 
 #include <interface/menus/Menu.hh>
 
-#include <debug/Debug.hh>
-#include <interface/menus/MenuEntry.hh>
-#include <game/Status.hh>
 #include <context/State.hh>
-#include <input/EventManager.hh>
+#include <debug/Debug.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <interface/Cursor.hh>
+#include <game/Status.hh>
 #include <graphics/Sprite.hh>
+#include <input/EventManager.hh>
+#include <interface/Cursor.hh>
+#include <interface/menus/MenuEntry.hh>
 
 
 namespace interface {
@@ -39,10 +39,12 @@ void Menu::setOrigin(const Coords origin)
 
 void Menu::decrementSelectedEntry()
 {
-  if (_selectedEntry) {
+  if (_selectedEntry != 0u)
+  {
     --_selectedEntry;
   }
-  else {
+  else
+  {
     _selectedEntry = _entries.size() - 1;
   }
 }
@@ -50,7 +52,7 @@ void Menu::decrementSelectedEntry()
 
 void Menu::draw()
 {
-  if (_entries.size() == 0)
+  if (_entries.empty())
   {
     PRINTF("on demand build");
     build(); /// \todo Use a cache (when pushing state)

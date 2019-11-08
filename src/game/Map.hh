@@ -154,7 +154,7 @@ public:
    * \param column column where to set the new unit
    * \note Throws if the column/line arguments are greater than the Map size
    */
-  void newUnit(std::shared_ptr<Unit> unit, size_t column, size_t line);
+  void newUnit(const std::shared_ptr<Unit>& unit, size_t column, size_t line);
 
   /**
    * \brief moves the _selectedUnit to the given coordinates
@@ -181,14 +181,14 @@ public:
    * \param defender Unit defending the attack
    * \return the result of the attack (which unit died, if any)
    */
-  e_attack_result attack(std::shared_ptr<Unit> defender);
+  e_attack_result attack(const std::shared_ptr<Unit>& defender);
 
   /**
    * \brief Perform the attack of the _selectedUnit on the target_cell
    * \param target_cell target of the attack (may contain an unit)
    * \return the result of the attack (which unit died, if any)
    */
-  e_attack_result attack(std::shared_ptr<Cell> target_cell);
+  e_attack_result attack(const std::shared_ptr<Cell>& target_cell);
 
   /**
    * \brief Removes a Unit from the map. This is useful to group units

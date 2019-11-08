@@ -44,21 +44,21 @@ public:
    * \brief Initialization, parses the XML, calling buildFromXML()
    * \param file_name XML file name to parse
    */
-  static void initialize(const std::string file_name);
+  static void initialize(const std::string& file_name);
 
   /**
    * \brief If a Texture with the given name exists, return it
    * \return A new Image matching the given name.
    * \note If the Texture doesn't exist, print an error and return a default one
    */
-  static std::shared_ptr<graphics::Texture> getTexture(std::string name);
+  static std::shared_ptr<graphics::Texture> getTexture(const std::string& name);
 
   /**
    * \brief If a font with the given name exists, return the matching Font
    * \return A new Font matching the given name.
    *   If the Font does not exist, print an error and return the default one
    */
-  static std::shared_ptr<resources::Font> getFont(const std::string name);
+  static std::shared_ptr<resources::Font> getFont(const std::string& name);
 
 
 
@@ -86,8 +86,8 @@ private:
    *   false otherwise
    */
   static bool addResource(const e_resource_type type,
-                          const std::string name,
-                          const std::string file_name);
+                          const std::string& name,
+                          const std::string& file_name);
 
   /**
    * \brief parses XML file
@@ -96,7 +96,7 @@ private:
    * \return true if the file was successfully parsed
    *   false otherwise (prints an error message on std::err)
    */
-  static bool parseXML(const std::string file_name);
+  static bool parseXML(const std::string& file_name);
 
 
 # ifdef DEBUG_XML

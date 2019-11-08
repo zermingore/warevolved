@@ -1,28 +1,30 @@
 #include <game/Battle.hh>
 
-#include <random>
-#include <iomanip>
-#include <stdexcept>
+
+#include <chrono>
 #include <filesystem>
+#include <iomanip>
+#include <random>
+#include <stdexcept>
+#include <thread>
 
 #include <lib/pugixml.hh>
 
-#include <debug/Debug.hh>
-#include <tools/options/OptionsParser.hh>
-#include <common/enums/units.hh>
 #include <common/enums/terrains.hh>
-#include <structures/Vector.hh>
-#include <game/Status.hh>
-#include <game/Player.hh>
+#include <common/enums/units.hh>
+#include <debug/Debug.hh>
 #include <game/Map.hh>
+#include <game/Player.hh>
+#include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <game/units/UnitsFactory.hh>
 #include <game/units/Vehicle.hh>
-#include <interface/Cursor.hh>
 #include <graphics/MapGraphicsProperties.hh>
+#include <interface/Cursor.hh>
+#include <structures/Vector.hh>
+#include <tools/options/OptionsParser.hh>
 
-#include <thread>
-#include <chrono>
+
 
 Battle::Battle(const OptionsParser& options_parser)
   : _currentPlayer(0)
@@ -90,9 +92,13 @@ void Battle::initializePlayers()
 void Battle::buildMap()
 {
   if (!_loadMapFile.empty())
+  {
     loadMap();
+  }
   else
+  {
     generateRandomMap();
+  }
 }
 
 
@@ -112,7 +118,7 @@ void Battle::generateRandomMap()
 # pragma GCC diagnostic push // random_device and mt19937 are 5k on my machine
 # pragma GCC diagnostic ignored "-Wlarger-than="
   std::random_device rd;
-  if (!_randomSeed)
+  if (_randomSeed == 0u)
   {
     _randomSeed = rd();
   }
@@ -168,7 +174,9 @@ void Battle::generateRandomMap()
         auto hp = randHpSoldier(gen);
 
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
+        {
           played = static_cast<bool> (randBool(gen));
+        }
         _map->newUnit(type, col, line, player_id, hp, played);
       }
       if (rand100(gen) > 80)
@@ -183,7 +191,9 @@ void Battle::generateRandomMap()
         auto hp = randHpSoldier(gen);
 
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
+        {
           played = static_cast<bool> (randBool(gen));
+        }
         _map->newUnit(type, col, line, player_id, hp, played);
 
         // crew
@@ -270,7 +280,7 @@ void Battle::loadMap()
 
   // Cells
   auto cells = doc.child("map").child("cells");
-  while (cells)
+  while (cells != nullptr)
   {
     for (pugi::xml_node cell: cells.children("cell"))
     {
@@ -345,7 +355,7 @@ void Battle::randomMapRefine()
   // Give one extra Soldier to every player and set their cursor on it
   const auto cols{_map->nbColumns()};
   const auto lines{_map->nbLines()};
-  for (auto player: _players)
+  for (const auto& player: _players)
   {
     Coords freeCoords{0, 0};
     auto found_free_cell{false};

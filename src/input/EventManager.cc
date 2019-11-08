@@ -1,6 +1,6 @@
-#include <input/EventManager.hh>
-#include <debug/Debug.hh>
 #include <common/enums/states.hh>
+#include <debug/Debug.hh>
+#include <input/EventManager.hh>
 
 
 bool EventManager::process(const e_input input)

@@ -43,13 +43,13 @@ public:
    * \brief Adds an InterfaceElement to manage
    * \param elt Element to add to the interface
    */
-  void addElement(const std::shared_ptr<InterfaceElement> elt);
+  void addElement(const std::shared_ptr<InterfaceElement>& elt);
 
   /**
    * \brief Remove a managed InterfaceElement
    * \param elt Element to remove from the interface.
    */
-  void removeElement(const std::shared_ptr<InterfaceElement> elt);
+  void removeElement(const std::shared_ptr<InterfaceElement>& elt);
 
   /**
    * \brief Interface elements vector getter.
@@ -63,7 +63,7 @@ public:
    * \param id name of the InterfaceElement to retrieve
    * \return Pointer to the matching InterfaceElement, nullptr if there is none
    */
-  std::shared_ptr<InterfaceElement> element(const std::string id);
+  std::shared_ptr<InterfaceElement> element(const std::string& id);
 
   /**
    * \brief Cursor color getter.

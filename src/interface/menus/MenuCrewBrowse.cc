@@ -11,17 +11,17 @@
 #include <cassert>
 #include <debug/Debug.hh>
 
-#include <interface/menus/MenuEntryCrew.hh>
-#include <context/State.hh>
 #include <common/enums/states.hh>
-#include <game/Status.hh>
+#include <context/State.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
-#include <game/units/Vehicle.hh>
+#include <game/Status.hh>
 #include <game/units/Unit.hh>
+#include <game/units/Vehicle.hh>
+#include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <interface/menus/MenuEntryCrew.hh>
 
 
 
@@ -29,9 +29,7 @@ namespace interface {
 
 
 
-MenuCrewBrowse::MenuCrewBrowse()
-{
-}
+MenuCrewBrowse::MenuCrewBrowse() = default;
 
 
 
@@ -47,7 +45,7 @@ void MenuCrewBrowse::build()
   if (_selectedUnit->canHaveCrew())
   {
     auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
-    if (vehicle->crewSize())
+    if (vehicle->crewSize() != 0u)
     {
       for (auto& mem: vehicle->crew())
       {
@@ -98,7 +96,7 @@ void MenuCrewBrowse::draw()
 {
   update();
 
-  for (auto entry: _entries)
+  for (const auto& entry: _entries)
   {
     entry->draw();
   }

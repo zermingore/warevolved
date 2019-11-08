@@ -85,7 +85,7 @@ protected:
   /**
    * \brief Adds a cancel entry into the menu
    */
-  void addCancelEntry(const std::function<void()> cancel_callback);
+  void addCancelEntry(const std::function<void()>& cancel_callback);
 
 
   /// \todo RM _cursorCoords / _unit // state data

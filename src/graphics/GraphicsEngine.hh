@@ -40,7 +40,7 @@ public:
    *   - updates the window
    * \note Drawing while the window is not closed
    */
-  static void drawScene(const std::shared_ptr<Battle> battle);
+  static void drawScene(const std::shared_ptr<Battle>& battle);
 
   /**
    * \brief Draw the interface of the current Player.
@@ -62,7 +62,7 @@ public:
    * \brief Set the offset between the window border and the grid
    * \param map Used to get the number of columns and lines of the map
    */
-  static void setGridOffset(const std::shared_ptr<const Map> map);
+  static void setGridOffset(const std::shared_ptr<const Map>& map);
 
   /**
    * \brief Close the window on request; exiting the main loop
@@ -133,19 +133,19 @@ private:
    * \brief Draws cells content (terrain, unit).
    * \param battle Battle content to draw.
    */
-  static void drawMap(const std::shared_ptr<Battle> battle);
+  static void drawMap(const std::shared_ptr<Battle>& battle);
 
   /**
    * \brief Draws the grid, graphic cells separator.
    * \param map for which we draw the grid.
    */
-  static void drawGrid(const std::shared_ptr<Map> map);
+  static void drawGrid(const std::shared_ptr<Map>& map);
 
   /**
    * \brief Draws the given Unit.
    * \param unit Unit to draw.
    */
-  static void drawUnit(const std::shared_ptr<Unit> unit);
+  static void drawUnit(const std::shared_ptr<Unit>& unit);
 
   /**
    * \brief Draws the elements related to the given State

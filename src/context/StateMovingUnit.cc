@@ -2,28 +2,27 @@
 
 #include <cassert>
 
-#include <input/EventManager.hh>
-#include <common/enums/input.hh>
-#include <game/Status.hh>
-#include <common/enums/states.hh>
 #include <common/enums/directions.hh>
-#include <interface/Interface.hh>
-#include <interface/Cursor.hh>
-#include <interface/menus/InGameMenu.hh>
-#include <graphics/graphic_types.hh>
+#include <common/enums/input.hh>
+#include <common/enums/states.hh>
+#include <game/Battle.hh>
+#include <game/PathFinding.hh>
+#include <game/Player.hh>
+#include <game/Status.hh>
+#include <game/units/Unit.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
-#include <game/Battle.hh>
-#include <game/Player.hh>
-#include <game/units/Unit.hh>
-#include <game/PathFinding.hh>
+#include <graphics/graphic_types.hh>
+#include <input/EventManager.hh>
+#include <interface/Cursor.hh>
+#include <interface/Interface.hh>
+#include <interface/menus/InGameMenu.hh>
 
 
 
 StateMovingUnit::StateMovingUnit()
-  : State()
-  , _originalCoords(game::Status::interface()->element("cursor")->coords())
+  : _originalCoords(game::Status::interface()->element("cursor")->coords())
 {
   // used to get the cursor's coordinates and access to the callbacks
   auto player(game::Status::player());

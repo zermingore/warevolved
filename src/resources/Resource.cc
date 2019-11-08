@@ -1,8 +1,9 @@
 #include <resources/Resource.hh>
+#include <utility>
 
 
-Resource::Resource(const std::string& name)
-  : _name (name)
+Resource::Resource(std::string  name)
+  : _name (std::move(name))
   , _loaded (false)
   , _fileName ("")
 {

@@ -3,21 +3,21 @@
 #include <chrono>
 #include <ctime> // strftime
 
+#include <context/State.hh>
 #include <debug/Debug.hh>
 #include <debug/OSD.hh>
-#include <tools/Fps.hh>
-#include <graphics/Sprite.hh>
-#include <graphics/graphic_types.hh>
-#include <graphics/MapGraphicsProperties.hh>
-#include <context/State.hh>
-#include <interface/Interface.hh>
-#include <game/Status.hh>
-#include <game/Cell.hh>
 #include <game/Battle.hh>
+#include <game/Cell.hh>
 #include <game/Player.hh>
+#include <game/Status.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
+#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Sprite.hh>
+#include <graphics/graphic_types.hh>
 #include <input/EventsProcessor.hh>
+#include <interface/Interface.hh>
+#include <tools/Fps.hh>
 
 
 
@@ -33,7 +33,7 @@ std::unique_ptr<TerrainsHandler> GraphicsEngine::_terrainsHandler;
 
 
 
-void GraphicsEngine::drawScene(const std::shared_ptr<Battle> battle)
+void GraphicsEngine::drawScene(const std::shared_ptr<Battle>& battle)
 {
   _window->setActive();
   _exit = false;
@@ -120,7 +120,7 @@ void GraphicsEngine::drawBackground()
 }
 
 
-void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
+void GraphicsEngine::drawMap(const std::shared_ptr<Battle>& battle)
 {
   const auto map(battle->map());
 
@@ -154,7 +154,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle> battle)
 
 
 
-void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
+void GraphicsEngine::drawGrid(const std::shared_ptr<Map>& map)
 {
   using p = MapGraphicsProperties;
 
@@ -187,7 +187,7 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map> map)
 
 
 
-void GraphicsEngine::drawUnit(const std::shared_ptr<Unit> unit)
+void GraphicsEngine::drawUnit(const std::shared_ptr<Unit>& unit)
 {
   using p = MapGraphicsProperties;
 
@@ -233,7 +233,7 @@ void GraphicsEngine::drawInterface()
 
 
 
-void GraphicsEngine::setGridOffset(const std::shared_ptr<const Map> map)
+void GraphicsEngine::setGridOffset(const std::shared_ptr<const Map>& map)
 {
   using p = MapGraphicsProperties;
   using components = const std::pair<const component, const component>;
