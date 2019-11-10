@@ -9,9 +9,9 @@
 
 
 * TODO Roadmap
-** DONE Testing: Integration tests draft
-   CLOSED: [2019-11-05 Tue 22:10]
-
+** TODO Debug: Name threads
+** TODO Fix doxygen warnings
+** TODO Check included headers used
 
 * TODO Bugs / Features
 ** TODO Units
@@ -22,21 +22,18 @@
     Cannot reproduce it (October 2019)
 *** TODO Crew 'Passenger' not used
 
-
 ** TODO Graphics
 *** TODO Resize the window: center the map
 *** TODO Resize the window: propagate new panel positions
 *** TODO The cursor appears over the menus
 *** TODO Panel: Pilot and Co-Pilot fonts differ
 *** TODO Panel: Info font (next to the unit sprite) is too big
-** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
-** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
-** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
-** TODO Bootstrap: do not hard-code the path to the configure
-** DONE Seed 3696412022 move unit && dead lock?
-   CLOSED: [2019-11-01 Fri 13:38]
-   Seems to happen when trying to move an units without available adjacent free cell
-   Move a unit on itself
+
+** TODO Misc
+*** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
+*** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
+*** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
+*** TODO Bootstrap: do not hard-code the path to the configure
 
 
 * TODO Doc
@@ -54,19 +51,13 @@
 ** TODO Use the uniformed initialization
 ** TODO Find a way to have compile-time map keys (vehicle crews)
 ** TODO Map random generation
-** DONE Do not put enums in common as default (+ sort them)
-   CLOSED: [2019-11-02 Sat 19:38]
 
 
 * TODO Experimental
 ** TODO drawInterface Vs drawState
    drawState draws the interface ?
 ** TODO Cursor (interface) in its thread
-** DONE Handle external libs (pugixml) in submodules ?
-   CLOSED: [2019-10-20 Sun 16:35]
 ** TODO Player_id: use an enum (CURRENT, IA1, PLAYER1, PLAYER2, ...)
-** DONE Give clang-tidy a try
-   CLOSED: [2019-11-06 Wed 18:39]
 
 
 * TODO Input
@@ -82,7 +73,8 @@
 
 
 * TODO Code Design
-** TODO use emplace[_back] with std::vector (C++11)
+** DONE use emplace[_back] with std::vector (C++11)
+   CLOSED: [2019-11-10 Sun 16:41]
    (instead of create and push)
 ** TODO auto-generate Resources XML file
 ** TODO follow the C++ rule of 0
@@ -172,13 +164,12 @@
 
 * TODO Testing
 ** TODO Integration Test process
-*** DONE Load a map, a replay, save at the end; compare with a reference map
-    CLOSED: [2019-11-05 Tue 22:10]
 *** TODO Use screenshots for the interface
    ex: SELECTION key was pressed -> save the video buffer, a menu must be open
    Use OpenCV to get the distance between the images
 ** TODO Unit tests
    using google tests?
+   really brings something?
 ** TODO [#B] Disable the graphics engine (speeding up testing)
    May be considered later, if the process is indeed too slow because of it
    (The build process still takes more than a minute)
