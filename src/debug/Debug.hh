@@ -118,7 +118,6 @@ public:
     *_log << " " << head << COLOR_NORMAL;
   }
 
-
   /**
    * \brief print as error given parameters on standard output
    * \param head element to print right now
@@ -154,6 +153,15 @@ public:
     std::cout << head << " ";
     printf(tail...);
   }
+
+
+  /**
+   * \brief Set the current thread name
+   * \param name Name of the thread
+   * \warning System dependent; Unix only
+   */
+  static void setThisThreadName(const std::string& name);
+
 
 
 private:

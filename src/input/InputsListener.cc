@@ -20,6 +20,8 @@ void InputsListener::listen(bool replay,
                             const std::string& replay_filename,
                             const std::atomic_bool& stop_events_listener)
 {
+  Debug::setThisThreadName("InputsListener");
+
   // Initialize the replay mode as required (Read XOr Write)
   auto replay_manager = std::make_shared<ReplayManager> ();
   if (replay)

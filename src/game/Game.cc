@@ -6,6 +6,7 @@
 
 #include <common/enums/states.hh>
 #include <context/State.hh>
+#include <debug/Debug.hh>
 #include <game/Battle.hh>
 #include <game/Status.hh>
 #include <graphics/Context.hh>
@@ -41,7 +42,6 @@ void Game::run()
 
   resources::ResourcesManager::initialize("resources.xml");
 
-
   auto battle(std::make_shared<Battle> (_optionsParser));
   game::Status::setBattle(battle);
   battle->initializeMap();
@@ -60,6 +60,8 @@ void Game::run()
     replay_file,
     std::ref(stop_events_listener)
   );
+
+  Debug::setThisThreadName("game");
 
   game::Status::pushState(e_state::PLAYING);
   game::Status::resumeState();

@@ -1,3 +1,11 @@
+/**
+ * \brief Debug class implementation
+ */
+
+# ifdef __unix__
+#   include <sys/prctl.h>
+# endif
+
 #include <debug/Debug.hh>
 
 // Debug::_log definition
@@ -26,4 +34,13 @@ void Debug::logTime()
   const auto now{std::time(nullptr)};
   const auto full_date{*std::localtime(&now)};
   *_log << std::put_time(&full_date, "%F @ %T") << '\t';
+}
+
+
+
+void Debug::setThisThreadName(const std::string& name)
+{
+# ifdef __unix__
+  prctl(PR_SET_NAME, name.c_str(), 0, 0, 0);
+# endif
 }

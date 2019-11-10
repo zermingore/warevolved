@@ -16,6 +16,8 @@ std::condition_variable EventsProcessor::_cv_new_frame;
 
 void EventsProcessor::process()
 {
+  Debug::setThisThreadName("EventsProcessor");
+
   auto globalState { std::make_unique<StateGlobal> () };
   for (;;)
   {
