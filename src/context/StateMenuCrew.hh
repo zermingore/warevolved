@@ -30,15 +30,9 @@ class StateMenuCrew: public State
 {
 public:
   /**
-   * \brief Deleted default constuctor: Menu coordinates required
+   * \brief Default constuctor
    */
-  StateMenuCrew();// = delete;
-
-  /**
-   * \brief Constuctor: Builds the menu, registers to callbacks
-   * \param state State which is currently built
-   */
-  //explicit StateMenuCrew(const Coords& coords);
+  StateMenuCrew();
 
   /**
    * \brief default destructor

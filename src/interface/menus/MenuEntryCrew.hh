@@ -76,7 +76,7 @@ public:
 
   /**
    * \brief _callback setter
-   * \param callbacks List of Callbacks called when the menu entry is selected
+   * \param callback Callback called when the menu entry is selected
    */
   void setCallback(const std::function<void()> callback) {
     _callbacks = { callback };

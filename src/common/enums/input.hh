@@ -9,7 +9,7 @@
 
 
 /**
- * \enum input
+ * \enum e_input
  * \brief Logical input names.
  */
 enum class e_input

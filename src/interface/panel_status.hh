@@ -9,7 +9,7 @@
 
 
 /**
- * \enum e_panel_pos
+ * \enum e_panel_status
  * \brief List the possible locations of the interface side panel
  */
 enum class e_panel_status

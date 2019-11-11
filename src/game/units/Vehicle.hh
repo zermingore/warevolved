@@ -34,7 +34,7 @@ public:
   /**
    * \brief Check if a crew member can operate the vehicle weapon
    *   or if it can self open fire
-   * \node virtual pure
+   * \note virtual pure
    * \return true if at least one crew member can open fire
    */
   virtual bool canOpenFire() = 0;

@@ -135,9 +135,11 @@ public:
   /**
    * \brief builds and keep a new Unit
    * \param type type of the new unit
-   * \param line line where to set the new unit
    * \param column column where to set the new unit
+   * \param line line where to set the new unit
    * \param player_id player to which the unit belongs to
+   * \param hp Health Points of the newly created Unit
+   * \param played Set the Unit as played for this turn
    * \note Throws if the column/line arguments are greater than the Map size
    */
   void newUnit(e_unit type,

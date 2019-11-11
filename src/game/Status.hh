@@ -68,7 +68,7 @@ public:
   /**
    * \brief Process the given input
    * \param input Input from the KeyManager to process
-   * \return \true if a callback was found; \false otherwise
+   * \return true if a callback was found; false otherwise
    */
   static bool processInput(const e_input& input);
 

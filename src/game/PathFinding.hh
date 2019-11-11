@@ -88,14 +88,15 @@ public:
    * \brief Return the list of available targets
    * \param ref Unit for which and from where the targets will be seek
    * \param coords Coordinates where the attacker is located
+   * \return List of cells containing a target
    */
   std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
   getTargets(const std::shared_ptr<Unit>& ref, const Coords& coords);
 
   /**
    * \brief Return the list of available drop locations
-   * \param ref Unit for which and from where the drop zones will be seek
    * \param coords Coordinates where the vehicle is located
+   * \return List of valid drop zones
    */
   std::vector<std::shared_ptr<Cell>>
   getDropZones(const Coords& coords);

@@ -12,8 +12,11 @@
 
 
 
+namespace resources {
+
 /**
- * \enum enum matching every resource types
+ * \enum e_resource_type
+ * \brief matching every resource types
  */
 enum class e_resource_type: int
 {
@@ -23,9 +26,6 @@ enum class e_resource_type: int
   FONT,
   SOUND,  /// \todo sound management
 };
-
-
-namespace resources {
 
 
 /**

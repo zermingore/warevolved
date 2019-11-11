@@ -54,7 +54,7 @@
 
 
 /**
- * \macro debug print macro
+ * \def DEBUG_PRINT(x) debug print macro
  * prints the given string
  *   only if we compiled with the DEBUG flag
  */

@@ -33,9 +33,7 @@ public:
 
   /**
    * \brief Constructor; Loads the given map if any
-   * \param load_map_file Map to load
-   * \param saves_dir Path where to save games
-   * \note Throws if the saves_dir does not exist
+   * \param options_parser Command line options parser
    */
   Battle(const OptionsParser& options_parser);
 

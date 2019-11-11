@@ -31,7 +31,7 @@ public:
 
   /**
    * \brief Initializes the graphical context
-   * \param fullscreen Initialize a full screen or windowed graphical context
+   * \param options_parser Command line options parser
    * \see Context
    */
   explicit Game(const OptionsParser& options_parser);
@@ -46,8 +46,7 @@ public:
    * \brief contains the game loop which calls
    *   event processing
    *   window rendering
-   * \param replay true to start a replay, false otherwise
-   * \param filename Replay filename to read
+   * \note Create EventsProcessor and InputsListener threads
    */
   void run();
 

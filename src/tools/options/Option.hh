@@ -26,7 +26,7 @@ enum class e_option_argument
 
 
 /**
- * \class
+ * \class Option
  * \brief Represent command line options
  */
 class Option
@@ -61,8 +61,8 @@ public:
   auto provided() const { return _provided; }
 
   /**
-   * \brief Sets the provided boolean to \true
-   * \note _provided is set to \false in the constructor
+   * \brief Sets the provided boolean to true
+   * \note _provided is set to false in the constructor
    */
   void setProvided() { _provided = true; }
 

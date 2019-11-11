@@ -28,14 +28,15 @@ enum class e_state;
  *
  * Stores a state, which is composed of:
  *   a cursor position
- *   a state: \enum state index
+ *   a state: \enum e_state index
  *   an event manager
  */
 class State
 {
 public:
   /**
-   * \brief Default constructor. Instantiates the EventManager
+   * \brief Default constructor\
+   * \note Instantiates the EventManager
    */
   State();
 

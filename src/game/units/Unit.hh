@@ -111,7 +111,7 @@ public:
 
   /**
    * \brief _played setter
-   * \param played unit's moved status
+   * \param moved unit's moved status
    */
   void setMoved(bool moved) { _moved = moved; }
 
@@ -176,7 +176,8 @@ public:
   auto canHaveCrew() const { return _canHaveCrew; }
 
   /**
-   * \brief Add the given \Unit to the crew (need to be overloaded to be used)
+   * \brief Add the given Unit to the crew (need to be overloaded to be used)
+   * \param unit Unit to add to the crew
    * \note Aborts the execution if called with the base class definition
    */
   [[ noreturn ]] virtual bool addToCrew(std::shared_ptr<Unit> unit);
@@ -187,6 +188,7 @@ public:
    * \note must be overriden in Units using a crew
    */
   size_t virtual crewSize() const { return 0; }
+
 
 
 protected:
