@@ -54,6 +54,7 @@ game/units/Unit.cc                  \
 game/units/UnitsFactory.cc          \
 game/units/Vehicle.cc               \
 game/units/Car.cc                   \
+game/units/Motorcycle.cc            \
 game/units/Soldier.cc               \
 game/Player.cc                      \
 game/PathFinding.cc                 \

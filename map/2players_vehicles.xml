@@ -54,6 +54,16 @@
       </unit>
     </cell>
     <cell>
+      <coordinates col='3' line='0'></coordinates>
+      <terrain>2</terrain>
+      <unit
+          type='2'
+          player_id='0'
+          hp='3'
+          played='false'>
+      </unit>
+    </cell>
+    <cell>
       <coordinates col='0' line='1'></coordinates>
       <terrain>2</terrain>
       <unit
@@ -84,12 +94,14 @@
       </unit>
     </cell>
     <cell>
-      <coordinates col='1' line='1'></coordinates>
+      <coordinates col='3' line='1'></coordinates>
       <terrain>1</terrain>
-    </cell>
-    <cell>
-      <coordinates col='1' line='2'></coordinates>
-      <terrain>1</terrain>
+      <unit
+          type='2'
+          player_id='1'
+          hp='5'
+          played='false'>
+      </unit>
     </cell>
   </cells>
 </map>

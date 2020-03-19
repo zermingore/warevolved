@@ -53,7 +53,8 @@ bool MenuAction::allowMove()
   }
 
   // Move forbidden for a Vehicle without driver
-  if (_selectedUnit->type() == e_unit::CAR)
+  if (   _selectedUnit->type() == e_unit::CAR
+      || _selectedUnit->type() == e_unit::MOTORCYCLE)
   {
     auto v = std::static_pointer_cast<Vehicle> (_selectedUnit);
     try
