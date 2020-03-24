@@ -54,13 +54,10 @@ void Panel::setWindowSize(const graphics::Size2& size)
 {
   _size.x = size.x / 4;
   _size.y = size.y;
-  _background->setSize(_size);
 
-  if (_status == e_panel_status::POSITION_RIGHT)
+  if (_status != e_panel_status::DEACTIVATED)
   {
-    // Simulating a toggle to the right => recomputing positions
-    _status = e_panel_status::POSITION_LEFT;
-    toggleStatus();
+    computePosition();
   }
 }
 
@@ -72,6 +69,13 @@ void Panel::toggleStatus()
     (static_cast<int> (_status) + 1)
     % static_cast<int> (e_panel_status::NB_PANEL_STATUS));
 
+  computePosition();
+}
+
+
+
+void Panel::computePosition()
+{
   graphics::Pos2 background_position;
   auto draw_offset(0.f); // rendering room offset
   switch (_status)
@@ -296,6 +300,8 @@ void Panel::drawDataText(const std::string& data, const graphics::Pos2& pos)
 {
   drawDataText(data, pos, _fontSize);
 }
+
+
 
 void Panel::drawDataText(const std::string& data,
                          const graphics::Pos2& pos,

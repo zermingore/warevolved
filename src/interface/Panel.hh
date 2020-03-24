@@ -58,6 +58,12 @@ public:
   void toggleStatus();
 
   /**
+   * \brief Computes the panel new position
+   * \note Called on window redraw or pannel activation
+   */
+  void computePosition();
+
+  /**
    * \brief Updates the window size
    *   Updates the Panel components size accordingly
    */
