@@ -105,6 +105,12 @@ public:
   void togglePanel();
 
   /**
+   * \brief Update the panel relative position
+   * \param windowSize
+   */
+  void updatePanelPosition(const graphics::Size2& windowSize);
+
+  /**
    * \brief Update the Map selected Unit
    */
   void updateSelectedUnit();

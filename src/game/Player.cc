@@ -84,6 +84,13 @@ void Player::togglePanel()
 
 
 
+void Player::updatePanelPosition(const graphics::Size2& windowSize)
+{
+  _panel->setWindowSize(windowSize);
+}
+
+
+
 void Player::select()
 {
   // If there is a unit, which did not play and belong to us, allow to select it

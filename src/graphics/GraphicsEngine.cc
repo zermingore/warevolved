@@ -254,7 +254,15 @@ void GraphicsEngine::resizeWindow(unsigned int width, unsigned int height)
   }));
 
   // Re-center the map
-  setGridOffset(game::Status::battle()->map());
+  auto battle{game::Status::battle()};
+  setGridOffset(battle->map());
+
+  // Update panel position
+  for (auto player: battle->players())
+  {
+    player->updatePanelPosition({ static_cast<float> (width),
+                                  static_cast<float> (height) });
+  }
 }
 
 

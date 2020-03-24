@@ -55,6 +55,13 @@ void Panel::setWindowSize(const graphics::Size2& size)
   _size.x = size.x / 4;
   _size.y = size.y;
   _background->setSize(_size);
+
+  if (_status == e_panel_status::POSITION_RIGHT)
+  {
+    // Simulating a toggle to the right => recomputing positions
+    _status = e_panel_status::POSITION_LEFT;
+    toggleStatus();
+  }
 }
 
 
