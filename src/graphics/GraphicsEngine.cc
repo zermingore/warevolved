@@ -252,6 +252,9 @@ void GraphicsEngine::resizeWindow(unsigned int width, unsigned int height)
   _window->setView(sf::View( {
     0, 0, static_cast<float> (width), static_cast<float> (height)
   }));
+
+  // Re-center the map
+  setGridOffset(game::Status::battle()->map());
 }
 
 
