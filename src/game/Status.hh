@@ -107,8 +107,8 @@ public:
   static std::shared_ptr<Player> player();
 
   /**
-   * \brief wrapper to the battle to get the current player
-   * \return current player
+   * \brief wrapper to the battle to get the current player's interface
+   * \return current player's interface
    */
   static std::shared_ptr<interface::Interface> interface();
 
