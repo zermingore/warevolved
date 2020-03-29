@@ -304,9 +304,6 @@ void Battle::loadMap()
         // Crew
         for (pugi::xml_node mbr: unit.child("crew").children("member"))
         {
-          const auto u = _map->unit(col, line);
-          assert(u->canHaveCrew() && "This unit cannot have a crew");
-
           auto t = static_cast<e_unit> (mbr.attribute("type").as_int());
           std::shared_ptr<Unit> m(UnitsFactory::createUnit(t));
 
@@ -314,6 +311,8 @@ void Battle::loadMap()
           m->setHp(mbr.attribute("hp").as_int());
           m->setPlayed(mbr.attribute("played").as_bool());
 
+          const auto u = _map->unit(col, line);
+          assert(u->canReceive(m) && "Cannot add this unit to a crew");
           u->addToCrew(m); /// \todo way to specify the role
         }
       }

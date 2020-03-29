@@ -50,3 +50,15 @@ void Vehicle::restoreCrew()
     game::Status::battle()->map()->stashUnit(*(member.second));
   }
 }
+
+
+
+bool Vehicle::canReceive(const std::shared_ptr<const Unit> unit) const
+{
+  if (unit->type() != e_unit::SOLDIER)
+  {
+    return false;
+  }
+
+  return _crew.size() < _maxCrewMembers;
+}

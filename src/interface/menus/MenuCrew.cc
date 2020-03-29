@@ -53,8 +53,7 @@ void MenuCrew::build()
       }
     }
 
-    /// \todo check if the vehicle is already full
-    if (_selectedUnit->canHaveCrew() && unit->type() == e_unit::SOLDIER)
+    if (_selectedUnit->canReceive(unit))
     {
       auto entry_group(std::make_shared<MenuEntry> (e_entry::PICK_UP));
       entry_group->setCallbacks(
@@ -67,7 +66,7 @@ void MenuCrew::build()
       });
       _entries.push_back(entry_group);
     }
-    else if (_selectedUnit->type() == e_unit::SOLDIER && unit->canHaveCrew())
+    else if (unit->canReceive(_selectedUnit))
     {
       auto entry_group(std::make_shared<MenuEntry> (e_entry::BOARD));
       entry_group->setCallbacks(

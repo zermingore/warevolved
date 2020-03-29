@@ -74,6 +74,12 @@ public:
     _dropped.clear();
   }
 
+  /**
+   * \brief Check if the given unit can be a crew member
+   * \return true if the Unit can get in and the crew is not full
+   */
+  bool canReceive(const std::shared_ptr<const Unit> unit) const override;
+
 
 
 protected:

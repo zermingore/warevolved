@@ -176,6 +176,16 @@ public:
   auto canHaveCrew() const { return _canHaveCrew; }
 
   /**
+   * \brief Must be overriden to check if the given unit can be a crew member
+   * \return false
+   */
+  bool virtual canReceive(
+    [[maybe_unused]] const std::shared_ptr<const Unit> unit) const
+  {
+     return false;
+  }
+
+  /**
    * \brief Add the given Unit to the crew (need to be overloaded to be used)
    * \param unit Unit to add to the crew
    * \note Aborts the execution if called with the base class definition
