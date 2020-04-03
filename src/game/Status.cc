@@ -24,23 +24,15 @@ std::mutex Status::_lock;
 
 e_state Status::state()
 {
-  _lock.lock();
   assert(!_states.empty() && "_states stack is empty");
-
-  auto state_index{_states.top().first};
-  _lock.unlock();
-
-  return state_index;
+  return _states.top().first;
 }
 
 
 
 void Status::resumeState()
 {
-  _lock.lock();
   assert(!_states.empty() && "_states stack is empty");
-  _lock.unlock();
-
   _states.top().second->resume();
 }
 
