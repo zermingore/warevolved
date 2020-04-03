@@ -9,8 +9,6 @@
  * \brief Entry point
  */
 
-#include <exception>
-
 #include <debug/Debug.hh>
 #include <game/Game.hh>
 #include <tools/options/OptionsParser.hh>

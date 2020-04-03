@@ -1,6 +1,5 @@
 #include <game/PathFinding.hh>
 
-#include <algorithm>
 #include <exception>
 #include <stack>
 

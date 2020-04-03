@@ -1,7 +1,5 @@
 #include <game/Game.hh>
 
-#include <atomic>
-#include <cassert>
 #include <future>
 
 #include <common/enums/states.hh>

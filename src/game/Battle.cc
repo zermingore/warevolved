@@ -1,7 +1,5 @@
 #include <game/Battle.hh>
 
-
-#include <chrono>
 #include <filesystem>
 #include <iomanip>
 #include <random>
