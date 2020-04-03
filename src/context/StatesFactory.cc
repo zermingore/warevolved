@@ -39,7 +39,7 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
       return std::make_unique<StateSelectDropZone> ();
 
     default:
-      ERROR("UNRECOGNIZED STATE. Unable to instantiate an EventManager",
+      ERROR("UNRECOGNIZED STATE. Unable to instantiate a State",
             static_cast<int> (state));
       std::exit(1);
   }
