@@ -111,6 +111,8 @@ void Panel::computePosition()
   _minimap->setPosition({
       background_position.x + _margin, 2 * _size.y / 3 });
 
+  graphics::Size2 minimap_frame_size { _size.x - _margin * 2, _size.y / 4 };
+  _minimap->setFrameSize(minimap_frame_size);
 
   // Set the grid offset (map rendering zone size: 1/2 left room)
   using namespace graphics;

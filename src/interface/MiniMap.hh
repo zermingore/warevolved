@@ -61,6 +61,13 @@ public:
    */
   void setPosition(const graphics::Pos2& pos);
 
+  /**
+   * \brief Set the MiniMap frame size
+   * \param size New size
+   */
+  void setFrameSize(const graphics::Size2& size);
+
+
 
 private:
   graphics::Size2 _frameSize; ///< Draw area size

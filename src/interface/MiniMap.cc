@@ -107,4 +107,10 @@ void MiniMap::setPosition(const graphics::Pos2& pos)
 }
 
 
+
+void MiniMap::setFrameSize(const graphics::Size2& size)
+{
+  _frameSize = size;
+}
+
 } // namespace interface

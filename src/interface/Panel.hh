@@ -120,7 +120,7 @@ private:
   void drawUnitFrame();
 
 
-  const graphics::component _margin = 5;
+  const graphics::component _margin = 5; ///< Graphic margin (in px)
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)
 
   std::shared_ptr<const Map> _map; ///< Get terrain and unit under the Cursor
