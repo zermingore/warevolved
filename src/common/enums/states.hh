@@ -20,6 +20,7 @@ enum class e_state: int
 
   PLAYING,          ///< Browsing the map
   MAP_MENU,         ///< Generic map menu: next turn, ...
+  EDIT_MAP,          ///< Browsing the map
 
   SELECTION_UNIT,   ///< Pick a Unit
   MOVING_UNIT,      ///< Move it

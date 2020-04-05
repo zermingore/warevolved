@@ -1,5 +1,6 @@
 #include <context/StatesFactory.hh>
 
+#include <context/StateEditMap.hh>
 #include <context/StateGlobal.hh>
 #include <context/StateMenu.hh>
 #include <context/StateMenuCrew.hh>
@@ -18,6 +19,9 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
   {
     case e_state::PLAYING:
       return std::make_unique<StatePlaying> ();
+
+    case e_state::EDIT_MAP:
+      return std::make_unique<StateEditMap> ();
 
     // These menus share the same State
     case e_state::MAP_MENU:

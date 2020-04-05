@@ -61,7 +61,14 @@ void Game::run()
 
   Debug::setThisThreadName("game");
 
-  game::Status::pushState(e_state::PLAYING);
+  if (_optionsParser["edit-map"])
+  {
+    game::Status::pushState(e_state::EDIT_MAP);
+  }
+  else
+  {
+    game::Status::pushState(e_state::PLAYING);
+  }
   game::Status::resumeState();
 
   // Drawing loop

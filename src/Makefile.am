@@ -30,6 +30,7 @@ context/State.cc                    \
 context/StateGlobal.cc              \
 context/StatesFactory.cc            \
 context/StatePlaying.cc             \
+context/StateEditMap.cc             \
 context/StateMenu.cc                \
 context/StateMenuCrew.cc            \
 context/StateMovingUnit.cc          \
