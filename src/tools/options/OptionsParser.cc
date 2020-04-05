@@ -99,6 +99,15 @@ OptionsParser::OptionsParser(int ac, const char** av)
            e_option_argument::REQUIRED
     )
   );
+
+  _supportedOptions.emplace(
+    "edit-map",
+    Option("edit-map",
+           "Edit or create the given map; --edit-map=~/.we/map/map.xml/",
+           { "", "--edit-map" },
+           e_option_argument::REQUIRED
+    )
+  );
 }
 
 
