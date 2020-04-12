@@ -1,10 +1,10 @@
 // auto-generated code, edit at your own risks
-// generator: tools/code_generation/enum_print/generate_enum_print.sh
-// generated on: Sat Nov  2 11:42:23 CET 2019
+// generator: ./generate_enum_print.sh
+// generated on: Sun Apr 12 19:51:46 CEST 2020
 
 
-#include <common/enums/directions.hh>
 #include <string>
+#include <common/enums/directions.hh>
 
 namespace debug {
 
