@@ -1,7 +1,7 @@
 #include <game/TerrainsHandler.hh>
 
 #include <debug/Debug.hh>
-#include <generated/enum_print/enum_print_prototypes.hh>
+#include <generated/enum_print/enum_print.hh>
 
 #include <game/Terrain.hh>
 #include <graphics/graphic_types.hh>
