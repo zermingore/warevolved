@@ -26,31 +26,10 @@ BEGIN {
 END {
   # print "____________ done fetching enums _____________\n\n"
 
-
-  # Adding required headers
-  printf("// auto-generated code, edit at your own risks\n")
-  printf("// generator:\n")
-  printf("// generated on: %s\n", strftime())
-  print ""
-  print ""
-  printf("#include <string>\n")
-  print ""
-  print "namespace debug {"
-  print ""
-
-  # Generating prototypes
-  for (enums in res)
-  {
-    # Prototype
-    printf("std::string %s_string(%s entry);\n", enums, enums)
-  }
-  print ""
-
-
   for (enums in res)
   {
     # print enums
-    printf("std::string %s_string(%s entry)\n", enums, enums)
+    printf("\n\nstd::string %s_string(%s entry)\n", enums, enums)
     printf "{\n"
     printf("  switch (entry)\n")
     printf "  {\n"
@@ -79,9 +58,6 @@ END {
     printf "  }\n"
     printf "}\n"
   }
-
-  print ""
-  print "} // namespace debug"
 
   close("enum_res")
 }
