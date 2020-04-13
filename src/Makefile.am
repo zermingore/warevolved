@@ -84,12 +84,7 @@ tools/options/OptionsParser.cc
 
 # Generated sources files
 __top_srcdir__we_SOURCES +=                     \
-generated/enum_print/generated_terrains.cc      \
-generated/enum_print/generated_input.cc         \
-generated/enum_print/generated_directions.cc    \
-generated/enum_print/generated_attack_result.cc \
-generated/enum_print/generated_states.cc        \
-generated/enum_print/generated_units.cc
+generated/enum_print/enum_print.cc
 
 
 
