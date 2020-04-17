@@ -105,6 +105,10 @@ void InGameMenu::draw()
 
   for (const auto& entry: _entries)
   {
+    if (!entry) /// \todo Find the reason why entry is sometime nullptr
+    {
+      return; // skip the menu draw this frame
+    }
     entry->draw();
   }
 
