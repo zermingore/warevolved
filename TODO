@@ -12,6 +12,8 @@
 ** TODO Debug: Name threads
 ** TODO Fix doxygen warnings
 ** TODO Check included headers used
+** TODO Panel clean (code && graphics: make text width panel size dependent)
+
 
 * TODO Bugs / Features
 ** TODO Units
@@ -73,9 +75,6 @@
 
 
 * TODO Code Design
-** DONE use emplace[_back] with std::vector (C++11)
-   CLOSED: [2019-11-10 Sun 16:41]
-   (instead of create and push)
 ** TODO auto-generate Resources XML file
 ** TODO follow the C++ rule of 0
 ** TODO Avoid vector of vector
