@@ -211,12 +211,10 @@ void Panel::drawTerrainFrame()
 void Panel::drawUnitFrame()
 {
   // Map Cell under the Cursor
-  const auto cell(_map->cell(_playerCursor->coords()));
-  const auto unit(cell->unit());
+  const auto unit{_map->cell(_playerCursor->coords())->unit()};
   if (!unit)
   {
-    // Draw nothing if no Unit is under the Cursor
-    return;
+    return; // Draw nothing if no Unit is under the Cursor
   }
 
   // Unit sprite
@@ -225,7 +223,7 @@ void Panel::drawUnitFrame()
   sprite->setPosition(_frameUnit->position().x + _margin,
                       _frameUnit->position().y + _margin);
 
-  auto size(_frameUnit->size());
+  auto size{_frameUnit->size()};
   size.x -= 10;
   size.y -= 10;
   sprite->setSize(size);
@@ -240,60 +238,59 @@ void Panel::drawUnitFrame()
   drawDataText(unit_data, _unitDataPos);
 
   // Crew
-  if (unit->canHaveCrew())
+  if (!unit->canHaveCrew())
   {
-    const auto vehicle = std::static_pointer_cast<Vehicle> (unit);
-
-    // Compute crew member frame size
-    const graphics::Size2 crew_member_size({
-      size.x = (size.x - 2 * _margin) / 2,
-      size.y = (size.y - 2 * _margin) / 2
-    });
-
-    graphics::Pos2 crew_pos = {
-      _frameUnit->position().x,
-      _frameUnit->position().y + sprite->size().y + _margin * 2
-    };
-
-    if (unit->crewSize() <= 0)
-    {
-      drawDataText("No Crew", crew_pos);
-      return;
-    }
-    drawDataText("Crew:", crew_pos);
-
-    // First crew member frame position
-    crew_pos.y += sprite->size().y + _margin * 2;
-
-    float i = 0.f; // loop iterations in order to compute the offset position
-    for (const auto& member: vehicle->crew())
-    {
-      _frameUnit->draw();
-
-      auto mbr_sprite(member.second->sprite());
-      mbr_sprite->setPosition(
-        _frameUnit->position().x + _margin + 2 * i * crew_member_size.x,
-        _frameUnit->position().y + _frameUnit->size().y + 2 * _margin);
-
-      mbr_sprite->setSize(crew_member_size);
-      mbr_sprite->draw();
-
-      // Unit data text
-      const std::string& role = UNIT_ROLE_STR.at(member.first);
-      const auto mbr_data =
-        "role:   " + role + '\n' +
-        "hp:     " + std::to_string(member.second->hp())          + '\n' +
-        "motion: " + std::to_string(member.second->motionValue()) + '\n' +
-        "attack: " + std::to_string(member.second->attackValue());
-
-      const auto pos(mbr_sprite->position());
-      drawDataText(
-        mbr_data, { pos.x, pos.y + mbr_sprite->size().y + _margin }, 10);
-      ++i;
-    }
+    return; /// \todo drawUnitCrew() function;
   }
 
-  sprite->draw(); /// \todo remove me
+
+  graphics::Pos2 crew_pos = {
+    _frameUnit->position().x,
+    _frameUnit->position().y + sprite->size().y + _margin * 2
+  };
+
+  if (unit->crewSize() <= 0)
+  {
+    drawDataText("No Crew", crew_pos);
+    return;
+  }
+
+  // Compute crew member frame size
+  const graphics::Size2 crew_member_size({
+    size.x = (size.x - 2 * _margin) / 2,
+    size.y = (size.y - 2 * _margin) / 2
+  });
+
+  drawDataText("role      hp    attack",
+               { crew_pos.x + crew_member_size.y + 2 * _margin, crew_pos.y },
+               16);
+  const auto vehicle = std::static_pointer_cast<Vehicle> (unit);
+
+  // First crew member frame position
+  crew_pos.y += sprite->size().y + _margin * 2;
+
+  float i = 0.f; // loop iterations in order to compute the offset position
+  for (const auto& member: vehicle->crew())
+  {
+    auto mbr_sprite(member.second->sprite());
+    mbr_sprite->setPosition(_frameUnit->position().x + _margin,
+                            _frameUnit->position().y + _frameUnit->size().y
+                              + 2 * _margin + i * crew_member_size.y);
+
+    mbr_sprite->setSize(crew_member_size);
+    mbr_sprite->draw();
+
+    // Unit data text
+    const auto& crew_data {   UNIT_ROLE_STR.at(member.first) + "     "
+                            + std::to_string(member.second->hp()) + "     "
+                            + std::to_string(member.second->attackValue()) };
+    drawDataText( crew_data,
+                  { mbr_sprite->position().x + _margin + crew_member_size.x,
+                    mbr_sprite->position().y + crew_member_size.y / 2 },
+                  14);
+
+    ++i;
+  }
 }
 
 
@@ -319,7 +316,7 @@ void Panel::drawMetaInfo()
 {
   using namespace graphics;
 
-  // Draw the FPS /// \todo On release, display max(60, fps)
+  // Draw the FPS
   std::stringstream fpsStream;
   fpsStream << "fps: " << static_cast<int> (tools::Fps::getFps() + 0.5);
 
