@@ -7,6 +7,8 @@
 #include <graphics/GraphicsEngine.hh>
 #include <input/EventManager.hh>
 #include <interface/Cursor.hh>
+#include <game/Cell.hh>
+#include <game/units/UnitsFactory.hh>
 
 
 
@@ -28,6 +30,9 @@ StateEditMap::StateEditMap()
   _evtMgr->registerEvent(e_input::MOVE_RIGHT,
                          [=, this] { player->moveCursorRight(); });
 
+  _evtMgr->registerEvent(e_input::SELECTION,
+                         [=, this] { menuCell(); });
+
   _evtMgr->registerEvent(e_input::EXIT,
                          [=, this] {
                              graphics::GraphicsEngine::exitRequest();
@@ -39,4 +44,23 @@ StateEditMap::StateEditMap()
 
 void StateEditMap::draw()
 {
+}
+
+
+void StateEditMap::menuCell()
+{
+  auto map {game::Status::battle()->map()};
+  auto unit {map->unit(game::Status::player()->cursor()->coords())};
+  auto player {game::Status::player()};
+  const auto pos {player->cursor()->coords()};
+
+  if (unit)
+  {
+    map->cells()[pos.x][pos.y]->removeUnit();
+  }
+  else
+  {
+    auto hp {UnitsFactory::typeMaxHp(e_unit::SOLDIER)};
+    map->newUnit(e_unit::SOLDIER, pos.x, pos.y, player->id(), hp, false);
+  }
 }

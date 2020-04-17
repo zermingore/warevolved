@@ -29,9 +29,15 @@ public:
 
 
   /**
-   * \brief Draw the player interface
+   * \brief Draw the editor interface
    */
   virtual void draw() override final;
+
+
+  /**
+   * \brief Edit the cell under the cursor
+   */
+  void menuCell();
 };
 
 
