@@ -28,22 +28,18 @@ void Fps::updateFps(double last_frame_duration)
       _firstBurst = false;
     }
 
-    // Explicit cast to size_t
     _fps = static_cast<double> (_currentIndex) / _computationTimeSum;
     debug::OSD::addPod(_fps, "FPS");
 
     return;
   }
 
-
   _computationTimeSum -= _lastFramesDuration[_currentIndex];
   _lastFramesDuration[_currentIndex] = last_frame_duration;
   _computationTimeSum += last_frame_duration;
-
   _currentIndex = (_currentIndex + 1) % _nbFrames;
-
-  // Explicit cast to size_t
   _fps = static_cast<double> (_nbFrames) / _computationTimeSum;
+
   debug::OSD::addPod(_fps, "FPS");
 }
 
