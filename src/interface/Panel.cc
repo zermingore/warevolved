@@ -93,7 +93,7 @@ void Panel::computePosition()
       break;
 
     default:
-      ERROR("Unexpected panel position");
+      assert(!"Unexpected panel position");
       break;
   }
 
@@ -105,7 +105,8 @@ void Panel::computePosition()
   _frameCell->setPosition(background_position.x + _margin, _margin);
 
   // Unit
-  _frameUnit->setPosition(background_position.x + _margin, _size.y / 3);
+  _frameUnit->setPosition(background_position.x + _margin,
+                          _frameCell->size().y + 4 * _margin);
 
   // MiniMap
   _minimap->setPosition({
@@ -128,7 +129,7 @@ void Panel::update()
 {
   _background->setSize(_size);
 
-  auto edge_len = std::min(_size.x / 2, _size.y / 4);
+  auto edge_len = std::min(_size.x / 3, _size.y / 3);
 
   // Terrain
   _frameCell->setSize({ edge_len, edge_len });
@@ -139,6 +140,9 @@ void Panel::update()
 
   // Unit
   _frameUnit->setSize({ edge_len, edge_len });
+  _frameUnit->setPosition(
+    _frameCell->position().x,
+    _frameCell->position().y + _frameCell->size().x + 4 * _margin);
   _unitDataPos = {
     _frameUnit->position().x + _frameUnit->size().x + _margin,
     _frameUnit->position().y + _margin
