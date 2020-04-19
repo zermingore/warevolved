@@ -119,6 +119,11 @@ private:
    */
   void drawUnitFrame();
 
+  /**
+   * \brief Draw the concerned unit's crew
+   */
+  void drawCrew();
+
 
   const graphics::component _margin = 5; ///< Graphic margin (in px)
   graphics::Size2 _size; ///< (A ratio of the horizontal room) x (window height)

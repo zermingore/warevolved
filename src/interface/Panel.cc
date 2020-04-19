@@ -243,7 +243,15 @@ void Panel::drawUnitFrame()
     return; /// \todo drawUnitCrew() function;
   }
 
+  drawCrew();
+}
 
+
+
+void Panel::drawCrew()
+{
+  const auto unit{_map->cell(_playerCursor->coords())->unit()};
+  auto sprite(unit->sprite());
   graphics::Pos2 crew_pos = {
     _frameUnit->position().x,
     _frameUnit->position().y + sprite->size().y + _margin * 2
@@ -254,6 +262,8 @@ void Panel::drawUnitFrame()
     drawDataText("No Crew", crew_pos);
     return;
   }
+
+  auto size{_frameUnit->size()};
 
   // Compute crew member frame size
   const graphics::Size2 crew_member_size({
@@ -292,7 +302,6 @@ void Panel::drawUnitFrame()
     ++i;
   }
 }
-
 
 
 void Panel::drawDataText(const std::string& data, const graphics::Pos2& pos)
