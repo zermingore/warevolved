@@ -258,7 +258,7 @@ void Panel::drawCrew()
   auto sprite(unit->sprite());
   graphics::Pos2 crew_pos = {
     _frameUnit->position().x,
-    _frameUnit->position().y + sprite->size().y + _margin * 2
+    _frameUnit->position().y + sprite->size().y + 2 * _margin
   };
 
   if (unit->crewSize() <= 0)
@@ -275,9 +275,14 @@ void Panel::drawCrew()
     size.y = (size.y - 2 * _margin) / 2
   });
 
-  drawDataText("role      hp    attack",
+  drawDataText("Role",
                { crew_pos.x + crew_member_size.y + 2 * _margin, crew_pos.y },
                16);
+  drawDataText("HP     Attack",
+               { _background->position().x + _size.x / 2, crew_pos.y },
+               16);
+
+
   const auto vehicle = std::static_pointer_cast<Vehicle> (unit);
 
   // First crew member frame position
@@ -295,13 +300,18 @@ void Panel::drawCrew()
     mbr_sprite->draw();
 
     // Unit data text
-    const auto& crew_data {   UNIT_ROLE_STR.at(member.first) + "     "
-                            + std::to_string(member.second->hp()) + "     "
-                            + std::to_string(member.second->attackValue()) };
-    drawDataText( crew_data,
-                  { mbr_sprite->position().x + _margin + crew_member_size.x,
-                    mbr_sprite->position().y + crew_member_size.y / 2 },
-                  14);
+    const auto& role{UNIT_ROLE_STR.at(member.first)};
+    drawDataText(role,
+                 { mbr_sprite->position().x + _margin + crew_member_size.x,
+                   mbr_sprite->position().y + crew_member_size.y / 2 },
+                 14);
+
+    const auto& crew_data{  std::to_string(member.second->hp()) + "          "
+                          + std::to_string(member.second->attackValue())};
+    drawDataText(crew_data,
+                 { _background->position().x + _size.x / 2,
+                   mbr_sprite->position().y + crew_member_size.y / 2 },
+                 14);
 
     ++i;
   }
