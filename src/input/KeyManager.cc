@@ -84,6 +84,20 @@ void KeyManager::pushEvent(const sf::Keyboard::Key& key)
 }
 
 
+
+void KeyManager::pushKey(const e_key& key)
+{
+  if (_replay && _replay->mode() == e_replay_mode::RECORD)
+  {
+    // Logging only 'useful' events
+    _replay->storeKey(key);
+  }
+
+  _active_inputs.push(_events_mapping.at(key));
+}
+
+
+
 void KeyManager::pushKeyFromReplay(const e_key& key)
 {
   _active_inputs.push(_events_mapping[key]);

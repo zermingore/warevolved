@@ -83,6 +83,13 @@ public:
   static void pushEvent(const sf::Keyboard::Key& key);
 
   /**
+   * \brief Push the logical key into the events queue
+   * \param key Logical event
+   * \warning Throws if the key is not mapped
+   */
+  static void pushKey(const e_key& key);
+
+  /**
    * \brief Push a key as is in the fifo (which should be from the replay)
    * \param key Key to push in the fifo
    */
