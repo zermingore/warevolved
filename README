@@ -36,6 +36,18 @@ On a debian system, you may run:
 > sudo apt-get install build-essential autoconf libx11-dev libsfml-dev graphviz doxygen gawk
 
 
+Cross-Compiling
+You might want to check the
+--sysroot option of gcc (or equivalent for your compiler)
+--host option of configure
+
+Build example for aarch64:
+CXX="aarch64-linux-gnu-g++ --sysroot=/absolute/path/rfs/" ./configure --host=aarch64
+
+NOTE: The previous mentioned libraries (libX11, SFML, ...) must be installed in the given sysroot
+(if not found, double check the --sysroot argument is absolute)
+
+
 This project is under a fully permissive license.
 It means that you can do whatever you want with the code;
 A citation would be appreciated but is not required
