@@ -54,18 +54,18 @@ void MenuCrewBrowse::build()
         {
           [=, this] { vehicle->dropOff(mem.first, _coords); }
         });
-        _entries.push_back(entry);
+        _entries.emplace_back(entry);
       }
     }
   }
 
   auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
   entry_confirm->setCallback( [=, this] { confirm(); });
-  _entries.push_back(entry_confirm);
+  _entries.emplace_back(entry_confirm);
 
   auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
   entry_cancel->setCallback( [=, this] { cancel(); });
-  _entries.push_back(entry_cancel);
+  _entries.emplace_back(entry_cancel);
 
   // increase highlight sprite
   using namespace graphics;

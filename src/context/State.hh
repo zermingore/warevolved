@@ -64,7 +64,7 @@ public:
    */
   template<typename Attribute>
   void setAttribute(std::shared_ptr<Attribute> head) {
-    _attributes.push_back(head);
+    _attributes.emplace_back(head);
   }
 
   /**
@@ -116,7 +116,7 @@ public:
    * \param elt Element to add to the interface
    */
   void addInterfaceElement(std::shared_ptr<interface::InterfaceElement> elt) {
-    _interfaceElements.push_back(elt);
+    _interfaceElements.emplace_back(elt);
   }
 
 

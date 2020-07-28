@@ -24,7 +24,7 @@ void InGameMenu::addCancelEntry(const std::function<void()>& cancel_callback)
 {
   auto entry_cancel{std::make_shared<MenuEntry> (e_entry::CANCEL)};
   entry_cancel->setCallback([=, this] { cancel_callback(); });
-  _entries.push_back(entry_cancel);
+  _entries.emplace_back(entry_cancel);
 }
 
 

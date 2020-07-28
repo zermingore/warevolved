@@ -49,7 +49,7 @@ void OSD::addText(const std::string& str)
   };
 
   auto label = std::make_shared<resources::Text> (str, _fontSize, pos);
-  _drawables.push_back(label->graphicalText());
+  _drawables.emplace_back(label->graphicalText());
   _dataPosition.y += _fontSize + 5;
 }
 
@@ -65,7 +65,7 @@ void OSD::writeOnCell(size_t c, size_t l, const std::string& str)
   };
 
   auto label = std::make_shared<resources::Text> (str, _fontSize, pos);
-  _drawables.push_back(label->graphicalText());
+  _drawables.emplace_back(label->graphicalText());
 }
 
 

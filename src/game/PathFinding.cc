@@ -41,7 +41,7 @@ PathFinding::PathFinding(const std::shared_ptr<Unit>& origin)
     std::vector<size_t> vec(_map->nbLines(), out_of_reach);
     for (auto line(0u); line < _map->nbLines(); ++line)
     {
-      _costs.push_back(vec);
+      _costs.emplace_back(vec);
       cells[col][line]->setHighlight(false);
     }
   }
@@ -56,7 +56,7 @@ void PathFinding::drawPath()
   _lastPosition = _current;
   _current = _origin->coords();
 
-  // Locking as push_back() invalidates the end iterator;
+  // Locking as emplace_back() invalidates the end iterator;
   // It is safe to access elements concurrently only if there is no relocation
   auto i(0u);
   _lockDirections.lock();
@@ -199,7 +199,7 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
 void PathFinding::addNextDirection(const e_direction direction)
 {
   _lockDirections.lock();
-  _directions.push_back(direction);
+  _directions.emplace_back(direction);
   _lockDirections.unlock();
 
   ++_currentLength;
@@ -376,7 +376,7 @@ PathFinding::getTargets(const std::shared_ptr<Unit>& ref, const Coords& coords)
           && unit->playerId() != game::Status::player()->id()
           && manhattan(c->coords(), coords) <= ref->maxRange())
       {
-        targets.push_back(c);
+        targets.emplace_back(c);
       }
     }
   }

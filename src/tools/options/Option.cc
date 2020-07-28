@@ -31,7 +31,7 @@ void Option::populateArguments(const std::string& arguments)
   while (end_arg != std::string::npos)
   {
     // Extract the current argument
-    _arguments.push_back(args.substr(0, end_arg));
+    _arguments.emplace_back(args.substr(0, end_arg));
 
     // Omit the begining of the arguments string
     begin_arg = end_arg + 1;
@@ -40,7 +40,7 @@ void Option::populateArguments(const std::string& arguments)
   }
 
   // Handle last argument
-  _arguments.push_back(args);
+  _arguments.emplace_back(args);
 
 
   // Debug

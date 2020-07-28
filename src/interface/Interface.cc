@@ -22,7 +22,7 @@ Interface::Interface(const graphics::Color c) {
 
 
 void Interface::addElement(const std::shared_ptr<InterfaceElement>& elt) {
-  _elts.push_back(elt);
+  _elts.emplace_back(elt);
 }
 
 

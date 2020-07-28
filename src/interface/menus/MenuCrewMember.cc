@@ -41,7 +41,7 @@ void MenuCrewMember::build()
     {
       [=, this] { getOut(); },
     });
-    _entries.push_back(entry);
+    _entries.emplace_back(entry);
   }
 
   addCancelEntry( [=, this] { cancel(); } );

@@ -63,7 +63,7 @@ events_list EventsLogger::fetchLoggedEvents()
     // everything between the '=' and ' ' is the value
     auto value(StringParser::split(input[1], " ")[0]);
 
-    recorded_events.push_back({timestamp, atof(value.c_str())});
+    recorded_events.emplace_back(timestamp, atof(value.c_str()));
     std::cout << "input: @" << timestamp.count()
               << ": " << recorded_events.back().second << std::endl;
   }

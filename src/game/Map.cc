@@ -39,7 +39,7 @@ Map::Map(size_t nb_columns, size_t nb_lines)
     }
 
     // _cells is a vector of columns
-    _cells.push_back(vec);
+    _cells.emplace_back(vec);
   }
 }
 
@@ -124,7 +124,7 @@ void Map::newUnit(const std::shared_ptr<Unit>& unit, size_t column, size_t line)
   boundaryChecks(column, line);
 
   unit->setCoords({ column, line });
-  _units[unit->playerId()].push_back(unit);
+  _units[unit->playerId()].emplace_back(unit);
   _cells[column][line]->setUnit(unit);
 }
 
@@ -145,7 +145,7 @@ void Map::newUnit(e_unit type,
   new_unit->setPlayerId(player_id);
   new_unit->setHp(hp);
   new_unit->setPlayed(played);
-  _units[player_id].push_back(new_unit);
+  _units[player_id].emplace_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
 }
 

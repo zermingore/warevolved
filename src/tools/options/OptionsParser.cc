@@ -184,7 +184,7 @@ void OptionsParser::displayHelp() const noexcept
       }
     }
 
-    lines.push_back(line);
+    lines.emplace_back(line);
   }
 
   // Get the longest line in order to align correctly the descriptions

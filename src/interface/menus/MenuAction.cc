@@ -84,7 +84,7 @@ void MenuAction::buildMenuSelectionUnit()
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::MOVE)};
     entry->setCallback([=, this] { moveUnit(); });
-    _entries.push_back(entry);
+    _entries.emplace_back(entry);
   }
 
   // add the attack entry if a target is reachable from the current position
@@ -94,14 +94,14 @@ void MenuAction::buildMenuSelectionUnit()
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::ATTACK)};
     entry->setCallback([=, this] { attackUnit(); });
-    _entries.push_back(entry);
+    _entries.emplace_back(entry);
   }
 
   if (_selectedUnit->crewSize() != 0u)
   {
     auto entry_crew{std::make_shared<MenuEntry> (e_entry::CREW)};
     entry_crew->setCallback([=, this] { manageCrew(); });
-    _entries.push_back(entry_crew);
+    _entries.emplace_back(entry_crew);
   }
 }
 
@@ -115,7 +115,7 @@ void MenuAction::buildMenuAfterMovingUnit()
   {
     auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
     entry_wait->setCallback( [=, this] { waitUnit(); });
-    _entries.push_back(entry_wait);
+    _entries.emplace_back(entry_wait);
 
     /// \todo use other coordinates than the menu ones
 
@@ -130,7 +130,7 @@ void MenuAction::buildMenuAfterMovingUnit()
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=, this] { attackUnit(); });
-      _entries.push_back(entry);
+      _entries.emplace_back(entry);
     }
 
     if (_selectedUnit->crewSize() != 0u)
@@ -141,7 +141,7 @@ void MenuAction::buildMenuAfterMovingUnit()
         game::Status::player()->cursor()->setCoords(_coords);
         manageCrew();
       });
-      _entries.push_back(entry_crew);
+      _entries.emplace_back(entry_crew);
     }
   }
   else
