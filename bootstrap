@@ -8,17 +8,15 @@
 #   3: Arguments error
 #   4: Unsupported getopt version
 #   5: Implementation error
-#
-# TODO:
-#   Path to the configure is hard-coded
 
-VERSION=1.0.1
+
+VERSION=1.1.0
 
 OPTIONS=vh
-LONG_OPTIONS=help,version,no-build
-
+LONG_OPTIONS=help,version,build-dir:,no-build
 
 BUILD_DIR=./build # build destination
+
 
 
 function main()
@@ -28,8 +26,9 @@ function main()
   rm -rf "$BUILD_DIR"
   mkdir -p "$BUILD_DIR"
 
+  local root_dir=$(dirname $(realpath $0))
   pushd "$BUILD_DIR"
-  ../configure || exit $? # TODO find the configure wherever the build folder is
+  "${root_dir}/configure" || exit $?
 
   if [[ -z $NO_BUILD ]]; then
     make -j$(grep -c processor /proc/cpuinfo) || exit $?
@@ -48,6 +47,7 @@ function usage()
   echo ""
   echo "Options:"
   echo "  --no-build: configure the project only, do not run make"
+  echo "  --build-dir: path where to build the project (will be cleared!)"
   echo ""
   echo "War Evolved build script. Version $VERSION"
   echo ""
@@ -96,6 +96,12 @@ function check_args()
 
       --no-build)
         NO_BUILD=1
+        shift
+        ;;
+
+      --build-dir)
+        BUILD_DIR=$2
+        shift 2
         ;;
 
       --)

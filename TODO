@@ -35,7 +35,8 @@
 *** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 *** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 *** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
-*** TODO Bootstrap: do not hard-code the path to the configure
+*** DONE Bootstrap: do not hard-code the path to the configure
+    CLOSED: [2020-07-28 Tue 10:52]
 
 
 * TODO Doc
