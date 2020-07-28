@@ -35,13 +35,6 @@ public:
   Font(const std::string& file_name, const std::string& name);
 
   /**
-   * \brief Loads a font, if needed
-   * \return true if the font was already loaded
-   *   false if it was loaded during this call
-   */
-  bool load() override final;
-
-  /**
    * \brief _font getter
    * \return _font value
    * \note loads the requested Font if needed

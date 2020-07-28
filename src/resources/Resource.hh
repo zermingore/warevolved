@@ -34,21 +34,6 @@ public:
    */
   virtual ~Resource() = default;
 
-
-  /**
-   * \brief resource loading
-   * \todo remove (must be in the Ctor)
-   */
-  virtual bool load() {
-    return false;
-  }
-
-  /**
-   * \brief unloads a resource
-   * \todo virtual pure
-   */
-  virtual void unload() { }
-
   /**
    * \brief _loaded boolean getter
    * \return A boolean to know if the resource is already in RAM
