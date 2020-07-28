@@ -97,6 +97,12 @@ void Cursor::update()
 
 void Cursor::draw()
 {
+  if (_disableDrawThisFrame)
+  {
+    _disableDrawThisFrame = false;
+    return;
+  }
+
   _sprite->draw();
 }
 

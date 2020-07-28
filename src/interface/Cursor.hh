@@ -67,7 +67,7 @@ public:
   void update() override final;
 
   /**
-   * \brief Draw the Cursor
+   * \brief Draw the Cursor if required else reset _disableDrawThisFrame
    */
   void draw() override final;
 
@@ -76,13 +76,19 @@ public:
    */
   void setColor(graphics::Color color) { _color = color; }
 
+  /**
+   * \brief Skipping this frame the cursor draw
+   */
+  void disableDrawThisFrame() { _disableDrawThisFrame = true; }
 
 
 private:
   // map attributes
-  size_t _nbColumns{};      ///< number of columns in map
-  size_t _nbLines{};        ///< number of Lines in map
-  graphics::Color _color; ///< cursor's color
+  size_t _nbColumns = 0; ///< Number of columns in the map
+  size_t _nbLines = 0;   ///< Number of Lines in the map
+
+  graphics::Color _color;             ///< Cursor's color
+  bool _disableDrawThisFrame = false; ///< Prevent draw on this frame
 };
 
 

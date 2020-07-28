@@ -7,6 +7,7 @@
 #include <game/PathFinding.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>
+#include <interface/Cursor.hh>
 #include <input/EventManager.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
@@ -126,5 +127,7 @@ void StateMenu::fetchAttributes()
 
 void StateMenu::draw()
 {
+  auto player {game::Status::player()};
+  player->cursor()->disableDrawThisFrame();
   _menu->draw();
 }
