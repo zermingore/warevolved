@@ -4,11 +4,17 @@
 #
 # Return codes:
 #   0: no error occurred
-#   3: invalid argument
+#   1: Generic error
+#   3: Arguments error
+#   4: Unsupported getopt version
+#   5: Implementation error
 #
 # TODO:
-#   Real options parser
 #   Path to the configure is hard-coded
+
+
+OPTIONS=vh
+LONG_OPTIONS=help,version,no-build
 
 
 BUILD_DIR=./build # build destination
@@ -16,8 +22,6 @@ BUILD_DIR=./build # build destination
 
 function main
 {
-  local no_build=$1
-
   autoreconf --force --install --warnings=all
   local ret_code=$?
   if [[ $ret_code -ne 0 ]]; then
@@ -36,7 +40,7 @@ function main
   fi
 
 
-  if [[ "$no_build" == "" ]]; then
+  if [[ "$NO_BUILD" == "" ]]; then
     make -j$(grep -c processor /proc/cpuinfo)
     local ret_code=$?
     if [[ $ret_code -ne 0 ]]; then
@@ -67,26 +71,51 @@ function usage
 # $@: command line arguments
 function check_args
 {
-  if [[ $# -gt 1 ]]; then
-    echo "Too many arguments"
+  getopt --test
+  if [[ $? -ne 4 ]]; then
+    echo 'Unsupported getopt version'
+    exit 4
+  fi
+
+  # must be global in order to handle abortion on 'unrecognized option'
+  PARSED=$(getopt --options=$OPTIONS --longoptions=$LONG_OPTIONS --name "$(basename "$0")" -- "$@")
+  if [[ $? -ne 0 ]]; then
     usage
+    echo 'Invalid arguments'
     exit 3
   fi
 
-  # TODO: don't expect help to be at a defined position
-  if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    usage
-    exit 0
-  fi
+  eval set -- "$PARSED"
+  while true; do
+    case "$1" in
+      -h | --help)
+        usage
+        exit 0
+        ;;
 
-  if [[ "$1" && "$1" != "--no-build" ]]; then
-    echo "Invalid argument $1"
-    usage
-    exit 3
-  fi
+      -v | --version)
+        echo "$VERSION"
+        exit 0
+        ;;
+
+      --no-build)
+        NO_BUILD=1
+        ;;
+
+      --)
+        shift
+        break
+        ;;
+
+      *)
+        echo "[IMPLEMENTATION ERROR] Supported but not handled argument $1"
+        exit 5
+        ;;
+    esac
+  done
 }
 
 
 # ___________________________________ main ___________________________________ #
 check_args "$@"
-main "$@"
+main
