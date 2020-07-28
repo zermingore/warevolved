@@ -12,6 +12,7 @@
 # TODO:
 #   Path to the configure is hard-coded
 
+VERSION=1.0.1
 
 OPTIONS=vh
 LONG_OPTIONS=help,version,no-build
@@ -20,32 +21,18 @@ LONG_OPTIONS=help,version,no-build
 BUILD_DIR=./build # build destination
 
 
-function main
+function main()
 {
-  autoreconf --force --install --warnings=all
-  local ret_code=$?
-  if [[ $ret_code -ne 0 ]]; then
-    exit $ret_code
-  fi
-
+  autoreconf --force --install --warnings=all || exit $?
 
   rm -rf "$BUILD_DIR"
   mkdir -p "$BUILD_DIR"
 
   pushd "$BUILD_DIR"
-  ../configure # TODO find the configure wherever the build folder is
-  local ret_code=$?
-  if [[ $ret_code -ne 0 ]]; then
-    exit $ret_code
-  fi
+  ../configure || exit $? # TODO find the configure wherever the build folder is
 
-
-  if [[ "$NO_BUILD" == "" ]]; then
-    make -j$(grep -c processor /proc/cpuinfo)
-    local ret_code=$?
-    if [[ $ret_code -ne 0 ]]; then
-      exit $ret_code
-    fi
+  if [[ -z $NO_BUILD ]]; then
+    make -j$(grep -c processor /proc/cpuinfo) || exit $?
   fi
   popd # "$BUILD_DIR"
 }
@@ -53,7 +40,7 @@ function main
 
 
 # Display the script usage
-function usage
+function usage()
 {
   echo ""
   echo "Usage:"
@@ -62,18 +49,27 @@ function usage
   echo "Options:"
   echo "  --no-build: configure the project only, do not run make"
   echo ""
-  echo "War Evolved build script. Version 1.0"
+  echo "War Evolved build script. Version $VERSION"
   echo ""
+}
+
+
+function printError()
+{
+  local -r color_error='\e[0;31m'
+  local -r color_normal=$(echo -e '\e[0m')
+
+  echo -e "${color_error}$1${color_normal}" 1>&2
 }
 
 
 # Checks the command line arguments
 # $@: command line arguments
-function check_args
+function check_args()
 {
   getopt --test
   if [[ $? -ne 4 ]]; then
-    echo 'Unsupported getopt version'
+    printError "Unsupported getopt version"
     exit 4
   fi
 
@@ -81,7 +77,7 @@ function check_args
   PARSED=$(getopt --options=$OPTIONS --longoptions=$LONG_OPTIONS --name "$(basename "$0")" -- "$@")
   if [[ $? -ne 0 ]]; then
     usage
-    echo 'Invalid arguments'
+    printError "Invalid arguments"
     exit 3
   fi
 
@@ -108,7 +104,7 @@ function check_args
         ;;
 
       *)
-        echo "[IMPLEMENTATION ERROR] Supported but not handled argument $1"
+        printError "[IMPLEMENTATION ERROR] Supported but not handled argument $1"
         exit 5
         ;;
     esac
