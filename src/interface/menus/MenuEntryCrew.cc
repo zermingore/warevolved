@@ -11,6 +11,7 @@
 #include <debug/Debug.hh>
 #include <game/Battle.hh>
 #include <game/Status.hh>
+#include <game/Player.hh>
 #include <game/units/Vehicle.hh>
 #include <game/units/unit_roles.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -92,6 +93,8 @@ void MenuEntryCrew::draw()
     using p = graphics::MapGraphicsProperties;
 
     sprite_unit->setPosition(_position.x + 2 * p::cellWidth(), _position.y);
+    sprite_unit->setSize(p::cellWidth(), p::cellHeight());
+    sprite_unit->setColor(game::Status::player()->color());
     sprite_unit->draw();
 
 

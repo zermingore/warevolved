@@ -18,7 +18,6 @@
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>
 #include <graphics/MapGraphicsProperties.hh>
-#include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
 
 namespace interface {
