@@ -86,8 +86,7 @@
 # ifdef DEBUG
 #   define PRINTF Debug::printf
 # else
-#   define PRINTF do { \
-    } while (0);
+#   define PRINTF Debug::logPrintf
 # endif
 
 
@@ -104,7 +103,10 @@ public:
   {
     logTime();
     bodylogprintf(head, tail...);
-    printf(head, tail...);
+
+#   ifdef DEBUG
+      printf(head, tail...);
+#   endif
   }
 
   /**

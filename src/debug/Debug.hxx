@@ -15,8 +15,10 @@ void constexpr Debug::notice(const T head, const Tail... tail)
   *_log << COLOR_NOTICE;
   bodylogprintf(head, tail...);
 
+#ifdef DEBUG
   std::cout << COLOR_NOTICE;
   printf(head, tail...);
+#endif
 }
 
 

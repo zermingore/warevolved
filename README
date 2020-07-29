@@ -6,7 +6,8 @@ To build the project, the following are required:
 - A C++ compiler with at least experimental C++20 support
 - The SFML (version >= 2.3)
 
-As the C++20 standard is not yet released, you may have to build a compiler from sources.
+As the C++20 standard is recent, your compiler might not yet fully comply to it.
+Therefore, you may have to build a compiler from sources.
 You may also need to indicate the path to a recent libc to run the binary using:
 > LD_LIBRARY_PATH=/path/to/lib ./we
 
@@ -24,19 +25,33 @@ please refer to the HELP text file at the root of the project.
 To generate the documentation, at the root, run
 > doxygen
 
-you will need:
-- graphviz to generate caller graphs
+
+Required packages
+-----------------
+In order to generate the documentation you will need:
+- graphviz for the caller graphs
 - doxygen
 
-
-In order to generate the enums, gawk is required
+To generate the enums, gawk is required
 
 
 On a debian system, you may run:
 > sudo apt-get install build-essential autoconf libx11-dev libsfml-dev graphviz doxygen gawk
 
 
+
+Release Build
+-------------
+One need to explicit
+- deactivate the debug informations
+- undefine the DEBUG symbol
+- strip the binary
+WE_EXTRA_CXXFLAGS='-UDEBUG -O3 -g0 -ggdb0 -s' ./bootstrap
+
+
+
 Cross-Compiling
+---------------
 You might want to check the
 --sysroot option of gcc (or equivalent for your compiler)
 --host option of configure
@@ -48,6 +63,9 @@ NOTE: The previous mentioned libraries (libX11, SFML, ...) must be installed in 
 (if not found, double check the --sysroot argument is absolute)
 
 
+
+Notes
+-----
 This project is under a fully permissive license.
 It means that you can do whatever you want with the code;
 A citation would be appreciated but is not required

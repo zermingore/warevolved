@@ -9,7 +9,8 @@
 
 
 * TODO Roadmap
-** TODO Debug: Name threads
+** DONE Debug: Name threads
+   CLOSED: [2020-07-29 Wed 08:23]
 ** TODO Fix doxygen warnings
 ** TODO Check included headers used
 ** TODO Panel clean (code && graphics: make text width panel size dependent)
