@@ -78,6 +78,7 @@ interface/menus/MenuCrewMember.cc   \
 \
 tools/StringParser.cc               \
 tools/Fps.cc                        \
+tools/Random.cc                        \
 tools/options/Option.cc             \
 tools/options/OptionsParser.cc
 

@@ -2,7 +2,6 @@
 
 #include <filesystem>
 #include <iomanip>
-#include <random>
 #include <stdexcept>
 #include <thread>
 
@@ -21,6 +20,7 @@
 #include <interface/Cursor.hh>
 #include <structures/Vector.hh>
 #include <tools/options/OptionsParser.hh>
+#include <tools/Random.hh>
 
 
 
@@ -28,7 +28,6 @@ Battle::Battle(const OptionsParser& options_parser)
   : _currentPlayer(0)
   , _nbPlayers(0)
   , _savesDirectory("./")
-  , _randomSeed(0) // randomize the seed
 {
   // Fetch the Map to load and the save directory, if provided
   if (options_parser.optionExists("load-map"))
@@ -57,12 +56,7 @@ Battle::Battle(const OptionsParser& options_parser)
     }
   }
 
-  // Extract the random seed, if provided
-  if (options_parser.optionExists("random-seed"))
-  {
-    _randomSeed = std::stoul(
-      options_parser["random-seed"].value().arguments()[0]);
-  }
+  Random::init(options_parser);
 }
 
 
@@ -112,40 +106,20 @@ void Battle::nextPlayer()
 
 void Battle::generateRandomMap()
 {
-  // Random initialization /// \todo somewhere else
-# pragma GCC diagnostic push // random_device and mt19937 are 5k on my machine
-# pragma GCC diagnostic ignored "-Wlarger-than="
-  std::random_device rd;
-  if (_randomSeed == 0u)
-  {
-    _randomSeed = rd();
-  }
-  NOTICE("Using random seed:", _randomSeed);
-  std::mt19937 gen(_randomSeed);
-# pragma GCC diagnostic pop
-  std::uniform_int_distribution<> rand100(1, 100);
-  std::uniform_int_distribution<> randPlayer(2, 4);
-  std::uniform_int_distribution<> randMapSize(3, 15);
-  std::uniform_int_distribution<> randTerrain(
-    1, static_cast<int> (e_terrain::NB_TERRAIN) -1);
-  std::uniform_int_distribution<> randBool(0, 1);
-  std::uniform_int_distribution<> randByte(0, 255);
-
-
   // Map size
-  const auto lines = randMapSize(gen);
-  const auto cols = randMapSize(gen);
+  const auto lines = Random::randInt(3, 15);
+  const auto cols = Random::randInt(3, 15);
   NOTICE("Generating a Map of", lines, "x", cols);
   _map = std::make_shared<Map> (cols, lines);
 
   // Players list
-  auto nb_players = randPlayer(gen);
+  auto nb_players = Random::randInt(2, 4);
   for (auto i = 0; i < nb_players; ++i)
   {
     // Color
-    const auto r = static_cast<sf::Uint8> (randByte(gen));
-    const auto g = static_cast<sf::Uint8> (randByte(gen));
-    const auto b = static_cast<sf::Uint8> (randByte(gen));
+    const auto r = static_cast<sf::Uint8> (Random::randInt(0, 255));
+    const auto g = static_cast<sf::Uint8> (Random::randInt(0, 255));
+    const auto b = static_cast<sf::Uint8> (Random::randInt(0, 255));
     _players.emplace_back(std::make_shared<Player> (graphics::Color(r, g, b)));
 
     // Cursor location
@@ -153,49 +127,44 @@ void Battle::generateRandomMap()
   }
 
   // Current Player
-  std::uniform_int_distribution<> randCurrentPlayer(0, nb_players - 1);
-  _currentPlayer = randCurrentPlayer(gen);
+  _currentPlayer = Random::randInt(0, nb_players - 1);
   for (auto col(0); col < cols; ++col)
   {
     for (auto line(0); line < lines; ++line)
     {
-      _map->setTerrain(col, line, static_cast<e_terrain> (randTerrain(gen)));
-      if (rand100(gen) > 90)
+      _map->setTerrain(col, line, Random::randTerrain());
+      if (Random::randInt(1, 100) > 90)
       {
         auto type = e_unit::SOLDIER;
-        std::uniform_int_distribution<> rand_player(0, nb_players - 1);
-        auto player_id = rand_player(gen);
+        auto player_id = Random::randInt(0, nb_players - 1);
         auto played = false;
 
         auto max_hp{UnitsFactory::typeMaxHp(type)};
-        std::uniform_int_distribution<> randHpSoldier(1, max_hp);
-        auto hp = randHpSoldier(gen);
+        auto hp = Random::randInt(1, max_hp);
 
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
         {
-          played = static_cast<bool> (randBool(gen));
+          played = Random::randBool();
         }
         _map->newUnit(type, col, line, player_id, hp, played);
       }
-      if (rand100(gen) > 80)
+      if (Random::randInt(1, 100) > 80)
       {
         auto type = e_unit::CAR;
-        std::uniform_int_distribution<> rand_player(0, nb_players - 1);
-        auto player_id = rand_player(gen);
+        auto player_id = Random::randInt(0, nb_players - 1);
         auto played = false;
 
         auto max_hp{UnitsFactory::typeMaxHp(type)};
-        std::uniform_int_distribution<> randHpSoldier(1, max_hp);
-        auto hp = randHpSoldier(gen);
+        auto hp = Random::randInt(1, max_hp);
 
         if (static_cast<unsigned int> (player_id) == _currentPlayer)
         {
-          played = static_cast<bool> (randBool(gen));
+          played = Random::randBool();
         }
         _map->newUnit(type, col, line, player_id, hp, played);
 
         // crew
-        if (rand100(gen) > 40)
+        if (Random::randInt(1, 100) > 40)
         {
           std::shared_ptr<Unit> member(
             UnitsFactory::createUnit(e_unit::SOLDIER));
@@ -203,8 +172,7 @@ void Battle::generateRandomMap()
           // Fetching the unit first as we may hide it with a temporary one
           const auto unit = _map->unit(col, line);
 
-          std::uniform_int_distribution<> randHpCrewMember(1, max_hp);
-          member->setHp(randHpCrewMember(gen));
+          member->setHp(Random::randInt(1, max_hp));
           member->setPlayed(false);
           member->setPlayerId(player_id);
 
@@ -215,12 +183,12 @@ void Battle::generateRandomMap()
           vehicle->addToCrew(member);
 
           // 2nd crew member
-          if (rand100(gen) > 75)
+          if (Random::randInt(1, 100) > 75)
           {
             std::shared_ptr<Unit> member2(
               UnitsFactory::createUnit(e_unit::SOLDIER));
 
-            member2->setHp(randHpCrewMember(gen));
+            member2->setHp(Random::randInt(1, max_hp));
             member2->setPlayed(false);
             member2->setPlayerId(player_id);
             _map->newUnit(member2, 0, 0);
