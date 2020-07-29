@@ -59,12 +59,12 @@ public:
   /**
    * \brief _mode getter
    */
-  e_replay_mode mode() const;
+  e_replay_mode mode() const { return _mode; }
 
   /**
    * \brief _mode setter
    */
-  void setMode(const e_replay_mode mode);
+  void setMode(const e_replay_mode mode) { _mode = mode; }
 
   /**
    * \brief Set the replay filename, reset the open stream using this filename

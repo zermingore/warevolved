@@ -19,6 +19,7 @@ ReplayManager::ReplayManager()
 }
 
 
+
 void ReplayManager::prepareReplayKeys(const std::string& filename)
 {
   NOTICE("Parsing replay", filename);
@@ -45,15 +46,9 @@ void ReplayManager::prepareReplayKeys(const std::string& filename)
 }
 
 
+
 void ReplayManager::storeKey(const e_key& key)
 {
-  /// checking for initialization \todo no longer in this static class
-  if (!_file)
-  {
-    ERROR("Replay file not initialized");
-    return;
-  }
-
   using namespace std::chrono;
   auto time_elapsed(duration_cast<duration<double, std::milli>> (
                       steady_clock::now() - _creationTime));
@@ -61,17 +56,6 @@ void ReplayManager::storeKey(const e_key& key)
   *_file << time_elapsed.count() << " " << static_cast<int> (key) << '\n';
 }
 
-
-e_replay_mode ReplayManager::mode() const
-{
-  return _mode;
-}
-
-
-void ReplayManager::setMode(const e_replay_mode mode)
-{
-  _mode = mode;
-}
 
 
 void ReplayManager::setReplayFile(const std::string& filename)
@@ -81,6 +65,7 @@ void ReplayManager::setReplayFile(const std::string& filename)
   _file.reset();
   _file = std::make_unique<std::ofstream> (_filename, std::ios_base::out);
 }
+
 
 
 EventsList& ReplayManager::events()
