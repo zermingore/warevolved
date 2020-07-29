@@ -28,7 +28,8 @@
 ** TODO Graphics
 *** TODO Resize the window: center the map
 *** TODO Resize the window: propagate new panel positions
-*** TODO The cursor appears over the menus
+*** DONE The cursor appears over the menus
+    CLOSED: [2020-07-29 Wed 19:34]
 *** TODO Panel: Pilot and Co-Pilot fonts differ
 *** TODO Panel: Info font (next to the unit sprite) is too big
 
@@ -65,7 +66,8 @@
 
 
 * TODO Input
-** TODO Use the mouse to move the cursor, browse menus...
+** DONE Use the mouse to move the cursor, browse menus...
+   CLOSED: [2020-07-29 Wed 19:35]
 ** TODO Clear the events fifo on State changes
 ** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
 ** TODO Make sure the events_log is saved before quitting the game
