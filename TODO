@@ -70,7 +70,8 @@
    CLOSED: [2020-07-29 Wed 19:35]
 ** TODO Clear the events fifo on State changes
 ** TODO Merge InputsListener EventsProcessor and KeyManager in a common static class ?
-** TODO Make sure the events_log is saved before quitting the game
+** DONE Make sure the events_log is saved before quitting the game
+   CLOSED: [2020-07-30 Thu 17:45]
 
 
 * TODO Game Features

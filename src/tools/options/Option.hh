@@ -50,12 +50,6 @@ public:
          const e_option_argument required_arguments);
 
   /**
-   * \brief Default destructor
-   */
-  ~Option() = default;
-
-
-  /**
    * \brief _provided getter
    */
   auto provided() const { return _provided; }
@@ -68,26 +62,31 @@ public:
 
   /**
    * \brief Full option name getter ("help" for instance)
+   * \return Option handy name
    */
   auto name() const { return _name; }
 
   /**
    * \brief Command line aliases getter
+   * \return Option aliases list
    */
   auto aliases() const { return _aliases; }
 
   /**
    * \brief Description getter
+   * \return Option description
    */
   auto description() const { return _description; }
 
   /**
    * \brief Argument status getter
+   * \return Wether the option expects an argument
    */
   auto requiredArguments() const { return _requiredArgs; }
 
   /**
    * \brief Arguments getter
+   * \return Option's arguments list
    */
   auto arguments() const { return _arguments; }
 
