@@ -83,7 +83,7 @@ public:
    * \brief _callback setter
    * \param callbacks List of Callbacks called when the menu entry is selected
    */
-  void setCallbacks(const std::vector<std::function<void()>> callbacks) {
+  void setCallbacks(const std::vector<std::function<void()>>& callbacks) {
     _callbacks = callbacks;
   }
 

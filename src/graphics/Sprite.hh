@@ -106,9 +106,9 @@ public:
   template <typename T>
   void setSize(const T width, const T height)
   {
-    Size2 size(_texture->getSize());
+    Size2 sz{_texture->getSize()};
     _rectangle->setSize({ width, height });
-    _sprite->setScale({ width / size.x, height / size.y });
+    _sprite->setScale({ width / sz.x, height / sz.y });
   }
 
   /**

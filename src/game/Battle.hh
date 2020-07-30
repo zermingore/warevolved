@@ -35,7 +35,7 @@ public:
    * \brief Constructor; Loads the given map if any
    * \param options_parser Command line options parser
    */
-  Battle(const OptionsParser& options_parser);
+  explicit Battle(const OptionsParser& options_parser);
 
 
   /**

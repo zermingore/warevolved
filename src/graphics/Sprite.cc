@@ -12,15 +12,13 @@ namespace graphics {
 
 
 Sprite::Sprite(const std::string& file_name)
+  : _texture(resources::ResourcesManager::getTexture(file_name))
+  , _sprite(std::make_shared<sf::Sprite> (*_texture))
+  , _rectangle(std::make_shared<RectangleShape> ())
 {
-  _rectangle = std::make_shared<RectangleShape> ();
   _rectangle->setPosition({0, 0});
   _rectangle->setSize(Size2(0, 0));
-
-  _texture = resources::ResourcesManager::getTexture(file_name);
   _rectangle->setTexture(_texture.get());
-
-  _sprite = std::make_shared<sf::Sprite> (*_texture);
 }
 
 
