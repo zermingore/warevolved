@@ -63,6 +63,8 @@ public:
   {
     x = r.x;
     y = r.y;
+    c = r.x;
+    l = r.y;
     return *this;
   }
 
