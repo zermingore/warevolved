@@ -5,7 +5,10 @@
  * \date November 2, 2019
  */
 
-#include <debug/OSD.hh>
+#ifndef OSD_HXX_
+# define OSD_HXX_
+
+# include <debug/OSD.hh>
 
 
 
@@ -29,3 +32,6 @@ void OSD::addPod(const T& value, const std::string& description)
 
 
 } // namespace debug
+
+
+#endif // OSD_HXX_

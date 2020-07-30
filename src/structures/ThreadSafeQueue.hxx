@@ -1,6 +1,17 @@
-#include <structures/ThreadSafeQueue.hh>
+/**
+ * \file
+ * \date Jun, 21 2017
+ * \author Zermingore
+ * \brief ThreadSafeQueue template definitions
+ */
 
-#include <thread>
+#ifndef STRUCTURES_THREAD_SAFE_QUEUE_HXX_
+# define STRUCTURES_THREAD_SAFE_QUEUE_HXX_
+
+
+# include <thread>
+
+# include <structures/ThreadSafeQueue.hh>
 
 
 template <typename T>
@@ -73,3 +84,5 @@ bool ThreadSafeQueue<T>::empty() const
 {
   return _queue.empty();
 }
+
+#endif // STRUCTURES_THREAD_SAFE_QUEUE_HXX_

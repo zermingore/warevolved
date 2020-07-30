@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date Jun, 21 2017
+ * \author Zermingore
+ * \brief ThreadSafeQueue declaration
+ */
+
 #ifndef STRUCTURES_THREAD_SAFE_QUEUE_HH_
 # define STRUCTURES_THREAD_SAFE_QUEUE_HH_
 

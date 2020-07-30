@@ -5,9 +5,11 @@
  * \date October 19, 2019
  */
 
-#include <game/Status.hh>
-#include <context/State.hh>
+#ifndef STATUS_HXX_
+# define STATUS_HXX_
 
+# include <game/Status.hh>
+# include <context/State.hh>
 
 
 namespace game {
@@ -27,4 +29,7 @@ void Status::setStateAttributes(Attributes... attributes)
 }
 
 
-}
+} // namespace game
+
+
+#endif // STATUS_HXX_

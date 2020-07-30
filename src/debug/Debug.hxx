@@ -5,7 +5,10 @@
  * \date November 2, 2019
  */
 
-#include <debug/Debug.hh>
+#ifndef DEBUG_HXX_
+# define DEBUG_HXX_
+
+# include <debug/Debug.hh>
 
 
 template<typename T, typename... Tail>
@@ -46,3 +49,5 @@ void constexpr Debug::error(const T head, const Tail... tail)
   std::cout << COLOR_ERROR;
   printf(head, tail...);
 }
+
+#endif // DEBUG_HXX_
