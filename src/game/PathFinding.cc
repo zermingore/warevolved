@@ -56,7 +56,7 @@ void PathFinding::drawPath()
   _lastPosition = _current;
   _current = _origin->coords();
 
-  // Locking as emplace_back() invalidates the end iterator;
+  // Locking as addDirection() may invalidate the end iterator concurrently
   // It is safe to access elements concurrently only if there is no relocation
   auto i(0u);
   _lockDirections.lock();

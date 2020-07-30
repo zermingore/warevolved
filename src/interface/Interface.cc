@@ -37,7 +37,7 @@ void Interface::removeElement(const std::shared_ptr<InterfaceElement>& elt)
   for (const auto& it: _elts)
   {
     if (it->name() == elt->name()) {
-      remove_indexes.push_back(index);
+      remove_indexes.emplace_back(index);
     }
     ++index;
   }
