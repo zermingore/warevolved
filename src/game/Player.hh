@@ -117,12 +117,6 @@ public:
 
 
 private:
-  /**
-   * \brief Keep updated the real cursor position
-   */
-  void updateCellCursorPostion();
-
-
   // (logically const, cannot be initialized by a static variable)
   mutable size_t _id; ///< Player's identifier
 

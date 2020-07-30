@@ -16,16 +16,13 @@
 
 
 Player::Player(const graphics::Color c)
+  : _interface(std::make_shared<interface::Interface> (c))
+  , _cursor(std::make_shared<interface::Cursor> ())
+  , _color(c)
 {
   static size_t static_id = 0;
   _id = static_id++;
 
-  _color = c;
-
-  // Interface and elements
-  _interface = std::make_shared<interface::Interface> (c);
-
-  _cursor = std::make_shared<interface::Cursor> ();
   _cursor->setColor(c);
   _interface->addElement(_cursor);
 
@@ -38,41 +35,33 @@ Player::Player(const graphics::Color c)
 
 
 
-// Interface elements
 void Player::moveCursorUp()
 {
   _cursor->moveUp();
-  updateCellCursorPostion();
+  resetCellCursorPosition();
 }
 
 void Player::moveCursorDown()
 {
   _cursor->moveDown();
-  updateCellCursorPostion();
+  resetCellCursorPosition();
 }
 
 void Player::moveCursorLeft()
 {
   _cursor->moveLeft();
-  updateCellCursorPostion();
+  resetCellCursorPosition();
 }
 
 void Player::moveCursorRight()
 {
   _cursor->moveRight();
-  updateCellCursorPostion();
+  resetCellCursorPosition();
 }
 
 void Player::resetCellCursorPosition()
 {
   _cellCursorPosition = _cursor->coords();
-}
-
-
-void Player::updateCellCursorPostion()
-{
-  _cellCursorPosition.c = _cursor->coords().c;
-  _cellCursorPosition.l = _cursor->coords().l;
 }
 
 
