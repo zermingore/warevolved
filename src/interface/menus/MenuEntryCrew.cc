@@ -28,7 +28,6 @@ namespace interface {
 MenuEntryCrew::MenuEntryCrew(e_unit_role role,
                              std::shared_ptr<const Unit> crew_member)
   : MenuEntry(e_entry::NONE)
-  , _id(e_entry::NONE)
   , _crewMember(std::move(std::move(crew_member)))
   , _role(role)
 {
@@ -47,7 +46,6 @@ MenuEntryCrew::MenuEntryCrew(e_unit_role role,
 
 MenuEntryCrew::MenuEntryCrew(const e_entry entry)
   : MenuEntry(entry)
-  , _id(entry)
   , _crewMember(nullptr)
   , _role(e_unit_role::NONE)
 {

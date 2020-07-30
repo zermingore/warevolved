@@ -70,7 +70,7 @@ public:
    * \brief _callback setter
    * \param callbacks List of Callbacks called when the menu entry is selected
    */
-  void setCallbacks(const std::vector<std::function<void()>> callbacks) {
+  void setCallbacks(const std::vector<std::function<void()>>& callbacks) {
     _callbacks = callbacks;
   }
 
@@ -104,17 +104,10 @@ private:
    */
   void setLabelName();
 
-  e_entry _id;                             ///< Entry identifier
-  std::shared_ptr<resources::Text> _label; ///< Button label text
-  std::string _labelName;                  ///< Menu entry text
-
   /// Pointer on the Unit in the crew this entry is about
   const std::shared_ptr<const Unit> _crewMember;
 
   const e_unit_role _role; ///< Crew member role, used as label
-
-  /// Callbacks list executed when the entry is selected
-  std::vector<std::function<void()>> _callbacks;
 };
 
 

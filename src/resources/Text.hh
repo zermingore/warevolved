@@ -41,7 +41,7 @@ public:
    * \param pos Optional position of the text on the screen
    * \param font Optional font name used to retrieve the Font
    */
-  Text(std::string str,
+  Text(const std::string& str,
        size_t size,
        graphics::Pos2 pos = {0, 0},
        const std::string& font = "");

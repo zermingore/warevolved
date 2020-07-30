@@ -16,8 +16,9 @@
 namespace interface {
 
 
-Interface::Interface(const graphics::Color c) {
-  _settings = std::make_unique<InterfaceSettings> (c);
+Interface::Interface(const graphics::Color c)
+  : _settings(std::make_unique<InterfaceSettings> (c))
+{
 }
 
 

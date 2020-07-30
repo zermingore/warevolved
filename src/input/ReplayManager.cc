@@ -14,8 +14,8 @@
 
 ReplayManager::ReplayManager()
   : _mode(e_replay_mode::DEACTIVATED)
+  , _creationTime(std::chrono::steady_clock::now())
 {
-  _creationTime = std::chrono::steady_clock::now();
 }
 
 

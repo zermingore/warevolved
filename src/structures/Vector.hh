@@ -24,7 +24,7 @@ class Vector2
 {
 public:
   /// Copy constructor.
-  Vector2(const Vector2<T>& v)
+  Vector2(const Vector2<T>& v) noexcept
     : x(v.x)
     , y(v.y)
   {

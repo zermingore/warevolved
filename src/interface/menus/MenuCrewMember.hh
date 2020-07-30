@@ -24,6 +24,11 @@ class MenuCrewMember: public InGameMenu
 {
 public:
   /**
+   * \brief Default constructor
+   */
+  MenuCrewMember() = default;
+
+  /**
    * \brief Add entries depending on the highlighted crew member
    */
   void build() override final;

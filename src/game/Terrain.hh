@@ -49,7 +49,7 @@ public:
    * \return The Texture name
    * \note Used in the Panel to print the Terrain name or retrieve its texture
    */
-  const std::string& name() const;
+  const std::string& name() const { return _textureName; }
 
 
 

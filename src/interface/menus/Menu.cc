@@ -23,10 +23,10 @@ namespace interface {
 
 Menu::Menu()
   : InterfaceElement("selection_menu_button")
-  , _selectedEntry (0)
+  , _selectedEntry(0)
+  , _imageSelection(
+    std::make_shared<graphics::Sprite> ("selection_menu_selection"))
 {
-  _imageSelection =
-    std::make_shared<graphics::Sprite> ("selection_menu_selection");
 }
 
 

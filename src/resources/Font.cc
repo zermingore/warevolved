@@ -6,11 +6,10 @@ namespace resources {
 
 
 Font::Font(const std::string& file_name, const std::string& name)
+  : _font(std::make_shared<graphics::Font> ())
 {
   _fileName = file_name;
   _name = name;
-
-  _font = std::make_shared<graphics::Font> ();
   _font->loadFromFile(_fileName);
 }
 

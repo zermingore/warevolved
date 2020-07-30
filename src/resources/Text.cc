@@ -8,15 +8,15 @@
 namespace resources {
 
 
-Text::Text(std::string str,
+Text::Text(const std::string& str,
            size_t size,
            graphics::Pos2 pos,
            const std::string& font)
   : _string(str)
   , _size(size)
+  , _font(ResourcesManager::getFont(font))
+  , _text(std::make_shared<sf::Text> (str, *(_font->getFont()), _size))
 {
-  _font = ResourcesManager::getFont(font);
-  _text = std::make_shared<sf::Text> (str, *(_font->getFont()), _size);
   _text->setPosition({pos.x, pos.y});
 }
 

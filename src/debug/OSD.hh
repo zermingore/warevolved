@@ -59,7 +59,7 @@ public:
    * \note If the description is given, it will be followed by the string ": "
    */
   template<typename T>
-  static void addPod(const T& value, const std::string description = "");
+  static void addPod(const T& value, const std::string& description = "");
 
   /**
    * \brief Draw added data, calling the Graphics Engine

@@ -25,6 +25,11 @@ class Settings
 {
 public:
   /**
+   * \brief Default constructor
+   */
+  Settings() = default;
+
+  /**
    * \brief graphic depth getter.
    * \return depth value.
    */
@@ -58,8 +63,7 @@ public:
 
 private:
   /**
-   * \brief Sets graphic attributes
-   * It is called when the fullscreen parameter is changed
+   * \brief Sets graphic attributes. Called on fullscreen parameter change
    * \param depth graphic depth value
    * \param stencil stencil value
    * \param antiAliasing anti aliasing coefficient
@@ -70,12 +74,12 @@ private:
 
 
   // graphic settings
-  unsigned int _depth;        ///< Depth buffer size.
-  unsigned int _stencil;      ///< Stencil buffer size
-  unsigned int _antiAliasing; ///< Anti aliasing level.
+  unsigned int _depth = 0;        ///< Depth buffer size
+  unsigned int _stencil = 0;      ///< Stencil buffer size
+  unsigned int _antiAliasing = 0; ///< Anti aliasing level
 
   // generic settings
-  bool _fullScreen; ///< Notify if we're running in full screen.
+  bool _fullScreen = false; ///< Notify if we're running in full screen
 };
 
 
