@@ -15,28 +15,27 @@ StatePlaying::StatePlaying()
   // Add parameters in the lambda ?
   // should these functions return booleans to consume events ?
 
-  auto player(game::Status::player());
   _evtMgr->registerEvent(e_input::MOVE_UP,
-                         [=, this] { player->moveCursorUp(); });
+                         [=] { game::Status::player()->moveCursorUp(); });
 
   _evtMgr->registerEvent(e_input::MOVE_DOWN,
-                         [=, this] { player->moveCursorDown(); });
+                         [=] { game::Status::player()->moveCursorDown(); });
 
   _evtMgr->registerEvent(e_input::MOVE_LEFT,
-                         [=, this] { player->moveCursorLeft(); });
+                         [=] { game::Status::player()->moveCursorLeft(); });
 
   _evtMgr->registerEvent(e_input::MOVE_RIGHT,
-                         [=, this] { player->moveCursorRight(); });
+                         [=] { game::Status::player()->moveCursorRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION,
-                         [=, this] { player->select(); });
+                         [=] { game::Status::player()->select(); });
 
   _evtMgr->registerEvent(e_input::EXIT,
-                         [=, this] {
-                             graphics::GraphicsEngine::exitRequest();
+                         [=] {
+                            graphics::GraphicsEngine::exitRequest();
                          });
 
-  addInterfaceElement(player->cursor());
+  addInterfaceElement(game::Status::player()->cursor());
 }
 
 

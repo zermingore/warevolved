@@ -59,7 +59,6 @@ private:
   void cancel() override final;
 
 
-  e_state _state;      ///< State related to this menu
   Coords _clickedCell; ///< Clicked cell where this menu was invoked
 
   std::shared_ptr<Unit> _selectedUnit; ///< Vehicle containing the crew

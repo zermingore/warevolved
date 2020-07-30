@@ -93,7 +93,8 @@ void Panel::computePosition()
       break;
 
     default:
-      assert(!"Unexpected panel position");
+      ERROR("Unexpected panel position");
+      assert(false);
       break;
   }
 

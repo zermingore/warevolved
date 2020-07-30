@@ -240,7 +240,7 @@ void StateMenuCrew::fetchAttributes()
   if (_attributes.empty())
   {
     ERROR("StateMenu::fetchAttributes called without available attributes");
-    assert(!"No attribute found");
+    assert(false);
     return;
   }
 

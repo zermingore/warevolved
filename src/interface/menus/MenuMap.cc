@@ -10,7 +10,7 @@ void MenuMap::build()
   addCancelEntry( [=, this] { cancel(); } );
 
   auto entry(std::make_shared<MenuEntry> (e_entry::NEXT_TURN));
-  entry->setCallback( [=, this] { game::Status::nextPlayer(); });
+  entry->setCallback( [=] { game::Status::nextPlayer(); });
   _entries.emplace_back(entry);
 }
 

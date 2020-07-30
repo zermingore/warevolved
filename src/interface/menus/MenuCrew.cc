@@ -46,7 +46,7 @@ void MenuCrew::build()
         auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
         entry->setCallbacks(
         {
-          [=, this] { vehicle->dropOff(member.first, coords); },
+          [=] { vehicle->dropOff(member.first, coords); },
         });
 
         _entries.emplace_back(entry);
@@ -59,10 +59,10 @@ void MenuCrew::build()
       entry_group->setCallbacks(
       {
         [=, this] { _selectedUnit->addToCrew(unit); },
-        [=, this] { game::Status::battle()->map()->stashUnit(*unit); },
+        [=] { game::Status::battle()->map()->stashUnit(*unit); },
         [=, this] { game::Status::battle()->map()->moveUnit(_coords); },
         [=, this] { game::Status::player()->cursor()->setCoords(_coords); },
-        [=, this] { game::Status::clearStates(); }
+        [=] { game::Status::clearStates(); }
       });
       _entries.emplace_back(entry_group);
     }
@@ -74,7 +74,7 @@ void MenuCrew::build()
         [=, this] { unit->addToCrew(_selectedUnit); },
         [=, this] { game::Status::battle()->map()->stashUnit(*_selectedUnit); },
         [=, this] { game::Status::player()->cursor()->setCoords(_coords); },
-        [=, this] { game::Status::clearStates(); }
+        [=] { game::Status::clearStates(); }
       });
       _entries.emplace_back(entry_group);
     }

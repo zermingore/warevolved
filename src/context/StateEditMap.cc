@@ -19,23 +19,23 @@ StateEditMap::StateEditMap()
 
   auto player(game::Status::player());
   _evtMgr->registerEvent(e_input::MOVE_UP,
-                         [=, this] { player->moveCursorUp(); });
+                         [=] { player->moveCursorUp(); });
 
   _evtMgr->registerEvent(e_input::MOVE_DOWN,
-                         [=, this] { player->moveCursorDown(); });
+                         [=] { player->moveCursorDown(); });
 
   _evtMgr->registerEvent(e_input::MOVE_LEFT,
-                         [=, this] { player->moveCursorLeft(); });
+                         [=] { player->moveCursorLeft(); });
 
   _evtMgr->registerEvent(e_input::MOVE_RIGHT,
-                         [=, this] { player->moveCursorRight(); });
+                         [=] { player->moveCursorRight(); });
 
   _evtMgr->registerEvent(e_input::SELECTION,
                          [=, this] { menuCell(); });
 
   _evtMgr->registerEvent(e_input::EXIT,
-                         [=, this] {
-                             graphics::GraphicsEngine::exitRequest();
+                         [=] {
+                            graphics::GraphicsEngine::exitRequest();
                          });
 
   addInterfaceElement(player->cursor());
