@@ -92,6 +92,8 @@ void StateSelectTarget::resume()
 
 void StateSelectTarget::draw()
 {
+  game::Status::player()->cursor()->disableDrawThisFrame();
+
   auto selected_unit(game::Status::battle()->map()->selectedUnit());
   PathFinding path(selected_unit);
   _targets = path.getTargets(selected_unit, _attackLocation);

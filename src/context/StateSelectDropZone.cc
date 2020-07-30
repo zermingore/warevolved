@@ -108,6 +108,8 @@ void StateSelectDropZone::resume()
 
 void StateSelectDropZone::draw()
 {
+  game::Status::player()->cursor()->disableDrawThisFrame();
+
   std::shared_ptr<Map> map = game::Status::battle()->map();
   auto selected_unit(map->selectedUnit());
 

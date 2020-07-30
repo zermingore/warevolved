@@ -1,10 +1,18 @@
-#include <context/StateMovingUnit.hh>
+/**
+ * \file
+ * \date November 30, 2016
+ * \author Zermingore
+ * \brief StateMovingUnit implementation
+ */
 
 #include <cassert>
+
+#include <context/StateMovingUnit.hh>
 
 #include <common/enums/directions.hh>
 #include <common/enums/input.hh>
 #include <common/enums/states.hh>
+#include <context/StateMenu.hh>
 #include <game/Battle.hh>
 #include <game/PathFinding.hh>
 #include <game/Player.hh>
@@ -150,6 +158,7 @@ void StateMovingUnit::draw()
   /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnit);
 
+  game::Status::player()->cursor()->disableDrawThisFrame();
   _pathFinding->highlightCells();
   _pathFinding->drawPath();
 

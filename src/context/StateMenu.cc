@@ -127,7 +127,6 @@ void StateMenu::fetchAttributes()
 
 void StateMenu::draw()
 {
-  auto player {game::Status::player()};
-  player->cursor()->disableDrawThisFrame();
+  game::Status::player()->cursor()->disableDrawThisFrame();
   _menu->draw();
 }
