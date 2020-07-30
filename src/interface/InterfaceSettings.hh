@@ -26,10 +26,13 @@ public:
 
   /**
    * \brief InterfaceSettings constructor.
-   *
    * \param player_color Player's main color.
    */
-  explicit InterfaceSettings(const graphics::Color player_color);
+  explicit InterfaceSettings(const graphics::Color player_color)
+    : _cursorColor(player_color)
+    , _unitsColor(player_color)
+  {
+  }
 
   /// Default destructor
   ~InterfaceSettings() = default;
