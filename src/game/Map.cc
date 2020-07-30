@@ -256,67 +256,65 @@ std::unique_ptr<pugi::xml_document> Map::dump()
   std::unique_ptr<pugi::xml_document> doc{new pugi::xml_document};
 
   // Main 'map' node
-  auto map = doc->append_child("map");
+  auto map{doc->append_child("map")};
 
   // 'metadata' node
-  auto metadata = map.append_child("metadata");
+  auto metadata{map.append_child("metadata")};
 
   // Map size
-  auto map_size = metadata.append_child("map_size");
-  map_size.append_attribute("nb_columns") = static_cast<int> (_nbColumns);
-  map_size.append_attribute("nb_lines") = static_cast<int> (_nbLines);
+  auto map_size{metadata.append_child("map_size")};
+  map_size.append_attribute("nb_columns") = _nbColumns;
+  map_size.append_attribute("nb_lines") = _nbLines;
 
   // Players
-  auto players = metadata.append_child("players");
+  auto players{metadata.append_child("players")};
 
   // Current Player
-  const auto player_number = game::Status::battle()->currentPlayer();
-  const auto player_str = std::to_string(player_number).c_str();
-  auto current_player = players.append_child("current_player");
-  current_player.append_child(pugi::node_pcdata).set_value(player_str);
+  players.append_child("current_player")
+    .append_child(pugi::node_pcdata)
+    .set_value(std::to_string(game::Status::battle()->currentPlayer())
+    .c_str());
 
   for (const auto& player: game::Status::battle()->players())
   {
-    auto n_player = players.append_child("player");
+    auto n_player{players.append_child("player")};
 
-    auto n_color = n_player.append_child("color");
-    n_color.append_attribute("r") = static_cast<int> ( player->color().r);
+    auto n_color{n_player.append_child("color")};
+    n_color.append_attribute("r") = static_cast<int> (player->color().r);
     n_color.append_attribute("g") = static_cast<int> (player->color().g);
     n_color.append_attribute("b") = static_cast<int> (player->color().b);
 
-    auto n_cursor = n_player.append_child("cursor");
-    n_cursor.append_attribute("col")  =
-      static_cast<int> (player->cursor()->coords().c);
-    n_cursor.append_attribute("line") =
-      static_cast<int> (player->cursor()->coords().l);
+    auto n_cursor{n_player.append_child("cursor")};
+    n_cursor.append_attribute("col")  = player->cursor()->coords().c;
+    n_cursor.append_attribute("line") = player->cursor()->coords().l;
   }
 
 
   // 'cells' node
   auto cells = map.append_child("cells");
-  for (auto col(0u); col < _nbColumns; ++col)
+  for (auto col{0u}; col < _nbColumns; ++col)
   {
-    for (auto line(0u); line < _nbLines; ++line)
+    for (auto line{0u}; line < _nbLines; ++line)
     {
-      auto cell = cells.append_child("cell");
+      auto cell{cells.append_child("cell")};
 
       // Coordinates
-      auto coords = cell.append_child("coordinates");
+      auto coords{cell.append_child("coordinates")};
       coords.append_attribute("col") = col;
       coords.append_attribute("line") = line;
 
       // Terrain
-      auto terrain_int = static_cast<int> (_cells[col][line]->terrain());
-      const auto terrain_str = std::to_string(terrain_int).c_str();
-      auto terrain = cell.append_child("terrain");
-      terrain.append_child(pugi::node_pcdata).set_value(terrain_str);
+      const auto i_terrain{ static_cast<int> (_cells[col][line]->terrain()) };
+      cell.append_child("terrain")
+        .append_child(pugi::node_pcdata)
+        .set_value(std::to_string(i_terrain).c_str());
 
       // Unit
-      if (const auto u = _cells[col][line]->unit())
+      if (const auto u{_cells[col][line]->unit()})
       {
-        auto unit = cell.append_child("unit");
+        auto unit{cell.append_child("unit")};
         unit.append_attribute("type") = static_cast<int> (u->type());
-        unit.append_attribute("player_id") = static_cast<int> (u->playerId());
+        unit.append_attribute("player_id") = u->playerId();
         unit.append_attribute("hp") = u->hp();
         unit.append_attribute("played") = u->played();
 
@@ -326,16 +324,16 @@ std::unique_ptr<pugi::xml_document> Map::dump()
           continue; // no crew -> skip to the next unit
         }
 
-        auto crew = unit.append_child("crew");
-        auto vehicle = std::static_pointer_cast<Vehicle> (u);
+        auto crew{unit.append_child("crew")};
+        auto vehicle{std::static_pointer_cast<Vehicle> (u)};
         for (const auto& member: vehicle->crew())
         {
-          auto n = crew.append_child("member");
+          auto n{crew.append_child("member")};
           n.append_attribute("role") = static_cast<int> (member.first);
 
-          const auto& m = member.second;
+          const auto& m{member.second};
           n.append_attribute("type") = static_cast<int> (m->type());
-          n.append_attribute("player_id") = static_cast<int> (m->playerId());
+          n.append_attribute("player_id") = m->playerId();
           n.append_attribute("hp") = m->hp();
           n.append_attribute("played") = m->played();
         }
