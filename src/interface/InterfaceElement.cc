@@ -16,8 +16,9 @@ namespace interface {
 
 InterfaceElement::InterfaceElement(const std::string& image_name)
   : _imgName(image_name)
+  , _sprite(std::make_shared<graphics::Sprite> (_imgName))
+  , _position(0.f, 0.f)
 {
-  _sprite = std::make_shared<graphics::Sprite> (_imgName);
   _scale.x = static_cast<float> (_sprite->texture()->getSize().x);
   _scale.y = static_cast<float> (_sprite->texture()->getSize().y);
 }

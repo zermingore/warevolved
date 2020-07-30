@@ -139,7 +139,7 @@ protected:
   graphics::Pos2 _position; ///< Element position (in pixels)
   Coords _coords;           ///< Position (in cells; not always filled)
   graphics::Scale2 _scale;  ///< Element scale (related to a Cell size)
-  float _rotation;          ///< Element rotation
+  float _rotation = 0.f;    ///< Element rotation
 };
 
 

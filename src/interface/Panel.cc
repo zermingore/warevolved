@@ -35,16 +35,16 @@ Panel::Panel(std::shared_ptr<const Map> map,
   : InterfaceElement("side_panel")
   , _map(map)
   , _playerCursor(cursor)
+  , _background(std::make_unique<graphics::Sprite> (_imgName))
+  , _frameCell(std::make_unique<graphics::Sprite> ("frame_thumbnail"))
+  , _frameUnit(std::make_unique<graphics::Sprite> ("frame_thumbnail"))
   , _status(e_panel_status::DEACTIVATED)
   , _fontSize(20)
   , _dateWidth(0)
 {
-  _background = std::make_unique<graphics::Sprite> (_imgName);
-  _frameCell = std::make_unique<graphics::Sprite> ("frame_thumbnail");
-  _frameUnit = std::make_unique<graphics::Sprite> ("frame_thumbnail");
-
-  setWindowSize(graphics::GraphicsEngine::windowSize());
-  graphics::Size2 size { _size.x - _margin * 2, _size.y / 4 };
+  using namespace graphics;
+  setWindowSize(static_cast<Size2> (GraphicsEngine::windowSize()));
+  Size2 size { _size.x - _margin * 2, _size.y / 4 };
   _minimap = std::make_unique<MiniMap> (size, map, cursor);
 }
 

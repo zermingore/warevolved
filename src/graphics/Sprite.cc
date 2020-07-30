@@ -17,22 +17,20 @@ Sprite::Sprite(const std::string& file_name)
   , _rectangle(std::make_shared<RectangleShape> ())
 {
   _rectangle->setPosition({0, 0});
-  _rectangle->setSize(Size2(0, 0));
+  _rectangle->setSize({0, 0});
   _rectangle->setTexture(_texture.get());
 }
 
 
 
 Sprite::Sprite(const std::shared_ptr<Texture>& texture)
+  : _texture(texture)
+  , _sprite(std::make_shared<sf::Sprite> (*_texture))
+  , _rectangle(std::make_shared<RectangleShape> ())
 {
-  _rectangle = std::make_shared<RectangleShape> ();
-  _rectangle->setPosition(Pos2(0, 0));
-  _rectangle->setSize(Size2(0, 0));
-
-  _texture = texture;
+  _rectangle->setPosition(0, 0);
+  _rectangle->setSize({0, 0});
   _rectangle->setTexture(_texture.get());
-
-  _sprite = std::make_shared<sf::Sprite> (*_texture);
 }
 
 
@@ -41,7 +39,7 @@ void Sprite::setTexture(const std::string& file_name)
 {
   _rectangle = std::make_shared<RectangleShape> ();
   _rectangle->setPosition({0, 0});
-  _rectangle->setSize(Size2(0, 0));
+  _rectangle->setSize({0, 0});
 
   _texture = resources::ResourcesManager::getTexture(file_name);
   _rectangle->setTexture(_texture.get());
@@ -53,7 +51,7 @@ void Sprite::setTexture(const std::string& file_name)
 
 Pos2 const Sprite::position()
 {
-  return _sprite->getPosition();
+  return Pos2{_sprite->getPosition()};
 }
 
 
@@ -73,13 +71,13 @@ void Sprite::setPosition(const Pos2 position)
 
 Size2 const Sprite::size()
 {
-  return _rectangle->getSize();
+  return Size2{_rectangle->getSize()};
 }
 
 void Sprite::setSize(const Size2 size)
 {
   _rectangle->setSize({ size.x, size.y });
-  _sprite->setScale(size / _texture->getSize());
+  _sprite->setScale(size / Size2{_texture->getSize()});
 }
 
 

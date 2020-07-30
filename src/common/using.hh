@@ -26,7 +26,7 @@ public:
    * \note Initializes the c and l references on Vector2 x y
    */
   Coords()
-    : Vector2<size_t> ()
+    : Vector2<size_t> (0, 0)
     , c(x)
     , l(y)
   {

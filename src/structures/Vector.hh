@@ -23,13 +23,6 @@ template <typename T>
 class Vector2
 {
 public:
-  /// Default constructor. Creates a Vector2(0, 0).
-  Vector2()
-    : x(0)
-    , y(0)
-  {
-  }
-
   /// Copy constructor.
   Vector2(const Vector2<T>& v)
     : x(v.x)
@@ -39,7 +32,7 @@ public:
 
   /// Build from generic SFML vector.
   template<typename U>
-  Vector2(const sf::Vector2<U>& v)
+  explicit Vector2(const sf::Vector2<U>& v)
     : x(static_cast<T> (v.x))
     , y(static_cast<T> (v.y))
   {
@@ -51,8 +44,17 @@ public:
    * \param b y coordinate.
    */
   Vector2(const T& a, const T& b)
-    : x(a)
-    , y(b)
+    : x(static_cast<T> (a))
+    , y(static_cast<T> (b))
+  {
+  }
+
+  /**
+   * \brief Default constructor, initializes the coordinates to 0
+   */
+  Vector2()
+    : x(static_cast<T> (0))
+    , y(static_cast<T> (0))
   {
   }
 

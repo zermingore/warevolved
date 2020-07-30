@@ -71,7 +71,6 @@ public:
 
 private:
   graphics::Size2 _frameSize; ///< Draw area size
-  graphics::Pos2  _position;  ///< Draw area position
 
   const Map& _map; ///< Pointer on the game's map
 
