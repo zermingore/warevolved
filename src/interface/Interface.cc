@@ -51,19 +51,23 @@ void Interface::removeElement(const std::shared_ptr<InterfaceElement>& elt)
 
 std::shared_ptr<InterfaceElement> Interface::element(const std::string& id)
 {
-  for (const auto& it: _elts)
+  auto it = std::find_if(
+      _elts.begin()
+    , _elts.end()
+    , [&] (std::shared_ptr<InterfaceElement> i) { return i->name() == id; }
+  );
+
+  if (it != _elts.end())
   {
-    if (it->name() == id) {
-      return it;
-    }
+    return *it;
   }
 
-# ifdef DEBUG
   ERROR("Interface: invalid element name request: ", id);
+# ifdef DEBUG
   PRINTF("displaying", _elts.size(), "element names");
-  for (const auto& it: _elts)
+  for (const auto& i: _elts)
   {
-    PRINTF(" >", it->name());
+    PRINTF(" >", i->name());
   }
 # endif // DEBUG
 
