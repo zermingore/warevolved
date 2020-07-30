@@ -29,13 +29,22 @@ void Interface::addElement(const std::shared_ptr<InterfaceElement>& elt) {
 
 void Interface::removeElement(const std::shared_ptr<InterfaceElement>& elt)
 {
-  // Locating the right element to remove
   /// \todo (do not remove a graphical element based on its sprite name)
+
+  // Locating the elements to remove
+  int index{0};
+  std::vector<int> remove_indexes;
   for (const auto& it: _elts)
   {
     if (it->name() == elt->name()) {
-      _elts.pop_back();
+      remove_indexes.push_back(index);
     }
+    ++index;
+  }
+
+  for (const auto i: remove_indexes)
+  {
+    _elts.erase(_elts.begin() + i);
   }
 }
 
