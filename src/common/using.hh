@@ -48,6 +48,7 @@ public:
 
   /**
    * \brief Copy constructor
+   * \param coords Coordinates to copy from
    */
   Coords(const Coords &coord)
     : Vector2<size_t> (coord.x, coord.y)
@@ -58,6 +59,7 @@ public:
 
   /**
    * \brief Copy assignment operator
+   * \param r Right member of the assignement
    */
   Coords& operator=(const Coords& r)
   {

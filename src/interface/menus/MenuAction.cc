@@ -109,15 +109,15 @@ void MenuAction::buildMenuSelectionUnit()
 
 void MenuAction::buildMenuAfterMovingUnit()
 {
+  /// \todo use other coordinates as the menu ones
+
   auto map(game::Status::battle()->map());
   auto unit(map->unit(_coords));
   if (!unit) // Specific action depending on the occupation
   {
     auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
-    entry_wait->setCallback( [=, this] { waitUnit(); });
+    entry_wait->setCallback( [=, this] { waitUnit(_coords); });
     _entries.emplace_back(entry_wait);
-
-    /// \todo use other coordinates than the menu ones
 
     // _selectedUnit does not exits (another instance of MenuAction built it)
     _selectedUnit = map->selectedUnit();
@@ -160,15 +160,14 @@ void MenuAction::moveUnit()
 }
 
 
-void MenuAction::waitUnit()
+void MenuAction::waitUnit(const Coords& coords)
 {
-  /// \todo use other coordinates as the menu ones
-  game::Status::battle()->map()->moveUnit(_coords);
+  game::Status::battle()->map()->moveUnit(coords);
   _selectedUnit->setPlayed(true);
   game::Status::clearStates();
 
   // setting the cursor over the freshly moved unit
-  game::Status::player()->cursor()->setCoords(_coords);
+  game::Status::player()->cursor()->setCoords(coords);
 }
 
 

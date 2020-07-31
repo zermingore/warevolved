@@ -127,7 +127,6 @@ public:
    * \brief Default InterfaceElement draw method.
    * \note Calls the GraphicsEngine::draw() method with the sprite of _image
    */
-
   virtual void draw() = 0;
 
 

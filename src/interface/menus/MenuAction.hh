@@ -90,8 +90,9 @@ private:
 
   /**
    * \brief Order the Unit to wait
+   * \param coords Unit's destination coordinates
    */
-  void waitUnit();
+  void waitUnit(const Coords& coords);
 
   /**
    * \brief Order the Unit to attack another one
