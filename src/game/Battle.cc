@@ -27,7 +27,7 @@
 Battle::Battle(const OptionsParser& options_parser)
   : _currentPlayer(0)
   , _nbPlayers(0)
-  , _savesDirectory("./")
+  , _savesDirectory(".")
 {
   // Fetch the Map to load and the save directory, if provided
   if (options_parser.optionExists("load-map"))
