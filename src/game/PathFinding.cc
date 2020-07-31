@@ -435,7 +435,7 @@ PathFinding::getDropZones(const Coords& coords)
   );
 
   // shrink container to new size (necessary to drop invalid items)
-  dropZones.resize(std::distance(dropZones.begin(), it));
+  dropZones.resize(static_cast<size_t> (std::distance(dropZones.begin(), it)));
 
   return dropZones;
 }

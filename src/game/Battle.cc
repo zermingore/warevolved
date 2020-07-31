@@ -107,14 +107,14 @@ void Battle::nextPlayer()
 void Battle::generateRandomMap()
 {
   // Map size
-  const auto lines = Random::randInt(3, 15);
-  const auto cols = Random::randInt(3, 15);
+  const auto lines = Random::randVal<size_t>(3, 15);
+  const auto cols = Random::randVal<size_t>(3, 15);
   NOTICE("Generating a Map of", lines, "x", cols);
   _map = std::make_shared<Map> (cols, lines);
 
   // Players list
-  auto nb_players = Random::randInt(2, 4);
-  for (auto i = 0; i < nb_players; ++i)
+  auto nb_players = Random::randVal<size_t>(2, 4);
+  for (auto i = 0u; i < nb_players; ++i)
   {
     // Color
     const auto r = static_cast<sf::Uint8> (Random::randInt(0, 255));
@@ -127,22 +127,22 @@ void Battle::generateRandomMap()
   }
 
   // Current Player
-  _currentPlayer = Random::randInt(0, nb_players - 1);
-  for (auto col(0); col < cols; ++col)
+  _currentPlayer = Random::randVal<size_t>(0, nb_players - 1);
+  for (auto col(0u); col < cols; ++col)
   {
-    for (auto line(0); line < lines; ++line)
+    for (auto line(0u); line < lines; ++line)
     {
       _map->setTerrain(col, line, Random::randTerrain());
       if (Random::randInt(1, 100) > 90)
       {
         auto type = e_unit::SOLDIER;
-        auto player_id = Random::randInt(0, nb_players - 1);
+        auto player_id = Random::randVal<size_t>(0, nb_players - 1);
         auto played = false;
 
         auto max_hp{UnitsFactory::typeMaxHp(type)};
         auto hp = Random::randInt(1, max_hp);
 
-        if (static_cast<unsigned int> (player_id) == _currentPlayer)
+        if (player_id == _currentPlayer)
         {
           played = Random::randBool();
         }
@@ -151,13 +151,13 @@ void Battle::generateRandomMap()
       if (Random::randInt(1, 100) > 80)
       {
         auto type = e_unit::CAR;
-        auto player_id = Random::randInt(0, nb_players - 1);
+        auto player_id = Random::randVal<size_t>(0, nb_players - 1);
         auto played = false;
 
         auto max_hp{UnitsFactory::typeMaxHp(type)};
         auto hp = Random::randInt(1, max_hp);
 
-        if (static_cast<unsigned int> (player_id) == _currentPlayer)
+        if (player_id == _currentPlayer)
         {
           played = Random::randBool();
         }
@@ -215,16 +215,16 @@ void Battle::loadMap()
     throw std::runtime_error(msg);
   }
 
-  auto metadata = doc.child("map").child("metadata");
+  auto meta = doc.child("map").child("metadata");
 
   // Map size
-  int cols = metadata.child("map_size").attribute("nb_columns").as_int();
-  int lines = metadata.child("map_size").attribute("nb_lines").as_int();
+  const auto cols = meta.child("map_size").attribute("nb_columns").as_ullong();
+  const auto lines = meta.child("map_size").attribute("nb_lines").as_ullong();
   _map = std::make_shared<Map> (cols, lines);
 
   // Player
-  auto players = metadata.child("players");
-  _currentPlayer = players.child("current_player").text().as_int();
+  auto players = meta.child("players");
+  _currentPlayer = players.child("current_player").text().as_ullong();
   for (auto player: players.children("player"))
   {
     // Color
@@ -237,8 +237,8 @@ void Battle::loadMap()
 
     // Cursor location
     auto cursor_node = player.child("cursor");
-    const size_t col = cursor_node.attribute("col").as_int();
-    const size_t line = cursor_node.attribute("line").as_int();
+    const size_t col = cursor_node.attribute("col").as_ullong();
+    const size_t line = cursor_node.attribute("line").as_ullong();
     p->cursor()->setCoords({col, line});
 
     ++_nbPlayers;
@@ -251,18 +251,18 @@ void Battle::loadMap()
     for (pugi::xml_node cell: cells.children("cell"))
     {
       // Coordinates
-      int col = cell.child("coordinates").attribute("col").as_int();
-      int line = cell.child("coordinates").attribute("line").as_int();
+      const auto col = cell.child("coordinates").attribute("col").as_ullong();
+      const auto line = cell.child("coordinates").attribute("line").as_ullong();
 
       // Terrain
       _map->setTerrain(col, line, static_cast<e_terrain> (
-                        cell.child("terrain").text().as_int()));
+                       cell.child("terrain").text().as_int()));
 
       // Unit
       for (pugi::xml_node unit: cell.children("unit"))
       {
         auto type = static_cast<e_unit> (unit.attribute("type").as_int());
-        auto player_id = unit.attribute("player_id").as_int();
+        auto player_id = unit.attribute("player_id").as_ullong();
         auto hp = unit.attribute("hp").as_int();
         auto played = unit.attribute("played").as_bool();
         _map->newUnit(type, col, line, player_id, hp, played);
@@ -273,7 +273,7 @@ void Battle::loadMap()
           auto t = static_cast<e_unit> (mbr.attribute("type").as_int());
           std::shared_ptr<Unit> m(UnitsFactory::createUnit(t));
 
-          m->setPlayerId(mbr.attribute("player_id").as_int());
+          m->setPlayerId(mbr.attribute("player_id").as_ullong());
           m->setHp(mbr.attribute("hp").as_int());
           m->setPlayed(mbr.attribute("played").as_bool());
 

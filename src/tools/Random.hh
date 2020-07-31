@@ -38,6 +38,9 @@ public:
    */
   static int randInt(int min, int max);
 
+  template<typename T>
+  static T randVal(T min, T max);
+
   /**
    * \brief Random terrain generation
    * \return Random terrain
@@ -56,5 +59,7 @@ private:
   static std::unique_ptr<std::mt19937> _generator;
 };
 
+
+# include <tools/Random.hxx>
 
 #endif /* !RANDOM_HH_ */

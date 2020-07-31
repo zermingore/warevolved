@@ -195,7 +195,7 @@ void OptionsParser::displayHelp() const noexcept
   }
 
   // Print the descriptions
-  auto i = 0;
+  auto i = 0u;
   for (const auto& [name, opt]: _supportedOptions)
   {
     auto line = lines[i++];
