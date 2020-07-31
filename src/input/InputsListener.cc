@@ -64,17 +64,19 @@ void InputsListener::listen(bool replay,
       // Mouse
       if (event.type == sf::Event::MouseMoved)
       {
+        // event.mouseMove.{x,y}: coordinates in px -> should never be negative
+        if (event.mouseMove.x < 0 || event.mouseMove.y < 0)
+        {
+          WARNING("Negative mouse coordinates"); /// \todo WARNING_ONCE macro
+          break;
+        }
+
         static int last_mouse_x = 0;
         static int last_mouse_y = 0;
 
         using p = graphics::MapGraphicsProperties;
-        const auto cell_width { static_cast<size_t> (p::cellWidth()) };
-        const auto cell_height { static_cast<size_t> (p::cellHeight()) };
-        const size_t grid_x { static_cast<size_t> (p::gridOffsetX()) };
-        const size_t grid_y { static_cast<size_t> (p::gridOffsetY()) };
-
-        const Coords mouse{ (event.mouseMove.x - grid_x) / cell_width,
-                            (event.mouseMove.y - grid_y) / cell_height };
+        const auto cell_width { static_cast<int> (p::cellWidth()) };
+        const auto cell_height { static_cast<int> (p::cellHeight()) };
 
         // Avoid spamming cursor move
         if (   std::abs(last_mouse_x - event.mouseMove.x) < cell_width / 2
@@ -84,6 +86,12 @@ void InputsListener::listen(bool replay,
         }
         last_mouse_x = event.mouseMove.x;
         last_mouse_y = event.mouseMove.y;
+
+        const auto grid_x { static_cast<int> (p::gridOffsetX()) };
+        const auto grid_y { static_cast<int> (p::gridOffsetY()) };
+        const Coords mouse {
+           static_cast<size_t> ((event.mouseMove.x - grid_x) / cell_width),
+           static_cast<size_t> ((event.mouseMove.y - grid_y) / cell_height) };
 
         // out of map bounds check
         if (   mouse.l > game::Status::battle()->map()->nbLines() - 1
