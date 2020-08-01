@@ -8,9 +8,28 @@
 
 #include <debug/Debug.hh>
 
+#include <filesystem>
+
+
+
 // Debug::_log definition
-std::unique_ptr<std::ofstream> Debug::_log{
-  std::make_unique<std::ofstream> (LOG_FILENAME, std::ios_base::out)};
+std::unique_ptr<std::ofstream> Debug::_log;
+
+
+void Debug::init()
+{
+  try
+  {
+    std::filesystem::rename(LOG_FILENAME, LOG_FILENAME_OLD);
+  }
+  catch (std::filesystem::filesystem_error& e)
+  {
+    std::cout << "Error moving the old log: " << e.what() << "... ignoring\n";
+  }
+
+  _log = std::make_unique<std::ofstream> (LOG_FILENAME, std::ios_base::out);
+  NOTICE("Logging into", LOG_FILENAME); // Using the log, checking if it works
+}
 
 
 

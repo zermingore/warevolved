@@ -18,7 +18,7 @@
 /// \def Log file name
 # ifdef __unix__
 #   define LOG_FILENAME "LOG"
-#   define LOG_FILENAME_OLD "/tmp/LOG_war_evolved"
+#   define LOG_FILENAME_OLD "LOG_old"
 # else
 #   define LOG_FILENAME "LOG.txt"
 #   define LOG_FILENAME_OLD "LOG_old.txt"
@@ -98,6 +98,12 @@
 class Debug
 {
 public:
+  /**
+   * \brief Move the eventualy existing log file; Create the new one
+   */
+  static void init();
+
+
   template<typename T, typename... Tail>
   static void constexpr logPrintf(const T head, const Tail... tail)
   {

@@ -17,6 +17,8 @@
 
 int main(int ac, const char **av)
 {
+  Debug::init();
+
   // Options parsing
   OptionsParser opt(ac, av);
   try
