@@ -51,7 +51,7 @@ StateSelectDropZone::StateSelectDropZone()
   // explicitly using some floats for the division
   float x(static_cast<float> (_zoneHighlight->texture()->getSize().x));
   float y(static_cast<float> (_zoneHighlight->texture()->getSize().y));
-  _zoneHighlight->setScale(p::cellWidth()  / x, p::cellHeight() / y);
+  _zoneHighlight->setScale( p::cellWidth() / x, p::cellHeight() / y);
   _zoneHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   /// \todo hard-coded soldier
