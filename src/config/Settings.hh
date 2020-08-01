@@ -25,33 +25,28 @@ class Settings
 {
 public:
   /**
-   * \brief Default constructor
-   */
-  Settings() = default;
-
-  /**
    * \brief graphic depth getter.
    * \return depth value.
    */
-  auto depth() { return _depth; }
+  auto depth() const { return _depth; }
 
   /**
    * \brief graphic stencil getter.
    * \return stencil value.
    */
-  auto stencil() { return _stencil; }
+  auto stencil() const { return _stencil; }
 
   /**
    * \brief Anti aliasing getter.
    * \return Anti aliasing coefficient.
    */
-  auto antiAliasing() { return _antiAliasing; }
+  auto antiAliasing() const { return _antiAliasing; }
 
   /**
    * \brief _fullScreen getter.
    * \return true if we're in full screen false otherwise.
    */
-  auto fullScreen() { return _fullScreen; }
+  auto fullScreen() const { return _fullScreen; }
 
   /**
    * \brief Sets the _fullScreen attribute
