@@ -105,7 +105,6 @@ bool ResourcesManager::parseXML(const std::string& file_name)
     return false;
   }
 
-  /// \todo UNDEFINED BEHAVIOR: incrementing enum class
   auto type = static_cast<e_resource_type> (
     static_cast<int> (e_resource_type::NONE) + 1);
   auto category = doc.child("resources").child(_typeNames[type].c_str());
