@@ -19,10 +19,11 @@
 * TODO Bugs / Features
 ** TODO Units
 *** TODO In crew menu, 'Confirm' should be available only on changes
-*** TODO Sometimes, moving over an enemy unit is possible
+*** DROP Sometimes, moving over an enemy unit is possible
     Seems to appear when two keys are pressed at the same time
     Unable to wait on an occupied cell though
     Cannot reproduce it (October 2019)
+    Cannot reproduce it (August 2020)
 *** TODO Crew 'Passenger' not used
 
 ** TODO Graphics
@@ -55,7 +56,8 @@
 ** TODO Capture lambda as reference when possible
 ** TODO Use the uniformed initialization
 ** TODO Find a way to have compile-time map keys (vehicle crews)
-** TODO Map random generation
+** DONE Map random generation
+   CLOSED: [2020-08-01 Sat 16:51]
 
 
 * TODO Experimental
