@@ -80,6 +80,7 @@ void Status::popCurrentState()
 }
 
 
+
 void Status::clearStates()
 {
   assert(!_states.empty() && "clearStates called with empty stack");
@@ -89,6 +90,7 @@ void Status::clearStates()
     popCurrentState();
   }
 }
+
 
 
 void Status::nextPlayer()
