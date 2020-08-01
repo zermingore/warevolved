@@ -53,14 +53,6 @@ StateSelectDropZone::StateSelectDropZone()
   float y(static_cast<float> (_zoneHighlight->texture()->getSize().y));
   _zoneHighlight->setScale( p::cellWidth() / x, p::cellHeight() / y);
   _zoneHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
-
-  /// \todo hard-coded soldier
-  _holoUnit = std::make_shared<graphics::Sprite> ("soldier");
-  _holoUnit->setColor(graphics::Color(127, 255, 127, 255));
-
-  x = static_cast<float> (_holoUnit->texture()->getSize().x);
-  y = static_cast<float> (_holoUnit->texture()->getSize().y);
-  _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 }
 
 
@@ -108,11 +100,6 @@ void StateSelectDropZone::resume()
 
 void StateSelectDropZone::draw()
 {
-  game::Status::player()->cursor()->disableDrawThisFrame();
-
-  std::shared_ptr<Map> map = game::Status::battle()->map();
-  auto selected_unit(map->selectedUnit());
-
   if (_zones.empty())
   {
     ERROR("No drop zone to select");
@@ -124,6 +111,21 @@ void StateSelectDropZone::draw()
     return;
   }
 
+  using p = graphics::MapGraphicsProperties;
+
+  game::Status::player()->cursor()->disableDrawThisFrame();
+
+  std::shared_ptr<Map> map = game::Status::battle()->map();
+  auto selected_unit(map->selectedUnit());
+
+  auto vehicle{std::static_pointer_cast<Vehicle> (selected_unit)};
+  auto drop{vehicle->crew().at(_role)};
+  _holoUnit = std::make_shared<graphics::Sprite> (drop->sprite()->texture());
+
+  const auto x = static_cast<float> (_holoUnit->texture()->getSize().x);
+  const auto y = static_cast<float> (_holoUnit->texture()->getSize().y);
+  _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
+
   _holoUnit->drawAtCell(_zones[_indexZone]->coords());
   _holoUnit->setColor({ 255, 255, 255, 127 });
 
@@ -131,7 +133,6 @@ void StateSelectDropZone::draw()
   static size_t angle = 0;
   angle = (angle + 1) % 360;
 
-  using p = graphics::MapGraphicsProperties;
   auto width(p::cellWidth());
   auto height(p::cellHeight());
 
