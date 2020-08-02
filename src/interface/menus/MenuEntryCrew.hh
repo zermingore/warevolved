@@ -2,7 +2,7 @@
  * \file
  * \date September 21, 2019
  * \author Zermingore
- * \brief interface::MenuEntryCrew declaration
+ * \brief interface::MenuEntryCrew class declaration
  */
 
 
@@ -32,7 +32,7 @@ namespace interface {
  * \note The entry position is relative to the menu it belongs to.
  * \note Motherclass: MenuEntry
  */
-class MenuEntryCrew: public MenuEntry
+class MenuEntryCrew final: public MenuEntry
 {
 public:
   /**
@@ -64,7 +64,7 @@ public:
   /**
    * \brief Executes the action matching the entry
    */
-  void execute();
+  void execute() const;
 
   /**
    * \brief _callback setter

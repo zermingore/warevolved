@@ -1,7 +1,7 @@
 /**
  * \file
  * \date Sept 11, 2017
- * \brief Text declaration, used to draw a string on the screen
+ * \brief resources::Text class declaration, used to draw strings
  */
 
 
@@ -26,7 +26,7 @@ class Font;
  * \class Text
  * \brief Class representing a text; uses a Font
  */
-class Text: public Resource
+class Text final: public Resource
 {
 public:
   /**

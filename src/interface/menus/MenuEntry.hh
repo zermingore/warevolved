@@ -2,6 +2,7 @@
  * \file
  * \date May 20, 2013
  * \author Zermingore
+ * \brief interface::MenuEntry class declaration
  */
 
 #ifndef MENU_ENTRY_HH_
@@ -63,6 +64,8 @@ public:
    */
   MenuEntry() = delete;
 
+  virtual ~MenuEntry() = default;
+
   /**
    * \brief Constructor
    * \param entry Entry type to build.
@@ -103,7 +106,7 @@ public:
   /**
    * \brief Draws label and sprite of the entry, calling the graphics engine
    */
-  void draw() override;
+  virtual void draw() override;
 
 
 

@@ -2,7 +2,7 @@
  * \file
  * \date August 22, 2017
  * \author Zermingore
- * \brief Side panel class declaration
+ * \brief Side panel's MiniMap class declaration
  */
 
 
@@ -30,7 +30,7 @@ class Cursor;
  * \class MiniMap
  * \brief In charge of the build / display of the minimap in the side panel
  */
-class MiniMap: public InterfaceElement
+class MiniMap final: public InterfaceElement
 {
 public:
   /**

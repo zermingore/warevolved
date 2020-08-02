@@ -2,6 +2,7 @@
  * \file
  * \date July 27, 2017
  * \author Zermingore
+ * \brief StateGlobal class declaration
  */
 
 #ifndef STATE_GLOBAL_HH_
@@ -15,7 +16,7 @@
  * \brief State which is always present.
  *   It tries to treat events not handled by the current State
  */
-class StateGlobal: public State
+class StateGlobal final: public State
 {
 public:
   /**
@@ -38,22 +39,22 @@ public:
   /**
    * \brief Saves the current rendered image into a file
    */
-  void screenshot();
+  void screenshot() const;
 
   /**
    * \brief Dumps the Map on the standard output
    */
-  void dumpMap();
+  void dumpMap() const;
 
   /**
    * \brief Save the current Map on the quick save file
    */
-  void quickSave();
+  void quickSave() const;
 
   /**
    * \brief Load the Map from the latest quick load file
    */
-  void quickLoad();
+  void quickLoad() const;
 };
 
 

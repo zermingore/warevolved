@@ -37,13 +37,13 @@ public:
    * \note virtual pure
    * \return true if at least one crew member can open fire
    */
-  virtual bool canOpenFire() = 0;
+  virtual bool canOpenFire() const = 0;
 
   /**
    * \brief Returns crew list
    * \todo rename to 'crew()'
    */
-  const auto& crew() { return _crew; }
+  const auto& crew() const { return _crew; }
 
   /**
    * \brief Drop the given unit off the Vehicle at the given position

@@ -92,7 +92,7 @@ void InGameMenu::close()
 
 
 
-e_entry InGameMenu::getCurrentSelection()
+e_entry InGameMenu::getCurrentSelection() const
 {
   return _entries[_selectedEntry]->id();
 }

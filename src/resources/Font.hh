@@ -2,6 +2,7 @@
  * \file
  * \date Apr 27, 2013
  * \author Zermingore
+ * \brief resources::Font class declaration
  */
 
 #ifndef RESOURCES_FONT_HH_
@@ -21,11 +22,13 @@ namespace resources {
  * \class Font
  * \brief Font resource type, used to draw text
  */
-class Font: public Resource
+class Font final: public Resource
 {
 public:
   /// \brief default constructor
   Font() = default;
+
+  ~Font() final = default;
 
   /**
    * \brief Constructor

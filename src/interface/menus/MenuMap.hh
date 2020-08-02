@@ -2,7 +2,7 @@
  * \file
  * \date January 25, 2017
  * \author Zermingore
- * \brief interface::MenuMap declaration
+ * \brief interface::MenuMap class declaration
  */
 
 
@@ -15,7 +15,7 @@
 namespace interface {
 
 
-class MenuMap: public InGameMenu
+class MenuMap final: public InGameMenu
 {
 public:
   void build() override final;

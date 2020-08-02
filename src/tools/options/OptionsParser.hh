@@ -23,7 +23,7 @@
  * \class ArgumentsException
  * \brief Exception thrown if the provided are invalid
  */
-class ArgumentsException: public std::exception
+class ArgumentsException final: public std::exception
 {
 public:
   /**
@@ -44,7 +44,7 @@ public:
    * \brief Standard exception what() override
    *   Displays the provided error message through the constructor
    */
-  const char *what() const noexcept override { return _exc.c_str(); }
+  const char *what() const noexcept override final { return _exc.c_str(); }
 
 private:
   /// Error message displayed by exc.what()

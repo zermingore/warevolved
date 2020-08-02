@@ -118,7 +118,7 @@ void MenuEntryCrew::draw()
 
 
 
-void MenuEntryCrew::execute()
+void MenuEntryCrew::execute() const
 {
   for (const auto& callback: _callbacks)
   {

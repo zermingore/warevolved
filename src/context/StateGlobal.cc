@@ -26,29 +26,29 @@ StateGlobal::StateGlobal()
 
 
 
-void StateGlobal::screenshot()
+void StateGlobal::screenshot() const
 {
   graphics::GraphicsEngine::screenshotRequest();
 }
 
 
 
-void StateGlobal::dumpMap()
+void StateGlobal::dumpMap() const
 {
-  auto doc{game::Status::battle()->map()->dump()};
+  const auto doc{game::Status::battle()->map()->dump()};
   doc->print(std::cout);
 }
 
 
 
-void StateGlobal::quickSave()
+void StateGlobal::quickSave() const
 {
   game::Status::battle()->saveMap();
 }
 
 
 
-void StateGlobal::quickLoad()
+void StateGlobal::quickLoad() const
 {
   ERROR("quickLoad not implemented yet"); /// \todo implement
 }

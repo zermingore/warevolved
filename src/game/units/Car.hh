@@ -28,7 +28,7 @@ public:
   /**
    * \brief Can open fire depending on the presence of a co-pilot
    */
-  bool canOpenFire() override final;
+  bool canOpenFire() const override final;
 
   /**
    * \brief Add the given unit to the Car

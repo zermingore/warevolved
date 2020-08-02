@@ -40,7 +40,7 @@ Car::Car()
 
 
 
-bool Car::canOpenFire()
+bool Car::canOpenFire() const
 {
   return _crew.find(e_unit_role::COPILOT) != _crew.end();
 }

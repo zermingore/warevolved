@@ -62,7 +62,7 @@ public:
    * \brief Get the currently highlighted entry
    * \return Highlighted entry type
    */
-  e_entry getCurrentSelection();
+  e_entry getCurrentSelection() const;
 
   /**
    * \brief updates the graphics attributes of the menu

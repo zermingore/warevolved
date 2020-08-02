@@ -38,7 +38,7 @@ Motorcycle::Motorcycle()
 
 
 
-bool Motorcycle::canOpenFire()
+bool Motorcycle::canOpenFire() const
 {
   return !_crew.empty();
 }

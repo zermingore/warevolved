@@ -2,7 +2,7 @@
  * \file
  * \date September 23, 2019
  * \author Zermingore
- * \brief interface::MenuCrewBrowse declaration
+ * \brief interface::MenuCrewBrowse class declaration
  */
 
 
@@ -20,20 +20,9 @@ namespace interface {
  * \class MenuCrewBrowse
  * \brief Builds the menu displaying a vehicle's crew members list
  */
-class MenuCrewBrowse: public InGameMenu
+class MenuCrewBrowse final: public InGameMenu
 {
 public:
-  /**
-   * \brief Default constructor
-   */
-  MenuCrewBrowse();
-
-  /**
-   * \brief default destructor
-   */
-  ~MenuCrewBrowse() override = default;
-
-
   /**
    * \brief Builds the menu, initializing the entries
    */

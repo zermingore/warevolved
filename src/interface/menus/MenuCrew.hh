@@ -2,7 +2,7 @@
  * \file
  * \date September 7, 2019
  * \author Zermingore
- * \brief interface::MenuCrew declaration
+ * \brief interface::MenuCrew class declaration
  */
 
 
@@ -25,7 +25,7 @@ namespace interface {
  * \class MenuCrew
  * \brief Builds the menu displaying possible actions for a unit being played
  */
-class MenuCrew: public InGameMenu
+class MenuCrew final: public InGameMenu
 {
 public:
   /**

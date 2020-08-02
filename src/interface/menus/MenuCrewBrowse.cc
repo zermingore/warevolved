@@ -28,11 +28,6 @@
 namespace interface {
 
 
-
-MenuCrewBrowse::MenuCrewBrowse() = default;
-
-
-
 void MenuCrewBrowse::build()
 {
   auto map(game::Status::battle()->map());

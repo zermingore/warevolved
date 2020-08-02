@@ -2,7 +2,7 @@
  * \file
  * \date January 26, 2017
  * \author Zermingore
- * \brief interface::MenuAction declaration
+ * \brief interface::MenuAction class declaration
  */
 
 
@@ -25,7 +25,7 @@ namespace interface {
  * \class MenuAction
  * \brief Builds the menu displaying possible actions for a unit being played
  */
-class MenuAction: public InGameMenu
+class MenuAction final: public InGameMenu
 {
 public:
   /**
