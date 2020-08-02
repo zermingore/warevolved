@@ -2,6 +2,7 @@
  * \file
  * \date February 22, 2017
  * \author Zermingore
+ * \brief StateSelectTarget class declaration
  */
 
 #ifndef SELECT_TARGET_HH_

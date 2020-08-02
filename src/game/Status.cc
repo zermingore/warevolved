@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date April 18, 2013
+ * \author Zermingore
+ * \brief Global game status accessor, including current Player, State, ...
+ */
+
 #include <cassert>
 
 #include <common/enums/input.hh>

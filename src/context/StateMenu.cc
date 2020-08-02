@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date October 24, 2016
+ * \author Zermingore
+ * \brief StateMenu class implementation
+ */
+
 #include <context/StateMenu.hh>
 
 #include <common/enums/input.hh>

@@ -2,6 +2,7 @@
  * \file
  * \date July 21, 2013
  * \author Zermingore
+ * \brief e_path_shape enum declaration
  */
 
 #ifndef ENUM_PATH_SHAPES_HH_

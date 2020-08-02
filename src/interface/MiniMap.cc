@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date August 22, 2017
+ * \author Zermingore
+ * \namespace interface
+ * \brief Side panel's MiniMap class implementation
+ */
+
 #include <interface/MiniMap.hh>
 
 #include <common/enums/terrains.hh>

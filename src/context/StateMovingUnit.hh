@@ -2,6 +2,7 @@
  * \file
  * \date November 25, 2016
  * \author Zermingore
+ * \brief StateMovingUnit class declaration
  */
 
 #ifndef STATE_MOVING_UNIT_HH_

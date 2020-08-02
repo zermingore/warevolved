@@ -2,6 +2,7 @@
  * \file
  * \date October 16, 2016
  * \author Zermingore
+ * \brief StatesFactory class declaration
  */
 
 #ifndef STATE_FACTORY_HH_

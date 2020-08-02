@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date June 22, 2017
+ * \author Zermingore
+ * \brief EventsProcessor class definition
+ */
+
 #include <input/EventsProcessor.hh>
 
 #include <context/State.hh>

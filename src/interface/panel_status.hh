@@ -2,6 +2,7 @@
  * \file
  * \date August 24, 2017
  * \author Zermingore
+ * \brief panel_status enum declaration
  */
 
 #ifndef ENUM_PANEL_STATUS_HH_

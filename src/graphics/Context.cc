@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \namespace graphics
+ * \brief Context class definition
+ */
+
 #include <graphics/Context.hh>
 
 #include <config/Settings.hh>

@@ -2,6 +2,8 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
+ * \namespace graphics
+ * \brief Context class declaration
  */
 
 #ifndef CORE_CONTEXT_HH_

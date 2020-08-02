@@ -2,6 +2,7 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
+ * \brief System class declaration
  */
 
 #ifndef SYSTEM_HH_

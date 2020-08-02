@@ -2,6 +2,7 @@
  * \file
  * \date April 5, 2020
  * \author Zermingore
+ * \brief StateEditMap class declaration
  */
 
 #ifndef STATE_EDIT_MAP_HH_
@@ -13,6 +14,7 @@
 /**
  * \class StateEditMap
  * \brief Map editor State
+ * \note State derived class
  */
 class StateEditMap: public State
 {

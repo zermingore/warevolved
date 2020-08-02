@@ -2,9 +2,9 @@
  * \file
  * \date January 25, 2017
  * \author Zermingore
- * \brief interface::MenuMap class declaration
+ * \namespace interface
+ * \brief MenuMap class declaration
  */
-
 
 #ifndef MENU_MENU_MAP_HH_
 # define MENU_MENU_MAP_HH_

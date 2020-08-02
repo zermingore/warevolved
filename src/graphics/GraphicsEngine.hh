@@ -2,7 +2,8 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
- * \brief Graphics related class / functions declarations
+ * \namespace graphics
+ * \brief GraphicsEngine class declaration
  */
 
 #ifndef GRAPHICS_GRAPHICS_ENGINE_HH_

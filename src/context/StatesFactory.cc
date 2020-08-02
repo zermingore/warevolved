@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date October 16, 2016
+ * \author Zermingore
+ * \brief StatesFactory class definition
+ */
+
 #include <context/StatesFactory.hh>
 
 #include <context/StateEditMap.hh>

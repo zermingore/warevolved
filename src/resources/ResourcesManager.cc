@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date Apr 25, 2013
+ * \author Zermingore
+ * \namespace resources
+ * \brief ResourcesManager (handling Images, Fonts, ...) class implementation
+ */
+
 #include <resources/ResourcesManager.hh>
 
 #include <exception>

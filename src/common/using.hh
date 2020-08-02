@@ -2,7 +2,7 @@
  * \file
  * \date Feb 19, 2013
  * \author Zermingore
- * \brief Handy aliases on data structures
+ * \brief Coord class declaration; Handy aliases on data structures
  */
 
 #ifndef COMMON_USING_HH_

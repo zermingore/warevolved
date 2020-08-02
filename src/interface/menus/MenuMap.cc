@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date January 25, 2017
+ * \author Zermingore
+ * \namespace interface
+ * \brief MenuMap class definition
+ */
+
 #include <game/Status.hh>
 #include <interface/menus/MenuMap.hh>
 

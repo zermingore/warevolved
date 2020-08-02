@@ -53,6 +53,7 @@ public:
 
   /**
    * \brief Load the Map from the latest quick load file
+   * \todo implement quickLoad()
    */
   void quickLoad() const;
 };

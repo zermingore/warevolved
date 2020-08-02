@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \brief Game class definition
+ */
+
 #include <game/Game.hh>
 
 #include <future>

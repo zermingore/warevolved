@@ -2,6 +2,8 @@
  * \file
  * \date Apr 25, 2013
  * \author Zermingore
+ * \namespace graphics
+ * \brief Sprite class declaration
  */
 
 #ifndef RESOURCES_IMAGE_HH_

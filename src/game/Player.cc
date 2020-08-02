@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date August 1, 2013
+ * \author Zermingore
+ * \brief Player class definition
+ */
+
 #include <game/Player.hh>
 
 #include <common/enums/states.hh>

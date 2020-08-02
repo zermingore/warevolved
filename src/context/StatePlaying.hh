@@ -2,6 +2,7 @@
  * \file
  * \date October 14, 2016
  * \author Zermingore
+ * \brief StatePlaying class declaration
  */
 
 #ifndef STATE_PLAYING_HH_

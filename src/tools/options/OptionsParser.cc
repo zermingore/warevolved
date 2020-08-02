@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date July 7, 2017
+ * \author Zermingore
+ * \brief OptionsParser class definition
+ */
+
 #include <tools/options/OptionsParser.hh>
 
 #include <algorithm>

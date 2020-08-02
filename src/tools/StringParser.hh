@@ -2,7 +2,7 @@
  * \file
  * \date April 20, 2017
  * \author Zermingore
- * \brief Strings parser helper class declaration
+ * \brief StringParser helper class declaration
  */
 
 #ifndef STRING_PARSER_HH_

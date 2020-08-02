@@ -2,7 +2,7 @@
  * \file
  * \date April 19, 2013
  * \author Zermingore
- * \brief Map class implementation.
+ * \brief Map class implementation
  */
 
 #include <game/Map.hh>

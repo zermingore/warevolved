@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date August 3, 2013
+ * \author Zermingore
+ * \brief Battle class definition
+ */
+
 #include <game/Battle.hh>
 
 #include <filesystem>

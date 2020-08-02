@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date July 27, 2017
+ * \author Zermingore
+ * \brief StateGlobal class definition
+ */
+
 #include <context/StateGlobal.hh>
 
 #include <lib/pugixml.hh>

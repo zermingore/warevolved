@@ -2,6 +2,7 @@
  * \file
  * \date March 20, 2017
  * \author Zermingore
+ * \brief EventsLogger class declaration
  */
 
 #ifndef EVENTS_LOGGER_HH_

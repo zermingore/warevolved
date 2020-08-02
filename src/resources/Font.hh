@@ -2,6 +2,7 @@
  * \file
  * \date Apr 27, 2013
  * \author Zermingore
+ * \namespace resources
  * \brief resources::Font class declaration
  */
 

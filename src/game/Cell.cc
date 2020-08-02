@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date April 19, 2013
+ * \author Zermingore
+ * \brief Cell class definition
+ */
+
 #include <common/enums/terrains.hh>
 #include <game/Cell.hh>
 

@@ -2,7 +2,7 @@
  * \file
  * \date April 19, 2013
  * \author Zermingore
- * \brief Map class definition.
+ * \brief Map class definition
  */
 
 #ifndef GAME_MAP_HH_

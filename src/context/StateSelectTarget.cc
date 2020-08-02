@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date February 22, 2017
+ * \author Zermingore
+ * \brief StateSelectTarget class definition
+ */
+
+
 #include <context/StateSelectTarget.hh>
 
 #include <common/enums/attack_result.hh>

@@ -2,6 +2,7 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
+ * \brief Game class declaration
  */
 
 #ifndef GAME_HH_

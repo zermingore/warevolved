@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date March 20, 2017
+ * \author Zermingore
+ * \brief EventsLogger class definition
+ */
+
 #include <chrono>
 #include <fstream>
 #include <map>

@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date October 14, 2016
+ * \author Zermingore
+ * \brief StatePlaying class definition
+ */
+
 #include <context/StatePlaying.hh>
 
 #include <common/enums/input.hh>

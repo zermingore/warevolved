@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date May 20, 2013
+ * \author Zermingore
+ * \namespace interface
+ * \brief MenuEntry class definition
+ */
+
 #include <debug/Debug.hh>
 #include <game/Battle.hh>
 #include <game/Status.hh>

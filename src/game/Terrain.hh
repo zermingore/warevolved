@@ -2,6 +2,7 @@
  * \file
  * \date November 25, 2016
  * \author Zermingore
+ * \brief Terrain class declaration
  */
 
 #ifndef TERRAIN_HH_

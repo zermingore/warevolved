@@ -2,7 +2,8 @@
  * \file
  * \date March 4, 2013
  * \author Zermingore
- * \brief Handle the Frame Per Second computation
+ * \namespace tools
+ * \brief FPS class declaration. Handle the Frame Per Second computation
  */
 
 #ifndef TOOLS_FPS_HH_

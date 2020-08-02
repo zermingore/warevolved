@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date February 10, 2017
+ * \author Zermingore
+ * \namespace graphics
+ * \brief MapGraphicsProperties class definition
+ */
+
 #include <graphics/MapGraphicsProperties.hh>
 
 

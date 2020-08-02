@@ -2,6 +2,7 @@
  * \file
  * \date October 24, 2016
  * \author Zermingore
+ * \brief StateMenu class declaration
  */
 
 #ifndef STATE_MENU_HH_

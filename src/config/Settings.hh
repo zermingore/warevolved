@@ -2,7 +2,7 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
- * \brief Global settings class declaration.
+ * \brief Global Settings class declaration
  */
 
 #ifndef SETTINGS_HH_

@@ -2,6 +2,8 @@
  * \file
  * \date July 25, 2013
  * \author Zermingore
+ * \namespace interface
+ * \brief InGameMenu class declaration
  */
 
 #ifndef IN_GAME_MENU_HH_

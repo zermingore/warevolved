@@ -2,9 +2,8 @@
  * \file
  * \date June 22, 2017
  * \author Zermingore
- * \brief EventsProcessor declaration
+ * \brief EventsProcessor class declaration
  */
-
 
 #ifndef INPUT_EVENTS_PROCESSOR_HH_
 # define INPUT_EVENTS_PROCESSOR_HH_

@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date April 5, 2020
+ * \author Zermingore
+ * \brief StateEditMap class definition
+ */
+
 #include <context/StateEditMap.hh>
 
 #include <common/enums/input.hh>

@@ -2,6 +2,7 @@
  * \file
  * \date Jul 23, 2013
  * \author Zermingore
+ * \brief Debug macros declaration
  */
 
 #ifndef DEBUG_HH_

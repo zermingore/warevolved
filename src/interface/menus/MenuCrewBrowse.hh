@@ -2,9 +2,9 @@
  * \file
  * \date September 23, 2019
  * \author Zermingore
- * \brief interface::MenuCrewBrowse class declaration
+ * \namespace interface
+ * \brief MenuCrewBrowse class declaration
  */
-
 
 #ifndef MENU_CREW_BROWSE_HH_
 # define MENU_CREW_BROWSE_HH_

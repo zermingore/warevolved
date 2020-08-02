@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date September 19, 2017
+ * \author Zermingore
+ * \brief TerrainsHandler class definition
+ */
+
 #include <game/TerrainsHandler.hh>
 
 #include <debug/Debug.hh>

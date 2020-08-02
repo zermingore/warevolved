@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \namespace graphics
+ * \brief GraphicsEngine class definition
+ */
+
 #include <graphics/GraphicsEngine.hh>
 
 #include <chrono>

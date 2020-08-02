@@ -2,7 +2,7 @@
  * \file
  * \date Feb 23, 2016
  * \author Zermingore
- * \brief Interface settings.
+ * \brief InterfaceSettings class declaration
  */
 
 #ifndef INTERFACE_INTERFACE_SETTINGS_HH_

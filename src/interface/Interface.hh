@@ -2,9 +2,7 @@
  * \file
  * \date May 21, 2013
  * \author Zermingore
- * \brief Interface class definition.
- *
- * Manages the User Interface.
+ * \brief User Interface class definition
  */
 
 #ifndef INTERFACE_HH_

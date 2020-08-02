@@ -1,8 +1,8 @@
 /**
  * \file
- * \brief Cursor class definition.
- *
- * User Interface's Cursor
+ * \date April 15, 2013
+ * \author zermingore
+ * \brief UI's Cursor class definition
  */
 
 #include <interface/Cursor.hh>

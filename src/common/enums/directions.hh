@@ -2,6 +2,7 @@
  * \file
  * \date July 21, 2013
  * \author Zermingore
+ * \brief directions enum
  */
 
 #ifndef ENUM_DIRECTIONS_HH_

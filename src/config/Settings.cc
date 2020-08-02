@@ -2,7 +2,7 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
- * \brief Global settings class definition.
+ * \brief Global settings class definition
  */
 
 #include <config/Settings.hh>

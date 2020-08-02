@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date July 25, 2013
+ * \author Zermingore
+ * \namespace interface
+ * \brief InGameMenu class definition
+ */
+
 #include <interface/menus/InGameMenu.hh>
 
 #include <common/enums/states.hh>

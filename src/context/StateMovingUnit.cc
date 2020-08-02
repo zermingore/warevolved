@@ -2,7 +2,7 @@
  * \file
  * \date November 30, 2016
  * \author Zermingore
- * \brief StateMovingUnit implementation
+ * \brief StateMovingUnit class implementation
  */
 
 #include <cassert>

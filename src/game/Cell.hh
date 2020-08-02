@@ -2,6 +2,7 @@
  * \file
  * \date April 19, 2013
  * \author Zermingore
+ * \brief Cell class declaration
  */
 
 #ifndef GAME_CELL_HH_

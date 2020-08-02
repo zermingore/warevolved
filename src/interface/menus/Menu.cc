@@ -2,7 +2,7 @@
  * \file
  * \date July 24, 2013
  * \author Zermingore
- * \brief Interface generic menu class implementation
+ * \brief Interface generic Menu class implementation
  */
 
 #include <interface/menus/Menu.hh>

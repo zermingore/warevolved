@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date Apr 25, 2013
+ * \author Zermingore
+ * \namespace graphics
+ * \brief Sprite class definition
+ */
+
 #include <graphics/Sprite.hh>
 
 #include <debug/Debug.hh>

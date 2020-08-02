@@ -1,8 +1,8 @@
 /**
  * \file
- * \brief Global game status accessor, including current Player, State, ...
- * \author Zermingore
  * \date April 18, 2013
+ * \author Zermingore
+ * \brief Global game status accessor, including current Player, State, ...
  */
 
 #ifndef COMMON_STATUS_HH_

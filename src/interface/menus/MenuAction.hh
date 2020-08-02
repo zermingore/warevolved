@@ -2,9 +2,9 @@
  * \file
  * \date January 26, 2017
  * \author Zermingore
- * \brief interface::MenuAction class declaration
+ * \namespace interface
+ * \brief MenuAction class declaration
  */
-
 
 #ifndef MENU_ACTION_HH_
 # define MENU_ACTION_HH_

@@ -2,6 +2,7 @@
  * \file
  * \date April 17, 2013
  * \author Zermingore
+ * \brief KeyManager class declaration
  */
 
 #ifndef INPUT_KEY_MANAGER_HH_

@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date April 17, 2013
+ * \author Zermingore
+ * \brief EventManager class definition
+ */
+
 #include <common/enums/states.hh>
 #include <debug/Debug.hh>
 #include <input/EventManager.hh>

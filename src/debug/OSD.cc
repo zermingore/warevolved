@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date April 15, 2013
+ * \author Zermingore
+ * \brief OSD (On Screen Display) Debug information class implementation
+ */
+
 #include <debug/OSD.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>

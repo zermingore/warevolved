@@ -2,7 +2,7 @@
  * \file
  * \date August 1, 2013
  * \author Zermingore
- * \brief Player definition.
+ * \brief Player class declaration
  */
 
 #ifndef PLAYER_HH_

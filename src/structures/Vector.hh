@@ -1,8 +1,8 @@
 /**
  * \file
- * \date Jul 24, 2013
+ * \date July 24, 2013
  * \author Zermingore
- * \brief library independent 2 dimensions Vector
+ * \brief Vector2 class definition: library independent 2 dimensions vector
  */
 
 #ifndef VECTOR_HH_

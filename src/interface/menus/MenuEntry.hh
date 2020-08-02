@@ -2,7 +2,8 @@
  * \file
  * \date May 20, 2013
  * \author Zermingore
- * \brief interface::MenuEntry class declaration
+ * \namespace interface
+ * \brief MenuEntry class declaration
  */
 
 #ifndef MENU_ENTRY_HH_

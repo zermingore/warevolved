@@ -2,6 +2,7 @@
  * \file
  * \date April 17, 2013
  * \author Zermingore
+ * \brief EventManager class declaration
  */
 
 #ifndef EVENT_MANAGER_HH_

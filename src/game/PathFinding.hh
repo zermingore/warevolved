@@ -2,6 +2,7 @@
  * \file
  * \date July 18, 2013
  * \author Zermingore
+ * \brief PathFinding class declaration
  */
 
 #ifndef PATH_FINDING_HH_

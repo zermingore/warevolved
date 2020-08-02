@@ -2,7 +2,7 @@
  * \file
  * \date July 14, 2018
  * \author Zermingore
- * \brief Class to represent command line options
+ * \brief Option class declaration, representing command line options
  */
 
 #ifndef TOOLS_OPTIONS_OPTION_HH_

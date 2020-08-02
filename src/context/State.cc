@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date July 24, 2013
+ * \author Zermingore
+ * \brief State class definition
+ */
+
 #include <context/State.hh>
 
 #include <input/EventManager.hh>

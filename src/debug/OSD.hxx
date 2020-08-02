@@ -1,8 +1,8 @@
 /**
  * \file
- * \brief OSD templates implementation
- * \author Zermingore
  * \date November 2, 2019
+ * \author Zermingore
+ * \brief OSD templates implementation
  */
 
 #ifndef OSD_HXX_

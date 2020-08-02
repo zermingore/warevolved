@@ -2,6 +2,7 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
+ * \brief UI's Cursor class declaration
  */
 
 #ifndef CURSOR_HH_

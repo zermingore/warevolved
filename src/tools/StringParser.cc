@@ -2,7 +2,7 @@
  * \file
  * \date April 20, 2017
  * \author Zermingore
- * \brief Strings parser class definition
+ * \brief StringParser class definition
  */
 
 #include <regex>

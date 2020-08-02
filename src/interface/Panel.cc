@@ -2,7 +2,7 @@
  * \file
  * \date August 22, 2017
  * \author Zermingore
- * \brief Side panel class definition
+ * \brief Side Panel class definition
  */
 
 

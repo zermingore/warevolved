@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date April 17, 2013
+ * \author Zermingore
+ * \brief KeyManager class definition
+ */
+
 #include <input/KeyManager.hh>
 
 #include <common/enums/input.hh>

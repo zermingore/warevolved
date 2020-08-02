@@ -1,8 +1,8 @@
 /**
  * \file
- * \brief Status templates implementation
- * \author Zermingore
  * \date October 19, 2019
+ * \author Zermingore
+ * \brief Status templates implementation
  */
 
 #ifndef STATUS_HXX_

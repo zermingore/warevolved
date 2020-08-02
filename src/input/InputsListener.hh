@@ -2,7 +2,7 @@
  * \file
  * \date June 21, 2017
  * \author Zermingore
- * \brief InputsListener declaration
+ * \brief InputsListener class declaration
  */
 
 #ifndef INPUT_INPUTS_LISTENER_HH_

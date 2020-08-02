@@ -2,7 +2,8 @@
  * \file
  * \date February 10, 2017
  * \author Zermingore
- * \brief Map class definition.
+ * \namespace graphics
+ * \brief MapGraphicsProperties class declaration
  */
 
 #ifndef MAP_GRAPHICS_PROPERTIES_HH_

@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date July 18, 2013
+ * \author Zermingore
+ * \brief PathFinding class definition
+ */
+
 #include <game/PathFinding.hh>
 
 #include <exception>

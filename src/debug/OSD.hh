@@ -2,7 +2,7 @@
  * \file
  * \date April 15, 2013
  * \author Zermingore
- * \brief On Screen Debug information display
+ * \brief OSD (On Screen Display) Debug information class implementation
  */
 
 #ifndef DEBUG_OSD_HH_

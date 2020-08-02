@@ -2,7 +2,8 @@
  * \file
  * \date September 23, 2019
  * \author Zermingore
- * \brief interface::MenuCrewMember class declaration
+ * \namespace interface
+ * \brief MenuCrewMember class declaration
  */
 
 

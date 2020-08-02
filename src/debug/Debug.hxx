@@ -1,8 +1,8 @@
 /**
  * \file
- * \brief Debug class templates implementation
- * \author Zermingore
  * \date November 2, 2019
+ * \author Zermingore
+ * \brief Debug class templates implementation
  */
 
 #ifndef DEBUG_HXX_

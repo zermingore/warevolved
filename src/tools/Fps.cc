@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date March 4, 2013
+ * \author Zermingore
+ * \namespace tools
+ * \brief Fps class implementation
+ */
+
 #include <debug/OSD.hh>
 #include <tools/Fps.hh>
 

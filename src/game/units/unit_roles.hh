@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date August 30, 2019
+ * \author Zermingore
+ * \brief Unit roles enum
+ */
+
 #ifndef UNIT_ROLES_HH_
 # define UNIT_ROLES_HH_
 

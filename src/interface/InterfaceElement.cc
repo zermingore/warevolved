@@ -1,8 +1,9 @@
 /**
  * \file
  * \date Jan 11, 2015
+ * \author Zermingore
  * \namespace interface
- * \brief InterfaceElement implementation
+ * \brief InterfaceElement class implementation
  */
 
 #include <graphics/Sprite.hh>

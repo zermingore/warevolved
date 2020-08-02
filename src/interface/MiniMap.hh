@@ -2,6 +2,7 @@
  * \file
  * \date August 22, 2017
  * \author Zermingore
+ * \namespace interface
  * \brief Side panel's MiniMap class declaration
  */
 
@@ -18,7 +19,6 @@
 # include <common/using.hh>
 
 class Map;
-
 
 
 namespace interface {

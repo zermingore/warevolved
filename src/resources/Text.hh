@@ -1,9 +1,10 @@
 /**
  * \file
+ * \author Zermingore
  * \date Sept 11, 2017
- * \brief resources::Text class declaration, used to draw strings
+ * \namespace resources
+ * \brief Text class declaration, used to draw strings
  */
-
 
 #ifndef RESOURCES_TEXT_HH_
 # define RESOURCES_TEXT_HH_

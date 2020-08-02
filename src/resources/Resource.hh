@@ -1,6 +1,7 @@
 /**
  * \file
  * \date April 25, 2013
+ * \author Zermingore
  * \brief Resource abstract class declaration
  */
 

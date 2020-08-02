@@ -2,7 +2,8 @@
  * \file
  * \date July 24, 2013
  * \author Zermingore
- * \brief Interface generic menu class declaration
+ * \namespace interface
+ * \brief Interface generic Menu class declaration
  */
 
 #ifndef MENU_HH_

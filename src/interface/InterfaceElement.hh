@@ -2,6 +2,8 @@
  * \file
  * \date Jan 11, 2015
  * \author Zermingore
+ * \namespace interface
+ * \brief InterfaceElement class declaration
  */
 
 #ifndef INTERFACE_ELEMENT_HH_

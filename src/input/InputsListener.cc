@@ -1,3 +1,10 @@
+/**
+ * \file
+ * \date June 21, 2017
+ * \author Zermingore
+ * \brief InputsListener class definition
+ */
+
 #include <input/InputsListener.hh>
 
 #include <chrono>

@@ -2,6 +2,8 @@
  * \file
  * \date Apr 25, 2013
  * \author Zermingore
+ * \namespace resources
+ * \brief ResourcesManager (handling Images, Fonts, ...) class declaration
  */
 
 #ifndef RESOURCES_RESOURCES_MANAGER_HH_

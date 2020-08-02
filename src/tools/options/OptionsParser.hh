@@ -2,8 +2,7 @@
  * \file
  * \date July 7, 2017
  * \author Zermingore
- * \brief Tool to parse options (from the command line),
- *   including the associated exceptions definitions
+ * \brief OptionsParser class declaration
  */
 
 #ifndef TOOLS_OPTIONS_OPTIONS_PARSER_HH_
@@ -21,7 +20,9 @@
 
 /**
  * \class ArgumentsException
- * \brief Exception thrown if the provided are invalid
+ * \brief Tool to parse options (from the command line),
+ *   including the associated exceptions definitions
+ * \warning Exception thrown if the provided are invalid
  */
 class ArgumentsException final: public std::exception
 {

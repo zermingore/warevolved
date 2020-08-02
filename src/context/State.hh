@@ -2,6 +2,7 @@
  * \file
  * \date July 24, 2013
  * \author Zermingore
+ * \brief State class declaration
  */
 
 #ifndef STATE_HH_

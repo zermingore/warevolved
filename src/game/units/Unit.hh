@@ -2,6 +2,7 @@
  * \file
  * \date May 3, 2013
  * \author Zermingore
+ * \brief Unit class declaration
  */
 
 #ifndef UNIT_HH_

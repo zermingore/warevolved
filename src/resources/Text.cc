@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \author Zermingore
+ * \date Sept 11, 2017
+ * \namespace resources
+ * \brief Text class declaration, used to draw strings
+ */
+
 #include <resources/Text.hh>
 
 #include <graphics/GraphicsEngine.hh>

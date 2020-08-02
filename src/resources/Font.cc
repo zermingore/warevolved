@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date Apr 27, 2013
+ * \author Zermingore
+ * \namespace resources
+ * \brief resources::Font class implementation
+ */
+
 #include <graphics/graphic_types.hh>
 #include <resources/Font.hh>
 

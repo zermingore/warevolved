@@ -2,9 +2,8 @@
  * \file
  * \date May 3, 2013
  * \author Zermingore
- * \brief Unit constructor definition
+ * \brief Unit class definition
  */
-
 
 #include <game/units/Unit.hh>
 

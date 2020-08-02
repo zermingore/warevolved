@@ -2,9 +2,9 @@
  * \file
  * \date September 23, 2019
  * \author Zermingore
- * \brief interface::MenuCrewMember definition
+ * \namespace interface
+ * \brief MenuCrewMember definition
  */
-
 
 #include <interface/menus/MenuCrewMember.hh>
 

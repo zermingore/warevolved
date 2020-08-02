@@ -1,3 +1,11 @@
+/**
+ * \file
+ * \date January 26, 2017
+ * \author Zermingore
+ * \namespace interface
+ * \brief MenuAction class definition
+ */
+
 #include <interface/menus/MenuAction.hh>
 
 #include <context/State.hh>
