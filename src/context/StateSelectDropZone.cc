@@ -61,8 +61,8 @@ void StateSelectDropZone::fetchAttributes()
 {
   if (_attributes.empty())
   {
-    ERROR("fetchAttributes called without available attributes");
-    assert(false && "No attribute found");
+    ERROR("StateSelectDropZone::fetchAttributes called without attributes");
+    assert(false);
     return;
   }
 

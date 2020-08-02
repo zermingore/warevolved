@@ -108,8 +108,8 @@ void StateMenu::fetchAttributes()
 {
   if (_attributes.empty())
   {
-    ERROR("StateMenu::fetchAttributes called without available attributes");
-    assert(false && "No attribute found");
+    ERROR("StateMenu::fetchAttributes called without attributes");
+    assert(false);
     return;
   }
 

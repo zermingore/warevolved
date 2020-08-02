@@ -98,7 +98,7 @@ void PathFinding::updateCurrentCell(e_direction direction)
 
 
 
-e_path_shape PathFinding::getShape(size_t index)
+e_path_shape PathFinding::getShape(size_t index) const
 {
   assert(index < _directions.size());
 
@@ -359,8 +359,8 @@ bool PathFinding::allowedMove(e_direction direction)
 
 
 
-std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-PathFinding::getTargets(const std::shared_ptr<Unit>& ref, const Coords& coords)
+std::shared_ptr<std::vector<std::shared_ptr<Cell>>> PathFinding::getTargets(
+  const std::shared_ptr<const Unit>& ref, const Coords& coords) const
 {
   // Dummy: for every cell if unit && not one of the current player -> target
   // (NOT considering the motion value)
@@ -386,10 +386,10 @@ PathFinding::getTargets(const std::shared_ptr<Unit>& ref, const Coords& coords)
 
 
 
-std::vector<std::shared_ptr<Cell>>
-PathFinding::getAdjacentCells(const Coords coords)
+std::vector<std::shared_ptr<const Cell>>
+PathFinding::getAdjacentCells(const Coords coords) const
 {
-  std::vector<std::shared_ptr<Cell>> adjacents; // return value
+  std::vector<std::shared_ptr<const Cell>> adjacents; // return value
 
   const auto nb_col(_map->nbColumns());
   const auto nb_lines(_map->nbLines());
@@ -419,13 +419,13 @@ PathFinding::getAdjacentCells(const Coords coords)
 
 
 
-std::vector<std::shared_ptr<Cell>>
-PathFinding::getDropZones(const Coords& coords)
+std::vector<std::shared_ptr<const Cell>>
+PathFinding::getDropZones(const Coords& coords) const
 {
   auto candidates = getAdjacentCells(coords);
 
   // return value initialization
-  std::vector<std::shared_ptr<Cell>> dropZones(candidates.size());
+  std::vector<std::shared_ptr<const Cell>> dropZones(candidates.size());
 
   auto it = std::copy_if(
     candidates.begin(),
@@ -442,7 +442,7 @@ PathFinding::getDropZones(const Coords& coords)
 
 
 
-size_t PathFinding::manhattan(const Coords a, const Coords b)
+size_t PathFinding::manhattan(const Coords a, const Coords b) const
 {
   // explicit cast into signed int
   int dist_columns(static_cast<int> (a.c - b.c));

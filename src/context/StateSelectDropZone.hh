@@ -82,7 +82,7 @@ private:
 
 
   /// Free cells list from the PathFinding
-  std::vector<std::shared_ptr<Cell>> _zones;
+  std::vector<std::shared_ptr<const Cell>> _zones;
 
   size_t _indexZone; ///< index of the selected zone
 

@@ -58,8 +58,8 @@ void StateSelectTarget::fetchAttributes()
 {
   if (_attributes.empty())
   {
-    ERROR("fetchAttributes called without available attributes");
-    assert(false && "No attribute found");
+    ERROR("StateSelectTarget::fetchAttributes called without attributes");
+    assert(false);
     return;
   }
 

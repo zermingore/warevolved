@@ -90,16 +90,16 @@ public:
    * \param coords Coordinates where the attacker is located
    * \return List of cells containing a target
    */
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>>
-  getTargets(const std::shared_ptr<Unit>& ref, const Coords& coords);
+  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getTargets(
+    const std::shared_ptr<const Unit>& ref, const Coords& coords) const;
 
   /**
    * \brief Return the list of available drop locations
    * \param coords Coordinates where the vehicle is located
    * \return List of valid drop zones
    */
-  std::vector<std::shared_ptr<Cell>>
-  getDropZones(const Coords& coords);
+  std::vector<std::shared_ptr<const Cell>>
+  getDropZones(const Coords& coords) const;
 
 
 
@@ -129,23 +129,23 @@ private:
    * \return shape of _direction[index]
    *   according to the next direction (for smooth corners).
    */
-  e_path_shape getShape(size_t index);
+  e_path_shape getShape(size_t index) const;
 
   /**
    * \brief returns the Manhattan distance between two cells
    * \param a first cell
    * \param b second cell
-   * \return the distance between the two cells
+   * \return the distance (in cells) between the two cells
    */
-  size_t manhattan(Coords a, Coords b);
+  size_t manhattan(const Coords a, const Coords b) const;
 
   /**
    * \brief Get the list of valid adjacent cells
    * \param coords Coordinates of the cell from where to check
    * \return List of valid adjacent cells on the map
    */
-  std::vector<std::shared_ptr<Cell>>
-  getAdjacentCells(const Coords coords);
+  std::vector<std::shared_ptr<const Cell>>
+  getAdjacentCells(const Coords coords) const;
 
 
 
