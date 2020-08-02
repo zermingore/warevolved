@@ -99,8 +99,9 @@ public:
   /**
    * \brief selected unit getter
    * \return a pointer on the currently selected unit, if any
+   * \note Find a Unit under current Player's cursor if _selectedUnit is NULL
    */
-  auto selectedUnit() { return _selectedUnit; }
+  std::shared_ptr<Unit> selectedUnit();
 
   /**
    * \brief Get the terrain at given coordinates.

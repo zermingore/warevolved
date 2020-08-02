@@ -89,6 +89,17 @@ void Map::selectUnit(const Coords& c)
 }
 
 
+std::shared_ptr<Unit> Map::selectedUnit()
+{
+  if (!_selectedUnit)
+  {
+    PRINTF("No selecting unit -> auto update");
+    game::Status::player()->updateSelectedUnit();
+  }
+
+  return _selectedUnit;
+}
+
 
 void Map::moveUnit(const Coords& c)
 {
