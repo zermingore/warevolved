@@ -10,6 +10,7 @@
 
 #include <context/State.hh>
 #include <game/Battle.hh>
+#include <game/Cell.hh>
 #include <game/PathFinding.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>

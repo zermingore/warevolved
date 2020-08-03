@@ -52,14 +52,35 @@ StateSelectTarget::StateSelectTarget()
   _targetHighlight->setScale( p::cellWidth() / x, p::cellHeight() / y);
   _targetHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
+  game::Status::battle()->getCurrentPlayer()->updateSelectedUnit();
+  auto selected_unit{game::Status::battle()->map()->selectedUnit()};
   _holoUnit = std::make_shared<graphics::Sprite> (
-    game::Status::battle()->map()->selectedUnit()->sprite()->texture());
+    selected_unit->sprite()->texture());
   _holoUnit->setColor(graphics::Color(255, 127, 127, 255));
 
   x = static_cast<float> (_holoUnit->texture()->getSize().x);
   y = static_cast<float> (_holoUnit->texture()->getSize().y);
   _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 }
+
+
+
+StateSelectTarget::~StateSelectTarget()
+{
+  auto map {game::Status::battle()->map()};
+  auto cells {map->cells()};
+  const auto nb_col(map->nbColumns());
+  const auto nb_lines(map->nbLines());
+
+  for (auto col(0u); col < nb_col; ++col)
+  {
+    for (auto line(0u); line < nb_lines; ++line)
+    {
+      cells[col][line]->setHighlight(false);
+    }
+  }
+}
+
 
 
 void StateSelectTarget::fetchAttributes()
@@ -74,6 +95,17 @@ void StateSelectTarget::fetchAttributes()
   auto p = std::static_pointer_cast<Coords> (_attributes[0]);
   _attackLocation.c = p->c;
   _attackLocation.l = p->l;
+
+  auto selected_unit(game::Status::battle()->map()->selectedUnit());
+  _path = std::make_shared<PathFinding> (selected_unit);
+  const auto targets {_path->getTargets(selected_unit, _attackLocation)};
+  auto map {game::Status::battle()->map()};
+  for (const auto& target: *targets)
+  {
+    auto c = map->cell(target->coords());
+    c->setHighlight(true);
+    c->setHighlightColor(graphics::Color::Red);
+  }
 
   // reset the attributes vector
   _attributes.clear();
@@ -91,8 +123,7 @@ void StateSelectTarget::resume()
   game::Status::player()->updateSelectedUnit();
   auto selected_unit(game::Status::battle()->map()->selectedUnit());
 
-  PathFinding path(selected_unit);
-  _targets = path.getTargets(selected_unit, _attackLocation);
+  _targets = _path->getTargets(selected_unit, _attackLocation);
 
   assert(!_targets->empty() && "StateSelectTarget: no target available");
 }
@@ -103,8 +134,7 @@ void StateSelectTarget::draw()
   game::Status::player()->cursor()->disableDrawThisFrame();
 
   auto selected_unit(game::Status::battle()->map()->selectedUnit());
-  PathFinding path(selected_unit);
-  _targets = path.getTargets(selected_unit, _attackLocation);
+  _targets = _path->getTargets(selected_unit, _attackLocation);
 
   if (!_targets || _targets->empty())
   {

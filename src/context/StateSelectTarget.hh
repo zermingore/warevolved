@@ -14,6 +14,7 @@
 # include <graphics/graphic_types.hh>
 
 class Cell;
+class PathFinding;
 
 namespace graphics {
   class Sprite;
@@ -34,9 +35,9 @@ public:
   StateSelectTarget();
 
   /**
-   * \brief Default destructor
+   * \brief Default destructor; Clear cells highlights
    */
-  ~StateSelectTarget() override = default;
+  ~StateSelectTarget() override;
 
   /**
    * \brief re-build the menu.
@@ -91,6 +92,7 @@ private:
   Coords _attackLocation; ///< Cell from which the attack is performed
 
   std::shared_ptr<graphics::Sprite> _holoUnit; ///< 'holo' attacking unit sprite
+  std::shared_ptr<PathFinding> _path; ///< Keep the pathfinding at hand
 };
 
 
