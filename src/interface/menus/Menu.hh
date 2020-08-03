@@ -103,11 +103,6 @@ public:
   virtual void clear() { _entries.clear(); }
 
   /**
-   * \brief Callback for closing the menu
-   */
-  virtual void close() = 0;
-
-  /**
    * \brief executes action matching _selectedEntry
    */
   virtual void validate() = 0;

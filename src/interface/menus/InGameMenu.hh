@@ -35,11 +35,6 @@ public:
   virtual void build() override = 0;
 
   /**
-   * \brief Closes the current menu, clearing its interface elements
-   */
-  virtual void close() override;
-
-  /**
    * \brief default destructor
    */
   ~InGameMenu() override = default;

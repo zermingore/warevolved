@@ -87,18 +87,6 @@ void InGameMenu::update()
 }
 
 
-/// \todo move in Dtor ?
-void InGameMenu::close()
-{
-  // auto interface(game::Status::interface());
-  // for (auto entry: _entries) {
-  //   interface->removeElement(entry);
-  // }
-
-  // interface->removeElement(this); // apparently not needed, not sure why
-}
-
-
 
 e_entry InGameMenu::getCurrentSelection() const
 {
