@@ -17,6 +17,8 @@
 
 // Debug::_log definition
 std::unique_ptr<std::ofstream> Debug::_log;
+std::map<std::string, bool> Debug::_printedOnce;
+
 
 
 void Debug::init()
@@ -56,6 +58,22 @@ void Debug::logTime()
   const auto now{std::time(nullptr)};
   const auto full_date{*std::localtime(&now)};
   *_log << std::put_time(&full_date, "%F @ %T") << '\t';
+}
+
+
+
+void Debug::printOnce(const std::string& str)
+{
+  try
+  {
+    if (_printedOnce.at(str)) // avoid ignoring return value
+      return;
+  }
+  catch (const std::out_of_range& e)
+  {
+    PRINTF(str);
+    _printedOnce[str] = true;
+  }
 }
 
 

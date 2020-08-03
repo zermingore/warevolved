@@ -14,6 +14,7 @@
 # include <sstream>
 # include <cassert> // not needed here, just for modules including this file
 # include <iomanip>
+# include <map>
 
 
 /// \def Log file name
@@ -90,6 +91,8 @@
 #   define PRINTF Debug::logPrintf
 # endif
 
+# define PRINT_ONCE Debug::printOnce
+
 
 
 /**
@@ -163,6 +166,12 @@ public:
     printf(tail...);
   }
 
+  /**
+   * \brief print one unique time the given string
+   * \param str string to print once
+   * \warning The unicity check relies on the given string
+   */
+  static void printOnce(const std::string& str);
 
   /**
    * \brief Set the current thread name
@@ -199,6 +208,9 @@ private:
 
 
   static std::unique_ptr<std::ofstream> _log; ///< log file
+
+  /// Track already displayed strings
+  static std::map<std::string, bool> _printedOnce;
 };
 
 
