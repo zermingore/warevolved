@@ -57,6 +57,17 @@ StateSelectDropZone::StateSelectDropZone()
 
 
 
+StateSelectDropZone::~StateSelectDropZone()
+{
+  std::shared_ptr<Map> map = game::Status::battle()->map();
+  for (auto& cell: _zones)
+  {
+    (*map)[cell->c()][cell->l()]->setHighlight(false);
+  }
+}
+
+
+
 void StateSelectDropZone::fetchAttributes()
 {
   if (_attributes.empty())

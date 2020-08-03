@@ -65,7 +65,7 @@ void StateMenuCrew::resume()
   _menuCrew->build();
 
   _menuMemberCoords = _menuCrewCoords;
-  _menuMemberCoords.x += 4; /// \todo hard-coded
+  _menuMemberCoords.x += 4; // in cells
   _menuMember->setCoords(_menuMemberCoords);
   _menuMember->build();
 
@@ -249,7 +249,7 @@ void StateMenuCrew::fetchAttributes()
   _menuCrewCoords.l = p->l;
 
   _menuMemberCoords = _menuCrewCoords;
-  _menuMemberCoords.x += 4; /// \todo hard-coded
+  _menuMemberCoords.x += 4; // in cells
 
   /// \todo fetch selected and hovered units?
 

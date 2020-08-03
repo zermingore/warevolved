@@ -35,9 +35,9 @@ public:
   StateSelectDropZone();
 
   /**
-   * \brief Default destructor
+   * \brief Destructor; deactivates drop zones highlights
    */
-  ~StateSelectDropZone() override = default;
+  ~StateSelectDropZone() override;
 
   /**
    * \brief re-build the menu.
