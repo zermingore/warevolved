@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: generate_enum_print.sh
-// generated on: Tue 04 Aug 2020 11:14:49 AM CEST
+// generated on: Tue 04 Aug 2020 11:21:46 AM CEST
 
 
 
@@ -41,24 +41,6 @@ std::string e_input_string(e_input entry)
       return "e_input::EXIT (no explicit value)";
     case e_input::NB_KEYS:
       return "e_input::NB_KEYS (no explicit value)";
-    default:
-      return "entry not matched";
-  }
-}
-
-
-std::string e_terrain_string(e_terrain entry)
-{
-  switch (entry)
-  {
-    case e_terrain::NONE:
-      return "e_terrain::NONE (0)";
-    case e_terrain::PLAIN:
-      return "e_terrain::PLAIN (no explicit value)";
-    case e_terrain::FOREST:
-      return "e_terrain::FOREST (no explicit value)";
-    case e_terrain::NB_TERRAIN:
-      return "e_terrain::NB_TERRAIN (no explicit value)";
     default:
       return "entry not matched";
   }

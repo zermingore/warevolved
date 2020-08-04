@@ -9,9 +9,9 @@
 # define TERRAINS_HANDLER_HH_
 
 # include <map>
-# include <common/enums/terrains.hh>
 
 class Terrain;
+enum class e_terrain;
 
 
 

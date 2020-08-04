@@ -10,7 +10,6 @@
 
 #include <algorithm> // std:min
 
-#include <common/enums/terrains.hh>
 #include <debug/Debug.hh>
 #include <game/Cell.hh>
 #include <game/Map.hh>

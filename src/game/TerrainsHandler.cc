@@ -8,9 +8,8 @@
 #include <game/TerrainsHandler.hh>
 
 #include <debug/Debug.hh>
-#include <generated/enum_print/enum_print.hh>
-
 #include <game/Terrain.hh>
+#include <game/Cell.hh> // e_terrain
 #include <graphics/graphic_types.hh>
 
 
@@ -35,7 +34,7 @@ const Terrain& TerrainsHandler::get(const e_terrain id)
   }
   catch (std::exception& exc)
   {
-    ERROR("The terrain", debug::e_terrain_string(id), "is not in the list");
+    ERROR("The terrain", static_cast<int> (id), "is not in the list");
     ERROR(exc.what());
     throw;
   }

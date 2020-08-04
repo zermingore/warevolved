@@ -11,10 +11,10 @@
 # include <random>
 # include <memory>
 
-# include <common/enums/terrains.hh>
-
 
 class OptionsParser;
+enum class e_terrain;
+
 
 /**
  * \class Random

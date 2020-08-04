@@ -12,13 +12,11 @@
 # include <string>
 
 # include <common/enums/input.hh>
-# include <common/enums/terrains.hh>
 
 
 namespace debug {
 
 std::string e_input_string(e_input entry);
-std::string e_terrain_string(e_terrain entry);
 
 } // namespace debug
 
