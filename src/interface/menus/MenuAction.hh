@@ -10,7 +10,6 @@
 # define MENU_ACTION_HH_
 
 # include <interface/menus/InGameMenu.hh>
-# include <common/enums/states.hh>
 
 enum class e_state;
 

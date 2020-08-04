@@ -8,7 +8,6 @@
 #include <context/StateMenu.hh>
 
 #include <common/enums/input.hh>
-#include <common/enums/states.hh>
 #include <debug/Debug.hh>
 #include <game/Battle.hh>
 #include <game/PathFinding.hh>

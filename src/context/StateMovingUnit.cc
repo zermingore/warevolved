@@ -10,7 +10,6 @@
 #include <context/StateMovingUnit.hh>
 
 #include <common/enums/input.hh>
-#include <common/enums/states.hh>
 #include <context/StateMenu.hh>
 #include <game/Battle.hh>
 #include <game/PathFinding.hh>

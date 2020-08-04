@@ -8,7 +8,6 @@
 
 #include <interface/menus/InGameMenu.hh>
 
-#include <common/enums/states.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>

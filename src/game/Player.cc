@@ -7,7 +7,6 @@
 
 #include <game/Player.hh>
 
-#include <common/enums/states.hh>
 #include <context/State.hh>
 #include <context/StateMenu.hh>
 #include <game/Battle.hh>

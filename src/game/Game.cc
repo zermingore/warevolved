@@ -9,7 +9,6 @@
 
 #include <future>
 
-#include <common/enums/states.hh>
 #include <context/State.hh>
 #include <debug/Debug.hh>
 #include <game/Battle.hh>

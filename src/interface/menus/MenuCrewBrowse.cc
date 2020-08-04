@@ -11,7 +11,6 @@
 #include <cassert>
 #include <debug/Debug.hh>
 
-#include <common/enums/states.hh>
 #include <context/State.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>

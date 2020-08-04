@@ -8,9 +8,6 @@
 
 #include <interface/menus/MenuCrewMember.hh>
 
-#include <debug/Debug.hh>
-
-#include <common/enums/states.hh>
 #include <context/State.hh>
 #include <game/Battle.hh>
 #include <game/PathFinding.hh>

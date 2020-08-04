@@ -5,7 +5,6 @@
  * \brief EventManager class definition
  */
 
-#include <common/enums/states.hh>
 #include <debug/Debug.hh>
 #include <input/EventManager.hh>
 
