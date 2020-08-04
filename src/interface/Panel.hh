@@ -2,14 +2,13 @@
  * \file
  * \date August 22, 2017
  * \author Zermingore
- * \brief Side panel class declaration
+ * \brief Side Panel class declaration and enum e_panel_status definition
  */
 
 
 #ifndef INTERFACE_PANEL_HH_
 # define INTERFACE_PANEL_HH_
 
-# include <interface/panel_status.hh>
 # include <interface/Cursor.hh>
 # include <interface/MiniMap.hh>
 
@@ -18,6 +17,8 @@
 # include <interface/InterfaceElement.hh>
 # include <game/Map.hh>
 
+
+enum class e_panel_status; // definition follows
 
 class Map;
 
@@ -149,5 +150,20 @@ private:
 
 
 } // namespace interface
+
+
+/**
+ * \enum e_panel_status
+ * \brief List the possible locations of the interface side panel
+ */
+enum class e_panel_status
+{
+  DEACTIVATED = 0,
+  POSITION_LEFT,
+  POSITION_RIGHT,
+
+  NB_PANEL_STATUS
+};
+
 
 #endif /* !INTERFACE_PANEL_HH_ */
