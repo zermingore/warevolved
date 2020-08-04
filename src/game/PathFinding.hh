@@ -2,7 +2,8 @@
  * \file
  * \date July 18, 2013
  * \author Zermingore
- * \brief PathFinding class declarations and enums e_path_shape e_directions
+ * \brief PathFinding class declarations
+ *   and enums e_path_shape e_directions definitions
  */
 
 #ifndef PATH_FINDING_HH_
@@ -18,8 +19,8 @@ class Map;
 class Unit;
 class Cell;
 
-enum class e_direction;
-enum class e_path_shape;
+enum class e_path_shape; // definition follows
+enum class e_direction;  // definition follows
 
 
 

@@ -13,7 +13,6 @@
 #include <game/Status.hh>
 #include <game/Player.hh>
 #include <game/units/Vehicle.hh>
-#include <game/units/unit_roles.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>

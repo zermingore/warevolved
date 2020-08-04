@@ -12,13 +12,14 @@
 # include <memory>
 # include <context/State.hh>
 # include <graphics/graphic_types.hh>
-# include <game/units/unit_roles.hh>
 
 class Cell;
 
 namespace graphics {
   class Sprite;
 }
+
+enum class e_unit_role;
 
 
 /**

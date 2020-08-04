@@ -16,7 +16,7 @@
 
 # include <interface/menus/MenuEntry.hh>
 # include <interface/InterfaceElement.hh>
-# include <game/units/unit_roles.hh>
+# include <game/units/Vehicle.hh> // e_unit_role
 
 
 namespace resources {

@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: generate_enum_print.sh
-// generated on: Tue 04 Aug 2020 10:45:48 AM CEST
+// generated on: Tue 04 Aug 2020 10:56:43 AM CEST
 
 
 

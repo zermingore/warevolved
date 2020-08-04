@@ -3,6 +3,7 @@
  * \date August 11, 2019
  * \author Zermingore
  * \brief Vehicle (abstract Unit) class declaration
+ *    and enum e_unit_role definition
  */
 
 #ifndef VEHICLE_HH_
@@ -10,8 +11,9 @@
 
 # include <string>
 # include <game/units/Unit.hh>
-# include <game/units/unit_roles.hh>
 
+
+enum class e_unit_role; // definition follows
 
 
 /**
@@ -91,5 +93,33 @@ protected:
 
   size_t _maxCrewMembers = 0; ///< Number of seats (constant)
 };
+
+
+
+enum class e_unit_role
+{
+    NONE
+
+  , PASSENGER // eventually multiple passengers
+  , DRIVER    // or pilot
+  , COPILOT   // may be necessary (airplane)
+  , LOADER    // ex: tank
+  , GUNNER    // list (airplane)
+  , MECHANIC
+};
+
+
+
+const std::map<const e_unit_role, const std::string> UNIT_ROLE_STR =
+{
+    { e_unit_role::NONE,      "None" }
+  , { e_unit_role::PASSENGER, "Passenger" }
+  , { e_unit_role::DRIVER,    "Driver" }
+  , { e_unit_role::COPILOT,   "Co-Pilot" }
+  , { e_unit_role::LOADER,    "Loader" }
+  , { e_unit_role::GUNNER,    "Gunner" }
+  , { e_unit_role::MECHANIC,  "Mechanic" }
+};
+
 
 #endif /* !VEHICLE_HH_ */
