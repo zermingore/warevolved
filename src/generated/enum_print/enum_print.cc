@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: generate_enum_print.sh
-// generated on: Tue 04 Aug 2020 11:02:16 AM CEST
+// generated on: Tue 04 Aug 2020 11:08:34 AM CEST
 
 
 
@@ -59,26 +59,6 @@ std::string e_terrain_string(e_terrain entry)
       return "e_terrain::FOREST (no explicit value)";
     case e_terrain::NB_TERRAIN:
       return "e_terrain::NB_TERRAIN (no explicit value)";
-    default:
-      return "entry not matched";
-  }
-}
-
-
-std::string e_attack_result_string(e_attack_result entry)
-{
-  switch (entry)
-  {
-    case e_attack_result::INVALID:
-      return "e_attack_result::INVALID (0)";
-    case e_attack_result::NONE_DIED:
-      return "e_attack_result::NONE_DIED (no explicit value)";
-    case e_attack_result::ATTACKER_DIED:
-      return "e_attack_result::ATTACKER_DIED (no explicit value)";
-    case e_attack_result::DEFENDER_DIED:
-      return "e_attack_result::DEFENDER_DIED (no explicit value)";
-    case e_attack_result::BOTH_DIED:
-      return "e_attack_result::BOTH_DIED (no explicit value)";
     default:
       return "entry not matched";
   }

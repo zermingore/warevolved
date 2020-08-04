@@ -2,7 +2,7 @@
  * \file
  * \date April 19, 2013
  * \author Zermingore
- * \brief Map class definition
+ * \brief Map class definition and enum e_attack_result definition
  */
 
 #ifndef GAME_MAP_HH_
@@ -18,11 +18,11 @@
 # include <lib/pugixml.hh>
 
 # include <common/using.hh>
-# include <common/enums/attack_result.hh>
 
 class Cell;
 class Unit;
 
+enum class e_attack_result; // definition follows
 enum class e_terrain;
 enum class e_unit;
 
@@ -263,5 +263,19 @@ private:
   std::mutex _lockSelectedUnitUpdate;
 };
 
+
+
+/**
+ * \enum e_attack_result
+ * \brief Identifies the result of an attack
+ */
+enum class e_attack_result
+{
+  INVALID = 0,
+  NONE_DIED,
+  ATTACKER_DIED,
+  DEFENDER_DIED,
+  BOTH_DIED,
+};
 
 #endif /* !GAME_MAP_HH_ */

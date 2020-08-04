@@ -13,7 +13,6 @@
 
 # include <common/enums/input.hh>
 # include <common/enums/terrains.hh>
-# include <common/enums/attack_result.hh>
 # include <common/enums/units.hh>
 
 
@@ -21,7 +20,6 @@ namespace debug {
 
 std::string e_input_string(e_input entry);
 std::string e_terrain_string(e_terrain entry);
-std::string e_attack_result_string(e_attack_result entry);
 std::string e_unit_string(e_unit entry);
 
 } // namespace debug
