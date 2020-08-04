@@ -2,7 +2,7 @@
  * \file
  * \date July 18, 2013
  * \author Zermingore
- * \brief PathFinding class declaration
+ * \brief PathFinding class declarations and enums e_path_shape e_directions
  */
 
 #ifndef PATH_FINDING_HH_
@@ -172,6 +172,62 @@ private:
   /// list of cells occupied by an enemy unit
   std::vector<std::shared_ptr<Cell>> _enemyPositions;
 };
+
+
+
+/**
+ * \enum e_path_shape
+ * \brief Help matching which element we want to display, drawing the path
+ * \note Values match needed sprite rotation angle.
+ */
+enum class e_path_shape
+{
+  // Arrows (last of the path)
+  LAST_UP = 0,
+  LAST_DOWN = 180,
+  LAST_LEFT = 90,
+  LAST_RIGHT = 270,
+
+  // Rectangles
+  UP = 360,
+  DOWN = 540, // same as UP
+  LEFT = 630,
+  RIGHT = 450, // same as LEFT
+
+  // Corners (clockwise direction)
+  CORNER_RIGHT_UP = 720,
+  CORNER_UP_LEFT = 990,
+  CORNER_LEFT_DOWN = 900,
+  CORNER_DOWN_RIGHT = 810,
+
+  // Same as above, just to help building the path
+  CORNER_UP_RIGHT = 1080,
+  CORNER_LEFT_UP = 1350,
+  CORNER_DOWN_LEFT = 1260,
+  CORNER_RIGHT_DOWN = 1170,
+
+  NONE
+};
+
+
+
+/**
+ * \enum e_direction
+ * \brief Stores directions + rotation angles. Used for paths
+ */
+enum class e_direction
+{
+  NONE = 0,
+
+  // these values matches rotation angle
+  // (sprites are always oriented to the top
+  //   rotation are done in clockwise direction)
+  UP = 360,
+  DOWN = 540,
+  LEFT = 630,
+  RIGHT = 450
+};
+
 
 
 #endif /* !PATH_FINDING_HH_ */

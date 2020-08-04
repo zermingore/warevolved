@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: generate_enum_print.sh
-// generated on: Mon 13 Apr 2020 11:22:19 AM CEST
+// generated on: Tue 04 Aug 2020 10:45:48 AM CEST
 
 
 
@@ -77,6 +77,8 @@ std::string e_state_string(e_state entry)
       return "e_state::PLAYING (no explicit value)";
     case e_state::MAP_MENU:
       return "e_state::MAP_MENU (no explicit value)";
+    case e_state::EDIT_MAP:
+      return "e_state::EDIT_MAP (no explicit value)";
     case e_state::SELECTION_UNIT:
       return "e_state::SELECTION_UNIT (no explicit value)";
     case e_state::MOVING_UNIT:
@@ -131,26 +133,6 @@ std::string e_unit_string(e_unit entry)
       return "e_unit::NB_UNITS (no explicit value)";
     case e_unit::NONE:
       return "e_unit::NONE (no explicit value)";
-    default:
-      return "entry not matched";
-  }
-}
-
-
-std::string e_direction_string(e_direction entry)
-{
-  switch (entry)
-  {
-    case e_direction::NONE:
-      return "e_direction::NONE (0)";
-    case e_direction::UP:
-      return "e_direction::UP (360)";
-    case e_direction::DOWN:
-      return "e_direction::DOWN (540)";
-    case e_direction::LEFT:
-      return "e_direction::LEFT (630)";
-    case e_direction::RIGHT:
-      return "e_direction::RIGHT (450)";
     default:
       return "entry not matched";
   }

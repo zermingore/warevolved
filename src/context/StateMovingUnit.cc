@@ -9,7 +9,6 @@
 
 #include <context/StateMovingUnit.hh>
 
-#include <common/enums/directions.hh>
 #include <common/enums/input.hh>
 #include <common/enums/states.hh>
 #include <context/StateMenu.hh>

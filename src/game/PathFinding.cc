@@ -13,13 +13,11 @@
 #include <debug/Debug.hh>
 #include <debug/OSD.hh>
 
-#include <common/enums/directions.hh>
 #include <game/Battle.hh>
 #include <game/Cell.hh>
 #include <game/Map.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>
-#include <game/path_shapes.hh>
 #include <game/units/Unit.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
