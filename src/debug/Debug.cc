@@ -41,7 +41,6 @@ void Debug::init()
 void Debug::bodylogprintf()
 {
   *_log << std::endl;
-  std::cout << std::endl;
 }
 
 
