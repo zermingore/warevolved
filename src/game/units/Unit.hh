@@ -2,7 +2,7 @@
  * \file
  * \date May 3, 2013
  * \author Zermingore
- * \brief Unit class declaration
+ * \brief Unit class declaration and enum e_unit definition
  */
 
 #ifndef UNIT_HH_
@@ -12,8 +12,9 @@
 # include <cstddef> // size_t
 # include <common/using.hh> // Coords
 # include <graphics/graphic_types.hh>
-# include <common/enums/units.hh>
 
+
+enum class e_unit; // definition follows
 
 namespace graphics {
   class Sprite;
@@ -220,6 +221,22 @@ protected:
   size_t _maxRange;    ///< Maximal range to attack a unit
 
   std::shared_ptr<graphics::Sprite> _sprite; ///< Unit Sprite
+};
+
+
+
+/**
+ * \enum e_unit
+ * \brief Different units types.
+ */
+enum class e_unit
+{
+  SOLDIER = 0,
+  CAR,
+  MOTORCYCLE,
+
+  NB_UNITS,
+  NONE
 };
 
 

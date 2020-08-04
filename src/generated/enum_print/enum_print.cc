@@ -1,6 +1,6 @@
 // auto-generated code, edit at your own risks
 // generator: generate_enum_print.sh
-// generated on: Tue 04 Aug 2020 11:08:34 AM CEST
+// generated on: Tue 04 Aug 2020 11:14:49 AM CEST
 
 
 
@@ -59,26 +59,6 @@ std::string e_terrain_string(e_terrain entry)
       return "e_terrain::FOREST (no explicit value)";
     case e_terrain::NB_TERRAIN:
       return "e_terrain::NB_TERRAIN (no explicit value)";
-    default:
-      return "entry not matched";
-  }
-}
-
-
-std::string e_unit_string(e_unit entry)
-{
-  switch (entry)
-  {
-    case e_unit::SOLDIER:
-      return "e_unit::SOLDIER (0)";
-    case e_unit::CAR:
-      return "e_unit::CAR (no explicit value)";
-    case e_unit::MOTORCYCLE:
-      return "e_unit::MOTORCYCLE (no explicit value)";
-    case e_unit::NB_UNITS:
-      return "e_unit::NB_UNITS (no explicit value)";
-    case e_unit::NONE:
-      return "e_unit::NONE (no explicit value)";
     default:
       return "entry not matched";
   }

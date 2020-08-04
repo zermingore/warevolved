@@ -9,9 +9,9 @@
 # define UNIT_FACTORY_HH_
 
 # include <memory>
-# include <common/enums/units.hh>
 
 class Unit;
+enum class e_unit;
 
 
 /// \todo investigate std::variant, could make things safer

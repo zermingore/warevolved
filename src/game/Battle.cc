@@ -15,7 +15,6 @@
 #include <lib/pugixml.hh>
 
 #include <common/enums/terrains.hh>
-#include <common/enums/units.hh>
 #include <debug/Debug.hh>
 #include <game/Map.hh>
 #include <game/Player.hh>
