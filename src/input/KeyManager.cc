@@ -7,8 +7,8 @@
 
 #include <input/KeyManager.hh>
 
-#include <common/enums/input.hh>
 #include <debug/Debug.hh>
+#include <input/EventManager.hh>
 #include <input/ReplayManager.hh>
 #include <utility>
 

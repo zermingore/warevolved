@@ -8,7 +8,6 @@
 
 #include <context/StateSelectTarget.hh>
 
-#include <common/enums/input.hh>
 #include <debug/Debug.hh>
 #include <game/Battle.hh>
 #include <game/Cell.hh>

@@ -10,7 +10,6 @@
 #include <chrono>
 #include <future>
 
-#include <common/enums/input.hh>
 #include <context/State.hh>
 #include <debug/Debug.hh>
 #include <game/Battle.hh>

@@ -2,7 +2,7 @@
  * \file
  * \date April 17, 2013
  * \author Zermingore
- * \brief EventManager class declaration
+ * \brief EventManager class declaration and enum e_input definition
  */
 
 #ifndef EVENT_MANAGER_HH_
@@ -14,7 +14,7 @@
 
 
 class KeyManager;
-enum class e_input;
+enum class e_input; // definition follows
 
 
 /**
@@ -51,6 +51,38 @@ private:
 
   /// Callbacks / events association
   std::map<e_input, std::function<void()>> _callbacks;
+};
+
+
+
+/**
+ * \enum e_input
+ * \brief Logical input names.
+ */
+enum class e_input
+{
+  // Motion keys
+  MOVE_UP = 0,
+  MOVE_DOWN,
+  MOVE_LEFT,
+  MOVE_RIGHT,
+
+  // Action keys
+  SELECTION,
+
+  // Interface keys
+  TOGGLE_PANEL,
+
+  // Global inputs
+  SCREENSHOT,
+  DUMP_MAP,
+  QUICK_SAVE,
+  QUICK_LOAD,
+
+  // Exit requests
+  EXIT,
+
+  NB_KEYS
 };
 
 

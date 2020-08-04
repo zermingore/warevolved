@@ -9,7 +9,6 @@
 
 #include <debug/Debug.hh>
 
-#include <common/enums/input.hh>
 #include <game/Battle.hh>
 #include <game/Cell.hh>
 #include <game/Map.hh>

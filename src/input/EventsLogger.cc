@@ -11,7 +11,6 @@
 
 #include <debug/Debug.hh>
 
-#include <generated/enum_print/enum_print.hh>
 #include <input/EventsLogger.hh>
 
 #include <tools/StringParser.hh>

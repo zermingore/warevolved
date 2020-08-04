@@ -9,7 +9,6 @@
 
 #include <lib/pugixml.hh>
 
-#include <common/enums/input.hh>
 #include <debug/Debug.hh>
 #include <game/Battle.hh>
 #include <game/Map.hh>

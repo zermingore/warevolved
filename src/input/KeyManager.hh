@@ -2,7 +2,7 @@
  * \file
  * \date April 17, 2013
  * \author Zermingore
- * \brief KeyManager class declaration
+ * \brief KeyManager class declaration and enum e_key definition
  */
 
 #ifndef INPUT_KEY_MANAGER_HH_
@@ -19,38 +19,11 @@
 # include <SFML/Window/Keyboard.hpp>
 # include <structures/ThreadSafeQueue.hh>
 
-class ReplayManager;
+
+enum class e_key;   // definition follows
 enum class e_input;
 
-
-/**
- * \enum e_key
- * \brief Keys indexes allowing key repeating.
- */
-enum class e_key
-{
-  // action keys
-  SELECTION,
-
-  // Global actions
-  SCREENSHOT,
-  DUMP_MAP,
-  QUICK_SAVE,
-  QUICK_LOAD,
-
-  // Interface keys
-  TOGGLE_PANEL,
-
-  // exit requests
-  EXIT,
-
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT,
-
-  NB_KEYS
-};
+class ReplayManager;
 
 
 /**
@@ -117,6 +90,37 @@ private:
 
   /// Pointer on the replay manager to add keys to a replay being created
   static std::shared_ptr<ReplayManager> _replay;
+};
+
+
+
+/**
+ * \enum e_key
+ * \brief Keys indexes allowing key repeating.
+ */
+enum class e_key
+{
+  // action keys
+  SELECTION,
+
+  // Global actions
+  SCREENSHOT,
+  DUMP_MAP,
+  QUICK_SAVE,
+  QUICK_LOAD,
+
+  // Interface keys
+  TOGGLE_PANEL,
+
+  // exit requests
+  EXIT,
+
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
+
+  NB_KEYS
 };
 
 

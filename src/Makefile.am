@@ -83,8 +83,8 @@ tools/options/OptionsParser.cc
 
 
 # Generated sources files
-__top_srcdir__we_SOURCES +=                     \
-generated/enum_print/enum_print.cc
+# __top_srcdir__we_SOURCES +=                     \
+# generated/enum_print/enum_print.cc
 
 
 

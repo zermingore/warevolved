@@ -7,7 +7,6 @@
 
 #include <cassert>
 
-#include <common/enums/input.hh>
 #include <context/StatesFactory.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
