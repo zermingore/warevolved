@@ -33,7 +33,7 @@ void Debug::init()
   }
 
   _log = std::make_unique<std::ofstream> (LOG_FILENAME, std::ios_base::out);
-  NOTICE("Logging into", LOG_FILENAME); // Using the log, checking if it works
+  NOTICE("Logging into:", LOG_FILENAME); // Using the log, checking if it works
 }
 
 

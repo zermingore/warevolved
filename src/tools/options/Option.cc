@@ -43,11 +43,11 @@ void Option::populateArguments(const std::string& arguments)
   _arguments.emplace_back(args);
 
 
-  // Debug
-  NOTICE("Option", _name, "arguments: ");
-  for (const auto& arg: _arguments)
-  {
-    std::cout << arg << " ";
-  }
-  std::cout << std::endl;
+  // Debug: Options + arguments print
+  // NOTICE("Option", _name, "arguments: ");
+  // for (const auto& arg: _arguments)
+  // {
+  //   std::cout << arg << " ";
+  // }
+  // std::cout << '\n';
 }

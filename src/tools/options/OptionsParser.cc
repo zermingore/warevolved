@@ -233,7 +233,6 @@ void OptionsParser::validArguments()
     {
       argument = option->substr(pos + 1);
       op = option->substr(0, pos);
-      std::cout << "opt " << op << ": args: " << argument << '\n';
     }
 
     // Search the provided option in the supported options list
