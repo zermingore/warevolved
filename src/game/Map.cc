@@ -58,13 +58,6 @@ std::shared_ptr<Unit> Map::unit(const Coords& c) const
 
 
 
-e_terrain Map::getTerrain(size_t column, size_t line) const
-{
-  return _cells[column][line]->terrain();
-}
-
-
-
 void Map::setTerrain(size_t column, size_t line, e_terrain terrain)
 {
   _cells[column][line]->setTerrain(terrain);

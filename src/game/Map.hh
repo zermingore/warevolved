@@ -104,15 +104,6 @@ public:
   std::shared_ptr<Unit> selectedUnit();
 
   /**
-   * \brief Get the terrain at given coordinates.
-   * \param column Coordinates according to columns.
-   * \param line Coordinates according to lines.
-   * \return The enum index in e_terrain matching the terrain
-   *   located at coordinates (column, line).
-   */
-  e_terrain getTerrain(size_t column, size_t line) const;
-
-  /**
    * \brief sets the terrain at given coordinates
    * \param column Coordinates according to columns.
    * \param line Coordinates according to lines.
