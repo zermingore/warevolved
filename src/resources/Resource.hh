@@ -28,7 +28,12 @@ public:
    * \brief Constructor
    * \param name resource name
    */
-  explicit Resource(std::string  name);
+  explicit Resource(std::string name)
+    : _name(std::move(name))
+    , _loaded(false)
+    , _fileName("")
+  {
+  }
 
   /**
    * \brief default destructor
