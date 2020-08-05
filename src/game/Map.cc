@@ -65,6 +65,18 @@ void Map::setTerrain(size_t column, size_t line, e_terrain terrain)
 
 
 
+void Map::clearHighlights()
+{
+  for (auto col(0u); col < _nbColumns; ++col)
+  {
+    for (auto line(0u); line < _nbLines; ++line)
+    {
+      _cells[col][line]->setHighlight(false);
+    }
+  }
+}
+
+
 void Map::selectUnit(const Coords& c)
 {
   // Retrieve the unit

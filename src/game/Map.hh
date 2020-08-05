@@ -112,6 +112,11 @@ public:
   void setTerrain(size_t column, size_t line, e_terrain terrain);
 
   /**
+   * \brief Clear, for each cell the highlight flag
+   */
+  void clearHighlights();
+
+  /**
    * \brief get the cell at given coordinates
    * \param coords the coordinates of the Cell to retrieve
    * \return The cell at coords coordinates
