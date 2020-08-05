@@ -152,7 +152,6 @@ void StateMovingUnit::moveUnitRight()
 
 void StateMovingUnit::draw()
 {
-  /// \todo should only the graphics engine be allowed to draw ?
   // graphics::GraphicsEngine::draw(_holoUnit);
 
   game::Status::player()->cursor()->disableDrawThisFrame();
