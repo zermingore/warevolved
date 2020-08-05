@@ -50,9 +50,20 @@ public:
 
   /**
    * \brief Sets the _fullScreen attribute
-   * Adjust the concerned graphical attributes accordingly
+   *   and adjust the concerned graphical attributes accordingly
    */
-  void setFullScreen(bool fullScreen);
+  void setFullScreen(bool fullScreen)
+  {
+    _fullScreen = fullScreen;
+    if (fullScreen)
+    {
+      setGraphics(24, 8, 4);
+    }
+    else
+    {
+      setGraphics(0, 0, 0); // vanilla (debug) mode
+    }
+  }
 
 
 
@@ -65,7 +76,12 @@ private:
    */
   void setGraphics(unsigned int depth,
                    unsigned int stencil,
-                   unsigned int antiAliasing);
+                   unsigned int antiAliasing)
+  {
+    _depth = depth;
+    _stencil = stencil;
+    _antiAliasing = antiAliasing;
+  }
 
 
   // graphic settings

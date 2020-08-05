@@ -36,6 +36,7 @@ public:
 
 
 private:
+  // not const: Terrain needs the ResourcesManager (static) initialization
   /// Mapping Terrain identifier -> Terrain
   static std::map<e_terrain, const Terrain> _terrains;
 };
