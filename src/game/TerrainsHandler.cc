@@ -9,7 +9,6 @@
 
 #include <debug/Debug.hh>
 #include <game/Terrain.hh>
-#include <game/Cell.hh> // e_terrain
 #include <graphics/graphic_types.hh>
 
 

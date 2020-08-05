@@ -8,6 +8,7 @@
 #include <tools/Random.hh>
 #include <tools/options/OptionsParser.hh>
 #include <game/Cell.hh>
+#include <game/Terrain.hh>
 #include <debug/Debug.hh>
 
 

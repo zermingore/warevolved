@@ -2,7 +2,7 @@
  * \file
  * \date April 19, 2013
  * \author Zermingore
- * \brief Cell class declaration and enum e_terrain definition
+ * \brief Cell class declaration
  */
 
 #ifndef GAME_CELL_HH_
@@ -12,7 +12,7 @@
 # include <graphics/graphic_types.hh>
 
 
-enum class e_terrain; // definition follows
+enum class e_terrain;
 enum class e_unit;
 
 
@@ -130,18 +130,5 @@ private:
 };
 
 
-
-/**
- * \enum e_terrain
- * \brief Listing of all terrains
- */
-enum class e_terrain
-{
-  NONE = 0,
-  PLAIN,
-  FOREST,
-
-  NB_TERRAIN
-};
 
 #endif /* !GAME_CELL_HH_ */

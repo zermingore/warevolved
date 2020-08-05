@@ -2,7 +2,7 @@
  * \file
  * \date November 25, 2016
  * \author Zermingore
- * \brief Terrain class declaration
+ * \brief Terrain class declaration and enum e_terrain definition
  */
 
 #ifndef TERRAIN_HH_
@@ -53,12 +53,27 @@ public:
   const std::string& name() const { return _textureName; }
 
 
-
 private:
   int _cover; ///< Protection value
   const std::string _textureName; ///< Texture name, also used as an id
   std::shared_ptr<graphics::Texture> _texture; ///< Graphical image
 };
+
+
+
+/**
+ * \enum e_terrain
+ * \brief Listing of all terrains
+ */
+enum class e_terrain
+{
+  NONE = 0,
+  PLAIN,
+  FOREST,
+
+  NB_TERRAIN
+};
+
 
 
 #endif /* !TERRAIN_HH_ */
