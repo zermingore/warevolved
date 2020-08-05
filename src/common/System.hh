@@ -26,12 +26,15 @@ public:
   System() = delete;
 
   /**
-   * \brief sets the SFML major and minor version numbers
+   * \brief sets the SFML minimal required version
+   * \param sfml_major SFML version major number
+   * \param sfml_minor SFML version minor number
    */
-  System(const unsigned int sfml_major, const unsigned int sfml_minor);
-
-  /// default destructor
-  ~System() = default;
+  System(const unsigned int sfml_major, const unsigned int sfml_minor)
+    : _sfmlMajor (sfml_major)
+    , _sfmlMinor (sfml_minor)
+  {
+  }
 
 
   /**

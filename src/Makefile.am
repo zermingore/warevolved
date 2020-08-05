@@ -21,8 +21,6 @@ resources/Text.cc                   \
 debug/Debug.cc                      \
 debug/OSD.cc                        \
 \
-common/System.cc                    \
-\
 config/Settings.cc                  \
 \
 context/State.cc                    \
