@@ -314,13 +314,7 @@ void PathFinding::highlightCells()
 
 void PathFinding::hideAllowedPath()
 {
-  // cleaning displayed move possibilities
-  for (auto i(0u); i < _map->nbColumns(); ++i)
-  {
-    for (auto j(0u); j < _map->nbLines(); ++j) {
-      (*_map)[i][j]->setHighlight(false);
-    }
-  }
+  _map->clearHighlights();
 }
 
 
