@@ -283,7 +283,7 @@ void Battle::loadMap()
 
           const auto u = _map->unit(col, line);
           assert(u->canReceive(m) && "Cannot add this unit to a crew");
-          u->addToCrew(m); /// \todo way to specify the role
+          u->addToCrew(m);
         }
       }
 

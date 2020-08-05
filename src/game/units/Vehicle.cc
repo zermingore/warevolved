@@ -44,8 +44,7 @@ void Vehicle::restoreCrew()
 {
   for (const auto& member: _dropped)
   {
-    /// \todo Make sure the roles are properly restored
-    addToCrew(member.second);
+    addToCrew(member.second, member.first);
     game::Status::battle()->map()->stashUnit(*(member.second));
   }
 }

@@ -14,6 +14,19 @@
 # include <graphics/graphic_types.hh>
 
 
+enum class e_unit_role
+{
+    NONE
+
+  , PASSENGER // eventually multiple passengers
+  , DRIVER    // or pilot
+  , COPILOT   // may be necessary (airplane)
+  , LOADER    // ex: tank
+  , GUNNER    // list (airplane)
+  , MECHANIC
+};
+
+
 enum class e_unit; // definition follows
 
 namespace graphics {
@@ -188,11 +201,16 @@ public:
   }
 
   /**
-   * \brief Add the given Unit to the crew (need to be overloaded to be used)
+   * \brief Add the given Unit to the crew at the given role
    * \param unit Unit to add to the crew
+   * \param role Role to give to the unit
+   * \return true if the Unit could be added (false on full crew, role occupied)
    * \note Aborts the execution if called with the base class definition
+   * \warning This method needs to be overloaded to be used
    */
-  [[ noreturn ]] virtual bool addToCrew(std::shared_ptr<Unit> unit);
+  [[ noreturn ]]
+  virtual bool addToCrew(std::shared_ptr<Unit> unit,
+                         e_unit_role role = e_unit_role::NONE);
 
   /**
    * \brief *Always* returns 0
@@ -237,6 +255,18 @@ enum class e_unit
 
   NB_UNITS,
   NONE
+};
+
+
+const std::map<const e_unit_role, const std::string> UNIT_ROLE_STR =
+{
+    { e_unit_role::NONE,      "None" }
+  , { e_unit_role::PASSENGER, "Passenger" }
+  , { e_unit_role::DRIVER,    "Driver" }
+  , { e_unit_role::COPILOT,   "Co-Pilot" }
+  , { e_unit_role::LOADER,    "Loader" }
+  , { e_unit_role::GUNNER,    "Gunner" }
+  , { e_unit_role::MECHANIC,  "Mechanic" }
 };
 
 

@@ -47,13 +47,27 @@ bool Car::canOpenFire() const
 
 
 
-bool Car::addToCrew(std::shared_ptr<Unit> unit)
+bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
 {
   if (_crew.size() >= _maxCrewMembers)
   {
     ERROR("Called 'addToCrew()' with a full Vehicle");
     return false;
   }
+
+  // If the role is specified, use it
+  if (role != e_unit_role::NONE)
+  {
+    if (_crew.contains(role))
+    {
+      WARNING("Already occupied role", static_cast<int> (role));
+      return false;
+    }
+
+    _crew[role] = unit;
+    return true;
+  }
+
 
   std::shared_ptr<Unit> driver = nullptr;
   std::shared_ptr<Unit> copilot = nullptr;

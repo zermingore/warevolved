@@ -11,7 +11,7 @@
 # define MENU_CREW_MEMBER_HH_
 
 # include <interface/menus/InGameMenu.hh>
-# include <game/units/Vehicle.hh> // e_unit_role
+# include <game/units/Unit.hh> // e_unit_role
 
 
 namespace interface {

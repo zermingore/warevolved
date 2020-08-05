@@ -45,11 +45,17 @@ bool Motorcycle::canOpenFire() const
 
 
 
-bool Motorcycle::addToCrew(std::shared_ptr<Unit> unit)
+bool Motorcycle::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
 {
   if (_crew.size() >= _maxCrewMembers)
   {
     ERROR("Called 'addToCrew()' with a full Vehicle");
+    return false;
+  }
+
+  if (role != e_unit_role::DRIVER)
+  {
+    ERROR("A motorcycle handles only drivers");
     return false;
   }
 

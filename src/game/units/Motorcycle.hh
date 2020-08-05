@@ -33,10 +33,13 @@ public:
   /**
    * \brief Add the given unit to the Motorcycle
    * \param unit Unit getting in the motorcycle (adding it to the crew)
+   * \param role Role of the Unit getting in the motorcycle
    * \note Only a driver can be added
    * \todo Check if the given Unit can get in (ex: a tank could not get in)
    */
-  bool addToCrew(std::shared_ptr<Unit> unit) override final;
+  bool addToCrew(
+    std::shared_ptr<Unit> unit,
+    e_unit_role role = e_unit_role::DRIVER) override final;
 };
 
 #endif /* !MOTORCYCLE_HH_ */
