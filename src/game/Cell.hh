@@ -38,7 +38,12 @@ public:
    * \param l line   coordinate of the cell to create.
    * \param terrain id of the terrain associated to the cell
    */
-  Cell(size_t c, size_t l, e_terrain terrain);
+  Cell(size_t c, size_t l, e_terrain terrain)
+    : _coords(c, l)
+    , _terrain(terrain)
+  {
+  }
+
 
   // __________________________ Getters / Setters __________________________ //
   /**
@@ -118,9 +123,9 @@ public:
 private:
   Coords _coords;              ///< Cell's coordinates.
   e_terrain _terrain;          ///< Terrain type index (matching terrains).
-  std::shared_ptr<Unit> _unit; ///< Unit type index (matching terrains).
+  std::shared_ptr<Unit> _unit = nullptr; ///< Eventual Unit on the Cell
 
-  bool _highlight;                 ///< Does the cell needs to be highlighted ?
+  bool _highlight = false;         ///< Does the cell needs to be highlighted ?
   graphics::Color _highlightColor; ///< Color of the cell's highlight.
 };
 

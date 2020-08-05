@@ -45,7 +45,6 @@ game/Game.cc                        \
 game/Status.cc                      \
 game/Battle.cc                      \
 game/Map.cc                         \
-game/Cell.cc                        \
 game/Terrain.cc                     \
 game/TerrainsHandler.cc             \
 game/units/Unit.cc                  \
