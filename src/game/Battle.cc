@@ -68,7 +68,6 @@ Battle::Battle(const OptionsParser& options_parser)
 
 void Battle::initializeMap()
 {
-  graphics::MapGraphicsProperties::initialize();
   buildMap();
   initializePlayers();
 }

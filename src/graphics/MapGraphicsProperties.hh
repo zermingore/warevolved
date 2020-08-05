@@ -21,11 +21,6 @@ class MapGraphicsProperties
 {
 public:
   /**
-   * \brief Initialize attributes with default values.
-   */
-  static void initialize();
-
-  /**
    * \brief cell width getter.
    * \return cell width in pixels.
    */
@@ -93,6 +88,7 @@ public:
 
 
 private:
+  /// \todo These are not const because they will be modifyable later
   static component _cellWidth;     ///< cells width in pixels
   static component _cellHeight;    ///< cells height in pixels
   static component _gridThickness; ///< thickness of the grid
