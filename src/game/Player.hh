@@ -106,7 +106,7 @@ public:
 
   /**
    * \brief Update the panel relative position
-   * \param windowSize
+   * \param windowSize Main window size
    */
   void updatePanelPosition(const graphics::Size2& windowSize);
 

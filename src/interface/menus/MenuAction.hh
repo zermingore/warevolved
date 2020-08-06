@@ -101,7 +101,7 @@ private:
   /**
    * \brief Handle the Unit Crew allowing to
    *   - drop some unit
-   *   - change their role \todo
+   *   - \todo change their role
    */
   void manageCrew();
 
