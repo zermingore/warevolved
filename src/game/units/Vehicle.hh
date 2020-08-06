@@ -30,7 +30,7 @@ public:
   /**
    * \brief Default desctructor
    */
-  virtual ~Vehicle() = default;
+  virtual ~Vehicle() override = default;
 
   /**
    * \brief Check if a crew member can operate the vehicle weapon

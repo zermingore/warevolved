@@ -71,7 +71,7 @@ bool MenuAction::allowMove()
       v->crew().at(e_unit_role::DRIVER);
       return true;
     }
-    catch (const std::out_of_range& e)
+    catch ([[maybe_unused]] const std::out_of_range& e)
     {
       return false;
     }

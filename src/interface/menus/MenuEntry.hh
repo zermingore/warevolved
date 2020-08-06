@@ -65,7 +65,7 @@ public:
    */
   MenuEntry() = delete;
 
-  virtual ~MenuEntry() = default;
+  virtual ~MenuEntry() override = default;
 
   /**
    * \brief Constructor

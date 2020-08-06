@@ -68,7 +68,7 @@ void Debug::printOnce(const std::string& str)
     if (_printedOnce.at(str)) // avoid ignoring return value
       return;
   }
-  catch (const std::out_of_range& e)
+  catch ([[maybe_unused]] const std::out_of_range& e)
   {
     PRINTF(str);
     _printedOnce[str] = true;
