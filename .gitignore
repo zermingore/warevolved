@@ -4,6 +4,7 @@
 *.o
 *.in
 LOG
+LOG_old
 LOG_EVENTS
 events_log
 *\#
