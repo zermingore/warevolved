@@ -11,7 +11,8 @@
 * TODO Roadmap
 ** DONE Debug: Name threads
    CLOSED: [2020-07-29 Wed 08:23]
-** TODO Fix doxygen warnings
+** DONE Fix doxygen warnings
+   CLOSED: [2020-08-06 Thu 21:15]
 ** TODO Check included headers used
 ** TODO Panel clean (code && graphics: make text width panel size dependent)
 
@@ -45,6 +46,10 @@
 * TODO Doc
 ** TODO Options
 ** TODO Document the coding style
+** TODO Investigate spooky Doxygen warnings
+   todo:20: warning: unexpected token TK_COMMAND_BS as the argument of _internalref
+   todo:56: warning: unexpected token TK_COMMAND_BS as the argument of _internalref
+
 
 
 * TODO Clean
