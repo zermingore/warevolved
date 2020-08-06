@@ -48,7 +48,7 @@ public:
 
   /**
    * \brief Copy constructor
-   * \param coords Coordinates to copy from
+   * \param coord Coordinates to copy from
    */
   Coords(const Coords &coord)
     : Vector2<size_t> (coord.x, coord.y)
