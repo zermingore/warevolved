@@ -33,6 +33,8 @@ enum class e_unit;
  */
 class Map
 {
+  class MapIterator;
+
 public:
   /**
    * \typedef unit_list
@@ -222,6 +224,11 @@ public:
 
 
 
+  MapIterator begin() { return MapIterator(*this, 0); }
+
+  MapIterator end() { return MapIterator(*this, 0); }
+
+
 private:
   /**
    * \brief Helper function to compute the damages values
@@ -257,6 +264,35 @@ private:
 
   /// Locking while updating the selected unit
   std::mutex _lockSelectedUnitUpdate;
+
+
+
+  class MapIterator
+  {
+    public:
+      using iterator_category = std::output_iterator_tag;
+      using value_type = Cell;
+      using difference_type = void;
+      using pointer = void;
+      using reference = void;
+
+      explicit MapIterator(Map& map, int col_idx = 0) //, int line_idx = 0
+        : _colIdx(col_idx)
+        // , _lineIdx(line_idx)
+      {
+      }
+
+      // int operator*() const;
+      // iterator& operator++();
+      // iterator& operator++(int);
+
+      bool operator!=(const MapIterator& rhs) const { return _colIdx != rhs._colIdx; }
+
+
+    private:
+      size_t _colIdx;
+      // size_t _lineIdx;
+  };
 };
 
 
