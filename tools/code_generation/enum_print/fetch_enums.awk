@@ -76,8 +76,16 @@ END {
   next
 }
 
+
+# Skip enum forward declaration
+/enum class.*;/ {
+  next
+}
+
 # enum found
-/enum\ class/ {
+/enum class/ {
+  # printf "\nenum class declaration [%s] found\n", $0
+
   in_enum = 1
   nb_val = 0
 
