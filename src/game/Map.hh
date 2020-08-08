@@ -224,9 +224,10 @@ public:
 
 
 
-  MapIterator begin() { return MapIterator(*this, 0); }
+  MapIterator begin() { return MapIterator(*this, 0, 0); }
 
-  MapIterator end() { return MapIterator(*this, 0); }
+  // out of range: ok
+  MapIterator end() { return MapIterator(*this, _nbColumns, _nbLines); }
 
 
 private:
@@ -276,15 +277,20 @@ private:
       using pointer = Cell*;
       using reference = Cell&;
 
-      explicit MapIterator(Map& map, int col_idx = 0, int line_idx = 0)
-        : _colIdx(col_idx)
+      explicit MapIterator(Map& map, size_t col_idx = 0, size_t line_idx = 0)
+        : _cells(map.cells())
+        , _colIdx(col_idx)
         , _lineIdx(line_idx)
+        , _nbColumns(map.nbColumns())
+        , _nbLines(map.nbLines())
       {
+        map.cells()[0][0];
+        _cells[0][0];
       }
 
-      // int operator*() const;
-      // iterator& operator++();
-      // iterator& operator++(int);
+      MapIterator& operator++();
+
+      Cell operator++(int);
 
       bool operator!=(const MapIterator& rhs) const {
         return _colIdx != rhs._colIdx || _lineIdx != rhs._lineIdx;
@@ -294,8 +300,11 @@ private:
 
 
     private:
+      std::vector<std::vector<std::shared_ptr<Cell>>> _cells;
       size_t _colIdx;
       size_t _lineIdx;
+      size_t _nbColumns;
+      size_t _nbLines;
       std::shared_ptr<Cell> _cell;
   };
 };

@@ -387,3 +387,26 @@ constexpr void Map::boundaryChecks(size_t column, size_t line)
     throw std::out_of_range("Invalid provided coordinates");
   }
 }
+
+
+
+Map::MapIterator& Map::MapIterator::operator++()
+{
+  _colIdx = (_colIdx + 1) % _nbColumns;
+  if (_colIdx == 0)
+  {
+    _lineIdx = (_lineIdx + 1) % _nbLines;
+  }
+
+  NOTICE("++", _colIdx, _lineIdx);
+
+  _cell = _cells[_colIdx][_lineIdx];
+  return *this;
+}
+
+Cell Map::MapIterator::operator++(int)
+{
+  Cell ret(*_cell);
+  ++*this;
+  return ret;
+}
