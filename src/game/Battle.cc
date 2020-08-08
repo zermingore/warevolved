@@ -27,8 +27,6 @@
 #include <tools/options/OptionsParser.hh>
 #include <tools/Random.hh>
 
-#include <game/Cell.hh> // debug
-
 
 
 Battle::Battle(const OptionsParser& options_parser)
@@ -72,24 +70,6 @@ void Battle::initializeMap()
 {
   buildMap();
   initializePlayers();
-
-  ERROR("tst", _map->cells()[0][0]->highlight());
-
-  NOTICE("manual");
-  for (auto it = _map->begin(); it != _map->end(); ++it)
-  {
-    if (!*it)
-      ERROR("CELL NULL");
-    WARNING((*it)->highlight());
-  }
-
-  NOTICE("auto");
-  for (const auto& cell: *_map)
-  {
-    if (!cell)
-      ERROR("CELL NULL");
-    WARNING(cell->highlight());
-  }
 }
 
 

@@ -398,8 +398,6 @@ Map::MapIterator& Map::MapIterator::operator++()
     ++_lineIdx; // no boundary check: end() == last_col; out of bound line
   }
 
-  NOTICE("++", _colIdx, _lineIdx);
-
   return *this;
 }
 
