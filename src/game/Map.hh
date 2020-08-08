@@ -227,7 +227,7 @@ public:
   MapIterator begin() { return MapIterator(*this, 0, 0); }
 
   // out of range: ok
-  MapIterator end() { return MapIterator(*this, _nbColumns, _nbLines); }
+  MapIterator end() { return MapIterator(*this, 0, _nbLines); }
 
 
 private:
@@ -285,7 +285,6 @@ private:
         , _nbLines(map.nbLines())
       {
         map.cells()[0][0];
-        _cells[0][0];
       }
 
       MapIterator& operator++();
@@ -296,7 +295,7 @@ private:
         return _colIdx != rhs._colIdx || _lineIdx != rhs._lineIdx;
       }
 
-      std::shared_ptr<Cell> operator*() { return _cell; }
+      std::shared_ptr<Cell> operator*() { return _cells[_colIdx][_lineIdx]; }
 
 
     private:
@@ -305,7 +304,6 @@ private:
       size_t _lineIdx;
       size_t _nbColumns;
       size_t _nbLines;
-      std::shared_ptr<Cell> _cell;
   };
 };
 

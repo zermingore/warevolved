@@ -395,18 +395,17 @@ Map::MapIterator& Map::MapIterator::operator++()
   _colIdx = (_colIdx + 1) % _nbColumns;
   if (_colIdx == 0)
   {
-    _lineIdx = (_lineIdx + 1) % _nbLines;
+    ++_lineIdx; // no boundary check: end() == last_col; out of bound line
   }
 
   NOTICE("++", _colIdx, _lineIdx);
 
-  _cell = _cells[_colIdx][_lineIdx];
   return *this;
 }
 
 Cell Map::MapIterator::operator++(int)
 {
-  Cell ret(*_cell);
+  Cell ret(*_cells[_colIdx][_lineIdx]);
   ++*this;
   return ret;
 }
