@@ -9,6 +9,7 @@
 #include <interface/menus/MenuCrewMember.hh>
 
 #include <context/State.hh>
+#include <game/Map.hh>
 #include <game/Battle.hh>
 #include <game/PathFinding.hh>
 #include <game/Player.hh>

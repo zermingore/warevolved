@@ -12,10 +12,10 @@
 # include <string>
 # include <memory>
 
+# include <common/using.hh> // Coords
 # include <structures/Vector.hh>
 # include <graphics/graphic_types.hh>
 # include <interface/InterfaceSettings.hh>
-# include <game/Map.hh>
 # include <resources/ResourcesManager.hh>
 
 namespace graphics {

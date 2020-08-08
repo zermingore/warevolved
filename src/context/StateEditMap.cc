@@ -13,6 +13,7 @@
 #include <graphics/GraphicsEngine.hh>
 #include <input/EventManager.hh>
 #include <interface/Cursor.hh>
+#include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/units/UnitsFactory.hh>
 
