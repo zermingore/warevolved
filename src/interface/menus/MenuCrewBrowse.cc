@@ -12,6 +12,7 @@
 #include <debug/Debug.hh>
 
 #include <context/State.hh>
+#include <game/Map.hh>
 #include <game/Battle.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>

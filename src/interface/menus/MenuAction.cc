@@ -9,6 +9,7 @@
 #include <interface/menus/MenuAction.hh>
 
 #include <context/State.hh>
+#include <game/Map.hh>
 #include <game/Battle.hh>
 #include <game/Cell.hh>
 #include <game/PathFinding.hh>

@@ -10,6 +10,7 @@
 #include <context/StateMovingUnit.hh>
 
 #include <context/StateMenu.hh>
+#include <game/Map.hh>
 #include <game/Battle.hh>
 #include <game/PathFinding.hh>
 #include <game/Player.hh>
