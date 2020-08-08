@@ -223,10 +223,17 @@ public:
   std::unique_ptr<pugi::xml_document> dump();
 
 
-
+  /**
+   * \brief MapIterator first value
+   * \return A MapIterator on the first Cell
+   */
   MapIterator begin() { return MapIterator(*this, 0, 0); }
 
-  // out of range: ok
+  /**
+   * \brief MapIterator last value
+   * \return A MapIterator on the first out of bound Cell
+   * \note The {0, _nbLines} coordinates is out of Map bounds
+   */
   MapIterator end() { return MapIterator(*this, 0, _nbLines); }
 
 
@@ -268,6 +275,11 @@ private:
 
 
 
+  /**
+   * \class MapIterator
+   * \brief Custom iterator on the Map cells
+   * \note Map private class
+   */
   class MapIterator
   {
     public:
@@ -277,6 +289,12 @@ private:
       using pointer = Cell*;
       using reference = Cell&;
 
+      /**
+       * \brief Constructor
+       * \param map Map in order to get the cells list and Map dimensions
+       * \param col_idx Pointed Cell column index
+       * \param line_idx Pointed Cell line index
+       */
       explicit MapIterator(Map& map, size_t col_idx = 0, size_t line_idx = 0)
         : _cells(map.cells())
         , _colIdx(col_idx)
@@ -284,26 +302,40 @@ private:
         , _nbColumns(map.nbColumns())
         , _nbLines(map.nbLines())
       {
-        map.cells()[0][0];
       }
 
+      /**
+       * \brief Increment operator (postfix)
+       */
       MapIterator& operator++();
 
+      /**
+       * \brief Increment operator (prefix)
+       */
       Cell operator++(int);
 
+      /**
+       * \brief Comparison operator
+       * \param rhs Right hand side operand
+       * \return wether if the Cell coordinates of both operator are the same
+       */
       bool operator!=(const MapIterator& rhs) const {
         return _colIdx != rhs._colIdx || _lineIdx != rhs._lineIdx;
       }
 
+      /**
+       * \brief Derefence operator
+       * \return the Cell pointed by the operator coordinates
+       */
       std::shared_ptr<Cell> operator*() { return _cells[_colIdx][_lineIdx]; }
 
 
     private:
-      std::vector<std::vector<std::shared_ptr<Cell>>> _cells;
-      size_t _colIdx;
-      size_t _lineIdx;
-      size_t _nbColumns;
-      size_t _nbLines;
+      std::vector<std::vector<std::shared_ptr<Cell>>> _cells; ///< Map cells
+      size_t _colIdx;    ///< Cell column index
+      size_t _lineIdx;   ///< Cell line index
+      size_t _nbColumns; ///< Map nb columns
+      size_t _nbLines;   ///< Map nb lines
   };
 };
 
