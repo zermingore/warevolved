@@ -66,16 +66,9 @@ StateSelectTarget::StateSelectTarget()
 StateSelectTarget::~StateSelectTarget()
 {
   auto map {game::Status::battle()->map()};
-  auto cells {map->cells()};
-  const auto nb_col(map->nbColumns());
-  const auto nb_lines(map->nbLines());
-
-  for (auto col(0u); col < nb_col; ++col)
+  for (const auto& cell: *map)
   {
-    for (auto line(0u); line < nb_lines; ++line)
-    {
-      cells[col][line]->setHighlight(false);
-    }
+    cell->setHighlight(false);
   }
 }
 
