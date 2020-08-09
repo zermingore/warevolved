@@ -3,7 +3,7 @@
  * \date May 20, 2013
  * \author Zermingore
  * \namespace interface
- * \brief MenuEntry class declaration
+ * \brief MenuEntry class declaration and e_entry enum definition
  */
 
 #ifndef MENU_ENTRY_HH_
@@ -20,35 +20,10 @@ namespace resources {
   class Text;
 }
 
+enum class e_entry; // definition follows
+
 
 namespace interface {
-
-
-/**
- * \enum e_entry
- * \brief entries descriptors
- */
-enum class e_entry
-{
-  NONE = 0, // invalid selected entry
-
-  MOVE,    // motion order
-  WAIT,    // motion order
-  PICK_UP, // motion order
-  BOARD,   // motion order
-
-  // crew
-  DROP_OFF,
-  GET_OUT,
-  CREW,
-  CREW_CONFIRM, // Confirm the crew actions (not reversible)
-
-  NEXT_TURN,
-  ATTACK,
-
-  CANCEL
-};
-
 
 
 /**
@@ -128,6 +103,33 @@ protected:
 
 
 } // namespace interface
+
+
+
+/**
+ * \enum e_entry
+ * \brief entries descriptors
+ */
+enum class e_entry
+{
+  NONE = 0, // invalid selected entry
+
+  MOVE,    // motion order
+  WAIT,    // motion order
+  PICK_UP, // motion order
+  BOARD,   // motion order
+
+  // crew
+  DROP_OFF,
+  GET_OUT,
+  CREW,
+  CREW_CONFIRM, // Confirm the crew actions (not reversible)
+
+  NEXT_TURN,
+  ATTACK,
+
+  CANCEL
+};
 
 
 #endif /* !MENU_ENTRY_HH_ */

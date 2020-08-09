@@ -16,14 +16,14 @@
 
 enum class e_unit_role
 {
-    NONE
+  NONE,
 
-  , PASSENGER // eventually multiple passengers
-  , DRIVER    // or pilot
-  , COPILOT   // may be necessary (airplane)
-  , LOADER    // ex: tank
-  , GUNNER    // list (airplane)
-  , MECHANIC
+  PASSENGER, // eventually multiple passengers
+  DRIVER,    // or pilot
+  COPILOT,   // may be necessary (airplane)
+  LOADER,    // ex: tank
+  GUNNER,    // list (airplane)
+  MECHANIC
 };
 
 

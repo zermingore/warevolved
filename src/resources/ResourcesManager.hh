@@ -4,6 +4,7 @@
  * \author Zermingore
  * \namespace resources
  * \brief ResourcesManager (handling Images, Fonts, ...) class declaration
+ *   and enum e_resource_type definition
  */
 
 #ifndef RESOURCES_RESOURCES_MANAGER_HH_
@@ -13,21 +14,11 @@
 # include <resources/Font.hh>
 
 
+enum class e_resource_type: int; // definition follows
+
 
 namespace resources {
 
-/**
- * \enum e_resource_type
- * \brief matching every resource types
- */
-enum class e_resource_type: int
-{
-  NONE = 0,
-
-  IMAGE,
-  FONT,
-  SOUND,  /// \todo sound management
-};
 
 
 /**
@@ -123,6 +114,20 @@ private:
 };
 
 } // namespace resources
+
+
+/**
+ * \enum e_resource_type
+ * \brief matching every resource types
+ */
+enum class e_resource_type: int
+{
+  NONE = 0,
+
+  IMAGE,
+  FONT,
+  SOUND,  /// \todo sound management
+};
 
 
 #endif /* !RESOURCES_RESOURCES_MANAGER_HH_ */
