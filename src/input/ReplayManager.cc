@@ -9,6 +9,7 @@
 #include <input/KeyManager.hh>
 #include <input/ReplayManager.hh>
 #include <tools/StringParser.hh>
+#include <config/Settings.hh>
 
 
 
@@ -28,6 +29,12 @@ void ReplayManager::prepareReplayKeys(const std::string& filename)
   std::ifstream stream(filename, std::ios_base::in);
   while (stream.getline(line, 256))
   {
+    if (line[0] == '#')
+    {
+      PRINTF("Ignoring replay comment: ", line);
+      continue;
+    }
+
     // getting the input events only from the log
     auto entry(StringParser::split(line, " "));
     if (entry.size() != 2) // not the expected format: timestamp e_key
@@ -64,6 +71,8 @@ void ReplayManager::setReplayFile(const std::string& filename)
 
   _file.reset();
   _file = std::make_unique<std::ofstream> (_filename, std::ios_base::out);
+
+  *_file << "# version " << Settings::versionString() << '\n';
 }
 
 
