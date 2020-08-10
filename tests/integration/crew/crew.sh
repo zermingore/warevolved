@@ -23,6 +23,12 @@ SAVED_MAP=$(grep "Saving map into:" "$(pwd)/LOG" \
               | awk '{ print $NF }')
 SAVED_MAP=${SAVED_MAP%xml*}xml # Trim color characters
 
-diff "${BASH_SOURCE%.*}.map.ref" "$(dirname $(readlink -f $0))/../${SAVED_MAP}"
+diff -I'<.*_version.*>' "${BASH_SOURCE%.*}.map.ref" "$(dirname $(readlink -f $0))/../${SAVED_MAP}"
 
-return $?
+if [[ $? -ne 0 ]]; then
+  echo "Failure: diff not null:"
+  echo "${BASH_SOURCE%.*}.map.ref" "$(dirname $(readlink -f $0))/../${SAVED_MAP}"
+  return 1
+fi
+
+return 0
