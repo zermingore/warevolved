@@ -21,6 +21,8 @@ resources/Text.cc                   \
 debug/Debug.cc                      \
 debug/OSD.cc                        \
 \
+config/Settings.cc                  \
+\
 context/State.cc                    \
 context/StateGlobal.cc              \
 context/StatesFactory.cc            \

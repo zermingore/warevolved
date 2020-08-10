@@ -10,7 +10,6 @@
 # define CORE_CONTEXT_HH_
 
 # include <memory>
-# include <common/System.hh>
 
 class Settings;
 
@@ -47,9 +46,6 @@ private:
    * \brief Builds and sets the main window
    */
   void init();
-
-  std::unique_ptr<System> _system;     ///< System settings (libs versions, ...)
-  std::shared_ptr<Settings> _settings; ///< generic settings (options, ...)
 };
 
 

@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include <debug/Debug.hh>
+#include <config/Settings.hh>
 #include <tools/options/Option.hh>
 
 
@@ -158,8 +159,9 @@ void OptionsParser::displayVersion() const noexcept
   std::cout << _av[0] << ": version ";
 
   // Print the version numbers, each number separated by a dot
-  std::cout << *(_version.begin());
-  for (auto it = _version.begin() + 1; it != _version.end(); ++it)
+  auto version { Settings::version() };
+  std::cout << *(version.begin());
+  for (auto it = version.begin() + 1; it != version.end(); ++it)
   {
     std::cout << '.' << *it;
   }

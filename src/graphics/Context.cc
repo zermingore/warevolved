@@ -19,34 +19,26 @@ namespace graphics {
 
 
 Context::Context(const bool fullscreen)
-  : _system(std::make_unique<System> (2, 1)) // SFML version: 2.1
-  , _settings(std::make_shared<Settings> ())
 {
   // Initialize the Xlib support for concurrent threads.
   XInitThreads();
 
-  _settings->setFullScreen(fullscreen);
+  Settings::setFullScreen(fullscreen);
   init();
 }
 
 
 void Context::init()
 {
-  if (_system->sfmlMajor() < 2)
-  {
-    ERROR("SFML version not officially supported");
-    assert(false && "SFML version not supported, aborting in debug");
-  }
-
-  sf::ContextSettings contextSettings(_settings->depth(),
-                                      _settings->stencil(),
-                                      _settings->antiAliasing(),
-                                      _system->sfmlMajor(),
-                                      _system->sfmlMinor());
+  sf::ContextSettings contextSettings(Settings::depth(),
+                                      Settings::stencil(),
+                                      Settings::antiAliasing(),
+                                      Settings::sfmlMajor(),
+                                      Settings::sfmlMinor());
 
   // getting right resolution, from desktop
   std::unique_ptr<sf::RenderWindow> window;
-  if (_settings->fullScreen())
+  if (Settings::fullScreen())
   {
     window = std::make_unique<sf::RenderWindow>
       (sf::VideoMode::getDesktopMode(),

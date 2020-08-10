@@ -8,15 +8,16 @@
 #ifndef SETTINGS_HH_
 # define SETTINGS_HH_
 
+# include <vector>
 
-
-/// \todo create subclasses: VideoSettings, GameSettings
 
 /**
  * \class Settings
  * \brief Class storing settings.
  *
  * Storing the following settings:
+ *   Game version
+ *   Libraries versions
  *   user's preferences
  *   system's informations (such as video modes)
  *   program options
@@ -28,43 +29,50 @@ public:
    * \brief graphic depth getter.
    * \return depth value.
    */
-  auto depth() const { return _depth; }
+  static auto depth() { return _depth; }
 
   /**
    * \brief graphic stencil getter.
    * \return stencil value.
    */
-  auto stencil() const { return _stencil; }
+  static auto stencil() { return _stencil; }
 
   /**
    * \brief Anti aliasing getter.
    * \return Anti aliasing coefficient.
    */
-  auto antiAliasing() const { return _antiAliasing; }
+  static auto antiAliasing() { return _antiAliasing; }
 
   /**
    * \brief _fullScreen getter.
    * \return true if we're in full screen false otherwise.
    */
-  auto fullScreen() const { return _fullScreen; }
+  static auto fullScreen() { return _fullScreen; }
 
   /**
    * \brief Sets the _fullScreen attribute
    *   and adjust the concerned graphical attributes accordingly
    */
-  void setFullScreen(bool fullScreen)
-  {
-    _fullScreen = fullScreen;
-    if (fullScreen)
-    {
-      setGraphics(24, 8, 4);
-    }
-    else
-    {
-      setGraphics(0, 0, 0); // vanilla (debug) mode
-    }
-  }
+  static void setFullScreen(bool fullScreen);
 
+
+  /**
+   * \brief SFML minor version number getter
+   * \return SFML minor version number
+   */
+  static auto version() { return _version; }
+
+  /**
+   * \brief SFML major version number getter
+   * \return SFML major version number
+   */
+  static auto sfmlMajor() { return _sfmlMajor; }
+
+  /**
+   * \brief SFML minor version number getter
+   * \return SFML minor version number
+   */
+  static auto sfmlMinor() { return _sfmlMinor; }
 
 
 private:
@@ -74,9 +82,9 @@ private:
    * \param stencil stencil value
    * \param antiAliasing anti aliasing coefficient
    */
-  void setGraphics(unsigned int depth,
-                   unsigned int stencil,
-                   unsigned int antiAliasing)
+  static void setGraphics(unsigned int depth,
+                          unsigned int stencil,
+                          unsigned int antiAliasing)
   {
     _depth = depth;
     _stencil = stencil;
@@ -85,12 +93,18 @@ private:
 
 
   // graphic settings
-  unsigned int _depth = 0;        ///< Depth buffer size
-  unsigned int _stencil = 0;      ///< Stencil buffer size
-  unsigned int _antiAliasing = 0; ///< Anti aliasing level
+  static unsigned int _depth;        ///< Depth buffer size
+  static unsigned int _stencil;      ///< Stencil buffer size
+  static unsigned int _antiAliasing; ///< Anti aliasing level
 
   // generic settings
-  bool _fullScreen = false; ///< Notify if we're running in full screen
+  static bool _fullScreen; ///< Notify if we're running in full screen
+
+  static const unsigned int _sfmlMajor = 2; ///< SFML major version (x.*)
+  static const unsigned int _sfmlMinor = 1; ///< SFML minor version (*.x)
+
+  /// Game's version (major, minor, bugfix)
+  static const std::vector<std::size_t> _version;
 };
 
 
