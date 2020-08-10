@@ -156,17 +156,7 @@ void OptionsParser::parse()
 
 void OptionsParser::displayVersion() const noexcept
 {
-  std::cout << _av[0] << ": version ";
-
-  // Print the version numbers, each number separated by a dot
-  auto version { Settings::version() };
-  std::cout << *(version.begin());
-  for (auto it = version.begin() + 1; it != version.end(); ++it)
-  {
-    std::cout << '.' << *it;
-  }
-
-  std::cout << std::endl;
+  std::cout << _av[0] << ": version " << Settings::versionString() << '\n';
 }
 
 

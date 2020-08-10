@@ -10,6 +10,7 @@
 #include <lib/pugixml.hh>
 
 #include <debug/Debug.hh>
+#include <config/Settings.hh>
 #include <game/Battle.hh>
 #include <game/Cell.hh>
 #include <game/Player.hh>
@@ -268,6 +269,12 @@ e_attack_result Map::attack(const std::shared_ptr<Cell>& target_cell)
 std::unique_ptr<pugi::xml_document> Map::dump()
 {
   std::unique_ptr<pugi::xml_document> doc{new pugi::xml_document};
+
+  // 'version' node
+  auto version{doc->append_child("game_version")};
+  version.append_attribute("major") = Settings::version()[0];
+  version.append_attribute("minor") = Settings::version()[1];
+  version.append_attribute("patch") = Settings::version()[2];
 
   // Main 'map' node
   auto map{doc->append_child("map")};

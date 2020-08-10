@@ -8,6 +8,7 @@
 #ifndef SETTINGS_HH_
 # define SETTINGS_HH_
 
+# include <string>
 # include <vector>
 
 
@@ -61,6 +62,12 @@ public:
    * \return SFML minor version number
    */
   static auto version() { return _version; }
+
+  /**
+   * \brief Get the version numbers, each one separated by a dot
+   * \return A string containing the version (form: Major.Minor.Patch)
+   */
+  static std::string versionString();
 
   /**
    * \brief SFML major version number getter
