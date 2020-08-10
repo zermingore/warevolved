@@ -30,6 +30,8 @@ public:
    */
   static void init(const OptionsParser& options_parser);
 
+  static auto seed() { return _randomSeed; }
+
   /**
    * \brief Random int generation
    * \param min Inclusive minimal value

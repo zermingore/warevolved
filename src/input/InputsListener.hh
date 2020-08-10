@@ -27,6 +27,7 @@ public:
    * \brief Polls events until the exit event was found
    * \param replay true if we're in replay mode
    * \param replay_filename Replay file (w/o relative or absolute path)
+   * \param replay_header Replay file header optional metadata
    * \param stop_events_listener stop thread condition
    * \note Infinite loop polling events, populating the KeyManager events queue
    * \note Initialize the KeyManager
@@ -34,6 +35,7 @@ public:
    */
   static void listen(bool replay,
                      const std::string& replay_filename,
+                     const std::string& replay_header,
                      const std::atomic_bool& stop_events_listener);
 
 

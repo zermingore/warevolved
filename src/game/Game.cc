@@ -9,6 +9,7 @@
 
 #include <future>
 
+#include <config/Settings.hh>
 #include <context/State.hh>
 #include <debug/Debug.hh>
 #include <game/Battle.hh>
@@ -18,6 +19,7 @@
 #include <input/InputsListener.hh>
 #include <resources/ResourcesManager.hh>
 #include <tools/options/OptionsParser.hh>
+#include <tools/Random.hh>
 
 
 
@@ -56,12 +58,22 @@ void Game::run()
     replay_file = _replayFiles[0];
   }
 
+  std::stringstream replay_header;
+  replay_header << "# version " << Settings::versionString() << '\n';
+  if (_optionsParser.optionExists("load-map"))
+  {
+    replay_header << "# Loaded map file: "
+                  << _optionsParser["load-map"].value().arguments()[0] << '\n';
+  }
+  replay_header << "# Random seed: " << std::to_string(Random::seed()) << '\n';
+
   std::atomic_bool stop_events_listener{false};
   auto inputs = std::async(
     std::launch::async,
     InputsListener::listen,
     _replay,
     replay_file,
+    replay_header.str(),
     std::ref(stop_events_listener)
   );
 

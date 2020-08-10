@@ -65,14 +65,15 @@ void ReplayManager::storeKey(const e_key& key)
 
 
 
-void ReplayManager::setReplayFile(const std::string& filename)
+void ReplayManager::setReplayFile(const std::string& filename,
+                                  const std::string& header)
 {
   _filename = filename;
 
   _file.reset();
   _file = std::make_unique<std::ofstream> (_filename, std::ios_base::out);
 
-  *_file << "# version " << Settings::versionString() << '\n';
+  *_file << header;
 }
 
 

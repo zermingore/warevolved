@@ -69,8 +69,9 @@ public:
   /**
    * \brief Set the replay filename, reset the open stream using this filename
    * \param filename File name to open
+   * \param header Comments header (random seed / map load file)
    */
-  void setReplayFile(const std::string& filename);
+  void setReplayFile(const std::string& filename, const std::string& header);
 
   /**
    * \brief Builds if necessary and return the list of events from the replay
