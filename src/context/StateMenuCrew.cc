@@ -220,6 +220,7 @@ void StateMenuCrew::cancel()
   auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
   if (selectedUnit->moved())
   {
+    game::Status::player()->cursor()->setCoords(selectedUnit->oldCoords());
     game::Status::battle()->map()->moveUnit(selectedUnit->oldCoords());
     selectedUnit->setMoved(false);
   }
