@@ -38,9 +38,6 @@
 * TODO Clean
 ** TODO Pointer parameters (should pass smart_ptr only when sharing the ownership)
 ** TODO Avoid casts to graphic types, overriding some methods
-** DONE Map iterator to access cells without explicit double loop
-   CLOSED: [2020-08-11 Tue 08:06]
-   (Used in PathFinding GraphicsEngine Map MiniMap at least)
 ** TODO Merge Cell highlight boolean and color (color::None)
 ** TODO Capture lambda as reference when possible
 ** DROP Use the uniformed initialization
@@ -67,8 +64,6 @@
 
 * TODO Code Design
 ** TODO auto-generate Resources XML file
-** DONE follow the C++ rule of 0
-   CLOSED: [2020-08-11 Tue 08:07]
 ** TODO Avoid vector of vector
    (std::vector<std::vector<Cell>> for the Map)
 ** TODO think about cleaning some types names
