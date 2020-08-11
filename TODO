@@ -8,30 +8,15 @@
 # - (Very) long term features are documented in the doc/think/concept file
 
 
-* TODO Roadmap
-** DONE Debug: Name threads
-   CLOSED: [2020-07-29 Wed 08:23]
-** DONE Fix doxygen warnings
-   CLOSED: [2020-08-06 Thu 21:15]
-** TODO Check included headers used
-** TODO Panel clean (code && graphics: make text width panel size dependent)
-
 
 * TODO Bugs / Features
 ** TODO Units
 *** TODO In crew menu, 'Confirm' should be available only on changes
-*** DROP Sometimes, moving over an enemy unit is possible
-    Seems to appear when two keys are pressed at the same time
-    Unable to wait on an occupied cell though
-    Cannot reproduce it (October 2019)
-    Cannot reproduce it (August 2020)
 *** TODO Crew 'Passenger' not used
 
 ** TODO Graphics
 *** TODO Resize the window: center the map
 *** TODO Resize the window: propagate new panel positions
-*** DONE The cursor appears over the menus
-    CLOSED: [2020-07-29 Wed 19:34]
 *** TODO Panel: Pilot and Co-Pilot fonts differ
 *** TODO Panel: Info font (next to the unit sprite) is too big
 
@@ -39,8 +24,6 @@
 *** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 *** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 *** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
-*** DONE Bootstrap: do not hard-code the path to the configure
-    CLOSED: [2020-07-28 Tue 10:52]
 
 
 * TODO Doc
@@ -55,14 +38,16 @@
 * TODO Clean
 ** TODO Pointer parameters (should pass smart_ptr only when sharing the ownership)
 ** TODO Avoid casts to graphic types, overriding some methods
-** TODO Map iterator to access cells without explicit double loop
+** DONE Map iterator to access cells without explicit double loop
+   CLOSED: [2020-08-11 Tue 08:06]
    (Used in PathFinding GraphicsEngine Map MiniMap at least)
 ** TODO Merge Cell highlight boolean and color (color::None)
 ** TODO Capture lambda as reference when possible
-** TODO Use the uniformed initialization
+** DROP Use the uniformed initialization
+   Coding style stuff; won't fix the whole code at once
 ** TODO Find a way to have compile-time map keys (vehicle crews)
-** DONE Map random generation
-   CLOSED: [2020-08-01 Sat 16:51]
+** TODO Check included headers used
+** TODO Panel clean (code && graphics: make text width panel size dependent)
 
 
 * TODO Experimental
@@ -73,14 +58,7 @@
 
 
 * TODO Input
-** DONE Use the mouse to move the cursor, browse menus...
-   CLOSED: [2020-07-29 Wed 19:35]
 ** TODO Clear the events fifo on State changes
-** DROP Merge InputsListener EventsProcessor and KeyManager in a common static class ?
-   wont't do: too different classes
-** DONE Make sure the events_log is saved before quitting the game
-   CLOSED: [2020-07-30 Thu 17:45]
-
 
 * TODO Game Features
 ** TODO Load the last save (with an option flag?)
@@ -89,7 +67,8 @@
 
 * TODO Code Design
 ** TODO auto-generate Resources XML file
-** TODO follow the C++ rule of 0
+** DONE follow the C++ rule of 0
+   CLOSED: [2020-08-11 Tue 08:07]
 ** TODO Avoid vector of vector
    (std::vector<std::vector<Cell>> for the Map)
 ** TODO think about cleaning some types names
