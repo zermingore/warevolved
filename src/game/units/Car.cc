@@ -64,7 +64,7 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
       return false;
     }
 
-    _crew[role] = unit;
+    _crew[role].push_back(unit);
     return true;
   }
 
@@ -74,12 +74,12 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
 
   if (!_crew.contains(e_unit_role::DRIVER))
   {
-    _crew[e_unit_role::DRIVER] = unit;
+    _crew[e_unit_role::DRIVER].push_back(unit);
     return true;
   }
   if (!_crew.contains(e_unit_role::COPILOT))
   {
-    _crew[e_unit_role::COPILOT] = unit;
+    _crew[e_unit_role::COPILOT].push_back(unit);
     return true;
   }
 

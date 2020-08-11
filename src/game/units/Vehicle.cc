@@ -22,7 +22,7 @@ Vehicle::Vehicle()
 
 
 
-void Vehicle::dropOff(e_unit_role role, const Coords& location)
+void Vehicle::dropOff(e_unit_role role, int unit_index, const Coords& location)
 {
   assert(!_crew.empty() && "Called 'dropOff()' with an empty Vehicle");
   assert(_crew.find(role) != _crew.end() && "Role not found in the Vehicle");
@@ -31,13 +31,14 @@ void Vehicle::dropOff(e_unit_role role, const Coords& location)
   assert(   map->unit(location) == nullptr
          && "Called 'dropOff()' with an occupied location");
 
-  auto unit = _crew.at(role);
+  auto unit = _crew.at(role)[unit_index];
   unit->setCoords(location);
   map->stashPopUnit(*unit);
   _crew.erase(role);
 
   _dropped[role] = unit;
 }
+
 
 
 void Vehicle::restoreCrew()

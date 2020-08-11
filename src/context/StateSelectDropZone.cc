@@ -78,6 +78,9 @@ void StateSelectDropZone::fetchAttributes()
   auto pRole = std::static_pointer_cast<e_unit_role> (_attributes[1]);
   _role = *pRole;
 
+  auto pUnitIndex = std::static_pointer_cast<int> (_attributes[2]);
+  _unitIdx = *pUnitIndex;
+
   // reset the attributes vector
   _attributes.clear();
 }
@@ -124,7 +127,7 @@ void StateSelectDropZone::draw()
   auto selected_unit(map->selectedUnit());
 
   auto vehicle{std::static_pointer_cast<Vehicle> (selected_unit)};
-  auto drop{vehicle->crew().at(_role)};
+  auto drop{(vehicle->crew().at(_role))[_unitIdx]};
   _holoUnit = std::make_shared<graphics::Sprite> (drop->sprite()->texture());
 
   const auto x = static_cast<float> (_holoUnit->texture()->getSize().x);
@@ -185,7 +188,7 @@ void StateSelectDropZone::validate()
   auto map{game::Status::battle()->map()};
   auto unit{game::Status::battle()->map()->unit(_vehicleLocation)};
   auto vehicle{std::static_pointer_cast<Vehicle> (unit)};
-  vehicle->dropOff(_role, _zones[_indexZone]->coords());
+  vehicle->dropOff(_role, _unitIdx, _zones[_indexZone]->coords());
 
   // Should lock the draw ? (without unlocking it ?)
   game::Status::player()->cursor()->setCoords(_vehicleLocation);

@@ -68,6 +68,7 @@ private:
   bool _active = false; ///< True if the menu has the focus
   bool _hidden = false; ///< True to not draw the menu
   e_unit_role _role;    ///< Role concerned by this menu
+  int _unitRoleIdx;
 };
 
 

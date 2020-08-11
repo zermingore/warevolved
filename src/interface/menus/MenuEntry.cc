@@ -21,7 +21,7 @@ namespace interface {
 
 MenuEntry::MenuEntry(const e_entry entry)
   : InterfaceElement("selection_menu_button")
-  , _id (entry)
+  , _id(entry)
 {
   setLabelName(entry);
 

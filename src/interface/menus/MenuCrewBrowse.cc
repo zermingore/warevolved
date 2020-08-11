@@ -44,11 +44,12 @@ void MenuCrewBrowse::build()
     {
       for (auto& mem: vehicle->crew())
       {
-        auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second));
+        auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second[0])); /// \todo index
         entry->setCallbacks(
         {
-          [=, this] { vehicle->dropOff(mem.first, _coords); }
+          [=, this] { vehicle->dropOff(mem.first, 0,_coords); } /// \todo index
         });
+        ERROR("TODO index dropoff");
         _entries.emplace_back(entry);
       }
     }

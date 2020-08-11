@@ -44,14 +44,14 @@ public:
    * \brief Returns crew list
    * \todo rename to 'crew()'
    */
-  const auto& crew() const { return _crew; }
+  const auto& crew() { return _crew; }
 
   /**
    * \brief Drop the given unit off the Vehicle at the given position
    * \param role Crew member occupying this role will be dropped off
    * \param location Cell where to drop the unit off
    */
-  void dropOff(e_unit_role role, const Coords& location);
+  void dropOff(e_unit_role role, int unit_index, const Coords& location);
 
   /**
    * \brief _crew size getter
@@ -84,7 +84,7 @@ public:
 
 
 protected:
-  std::map<e_unit_role, std::shared_ptr<Unit>> _crew; ///< Crew list (const key)
+  std::map<e_unit_role, std::vector<std::shared_ptr<Unit>>> _crew; ///< Crew list (const key)
 
   /// Units dropped since the last cancel / beginning of the turn
   /// Used in order to cancel the drop

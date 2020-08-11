@@ -347,16 +347,18 @@ std::unique_ptr<pugi::xml_document> Map::dump()
 
         auto crew{unit.append_child("crew")};
         auto vehicle{std::static_pointer_cast<Vehicle> (u)};
-        for (const auto& member: vehicle->crew())
+        for (const auto& role_units: vehicle->crew())
         {
-          auto n{crew.append_child("member")};
-          n.append_attribute("role") = static_cast<int> (member.first);
+          for (const auto& member: role_units.second)
+          {
+            auto n{crew.append_child("member")};
+            n.append_attribute("role") = static_cast<int> (role_units.first);
 
-          const auto& m{member.second};
-          n.append_attribute("type") = static_cast<int> (m->type());
-          n.append_attribute("player_id") = m->playerId();
-          n.append_attribute("hp") = m->hp();
-          n.append_attribute("played") = m->played();
+            n.append_attribute("type") = static_cast<int> (member->type());
+            n.append_attribute("player_id") = member->playerId();
+            n.append_attribute("hp") = member->hp();
+            n.append_attribute("played") = member->played();
+          }
         }
       }
     }
