@@ -104,6 +104,18 @@ void MiniMap::draw()
       }
     }
   }
+
+  // Draw the cursor
+  const Pos2 cursorCoords { static_cast<component> (_playerCursor.coords().x),
+                            static_cast<component> (_playerCursor.coords().y) };
+  const Pos2 pos { 5 + _position.x + size_col  * cursorCoords.x,
+                   5 + _position.y + size_line * cursorCoords.y };
+
+  auto img { std::make_shared<Sprite> ("cursor") };
+  img->setPosition(pos.x, pos.y);
+  img->setSize(cell_size);
+  img->setColor(game::Status::battle()->getCurrentPlayer()->color());
+  img->draw();
 }
 
 
