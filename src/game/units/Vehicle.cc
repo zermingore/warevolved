@@ -33,9 +33,9 @@ void Vehicle::dropOff(size_t crew_index, const Coords& location)
 
   unit->setCoords(location);
   map->stashPopUnit(*unit);
-  _crew.erase(_crew.begin() + crew_index);
 
   _dropped.push_back(_crew[crew_index]);
+  _crew.erase(_crew.begin() + crew_index);
 }
 
 
