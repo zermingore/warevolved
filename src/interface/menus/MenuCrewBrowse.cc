@@ -43,14 +43,13 @@ void MenuCrewBrowse::build()
     if (vehicle->crewSize() != 0u)
     {
       int i{0};
-      for (auto& mem: vehicle->crew())
+      for ([[maybe_unused]] auto& unused: vehicle->crew())
       {
-        auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second));
+        auto entry(std::make_shared<MenuEntryCrew> (e_entry::NONE, i));
         entry->setCallbacks(
         {
-          [=, this] { vehicle->dropOff(i,_coords); } /// \todo remove index
+          [=, this] { vehicle->dropOff(i, _coords); }
         });
-        ERROR("TODO index dropoff");
         _entries.emplace_back(entry);
         ++i;
       }

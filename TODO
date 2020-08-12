@@ -12,7 +12,8 @@
 * TODO Bugs / Features
 ** TODO Units
 *** TODO In crew menu, 'Confirm' should be available only on changes
-*** TODO Crew 'Passenger' not used
+*** DONE Crew 'Passenger' not used
+    CLOSED: [2020-08-12 Wed 18:44]
 
 ** TODO Graphics
 *** TODO Resize the window: center the map

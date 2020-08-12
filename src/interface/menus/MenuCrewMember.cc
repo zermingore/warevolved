@@ -76,7 +76,7 @@ void MenuCrewMember::getOut()
   game::Status::setStateAttributes(
     std::make_shared<Coords> (vehicle_coords),
     std::make_shared<e_unit_role> (_role),
-    std::make_shared<int> (0) /// \todo index
+    std::make_shared<int> (_unitIdx)
   );
 
   game::Status::resumeState();

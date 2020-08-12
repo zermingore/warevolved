@@ -97,6 +97,14 @@ void StateMenuCrew::moveUp()
   else
   {
     _menuMember->decrementSelectedEntry();
+    if (_unitIdx != 0)
+    {
+      --_unitIdx;
+    }
+    else
+    {
+      _unitIdx = static_cast<int> (_menuMember->getEntries().size()) - 1;
+    }
   }
 }
 
@@ -112,6 +120,8 @@ void StateMenuCrew::moveDown()
   else
   {
     _menuMember->incrementSelectedEntry();
+    _unitIdx =
+      (_unitIdx + 1) % static_cast<int> (_menuMember->getEntries().size());
   }
 }
 
@@ -132,7 +142,7 @@ void StateMenuCrew::setFocusMenuMember()
     auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
     _menuMember->setRole(e->role());
     _menuMember->setHidden(false);
-    //_menuMember->setUnitRoleIdx(TODO);
+    _menuMember->setUnitIdx(_unitIdx);
   }
 }
 

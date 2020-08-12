@@ -81,8 +81,6 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
           ERROR("Already occupied role", debug::e_unit_role_string(role));
           return false;
         }
-
-        /// \todo if nb_passengers >= max_passengers -> return false
       }
     }
 
@@ -93,9 +91,6 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
 
   auto driver_occupied{false};
   auto copilot_occupied{false};
-  std::shared_ptr<Unit> driver = nullptr;
-  std::shared_ptr<Unit> copilot = nullptr;
-
   for (const auto& member: _crew)
   {
     if (member.first == e_unit_role::DRIVER)
@@ -122,13 +117,6 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
     return true;
   }
 
-  /// \todo check and add passenger
-  // if (_nbPassengers >= _maxPassengers)
-  // {
-  //   return false;
-  // }
-  // ++_nbPassengers;
-
-  ERROR("[IMPLEMENTATION ERROR] Failed trying to add the unit to the crew");
-  return false;
+  _crew.push_back({e_unit_role::PASSENGER, unit});
+  return true;
 }

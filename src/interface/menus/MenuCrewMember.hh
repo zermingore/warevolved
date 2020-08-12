@@ -55,6 +55,10 @@ public:
     _role = role;
   }
 
+  /// _role setter
+  void setUnitIdx(int unitIdx) {
+    _unitIdx = unitIdx;
+  }
 
 
 private:
@@ -68,7 +72,7 @@ private:
   bool _active = false; ///< True if the menu has the focus
   bool _hidden = false; ///< True to not draw the menu
   e_unit_role _role;    ///< Role concerned by this menu
-  int _unitRoleIdx;
+  int _unitIdx;         ///< Index in the crew member
 };
 
 

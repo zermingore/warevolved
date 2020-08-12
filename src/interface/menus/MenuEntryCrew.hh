@@ -23,6 +23,8 @@ namespace resources {
   class Text;
 }
 
+class Vehicle;
+
 
 namespace interface {
 
@@ -37,23 +39,10 @@ class MenuEntryCrew final: public MenuEntry
 {
 public:
   /**
-   * \brief deleted default constructor
-   */
-  MenuEntryCrew() = delete;
-
-  /**
    * \brief Constructor
-   * \param entry Entry type to build.
+   * \param crew_idx Crew member array index
    */
-  explicit MenuEntryCrew(const e_entry entry);
-
-  /**
-   * \brief Constructor
-   * \param role Crew member role
-   * \param crew_member Crew member this entry is about
-   */
-  MenuEntryCrew(e_unit_role role,
-                std::shared_ptr<const Unit> crew_member);
+  explicit MenuEntryCrew(const e_entry entry, int crew_idx = -1);
 
 
   /**
@@ -93,10 +82,8 @@ public:
    */
   void draw() override final;
 
-
   /// _role getter
   e_unit_role role() const { return _role; }
-
 
 
 private:
@@ -105,10 +92,10 @@ private:
    */
   void setLabelName();
 
-  /// Pointer on the Unit in the crew this entry is about
-  const std::shared_ptr<const Unit> _crewMember;
 
-  const e_unit_role _role; ///< Crew member role, used as label
+  e_unit_role _role;                 ///< Crew member role, used as label
+  std::shared_ptr<Vehicle> _vehicle; ///< Holder of the crew
+  const int _crewIdx;                ///< Crew member array index
 };
 
 

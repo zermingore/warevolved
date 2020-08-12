@@ -25,30 +25,22 @@
 namespace interface {
 
 
-MenuEntryCrew::MenuEntryCrew(e_unit_role role,
-                             std::shared_ptr<const Unit> crew_member)
-  : MenuEntry(e_entry::NONE)
-  , _crewMember(std::move(crew_member))
-  , _role(role)
-{
-  setLabelName();
-
-  // label initialization
-  /// \todo the size should be ratio dependent, eventually text length dependent
-  using p = graphics::MapGraphicsProperties;
-  auto size { (p::cellWidth() / 2 + p::cellHeight()) / 4 };
-
-  _label = std::make_shared<resources::Text> (
-    _labelName, size, graphics::Pos2(0, 0), "font_army");
-}
-
-
-
-MenuEntryCrew::MenuEntryCrew(const e_entry entry)
+MenuEntryCrew::MenuEntryCrew(const e_entry entry, int crew_idx)
   : MenuEntry(entry)
-  , _crewMember(nullptr)
-  , _role(e_unit_role::NONE)
+  , _crewIdx(crew_idx)
 {
+  const auto selected_unit(game::Status::battle()->map()->selectedUnit());
+  _vehicle = std::static_pointer_cast<Vehicle> (selected_unit);
+
+  if (crew_idx != -1)
+  {
+    _role = _vehicle->crew()[_crewIdx].first;
+  }
+  else
+  {
+    _role = e_unit_role::NONE;
+  }
+
   setLabelName();
 
   // label initialization
@@ -80,12 +72,10 @@ void MenuEntryCrew::draw()
   _sprite->draw();
 
   // If any, draw the Unit and some of its statistics
-  if (_role != e_unit_role::NONE) // Cancel / Confirm don't apply
+  if (_crewIdx != -1) // Cancel / Confirm don't apply
   {
     // Unit Sprite
-    const auto selected_unit(game::Status::battle()->map()->selectedUnit());
-    const auto vehicle{ std::static_pointer_cast<Vehicle> (selected_unit) };
-    const auto dropping_unit = vehicle->crew()[0].second; /// \todo index
+    const auto dropping_unit = _vehicle->crew()[_crewIdx].second;
 
     const auto sprite_unit(dropping_unit->sprite());
     using p = graphics::MapGraphicsProperties;
@@ -142,7 +132,7 @@ void MenuEntryCrew::setLabelName()
       return;
 
     default:
-      _labelName = UNIT_ROLE_STR.at(_role);
+      _labelName = UNIT_ROLE_STR.at(_vehicle->crew()[_crewIdx].first);
       break;
   }
 }
