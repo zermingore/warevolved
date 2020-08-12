@@ -28,7 +28,7 @@ namespace interface {
 MenuEntryCrew::MenuEntryCrew(e_unit_role role,
                              std::shared_ptr<const Unit> crew_member)
   : MenuEntry(e_entry::NONE)
-  , _crewMember(std::move(std::move(crew_member)))
+  , _crewMember(std::move(crew_member))
   , _role(role)
 {
   setLabelName();
@@ -84,8 +84,8 @@ void MenuEntryCrew::draw()
   {
     // Unit Sprite
     const auto selected_unit(game::Status::battle()->map()->selectedUnit());
-    const auto vehicle = std::static_pointer_cast<Vehicle> (selected_unit);
-    const auto dropping_unit = vehicle->crew().at(_role)[0]; /// \todo index
+    const auto vehicle{ std::static_pointer_cast<Vehicle> (selected_unit) };
+    const auto dropping_unit = vehicle->crew()[0].second; /// \todo index
 
     const auto sprite_unit(dropping_unit->sprite());
     using p = graphics::MapGraphicsProperties;

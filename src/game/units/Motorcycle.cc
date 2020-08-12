@@ -62,9 +62,18 @@ bool Motorcycle::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
   std::shared_ptr<Unit> driver = nullptr;
   std::shared_ptr<Unit> copilot = nullptr;
 
-  if (!_crew.contains(e_unit_role::DRIVER))
+
+  auto it = std::find_if(
+    _crew.begin(),
+    _crew.end(),
+    [=] (std::pair<e_unit_role, std::shared_ptr<Unit>> member) -> bool {
+      return member.first == e_unit_role::DRIVER;
+    }
+  );
+
+  if (it == _crew.end())
   {
-    _crew[e_unit_role::DRIVER].push_back(unit);
+    _crew.push_back({e_unit_role::DRIVER, unit});
     return true;
   }
 

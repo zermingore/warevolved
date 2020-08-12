@@ -42,7 +42,14 @@ Car::Car()
 
 bool Car::canOpenFire() const
 {
-  return _crew.find(e_unit_role::COPILOT) != _crew.end();
+  for (const auto& member: _crew)
+  {
+    if (member.first == e_unit_role::COPILOT)
+    {
+      return true;
+    }
+  }
+  return false;
 }
 
 
@@ -58,30 +65,69 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
   // If the role is specified, use it
   if (role != e_unit_role::NONE)
   {
-    if (_crew.contains(role))
+    if (   role != e_unit_role::DRIVER
+        && role != e_unit_role::COPILOT
+        && role != e_unit_role::PASSENGER)
     {
-      WARNING("Already occupied role", static_cast<int> (role));
-      return false;
+      ERROR("Unsupported role for a car", debug::e_unit_role_string(role));
     }
 
-    _crew[role].push_back(unit);
+    for (const auto& member: _crew)
+    {
+      if (member.first == role)
+      {
+        if (role != e_unit_role::PASSENGER)
+        {
+          ERROR("Already occupied role", debug::e_unit_role_string(role));
+          return false;
+        }
+
+        /// \todo if nb_passengers >= max_passengers -> return false
+      }
+    }
+
+    _crew.push_back({role, unit});
     return true;
   }
 
 
+  auto driver_occupied{false};
+  auto copilot_occupied{false};
   std::shared_ptr<Unit> driver = nullptr;
   std::shared_ptr<Unit> copilot = nullptr;
 
-  if (!_crew.contains(e_unit_role::DRIVER))
+  for (const auto& member: _crew)
   {
-    _crew[e_unit_role::DRIVER].push_back(unit);
+    if (member.first == e_unit_role::DRIVER)
+    {
+      driver_occupied = true;
+      continue;
+    }
+
+    if (member.first == e_unit_role::COPILOT)
+    {
+      copilot_occupied = true;
+      continue;
+    }
+  }
+
+  if (!driver_occupied)
+  {
+    _crew.push_back({e_unit_role::DRIVER, unit});
     return true;
   }
-  if (!_crew.contains(e_unit_role::COPILOT))
+  if (!copilot_occupied)
   {
-    _crew[e_unit_role::COPILOT].push_back(unit);
+    _crew.push_back({e_unit_role::COPILOT, unit});
     return true;
   }
+
+  /// \todo check and add passenger
+  // if (_nbPassengers >= _maxPassengers)
+  // {
+  //   return false;
+  // }
+  // ++_nbPassengers;
 
   ERROR("[IMPLEMENTATION ERROR] Failed trying to add the unit to the crew");
   return false;

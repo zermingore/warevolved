@@ -25,18 +25,27 @@ Vehicle::Vehicle()
 void Vehicle::dropOff(e_unit_role role, int unit_index, const Coords& location)
 {
   assert(!_crew.empty() && "Called 'dropOff()' with an empty Vehicle");
-  assert(_crew.find(role) != _crew.end() && "Role not found in the Vehicle");
+  std::shared_ptr<Unit> unit{nullptr};
+  auto it{_crew.begin()};
+  for (; it != _crew.end(); ++it)
+  {
+    if (it->first == role)
+    {
+      unit = it->second;
+      break;
+    }
+  }
+  assert(unit && "Role not found in the Vehicle");
 
   auto map = game::Status::battle()->map();
   assert(   map->unit(location) == nullptr
          && "Called 'dropOff()' with an occupied location");
 
-  auto unit = _crew.at(role)[unit_index];
   unit->setCoords(location);
   map->stashPopUnit(*unit);
-  _crew.erase(role);
+  _crew.erase(it);
 
-  _dropped[role] = unit;
+  _dropped.push_back({role, unit});
 }
 
 

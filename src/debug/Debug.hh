@@ -16,6 +16,8 @@
 # include <iomanip>
 # include <map>
 
+# include <generated/enum_print/enum_print.hh>
+
 
 /// \def Log file name
 # ifdef __unix__

@@ -132,8 +132,10 @@ void StateMenuCrew::setFocusMenuMember()
     auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
     _menuMember->setRole(e->role());
     _menuMember->setHidden(false);
+    //_menuMember->setUnitRoleIdx(TODO);
   }
 }
+
 
 
 void StateMenuCrew::moveRight()

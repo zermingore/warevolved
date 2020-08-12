@@ -67,15 +67,15 @@ bool MenuAction::allowMove()
       || _selectedUnit->type() == e_unit::MOTORCYCLE)
   {
     auto v = std::static_pointer_cast<Vehicle> (_selectedUnit);
-    try
-    {
-      v->crew().at(e_unit_role::DRIVER);
-      return true;
-    }
-    catch ([[maybe_unused]] const std::out_of_range& e)
-    {
-      return false;
-    }
+    auto it = std::find_if(
+      v->crew().begin(),
+      v->crew().end(),
+      [=] (std::pair<e_unit_role, std::shared_ptr<Unit>> member) -> bool {
+        return member.first == e_unit_role::DRIVER;
+      }
+    );
+
+    return it != v->crew().end();
   }
 
   return true;

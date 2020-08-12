@@ -8,7 +8,8 @@
 #ifndef VEHICLE_HH_
 # define VEHICLE_HH_
 
-# include <string>
+# include <vector>
+# include <utility>
 # include <game/units/Unit.hh>
 
 
@@ -84,11 +85,12 @@ public:
 
 
 protected:
-  std::map<e_unit_role, std::vector<std::shared_ptr<Unit>>> _crew; ///< Crew list (const key)
+  /// Crew members list
+  std::vector<std::pair<e_unit_role, std::shared_ptr<Unit>>> _crew;
 
   /// Units dropped since the last cancel / beginning of the turn
   /// Used in order to cancel the drop
-  std::map<e_unit_role, std::shared_ptr<Unit>> _dropped;
+  std::vector<std::pair<e_unit_role, std::shared_ptr<Unit>>> _dropped;
 
   size_t _maxCrewMembers = 0; ///< Number of seats (constant)
 };

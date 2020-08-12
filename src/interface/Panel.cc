@@ -289,34 +289,32 @@ void Panel::drawCrew()
   crew_pos.y += sprite->size().y + _margin * 2;
 
   float i = 0.f; // loop iterations in order to compute the offset position
-  for (const auto& role_units: vehicle->crew())
+
+  for (const auto& mbr: vehicle->crew())
   {
-    for (const auto& member: role_units.second)
-    {
-      auto mbr_sprite(member->sprite());
-      mbr_sprite->setPosition(_frameUnit->position().x + _margin,
-                              _frameUnit->position().y + _frameUnit->size().y
-                                + 2 * _margin + i * crew_member_size.y);
+    auto mbr_sprite(mbr.second->sprite());
+    mbr_sprite->setPosition(_frameUnit->position().x + _margin,
+                            _frameUnit->position().y + _frameUnit->size().y
+                              + 2 * _margin + i * crew_member_size.y);
 
-      mbr_sprite->setSize(crew_member_size);
-      mbr_sprite->draw();
+    mbr_sprite->setSize(crew_member_size);
+    mbr_sprite->draw();
 
-      // Unit data text
-      const auto& role{UNIT_ROLE_STR.at(role_units.first)};
-      drawDataText(role,
-                  { mbr_sprite->position().x + _margin + crew_member_size.x,
-                    mbr_sprite->position().y + crew_member_size.y / 2 },
-                  14);
+    // Unit data text
+    const auto& role{UNIT_ROLE_STR.at(mbr.first)};
+    drawDataText(role,
+                { mbr_sprite->position().x + _margin + crew_member_size.x,
+                  mbr_sprite->position().y + crew_member_size.y / 2 },
+                14);
 
-      const auto& crew_data{  std::to_string(member->hp()) + "          "
-                            + std::to_string(member->attackValue())};
-      drawDataText(crew_data,
-                  { _background->position().x + _size.x / 2,
-                    mbr_sprite->position().y + crew_member_size.y / 2 },
-                  14);
+    const auto& crew_data{  std::to_string(mbr.second->hp()) + "          "
+                          + std::to_string(mbr.second->attackValue())};
+    drawDataText(crew_data,
+                { _background->position().x + _size.x / 2,
+                  mbr_sprite->position().y + crew_member_size.y / 2 },
+                14);
 
-      ++i;
-    }
+    ++i;
   }
 }
 
