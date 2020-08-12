@@ -40,6 +40,7 @@ class MenuEntryCrew final: public MenuEntry
 public:
   /**
    * \brief Constructor
+   * \param entry Entry to build (provide e_entry::NONE for the crew members)
    * \param crew_idx Crew member array index
    */
   explicit MenuEntryCrew(const e_entry entry, int crew_idx = -1);
