@@ -209,7 +209,7 @@ void StateSelectDropZone::validate()
   auto map{game::Status::battle()->map()};
   auto unit{game::Status::battle()->map()->unit(_vehicleLocation)};
   auto vehicle{std::static_pointer_cast<Vehicle> (unit)};
-  vehicle->dropOff(_role, _unitIdx, _zones[_indexZone]->coords());
+  vehicle->dropOff(_unitIdx, _zones[_indexZone]->coords());
 
   // Should lock the draw ? (without unlocking it ?)
   game::Status::player()->cursor()->setCoords(_vehicleLocation);

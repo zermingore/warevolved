@@ -42,15 +42,17 @@ void MenuCrewBrowse::build()
     auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
     if (vehicle->crewSize() != 0u)
     {
+      int i{0};
       for (auto& mem: vehicle->crew())
       {
         auto entry(std::make_shared<MenuEntryCrew> (mem.first, mem.second));
         entry->setCallbacks(
         {
-          [=, this] { vehicle->dropOff(mem.first, 0,_coords); } /// \todo remove index
+          [=, this] { vehicle->dropOff(i,_coords); } /// \todo remove index
         });
         ERROR("TODO index dropoff");
         _entries.emplace_back(entry);
+        ++i;
       }
     }
   }

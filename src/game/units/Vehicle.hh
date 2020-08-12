@@ -49,10 +49,10 @@ public:
 
   /**
    * \brief Drop the given unit off the Vehicle at the given position
-   * \param role Crew member occupying this role will be dropped off
+   * \param crew_index Crew member's index occupying to drop off
    * \param location Cell where to drop the unit off
    */
-  void dropOff(e_unit_role role, int unit_index, const Coords& location);
+  void dropOff(size_t crew_index, const Coords& location);
 
   /**
    * \brief _crew size getter

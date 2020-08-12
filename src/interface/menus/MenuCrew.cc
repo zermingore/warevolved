@@ -42,13 +42,13 @@ void MenuCrew::build()
     {
       auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
-      for (const auto& member: vehicle->crew())
+      for ([[ maybe_unused ]] const auto& member: vehicle->crew())
       {
         int i = 0;
         auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
         entry->setCallbacks(
         {
-          [=] { vehicle->dropOff(member.first, i, coords); },
+          [=] { vehicle->dropOff(i, coords); },
         });
         _entries.emplace_back(entry);
         ++i;
