@@ -12,7 +12,7 @@
 
 class Terrain;
 enum class e_terrain;
-
+enum class e_unit;
 
 
 /**
@@ -29,10 +29,19 @@ public:
   static void initialize();
 
   /**
-   * \brief Return the Terrain of the list matching the given id
+   * \brief Get a Terrain given its id
    * \param id Terrain identifier
+   * \return Terrain of the list matching the given id
    */
   static const Terrain& get(e_terrain id);
+
+  /**
+   * \brief Get the cost to cross a terrain
+   * \param terrain Type of the Terrain to cross
+   * \param unit_type Type of the Unit willing to cross
+   * \return Motion cost (negative value if crossing the terrain is not allowed)
+   */
+  static int cost(const e_terrain terrain, const e_unit unit_type);
 
 
 private:

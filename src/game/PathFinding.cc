@@ -18,6 +18,7 @@
 #include <game/Map.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>
+#include <game/TerrainsHandler.hh>
 #include <game/units/Unit.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
@@ -26,7 +27,8 @@
 
 
 PathFinding::PathFinding(const std::shared_ptr<Unit>& origin)
-  : _currentLength(0)
+  : _maxLength(0)
+  , _currentLength(0)
 {
   if (!origin)
   {
@@ -201,13 +203,15 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
 
 
 
-void PathFinding::addNextDirection(const e_direction direction)
+void PathFinding::addNextDirection(const e_direction direction,
+                                   const Coords& coords)
 {
   _lockDirections.lock();
   _directions.emplace_back(direction);
   _lockDirections.unlock();
 
-  ++_currentLength;
+  _currentLength += TerrainsHandler::cost(
+    (*_map)[coords.c][coords.l]->terrain(), _origin->type());
   highlightCells();
 }
 
@@ -234,29 +238,51 @@ void PathFinding::computeCosts()
     }
 
     // Considering adjacent Cells and minimizing their distance
-    auto distance = _costs[col][line];
-    if (col > 0 && distance + 1 < _costs[col - 1][line])
+    const auto type{_origin->type()};
+    auto cells{_map->cells()};
+    const auto distance = _costs[col][line];
+    if (col > 0)
     {
-      _costs[col - 1][line] = distance + 1;
-      candidates.emplace(col - 1, line);
+      const auto costCurrentCell {
+        TerrainsHandler::cost(cells[col - 1][line]->terrain(), type) };
+      if ( distance + costCurrentCell < _costs[col - 1][line])
+      {
+        _costs[col - 1][line] = distance + costCurrentCell;
+        candidates.emplace(col - 1, line);
+      }
     }
 
-    if (col < nb_col - 1 && distance + 1 < _costs[col + 1][line])
+    if (col < nb_col - 1)
     {
-      _costs[col + 1][line] = distance + 1;
-      candidates.emplace(col + 1, line);
+      const auto costCurrentCell {
+        TerrainsHandler::cost(cells[col + 1][line]->terrain(), type) };
+      if (distance + costCurrentCell < _costs[col + 1][line])
+      {
+        _costs[col + 1][line] = distance + costCurrentCell;
+        candidates.emplace(col + 1, line);
+      }
     }
 
-    if (line > 0 && distance + 1 < _costs[col][line - 1])
+    if (line > 0)
     {
-      _costs[col][line - 1] = distance + 1;
-      candidates.emplace(col, line - 1);
+      const auto costCurrentCell {
+        TerrainsHandler::cost(cells[col][line - 1]->terrain(), type) };
+      if (distance + costCurrentCell < _costs[col][line - 1])
+      {
+        _costs[col][line - 1] = distance + costCurrentCell;
+        candidates.emplace(col, line - 1);
+      }
     }
 
-    if (line < nb_lines - 1 && distance + 1 < _costs[col][line + 1])
+    if (line < nb_lines - 1)
     {
-      _costs[col][line + 1] = distance + 1;
-      candidates.emplace(col, line + 1);
+      const auto costCurrentCell {
+        TerrainsHandler::cost(cells[col][line + 1]->terrain(), type) };
+      if (distance + costCurrentCell < _costs[col][line + 1])
+      {
+        _costs[col][line + 1] = distance + costCurrentCell;
+        candidates.emplace(col, line + 1);
+      }
     }
   }
 }
@@ -351,7 +377,14 @@ bool PathFinding::allowedMove(e_direction direction)
       return false;
   }
 
-  // do not allow to move over enemy units
+  // Take destination terrain motion cost into account
+  if (_currentLength + TerrainsHandler::cost(dst->terrain(), _origin->type())
+    > _maxLength)
+  {
+    return false;
+  }
+
+  // Do not allow to move over enemy units
   auto u{dst->unit()};
   return !u || u->playerId() == game::Status::player()->id();
 }

@@ -63,8 +63,9 @@ public:
   /**
    * \brief adds the next element to the current path
    * \param direction direction of the element
+   * \param coords Coordinates of the next cell
    */
-  void addNextDirection(e_direction direction);
+  void addNextDirection(e_direction direction, const Coords& coords);
 
   /**
    * \brief uses _graphicPath to draw the current path

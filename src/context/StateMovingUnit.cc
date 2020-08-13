@@ -110,11 +110,12 @@ void StateMovingUnit::resume()
 // _________________________  Graphical Units motion ________________________ //
 void StateMovingUnit::moveUnitUp()
 {
-  if (_holoUnitPosition.l > 0 && _pathFinding->allowedMove(e_direction::UP))
+  if (   _holoUnitPosition.l > 0
+      && _pathFinding->allowedMove(e_direction::UP))
   {
     --_holoUnitPosition.l;
     game::Status::player()->setCellCursorPosition(_holoUnitPosition);
-    _pathFinding->addNextDirection(e_direction::UP);
+    _pathFinding->addNextDirection(e_direction::UP, _holoUnitPosition);
   }
 }
 
@@ -125,28 +126,29 @@ void StateMovingUnit::moveUnitDown()
   {
     ++_holoUnitPosition.l;
     game::Status::player()->setCellCursorPosition(_holoUnitPosition);
-    _pathFinding->addNextDirection(e_direction::DOWN);
+    _pathFinding->addNextDirection(e_direction::DOWN, _holoUnitPosition);
   }
 }
 
 void StateMovingUnit::moveUnitLeft()
 {
-  if (_holoUnitPosition.c > 0 && _pathFinding->allowedMove(e_direction::LEFT))
+  if (   _holoUnitPosition.c > 0
+      && _pathFinding->allowedMove(e_direction::LEFT))
   {
     --_holoUnitPosition.c;
     game::Status::player()->setCellCursorPosition(_holoUnitPosition);
-    _pathFinding->addNextDirection(e_direction::LEFT);
+    _pathFinding->addNextDirection(e_direction::LEFT, _holoUnitPosition);
   }
 }
 
 void StateMovingUnit::moveUnitRight()
 {
-  if (_holoUnitPosition.c < _nbColumns - 1
+  if (   _holoUnitPosition.c < _nbColumns - 1
       && _pathFinding->allowedMove(e_direction::RIGHT))
   {
     ++_holoUnitPosition.c;
     game::Status::player()->setCellCursorPosition(_holoUnitPosition);
-    _pathFinding->addNextDirection(e_direction::RIGHT);
+    _pathFinding->addNextDirection(e_direction::RIGHT, _holoUnitPosition);
   }
 }
 
