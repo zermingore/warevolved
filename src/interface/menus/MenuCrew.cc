@@ -63,6 +63,7 @@ void MenuCrew::build()
         [=, this] { _selectedUnit->addToCrew(unit); },
         [=] { game::Status::battle()->map()->stashUnit(*unit); },
         [=, this] { game::Status::battle()->map()->moveUnit(_coords); },
+        [=, this] { _selectedUnit->setPlayed(true); },
         [=, this] { game::Status::player()->cursor()->setCoords(_coords); },
         [=] { game::Status::clearStates(); }
       });
