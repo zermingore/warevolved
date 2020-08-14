@@ -58,6 +58,7 @@ private:
   bool _active = true; ///< True if the menu has the focus
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
+  bool _confirmEntryActive = false; ///< Should the 'Confirm' entry appear?
 };
 
 

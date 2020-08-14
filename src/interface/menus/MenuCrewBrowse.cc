@@ -56,9 +56,13 @@ void MenuCrewBrowse::build()
     }
   }
 
-  auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
-  entry_confirm->setCallback( [=, this] { confirm(); });
-  _entries.emplace_back(entry_confirm);
+  if (_confirmEntryActive)
+  {
+    auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
+    entry_confirm->setCallback( [=, this] { confirm(); });
+    _entries.emplace_back(entry_confirm);
+  }
+  _confirmEntryActive = true;
 
   auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
   entry_cancel->setCallback( [=, this] { cancel(); });

@@ -206,7 +206,6 @@ void StateSelectDropZone::selectNextZone()
 
 void StateSelectDropZone::validate()
 {
-  auto map{game::Status::battle()->map()};
   auto unit{game::Status::battle()->map()->unit(_vehicleLocation)};
   auto vehicle{std::static_pointer_cast<Vehicle> (unit)};
   vehicle->dropOff(_unitIdx, _zones[_indexZone]->coords());
