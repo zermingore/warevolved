@@ -122,7 +122,7 @@ private:
   Coords _menuMemberCoords; ///< Menu member coordinates
 
   bool _browseMembers; ///< Browse the crew or a member's actions?
-  int _unitIdx = 0;
+  int _unitIdx = 0; ///< Currently selected crew Unit index
 };
 
 

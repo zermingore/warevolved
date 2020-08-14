@@ -54,8 +54,8 @@ public:
   static void resumeState();
 
   /**
-   * \brief Resume the current state (at the top of _states stack)
-   * \note does *NOT* pop the stack
+   * \brief Set the given attributes of the current state
+   * \param attributes List of attributes
    */
   template<typename... Attributes>
   static void setStateAttributes(Attributes... attributes);

@@ -132,7 +132,7 @@ void StateSelectDropZone::draw()
     vehicle->crew().begin(),
     vehicle->crew().end(),
     [=, this] (std::pair<e_unit_role, std::shared_ptr<Unit>> member) -> bool {
-      return member.first == this->_role;;
+      return member.first == this->_role;
     }
   );
   if (it == vehicle->crew().end())
