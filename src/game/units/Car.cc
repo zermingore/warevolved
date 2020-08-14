@@ -17,6 +17,7 @@ Car::Car()
   : Vehicle()
 {
   _type = e_unit::CAR;
+  _allowedCrewTypes = { {e_unit::SOLDIER, true} };
 
   /// \todo Multiple sprites
   _sprite = std::make_shared<graphics::Sprite> ("car");

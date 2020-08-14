@@ -93,8 +93,10 @@ protected:
   std::vector<std::pair<e_unit_role, std::shared_ptr<Unit>>> _dropped;
 
   size_t _maxCrewMembers = 0; ///< Number of seats (constant)
-};
 
+  /// Allowed Unit types in the crew
+  mutable std::map<e_unit, bool> _allowedCrewTypes;
+};
 
 
 #endif /* !VEHICLE_HH_ */

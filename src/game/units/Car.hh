@@ -31,12 +31,10 @@ public:
   bool canOpenFire() const override final;
 
   /**
-   * \brief Add the given unit to the Car
+   * \brief Add the given unit to the Car if its role allows it
    * \param unit Unit getting in the car (adding it to the crew)
    * \param role role to give to the Unit getting in the car
    * \note If the role is left empty: The driver will be added; then the copilot
-   * \todo Handle passengers
-   * \todo Check if the given Unit can get in (ex: a tank cannot get in a car)
    */
   bool addToCrew(
     std::shared_ptr<Unit> unit,

@@ -31,11 +31,10 @@ public:
   bool canOpenFire() const override final;
 
   /**
-   * \brief Add the given unit to the Motorcycle
+   * \brief Add the given unit to the Motorcycle if its type allows it
    * \param unit Unit getting in the motorcycle (adding it to the crew)
    * \param role Role of the Unit getting in the motorcycle
    * \note Only a driver can be added
-   * \todo Check if the given Unit can get in (ex: a tank could not get in)
    */
   bool addToCrew(
     std::shared_ptr<Unit> unit,

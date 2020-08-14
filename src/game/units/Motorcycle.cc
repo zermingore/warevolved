@@ -17,6 +17,7 @@ Motorcycle::Motorcycle()
   : Vehicle()
 {
   _type = e_unit::MOTORCYCLE;
+  _allowedCrewTypes = { {e_unit::SOLDIER, true} };
 
   /// \todo Multiple sprites
   _sprite = std::make_shared<graphics::Sprite> ("motorcycle");
