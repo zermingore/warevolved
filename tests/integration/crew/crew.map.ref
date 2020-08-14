@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<game_version major="0" minor="1" patch="0" />
 <map>
 	<metadata>
 		<map_size nb_columns="6" nb_lines="6" />
@@ -6,11 +7,11 @@
 			<current_player>0</current_player>
 			<player>
 				<color r="0" g="127" b="127" />
-				<cursor col="2" line="3" />
+				<cursor col="1" line="4" />
 			</player>
 			<player>
 				<color r="227" g="227" b="0" />
-				<cursor col="5" line="4" />
+				<cursor col="3" line="2" />
 			</player>
 		</players>
 	</metadata>
@@ -30,7 +31,7 @@
 		<cell>
 			<coordinates col="0" line="3" />
 			<terrain>1</terrain>
-			<unit type="0" player_id="0" hp="5" played="false" />
+			<unit type="0" player_id="0" hp="7" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="0" line="4" />
@@ -60,6 +61,11 @@
 		<cell>
 			<coordinates col="1" line="4" />
 			<terrain>1</terrain>
+			<unit type="1" player_id="0" hp="5" played="false">
+				<crew>
+					<member role="2" type="0" player_id="0" hp="7" played="false" />
+				</crew>
+			</unit>
 		</cell>
 		<cell>
 			<coordinates col="1" line="5" />
@@ -76,12 +82,11 @@
 		<cell>
 			<coordinates col="2" line="2" />
 			<terrain>1</terrain>
-			<unit type="0" player_id="0" hp="7" played="true" />
 		</cell>
 		<cell>
 			<coordinates col="2" line="3" />
 			<terrain>1</terrain>
-			<unit type="1" player_id="0" hp="5" played="true" />
+			<unit type="0" player_id="0" hp="5" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="2" line="4" />
@@ -106,11 +111,11 @@
 		<cell>
 			<coordinates col="3" line="3" />
 			<terrain>1</terrain>
-			<unit type="0" player_id="0" hp="7" played="true" />
 		</cell>
 		<cell>
 			<coordinates col="3" line="4" />
 			<terrain>1</terrain>
+			<unit type="0" player_id="1" hp="7" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="3" line="5" />
@@ -163,7 +168,6 @@
 		<cell>
 			<coordinates col="5" line="5" />
 			<terrain>2</terrain>
-			<unit type="0" player_id="1" hp="7" played="false" />
 		</cell>
 	</cells>
 </map>
