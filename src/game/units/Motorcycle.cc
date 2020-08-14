@@ -53,9 +53,9 @@ bool Motorcycle::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
     return false;
   }
 
-  if (role != e_unit_role::DRIVER)
+  if (role != e_unit_role::DRIVER && role != e_unit_role::NONE)
   {
-    ERROR("A motorcycle handles only drivers");
+    ERROR("Motorcycle do not handle role:", debug::e_unit_role_string(role));
     return false;
   }
 
