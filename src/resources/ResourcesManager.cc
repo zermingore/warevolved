@@ -73,7 +73,7 @@ void ResourcesManager::initTypeNames()
   _typeNames[e_resource_type::NONE]  = "none";
   _typeNames[e_resource_type::IMAGE] = "images";
   _typeNames[e_resource_type::FONT]  = "fonts";
-  _typeNames[e_resource_type::SOUND] = "sounds";
+  _typeNames[e_resource_type::SOUND] = "sounds"; /// \todo sound management
 }
 
 

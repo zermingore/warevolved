@@ -15,7 +15,6 @@
 # include <chrono>
 
 # include <SFML/Window/Event.hpp>
-# include <SFML/System/Clock.hpp> /// \todo use std::clock instead
 # include <SFML/Window/Keyboard.hpp>
 # include <structures/ThreadSafeQueue.hh>
 

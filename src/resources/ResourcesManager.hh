@@ -126,7 +126,7 @@ enum class e_resource_type: int
 
   IMAGE,
   FONT,
-  SOUND,  /// \todo sound management
+  SOUND,
 };
 
 
