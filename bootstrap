@@ -104,7 +104,12 @@ function check_args()
         ;;
 
       --release)
-        local -r extra_flags='-UDEBUG -UDEBUG_PERFS -O3 -g0 -ggdb0 -s'
+        local -r custom_warnings='-Wno-suggest-final-types \
+                                  -Wno-suggest-final-methods \
+                                  -Wno-suggest-attribute=const \
+                                  -Wno-suggest-attribute=pure \
+                                  -Wlarger-than=8192'
+        local -r extra_flags="-UDEBUG -UDEBUG_PERFS -O3 -g0 -ggdb0 -s $custom_warnings"
         export WE_EXTRA_CXXFLAGS="$extra_flags $WE_EXTRA_CXXFLAGS"
         shift
         ;;
