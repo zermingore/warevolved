@@ -44,7 +44,7 @@ void MenuCrew::build()
       const Coords coords = { _coords.c + 1, _coords.l };
       for ([[ maybe_unused ]] const auto& member: vehicle->crew())
       {
-        int i = 0;
+        size_t i = 0;
         auto entry(std::make_shared<MenuEntry> (e_entry::GET_OUT));
         entry->setCallbacks(
         {
@@ -61,10 +61,10 @@ void MenuCrew::build()
       entry_group->setCallbacks(
       {
         [=, this] { _selectedUnit->addToCrew(unit); },
-        [=] { game::Status::battle()->map()->stashUnit(*unit); },
-        [=, this] { game::Status::battle()->map()->moveUnit(_coords); },
-        [=, this] { _selectedUnit->setPlayed(true); },
-        [=, this] { game::Status::player()->cursor()->setCoords(_coords); },
+        [unit = unit] { game::Status::battle()->map()->stashUnit(*unit); },
+        [c = _coords] { game::Status::battle()->map()->moveUnit(c); },
+        [u = _selectedUnit ] () noexcept { u->setPlayed(true); },
+        [c = _coords] { game::Status::player()->cursor()->setCoords(c); },
         [=] { game::Status::clearStates(); }
       });
       _entries.emplace_back(entry_group);
