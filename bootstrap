@@ -13,7 +13,7 @@
 VERSION=1.1.0
 
 OPTIONS=vh
-LONG_OPTIONS=help,version,build-dir:,no-build
+LONG_OPTIONS=help,version,build-dir:,no-build,release
 
 BUILD_DIR=./build # build destination
 
@@ -43,11 +43,18 @@ function usage()
 {
   echo ""
   echo "Usage:"
-  echo "  $0 [--no-build]"
+  echo "  $0 [--release] [--no-build] [--build-dir=dir]"
   echo ""
   echo "Options:"
+  echo "  -h | --help: Show this usage"
+  echo "  -v | --version: Show $0 version ($VERSION)"
+  echo "  --release: configure (eventually build) the project in release mode"
   echo "  --no-build: configure the project only, do not run make"
-  echo "  --build-dir: path where to build the project (will be cleared!)"
+  echo "  --build-dir=path: path where to build the project (will be cleared!)"
+  echo ""
+  echo "Notes:"
+  echo "  The compilation flags can be customized using CXX and WE_EXTRA_CXXFLAGS variables:"
+  echo "  CXX=clang++ WE_EXTRA_CXXFLAGS='-Wno-unknown-warning-option -Wdocumentation' ./bootstrap"
   echo ""
   echo "War Evolved build script. Version $VERSION"
   echo ""
@@ -92,6 +99,12 @@ function check_args()
       -v | --version)
         echo "$VERSION"
         exit 0
+        ;;
+
+      --release)
+        local -r extra_flags='-UDEBUG -UDEBUG_PERFS -O3 -g0 -ggdb0 -s'
+        export WE_EXTRA_CXXFLAGS="$extra_flags $WE_EXTRA_CXXFLAGS"
+        shift
         ;;
 
       --no-build)
