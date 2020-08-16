@@ -18,7 +18,7 @@ namespace debug {
 template<typename T>
 void OSD::addPod(const T& value, const std::string& description)
 {
-  static_assert(std::is_pod<T>::value,
+  static_assert(std::is_trivial<T>::value,
                 "OSD::addPod supports only Plain Old Data");
 
   std::string desc;

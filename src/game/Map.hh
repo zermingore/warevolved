@@ -175,7 +175,8 @@ public:
    * \param defender_status defender status after the fight
    * \return the attack result
    */
-  e_attack_result attackResult(bool attacker_status, bool defender_status);
+  e_attack_result attackResult(bool attacker_status,
+                               bool defender_status) const;
 
   /**
    * \brief Perform the attack of the _selectedUnit over the defender

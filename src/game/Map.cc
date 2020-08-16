@@ -166,7 +166,8 @@ void Map::newUnit(e_unit type,
 
 
 
-e_attack_result Map::attackResult(bool attacker_status, bool defender_status)
+e_attack_result Map::attackResult(bool attacker_status,
+                                  bool defender_status) const
 {
   /// \todo handle other status (unit down)
   if (attacker_status && defender_status)
