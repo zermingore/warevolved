@@ -95,7 +95,7 @@ private:
   std::shared_ptr<graphics::Sprite> _holoUnit; ///< 'holo' dropping unit sprite
 
   e_unit_role _role; ///< Concerned Unit's role
-  int _unitIdx; ///< Index in the crew[role] list
+  size_t _unitIdx; ///< Index in the crew[role] list
 };
 
 

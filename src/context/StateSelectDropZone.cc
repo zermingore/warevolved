@@ -78,7 +78,7 @@ void StateSelectDropZone::fetchAttributes()
   auto pRole = std::static_pointer_cast<e_unit_role> (_attributes[1]);
   _role = *pRole;
 
-  auto pUnitIndex = std::static_pointer_cast<int> (_attributes[2]);
+  auto pUnitIndex = std::static_pointer_cast<size_t> (_attributes[2]);
   _unitIdx = *pUnitIndex;
 
   // reset the attributes vector

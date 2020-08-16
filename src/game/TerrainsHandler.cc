@@ -25,7 +25,7 @@ void TerrainsHandler::initialize()
 }
 
 
-int TerrainsHandler::cost(const e_terrain terrain, const e_unit unit_type)
+size_t TerrainsHandler::cost(const e_terrain terrain, const e_unit unit_type)
 {
   switch (terrain)
   {

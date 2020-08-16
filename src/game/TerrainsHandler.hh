@@ -41,7 +41,7 @@ public:
    * \param unit_type Type of the Unit willing to cross
    * \return Motion cost (negative value if crossing the terrain is not allowed)
    */
-  static int cost(const e_terrain terrain, const e_unit unit_type);
+  static size_t cost(const e_terrain terrain, const e_unit unit_type);
 
 
 private:

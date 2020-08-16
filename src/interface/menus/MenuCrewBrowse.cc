@@ -42,7 +42,7 @@ void MenuCrewBrowse::build()
     auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
     if (vehicle->crewSize() != 0u)
     {
-      int i{0};
+      size_t i{0u};
       for ([[maybe_unused]] auto& unused: vehicle->crew())
       {
         auto entry(std::make_shared<MenuEntryCrew> (e_entry::NONE, i));

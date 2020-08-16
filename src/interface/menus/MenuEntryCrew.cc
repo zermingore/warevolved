@@ -34,7 +34,7 @@ MenuEntryCrew::MenuEntryCrew(const e_entry entry, int crew_idx)
 
   if (crew_idx != -1)
   {
-    _role = _vehicle->crew()[_crewIdx].first;
+    _role = _vehicle->crew()[static_cast<size_t> (_crewIdx)].first;
   }
   else
   {
@@ -75,7 +75,8 @@ void MenuEntryCrew::draw()
   if (_crewIdx != -1) // Cancel / Confirm don't apply
   {
     // Unit Sprite
-    const auto dropping_unit = _vehicle->crew()[_crewIdx].second;
+    const auto dropping_unit =
+      _vehicle->crew()[static_cast<size_t> (_crewIdx)].second;
 
     const auto sprite_unit(dropping_unit->sprite());
     using p = graphics::MapGraphicsProperties;
@@ -132,7 +133,8 @@ void MenuEntryCrew::setLabelName()
       return;
 
     default:
-      _labelName = UNIT_ROLE_STR.at(_vehicle->crew()[_crewIdx].first);
+      _labelName = UNIT_ROLE_STR.at(
+        _vehicle->crew()[static_cast<size_t> (_crewIdx)].first);
       break;
   }
 }
