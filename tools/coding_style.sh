@@ -84,8 +84,10 @@ function check_arguments()
 
 function check_lines_length()
 {
+  local -i error=0
   local lines=$(find "$1" -name \*.hh -o -name \*.cc | xargs grep -H ".\{${MAX_COLUMNS},\}")
   if [[ $lines != "" ]]; then
+    error=1
     echo "${COLOR_RED}Too long lines detected:${COLOR_NORMAL}"
 
     # Printing the too long lines
@@ -99,14 +101,18 @@ function check_lines_length()
     echo -n "Maximal line length respected ($MAX_COLUMNS columns with \\n)"
     echo "${COLOR_NORMAL}"
   fi
+
+  return $error
 }
 
 
 
 function check_tabs()
 {
+  local -i error=0
   local lines=$(grep -rn -P '\t' "$1" --exclude=*.in)
   if [[ $lines != "" ]]; then
+    error=1
     echo "${COLOR_RED}Tabs detected:${COLOR_NORMAL}"
 
     # Printing faulty lines
@@ -118,6 +124,8 @@ function check_tabs()
   else
     echo "${COLOR_GREEN}No tab detected${COLOR_NORMAL}"
   fi
+
+  return $error
 }
 
 
@@ -126,8 +134,14 @@ function main()
 {
   check_arguments "$@"
 
+  local -i error=0
   check_lines_length "$1"
+  ((error += $?))
+
   check_tabs "$1"
+  ((error += $?))
+
+  return $error
 }
 
 
