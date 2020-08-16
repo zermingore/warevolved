@@ -131,7 +131,6 @@ __top_srcdir__we_CXXFLAGS += -Wfloat-equal                      # Warn if testin
 __top_srcdir__we_CXXFLAGS += -Wfree-nonheap-object              # Warn when attempting to free a non-heap object
 __top_srcdir__we_CXXFLAGS += -Winherited-variadic-ctor          # Warn about C++11 inheriting constructors when the base has a variadic constructor
 __top_srcdir__we_CXXFLAGS += -Winit-self                        # Warn about variables which are initialized to themselves
-__top_srcdir__we_CXXFLAGS += -Winline                           # Warn when an inlined function cannot be inlined
 __top_srcdir__we_CXXFLAGS += -Wint-to-pointer-cast              # Warn when there is a cast to a pointer from an integer of a different size
 __top_srcdir__we_CXXFLAGS += -Winvalid-memory-model             # Warn when an atomic memory model parameter is known to be outside the valid range.
 __top_srcdir__we_CXXFLAGS += -Winvalid-offsetof                 # Warn about invalid uses of the "offsetof" macro
@@ -270,6 +269,7 @@ __top_srcdir__we_CXXFLAGS += ${WE_EXTRA_CXXFLAGS}               # Append user-de
 # -Waggregate-return          Warn about returning structures, unions or arrays
 # -Wswitch-enum               Warn about all enumerated switches missing a specific case (even if a 'default' is present)
 # -Weffc++                    Warn about violations of Effective C++ style rules (05/2017: too many false positives [std::string default constructor])
+# -Winline                    Warn when an inlined function cannot be inlined (not really relevant, triggered by implicit destructors)
 
 # Deactivated warnings (unsure about the relevance in this context)
 # -Wpadded                    Warn when padding is required to align structure members
