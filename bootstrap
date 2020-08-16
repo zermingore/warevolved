@@ -28,7 +28,7 @@ function main()
 
   local root_dir=$(dirname $(realpath $0))
   pushd "$BUILD_DIR"
-  "${root_dir}/configure" || exit $?
+  "${root_dir}/configure" $CONFIGURE_FLAGS || exit $?
 
   if [[ -z $NO_BUILD ]]; then
     make -j$(grep -c processor /proc/cpuinfo) || exit $?
@@ -54,7 +54,9 @@ function usage()
   echo ""
   echo "Notes:"
   echo "  The compilation flags can be customized using CXX and WE_EXTRA_CXXFLAGS variables:"
-  echo "  CXX=clang++ WE_EXTRA_CXXFLAGS='-Wno-unknown-warning-option -Wdocumentation' ./bootstrap"
+  echo "    CXX=clang++ WE_EXTRA_CXXFLAGS='-Wno-unknown-warning-option -Wdocumentation' $0"
+  echo "  The configure flags can be customized using CONFIGURE_FLAGS variables:"
+  echo "    CONFIGURE_FLAGS='--host=aarch64-linux-gnu' CXX='aarch64-linux-gnu-g++ --sysroot=/root/fs/' $0"
   echo ""
   echo "War Evolved build script. Version $VERSION"
   echo ""
