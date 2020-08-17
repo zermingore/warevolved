@@ -39,8 +39,11 @@ MenuEntry::MenuEntry(const e_entry entry)
 void MenuEntry::update()
 {
   using p = graphics::MapGraphicsProperties;
+
+  _lock.lock();
   _sprite->setSize(p::cellWidth() * 2, p::cellHeight());
   _label->setPosition(_position.x, _position.y);
+  _lock.unlock();
 }
 
 

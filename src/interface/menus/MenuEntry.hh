@@ -11,6 +11,7 @@
 
 # include <string>
 # include <memory>
+# include <mutex>
 # include <functional>
 
 # include <interface/InterfaceElement.hh>
@@ -99,6 +100,8 @@ protected:
 
   /// callbacks list executed when the entry is selected
   std::vector<std::function<void()>> _callbacks;
+
+  std::mutex _lock; ///< Prevent updating old entries
 };
 
 

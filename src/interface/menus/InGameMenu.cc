@@ -63,6 +63,8 @@ void InGameMenu::update()
   using namespace graphics;
   using p = MapGraphicsProperties;
 
+  _lock.lock();
+
   // _coords is filled by the player, with cursor coordinates
   _position = {
     static_cast<component> (_coords.c) * p::cellWidth()  + p::gridOffsetX(),
@@ -83,6 +85,8 @@ void InGameMenu::update()
     entry->update();
     ++entry_index;
   }
+
+  _lock.unlock();
 }
 
 

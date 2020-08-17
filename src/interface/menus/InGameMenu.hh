@@ -10,6 +10,7 @@
 # define IN_GAME_MENU_HH_
 
 # include <memory>
+# include <mutex>
 # include <functional>
 
 # include <interface/menus/Menu.hh>
@@ -88,6 +89,10 @@ protected:
   /// \todo RM _cursorCoords / _unit // state data
   Coords _cursorCoords; ///< Saved cursor coordinates
   std::shared_ptr<Unit> _unit; ///< Saved unit
+
+
+private:
+  std::mutex _lock; /// Prevent from drawing a not anymore current State (crash)
 };
 
 

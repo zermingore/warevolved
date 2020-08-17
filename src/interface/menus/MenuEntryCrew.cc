@@ -57,8 +57,10 @@ MenuEntryCrew::MenuEntryCrew(const e_entry entry, int crew_idx)
 void MenuEntryCrew::update()
 {
   using p = graphics::MapGraphicsProperties;
+  _lock.lock();
   _sprite->setSize(p::cellWidth() * 4, p::cellHeight());
   _label->setPosition(_position.x + 2, _position.y);
+  _lock.unlock();
 }
 
 
