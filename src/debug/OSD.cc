@@ -20,6 +20,7 @@ namespace debug {
 Coords OSD::_dataPosition;
 std::vector<std::shared_ptr<sf::Drawable>> OSD::_drawables;
 unsigned int OSD::_fontSize = 20;
+std::mutex OSD::_lock;
 
 
 
@@ -39,11 +40,13 @@ void OSD::draw()
 {
   /// \todo draw a background
 
+  _lock.lock();
   for (const auto& it: _drawables) {
     graphics::GraphicsEngine::draw(it);
   }
+  _drawables.clear(); /// \todo thread safe (free(): corrupted unsorted chunks)
+  _lock.unlock();
 
-  _drawables.clear();
   _dataPosition.y = 0;
 }
 
@@ -56,7 +59,11 @@ void OSD::addText(const std::string& str)
   };
 
   auto label = std::make_shared<resources::Text> (str, _fontSize, pos);
+
+  _lock.lock();
   _drawables.emplace_back(label->graphicalText());
+  _lock.unlock();
+
   _dataPosition.y += _fontSize + 5;
 }
 
@@ -72,7 +79,10 @@ void OSD::writeOnCell(size_t c, size_t l, const std::string& str)
   };
 
   auto label = std::make_shared<resources::Text> (str, _fontSize, pos);
+
+  _lock.lock();
   _drawables.emplace_back(label->graphicalText());
+  _lock.unlock();
 }
 
 

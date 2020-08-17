@@ -10,8 +10,10 @@
 
 # include <string>
 # include <memory>
+# include <mutex>
 # include <vector>
 # include <type_traits>
+
 
 # include <common/using.hh>
 
@@ -89,6 +91,9 @@ private:
 
   /// List of items to display
   static std::vector<std::shared_ptr<sf::Drawable>> _drawables;
+
+  /// Prevent parallel push and clear
+  static std::mutex _lock;
 };
 
 
