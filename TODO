@@ -9,18 +9,6 @@
 
 
 
-* TODO Bugs / Features
-** TODO Units
-*** TODO In crew menu, 'Confirm' should be available only on changes
-*** DONE Crew 'Passenger' not used
-    CLOSED: [2020-08-12 Wed 18:44]
-
-** TODO Graphics
-*** TODO Resize the window: center the map
-*** TODO Resize the window: propagate new panel positions
-*** TODO Panel: Pilot and Co-Pilot fonts differ
-*** TODO Panel: Info font (next to the unit sprite) is too big
-
 ** TODO Misc
 *** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
 *** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
@@ -30,19 +18,12 @@
 * TODO Doc
 ** TODO Options
 ** TODO Document the coding style
-** TODO Investigate spooky Doxygen warnings
-   todo:20: warning: unexpected token TK_COMMAND_BS as the argument of _internalref
-   todo:56: warning: unexpected token TK_COMMAND_BS as the argument of _internalref
-
 
 
 * TODO Clean
 ** TODO Pointer parameters (should pass smart_ptr only when sharing the ownership)
 ** TODO Avoid casts to graphic types, overriding some methods
 ** TODO Merge Cell highlight boolean and color (color::None)
-** TODO Capture lambda as reference when possible
-** DROP Use the uniformed initialization
-   Coding style stuff; won't fix the whole code at once
 ** TODO Find a way to have compile-time map keys (vehicle crews)
 ** TODO Check included headers used
 ** TODO Panel clean (code && graphics: make text width panel size dependent)
