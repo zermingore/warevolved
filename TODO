@@ -92,7 +92,8 @@
 ** TODO Highlight possible targets when hovering a unit
 ** TODO Menu Bar
 ** TODO Configuration file
-** TODO select between satellite or schematic view
+** DELAYED select between satellite or schematic view
+   Documented in doc/think/concept
 ** TODO unit selection -> 'flashing lights'
 ** TODO center text in in-game menu entries
 ** TODO Display last killed unit list
@@ -114,10 +115,12 @@
 
 
 * TODO Tools
-** TODO Global log
-*** TODO Merge every log entries, by timestamps
-*** TODO html / xml output
-*** TODO css / xmlss
+** DROP Global log
+   not really useful so far
+   (multiple threads -> timestamps / prints not so useful on crash)
+*** DROP Merge every log entries, by timestamps
+*** DROP html / xml output
+*** DROP css / xmlss
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
