@@ -50,7 +50,9 @@ void MenuCrew::build()
         {
           [=] { vehicle->dropOff(i, coords); },
         });
-        _entries.emplace_back(entry);
+        _lock.lock();
+        _entries.emplace_back(std::move(entry));
+        _lock.unlock();
         ++i;
       }
     }
@@ -67,7 +69,9 @@ void MenuCrew::build()
         [c = _coords] { game::Status::player()->cursor()->setCoords(c); },
         [=] { game::Status::clearStates(); }
       });
-      _entries.emplace_back(entry_group);
+      _lock.lock();
+      _entries.emplace_back(std::move(entry_group));
+      _lock.unlock();
     }
     else if (unit->canReceive(_selectedUnit))
     {
@@ -79,10 +83,10 @@ void MenuCrew::build()
         [=, this] { game::Status::player()->cursor()->setCoords(_coords); },
         [=] { game::Status::clearStates(); }
       });
-      _entries.emplace_back(entry_group);
+      _lock.lock();
+      _entries.emplace_back(std::move(entry_group));
+      _lock.unlock();
     }
-
-    NOTICE("Build crew menu");
   }
 
   addCancelEntry( [=, this] { cancel(); } );

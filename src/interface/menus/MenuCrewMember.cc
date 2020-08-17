@@ -26,7 +26,10 @@ void MenuCrewMember::build()
   auto map(game::Status::battle()->map());
   const auto selectedUnit = map->selectedUnit();
   auto vehicle = std::static_pointer_cast<Vehicle> (selectedUnit);
+
+  _lock.lock();
   _entries.clear();
+  _lock.unlock();
 
   // Add a get_out entry only if the unit can exit the vehicle
   PathFinding path(vehicle);
@@ -38,7 +41,10 @@ void MenuCrewMember::build()
     {
       [=, this] { getOut(); },
     });
-    _entries.emplace_back(entry);
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
   }
 
   addCancelEntry( [=, this] { cancel(); } );
@@ -55,10 +61,12 @@ void MenuCrewMember::draw()
 
   update();
 
+  _lock.lock();
   for (const auto& entry: _entries)
   {
     entry->draw();
   }
+  _lock.unlock();
 
   if (_active)
   {

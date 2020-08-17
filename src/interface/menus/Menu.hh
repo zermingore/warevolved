@@ -96,12 +96,6 @@ public:
    */
   virtual void moveRight() {}
 
-
-  /**
-   * \brief Removes the entries of the menu
-   */
-  virtual void clear() { _entries.clear(); }
-
   /**
    * \brief executes action matching _selectedEntry
    */

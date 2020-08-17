@@ -94,7 +94,10 @@ void MenuAction::buildMenuSelectionUnit()
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::MOVE)};
     entry->setCallback([=, this] { moveUnit(); });
-    _entries.emplace_back(entry);
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
   }
 
   // add the attack entry if a target is reachable from the current position
@@ -104,14 +107,20 @@ void MenuAction::buildMenuSelectionUnit()
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::ATTACK)};
     entry->setCallback([=, this] { attackUnit(); });
-    _entries.emplace_back(entry);
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
   }
 
   if (_selectedUnit->crewSize() != 0u)
   {
     auto entry_crew{std::make_shared<MenuEntry> (e_entry::CREW)};
     entry_crew->setCallback([=, this] { manageCrew(); });
-    _entries.emplace_back(entry_crew);
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry_crew));
+    _lock.unlock();
   }
 }
 
@@ -130,7 +139,9 @@ void MenuAction::buildMenuAfterMovingUnit()
       waitUnit();
       game::Status::clearStates(); // will destroy 'this'
     });
-    _entries.emplace_back(entry_wait);
+    _lock.lock();
+    _entries.emplace_back(std::move(entry_wait));
+    _lock.unlock();
 
     // _selectedUnit does not exits (another instance of MenuAction built it)
     _selectedUnit = map->selectedUnit();
@@ -143,7 +154,10 @@ void MenuAction::buildMenuAfterMovingUnit()
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=, this] { attackUnit(); });
-      _entries.emplace_back(entry);
+
+      _lock.lock();
+      _entries.emplace_back(std::move(entry));
+      _lock.unlock();
     }
 
     if (_selectedUnit->crewSize() != 0u)
@@ -154,7 +168,10 @@ void MenuAction::buildMenuAfterMovingUnit()
         game::Status::player()->cursor()->setCoords(_coords);
         manageCrew();
       });
-      _entries.emplace_back(entry_crew);
+
+      _lock.lock();
+      _entries.emplace_back(std::move(entry_crew));
+      _lock.unlock();
     }
   }
   else

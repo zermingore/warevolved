@@ -33,7 +33,10 @@ void MenuCrewBrowse::build()
   auto map(game::Status::battle()->map());
   game::Status::player()->updateSelectedUnit();
   auto unit(map->unit(_coords));
+
+  _lock.lock();
   _entries.clear();
+  _lock.unlock();
 
   _selectedUnit = map->selectedUnit();
   assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");
@@ -50,7 +53,10 @@ void MenuCrewBrowse::build()
         {
           [=, this] { vehicle->dropOff(i, _coords); }
         });
-        _entries.emplace_back(entry);
+
+        _lock.lock();
+        _entries.emplace_back(std::move(entry));
+        _lock.unlock();
         ++i;
       }
     }
@@ -60,13 +66,19 @@ void MenuCrewBrowse::build()
   {
     auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
     entry_confirm->setCallback( [=, this] { confirm(); });
-    _entries.emplace_back(entry_confirm);
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry_confirm));
+    _lock.unlock();
   }
   _confirmEntryActive = true;
 
   auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
   entry_cancel->setCallback( [=, this] { cancel(); });
-  _entries.emplace_back(entry_cancel);
+
+  _lock.lock();
+  _entries.emplace_back(std::move(entry_cancel));
+  _lock.unlock();
 
   // increase highlight sprite
   using namespace graphics;
@@ -97,10 +109,12 @@ void MenuCrewBrowse::draw()
 {
   update();
 
+  _lock.lock();
   for (const auto& entry: _entries)
   {
     entry->draw();
   }
+  _lock.unlock();
 
   if (_active)
   {

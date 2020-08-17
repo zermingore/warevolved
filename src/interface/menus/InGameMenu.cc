@@ -21,6 +21,11 @@
 
 namespace interface {
 
+InGameMenu::~InGameMenu()
+{
+  _lock.lock();
+}
+
 
 void InGameMenu::cancel() {
   game::Status::popCurrentState();
@@ -31,7 +36,10 @@ void InGameMenu::addCancelEntry(const std::function<void()>& cancel_callback)
 {
   auto entry_cancel{std::make_shared<MenuEntry> (e_entry::CANCEL)};
   entry_cancel->setCallback([=] { cancel_callback(); });
-  _entries.emplace_back(entry_cancel);
+
+  _lock.lock();
+  _entries.emplace_back(std::move(entry_cancel));
+  _lock.unlock();
 }
 
 
@@ -91,9 +99,13 @@ void InGameMenu::update()
 
 
 
-e_entry InGameMenu::getCurrentSelection() const
+e_entry InGameMenu::getCurrentSelection()
 {
-  return _entries[_selectedEntry]->id();
+  _lock.lock();
+  auto idx{ _entries[_selectedEntry]->id() };
+  _lock.unlock();
+
+  return idx;
 }
 
 
@@ -102,14 +114,12 @@ void InGameMenu::draw()
 {
   update();
 
+  _lock.lock();
   for (const auto& entry: _entries)
   {
-    if (!entry) /// \todo Find the reason why entry is sometime nullptr
-    {
-      return; // skip the menu draw this frame
-    }
     entry->draw();
   }
+  _lock.unlock();
 
   _imageSelection->draw();
 }

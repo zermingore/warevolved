@@ -19,7 +19,10 @@ void MenuMap::build()
 
   auto entry(std::make_shared<MenuEntry> (e_entry::NEXT_TURN));
   entry->setCallback( [=] { game::Status::nextPlayer(); });
-  _entries.emplace_back(entry);
+
+  _lock.lock();
+  _entries.emplace_back(std::move(entry));
+  _lock.unlock();
 }
 
 
