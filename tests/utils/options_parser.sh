@@ -18,6 +18,12 @@ function _help()
          "-h|--help"    "print this help and exit"
 
   printf "    %-${longest_opt}s%s\n"\
+         "-v|--version" "print the program version ($VERSION) and exit"
+
+  printf "    %-${longest_opt}s%s\n"\
+         "--safe-mode" "out of tree build, based on tracked files; run tests"
+
+  printf "    %-${longest_opt}s%s\n"\
          "-j|--parallel-build" "Run make in parallel (--jobs)"
 
   printf "    %-${longest_opt}s%s\n"\
@@ -41,18 +47,19 @@ function _help()
   printf "    %-${longest_opt}s%s\n"\
          "--tests=TEST1,TEST2" "Run the specified tests cases only"
 
-  printf "    %-${longest_opt}s%s\n"\
-         "-v|--version" "print the program version ($VERSION) and exit"
-
   echo
   echo "Examples:"
-  echo "    Clean build, run all tests (should be used before pushing changes)"
+  echo "    Clean build, run all tests"
   echo "    $0"
   echo
   echo "    Partial parallel build, run only the regression tests"
   echo "    $0 --no-configure -j --regression"
   echo
-  echo "$0 -n -j --tests=tests/regression/escape_map.sh,tests/path/basic.sh"
+  echo "    Run a specific test without configure"
+  echo "    $0 -n -j --tests=tests/regression/escape_map.sh,tests/path/basic.sh"
+  echo
+  echo "    What a git push hook should do (out of tree build, run every test)"
+  echo "    $0 --safe-mode"
 }
 
 
@@ -108,6 +115,16 @@ function parse_options()
         exit 0
         ;;
 
+      -v|--version)
+        _version
+        exit 0
+        ;;
+
+      --safe-mode)
+        SAFE_MODE=1
+        shift
+        ;;
+
       -j|--parallel-build)
         PARALLEL_BUILD="-j$(grep -c processor /proc/cpuinfo)"
         shift
@@ -146,11 +163,6 @@ function parse_options()
         TESTS_LIST=(${2//,/ }) # Build an array of tests from the argument
         shift 2
         _check_test_files_exist
-        ;;
-
-      -v|--version)
-        _version
-        exit 0
         ;;
 
       --)

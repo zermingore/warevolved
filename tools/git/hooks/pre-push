@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-tests/test.sh
+tests/test.sh --safe-mode
 tools/check_headers.sh src/

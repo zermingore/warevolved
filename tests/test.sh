@@ -15,6 +15,8 @@ VERSION=0.1.0
 OPTIONS=hjnrsvi
 OPTIONS_LONG=\
 help,\
+version,\
+safe-mode,\
 no-configure,\
 parallel-build,\
 no-configure,\
@@ -22,8 +24,8 @@ random-seed:,\
 smoke,\
 regression,\
 integration,\
-tests:,\
-version
+tests:
+
 
 # Program options associated variables
 PARALLEL_BUILD="-j1"
@@ -33,6 +35,7 @@ RUN_SMOKE=0
 RUN_REGRESSION=0
 RUN_INTEGRATION=0
 RANDOM_SEED=$(shuf -i 0-4294967296 -n 1)
+SAFE_MODE=0
 
 
 # Paths
@@ -121,10 +124,44 @@ function integration_tests()
 
 
 
+function safe_mode()
+{
+  local -r tmp_dir=$(mktemp -d)
+
+  echo -n "Copying tracked files in ${tmp_dir}... "
+  for f in $(git ls-files); do
+    cp --parents "$f" "$tmp_dir"
+    if [[ $? -ne 0 ]]; then
+      printError "[FAIL]"
+      exit 3
+    fi
+  done
+  printSuccess "[done]\n"
+
+  pushd "$tmp_dir" >/dev/null
+  if [ $? -ne 0 ]; then
+    printError "Cannot cd to temp directory $tmp_dir"
+    exit 3
+  fi
+
+  tests/test.sh
+}
+
+
 # ________________________________ Entry point _______________________________ #
 function main()
 {
   parse_options "$@"
+
+  if [ $SAFE_MODE -eq 1 ]; then
+    if [ $# -ne 1 ]; then
+      printError "--safe-mode is not compatible with any option"
+      exit 2
+    fi
+
+    safe_mode
+    exit $?
+  fi
 
   build
   # Get the absolute path to the 'we' binary
