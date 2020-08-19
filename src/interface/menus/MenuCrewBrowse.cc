@@ -88,13 +88,6 @@ void MenuCrewBrowse::build()
 
 
 
-void MenuCrewBrowse::cancel()
-{
-  game::Status::clearStates();
-}
-
-
-
 void MenuCrewBrowse::confirm()
 {
   WARNING("Confirming");

@@ -27,7 +27,8 @@ InGameMenu::~InGameMenu()
 }
 
 
-void InGameMenu::cancel() {
+void InGameMenu::cancel()
+{
   game::Status::popCurrentState();
 }
 

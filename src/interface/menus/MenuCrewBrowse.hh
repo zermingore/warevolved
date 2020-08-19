@@ -44,12 +44,6 @@ public:
 
 private:
   /**
-   * \brief Closes the menu
-   *   rolls back to the previous action menu if any, or pops every State
-   */
-  void cancel() override final;
-
-  /**
    * \brief Closes the menu, confirming the crew management
    */
   void confirm();

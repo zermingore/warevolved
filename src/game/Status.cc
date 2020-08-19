@@ -112,11 +112,13 @@ void Status::nextPlayer()
 
 
 
-std::shared_ptr<Player> Status::player() {
+std::shared_ptr<Player> Status::player()
+{
   return _battle->getCurrentPlayer();
 }
 
-std::shared_ptr<interface::Interface> Status::interface() {
+std::shared_ptr<interface::Interface> Status::interface()
+{
   return _battle->getCurrentPlayer()->interface();
 }
 

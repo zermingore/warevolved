@@ -36,7 +36,7 @@ class State
 {
 public:
   /**
-   * \brief Default constructor\
+   * \brief Default constructor
    * \note Instantiates the EventManager
    */
   State();
