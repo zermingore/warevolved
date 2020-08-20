@@ -116,8 +116,6 @@
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
-*** DONE auto generate documentation
-    CLOSED: [2020-08-18 Tue 10:30]
 ** TODO auto resources XML generator
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
