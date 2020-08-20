@@ -213,7 +213,10 @@ void StateSelectDropZone::validate()
   // Should lock the draw ? (without unlocking it ?)
   game::Status::player()->cursor()->setCoords(_vehicleLocation);
 
-  game::Status::popCurrentState();
+  game::Status::pushState(e_state::CREW_MANAGEMENT);
+  game::Status::setStateAttributes(
+    std::make_shared<Coords> (_vehicleLocation),
+    std::make_shared<bool> (true));
   game::Status::resumeState();
 }
 

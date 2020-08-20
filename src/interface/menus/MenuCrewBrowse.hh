@@ -35,9 +35,18 @@ public:
 
   /**
    * \brief _active (focus) setter
+   * \param active new _active value
    */
   void setActive(bool active) {
     _active = active;
+  }
+
+  /**
+   * \brief _active (focus) setter
+   * \param active true: display the confirm entry; false: hide it
+   */
+  void setConfirmEntryActive(bool active) {
+    _confirmEntryActive = active;
   }
 
 
@@ -52,7 +61,7 @@ private:
   bool _active = true; ///< True if the menu has the focus
 
   std::shared_ptr<Unit> _selectedUnit; ///< Currently selected unit
-  bool _confirmEntryActive = false; ///< Should the 'Confirm' entry appear?
+  bool _confirmEntryActive = true; ///< Should the 'Confirm' entry appear?
 };
 
 

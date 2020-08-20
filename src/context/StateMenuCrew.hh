@@ -123,6 +123,8 @@ private:
 
   bool _browseMembers; ///< Browse the crew or a member's actions?
   int _unitIdx = 0; ///< Currently selected crew Unit index
+
+  bool _menuCrewConfirmEntryActive; ///< 'confirm' in crew menu active?
 };
 
 

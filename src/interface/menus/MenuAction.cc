@@ -49,6 +49,13 @@ void MenuAction::build()
 
 void MenuAction::cancel()
 {
+  if (_selectedUnit->moved())
+  {
+    game::Status::player()->cursor()->setCoords(_selectedUnit->oldCoords());
+    game::Status::battle()->map()->moveUnit(_selectedUnit->oldCoords());
+    _selectedUnit->setMoved(false);
+  }
+
   game::Status::clearStates();
 }
 
@@ -204,7 +211,9 @@ void MenuAction::waitUnit()
 void MenuAction::manageCrew()
 {
   game::Status::pushState(e_state::CREW_MANAGEMENT);
-  game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
+  game::Status::setStateAttributes(
+    std::make_shared<Coords> (_coords),
+    std::make_shared<bool> (false));
   game::Status::resumeState();
 }
 

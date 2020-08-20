@@ -32,7 +32,6 @@ void MenuCrewBrowse::build()
 {
   auto map(game::Status::battle()->map());
   game::Status::player()->updateSelectedUnit();
-  auto unit(map->unit(_coords));
 
   _lock.lock();
   _entries.clear();
@@ -71,7 +70,6 @@ void MenuCrewBrowse::build()
     _entries.emplace_back(std::move(entry_confirm));
     _lock.unlock();
   }
-  _confirmEntryActive = true;
 
   auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
   entry_cancel->setCallback( [=, this] { cancel(); });
@@ -90,8 +88,6 @@ void MenuCrewBrowse::build()
 
 void MenuCrewBrowse::confirm()
 {
-  WARNING("Confirming");
-
  _selectedUnit->setPlayed(true);
   game::Status::clearStates();
 }

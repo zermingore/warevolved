@@ -61,6 +61,7 @@ void StateMenuCrew::resume()
   }
 
   _menuCrew->setCoords(_menuCrewCoords);
+  _menuCrew->setConfirmEntryActive(_menuCrewConfirmEntryActive);
   _menuCrew->build();
 
   _menuMemberCoords = _menuCrewCoords;
@@ -230,19 +231,18 @@ void StateMenuCrew::exit() // escape key
 void StateMenuCrew::cancel()
 {
   auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
-  if (selectedUnit->moved())
-  {
-    game::Status::player()->cursor()->setCoords(selectedUnit->oldCoords());
-    game::Status::battle()->map()->moveUnit(selectedUnit->oldCoords());
-    selectedUnit->setMoved(false);
-  }
 
   // restore dropped unit
   auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
   v->restoreCrew();
   v->clearDroppedHistory();
 
-  game::Status::clearStates();
+  // Pop every select_drop_zone and crew_management states
+  while (   game::Status::state() != e_state::ACTION_MENU
+         && game::Status::state() != e_state::SELECTION_UNIT)
+  {
+    game::Status::popCurrentState();
+  }
 }
 
 
@@ -262,6 +262,10 @@ void StateMenuCrew::fetchAttributes()
 
   _menuMemberCoords = _menuCrewCoords;
   _menuMemberCoords.x += 4; // in cells
+
+
+  auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
+  _menuCrewConfirmEntryActive = *p2;
 
   /// \todo fetch selected and hovered units?
 
