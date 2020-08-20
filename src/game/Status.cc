@@ -46,14 +46,19 @@ void Status::resumeState()
 
 void Status::drawState()
 {
+  _lock.try_lock(); ///< \todo Explain this try_lock + unconditional unlock
   _states.top().second->draw();
+  _lock.unlock();
 }
 
 
 
 bool Status::processInput(const e_input& input)
 {
-  return _states.top().second->eventManager()->process(input);
+  _lock.lock();
+  auto ret {_states.top().second->eventManager()->process(input)};
+  _lock.unlock();
+  return ret;
 }
 
 

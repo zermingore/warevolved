@@ -48,6 +48,5 @@ void EventsProcessor::process()
 
 void EventsProcessor::notifyFrame()
 {
-  std::unique_lock<std::mutex> lock(_lock);
   _cv_new_frame.notify_one();
 }
