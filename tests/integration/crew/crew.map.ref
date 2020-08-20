@@ -7,11 +7,11 @@
 			<current_player>0</current_player>
 			<player>
 				<color r="0" g="127" b="127" />
-				<cursor col="1" line="4" />
+				<cursor col="1" line="5" />
 			</player>
 			<player>
 				<color r="227" g="227" b="0" />
-				<cursor col="3" line="2" />
+				<cursor col="2" line="3" />
 			</player>
 		</players>
 	</metadata>
@@ -31,7 +31,6 @@
 		<cell>
 			<coordinates col="0" line="3" />
 			<terrain>1</terrain>
-			<unit type="0" player_id="0" hp="7" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="0" line="4" />
@@ -56,16 +55,10 @@
 		<cell>
 			<coordinates col="1" line="3" />
 			<terrain>1</terrain>
-			<unit type="1" player_id="0" hp="5" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="1" line="4" />
 			<terrain>1</terrain>
-			<unit type="1" player_id="0" hp="5" played="false">
-				<crew>
-					<member role="2" type="0" player_id="0" hp="7" played="false" />
-				</crew>
-			</unit>
 		</cell>
 		<cell>
 			<coordinates col="1" line="5" />
@@ -86,7 +79,7 @@
 		<cell>
 			<coordinates col="2" line="3" />
 			<terrain>1</terrain>
-			<unit type="0" player_id="0" hp="5" played="false" />
+			<unit type="0" player_id="1" hp="6" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="2" line="4" />
@@ -115,7 +108,6 @@
 		<cell>
 			<coordinates col="3" line="4" />
 			<terrain>1</terrain>
-			<unit type="0" player_id="1" hp="7" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="3" line="5" />
@@ -136,6 +128,7 @@
 		<cell>
 			<coordinates col="4" line="3" />
 			<terrain>1</terrain>
+			<unit type="1" player_id="0" hp="5" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="4" line="4" />
