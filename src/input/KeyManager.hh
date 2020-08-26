@@ -111,6 +111,11 @@ enum class e_key
   // Interface keys
   TOGGLE_PANEL,
 
+  // Editor
+  EDIT_TERRAIN_NEXT,
+  EDIT_UNIT_NEXT,
+  EDIT_UNIT_DEL,
+
   // exit requests
   EXIT,
 

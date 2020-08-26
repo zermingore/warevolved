@@ -53,6 +53,11 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
   _keys_mapping.insert({sf::Keyboard::F8,     e_key::QUICK_LOAD});
   _keys_mapping.insert({sf::Keyboard::F4,     e_key::QUICK_SAVE});
 
+  // Editor
+  _keys_mapping.insert({sf::Keyboard::T,         e_key::EDIT_TERRAIN_NEXT});
+  _keys_mapping.insert({sf::Keyboard::U,         e_key::EDIT_UNIT_NEXT});
+  _keys_mapping.insert({sf::Keyboard::BackSpace, e_key::EDIT_UNIT_DEL});
+
 
   // This event mapping is populated here but will then be read only
   // These are the mapping key (dissociated from the keyboard) -> event
@@ -67,6 +72,11 @@ void KeyManager::Initialize(std::shared_ptr<ReplayManager> replay)
   _events_mapping.insert({e_key::DUMP_MAP,     e_input::DUMP_MAP    });
   _events_mapping.insert({e_key::QUICK_LOAD,   e_input::QUICK_LOAD  });
   _events_mapping.insert({e_key::QUICK_SAVE,   e_input::QUICK_SAVE  });
+
+  _events_mapping.insert({e_key::EDIT_TERRAIN_NEXT,
+                          e_input::EDIT_TERRAIN_NEXT});
+  _events_mapping.insert({e_key::EDIT_UNIT_NEXT, e_input::EDIT_UNIT_NEXT});
+  _events_mapping.insert({e_key::EDIT_UNIT_DEL,  e_input::EDIT_UNIT_DEL});
 }
 
 

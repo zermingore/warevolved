@@ -73,6 +73,11 @@ enum class e_input
   // Interface keys
   TOGGLE_PANEL,
 
+  // Editor
+  EDIT_TERRAIN_NEXT,
+  EDIT_UNIT_NEXT,
+  EDIT_UNIT_DEL,
+
   // Global inputs
   SCREENSHOT,
   DUMP_MAP,
