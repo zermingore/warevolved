@@ -1,6 +1,6 @@
 /**
  * \file
- * \date Sun 09 Aug 2020 07:21:34 AM CEST
+ * \date Wed 26 Aug 2020 03:46:37 PM CEST
  * \author generate_enum_print.sh
  * \brief Wrapper enum <=> string
  * \warning auto-generated code, edit at your own risks
@@ -206,6 +206,12 @@ std::string e_input_string(e_input entry)
       return "e_input::SELECTION (no explicit value)";
     case e_input::TOGGLE_PANEL:
       return "e_input::TOGGLE_PANEL (no explicit value)";
+    case e_input::EDIT_TERRAIN_NEXT:
+      return "e_input::EDIT_TERRAIN_NEXT (no explicit value)";
+    case e_input::EDIT_UNIT_NEXT:
+      return "e_input::EDIT_UNIT_NEXT (no explicit value)";
+    case e_input::EDIT_UNIT_DEL:
+      return "e_input::EDIT_UNIT_DEL (no explicit value)";
     case e_input::SCREENSHOT:
       return "e_input::SCREENSHOT (no explicit value)";
     case e_input::DUMP_MAP:
@@ -240,6 +246,12 @@ std::string e_key_string(e_key entry)
       return "e_key::QUICK_LOAD (no explicit value)";
     case e_key::TOGGLE_PANEL:
       return "e_key::TOGGLE_PANEL (no explicit value)";
+    case e_key::EDIT_TERRAIN_NEXT:
+      return "e_key::EDIT_TERRAIN_NEXT (no explicit value)";
+    case e_key::EDIT_UNIT_NEXT:
+      return "e_key::EDIT_UNIT_NEXT (no explicit value)";
+    case e_key::EDIT_UNIT_DEL:
+      return "e_key::EDIT_UNIT_DEL (no explicit value)";
     case e_key::EXIT:
       return "e_key::EXIT (no explicit value)";
     case e_key::UP:
