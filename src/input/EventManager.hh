@@ -57,7 +57,9 @@ private:
 
 /**
  * \enum e_input
- * \brief Logical input names.
+ * \brief Logical input names
+ * \warning New inputs should be added at the end of the list
+ *   (as tests replay rely on the values)
  */
 enum class e_input
 {
@@ -73,11 +75,6 @@ enum class e_input
   // Interface keys
   TOGGLE_PANEL,
 
-  // Editor
-  EDIT_TERRAIN_NEXT,
-  EDIT_UNIT_NEXT,
-  EDIT_UNIT_DEL,
-
   // Global inputs
   SCREENSHOT,
   DUMP_MAP,
@@ -86,6 +83,11 @@ enum class e_input
 
   // Exit requests
   EXIT,
+
+  // Editor
+  EDIT_TERRAIN_NEXT,
+  EDIT_UNIT_NEXT,
+  EDIT_UNIT_DEL,
 
   NB_KEYS
 };
