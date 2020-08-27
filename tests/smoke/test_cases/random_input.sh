@@ -52,7 +52,7 @@ done
 echo "Test file: $TMP"
 
 timeout 10 "${BIN_WE}" \
-        --random-seed="$RANDOM_SEED" -r --replay-file="$TMP" >> /dev/null
+        --random-seed="$RANDOM_SEED" -r --replay-file="$TMP" > "/tmp/we_log_test"
 if [ $? -eq 124 ]; then
   return 0
 fi

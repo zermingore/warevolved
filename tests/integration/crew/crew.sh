@@ -11,7 +11,7 @@
 timeout 90 "${BIN_WE}" \
         -r --replay-file=${BASH_SOURCE%.*}.replay \
         --load-map=${BASH_SOURCE%.*}.map.ori \
-        >> /dev/null
+        > /tmp/we_log_test
 if [[ $? -ne 0 ]]; then
   echo "Failure playing the replay -> abort"
   exit 1
