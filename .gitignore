@@ -3,6 +3,7 @@
 # temporary files
 *.o
 *.in
+.#dead_lock*
 LOG
 LOG_old
 LOG_EVENTS
