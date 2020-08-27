@@ -37,9 +37,25 @@ public:
 
 
   /**
+   * \brief Update the _currentTerrainIdx with the next Terrain value
+   */
+  constexpr void nextTerrain();
+
+  /**
+   * \brief Update the _currentTerrainIdx with the previous Terrain value
+   * \todo Map with an SFML event
+   */
+  constexpr void previousTerrain();
+
+
+  /**
    * \brief Edit the cell under the cursor
    */
   void menuCell();
+
+
+private:
+  int _currentTerrainIdx = 1;
 };
 
 

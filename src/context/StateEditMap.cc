@@ -16,6 +16,7 @@
 #include <game/Map.hh>
 #include <game/Cell.hh>
 #include <game/units/UnitsFactory.hh>
+#include <game/Terrain.hh>
 
 
 
@@ -40,6 +41,9 @@ StateEditMap::StateEditMap()
   _evtMgr->registerEvent(e_input::SELECTION,
                          [=, this] { menuCell(); });
 
+  _evtMgr->registerEvent(e_input::EDIT_TERRAIN_NEXT,
+                         [=, this] { nextTerrain(); });
+
   _evtMgr->registerEvent(e_input::EXIT,
                          [=] {
                             graphics::GraphicsEngine::exitRequest();
@@ -54,6 +58,7 @@ void StateEditMap::draw()
 }
 
 
+
 void StateEditMap::menuCell()
 {
   auto map {game::Status::battle()->map()};
@@ -61,13 +66,34 @@ void StateEditMap::menuCell()
   auto player {game::Status::player()};
   const auto pos {player->cursor()->coords()};
 
+  auto cell{map->cells()[pos.x][pos.y]};
+  cell->setTerrain(static_cast<e_terrain> (_currentTerrainIdx));
   if (unit)
   {
-    map->cells()[pos.x][pos.y]->removeUnit();
+    cell->removeUnit();
   }
   else
   {
     auto hp {UnitsFactory::typeMaxHp(e_unit::SOLDIER)};
     map->newUnit(e_unit::SOLDIER, pos.x, pos.y, player->id(), hp, false);
+  }
+}
+
+
+
+constexpr void StateEditMap::nextTerrain()
+{
+  _currentTerrainIdx %= (static_cast<int> (e_terrain::NB_TERRAIN) - 1);
+  ++_currentTerrainIdx;
+}
+
+
+
+constexpr void StateEditMap::previousTerrain()
+{
+  --_currentTerrainIdx;
+  if (_currentTerrainIdx <= 0)
+  {
+    _currentTerrainIdx = static_cast<int> (e_terrain::NB_TERRAIN) - 1;
   }
 }
