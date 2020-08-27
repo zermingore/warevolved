@@ -95,7 +95,9 @@ private:
 
 /**
  * \enum e_key
- * \brief Keys indexes allowing key repeating.
+ * \brief Keys indexes allowing key repeating
+ * \warning New inputs should be added at the end of the list
+ *   (as tests replay rely on the values)
  */
 enum class e_key
 {
@@ -111,11 +113,6 @@ enum class e_key
   // Interface keys
   TOGGLE_PANEL,
 
-  // Editor
-  EDIT_TERRAIN_NEXT,
-  EDIT_UNIT_NEXT,
-  EDIT_UNIT_DEL,
-
   // exit requests
   EXIT,
 
@@ -123,6 +120,11 @@ enum class e_key
   DOWN,
   LEFT,
   RIGHT,
+
+  // Editor
+  EDIT_TERRAIN_NEXT,
+  EDIT_UNIT_NEXT,
+  EDIT_UNIT_DEL,
 
   NB_KEYS
 };
