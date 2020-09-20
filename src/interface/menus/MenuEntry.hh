@@ -131,6 +131,13 @@ enum class e_entry
   NEXT_TURN,
   ATTACK,
 
+  // Buildings
+  INVESTIGATE,
+  CONTROL,
+  LEAVE,
+  COLLECT,
+  LOAD,
+
   CANCEL
 };
 

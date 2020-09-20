@@ -111,6 +111,23 @@ void MenuEntry::setLabelName(const e_entry entry)
       _labelName = "Confirm";
       break;
 
+    // Buildings
+    case e_entry::INVESTIGATE:
+      _labelName = "Investigate";
+      break;
+    case e_entry::CONTROL:
+      _labelName = "Control";
+      break;
+    case e_entry::LEAVE:
+      _labelName = "Leave";
+      break;
+    case e_entry::COLLECT:
+      _labelName = "Collect";
+      break;
+    case e_entry::LOAD:
+      _labelName = "Load";
+      break;
+
     default:
       _labelName = "## NOT FOUND ##";
       ERROR("No label found for e_entry", static_cast<int> (entry));
