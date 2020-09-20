@@ -19,7 +19,7 @@
 # include <generated/enum_print/enum_print.hh>
 
 
-/// \def Log file name
+// Log file name
 # ifdef __unix__
 #   define LOG_FILENAME "LOG"
 #   define LOG_FILENAME_OLD "LOG_old"
@@ -28,7 +28,7 @@
 #   define LOG_FILENAME_OLD "LOG_old.txt"
 # endif
 
-/// \def Print colors
+// Print colors
 # ifdef __unix__
 #   define COLOR_NORMAL  "\x1B[0m"
 #   define COLOR_RED     "\x1B[31m"
@@ -49,7 +49,7 @@
 #   define COLOR_WHITE   ""
 # endif
 
-/// \def Messages specific colors
+// Messages specific colors
 # define COLOR_ERROR   COLOR_RED
 # define COLOR_WARNING COLOR_YELLOW
 # define COLOR_SUCCESS COLOR_GREEN
@@ -164,8 +164,15 @@ public:
   template<typename T, typename... Tail>
   static void constexpr printf(const T head, const Tail... tail)
   {
-    std::cout << head << " ";
-    printf(tail...);
+    if constexpr(sizeof...(Tail) > 0)
+    {
+      std::cout << head << " ";
+      printf(tail...);
+    }
+    else
+    {
+      std::cout << COLOR_NORMAL << std::endl;
+    }
   }
 
   /**
@@ -194,19 +201,21 @@ private:
   static void constexpr bodylogprintf(const T head, const Tail... tail)
   {
     printLog(head);
-    bodylogprintf(tail...);
+
+    if constexpr(sizeof...(Tail) > 0)
+    {
+      bodylogprintf(tail...);
+    }
+    else
+    {
+      *_log << std::endl;
+    }
   }
 
   /**
    * \brief Prints the current time to the log
    */
   static void logTime();
-
-  /// Execute after the last argument
-  static void bodylogprintf();
-
-  /// appends a new line after last parameter
-  static void printf();
 
 
   static std::unique_ptr<std::ofstream> _log; ///< log file

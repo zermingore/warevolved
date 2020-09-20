@@ -38,20 +38,6 @@ void Debug::init()
 
 
 
-void Debug::bodylogprintf()
-{
-  *_log << std::endl;
-}
-
-
-
-void Debug::printf()
-{
-  std::cout << COLOR_NORMAL << std::endl;
-}
-
-
-
 void Debug::logTime()
 {
   const auto now{std::time(nullptr)};
