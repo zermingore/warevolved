@@ -164,9 +164,9 @@ public:
   template<typename T, typename... Tail>
   static void constexpr printf(const T head, const Tail... tail)
   {
+    std::cout << head << " ";
     if constexpr(sizeof...(Tail) > 0)
     {
-      std::cout << head << " ";
       printf(tail...);
     }
     else
