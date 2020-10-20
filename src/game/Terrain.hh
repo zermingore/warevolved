@@ -70,6 +70,8 @@ enum class e_terrain
   NONE = 0,
   PLAIN,
   FOREST,
+  BUILDING,
+  BUILDING_DOOR,
 
   NB_TERRAIN
 };
