@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<game_version major="0" minor="1" patch="0" />
+<map>
+	<metadata>
+		<map_size nb_columns="7" nb_lines="8" />
+		<players>
+			<current_player>0</current_player>
+			<player>
+				<color r="255" g="0" b="0" />
+				<cursor col="0" line="6" />
+			</player>
+			<player>
+				<color r="0" g="0" b="255" />
+				<cursor col="6" line="0" />
+			</player>
+		</players>
+	</metadata>
+	<cells>
+		<cell>
+			<coordinates col="0" line="0" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="0" line="1" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="0" line="2" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="0" line="3" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="0" line="4" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="0" line="5" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="0" line="6" />
+			<terrain>1</terrain>
+			<unit type="0" player_id="0" hp="10" played="false" />
+		</cell>
+		<cell>
+			<coordinates col="0" line="7" />
+			<terrain>1</terrain>
+			<unit type="0" player_id="0" hp="10" played="false" />
+		</cell>
+		<cell>
+			<coordinates col="1" line="0" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="1" line="1" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="1" line="2" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="1" line="3" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="1" line="4" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="1" line="5" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="1" line="6" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="1" line="7" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="0" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="1" />
+			<terrain>7</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="2" />
+			<terrain>6</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="3" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="4" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="5" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="6" />
+			<terrain>5</terrain>
+		</cell>
+		<cell>
+			<coordinates col="2" line="7" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="3" line="0" />
+			<terrain>1</terrain>
+			<unit type="0" player_id="1" hp="10" played="false" />
+		</cell>
+		<cell>
+			<coordinates col="3" line="1" />
+			<terrain>7</terrain>
+		</cell>
+		<cell>
+			<coordinates col="3" line="2" />
+			<terrain>6</terrain>
+		</cell>
+		<cell>
+			<coordinates col="3" line="3" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="3" line="4" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="3" line="5" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="3" line="6" />
+			<terrain>3</terrain>
+		</cell>
+		<cell>
+			<coordinates col="3" line="7" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="0" />
+			<terrain>2</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="1" />
+			<terrain>7</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="2" />
+			<terrain>6</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="3" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="4" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="5" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="6" />
+			<terrain>3</terrain>
+		</cell>
+		<cell>
+			<coordinates col="4" line="7" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="0" />
+			<terrain>2</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="1" />
+			<terrain>7</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="2" />
+			<terrain>6</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="3" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="4" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="5" />
+			<terrain>4</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="6" />
+			<terrain>5</terrain>
+		</cell>
+		<cell>
+			<coordinates col="5" line="7" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="6" line="0" />
+			<terrain>2</terrain>
+		</cell>
+		<cell>
+			<coordinates col="6" line="1" />
+			<terrain>2</terrain>
+			<unit type="0" player_id="1" hp="10" played="false" />
+		</cell>
+		<cell>
+			<coordinates col="6" line="2" />
+			<terrain>2</terrain>
+		</cell>
+		<cell>
+			<coordinates col="6" line="3" />
+			<terrain>2</terrain>
+		</cell>
+		<cell>
+			<coordinates col="6" line="4" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="6" line="5" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="6" line="6" />
+			<terrain>1</terrain>
+		</cell>
+		<cell>
+			<coordinates col="6" line="7" />
+			<terrain>1</terrain>
+		</cell>
+	</cells>
+</map>
