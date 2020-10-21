@@ -19,10 +19,14 @@ std::map<e_terrain, const Terrain> TerrainsHandler::_terrains;
 void TerrainsHandler::initialize()
 {
   TerrainsHandler::_terrains = {
-    { e_terrain::PLAIN,         {1, "plain" }        },
-    { e_terrain::FOREST,        {3, "forest"}        },
-    { e_terrain::BUILDING,      {8, "building"}      },
-    { e_terrain::BUILDING_DOOR, {2, "building_door"} }
+    { e_terrain::PLAIN,  {1, "plain" } },
+    { e_terrain::FOREST, {3, "forest"} },
+
+    { e_terrain::BUILDING_DOOR,         {2, "building_door"        } },
+    { e_terrain::BUILDING_WINDOW,       {4, "building_window"      } },
+    { e_terrain::BUILDING_WINDOW_FIRST, {3, "building_window_first"} },
+    { e_terrain::BUILDING_LAST_STAGE,   {5, "building_last_stage"  } },
+    { e_terrain::BUILDING_ROOF,         {6, "building_roof"        } },
   };
 }
 
@@ -43,11 +47,6 @@ size_t TerrainsHandler::cost(const e_terrain terrain, const e_unit unit_type)
       return 1;
     }
 
-    case e_terrain::BUILDING:
-    {
-      return 1000; // Direct cross forbidden
-    }
-
     case e_terrain::BUILDING_DOOR:
     {
       if (unit_type == e_unit::SOLDIER)
@@ -58,6 +57,13 @@ size_t TerrainsHandler::cost(const e_terrain terrain, const e_unit unit_type)
       return 1000; // Direct cross forbidden
     }
 
+    case e_terrain::BUILDING_WINDOW:
+    case e_terrain::BUILDING_WINDOW_FIRST:
+    case e_terrain::BUILDING_LAST_STAGE:
+    case e_terrain::BUILDING_ROOF:
+    {
+      return 1000; // Direct cross forbidden
+    }
 
     default:
       ERROR("[cost] Terrain not found", debug::e_terrain_string(terrain));

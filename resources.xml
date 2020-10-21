@@ -25,6 +25,23 @@
         <name>forest</name>
       </file>
     </folder>
+    <folder path='resources/terrains/buildings/'>
+      <file filename='door.png'>
+        <name>building_door</name>
+      </file>
+      <file filename='last_stage.png'>
+        <name>building_last_stage</name>
+      </file>
+      <file filename='roof.png'>
+        <name>building_roof</name>
+      </file>
+      <file filename='window.png'>
+        <name>building_window</name>
+      </file>
+      <file filename='window_first.png'>
+        <name>building_window_first</name>
+      </file>
+    </folder>
     <folder path='resources/interface/'>
       <file filename='highlight.png'>
         <name>highlight</name>
