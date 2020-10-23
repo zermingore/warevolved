@@ -97,6 +97,10 @@ private:
    */
   void attackUnit();
 
+  /**
+   * \brief Get in a building (through a door)
+   */
+  void enterBuilding();
 
   /**
    * \brief Handle the Unit Crew allowing to

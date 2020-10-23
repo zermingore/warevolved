@@ -128,6 +128,9 @@ enum class e_entry
   CREW,
   CREW_CONFIRM, // Confirm the crew actions (not reversible)
 
+  // Buildings
+  ENTER_BUILDING,
+
   NEXT_TURN,
   ATTACK,
 

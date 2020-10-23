@@ -17,6 +17,7 @@
 #include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
+#include <game/Terrain.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/MenuEntry.hh>
 
@@ -129,6 +130,18 @@ void MenuAction::buildMenuSelectionUnit()
     _entries.emplace_back(std::move(entry_crew));
     _lock.unlock();
   }
+
+  if (   _selectedUnit->playerId() == game::Status::player()->id()
+      && _selectedUnit->type() == e_unit::SOLDIER
+      && cell->terrain() == e_terrain::BUILDING_DOOR)
+  {
+    auto entry{std::make_shared<MenuEntry> (e_entry::ENTER_BUILDING)};
+    entry->setCallback([=, this] { enterBuilding(); });
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
+  }
 }
 
 
@@ -161,6 +174,17 @@ void MenuAction::buildMenuAfterMovingUnit()
     {
       auto entry(std::make_shared<MenuEntry> (e_entry::ATTACK));
       entry->setCallback( [=, this] { attackUnit(); });
+
+      _lock.lock();
+      _entries.emplace_back(std::move(entry));
+      _lock.unlock();
+    }
+
+    if (   _selectedUnit->type() == e_unit::SOLDIER
+        && cell->terrain() == e_terrain::BUILDING_DOOR)
+    {
+      auto entry{std::make_shared<MenuEntry> (e_entry::ENTER_BUILDING)};
+      entry->setCallback([=, this] { enterBuilding(); });
 
       _lock.lock();
       _entries.emplace_back(std::move(entry));
@@ -215,6 +239,13 @@ void MenuAction::manageCrew()
     std::make_shared<Coords> (_coords),
     std::make_shared<bool> (false));
   game::Status::resumeState();
+}
+
+
+
+void MenuAction::enterBuilding()
+{
+  WARNING("enterBuilding not yet implemented");
 }
 
 

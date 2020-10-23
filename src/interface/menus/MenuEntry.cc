@@ -110,6 +110,9 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::CREW_CONFIRM:
       _labelName = "Confirm";
       break;
+    case e_entry::ENTER_BUILDING:
+      _labelName = "Enter";
+      break;
 
     default:
       _labelName = "## NOT FOUND ##";
