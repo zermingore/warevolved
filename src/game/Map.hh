@@ -10,6 +10,7 @@
 
 # include <mutex>
 # include <memory>
+# include <optional>
 # include <vector>
 # include <list>
 # include <map>
@@ -64,10 +65,16 @@ public:
 
 
   /**
+   * \brief Get the building containing the given coordinates
+   * \param coord Coordinates in the building
+   */
+  std::optional<Building> getBuilding(const Coords coord);
+
+  /**
    * \brief Add a building to the Map
    * \param coords List of Cell's coordinates where the building is located
    */
-  void addBuilding(const std::vector<Coords> &coords);
+  void addBuilding(const std::vector<std::shared_ptr<Coords>> &coords);
 
   /**
    * \brief _nbColumns getter

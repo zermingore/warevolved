@@ -21,16 +21,23 @@ class Building
 {
 public:
   Building() = default;
-  explicit Building(const std::vector<Coords> &coords) {
+  explicit Building(const std::vector<std::shared_ptr<Coords>> &coords) {
     _cells = coords;
   }
 
   ~Building() = default;
 
 
+  ///< Units getter
+  std::vector<std::shared_ptr<Unit>> getUnits()    { return _units; }
+
+  ///< Coordinates getter
+  std::vector<std::shared_ptr<Coords>> getCoords() { return _cells; }
+
+
 private:
-  std::vector<Coords> _cells; ///< Map concerned Cells
-  // std::unique_ptr<std::vector<Unit>> _units; ///< Units in the building
+  std::vector<std::shared_ptr<Coords>> _cells; ///< Map concerned Cells
+  std::vector<std::shared_ptr<Unit>> _units; ///< Units in the building
   // std::vector<Floors> _floors; // Map list
   // std::vector<Item> _items; // Items inside the building
   // std::vector<Item> _collectable; // Ready to pick-up items

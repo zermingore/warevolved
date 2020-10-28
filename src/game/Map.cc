@@ -45,7 +45,7 @@ Map::Map(size_t nb_columns, size_t nb_lines)
 
 
 
-void Map::addBuilding(const std::vector<Coords> &coords)
+void Map::addBuilding(const std::vector<std::shared_ptr<Coords>> &coords)
 {
   _buildings.push_back(Building{coords});
 }
@@ -275,9 +275,34 @@ e_attack_result Map::attack(const std::shared_ptr<Cell>& target_cell)
 
 
 
+std::optional<Building> Map::getBuilding(const Coords coord)
+{
+  for (auto b: _buildings)
+  {
+    for (const auto c: b.getCoords())
+    {
+      if (c->c == coord.c && c->l == coord.l)
+      {
+        return b;
+      }
+    }
+  }
+
+  return {};
+}
+
+
+
 e_attack_result Map::attackBuilding(const Coords attackerCoords)
 {
-  /// \todo Get the concerned building
+  auto building = getBuilding(attackerCoords);
+  assert(building);
+
+  if (building->getUnits().size() == 0)
+  {
+    /// \todo Add the attacker to the building
+    return e_attack_result::NONE_DIED;
+  }
 
   return attackResult(false, false);
 }
