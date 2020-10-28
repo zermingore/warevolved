@@ -19,8 +19,11 @@
 
 # include <common/using.hh>
 
+# include <game/Building.hh>
+
 class Cell;
 class Unit;
+class Building;
 
 enum class e_attack_result; // definition follows
 enum class e_terrain;
@@ -59,6 +62,12 @@ public:
    */
   Map(size_t nb_columns, size_t nb_lines);
 
+
+  /**
+   * \brief Add a building to the Map
+   * \param coords List of Cell's coordinates where the building is located
+   */
+  void addBuilding(const std::vector<Coords> &coords);
 
   /**
    * \brief _nbColumns getter
@@ -192,6 +201,12 @@ public:
    */
   e_attack_result attack(const std::shared_ptr<Cell>& target_cell);
 
+
+  e_attack_result attackBuilding(const std::shared_ptr<Unit>& defender,
+                                 const std::shared_ptr<Unit>& attacker);
+
+  e_attack_result attackBuilding(const Coords attackerCoords);
+
   /**
    * \brief Removes a Unit from the map. This is useful to group units
    * \param unit Unit to hide
@@ -274,6 +289,8 @@ private:
   /// Locking while updating the selected unit
   std::mutex _lockSelectedUnitUpdate;
 
+  /// List of buildings
+  std::vector<Building> _buildings;
 
 
   /**

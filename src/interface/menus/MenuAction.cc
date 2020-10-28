@@ -245,7 +245,8 @@ void MenuAction::manageCrew()
 
 void MenuAction::enterBuilding()
 {
-  WARNING("enterBuilding not yet implemented");
+  auto map(game::Status::battle()->map());
+  map->attackBuilding(_coords);
 }
 
 

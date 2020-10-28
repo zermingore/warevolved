@@ -11,16 +11,26 @@
 # include <vector>
 # include <memory>
 
-class Cell;
+# include <common/using.hh>
+
 class Unit;
 
 
 
 class Building
 {
+public:
+  Building() = default;
+  explicit Building(const std::vector<Coords> &coords) {
+    _cells = coords;
+  }
+
+  ~Building() = default;
+
+
 private:
-  std::vector<std::shared_ptr<Cell>> _cells; ///< Map concerned Cells
-  std::vector<std::shared_ptr<Unit>> _units; ///< Units in the building
+  std::vector<Coords> _cells; ///< Map concerned Cells
+  // std::unique_ptr<std::vector<Unit>> _units; ///< Units in the building
   // std::vector<Floors> _floors; // Map list
   // std::vector<Item> _items; // Items inside the building
   // std::vector<Item> _collectable; // Ready to pick-up items

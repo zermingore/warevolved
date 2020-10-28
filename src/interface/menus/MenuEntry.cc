@@ -112,9 +112,6 @@ void MenuEntry::setLabelName(const e_entry entry)
       break;
 
     // Buildings
-    case e_entry::ENTER_BUILDING:
-      _labelName = "Enter";
-      break;
     case e_entry::INVESTIGATE:
       _labelName = "Investigate";
       break;

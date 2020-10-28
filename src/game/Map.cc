@@ -19,6 +19,7 @@
 #include <game/TerrainsHandler.hh>
 #include <game/units/UnitsFactory.hh>
 #include <game/units/Vehicle.hh>
+#include <game/Building.hh>
 #include <interface/Cursor.hh>
 
 
@@ -40,6 +41,13 @@ Map::Map(size_t nb_columns, size_t nb_lines)
     // _cells is a vector of columns
     _cells.emplace_back(vec);
   }
+}
+
+
+
+void Map::addBuilding(const std::vector<Coords> &coords)
+{
+  _buildings.push_back(Building{coords});
 }
 
 
@@ -263,6 +271,15 @@ e_attack_result Map::attack(const std::shared_ptr<Cell>& target_cell)
   }
 
   return attack(defender);
+}
+
+
+
+e_attack_result Map::attackBuilding(const Coords attackerCoords)
+{
+  /// \todo Get the concerned building
+
+  return attackResult(false, false);
 }
 
 
