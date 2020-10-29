@@ -68,7 +68,7 @@ public:
    * \brief Get the building containing the given coordinates
    * \param coord Coordinates in the building
    */
-  std::optional<Building> getBuilding(const Coords coord);
+  std::optional<std::shared_ptr<Building>> getBuilding(const Coords coord);
 
   /**
    * \brief Add a building to the Map
@@ -301,7 +301,7 @@ private:
   std::mutex _lockSelectedUnitUpdate;
 
   /// List of buildings
-  std::vector<Building> _buildings;
+  std::vector<std::shared_ptr<Building>> _buildings;
 
 
   /**
