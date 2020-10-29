@@ -34,11 +34,15 @@ public:
   ///< Coordinates getter
   auto getCoords() { return _cells; }
 
-
+  /**
+   * \brief Add the given Unit to the list
+   * \note Change _factionControl if required
+   */
   void addUnit(std::shared_ptr<Unit> unit);
 
 
 private:
+  int _factionControl = -1; ///< Who owns the building
   std::vector<std::shared_ptr<Coords>> _cells; ///< Map concerned Cells
   std::vector<std::shared_ptr<Unit>> _units; ///< Units in the building
   // std::vector<Floors> _floors; // Map list

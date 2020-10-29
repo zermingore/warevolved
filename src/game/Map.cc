@@ -298,7 +298,9 @@ e_attack_result Map::attackBuilding(const Coords attackerCoords)
   auto building = getBuilding(attackerCoords);
   assert(building);
 
-  if ((*building)->getUnits().size() == 0)
+  NOTICE((*building)->getUnits().size());
+  if ((*building)->getUnits().size() == 0
+      || (*building)->getUnits()[0]->playerId() == _selectedUnit->playerId())
   {
     _selectedUnit->setPlayed(true);
     (*building)->addUnit(_selectedUnit);

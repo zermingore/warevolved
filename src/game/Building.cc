@@ -13,4 +13,5 @@
 void Building::addUnit(std::shared_ptr<Unit> unit)
 {
   _units.push_back(unit);
+  _factionControl = static_cast<int> (unit->playerId());
 }
