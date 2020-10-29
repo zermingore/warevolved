@@ -300,7 +300,9 @@ e_attack_result Map::attackBuilding(const Coords attackerCoords)
 
   if (building->getUnits().size() == 0)
   {
-    /// \todo Add the attacker to the building
+    _selectedUnit->setPlayed(true);
+    building->addUnit(_selectedUnit);
+    _cells[_selectedUnit->c()][_selectedUnit->l()]->removeUnit();
     return e_attack_result::NONE_DIED;
   }
 

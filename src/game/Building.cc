@@ -1,0 +1,16 @@
+/**
+ * \file
+ * \date October 28, 2020
+ * \author Zermingore
+ * \brief Building class implementation
+ */
+
+#include <game/Building.hh>
+
+#include <game/units/Unit.hh>
+
+
+void Building::addUnit(std::shared_ptr<Unit> unit)
+{
+  _units.push_back(unit);
+}

@@ -29,10 +29,13 @@ public:
 
 
   ///< Units getter
-  std::vector<std::shared_ptr<Unit>> getUnits()    { return _units; }
+  auto getUnits()  { return _units; }
 
   ///< Coordinates getter
-  std::vector<std::shared_ptr<Coords>> getCoords() { return _cells; }
+  auto getCoords() { return _cells; }
+
+
+  void addUnit(std::shared_ptr<Unit> unit);
 
 
 private:

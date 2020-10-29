@@ -55,6 +55,7 @@ game/units/Motorcycle.cc            \
 game/units/Soldier.cc               \
 game/Player.cc                      \
 game/PathFinding.cc                 \
+game/Building.cc                    \
 \
 interface/Interface.cc              \
 interface/InterfaceElement.cc       \

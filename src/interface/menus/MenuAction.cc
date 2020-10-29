@@ -247,6 +247,7 @@ void MenuAction::enterBuilding()
 {
   auto map(game::Status::battle()->map());
   map->attackBuilding(_coords);
+  game::Status::clearStates();
 }
 
 
