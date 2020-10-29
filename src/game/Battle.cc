@@ -290,6 +290,25 @@ void Battle::loadMap()
       cells = cells.next_sibling();
     }
   }
+
+  // Buildings
+  auto buildings = doc.child("map").child("buildings");
+  while (buildings != nullptr)
+  {
+    for (pugi::xml_node building: buildings.children("building"))
+    {
+      std::vector<std::shared_ptr<Coords>> building_cells;
+      for (pugi::xml_node c: building.child("cells").children("coordinates"))
+      {
+        const auto col = c.attribute("col").as_ullong();
+        const auto line = c.attribute("line").as_ullong();
+        building_cells.emplace_back(std::make_shared<Coords>(col, line));
+      }
+      _map->addBuilding(building_cells);
+    }
+
+    buildings = buildings.next_sibling();
+  }
 }
 
 
