@@ -208,10 +208,14 @@ public:
    */
   e_attack_result attack(const std::shared_ptr<Cell>& target_cell);
 
-
-  e_attack_result attackBuilding(const std::shared_ptr<Unit>& defender,
-                                 const std::shared_ptr<Unit>& attacker);
-
+  /**
+   * \brief Attack the building including the given coordinates
+   * \param attackerCoords Attacker coordinates; belongs to the building
+   * \return The result of the attack (NONE_DIED on empty building)
+   * \note The two opponents will fight until one has no HPs left
+   * \note The defender attacks first; There is no strike back concept
+   * \note Defender's cover is greater than the attacker's one
+   */
   e_attack_result attackBuilding(const Coords attackerCoords);
 
   /**

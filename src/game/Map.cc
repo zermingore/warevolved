@@ -288,7 +288,7 @@ std::optional<Building> Map::getBuilding(const Coords coord)
     }
   }
 
-  return {};
+  return std::nullopt;
 }
 
 
@@ -304,7 +304,42 @@ e_attack_result Map::attackBuilding(const Coords attackerCoords)
     return e_attack_result::NONE_DIED;
   }
 
-  return attackResult(false, false);
+  const auto def_attacker = 3;
+  const auto def_defender = 5;
+
+  auto dmg_att{static_cast<int> (_selectedUnit->attackValue()) - def_defender};
+  auto attacker_damages = std::max(1, dmg_att);
+
+  _lockSelectedUnitUpdate.lock();
+
+  while (building->getUnits().size() > 0)
+  {
+    for (auto defender: building->getUnits())
+    {
+      // The attacker receives damages first
+      auto dmg_def{static_cast<int> (defender->attackValue()) - def_attacker};
+      auto defender_damages = std::max(1, dmg_def);
+
+      _selectedUnit->setHp(_selectedUnit->hp() - defender_damages);
+      if (_selectedUnit->hp() <= 0)
+      {
+        _cells[_selectedUnit->c()][_selectedUnit->l()]->removeUnit();
+        _lockSelectedUnitUpdate.unlock();
+        return e_attack_result::ATTACKER_DIED;
+      }
+    }
+
+    auto defender{building->getUnits()[0]};
+    defender->setHp(defender->hp() - attacker_damages);
+    if (defender->hp() <= 0)
+    {
+      auto units{building->getUnits()};
+      units.erase(units.begin());
+    }
+  }
+
+  _lockSelectedUnitUpdate.unlock();
+  return e_attack_result::DEFENDER_DIED;
 }
 
 
