@@ -52,7 +52,21 @@ e_terrain Random::randTerrain()
   std::uniform_int_distribution<> rand(
     1, static_cast<int> (e_terrain::NB_TERRAIN) -1);
 
-  return static_cast<e_terrain> (rand(*_generator));
+  // Avoid buildings
+  auto ret{static_cast<e_terrain> (rand(*_generator))};
+  if (   ret == e_terrain::BUILDING_DOOR
+      || ret == e_terrain::BUILDING_WINDOW
+      || ret == e_terrain::BUILDING_WINDOW_FIRST)
+  {
+    ret = e_terrain::PLAIN;
+  }
+  else if (   ret == e_terrain::BUILDING_LAST_STAGE
+           || ret == e_terrain::BUILDING_ROOF)
+  {
+    ret = e_terrain::FOREST;
+  }
+
+  return ret;
 }
 
 
