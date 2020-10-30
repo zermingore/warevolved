@@ -59,7 +59,7 @@ void MenuAction::build()
 
 void MenuAction::cancel()
 {
-  if (_selectedUnit->moved())
+  if (_selectedUnit && _selectedUnit->moved())
   {
     game::Status::player()->cursor()->setCoords(_selectedUnit->oldCoords());
     game::Status::battle()->map()->moveUnit(_selectedUnit->oldCoords());
