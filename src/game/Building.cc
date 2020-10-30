@@ -22,4 +22,8 @@ void Building::addUnit(std::shared_ptr<Unit> unit)
 void Building::removeUnit(int idx)
 {
   _units.erase(_units.begin() + idx);
+  if (_units.size() == 0)
+  {
+    _factionControl = -1;
+  }
 }
