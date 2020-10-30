@@ -75,6 +75,11 @@ private:
   void buildMenuAfterMovingUnit();
 
   /**
+   * \brief Build Building related menu
+   */
+  void buildMenuBuilding();
+
+  /**
    * \brief Check if the unit is allowed to move. It is the case if
    *   - the unit didn't play (end of its action)
    *   - the unit didn't already moved
@@ -101,6 +106,11 @@ private:
    * \brief Get in a building (through a door)
    */
   void enterBuilding();
+
+  /**
+   * \brief Get in a building (through a door)
+   */
+  void exitBuilding();
 
   /**
    * \brief Handle the Unit Crew allowing to

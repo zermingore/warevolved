@@ -130,6 +130,9 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::LOAD:
       _labelName = "Load";
       break;
+    case e_entry::EXIT_BUILDING:
+      _labelName = "Exit";
+      break;
 
     default:
       _labelName = "## NOT FOUND ##";

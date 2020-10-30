@@ -173,7 +173,9 @@ enum class e_state: int
   SELECTION_CREW,   ///< Select a member in a Unit crew
 
   SELECT_TARGET,    ///< Select a taget (attack, heal, ...)
-  SELECT_DROP_ZONE, ///< Select a taget (attack, heal, ...)
+  SELECT_DROP_ZONE, ///< Select a zone to drop a crew member
+
+  BUILDING_MENU,    ///< Owned Building management
 };
 
 

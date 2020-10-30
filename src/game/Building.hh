@@ -35,10 +35,24 @@ public:
   auto getCoords() { return _cells; }
 
   /**
-   * \brief Add the given Unit to the list
+   * \brief Add the given Unit to the Building
+   * \param unit Unit to add to the _units list
    * \note Change _factionControl if required
    */
   void addUnit(std::shared_ptr<Unit> unit);
+
+  /**
+   * \brief Remove the given unit from the Building
+   * \param idx Index of the Unit in the _units vector
+   */
+  void removeUnit(int idx);
+
+  /**
+   * \brief Get the current faction controling the building
+   * \return Faction number, matching player id
+   */
+  auto faction() { return _factionControl; }
+
 
 
 private:

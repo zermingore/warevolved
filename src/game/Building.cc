@@ -10,8 +10,16 @@
 #include <game/units/Unit.hh>
 
 
+
 void Building::addUnit(std::shared_ptr<Unit> unit)
 {
   _units.push_back(unit);
   _factionControl = static_cast<int> (unit->playerId());
+}
+
+
+
+void Building::removeUnit(int idx)
+{
+  _units.erase(_units.begin() + idx);
 }

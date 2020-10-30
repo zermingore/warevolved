@@ -34,13 +34,22 @@ MenuAction::MenuAction(const e_state state)
 
 void MenuAction::build()
 {
-  if (_state == e_state::SELECTION_UNIT)
+  switch (_state)
   {
-    buildMenuSelectionUnit();
-  }
-  else if (_state == e_state::ACTION_MENU)
-  {
-    buildMenuAfterMovingUnit();
+    case e_state::SELECTION_UNIT:
+      buildMenuSelectionUnit();
+      break;
+
+    case e_state::ACTION_MENU:
+      buildMenuAfterMovingUnit();
+      break;
+
+    case e_state::BUILDING_MENU:
+      buildMenuBuilding();
+      break;
+
+    default:
+      break;
   }
 
   addCancelEntry([=, this] { cancel(); } );
@@ -214,11 +223,31 @@ void MenuAction::buildMenuAfterMovingUnit()
 }
 
 
+
+void MenuAction::buildMenuBuilding()
+{
+  /// \todo use other coordinates as the menu ones
+  auto map{game::Status::battle()->map()};
+  auto building{map->getBuilding(_coords)};
+  if (building && (*building)->getUnits().size() > 0)
+  {
+    auto entry{std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING)};
+    entry->setCallback([=, this] { exitBuilding(); });
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
+  }
+}
+
+
+
 void MenuAction::moveUnit()
 {
   game::Status::pushState(e_state::MOVING_UNIT);
   game::Status::resumeState();
 }
+
 
 
 void MenuAction::waitUnit()
@@ -247,6 +276,35 @@ void MenuAction::enterBuilding()
 {
   auto map(game::Status::battle()->map());
   map->attackBuilding(_coords);
+  game::Status::clearStates();
+}
+
+
+
+void MenuAction::exitBuilding()
+{
+  auto map(game::Status::battle()->map());
+  auto building{map->getBuilding(_coords)};
+  assert(building && (*building)->getUnits().size() > 0);
+
+  // Find building doors
+  std::vector<Coords> doors;
+  for (const auto c: (*building)->getCoords())
+  {
+    if (map->cell(*c)->terrain() == e_terrain::BUILDING_DOOR)
+    {
+      doors.emplace_back(*c);
+    }
+  }
+
+  /// \todo Push a state to select the unit to exit the building
+  auto stash_unit{(*building)->getUnits()[0]};
+
+  /// \todo Push a state to select the door where to exit
+  stash_unit->setCoords(doors[0]);
+  map->stashPopUnit(*stash_unit);
+  building->get()->removeUnit(0); /// \todo correct index
+
   game::Status::clearStates();
 }
 

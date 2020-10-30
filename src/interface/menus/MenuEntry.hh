@@ -138,6 +138,7 @@ enum class e_entry
   LEAVE,
   COLLECT,
   LOAD,
+  EXIT_BUILDING,
 
   CANCEL
 };
