@@ -42,13 +42,6 @@ public:
 
 
 private:
-  /**
-   * \brief Looks for any released key.
-   * \note Reset the key timer matching the released key (if any)
-   * \note Reset switches if needed
-   */
-  void releasedKeys();
-
   /// Callbacks / events association
   std::map<e_input, std::function<void()>> _callbacks;
 };
