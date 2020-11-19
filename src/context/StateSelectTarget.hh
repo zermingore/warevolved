@@ -10,7 +10,7 @@
 
 # include <vector>
 # include <memory>
-# include <context/State.hh>
+# include <context/StateSelectCell.hh>
 # include <graphics/graphic_types.hh>
 
 class Cell;
@@ -26,18 +26,18 @@ namespace graphics {
  * \brief State in charge of the target selection
  * \note This State is active after the Attack has been given
  */
-class StateSelectTarget: public State
+class StateSelectTarget: public StateSelectCell
 {
 public:
   /**
-   * \brief registers to callbacks. Initializes the graphical attributes
+   * \brief Initializes the graphical attributes
    */
   StateSelectTarget();
 
   /**
-   * \brief Default destructor; Clear cells highlights
+   * \brief Default destructor
    */
-  ~StateSelectTarget() override;
+  ~StateSelectTarget() override = default;
 
   /**
    * \brief re-build the menu.
@@ -59,35 +59,10 @@ public:
 
 private:
   /**
-   * \brief Select the previous unit
-   * \note loops on the last unit if called on the first entry
-   */
-  void selectPreviousTarget();
-
-  /**
-   * \brief Highlights the entry on top of the current one
-   * \note loops on the first unit if called on the last entry
-   */
-  void selectNextTarget();
-
-  /**
    * \brief Validates the current unit selected
    */
-  void validate();
+  void validate() override;
 
-  /**
-   * \brief Callback associated with the exit menu event
-   */
-  void exit();
-
-
-  /// targets list from the PathFinding
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> _targets;
-
-  size_t _index_target; ///< index of the selected target
-
-  /// sprite associated to the highlight of the selected target
-  std::shared_ptr<graphics::Sprite> _targetHighlight;
 
   Coords _attackLocation; ///< Cell from which the attack is performed
 

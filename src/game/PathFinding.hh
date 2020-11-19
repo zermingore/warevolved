@@ -93,7 +93,7 @@ public:
    * \param coords Coordinates where the attacker is located
    * \return List of cells containing a target
    */
-  std::shared_ptr<std::vector<std::shared_ptr<Cell>>> getTargets(
+  std::shared_ptr<std::vector<std::shared_ptr<const Cell>>> getTargets(
     const std::shared_ptr<const Unit>& ref, const Coords& coords) const;
 
   /**

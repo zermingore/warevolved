@@ -5,7 +5,6 @@
  * \brief StateSelectTarget class definition
  */
 
-
 #include <context/StateSelectTarget.hh>
 
 #include <debug/Debug.hh>
@@ -23,32 +22,7 @@
 
 
 StateSelectTarget::StateSelectTarget()
-  : _index_target(0)
 {
-  _evtMgr->registerEvent(e_input::MOVE_UP,
-                         [=, this] { selectNextTarget();     });
-  _evtMgr->registerEvent(e_input::MOVE_DOWN,
-                         [=, this] { selectPreviousTarget(); });
-  _evtMgr->registerEvent(e_input::MOVE_LEFT,
-                         [=, this] { selectPreviousTarget(); });
-  _evtMgr->registerEvent(e_input::MOVE_RIGHT,
-                         [=, this] { selectNextTarget();     });
-  _evtMgr->registerEvent(e_input::SELECTION,
-                         [=, this] { validate();             });
-  _evtMgr->registerEvent(e_input::EXIT,
-                         [=, this] { exit();                 });
-
-  // Graphical attributes initialization
-  _targetHighlight = std::make_shared<graphics::Sprite> ("cursor");
-  _targetHighlight->setColor(graphics::Color(255, 127, 127, 255));
-
-  using p = graphics::MapGraphicsProperties;
-
-  // explicitly using some floats for the division
-  float x(static_cast<float> (_targetHighlight->texture()->getSize().x));
-  float y(static_cast<float> (_targetHighlight->texture()->getSize().y));
-  _targetHighlight->setScale( p::cellWidth() / x, p::cellHeight() / y);
-  _targetHighlight->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 
   game::Status::battle()->getCurrentPlayer()->updateSelectedUnit();
   auto selected_unit{game::Status::battle()->map()->selectedUnit()};
@@ -56,20 +30,11 @@ StateSelectTarget::StateSelectTarget()
     selected_unit->sprite()->texture());
   _holoUnit->setColor(graphics::Color(255, 127, 127, 255));
 
-  x = static_cast<float> (_holoUnit->texture()->getSize().x);
-  y = static_cast<float> (_holoUnit->texture()->getSize().y);
+  // explicitly using some floats for the division
+  float x = static_cast<float> (_holoUnit->texture()->getSize().x);
+  float y = static_cast<float> (_holoUnit->texture()->getSize().y);
+  using p = graphics::MapGraphicsProperties;
   _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
-}
-
-
-
-StateSelectTarget::~StateSelectTarget()
-{
-  auto map {game::Status::battle()->map()};
-  for (const auto& cell: *map)
-  {
-    cell->setHighlight(false);
-  }
 }
 
 
@@ -114,9 +79,9 @@ void StateSelectTarget::resume()
   game::Status::player()->updateSelectedUnit();
   auto selected_unit(game::Status::battle()->map()->selectedUnit());
 
-  _targets = _path->getTargets(selected_unit, _attackLocation);
+  _cells = *(_path->getTargets(selected_unit, _attackLocation));
 
-  assert(!_targets->empty() && "StateSelectTarget: no target available");
+  assert(!_cells.empty() && "StateSelectTarget: no target available");
 }
 
 
@@ -125,16 +90,16 @@ void StateSelectTarget::draw()
   game::Status::player()->cursor()->disableDrawThisFrame();
 
   auto selected_unit(game::Status::battle()->map()->selectedUnit());
-  _targets = _path->getTargets(selected_unit, _attackLocation);
+  _cells = *_path->getTargets(selected_unit, _attackLocation);
 
-  if (!_targets || _targets->empty())
+  if (_cells.empty())
   {
     ERROR("No target to select");
     return;
   }
-  if (_index_target > _targets->size())
+  if (_indexSelect > _cells.size())
   {
-    ERROR("Invalid target index", _index_target, "size:", _targets->size());
+    ERROR("Invalid target index", _indexSelect, "size:", _cells.size());
     return;
   }
 
@@ -149,34 +114,18 @@ void StateSelectTarget::draw()
   auto height(p::cellHeight());
 
   // target cell coordinates
-  auto coords((*_targets)[_index_target]->coords());
+  auto coords(_cells[_indexSelect]->coords());
   auto pos_c(static_cast<float> (coords.c) * width
              + p::gridOffsetX() + width  / 2);
   auto pos_l(static_cast<float> (coords.l) * height
              + p::gridOffsetY() + height / 2);
 
-  _targetHighlight->setPosition(pos_c, pos_l);
-  _targetHighlight->setRotation(static_cast<float> (angle));
+  _selectHighlight->setPosition(pos_c, pos_l);
+  _selectHighlight->setRotation(static_cast<float> (angle));
 
-  _targetHighlight->draw();
+  _selectHighlight->draw();
 }
 
-
-void StateSelectTarget::selectPreviousTarget()
-{
-  if (_index_target == 0)
-  {
-    _index_target = _targets->size() - 1;
-    return;
-  }
-
-  --_index_target;
-}
-
-
-void StateSelectTarget::selectNextTarget() {
-  _index_target = (_index_target + 1) % _targets->size();
-}
 
 
 void StateSelectTarget::validate()
@@ -184,7 +133,7 @@ void StateSelectTarget::validate()
   auto map(game::Status::battle()->map());
 
   // move the unit (if it's still alive)
-  auto attackResult(map->attack((*_targets)[_index_target]));
+  auto attackResult(map->attack(_cells[_indexSelect]));
   if (   attackResult != e_attack_result::ATTACKER_DIED
       && attackResult != e_attack_result::BOTH_DIED)
   {
@@ -196,10 +145,4 @@ void StateSelectTarget::validate()
   game::Status::player()->cursor()->setCoords(_attackLocation);
 
   game::Status::clearStates();
-}
-
-
-void StateSelectTarget::exit()
-{
-  game::Status::popCurrentState();
 }

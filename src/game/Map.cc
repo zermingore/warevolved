@@ -261,7 +261,7 @@ e_attack_result Map::attack(const std::shared_ptr<Unit>& defender)
 
 
 
-e_attack_result Map::attack(const std::shared_ptr<Cell>& target_cell)
+e_attack_result Map::attack(const std::shared_ptr<const Cell>& target_cell)
 {
   auto defender = target_cell->unit();
   if (!defender)

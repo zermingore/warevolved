@@ -206,7 +206,7 @@ public:
    * \param target_cell target of the attack (may contain an unit)
    * \return the result of the attack (which unit died, if any)
    */
-  e_attack_result attack(const std::shared_ptr<Cell>& target_cell);
+  e_attack_result attack(const std::shared_ptr<const Cell>& target_cell);
 
   /**
    * \brief Attack the building including the given coordinates

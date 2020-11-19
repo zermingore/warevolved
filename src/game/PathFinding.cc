@@ -391,12 +391,13 @@ bool PathFinding::allowedMove(e_direction direction)
 
 
 
-std::shared_ptr<std::vector<std::shared_ptr<Cell>>> PathFinding::getTargets(
+std::shared_ptr<std::vector<std::shared_ptr<const Cell>>>
+PathFinding::getTargets(
   const std::shared_ptr<const Unit>& ref, const Coords& coords) const
 {
   // Dummy: for every cell if unit && not one of the current player -> target
   // (NOT considering the motion value)
-  std::vector<std::shared_ptr<Cell>> targets;
+  std::vector<std::shared_ptr<const Cell>> targets;
 
   for (auto i(0u); i < _map->nbColumns(); ++i)
   {
@@ -413,7 +414,7 @@ std::shared_ptr<std::vector<std::shared_ptr<Cell>>> PathFinding::getTargets(
     }
   }
 
-  return std::make_shared<std::vector<std::shared_ptr<Cell>>> (targets);
+  return std::make_shared<std::vector<std::shared_ptr<const Cell>>> (targets);
 }
 
 
