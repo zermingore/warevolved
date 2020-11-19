@@ -108,7 +108,7 @@ private:
   void enterBuilding();
 
   /**
-   * \brief Get in a building (through a door)
+   * \brief Exit a building (through a door)
    */
   void exitBuilding();
 

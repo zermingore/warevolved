@@ -31,6 +31,7 @@ context/StateEditMap.cc             \
 context/StateMenu.cc                \
 context/StateMenuCrew.cc            \
 context/StateMovingUnit.cc          \
+context/StateSelectCell.cc              \
 context/StateSelectTarget.cc        \
 context/StateSelectDropZone.cc      \
 \

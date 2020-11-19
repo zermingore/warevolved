@@ -10,7 +10,7 @@
 
 # include <vector>
 # include <memory>
-# include <context/State.hh>
+# include <context/StateSelectCell.hh>
 # include <graphics/graphic_types.hh>
 
 class Cell;
@@ -27,18 +27,18 @@ enum class e_unit_role;
  * \brief State in charge of the drop zone selection
  * \note This State is active after the Drop Off or Get Out order
  */
-class StateSelectDropZone: public State
+class StateSelectDropZone: public StateSelectCell
 {
 public:
   /**
-   * \brief registers to callbacks. Initializes the graphical attributes
+   * \brief Initializes _role to NONE
    */
   StateSelectDropZone();
 
   /**
-   * \brief Destructor; deactivates drop zones highlights
+   * \brief Default destructor
    */
-  ~StateSelectDropZone() override;
+  ~StateSelectDropZone() override = default;
 
   /**
    * \brief re-build the menu.
@@ -60,35 +60,10 @@ public:
 
 private:
   /**
-   * \brief Select the previous free cell
-   * \note loops on the last cell if called on the first one of the list
-   */
-  void selectPreviousZone();
-
-  /**
-   * \brief Highlights the next free cell in the list
-   * \note loops on the first cell if called on the last one
-   */
-  void selectNextZone();
-
-  /**
    * \brief Validates the current drop zone selected
    */
-  void validate();
+  void validate() override;
 
-  /**
-   * \brief Callback associated with the exit menu event
-   */
-  void exit();
-
-
-  /// Free cells list from the PathFinding
-  std::vector<std::shared_ptr<const Cell>> _zones;
-
-  size_t _indexZone; ///< index of the selected zone
-
-  /// sprite associated to the highlight of the selected zone
-  std::shared_ptr<graphics::Sprite> _zoneHighlight;
 
   Coords _vehicleLocation; ///< Cell from which the drop is performed
 
