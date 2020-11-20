@@ -5,8 +5,8 @@
  * \brief StateSelectTarget class declaration
  */
 
-#ifndef SELECT_TARGET_HH_
-# define SELECT_TARGET_HH_
+#ifndef STATE_SELECT_TARGET_HH_
+# define STATE_SELECT_TARGET_HH_
 
 # include <vector>
 # include <memory>
@@ -71,4 +71,4 @@ private:
 };
 
 
-#endif /* !SELECT_TARGET_HH_ */
+#endif /* !STATE_SELECT_TARGET_HH_ */

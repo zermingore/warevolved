@@ -5,7 +5,6 @@
  * \brief StateMenuCrew declaration
  */
 
-
 #ifndef STATE_MENU_CREW_HH_
 # define STATE_MENU_CREW_HH_
 
