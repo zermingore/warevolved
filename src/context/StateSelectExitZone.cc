@@ -74,7 +74,6 @@ void StateSelectExitZone::resume()
 
 void StateSelectExitZone::draw()
 {
-  _lock.try_lock();
   if (_cells.empty())
   {
     ERROR("No exit zone to select");
@@ -124,14 +123,12 @@ void StateSelectExitZone::draw()
     (*map)[cell->c()][cell->l()]->setHighlight(true);
     (*map)[cell->c()][cell->l()]->setHighlightColor(graphics::Color::Green);
   }
-  _lock.unlock();
 }
 
 
 
 void StateSelectExitZone::validate()
 {
-  _lock.lock();
   auto map(game::Status::battle()->map());
 
   // Find building doors
