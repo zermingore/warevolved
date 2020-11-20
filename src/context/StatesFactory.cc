@@ -15,6 +15,7 @@
 #include <context/StatePlaying.hh>
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
+#include <context/StateSelectExitZone.hh>
 #include <debug/Debug.hh>
 
 
@@ -49,6 +50,9 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
 
     case e_state::SELECT_DROP_ZONE:
       return std::make_unique<StateSelectDropZone> ();
+
+    case e_state::SELECT_EXIT_ZONE:
+      return std::make_unique<StateSelectExitZone> ();
 
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate a State",

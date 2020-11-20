@@ -283,29 +283,9 @@ void MenuAction::enterBuilding()
 
 void MenuAction::exitBuilding()
 {
-  auto map(game::Status::battle()->map());
-  auto building{map->getBuilding(_coords)};
-  assert(building && (*building)->getUnits().size() > 0);
-
-  // Find building doors
-  std::vector<Coords> doors;
-  for (const auto c: (*building)->getCoords())
-  {
-    if (map->cell(*c)->terrain() == e_terrain::BUILDING_DOOR)
-    {
-      doors.emplace_back(*c);
-    }
-  }
-
-  /// \todo Push a state to select the unit to exit the building
-  auto stash_unit{(*building)->getUnits()[0]};
-
-  /// \todo Push a state to select the door where to exit
-  stash_unit->setCoords(doors[0]);
-  map->stashPopUnit(*stash_unit);
-  building->get()->removeUnit(0); /// \todo correct index
-
-  game::Status::clearStates();
+  game::Status::pushState(e_state::SELECT_EXIT_ZONE);
+  game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
+  game::Status::resumeState();
 }
 
 
