@@ -30,6 +30,7 @@ context/StatePlaying.cc             \
 context/StateEditMap.cc             \
 context/StateMenu.cc                \
 context/StateMenuCrew.cc            \
+context/StateMenuBuilding.cc        \
 context/StateMovingUnit.cc          \
 context/StateSelectCell.cc          \
 context/StateSelectTarget.cc        \
@@ -73,6 +74,8 @@ interface/menus/MenuAction.cc       \
 interface/menus/MenuCrew.cc         \
 interface/menus/MenuCrewBrowse.cc   \
 interface/menus/MenuCrewMember.cc   \
+interface/menus/MenuBuilding.cc     \
+interface/menus/MenuBuildingUnit.cc \
 \
 tools/StringParser.cc               \
 tools/Fps.cc                        \
@@ -82,7 +85,7 @@ tools/options/OptionsParser.cc
 
 
 # Generated sources files
-__top_srcdir__we_SOURCES +=                     \
+__top_srcdir__we_SOURCES +=          \
   generated/enum_print/enum_print.cc
 
 

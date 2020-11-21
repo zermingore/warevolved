@@ -16,6 +16,7 @@
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateSelectExitZone.hh>
+#include <context/StateMenuBuilding.hh>
 #include <debug/Debug.hh>
 
 
@@ -36,11 +37,13 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
     case e_state::ACTION_MENU:
     case e_state::SELECTION_UNIT:
     case e_state::SELECTION_CREW:
-    case e_state::BUILDING_MENU:
       return std::make_unique<StateMenu> (state);
 
     case e_state::CREW_MANAGEMENT:
       return std::make_unique<StateMenuCrew> ();
+
+    case e_state::BUILDING_MENU:
+      return std::make_unique<StateMenuBuilding> ();
 
     case e_state::MOVING_UNIT:
       return std::make_unique<StateMovingUnit> ();

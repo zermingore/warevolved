@@ -20,6 +20,7 @@
 #include <interface/menus/MenuAction.hh>
 #include <interface/menus/MenuCrew.hh>
 #include <interface/menus/MenuMap.hh>
+#include <interface/menus/MenuBuilding.hh>
 
 
 
@@ -43,8 +44,11 @@ StateMenu::StateMenu(const e_state state)
 
     case e_state::SELECTION_UNIT:
     case e_state::ACTION_MENU:
-    case e_state::BUILDING_MENU:
       _menu = std::make_shared<interface::MenuAction> (state);
+      break;
+
+    case e_state::BUILDING_MENU:
+      _menu = std::make_shared<interface::MenuBuilding> ();
       break;
 
     case e_state::SELECTION_CREW:

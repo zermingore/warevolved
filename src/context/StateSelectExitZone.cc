@@ -64,7 +64,6 @@ void StateSelectExitZone::resume()
     }
   }
 
-
   _unit = _building->getUnits()[0]; ///< \todo correct Unit
 
   assert(!_cells.empty() && "StateSelectExitZone: no exit zone available");

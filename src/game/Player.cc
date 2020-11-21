@@ -101,6 +101,9 @@ void Player::select()
     if (b && (*b)->faction() == static_cast<int> (_id))
     {
       game::Status::pushState(e_state::BUILDING_MENU);
+        game::Status::setStateAttributes(
+      std::make_shared<Coords> (coords));
+      // std::make_shared<bool> (false));
     }
     else
     {
