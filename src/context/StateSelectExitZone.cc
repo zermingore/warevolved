@@ -90,7 +90,6 @@ void StateSelectExitZone::draw()
   game::Status::player()->cursor()->disableDrawThisFrame();
 
   std::shared_ptr<Map> map = game::Status::battle()->map();
-  auto selected_unit(map->selectedUnit());
 
   _holoUnit = std::make_shared<graphics::Sprite> (_unit->sprite()->texture());
 
@@ -141,12 +140,9 @@ void StateSelectExitZone::validate()
     }
   }
 
-  /// \todo Push a state to select the unit to exit the building
-  auto stash_unit{_building->getUnits()[0]};
-
   /// \todo Push a state to select the door where to exit
-  stash_unit->setCoords(doors[0]);
-  map->stashPopUnit(*stash_unit);
+  _unit->setCoords(doors[_indexSelect]);
+  map->stashPopUnit(*_unit);
   _building->removeUnit(0); /// \todo correct index
 
   game::Status::clearStates();
