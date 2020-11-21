@@ -45,7 +45,7 @@ public:
    * \brief Remove the given unit from the Building
    * \param idx Index of the Unit in the _units vector
    */
-  void removeUnit(int idx);
+  void removeUnit(size_t idx);
 
   /**
    * \brief Get the current faction controling the building

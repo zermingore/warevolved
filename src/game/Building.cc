@@ -19,7 +19,7 @@ void Building::addUnit(std::shared_ptr<Unit> unit)
 
 
 
-void Building::removeUnit(int idx)
+void Building::removeUnit(size_t idx)
 {
   _units.erase(_units.begin() + idx);
   if (_units.size() == 0)

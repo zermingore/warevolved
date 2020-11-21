@@ -26,6 +26,7 @@ class EventManager
 public:
   /**
    * \brief executes the callback matching the given event, if any
+   * \param input Abstract input
    * \return true if a callback was executed
    */
   bool process(const e_input input);
