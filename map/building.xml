@@ -7,7 +7,7 @@
 			<current_player>0</current_player>
 			<player>
 				<color r="255" g="0" b="0" />
-				<cursor col="0" line="6" />
+				<cursor col="2" line="7" />
 			</player>
 			<player>
 				<color r="0" g="0" b="255" />
@@ -113,6 +113,7 @@
 		<cell>
 			<coordinates col="2" line="7" />
 			<terrain>1</terrain>
+			<unit type="0" player_id="0" hp="10" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="3" line="0" />
@@ -146,6 +147,7 @@
 		<cell>
 			<coordinates col="3" line="7" />
 			<terrain>1</terrain>
+			<unit type="1" player_id="0" hp="10" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="4" line="0" />
