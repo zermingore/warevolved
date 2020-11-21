@@ -442,7 +442,7 @@ PathFinding::getAdjacentCells(const Coords coords) const
     adjacents.emplace_back((*_map)[coords.c][coords.l - 1]);
   }
 
-  if (coords.l < nb_lines)
+  if (coords.l < nb_lines - 1)
   {
     adjacents.emplace_back((*_map)[coords.c][coords.l + 1]);
   }
