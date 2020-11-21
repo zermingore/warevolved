@@ -163,15 +163,6 @@ void MenuAction::buildMenuAfterMovingUnit()
   auto unit(map->unit(_coords));
   if (!unit) // Specific action depending on the occupation
   {
-    auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
-    entry_wait->setCallback([=, this] {
-      waitUnit();
-      game::Status::clearStates(); // will destroy 'this'
-    });
-    _lock.lock();
-    _entries.emplace_back(std::move(entry_wait));
-    _lock.unlock();
-
     // _selectedUnit does not exits (another instance of MenuAction built it)
     _selectedUnit = map->selectedUnit();
     assert(_selectedUnit);
@@ -213,6 +204,15 @@ void MenuAction::buildMenuAfterMovingUnit()
       _entries.emplace_back(std::move(entry_crew));
       _lock.unlock();
     }
+
+    auto entry_wait(std::make_shared<MenuEntry> (e_entry::WAIT));
+    entry_wait->setCallback([=, this] {
+      waitUnit();
+      game::Status::clearStates(); // will destroy 'this'
+    });
+    _lock.lock();
+    _entries.emplace_back(std::move(entry_wait));
+    _lock.unlock();
   }
   else
   {
