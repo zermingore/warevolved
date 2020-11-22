@@ -55,7 +55,6 @@ public:
    */
   void draw() override final;
 
-
   /**
    * \brief Fetch the attribute from thle list
    * \note Expects one attribute: menu coordinates.

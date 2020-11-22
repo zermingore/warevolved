@@ -235,6 +235,9 @@ void StateMenuBuilding::fetchAttributes()
   _menuUnitCoords = _menuUnitsCoords;
   _menuUnitCoords.x += 4; // in cells
 
+  _menuUnits->setCoords(*p);
+  _menuUnit->setCoords(*p);
+
   auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
   _menuBuildingConfirmEntryActive = *p2;
 

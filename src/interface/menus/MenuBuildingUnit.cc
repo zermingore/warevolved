@@ -30,10 +30,10 @@ void MenuBuildingUnit::build()
   _entries.clear();
   _lock.unlock();
 
-
-  auto map(game::Status::battle()->map());
-  ///< \todo avoid using Menu's coordinates
-  auto building = *(map->getBuilding(_coords));
+  const auto battle {game::Status::battle()};
+  const auto pos {battle->getCurrentPlayer()->cellCursorPosition()};
+  auto map(battle->map());
+  auto building = *(map->getBuilding(pos));
   assert(building && building->getUnits().size() > 0);
 
   // Find building doors

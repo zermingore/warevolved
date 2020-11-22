@@ -306,7 +306,6 @@ void MenuAction::enterBuilding()
 
 void MenuAction::exitBuilding()
 {
-  WARNING("FIX exitBuilding");
   game::Status::pushState(e_state::BUILDING_UNITS);
   game::Status::setStateAttributes(
     std::make_shared<Coords> (_coords),

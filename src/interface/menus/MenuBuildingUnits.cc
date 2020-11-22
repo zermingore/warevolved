@@ -21,7 +21,7 @@
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
-#include <interface/menus/MenuEntry.hh>
+#include <interface/menus/MenuEntryBuildingUnit.hh>
 
 
 
@@ -39,13 +39,15 @@ void MenuBuildingUnits::build()
   if (_building->getUnits().size() == 0)
   {
     ERROR("MenuBuildingUnits: No Unit in the Building");
+    assert(false);
     return;
   }
 
   size_t i{0u};
   for ([[maybe_unused]] auto& unused: _building->getUnits())
   {
-    auto entry(std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING));
+    auto entry(std::make_shared<MenuEntryBuildingUnit> (
+      e_entry::NONE, _building, i));
     entry->setCallbacks( { [=, this] { _building->removeUnit(i); } });
 
     _lock.lock();
