@@ -43,6 +43,13 @@ public:
 
 
 private:
+  /**
+   * \brief Closes the action menu
+   *   rolls back to the previous action menu if any, or pops every State
+   */
+  void cancel() override final;
+
+
   bool _active = true; ///< True if the menu has the focus
 
   std::shared_ptr<Building> _building; ///< Currently selected Building

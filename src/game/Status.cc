@@ -14,6 +14,7 @@
 #include <input/EventManager.hh>
 #include <input/KeyManager.hh>
 
+#include <debug/Debug.hh>
 
 
 namespace game {

@@ -63,7 +63,6 @@ public:
   void fetchAttributes() override final;
 
 
-
 private:
   /**
    * \brief Highlights the entry on top of the current one
@@ -102,7 +101,7 @@ private:
   /**
    * \brief Adjust the menu member hidden flag
    */
-  void setFocusMenuMember();
+  void setFocusMenuUnit();
 
 
   std::shared_ptr<interface::MenuBuildingUnits> _menuUnits; ///< Crew members
@@ -113,6 +112,8 @@ private:
 
   bool _browseUnits; ///< Browse the Units or its actions
   int _unitIdx = 0;  ///< Currently selected crew Unit index
+
+  bool _menuBuildingConfirmEntryActive; ///< 'confirm' in crew menu active?
 };
 
 #endif /* !STATE_SELECT_BUILDING_UNIT_HH_ */

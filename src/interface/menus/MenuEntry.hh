@@ -139,6 +139,7 @@ enum class e_entry
   COLLECT,
   LOAD,
   EXIT_BUILDING,
+  UNITS_BUILDING,
 
   CANCEL
 };

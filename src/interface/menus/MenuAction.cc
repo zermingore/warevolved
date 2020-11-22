@@ -32,6 +32,7 @@ MenuAction::MenuAction(const e_state state)
 }
 
 
+
 void MenuAction::build()
 {
   switch (_state)
@@ -45,7 +46,7 @@ void MenuAction::build()
       break;
 
     case e_state::BUILDING_MENU:
-      buildMenuBuilding();
+      buildMenuSelectionBuilding();
       break;
 
     default:
@@ -146,6 +147,28 @@ void MenuAction::buildMenuSelectionUnit()
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::ENTER_BUILDING)};
     entry->setCallback([=, this] { enterBuilding(); });
+
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
+  }
+}
+
+
+
+void MenuAction::buildMenuSelectionBuilding()
+{
+  auto map(game::Status::battle()->map());
+
+  /// \todo use other coordinates than the menu ones
+  auto building = map->getBuilding(_coords);
+  if (   building
+      && (*building)->faction()
+         == static_cast<int> (game::Status::player()->id())
+      && (*building)->getUnits().size() > 0)
+  {
+    auto entry{std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING)};
+    entry->setCallback([=, this] { buildMenuBuilding(); });
 
     _lock.lock();
     _entries.emplace_back(std::move(entry));
@@ -283,8 +306,11 @@ void MenuAction::enterBuilding()
 
 void MenuAction::exitBuilding()
 {
-  game::Status::pushState(e_state::SELECT_EXIT_ZONE);
-  game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
+  WARNING("FIX exitBuilding");
+  game::Status::pushState(e_state::BUILDING_UNITS);
+  game::Status::setStateAttributes(
+    std::make_shared<Coords> (_coords),
+    std::make_shared<bool> (false));
   game::Status::resumeState();
 }
 

@@ -24,16 +24,12 @@
 #include <interface/menus/MenuEntry.hh>
 
 
-
 namespace interface {
+
 
 
 void MenuBuilding::build()
 {
-  _lock.lock();
-  _entries.clear();
-  _lock.unlock();
-
   auto map(game::Status::battle()->map());
   _building = *(map->getBuilding(_coords));
   if (_building->getUnits().size() == 0)
@@ -54,12 +50,7 @@ void MenuBuilding::build()
     ++i;
   }
 
-  auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL));
-  entry_cancel->setCallback( [=, this] { cancel(); });
-
-  _lock.lock();
-  _entries.emplace_back(std::move(entry_cancel));
-  _lock.unlock();
+  addCancelEntry( [=, this] { cancel(); } );
 
   // increase highlight sprite
   using p = graphics::MapGraphicsProperties;
@@ -68,21 +59,16 @@ void MenuBuilding::build()
 
 
 
+void MenuBuilding::cancel()
+{
+  game::Status::clearStates();
+}
+
+
+
 void MenuBuilding::draw()
 {
-  update();
-
-  _lock.lock();
-  for (const auto& entry: _entries)
-  {
-    entry->draw();
-  }
-  _lock.unlock();
-
-  if (_active)
-  {
-    _imageSelection->draw();
-  }
+  InGameMenu::draw();
 }
 
 

@@ -178,6 +178,7 @@ enum class e_state: int
   SELECT_EXIT_ZONE, ///< Select where to exit a building
 
   BUILDING_MENU,    ///< Owned Building management
+  BUILDING_UNITS,   ///< Owned Building Units management
 };
 
 

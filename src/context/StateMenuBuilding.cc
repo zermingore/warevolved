@@ -61,6 +61,7 @@ void StateMenuBuilding::resume()
   }
 
   _menuUnits->setCoords(_menuUnitsCoords);
+  _menuUnits->setConfirmEntryActive(_menuBuildingConfirmEntryActive);
   _menuUnits->build();
 
   _menuUnitCoords = _menuUnitsCoords;
@@ -72,7 +73,7 @@ void StateMenuBuilding::resume()
   _menuUnits->setActive(true);
   _menuUnit->setActive(false);
   if (   _menuUnits->getCurrentSelection() == e_entry::CANCEL
-      || _menuUnits->getCurrentSelection() == e_entry::CREW_CONFIRM)
+      || _menuUnits->getCurrentSelection() == e_entry::EXIT_BUILDING)
   {
     _menuUnit->setHidden(true);
   }
@@ -91,7 +92,7 @@ void StateMenuBuilding::moveUp()
   if (_browseUnits)
   {
     _menuUnits->decrementSelectedEntry();
-    setFocusMenuMember();
+    setFocusMenuUnit();
   }
   else
   {
@@ -114,7 +115,7 @@ void StateMenuBuilding::moveDown()
   if (_browseUnits)
   {
     _menuUnits->incrementSelectedEntry();
-    setFocusMenuMember();
+    setFocusMenuUnit();
   }
   else
   {
@@ -126,7 +127,7 @@ void StateMenuBuilding::moveDown()
 
 
 
-void StateMenuBuilding::setFocusMenuMember()
+void StateMenuBuilding::setFocusMenuUnit()
 {
   // Hide or reveal the menu depending on the entry we currently hightlight
   if (_menuUnits->getCurrentSelection() == e_entry::CANCEL)
@@ -149,7 +150,7 @@ void StateMenuBuilding::moveRight()
 {
   // No member menu next to 'Confirm' and 'Cancel'
   if (   _menuUnits->getCurrentSelection() == e_entry::CANCEL
-      || _menuUnits->getCurrentSelection() == e_entry::CREW_CONFIRM)
+      || _menuUnits->getCurrentSelection() == e_entry::EXIT_BUILDING)
   {
     return;
   }
@@ -234,8 +235,8 @@ void StateMenuBuilding::fetchAttributes()
   _menuUnitCoords = _menuUnitsCoords;
   _menuUnitCoords.x += 4; // in cells
 
-  // auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
-  // _menuCrewConfirmEntryActive = *p2;
+  auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
+  _menuBuildingConfirmEntryActive = *p2;
 
   // reset the attributes vector
   _attributes.clear();

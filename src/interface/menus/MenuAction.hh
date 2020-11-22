@@ -74,6 +74,12 @@ private:
    */
   void buildMenuAfterMovingUnit();
 
+
+  /**
+   * \brief Build the menu specific entries on Player's Building selection
+   */
+  void buildMenuSelectionBuilding();
+
   /**
    * \brief Build Building related menu
    */
