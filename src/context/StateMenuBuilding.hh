@@ -15,7 +15,7 @@ enum class e_state;
 
 namespace interface
 {
-  class MenuBuilding;
+  class MenuBuildingUnits;
   class MenuBuildingUnit;
 }
 
@@ -105,11 +105,11 @@ private:
   void setFocusMenuMember();
 
 
-  std::shared_ptr<interface::MenuBuilding> _menuBuilding; ///< Crew members
+  std::shared_ptr<interface::MenuBuildingUnits> _menuUnits; ///< Crew members
   std::shared_ptr<interface::MenuBuildingUnit> _menuUnit; ///< Member actions
 
-  Coords _menuBuildingCoords; ///< Menu coordinates
-  Coords _menuUnitsCoords;    ///< List of Units Menu's coordinates
+  Coords _menuUnitsCoords; ///< List of Units Menu's coordinates
+  Coords _menuUnitCoords;  ///< Unit Menu's coordinates
 
   bool _browseUnits; ///< Browse the Units or its actions
   int _unitIdx = 0;  ///< Currently selected crew Unit index

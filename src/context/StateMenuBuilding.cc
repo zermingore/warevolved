@@ -21,11 +21,12 @@
 #include <interface/menus/Menu.hh>
 #include <interface/menus/MenuBuilding.hh>
 #include <interface/menus/MenuBuildingUnit.hh>
+#include <interface/menus/MenuBuildingUnits.hh>
 
 
 
 StateMenuBuilding::StateMenuBuilding()
-  : _menuBuildingCoords(0, 0)
+  : _menuUnitsCoords(0, 0)
   , _browseUnits(true)
 {
   // browsing entries
@@ -37,7 +38,7 @@ StateMenuBuilding::StateMenuBuilding()
   _evtMgr->registerEvent(e_input::SELECTION,  [=, this] { validate(); });
   _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
 
-  _menuBuilding = std::make_unique<interface::MenuBuilding> ();
+  _menuUnits = std::make_unique<interface::MenuBuildingUnits> ();
   _menuUnit = std::make_unique<interface::MenuBuildingUnit> ();
 }
 
@@ -46,7 +47,7 @@ StateMenuBuilding::StateMenuBuilding()
 void StateMenuBuilding::suspend()
 {
   /// \todo set menu at optimal coordinates (avoid hiding units for instance)
-  _menuBuildingCoords = _menuBuilding->coords();
+  _menuUnitsCoords = _menuUnits->coords();
 }
 
 
@@ -59,25 +60,25 @@ void StateMenuBuilding::resume()
     fetchAttributes();
   }
 
-  _menuBuilding->setCoords(_menuBuildingCoords);
-  _menuBuilding->build();
+  _menuUnits->setCoords(_menuUnitsCoords);
+  _menuUnits->build();
 
-  _menuUnitsCoords = _menuBuildingCoords;
-  _menuUnitsCoords.x += 4; // in cells
-  _menuUnit->setCoords(_menuUnitsCoords);
+  _menuUnitCoords = _menuUnitsCoords;
+  _menuUnitCoords.x += 4; // in cells
+  _menuUnit->setCoords(_menuUnitCoords);
   _menuUnit->build();
 
   _browseUnits = true;
-  _menuBuilding->setActive(true);
+  _menuUnits->setActive(true);
   _menuUnit->setActive(false);
-  if (   _menuBuilding->getCurrentSelection() == e_entry::CANCEL
-      || _menuBuilding->getCurrentSelection() == e_entry::CREW_CONFIRM)
+  if (   _menuUnits->getCurrentSelection() == e_entry::CANCEL
+      || _menuUnits->getCurrentSelection() == e_entry::CREW_CONFIRM)
   {
     _menuUnit->setHidden(true);
   }
   else
   {
-    auto pe = _menuBuilding->getEntries()[_menuBuilding->selectedEntry()];
+    auto pe = _menuUnits->getEntries()[_menuUnits->selectedEntry()];
     auto e = std::static_pointer_cast<interface::MenuEntry> (pe);
     _menuUnit->setHidden(false);
   }
@@ -89,7 +90,7 @@ void StateMenuBuilding::moveUp()
 {
   if (_browseUnits)
   {
-    _menuBuilding->decrementSelectedEntry();
+    _menuUnits->decrementSelectedEntry();
     setFocusMenuMember();
   }
   else
@@ -112,7 +113,7 @@ void StateMenuBuilding::moveDown()
 {
   if (_browseUnits)
   {
-    _menuBuilding->incrementSelectedEntry();
+    _menuUnits->incrementSelectedEntry();
     setFocusMenuMember();
   }
   else
@@ -128,14 +129,14 @@ void StateMenuBuilding::moveDown()
 void StateMenuBuilding::setFocusMenuMember()
 {
   // Hide or reveal the menu depending on the entry we currently hightlight
-  if (_menuBuilding->getCurrentSelection() == e_entry::CANCEL)
+  if (_menuUnits->getCurrentSelection() == e_entry::CANCEL)
   {
     _menuUnit->setHidden(true);
   }
   else
   {
     // Retrieve the Unit matching the highlighted entry
-    auto pe = _menuBuilding->getEntries()[_menuBuilding->selectedEntry()];
+    auto pe = _menuUnits->getEntries()[_menuUnits->selectedEntry()];
     auto e = std::static_pointer_cast<interface::MenuEntry> (pe);
     _menuUnit->setHidden(false);
     _menuUnit->setUnitIdx(_unitIdx);
@@ -147,15 +148,15 @@ void StateMenuBuilding::setFocusMenuMember()
 void StateMenuBuilding::moveRight()
 {
   // No member menu next to 'Confirm' and 'Cancel'
-  if (   _menuBuilding->getCurrentSelection() == e_entry::CANCEL
-      || _menuBuilding->getCurrentSelection() == e_entry::CREW_CONFIRM)
+  if (   _menuUnits->getCurrentSelection() == e_entry::CANCEL
+      || _menuUnits->getCurrentSelection() == e_entry::CREW_CONFIRM)
   {
     return;
   }
 
   _browseUnits = false;
   _menuUnit->setActive(true);
-  _menuBuilding->setActive(false);
+  _menuUnits->setActive(false);
 }
 
 
@@ -163,7 +164,7 @@ void StateMenuBuilding::moveRight()
 void StateMenuBuilding::moveLeft()
 {
   _browseUnits = true;
-  _menuBuilding->setActive(true);
+  _menuUnits->setActive(true);
   _menuUnit->setActive(false);
   _menuUnit->resetSelectedEntry();
 }
@@ -174,7 +175,7 @@ void StateMenuBuilding::validate()
 {
   if (_browseUnits)
   {
-    if (_menuBuilding->getCurrentSelection() == e_entry::CREW_CONFIRM)
+    if (_menuUnits->getCurrentSelection() == e_entry::CREW_CONFIRM)
     {
       auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
       selectedUnit->setPlayed(true);
@@ -206,7 +207,7 @@ void StateMenuBuilding::exit() // escape key
   if (!_browseUnits)
   {
     _browseUnits = true;
-    _menuBuilding->setActive(true);
+    _menuUnits->setActive(true);
     _menuUnit->setActive(false);
     _menuUnit->resetSelectedEntry();
     return;
@@ -227,11 +228,11 @@ void StateMenuBuilding::fetchAttributes()
   }
 
   auto p = std::static_pointer_cast<Coords> (_attributes[0]);
-  _menuBuildingCoords.c = p->c;
-  _menuBuildingCoords.l = p->l;
+  _menuUnitsCoords.c = p->c;
+  _menuUnitsCoords.l = p->l;
 
-  _menuUnitsCoords = _menuBuildingCoords;
-  _menuUnitsCoords.x += 4; // in cells
+  _menuUnitCoords = _menuUnitsCoords;
+  _menuUnitCoords.x += 4; // in cells
 
   // auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
   // _menuCrewConfirmEntryActive = *p2;
@@ -245,6 +246,6 @@ void StateMenuBuilding::fetchAttributes()
 void StateMenuBuilding::draw()
 {
   game::Status::player()->cursor()->disableDrawThisFrame();
-  _menuBuilding->draw();
+  _menuUnits->draw();
   _menuUnit->draw();
 }

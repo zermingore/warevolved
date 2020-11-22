@@ -6,81 +6,82 @@ __top_srcdir__we_LDADD += -lstdc++fs # filesystem
 
 
 # Source files
-__top_srcdir__we_SOURCES =          \
-main.cc                             \
-\
-graphics/GraphicsEngine.cc          \
-graphics/Context.cc                 \
-graphics/MapGraphicsProperties.cc   \
-graphics/Sprite.cc                  \
-\
-resources/ResourcesManager.cc       \
-resources/Font.cc                   \
-resources/Text.cc                   \
-\
-debug/Debug.cc                      \
-debug/OSD.cc                        \
-\
-config/Settings.cc                  \
-\
-context/State.cc                    \
-context/StateGlobal.cc              \
-context/StatesFactory.cc            \
-context/StatePlaying.cc             \
-context/StateEditMap.cc             \
-context/StateMenu.cc                \
-context/StateMenuCrew.cc            \
-context/StateMenuBuilding.cc        \
-context/StateMovingUnit.cc          \
-context/StateSelectCell.cc          \
-context/StateSelectTarget.cc        \
-context/StateSelectDropZone.cc      \
-context/StateSelectExitZone.cc      \
-\
-input/KeyManager.cc                 \
-input/ReplayManager.cc              \
-input/EventManager.cc               \
-input/EventsProcessor.cc            \
-input/InputsListener.cc             \
-input/EventsLogger.cc               \
-\
-game/Game.cc                        \
-game/Status.cc                      \
-game/Battle.cc                      \
-game/Map.cc                         \
-game/Terrain.cc                     \
-game/TerrainsHandler.cc             \
-game/units/Unit.cc                  \
-game/units/UnitsFactory.cc          \
-game/units/Vehicle.cc               \
-game/units/Car.cc                   \
-game/units/Motorcycle.cc            \
-game/units/Soldier.cc               \
-game/Player.cc                      \
-game/PathFinding.cc                 \
-game/Building.cc                    \
-\
-interface/Interface.cc              \
-interface/InterfaceElement.cc       \
-interface/Cursor.cc                 \
-interface/Panel.cc                  \
-interface/MiniMap.cc                \
-interface/menus/Menu.cc             \
-interface/menus/MenuEntry.cc        \
-interface/menus/MenuEntryCrew.cc    \
-interface/menus/InGameMenu.cc       \
-interface/menus/MenuMap.cc          \
-interface/menus/MenuAction.cc       \
-interface/menus/MenuCrew.cc         \
-interface/menus/MenuCrewBrowse.cc   \
-interface/menus/MenuCrewMember.cc   \
-interface/menus/MenuBuilding.cc     \
-interface/menus/MenuBuildingUnit.cc \
-\
-tools/StringParser.cc               \
-tools/Fps.cc                        \
-tools/Random.cc                     \
-tools/options/Option.cc             \
+__top_srcdir__we_SOURCES =           \
+main.cc                              \
+                                     \
+graphics/GraphicsEngine.cc           \
+graphics/Context.cc                  \
+graphics/MapGraphicsProperties.cc    \
+graphics/Sprite.cc                   \
+                                     \
+resources/ResourcesManager.cc        \
+resources/Font.cc                    \
+resources/Text.cc                    \
+                                     \
+debug/Debug.cc                       \
+debug/OSD.cc                         \
+                                     \
+config/Settings.cc                   \
+                                     \
+context/State.cc                     \
+context/StateGlobal.cc               \
+context/StatesFactory.cc             \
+context/StatePlaying.cc              \
+context/StateEditMap.cc              \
+context/StateMenu.cc                 \
+context/StateMenuCrew.cc             \
+context/StateMenuBuilding.cc         \
+context/StateMovingUnit.cc           \
+context/StateSelectCell.cc           \
+context/StateSelectTarget.cc         \
+context/StateSelectDropZone.cc       \
+context/StateSelectExitZone.cc       \
+                                     \
+input/KeyManager.cc                  \
+input/ReplayManager.cc               \
+input/EventManager.cc                \
+input/EventsProcessor.cc             \
+input/InputsListener.cc              \
+input/EventsLogger.cc                \
+                                     \
+game/Game.cc                         \
+game/Status.cc                       \
+game/Battle.cc                       \
+game/Map.cc                          \
+game/Terrain.cc                      \
+game/TerrainsHandler.cc              \
+game/units/Unit.cc                   \
+game/units/UnitsFactory.cc           \
+game/units/Vehicle.cc                \
+game/units/Car.cc                    \
+game/units/Motorcycle.cc             \
+game/units/Soldier.cc                \
+game/Player.cc                       \
+game/PathFinding.cc                  \
+game/Building.cc                     \
+                                     \
+interface/Interface.cc               \
+interface/InterfaceElement.cc        \
+interface/Cursor.cc                  \
+interface/Panel.cc                   \
+interface/MiniMap.cc                 \
+interface/menus/Menu.cc              \
+interface/menus/MenuEntry.cc         \
+interface/menus/MenuEntryCrew.cc     \
+interface/menus/InGameMenu.cc        \
+interface/menus/MenuMap.cc           \
+interface/menus/MenuAction.cc        \
+interface/menus/MenuCrew.cc          \
+interface/menus/MenuCrewBrowse.cc    \
+interface/menus/MenuCrewMember.cc    \
+interface/menus/MenuBuilding.cc      \
+interface/menus/MenuBuildingUnit.cc  \
+interface/menus/MenuBuildingUnits.cc \
+                                     \
+tools/StringParser.cc                \
+tools/Fps.cc                         \
+tools/Random.cc                      \
+tools/options/Option.cc              \
 tools/options/OptionsParser.cc
 
 

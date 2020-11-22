@@ -6,8 +6,8 @@
  * \brief MenuBuildingUnit class declaration
  */
 
-#ifndef MENU_BUILDING_UNITS_HH_
-# define MENU_BUILDING_UNITS_HH_
+#ifndef MENU_BUILDING_UNIT_HH_
+# define MENU_BUILDING_UNIT_HH_
 
 # include <interface/menus/InGameMenu.hh>
 # include <game/units/Unit.hh> // e_unit_role
@@ -49,7 +49,7 @@ public:
     _hidden = hide;
   }
 
-  /// _role setter
+  /// _unitIdx setter
   void setUnitIdx(int unitIdx) {
     _unitIdx = unitIdx;
   }
@@ -72,4 +72,4 @@ private:
 } // namespace interface
 
 
-#endif /* !MENU_BUILDING_UNITS_HH_ */
+#endif /* !MENU_BUILDING_UNIT_HH_ */
