@@ -49,10 +49,12 @@
 ** TODO Avoid vector of vector
    (std::vector<std::vector<Cell>> for the Map)
 ** TODO think about cleaning some types names
-   (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> typedef)
+   (std::shared_ptr<std::vector<std::shared_ptr<Type>>> -> using)
    could use using std::vector
    could use typedef std::shared_ptr SP
 ** TODO Random generator as a service locator
+** TODO Menu and copy-pastes
+   MenuEntrySpecificType StateMenuType...
 
 
 * TODO Graphics
@@ -74,8 +76,10 @@
 **** TODO Jeep
 *** TODO Terrain
 **** TODO Mountain
-*** TODO Buildings
-**** TODO Block
+*** DONE Buildings
+    CLOSED: [2020-11-22 Sun 19:53]
+**** DONE Block
+     CLOSED: [2020-11-22 Sun 19:53]
 
 
 * TODO Gameplay
@@ -116,12 +120,12 @@
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
+*** TODO Check if the generated enums_printer need an update on commit/push
 ** TODO auto resources XML generator
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (blocked to 60 in release; unlimited in debug)
 ** TODO The displayed fps should be computed only over a fixed period of time
-** TODO Check if the generated enums_printer need an update on commit/push
 
 
 * TODO Testing
