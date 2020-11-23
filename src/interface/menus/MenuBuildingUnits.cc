@@ -35,8 +35,8 @@ void MenuBuildingUnits::build()
   _lock.unlock();
 
   auto map(game::Status::battle()->map());
-  _building = *(map->getBuilding(_coords));
-  if (_building->getUnits().size() == 0)
+  _building = *(map->building(_coords));
+  if (_building->units().size() == 0)
   {
     ERROR("MenuBuildingUnits: No Unit in the Building");
     assert(false);
@@ -44,7 +44,7 @@ void MenuBuildingUnits::build()
   }
 
   size_t i{0u};
-  for ([[maybe_unused]] auto& unused: _building->getUnits())
+  for ([[maybe_unused]] auto& unused: _building->units())
   {
     auto entry(std::make_shared<MenuEntryBuildingUnit> (
       e_entry::NONE, _building, i));

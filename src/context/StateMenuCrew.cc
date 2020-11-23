@@ -72,8 +72,8 @@ void StateMenuCrew::resume()
   _browseMembers = true;
   _menuCrew->setActive(true);
   _menuMember->setActive(false);
-  if (   _menuCrew->getCurrentSelection() == e_entry::CANCEL
-      || _menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
+  if (   _menuCrew->currentSelection() == e_entry::CANCEL
+      || _menuCrew->currentSelection() == e_entry::CREW_CONFIRM)
   {
     _menuMember->setHidden(true);
   }
@@ -131,8 +131,8 @@ void StateMenuCrew::moveDown()
 void StateMenuCrew::setFocusMenuMember()
 {
   // Hide or reveal the menu depending on the entry we currently hightlight
-  if (   _menuCrew->getCurrentSelection() == e_entry::CANCEL
-      || _menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
+  if (   _menuCrew->currentSelection() == e_entry::CANCEL
+      || _menuCrew->currentSelection() == e_entry::CREW_CONFIRM)
   {
     _menuMember->setHidden(true);
   }
@@ -152,8 +152,8 @@ void StateMenuCrew::setFocusMenuMember()
 void StateMenuCrew::moveRight()
 {
   // No member menu next to 'Confirm' and 'Cancel'
-  if (   _menuCrew->getCurrentSelection() == e_entry::CANCEL
-      || _menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
+  if (   _menuCrew->currentSelection() == e_entry::CANCEL
+      || _menuCrew->currentSelection() == e_entry::CREW_CONFIRM)
   {
     return;
   }
@@ -179,13 +179,13 @@ void StateMenuCrew::validate()
 {
   if (_browseMembers)
   {
-    if (_menuCrew->getCurrentSelection() == e_entry::CANCEL)
+    if (_menuCrew->currentSelection() == e_entry::CANCEL)
     {
       cancel();
       return;
     }
 
-    if (_menuCrew->getCurrentSelection() == e_entry::CREW_CONFIRM)
+    if (_menuCrew->currentSelection() == e_entry::CREW_CONFIRM)
     {
       auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
       selectedUnit->setPlayed(true);
@@ -201,7 +201,7 @@ void StateMenuCrew::validate()
     return;
   }
 
-  if (_menuMember->getCurrentSelection() == e_entry::CANCEL)
+  if (_menuMember->currentSelection() == e_entry::CANCEL)
   {
     exit();
     return;

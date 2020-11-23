@@ -33,8 +33,8 @@ void MenuBuildingUnit::build()
   const auto battle {game::Status::battle()};
   const auto pos {battle->getCurrentPlayer()->cellCursorPosition()};
   auto map(battle->map());
-  auto building = *(map->getBuilding(pos));
-  assert(building && building->getUnits().size() > 0);
+  auto building = *(map->building(pos));
+  assert(building && building->units().size() > 0);
 
   // Find building doors
   bool available_door = false;

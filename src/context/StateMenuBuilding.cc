@@ -72,8 +72,8 @@ void StateMenuBuilding::resume()
   _browseUnits = true;
   _menuUnits->setActive(true);
   _menuUnit->setActive(false);
-  if (   _menuUnits->getCurrentSelection() == e_entry::CANCEL
-      || _menuUnits->getCurrentSelection() == e_entry::EXIT_BUILDING)
+  if (   _menuUnits->currentSelection() == e_entry::CANCEL
+      || _menuUnits->currentSelection() == e_entry::EXIT_BUILDING)
   {
     _menuUnit->setHidden(true);
   }
@@ -130,7 +130,7 @@ void StateMenuBuilding::moveDown()
 void StateMenuBuilding::setFocusMenuUnit()
 {
   // Hide or reveal the menu depending on the entry we currently hightlight
-  if (_menuUnits->getCurrentSelection() == e_entry::CANCEL)
+  if (_menuUnits->currentSelection() == e_entry::CANCEL)
   {
     _menuUnit->setHidden(true);
   }
@@ -149,8 +149,8 @@ void StateMenuBuilding::setFocusMenuUnit()
 void StateMenuBuilding::moveRight()
 {
   // No member menu next to 'Confirm' and 'Cancel'
-  if (   _menuUnits->getCurrentSelection() == e_entry::CANCEL
-      || _menuUnits->getCurrentSelection() == e_entry::EXIT_BUILDING)
+  if (   _menuUnits->currentSelection() == e_entry::CANCEL
+      || _menuUnits->currentSelection() == e_entry::EXIT_BUILDING)
   {
     return;
   }
@@ -176,7 +176,7 @@ void StateMenuBuilding::validate()
 {
   if (_browseUnits)
   {
-    if (_menuUnits->getCurrentSelection() == e_entry::CREW_CONFIRM)
+    if (_menuUnits->currentSelection() == e_entry::CREW_CONFIRM)
     {
       auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
       selectedUnit->setPlayed(true);
@@ -192,7 +192,7 @@ void StateMenuBuilding::validate()
     return;
   }
 
-  if (_menuUnit->getCurrentSelection() == e_entry::CANCEL)
+  if (_menuUnit->currentSelection() == e_entry::CANCEL)
   {
     exit();
     return;

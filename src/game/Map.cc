@@ -275,7 +275,7 @@ e_attack_result Map::attack(const std::shared_ptr<const Cell>& target_cell)
 
 
 
-std::optional<std::shared_ptr<Building>> Map::getBuilding(const Coords coord)
+std::optional<std::shared_ptr<Building>> Map::building(const Coords coord)
 {
   for (auto b: _buildings)
   {
@@ -295,15 +295,15 @@ std::optional<std::shared_ptr<Building>> Map::getBuilding(const Coords coord)
 
 e_attack_result Map::attackBuilding(const Coords attackerCoords)
 {
-  auto building = getBuilding(attackerCoords);
-  assert(building);
+  auto build = building(attackerCoords);
+  assert(build);
 
-  NOTICE((*building)->getUnits().size());
-  if ((*building)->getUnits().size() == 0
-      || (*building)->getUnits()[0]->playerId() == _selectedUnit->playerId())
+  NOTICE((*build)->units().size());
+  if ((*build)->units().size() == 0
+      || (*build)->units()[0]->playerId() == _selectedUnit->playerId())
   {
     _selectedUnit->setPlayed(true);
-    (*building)->addUnit(_selectedUnit);
+    (*build)->addUnit(_selectedUnit);
     _cells[_selectedUnit->c()][_selectedUnit->l()]->removeUnit();
     return e_attack_result::NONE_DIED;
   }
@@ -316,9 +316,9 @@ e_attack_result Map::attackBuilding(const Coords attackerCoords)
 
   _lockSelectedUnitUpdate.lock();
 
-  while ((*building)->getUnits().size() > 0)
+  while ((*build)->units().size() > 0)
   {
-    for (auto defender: (*building)->getUnits())
+    for (auto defender: (*build)->units())
     {
       // The attacker receives damages first
       auto dmg_def{static_cast<int> (defender->attackValue()) - def_attacker};
@@ -333,11 +333,11 @@ e_attack_result Map::attackBuilding(const Coords attackerCoords)
       }
     }
 
-    auto defender{(*building)->getUnits()[0]};
+    auto defender{(*build)->units()[0]};
     defender->setHp(defender->hp() - attacker_damages);
     if (defender->hp() <= 0)
     {
-      auto units{(*building)->getUnits()};
+      auto units{(*build)->units()};
       units.erase(units.begin());
     }
   }

@@ -100,7 +100,7 @@ void InGameMenu::update()
 
 
 
-e_entry InGameMenu::getCurrentSelection()
+e_entry InGameMenu::currentSelection()
 {
   _lock.lock();
   auto idx{ _entries[_selectedEntry]->id() };

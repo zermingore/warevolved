@@ -31,15 +31,15 @@ namespace interface {
 void MenuBuilding::build()
 {
   auto map(game::Status::battle()->map());
-  _building = *(map->getBuilding(_coords));
-  if (_building->getUnits().size() == 0)
+  _building = *(map->building(_coords));
+  if (_building->units().size() == 0)
   {
     ERROR("MenuBuilding: No Unit in the Building");
     return;
   }
 
   size_t i{0u};
-  for ([[maybe_unused]] auto& unused: _building->getUnits())
+  for ([[maybe_unused]] auto& unused: _building->units())
   {
     auto entry(std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING));
     entry->setCallbacks( { [=, this] { _building->removeUnit(i); } });

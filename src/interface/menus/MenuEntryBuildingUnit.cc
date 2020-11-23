@@ -67,7 +67,7 @@ void MenuEntryBuildingUnit::draw()
   {
     // Unit Sprite
     const auto dropping_unit =
-      _building->getUnits()[static_cast<size_t> (_crewIdx)];
+      _building->units()[static_cast<size_t> (_crewIdx)];
 
     const auto sprite_unit(dropping_unit->sprite());
     using p = graphics::MapGraphicsProperties;

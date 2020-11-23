@@ -97,7 +97,7 @@ void Player::select()
   else
   {
     const auto coords{_cursor->coords()};
-    auto b{game::Status::battle()->map()->getBuilding(coords)};
+    auto b{game::Status::battle()->map()->building(coords)};
     if (b && (*b)->faction() == static_cast<int> (_id))
     {
       game::Status::pushState(e_state::BUILDING_MENU);

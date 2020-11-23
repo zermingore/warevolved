@@ -29,7 +29,7 @@ public:
 
 
   ///< Units getter
-  auto getUnits()  { return _units; }
+  auto units()  { return _units; }
 
   ///< Coordinates getter
   auto getCoords() { return _cells; }

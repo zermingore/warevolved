@@ -161,11 +161,11 @@ void MenuAction::buildMenuSelectionBuilding()
   auto map(game::Status::battle()->map());
 
   /// \todo use other coordinates than the menu ones
-  auto building = map->getBuilding(_coords);
+  auto building = map->building(_coords);
   if (   building
       && (*building)->faction()
          == static_cast<int> (game::Status::player()->id())
-      && (*building)->getUnits().size() > 0)
+      && (*building)->units().size() > 0)
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING)};
     entry->setCallback([=, this] { buildMenuBuilding(); });
@@ -251,8 +251,8 @@ void MenuAction::buildMenuBuilding()
 {
   /// \todo use other coordinates as the menu ones
   auto map{game::Status::battle()->map()};
-  auto building{map->getBuilding(_coords)};
-  if (building && (*building)->getUnits().size() > 0)
+  auto building{map->building(_coords)};
+  if (building && (*building)->units().size() > 0)
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING)};
     entry->setCallback([=, this] { exitBuilding(); });

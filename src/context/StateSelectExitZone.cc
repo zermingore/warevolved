@@ -51,8 +51,8 @@ void StateSelectExitZone::resume()
   }
 
   auto map(game::Status::battle()->map());
-  _building = *(map->getBuilding(_buildingLocation));
-  assert(_building && _building->getUnits().size() > 0);
+  _building = *(map->building(_buildingLocation));
+  assert(_building && _building->units().size() > 0);
 
   // Find building doors
   for (const auto coords: _building->getCoords())
@@ -64,7 +64,7 @@ void StateSelectExitZone::resume()
     }
   }
 
-  _unit = _building->getUnits()[0]; ///< \todo correct Unit
+  _unit = _building->units()[0]; ///< \todo correct Unit
 
   assert(!_cells.empty() && "StateSelectExitZone: no exit zone available");
 }
