@@ -31,7 +31,6 @@ namespace interface {
  * \class MenuEntry
  * \brief One entry (a clickable item) of a menu
  * \note The entry position is relative to the menu it belongs to.
- * \note Motherclass of MenuEntryCrew
  */
 class MenuEntry: public InterfaceElement
 {

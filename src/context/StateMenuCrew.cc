@@ -22,7 +22,6 @@
 #include <interface/menus/Menu.hh>
 #include <interface/menus/MenuCrewBrowse.hh>
 #include <interface/menus/MenuCrewMember.hh>
-#include <interface/menus/MenuEntryCrew.hh>
 
 
 

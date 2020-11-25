@@ -67,7 +67,6 @@ interface/Panel.cc                       \
 interface/MiniMap.cc                     \
 interface/menus/Menu.cc                  \
 interface/menus/MenuEntry.cc             \
-interface/menus/MenuEntryCrew.cc         \
 interface/menus/InGameMenu.cc            \
 interface/menus/MenuMap.cc               \
 interface/menus/MenuAction.cc            \
