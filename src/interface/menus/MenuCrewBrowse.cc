@@ -88,8 +88,7 @@ void MenuCrewBrowse::build()
   _lock.unlock();
 
   // increase highlight sprite
-  using namespace graphics;
-  using p = MapGraphicsProperties;
+  using p = graphics::MapGraphicsProperties;
   _imageSelection->setSize(p::cellWidth() * 4, p::cellHeight());
 }
 

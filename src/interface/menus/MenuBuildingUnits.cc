@@ -61,7 +61,7 @@ void MenuBuildingUnits::build()
     ++i;
   }
 
-  auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL));
+  auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL, true));
   entry_cancel->setCallback( [=, this] { cancel(); });
 
   _lock.lock();
