@@ -81,11 +81,6 @@ private:
   void buildMenuSelectionBuilding();
 
   /**
-   * \brief Build Building related menu
-   */
-  void buildMenuBuilding();
-
-  /**
    * \brief Check if the unit is allowed to move. It is the case if
    *   - the unit didn't play (end of its action)
    *   - the unit didn't already moved

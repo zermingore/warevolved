@@ -39,7 +39,7 @@ StateMenuBuilding::StateMenuBuilding()
   _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
 
   _menuUnits = std::make_unique<interface::MenuBuildingUnits> ();
-  _menuUnit = std::make_unique<interface::MenuBuildingUnit> ();
+  _menuUnit  = std::make_unique<interface::MenuBuildingUnit>  ();
 }
 
 
@@ -79,8 +79,7 @@ void StateMenuBuilding::resume()
   }
   else
   {
-    auto pe = _menuUnits->getEntries()[_menuUnits->selectedEntry()];
-    auto e = std::static_pointer_cast<interface::MenuEntry> (pe);
+    _menuUnit->setUnitIdx(static_cast<int> (_menuUnits->selectedEntry()));
     _menuUnit->setHidden(false);
   }
 }
@@ -176,6 +175,12 @@ void StateMenuBuilding::validate()
 {
   if (_browseUnits)
   {
+    if (_menuUnits->currentSelection() == e_entry::CANCEL)
+    {
+      exit();
+      return;
+    }
+
     if (_menuUnits->currentSelection() == e_entry::CREW_CONFIRM)
     {
       auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
@@ -214,7 +219,7 @@ void StateMenuBuilding::exit() // escape key
     return;
   }
 
-  game::Status::clearStates();
+  game::Status::popCurrentState();
 }
 
 

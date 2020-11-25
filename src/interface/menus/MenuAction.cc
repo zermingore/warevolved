@@ -168,7 +168,7 @@ void MenuAction::buildMenuSelectionBuilding()
       && (*building)->units().size() > 0)
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING)};
-    entry->setCallback([=, this] { buildMenuBuilding(); });
+    entry->setCallback([=, this] { exitBuilding(); });
 
     _lock.lock();
     _entries.emplace_back(std::move(entry));
@@ -242,24 +242,6 @@ void MenuAction::buildMenuAfterMovingUnit()
     game::Status::pushState(e_state::SELECTION_CREW);
     game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
     game::Status::resumeState();
-  }
-}
-
-
-
-void MenuAction::buildMenuBuilding()
-{
-  /// \todo use other coordinates as the menu ones
-  auto map{game::Status::battle()->map()};
-  auto building{map->building(_coords)};
-  if (building && (*building)->units().size() > 0)
-  {
-    auto entry{std::make_shared<MenuEntry> (e_entry::EXIT_BUILDING)};
-    entry->setCallback([=, this] { exitBuilding(); });
-
-    _lock.lock();
-    _entries.emplace_back(std::move(entry));
-    _lock.unlock();
   }
 }
 
