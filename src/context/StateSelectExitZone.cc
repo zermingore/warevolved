@@ -37,6 +37,8 @@ void StateSelectExitZone::fetchAttributes()
   _buildingLocation.c = pCoords->c;
   _buildingLocation.l = pCoords->l;
 
+  _unitIdx = *(std::static_pointer_cast<size_t> (_attributes[1]));
+
   // reset the attributes vector
   _attributes.clear();
 }
@@ -64,7 +66,7 @@ void StateSelectExitZone::resume()
     }
   }
 
-  _unit = _building->units()[0]; ///< \todo correct Unit
+  _unit = _building->units()[_unitIdx];
 
   assert(!_cells.empty() && "StateSelectExitZone: no exit zone available");
 }
@@ -142,7 +144,7 @@ void StateSelectExitZone::validate()
   /// \todo Push a state to select the door where to exit
   _unit->setCoords(doors[_indexSelect]);
   map->stashPopUnit(*_unit);
-  _building->removeUnit(0); /// \todo correct index
+  _building->removeUnit(_unitIdx);
 
   game::Status::clearStates();
 }

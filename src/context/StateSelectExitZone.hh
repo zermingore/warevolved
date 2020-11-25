@@ -63,6 +63,7 @@ private:
   Coords _buildingLocation; ///< Selected Cell belonging to the Building
   std::mutex _lock; ///< Avoid drawing while validating
   std::shared_ptr<Unit> _unit; ///< Unit exiting the Building
+  size_t _unitIdx; ///< Unit index in the Building
 };
 
 
