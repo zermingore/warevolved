@@ -76,7 +76,6 @@ interface/menus/MenuCrewMember.cc        \
 interface/menus/MenuBuilding.cc          \
 interface/menus/MenuBuildingUnit.cc      \
 interface/menus/MenuBuildingUnits.cc     \
-interface/menus/MenuEntryBuildingUnit.cc \
 \
 tools/StringParser.cc                    \
 tools/Fps.cc                             \

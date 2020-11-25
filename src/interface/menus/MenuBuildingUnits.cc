@@ -21,7 +21,6 @@
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
-#include <interface/menus/MenuEntryBuildingUnit.hh>
 
 
 
@@ -44,10 +43,17 @@ void MenuBuildingUnits::build()
   }
 
   size_t i{0u};
-  for ([[maybe_unused]] auto& unused: _building->units())
+  for (auto& mbr: _building->units())
   {
-    auto entry(std::make_shared<MenuEntryBuildingUnit> (
-      e_entry::NONE, _building, i));
+    // Unit statistics
+    const auto& unit_data =
+      "hp:     " + std::to_string(mbr->hp())
+      + '\n' + "attack: " + std::to_string(mbr->attackValue());
+
+    // label = UNIT_TYPE_STR(mbr->type) /// \todo
+    auto entry(std::make_shared<MenuEntry> (
+      "todo", *(mbr->sprite()), unit_data));
+
     entry->setCallbacks( { [=, this] { _building->removeUnit(i); } });
 
     _lock.lock();
