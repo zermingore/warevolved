@@ -37,17 +37,30 @@ class MenuEntry: public InterfaceElement
 {
 public:
   /**
-   * \brief deleted default constructor: we need to know the entry
+   * \brief deleted default constructor: we need to know at least the entry
    */
   MenuEntry() = delete;
-
-  virtual ~MenuEntry() override = default;
 
   /**
    * \brief Constructor
    * \param entry Entry type to build.
    */
   explicit MenuEntry(const e_entry entry);
+
+  /**
+   * \brief Constructor
+   * \param label Entry text
+   * \param sprite to draw on the entry
+   * \param notes Additional text to display
+   */
+  MenuEntry(const std::string label,
+            const graphics::Sprite &sprite,
+            std::string notes);
+
+  /**
+   * \brief Destructor
+   */
+  virtual ~MenuEntry() override = default;
 
   /**
    * \brief returns entry Identifier, as a entries value
@@ -97,6 +110,9 @@ protected:
   e_entry _id;                             ///< entry identifier
   std::shared_ptr<resources::Text> _label; ///< button label text
   std::string _labelName;                  ///< menu entry text
+
+  std::shared_ptr<graphics::Sprite> _extraSprite; ///< ex: Unit sprite
+  std::string _notes; ///< Extra text notes
 
   /// callbacks list executed when the entry is selected
   std::vector<std::function<void()>> _callbacks;

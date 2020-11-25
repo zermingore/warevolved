@@ -36,6 +36,25 @@ MenuEntry::MenuEntry(const e_entry entry)
 
 
 
+
+MenuEntry::MenuEntry(const std::string label,
+                     const graphics::Sprite &sprite,
+                     const std::string notes)
+  : InterfaceElement("selection_menu_button")
+  , _id(e_entry::NONE)
+  , _extraSprite(std::make_shared<graphics::Sprite> (sprite))
+  , _notes(notes)
+{
+  /// \todo the size should be ratio / text length dependent dependent
+  using p = graphics::MapGraphicsProperties;
+  auto size { (p::cellWidth() + p::cellHeight()) / 4 };
+
+  _label = std::make_shared<resources::Text> (
+    label, size, graphics::Pos2(0, 0), "font_army");
+}
+
+
+
 void MenuEntry::update()
 {
   using p = graphics::MapGraphicsProperties;
@@ -55,6 +74,31 @@ void MenuEntry::draw()
 
   _sprite->setPosition(_position.x, _position.y);
   _sprite->draw();
+
+  using p = graphics::MapGraphicsProperties;
+
+  if (_extraSprite)
+  {
+    _extraSprite->setPosition(_position.x + 2 * p::cellWidth(), _position.y);
+    _extraSprite->setSize(p::cellWidth(), p::cellHeight());
+    _extraSprite->draw();
+  }
+
+  if (_notes.length() > 0)
+  {
+    // 5: margin; 4: nb cells
+    const auto text_size = (p::cellWidth() - 5 * 2) / 4;
+
+    const graphics::Pos2 text_pos = {
+      _position.x + 3 * p::cellWidth(), // 3rd cell
+      _position.y
+    };
+
+    auto text = std::make_unique<resources::Text> (
+      _notes, text_size, text_pos
+    );
+    text->draw();
+  }
 }
 
 
