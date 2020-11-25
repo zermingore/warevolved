@@ -21,7 +21,7 @@
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
-#include <interface/menus/MenuEntryCrew.hh>
+#include <interface/menus/MenuEntry.hh>
 
 
 
@@ -45,9 +45,16 @@ void MenuCrewBrowse::build()
     if (vehicle->crewSize() != 0u)
     {
       size_t i{0u};
-      for ([[maybe_unused]] auto& unused: vehicle->crew())
+      for (auto& mbr: vehicle->crew())
       {
-        auto entry(std::make_shared<MenuEntryCrew> (e_entry::NONE, i));
+        // Unit statistics
+        const auto& unit_data =
+          "hp:     " + std::to_string(mbr.second->hp())
+          + '\n' + "attack: " + std::to_string(mbr.second->attackValue());
+
+        auto entry(std::make_shared<MenuEntry> (
+          UNIT_ROLE_STR.at(mbr.first), *(mbr.second->sprite()), unit_data));
+
         entry->setCallbacks(
         {
           [=, this] { vehicle->dropOff(i, _coords); }
@@ -63,7 +70,8 @@ void MenuCrewBrowse::build()
 
   if (_confirmEntryActive)
   {
-    auto entry_confirm(std::make_shared<MenuEntryCrew> (e_entry::CREW_CONFIRM));
+    auto entry_confirm(
+      std::make_shared<MenuEntry> (e_entry::CREW_CONFIRM, true));
     entry_confirm->setCallback( [=, this] { confirm(); });
 
     _lock.lock();
@@ -71,7 +79,8 @@ void MenuCrewBrowse::build()
     _lock.unlock();
   }
 
-  auto entry_cancel(std::make_shared<MenuEntryCrew> (e_entry::CANCEL));
+  auto entry_cancel(
+    std::make_shared<MenuEntry> (e_entry::CANCEL, true));
   entry_cancel->setCallback( [=, this] { cancel(); });
 
   _lock.lock();

@@ -19,9 +19,10 @@
 namespace interface {
 
 
-MenuEntry::MenuEntry(const e_entry entry)
+MenuEntry::MenuEntry(const e_entry entry, bool wide)
   : InterfaceElement("selection_menu_button")
   , _id(entry)
+  , _wide(wide)
 {
   setLabelName(entry);
 
@@ -42,11 +43,13 @@ MenuEntry::MenuEntry(const std::string label,
                      const std::string notes)
   : InterfaceElement("selection_menu_button")
   , _id(e_entry::NONE)
+  , _wide(true)
   , _extraSprite(std::make_shared<graphics::Sprite> (sprite))
   , _notes(notes)
 {
-  /// \todo the size should be ratio / text length dependent dependent
   using p = graphics::MapGraphicsProperties;
+
+  /// \todo the size should be ratio / text length dependent dependent
   auto size { (p::cellWidth() + p::cellHeight()) / 4 };
 
   _label = std::make_shared<resources::Text> (
@@ -60,7 +63,14 @@ void MenuEntry::update()
   using p = graphics::MapGraphicsProperties;
 
   _lock.lock();
-  _sprite->setSize(p::cellWidth() * 2, p::cellHeight());
+  if (_wide)
+  {
+    _sprite->setSize(p::cellWidth() * 4, p::cellHeight());
+  }
+  else
+  {
+    _sprite->setSize(p::cellWidth() * 2, p::cellHeight());
+  }
   _label->setPosition(_position.x, _position.y);
   _lock.unlock();
 }

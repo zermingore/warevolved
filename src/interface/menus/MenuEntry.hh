@@ -43,9 +43,10 @@ public:
 
   /**
    * \brief Constructor
-   * \param entry Entry type to build.
+   * \param entry Entry type to build
+   * \param wide Display the entry as wide?
    */
-  explicit MenuEntry(const e_entry entry);
+  explicit MenuEntry(const e_entry entry, bool wide = false);
 
   /**
    * \brief Constructor
@@ -111,6 +112,7 @@ protected:
   std::shared_ptr<resources::Text> _label; ///< button label text
   std::string _labelName;                  ///< menu entry text
 
+  bool _wide; ///< Wide entry?
   std::shared_ptr<graphics::Sprite> _extraSprite; ///< ex: Unit sprite
   std::string _notes; ///< Extra text notes
 
