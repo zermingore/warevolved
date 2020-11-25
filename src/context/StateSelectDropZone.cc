@@ -95,28 +95,7 @@ void StateSelectDropZone::draw()
   auto selected_unit(map->selectedUnit());
 
   auto vehicle{std::static_pointer_cast<Vehicle> (selected_unit)};
-  std::shared_ptr<Unit> drop = nullptr;
-  auto it = std::find_if(
-    vehicle->crew().begin(),
-    vehicle->crew().end(),
-    [=, this] (std::pair<e_unit_role, std::shared_ptr<Unit>> member) -> bool {
-      return member.first == this->_role;
-    }
-  );
-  if (it == vehicle->crew().end())
-  {
-    ERROR("Role not found");
-    return;
-  }
-
-  for (const auto member: vehicle->crew())
-  {
-    if (member.first == _role)
-    {
-      drop = member.second;
-      break;
-    }
-  }
+  std::shared_ptr<Unit> drop = vehicle->crew()[_unitIdx].second;
   _holoUnit = std::make_shared<graphics::Sprite> (drop->sprite()->texture());
 
   const auto x = static_cast<float> (_holoUnit->texture()->getSize().x);

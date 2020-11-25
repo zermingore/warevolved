@@ -51,11 +51,6 @@ public:
   }
 
   /// _role setter
-  void setRole(e_unit_role role) {
-    _role = role;
-  }
-
-  /// _role setter
   void setUnitIdx(int unitIdx) {
     _unitIdx = unitIdx;
   }

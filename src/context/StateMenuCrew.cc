@@ -79,9 +79,7 @@ void StateMenuCrew::resume()
   }
   else
   {
-    auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
-    auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
-    _menuMember->setRole(e->role());
+    _menuMember->setUnitIdx(static_cast<int> (_menuCrew->selectedEntry()));
     _menuMember->setHidden(false);
   }
 }
@@ -138,10 +136,6 @@ void StateMenuCrew::setFocusMenuMember()
   }
   else
   {
-    // Retrieve the Unit role matching the highlighted entry
-    auto pe = _menuCrew->getEntries()[_menuCrew->selectedEntry()];
-    auto e = std::static_pointer_cast<interface::MenuEntryCrew> (pe);
-    _menuMember->setRole(e->role());
     _menuMember->setHidden(false);
     _menuMember->setUnitIdx(_unitIdx);
   }
