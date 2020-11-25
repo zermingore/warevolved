@@ -5,8 +5,8 @@
  * \brief StateMenuBuilding class declaration
  */
 
-#ifndef STATE_SELECT_BUILDING_UNIT_HH_
-# define STATE_SELECT_BUILDING_UNIT_HH_
+#ifndef STATE_MENU_BUILDING_HH_
+# define STATE_MENU_BUILDING_HH_
 
 # include <memory>
 # include <context/State.hh>
@@ -116,4 +116,4 @@ private:
   bool _menuBuildingConfirmEntryActive; ///< 'confirm' in crew menu active?
 };
 
-#endif /* !STATE_SELECT_BUILDING_UNIT_HH_ */
+#endif /* !STATE_MENU_BUILDING_HH_ */

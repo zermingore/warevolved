@@ -5,7 +5,6 @@
  * \brief StateMenuCrew definition
  */
 
-
 #include <context/StateMenuCrew.hh>
 
 #include <debug/Debug.hh>
