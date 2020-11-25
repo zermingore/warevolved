@@ -50,9 +50,8 @@ void MenuBuildingUnits::build()
       "hp:     " + std::to_string(mbr->hp())
       + '\n' + "attack: " + std::to_string(mbr->attackValue());
 
-    // label = UNIT_TYPE_STR(mbr->type) /// \todo
     auto entry(std::make_shared<MenuEntry> (
-      "todo", *(mbr->sprite()), unit_data));
+      UNIT_TYPE_STR.at(mbr->type()), *(mbr->sprite()), unit_data));
 
     entry->setCallbacks( { [=, this] { _building->removeUnit(i); } });
 

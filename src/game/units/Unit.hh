@@ -14,20 +14,39 @@
 # include <graphics/graphic_types.hh>
 
 
+
+/**
+ * \enum e_unit_role
+ * \brief Different units roles in a crew
+ */
 enum class e_unit_role
 {
-  NONE,
+  NONE = 0,  // Role not specified
 
-  PASSENGER, // eventually multiple passengers
-  DRIVER,    // or pilot
-  COPILOT,   // may be necessary (airplane)
-  LOADER,    // ex: tank
-  GUNNER,    // list (airplane)
+  PASSENGER, // Eventually multiple passengers
+  DRIVER,    // Or pilot
+  COPILOT,   // May be necessary (airplane)
+  LOADER,    // Ex: tank
+  GUNNER,    // List (airplane)
   MECHANIC
 };
 
 
-enum class e_unit; // definition follows
+
+/**
+ * \enum e_unit
+ * \brief Different units types
+ */
+enum class e_unit
+{
+  SOLDIER = 0,
+  CAR,
+  MOTORCYCLE,
+
+  NB_UNITS,   // Counter
+  NONE        // Invalid
+};
+
 
 namespace graphics {
   class Sprite;
@@ -243,19 +262,13 @@ protected:
 
 
 
-/**
- * \enum e_unit
- * \brief Different units types.
- */
-enum class e_unit
+const std::map<const e_unit, const std::string> UNIT_TYPE_STR =
 {
-  SOLDIER = 0,
-  CAR,
-  MOTORCYCLE,
-
-  NB_UNITS,
-  NONE
+    { e_unit::SOLDIER,    "Soldier" }
+  , { e_unit::CAR,        "Car" }
+  , { e_unit::MOTORCYCLE, "Motorcycle" }
 };
+
 
 
 const std::map<const e_unit_role, const std::string> UNIT_ROLE_STR =
@@ -268,6 +281,7 @@ const std::map<const e_unit_role, const std::string> UNIT_ROLE_STR =
   , { e_unit_role::GUNNER,    "Gunner" }
   , { e_unit_role::MECHANIC,  "Mechanic" }
 };
+
 
 
 #endif /* !UNIT_HH_ */
