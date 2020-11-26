@@ -212,12 +212,7 @@ void StateMenu2d<T...>::validate()
 
     if (_menus[_currentMenu]->currentSelection() == e_entry::CONFIRM)
     {
-      // auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
-      // selectedUnit->setPlayed(true);
-
-      // auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
-      // v->clearDroppedHistory();
-
+      _confirmCallback();
       game::Status::clearStates();
       return;
     }
@@ -238,7 +233,7 @@ void StateMenu2d<T...>::validate()
 
 
 template <typename... T>
-void StateMenu2d<T...>::exit() // escape key
+void StateMenu2d<T...>::exit() // escape key / cancel entry
 {
   if (_currentMenu == 0)
   {
@@ -260,7 +255,8 @@ void StateMenu2d<T...>::exit() // escape key
 template <typename... T>
 void StateMenu2d<T...>::cancel()
 {
-  /// \todo Use extra cancel callbacks
+  _cancelCallback();
+
   // auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
   // restore dropped unit
   // auto v = std::static_pointer_cast<Vehicle> (selectedUnit);

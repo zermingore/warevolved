@@ -9,6 +9,7 @@
 # define STATE_MENU_2D_HH_
 
 # include <memory>
+# include <functional>
 # include <context/State.hh>
 
 enum class e_state;
@@ -16,6 +17,7 @@ enum class e_state;
 namespace interface {
   class InGameMenu;
 }
+
 
 
 /**
@@ -56,7 +58,7 @@ public:
   /**
    * \brief Closes the menu: Pop the current state
    */
-  void cancel() override final;
+  void cancel();
 
   /**
    * \brief Fetch the attribute from the list
@@ -64,6 +66,22 @@ public:
    * \note Aborts if no attribute was found
    */
   void fetchAttributes() override final;
+
+  /**
+   * \brief Cancel callback setter
+   * \param callback Callback called when the menu is fully canceled
+   */
+  void setCancelCallback(const std::function<void()> callback) {
+    _cancelCallback = callback;
+  }
+
+  /**
+   * \brief Confirm callback setter
+   * \param callback Callback called when the menu is fully closed (confirmed)
+   */
+  void setConfirmCallback(const std::function<void()> callback) {
+    _confirmCallback = callback;
+  }
 
 
 private:
@@ -114,6 +132,9 @@ private:
   int _selectionIdx = 0; ///< Currently selected entry index
 
   bool _confirmActive; ///< 'confirm' entry available?
+
+  std::function<void()> _cancelCallback; ///< Callback on menu cancelation
+  std::function<void()> _confirmCallback; ///< Callback on menu confirmation
 };
 
 #endif /* !STATE_MENU_2D_HH_  */
