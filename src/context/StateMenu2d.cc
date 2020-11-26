@@ -24,8 +24,8 @@
 
 
 
-template <typename... T>
-StateMenu2d<T...>::StateMenu2d()
+template<typename... T>
+StateMenu2d<T...>::StateMenu2d(T... args)
 {
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP,    [=, this] { moveUp();    });
@@ -36,14 +36,12 @@ StateMenu2d<T...>::StateMenu2d()
   _evtMgr->registerEvent(e_input::SELECTION,  [=, this] { validate(); });
   _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
 
-  // for each argument type, create a menu ?
-  // _menuCrew   = std::make_unique<interface::MenuCrewBrowse> ();
-  // _menuMember = std::make_unique<interface::MenuCrewMember> ();
+
+  appendMenu(args...);
 }
 
 
-
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::suspend()
 {
   /// \todo set menu at optimal coordinates (avoid hiding units for instance)
@@ -52,7 +50,7 @@ void StateMenu2d<T...>::suspend()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::resume()
 {
   // retrieve coordinates from the attributes
@@ -96,10 +94,9 @@ void StateMenu2d<T...>::resume()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::moveUp()
 {
-
   _menus[_currentMenu]->decrementSelectedEntry();
   // if (_browseMembers)
   // {
@@ -122,7 +119,7 @@ void StateMenu2d<T...>::moveUp()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::moveDown()
 {
   _menus[_currentMenu]->incrementSelectedEntry();
@@ -142,7 +139,7 @@ void StateMenu2d<T...>::moveDown()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::setFocusNextMenu()
 {
   // Hide or reveal the menu depending on the entry we currently hightlight
@@ -164,7 +161,8 @@ void StateMenu2d<T...>::setFocusNextMenu()
 }
 
 
-template <typename... T>
+
+template<typename... T>
 void StateMenu2d<T...>::moveRight()
 {
   // No menu right to 'Confirm' and 'Cancel'
@@ -185,7 +183,7 @@ void StateMenu2d<T...>::moveRight()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::moveLeft()
 {
   if (_currentMenu > 0)
@@ -199,7 +197,7 @@ void StateMenu2d<T...>::moveLeft()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::validate()
 {
   if (_currentMenu == 0)
@@ -232,7 +230,7 @@ void StateMenu2d<T...>::validate()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::exit() // escape key / cancel entry
 {
   if (_currentMenu == 0)
@@ -252,7 +250,7 @@ void StateMenu2d<T...>::exit() // escape key / cancel entry
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::cancel()
 {
   _cancelCallback();
@@ -265,18 +263,19 @@ void StateMenu2d<T...>::cancel()
 
 
   /// \todo game::Status::popCurrentState(); should be enough
+  game::Status::popCurrentState();
 
   // Pop every select_drop_zone and crew_management states
-  while (   game::Status::state() != e_state::ACTION_MENU
-         && game::Status::state() != e_state::SELECTION_UNIT)
-  {
-    game::Status::popCurrentState();
-  }
+  // while (   game::Status::state() != e_state::ACTION_MENU
+  //        && game::Status::state() != e_state::SELECTION_UNIT)
+  // {
+  //   game::Status::popCurrentState();
+  // }
 }
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::fetchAttributes()
 {
   if (_attributes.empty())
@@ -303,7 +302,7 @@ void StateMenu2d<T...>::fetchAttributes()
 
 
 
-template <typename... T>
+template<typename... T>
 void StateMenu2d<T...>::draw()
 {
   game::Status::player()->cursor()->disableDrawThisFrame();
