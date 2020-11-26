@@ -29,6 +29,7 @@ context/StatesFactory.cc                 \
 context/StatePlaying.cc                  \
 context/StateEditMap.cc                  \
 context/StateMenu.cc                     \
+context/StateMenu2d.cc                   \
 context/StateMenuCrew.cc                 \
 context/StateMenuBuilding.cc             \
 context/StateMovingUnit.cc               \

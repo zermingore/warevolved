@@ -158,7 +158,8 @@ enum class e_entry
   EXIT_BUILDING,
   UNITS_BUILDING,
 
-  CANCEL
+  CANCEL,
+  CONFIRM
 };
 
 

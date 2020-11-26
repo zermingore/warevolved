@@ -1,42 +1,40 @@
 /**
  * \file
- * \date September 22, 2019
+ * \date November 25, 2020
  * \author Zermingore
- * \brief StateMenuCrew declaration
+ * \brief StateMenu2d class declaration
  */
 
-#ifndef STATE_MENU_CREW_HH_
-# define STATE_MENU_CREW_HH_
+#ifndef STATE_MENU_2D_HH_
+# define STATE_MENU_2D_HH_
 
 # include <memory>
 # include <context/State.hh>
 
 enum class e_state;
 
-namespace interface
-{
-  class MenuCrewBrowse;
-  class MenuCrewMember;
+namespace interface {
+  class InGameMenu;
 }
 
 
-
 /**
- * \class StateMenuCrew
+ * \class StateMenu2d
  * \brief The State which applies to any menu (browse, select entries, ...)
  */
-class StateMenuCrew: public State
+template <typename... T>
+class StateMenu2d: public State
 {
 public:
   /**
    * \brief Default constuctor
    */
-  StateMenuCrew();
+  StateMenu2d();
 
   /**
    * \brief default destructor
    */
-  ~StateMenuCrew() override = default;
+  ~StateMenu2d() override = default;
 
 
   /**
@@ -51,17 +49,21 @@ public:
   void resume() override final;
 
   /**
-   * \brief Draws the menu crew
+   * \brief Draws the menus
    */
   void draw() override final;
 
   /**
-   * \brief Fetch the attribute from thle list
-   * \note Expects one attribute: menu coordinates.
+   * \brief Closes the menu: Pop the current state
+   */
+  void cancel() override final;
+
+  /**
+   * \brief Fetch the attribute from the list
+   * \note Expects one attribute per menu: its coordinates
    * \note Aborts if no attribute was found
    */
   void fetchAttributes() override final;
-
 
 
 private:
@@ -99,31 +101,19 @@ private:
    */
   void exit();
 
-
   /**
-   * \brief Restore the Vehicle status. This includes
-   *   - The Vehicle coordinates
-   *   - The dropped crew members
+   * \brief Give the focus to the next menu (to the right)
    */
-  void cancel();
+  void setFocusNextMenu();
 
-  /**
-   * \brief Adjust the menu member hidden flag
-   */
-  void setFocusMenuMember();
+  /// 'main' menu + Sub-menus
+  std::vector<std::shared_ptr<interface::InGameMenu>> _menus;
+  std::vector<Coords> _coords; ///< Menus coordinates
 
+  int _currentMenu;      ///< Which menu is currently browsed
+  int _selectionIdx = 0; ///< Currently selected entry index
 
-  std::shared_ptr<interface::MenuCrewBrowse> _menuCrew;   ///< Crew members
-  std::shared_ptr<interface::MenuCrewMember> _menuMember; ///< Member actions
-
-  Coords _menuCrewCoords;   ///< Menu crew coordinates
-  Coords _menuMemberCoords; ///< Menu member coordinates
-
-  bool _browseMembers; ///< Browse the crew or a member's actions?
-  int _unitIdx = 0; ///< Currently selected crew Unit index
-
-  bool _menuCrewConfirmEntryActive; ///< 'confirm' in crew menu active?
+  bool _confirmActive; ///< 'confirm' entry available?
 };
 
-
-#endif /* !STATE_MENU_CREW_HH_ */
+#endif /* !STATE_MENU_2D_HH_  */
