@@ -17,9 +17,10 @@
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateSelectExitZone.hh>
-#include <context/StateMenuBuilding.hh>
 #include <interface/menus/MenuCrewBrowse.hh>
 #include <interface/menus/MenuCrewMember.hh>
+#include <interface/menus/MenuBuildingUnit.hh>
+#include <interface/menus/MenuBuildingUnits.hh>
 
 
 
@@ -44,18 +45,23 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
 
     case e_state::CREW_MANAGEMENT:
     {
-      auto crew = std::make_shared<interface::MenuCrewBrowse> ();
-      auto mbr = std::make_shared<interface::MenuCrewMember> ();
-      std::initializer_list<std::shared_ptr<interface::InGameMenu>> vec {
-        std::move(crew),
-        std::move(mbr)
-      };
-
-      return std::make_unique<StateMenu2d> (vec);
+      return std::make_unique<StateMenu2d> (
+        std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
+          std::make_shared<interface::MenuCrewBrowse> (),
+          std::make_shared<interface::MenuCrewMember> ()
+       }
+      );
     }
 
     case e_state::BUILDING_UNITS:
-      return std::make_unique<StateMenuBuilding> ();
+    {
+      return std::make_unique<StateMenu2d> (
+        std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
+          std::make_shared<interface::MenuBuildingUnits> (),
+          std::make_shared<interface::MenuBuildingUnit> ()
+       }
+      );
+    }
 
     case e_state::MOVING_UNIT:
       return std::make_unique<StateMovingUnit> ();
