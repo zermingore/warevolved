@@ -24,8 +24,9 @@
 
 
 
-template<typename... T>
-StateMenu2d<T...>::StateMenu2d(T... args)
+StateMenu2d::StateMenu2d(
+  std::initializer_list<std::unique_ptr<interface::InGameMenu>> args)
+  // : _menus{args}
 {
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP,    [=, this] { moveUp();    });
@@ -35,14 +36,10 @@ StateMenu2d<T...>::StateMenu2d(T... args)
 
   _evtMgr->registerEvent(e_input::SELECTION,  [=, this] { validate(); });
   _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
-
-
-  appendMenu(args...);
 }
 
 
-template<typename... T>
-void StateMenu2d<T...>::suspend()
+void StateMenu2d::suspend()
 {
   /// \todo set menu at optimal coordinates (avoid hiding units for instance)
   // _menuCrewCoords = _menuCrew->coords();
@@ -50,8 +47,7 @@ void StateMenu2d<T...>::suspend()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::resume()
+void StateMenu2d::resume()
 {
   // retrieve coordinates from the attributes
   if (!_attributes.empty())
@@ -60,7 +56,7 @@ void StateMenu2d<T...>::resume()
   }
 
   auto x_offset{0u};
-  for (const auto menu: _menus)
+  for (const auto& menu: _menus)
   {
     menu->setCoords({_menus[0]->coords().x + x_offset, _menus[0]->coords().y});
     menu->build();
@@ -94,8 +90,7 @@ void StateMenu2d<T...>::resume()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::moveUp()
+void StateMenu2d::moveUp()
 {
   _menus[_currentMenu]->decrementSelectedEntry();
   // if (_browseMembers)
@@ -119,8 +114,7 @@ void StateMenu2d<T...>::moveUp()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::moveDown()
+void StateMenu2d::moveDown()
 {
   _menus[_currentMenu]->incrementSelectedEntry();
 
@@ -139,8 +133,7 @@ void StateMenu2d<T...>::moveDown()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::setFocusNextMenu()
+void StateMenu2d::setFocusNextMenu()
 {
   // Hide or reveal the menu depending on the entry we currently hightlight
   if (   _menus[_currentMenu]->currentSelection() == e_entry::CANCEL
@@ -151,7 +144,7 @@ void StateMenu2d<T...>::setFocusNextMenu()
   }
   else
   {
-    if (_currentMenu < _menus.size())
+    if (static_cast<size_t> (_currentMenu) < _menus.size())
     {
       ++_currentMenu;
       // _menus[_currentMenu]->setHidden(false);
@@ -162,8 +155,7 @@ void StateMenu2d<T...>::setFocusNextMenu()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::moveRight()
+void StateMenu2d::moveRight()
 {
   // No menu right to 'Confirm' and 'Cancel'
   if (   _menus[_currentMenu]->currentSelection() == e_entry::CANCEL
@@ -172,7 +164,7 @@ void StateMenu2d<T...>::moveRight()
     return;
   }
 
-  if (_currentMenu < _menus.size())
+  if (static_cast<size_t> (_currentMenu) < _menus.size())
   {
     // _menus[_currentMenu]->setActive(false);
     ++_currentMenu;
@@ -183,8 +175,7 @@ void StateMenu2d<T...>::moveRight()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::moveLeft()
+void StateMenu2d::moveLeft()
 {
   if (_currentMenu > 0)
   {
@@ -197,8 +188,7 @@ void StateMenu2d<T...>::moveLeft()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::validate()
+void StateMenu2d::validate()
 {
   if (_currentMenu == 0)
   {
@@ -230,8 +220,7 @@ void StateMenu2d<T...>::validate()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::exit() // escape key / cancel entry
+void StateMenu2d::exit() // escape key / cancel entry
 {
   if (_currentMenu == 0)
   {
@@ -250,8 +239,7 @@ void StateMenu2d<T...>::exit() // escape key / cancel entry
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::cancel()
+void StateMenu2d::cancel()
 {
   _cancelCallback();
 
@@ -275,8 +263,7 @@ void StateMenu2d<T...>::cancel()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::fetchAttributes()
+void StateMenu2d::fetchAttributes()
 {
   if (_attributes.empty())
   {
@@ -302,13 +289,12 @@ void StateMenu2d<T...>::fetchAttributes()
 
 
 
-template<typename... T>
-void StateMenu2d<T...>::draw()
+void StateMenu2d::draw()
 {
   game::Status::player()->cursor()->disableDrawThisFrame();
 
   auto i{0};
-  for (const auto menu: _menus)
+  for (const auto& menu: _menus)
   {
     if (i > _currentMenu)
     {

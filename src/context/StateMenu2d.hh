@@ -23,37 +23,22 @@ namespace interface {
 
 /**
  * \class StateMenu2d
- * \brief The State which applies to any menu (browse, select entries, ...)
+ * \brief The State which applies to any menu tree
  */
-template<typename... T>
 class StateMenu2d: public State
 {
 public:
   /**
    * \brief Default constuctor
    */
-  explicit StateMenu2d(T... args);
+  explicit StateMenu2d(
+    std::initializer_list<std::unique_ptr<interface::InGameMenu>> args);
 
   /**
    * \brief default destructor
    */
   ~StateMenu2d() override = default;
 
-
-  /**
-   * \brief Append the given menu in the _menus array
-   * \param unused First menu; unused parameter: only its type is used
-   * \param menus Rest of menus list to append
-   * \note Recursion through constructor arguments
-   */
-  template<typename Head, typename... Tail>
-  void appendMenu(Head unused, Tail... menus) {
-    _menus.push_back(std::make_unique<Head> ());
-    if constexpr(sizeof...(menus) > 0)
-    {
-      appendMenu(menus...);
-    }
-  }
 
   /**
    * \brief Save the menu coordinates.

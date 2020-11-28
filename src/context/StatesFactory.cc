@@ -7,17 +7,19 @@
 
 #include <context/StatesFactory.hh>
 
+#include <debug/Debug.hh>
 #include <context/StateEditMap.hh>
 #include <context/StateGlobal.hh>
 #include <context/StateMenu.hh>
-#include <context/StateMenuCrew.hh>
+#include <context/StateMenu2d.hh>
 #include <context/StateMovingUnit.hh>
 #include <context/StatePlaying.hh>
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateSelectExitZone.hh>
 #include <context/StateMenuBuilding.hh>
-#include <debug/Debug.hh>
+#include <interface/menus/MenuCrewBrowse.hh>
+#include <interface/menus/MenuCrewMember.hh>
 
 
 
@@ -41,7 +43,15 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
       return std::make_unique<StateMenu> (state);
 
     case e_state::CREW_MANAGEMENT:
-      return std::make_unique<StateMenuCrew> ();
+    {
+      auto crew = std::make_unique<interface::MenuCrewBrowse> ();
+      auto mbr = std::make_unique<interface::MenuCrewMember> ();
+      std::initializer_list<std::unique_ptr<interface::InGameMenu>> vec{
+        std::move(crew)
+      };
+
+      return std::make_unique<StateMenu2d> (vec);
+    }
 
     case e_state::BUILDING_UNITS:
       return std::make_unique<StateMenuBuilding> ();
