@@ -32,7 +32,7 @@ public:
    * \brief Default constuctor
    */
   explicit StateMenu2d(
-    std::initializer_list<std::unique_ptr<interface::InGameMenu>> args);
+    std::initializer_list<std::shared_ptr<interface::InGameMenu>> args);
 
   /**
    * \brief default destructor
@@ -127,7 +127,7 @@ private:
 
 
   /// 'main' menu + Sub-menus
-  std::vector<std::unique_ptr<interface::InGameMenu>> _menus;
+  std::vector<std::shared_ptr<interface::InGameMenu>> _menus;
   std::vector<Coords> _coords; ///< Menus coordinates
 
   int _currentMenu = 0;  ///< Which menu is currently browsed

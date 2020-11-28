@@ -44,10 +44,11 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
 
     case e_state::CREW_MANAGEMENT:
     {
-      auto crew = std::make_unique<interface::MenuCrewBrowse> ();
-      auto mbr = std::make_unique<interface::MenuCrewMember> ();
-      std::initializer_list<std::unique_ptr<interface::InGameMenu>> vec{
-        std::move(crew)
+      auto crew = std::make_shared<interface::MenuCrewBrowse> ();
+      auto mbr = std::make_shared<interface::MenuCrewMember> ();
+      std::initializer_list<std::shared_ptr<interface::InGameMenu>> vec {
+        std::move(crew),
+        std::move(mbr)
       };
 
       return std::make_unique<StateMenu2d> (vec);

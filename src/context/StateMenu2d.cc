@@ -25,8 +25,8 @@
 
 
 StateMenu2d::StateMenu2d(
-  std::initializer_list<std::unique_ptr<interface::InGameMenu>> args)
-  // : _menus{args}
+  std::initializer_list<std::shared_ptr<interface::InGameMenu>> args)
+  : _menus{args}
 {
   // browsing entries
   _evtMgr->registerEvent(e_input::MOVE_UP,    [=, this] { moveUp();    });
