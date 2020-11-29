@@ -86,9 +86,6 @@ protected:
   void addCancelEntry(const std::function<void()>& cancel_callback);
 
 
-  /// \todo RM _cursorCoords / _unit // state data
-  Coords _cursorCoords; ///< Saved cursor coordinates
-  std::shared_ptr<Unit> _unit; ///< Saved unit
   std::mutex _lock; /// Prevent from drawing a not anymore current State (crash)
 };
 
