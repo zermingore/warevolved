@@ -36,6 +36,9 @@ StateMenu2d::StateMenu2d(
 
   _evtMgr->registerEvent(e_input::SELECTION,  [=, this] { validate(); });
   _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
+
+  _cancelCallback = [] (auto&&...) {};
+  _confirmCallback = [] (auto&&...) {};
 }
 
 
@@ -56,36 +59,12 @@ void StateMenu2d::resume()
   }
 
   auto x_offset{0u};
-  for (const auto& menu: _menus)
+  for (auto menu: _menus)
   {
     menu->setCoords({_menus[0]->coords().x + x_offset, _menus[0]->coords().y});
     menu->build();
-    // menu->setHidden(true);
     x_offset += 4; // in cells
   }
-
-  // _menuCrew->setCoords(_menuCrewCoords);
-  // _menuCrew->setConfirmEntryActive(_menuCrewConfirmEntryActive);
-  // _menuCrew->build();
-
-  // _menuMemberCoords = _menuCrewCoords;
-  // _menuMemberCoords.x += 4; // in cells
-  // _menuMember->setCoords(_menuMemberCoords);
-  // _menuMember->build();
-
-  // _browseMembers = true;
-  // _menuCrew->setActive(true);
-  // _menuMember->setActive(false);
-  // if (   _menuCrew->currentSelection() == e_entry::CANCEL
-  //     || _menuCrew->currentSelection() == e_entry::CREW_CONFIRM)
-  // {
-  //   _menuMember->setHidden(true);
-  // }
-  // else
-  // {
-  //   _menuMember->setUnitIdx(static_cast<int> (_menuCrew->selectedEntry()));
-  //   _menuMember->setHidden(false);
-  // }
 }
 
 
@@ -93,23 +72,6 @@ void StateMenu2d::resume()
 void StateMenu2d::moveUp()
 {
   _menus[_currentMenu]->decrementSelectedEntry();
-  // if (_browseMembers)
-  // {
-  //   _menuCrew->decrementSelectedEntry();
-  //   setFocusMenuMember();
-  // }
-  // else
-  // {
-  //   _menuMember->decrementSelectedEntry();
-  //   if (_unitIdx != 0)
-  //   {
-  //     --_unitIdx;
-  //   }
-  //   else
-  //   {
-  //     _unitIdx = static_cast<int> (_menuMember->getEntries().size()) - 1;
-  //   }
-  // }
 }
 
 
@@ -117,18 +79,6 @@ void StateMenu2d::moveUp()
 void StateMenu2d::moveDown()
 {
   _menus[_currentMenu]->incrementSelectedEntry();
-
-  // if (_browseMembers)
-  // {
-  //   _menuCrew->incrementSelectedEntry();
-  //   setFocusMenuMember();
-  // }
-  // else
-  // {
-  //   _menuMember->incrementSelectedEntry();
-  //   _unitIdx =
-  //     (_unitIdx + 1) % static_cast<int> (_menuMember->getEntries().size());
-  // }
 }
 
 
@@ -139,7 +89,6 @@ void StateMenu2d::setFocusNextMenu()
   if (   _menus[_currentMenu]->currentSelection() == e_entry::CANCEL
       || _menus[_currentMenu]->currentSelection() == e_entry::CONFIRM)
   {
-    // _menus[_currentMenu]->setHidden(true);
     --_currentMenu;
   }
   else
@@ -147,7 +96,6 @@ void StateMenu2d::setFocusNextMenu()
     if (static_cast<size_t> (_currentMenu) < _menus.size())
     {
       ++_currentMenu;
-      // _menus[_currentMenu]->setHidden(false);
       // _menus[_currentMenu]->setSelectionIdx(_selectionIdx);
     }
   }
@@ -166,9 +114,7 @@ void StateMenu2d::moveRight()
 
   if (static_cast<size_t> (_currentMenu) < _menus.size())
   {
-    // _menus[_currentMenu]->setActive(false);
     ++_currentMenu;
-    // _menus[_currentMenu]->setActive(true);
     _selectionIdx = 0;
   }
 }
@@ -179,9 +125,7 @@ void StateMenu2d::moveLeft()
 {
   if (_currentMenu > 0)
   {
-    // _menus[_currentMenu]->setActive(false);
     --_currentMenu;
-    // _menus[_currentMenu]->setActive(true);
     _selectionIdx = 0;
   }
 }
@@ -224,16 +168,14 @@ void StateMenu2d::exit() // escape key / cancel entry
 {
   if (_currentMenu == 0)
   {
-    cancel();
+    this->cancel();
     return;
   }
 
   if (_currentMenu > 0)
   {
-    // ->setActive(false);
     --_currentMenu;
     _menus[_currentMenu]->resetSelectedEntry();
-    // ->setActive(true);
   }
 }
 
@@ -242,23 +184,7 @@ void StateMenu2d::exit() // escape key / cancel entry
 void StateMenu2d::cancel()
 {
   _cancelCallback();
-
-  // auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
-  // restore dropped unit
-  // auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
-  // v->restoreCrew();
-  // v->clearDroppedHistory();
-
-
-  /// \todo game::Status::popCurrentState(); should be enough
   game::Status::popCurrentState();
-
-  // Pop every select_drop_zone and crew_management states
-  // while (   game::Status::state() != e_state::ACTION_MENU
-  //        && game::Status::state() != e_state::SELECTION_UNIT)
-  // {
-  //   game::Status::popCurrentState();
-  // }
 }
 
 
