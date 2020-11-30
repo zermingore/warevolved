@@ -113,10 +113,7 @@ void MenuCrewBrowse::draw()
   }
   _lock.unlock();
 
-  if (_active)
-  {
-    _imageSelection->draw();
-  }
+  _imageSelection->draw();
 }
 
 

@@ -68,11 +68,6 @@ void MenuBuildingUnit::build()
 
 void MenuBuildingUnit::draw()
 {
-  if (_hidden)
-  {
-    return;
-  }
-
   update();
 
   _lock.lock();
@@ -82,10 +77,7 @@ void MenuBuildingUnit::draw()
   }
   _lock.unlock();
 
-  if (_active)
-  {
-    _imageSelection->draw();
-  }
+  _imageSelection->draw();
 }
 
 

@@ -33,14 +33,6 @@ public:
    */
   void draw() override final;
 
-  /**
-   * \brief _active (focus) setter
-   * \param active new _active value
-   */
-  void setActive(bool active) {
-    _active = active;
-  }
-
 
 private:
   /**
@@ -49,8 +41,6 @@ private:
    */
   void cancel() override final;
 
-
-  bool _active = true; ///< True if the menu has the focus
 
   std::shared_ptr<Building> _building; ///< Currently selected Building
 };

@@ -54,11 +54,6 @@ void MenuCrewMember::build()
 
 void MenuCrewMember::draw()
 {
-  if (_hidden)
-  {
-    return;
-  }
-
   update();
 
   _lock.lock();
@@ -68,10 +63,7 @@ void MenuCrewMember::draw()
   }
   _lock.unlock();
 
-  if (_active)
-  {
-    _imageSelection->draw();
-  }
+  _imageSelection->draw();
 }
 
 

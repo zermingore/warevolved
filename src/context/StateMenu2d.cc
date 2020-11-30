@@ -42,6 +42,7 @@ StateMenu2d::StateMenu2d(
 }
 
 
+
 void StateMenu2d::suspend()
 {
   /// \todo set menu at optimal coordinates (avoid hiding units for instance)
@@ -86,16 +87,30 @@ void StateMenu2d::moveDown()
 void StateMenu2d::setFocusNextMenu()
 {
   // Hide or reveal the menu depending on the entry we currently hightlight
-  if (   _menus[_currentMenu]->currentSelection() == e_entry::CANCEL
-      || _menus[_currentMenu]->currentSelection() == e_entry::CONFIRM)
+  if (_menus[_currentMenu]->currentSelection() == e_entry::CANCEL)
   {
     --_currentMenu;
+    return;
+  }
+
+  if (_menus[_currentMenu]->currentSelection() == e_entry::CONFIRM)
+  {
+    if (_currentMenu == 0)
+    {
+      _confirmCallback();
+      game::Status::clearStates();
+    }
+    else
+    {
+      ERROR("Unexpected confirm menu entry");
+    }
   }
   else
   {
     if (static_cast<size_t> (_currentMenu) < _menus.size())
     {
       ++_currentMenu;
+      // _menus[_currentMenu]->resetSelectedEntry();
       // _menus[_currentMenu]->setSelectionIdx(_selectionIdx);
     }
   }

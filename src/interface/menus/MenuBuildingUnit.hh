@@ -38,17 +38,6 @@ public:
    */
   void draw() override final;
 
-
-  /// _active setter
-  void setActive(bool active) {
-    _active = active;
-  }
-
-  /// _hidden setter
-  void setHidden(bool hide) {
-    _hidden = hide;
-  }
-
   /// _unitIdx setter
   void setUnitIdx(int unitIdx) {
     _unitIdx = unitIdx;
@@ -62,9 +51,6 @@ private:
    */
   void getOut();
 
-
-  bool _active = false; ///< True if the menu has the focus
-  bool _hidden = false; ///< True to not draw the menu
   int _unitIdx;         ///< Index in the crew member
 };
 
