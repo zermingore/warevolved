@@ -49,7 +49,7 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
           std::make_shared<interface::MenuCrewBrowse> (),
           std::make_shared<interface::MenuCrewMember> ()
-       }
+        }
       );
     }
 
@@ -59,7 +59,7 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
           std::make_shared<interface::MenuBuildingUnits> (),
           std::make_shared<interface::MenuBuildingUnit> ()
-       }
+        }
       );
     }
 

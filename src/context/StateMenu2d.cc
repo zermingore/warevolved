@@ -200,9 +200,7 @@ void StateMenu2d::fetchAttributes()
 
   // Base menu coordinates in function of the first one
   auto p = std::static_pointer_cast<Coords> (_attributes[0]);
-  _menus[0]->coords().c = p->c;
-  _menus[0]->coords().l = p->l;
-
+  _menus[0]->setCoords(*p);
 
   // auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
   // _menuCrewConfirmEntryActive = *p2;
