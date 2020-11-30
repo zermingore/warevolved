@@ -21,6 +21,7 @@
 #include <interface/menus/MenuCrewMember.hh>
 #include <interface/menus/MenuBuildingUnit.hh>
 #include <interface/menus/MenuBuildingUnits.hh>
+#include <interface/menus/MenuUnitsList.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Map.hh>
@@ -51,7 +52,7 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
     {
       auto menu = std::make_unique<StateMenu2d> (
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
-          std::make_shared<interface::MenuCrewBrowse> (),
+          std::make_shared<interface::MenuUnitsList<Vehicle>> (),
           std::make_shared<interface::MenuCrewMember> ()
         }
       );
