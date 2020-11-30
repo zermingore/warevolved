@@ -164,9 +164,6 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::CONFIRM:
       _labelName = "Confirm";
       break;
-    case e_entry::CREW_CONFIRM:
-      _labelName = "Confirm";
-      break;
 
     // Buildings
     case e_entry::ENTER_BUILDING:

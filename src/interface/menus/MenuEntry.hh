@@ -143,7 +143,6 @@ enum class e_entry
   DROP_OFF,
   GET_OUT,
   CREW,
-  CREW_CONFIRM, // Confirm the crew actions (not reversible)
 
   NEXT_TURN,
   ATTACK,

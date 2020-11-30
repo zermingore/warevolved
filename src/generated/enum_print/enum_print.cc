@@ -1,6 +1,6 @@
 /**
  * \file
- * \date Wed 26 Aug 2020 03:46:37 PM CEST
+ * \date Mon Nov 30 09:15:00 CET 2020
  * \author generate_enum_print.sh
  * \brief Wrapper enum <=> string
  * \warning auto-generated code, edit at your own risks
@@ -38,6 +38,16 @@ std::string e_terrain_string(e_terrain entry)
       return "e_terrain::PLAIN (no explicit value)";
     case e_terrain::FOREST:
       return "e_terrain::FOREST (no explicit value)";
+    case e_terrain::BUILDING_DOOR:
+      return "e_terrain::BUILDING_DOOR (no explicit value)";
+    case e_terrain::BUILDING_WINDOW:
+      return "e_terrain::BUILDING_WINDOW (no explicit value)";
+    case e_terrain::BUILDING_WINDOW_FIRST:
+      return "e_terrain::BUILDING_WINDOW_FIRST (no explicit value)";
+    case e_terrain::BUILDING_LAST_STAGE:
+      return "e_terrain::BUILDING_LAST_STAGE (no explicit value)";
+    case e_terrain::BUILDING_ROOF:
+      return "e_terrain::BUILDING_ROOF (no explicit value)";
     case e_terrain::NB_TERRAIN:
       return "e_terrain::NB_TERRAIN (no explicit value)";
     default:
@@ -135,7 +145,7 @@ std::string e_unit_role_string(e_unit_role entry)
   switch (entry)
   {
     case e_unit_role::NONE:
-      return "e_unit_role::NONE (no explicit value)";
+      return "e_unit_role::NONE (0)";
     case e_unit_role::PASSENGER:
       return "e_unit_role::PASSENGER (no explicit value)";
     case e_unit_role::DRIVER:
@@ -206,12 +216,6 @@ std::string e_input_string(e_input entry)
       return "e_input::SELECTION (no explicit value)";
     case e_input::TOGGLE_PANEL:
       return "e_input::TOGGLE_PANEL (no explicit value)";
-    case e_input::EDIT_TERRAIN_NEXT:
-      return "e_input::EDIT_TERRAIN_NEXT (no explicit value)";
-    case e_input::EDIT_UNIT_NEXT:
-      return "e_input::EDIT_UNIT_NEXT (no explicit value)";
-    case e_input::EDIT_UNIT_DEL:
-      return "e_input::EDIT_UNIT_DEL (no explicit value)";
     case e_input::SCREENSHOT:
       return "e_input::SCREENSHOT (no explicit value)";
     case e_input::DUMP_MAP:
@@ -222,6 +226,12 @@ std::string e_input_string(e_input entry)
       return "e_input::QUICK_LOAD (no explicit value)";
     case e_input::EXIT:
       return "e_input::EXIT (no explicit value)";
+    case e_input::EDIT_TERRAIN_NEXT:
+      return "e_input::EDIT_TERRAIN_NEXT (no explicit value)";
+    case e_input::EDIT_UNIT_NEXT:
+      return "e_input::EDIT_UNIT_NEXT (no explicit value)";
+    case e_input::EDIT_UNIT_DEL:
+      return "e_input::EDIT_UNIT_DEL (no explicit value)";
     case e_input::NB_KEYS:
       return "e_input::NB_KEYS (no explicit value)";
     default:
@@ -246,12 +256,6 @@ std::string e_key_string(e_key entry)
       return "e_key::QUICK_LOAD (no explicit value)";
     case e_key::TOGGLE_PANEL:
       return "e_key::TOGGLE_PANEL (no explicit value)";
-    case e_key::EDIT_TERRAIN_NEXT:
-      return "e_key::EDIT_TERRAIN_NEXT (no explicit value)";
-    case e_key::EDIT_UNIT_NEXT:
-      return "e_key::EDIT_UNIT_NEXT (no explicit value)";
-    case e_key::EDIT_UNIT_DEL:
-      return "e_key::EDIT_UNIT_DEL (no explicit value)";
     case e_key::EXIT:
       return "e_key::EXIT (no explicit value)";
     case e_key::UP:
@@ -262,6 +266,12 @@ std::string e_key_string(e_key entry)
       return "e_key::LEFT (no explicit value)";
     case e_key::RIGHT:
       return "e_key::RIGHT (no explicit value)";
+    case e_key::EDIT_TERRAIN_NEXT:
+      return "e_key::EDIT_TERRAIN_NEXT (no explicit value)";
+    case e_key::EDIT_UNIT_NEXT:
+      return "e_key::EDIT_UNIT_NEXT (no explicit value)";
+    case e_key::EDIT_UNIT_DEL:
+      return "e_key::EDIT_UNIT_DEL (no explicit value)";
     case e_key::NB_KEYS:
       return "e_key::NB_KEYS (no explicit value)";
     default:
@@ -324,14 +334,30 @@ std::string e_entry_string(e_entry entry)
       return "e_entry::GET_OUT (no explicit value)";
     case e_entry::CREW:
       return "e_entry::CREW (no explicit value)";
-    case e_entry::CREW_CONFIRM:
-      return "e_entry::CREW_CONFIRM (no explicit value)";
     case e_entry::NEXT_TURN:
       return "e_entry::NEXT_TURN (no explicit value)";
     case e_entry::ATTACK:
       return "e_entry::ATTACK (no explicit value)";
+    case e_entry::ENTER_BUILDING:
+      return "e_entry::ENTER_BUILDING (no explicit value)";
+    case e_entry::INVESTIGATE:
+      return "e_entry::INVESTIGATE (no explicit value)";
+    case e_entry::CONTROL:
+      return "e_entry::CONTROL (no explicit value)";
+    case e_entry::LEAVE:
+      return "e_entry::LEAVE (no explicit value)";
+    case e_entry::COLLECT:
+      return "e_entry::COLLECT (no explicit value)";
+    case e_entry::LOAD:
+      return "e_entry::LOAD (no explicit value)";
+    case e_entry::EXIT_BUILDING:
+      return "e_entry::EXIT_BUILDING (no explicit value)";
+    case e_entry::UNITS_BUILDING:
+      return "e_entry::UNITS_BUILDING (no explicit value)";
     case e_entry::CANCEL:
       return "e_entry::CANCEL (no explicit value)";
+    case e_entry::CONFIRM:
+      return "e_entry::CONFIRM (no explicit value)";
     default:
       return "entry not matched";
   }
@@ -384,6 +410,12 @@ std::string e_state_string(e_state entry)
       return "e_state::SELECT_TARGET (no explicit value)";
     case e_state::SELECT_DROP_ZONE:
       return "e_state::SELECT_DROP_ZONE (no explicit value)";
+    case e_state::SELECT_EXIT_ZONE:
+      return "e_state::SELECT_EXIT_ZONE (no explicit value)";
+    case e_state::BUILDING_MENU:
+      return "e_state::BUILDING_MENU (no explicit value)";
+    case e_state::BUILDING_UNITS:
+      return "e_state::BUILDING_UNITS (no explicit value)";
     default:
       return "entry not matched";
   }
