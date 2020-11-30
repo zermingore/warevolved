@@ -18,6 +18,7 @@
 #include <game/Map.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>
+#include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
 #include <game/units/Unit.hh>
 #include <graphics/MapGraphicsProperties.hh>
@@ -464,7 +465,11 @@ PathFinding::getDropZones(const Coords& coords) const
     candidates.begin(),
     candidates.end(),
     dropZones.begin(),
-    [] (std::shared_ptr<const Cell> c) { return !c->unit(); }
+    [] (std::shared_ptr<const Cell> c) {
+      return !c->unit() && (   c->terrain() == e_terrain::BUILDING_DOOR
+                            || c->terrain() == e_terrain::FOREST
+                            || c->terrain() == e_terrain::PLAIN);
+    }
   );
 
   // shrink container to new size (necessary to drop invalid items)

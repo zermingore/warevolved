@@ -12,10 +12,12 @@
 
 #include <context/State.hh>
 #include <game/Map.hh>
+#include <game/Cell.hh>
 #include <game/Battle.hh>
 #include <game/PathFinding.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>
+#include <game/Terrain.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
 #include <interface/Cursor.hh>
@@ -38,7 +40,12 @@ void MenuCrew::build()
   assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");
   if (_selectedUnit->playerId() == unit->playerId())
   {
-    if (!unit && (_selectedUnit->crewSize() != 0u))
+    auto terrain {(*map)[_coords.c][_coords.l]->terrain()};
+    if (   !unit
+        && (_selectedUnit->crewSize() != 0u)
+        && (    terrain == e_terrain::FOREST
+             || terrain == e_terrain::PLAIN
+             || terrain == e_terrain::BUILDING_DOOR))
     {
       auto vehicle = std::static_pointer_cast<Vehicle> (_selectedUnit);
       const Coords coords = { _coords.c + 1, _coords.l };
