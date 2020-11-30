@@ -43,14 +43,6 @@ StateMenu2d::StateMenu2d(
 
 
 
-void StateMenu2d::suspend()
-{
-  /// \todo set menu at optimal coordinates (avoid hiding units for instance)
-  // _menuCrewCoords = _menuCrew->coords();
-}
-
-
-
 void StateMenu2d::resume()
 {
   // retrieve coordinates from the attributes
@@ -216,11 +208,6 @@ void StateMenu2d::fetchAttributes()
   // Base menu coordinates in function of the first one
   auto p = std::static_pointer_cast<Coords> (_attributes[0]);
   _menus[0]->setCoords(*p);
-
-  // auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
-  // _menuCrewConfirmEntryActive = *p2;
-
-  /// \todo fetch selected and hovered units?
 
   // reset the attributes vector
   _attributes.clear();

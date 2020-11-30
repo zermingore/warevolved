@@ -41,12 +41,6 @@ public:
 
 
   /**
-   * \brief Save the menu coordinates.
-   * \todo suspend() should also save selected entry.
-   */
-  void suspend() override final;
-
-  /**
    * \brief re-build the menu.
    */
   void resume() override final;

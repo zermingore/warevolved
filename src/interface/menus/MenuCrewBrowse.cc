@@ -70,8 +70,7 @@ void MenuCrewBrowse::build()
 
   if (_confirmEntryActive)
   {
-    auto entry_confirm(
-      std::make_shared<MenuEntry> (e_entry::CREW_CONFIRM, true));
+    auto entry_confirm(std::make_shared<MenuEntry> (e_entry::CONFIRM, true));
     entry_confirm->setCallback( [=, this] { confirm(); });
 
     _lock.lock();

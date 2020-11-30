@@ -21,6 +21,10 @@
 #include <interface/menus/MenuCrewMember.hh>
 #include <interface/menus/MenuBuildingUnit.hh>
 #include <interface/menus/MenuBuildingUnits.hh>
+#include <game/Status.hh>
+#include <game/Battle.hh>
+#include <game/Map.hh>
+#include <game/units/Vehicle.hh>
 
 
 
@@ -45,12 +49,23 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
 
     case e_state::CREW_MANAGEMENT:
     {
-      return std::make_unique<StateMenu2d> (
+      auto menu = std::make_unique<StateMenu2d> (
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
           std::make_shared<interface::MenuCrewBrowse> (),
           std::make_shared<interface::MenuCrewMember> ()
         }
       );
+
+      auto confirmCb = [] () {
+        auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
+        selectedUnit->setPlayed(true);
+
+        auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
+        v->clearDroppedHistory();
+      };
+      menu->setConfirmCallback(confirmCb);
+
+      return menu;
     }
 
     case e_state::BUILDING_UNITS:
