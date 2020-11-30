@@ -60,7 +60,7 @@ void StateSelectExitZone::resume()
   for (const auto coords: _building->getCoords())
   {
     auto c = map->cell(*coords);
-    if (c->terrain() == e_terrain::BUILDING_DOOR)
+    if (c->terrain() == e_terrain::BUILDING_DOOR && !c->unit())
     {
       _cells.emplace_back(c);
     }
