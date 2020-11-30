@@ -54,7 +54,9 @@
    could use typedef std::shared_ptr SP
 ** TODO Random generator as a service locator
 ** TODO Menu and copy-pastes
-   MenuEntrySpecificType StateMenuType...
+*** DONE MenuEntrySpecificType
+    CLOSED: [2020-11-30 Mon 09:36]
+*** TODO StateMenuType
 
 
 * TODO Graphics
