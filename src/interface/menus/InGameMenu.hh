@@ -72,6 +72,13 @@ public:
    */
   virtual void draw() override;
 
+  /**
+   * \brief Enable the "Confirm" entry of the menu, if any
+   * \param confirmActive Confirm flag value
+   */
+  void setConfirmActive(bool confirmActive) {
+    _confirmActive = confirmActive;
+  }
 
 
 protected:
@@ -86,6 +93,7 @@ protected:
   void addCancelEntry(const std::function<void()>& cancel_callback);
 
 
+  bool _confirmActive = false; ///< Should the menu show its "Confirm" entry?
   std::mutex _lock; /// Prevent from drawing a not anymore current State (crash)
 };
 

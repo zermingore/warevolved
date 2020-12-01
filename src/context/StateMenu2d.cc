@@ -7,8 +7,9 @@
 
 #include <context/StateMenu2d.hh>
 
-#include <debug/Debug.hh>
+#include <cassert>
 
+#include <debug/Debug.hh>
 #include <game/Map.hh>
 #include <game/Battle.hh>
 #include <game/Status.hh>
@@ -53,7 +54,9 @@ void StateMenu2d::resume()
   for (auto menu: _menus)
   {
     menu->setCoords({_menus[0]->coords().x + x_offset, _menus[0]->coords().y});
+    menu->setConfirmActive(_confirmActive);
     menu->build();
+
     x_offset += 4; // in cells
   }
 }
@@ -201,10 +204,15 @@ void StateMenu2d::fetchAttributes()
     assert(false);
     return;
   }
+  assert(_attributes.size() == 2 && "Invalid attributes vector size");
 
   // Base menu coordinates in function of the first one
   auto p = std::static_pointer_cast<Coords> (_attributes[0]);
   _menus[0]->setCoords(*p);
+
+  // Base menu coordinates in function of the first one
+  auto p2 = std::static_pointer_cast<bool> (_attributes[1]);
+  _confirmActive = *p2;
 
   // reset the attributes vector
   _attributes.clear();

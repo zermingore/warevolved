@@ -49,11 +49,14 @@ void MenuUnitsList<T>::build()
     return;
   }
 
-  auto entry_confirm(std::make_shared<MenuEntry> (e_entry::CONFIRM, true));
-  entry_confirm->setCallback( [=, this] { confirm(); });
-  _lock.lock();
-  _entries.emplace_back(std::move(entry_confirm));
-  _lock.unlock();
+  if (_confirmActive)
+  {
+    auto entry_confirm(std::make_shared<MenuEntry> (e_entry::CONFIRM, true));
+    entry_confirm->setCallback( [=, this] { confirm(); });
+    _lock.lock();
+    _entries.emplace_back(std::move(entry_confirm));
+    _lock.unlock();
+  }
 
   auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL, true));
   entry_cancel->setCallback( [=, this] { cancel(); });

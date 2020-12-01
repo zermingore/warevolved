@@ -37,14 +37,6 @@ public:
   void draw() override final;
 
   /**
-   * \brief _confirmEntryActive setter
-   * \param active true: display the confirm entry; false: hide it
-   */
-  void setConfirmEntryActive(bool active) {
-    _confirmEntryActive = active;
-  }
-
-  /**
    * \brief Add Building specific entries
    */
   void buildEntriesBuilding();
@@ -58,10 +50,6 @@ public:
    * \brief Confirm the choices; close the menu
    */
   void confirm();
-
-
-private:
-  bool _confirmEntryActive = true; ///< Should the 'Confirm' entry appear?
 };
 
 
