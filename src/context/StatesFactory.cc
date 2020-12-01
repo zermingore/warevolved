@@ -17,10 +17,8 @@
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateSelectExitZone.hh>
-#include <interface/menus/MenuCrewBrowse.hh>
 #include <interface/menus/MenuCrewMember.hh>
 #include <interface/menus/MenuBuildingUnit.hh>
-#include <interface/menus/MenuBuildingUnits.hh>
 #include <interface/menus/MenuUnitsList.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>

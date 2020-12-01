@@ -70,11 +70,9 @@ interface/menus/InGameMenu.cc            \
 interface/menus/MenuMap.cc               \
 interface/menus/MenuAction.cc            \
 interface/menus/MenuCrew.cc              \
-interface/menus/MenuCrewBrowse.cc        \
 interface/menus/MenuCrewMember.cc        \
 interface/menus/MenuBuilding.cc          \
 interface/menus/MenuBuildingUnit.cc      \
-interface/menus/MenuBuildingUnits.cc     \
 \
 tools/StringParser.cc                    \
 tools/Fps.cc                             \

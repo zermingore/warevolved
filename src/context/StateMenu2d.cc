@@ -19,8 +19,6 @@
 #include <interface/Cursor.hh>
 #include <interface/menus/InGameMenu.hh>
 #include <interface/menus/Menu.hh>
-#include <interface/menus/MenuCrewBrowse.hh>
-#include <interface/menus/MenuCrewMember.hh>
 
 
 
