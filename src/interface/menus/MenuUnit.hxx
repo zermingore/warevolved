@@ -1,13 +1,14 @@
 /**
  * \file
- * \date September 23, 2019
+ * \date December 1st, 2020
  * \author Zermingore
  * \namespace interface
- * \brief MenuCrewMember definition
+ * \brief MenuUnit templates definition
  */
 
-#include <interface/menus/MenuCrewMember.hh>
+#include <interface/menus/MenuUnit.hh>
 
+#include <debug/Debug.hh>
 #include <context/State.hh>
 #include <game/Map.hh>
 #include <game/Battle.hh>
@@ -18,10 +19,13 @@
 #include <graphics/MapGraphicsProperties.hh>
 #include <interface/Cursor.hh>
 
+
+
 namespace interface {
 
 
-void MenuCrewMember::build()
+template<typename T>
+void MenuUnit<T>::build()
 {
   auto map(game::Status::battle()->map());
   const auto selectedUnit = map->selectedUnit();
@@ -52,7 +56,8 @@ void MenuCrewMember::build()
 
 
 
-void MenuCrewMember::draw()
+template<typename T>
+void MenuUnit<T>::draw()
 {
   update();
 
@@ -68,16 +73,32 @@ void MenuCrewMember::draw()
 
 
 
-void MenuCrewMember::getOut()
+template<typename T>
+void MenuUnit<T>::getOut()
 {
-  auto vehicle_coords(game::Status::player()->cellCursorPosition());
-
-  game::Status::pushState(e_state::SELECT_DROP_ZONE);
-  game::Status::setStateAttributes(
-    std::make_shared<Coords> (vehicle_coords),
-    std::make_shared<e_unit_role> (_role),
-    std::make_shared<size_t> (_unitIdx)
-  );
+  auto coords(game::Status::player()->cellCursorPosition());
+  if (std::is_same<T, Building>::value)
+  {
+    game::Status::pushState(e_state::SELECT_EXIT_ZONE);
+    game::Status::setStateAttributes(
+      std::make_shared<Coords> (coords),
+      std::make_shared<size_t> (_unitIdx)
+    );
+  }
+  else if (std::is_same<T, Vehicle>::value)
+  {
+    game::Status::pushState(e_state::SELECT_DROP_ZONE);
+    game::Status::setStateAttributes(
+      std::make_shared<Coords> (coords),
+      std::make_shared<e_unit_role> (_role),
+      std::make_shared<size_t> (_unitIdx)
+    );
+  }
+  else
+  {
+    ERROR("MenuUnit: Invalid container type");
+    return;
+  }
 
   game::Status::resumeState();
 }

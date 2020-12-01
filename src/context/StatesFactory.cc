@@ -17,9 +17,8 @@
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateSelectExitZone.hh>
-#include <interface/menus/MenuCrewMember.hh>
-#include <interface/menus/MenuBuildingUnit.hh>
 #include <interface/menus/MenuUnitsList.hh>
+#include <interface/menus/MenuUnit.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Map.hh>
@@ -51,7 +50,7 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
       auto menu = std::make_unique<StateMenu2d> (
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
           std::make_shared<interface::MenuUnitsList<Vehicle>> (),
-          std::make_shared<interface::MenuCrewMember> ()
+          std::make_shared<interface::MenuUnit<Vehicle>> ()
         }
       );
 
@@ -88,7 +87,7 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
       auto menu = std::make_unique<StateMenu2d> (
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
           std::make_shared<interface::MenuUnitsList<Building>> (),
-          std::make_shared<interface::MenuBuildingUnit> ()
+          std::make_shared<interface::MenuUnit<Building>> ()
         }
       );
 
