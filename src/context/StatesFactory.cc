@@ -17,10 +17,8 @@
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateSelectExitZone.hh>
-#include <interface/menus/MenuCrewBrowse.hh>
-#include <interface/menus/MenuCrewMember.hh>
-#include <interface/menus/MenuBuildingUnit.hh>
-#include <interface/menus/MenuBuildingUnits.hh>
+#include <interface/menus/MenuUnitsList.hh>
+#include <interface/menus/MenuUnit.hh>
 #include <game/Status.hh>
 #include <game/Battle.hh>
 #include <game/Map.hh>
@@ -51,8 +49,8 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
     {
       auto menu = std::make_unique<StateMenu2d> (
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
-          std::make_shared<interface::MenuCrewBrowse> (),
-          std::make_shared<interface::MenuCrewMember> ()
+          std::make_shared<interface::MenuUnitsList<Vehicle>> (),
+          std::make_shared<interface::MenuUnit<Vehicle>> ()
         }
       );
 
@@ -65,17 +63,40 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
       };
       menu->setConfirmCallback(confirmCb);
 
+      auto cancelCb = [] () {
+        // restore dropped unit
+        auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
+        auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
+        v->restoreCrew();
+        v->clearDroppedHistory();
+
+        // Pop every select_drop_zone and crew_management states
+        while (   game::Status::state() != e_state::ACTION_MENU
+                && game::Status::state() != e_state::SELECTION_UNIT)
+        {
+          game::Status::popCurrentState();
+        }
+      };
+      menu->setCancelCallback(cancelCb);
+
       return menu;
     }
 
     case e_state::BUILDING_UNITS:
     {
-      return std::make_unique<StateMenu2d> (
+      auto menu = std::make_unique<StateMenu2d> (
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
-          std::make_shared<interface::MenuBuildingUnits> (),
-          std::make_shared<interface::MenuBuildingUnit> ()
+          std::make_shared<interface::MenuUnitsList<Building>> (),
+          std::make_shared<interface::MenuUnit<Building>> ()
         }
       );
+
+      auto cancelCb = [] () {
+        game::Status::popCurrentState();
+      };
+      menu->setCancelCallback(cancelCb);
+
+      return menu;
     }
 
     case e_state::MOVING_UNIT:

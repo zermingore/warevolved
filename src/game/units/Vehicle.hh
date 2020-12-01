@@ -43,7 +43,6 @@ public:
 
   /**
    * \brief Returns crew list
-   * \todo rename to 'crew()'
    */
   const auto& crew() { return _crew; }
 

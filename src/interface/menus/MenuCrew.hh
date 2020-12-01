@@ -22,7 +22,7 @@ namespace interface {
 
 /**
  * \class MenuCrew
- * \brief Builds the menu displaying possible actions for a unit being played
+ * \brief Builds the menu displayed when a Unit reaches a Crew
  */
 class MenuCrew final: public InGameMenu
 {

@@ -1,14 +1,13 @@
 /**
  * \file
- * \date September 23, 2019
+ * \date December 1st, 2020
  * \author Zermingore
  * \namespace interface
- * \brief MenuCrewMember class declaration
+ * \brief MenuUnit class declaration
  */
 
-
-#ifndef MENU_CREW_MEMBER_HH_
-# define MENU_CREW_MEMBER_HH_
+#ifndef MENU_UNIT
+# define MENU_UNIT
 
 # include <interface/menus/InGameMenu.hh>
 # include <game/units/Unit.hh> // e_unit_role
@@ -18,16 +17,18 @@ namespace interface {
 
 
 /**
- * \class MenuCrewMember
- * \brief Menu handling the actions available for a crew member
+ * \class MenuUnit
+ * \brief Handle actions available for a Unit (in a given container)
+ * \note Allowed templates: Building Vehicle
  */
-class MenuCrewMember final: public InGameMenu
+template<typename T>
+class MenuUnit final: public InGameMenu
 {
 public:
   /**
    * \brief Default constructor
    */
-  MenuCrewMember() = default;
+  MenuUnit() = default;
 
   /**
    * \brief Add entries depending on the highlighted crew member
@@ -53,12 +54,13 @@ private:
    */
   void getOut();
 
-  e_unit_role _role;    ///< Role concerned by this menu
-  int _unitIdx;         ///< Index in the crew member
+  e_unit_role _role; ///< Role concerned by this menu
+  int _unitIdx;      ///< Index in the crew member
 };
 
 
 } // namespace interface
 
+# include <interface/menus/MenuUnit.hxx>
 
-#endif /* !MENU_CREW_MEMBER_HH_ */
+#endif /* !MENU_UNIT */
