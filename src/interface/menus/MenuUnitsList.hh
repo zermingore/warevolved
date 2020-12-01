@@ -54,6 +54,11 @@ public:
    */
   void buildEntriesVehicle();
 
+  /**
+   * \brief Confirm the choices; close the menu
+   */
+  void confirm();
+
 
 private:
   bool _confirmEntryActive = true; ///< Should the 'Confirm' entry appear?

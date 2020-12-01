@@ -15,6 +15,7 @@
 #include <game/Map.hh>
 #include <game/Battle.hh>
 #include <game/Building.hh>
+#include <game/Player.hh>
 #include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
@@ -48,9 +49,14 @@ void MenuUnitsList<T>::build()
     return;
   }
 
+  auto entry_confirm(std::make_shared<MenuEntry> (e_entry::CONFIRM, true));
+  entry_confirm->setCallback( [=, this] { confirm(); });
+  _lock.lock();
+  _entries.emplace_back(std::move(entry_confirm));
+  _lock.unlock();
+
   auto entry_cancel(std::make_shared<MenuEntry> (e_entry::CANCEL, true));
   entry_cancel->setCallback( [=, this] { cancel(); });
-
   _lock.lock();
   _entries.emplace_back(std::move(entry_cancel));
   _lock.unlock();
@@ -92,6 +98,7 @@ void MenuUnitsList<T>::buildEntriesBuilding()
 template<typename T>
 void MenuUnitsList<T>::buildEntriesVehicle()
 {
+  game::Status::player()->updateSelectedUnit();
   auto selectedUnit{ game::Status::battle()->map()->selectedUnit() };
   assert(selectedUnit && "MenuUnitList<Vehicle>: No selected unit");
   if (!selectedUnit->canHaveCrew())
@@ -124,6 +131,14 @@ void MenuUnitsList<T>::buildEntriesVehicle()
       ++i;
     }
   }
+}
+
+
+
+template<typename T>
+void MenuUnitsList<T>::confirm()
+{
+  game::Status::clearStates();
 }
 
 

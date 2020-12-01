@@ -127,7 +127,7 @@ private:
   int _currentMenu = 0;  ///< Which menu is currently browsed
   int _selectionIdx = 0; ///< Currently selected entry index
 
-  bool _confirmActive; ///< 'confirm' entry available?
+  // bool _confirmActive; ///< 'confirm' entry available?
 
   std::function<void()> _cancelCallback; ///< Callback on menu cancelation
   std::function<void()> _confirmCallback; ///< Callback on menu confirmation
