@@ -8,11 +8,13 @@
 # - (Very) long term features are documented in the doc/think/concept file
 
 
+* TODO Debug
+** TODO Mouse and menu entry selection not really usable
 
-** TODO Misc
-*** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
-*** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
-*** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
+* TODO Misc
+** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
+** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
+** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
 
 
 * TODO Doc
@@ -53,10 +55,12 @@
    could use using std::vector
    could use typedef std::shared_ptr SP
 ** TODO Random generator as a service locator
-** TODO Menu and copy-pastes
+** DONE Menu and copy-pastes
+   CLOSED: [2020-12-01 Tue 19:20]
 *** DONE MenuEntrySpecificType
     CLOSED: [2020-11-30 Mon 09:36]
-*** TODO StateMenuType
+*** DONE StateMenuType
+    CLOSED: [2020-12-01 Tue 19:20]
 
 
 * TODO Graphics
