@@ -64,17 +64,40 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
       };
       menu->setConfirmCallback(confirmCb);
 
+      auto cancelCb = [] () {
+        // restore dropped unit
+        auto selectedUnit{game::Status::battle()->map()->selectedUnit()};
+        auto v = std::static_pointer_cast<Vehicle> (selectedUnit);
+        v->restoreCrew();
+        v->clearDroppedHistory();
+
+        // Pop every select_drop_zone and crew_management states
+        while (   game::Status::state() != e_state::ACTION_MENU
+                && game::Status::state() != e_state::SELECTION_UNIT)
+        {
+          game::Status::popCurrentState();
+        }
+      };
+      menu->setCancelCallback(cancelCb);
+
       return menu;
     }
 
     case e_state::BUILDING_UNITS:
     {
-      return std::make_unique<StateMenu2d> (
+      auto menu = std::make_unique<StateMenu2d> (
         std::initializer_list<std::shared_ptr<interface::InGameMenu>> {
           std::make_shared<interface::MenuUnitsList<Building>> (),
           std::make_shared<interface::MenuBuildingUnit> ()
         }
       );
+
+      auto cancelCb = [] () {
+        game::Status::popCurrentState();
+      };
+      menu->setCancelCallback(cancelCb);
+
+      return menu;
     }
 
     case e_state::MOVING_UNIT:

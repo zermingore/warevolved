@@ -189,7 +189,6 @@ void StateMenu2d::exit() // escape key / cancel entry
 void StateMenu2d::cancel()
 {
   _cancelCallback();
-  game::Status::popCurrentState();
 }
 
 
