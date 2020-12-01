@@ -20,6 +20,7 @@ namespace interface {
 /**
  * \class MenuUnitsList
  * \brief Builds a menu displaying a Units list (Building / Vehicle crew)
+ * \note Allowed templates: Building Vehicle
  */
 template<typename T>
 class MenuUnitsList final: public InGameMenu
@@ -44,18 +45,18 @@ public:
   }
 
   /**
-   * \brief Callbacks on selection array setter
-   * \param callbacks Callbacks to call on Unit selection
+   * \brief Add Building specific entries
    */
-  void setEntryCallbacks(std::vector<std::function<void()>> callbacks) {
-    _entryCbs = callbacks;
-  }
+  void buildEntriesBuilding();
+
+  /**
+   * \brief Add Vehicle specific entries
+   */
+  void buildEntriesVehicle();
 
 
 private:
   bool _confirmEntryActive = true; ///< Should the 'Confirm' entry appear?
-  std::vector<std::function<void()>> _entryCbs; ///< Callbacks on selection
-  std::vector<std::shared_ptr<Unit>> _units; ///< Units list
 };
 
 
