@@ -9,7 +9,8 @@
 
 
 * TODO Debug
-** TODO Mouse and menu entry selection not really usable
+** DONE Mouse and menu entry selection not really usable
+   CLOSED: [2020-12-02 Wed 20:39]
 
 * TODO Misc
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
