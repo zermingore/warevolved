@@ -75,7 +75,7 @@ void InputsListener::listen(bool replay,
         // event.mouseMove.{x,y}: coordinates in px -> should never be negative
         if (event.mouseMove.x < 0 || event.mouseMove.y < 0)
         {
-          WARNING("Negative mouse coordinates"); /// \todo WARNING_ONCE macro
+          WARNING("Negative mouse coordinates");
           break;
         }
 
@@ -101,31 +101,29 @@ void InputsListener::listen(bool replay,
            static_cast<size_t> ((event.mouseMove.x - grid_x) / cell_width),
            static_cast<size_t> ((event.mouseMove.y - grid_y) / cell_height) };
 
-        // out of map bounds check
-        if (   mouse.l > game::Status::battle()->map()->nbLines() - 1
-            || mouse.c > game::Status::battle()->map()->nbColumns() - 1)
-        {
-          break;
-        }
+        static Coords mouse_old_cell = mouse;
 
-        auto cursor_coords{ game::Status::player()->cursor()->coords() };
-        if (mouse.l < cursor_coords.l)
+        if (mouse.l < mouse_old_cell.l)
         {
+          mouse_old_cell = mouse;
           KeyManager::pushKey(e_key::UP);
           break;
         }
-        if (mouse.l > cursor_coords.l)
+        if (mouse.l > mouse_old_cell.l)
         {
+          mouse_old_cell = mouse;
           KeyManager::pushKey(e_key::DOWN);
           break;
         }
-        if (mouse.c < cursor_coords.c)
+        if (mouse.c < mouse_old_cell.c)
         {
+          mouse_old_cell = mouse;
           KeyManager::pushKey(e_key::LEFT);
           break;
         }
-        if (mouse.c > cursor_coords.c)
+        if (mouse.c > mouse_old_cell.c)
         {
+          mouse_old_cell = mouse;
           KeyManager::pushKey(e_key::RIGHT);
           break;
         }

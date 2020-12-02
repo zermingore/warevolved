@@ -36,7 +36,7 @@ StateMenu2d::StateMenu2d(
   _evtMgr->registerEvent(e_input::SELECTION,  [=, this] { validate(); });
   _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
 
-  _cancelCallback = [] (auto&&...) {};
+  _cancelCallback  = [] (auto&&...) {};
   _confirmCallback = [] (auto&&...) {};
 }
 
