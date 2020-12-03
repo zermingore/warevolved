@@ -7,10 +7,11 @@
 # - A task can be added or marked as done on any branch
 # - (Very) long term features are documented in the doc/think/concept file
 
-
-* TODO Debug
+* DONE Debug
+  CLOSED: [2020-12-03 Thu 15:09]
 ** DONE Mouse and menu entry selection not really usable
    CLOSED: [2020-12-02 Wed 20:39]
+
 
 * TODO Misc
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
@@ -41,6 +42,7 @@
 
 * TODO Input
 ** TODO Clear the events fifo on State changes
+
 
 * TODO Game Features
 ** TODO Load the last save (with an option flag?)
@@ -127,7 +129,8 @@
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
-*** TODO Check if the generated enums_printer need an update on commit/push
+*** DONE Check if the generated enums_printer need an update on commit/push
+    CLOSED: [2020-12-03 Thu 15:08]
 ** TODO auto resources XML generator
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
