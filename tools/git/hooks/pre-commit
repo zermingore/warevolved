@@ -9,3 +9,11 @@ if [ "$doxygen_output" != "" ]; then
 fi
 
 tools/coding_style.sh src/
+
+
+tools/code_generation/enum_print/generate_enum_print.sh ./
+
+if git status --porcelain | grep -q "M src/generated/enum_print/enum_print."; then
+  echo "ERROR: enum printer generated code not up to date; aborting..."
+  exit 1
+fi
