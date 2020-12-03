@@ -1,6 +1,5 @@
 /**
  * \file
- * \date Mon Nov 30 09:15:00 CET 2020
  * \author generate_enum_print.sh
  * \brief Wrapper enum <=> string
  * \warning auto-generated code, edit at your own risks
