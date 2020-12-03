@@ -7,11 +7,6 @@
 # - A task can be added or marked as done on any branch
 # - (Very) long term features are documented in the doc/think/concept file
 
-* DONE Debug
-  CLOSED: [2020-12-03 Thu 15:09]
-** DONE Mouse and menu entry selection not really usable
-   CLOSED: [2020-12-02 Wed 20:39]
-
 
 * TODO Misc
 ** TODO Loading a map and 'next turn' should properly initalize every non-current player units 'played' flag
@@ -58,12 +53,6 @@
    could use using std::vector
    could use typedef std::shared_ptr SP
 ** TODO Random generator as a service locator
-** DONE Menu and copy-pastes
-   CLOSED: [2020-12-01 Tue 19:20]
-*** DONE MenuEntrySpecificType
-    CLOSED: [2020-11-30 Mon 09:36]
-*** DONE StateMenuType
-    CLOSED: [2020-12-01 Tue 19:20]
 
 
 * TODO Graphics
@@ -85,10 +74,6 @@
 **** TODO Jeep
 *** TODO Terrain
 **** TODO Mountain
-*** DONE Buildings
-    CLOSED: [2020-11-22 Sun 19:53]
-**** DONE Block
-     CLOSED: [2020-11-22 Sun 19:53]
 
 
 * TODO Gameplay
@@ -129,8 +114,6 @@
 ** TODO Commit checker
 *** TODO memory leaks checker before commit
 *** TODO auto-compile / launch for all build rules
-*** DONE Check if the generated enums_printer need an update on commit/push
-    CLOSED: [2020-12-03 Thu 15:08]
 ** TODO auto resources XML generator
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
