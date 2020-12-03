@@ -2,7 +2,7 @@
  * \file
  * \date Jul 23, 2013
  * \author Zermingore
- * \brief Debug macros declaration
+ * \brief Debugging macros and Debug class declaration
  */
 
 #ifndef DEBUG_HH_
@@ -59,8 +59,7 @@
 
 /**
  * \def DEBUG_PRINT(x) debug print macro
- * prints the given string
- *   only if we compiled with the DEBUG flag
+ * Prints the given string only if compiled with the DEBUG flag
  */
 # ifdef DEBUG
 #   define DEBUG_PRINT(x) do { \
@@ -109,7 +108,12 @@ public:
    */
   static void init();
 
-
+  /**
+   * \brief Print the given arguments in the log and, on debug, print on stdout
+   * \param head First parameter
+   * \param tail Rest of the parameters, if any
+   * \note Templated
+   */
   template<typename T, typename... Tail>
   static void constexpr logPrintf(const T head, const Tail... tail)
   {
