@@ -29,8 +29,6 @@ enum class e_input;
 
 namespace game {
 
-/// \todo Status no longer static and destructor pops every States
-
 /**
  * \class Status
  * \brief stores game status information such as current player, battle, ...

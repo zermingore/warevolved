@@ -19,6 +19,7 @@
 # include <generated/enum_print/enum_print.hh>
 
 
+
 // Log file name
 # ifdef __unix__
 #   define LOG_FILENAME "LOG"
@@ -85,7 +86,6 @@
 # define NOTICE  Debug::notice
 # define WARNING Debug::warning
 
-/// \todo in release, printf should print in a log
 # ifdef DEBUG
 #   define PRINTF Debug::printf
 # else

@@ -141,7 +141,6 @@ void StateSelectExitZone::validate()
     }
   }
 
-  /// \todo Push a state to select the door where to exit
   _unit->setCoords(doors[_indexSelect]);
   map->stashPopUnit(*_unit);
   _building->removeUnit(_unitIdx);

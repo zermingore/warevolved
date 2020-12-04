@@ -44,7 +44,7 @@ void OSD::draw()
   for (const auto& it: _drawables) {
     graphics::GraphicsEngine::draw(it);
   }
-  _drawables.clear(); /// \todo thread safe (free(): corrupted unsorted chunks)
+  _drawables.clear();
   _lock.unlock();
 
   _dataPosition.y = 0;

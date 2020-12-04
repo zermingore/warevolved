@@ -43,7 +43,6 @@ public:
 
   /**
    * \brief Update the _currentTerrainIdx with the previous Terrain value
-   * \todo Map with an SFML event
    */
   constexpr void previousTerrain();
 
