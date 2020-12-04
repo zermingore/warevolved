@@ -19,7 +19,7 @@ enum class e_terrain;
 /**
  * \class Random
  * \brief Random generator class
- * \note Abstract class
+ * \note Static class
  */
 class Random
 {

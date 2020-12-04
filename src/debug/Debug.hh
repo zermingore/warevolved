@@ -2,7 +2,7 @@
  * \file
  * \date Jul 23, 2013
  * \author Zermingore
- * \brief Debug macros declaration
+ * \brief Debugging macros and Debug class declaration
  */
 
 #ifndef DEBUG_HH_
@@ -59,8 +59,7 @@
 
 /**
  * \def DEBUG_PRINT(x) debug print macro
- * prints the given string
- *   only if we compiled with the DEBUG flag
+ * Prints the given string only if compiled with the DEBUG flag
  */
 # ifdef DEBUG
 #   define DEBUG_PRINT(x) do { \
@@ -109,17 +108,14 @@ public:
    */
   static void init();
 
-
+  /**
+   * \brief Print the given arguments in the log and, on debug, print on stdout
+   * \param head First parameter
+   * \param tail Rest of the parameters, if any
+   * \note Templated
+   */
   template<typename T, typename... Tail>
-  static void constexpr logPrintf(const T head, const Tail... tail)
-  {
-    logTime();
-    bodylogprintf(head, tail...);
-
-#   ifdef DEBUG
-      printf(head, tail...);
-#   endif
-  }
+  static void constexpr logPrintf(const T head, const Tail... tail);
 
   /**
    * \brief Print the given element into the log file
@@ -127,10 +123,7 @@ public:
    * \note head must override the << stream operator
    */
   template<typename T>
-  static constexpr void printLog(const T head)
-  {
-    *_log << " " << head << COLOR_NORMAL;
-  }
+  static constexpr void printLog(const T head);
 
   /**
    * \brief print as error given parameters on standard output
@@ -162,18 +155,7 @@ public:
    * \param tail eventually, rest of given arguments list
    */
   template<typename T, typename... Tail>
-  static void constexpr printf(const T head, const Tail... tail)
-  {
-    std::cout << head << " ";
-    if constexpr(sizeof...(Tail) > 0)
-    {
-      printf(tail...);
-    }
-    else
-    {
-      std::cout << COLOR_NORMAL << std::endl;
-    }
-  }
+  static void constexpr printf(const T head, const Tail... tail);
 
   /**
    * \brief print one unique time the given string
@@ -198,19 +180,7 @@ private:
    * \param tail Eventual following arguments
    */
   template<typename T, typename... Tail>
-  static void constexpr bodylogprintf(const T head, const Tail... tail)
-  {
-    printLog(head);
-
-    if constexpr(sizeof...(Tail) > 0)
-    {
-      bodylogprintf(tail...);
-    }
-    else
-    {
-      *_log << std::endl;
-    }
-  }
+  static void constexpr bodylogprintf(const T head, const Tail... tail);
 
   /**
    * \brief Prints the current time to the log
