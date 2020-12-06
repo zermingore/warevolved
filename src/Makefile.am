@@ -35,6 +35,7 @@ context/StateSelectCell.cc               \
 context/StateSelectTarget.cc             \
 context/StateSelectDropZone.cc           \
 context/StateSelectExitZone.cc           \
+context/StateInventory.cc                \
 \
 input/KeyManager.cc                      \
 input/ReplayManager.cc                   \

@@ -415,6 +415,10 @@ std::string e_state_string(e_state entry)
       return "e_state::BUILDING_MENU (no explicit value)";
     case e_state::BUILDING_UNITS:
       return "e_state::BUILDING_UNITS (no explicit value)";
+    case e_state::INVENTORY:
+      return "e_state::INVENTORY (no explicit value)";
+    case e_state::ITEM_MENU:
+      return "e_state::ITEM_MENU (no explicit value)";
     default:
       return "entry not matched";
   }

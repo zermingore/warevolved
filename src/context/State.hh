@@ -179,6 +179,9 @@ enum class e_state: int
 
   BUILDING_MENU,    ///< Owned Building management
   BUILDING_UNITS,   ///< Owned Building Units management
+
+  INVENTORY,        ///< Inventory opened
+  ITEM_MENU,        ///< Item selection in the Inventory
 };
 
 

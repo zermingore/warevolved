@@ -17,6 +17,7 @@
 #include <context/StateSelectDropZone.hh>
 #include <context/StateSelectTarget.hh>
 #include <context/StateSelectExitZone.hh>
+#include <context/StateInventory.hh>
 #include <interface/menus/MenuUnitsList.hh>
 #include <interface/menus/MenuUnit.hh>
 #include <game/Status.hh>
@@ -110,6 +111,11 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
 
     case e_state::SELECT_EXIT_ZONE:
       return std::make_unique<StateSelectExitZone> ();
+
+    case e_state::INVENTORY:
+      return std::make_unique<StateInventory> ();
+
+    // case e_state::ITEM_MENU:
 
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate a State",
