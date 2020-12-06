@@ -353,6 +353,8 @@ std::string e_entry_string(e_entry entry)
       return "e_entry::EXIT_BUILDING (no explicit value)";
     case e_entry::UNITS_BUILDING:
       return "e_entry::UNITS_BUILDING (no explicit value)";
+    case e_entry::INVENTORY:
+      return "e_entry::INVENTORY (no explicit value)";
     case e_entry::CANCEL:
       return "e_entry::CANCEL (no explicit value)";
     case e_entry::CONFIRM:

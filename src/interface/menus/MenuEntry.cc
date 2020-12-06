@@ -188,6 +188,11 @@ void MenuEntry::setLabelName(const e_entry entry)
       _labelName = "Exit";
       break;
 
+    // Items
+    case e_entry::INVENTORY:
+      _labelName = "Items";
+      break;
+
     default:
       _labelName = "## NOT FOUND ##";
       ERROR("No label found for e_entry", static_cast<int> (entry));

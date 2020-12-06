@@ -157,6 +157,9 @@ enum class e_entry
   EXIT_BUILDING,
   UNITS_BUILDING,
 
+  // Items
+  INVENTORY,
+
   CANCEL,
   CONFIRM
 };

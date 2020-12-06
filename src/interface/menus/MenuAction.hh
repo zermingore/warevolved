@@ -120,6 +120,11 @@ private:
    */
   void manageCrew();
 
+  /**
+   * \brief Open the inventory of the selected unit
+   */
+  void openInventory();
+
 
   e_state _state; ///< State related to this menu
 

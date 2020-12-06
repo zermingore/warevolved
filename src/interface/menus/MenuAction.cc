@@ -116,6 +116,13 @@ void MenuAction::buildMenuSelectionUnit()
     _lock.lock();
     _entries.emplace_back(std::move(entry));
     _lock.unlock();
+
+
+    auto entryInventory{std::make_shared<MenuEntry> (e_entry::INVENTORY)};
+    entryInventory->setCallback([=, this] { openInventory(); });
+    _lock.lock();
+    _entries.emplace_back(std::move(entryInventory));
+    _lock.unlock();
   }
 
   // add the attack entry if a target is reachable from the current position
@@ -236,6 +243,13 @@ void MenuAction::buildMenuAfterMovingUnit()
     _lock.lock();
     _entries.emplace_back(std::move(entry_wait));
     _lock.unlock();
+
+
+    auto entry{std::make_shared<MenuEntry> (e_entry::INVENTORY)};
+    entry->setCallback([=, this] { openInventory(); });
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
   }
   else
   {
@@ -282,6 +296,15 @@ void MenuAction::enterBuilding()
   auto map(game::Status::battle()->map());
   map->attackBuilding(_coords);
   game::Status::clearStates();
+}
+
+
+
+void MenuAction::openInventory()
+{
+  game::Status::pushState(e_state::INVENTORY);
+  // game::Status::setStateAttributes(); /// \todo
+  game::Status::resumeState();
 }
 
 
