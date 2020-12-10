@@ -58,6 +58,7 @@ game/units/Soldier.cc                    \
 game/Player.cc                           \
 game/PathFinding.cc                      \
 game/Building.cc                         \
+game/Item.cc                             \
 \
 interface/Interface.cc                   \
 interface/InterfaceElement.cc            \

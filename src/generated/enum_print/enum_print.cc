@@ -11,6 +11,7 @@
 #include <generated/enum_print/enum_print.hh>
 #include <game/Terrain.hh>
 #include <game/Map.hh>
+#include <game/Item.hh>
 #include <game/PathFinding.hh>
 #include <game/units/Unit.hh>
 #include <input/ReplayManager.hh>
@@ -69,6 +70,24 @@ std::string e_attack_result_string(e_attack_result entry)
       return "e_attack_result::DEFENDER_DIED (no explicit value)";
     case e_attack_result::BOTH_DIED:
       return "e_attack_result::BOTH_DIED (no explicit value)";
+    default:
+      return "entry not matched";
+  }
+}
+
+
+std::string e_rotation_string(e_rotation entry)
+{
+  switch (entry)
+  {
+    case e_rotation::ROT_0:
+      return "e_rotation::ROT_0 (0)";
+    case e_rotation::ROT_90:
+      return "e_rotation::ROT_90 (90)";
+    case e_rotation::ROT_180:
+      return "e_rotation::ROT_180 (180)";
+    case e_rotation::ROT_270:
+      return "e_rotation::ROT_270 (270)";
     default:
       return "entry not matched";
   }

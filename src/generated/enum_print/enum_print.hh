@@ -12,6 +12,7 @@
 
 enum class e_terrain;
 enum class e_attack_result;
+enum class e_rotation;
 enum class e_path_shape;
 enum class e_direction;
 enum class e_unit_role;
@@ -30,6 +31,7 @@ namespace debug {
 
 std::string e_terrain_string(e_terrain entry);
 std::string e_attack_result_string(e_attack_result entry);
+std::string e_rotation_string(e_rotation entry);
 std::string e_path_shape_string(e_path_shape entry);
 std::string e_direction_string(e_direction entry);
 std::string e_unit_role_string(e_unit_role entry);
