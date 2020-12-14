@@ -13,6 +13,7 @@
 # include <string>
 
 # include <graphics/graphic_types.hh>
+# include <interface/InterfaceElement.hh>
 
 
 namespace graphics {
@@ -68,7 +69,7 @@ private:
  * \class Inventory
  * \brief Possesions of an entity (Unit, Building, Vehicle, ...)
  */
-class Inventory
+class Inventory: public interface::InterfaceElement
 {
 public:
   /**
@@ -82,6 +83,17 @@ public:
    * \param nbLines Inventory occupied space
    */
   Inventory(size_t nbCols, size_t nbLines);
+
+
+  /**
+   * \brief Update the graphics elements before drawing
+   */
+  virtual void update() override final;
+
+  /**
+   * \brief Draw the components of the Inventory
+   */
+  virtual void draw() override final;
 
 
 private:

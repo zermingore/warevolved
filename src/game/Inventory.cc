@@ -26,8 +26,21 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 
 Inventory::Inventory(size_t nbCols, size_t nbLines)
-  : _sprite(std::make_unique<graphics::Sprite> ("inventory_background"))
+  : InterfaceElement("inventory")
+  , _sprite(std::make_unique<graphics::Sprite> ("inventory_background"))
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
+}
+
+
+
+void Inventory::update()
+{
+
+}
+
+void Inventory::draw()
+{
+
 }
