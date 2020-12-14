@@ -57,7 +57,7 @@ private:
   std::string _name;      ///< Displayed name
 
   std::string _textureName;                  ///< Graphic Texture file name
-  std::shared_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
+  std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
 
   std::vector<std::unique_ptr<Item>> _stored; ///< Items in the container
 };
@@ -72,7 +72,7 @@ class Inventory
 {
 public:
   /**
-   * \brief Deleted default constructor (name, sprite, size required)
+   * \brief Deleted default constructor (size required)
    */
   Inventory() = delete;
 
@@ -86,7 +86,7 @@ public:
 
 private:
   std::string _textureName;                  ///< Graphic Texture file name
-  std::shared_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
+  std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
 
   std::vector<std::unique_ptr<Item>> _equipped; ///< Equiped items
 

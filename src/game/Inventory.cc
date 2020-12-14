@@ -19,7 +19,7 @@ ItemsContainer::ItemsContainer(e_container_type type,
   : _type(type)
   , _name(name)
   , _textureName(textureName)
-  , _sprite(std::make_shared<graphics::Sprite> (_textureName))
+  , _sprite(std::make_unique<graphics::Sprite> (_textureName))
 {
 }
 
@@ -27,7 +27,7 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 Inventory::Inventory(size_t nbCols, size_t nbLines)
   : _textureName("inventory")
-  , _sprite(std::make_shared<graphics::Sprite> (_textureName))
+  , _sprite(std::make_unique<graphics::Sprite> (_textureName))
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
