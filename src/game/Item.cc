@@ -11,6 +11,7 @@
 #include <resources/ResourcesManager.hh>
 
 
+
 Item::Item(const std::string& name,
            const std::string& textureName,
            size_t nbCols,

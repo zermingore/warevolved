@@ -13,6 +13,7 @@
 #include <game/Map.hh>
 #include <game/Item.hh>
 #include <game/PathFinding.hh>
+#include <game/Inventory.hh>
 #include <game/units/Unit.hh>
 #include <input/ReplayManager.hh>
 #include <input/EventManager.hh>
@@ -152,6 +153,22 @@ std::string e_direction_string(e_direction entry)
       return "e_direction::LEFT (630)";
     case e_direction::RIGHT:
       return "e_direction::RIGHT (450)";
+    default:
+      return "entry not matched";
+  }
+}
+
+
+std::string e_container_type_string(e_container_type entry)
+{
+  switch (entry)
+  {
+    case e_container_type::BACKPACK:
+      return "e_container_type::BACKPACK (no explicit value)";
+    case e_container_type::POCKET:
+      return "e_container_type::POCKET (no explicit value)";
+    case e_container_type::TRUNK:
+      return "e_container_type::TRUNK (no explicit value)";
     default:
       return "entry not matched";
   }

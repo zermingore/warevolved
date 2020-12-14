@@ -38,7 +38,7 @@ enum class e_rotation
 /**
  * \class Item
  * \brief Inventory Item
-*/
+ */
 class Item
 {
 public:
@@ -58,6 +58,7 @@ public:
        const std::string& textureName,
        size_t nbCols,
        size_t nbLines);
+
 
   /**
    * \brief Set the graphic rotation angle
@@ -79,7 +80,7 @@ private:
   std::string _name; ///< Displayed name
   std::string _textureName; ///< Graphic Texture file name
 
-  std::shared_ptr<graphics::Sprite> _sprite;   ///< Graphic Sprite
+  std::shared_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
 
   e_rotation _rotation = e_rotation::ROT_0; ///< Rotation in the inventory
 
@@ -89,6 +90,8 @@ private:
   bool _usable = false;     ///< Consumable
   bool _equippable = false; ///< Can be equipped by a Unit
   bool _combinable = false; ///< Can be combined with another Item
+
+  std::vector<std::unique_ptr<Item>> _accessories; ///< Combined items
 };
 
 
