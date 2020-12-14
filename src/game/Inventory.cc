@@ -26,8 +26,7 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 
 Inventory::Inventory(size_t nbCols, size_t nbLines)
-  : _textureName("inventory")
-  , _sprite(std::make_unique<graphics::Sprite> (_textureName))
+  : _sprite(std::make_unique<graphics::Sprite> ("inventory_background"))
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {

@@ -5,8 +5,8 @@
  * \brief Inventory and ItemsContainer classes declaration
  */
 
-#ifndef Inventory_HH_
-# define Inventory_HH_
+#ifndef INVENTORY_HH_
+# define INVENTORY_HH_
 
 # include <cstddef> // size_t
 # include <memory>
@@ -85,14 +85,14 @@ public:
 
 
 private:
-  std::string _textureName;                  ///< Graphic Texture file name
   std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
 
-  std::vector<std::unique_ptr<Item>> _equipped; ///< Equiped items
+  std::vector<std::unique_ptr<Item>> _equipped;         ///< Equiped items
+  std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
 
   size_t _nbColumns; ///< Number of columns in the inventory
   size_t _nbLines;   ///< Number of lines in the inventory
 };
 
 
-#endif /* Inventory_HH_ */
+#endif /* INVENTORY_HH_ */
