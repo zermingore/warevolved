@@ -117,7 +117,6 @@ void MenuAction::buildMenuSelectionUnit()
     _entries.emplace_back(std::move(entry));
     _lock.unlock();
 
-
     auto entryInventory{std::make_shared<MenuEntry> (e_entry::INVENTORY)};
     entryInventory->setCallback([=, this] { openInventory(); });
     _lock.lock();
@@ -303,7 +302,7 @@ void MenuAction::enterBuilding()
 void MenuAction::openInventory()
 {
   game::Status::pushState(e_state::INVENTORY);
-  // game::Status::setStateAttributes(); /// \todo
+  game::Status::setStateAttributes(_selectedUnit->inventory());
   game::Status::resumeState();
 }
 

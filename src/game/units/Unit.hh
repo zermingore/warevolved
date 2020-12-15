@@ -13,6 +13,12 @@
 # include <common/using.hh> // Coords
 # include <graphics/graphic_types.hh>
 
+class Inventory;
+
+namespace graphics {
+  class Sprite;
+}
+
 
 
 /**
@@ -47,10 +53,6 @@ enum class e_unit
   NONE        // Invalid
 };
 
-
-namespace graphics {
-  class Sprite;
-}
 
 
 /**
@@ -130,6 +132,12 @@ public:
    * \return true if the unit has already been moved, false otherwise
    */
   auto moved() const { return _moved; }
+
+  /**
+   * \brief _inventory getter
+   * \return A shared pointer on the Inventory
+   */
+  auto inventory() const { return _inventory; }
 
   /**
    * \brief sets Unit's player belonging
@@ -258,6 +266,8 @@ protected:
   size_t _maxRange;    ///< Maximal range to attack a unit
 
   std::shared_ptr<graphics::Sprite> _sprite; ///< Unit Sprite
+
+  std::shared_ptr<Inventory> _inventory; ///< Collection of Items
 };
 
 

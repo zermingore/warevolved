@@ -11,6 +11,8 @@
 # include <memory>
 # include <context/State.hh>
 
+class Inventory;
+
 
 
 /**
@@ -31,6 +33,13 @@ public:
    */
   ~StateInventory() override = default;
 
+
+  /**
+   * \brief Fetch the attribute from the list
+   * \note Expects one attribute: the relevant Inventory
+   * \note Aborts if no attribute was found
+   */
+  void fetchAttributes() override final;
 
   /**
    * \brief Exits the current State
@@ -63,6 +72,8 @@ private:
 
 
   Coords _cursorCoords; ///< Inventory cursor position
+
+  std::shared_ptr<Inventory> _inventory;
 };
 
 

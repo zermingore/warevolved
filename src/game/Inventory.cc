@@ -21,6 +21,8 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _textureName(textureName)
   , _sprite(std::make_unique<graphics::Sprite> (_textureName))
 {
+  _sprite->setPosition(0, 0);
+  _sprite->setSize(50.f, 50.f);
 }
 
 
@@ -31,16 +33,17 @@ Inventory::Inventory(size_t nbCols, size_t nbLines)
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
+  _sprite->setPosition(0, 0);
+  _sprite->setSize(200.f, 200.f);
 }
 
 
 
 void Inventory::update()
 {
-
 }
 
 void Inventory::draw()
 {
-
+  _sprite->draw();
 }

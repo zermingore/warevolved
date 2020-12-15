@@ -8,7 +8,9 @@
 #include <game/units/Unit.hh>
 
 #include <debug/Debug.hh>
-#include <graphics/Sprite.hh> // Sprite is forward-declared in the header
+#include <graphics/Sprite.hh>
+#include <game/Item.hh>
+#include <game/Inventory.hh>
 
 
 
@@ -24,6 +26,7 @@ Unit::Unit()
   , _attackValue(0)
   , _minRange(0)
   , _maxRange(0)
+  , _inventory(std::make_shared<Inventory> (20, 20))
 {
 }
 

@@ -9,6 +9,7 @@
 
 #include <context/StateInventory.hh>
 
+#include <debug/Debug.hh>
 #include <context/StateMenu.hh>
 #include <game/Map.hh>
 #include <game/Battle.hh>
@@ -16,6 +17,7 @@
 #include <game/Player.hh>
 #include <game/Status.hh>
 #include <game/units/Unit.hh>
+#include <game/Inventory.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <graphics/MapGraphicsProperties.hh>
 #include <graphics/Sprite.hh>
@@ -65,7 +67,8 @@ void StateInventory::exit()
 
 void StateInventory::resume()
 {
-  /// \todo Fetch inventory
+  // retrieve the concerned Inventory the attributes
+  fetchAttributes();
 }
 
 
@@ -89,4 +92,23 @@ void StateInventory::selectRight()
 
 void StateInventory::draw()
 {
+  _inventory->draw();
+}
+
+
+void StateInventory::fetchAttributes()
+{
+  if (_attributes.empty())
+  {
+    ERROR("StateInventory::fetchAttributes called without attributes");
+    assert(false);
+    return;
+  }
+  assert(_attributes.size() == 1 && "Invalid attributes vector size");
+
+  // Fetch the Inventory
+  _inventory = std::static_pointer_cast<Inventory> (_attributes[0]);
+
+  // reset the attributes vector
+  _attributes.clear();
 }
