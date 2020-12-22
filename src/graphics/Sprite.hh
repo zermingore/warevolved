@@ -160,6 +160,13 @@ public:
   void setColor(const Color& color);
 
   /**
+   * \brief Use the texture as a repeated pattern
+   * \param \true on repeated pattern; \false otherwise
+   * \note Defaults to \false
+   */
+  void setTextureRepeat(bool repetition);
+
+  /**
    * \brief draws the Sprite in the cell coords.c, coords.l
    * \param c coordinate to display the sprite
    */

@@ -57,10 +57,27 @@ void Sprite::setTexture(const std::string& file_name)
 
 
 
+void Sprite::setTextureRepeat(bool repetition)
+{
+  _texture->setRepeated(repetition);
+
+  _sprite = std::make_shared<sf::Sprite> (*_texture);
+  _sprite->setTextureRect({
+    0,
+    0,
+    static_cast<int> (_rectangle->getSize().x),
+    static_cast<int> (_rectangle->getSize().y)
+  });
+  _rectangle->setTexture(_texture.get());
+}
+
+
+
 Pos2 const Sprite::position()
 {
   return Pos2{_sprite->getPosition()};
 }
+
 
 
 void Sprite::setPosition(const Coords position)
@@ -68,6 +85,7 @@ void Sprite::setPosition(const Coords position)
   _sprite->setPosition({ static_cast<component> (position.c),
                          static_cast<component> (position.l) });
 }
+
 
 
 void Sprite::setPosition(const Pos2 position)
@@ -81,6 +99,8 @@ Size2 const Sprite::size()
 {
   return Size2{_rectangle->getSize()};
 }
+
+
 
 void Sprite::setSize(const Size2 size)
 {
@@ -96,10 +116,12 @@ void Sprite::setOrigin(float x, float y)
 }
 
 
+
 void Sprite::setRotation(float angle)
 {
   _sprite->setRotation(angle);
 }
+
 
 
 void Sprite::setScale(const Scale2 scale)
@@ -107,6 +129,8 @@ void Sprite::setScale(const Scale2 scale)
   _rectangle->setScale(scale.x, scale.y);
   _sprite->setScale(scale.x, scale.y);
 }
+
+
 
 void Sprite::setScale(float ratio)
 {
@@ -134,6 +158,7 @@ void Sprite::drawAtCell(const Coords c)
 
   GraphicsEngine::draw(_sprite);
 }
+
 
 
 void Sprite::draw()

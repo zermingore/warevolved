@@ -31,7 +31,6 @@ public:
    */
   bool process(const e_input input);
 
-
   /**
    * \brief Associates a callback to an event identified by key.
    * \param input event to link with the callback.

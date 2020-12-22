@@ -21,20 +21,17 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _textureName(textureName)
   , _sprite(std::make_unique<graphics::Sprite> (_textureName))
 {
-  _sprite->setPosition(0, 0);
-  _sprite->setSize(50.f, 50.f);
 }
 
 
 
 Inventory::Inventory(size_t nbCols, size_t nbLines)
-  : InterfaceElement("inventory")
-  , _sprite(std::make_unique<graphics::Sprite> ("inventory_background"))
+  : InterfaceElement("cursor")
+  , _sprite(std::make_unique<graphics::Sprite> ("cell_inventory_backgound"))
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
-  _sprite->setPosition(0, 0);
-  _sprite->setSize(200.f, 200.f);
+  _sprite->setSize(200.f, 200.f); ///< \todo Set correct size
 }
 
 
@@ -43,7 +40,10 @@ void Inventory::update()
 {
 }
 
+
+
 void Inventory::draw()
 {
+  _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
   _sprite->draw();
 }
