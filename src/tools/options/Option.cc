@@ -10,9 +10,9 @@
 #include <utility>
 
 
-Option::Option(std::string  name,
-               std::string  description,
-               std::vector<std::string>  aliases,
+Option::Option(std::string name,
+               std::string description,
+               std::vector<std::string> aliases,
                const e_option_argument required_arguments)
   : _name(std::move(name))
   , _description(std::move(description))

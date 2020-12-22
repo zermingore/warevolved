@@ -3,10 +3,11 @@
  * \date July 7, 2017
  * \author Zermingore
  * \brief OptionsParser class declaration
+ *   ArgumentsHelpVersionException and ArgumentsException exception definition
  */
 
-#ifndef TOOLS_OPTIONS_OPTIONS_PARSER_HH_
-# define TOOLS_OPTIONS_OPTIONS_PARSER_HH_
+#ifndef OPTIONS_OPTIONS_PARSER_HH_
+# define OPTIONS_OPTIONS_PARSER_HH_
 
 # include <map>
 # include <vector>
@@ -16,6 +17,7 @@
 # include <optional>
 
 # include <tools/options/Option.hh>
+
 
 
 /**
@@ -47,10 +49,12 @@ public:
    */
   const char *what() const noexcept override final { return _exc.c_str(); }
 
+
 private:
   /// Error message displayed by exc.what()
   std::string _exc = "Arguments exception";
 };
+
 
 
 /**
@@ -77,11 +81,6 @@ public:
   OptionsParser() = delete;
 
   /**
-   * \brief Default destructor
-   */
-  ~OptionsParser() = default;
-
-  /**
    * \brief Disabled copy constructor.
    *   There's (apparently) no good reason to need it
    */
@@ -94,7 +93,7 @@ public:
    * \param av Argument vector (C-style)
    * \warning The argument vector must contain ac entries (throws otherwise)
    * \note This parameters should be directly forwarded from the main
-   * \note Throws if no arguments is provided
+   * \note Throws if no arguments is provided (ac == 0 or av empty)
    */
   OptionsParser(int ac, const char** av);
 
@@ -120,7 +119,6 @@ public:
    * \note throws std::out_of_range if the given option does not exist
    * \return The associated option, if any
    */
-  // std::optional<const std::vector<std::string>>
   std::optional<const Option>
   operator[] (const std::string& name) const noexcept(true);
 
@@ -153,4 +151,4 @@ private:
 };
 
 
-#endif /* !TOOLS_OPTIONS_OPTIONS_PARSER_HH_ */
+#endif /* !OPTIONS_OPTIONS_PARSER_HH_ */

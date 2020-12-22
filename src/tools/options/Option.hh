@@ -44,9 +44,9 @@ public:
    * \param aliases Command line option invocation names
    * \param required_arguments Are arguments optional mandatory or forbidden ?
    */
-  Option(std::string  name,
-         std::string  description,
-         std::vector<std::string>  aliases,
+  Option(std::string name,
+         std::string description,
+         std::vector<std::string> aliases,
          const e_option_argument required_arguments);
 
   /**
