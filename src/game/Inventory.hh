@@ -35,32 +35,48 @@ enum class e_container_type
 
 /**
  * \class ItemsContainer
- * \brief Items Container (backpack, trunk, pocket, ...)
+ * \brief Items container (backpack, trunk, pocket, ...)
  */
-class ItemsContainer
+class ItemsContainer: public interface::InterfaceElement
 {
 public:
   /**
-   * \brief Default contructor (name required)
+   * \brief Default contructor (parameters required)
    */
   ItemsContainer() = default;
 
   /**
-   * \brief Contructor (name required)
+   * \brief Contructor
+   * \param type Type of the container (\see e_container_type)
+   * \param name Displayed name of the container
+   * \param nbCols Size of the container (in inventory cells)
+   * \param nbLines Size of the container (in inventory cells)
    */
   ItemsContainer(e_container_type type,
                  const std::string& name,
-                 const std::string& textureName);
+                 size_t nbCols,
+                 size_t nbLines);
+
+
+  /**
+   * \brief Update the graphics elements before drawing
+   */
+  virtual void update() override final;
+
+  /**
+   * \brief Draw the container and its content
+   */
+  virtual void draw() override final;
 
 
 private:
   e_container_type _type; ///< Type of the container
   std::string _name;      ///< Displayed name
 
-  std::string _textureName;                  ///< Graphic Texture file name
-  std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
-
   std::vector<std::unique_ptr<Item>> _stored; ///< Items in the container
+
+  size_t _nbColumns; ///< number of columns (x coordinate)
+  size_t _nbLines;   ///< number of lines (y coordinate)
 };
 
 
@@ -86,12 +102,12 @@ public:
 
 
   /**
-   * \brief Update the graphics elements before drawing
+   * \brief Do nothing (override required)
    */
-  virtual void update() override final;
+  virtual void update() override final {}
 
   /**
-   * \brief Draw the components of the Inventory
+   * \brief Draw the components of the Inventory (equiped list and containers)
    */
   virtual void draw() override final;
 
