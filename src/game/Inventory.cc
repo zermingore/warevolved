@@ -26,12 +26,12 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 
 Inventory::Inventory(size_t nbCols, size_t nbLines)
-  : InterfaceElement("cursor")
-  , _sprite(std::make_unique<graphics::Sprite> ("cell_inventory_backgound"))
+  : InterfaceElement("cell_inventory_background")
+  , _sprite(std::make_unique<graphics::Sprite> ("cell_inventory_background"))
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
-  _sprite->setSize(200.f, 200.f); ///< \todo Set correct size
+  _sprite->setSize(200.f, 800.f); ///< \todo Set correct size
 }
 
 

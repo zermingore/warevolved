@@ -14,6 +14,8 @@
 # include <resources/Font.hh>
 
 
+// # define DEBUG_XML // dump XML mapping resource name <> file
+
 enum class e_resource_type: int; // definition follows
 
 

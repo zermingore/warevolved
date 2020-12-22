@@ -77,6 +77,11 @@
         <name>minimap_unit</name>
       </file>
     </folder>
+    <folder path='resources/interface/items/inventory/'>
+      <file filename='cell_inventory_backgound.png'>
+        <name>cell_inventory_background</name>
+      </file>
+    </folder>
   </images>
   <fonts>
     <folder path='resources/fonts/'>
