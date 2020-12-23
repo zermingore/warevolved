@@ -78,7 +78,7 @@ public:
   void setColor(graphics::Color color) { _color = color; }
 
   /**
-   * \brief Skipping this frame the cursor draw
+   * \brief Skipping this frame the cursor draw (hide it)
    */
   void disableDrawThisFrame() { _disableDrawThisFrame = true; }
 

@@ -20,5 +20,11 @@ component MapGraphicsProperties::_gridOffsetX   = 0;
 component MapGraphicsProperties::_gridOffsetY   = 0;
 
 
+component MapGraphicsProperties::_inventoryCellWidth =
+ MapGraphicsProperties::_cellWidth / 4;
+
+component MapGraphicsProperties::_inventoryCellHeight =
+ MapGraphicsProperties::_cellHeight / 4;
+
 
 } // namespace graphics

@@ -26,7 +26,7 @@ Unit::Unit()
   , _attackValue(0)
   , _minRange(0)
   , _maxRange(0)
-  , _inventory(std::make_shared<Inventory> (20, 20))
+  , _inventory(std::make_shared<Inventory> ())
 {
 }
 

@@ -33,6 +33,18 @@ public:
   static auto cellHeight() { return _cellHeight; }
 
   /**
+   * \brief Cell width getter.
+   * \return Cell width in pixels.
+   */
+  static auto inventoryCellWidth() { return _inventoryCellWidth; }
+
+  /**
+   * \brief Cell height getter.
+   * \return Cell height in pixels.
+   */
+  static auto inventoryCellHeight() { return _inventoryCellHeight; }
+
+  /**
    * \brief grid thickness getter.
    * \return grid thickness in pixels.
    */
@@ -89,11 +101,14 @@ public:
 
 private:
   /// \todo These are not const because they will be modifyable later
-  static component _cellWidth;     ///< cells width in pixels
-  static component _cellHeight;    ///< cells height in pixels
-  static component _gridThickness; ///< thickness of the grid
+  static component _cellWidth;     ///< Map cells width in pixels
+  static component _cellHeight;    ///< Map cells height in pixels
+  static component _gridThickness; ///< Thickness of the grid
   static component _gridOffsetX;   ///< X offset (from the window left border)
   static component _gridOffsetY;   ///< Y offset (from the window top border)
+
+  static component _inventoryCellWidth;  ///< Inventory cell width in pixels
+  static component _inventoryCellHeight; ///< Inventory cell width in pixels
 };
 
 

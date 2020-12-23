@@ -70,6 +70,8 @@ public:
 
 
 private:
+  std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
+
   e_container_type _type; ///< Type of the container
   std::string _name;      ///< Displayed name
 
@@ -85,36 +87,23 @@ private:
  * \class Inventory
  * \brief Possesions of an entity (Unit, Building, Vehicle, ...)
  */
-class Inventory: public interface::InterfaceElement
+class Inventory
 {
 public:
   /**
-   * \brief Deleted default constructor (size required)
-   */
-  Inventory() = delete;
-
-  /**
-   * \brief Constructor
-   * \param nbCols Inventory occupied space
-   * \param nbLines Inventory occupied space
-   */
-  Inventory(size_t nbCols, size_t nbLines);
-
-
-  /**
-   * \brief Do nothing (override required)
-   */
-  virtual void update() override final {}
-
-  /**
    * \brief Draw the components of the Inventory (equiped list and containers)
    */
-  virtual void draw() override final;
+  void draw();
+
+
+  void addContainer(e_container_type type,
+                    const std::string& name,
+                    size_t nbCols,
+                    size_t nbLines);
+
 
 
 private:
-  std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
-
   std::vector<std::unique_ptr<Item>> _equipped;         ///< Equiped items
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
 
