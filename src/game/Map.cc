@@ -19,6 +19,7 @@
 #include <game/TerrainsHandler.hh>
 #include <game/units/UnitsFactory.hh>
 #include <game/units/Vehicle.hh>
+#include <game/Inventory.hh>
 #include <game/Building.hh>
 #include <interface/Cursor.hh>
 
@@ -168,6 +169,15 @@ void Map::newUnit(e_unit type,
   new_unit->setPlayerId(player_id);
   new_unit->setHp(hp);
   new_unit->setPlayed(played);
+
+  if (type == e_unit::SOLDIER)
+  {
+    new_unit->inventory()->addContainer(
+      e_container_type::POCKET, "jacket pocket left", 10, 10);
+    new_unit->inventory()->addContainer(
+      e_container_type::POCKET, "jacket pocket right", 10, 10);
+  }
+
   _units[player_id].emplace_back(new_unit);
   _cells[column][line]->setUnit(new_unit);
 }

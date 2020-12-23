@@ -7,6 +7,7 @@
 
 #include <game/Inventory.hh>
 
+#include <cassert>
 #include <game/Item.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -64,11 +65,21 @@ void Inventory::draw()
   graphics::GraphicsEngine::draw(background);
   game::Status::player()->cursor()->disableDrawThisFrame();
 
-  // _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
-  // _sprite->draw();
-
   for (const auto& container: _stored)
   {
     container->draw();
   }
+}
+
+
+
+void Inventory::addContainer(e_container_type type,
+                             const std::string& name,
+                             size_t nbCols,
+                             size_t nbLines)
+{
+  assert(nbCols > 0 && nbLines > 0);
+
+  _stored.emplace_back(
+    std::make_unique<ItemsContainer> (type, name, nbCols, nbLines));
 }

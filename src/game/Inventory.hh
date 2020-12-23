@@ -95,7 +95,9 @@ public:
    */
   void draw();
 
-
+  /**
+   * \brief Create and add a container to the Inventory
+   */
   void addContainer(e_container_type type,
                     const std::string& name,
                     size_t nbCols,
