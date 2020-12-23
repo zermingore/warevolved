@@ -32,9 +32,9 @@ ItemsContainer::ItemsContainer(e_container_type type,
 {
   _sprite->setSize(
     static_cast<float> (nbCols)
-     * graphics::MapGraphicsProperties::inventoryCellHeight(),
+     * graphics::MapGraphicsProperties::inventoryCellWidth(),
     static_cast<float> (nbLines)
-     * graphics::MapGraphicsProperties::inventoryCellWidth());
+     * graphics::MapGraphicsProperties::inventoryCellHeight());
 }
 
 
@@ -48,6 +48,7 @@ void ItemsContainer::update()
 void ItemsContainer::draw()
 {
   _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
+  _sprite->setPosition(_position); // Refresh the position
   _sprite->draw();
 }
 
@@ -80,6 +81,10 @@ void Inventory::addContainer(e_container_type type,
 {
   assert(nbCols > 0 && nbLines > 0);
 
-  _stored.emplace_back(
-    std::make_unique<ItemsContainer> (type, name, nbCols, nbLines));
+  auto cont = std::make_unique<ItemsContainer> (type, name, nbCols, nbLines);
+  cont->setPosition(_currentContainerPosition);
+  _stored.emplace_back(std::move(cont));
+
+  const auto sz{graphics::MapGraphicsProperties::inventoryCellWidth()};
+  _currentContainerPosition.x += static_cast<float> (nbCols) * sz + 5 * sz;
 }

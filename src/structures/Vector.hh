@@ -43,7 +43,7 @@ public:
    * \param a x coordinate.
    * \param b y coordinate.
    */
-  Vector2(const T& a, const T& b)
+  Vector2(const T& a, const T& b) noexcept
     : x(static_cast<T> (a))
     , y(static_cast<T> (b))
   {

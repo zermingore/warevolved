@@ -43,7 +43,7 @@ public:
   /**
    * \brief Default contructor (parameters required)
    */
-  ItemsContainer() = default;
+  ItemsContainer() = delete;
 
   /**
    * \brief Contructor
@@ -71,6 +71,7 @@ public:
 
 private:
   std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
+  graphics::Pos2 _drawPosition; ///< Controlled by the inventory
 
   e_container_type _type; ///< Type of the container
   std::string _name;      ///< Displayed name
@@ -108,6 +109,9 @@ public:
 private:
   std::vector<std::unique_ptr<Item>> _equipped;         ///< Equiped items
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
+
+  /// Where to draw the current container
+  graphics::Pos2 _currentContainerPosition = {0, 50};
 
   size_t _nbColumns; ///< Number of columns in the inventory
   size_t _nbLines;   ///< Number of lines in the inventory
