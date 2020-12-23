@@ -161,8 +161,8 @@ public:
 
   /**
    * \brief Use the texture as a repeated pattern
-   * \param \true on repeated pattern; \false otherwise
-   * \note Defaults to \false
+   * \param repetition true on repeated pattern; false otherwise
+   * \note The texture repetition defaults to false
    */
   void setTextureRepeat(bool repetition);
 
