@@ -81,6 +81,12 @@
       <file filename='cell_inventory_backgound.png'>
         <name>cell_inventory_background</name>
       </file>
+      <file filename='handgun.png'>
+        <name>handgun</name>
+      </file>
+      <file filename='clip_full.png'>
+        <name>clip_full</name>
+      </file>
     </folder>
   </images>
   <fonts>
