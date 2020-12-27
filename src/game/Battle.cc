@@ -21,7 +21,7 @@
 #include <game/units/Unit.hh>
 #include <game/units/UnitsFactory.hh>
 #include <game/units/Vehicle.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <interface/Cursor.hh>
 #include <structures/Vector.hh>
 #include <tools/options/OptionsParser.hh>

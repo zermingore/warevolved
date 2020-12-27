@@ -3,21 +3,24 @@
  * \date February 10, 2017
  * \author Zermingore
  * \namespace graphics
- * \brief MapGraphicsProperties class declaration
+ * \brief Properties class declaration
  */
 
-#ifndef MAP_GRAPHICS_PROPERTIES_HH_
-# define MAP_GRAPHICS_PROPERTIES_HH_
+#ifndef GRAPHICS_PROPERTIES_HH_
+# define GRAPHICS_PROPERTIES_HH_
 
 # include <graphics/graphic_types.hh>
 
+
+
 namespace graphics {
 
+
 /**
- * \class MapGraphicsProperties
+ * \class Properties
  * \brief Graphics properties of the Map (cell sizes, grid thickness, ...)
  */
-class MapGraphicsProperties
+class Properties
 {
 public:
   /**
@@ -114,4 +117,4 @@ private:
 
 } // namespace graphics
 
-#endif /* !MAP_GRAPHICS_PROPERTIES_HH_ */
+#endif /* !GRAPHICS_PROPERTIES_HH_ */

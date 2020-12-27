@@ -21,7 +21,7 @@
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
 #include <game/units/Unit.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 
@@ -186,7 +186,7 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
       break;
   }
 
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   unsigned int angle(static_cast<int> (shape) % 360);
   img->setRotation(static_cast<float> (angle));

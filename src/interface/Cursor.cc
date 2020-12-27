@@ -8,7 +8,7 @@
 #include <interface/Cursor.hh>
 
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 
 
@@ -64,7 +64,7 @@ bool Cursor::moveRight()
 void Cursor::update()
 {
   using namespace graphics;
-  using p = MapGraphicsProperties;
+  using p = graphics::Properties;
 
   auto w(p::cellWidth());
   auto h(p::cellHeight());

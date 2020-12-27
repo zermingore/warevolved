@@ -16,7 +16,7 @@
 #include <game/Player.hh>
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/graphic_types.hh>
 #include <input/EventManager.hh>
 #include <interface/Cursor.hh>
@@ -87,7 +87,7 @@ void StateSelectDropZone::draw()
     return;
   }
 
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   game::Status::player()->cursor()->disableDrawThisFrame();
 

@@ -17,7 +17,7 @@
 #include <game/TerrainsHandler.hh>
 #include <game/units/Vehicle.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/graphic_types.hh>
 #include <interface/Cursor.hh>
 #include <interface/MiniMap.hh>
@@ -117,7 +117,7 @@ void Panel::computePosition()
 
   // Set the grid offset (map rendering zone size: 1/2 left room)
   using namespace graphics;
-  using p = MapGraphicsProperties;
+  using p = graphics::Properties;
   auto size = static_cast<component> (GraphicsEngine::windowSize().x) - _margin;
   auto nb_col = static_cast<component> (_map->nbColumns());
   p::setGridOffsetX((draw_offset + size - p::cellWidth() * nb_col) / 2);

@@ -7,7 +7,7 @@
 
 #include <debug/OSD.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <interface/Interface.hh>
 #include <resources/ResourcesManager.hh>
 #include <resources/Text.hh>
@@ -71,7 +71,7 @@ void OSD::addText(const std::string& str)
 
 void OSD::writeOnCell(size_t c, size_t l, const std::string& str)
 {
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   const graphics::Pos2 pos {
     static_cast<graphics::component> (c) * p::cellWidth()  + p::gridOffsetX(),

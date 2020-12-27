@@ -12,7 +12,7 @@
 #include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <resources/ResourcesManager.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <game/Status.hh>
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
@@ -32,9 +32,9 @@ ItemsContainer::ItemsContainer(e_container_type type,
 {
   _sprite->setSize(
     static_cast<float> (nbCols)
-     * graphics::MapGraphicsProperties::inventoryCellWidth(),
+     * graphics::Properties::inventoryCellWidth(),
     static_cast<float> (nbLines)
-     * graphics::MapGraphicsProperties::inventoryCellHeight());
+     * graphics::Properties::inventoryCellHeight());
 }
 
 
@@ -85,6 +85,6 @@ void Inventory::addContainer(e_container_type type,
   cont->setPosition(_currentContainerPosition);
   _stored.emplace_back(std::move(cont));
 
-  const auto sz{graphics::MapGraphicsProperties::inventoryCellWidth()};
+  const auto sz{graphics::Properties::inventoryCellWidth()};
   _currentContainerPosition.x += static_cast<float> (nbCols) * sz + 5 * sz;
 }

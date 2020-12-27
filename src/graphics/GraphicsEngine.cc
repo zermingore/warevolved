@@ -21,7 +21,7 @@
 #include <game/Status.hh>
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 #include <input/EventsProcessor.hh>
@@ -165,7 +165,7 @@ void GraphicsEngine::drawMap(const std::shared_ptr<Battle>& battle)
 
 void GraphicsEngine::drawGrid(const std::shared_ptr<Map>& map)
 {
-  using p = MapGraphicsProperties;
+  using p = graphics::Properties;
 
   // Lines
   auto offset_y(p::gridOffsetY());
@@ -198,7 +198,7 @@ void GraphicsEngine::drawGrid(const std::shared_ptr<Map>& map)
 
 void GraphicsEngine::drawUnit(const std::shared_ptr<Unit>& unit)
 {
-  using p = MapGraphicsProperties;
+  using p = graphics::Properties;
 
   // image.sprite()->setColor(game::Status::player()->unitsColor());
   auto sprite(unit->sprite());
@@ -244,7 +244,7 @@ void GraphicsEngine::drawInterface()
 
 void GraphicsEngine::setGridOffset(const std::shared_ptr<const Map>& map)
 {
-  using p = MapGraphicsProperties;
+  using p = graphics::Properties;
   using components = const std::pair<const component, const component>;
 
   // offset = 1/2 left room

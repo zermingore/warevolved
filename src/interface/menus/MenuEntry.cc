@@ -10,7 +10,7 @@
 #include <game/Battle.hh>
 #include <game/Status.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <interface/menus/MenuEntry.hh>
 #include <resources/Text.hh>
@@ -28,7 +28,7 @@ MenuEntry::MenuEntry(const e_entry entry, bool wide)
 
   // label initialization
   /// \todo the size should be ratio dependent, eventually text length dependent
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
   auto size { (p::cellWidth() + p::cellHeight()) / 4 };
 
   _label = std::make_shared<resources::Text> (
@@ -47,7 +47,7 @@ MenuEntry::MenuEntry(const std::string label,
   , _extraSprite(std::make_shared<graphics::Sprite> (sprite))
   , _notes(notes)
 {
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   /// \todo the size should be ratio / text length dependent dependent
   auto size { (p::cellWidth() + p::cellHeight()) / 4 };
@@ -60,7 +60,7 @@ MenuEntry::MenuEntry(const std::string label,
 
 void MenuEntry::update()
 {
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   _lock.lock();
   if (_wide)
@@ -85,7 +85,7 @@ void MenuEntry::draw()
   _sprite->setPosition(_position.x, _position.y);
   _sprite->draw();
 
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   if (_extraSprite)
   {

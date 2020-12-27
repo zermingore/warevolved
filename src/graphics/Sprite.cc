@@ -10,7 +10,7 @@
 
 #include <debug/Debug.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/graphic_types.hh>
 #include <resources/ResourcesManager.hh>
 
@@ -151,7 +151,7 @@ void Sprite::drawAtCell(const Coords c)
 {
   // Set the sprite position
   using namespace graphics;
-  using p = MapGraphicsProperties;
+  using p = graphics::Properties;
   _sprite->setPosition(
     { static_cast<component> (c.c) * p::cellWidth()  + p::gridOffsetX(),
       static_cast<component> (c.l) * p::cellHeight() + p::gridOffsetY() });

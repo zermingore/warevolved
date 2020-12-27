@@ -18,7 +18,7 @@
 #include <game/Player.hh>
 #include <interface/Cursor.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <input/EventManager.hh>
 #include <input/EventsProcessor.hh>
 #include <input/KeyManager.hh>
@@ -82,7 +82,7 @@ void InputsListener::listen(bool replay,
         static int last_mouse_x = 0;
         static int last_mouse_y = 0;
 
-        using p = graphics::MapGraphicsProperties;
+        using p = graphics::Properties;
         const auto cell_width { static_cast<int> (p::cellWidth()) };
         const auto cell_height { static_cast<int> (p::cellHeight()) };
 

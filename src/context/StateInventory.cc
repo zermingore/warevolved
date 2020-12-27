@@ -19,7 +19,7 @@
 #include <game/units/Unit.hh>
 #include <game/Inventory.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 #include <input/EventManager.hh>

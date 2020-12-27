@@ -14,7 +14,7 @@
 #include <game/PathFinding.hh>
 #include <game/Player.hh>
 #include <game/Status.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/graphic_types.hh>
 #include <input/EventManager.hh>
 #include <interface/Cursor.hh>
@@ -33,7 +33,7 @@ StateSelectTarget::StateSelectTarget()
   // explicitly using some floats for the division
   float x = static_cast<float> (_holoUnit->texture()->getSize().x);
   float y = static_cast<float> (_holoUnit->texture()->getSize().y);
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
   _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 }
 
@@ -109,7 +109,7 @@ void StateSelectTarget::draw()
   static size_t angle = 0;
   angle = (angle + 1) % 360;
 
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
   auto width(p::cellWidth());
   auto height(p::cellHeight());
 

@@ -17,7 +17,7 @@
 #include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <graphics/GraphicsEngine.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
 #include <input/EventManager.hh>
@@ -64,7 +64,7 @@ StateMovingUnit::StateMovingUnit()
 
   const auto x { static_cast<graphics::component> (_holoUnit->size().x) };
   const auto y { static_cast<graphics::component> (_holoUnit->size().y) };
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
   _holoUnit->setScale(p::cellWidth() / x, p::cellHeight() / y);
 
   // Fading sprite at original position

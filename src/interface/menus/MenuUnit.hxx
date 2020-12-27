@@ -16,7 +16,7 @@
 #include <game/Player.hh>
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <interface/Cursor.hh>
 
 

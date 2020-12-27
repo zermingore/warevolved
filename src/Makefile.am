@@ -11,7 +11,7 @@ main.cc                                  \
 \
 graphics/GraphicsEngine.cc               \
 graphics/Context.cc                      \
-graphics/MapGraphicsProperties.cc        \
+graphics/Properties.cc        \
 graphics/Sprite.cc                       \
 \
 resources/ResourcesManager.cc            \

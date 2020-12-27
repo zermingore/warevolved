@@ -18,7 +18,7 @@
 #include <game/Status.hh>
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/MenuEntry.hh>
@@ -53,7 +53,7 @@ void MenuBuilding::build()
   addCancelEntry( [=, this] { cancel(); } );
 
   // increase highlight sprite
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
   _imageSelection->setSize(p::cellWidth() * 4, p::cellHeight());
 }
 

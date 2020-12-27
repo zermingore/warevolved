@@ -17,7 +17,7 @@
 #include <game/Status.hh>
 #include <game/units/Vehicle.hh>
 #include <game/Terrain.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/graphic_types.hh>
 #include <input/EventManager.hh>
 #include <interface/Cursor.hh>
@@ -86,7 +86,7 @@ void StateSelectExitZone::draw()
     return;
   }
 
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   game::Status::player()->cursor()->disableDrawThisFrame();
 

@@ -12,7 +12,7 @@
 #include <game/Map.hh>
 #include <game/Status.hh>
 #include <graphics/graphic_types.hh>
-#include <graphics/MapGraphicsProperties.hh>
+#include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <input/EventManager.hh>
 
@@ -38,7 +38,7 @@ StateSelectCell::StateSelectCell()
   _selectHighlight = std::make_shared<graphics::Sprite> ("cursor");
   _selectHighlight->setColor(graphics::Color(255, 127, 127, 255));
 
-  using p = graphics::MapGraphicsProperties;
+  using p = graphics::Properties;
 
   // explicitly using some floats for the division
   float x(static_cast<float> (_selectHighlight->texture()->getSize().x));
