@@ -26,6 +26,7 @@ class Item;
 
 enum class e_container_type
 {
+  EQUIPPED,  ///< Unit type agnostic
   BACKPACK, ///< Soldier only
   POCKET,   ///< Soldier only
   TRUNK,    ///< Vehicle only
@@ -89,12 +90,22 @@ class Inventory
 {
 public:
   /**
-   * \brief Draw the components of the Inventory (equiped list and containers)
+   * \brief Default constructor. Initializes the equipped items container
+   */
+  Inventory();
+
+
+  /**
+   * \brief Draw the components of the Inventory (equipped list and containers)
    */
   void draw();
 
   /**
    * \brief Create and add a container to the Inventory
+   * \param type Type of the container
+   * \param name Displayed container name
+   * \param nbCols Number of inventory cells (column)
+   * \param nbLines Number of inventory cells (lines)
    */
   void addContainer(e_container_type type,
                     const std::string& name,
@@ -104,9 +115,10 @@ public:
 
 
 private:
-  std::vector<std::unique_ptr<Item>> _equipped;         ///< Equiped items
+  std::unique_ptr<ItemsContainer> _equipped;            ///< Equipped items
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
 
+  /// \todo dynamic first container place (based on biggest equipped items)
   /// Where to draw the current container
   graphics::Pos2 _currentContainerPosition = {0, 50};
 

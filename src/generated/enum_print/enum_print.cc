@@ -163,6 +163,8 @@ std::string e_container_type_string(e_container_type entry)
 {
   switch (entry)
   {
+    case e_container_type::EQUIPPED:
+      return "e_container_type::EQUIPPED (no explicit value)";
     case e_container_type::BACKPACK:
       return "e_container_type::BACKPACK (no explicit value)";
     case e_container_type::POCKET:

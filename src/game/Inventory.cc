@@ -53,6 +53,18 @@ void ItemsContainer::draw()
 
 
 
+// _______________________________ Inventory _______________________________ //
+
+Inventory::Inventory()
+  : _equipped(std::make_unique<ItemsContainer> (
+      e_container_type::EQUIPPED, "equipped", 10, 30))
+{
+  /// \todo Fix hard-coded sizes
+  _equipped->setPosition({10, 50});
+  const auto sz{graphics::Properties::inventoryCellWidth()};
+  _currentContainerPosition.x = static_cast<float> (10) * sz + 5 * sz;
+}
+
 
 
 void Inventory::draw()
@@ -64,6 +76,8 @@ void Inventory::draw()
   background.setFillColor(bg);
   graphics::GraphicsEngine::draw(background);
   game::Status::player()->cursor()->disableDrawThisFrame();
+
+  _equipped->draw();
 
   for (const auto& container: _stored)
   {
