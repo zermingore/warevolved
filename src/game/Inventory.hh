@@ -70,9 +70,6 @@ public:
 
 
 private:
-  std::unique_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
-  graphics::Pos2 _drawPosition; ///< Controlled by the inventory
-
   e_container_type _type; ///< Type of the container
   std::string _name;      ///< Displayed name
 

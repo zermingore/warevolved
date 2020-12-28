@@ -24,7 +24,6 @@ ItemsContainer::ItemsContainer(e_container_type type,
                                size_t nbCols,
                                size_t nbLines)
   : InterfaceElement("cell_inventory_background")
-  , _sprite(std::make_unique<graphics::Sprite> ("cell_inventory_background"))
   , _type(type)
   , _name(name)
   , _nbColumns(nbCols)
