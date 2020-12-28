@@ -58,6 +58,12 @@ public:
                  size_t nbCols,
                  size_t nbLines);
 
+  /**
+   * \brief Add the given Item to the container
+   * \param item Item to add
+   */
+  void add(std::unique_ptr<Item> item);
+
 
   /**
    * \brief Update the graphics elements before drawing
@@ -112,6 +118,16 @@ public:
                     size_t nbCols,
                     size_t nbLines);
 
+  /**
+   * \brief Add a new item in the equipped list
+   * \param name Displayed Item name
+   * \param nbCols New Item number of used columns
+   * \param nbLines New Item number of used lines
+   * \note Creating a new Items from these parameters
+   */
+  void addEquip(const std::string& name,
+                size_t nbCols,
+                size_t nbLines);
 
 
 private:

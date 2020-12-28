@@ -38,6 +38,13 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 
 
+void ItemsContainer::add(std::unique_ptr<Item> item)
+{
+  _stored.emplace_back(std::move(item));
+}
+
+
+
 void ItemsContainer::update()
 {
 }
@@ -49,6 +56,11 @@ void ItemsContainer::draw()
   _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
   _sprite->setPosition(_position); // Refresh the position
   _sprite->draw();
+
+  for (const auto& item: _stored)
+  {
+    _stored->draw();
+  }
 }
 
 
@@ -100,4 +112,14 @@ void Inventory::addContainer(e_container_type type,
 
   const auto sz{graphics::Properties::inventoryCellWidth()};
   _currentContainerPosition.x += static_cast<float> (nbCols) * sz + 5 * sz;
+}
+
+
+
+void Inventory::addEquip(const std::string& name,
+                         size_t nbCols,
+                         size_t nbLines)
+{
+  auto item = std::make_unique<Item> (name, name, nbCols, nbLines);
+  _equipped->add(std::move(item));
 }

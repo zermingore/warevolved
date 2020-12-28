@@ -176,6 +176,8 @@ void Map::newUnit(e_unit type,
       e_container_type::POCKET, "jacket pocket left", 10, 10);
     new_unit->inventory()->addContainer(
       e_container_type::POCKET, "jacket pocket right", 10, 10);
+
+    new_unit->inventory()->addEquip("handgun", 10 , 5);
   }
 
   _units[player_id].emplace_back(new_unit);
