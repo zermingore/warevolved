@@ -25,4 +25,13 @@ InterfaceElement::InterfaceElement(const std::string& image_name)
 }
 
 
+
+void InterfaceElement::setPosition(const graphics::Pos2& position)
+{
+  _position = position;
+  _sprite->setPosition(position);
+}
+
+
+
 } // namespace interface

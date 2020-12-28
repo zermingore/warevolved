@@ -22,12 +22,6 @@ Item::Item(const std::string& name,
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
-}
-
-
-
-void Item::update()
-{
   const auto w{graphics::Properties::inventoryCellWidth()};
   const auto h{graphics::Properties::inventoryCellHeight()};
 
@@ -37,8 +31,13 @@ void Item::update()
 
 
 
+void Item::update()
+{
+}
+
+
+
 void Item::draw()
 {
-  update();
   _sprite->draw();
 }

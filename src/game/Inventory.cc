@@ -40,7 +40,9 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 void ItemsContainer::add(std::unique_ptr<Item> item)
 {
-  _stored.emplace_back(std::move(item));
+  /// \todo Items coordinates
+  Coords c{0, 0};
+  _stored.push_back({c, std::move(item)});
 }
 
 
@@ -57,9 +59,16 @@ void ItemsContainer::draw()
   _sprite->setPosition(_position); // Refresh the position
   _sprite->draw();
 
+  const auto w{graphics::Properties::inventoryCellWidth()};
+  const auto h{graphics::Properties::inventoryCellHeight()};
   for (const auto& item: _stored)
   {
-    item->draw();
+    graphics::Pos2 coords(_position);
+    coords.x += static_cast<float> (item.first.c) * w;
+    coords.y += static_cast<float> (item.first.l) * h;
+
+    item.second->setPosition(coords);
+    item.second->draw();
   }
 }
 
@@ -84,7 +93,7 @@ void Inventory::draw()
   // Background
   graphics::Size2 size{graphics::GraphicsEngine::windowSize()};
   graphics::RectangleShape background(size);
-  const sf::Color bg(0, 0, 0, 224);
+  const sf::Color bg(127, 127, 127, 224);
   background.setFillColor(bg);
   graphics::GraphicsEngine::draw(background);
   game::Status::player()->cursor()->disableDrawThisFrame();

@@ -80,10 +80,11 @@ private:
   e_container_type _type; ///< Type of the container
   std::string _name;      ///< Displayed name
 
-  std::vector<std::unique_ptr<Item>> _stored; ///< Items in the container
+  /// Items in the container and their coordinates in the container
+  std::vector<std::pair<Coords, std::unique_ptr<Item>>> _stored;
 
-  size_t _nbColumns; ///< number of columns (x coordinate)
-  size_t _nbLines;   ///< number of lines (y coordinate)
+  size_t _nbColumns; ///< Number of columns (x coordinate)
+  size_t _nbLines;   ///< Number of lines (y coordinate)
 };
 
 

@@ -85,10 +85,10 @@ public:
   void setCoords(const Coords& coords) { _coords = coords; }
 
   /**
-   * \brief position setter.
-   * \param position cells coordinates to place the element.
+   * \brief Sprite position setter
+   * \param position Coordinates to place the element
    */
-  void setPosition(const graphics::Pos2& position) { _position = position; }
+  void setPosition(const graphics::Pos2& position);
 
   /**
    * \brief scale setter.
