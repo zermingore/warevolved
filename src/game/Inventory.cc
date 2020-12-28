@@ -59,7 +59,7 @@ void ItemsContainer::draw()
 
   for (const auto& item: _stored)
   {
-    _stored->draw();
+    item->draw();
   }
 }
 

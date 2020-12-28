@@ -13,6 +13,7 @@
 # include <string>
 
 # include <graphics/graphic_types.hh>
+# include <interface/InterfaceElement.hh>
 
 
 namespace graphics {
@@ -39,7 +40,7 @@ enum class e_rotation
  * \class Item
  * \brief Inventory Item
  */
-class Item
+class Item: public interface::InterfaceElement
 {
 public:
   /**
@@ -76,11 +77,21 @@ public:
   bool combinable() { return _combinable; }
 
 
+  /**
+   * \brief Do nothing
+   */
+  virtual void update() override final;
+
+  /**
+   * \brief Draw the sprite
+   */
+  virtual void draw() override final;
+
+
+
 private:
   std::string _name; ///< Displayed name
   std::string _textureName; ///< Graphic Texture file name
-
-  std::shared_ptr<graphics::Sprite> _sprite; ///< Graphic Sprite
 
   e_rotation _rotation = e_rotation::ROT_0; ///< Rotation in the inventory
 

@@ -9,6 +9,7 @@
 
 #include <graphics/Sprite.hh>
 #include <resources/ResourcesManager.hh>
+#include <graphics/Properties.hh>
 
 
 
@@ -16,10 +17,28 @@ Item::Item(const std::string& name,
            const std::string& textureName,
            size_t nbCols,
            size_t nbLines)
-  : _name(name)
-  , _textureName(textureName)
-  , _sprite(std::make_shared<graphics::Sprite> (_textureName))
+  : InterfaceElement(textureName)
+  , _name(name)
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
+}
+
+
+
+void Item::update()
+{
+  const auto w{graphics::Properties::inventoryCellWidth()};
+  const auto h{graphics::Properties::inventoryCellHeight()};
+
+  _sprite->setSize(static_cast<float> (_nbColumns) * w,
+                   static_cast<float> (_nbLines) * h);
+}
+
+
+
+void Item::draw()
+{
+  update();
+  _sprite->draw();
 }
