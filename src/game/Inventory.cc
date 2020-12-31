@@ -12,6 +12,7 @@
 #include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <resources/ResourcesManager.hh>
+#include <resources/Text.hh>
 #include <graphics/Properties.hh>
 #include <game/Status.hh>
 #include <game/Player.hh>
@@ -29,11 +30,14 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
-  _sprite->setSize(
-    static_cast<float> (nbCols)
-     * graphics::Properties::inventoryCellWidth(),
-    static_cast<float> (nbLines)
-     * graphics::Properties::inventoryCellHeight());
+  const auto w{graphics::Properties::inventoryCellWidth()};
+  const auto h{graphics::Properties::inventoryCellHeight()};
+
+  _sprite->setSize(static_cast<float> (nbCols)  * w,
+                   static_cast<float> (nbLines) * h);
+
+  _label = std::make_shared<resources::Text> (
+    _name, w, graphics::Pos2(0, 0), "font_army");
 }
 
 
@@ -55,12 +59,19 @@ void ItemsContainer::update()
 
 void ItemsContainer::draw()
 {
+  const auto w{graphics::Properties::inventoryCellWidth()};
+  const auto h{graphics::Properties::inventoryCellHeight()};
+
+  // Text
+  _label->setPosition(_position.x, _position.y - w);
+  _label->draw();
+
+  // Background
   _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
   _sprite->setPosition(_position); // Refresh the position
   _sprite->draw();
 
-  const auto w{graphics::Properties::inventoryCellWidth()};
-  const auto h{graphics::Properties::inventoryCellHeight()};
+  // Items
   for (const auto& item: _stored)
   {
     graphics::Pos2 coords(_position);

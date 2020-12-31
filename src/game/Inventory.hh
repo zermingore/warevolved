@@ -20,6 +20,10 @@ namespace graphics {
   class Sprite;
 }
 
+namespace resources {
+  class Text;
+}
+
 class Item;
 
 
@@ -85,6 +89,8 @@ private:
 
   size_t _nbColumns; ///< Number of columns (x coordinate)
   size_t _nbLines;   ///< Number of lines (y coordinate)
+
+  std::shared_ptr<resources::Text> _label; ///< button label text
 };
 
 
