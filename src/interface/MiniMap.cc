@@ -75,8 +75,7 @@ void MiniMap::draw()
       };
 
       // Draw the terrain
-      graphics::Sprite sprite;
-      sprite.setTexture(TerrainsHandler::get(c->terrain()).name());
+      graphics::Sprite sprite(TerrainsHandler::get(c->terrain()).texture());
       sprite.setPosition(pos.x, pos.y);
       sprite.setSize(cell_size);
       sprite.draw();

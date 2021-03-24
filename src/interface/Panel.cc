@@ -192,7 +192,7 @@ void Panel::drawTerrainFrame()
   _frameCell->draw();
 
   const auto& terrain = TerrainsHandler::get(cell->terrain());
-  graphics::Sprite img(terrain.name());
+  graphics::Sprite img(terrain.texture());
   img.setPosition(_frameCell->position().x + _margin,
                   _frameCell->position().y + _margin);
 
