@@ -1,0 +1,107 @@
+Here is a draft of the coding style used in War Evolved.
+
+
+
+Notes:
+
+This coding style applies only to C++ sources (excluding external libraries / generated sources)
+
+So far, no automated coding style editor file is provided
+(though a minimal checker exists and may be called in a git pre-commit hook [see tools/git/hooks/pre-commit])
+
+
+
+Indentation:
+
+The code must be indented with 2 spaces (never use tabs)
+Line length must be limited to 80 columns
+Trailing whitespaces should never appear (unless necessary)
+Exactly one blank line is expected at the end of every file
+
+
+
+Code style:
+
+Curly braces in control flow are never optional
+If there're used for control flow / scope, curly braces must appear on their own line, alone
+(comments, namespaces and ';' are tolerated though)
+Rational: Modifying a control flow block from 1 to multiple lines will not trigger unwanted noise in a diff
+
+Functions / Methods should be separated by 3 blank lines
+In a function / method body, never more than 2 consecutive blank lines must appear
+
+Never more than 1 consecutive space should appear in code (except for indentation and in strings)
+
+After a keyword, a single space must be used
+binary operators should be separated by spaces
+
+Breaking a multiple operands condition must be done before the operator; the conditions indentation may be adapted
+Correct:
+if (   a_long_function_name_returning_a_boolean()
+    && another_function())
+
+Preprocessor names must be indented; the preprocessor '#' token must always appear on first column
+Correct:
+#ifdef DEBUG
+# ifdef ANOTHER_CONDITION
+#   ifdef A_LAST_ONE
+
+Note: The code affected by conditional preprocessor block might be indented if it's not a header guards
+
+
+Header guards format is as follow (#ifdef FILENAME_EXTENSION_ ... #endif /* !FILENAME_EXTENSION_ */)
+
+Doxygen headers should appear before header guards
+A blank line must separate header guards and standard includes
+A blank line must separate standard includes and own includes
+A blank line must separate own includes and forward declarations (which may be divided in blocks, separated by one blank line)
+
+Own includes must be included with '<>' absoulute syntax
+
+Correct:
+
+/**
+ * \file
+ * \date today
+ * \author Zermingore
+ * \brief Demonstrate coding style usage
+ */
+
+#ifndef MY_HEADER_HH_
+# define MY_HEADER_HH_
+
+# include <vector>
+
+# include <map.hh>
+
+
+class Map
+{
+};
+
+#endif /* !MY_HEADER_HH_ */
+
+
+
+Features:
+
+The code uses modern standards; every relatively well supported feature (implemented by at least GCC) may be used
+
+'using namespace' should not be used at global scope
+'using namespace' must not be used in headers
+
+const / constexpr should be used as often as possible
+auto should be used as often as possible
+raw pointers should never be directly used (replace them with reference / unique_ptr / shared_ptr)
+malloc / free / new / delete should never be directly used (use smart pointers)
+
+Uniform initialization should be used everywhere
+
+C-style casts must never be used (replace them with static_cast or dynamic_cast)
+
+
+
+Others:
+
+Doxygen comments should be used wherever ther're relevant
+For example: Classes methods / attributes; File headers
