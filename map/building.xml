@@ -213,6 +213,7 @@
 		<cell>
 			<coordinates col="5" line="7" />
 			<terrain>1</terrain>
+                        <unit type="0" player_id="0" hp="10" played="false" />
 		</cell>
 		<cell>
 			<coordinates col="6" line="0" />

@@ -64,11 +64,6 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
     return false;
   }
 
-  // Handle crew sprites
-  auto passenger = resources::ResourcesManager::getTexture("passenger");
-  graphics::Texture texture = *(_sprite->texture());
-  texture.update(*passenger, 3, 3);
-  _sprite->setTexture(texture);
 
   // If the role is specified, use it
   if (role != e_unit_role::NONE)
@@ -93,6 +88,7 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
     }
 
     _crew.push_back({role, unit});
+    updateSprite();
     return true;
   }
 
@@ -117,14 +113,65 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
   if (!driver_occupied)
   {
     _crew.push_back({e_unit_role::DRIVER, unit});
-    return true;
   }
-  if (!copilot_occupied)
+  else if (!copilot_occupied)
   {
     _crew.push_back({e_unit_role::COPILOT, unit});
-    return true;
+  }
+  else
+  {
+    _crew.push_back({e_unit_role::PASSENGER, unit});
   }
 
-  _crew.push_back({e_unit_role::PASSENGER, unit});
+  updateSprite();
   return true;
+}
+
+
+
+void Car::updateSprite()
+{
+  auto offset_x{0u};
+  auto offset_y{0u};
+  graphics::Texture texture = *(_sprite->texture());
+  auto passenger = resources::ResourcesManager::getTexture("passenger");
+  bool first_passenger = true;
+
+  for (const auto& member: _crew)
+  {
+    switch (member.first)
+    {
+      case e_unit_role::DRIVER:
+        offset_x = 8;
+        offset_y = 32;
+        break;
+
+      case e_unit_role::COPILOT:
+        offset_x = 8;
+        offset_y = 8;
+        break;
+
+      case e_unit_role::PASSENGER:
+        if (first_passenger)
+        {
+          first_passenger = false;
+          offset_x = 32;
+          offset_y = 32;
+        }
+        else
+        {
+          offset_x = 32;
+          offset_y = 8;
+        }
+        break;
+
+      default:
+        ERROR("Unexpected role in a car: ", static_cast<int> (member.first));
+        break;
+    }
+
+    texture.update(*passenger, offset_x, offset_y);
+  }
+
+  _sprite->setTexture(texture);
 }
