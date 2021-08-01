@@ -131,9 +131,11 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
 
 void Car::updateSprite()
 {
+  // Make a copy of the texture
+  graphics::Texture texture = *resources::ResourcesManager::getTexture("car");
+
   auto offset_x{0u};
   auto offset_y{0u};
-  graphics::Texture texture = *(_sprite->texture());
   auto passenger = resources::ResourcesManager::getTexture("passenger");
   bool first_passenger = true;
 

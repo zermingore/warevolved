@@ -42,6 +42,12 @@ public:
   virtual bool canOpenFire() const = 0;
 
   /**
+   * Update the Vehicle's Sprite, depending on its crew
+   * \todo Clean manual pixel offsets
+   */
+  virtual void updateSprite() = 0;
+
+  /**
    * \brief Returns crew list
    */
   const auto& crew() { return _crew; }

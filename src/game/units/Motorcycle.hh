@@ -39,6 +39,14 @@ public:
   bool addToCrew(
     std::shared_ptr<Unit> unit,
     e_unit_role role = e_unit_role::DRIVER) override final;
+
+  /**
+   * Update the Sprite, depending on the crew
+   * \todo Implementation
+   */
+  void updateSprite() override final {
+    // TODO
+  }
 };
 
 #endif /* !MOTORCYCLE_HH_ */

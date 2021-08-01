@@ -44,7 +44,7 @@ public:
    * Update the Sprite, depending on the crew
    * \todo Clean manual pixel offsets
    */
-  void updateSprite();
+  void updateSprite() override final;
 };
 
 #endif /* !CAR_HH_ */

@@ -36,6 +36,8 @@ void Vehicle::dropOff(size_t crew_index, const Coords& location)
 
   _dropped.push_back(_crew[crew_index]);
   _crew.erase(_crew.begin() + static_cast<int> (crew_index));
+
+  updateSprite();
 }
 
 
@@ -47,6 +49,8 @@ void Vehicle::restoreCrew()
     addToCrew(member.second, member.first);
     game::Status::battle()->map()->stashUnit(*(member.second));
   }
+
+  updateSprite();
 }
 
 
