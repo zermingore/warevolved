@@ -54,6 +54,12 @@ public:
   void setTexture(const std::string& file_name);
 
   /**
+   * \brief _texture setter
+   * \param texture Pointer on the new texture
+   */
+  void setTexture(const Texture& texture);
+
+  /**
    * \brief _texture getter
    * \return _texture
    */

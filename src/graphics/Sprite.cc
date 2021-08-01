@@ -57,6 +57,20 @@ void Sprite::setTexture(const std::string& file_name)
 
 
 
+void Sprite::setTexture(const Texture& texture)
+{
+  _rectangle = std::make_shared<RectangleShape> ();
+  _rectangle->setPosition({0, 0});
+  _rectangle->setSize({0, 0});
+
+  _texture = std::make_shared<graphics::Texture> (texture);
+  _rectangle->setTexture(_texture.get());
+
+  _sprite = std::make_shared<sf::Sprite> (*_texture);
+}
+
+
+
 void Sprite::setTextureRepeat(bool repetition)
 {
   _texture->setRepeated(repetition);

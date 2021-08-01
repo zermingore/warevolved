@@ -65,9 +65,10 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
   }
 
   // Handle crew sprites
-  auto img = _sprite->texture()->copyToImage();
   auto passenger = resources::ResourcesManager::getTexture("passenger");
-  _sprite->texture()->update(*passenger, 3, 3);
+  graphics::Texture texture = *(_sprite->texture());
+  texture.update(*passenger, 3, 3);
+  _sprite->setTexture(texture);
 
   // If the role is specified, use it
   if (role != e_unit_role::NONE)
