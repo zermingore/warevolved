@@ -10,6 +10,7 @@
 #include <debug/Debug.hh>
 #include <graphics/Sprite.hh>
 #include <game/units/UnitsFactory.hh>
+#include <resources/ResourcesManager.hh>
 
 
 
@@ -62,6 +63,11 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
     ERROR("Called 'addToCrew()' with a full Vehicle");
     return false;
   }
+
+  // Handle crew sprites
+  auto img = _sprite->texture()->copyToImage();
+  auto passenger = resources::ResourcesManager::getTexture("passenger");
+  _sprite->texture()->update(*passenger, 3, 3);
 
   // If the role is specified, use it
   if (role != e_unit_role::NONE)

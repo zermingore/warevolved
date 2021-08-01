@@ -13,6 +13,9 @@
       <file filename='car.png'>
         <name>car</name>
       </file>
+      <file filename='passenger.png'>
+        <name>passenger</name>
+      </file>
       <file filename='motorcycle.png'>
         <name>motorcycle</name>
       </file>
