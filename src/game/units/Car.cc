@@ -9,6 +9,7 @@
 
 #include <debug/Debug.hh>
 #include <graphics/Sprite.hh>
+#include <graphics/Properties.hh>
 #include <game/units/UnitsFactory.hh>
 #include <resources/ResourcesManager.hh>
 
@@ -131,14 +132,23 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
 
 void Car::updateSprite()
 {
-  // Make a copy of the texture
-  graphics::Texture texture = *resources::ResourcesManager::getTexture("car");
+  using p = graphics::Properties;
 
-  auto offset_x{0u};
-  auto offset_y{0u};
-  auto passenger = resources::ResourcesManager::getTexture("passenger");
-  bool first_passenger = true;
+  // Initialize a RenderTexture
+  sf::RenderTexture render;
+  if (!render.create(static_cast<uint16_t> (p::cellWidth()),
+                     static_cast<uint16_t> (p::cellHeight())))
+  {
+    ERROR("Unable to create render texture (car crew)");
+    return;
+  }
+  render.clear(sf::Color::Transparent);
 
+  graphics::component offset_x{0};
+  graphics::component offset_y{0};
+  auto passengerTexture =
+    *resources::ResourcesManager::getTexture("passenger");
+  bool first_passenger = true; // Differentiate both passengers
   for (const auto& member: _crew)
   {
     switch (member.first)
@@ -172,8 +182,16 @@ void Car::updateSprite()
         break;
     }
 
-    texture.update(*passenger, offset_x, offset_y);
+    // Add the passenger to the render texture
+    sf::Sprite passengerSprite{passengerTexture};
+    passengerSprite.setPosition(offset_x, offset_y);
+    render.draw(passengerSprite);
   }
 
-  _sprite->setTexture(texture);
+  // Draw the car itself at last (over the passengers)
+  sf::Sprite sprite(*resources::ResourcesManager::getTexture("car"));
+  render.draw(sprite);
+
+  render.display();
+  _sprite->setTexture(render.getTexture());
 }
