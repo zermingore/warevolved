@@ -152,20 +152,30 @@ void Car::updateSprite()
   auto passengerTexture =
     *resources::ResourcesManager::getTexture("passenger");
 
+  const auto& carTexture =
+    *resources::ResourcesManager::getTexture("car");
+  const graphics::Size2& carSize {
+    static_cast<graphics::component> (carTexture.getSize().x),
+    static_cast<graphics::component> (carTexture.getSize().y) };
+  const graphics::component offset_front {carSize.x / 8.f};
+  const graphics::component offset_rear {carSize.x / 2.f - carSize.x / 16.f};
+  const graphics::component offset_vert_base {carSize.y / 2.f};
+  const graphics::component offset_vert_in {carSize.y / 10.f};
+
   bool first_passenger = true; // Differentiate both passengers
   for (const auto& member: _crew)
   {
     switch (member.first)
     {
       case e_unit_role::DRIVER:
-        offset_x = 8;
-        offset_y = 26;
+        offset_x = offset_front;
+        offset_y = offset_vert_base - offset_vert_in;
         flip = false;
         break;
 
       case e_unit_role::COPILOT:
-        offset_x = 8;
-        offset_y = 38;
+        offset_x = offset_front;
+        offset_y = offset_vert_base + offset_vert_in;
         flip = true;
         break;
 
@@ -173,14 +183,14 @@ void Car::updateSprite()
         if (first_passenger)
         {
           first_passenger = false;
-          offset_x = 28;
-          offset_y = 38;
+          offset_x = offset_rear;
+          offset_y = offset_vert_base + offset_vert_in;
           flip = true;
         }
         else
         {
-          offset_x = 28;
-          offset_y = 26;
+          offset_x = offset_rear;
+          offset_y = offset_vert_base - offset_vert_in;
           flip = false;
         }
         break;
