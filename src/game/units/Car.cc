@@ -144,10 +144,14 @@ void Car::updateSprite()
   }
   render.clear(sf::Color::Transparent);
 
+
   graphics::component offset_x{0};
   graphics::component offset_y{0};
+  bool flip {false}; // vertical sprite flip
+
   auto passengerTexture =
     *resources::ResourcesManager::getTexture("passenger");
+
   bool first_passenger = true; // Differentiate both passengers
   for (const auto& member: _crew)
   {
@@ -155,25 +159,29 @@ void Car::updateSprite()
     {
       case e_unit_role::DRIVER:
         offset_x = 8;
-        offset_y = 32;
+        offset_y = 26;
+        flip = false;
         break;
 
       case e_unit_role::COPILOT:
         offset_x = 8;
-        offset_y = 8;
+        offset_y = 38;
+        flip = true;
         break;
 
       case e_unit_role::PASSENGER:
         if (first_passenger)
         {
           first_passenger = false;
-          offset_x = 32;
-          offset_y = 32;
+          offset_x = 28;
+          offset_y = 38;
+          flip = true;
         }
         else
         {
-          offset_x = 32;
-          offset_y = 8;
+          offset_x = 28;
+          offset_y = 26;
+          flip = false;
         }
         break;
 
@@ -184,6 +192,11 @@ void Car::updateSprite()
 
     // Add the passenger to the render texture
     sf::Sprite passengerSprite{passengerTexture};
+    if (flip)
+    {
+      passengerSprite.setScale(1.0f, -1.0f);
+    }
+
     passengerSprite.setPosition(offset_x, offset_y);
     render.draw(passengerSprite);
   }

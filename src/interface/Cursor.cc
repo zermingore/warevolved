@@ -20,11 +20,13 @@ Cursor::Cursor()
 }
 
 
+
 void Cursor::setLimits(const size_t nb_columns, const size_t nb_lines)
 {
   _nbColumns = nb_columns;
   _nbLines = nb_lines;
 }
+
 
 
 // _____________________________ Cursor Motion _____________________________ //
@@ -61,6 +63,7 @@ bool Cursor::moveRight()
 }
 
 
+
 void Cursor::update()
 {
   using namespace graphics;
@@ -93,6 +96,7 @@ void Cursor::update()
 
   _sprite->setColor(_color);
 }
+
 
 
 void Cursor::draw()
