@@ -74,6 +74,7 @@ bool Car::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
         && role != e_unit_role::PASSENGER)
     {
       ERROR("Unsupported role for a car", debug::e_unit_role_string(role));
+      return false;
     }
 
     for (const auto& member: _crew)

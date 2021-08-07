@@ -32,7 +32,7 @@ Motorcycle::Motorcycle()
   _minRange = 0;
   _maxRange = 0;
 
-  _maxCrewMembers = 1;
+  _maxCrewMembers = 2;
 
   /// \todo Initialize the map
   // The keys should stay constant; only the values are adjusted
@@ -56,33 +56,60 @@ bool Motorcycle::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
     return false;
   }
 
-  if (role != e_unit_role::DRIVER && role != e_unit_role::NONE)
+
+  // If the role is specified, use it
+  if (role != e_unit_role::NONE)
   {
-    ERROR("Motorcycle do not handle role:", debug::e_unit_role_string(role));
-    return false;
-  }
-
-  std::shared_ptr<Unit> driver = nullptr;
-  std::shared_ptr<Unit> copilot = nullptr;
-
-
-  auto it = std::find_if(
-    _crew.begin(),
-    _crew.end(),
-    [=] (std::pair<e_unit_role, std::shared_ptr<Unit>> member) -> bool {
-      return member.first == e_unit_role::DRIVER;
+    if (   role != e_unit_role::DRIVER
+        && role != e_unit_role::COPILOT
+        && role != e_unit_role::PASSENGER)
+    {
+      ERROR("Unsupported role for a motorcycle",
+           debug::e_unit_role_string(role));
+      return false;
     }
-  );
 
-  if (it == _crew.end())
-  {
-    _crew.push_back({e_unit_role::DRIVER, unit});
+    for (const auto& member: _crew)
+    {
+      if (member.first == role)
+      {
+        ERROR("Already occupied role", debug::e_unit_role_string(role));
+        return false;
+      }
+    }
+
+    _crew.push_back({role, unit});
     updateSprite();
     return true;
   }
 
-  ERROR("[IMPLEMENTATION ERROR] Failed trying to add the unit to the crew");
-  return false;
+
+  auto driver_occupied{false};
+  for (const auto& member: _crew)
+  {
+    if (member.first == e_unit_role::DRIVER)
+    {
+      driver_occupied = true;
+      continue;
+    }
+
+    if (member.first == e_unit_role::PASSENGER)
+    {
+      continue;
+    }
+  }
+
+  if (!driver_occupied)
+  {
+    _crew.push_back({e_unit_role::DRIVER, unit});
+  }
+  else
+  {
+    _crew.push_back({e_unit_role::PASSENGER, unit});
+  }
+
+  updateSprite();
+  return true;
 }
 
 
@@ -128,7 +155,6 @@ void Motorcycle::updateSprite()
     sf::Sprite crewSprite(*resources::ResourcesManager::getTexture(texture));
 
     // Add the passenger to the render texture
-    sprite.setPosition(0, 0);
     render.draw(crewSprite);
   }
 
