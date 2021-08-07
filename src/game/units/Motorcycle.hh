@@ -42,11 +42,8 @@ public:
 
   /**
    * Update the Sprite, depending on the crew
-   * \todo Implementation
    */
-  void updateSprite() override final {
-    // TODO
-  }
+  void updateSprite() override final;
 };
 
 #endif /* !MOTORCYCLE_HH_ */

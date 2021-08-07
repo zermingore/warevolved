@@ -19,6 +19,12 @@
       <file filename='motorcycle.png'>
         <name>motorcycle</name>
       </file>
+      <file filename='motorcycle_driver.png'>
+        <name>motorcycle_driver</name>
+      </file>
+      <file filename='motorcycle_passenger.png'>
+        <name>motorcycle_passenger</name>
+      </file>
     </folder>
     <folder path='resources/terrains/'>
       <file filename='plain.png'>
