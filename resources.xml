@@ -13,8 +13,8 @@
       <file filename='car.png'>
         <name>car</name>
       </file>
-      <file filename='passenger.png'>
-        <name>passenger</name>
+      <file filename='car_passenger.png'>
+        <name>car_passenger</name>
       </file>
       <file filename='motorcycle.png'>
         <name>motorcycle</name>

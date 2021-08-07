@@ -150,7 +150,7 @@ void Car::updateSprite()
   bool flip {false}; // vertical sprite flip
 
   auto passengerTexture =
-    *resources::ResourcesManager::getTexture("passenger");
+    *resources::ResourcesManager::getTexture("car_passenger");
 
   const auto& carTexture =
     *resources::ResourcesManager::getTexture("car");
