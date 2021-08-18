@@ -25,7 +25,7 @@ public:
    * \brief Default constructor. Initial coordinates: (0, 0)
    * \note Initializes the c and l references on Vector2 x y
    */
-  Coords()
+  Coords() noexcept
     : Vector2<size_t> (0, 0)
     , c(x)
     , l(y)
@@ -38,7 +38,7 @@ public:
    * \param b y, line   coordinate
    * \note Initializes the c and l references on Vector2 x y
    */
-  Coords(const size_t a, const size_t b)
+  Coords(const size_t a, const size_t b) noexcept
     : Vector2<size_t> (a, b)
     , c(x)
     , l(y)
@@ -50,7 +50,7 @@ public:
    * \brief Copy constructor
    * \param coord Coordinates to copy from
    */
-  Coords(const Coords &coord)
+  Coords(const Coords &coord) noexcept
     : Vector2<size_t> (coord.x, coord.y)
     , c(x)
     , l(y)

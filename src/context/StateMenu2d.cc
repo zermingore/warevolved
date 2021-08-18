@@ -24,7 +24,7 @@
 
 
 StateMenu2d::StateMenu2d(
-  std::initializer_list<std::shared_ptr<interface::InGameMenu>> args)
+  std::initializer_list<std::shared_ptr<interface::InGameMenu>> args) noexcept
   : _menus{args}
 {
   // browsing entries
@@ -36,8 +36,8 @@ StateMenu2d::StateMenu2d(
   _evtMgr->registerEvent(e_input::SELECTION,  [=, this] { validate(); });
   _evtMgr->registerEvent(e_input::EXIT,       [=, this] { exit();     });
 
-  _cancelCallback  = [] (auto&&...) {};
-  _confirmCallback = [] (auto&&...) {};
+  _cancelCallback  = [] (auto&&...) noexcept {};
+  _confirmCallback = [] (auto&&...) noexcept {};
 }
 
 

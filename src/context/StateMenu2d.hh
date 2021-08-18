@@ -32,7 +32,8 @@ public:
    * \brief Default constuctor
    */
   explicit StateMenu2d(
-    std::initializer_list<std::shared_ptr<interface::InGameMenu>> args);
+    std::initializer_list<std::shared_ptr<interface::InGameMenu>> args)
+    noexcept;
 
   /**
    * \brief default destructor
