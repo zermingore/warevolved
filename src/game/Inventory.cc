@@ -29,6 +29,7 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _name(name)
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
+  , _selected(0, 0)
 {
   const auto w{graphics::Properties::inventoryCellWidth()};
   const auto h{graphics::Properties::inventoryCellHeight()};
@@ -74,9 +75,25 @@ void ItemsContainer::draw()
   // Items
   for (const auto& item: _stored)
   {
+    Coords itemCoords{ item.first.c, item.first.l };
     graphics::Pos2 coords(_position);
-    coords.x += static_cast<float> (item.first.c) * w;
-    coords.y += static_cast<float> (item.first.l) * h;
+    coords.x += static_cast<float> (itemCoords.c) * w;
+    coords.y += static_cast<float> (itemCoords.l) * h;
+
+    if (_selected == itemCoords)
+    {
+      graphics::Size2 size {
+        item.second->size().x * graphics::Properties::inventoryCellHeight(),
+        item.second->size().y * graphics::Properties::inventoryCellWidth(),
+      };
+
+      graphics::RectangleShape background(size);
+      background.setOutlineColor(graphics::Color::Yellow);
+      background.setOutlineThickness(3);
+      background.setFillColor(graphics::Color::Transparent);
+      background.setPosition(coords);
+      graphics::GraphicsEngine::draw(background);
+    }
 
     item.second->setPosition(coords);
     item.second->draw();

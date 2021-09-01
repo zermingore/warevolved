@@ -90,10 +90,12 @@ void StateInventory::selectRight()
 }
 
 
+
 void StateInventory::draw()
 {
   _inventory->draw();
 }
+
 
 
 void StateInventory::fetchAttributes()

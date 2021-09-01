@@ -76,6 +76,12 @@ public:
   /// _combinable getter
   bool combinable() { return _combinable; }
 
+  /// Size (columns / lines) getter
+  graphics::Size2 size() {
+    return { static_cast<graphics::component> (_nbColumns),
+             static_cast<graphics::component> (_nbLines) };
+  }
+
 
   /**
    * \brief Do nothing

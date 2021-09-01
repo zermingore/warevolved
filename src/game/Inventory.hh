@@ -90,6 +90,8 @@ private:
   size_t _nbColumns; ///< Number of columns (x coordinate)
   size_t _nbLines;   ///< Number of lines (y coordinate)
 
+  Coords _selected; ///< Selected item location
+
   std::shared_ptr<resources::Text> _label; ///< button label text
 };
 
