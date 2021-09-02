@@ -8,6 +8,8 @@
 #include <game/Inventory.hh>
 
 #include <cassert>
+
+#include <debug/Debug.hh>
 #include <game/Item.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -31,6 +33,8 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _nbLines(nbLines)
   , _selected(0, 0)
 {
+  _freeCells.resize(nbCols * nbLines, true);
+
   const auto w{graphics::Properties::inventoryCellWidth()};
   const auto h{graphics::Properties::inventoryCellHeight()};
 
@@ -43,11 +47,87 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 
 
-void ItemsContainer::add(std::unique_ptr<Item> item)
+bool ItemsContainer::add(std::unique_ptr<Item> item)
 {
-  /// \todo Items coordinates
+  const Coords sz{
+    static_cast<size_t> (item->size().x),
+    static_cast<size_t> (item->size().y)};
+
+  NOTICE("sz:", sz.c, sz.l);
+  if (   (sz.c >= _nbColumns || sz.l >= _nbLines)
+      && (sz.l >= _nbLines   || sz.l >= _nbColumns))
+  {
+    NOTICE("Item bigger as the inventory");
+    return false;
+  }
+  NOTICE("sz:", sz.c, sz.l);
+
+  // Locate possible new item location
   Coords c{0, 0};
+  auto location_idx{0u};
+  while (location_idx < _freeCells.size())
+  {
+    if (   !_freeCells[location_idx]
+        || location_idx % _nbColumns + sz.c > _nbColumns
+        || location_idx % _nbLines   + sz.l > _nbLines)
+    {
+      // TODO? Optimization: skip occupied cells matching concerned item
+      ++location_idx;
+      continue;
+    }
+
+    for (auto col{0u}; col < sz.c; ++col)
+    {
+      for (auto line{0u}; line < sz.l; ++line)
+      {
+        if (!_freeCells[((location_idx + col * _nbColumns))  + (line + location_idx) / _nbColumns])
+        {
+          ++location_idx;
+          continue;
+        }
+      }
+    }
+
+    c.c = location_idx % _nbColumns;
+    c.l = location_idx / _nbColumns;
+    NOTICE("location:", location_idx, "coords:", c);
+    break;
+  }
+
+
+  if (location_idx >= _freeCells.size()) // No space found
+  {
+    // TODO Rotate the item and try again to add it
+    NOTICE("Not enough space to add item", sz, location_idx);
+    return false;
+  }
+
+
+  // Keep track of free space
+  int nb_occupied = 0;
+  NOTICE("size:", sz.c, sz.l);
+  for (auto col{0u}; col < sz.c; ++col)
+  {
+    for (auto line{0u}; line < sz.l; ++line)
+    {
+      const auto idx{(c.c + col) * _nbColumns + c.l + line};
+      if (!_freeCells[idx])
+      {
+        WARNING("Add item: occupied cell: (",
+                c.c + col, c.l + line, ") ->", idx);
+      }
+
+      _freeCells[idx] = false;
+      std::cout << idx << " (" << c.c + col << ", " << c.l + line << ") | ";
+      ++nb_occupied;
+    }
+    std::cout << '\n';
+  }
+
   _stored.push_back({c, std::move(item)});
+  NOTICE("Added item at", c, nb_occupied);
+
+  return true;
 }
 
 
@@ -153,10 +233,10 @@ void Inventory::addContainer(e_container_type type,
 
 
 
-void Inventory::addEquip(const std::string& name,
+bool Inventory::addEquip(const std::string& name,
                          size_t nbCols,
                          size_t nbLines)
 {
   auto item = std::make_unique<Item> (name, name, nbCols, nbLines);
-  _equipped->add(std::move(item));
+  return _equipped->add(std::move(item));
 }

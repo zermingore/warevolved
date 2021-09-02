@@ -66,7 +66,7 @@ public:
    * \brief Add the given Item to the container
    * \param item Item to add
    */
-  void add(std::unique_ptr<Item> item);
+  bool add(std::unique_ptr<Item> item);
 
 
   /**
@@ -89,6 +89,8 @@ private:
 
   size_t _nbColumns; ///< Number of columns (x coordinate)
   size_t _nbLines;   ///< Number of lines (y coordinate)
+
+  std::vector<bool> _freeCells; ///< Keeping track of free space
 
   Coords _selected; ///< Selected item location
 
@@ -132,9 +134,10 @@ public:
    * \param name Displayed Item name
    * \param nbCols New Item number of used columns
    * \param nbLines New Item number of used lines
+   * \return true on success; false on impossible add (item too large)
    * \note Creating a new Items from these parameters
    */
-  void addEquip(const std::string& name,
+  bool addEquip(const std::string& name,
                 size_t nbCols,
                 size_t nbLines);
 

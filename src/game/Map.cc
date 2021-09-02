@@ -170,7 +170,8 @@ void Map::newUnit(e_unit type,
   new_unit->setHp(hp);
   new_unit->setPlayed(played);
 
-  if (type == e_unit::SOLDIER)
+  static bool first = true;
+  if (type == e_unit::SOLDIER && first)
   {
     new_unit->inventory()->addContainer(
       e_container_type::POCKET, "jacket pocket left", 10, 10);
@@ -178,6 +179,9 @@ void Map::newUnit(e_unit type,
       e_container_type::POCKET, "jacket pocket right", 10, 10);
 
     new_unit->inventory()->addEquip("handgun", 10 , 5);
+    new_unit->inventory()->addEquip("handgun", 10 , 5);
+    new_unit->inventory()->addEquip("handgun", 10 , 5);
+    first = false;
   }
 
   _units[player_id].emplace_back(new_unit);
