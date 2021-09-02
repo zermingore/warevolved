@@ -80,7 +80,7 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
     {
       for (auto line{0u}; line < sz.l; ++line)
       {
-        if (!_freeCells[((location_idx + col * _nbColumns))  + (line + location_idx) / _nbColumns])
+        if (!_freeCells[location_idx + col * _nbColumns + line])
         {
           ++location_idx;
           continue;
@@ -104,28 +104,22 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
 
 
   // Keep track of free space
-  int nb_occupied = 0;
-  NOTICE("size:", sz.c, sz.l);
+  NOTICE("location_idx:", location_idx);
+
   for (auto col{0u}; col < sz.c; ++col)
   {
     for (auto line{0u}; line < sz.l; ++line)
     {
-      const auto idx{(c.c + col) * _nbColumns + c.l + line};
-      if (!_freeCells[idx])
-      {
-        WARNING("Add item: occupied cell: (",
-                c.c + col, c.l + line, ") ->", idx);
-      }
-
+       const auto idx{location_idx + col * _nbColumns + line};
+       std::cout << idx << " ";
       _freeCells[idx] = false;
-      std::cout << idx << " (" << c.c + col << ", " << c.l + line << ") | ";
-      ++nb_occupied;
     }
-    std::cout << '\n';
+    std::cout << "\n";
   }
 
+
   _stored.push_back({c, std::move(item)});
-  NOTICE("Added item at", c, nb_occupied);
+  NOTICE("Added item at", c);
 
   return true;
 }
