@@ -138,7 +138,7 @@ void ItemsContainer::draw()
   const auto h{graphics::Properties::inventoryCellHeight()};
 
   // Text
-  _label->setPosition(_position.x, _position.y - w);
+  _label->setPosition(_position.x, _position.y - 2 * h);
   _label->draw();
 
   // Background
