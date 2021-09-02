@@ -151,8 +151,8 @@ void ItemsContainer::draw()
   {
     Coords itemCoords{ item.first.c, item.first.l };
     graphics::Pos2 coords(_position);
-    coords.x += static_cast<float> (itemCoords.c) * w;
-    coords.y += static_cast<float> (itemCoords.l) * h;
+    coords.x += static_cast<float> (itemCoords.c) * w / 2;
+    coords.y += static_cast<float> (itemCoords.l) * h / 2;
 
     if (_selected == itemCoords)
     {
@@ -163,7 +163,7 @@ void ItemsContainer::draw()
 
       graphics::RectangleShape background(size);
       background.setOutlineColor(graphics::Color::Yellow);
-      background.setOutlineThickness(3);
+      background.setOutlineThickness(w / 4);
       background.setFillColor(graphics::Color::Transparent);
       background.setPosition(coords);
       graphics::GraphicsEngine::draw(background);
