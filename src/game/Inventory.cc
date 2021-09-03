@@ -33,16 +33,23 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _nbLines(nbLines)
   , _selected(0, 0)
 {
+  using namespace graphics;
   _freeCells.resize(nbCols * nbLines, true);
 
-  const auto w{graphics::Properties::inventoryCellWidth()};
-  const auto h{graphics::Properties::inventoryCellHeight()};
+  const auto w{Properties::inventoryCellWidth()};
+  const auto h{Properties::inventoryCellHeight()};
 
-  _sprite->setSize(static_cast<float> (nbCols)  * w,
-                   static_cast<float> (nbLines) * h);
+  _sprite->setSize(static_cast<component> (nbCols)  * w,
+                   static_cast<component> (nbLines) * h);
 
   _label = std::make_shared<resources::Text> (
     _name, w, graphics::Pos2(0, 0), "font_army");
+
+  // Description zone
+  const graphics::Pos2 location {
+    w, static_cast<component> (GraphicsEngine::windowSize().y) - 5 * h};
+  _labelDescription = std::make_shared<resources::Text> (
+    "Description", w, location, "font_army");
 }
 
 
@@ -140,6 +147,8 @@ void ItemsContainer::draw()
   // Text
   _label->setPosition(_position.x, _position.y - 2 * h);
   _label->draw();
+
+  _labelDescription->draw();
 
   // Background
   _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)

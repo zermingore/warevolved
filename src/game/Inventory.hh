@@ -95,6 +95,7 @@ private:
   Coords _selected; ///< Selected item location
 
   std::shared_ptr<resources::Text> _label; ///< button label text
+  std::shared_ptr<resources::Text> _labelDescription; ///< description text
 };
 
 
