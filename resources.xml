@@ -96,6 +96,9 @@
       <file filename='clip_full.png'>
         <name>clip_full</name>
       </file>
+      <file filename='rifle.png'>
+        <name>rifle</name>
+      </file>
     </folder>
   </images>
   <fonts>
