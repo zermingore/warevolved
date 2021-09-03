@@ -178,9 +178,12 @@ void Map::newUnit(e_unit type,
     new_unit->inventory()->addContainer(
       e_container_type::POCKET, "jacket pocket right", 10, 10);
 
-    new_unit->inventory()->addEquip("rifle", 10 , 5);
-    new_unit->inventory()->addEquip("handgun", 10 , 5);
-    new_unit->inventory()->addEquip("handgun", 10 , 5);
+    new_unit->inventory()->addEquip(
+      "rifle", "Assault rifle\nDamages: 10\nCal: 7.62mm", 10 , 5);
+    new_unit->inventory()->addEquip(
+      "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10 , 5);
+    new_unit->inventory()->addEquip(
+      "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10 , 5);
     first = false;
   }
 

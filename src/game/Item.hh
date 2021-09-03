@@ -51,12 +51,15 @@ public:
   /**
    * \brief Constructor
    * \param name Item displayed name
+   * \param textureName String to fetch a Texture in order to build the Sprite
+   * \param description Description text
    * \param nbCols Inventory occupied space
    * \param nbLines Inventory occupied space
-   * \param textureName String to fetch a Texture in order to build the Sprite
+   * \todo Constructor with only one parameter: Item(e_item_type)
    */
   Item(const std::string& name,
        const std::string& textureName,
+       const std::string& description,
        size_t nbCols,
        size_t nbLines);
 
@@ -68,13 +71,16 @@ public:
   void rotate(const e_rotation rotation);
 
   /// _usable getter
-  bool usable() { return _usable; }
+  auto usable() const { return _usable; }
 
   /// _equippable getter
-  bool equippable() { return _equippable; }
+  auto equippable() const { return _equippable; }
 
   /// _combinable getter
-  bool combinable() { return _combinable; }
+  auto combinable() const { return _combinable; }
+
+  /// _description getter
+  auto description() const { return _description; }
 
   /// Size (columns / lines) getter
   graphics::Size2 size() {
@@ -98,6 +104,7 @@ public:
 private:
   std::string _name; ///< Displayed name
   std::string _textureName; ///< Graphic Texture file name
+  std::string _description; ///< Item description text
 
   e_rotation _rotation = e_rotation::ROT_0; ///< Rotation in the inventory
 

@@ -34,20 +34,17 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _selected(0, 0)
 {
   using namespace graphics;
-  _freeCells.resize(nbCols * nbLines, true);
+  _freeCells.resize(_nbColumns * _nbLines, true);
 
   const auto w{Properties::inventoryCellWidth()};
   const auto h{Properties::inventoryCellHeight()};
-
-  _sprite->setSize(static_cast<component> (nbCols)  * w,
-                   static_cast<component> (nbLines) * h);
 
   _label = std::make_shared<resources::Text> (
     _name, w, graphics::Pos2(0, 0), "font_army");
 
   // Description zone
   const graphics::Pos2 location {
-    w, static_cast<component> (GraphicsEngine::windowSize().y) - 5 * h};
+    w, static_cast<component> (GraphicsEngine::windowSize().y) - 6 * h};
   _labelDescription = std::make_shared<resources::Text> (
     "Description", w, location, "font_army");
 }
@@ -141,16 +138,18 @@ void ItemsContainer::update()
 
 void ItemsContainer::draw()
 {
-  const auto w{graphics::Properties::inventoryCellWidth()};
-  const auto h{graphics::Properties::inventoryCellHeight()};
+  using namespace graphics;
+
+  const auto w{Properties::inventoryCellWidth()};
+  const auto h{Properties::inventoryCellHeight()};
 
   // Text
   _label->setPosition(_position.x, _position.y - 2 * h);
   _label->draw();
 
-  _labelDescription->draw();
-
   // Background
+  _sprite->setSize(static_cast<component> (_nbColumns)  * w,
+                   static_cast<component> (_nbLines) * h);
   _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
   _sprite->setPosition(_position); // Refresh the position
   _sprite->draw();
@@ -163,11 +162,13 @@ void ItemsContainer::draw()
     coords.x += static_cast<float> (itemCoords.c) * w / 2;
     coords.y += static_cast<float> (itemCoords.l) * h / 2;
 
-    if (_selected == itemCoords)
+
+    if (_selected == itemCoords) // Current selected item
     {
+      // Selection frame
       graphics::Size2 size {
-        item.second->size().x * graphics::Properties::inventoryCellHeight(),
-        item.second->size().y * graphics::Properties::inventoryCellWidth(),
+        item.second->size().x * Properties::inventoryCellHeight(),
+        item.second->size().y * Properties::inventoryCellWidth(),
       };
 
       graphics::RectangleShape background(size);
@@ -176,7 +177,32 @@ void ItemsContainer::draw()
       background.setFillColor(graphics::Color::Transparent);
       background.setPosition(coords);
       graphics::GraphicsEngine::draw(background);
+
+
+      // Description
+      _labelDescription->draw();
+
+      const auto desc{item.second->description()};
+      graphics::Size2 sz { ///< \todo handle \n and length
+        w * static_cast<graphics::component> (desc.length()),
+        static_cast<graphics::component> (
+          std::count(desc.begin(), desc.end(), '\n') + 1) * h
+      };
+
+      const graphics::Pos2 location {
+        w, static_cast<component> (GraphicsEngine::windowSize().y) - 4 * h};
+
+      graphics::RectangleShape descBg(sz);
+      descBg.setPosition(location.x, location.y);
+      const sf::Color bg(64, 64, 64, 255);
+      descBg.setFillColor(bg);
+      graphics::GraphicsEngine::draw(descBg);
+
+      auto label = std::make_shared<resources::Text> (
+        item.second->description() , w, location, "font_army");
+      label->draw();
     }
+
 
     item.second->setPosition(coords);
     item.second->draw();
@@ -237,9 +263,11 @@ void Inventory::addContainer(e_container_type type,
 
 
 bool Inventory::addEquip(const std::string& name,
+                         const std::string& description,
                          size_t nbCols,
                          size_t nbLines)
 {
-  auto item = std::make_unique<Item> (name, name, nbCols, nbLines);
+  auto item = std::make_unique<Item> (
+    name, name, description, nbCols, nbLines);
   return _equipped->add(std::move(item));
 }

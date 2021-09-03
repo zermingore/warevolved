@@ -15,10 +15,12 @@
 
 Item::Item(const std::string& name,
            const std::string& textureName,
+           const std::string& description,
            size_t nbCols,
            size_t nbLines)
   : InterfaceElement(textureName)
   , _name(name)
+  , _description(description)
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
 {
