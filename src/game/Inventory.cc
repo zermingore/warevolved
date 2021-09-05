@@ -211,6 +211,30 @@ void ItemsContainer::draw()
 
 
 
+void ItemsContainer::selectItem(const e_direction direction)
+{
+  if (_stored.empty())
+  {
+    return;
+  }
+
+
+  /// \todo Moving item: don't jump to the next item but to the next cell
+
+  auto newItemCoords {_selected};
+  for (const auto& item: _stored)
+  {
+    const auto coords {item.second->coords()};
+    if (coords != _selected)
+    {
+      _selected = coords;
+      return;
+    }
+  }
+}
+
+
+
 // _______________________________ Inventory _______________________________ //
 
 Inventory::Inventory()
@@ -277,23 +301,10 @@ bool Inventory::addEquip(const std::string& name,
 
 void Inventory::moveSelection(const e_direction direction)
 {
-  if (_stored[_selectedContainer]->items().empty())
+  if (_stored.empty())
   {
     return;
   }
 
-
-  /// \todo Moving item: don't jump to the next item but to the next cell
-
-  const auto selectedCoords {_stored[_selectedContainer]->selectedItemCoords()};
-  auto newItemCoords {selectedCoords};
-  for (const auto& item: _stored[_selectedContainer]->items())
-  {
-    const auto coords {item.second->coords()};
-    if (coords != _stored[_selectedContainer]->selectedItemCoords())
-    {
-      _stored[_selectedContainer]->setSelected(coords);
-      return;
-    }
-  }
+  _stored[_selectedContainer]->selectItem(direction);
 }

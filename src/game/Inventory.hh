@@ -70,6 +70,10 @@ public:
    */
   bool add(std::unique_ptr<Item> item);
 
+  /***
+   * \brief Select the next item, according to the given direction
+   */
+  void selectItem(const e_direction direction);
 
   /**
    * \brief Update the graphics elements before drawing
@@ -85,22 +89,13 @@ public:
   /// \todo rename getter or attribute?
   auto selectedItemCoords() const { return _selected; }
 
-  ///< _stored getter
-  /// \todo rename getter or attribute?
-  const auto items() const { return _stored; }
-
-  ///< _selected setter
-  void setSelected(const Coords selected) { _selected = selected; }
-
-
-
 
 private:
   e_container_type _type; ///< Type of the container
   std::string _name;      ///< Displayed name
 
   /// Items in the container and their coordinates in the container
-  std::vector<std::pair<Coords, std::shared_ptr<Item>>> _stored;
+  std::vector<std::pair<Coords, std::unique_ptr<Item>>> _stored;
 
   size_t _nbColumns; ///< Number of columns (x coordinate)
   size_t _nbLines;   ///< Number of lines (y coordinate)
