@@ -75,18 +75,22 @@ void StateInventory::resume()
 
 void StateInventory::selectUp()
 {
+  _inventory->moveSelection(e_direction::UP);
 }
 
 void StateInventory::selectDown()
 {
+  _inventory->moveSelection(e_direction::DOWN);
 }
 
 void StateInventory::selectLeft()
 {
+  _inventory->moveSelection(e_direction::LEFT);
 }
 
 void StateInventory::selectRight()
 {
+  _inventory->moveSelection(e_direction::RIGHT);
 }
 
 

@@ -216,6 +216,7 @@ void ItemsContainer::draw()
 Inventory::Inventory()
   : _equipped(std::make_unique<ItemsContainer> (
       e_container_type::EQUIPPED, "equipped", 10, 30))
+  , _selectedContainer(0)
 {
   /// \todo Fix hard-coded sizes
   _equipped->setPosition({10, 50});
@@ -270,4 +271,29 @@ bool Inventory::addEquip(const std::string& name,
   auto item = std::make_unique<Item> (
     name, name, description, nbCols, nbLines);
   return _equipped->add(std::move(item));
+}
+
+
+
+void Inventory::moveSelection(const e_direction direction)
+{
+  if (_stored[_selectedContainer]->items().empty())
+  {
+    return;
+  }
+
+
+  /// \todo Moving item: don't jump to the next item but to the next cell
+
+  const auto selectedCoords {_stored[_selectedContainer]->selectedItemCoords()};
+  auto newItemCoords {selectedCoords};
+  for (const auto& item: _stored[_selectedContainer]->items())
+  {
+    const auto coords {item.second->coords()};
+    if (coords != _stored[_selectedContainer]->selectedItemCoords())
+    {
+      _stored[_selectedContainer]->setSelected(coords);
+      return;
+    }
+  }
 }

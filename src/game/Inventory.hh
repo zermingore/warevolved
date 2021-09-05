@@ -14,6 +14,8 @@
 
 # include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>
+# include <game/Item.hh>
+# include <game/PathFinding.hh> // e_directions -> TODO split
 
 
 namespace graphics {
@@ -79,13 +81,26 @@ public:
    */
   virtual void draw() override final;
 
+  ///< _selected getter
+  /// \todo rename getter or attribute?
+  auto selectedItemCoords() const { return _selected; }
+
+  ///< _stored getter
+  /// \todo rename getter or attribute?
+  const auto items() const { return _stored; }
+
+  ///< _selected setter
+  void setSelected(const Coords selected) { _selected = selected; }
+
+
+
 
 private:
   e_container_type _type; ///< Type of the container
   std::string _name;      ///< Displayed name
 
   /// Items in the container and their coordinates in the container
-  std::vector<std::pair<Coords, std::unique_ptr<Item>>> _stored;
+  std::vector<std::pair<Coords, std::shared_ptr<Item>>> _stored;
 
   size_t _nbColumns; ///< Number of columns (x coordinate)
   size_t _nbLines;   ///< Number of lines (y coordinate)
@@ -145,10 +160,19 @@ public:
                 size_t nbCols,
                 size_t nbLines);
 
+  /**
+   * \brief Move the selection cursor
+   * \param direction Where to fetch another selected item
+   * \note Handles Inventory selection
+   */
+  void moveSelection(const e_direction direction);
+
 
 private:
   std::unique_ptr<ItemsContainer> _equipped;            ///< Equipped items
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
+
+  size_t _selectedContainer; ///< Index of the currently selected container
 
   /// \todo dynamic first container place (based on biggest equipped items)
   /// Where to draw the current container
