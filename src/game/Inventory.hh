@@ -164,7 +164,6 @@ public:
 
 
 private:
-  std::unique_ptr<ItemsContainer> _equipped;            ///< Equipped items
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
 
   size_t _selectedContainer; ///< Index of the currently selected container

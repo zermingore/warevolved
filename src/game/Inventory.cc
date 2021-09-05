@@ -215,6 +215,7 @@ void ItemsContainer::selectItem(const e_direction direction)
 {
   if (_stored.empty())
   {
+    NOTICE("No item in the container");
     return;
   }
 
@@ -238,12 +239,12 @@ void ItemsContainer::selectItem(const e_direction direction)
 // _______________________________ Inventory _______________________________ //
 
 Inventory::Inventory()
-  : _equipped(std::make_unique<ItemsContainer> (
-      e_container_type::EQUIPPED, "equipped", 10, 30))
-  , _selectedContainer(0)
+  : _selectedContainer(0)
 {
   /// \todo Fix hard-coded sizes
-  _equipped->setPosition({10, 50});
+  _stored.emplace_back(std::make_unique<ItemsContainer> (
+      e_container_type::EQUIPPED, "equipped", 10, 30));
+  _stored[0]->setPosition({10, 50});
   const auto sz{graphics::Properties::inventoryCellWidth()};
   _currentContainerPosition.x = static_cast<float> (10) * sz + 5 * sz;
 }
@@ -259,8 +260,6 @@ void Inventory::draw()
   background.setFillColor(bg);
   graphics::GraphicsEngine::draw(background);
   game::Status::player()->cursor()->disableDrawThisFrame();
-
-  _equipped->draw();
 
   for (const auto& container: _stored)
   {
@@ -294,17 +293,12 @@ bool Inventory::addEquip(const std::string& name,
 {
   auto item = std::make_unique<Item> (
     name, name, description, nbCols, nbLines);
-  return _equipped->add(std::move(item));
+  return _stored[0]->add(std::move(item));
 }
 
 
 
 void Inventory::moveSelection(const e_direction direction)
 {
-  if (_stored.empty())
-  {
-    return;
-  }
-
   _stored[_selectedContainer]->selectItem(direction);
 }
