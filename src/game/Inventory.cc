@@ -57,14 +57,12 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
     static_cast<size_t> (item->size().x),
     static_cast<size_t> (item->size().y)};
 
-  NOTICE("sz:", sz.c, sz.l);
   if (   (sz.c >= _nbColumns || sz.l >= _nbLines)
       && (sz.l >= _nbLines   || sz.l >= _nbColumns))
   {
     NOTICE("Item bigger as the inventory");
     return false;
   }
-  NOTICE("sz:", sz.c, sz.l);
 
   // Locate possible new item location
   Coords c{0, 0};
@@ -94,7 +92,6 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
 
     c.c = location_idx % _nbColumns;
     c.l = location_idx / _nbColumns;
-    NOTICE("location:", location_idx, "coords:", c);
     break;
   }
 
@@ -108,22 +105,17 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
 
 
   // Keep track of free space
-  NOTICE("location_idx:", location_idx);
-
   for (auto col{0u}; col < sz.c; ++col)
   {
     for (auto line{0u}; line < sz.l; ++line)
     {
        const auto idx{location_idx + col * _nbColumns + line};
-       std::cout << idx << " ";
       _freeCells[idx] = false;
     }
-    std::cout << "\n";
   }
 
 
   _stored.push_back({c, std::move(item)});
-  NOTICE("Added item at", c);
 
   return true;
 }
