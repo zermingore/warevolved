@@ -214,15 +214,66 @@ void ItemsContainer::selectItem(const e_direction direction)
 
   /// \todo Moving item: don't jump to the next item but to the next cell
 
+  // Identify best candidates for the 4 directions
+  auto oriSelected {_selected};
+
+  Coords itemMaxUp {0, 0};
+  Coords itemMinDown {0, SIZE_MAX};
+  Coords itemMaxLeft {0, 0};
+  Coords itemMinRight {SIZE_MAX, 0};
+
   auto newItemCoords {_selected};
   for (const auto& item: _stored)
   {
     const Coords itemCoords { item.first.c, item.first.l };
-
-    if (itemCoords != _selected)
+    if (itemCoords == oriSelected)
     {
-      _selected = itemCoords;
-      return;
+      continue;
+    }
+
+
+    // Up
+    if (direction == e_direction::UP)
+    {
+      // Above orignal selected item and under current candidate
+      if (itemCoords.l <= oriSelected.l && itemCoords.l >= itemMaxUp.l)
+      {
+        itemMaxUp = itemCoords;
+        _selected = itemMaxUp;
+      }
+    }
+
+    // Down
+    if (direction == e_direction::DOWN)
+    {
+      // Under orignal selected item and above current candidate
+      if (itemCoords.l >= oriSelected.l && itemCoords.l <= itemMinDown.l)
+      {
+        itemMinDown = itemCoords;
+        _selected = itemMinDown;
+      }
+    }
+
+    // Left
+    if (direction == e_direction::LEFT)
+    {
+      // Left from orignal selected item and right from current candidate
+      if (itemCoords.c <= oriSelected.c && itemCoords.c >= itemMaxLeft.c)
+      {
+        itemMaxLeft = itemCoords;
+        _selected = itemMaxLeft;
+      }
+    }
+
+    // Right
+    if (direction == e_direction::RIGHT)
+    {
+      // Left from orignal selected item and right from current candidate
+      if (itemCoords.c >= oriSelected.c && itemCoords.c <= itemMinRight.c)
+      {
+        itemMinRight = itemCoords;
+        _selected = itemMinRight;
+      }
     }
   }
 }
