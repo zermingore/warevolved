@@ -225,10 +225,11 @@ void ItemsContainer::selectItem(const e_direction direction)
   auto newItemCoords {_selected};
   for (const auto& item: _stored)
   {
-    const auto coords {item.second->coords()};
-    if (coords != _selected)
+    const Coords itemCoords { item.first.c, item.first.l };
+
+    if (itemCoords != _selected)
     {
-      _selected = coords;
+      _selected = itemCoords;
       return;
     }
   }
