@@ -151,6 +151,7 @@ public:
    * \param description New Item description
    * \param nbCols New Item number of used columns
    * \param nbLines New Item number of used lines
+   * \param use Callback function triggered on Item usage
    * \return true on success; false on impossible add (item too large)
    * \note Creating a new Items from these parameters
    * \todo only one paramter to take and forward: item type
@@ -158,7 +159,8 @@ public:
   bool addEquip(const std::string& name,
                 const std::string& description,
                 size_t nbCols,
-                size_t nbLines);
+                size_t nbLines,
+                const std::function<void()>& use = {});
 
   /**
    * \brief Move the selection cursor

@@ -17,7 +17,8 @@ Item::Item(const std::string& name,
            const std::string& textureName,
            const std::string& description,
            size_t nbCols,
-           size_t nbLines)
+           size_t nbLines,
+           const std::function<void()>& use)
   : InterfaceElement(textureName)
   , _name(name)
   , _description(description)
@@ -29,6 +30,8 @@ Item::Item(const std::string& name,
 
   _sprite->setSize(static_cast<float> (_nbColumns) * w,
                    static_cast<float> (_nbLines) * h);
+
+  _use = use;
 }
 
 

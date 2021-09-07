@@ -61,7 +61,8 @@ public:
        const std::string& textureName,
        const std::string& description,
        size_t nbCols,
-       size_t nbLines);
+       size_t nbLines,
+       const std::function<void()>& use = {});
 
 
   /**
@@ -100,6 +101,20 @@ public:
   virtual void draw() override final;
 
 
+  /**
+   * \brief _use callback setter
+   * \param callback Callback called when the item is used
+   */
+  void setUseCallback(const std::function<void()> callback) {
+    _use = callback;
+  }
+
+  /**
+   * \brief _use() function wrapper
+   */
+  void use() { _use(); }
+
+
 
 private:
   std::string _name; ///< Displayed name
@@ -116,6 +131,7 @@ private:
   bool _combinable = false; ///< Can be combined with another Item
 
   std::vector<std::unique_ptr<Item>> _accessories; ///< Combined items
+  std::function<void()> _use; ///< Callback on item usage
 };
 
 

@@ -286,7 +286,7 @@ void ItemsContainer::useItem()
   {
     if (item.first == _selected)
     {
-      // item.second->use();
+      item.second->use();
       _stored.erase(
         std::remove(_stored.begin(), _stored.end(), item), _stored.end());
       return;
@@ -349,10 +349,11 @@ void Inventory::addContainer(e_container_type type,
 bool Inventory::addEquip(const std::string& name,
                          const std::string& description,
                          size_t nbCols,
-                         size_t nbLines)
+                         size_t nbLines,
+                         const std::function<void()>& use)
 {
   auto item = std::make_unique<Item> (
-    name, name, description, nbCols, nbLines);
+    name, name, description, nbCols, nbLines, use);
   return _stored[0]->add(std::move(item));
 }
 

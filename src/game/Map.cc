@@ -183,7 +183,8 @@ void Map::newUnit(e_unit type,
     new_unit->inventory()->addEquip(
       "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10 , 5);
     new_unit->inventory()->addEquip(
-      "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10 , 5);
+      "medkit", "Medkit\nRestores: 10", 10 , 5,
+      [] (auto&&...) noexcept { NOTICE("Using"); });
     first = false;
   }
 

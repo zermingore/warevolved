@@ -272,6 +272,8 @@ void MenuAction::buildMenuItem()
   assert(_selectedUnit);
 
   auto inventory{_selectedUnit->inventory()};
+
+  /// \todo If item usable
   auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_USE)};
   entry->setCallback([=, this] { inventory->useItem(); });
   _lock.lock();
