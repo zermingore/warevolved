@@ -192,10 +192,25 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::INVENTORY:
       _labelName = "Items";
       break;
+    case e_entry::ITEM_USE:
+      _labelName = "Use";
+      break;
+    case e_entry::ITEM_COMBINE:
+      _labelName = "Combine";
+      break;
+    case e_entry::ITEM_MOVE:
+      _labelName = "Move";
+      break;
+    case e_entry::ITEM_DROP:
+      _labelName = "Drop";
+      break;
+    case e_entry::ITEM_EQUIP:
+      _labelName = "Equip";
+      break;
 
     default:
       _labelName = "## NOT FOUND ##";
-      ERROR("No label found for e_entry", static_cast<int> (entry));
+      ERROR("No label found for e_entry", debug::e_entry_string(entry));
       assert(false && "No label found");
       break;
   }

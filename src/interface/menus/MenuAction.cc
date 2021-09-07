@@ -267,6 +267,10 @@ void MenuAction::buildMenuAfterMovingUnit()
 
 void MenuAction::buildMenuItem()
 {
+  auto map(game::Status::battle()->map());
+  _selectedUnit = map->selectedUnit();
+  assert(_selectedUnit);
+
   auto inventory{_selectedUnit->inventory()};
   auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_USE)};
   entry->setCallback([=, this] { inventory->useItem(); });
