@@ -184,7 +184,8 @@ void Map::newUnit(e_unit type,
       "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10 , 5);
     new_unit->inventory()->addEquip(
       "medkit", "Medkit\nRestores: 10", 10 , 5,
-      [] (auto&&...) noexcept { NOTICE("Using"); });
+      [new_unit] (auto&&...) noexcept {
+        new_unit->setHp(new_unit->hp() + 10); });
     first = false;
   }
 

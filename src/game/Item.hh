@@ -127,7 +127,6 @@ private:
   size_t _nbColumns; ///< Number of columns in the inventory
   size_t _nbLines;   ///< Number of lines in the inventory
 
-  bool _usable = false;     ///< Consumable
   bool _equippable = false; ///< Can be equipped by a Unit
   bool _combinable = false; ///< Can be combined with another Item
 
