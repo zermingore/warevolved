@@ -393,6 +393,16 @@ std::string e_entry_string(e_entry entry)
       return "e_entry::UNITS_BUILDING (no explicit value)";
     case e_entry::INVENTORY:
       return "e_entry::INVENTORY (no explicit value)";
+    case e_entry::ITEM_USE:
+      return "e_entry::ITEM_USE (no explicit value)";
+    case e_entry::ITEM_COMBINE:
+      return "e_entry::ITEM_COMBINE (no explicit value)";
+    case e_entry::ITEM_MOVE:
+      return "e_entry::ITEM_MOVE (no explicit value)";
+    case e_entry::ITEM_DROP:
+      return "e_entry::ITEM_DROP (no explicit value)";
+    case e_entry::ITEM_EQUIP:
+      return "e_entry::ITEM_EQUIP (no explicit value)";
     case e_entry::CANCEL:
       return "e_entry::CANCEL (no explicit value)";
     case e_entry::CONFIRM:

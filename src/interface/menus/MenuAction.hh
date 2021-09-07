@@ -74,11 +74,15 @@ private:
    */
   void buildMenuAfterMovingUnit();
 
-
   /**
    * \brief Build the menu specific entries on Player's Building selection
    */
   void buildMenuSelectionBuilding();
+
+  /**
+   * \brief Build the menu specific entries to the currently selected item
+   */
+  void buildMenuItem();
 
   /**
    * \brief Check if the unit is allowed to move. It is the case if

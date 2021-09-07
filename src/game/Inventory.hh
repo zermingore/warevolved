@@ -85,6 +85,11 @@ public:
    */
   virtual void draw() override final;
 
+  /**
+   * \brief Use the currently selected Item
+   */
+  void useItem();
+
   ///< _selected getter
   /// \todo rename getter or attribute?
   auto selectedItemCoords() const { return _selected; }
@@ -161,6 +166,11 @@ public:
    * \note Handles Inventory selection
    */
   void moveSelection(const e_direction direction);
+
+  /**
+   * \brief Use the currently selected Item
+   */
+  void useItem();
 
 
 private:

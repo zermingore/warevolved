@@ -159,6 +159,11 @@ enum class e_entry
 
   // Items
   INVENTORY,
+  ITEM_USE,
+  ITEM_COMBINE,
+  ITEM_MOVE,
+  ITEM_DROP,
+  ITEM_EQUIP,
 
   CANCEL,
   CONFIRM

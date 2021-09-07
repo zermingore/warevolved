@@ -18,6 +18,7 @@
 #include <game/units/Unit.hh>
 #include <game/units/Vehicle.hh>
 #include <game/Terrain.hh>
+#include <game/Inventory.hh>
 #include <interface/Cursor.hh>
 #include <interface/menus/MenuEntry.hh>
 
@@ -47,6 +48,10 @@ void MenuAction::build()
 
     case e_state::BUILDING_MENU:
       buildMenuSelectionBuilding();
+      break;
+
+    case e_state::ITEM_MENU:
+      buildMenuItem();
       break;
 
     default:
@@ -256,6 +261,18 @@ void MenuAction::buildMenuAfterMovingUnit()
     game::Status::setStateAttributes(std::make_shared<Coords> (_coords));
     game::Status::resumeState();
   }
+}
+
+
+
+void MenuAction::buildMenuItem()
+{
+  auto inventory{_selectedUnit->inventory()};
+  auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_USE)};
+  entry->setCallback([=, this] { inventory->useItem(); });
+  _lock.lock();
+  _entries.emplace_back(std::move(entry));
+  _lock.unlock();
 }
 
 

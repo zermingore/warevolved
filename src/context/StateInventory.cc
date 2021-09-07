@@ -43,11 +43,11 @@ StateInventory::StateInventory()
   _evtMgr->registerEvent(e_input::MOVE_LEFT,  [=, this] { selectLeft();  });
   _evtMgr->registerEvent(e_input::MOVE_RIGHT, [=, this] { selectRight(); });
 
-  // _evtMgr->registerEvent(e_input::SELECTION,  [=, this] {
-  //     game::Status::pushState(e_state::ITEM_MENU);
-  //     // game::Status::setStateAttributes() /// \todo give item / item index
-  //     game::Status::resumeState();
-  //   });
+  _evtMgr->registerEvent(e_input::SELECTION,  [=, this] {
+      game::Status::pushState(e_state::ITEM_MENU);
+      // game::Status::setStateAttributes() /// \todo give item / item index
+      game::Status::resumeState();
+  });
 
   _evtMgr->registerEvent(e_input::EXIT, [=, this] { exit(); });
 

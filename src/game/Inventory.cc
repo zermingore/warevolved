@@ -280,6 +280,22 @@ void ItemsContainer::selectItem(const e_direction direction)
 
 
 
+void ItemsContainer::useItem()
+{
+  for (auto& item: _stored)
+  {
+    if (item.first == _selected)
+    {
+      // item.second->use();
+      _stored.erase(
+        std::remove(_stored.begin(), _stored.end(), item), _stored.end());
+      return;
+    }
+  }
+}
+
+
+
 // _______________________________ Inventory _______________________________ //
 
 Inventory::Inventory()
@@ -345,4 +361,11 @@ bool Inventory::addEquip(const std::string& name,
 void Inventory::moveSelection(const e_direction direction)
 {
   _stored[_selectedContainer]->selectItem(direction);
+}
+
+
+
+void Inventory::useItem()
+{
+  _stored[_selectedContainer]->useItem();
 }

@@ -44,6 +44,7 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
     case e_state::SELECTION_UNIT:
     case e_state::SELECTION_CREW:
     case e_state::BUILDING_MENU:
+    case e_state::ITEM_MENU:
       return std::make_unique<StateMenu> (state);
 
     case e_state::CREW_MANAGEMENT:
@@ -114,8 +115,6 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
 
     case e_state::INVENTORY:
       return std::make_unique<StateInventory> ();
-
-    // case e_state::ITEM_MENU:
 
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate a State",

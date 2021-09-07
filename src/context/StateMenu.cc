@@ -45,6 +45,7 @@ StateMenu::StateMenu(const e_state state)
     case e_state::SELECTION_UNIT:
     case e_state::ACTION_MENU:
     case e_state::BUILDING_MENU:
+    case e_state::ITEM_MENU:
       _menu = std::make_shared<interface::MenuAction> (state);
       break;
 

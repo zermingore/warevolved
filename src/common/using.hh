@@ -70,6 +70,15 @@ public:
     return *this;
   }
 
+  /**
+   * \brief Equality operator
+   * \param r Right member to test the equality with
+   * \note x, c must be equal and y, l too
+   */
+  bool operator==(const Coords& r) const
+  {
+    return ((x == r.x && y == r.y) && (c == r.c && l == r.l));
+  }
 
 
 public: // explicitly specifying that these attributes are public
