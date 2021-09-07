@@ -55,6 +55,7 @@ public:
    * \param description Description text
    * \param nbCols Inventory occupied space
    * \param nbLines Inventory occupied space
+   * \param use Optional callback on Item usage
    * \todo Constructor with only one parameter: Item(e_item_type)
    */
   Item(const std::string& name,
@@ -72,7 +73,7 @@ public:
   void rotate(const e_rotation rotation);
 
   /// _usable getter
-  auto usable() const { return _usable; }
+  auto usable() const { return _use != nullptr; }
 
   /// _equippable getter
   auto equippable() const { return _equippable; }

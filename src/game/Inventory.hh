@@ -64,6 +64,18 @@ public:
                  size_t nbCols,
                  size_t nbLines);
 
+
+  ///< _selected getter
+  /// \todo rename getter or attribute?
+  auto selectedItemCoords() const { return _selected; }
+
+  /**
+   * \brief Check if the currently selected Item is usable
+   * \return true if the currently selected Item is usable; false otherwise
+  */
+  bool selectedItemUsable();
+
+
   /**
    * \brief Add the given Item to the container
    * \param item Item to add
@@ -89,10 +101,6 @@ public:
    * \brief Use the currently selected Item
    */
   void useItem();
-
-  ///< _selected getter
-  /// \todo rename getter or attribute?
-  auto selectedItemCoords() const { return _selected; }
 
 
 private:
@@ -173,6 +181,12 @@ public:
    * \brief Use the currently selected Item
    */
   void useItem();
+
+  /**
+   * \brief Check if the currently selected item is usable
+   * \return true if the Item is usable, false otherwise
+   */
+  bool usableSelectedItem();
 
 
 private:

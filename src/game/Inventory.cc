@@ -296,6 +296,23 @@ void ItemsContainer::useItem()
 
 
 
+bool ItemsContainer::selectedItemUsable()
+{
+  for (auto& item: _stored)
+  {
+    if (item.first == _selected)
+    {
+      return item.second->usable();
+    }
+  }
+
+  assert("No Item currently selected");
+  return false;
+}
+
+
+
+
 // _______________________________ Inventory _______________________________ //
 
 Inventory::Inventory()
@@ -369,4 +386,11 @@ void Inventory::moveSelection(const e_direction direction)
 void Inventory::useItem()
 {
   _stored[_selectedContainer]->useItem();
+}
+
+
+
+bool Inventory::usableSelectedItem()
+{
+  return _stored[_selectedContainer]->selectedItemUsable();
 }

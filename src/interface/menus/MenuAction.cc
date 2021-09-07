@@ -273,12 +273,14 @@ void MenuAction::buildMenuItem()
 
   auto inventory{_selectedUnit->inventory()};
 
-  /// \todo If item usable
-  auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_USE)};
-  entry->setCallback([=, this] { inventory->useItem(); });
-  _lock.lock();
-  _entries.emplace_back(std::move(entry));
-  _lock.unlock();
+  if (inventory->usableSelectedItem())
+  {
+    auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_USE)};
+    entry->setCallback([=, this] { inventory->useItem(); });
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
+  }
 }
 
 
