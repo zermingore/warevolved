@@ -28,6 +28,7 @@ Unit::Unit()
   , _maxRange(0)
   , _inventory(std::make_shared<Inventory> ())
 {
+  _inventory->addContainer(e_container_type::EQUIPPED, "Equipped", -1, -1);
 }
 
 

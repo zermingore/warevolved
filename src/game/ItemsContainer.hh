@@ -59,8 +59,8 @@ public:
    */
   ItemsContainer(e_container_type type,
                  const std::string& name,
-                 size_t nbCols,
-                 size_t nbLines);
+                 int nbCols,
+                 int nbLines);
 
 
   ///< _selected getter
@@ -102,8 +102,9 @@ public:
 
 
 private:
-  e_container_type _type; ///< Type of the container
-  std::string _name;      ///< Displayed name
+  e_container_type _type;  ///< Type of the container
+  std::string _name;       ///< Displayed name
+  bool _unlimited = false; ///< Unlimited container size (equiped / Cell)
 
   /// Items in the container and their coordinates in the container
   std::vector<std::pair<Coords, std::unique_ptr<Item>>> _stored;

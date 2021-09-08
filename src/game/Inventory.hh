@@ -46,11 +46,12 @@ public:
    * \param name Displayed container name
    * \param nbCols Number of inventory cells (column)
    * \param nbLines Number of inventory cells (lines)
+   * \note Unlimited container size if nbCols or nbLines <= 0
    */
   void addContainer(e_container_type type,
                     const std::string& name,
-                    size_t nbCols,
-                    size_t nbLines);
+                    int nbCols,
+                    int nbLines);
 
   /**
    * \brief Add a new item in the equipped list
@@ -96,9 +97,6 @@ private:
   /// \todo dynamic first container place (based on biggest equipped items)
   /// Where to draw the current container
   graphics::Pos2 _currentContainerPosition = {0, 50};
-
-  size_t _nbColumns; ///< Number of columns in the inventory
-  size_t _nbLines;   ///< Number of lines in the inventory
 };
 
 

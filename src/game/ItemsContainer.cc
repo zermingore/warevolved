@@ -20,8 +20,8 @@
 
 ItemsContainer::ItemsContainer(e_container_type type,
                                const std::string& name,
-                               size_t nbCols,
-                               size_t nbLines)
+                               int nbCols,
+                               int nbLines)
   : InterfaceElement("cell_inventory_background")
   , _type(type)
   , _name(name)
@@ -29,8 +29,16 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _nbLines(nbLines)
   , _selected(0, 0)
 {
+  if (nbCols <= 0 || nbLines <= 0)
+  {
+    _unlimited = true;
+  }
+  else
+  {
+    _freeCells.resize(_nbColumns * _nbLines, true);
+  }
+
   using namespace graphics;
-  _freeCells.resize(_nbColumns * _nbLines, true);
 
   const auto w{Properties::inventoryCellWidth()};
   const auto h{Properties::inventoryCellHeight()};
@@ -39,7 +47,7 @@ ItemsContainer::ItemsContainer(e_container_type type,
     _name, w, graphics::Pos2(0, 0), "font_army");
 
   // Description zone
-  const graphics::Pos2 location {
+  const graphics::Pos2 location { /// \todo Consider Panel existence
     w, static_cast<component> (GraphicsEngine::windowSize().y) - 6 * h};
   _labelDescription = std::make_shared<resources::Text> (
     "Description", w, location, "font_army");
@@ -49,6 +57,24 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 bool ItemsContainer::add(std::unique_ptr<Item> item)
 {
+  if (_unlimited)
+  {
+    // _stored.push_back({{0, max_line}, std::move(item)});
+    if (_stored.empty())
+    {
+      _stored.push_back({{0, 0}, std::move(item)});
+      return true;
+    }
+    const size_t last_line {
+        _stored.back().first.l
+      + static_cast<size_t> (_stored.back().second->size().y)
+      + 1u};
+    _stored.push_back({{0, last_line}, std::move(item)});
+
+    return true;
+  }
+
+
   const Coords sz{
     static_cast<size_t> (item->size().x),
     static_cast<size_t> (item->size().y)};
@@ -136,8 +162,25 @@ void ItemsContainer::draw()
   _label->draw();
 
   // Background
-  _sprite->setSize(static_cast<component> (_nbColumns)  * w,
-                   static_cast<component> (_nbLines) * h);
+  if (_stored.empty())
+  {
+    return;
+  }
+
+  if (_unlimited)
+  {
+    const auto lines {
+      _stored.back().first.l
+      + static_cast<size_t> (_stored.back().second->size().y)};
+    const auto cols {10u}; ///< \todo
+    _sprite->setSize(static_cast<component> (cols) * w,
+                     static_cast<component> (lines) * h);
+  }
+  else
+  {
+    _sprite->setSize(static_cast<component> (_nbColumns) * w,
+                    static_cast<component> (_nbLines) * h);
+  }
   _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
   _sprite->setPosition(_position); // Refresh the position
   _sprite->draw();
@@ -147,8 +190,8 @@ void ItemsContainer::draw()
   {
     Coords itemCoords{ item.first.c, item.first.l };
     graphics::Pos2 coords(_position);
-    coords.x += static_cast<float> (itemCoords.c) * w / 2;
-    coords.y += static_cast<float> (itemCoords.l) * h / 2;
+    coords.x += static_cast<float> (itemCoords.c) * w;
+    coords.y += static_cast<float> (itemCoords.l) * h;
 
 
     if (_selected == itemCoords) // Current selected item

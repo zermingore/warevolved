@@ -23,9 +23,6 @@ Inventory::Inventory()
   : _selectedContainer(0)
 {
   /// \todo Fix hard-coded sizes
-  _stored.emplace_back(std::make_unique<ItemsContainer> (
-      e_container_type::EQUIPPED, "equipped", 10, 30));
-  _stored[0]->setPosition({10, 50});
   const auto sz{graphics::Properties::inventoryCellWidth()};
   _currentContainerPosition.x = static_cast<float> (10) * sz + 5 * sz;
 }
@@ -42,6 +39,12 @@ void Inventory::draw()
   graphics::GraphicsEngine::draw(background);
   game::Status::player()->cursor()->disableDrawThisFrame();
 
+  if (_stored.empty())
+  {
+    return;
+  }
+
+  _stored[0]->setPosition({10, 50}); /// \todo Consider the Panel existence
   for (const auto& container: _stored)
   {
     container->draw();
@@ -52,11 +55,9 @@ void Inventory::draw()
 
 void Inventory::addContainer(e_container_type type,
                              const std::string& name,
-                             size_t nbCols,
-                             size_t nbLines)
+                             int nbCols,
+                             int nbLines)
 {
-  assert(nbCols > 0 && nbLines > 0);
-
   auto cont = std::make_unique<ItemsContainer> (type, name, nbCols, nbLines);
   cont->setPosition(_currentContainerPosition);
   _stored.emplace_back(std::move(cont));
