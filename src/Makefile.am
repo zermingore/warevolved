@@ -59,6 +59,7 @@ game/Player.cc                           \
 game/PathFinding.cc                      \
 game/Building.cc                         \
 game/Inventory.cc                        \
+game/ItemsContainer.cc                   \
 game/Item.cc                             \
 \
 interface/Interface.cc                   \

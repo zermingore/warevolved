@@ -2,7 +2,7 @@
  * \file
  * \date December 11, 2020
  * \author Zermingore
- * \brief Inventory and ItemsContainer classes declaration
+ * \brief Inventory class declaration
  */
 
 #ifndef INVENTORY_HH_
@@ -11,115 +11,12 @@
 # include <cstddef> // size_t
 # include <memory>
 # include <string>
+# include <vector>
 
 # include <graphics/graphic_types.hh>
-# include <interface/InterfaceElement.hh>
 # include <game/Item.hh>
 # include <game/PathFinding.hh> // e_directions -> TODO split
-
-
-namespace graphics {
-  class Sprite;
-}
-
-namespace resources {
-  class Text;
-}
-
-class Item;
-
-
-
-enum class e_container_type
-{
-  EQUIPPED,  ///< Unit type agnostic
-  BACKPACK, ///< Soldier only
-  POCKET,   ///< Soldier only
-  TRUNK,    ///< Vehicle only
-};
-
-
-
-/**
- * \class ItemsContainer
- * \brief Items container (backpack, trunk, pocket, ...)
- */
-class ItemsContainer: public interface::InterfaceElement
-{
-public:
-  /**
-   * \brief Default contructor (parameters required)
-   */
-  ItemsContainer() = delete;
-
-  /**
-   * \brief Contructor
-   * \param type Type of the container (\see e_container_type)
-   * \param name Displayed name of the container
-   * \param nbCols Size of the container (in inventory cells)
-   * \param nbLines Size of the container (in inventory cells)
-   */
-  ItemsContainer(e_container_type type,
-                 const std::string& name,
-                 size_t nbCols,
-                 size_t nbLines);
-
-
-  ///< _selected getter
-  /// \todo rename getter or attribute?
-  auto selectedItemCoords() const { return _selected; }
-
-  /**
-   * \brief Check if the currently selected Item is usable
-   * \return true if the currently selected Item is usable; false otherwise
-  */
-  bool selectedItemUsable();
-
-
-  /**
-   * \brief Add the given Item to the container
-   * \param item Item to add
-   */
-  bool add(std::unique_ptr<Item> item);
-
-  /***
-   * \brief Select the next item, according to the given direction
-   */
-  void selectItem(const e_direction direction);
-
-  /**
-   * \brief Update the graphics elements before drawing
-   */
-  virtual void update() override final;
-
-  /**
-   * \brief Draw the container and its content
-   */
-  virtual void draw() override final;
-
-  /**
-   * \brief Use the currently selected Item
-   */
-  void useItem();
-
-
-private:
-  e_container_type _type; ///< Type of the container
-  std::string _name;      ///< Displayed name
-
-  /// Items in the container and their coordinates in the container
-  std::vector<std::pair<Coords, std::unique_ptr<Item>>> _stored;
-
-  size_t _nbColumns; ///< Number of columns (x coordinate)
-  size_t _nbLines;   ///< Number of lines (y coordinate)
-
-  std::vector<bool> _freeCells; ///< Keeping track of free space
-
-  Coords _selected; ///< Selected item location
-
-  std::shared_ptr<resources::Text> _label; ///< button label text
-  std::shared_ptr<resources::Text> _labelDescription; ///< description text
-};
+# include <game/ItemsContainer.hh>
 
 
 
