@@ -162,13 +162,13 @@ void ItemsContainer::draw()
   _label->draw();
 
   // Background
-  if (_stored.empty())
-  {
-    return;
-  }
-
   if (_unlimited)
   {
+    if (_stored.empty())
+    {
+      return;
+    }
+
     const auto lines {
       _stored.back().first.l
       + static_cast<size_t> (_stored.back().second->size().y)};
