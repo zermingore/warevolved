@@ -15,8 +15,10 @@
 
 # include <graphics/graphic_types.hh>
 # include <game/Item.hh>
-# include <game/PathFinding.hh> // e_directions -> TODO split
 # include <game/ItemsContainer.hh>
+
+
+enum class e_directions;
 
 
 

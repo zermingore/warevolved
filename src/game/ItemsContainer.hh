@@ -14,7 +14,6 @@
 # include <vector>
 
 # include <interface/InterfaceElement.hh>
-# include <game/PathFinding.hh> // e_directions -> TODO split
 
 
 namespace resources {
@@ -22,6 +21,7 @@ namespace resources {
 }
 
 class Item;
+enum class e_direction;
 
 
 /**

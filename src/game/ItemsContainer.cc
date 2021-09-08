@@ -14,6 +14,7 @@
 #include <resources/ResourcesManager.hh>
 #include <resources/Text.hh>
 #include <graphics/Properties.hh>
+#include <game/PathFinding.hh> // e_directions
 
 
 
