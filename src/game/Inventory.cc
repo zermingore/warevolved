@@ -135,3 +135,54 @@ bool Inventory::selectedItemEquippable()
 {
   return _stored[_selectedContainer]->selectedItemEquippable();
 }
+
+
+
+void Inventory::equip()
+{
+  _stored[0]->add(std::move(_stored[_selectedContainer]->item()));
+}
+
+
+
+bool Inventory::unequip()
+{
+  auto item { _stored[_selectedContainer]->item() };
+  if (!item)
+  {
+    ERROR("Expecting Item to unequip");
+    return false;
+  }
+
+
+  const Coords size { static_cast<size_t> (item->size().x),
+                      static_cast<size_t> (item->size().y) };
+
+  auto equipped_list {true};
+  for (auto& container: _stored)
+  {
+    if (equipped_list) // skip equipped list
+    {
+      equipped_list = false;
+      continue;
+    }
+
+    if (container->addable(size))
+    {
+      continue;
+    }
+
+    if (!container->add(std::move(item)))
+    {
+      assert("Failure checking if an Item can be added");
+      return false;
+    }
+
+    NOTICE("Moved object");
+    return true;
+  }
+
+  // Add the Item back if we could not add it somewhere else
+  _stored[_selectedContainer]->add(std::move(item));
+  return false;
+}

@@ -60,8 +60,71 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 
 
+bool ItemsContainer::addable(Coords itemSize)
+{
+  if (_unlimited)
+  {
+    return true;
+  }
+
+  if (   (itemSize.c >= _nbColumns || itemSize.l >= _nbLines)
+      && (itemSize.l >= _nbLines   || itemSize.l >= _nbColumns))
+  {
+    return false;
+  }
+
+
+  // Locate possible new item location
+  Coords c{0, 0};
+  auto location_idx{0u};
+  while (location_idx < _freeCells.size())
+  {
+    if (   !_freeCells[location_idx]
+        || location_idx % _nbColumns + itemSize.c > _nbColumns
+        || location_idx % _nbLines   + itemSize.l > _nbLines)
+    {
+      // TODO? Optimization: skip occupied cells matching concerned item
+      ++location_idx;
+      continue;
+    }
+
+    for (auto col{0u}; col < itemSize.c; ++col)
+    {
+      for (auto line{0u}; line < itemSize.l; ++line)
+      {
+        if (!_freeCells[location_idx + col * _nbColumns + line])
+        {
+          ++location_idx;
+          continue;
+        }
+      }
+    }
+
+    c.c = location_idx % _nbColumns;
+    c.l = location_idx / _nbColumns;
+    break;
+  }
+
+
+  if (location_idx >= _freeCells.size()) // No space found
+  {
+    // TODO Rotate the item and try again
+    return false;
+  }
+
+  return true;
+}
+
+
+
 bool ItemsContainer::add(std::unique_ptr<Item> item)
 {
+  if (!item)
+  {
+    ERROR("Expected Item to add");
+    return false;
+  }
+
   if (_unlimited)
   {
     // _stored.push_back({{0, max_line}, std::move(item)});
@@ -84,10 +147,10 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
     static_cast<size_t> (item->size().x),
     static_cast<size_t> (item->size().y)};
 
-  if (   (sz.c >= _nbColumns || sz.l >= _nbLines)
-      && (sz.l >= _nbLines   || sz.l >= _nbColumns))
+  if (   (sz.c > _nbColumns || sz.l > _nbLines)
+      && (sz.l > _nbLines   || sz.l > _nbColumns))
   {
-    NOTICE("Item bigger as the inventory");
+    NOTICE("Item bigger as the inventory", sz.c, sz.l, _nbColumns, _nbLines);
     return false;
   }
 
@@ -400,4 +463,23 @@ bool ItemsContainer::selectedItemEquippable()
 bool ItemsContainer::empty()
 {
   return _stored.empty();
+}
+
+
+
+std::unique_ptr<Item> ItemsContainer::item()
+{
+  for (auto& item: _stored)
+  {
+    if (item.first == _selected)
+    {
+      auto ptr = std::move(item.second);
+      _stored.erase(
+        std::remove(_stored.begin(), _stored.end(), item), _stored.end());
+      return ptr;
+    }
+  }
+
+  assert("No item currently equipped");
+  return nullptr;
 }

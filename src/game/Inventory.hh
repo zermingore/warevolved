@@ -113,6 +113,19 @@ public:
    */
   bool selectedItemEquippable();
 
+  /**
+   * \brief Equip the currently selected Item
+   * \todo Unequip incompatible items (one main weapon, ...)
+   */
+  void equip();
+
+  /**
+   * \brief Unquip the currently selected Item
+   * \return true on success, false otherwise (no more space in containers)
+   */
+  bool unequip();
+
+
 
 private:
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items

@@ -89,7 +89,15 @@ public:
    */
   bool add(std::unique_ptr<Item> item);
 
-  /***
+  /**
+   * \brief Check if an Item fits in a container, depending on its size
+   * \param itemSize Item size
+   * \return true if the Item would fit; false otherwise
+   * \todo Try to rotate the Item if it does not fit
+   */
+  bool addable(Coords itemSize);
+
+  /**
    * \brief Select the next item, according to the given direction
    */
   void selectItem(const e_direction direction);
@@ -119,6 +127,12 @@ public:
    * \return true if empty; false otherwise
    */
   bool empty();
+
+  /**
+   * \brief Return the currenlty equipped Item
+   * \return Item (give ownership)
+   */
+  std::unique_ptr<Item> item();
 
 
 private:

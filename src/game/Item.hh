@@ -130,7 +130,8 @@ private:
   size_t _nbColumns; ///< Number of columns in the inventory
   size_t _nbLines;   ///< Number of lines in the inventory
 
-  bool _equippable = false; ///< Can be equipped by a Unit
+  /// \todo type based
+  bool _equippable = true; ///< Can be equipped by a Unit
   bool _combinable = false; ///< Can be combined with another Item
 
   std::vector<std::unique_ptr<Item>> _accessories; ///< Combined items
