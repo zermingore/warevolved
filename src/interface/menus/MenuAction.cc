@@ -281,6 +281,15 @@ void MenuAction::buildMenuItem()
     _entries.emplace_back(std::move(entry));
     _lock.unlock();
   }
+
+  if (!inventory->empty())
+  {
+    auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_DROP)};
+    entry->setCallback([=, this] { inventory->dropItem(); });
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
+  }
 }
 
 

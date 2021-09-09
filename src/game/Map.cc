@@ -82,6 +82,11 @@ void Map::clearHighlights()
     for (auto line(0u); line < _nbLines; ++line)
     {
       _cells[col][line]->setHighlight(false);
+      if (!_cells[col][line]->inventory()->empty())
+      {
+        _cells[col][line]->setHighlightColor(graphics::Color::White);
+        _cells[col][line]->setHighlight(true);
+      }
     }
   }
 }

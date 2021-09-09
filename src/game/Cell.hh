@@ -94,6 +94,11 @@ public:
   auto highlightColor() const { return _highlightColor; }
 
   /**
+   * \brief Inventory getter
+   */
+  auto inventory() const { return _inventory; }
+
+  /**
    * \brief Highlight color setter.
    * \param color Color of Cell's highlight.
    */

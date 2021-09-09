@@ -8,6 +8,11 @@
 #include <game/ItemsContainer.hh>
 
 #include <debug/Debug.hh>
+#include <game/Battle.hh>
+#include <game/Status.hh>
+#include <game/Map.hh>
+#include <game/Cell.hh>
+
 #include <game/Item.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/GraphicsEngine.hh>
@@ -335,6 +340,31 @@ void ItemsContainer::useItem()
 
 
 
+void ItemsContainer::dropItem()
+{
+  auto map(game::Status::battle()->map());
+  const auto selectedUnit = map->selectedUnit();
+
+  for (auto& item: _stored)
+  {
+    if (item.first == _selected)
+    {
+      map->cell(selectedUnit->coords())->inventory()->addEquip(
+        item.second->name(),
+        item.second->name(),
+        static_cast<size_t> (item.second->size().x),
+        static_cast<size_t> (item.second->size().y)
+      );
+
+      _stored.erase(
+        std::remove(_stored.begin(), _stored.end(), item), _stored.end());
+      return;
+    }
+  }
+}
+
+
+
 bool ItemsContainer::selectedItemUsable()
 {
   for (auto& item: _stored)
@@ -349,3 +379,9 @@ bool ItemsContainer::selectedItemUsable()
   return false;
 }
 
+
+
+bool ItemsContainer::empty()
+{
+  return _stored.empty();
+}

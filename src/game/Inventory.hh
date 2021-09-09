@@ -83,6 +83,18 @@ public:
   void useItem();
 
   /**
+   * \brief Drop the currently selected Item
+   * \note The Item will belong to the Cell's Inventory
+   */
+  void dropItem();
+
+  /**
+   * \brief Check wether the Containers (if any) are all empty
+   * \return true if no item is found in the inventory; false otherwise
+   */
+  bool empty();
+
+  /**
    * \brief Check if the currently selected item is usable
    * \return true if the Item is usable, false otherwise
    */

@@ -95,7 +95,29 @@ void Inventory::useItem()
 
 
 
+void Inventory::dropItem()
+{
+  _stored[_selectedContainer]->dropItem();
+}
+
+
+
 bool Inventory::usableSelectedItem()
 {
   return _stored[_selectedContainer]->selectedItemUsable();
+}
+
+
+
+bool Inventory::empty()
+{
+  for (const auto& container: _stored)
+  {
+    if (!container->empty())
+    {
+      return false;
+    }
+  }
+
+  return true;
 }

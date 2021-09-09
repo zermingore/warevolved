@@ -72,6 +72,9 @@ public:
    */
   void rotate(const e_rotation rotation);
 
+  /// _name getter
+  auto name() const { return _name; }
+
   /// _usable getter
   auto usable() const { return _use != nullptr; }
 

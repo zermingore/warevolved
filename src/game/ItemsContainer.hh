@@ -101,6 +101,17 @@ public:
    */
   void useItem();
 
+  /**
+   * \brief Drop the currently selected Item
+   */
+  void dropItem();
+
+  /**
+   * \brief Check wether the container is empty
+   * \return true if empty; false otherwise
+   */
+  bool empty();
+
 
 private:
   e_container_type _type;  ///< Type of the container
