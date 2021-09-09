@@ -12,12 +12,14 @@
 #include <game/Battle.hh>
 #include <game/Map.hh>
 #include <game/Status.hh>
+#include <game/Inventory.hh>
 
 
 
 Vehicle::Vehicle()
 {
   _canHaveCrew = true;
+  _inventory->addContainer(e_container_type::EQUIPPED, "Installed", -1, -1);
 }
 
 

@@ -8,6 +8,7 @@
 #include <game/units/Soldier.hh>
 
 #include <game/units/UnitsFactory.hh>
+#include <game/Inventory.hh>
 #include <graphics/Sprite.hh>
 
 
@@ -24,4 +25,10 @@ Soldier::Soldier()
 
   _minRange = 1;
   _maxRange = 2;
+
+  _inventory->addContainer(e_container_type::EQUIPPED, "Equipped", -1, -1);
+  _inventory->addContainer(
+    e_container_type::POCKET, "trousers\npocket left", 5, 10);
+  _inventory->addContainer(
+    e_container_type::POCKET, "Trousers\npocket right", 5, 10);
 }

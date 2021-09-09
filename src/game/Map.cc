@@ -173,11 +173,6 @@ void Map::newUnit(e_unit type,
   static bool first = true;
   if (type == e_unit::SOLDIER && first)
   {
-    new_unit->inventory()->addContainer(
-      e_container_type::POCKET, "jacket pocket left", 10, 10);
-    new_unit->inventory()->addContainer(
-      e_container_type::POCKET, "jacket pocket right", 10, 10);
-
     new_unit->inventory()->addEquip(
       "rifle", "Assault rifle\nDamages: 10\nCal: 7.62mm", 10 , 5);
     new_unit->inventory()->addEquip(

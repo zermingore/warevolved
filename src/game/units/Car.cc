@@ -11,6 +11,7 @@
 #include <graphics/Sprite.hh>
 #include <graphics/Properties.hh>
 #include <game/units/UnitsFactory.hh>
+#include <game/Inventory.hh>
 #include <resources/ResourcesManager.hh>
 
 
@@ -39,6 +40,8 @@ Car::Car()
   // _crew[e_unit_role::DRIVER] = nullptr;
   // _crew[e_unit_role::COPILOT] = nullptr;
   // _crew[e_unit_role::PASSENGER] = nullptr;
+
+  _inventory->addContainer(e_container_type::TRUNK, "Trunk", 40, 30);
 }
 
 
