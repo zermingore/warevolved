@@ -41,6 +41,8 @@ std::string e_container_type_string(e_container_type entry)
       return "e_container_type::POCKET (no explicit value)";
     case e_container_type::TRUNK:
       return "e_container_type::TRUNK (no explicit value)";
+    case e_container_type::CELL:
+      return "e_container_type::CELL (no explicit value)";
     default:
       return "entry not matched";
   }

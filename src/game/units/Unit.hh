@@ -13,6 +13,7 @@
 # include <common/using.hh> // Coords
 # include <graphics/graphic_types.hh>
 
+
 class Inventory;
 
 namespace graphics {

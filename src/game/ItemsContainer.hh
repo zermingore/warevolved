@@ -30,10 +30,11 @@ enum class e_direction;
  */
 enum class e_container_type
 {
-  EQUIPPED,  ///< Unit type agnostic
+  EQUIPPED, ///< Unit type agnostic
   BACKPACK, ///< Soldier only
   POCKET,   ///< Soldier only
   TRUNK,    ///< Vehicle only
+  CELL,     ///< Cell's Inventory specific case
 };
 
 

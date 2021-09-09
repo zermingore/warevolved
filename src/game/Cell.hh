@@ -10,10 +10,12 @@
 
 # include <game/units/Unit.hh>
 # include <graphics/graphic_types.hh>
+# include <game/Inventory.hh>
 
 
 enum class e_terrain;
 enum class e_unit;
+
 
 
 /**
@@ -24,6 +26,7 @@ enum class e_unit;
  *
  * A Cell has:
  *   a terrain
+ *   an inventory
  *   eventually, a unit
  */
 class Cell
@@ -41,7 +44,9 @@ public:
   Cell(size_t c, size_t l, e_terrain terrain)
     : _coords(c, l)
     , _terrain(terrain)
+    , _inventory(std::make_shared<Inventory> ())
   {
+    _inventory->addContainer(e_container_type::CELL, "Items", -1, -1);
   }
 
 
@@ -127,6 +132,8 @@ private:
 
   bool _highlight = false;         ///< Does the cell needs to be highlighted ?
   graphics::Color _highlightColor; ///< Color of the cell's highlight.
+
+  std::shared_ptr<Inventory> _inventory; ///< Collection of Items
 };
 
 
