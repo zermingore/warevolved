@@ -290,6 +290,26 @@ void MenuAction::buildMenuItem()
     _entries.emplace_back(std::move(entry));
     _lock.unlock();
   }
+
+  if (inventory->selectedItemEquippable())
+  {
+    if (inventory->equippedItem())
+    {
+      auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_UNEQUIP)};
+      // entry->setCallback([=, this] { inventory->unequip(); });
+      _lock.lock();
+      _entries.emplace_back(std::move(entry));
+      _lock.unlock();
+    }
+    else
+    {
+      auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_EQUIP)};
+      // entry->setCallback([=, this] { inventory->equip(); });
+      _lock.lock();
+      _entries.emplace_back(std::move(entry));
+      _lock.unlock();
+    }
+  }
 }
 
 

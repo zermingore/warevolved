@@ -100,6 +100,19 @@ public:
    */
   bool usableSelectedItem();
 
+  /**
+   * \brief Check wether the current Item is equipped
+   * \return true if equipped; false otherwise
+   * \note The returned flag is based on the Item Container type
+   */
+  bool equippedItem();
+
+  /**
+   * \brief Check if the currently selected Item can be equipped
+   * \return true if the current Item can be equipped; false otherwise
+   */
+  bool selectedItemEquippable();
+
 
 private:
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items

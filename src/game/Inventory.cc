@@ -121,3 +121,17 @@ bool Inventory::empty()
 
   return true;
 }
+
+
+
+bool Inventory::equippedItem()
+{
+  return _stored[_selectedContainer]->type() == e_container_type::EQUIPPED;
+}
+
+
+
+bool Inventory::selectedItemEquippable()
+{
+  return _stored[_selectedContainer]->selectedItemEquippable();
+}

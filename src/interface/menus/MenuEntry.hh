@@ -164,6 +164,7 @@ enum class e_entry
   ITEM_MOVE,
   ITEM_DROP,
   ITEM_EQUIP,
+  ITEM_UNEQUIP,
 
   CANCEL,
   CONFIRM

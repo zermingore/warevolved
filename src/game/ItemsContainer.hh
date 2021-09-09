@@ -68,12 +68,20 @@ public:
   /// \todo rename getter or attribute?
   auto selectedItemCoords() const { return _selected; }
 
+  ///< type getter
+  auto type() { return _type; }
+
   /**
    * \brief Check if the currently selected Item is usable
    * \return true if the currently selected Item is usable; false otherwise
   */
   bool selectedItemUsable();
 
+  /**
+   * \brief Check if the currently selected Item is equippable
+   * \return true if the currently selected Item is equippable; false otherwise
+   */
+  bool selectedItemEquippable();
 
   /**
    * \brief Add the given Item to the container
@@ -116,7 +124,7 @@ public:
 private:
   e_container_type _type;  ///< Type of the container
   std::string _name;       ///< Displayed name
-  bool _unlimited = false; ///< Unlimited container size (equiped / Cell)
+  bool _unlimited = false; ///< Unlimited container size (equipped / Cell)
 
   /// Items in the container and their coordinates in the container
   std::vector<std::pair<Coords, std::unique_ptr<Item>>> _stored;

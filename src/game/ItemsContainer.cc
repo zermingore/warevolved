@@ -381,6 +381,22 @@ bool ItemsContainer::selectedItemUsable()
 
 
 
+bool ItemsContainer::selectedItemEquippable()
+{
+  for (auto& item: _stored)
+  {
+    if (item.first == _selected)
+    {
+      return item.second->equippable();
+    }
+  }
+
+  assert("No Item currently selected");
+  return false;
+}
+
+
+
 bool ItemsContainer::empty()
 {
   return _stored.empty();

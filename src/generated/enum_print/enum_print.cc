@@ -405,6 +405,8 @@ std::string e_entry_string(e_entry entry)
       return "e_entry::ITEM_DROP (no explicit value)";
     case e_entry::ITEM_EQUIP:
       return "e_entry::ITEM_EQUIP (no explicit value)";
+    case e_entry::ITEM_UNEQUIP:
+      return "e_entry::ITEM_UNEQUIP (no explicit value)";
     case e_entry::CANCEL:
       return "e_entry::CANCEL (no explicit value)";
     case e_entry::CONFIRM:

@@ -116,6 +116,8 @@ std::unique_ptr<State> StatesFactory::createState(const e_state& state)
     case e_state::INVENTORY:
       return std::make_unique<StateInventory> ();
 
+    /// \todo state::Item Menu
+
     default:
       ERROR("UNRECOGNIZED STATE. Unable to instantiate a State",
             static_cast<int> (state));

@@ -207,6 +207,9 @@ void MenuEntry::setLabelName(const e_entry entry)
     case e_entry::ITEM_EQUIP:
       _labelName = "Equip";
       break;
+    case e_entry::ITEM_UNEQUIP:
+      _labelName = "Unequip";
+      break;
 
     default:
       _labelName = "## NOT FOUND ##";
