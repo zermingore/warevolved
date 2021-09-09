@@ -99,6 +99,9 @@
       <file filename='rifle.png'>
         <name>rifle</name>
       </file>
+      <file filename='knife.png'>
+        <name>knife</name>
+      </file>
       <file filename='medkit.png'>
         <name>medkit</name>
       </file>
