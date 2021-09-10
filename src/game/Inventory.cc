@@ -167,16 +167,13 @@ bool Inventory::unequip()
       continue;
     }
 
-    if (container->addable(size))
+    const auto destination {container->addable(size)};
+    if (!destination)
     {
       continue;
     }
 
-    if (!container->add(std::move(item)))
-    {
-      assert("Failure checking if an Item can be added");
-      return false;
-    }
+    container->add(std::move(item), *destination);
 
     NOTICE("Moved object");
     return true;

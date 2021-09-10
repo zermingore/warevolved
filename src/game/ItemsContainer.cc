@@ -60,22 +60,36 @@ ItemsContainer::ItemsContainer(e_container_type type,
 
 
 
-bool ItemsContainer::addable(Coords itemSize)
+std::optional<Coords> ItemsContainer::addable(Coords itemSize)
 {
   if (_unlimited)
   {
-    return true;
+    // _stored.push_back({{0, max_line}, std::move(item)});
+    if (_stored.empty())
+    {
+      return Coords{0, 0};
+    }
+
+    const size_t last_line {
+        _stored.back().first.l
+      + static_cast<size_t> (_stored.back().second->size().y)
+      + 1u};
+
+    return Coords{0, last_line};
   }
 
-  if (   (itemSize.c >= _nbColumns || itemSize.l >= _nbLines)
-      && (itemSize.l >= _nbLines   || itemSize.l >= _nbColumns))
+  if (   (itemSize.c > _nbColumns || itemSize.l > _nbLines)
+      && (itemSize.l > _nbLines   || itemSize.l > _nbColumns))
   {
-    return false;
+    NOTICE("Item bigger as the inventory",
+           itemSize.c, itemSize.l, _nbColumns, _nbLines);
+
+    return std::nullopt;
   }
 
 
   // Locate possible new item location
-  Coords c{0, 0};
+  Coords loc{0, 0};
   auto location_idx{0u};
   while (location_idx < _freeCells.size())
   {
@@ -100,8 +114,8 @@ bool ItemsContainer::addable(Coords itemSize)
       }
     }
 
-    c.c = location_idx % _nbColumns;
-    c.l = location_idx / _nbColumns;
+    loc.c = location_idx % _nbColumns;
+    loc.l = location_idx / _nbColumns;
     break;
   }
 
@@ -109,10 +123,10 @@ bool ItemsContainer::addable(Coords itemSize)
   if (location_idx >= _freeCells.size()) // No space found
   {
     // TODO Rotate the item and try again
-    return false;
+    return std::nullopt;
   }
 
-  return true;
+  return loc;
 }
 
 
@@ -208,6 +222,36 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
   _stored.push_back({c, std::move(item)});
 
   return true;
+}
+
+
+
+void ItemsContainer::add(std::unique_ptr<Item> item, const Coords& dst)
+{
+  if (!item)
+  {
+    ERROR("Expected Item to add");
+    return;
+  }
+
+  if (_unlimited)
+  {
+    _stored.push_back({dst, std::move(item)});
+    return;
+  }
+
+  // Keep track of free space
+  auto location_idx {dst.l * _nbLines + dst.c * _nbColumns};
+  for (auto col{0u}; col < static_cast<size_t> (item->size().x); ++col)
+  {
+    for (auto line{0u}; line < static_cast<size_t> (item->size().y); ++line)
+    {
+       const auto idx{location_idx + col * _nbColumns + line};
+      _freeCells[idx] = false;
+    }
+  }
+
+  _stored.push_back({dst, std::move(item)});
 }
 
 

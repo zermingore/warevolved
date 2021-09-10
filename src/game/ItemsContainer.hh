@@ -12,6 +12,7 @@
 # include <memory>
 # include <string>
 # include <vector>
+# include <optional>
 
 # include <interface/InterfaceElement.hh>
 
@@ -90,12 +91,19 @@ public:
   bool add(std::unique_ptr<Item> item);
 
   /**
+   * \brief Add the given Item to the container
+   * \param item Item to add
+   * \param dst Where to add the Item in the inventory
+   */
+  void add(std::unique_ptr<Item> item, const Coords& dst);
+
+  /**
    * \brief Check if an Item fits in a container, depending on its size
    * \param itemSize Item size
-   * \return true if the Item would fit; false otherwise
+   * \return Coordinates where the Item would fit if any
    * \todo Try to rotate the Item if it does not fit
    */
-  bool addable(Coords itemSize);
+  std::optional<Coords> addable(Coords itemSize);
 
   /**
    * \brief Select the next item, according to the given direction
