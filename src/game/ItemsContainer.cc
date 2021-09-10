@@ -93,6 +93,7 @@ std::optional<Coords> ItemsContainer::addable(Coords itemSize)
   auto location_idx{0u};
   while (location_idx < _freeCells.size())
   {
+    // Find the first free Cell far enough from Container's borders
     if (   !_freeCells[location_idx]
         || location_idx % _nbColumns + itemSize.c > _nbColumns
         || location_idx % _nbLines   + itemSize.l > _nbLines)
@@ -102,21 +103,30 @@ std::optional<Coords> ItemsContainer::addable(Coords itemSize)
       continue;
     }
 
-    for (auto col{0u}; col < itemSize.c; ++col)
-    {
-      for (auto line{0u}; line < itemSize.l; ++line)
+    // Check if every cell the Item would take is free
+    auto item_fit { false };
+    [&] {
+      for (auto col{0u}; col < itemSize.c; ++col)
       {
-        if (!_freeCells[location_idx + col * _nbColumns + line])
+        for (auto line{0u}; line < itemSize.l; ++line)
         {
-          ++location_idx;
-          continue;
+          if (!_freeCells[location_idx + col + _nbColumns * line])
+          {
+            ++location_idx;
+            return;
+          }
         }
       }
-    }
 
-    loc.c = location_idx % _nbColumns;
-    loc.l = location_idx / _nbColumns;
-    break;
+      item_fit = true;
+    } ();
+
+    if (item_fit)
+    {
+      loc.c = location_idx % _nbColumns;
+      loc.l = location_idx / _nbColumns;
+      break;
+    }
   }
 
 

@@ -29,6 +29,6 @@ Soldier::Soldier()
   _inventory->addContainer(e_container_type::EQUIPPED, "Equipped", -1, -1);
   _inventory->addContainer(
     e_container_type::POCKET, "trousers\npocket left", 10, 5);
-  // _inventory->addContainer(
-  //   e_container_type::POCKET, "Trousers\npocket right", 5, 10);
+  _inventory->addContainer(
+    e_container_type::POCKET, "Trousers\npocket right", 1, 1);
 }
