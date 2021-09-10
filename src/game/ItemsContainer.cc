@@ -139,87 +139,15 @@ bool ItemsContainer::add(std::unique_ptr<Item> item)
     return false;
   }
 
-  if (_unlimited)
+  const auto destination { addable({ static_cast<size_t> (item->size().x),
+                                     static_cast<size_t> (item->size().y)}) };
+
+  if (!destination)
   {
-    // _stored.push_back({{0, max_line}, std::move(item)});
-    if (_stored.empty())
-    {
-      _stored.push_back({{0, 0}, std::move(item)});
-      return true;
-    }
-    const size_t last_line {
-        _stored.back().first.l
-      + static_cast<size_t> (_stored.back().second->size().y)
-      + 1u};
-    _stored.push_back({{0, last_line}, std::move(item)});
-
-    return true;
-  }
-
-
-  const Coords sz{
-    static_cast<size_t> (item->size().x),
-    static_cast<size_t> (item->size().y)};
-
-  if (   (sz.c > _nbColumns || sz.l > _nbLines)
-      && (sz.l > _nbLines   || sz.l > _nbColumns))
-  {
-    NOTICE("Item bigger as the inventory", sz.c, sz.l, _nbColumns, _nbLines);
     return false;
   }
 
-  // Locate possible new item location
-  Coords c{0, 0};
-  auto location_idx{0u};
-  while (location_idx < _freeCells.size())
-  {
-    if (   !_freeCells[location_idx]
-        || location_idx % _nbColumns + sz.c > _nbColumns
-        || location_idx % _nbLines   + sz.l > _nbLines)
-    {
-      // TODO? Optimization: skip occupied cells matching concerned item
-      ++location_idx;
-      continue;
-    }
-
-    for (auto col{0u}; col < sz.c; ++col)
-    {
-      for (auto line{0u}; line < sz.l; ++line)
-      {
-        if (!_freeCells[location_idx + col * _nbColumns + line])
-        {
-          ++location_idx;
-          continue;
-        }
-      }
-    }
-
-    c.c = location_idx % _nbColumns;
-    c.l = location_idx / _nbColumns;
-    break;
-  }
-
-
-  if (location_idx >= _freeCells.size()) // No space found
-  {
-    // TODO Rotate the item and try again to add it
-    NOTICE("Not enough space to add item", sz, location_idx);
-    return false;
-  }
-
-
-  // Keep track of free space
-  for (auto col{0u}; col < sz.c; ++col)
-  {
-    for (auto line{0u}; line < sz.l; ++line)
-    {
-       const auto idx{location_idx + col * _nbColumns + line};
-      _freeCells[idx] = false;
-    }
-  }
-
-
-  _stored.push_back({c, std::move(item)});
+  add(std::move(item), *destination);
 
   return true;
 }
