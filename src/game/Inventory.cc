@@ -11,10 +11,11 @@
 #include <game/Item.hh>
 #include <game/ItemsContainer.hh>
 #include <game/Status.hh>
+#include <game/Player.hh>
+#include <game/PathFinding.hh> // e_direction enum
 #include <graphics/Properties.hh>
 #include <graphics/GraphicsEngine.hh>
 #include <resources/Text.hh>
-#include <game/Player.hh>
 #include <interface/Cursor.hh>
 
 
@@ -64,6 +65,12 @@ void Inventory::addContainer(e_container_type type,
 
   const auto sz{graphics::Properties::inventoryCellWidth()};
   _currentContainerPosition.x += static_cast<float> (nbCols) * sz + 5 * sz;
+
+  for (auto& container: _stored)
+  {
+    container->setDrawSelectionCursor(false);
+  }
+  _stored.back()->setDrawSelectionCursor(true);
 }
 
 
@@ -83,7 +90,30 @@ bool Inventory::addEquip(const std::string& name,
 
 void Inventory::moveSelection(const e_direction direction)
 {
-  _stored[_selectedContainer]->selectItem(direction);
+  auto dir_container {_stored[_selectedContainer]->selectItem(direction)};
+
+  if (dir_container == e_direction::LEFT)
+  {
+    _stored[_selectedContainer]->setDrawSelectionCursor(false);
+    if (_selectedContainer > 0)
+    {
+      --_selectedContainer;
+    }
+    else
+    {
+      _selectedContainer = _stored.size() - 1;
+    }
+    _stored[_selectedContainer]->setDrawSelectionCursor(true);
+    _stored.back()->resetSelectedItem();
+  }
+
+  if (dir_container == e_direction::RIGHT)
+  {
+    _stored[_selectedContainer]->setDrawSelectionCursor(false);
+    _selectedContainer = (_selectedContainer + 1) % _stored.size();
+    _stored[_selectedContainer]->setDrawSelectionCursor(true);
+    _stored.back()->resetSelectedItem();
+  }
 }
 
 

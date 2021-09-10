@@ -244,7 +244,8 @@ void ItemsContainer::draw()
     coords.y += static_cast<float> (itemCoords.l) * h;
 
 
-    if (_selected == itemCoords) // Current selected item
+    // Draw current selected item emphasis
+    if (_drawSelectionCursor && _selected == itemCoords)
     {
       // Selection frame
       graphics::Size2 size {
@@ -292,12 +293,26 @@ void ItemsContainer::draw()
 
 
 
-void ItemsContainer::selectItem(const e_direction direction)
+void ItemsContainer::resetSelectedItem()
+{
+  for (auto idx_first{0u}; idx_first < _freeCells.size(); ++idx_first)
+  {
+    if (!_freeCells[idx_first])
+    {
+      _selected = { idx_first % _nbColumns, idx_first / _nbColumns };
+      return;
+    }
+  }
+}
+
+
+
+e_direction ItemsContainer::selectItem(const e_direction direction)
 {
   if (_stored.empty())
   {
     NOTICE("No item in the container");
-    return;
+    return direction;
   }
 
 
@@ -329,6 +344,7 @@ void ItemsContainer::selectItem(const e_direction direction)
       {
         itemMaxUp = itemCoords;
         _selected = itemMaxUp;
+        return e_direction::NONE;
       }
     }
 
@@ -340,31 +356,46 @@ void ItemsContainer::selectItem(const e_direction direction)
       {
         itemMinDown = itemCoords;
         _selected = itemMinDown;
+        return e_direction::NONE;
       }
     }
 
     // Left
     if (direction == e_direction::LEFT)
     {
+      if (oriSelected.c <= 0)
+      {
+        return e_direction::LEFT;
+      }
+
       // Left from orignal selected item and right from current candidate
       if (itemCoords.c <= oriSelected.c && itemCoords.c >= itemMaxLeft.c)
       {
         itemMaxLeft = itemCoords;
         _selected = itemMaxLeft;
+        return e_direction::NONE;
       }
     }
 
     // Right
     if (direction == e_direction::RIGHT)
     {
+      if (oriSelected.c + itemCoords.c >= _nbColumns)
+      {
+        return e_direction::RIGHT;
+      }
+
       // Left from orignal selected item and right from current candidate
       if (itemCoords.c >= oriSelected.c && itemCoords.c <= itemMinRight.c)
       {
         itemMinRight = itemCoords;
         _selected = itemMinRight;
+        return e_direction::NONE;
       }
     }
   }
+
+  return e_direction::NONE;
 }
 
 

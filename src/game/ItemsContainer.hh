@@ -107,8 +107,11 @@ public:
 
   /**
    * \brief Select the next item, according to the given direction
+   * \return Direction where another ItemContainer should be considered
+   *   Used when "trying" to cross inventory borders (ex: left from most-left)
+   *   return e_direction::NONE if a new selection can be made in this container
    */
-  void selectItem(const e_direction direction);
+  e_direction selectItem(const e_direction direction);
 
   /**
    * \brief Update the graphics elements before drawing
@@ -137,6 +140,17 @@ public:
   bool empty();
 
   /**
+   * \brief Clear the cursor selection drawing
+   */
+  void setDrawSelectionCursor(bool value) { _drawSelectionCursor = value; }
+
+  /**
+   * \brief Reset the selected Item (coordinates)
+   * \note Select the top-left Item
+   */
+  void resetSelectedItem();
+
+  /**
    * \brief Return the currenlty equipped Item
    * \return Item (give ownership)
    */
@@ -157,6 +171,7 @@ private:
   std::vector<bool> _freeCells; ///< Keeping track of free space
 
   Coords _selected; ///< Selected item location
+  bool _drawSelectionCursor = false;
 
   std::shared_ptr<resources::Text> _label; ///< button label text
   std::shared_ptr<resources::Text> _labelDescription; ///< description text
