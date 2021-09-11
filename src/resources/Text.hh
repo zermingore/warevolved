@@ -71,6 +71,13 @@ public:
   void setPosition(graphics::component x, graphics::component y);
 
   /**
+   * \brief Font color setter
+   * \param color New color
+   * \note If never explicit set, the color will default to opaque white
+   */
+  void setColor(graphics::Color color);
+
+  /**
    * \brief Graphic text getter
    * \return The graphical element containing the Text
    */

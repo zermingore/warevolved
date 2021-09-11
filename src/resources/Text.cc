@@ -51,6 +51,13 @@ void Text::setPosition(graphics::component x, graphics::component y)
 
 
 
+void Text::setColor(graphics::Color color)
+{
+  _text->setFillColor(color);
+}
+
+
+
 void Text::draw()
 {
   graphics::GraphicsEngine::draw(_text);

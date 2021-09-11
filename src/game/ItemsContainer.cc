@@ -209,9 +209,6 @@ void ItemsContainer::draw()
   const auto w{Properties::inventoryCellWidth()};
   const auto h{Properties::inventoryCellHeight()};
 
-  // Text
-  _label->setPosition(_position.x, _position.y - 2 * h);
-  _label->draw();
 
   // Background
   if (_unlimited)
@@ -225,17 +222,18 @@ void ItemsContainer::draw()
       _stored.back().first.l
       + static_cast<size_t> (_stored.back().second->size().y)};
     const auto cols {10u}; ///< \todo
-    _sprite->setSize(static_cast<component> (cols) * w,
+    _sprite->setSize(static_cast<component> (cols)  * w,
                      static_cast<component> (lines) * h);
   }
   else
   {
     _sprite->setSize(static_cast<component> (_nbColumns) * w,
-                    static_cast<component> (_nbLines) * h);
+                     static_cast<component> (_nbLines) * h);
   }
   _sprite->setTextureRepeat(true); // NOT in update() (reset Texture repeat)
   _sprite->setPosition(_position); // Refresh the position
   _sprite->draw();
+
 
   // Items
   for (const auto& item: _stored)
@@ -291,6 +289,19 @@ void ItemsContainer::draw()
     item.second->setPosition(coords);
     item.second->draw();
   }
+
+
+  // Container name
+  if (_drawSelectionCursor)
+  {
+    _label->setColor(graphics::Color::Yellow);
+  }
+  else
+  {
+    _label->setColor(graphics::Color::White);
+  }
+  _label->setPosition(_position.x, _position.y - 2 * h);
+  _label->draw();
 }
 
 
