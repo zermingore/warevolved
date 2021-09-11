@@ -37,8 +37,9 @@ public:
 
   /**
    * \brief Draw the components of the Inventory (equipped list and containers)
+   * \param direction Direction offset where to draw the Inventory
    */
-  void draw();
+  void draw(e_direction direction);
 
   /**
    * \brief Create and add a container to the Inventory

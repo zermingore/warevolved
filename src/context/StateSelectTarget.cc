@@ -23,7 +23,6 @@
 
 StateSelectTarget::StateSelectTarget()
 {
-
   game::Status::battle()->getCurrentPlayer()->updateSelectedUnit();
   auto selected_unit{game::Status::battle()->map()->selectedUnit()};
   _holoUnit = std::make_shared<graphics::Sprite> (
@@ -68,6 +67,7 @@ void StateSelectTarget::fetchAttributes()
 }
 
 
+
 void StateSelectTarget::resume()
 {
   // retrieve attack coordinates from the attributes
@@ -83,6 +83,7 @@ void StateSelectTarget::resume()
 
   assert(!_cells.empty() && "StateSelectTarget: no target available");
 }
+
 
 
 void StateSelectTarget::draw()

@@ -30,32 +30,47 @@ Inventory::Inventory()
 
 
 
-void Inventory::draw()
+void Inventory::draw(e_direction direction)
 {
-  // Background
-  graphics::Size2 size{graphics::GraphicsEngine::windowSize()};
-  graphics::RectangleShape background(size);
-  const sf::Color bg(127, 127, 127, 224);
-  background.setFillColor(bg);
-  graphics::GraphicsEngine::draw(background);
-  game::Status::player()->cursor()->disableDrawThisFrame();
-
-  if (_stored.empty())
+  // Background (only if "main" Inventory)
+  if (direction == e_direction::UP)
   {
-    return;
+    graphics::Size2 size{graphics::GraphicsEngine::windowSize()};
+    graphics::RectangleShape background(size);
+    const sf::Color bg(127, 127, 127, 224);
+    background.setFillColor(bg);
+    graphics::GraphicsEngine::draw(background);
+    game::Status::player()->cursor()->disableDrawThisFrame();
   }
 
-  graphics::Pos2 offset { graphics::Properties::gridOffsetX(),
-                          30.f };
-  const auto sz{graphics::Properties::inventoryCellWidth()};
-  for (const auto& container: _stored)
-  {
-    container->setPosition(offset);
-    container->draw();
 
-    offset.x +=   sz * 2
-                + sz * static_cast<float> (std::max(
-                    container->size().x, container->name().size() / 2));
+  // Draw the Items inventory
+  if (!_stored.empty())
+  {
+    graphics::Pos2 offset;
+    if (direction == e_direction::UP)
+    {
+      offset = { graphics::Properties::gridOffsetX(), 30.f };
+    }
+    else if (direction == e_direction::DOWN)
+    {
+      offset = {
+        graphics::Properties::gridOffsetX(),
+        static_cast<graphics::component> (
+            graphics::GraphicsEngine::windowSize().y)
+          - graphics::Properties::gridOffsetY() };
+    }
+
+    const auto sz{graphics::Properties::inventoryCellWidth()};
+    for (const auto& container: _stored)
+    {
+      container->setPosition(offset);
+      container->draw();
+
+      offset.x +=   sz * 2
+                  + sz * static_cast<float> (std::max(
+                        container->size().x, container->name().size() / 2));
+    }
   }
 }
 
