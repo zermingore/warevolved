@@ -45,10 +45,17 @@ void Inventory::draw()
     return;
   }
 
-  _stored[0]->setPosition({10, 50}); /// \todo Consider the Panel existence
+  graphics::Pos2 offset { graphics::Properties::gridOffsetX(),
+                          30.f };
+  const auto sz{graphics::Properties::inventoryCellWidth()};
   for (const auto& container: _stored)
   {
+    container->setPosition(offset);
     container->draw();
+
+    offset.x +=   sz * 2
+                + sz * static_cast<float> (std::max(
+                    container->size().x, container->name().size() / 2));
   }
 }
 

@@ -69,8 +69,14 @@ public:
   /// \todo rename getter or attribute?
   auto selectedItemCoords() const { return _selected; }
 
-  ///< type getter
+  ///< _type getter
   auto type() { return _type; }
+
+  /**
+   * \brief Get the Container size
+   * \return Container size as a Coords (_nbColumns, _nbLines)
+   */
+  Coords size() const { return {_nbColumns, _nbLines}; }
 
   /**
    * \brief Check if the currently selected Item is usable

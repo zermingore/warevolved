@@ -36,6 +36,8 @@ ItemsContainer::ItemsContainer(e_container_type type,
 {
   if (nbCols <= 0 || nbLines <= 0)
   {
+    _nbColumns = 0;
+    _nbLines = 0;
     _unlimited = true;
   }
   else

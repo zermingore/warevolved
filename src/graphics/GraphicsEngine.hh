@@ -126,11 +126,6 @@ private:
   static void drawBackground();
 
   /**
-   * \brief Draw the panel, if activated
-   */
-  static void drawPanel();
-
-  /**
    * \brief Draws cells content (terrain, unit).
    * \param battle Battle content to draw.
    */
