@@ -26,11 +26,8 @@ MenuEntry::MenuEntry(const e_entry entry, bool wide)
 {
   setLabelName(entry);
 
-  // label initialization
-  /// \todo the size should be ratio dependent, eventually text length dependent
-  using p = graphics::Properties;
-  auto size { (p::cellWidth() + p::cellHeight()) / 4 };
-
+  const auto len { std::max(5.f, static_cast<float> (_labelName.length())) };
+  const auto size { 3 * graphics::Properties::cellWidth() / len };
   _label = std::make_shared<resources::Text> (
     _labelName, size, graphics::Pos2(0, 0), "font_army");
 }
@@ -47,11 +44,8 @@ MenuEntry::MenuEntry(const std::string label,
   , _extraSprite(std::make_shared<graphics::Sprite> (sprite))
   , _notes(notes)
 {
-  using p = graphics::Properties;
-
-  /// \todo the size should be ratio / text length dependent dependent
-  auto size { (p::cellWidth() + p::cellHeight()) / 4 };
-
+  const auto len { std::max(5.f, static_cast<float> (_labelName.length())) };
+  const auto size { 3 * graphics::Properties::cellWidth() / len };
   _label = std::make_shared<resources::Text> (
     label, size, graphics::Pos2(0, 0), "font_army");
 }
