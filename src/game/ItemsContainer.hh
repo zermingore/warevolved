@@ -162,6 +162,12 @@ public:
    */
   std::unique_ptr<Item> item();
 
+  /**
+   * \brief Re-organize Items in the Container, avoiding gaps
+   * \warning Handling only unlimited ItemsContainers
+   */
+  void reorganizeItems();
+
 
 private:
   e_container_type _type;  ///< Type of the container

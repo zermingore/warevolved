@@ -226,6 +226,7 @@ bool Inventory::unequip()
     }
 
     container->add(std::move(item), *destination);
+    _stored[_selectedContainer]->reorganizeItems(); // Assumed unlimited
 
     NOTICE("Moved object");
     return true;
@@ -233,5 +234,8 @@ bool Inventory::unequip()
 
   // Add the Item back if we could not add it somewhere else
   _stored[_selectedContainer]->add(std::move(item));
+
+  /// \todo *WARNING* Properly pop item, not leaving a nullptr
+
   return false;
 }

@@ -447,8 +447,28 @@ void ItemsContainer::dropItem()
 
       _stored.erase(
         std::remove(_stored.begin(), _stored.end(), item), _stored.end());
+
+      if (_unlimited)
+      {
+        reorganizeItems();
+      }
+
       return;
     }
+  }
+}
+
+
+
+void ItemsContainer::reorganizeItems()
+{
+  assert(_unlimited && "Reorganization only for unlimited ItemsContainer");
+
+  Coords newCoords {0, 0};
+  for (auto& item: _stored)
+  {
+    item.first = newCoords;
+    newCoords = { 0u, static_cast<size_t> (item.second->size().y) };
   }
 }
 
@@ -464,7 +484,7 @@ bool ItemsContainer::selectedItemUsable()
     }
   }
 
-  assert("No Item currently selected");
+  assert(!"No Item currently selected");
   return false;
 }
 
@@ -480,7 +500,7 @@ bool ItemsContainer::selectedItemEquippable()
     }
   }
 
-  assert("No Item currently selected");
+  assert(!"No Item currently selected");
   return false;
 }
 
@@ -506,6 +526,6 @@ std::unique_ptr<Item> ItemsContainer::item()
     }
   }
 
-  assert("No item currently equipped");
+  assert(!"No item currently equipped");
   return nullptr;
 }
