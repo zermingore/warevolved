@@ -36,6 +36,7 @@ MenuAction::MenuAction(const e_state state)
 
 void MenuAction::build()
 {
+  _inventory = false;
   switch (_state)
   {
     case e_state::SELECTION_UNIT:
@@ -267,6 +268,7 @@ void MenuAction::buildMenuAfterMovingUnit()
 
 void MenuAction::buildMenuItem()
 {
+  _inventory = true;
   auto map(game::Status::battle()->map());
   _selectedUnit = map->selectedUnit();
   assert(_selectedUnit);
@@ -386,6 +388,13 @@ void MenuAction::draw()
 {
   if (_pathFinding) {
     _pathFinding->drawPath();
+  }
+
+  if (_inventory)
+  {
+    _selectedUnit = game::Status::battle()->map()->selectedUnit();
+    assert(_selectedUnit);
+    _selectedUnit->inventory()->draw(e_direction::UP);
   }
 
   InGameMenu::draw();

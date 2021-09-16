@@ -136,6 +136,8 @@ private:
 
   /// Get targets list of the selected unit
   std::unique_ptr<PathFinding> _pathFinding;
+
+  bool _inventory = false; ///< Inventory mode
 };
 
 

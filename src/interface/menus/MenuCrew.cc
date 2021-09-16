@@ -40,7 +40,7 @@ void MenuCrew::build()
   assert(_selectedUnit && "Cannot build a MenuCrew without selected unit");
   if (_selectedUnit->playerId() == unit->playerId())
   {
-    auto terrain {(*map)[_coords.c][_coords.l]->terrain()};
+    const auto terrain {(*map)[_coords.c][_coords.l]->terrain()};
     if (   !unit
         && (_selectedUnit->crewSize() != 0u)
         && (    terrain == e_terrain::FOREST
