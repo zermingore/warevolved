@@ -47,3 +47,15 @@ bool Unit::addToCrew(std::shared_ptr<Unit> unit, e_unit_role role)
         static_cast<int> (role));
   std::exit(1);
 }
+
+
+
+size_t Unit::attackValue() const
+{
+  if (const auto value = _inventory->attackValue())
+  {
+    return std::max(value, _attackValue);
+  }
+
+  return _attackValue;
+}

@@ -529,3 +529,19 @@ std::unique_ptr<Item> ItemsContainer::item()
   assert(!"No item currently equipped");
   return nullptr;
 }
+
+
+size_t ItemsContainer::attackValue() const
+{
+  /// \todo Consider secondary weapon if the main one is empty / doesn't exist
+  for (const auto& item: _stored)
+  {
+    if (item.second->slot() == e_item_slot::MAIN_WEAPON)
+    {
+      /// \todo If usable (clip->bullets > 0)...
+      return item.second->onUseValue();
+    }
+  }
+
+  return 0;
+}

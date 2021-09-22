@@ -240,7 +240,7 @@ std::pair<size_t, size_t> Map::damageValues(const Unit& attacker,
   auto att_cell = _cells[attacker.c()][attacker.l()];
   auto att_terrain = TerrainsHandler::get(att_cell->terrain());
 
-  int dmg_def =
+  int dmg_def = /// \todo defender.counterAttack() based on secondary weapon
     static_cast<int> (defender.attackValue() / 2) - att_terrain.cover();
   auto defender_damages = std::max(1, dmg_def);
 

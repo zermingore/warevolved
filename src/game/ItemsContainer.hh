@@ -168,6 +168,12 @@ public:
    */
   void reorganizeItems();
 
+  /**
+   * \brief Return the relevant weapon attack value
+   * \todo Do this in the Inventory and make ItemsContainer iterable
+   */
+  size_t attackValue() const;
+
 
 private:
   e_container_type _type;  ///< Type of the container

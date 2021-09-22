@@ -183,10 +183,10 @@ public:
   auto maxHp() const { return _maxHp; }
 
   /**
-   * \brief _attackValue getter
+   * \brief Attack value getter
    * \return Attack value in hit points
    */
-  auto attackValue() const { return _attackValue; }
+  size_t attackValue() const;
 
   /**
    * \brief _motionValue getter

@@ -237,3 +237,10 @@ bool Inventory::unequip()
 
   return false;
 }
+
+
+
+size_t Inventory::attackValue()
+{
+  return _stored[0]->attackValue();
+}

@@ -21,10 +21,11 @@ Soldier::Soldier()
   _motionValue = 3;
   _maxHp = UnitsFactory::typeMaxHp(_type);
   _hp = _maxHp;
-  _attackValue = 5;
 
+  // Inventory dependent
+  _attackValue = 1;
   _minRange = 1;
-  _maxRange = 2;
+  _maxRange = 1;
 
   _inventory->addContainer(e_container_type::EQUIPPED, "Equipped", -1, -1);
   _inventory->addContainer(

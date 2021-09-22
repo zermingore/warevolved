@@ -115,6 +115,26 @@ std::string e_rotation_string(e_rotation entry)
 }
 
 
+std::string e_item_slot_string(e_item_slot entry)
+{
+  switch (entry)
+  {
+    case e_item_slot::MAIN_WEAPON:
+      return "e_item_slot::MAIN_WEAPON (no explicit value)";
+    case e_item_slot::SECONDARY_WEAPON:
+      return "e_item_slot::SECONDARY_WEAPON (no explicit value)";
+    case e_item_slot::HEAD:
+      return "e_item_slot::HEAD (no explicit value)";
+    case e_item_slot::TORSO:
+      return "e_item_slot::TORSO (no explicit value)";
+    case e_item_slot::LEGS:
+      return "e_item_slot::LEGS (no explicit value)";
+    default:
+      return "entry not matched";
+  }
+}
+
+
 std::string e_path_shape_string(e_path_shape entry)
 {
   switch (entry)

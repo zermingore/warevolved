@@ -23,6 +23,21 @@ namespace graphics {
 
 
 /**
+ * \enum e_item_slot
+ * \brief Describes which slot occupies the Item if equipped
+ */
+enum class e_item_slot
+{
+  MAIN_WEAPON,
+  SECONDARY_WEAPON, // used for counter attacks
+  HEAD,
+  TORSO,
+  LEGS,
+};
+
+
+
+/**
  * \enum e_rotation
  * \brief Possible rotations (clockwise; modulo 90 degrees)
  */
@@ -87,12 +102,17 @@ public:
   /// _description getter
   auto description() const { return _description; }
 
+  /// _slot getter
+  auto slot() const { return _slot; }
+
+  /// _onUseValue getter
+  auto onUseValue() const { return _onUseValue; }
+
   /// Size (columns / lines) getter
   graphics::Size2 size() {
     return { static_cast<graphics::component> (_nbColumns),
              static_cast<graphics::component> (_nbLines) };
   }
-
 
   /**
    * \brief Do nothing
@@ -136,6 +156,12 @@ private:
 
   std::vector<std::unique_ptr<Item>> _accessories; ///< Combined items
   std::function<void()> _use; ///< Callback on item usage
+
+  size_t _onUseValue;    ///< Usage effect value
+  size_t _range;         ///< Effect range (in Cells)
+  size_t _valueEquipped; ///< Value if the Item if equipped (protections)
+
+  e_item_slot _slot; ///< Item slot (if equipped)
 };
 
 

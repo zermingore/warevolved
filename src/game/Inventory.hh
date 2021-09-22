@@ -126,6 +126,11 @@ public:
    */
   bool unequip();
 
+  /**
+   * \brief Get the Unit's attack value (in case it's attacking, not defending)
+   * \return Attack value based on relevant equiped weapon
+   */
+  size_t attackValue();
 
 
 private:
