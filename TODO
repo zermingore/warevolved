@@ -13,6 +13,11 @@
 ** TODO Invoking the Panel seems to 'draw' a Terrain Sprite between the Panel and the Map
 ** TODO [Panel] Remove the Unit Sprite double draw in order to make sure the Unit sprite is displayed
 
+* TODO Inventory
+** TODO Side Panel: Equipped Items
+** TODO Stats: function of equipped items
+** TODO Fight: modify inventory
+
 
 * TODO Doc
 ** TODO Options
@@ -119,6 +124,9 @@
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (blocked to 60 in release; unlimited in debug)
 ** TODO The displayed fps should be computed only over a fixed period of time
+** TODO Bash completion
+*** TODO Options
+*** TODO Maps (option arguments)
 
 
 * TODO Testing
