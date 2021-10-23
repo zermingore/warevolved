@@ -319,6 +319,7 @@ void Panel::drawCrew()
 }
 
 
+
 void Panel::drawDataText(const std::string& data, const graphics::Pos2& pos)
 {
   drawDataText(data, pos, _fontSize);
@@ -344,10 +345,8 @@ void Panel::drawMetaInfo()
   std::stringstream fpsStream;
   fpsStream << "fps: " << static_cast<int> (tools::Fps::getFps() + 0.5);
 
-  auto fpsText = std::make_unique<resources::Text> (
-    fpsStream.str(), _fontSize, _metaInfoPos);
-
-  fpsText->draw();
+  resources::Text fpsText(fpsStream.str(), _fontSize, _metaInfoPos);
+  fpsText.draw();
 
 
   // Draw the time
@@ -364,7 +363,6 @@ void Panel::drawMetaInfo()
 
   auto text_pos = _metaInfoPos + Pos2{ _size.x - 2 * _margin - _dateWidth, 0 };
   dateText->setPosition(text_pos);
-
   dateText->draw();
 }
 

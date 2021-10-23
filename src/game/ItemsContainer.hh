@@ -147,6 +147,7 @@ public:
 
   /**
    * \brief Clear the cursor selection drawing
+   * \param value true if the selection cursor should be drawn; false otherwise
    */
   void setDrawSelectionCursor(bool value) { _drawSelectionCursor = value; }
 

@@ -25,7 +25,7 @@ Inventory::Inventory()
 {
   /// \todo Fix hard-coded sizes
   const auto sz{graphics::Properties::inventoryCellWidth()};
-  _currentContainerPosition.x = static_cast<float> (10) * sz + 5 * sz;
+  _currentContainerPosition.x = 10.f * sz + 5 * sz;
 }
 
 

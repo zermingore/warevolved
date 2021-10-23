@@ -102,12 +102,6 @@ public:
                     size_t size);
 
 
-  /**
-   * \brief Draw meta-information (fps, time, ...)
-   */
-  void drawMetaInfo();
-
-
 
 private:
   /**
@@ -124,6 +118,11 @@ private:
    * \brief Draw the concerned unit's crew
    */
   void drawCrew();
+
+  /**
+   * \brief Draw meta-information (fps, time, ...)
+   */
+  void drawMetaInfo();
 
 
   const graphics::component _margin = 5; ///< Graphic margin (in px)

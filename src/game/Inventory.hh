@@ -63,7 +63,7 @@ public:
    * \param use Callback function triggered on Item usage
    * \return true on success; false on impossible add (item too large)
    * \note Creating a new Items from these parameters
-   * \todo only one paramter to take and forward: item type
+   * \todo only one parameter to take and forward: item type
    */
   bool addEquip(const std::string& name,
                 const std::string& description,
@@ -131,7 +131,6 @@ public:
    * \return Attack value based on relevant equiped weapon
    */
   size_t attackValue();
-
 
 private:
   std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
