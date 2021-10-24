@@ -13,6 +13,7 @@
 #include <debug/Debug.hh>
 #include <game/Cell.hh>
 #include <game/Map.hh>
+#include <game/PathFinding.hh> // e_direction enum
 #include <game/Terrain.hh>
 #include <game/TerrainsHandler.hh>
 #include <game/units/Vehicle.hh>
@@ -242,12 +243,12 @@ void Panel::drawUnitFrame()
   drawDataText(unit_data, _unitDataPos);
 
   // Crew
-  if (!unit->canHaveCrew())
+  if (unit->canHaveCrew())
   {
-    return; /// \todo drawUnitCrew() function;
+    drawCrew();
   }
 
-  drawCrew();
+  drawEquippedItems();
 }
 
 
@@ -316,6 +317,24 @@ void Panel::drawCrew()
 
     ++i;
   }
+}
+
+
+
+void Panel::drawEquippedItems()
+{
+  const auto unit{_map->cell(_playerCursor->coords())->unit()};
+  if (!unit)
+  {
+    return; // Draw nothing if no Unit is under the Cursor
+  }
+
+  const auto offset_y =
+      _frameUnit->position().y + unit->sprite()->size().y + 8 * _margin
+    + static_cast<float> (unit->crewSize()) * _frameUnit->size().y;
+
+  unit->inventory()->drawInPanel(
+    { _background->position().x + _margin, offset_y });
 }
 
 

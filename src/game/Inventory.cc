@@ -76,6 +76,19 @@ void Inventory::draw(e_direction direction)
 
 
 
+void Inventory::drawInPanel(const graphics::Pos2& coords)
+{
+  if (_stored.empty())
+  {
+    return;
+  }
+
+  _stored[0]->setPosition(coords);
+  _stored[0]->draw();
+}
+
+
+
 void Inventory::addContainer(e_container_type type,
                              const std::string& name,
                              int nbCols,

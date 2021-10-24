@@ -42,6 +42,13 @@ public:
   void draw(e_direction direction);
 
   /**
+   * \brief Draw the Inventory in the side Panel
+   * \param coords Panel coordinates
+   * \param size Maximal drawn Item width
+   */
+  void drawInPanel(const graphics::Pos2& coords);
+
+  /**
    * \brief Create and add a container to the Inventory
    * \param type Type of the container
    * \param name Displayed container name
@@ -132,8 +139,9 @@ public:
    */
   size_t attackValue();
 
+
 private:
-  std::vector<std::unique_ptr<ItemsContainer>> _stored; ///< Stored items
+  std::vector<std::shared_ptr<ItemsContainer>> _stored; ///< Stored items
 
   size_t _selectedContainer; ///< Index of the currently selected container
 
