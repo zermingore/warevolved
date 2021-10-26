@@ -440,7 +440,7 @@ void ItemsContainer::dropItem()
     {
       map->cell(selectedUnit->coords())->inventory()->addEquip(
         item.second->name(),
-        item.second->name(),
+        item.second->description(),
         static_cast<size_t> (item.second->size().x),
         static_cast<size_t> (item.second->size().y)
       );
