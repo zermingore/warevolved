@@ -45,7 +45,6 @@ public:
   /**
    * \brief Draw the Inventory in the side Panel
    * \param coords Panel coordinates
-   * \param size Maximal drawn Item width
    */
   void drawInPanel(const graphics::Pos2& coords);
 
