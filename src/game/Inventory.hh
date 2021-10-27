@@ -12,6 +12,7 @@
 # include <memory>
 # include <string>
 # include <vector>
+# include <optional>
 
 # include <graphics/graphic_types.hh>
 # include <game/Item.hh>
@@ -135,9 +136,15 @@ public:
 
   /**
    * \brief Get the Unit's attack value (in case it's attacking, not defending)
-   * \return Attack value based on relevant equiped weapon
+   * \return Attack value based on relevant equipped weapon
    */
   size_t attackValue();
+
+  /**
+   * \brief Return the (min, max) range of the equipped weapon
+   * \return A pair of eventually min, max values
+   */
+  std::pair<std::optional<size_t>, std::optional<size_t>> range();
 
 
 private:

@@ -257,3 +257,21 @@ size_t Inventory::attackValue()
 {
   return _stored[0]->attackValue();
 }
+
+
+
+std::pair<std::optional<size_t>, std::optional<size_t>> Inventory::range()
+{
+  if (_stored.empty() || _stored[0]->empty())
+  {
+    return {std::nullopt, std::nullopt};
+  }
+
+  const auto item { _stored[0]->item() };
+  if (!item)
+  {
+    return {std::nullopt, std::nullopt};
+  }
+
+  return item->range();
+}

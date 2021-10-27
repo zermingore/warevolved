@@ -108,6 +108,9 @@ public:
   /// _onUseValue getter
   auto onUseValue() const { return _onUseValue; }
 
+  /// _range getter
+  auto range() const { return _range; }
+
   /// Size (columns / lines) getter
   graphics::Size2 size() {
     return { static_cast<graphics::component> (_nbColumns),
@@ -158,7 +161,10 @@ private:
   std::function<void()> _use; ///< Callback on item usage
 
   size_t _onUseValue;    ///< Usage effect value
-  size_t _range;         ///< Effect range (in Cells)
+
+  /// Effect range (minimum / maximum, in Cells)
+  std::pair<std::optional<size_t>, std::optional<size_t>> _range;
+
   size_t _valueEquipped; ///< Value if the Item if equipped (protections)
 
   e_item_slot _slot; ///< Item slot (if equipped)

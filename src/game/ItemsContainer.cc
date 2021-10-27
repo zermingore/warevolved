@@ -526,7 +526,6 @@ std::unique_ptr<Item> ItemsContainer::item()
     }
   }
 
-  assert(!"No item currently equipped");
   return nullptr;
 }
 

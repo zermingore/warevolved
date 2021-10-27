@@ -198,13 +198,13 @@ public:
    * \brief _minRange getter
    * \return Minimal attack range (in Cells)
    */
-  auto minRange() const { return _minRange; }
+  virtual size_t minRange() const { return _minRange; }
 
   /**
    * \brief _maxRange getter
    * \return Maximal attack range getter (in Cells)
    */
-  auto maxRange() const { return _maxRange; }
+  virtual size_t maxRange() const { return _maxRange; }
 
   /**
    * \brief _sprite getter

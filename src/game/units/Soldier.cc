@@ -33,3 +33,27 @@ Soldier::Soldier()
   _inventory->addContainer(
     e_container_type::POCKET, "Trousers\npocket right", 1, 1);
 }
+
+
+
+size_t Soldier::minRange() const
+{
+  if (const auto weapon_range { _inventory->range().first })
+  {
+    return *weapon_range;
+  }
+
+  return _minRange;
+}
+
+
+
+size_t Soldier::maxRange() const
+{
+  if (const auto weapon_range { _inventory->range().second })
+  {
+    return *weapon_range;
+  }
+
+  return _maxRange;
+}

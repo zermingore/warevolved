@@ -190,7 +190,7 @@ private:
   std::vector<bool> _freeCells; ///< Keeping track of free space
 
   Coords _selected; ///< Selected item location
-  bool _drawSelectionCursor = false;
+  bool _drawSelectionCursor = false; ///< Show / hide selection cursor
 
   std::shared_ptr<resources::Text> _label; ///< button label text
   std::shared_ptr<resources::Text> _labelDescription; ///< description text
