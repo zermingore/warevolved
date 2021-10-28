@@ -119,6 +119,8 @@ std::string e_item_slot_string(e_item_slot entry)
 {
   switch (entry)
   {
+    case e_item_slot::NONE:
+      return "e_item_slot::NONE (no explicit value)";
     case e_item_slot::MAIN_WEAPON:
       return "e_item_slot::MAIN_WEAPON (no explicit value)";
     case e_item_slot::SECONDARY_WEAPON:

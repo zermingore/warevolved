@@ -114,10 +114,12 @@ bool Inventory::addEquip(const std::string& name,
                          const std::string& description,
                          size_t nbCols,
                          size_t nbLines,
+                         e_item_slot slot,
+                         size_t onUseValue,
                          const std::function<void()>& use)
 {
   auto item = std::make_unique<Item> (
-    name, name, description, nbCols, nbLines, use);
+    name, name, description, nbCols, nbLines, slot, onUseValue, use);
   return _stored[0]->add(std::move(item));
 }
 

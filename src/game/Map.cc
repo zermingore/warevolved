@@ -175,17 +175,22 @@ void Map::newUnit(e_unit type,
   new_unit->setHp(hp);
   new_unit->setPlayed(played);
 
-  static bool first = true;
+  static bool first = true; /// \todo remove
   if (type == e_unit::SOLDIER && first)
   {
     new_unit->inventory()->addEquip(
-      "rifle", "Assault rifle\nDamages: 10\nCal: 7.62mm", 10 , 5);
+      "rifle", "Assault rifle\nDamages: 10\nCal: 7.62mm", 10 , 5,
+       e_item_slot::MAIN_WEAPON, 5);
+
     new_unit->inventory()->addEquip(
-      "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10 , 5);
+      "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10, 5,
+       e_item_slot::SECONDARY_WEAPON, 2);
+
     new_unit->inventory()->addEquip(
-      "medkit", "Medkit\nRestores: 10", 10 , 5,
+      "medkit", "Medkit\nRestores: 10", 10 , 5, e_item_slot::NONE, 5,
       [new_unit] (auto&&...) noexcept {
         new_unit->setHp(new_unit->hp() + 10); });
+
     first = false;
   }
 

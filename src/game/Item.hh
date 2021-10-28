@@ -25,9 +25,11 @@ namespace graphics {
 /**
  * \enum e_item_slot
  * \brief Describes which slot occupies the Item if equipped
+ * \todo Rename -> e_item_category?
  */
 enum class e_item_slot
 {
+  NONE,
   MAIN_WEAPON,
   SECONDARY_WEAPON, // used for counter attacks
   HEAD,
@@ -70,6 +72,8 @@ public:
    * \param description Description text
    * \param nbCols Inventory occupied space
    * \param nbLines Inventory occupied space
+   * \param slot Item category
+   * \param onUseValue Item usage effect value (attack, heal)
    * \param use Optional callback on Item usage
    * \todo Constructor with only one parameter: Item(e_item_type)
    */
@@ -78,6 +82,8 @@ public:
        const std::string& description,
        size_t nbCols,
        size_t nbLines,
+       e_item_slot slot,
+       size_t onUseValue,
        const std::function<void()>& use = {});
 
 
@@ -160,14 +166,13 @@ private:
   std::vector<std::unique_ptr<Item>> _accessories; ///< Combined items
   std::function<void()> _use; ///< Callback on item usage
 
-  size_t _onUseValue;    ///< Usage effect value
-
   /// Effect range (minimum / maximum, in Cells)
   std::pair<std::optional<size_t>, std::optional<size_t>> _range;
 
   size_t _valueEquipped; ///< Value if the Item if equipped (protections)
 
-  e_item_slot _slot; ///< Item slot (if equipped)
+  e_item_slot _slot;  ///< Item slot (if equipped)
+  size_t _onUseValue; ///< Usage effect value
 };
 
 

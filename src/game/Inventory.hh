@@ -67,6 +67,8 @@ public:
    * \param description New Item description
    * \param nbCols New Item number of used columns
    * \param nbLines New Item number of used lines
+   * \param slot Item category
+   * \param onUseValue Item usage effect value (damage, heal)
    * \param use Callback function triggered on Item usage
    * \return true on success; false on impossible add (item too large)
    * \note Creating a new Items from these parameters
@@ -76,6 +78,8 @@ public:
                 const std::string& description,
                 size_t nbCols,
                 size_t nbLines,
+                e_item_slot slot,
+                size_t onUseValue,
                 const std::function<void()>& use = {});
 
   /**

@@ -442,7 +442,9 @@ void ItemsContainer::dropItem()
         item.second->name(),
         item.second->description(),
         static_cast<size_t> (item.second->size().x),
-        static_cast<size_t> (item.second->size().y)
+        static_cast<size_t> (item.second->size().y),
+        item.second->slot(),
+        item.second->onUseValue()
       );
 
       _stored.erase(

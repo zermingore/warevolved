@@ -18,12 +18,16 @@ Item::Item(const std::string& name,
            const std::string& description,
            size_t nbCols,
            size_t nbLines,
+           e_item_slot slot,
+           size_t onUseValue,
            const std::function<void()>& use)
   : InterfaceElement(textureName)
   , _name(name)
   , _description(description)
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
+  , _slot(slot)
+  , _onUseValue(onUseValue)
 {
   const auto w{graphics::Properties::inventoryCellWidth()};
   const auto h{graphics::Properties::inventoryCellHeight()};
