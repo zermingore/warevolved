@@ -534,7 +534,8 @@ std::unique_ptr<Item> ItemsContainer::item()
 
 size_t ItemsContainer::attackValue() const
 {
-  /// \todo Consider secondary weapon if the main one is empty / doesn't exist
+  size_t secondary_weapon_damages{0u};
+
   for (const auto& item: _stored)
   {
     if (item.second->slot() == e_item_slot::MAIN_WEAPON)
@@ -542,7 +543,12 @@ size_t ItemsContainer::attackValue() const
       /// \todo If usable (clip->bullets > 0)...
       return item.second->onUseValue();
     }
+
+    if (item.second->slot() == e_item_slot::SECONDARY_WEAPON)
+    {
+      secondary_weapon_damages = item.second->onUseValue();
+    }
   }
 
-  return 0;
+  return secondary_weapon_damages;
 }

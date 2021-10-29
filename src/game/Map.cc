@@ -179,7 +179,7 @@ void Map::newUnit(e_unit type,
   if (type == e_unit::SOLDIER && first)
   {
     new_unit->inventory()->addEquip(
-      "rifle", "Assault rifle\nDamages: 10\nCal: 7.62mm", 10 , 5,
+      "rifle", "Assault rifle\nDamages: 10\nCal: 7.62mm", 10, 5,
        e_item_slot::MAIN_WEAPON, 5);
 
     new_unit->inventory()->addEquip(
@@ -187,7 +187,7 @@ void Map::newUnit(e_unit type,
        e_item_slot::SECONDARY_WEAPON, 2);
 
     new_unit->inventory()->addEquip(
-      "medkit", "Medkit\nRestores: 10", 10 , 5, e_item_slot::NONE, 5,
+      "medkit", "Medkit\nRestores: 10", 10, 5, e_item_slot::NONE, 5,
       [new_unit] (auto&&...) noexcept {
         new_unit->setHp(new_unit->hp() + 10); });
 
