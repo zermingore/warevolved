@@ -255,9 +255,16 @@ bool Inventory::unequip()
 
 
 
-size_t Inventory::attackValue()
+size_t Inventory::attackValue() const
 {
   return _stored[0]->attackValue();
+}
+
+
+
+size_t Inventory::counterAttackValue() const
+{
+  return _stored[0]->counterAttackValue();
 }
 
 

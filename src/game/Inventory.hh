@@ -141,7 +141,13 @@ public:
    * \brief Get the Unit's attack value (in case it's attacking, not defending)
    * \return Attack value based on relevant equipped weapon
    */
-  size_t attackValue();
+  size_t attackValue() const;
+
+  /**
+   * \brief Get the Unit's counter attack value (in case it's defending only)
+   * \return Attack value based on secondary weapon (if equipped and usable)
+   */
+  size_t counterAttackValue() const;
 
   /**
    * \brief Return the (min, max) range of the equipped weapon

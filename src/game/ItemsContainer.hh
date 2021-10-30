@@ -171,9 +171,19 @@ public:
 
   /**
    * \brief Return the relevant weapon attack value
+   * \return Attack value of the relevant equipped weapon
+   *    in the following order: the main weapon, secondary weapon, 0
    * \todo Do this in the Inventory and make ItemsContainer iterable
+   * \todo Check if the weapons are usable
    */
   size_t attackValue() const;
+
+  /**
+   * \brief Return the counter attack value (based on secondary weapon)
+   * \return Secondary weapon damage value if usable, 0 otherwise
+   * \todo If secondary weapon usable
+   */
+  size_t counterAttackValue() const;
 
 
 private:

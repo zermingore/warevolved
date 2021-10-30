@@ -189,6 +189,12 @@ public:
   size_t attackValue() const;
 
   /**
+   * \brief Conter attack value getter (used when the Unit is defending itself)
+   * \return Counter attack value in hit points
+   */
+  size_t counterAttackValue() const;
+
+  /**
    * \brief _motionValue getter
    * \return The number of Cells a Unit can cross in one turn
    */
@@ -261,7 +267,9 @@ protected:
   size_t _motionValue; ///< Unit's motion value (not considering the terrains)
   int _hp;             ///< Health Points
   int _maxHp;          ///< Max Health Points
-  size_t _attackValue; ///< Amount of damages dealing to other units
+
+  size_t _attackValue;       ///< Amount of damages dealt to other units
+  size_t _conterattackValue; ///< Amount of damages done, defending itself
 
   size_t _minRange;    ///< Minimal required range for a unit to attack
   size_t _maxRange;    ///< Maximal range to attack a unit

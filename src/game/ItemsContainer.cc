@@ -532,6 +532,7 @@ std::unique_ptr<Item> ItemsContainer::item()
 }
 
 
+
 size_t ItemsContainer::attackValue() const
 {
   size_t secondary_weapon_damages{0u};
@@ -551,4 +552,20 @@ size_t ItemsContainer::attackValue() const
   }
 
   return secondary_weapon_damages;
+}
+
+
+
+size_t ItemsContainer::counterAttackValue() const
+{
+  for (const auto& item: _stored)
+  {
+    if (item.second->slot() == e_item_slot::SECONDARY_WEAPON)
+    {
+      /// \todo If usable (clip->bullets > 0)...
+      return item.second->onUseValue();
+    }
+  }
+
+  return 0u;
 }

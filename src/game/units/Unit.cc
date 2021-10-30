@@ -59,3 +59,15 @@ size_t Unit::attackValue() const
 
   return _attackValue;
 }
+
+
+
+size_t Unit::counterAttackValue() const
+{
+  if (const auto value = _inventory->counterAttackValue())
+  {
+    return std::max(value, _conterattackValue);
+  }
+
+  return _conterattackValue;
+}
