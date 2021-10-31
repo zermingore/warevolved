@@ -32,7 +32,7 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _name(name)
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
-  , _selected(0, 0)
+  , _selectedItemCoords(0, 0)
 {
   if (nbCols <= 0 || nbLines <= 0)
   {
@@ -245,7 +245,7 @@ void ItemsContainer::draw()
 
 
     // Draw current selected item emphasis
-    if (_drawSelectionCursor && _selected == itemCoords)
+    if (_drawSelectionCursor && _selectedItemCoords == itemCoords)
     {
       // Selection frame
       graphics::Size2 size {
@@ -312,7 +312,7 @@ void ItemsContainer::resetSelectedItem()
   {
     if (!_freeCells[idx_first])
     {
-      _selected = { idx_first % _nbColumns, idx_first / _nbColumns };
+      _selectedItemCoords = { idx_first % _nbColumns, idx_first / _nbColumns };
       return;
     }
   }
@@ -332,14 +332,14 @@ e_direction ItemsContainer::selectItem(const e_direction direction)
   /// \todo Moving item: don't jump to the next item but to the next cell
 
   // Identify best candidates for the 4 directions
-  auto oriSelected {_selected};
+  auto oriSelected {_selectedItemCoords};
 
   Coords itemMaxUp {0, 0};
   Coords itemMinDown {0, SIZE_MAX};
   Coords itemMaxLeft {0, 0};
   Coords itemMinRight {SIZE_MAX, 0};
 
-  auto newItemCoords {_selected};
+  auto newItemCoords {_selectedItemCoords};
   for (const auto& item: _stored)
   {
     const Coords itemCoords { item.first.c, item.first.l };
@@ -356,7 +356,7 @@ e_direction ItemsContainer::selectItem(const e_direction direction)
       if (itemCoords.l <= oriSelected.l && itemCoords.l >= itemMaxUp.l)
       {
         itemMaxUp = itemCoords;
-        _selected = itemMaxUp;
+        _selectedItemCoords = itemMaxUp;
         return e_direction::NONE;
       }
     }
@@ -368,7 +368,7 @@ e_direction ItemsContainer::selectItem(const e_direction direction)
       if (itemCoords.l >= oriSelected.l && itemCoords.l <= itemMinDown.l)
       {
         itemMinDown = itemCoords;
-        _selected = itemMinDown;
+        _selectedItemCoords = itemMinDown;
         return e_direction::NONE;
       }
     }
@@ -385,7 +385,7 @@ e_direction ItemsContainer::selectItem(const e_direction direction)
       if (itemCoords.c <= oriSelected.c && itemCoords.c >= itemMaxLeft.c)
       {
         itemMaxLeft = itemCoords;
-        _selected = itemMaxLeft;
+        _selectedItemCoords = itemMaxLeft;
         return e_direction::NONE;
       }
     }
@@ -402,7 +402,7 @@ e_direction ItemsContainer::selectItem(const e_direction direction)
       if (itemCoords.c >= oriSelected.c && itemCoords.c <= itemMinRight.c)
       {
         itemMinRight = itemCoords;
-        _selected = itemMinRight;
+        _selectedItemCoords = itemMinRight;
         return e_direction::NONE;
       }
     }
@@ -417,7 +417,7 @@ void ItemsContainer::useItem()
 {
   for (auto& item: _stored)
   {
-    if (item.first == _selected)
+    if (item.first == _selectedItemCoords)
     {
       item.second->use();
       _stored.erase(
@@ -436,7 +436,7 @@ void ItemsContainer::dropItem()
 
   for (auto& item: _stored)
   {
-    if (item.first == _selected)
+    if (item.first == _selectedItemCoords)
     {
       map->cell(selectedUnit->coords())->inventory()->addEquip(
         item.second->name(),
@@ -480,7 +480,7 @@ bool ItemsContainer::selectedItemUsable()
 {
   for (auto& item: _stored)
   {
-    if (item.first == _selected)
+    if (item.first == _selectedItemCoords)
     {
       return item.second->usable();
     }
@@ -496,7 +496,7 @@ bool ItemsContainer::selectedItemEquippable()
 {
   for (auto& item: _stored)
   {
-    if (item.first == _selected)
+    if (item.first == _selectedItemCoords)
     {
       return item.second->equippable();
     }
@@ -519,7 +519,7 @@ std::unique_ptr<Item> ItemsContainer::item()
 {
   for (auto& item: _stored)
   {
-    if (item.first == _selected)
+    if (item.first == _selectedItemCoords)
     {
       auto ptr = std::move(item.second);
       _stored.erase(

@@ -66,8 +66,7 @@ public:
 
 
   ///< _selected getter
-  /// \todo rename getter or attribute?
-  auto selectedItemCoords() const { return _selected; }
+  auto selectedItemCoords() const { return _selectedItemCoords; }
 
   ///< _type getter
   auto type() { return _type; }
@@ -199,7 +198,7 @@ private:
 
   std::vector<bool> _freeCells; ///< Keeping track of free space
 
-  Coords _selected; ///< Selected item location
+  Coords _selectedItemCoords; ///< Selected item location
   bool _drawSelectionCursor = false; ///< Show / hide selection cursor
 
   std::shared_ptr<resources::Text> _label; ///< button label text
