@@ -209,6 +209,7 @@ public:
   /**
    * \brief _maxRange getter
    * \return Maximal attack range getter (in Cells)
+   * \todo item type as parameter? (handling main weapon; medkit; ...)
    */
   virtual size_t maxRange() const { return _maxRange; }
 

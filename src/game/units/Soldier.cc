@@ -38,22 +38,26 @@ Soldier::Soldier()
 
 size_t Soldier::minRange() const
 {
-  if (const auto weapon_range { _inventory->range().first })
+  try
   {
-    return *weapon_range;
+    return *(_inventory->range()[e_item_slot::MAIN_WEAPON].second);
   }
-
-  return _minRange;
+  catch (const std::out_of_range& e)
+  {
+    return _minRange;
+  }
 }
 
 
 
 size_t Soldier::maxRange() const
 {
-  if (const auto weapon_range { _inventory->range().second })
+  try
   {
-    return *weapon_range;
+    return *(_inventory->range()[e_item_slot::MAIN_WEAPON].second);
   }
-
-  return _maxRange;
+  catch (const std::out_of_range& e)
+  {
+    return _maxRange;
+  }
 }

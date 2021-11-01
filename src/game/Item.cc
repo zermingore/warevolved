@@ -19,6 +19,7 @@ Item::Item(const std::string& name,
            size_t nbCols,
            size_t nbLines,
            e_item_slot slot,
+           std::pair<std::optional<size_t>, std::optional<size_t>> range,
            size_t onUseValue,
            const std::function<void()>& use)
   : InterfaceElement(textureName)
@@ -27,6 +28,7 @@ Item::Item(const std::string& name,
   , _nbColumns(nbCols)
   , _nbLines(nbLines)
   , _slot(slot)
+  , _range(range)
   , _onUseValue(onUseValue)
 {
   const auto w{graphics::Properties::inventoryCellWidth()};

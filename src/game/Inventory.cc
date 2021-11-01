@@ -115,11 +115,13 @@ bool Inventory::addEquip(const std::string& name,
                          size_t nbCols,
                          size_t nbLines,
                          e_item_slot slot,
+                         std::pair<std::optional<size_t>,
+                                   std::optional<size_t>> range,
                          size_t onUseValue,
                          const std::function<void()>& use)
 {
   auto item = std::make_unique<Item> (
-    name, name, description, nbCols, nbLines, slot, onUseValue, use);
+    name, name, description, nbCols, nbLines, slot, range, onUseValue, use);
   return _stored[0]->add(std::move(item));
 }
 
@@ -269,18 +271,13 @@ size_t Inventory::counterAttackValue() const
 
 
 
-std::pair<std::optional<size_t>, std::optional<size_t>> Inventory::range()
+std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
+Inventory::range() const
 {
   if (_stored.empty() || _stored[0]->empty())
   {
-    return {std::nullopt, std::nullopt};
+    return {};
   }
 
-  const auto item { _stored[0]->item() };
-  if (!item)
-  {
-    return {std::nullopt, std::nullopt};
-  }
-
-  return item->range();
+  return _stored[0]->range();
 }

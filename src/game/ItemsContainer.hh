@@ -23,6 +23,7 @@ namespace resources {
 
 class Item;
 enum class e_direction;
+enum class e_item_slot;
 
 
 /**
@@ -183,6 +184,14 @@ public:
    * \todo If secondary weapon usable
    */
   size_t counterAttackValue() const;
+
+  /**
+   * \brief Get the maximal effective range for every stored Item type
+   * \return (min, max) range for every Item type
+   * \note Returns for instance: ranges[MAIN_WEAPON] = (3, std::nullopt)
+   */
+  std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
+  range() const;
 
 
 private:

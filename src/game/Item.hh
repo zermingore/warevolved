@@ -11,6 +11,7 @@
 # include <cstddef> // size_t
 # include <memory>
 # include <string>
+# include <optional>
 
 # include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>
@@ -73,6 +74,7 @@ public:
    * \param nbCols Inventory occupied space
    * \param nbLines Inventory occupied space
    * \param slot Item category
+   * \param range Item usage min, max range if applicable
    * \param onUseValue Item usage effect value (attack, heal)
    * \param use Optional callback on Item usage
    * \todo Constructor with only one parameter: Item(e_item_type)
@@ -83,6 +85,7 @@ public:
        size_t nbCols,
        size_t nbLines,
        e_item_slot slot,
+       std::pair<std::optional<size_t>, std::optional<size_t>> range,
        size_t onUseValue,
        const std::function<void()>& use = {});
 
@@ -166,12 +169,13 @@ private:
   std::vector<std::unique_ptr<Item>> _accessories; ///< Combined items
   std::function<void()> _use; ///< Callback on item usage
 
+  size_t _valueEquipped; ///< Value if the Item if equipped (protections)
+
+  e_item_slot _slot; ///< Item slot (if equipped)
+
   /// Effect range (minimum / maximum, in Cells)
   std::pair<std::optional<size_t>, std::optional<size_t>> _range;
 
-  size_t _valueEquipped; ///< Value if the Item if equipped (protections)
-
-  e_item_slot _slot;  ///< Item slot (if equipped)
   size_t _onUseValue; ///< Usage effect value
 };
 

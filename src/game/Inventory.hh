@@ -68,6 +68,7 @@ public:
    * \param nbCols New Item number of used columns
    * \param nbLines New Item number of used lines
    * \param slot Item category
+   * \param range Item effective min, max range
    * \param onUseValue Item usage effect value (damage, heal)
    * \param use Callback function triggered on Item usage
    * \return true on success; false on impossible add (item too large)
@@ -79,6 +80,7 @@ public:
                 size_t nbCols,
                 size_t nbLines,
                 e_item_slot slot,
+                std::pair<std::optional<size_t>, std::optional<size_t>> range,
                 size_t onUseValue,
                 const std::function<void()>& use = {});
 
@@ -151,9 +153,11 @@ public:
 
   /**
    * \brief Return the (min, max) range of the equipped weapon
-   * \return A pair of eventually min, max values
+   * \return A map of item_slot and pair of (if availables) min, max values
+   * \note Returns example: ranges[SECONDARY_WEAPON] = <std::nullopt, 1>
    */
-  std::pair<std::optional<size_t>, std::optional<size_t>> range();
+  std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
+  range() const;
 
 
 private:

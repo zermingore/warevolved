@@ -444,6 +444,7 @@ void ItemsContainer::dropItem()
         static_cast<size_t> (item.second->size().x),
         static_cast<size_t> (item.second->size().y),
         item.second->slot(),
+        item.second->range(),
         item.second->onUseValue()
       );
 
@@ -529,6 +530,22 @@ std::unique_ptr<Item> ItemsContainer::item()
   }
 
   return nullptr;
+}
+
+
+
+std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
+ItemsContainer::range() const
+{
+  std::map<e_item_slot,
+           std::pair<std::optional<size_t>, std::optional<size_t>>> ranges;
+
+  for (const auto& item: _stored)
+  {
+    ranges[item.second->slot()] = item.second->range();
+  }
+
+  return ranges;
 }
 
 
