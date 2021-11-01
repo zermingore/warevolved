@@ -19,7 +19,7 @@ Item::Item(const std::string& name,
            size_t nbCols,
            size_t nbLines,
            e_item_slot slot,
-           std::pair<std::optional<size_t>, std::optional<size_t>> range,
+           Range range,
            size_t onUseValue,
            const std::function<void()>& use)
   : InterfaceElement(textureName)

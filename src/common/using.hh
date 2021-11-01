@@ -8,9 +8,14 @@
 #ifndef COMMON_USING_HH_
 # define COMMON_USING_HH_
 
+# include <utility>
+# include <optional>
 # include <cstddef> // size_t
 # include <structures/Vector.hh>
 
+
+/// Used in Inventory context (Weapon / Unit effective range)
+using Range = std::pair<std::optional<size_t>, std::optional<size_t>>;
 
 
 /**

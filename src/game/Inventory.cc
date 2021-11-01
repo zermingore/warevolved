@@ -115,8 +115,7 @@ bool Inventory::addEquip(const std::string& name,
                          size_t nbCols,
                          size_t nbLines,
                          e_item_slot slot,
-                         std::pair<std::optional<size_t>,
-                                   std::optional<size_t>> range,
+                         Range range,
                          size_t onUseValue,
                          const std::function<void()>& use)
 {
@@ -271,8 +270,7 @@ size_t Inventory::counterAttackValue() const
 
 
 
-std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
-Inventory::range() const
+std::map<e_item_slot, Range> Inventory::range() const
 {
   if (_stored.empty() || _stored[0]->empty())
   {

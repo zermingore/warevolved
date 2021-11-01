@@ -85,7 +85,7 @@ public:
        size_t nbCols,
        size_t nbLines,
        e_item_slot slot,
-       std::pair<std::optional<size_t>, std::optional<size_t>> range,
+       Range range,
        size_t onUseValue,
        const std::function<void()>& use = {});
 
@@ -174,7 +174,7 @@ private:
   e_item_slot _slot; ///< Item slot (if equipped)
 
   /// Effect range (minimum / maximum, in Cells)
-  std::pair<std::optional<size_t>, std::optional<size_t>> _range;
+  Range _range;
 
   size_t _onUseValue; ///< Usage effect value
 };

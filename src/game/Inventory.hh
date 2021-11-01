@@ -80,7 +80,7 @@ public:
                 size_t nbCols,
                 size_t nbLines,
                 e_item_slot slot,
-                std::pair<std::optional<size_t>, std::optional<size_t>> range,
+                Range range,
                 size_t onUseValue,
                 const std::function<void()>& use = {});
 
@@ -156,8 +156,7 @@ public:
    * \return A map of item_slot and pair of (if availables) min, max values
    * \note Returns example: ranges[SECONDARY_WEAPON] = <std::nullopt, 1>
    */
-  std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
-  range() const;
+  std::map<e_item_slot, Range> range() const;
 
 
 private:

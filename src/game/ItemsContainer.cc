@@ -534,12 +534,9 @@ std::unique_ptr<Item> ItemsContainer::item()
 
 
 
-std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
-ItemsContainer::range() const
+std::map<e_item_slot, Range> ItemsContainer::range() const
 {
-  std::map<e_item_slot,
-           std::pair<std::optional<size_t>, std::optional<size_t>>> ranges;
-
+  std::map<e_item_slot, Range> ranges;
   for (const auto& item: _stored)
   {
     ranges[item.second->slot()] = item.second->range();

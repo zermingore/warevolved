@@ -190,8 +190,7 @@ public:
    * \return (min, max) range for every Item type
    * \note Returns for instance: ranges[MAIN_WEAPON] = (3, std::nullopt)
    */
-  std::map<e_item_slot, std::pair<std::optional<size_t>, std::optional<size_t>>>
-  range() const;
+  std::map<e_item_slot, Range> range() const;
 
 
 private:
