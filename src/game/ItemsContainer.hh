@@ -66,6 +66,9 @@ public:
                  int nbLines);
 
 
+  // auto stored() { return _stored; } // unique ptr: good idea?
+
+
   ///< _selected getter
   auto selectedItemCoords() const { return _selectedItemCoords; }
 
@@ -138,6 +141,11 @@ public:
    * \brief Drop the currently selected Item
    */
   void dropItem();
+
+  /**
+   * \brief Drop the currently selected Item
+   */
+  void takeItem();
 
   /**
    * \brief Check wether the container is empty

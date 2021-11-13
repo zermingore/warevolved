@@ -163,6 +163,7 @@ enum class e_entry
   ITEM_COMBINE,
   ITEM_MOVE,
   ITEM_DROP,
+  ITEM_TAKE,
   ITEM_EQUIP,
   ITEM_UNEQUIP,
 

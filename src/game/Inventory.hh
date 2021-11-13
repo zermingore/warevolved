@@ -37,6 +37,13 @@ public:
 
 
   /**
+   * \brief _stored getter
+   * \todo rename _stored -> items
+   */
+  auto items() { return _stored; }
+
+
+  /**
    * \brief Draw the components of the Inventory (equipped list and containers)
    * \param direction Direction offset where to draw the Inventory
    */
@@ -101,6 +108,12 @@ public:
    * \note The Item will belong to the Cell's Inventory
    */
   void dropItem();
+
+  /**
+   * \brief Take an Item on the current Cell
+   * \note The Item will belong to the selected Unit's Inventory
+   */
+  void takeItem();
 
   /**
    * \brief Check wether the Containers (if any) are all empty

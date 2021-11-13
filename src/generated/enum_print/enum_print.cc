@@ -425,6 +425,8 @@ std::string e_entry_string(e_entry entry)
       return "e_entry::ITEM_MOVE (no explicit value)";
     case e_entry::ITEM_DROP:
       return "e_entry::ITEM_DROP (no explicit value)";
+    case e_entry::ITEM_TAKE:
+      return "e_entry::ITEM_TAKE (no explicit value)";
     case e_entry::ITEM_EQUIP:
       return "e_entry::ITEM_EQUIP (no explicit value)";
     case e_entry::ITEM_UNEQUIP:

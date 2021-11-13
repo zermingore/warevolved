@@ -462,6 +462,19 @@ void ItemsContainer::dropItem()
 }
 
 
+void ItemsContainer::takeItem()
+{
+  auto map(game::Status::battle()->map());
+  const auto selectedUnit = map->selectedUnit();
+  auto cell { map->cell(selectedUnit->coords()) };
+
+  // auto container = *(cell->inventory()->items()[0]);
+  auto cellItems {cell->inventory()->items()[0]};
+
+  Debug::printf(cellItems->item()->name());
+}
+
+
 
 void ItemsContainer::reorganizeItems()
 {

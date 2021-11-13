@@ -170,6 +170,13 @@ void Inventory::dropItem()
 
 
 
+void Inventory::takeItem()
+{
+  _stored[_selectedContainer]->takeItem();
+}
+
+
+
 bool Inventory::usableSelectedItem()
 {
   return _stored[_selectedContainer]->selectedItemUsable();

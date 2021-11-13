@@ -164,6 +164,16 @@ void MenuAction::buildMenuSelectionUnit()
     _entries.emplace_back(std::move(entry));
     _lock.unlock();
   }
+
+  if (!cell->inventory()->empty())
+  {
+    auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_TAKE)};
+    entry->setCallback([=, this] { _selectedUnit->inventory()->takeItem(); });
+    _lock.lock();
+    _entries.emplace_back(std::move(entry));
+    _lock.unlock();
+  }
+
 }
 
 
