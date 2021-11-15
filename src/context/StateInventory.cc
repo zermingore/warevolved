@@ -124,10 +124,16 @@ void StateInventory::fetchAttributes()
     assert(false);
     return;
   }
-  assert(_attributes.size() == 1 && "Invalid attributes vector size");
 
-  // Fetch the Inventory
-  _inventory = std::static_pointer_cast<Inventory> (_attributes[0]);
+  // Fetch the Inventory \todo properly handle attributes
+  auto attrVector = std::static_pointer_cast<
+        std::vector<std::shared_ptr<
+          std::pair<e_unit, std::shared_ptr<Inventory>>>>> (
+            _attributes[0]);
+
+  _inventory = ((*attrVector)[0])->second;
+
+  /// \todo Fetch Cell and allies attributes
 
   // reset the attributes vector
   _attributes.clear();

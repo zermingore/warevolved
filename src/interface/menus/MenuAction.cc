@@ -367,8 +367,45 @@ void MenuAction::enterBuilding()
 
 void MenuAction::openInventory()
 {
+  /// \todo Pushing the new State should not be just before switching to it?
   game::Status::pushState(e_state::INVENTORY);
-  game::Status::setStateAttributes(_selectedUnit->inventory());
+
+  assert(_selectedUnit);
+
+  std::vector<
+    std::shared_ptr<std::pair<e_unit, std::shared_ptr<Inventory>>>> attributes;
+
+  // Add selected Unit Inventory
+  attributes.emplace_back(
+    std::make_shared<std::pair<e_unit, std::shared_ptr<Inventory>>> (
+      std::make_pair(_selectedUnit->type(), _selectedUnit->inventory())));
+
+  // Add current Cell inventory
+  auto cell(game::Status::battle()->map()->cell(_coords));
+  attributes.emplace_back(
+    std::make_shared<std::pair<e_unit, std::shared_ptr<Inventory>>> (
+      std::make_pair(e_unit::NONE, /// \todo May be cleaner to use another key
+                     cell->inventory())));
+
+  // Add adjacent allies Inventories
+  _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
+  auto adjacents { _pathFinding->getAdjacentCells(_coords) };
+  for (const auto adjacent: adjacents)
+  {
+    const auto unit{adjacent->unit()};
+    if (unit && unit->playerId() == _selectedUnit->playerId())
+    {
+      attributes.emplace_back(
+        std::make_shared<std::pair<e_unit, std::shared_ptr<Inventory>>> (
+          std::make_pair(unit->type(), unit->inventory())));
+    }
+  }
+
+  // Toggle the State
+  game::Status::setStateAttributes(
+    std::make_shared<
+      std::vector<std::shared_ptr<
+        std::pair<e_unit, std::shared_ptr<Inventory>>>>> (attributes));
   game::Status::resumeState();
 }
 

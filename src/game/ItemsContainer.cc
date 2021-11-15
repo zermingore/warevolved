@@ -472,6 +472,7 @@ void ItemsContainer::takeItem()
   auto cellItems {cell->inventory()->items()[0]};
 
   Debug::printf(cellItems->item()->name());
+  /// \todo
 }
 
 

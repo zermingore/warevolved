@@ -104,6 +104,13 @@ public:
   std::vector<std::shared_ptr<const Cell>>
   getDropZones(const Coords& coords) const;
 
+  /**
+   * \brief Get the list of valid adjacent cells
+   * \param coords Coordinates of the cell from where to check
+   * \return List of valid adjacent cells on the map
+   */
+  std::vector<std::shared_ptr<const Cell>>
+  getAdjacentCells(const Coords coords) const;
 
 
 private:
@@ -141,15 +148,6 @@ private:
    * \return the distance (in cells) between the two cells
    */
   size_t manhattan(const Coords a, const Coords b) const;
-
-  /**
-   * \brief Get the list of valid adjacent cells
-   * \param coords Coordinates of the cell from where to check
-   * \return List of valid adjacent cells on the map
-   */
-  std::vector<std::shared_ptr<const Cell>>
-  getAdjacentCells(const Coords coords) const;
-
 
 
   std::shared_ptr<Unit> _origin;  ///< Unit at the origin of the path
