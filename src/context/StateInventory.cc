@@ -68,7 +68,7 @@ void StateInventory::exit()
 
 void StateInventory::resume()
 {
-  // retrieve the concerned Inventory the attributes
+  // Retrieve the concerned Inventories in the attributes
   fetchAttributes();
 }
 
@@ -98,18 +98,8 @@ void StateInventory::selectRight()
 
 void StateInventory::draw()
 {
-  _inventories[_currentInventory]->draw(e_direction::UP);
-
-  // Draw Cell Inventory (if not empty)
-  auto map(game::Status::battle()->map());
-  const auto selectedUnit {map->selectedUnit()};
-  if (selectedUnit)
-  {
-    if (!map->cell(selectedUnit->coords())->inventory()->empty())
-    {
-      map->cell(selectedUnit->coords())->inventory()->draw(e_direction::DOWN);
-    }
-  }
+  _inventories[0]->draw(e_direction::UP);
+  _inventories[1]->draw(e_direction::DOWN);
 
   /// \todo Inventories of adjacent allied Units
 }
@@ -138,7 +128,6 @@ void StateInventory::fetchAttributes()
     assert(false);
     return;
   }
-
 
   for (auto attribute: *attrVector)
   {

@@ -24,21 +24,24 @@ class StateInventory: public State
 {
 public:
   /**
-   * \brief registers to callbacks. Initializes the graphical attributes
+   * \brief Registers to callbacks. Initializes the graphical attributes
    */
   StateInventory();
 
   /**
-   * \brief Resets the unit's sprite
-   * \note It is necessary if the move was canceled
+   * \brief Default destructor
    */
   ~StateInventory() override = default;
 
 
   /**
    * \brief Fetch the attribute from the list
-   * \note Expects one attribute: the relevant Inventory
+   * \note Expects one attribute: Inventories vector
    * \note Aborts if no attribute was found
+   * \note Aborts if less than two Inventories were forwarded
+   * \note Expects at least:
+   *   - The selected Unit Inventory
+   *   - The current Cell Inventory
    */
   void fetchAttributes() override final;
 
@@ -53,7 +56,8 @@ public:
   virtual void draw() override final;
 
   /**
-   * \brief \todo Fetch Inventory
+   * \brief Fetch Inventories
+   * \see fetchAttributes()
    */
   void resume() override final;
 
@@ -73,10 +77,16 @@ private:
 
 
   /// \todo Use _cursorCoords; make them selected inventory dependent
-  Coords _cursorCoords; ///< Inventory cursor position
+  Coords _cursorCoords;         ///< Selected Inventory cursor position
+  size_t _currentInventory = 0; ///< Currently selected Inventory
 
+  /// List of relevant Inventories, containing:
+  /// at least:
+  /// - The selected Unit Inventory
+  /// - The currently hovered Cell Inventory
+  /// Eventually:
+  /// - The adjacent allies Inventories
   std::vector<std::shared_ptr<Inventory>> _inventories;
-  size_t _currentInventory = 0;
 };
 
 
