@@ -76,29 +76,29 @@ void StateInventory::resume()
 
 void StateInventory::selectUp()
 {
-  _inventory->moveSelection(e_direction::UP);
+  _inventories[_currentInventory]->moveSelection(e_direction::UP);
 }
 
 void StateInventory::selectDown()
 {
-  _inventory->moveSelection(e_direction::DOWN);
+  _inventories[_currentInventory]->moveSelection(e_direction::DOWN);
 }
 
 void StateInventory::selectLeft()
 {
-  _inventory->moveSelection(e_direction::LEFT);
+  _inventories[_currentInventory]->moveSelection(e_direction::LEFT);
 }
 
 void StateInventory::selectRight()
 {
-  _inventory->moveSelection(e_direction::RIGHT);
+  _inventories[_currentInventory]->moveSelection(e_direction::RIGHT);
 }
 
 
 
 void StateInventory::draw()
 {
-  _inventory->draw(e_direction::UP);
+  _inventories[_currentInventory]->draw(e_direction::UP);
 
   // Draw Cell Inventory (if not empty)
   auto map(game::Status::battle()->map());
@@ -125,15 +125,25 @@ void StateInventory::fetchAttributes()
     return;
   }
 
+
   // Fetch the Inventory \todo properly handle attributes
   auto attrVector = std::static_pointer_cast<
         std::vector<std::shared_ptr<
           std::pair<e_unit, std::shared_ptr<Inventory>>>>> (
             _attributes[0]);
 
-  _inventory = ((*attrVector)[0])->second;
+  if (attrVector->size() < 2)
+  {
+    ERROR("StateInventory::fetchAttributes missing expected attributes");
+    assert(false);
+    return;
+  }
 
-  /// \todo Fetch Cell and allies attributes
+
+  for (auto attribute: *attrVector)
+  {
+    _inventories.push_back(attribute->second);
+  }
 
   // reset the attributes vector
   _attributes.clear();

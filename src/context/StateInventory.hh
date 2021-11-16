@@ -9,6 +9,7 @@
 # define STATE_INVENTORY_HH_
 
 # include <memory>
+# include <vector>
 # include <context/State.hh>
 
 class Inventory;
@@ -71,9 +72,11 @@ private:
   void selectRight();
 
 
+  /// \todo Use _cursorCoords; make them selected inventory dependent
   Coords _cursorCoords; ///< Inventory cursor position
 
-  std::shared_ptr<Inventory> _inventory;
+  std::vector<std::shared_ptr<Inventory>> _inventories;
+  size_t _currentInventory = 0;
 };
 
 
