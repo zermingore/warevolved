@@ -192,6 +192,10 @@ void Map::newUnit(e_unit type,
         new_unit->setHp(new_unit->hp() + 10); });
 
     first = false;
+
+    _cells[0][0]->inventory()->addEquip(
+      "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10, 5,
+       e_item_slot::SECONDARY_WEAPON, {1, 3}, 2);
   }
 
   _units[player_id].emplace_back(new_unit);

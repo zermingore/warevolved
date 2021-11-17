@@ -285,6 +285,11 @@ void MenuAction::buildMenuItem()
 
   auto inventory{_selectedUnit->inventory()};
 
+  if (inventory->empty())
+  {
+    return;
+  }
+
   if (inventory->usableSelectedItem())
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_USE)};
@@ -294,14 +299,11 @@ void MenuAction::buildMenuItem()
     _lock.unlock();
   }
 
-  if (!inventory->empty())
-  {
-    auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_DROP)};
-    entry->setCallback([=, this] { inventory->dropItem(); });
-    _lock.lock();
-    _entries.emplace_back(std::move(entry));
-    _lock.unlock();
-  }
+  auto entryDrop{std::make_shared<MenuEntry> (e_entry::ITEM_DROP)};
+  entryDrop->setCallback([=, this] { inventory->dropItem(); });
+  _lock.lock();
+  _entries.emplace_back(std::move(entryDrop));
+  _lock.unlock();
 
   if (inventory->selectedItemEquippable())
   {
