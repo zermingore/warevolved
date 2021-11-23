@@ -468,11 +468,9 @@ void ItemsContainer::takeItem()
   const auto selectedUnit = map->selectedUnit();
   auto cell { map->cell(selectedUnit->coords()) };
 
-  // auto container = *(cell->inventory()->items()[0]);
-  auto cellItems {cell->inventory()->items()[0]};
-
-  Debug::printf(cellItems->item()->name());
-  /// \todo
+  auto item = std::move(cell->inventory()->items()[0]->item());
+  assert(item && "Cannot add NULL item");
+  selectedUnit->inventory()->addEquip(std::move(item));
 }
 
 

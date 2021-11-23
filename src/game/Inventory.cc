@@ -124,6 +124,11 @@ bool Inventory::addEquip(const std::string& name,
   return _stored[0]->add(std::move(item));
 }
 
+bool Inventory::addEquip(std::unique_ptr<Item> item)
+{
+  return _stored[0]->add(std::move(item));
+}
+
 
 
 void Inventory::moveSelection(const e_direction direction)

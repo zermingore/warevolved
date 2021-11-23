@@ -92,6 +92,13 @@ public:
                 const std::function<void()>& use = {});
 
   /**
+   * \brief Move the given Item to the equip list
+   * \param item Item to equip
+   * \return true on success; false on impossible add (item too large)
+   */
+  bool addEquip(std::unique_ptr<Item> item);
+
+  /**
    * \brief Move the selection cursor
    * \param direction Where to fetch another selected item
    * \note Handles Inventory selection
