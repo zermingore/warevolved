@@ -185,7 +185,7 @@ private:
   size_t _selectedContainer; ///< Index of the currently selected container
 
   /// \todo dynamic first container place (based on biggest equipped items)
-  /// Where to draw the current container
+  /// Position in Pixels where to draw the current container
   graphics::Pos2 _currentContainerPosition = {0, 50};
 };
 

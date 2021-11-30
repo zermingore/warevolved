@@ -143,7 +143,8 @@ public:
   void dropItem();
 
   /**
-   * \brief Drop the currently selected Item
+   * \brief Take the first Item of the Container of the currently selected Cell
+   * \todo Handle a selected Item -> parameter? StateTradeItem?
    */
   void takeItem();
 

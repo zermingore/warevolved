@@ -462,6 +462,7 @@ void ItemsContainer::dropItem()
 }
 
 
+
 void ItemsContainer::takeItem()
 {
   auto map(game::Status::battle()->map());
