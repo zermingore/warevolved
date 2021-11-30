@@ -47,7 +47,7 @@ void Inventory::draw(e_direction direction)
 
 
   // Draw the Items inventory
-  if (!_stored.empty())
+  if (!_containers.empty())
   {
     Pos2 offset;
     if (direction == e_direction::UP)
@@ -62,7 +62,7 @@ void Inventory::draw(e_direction direction)
     }
 
     const auto sz{Properties::inventoryCellWidth()};
-    for (const auto& container: _stored)
+    for (const auto& container: _containers)
     {
       container->setPosition(offset);
       container->draw();
@@ -78,13 +78,13 @@ void Inventory::draw(e_direction direction)
 
 void Inventory::drawInPanel(const graphics::Pos2& coords)
 {
-  if (_stored.empty())
+  if (_containers.empty())
   {
     return;
   }
 
-  _stored[0]->setPosition(coords);
-  _stored[0]->draw();
+  _containers[0]->setPosition(coords);
+  _containers[0]->draw();
 }
 
 
@@ -96,16 +96,16 @@ void Inventory::addContainer(e_container_type type,
 {
   auto cont = std::make_unique<ItemsContainer> (type, name, nbCols, nbLines);
   cont->setPosition(_currentContainerPosition);
-  _stored.emplace_back(std::move(cont));
+  _containers.emplace_back(std::move(cont));
 
   const auto sz{graphics::Properties::inventoryCellWidth()};
   _currentContainerPosition.x += static_cast<float> (nbCols) * sz + 5 * sz;
 
-  for (auto& container: _stored)
+  for (auto& container: _containers)
   {
     container->setDrawSelectionCursor(false);
   }
-  _stored.back()->setDrawSelectionCursor(true);
+  _containers.back()->setDrawSelectionCursor(true);
 }
 
 
@@ -121,41 +121,41 @@ bool Inventory::addEquip(const std::string& name,
 {
   auto item = std::make_unique<Item> (
     name, name, description, nbCols, nbLines, slot, range, onUseValue, use);
-  return _stored[0]->add(std::move(item));
+  return _containers[0]->add(std::move(item));
 }
 
 bool Inventory::addEquip(std::unique_ptr<Item> item)
 {
-  return _stored[0]->add(std::move(item));
+  return _containers[0]->add(std::move(item));
 }
 
 
 
 void Inventory::moveSelection(const e_direction direction)
 {
-  auto dir_container {_stored[_selectedContainer]->selectItem(direction)};
+  auto dir_container {_containers[_selectedContainer]->selectItem(direction)};
 
   if (dir_container == e_direction::LEFT)
   {
-    _stored[_selectedContainer]->setDrawSelectionCursor(false);
+    _containers[_selectedContainer]->setDrawSelectionCursor(false);
     if (_selectedContainer > 0)
     {
       --_selectedContainer;
     }
     else
     {
-      _selectedContainer = _stored.size() - 1;
+      _selectedContainer = _containers.size() - 1;
     }
-    _stored[_selectedContainer]->setDrawSelectionCursor(true);
-    _stored.back()->resetSelectedItem();
+    _containers[_selectedContainer]->setDrawSelectionCursor(true);
+    _containers.back()->resetSelectedItem();
   }
 
   if (dir_container == e_direction::RIGHT)
   {
-    _stored[_selectedContainer]->setDrawSelectionCursor(false);
-    _selectedContainer = (_selectedContainer + 1) % _stored.size();
-    _stored[_selectedContainer]->setDrawSelectionCursor(true);
-    _stored.back()->resetSelectedItem();
+    _containers[_selectedContainer]->setDrawSelectionCursor(false);
+    _selectedContainer = (_selectedContainer + 1) % _containers.size();
+    _containers[_selectedContainer]->setDrawSelectionCursor(true);
+    _containers.back()->resetSelectedItem();
   }
 }
 
@@ -163,35 +163,35 @@ void Inventory::moveSelection(const e_direction direction)
 
 void Inventory::useItem()
 {
-  _stored[_selectedContainer]->useItem();
+  _containers[_selectedContainer]->useItem();
 }
 
 
 
 void Inventory::dropItem()
 {
-  _stored[_selectedContainer]->dropItem();
+  _containers[_selectedContainer]->dropItem();
 }
 
 
 
 void Inventory::takeItem()
 {
-  _stored[_selectedContainer]->takeItem();
+  _containers[_selectedContainer]->takeItem();
 }
 
 
 
 bool Inventory::usableSelectedItem()
 {
-  return _stored[_selectedContainer]->selectedItemUsable();
+  return _containers[_selectedContainer]->selectedItemUsable();
 }
 
 
 
 bool Inventory::empty()
 {
-  for (const auto& container: _stored)
+  for (const auto& container: _containers)
   {
     if (!container->empty())
     {
@@ -206,28 +206,28 @@ bool Inventory::empty()
 
 bool Inventory::equippedItem()
 {
-  return _stored[_selectedContainer]->type() == e_container_type::EQUIPPED;
+  return _containers[_selectedContainer]->type() == e_container_type::EQUIPPED;
 }
 
 
 
 bool Inventory::selectedItemEquippable()
 {
-  return _stored[_selectedContainer]->selectedItemEquippable();
+  return _containers[_selectedContainer]->selectedItemEquippable();
 }
 
 
 
 void Inventory::equip()
 {
-  _stored[0]->add(std::move(_stored[_selectedContainer]->item()));
+  _containers[0]->add(std::move(_containers[_selectedContainer]->item()));
 }
 
 
 
 bool Inventory::unequip()
 {
-  auto item { _stored[_selectedContainer]->item() };
+  auto item { _containers[_selectedContainer]->item() };
   if (!item)
   {
     ERROR("Expecting Item to unequip");
@@ -239,7 +239,7 @@ bool Inventory::unequip()
                       static_cast<size_t> (item->size().y) };
 
   auto equipped_list {true};
-  for (auto& container: _stored)
+  for (auto& container: _containers)
   {
     if (equipped_list) // skip equipped list
     {
@@ -254,14 +254,14 @@ bool Inventory::unequip()
     }
 
     container->add(std::move(item), *destination);
-    _stored[_selectedContainer]->reorganizeItems(); // Assumed unlimited
+    _containers[_selectedContainer]->reorganizeItems(); // Assumed unlimited
 
     NOTICE("Moved object");
     return true;
   }
 
   // Add the Item back if we could not add it somewhere else
-  _stored[_selectedContainer]->add(std::move(item));
+  _containers[_selectedContainer]->add(std::move(item));
 
   return false;
 }
@@ -270,24 +270,24 @@ bool Inventory::unequip()
 
 size_t Inventory::attackValue() const
 {
-  return _stored[0]->attackValue();
+  return _containers[0]->attackValue();
 }
 
 
 
 size_t Inventory::counterAttackValue() const
 {
-  return _stored[0]->counterAttackValue();
+  return _containers[0]->counterAttackValue();
 }
 
 
 
 std::map<e_item_slot, Range> Inventory::range() const
 {
-  if (_stored.empty() || _stored[0]->empty())
+  if (_containers.empty() || _containers[0]->empty())
   {
     return {};
   }
 
-  return _stored[0]->range();
+  return _containers[0]->range();
 }

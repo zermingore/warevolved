@@ -37,10 +37,10 @@ public:
 
 
   /**
-   * \brief _stored getter
-   * \todo rename _stored -> items
+   * \brief _containers getter
+   * \return Items containers
    */
-  auto items() { return _stored; }
+  auto containers() { return _containers; }
 
 
   /**
@@ -180,7 +180,7 @@ public:
 
 
 private:
-  std::vector<std::shared_ptr<ItemsContainer>> _stored; ///< Stored items
+  std::vector<std::shared_ptr<ItemsContainer>> _containers; ///< Stored items
 
   size_t _selectedContainer; ///< Index of the currently selected container
 
