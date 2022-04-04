@@ -31,6 +31,8 @@
 ** TODO Find a way to have compile-time map keys (vehicle crews)
 ** TODO Check included headers used
 ** TODO Panel clean (code && graphics: make text width panel size dependent)
+** TODO Investigate clang -Wpessimizing-move
+** TODO Investigate clang -Wrange-loop-construct
 
 
 * TODO Experimental

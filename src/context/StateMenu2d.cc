@@ -100,7 +100,7 @@ void StateMenu2d::setFocusNextMenu()
   }
   else
   {
-    if (static_cast<size_t> (_currentMenu) < _menus.size())
+    if (_currentMenu < _menus.size())
     {
       ++_currentMenu;
       // _menus[_currentMenu]->resetSelectedEntry();
@@ -120,7 +120,7 @@ void StateMenu2d::moveRight()
     return;
   }
 
-  if (static_cast<size_t> (_currentMenu) < _menus.size())
+  if (_currentMenu < _menus.size())
   {
     ++_currentMenu;
     _selectionIdx = 0;
@@ -224,7 +224,7 @@ void StateMenu2d::draw()
 {
   game::Status::player()->cursor()->disableDrawThisFrame();
 
-  auto i{0};
+  auto i{0u};
   for (const auto& menu: _menus)
   {
     if (i > _currentMenu)

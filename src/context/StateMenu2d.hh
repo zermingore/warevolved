@@ -125,8 +125,8 @@ private:
   std::vector<std::shared_ptr<interface::InGameMenu>> _menus;
   std::vector<Coords> _coords; ///< Menus coordinates
 
-  int _currentMenu = 0;  ///< Which menu is currently browsed
-  int _selectionIdx = 0; ///< Currently selected entry index
+  size_t _currentMenu = 0;  ///< Which menu is currently browsed
+  size_t _selectionIdx = 0; ///< Currently selected entry index
 
   bool _confirmActive = false; ///< 'confirm' entry available?
 
