@@ -247,10 +247,10 @@ std::pair<size_t, size_t> Map::damageValues(const Unit& attacker,
 
   // Compute defender strike-back damages
   auto att_cell = _cells[attacker.c()][attacker.l()];
-  auto att_terrain = TerrainsHandler::get(att_cell->terrain());
+  const auto att_terrain = TerrainsHandler::get(att_cell->terrain());
 
   int dmg_def = static_cast<int> (
-    defender.inventory()->counterAttackValue() - att_terrain.cover());
+    defender.inventory()->counterAttackValue() - static_cast<size_t> (att_terrain.cover()));
   auto defender_damages = std::max(1, dmg_def);
 
   return { attacker_damages, defender_damages };

@@ -25,8 +25,8 @@
 
 ItemsContainer::ItemsContainer(e_container_type type,
                                const std::string& name,
-                               int nbCols,
-                               int nbLines)
+                               size_t nbCols,
+                               size_t nbLines)
   : InterfaceElement("cell_inventory_background")
   , _type(type)
   , _name(name)

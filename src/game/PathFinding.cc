@@ -188,7 +188,7 @@ std::shared_ptr<graphics::Sprite> PathFinding::getSprite(const size_t index)
 
   using p = graphics::Properties;
 
-  unsigned int angle(static_cast<int> (shape) % 360);
+  unsigned int angle(static_cast<unsigned int> (shape) % 360);
   img->setRotation(static_cast<float> (angle));
   img->setOrigin(p::cellWidth() / 2, p::cellHeight() / 2);
 

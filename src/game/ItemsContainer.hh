@@ -62,8 +62,8 @@ public:
    */
   ItemsContainer(e_container_type type,
                  const std::string& name,
-                 int nbCols,
-                 int nbLines);
+                 size_t nbCols,
+                 size_t nbLines);
 
 
   // auto stored() { return _stored; } // unique ptr: good idea?
