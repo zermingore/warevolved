@@ -14,6 +14,9 @@
 #  pragma GCC diagnostic ignored "-Wzero-as-null-pointer-constant"
 #  pragma GCC diagnostic ignored "-Wpragmas" // ignore clang specific pragmas
 #  pragma GCC diagnostic ignored "-Wdeprecated-dynamic-exception-spec"
+#  pragma GCC diagnostic ignored "-Weffc++"
+#  pragma GCC diagnostic ignored "-Wunused-const-variable"
+
 #  include <pugixml/pugixml.hpp>
 # pragma GCC diagnostic pop
 

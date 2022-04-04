@@ -96,7 +96,7 @@ void GraphicsEngine::screenshot()
 {
   // Build the screenshot file name with the date
   time_t now = time(nullptr);
-  struct tm *date = localtime(&now);
+  tm *date = localtime(&now);
   char path[80] = {0};
   strftime(path, 80, "/tmp/./we_screenshot__%Y_%m_%d__%H_%M_%S.png", date);
 
