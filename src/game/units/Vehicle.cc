@@ -19,7 +19,7 @@
 Vehicle::Vehicle()
 {
   _canHaveCrew = true;
-  _inventory->addContainer(e_container_type::EQUIPPED, "Installed", -1, -1);
+  _inventory->addContainer(e_container_type::EQUIPPED, "Installed", 0, 0);
 }
 
 

@@ -46,7 +46,7 @@ public:
     , _terrain(terrain)
     , _inventory(std::make_shared<Inventory> ())
   {
-    _inventory->addContainer(e_container_type::CELL, "Items on Cell", -1, -1);
+    _inventory->addContainer(e_container_type::CELL, "Items on Cell", 0, 0);
   }
 
 

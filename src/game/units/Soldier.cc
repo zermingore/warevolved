@@ -27,7 +27,7 @@ Soldier::Soldier()
   _minRange = 1;
   _maxRange = 1;
 
-  _inventory->addContainer(e_container_type::EQUIPPED, "Equipped", -1, -1);
+  _inventory->addContainer(e_container_type::EQUIPPED, "Equipped", 0, 0);
   _inventory->addContainer(
     e_container_type::POCKET, "trousers\npocket left", 10, 5);
   _inventory->addContainer(

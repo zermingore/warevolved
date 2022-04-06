@@ -10,43 +10,43 @@
 
 # include <string>
 
-enum class e_container_type;
-enum class e_terrain;
-enum class e_attack_result;
-enum class e_item_slot;
-enum class e_rotation;
-enum class e_path_shape;
-enum class e_direction;
-enum class e_unit_role;
-enum class e_unit;
 enum class e_replay_mode: int8_t;
-enum class e_input;
 enum class e_key;
-enum class e_option_argument;
-enum class e_resource_type: int;
+enum class e_input;
 enum class e_entry;
 enum class e_panel_status;
+enum class e_resource_type: int;
+enum class e_option_argument;
+enum class e_item_slot;
+enum class e_rotation;
+enum class e_terrain;
+enum class e_path_shape;
+enum class e_direction;
+enum class e_attack_result;
+enum class e_container_type;
+enum class e_unit_role;
+enum class e_unit;
 enum class e_state: int;
 
 
 namespace debug {
 
-std::string e_container_type_string(e_container_type entry);
-std::string e_terrain_string(e_terrain entry);
-std::string e_attack_result_string(e_attack_result entry);
-std::string e_rotation_string(e_rotation entry);
-std::string e_item_slot_string(e_item_slot entry);
-std::string e_path_shape_string(e_path_shape entry);
-std::string e_direction_string(e_direction entry);
-std::string e_unit_role_string(e_unit_role entry);
-std::string e_unit_string(e_unit entry);
 std::string e_replay_mode_string(e_replay_mode entry);
-std::string e_input_string(e_input entry);
 std::string e_key_string(e_key entry);
-std::string e_option_argument_string(e_option_argument entry);
-std::string e_resource_type_string(e_resource_type entry);
+std::string e_input_string(e_input entry);
 std::string e_entry_string(e_entry entry);
 std::string e_panel_status_string(e_panel_status entry);
+std::string e_resource_type_string(e_resource_type entry);
+std::string e_option_argument_string(e_option_argument entry);
+std::string e_rotation_string(e_rotation entry);
+std::string e_item_slot_string(e_item_slot entry);
+std::string e_terrain_string(e_terrain entry);
+std::string e_path_shape_string(e_path_shape entry);
+std::string e_direction_string(e_direction entry);
+std::string e_attack_result_string(e_attack_result entry);
+std::string e_container_type_string(e_container_type entry);
+std::string e_unit_role_string(e_unit_role entry);
+std::string e_unit_string(e_unit entry);
 std::string e_state_string(e_state entry);
 
 } // namespace debug

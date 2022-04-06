@@ -34,10 +34,8 @@ ItemsContainer::ItemsContainer(e_container_type type,
   , _nbLines(nbLines)
   , _selectedItemCoords(0, 0)
 {
-  if (nbCols <= 0 || nbLines <= 0)
+  if (nbCols == 0 || nbLines == 0)
   {
-    _nbColumns = 0;
-    _nbLines = 0;
     _unlimited = true;
   }
   else
