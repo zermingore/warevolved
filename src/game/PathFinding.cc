@@ -50,7 +50,6 @@ PathFinding::PathFinding(const std::shared_ptr<Unit>& origin)
     for (auto line(0u); line < _map->nbLines(); ++line)
     {
       _costs.emplace_back(vec);
-      cells[col][line]->setHighlight(false);
     }
   }
 
