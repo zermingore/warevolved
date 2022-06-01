@@ -125,7 +125,6 @@
 ** TODO Options parser
 *** TODO Options structure to initialize the Game
 *** TODO Framerate (blocked to 60 in release; unlimited in debug)
-** TODO The displayed fps should be computed only over a fixed period of time
 ** TODO Bash completion
 *** TODO Options
 *** TODO Maps (option arguments)

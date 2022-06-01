@@ -306,7 +306,7 @@ __top_srcdir__we_CXXFLAGS += -Wformat-overflow=2                            # Wa
 __top_srcdir__we_CXXFLAGS += -Wformat-truncation=2                          # Warn about calls to snprintf and similar functions that truncate output.
 __top_srcdir__we_CXXFLAGS += -Wframe-larger-than=8192                       # Warn if a function's stack frame requires in excess of <byte-size>.
 __top_srcdir__we_CXXFLAGS += -Wimplicit-fallthrough=5                       # Warn when a switch case falls through.
-__top_srcdir__we_CXXFLAGS += -Wlarger-than=1024                             # Warn if an object's size exceeds <byte-size>.
+__top_srcdir__we_CXXFLAGS += -Wlarger-than=2048                             # Warn if an object's size exceeds <byte-size>.
 __top_srcdir__we_CXXFLAGS += -Wformat=2                                     # Warn about printf/scanf/strftime/strfmon format string anomalies.
 __top_srcdir__we_CXXFLAGS += -Wnormalized=nfc                               # Warn about non-normalized Unicode strings.
 __top_srcdir__we_CXXFLAGS += -Wplacement-new=2                              # Warn for placement new expressions with undefined behavior.

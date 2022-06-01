@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e -o pipefail
+
 # Generates a mapping enum value -> enum value name as a string
 #
 # WARNING: enums are fetch in header files (.hh) only

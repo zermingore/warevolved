@@ -38,7 +38,7 @@ public:
 
 
 private:
-  enum { _nbFrames = 32 }; ///< Nb frames kept
+  enum { _nbFrames = 256 }; ///< Nb frames kept
   /// Storing only a few frames in a ring buffer
   static std::array<double, _nbFrames> _lastFramesDuration;
 
