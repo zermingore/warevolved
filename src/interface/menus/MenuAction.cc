@@ -295,14 +295,20 @@ void MenuAction::buildMenuItem()
   if (inventory->usableSelectedItem())
   {
     auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_USE)};
-    entry->setCallback([=, this] { inventory->useItem(); });
+    entry->setCallback([=, this] {
+      inventory->useItem();
+      game::Status::popCurrentState();
+    });
     _lock.lock();
     _entries.emplace_back(std::move(entry));
     _lock.unlock();
   }
 
   auto entryDrop{std::make_shared<MenuEntry> (e_entry::ITEM_DROP)};
-  entryDrop->setCallback([=, this] { inventory->dropItem(); });
+  entryDrop->setCallback([=, this] {
+    inventory->dropItem();
+    game::Status::popCurrentState();
+  });
   _lock.lock();
   _entries.emplace_back(std::move(entryDrop));
   _lock.unlock();
@@ -312,7 +318,10 @@ void MenuAction::buildMenuItem()
     if (inventory->equippedItem())
     {
       auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_UNEQUIP)};
-      entry->setCallback([=, this] { inventory->unequip(); });
+      entry->setCallback([=, this] {
+        inventory->unequip();
+        game::Status::popCurrentState();
+      });
       _lock.lock();
       _entries.emplace_back(std::move(entry));
       _lock.unlock();
@@ -320,7 +329,10 @@ void MenuAction::buildMenuItem()
     else
     {
       auto entry{std::make_shared<MenuEntry> (e_entry::ITEM_EQUIP)};
-      entry->setCallback([=, this] { inventory->equip(); });
+      entry->setCallback([=, this] {
+        inventory->equip();
+        game::Status::popCurrentState();
+      });
       _lock.lock();
       _entries.emplace_back(std::move(entry));
       _lock.unlock();
