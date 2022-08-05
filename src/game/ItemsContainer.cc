@@ -498,7 +498,7 @@ bool ItemsContainer::selectedItemUsable()
     }
   }
 
-  assert(!"No Item currently selected");
+  assert(!"Item currently selected not usable");
   return false;
 }
 
@@ -514,7 +514,7 @@ bool ItemsContainer::selectedItemEquippable()
     }
   }
 
-  assert(!"No Item currently selected");
+  assert(!"Item currently selected not equippable");
   return false;
 }
 

@@ -287,7 +287,7 @@ void MenuAction::buildMenuItem()
 
   auto inventory{_selectedUnit->inventory()};
 
-  if (inventory->empty())
+  if (inventory->empty() || inventory->emptySelection())
   {
     return;
   }

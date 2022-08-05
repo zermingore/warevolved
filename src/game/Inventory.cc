@@ -204,6 +204,13 @@ bool Inventory::empty()
 
 
 
+bool Inventory::emptySelection()
+{
+  return _containers[_selectedContainer]->empty();
+}
+
+
+
 bool Inventory::equippedItem()
 {
   return _containers[_selectedContainer]->type() == e_container_type::EQUIPPED;

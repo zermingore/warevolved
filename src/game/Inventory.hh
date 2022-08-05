@@ -129,6 +129,12 @@ public:
   bool empty();
 
   /**
+   * \brief Check wether the selected Container (if any) is empty
+   * \return true if no item is found in the selected container; false otherwise
+   */
+  bool emptySelection();
+
+  /**
    * \brief Check if the currently selected item is usable
    * \return true if the Item is usable, false otherwise
    */
