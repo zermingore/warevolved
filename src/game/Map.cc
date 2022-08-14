@@ -84,7 +84,7 @@ void Map::clearHighlights()
       _cells[col][line]->setHighlight(false);
       if (!_cells[col][line]->inventory()->empty())
       {
-        _cells[col][line]->setHighlightColor(graphics::Color::White);
+        _cells[col][line]->setHighlightColor(graphics::Color::Blue);
         _cells[col][line]->setHighlight(true);
       }
     }

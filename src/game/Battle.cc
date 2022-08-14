@@ -95,6 +95,8 @@ void Battle::buildMap()
   {
     generateRandomMap();
   }
+
+  _map->clearHighlights(); // Initialize the highlights
 }
 
 
