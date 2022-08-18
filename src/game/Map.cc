@@ -194,7 +194,7 @@ void Map::newUnit(e_unit type,
     first = false;
 
     ///\todo remove (Inventory test)
-    _cells[0][0]->inventory()->addEquip(
+    _cells[1][5]->inventory()->addEquip(
       "handgun", "Pistol\nDamages: 4\nCal: 9mm", 10, 5,
        e_item_slot::SECONDARY_WEAPON, {1, 3}, 2);
   }

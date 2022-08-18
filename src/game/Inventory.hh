@@ -8,7 +8,7 @@
 #ifndef INVENTORY_HH_
 # define INVENTORY_HH_
 
-# include <cstddef> // size_t
+# include <cstddef>
 # include <memory>
 # include <string>
 # include <vector>
@@ -32,6 +32,7 @@ class Inventory
 public:
   /**
    * \brief Default constructor. Initializes the equipped items container
+   * \todo Destructor? Move every Item to the Cell Inventory?
    */
   Inventory();
 

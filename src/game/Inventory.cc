@@ -124,6 +124,8 @@ bool Inventory::addEquip(const std::string& name,
   return _containers[0]->add(std::move(item));
 }
 
+
+
 bool Inventory::addEquip(std::unique_ptr<Item> item)
 {
   return _containers[0]->add(std::move(item));

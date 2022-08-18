@@ -113,8 +113,8 @@ void Battle::nextPlayer()
 void Battle::generateRandomMap()
 {
   // Map size
-  const auto lines = Random::randVal<size_t>(3, 15);
-  const auto cols = Random::randVal<size_t>(3, 15);
+  const auto lines = Random::randVal<size_t>(5, 15);
+  const auto cols = Random::randVal<size_t>(5, 15);
   NOTICE("Generating a Map of", lines, "x", cols);
   _map = std::make_shared<Map> (cols, lines);
 
@@ -338,10 +338,6 @@ void Battle::saveMap()
 
 void Battle::randomMapRefine()
 {
-  /// \todo remove and explain this sleep
-  std::this_thread::sleep_for(
-    std::chrono::duration<double, std::chrono::seconds::period>(1));
-
   // Give one extra Soldier to every player and set their cursor on it
   const auto cols{_map->nbColumns()};
   const auto lines{_map->nbLines()};
