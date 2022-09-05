@@ -5,6 +5,9 @@
 # TODO Do not hard-code the shuffle range
 # TODO Do not hard-code the timeout / number of events
 
+set +x # do not spam too much (random generation)
+
+
 # Sanity checks
 if [[ -z "$ROOT_TESTS" || -z "$BIN_WE" ]]; then
   echo
@@ -50,6 +53,9 @@ for (( i=1; i < 10000; i++ )); do # hard-coded
 done
 
 echo "Test file: $TMP"
+
+
+set -x # re-activate output
 
 timeout 10 "${BIN_WE}" \
         --random-seed="$RANDOM_SEED" -r --replay-file="$TMP" > "/tmp/we_log_test"

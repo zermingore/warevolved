@@ -64,13 +64,16 @@ function smoke_tests()
     | while IFS= read -r -d $'\0' file
   do
     echo -n "Testing ${file}... "
+    set -x
     . "$file"
-    if [[ $? -ne 0 ]]; then # Aborting whatever the failure is
+    local ret=$?
+    set +x
+    if [[ $ret -ne 0 ]]; then # Aborting whatever the failure is
       printError "[FAIL]\n  Smoke tests failed; Aborting..."
       exit 123
     fi
 
-    printSuccess "[done]"
+    printSuccess "[done]\n"
   done
 
   endSection
@@ -86,9 +89,12 @@ function non_regression_tests()
   for file in $(find "${ROOT_TESTS}/regression" -type f -iname "*.sh")
   do
     echo -n "Testing ${file}... "
+    set -x
     . "$file"
-    if [[ $? -ne 0 ]]; then
-      printError "[FAIL]"
+    local ret=$?
+    set +x
+    if [[ $ret -ne 0 ]]; then
+      printError "[FAIL]\n"
       ret_val=1
     else
       printSuccess "[done]\n"
@@ -109,8 +115,11 @@ function integration_tests()
   for file in $(find "${ROOT_TESTS}/integration" -type f -iname "*.sh")
   do
     echo -n "Testing ${file}... "
+    set -x
     . "$file"
-    if [[ $? -ne 0 ]]; then
+    local ret=$?
+    set +x
+    if [[ $ret -ne 0 ]]; then
       printError "[FAIL]"
       ret_val=1
     else
