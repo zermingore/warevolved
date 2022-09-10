@@ -406,7 +406,7 @@ void MenuAction::openInventory()
   // Add adjacent allies Inventories
   _pathFinding = std::make_unique<PathFinding> (_selectedUnit);
   auto adjacents { _pathFinding->getAdjacentCells(_coords) };
-  for (const auto adjacent: adjacents)
+  for (const auto& adjacent: adjacents)
   {
     const auto unit{adjacent->unit()};
     if (unit && unit->playerId() == _selectedUnit->playerId())

@@ -57,7 +57,7 @@ void StateSelectExitZone::resume()
   assert(_building && _building->units().size() > 0);
 
   // Find building doors
-  for (const auto coords: _building->getCoords())
+  for (const auto& coords: _building->getCoords())
   {
     auto c = map->cell(*coords);
     if (c->terrain() == e_terrain::BUILDING_DOOR && !c->unit())
@@ -133,7 +133,7 @@ void StateSelectExitZone::validate()
 
   // Find building doors
   std::vector<Coords> doors;
-  for (const auto c: (_building)->getCoords())
+  for (const auto& c: (_building)->getCoords())
   {
     if (map->cell(*c)->terrain() == e_terrain::BUILDING_DOOR)
     {

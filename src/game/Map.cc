@@ -309,7 +309,7 @@ std::optional<std::shared_ptr<Building>> Map::building(const Coords coord)
 {
   for (auto b: _buildings)
   {
-    for (const auto c: b->getCoords())
+    for (const auto& c: b->getCoords())
     {
       if (c->c == coord.c && c->l == coord.l)
       {
