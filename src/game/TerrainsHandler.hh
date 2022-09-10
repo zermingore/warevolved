@@ -9,6 +9,7 @@
 # define TERRAINS_HANDLER_HH_
 
 # include <map>
+# include <cstddef>
 
 class Terrain;
 enum class e_terrain;

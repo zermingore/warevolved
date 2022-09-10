@@ -13,6 +13,7 @@
 # include <string>
 # include <vector>
 # include <optional>
+# include <functional>
 
 # include <graphics/graphic_types.hh>
 # include <game/Item.hh>

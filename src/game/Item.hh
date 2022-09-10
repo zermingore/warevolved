@@ -12,6 +12,7 @@
 # include <memory>
 # include <string>
 # include <optional>
+# include <functional>
 
 # include <graphics/graphic_types.hh>
 # include <interface/InterfaceElement.hh>

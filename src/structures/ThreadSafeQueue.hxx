@@ -15,7 +15,7 @@
 
 
 template <typename T>
-ThreadSafeQueue<T>::~ThreadSafeQueue<T>()
+ThreadSafeQueue<T>::~ThreadSafeQueue()
 {
   std::unique_lock<std::mutex> lock(_lock);
   while (!_queue.empty())
