@@ -12,14 +12,17 @@ You may also need to indicate the path to a recent libc to run the binary using:
 > LD_LIBRARY_PATH=/path/to/lib ./we
 
 
-At the root, run
+At the root of the project, run
 > ./bootstrap
 
-The binary file (we) should be created at the root of the project.
+After configuring, the project will be built in the build/ directory.
+The binary file (we) should be created at the project's root.
 
 
-If you experience any problem,
-please refer to the HELP text file at the root of the project.
+If you experience any problem, you may
+- Run `./bootstrap --help`
+- Refer to the HELP text file at the root of the project.
+- Please, ask for help on Github
 
 
 To generate the documentation, at the root, run

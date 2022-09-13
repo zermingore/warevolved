@@ -50,11 +50,6 @@ Although the default used compiler is g++ one might want to compile
 with another compiler. For instance, to compile with clang, use:
 CXX=clang++ WE_EXTRA_CXXFLAGS=-Wno-unknown-warning-option ./bootstrap
 
-Warning:
-As the C++20 standard is recent, main stream compilers do not support it fully
-yet. For instance, p0458r2 (map::contains()) is not supported yet by clang
-
-
 
 
 In any case, feel free to contact the maintainer on github.
