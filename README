@@ -69,15 +69,6 @@ NOTE: The previous mentioned libraries (libX11, SFML, ...) must be installed in 
 
 Notes
 -----
-This project is under a fully permissive license.
-It means that you can do whatever you want with the code;
-A citation would be appreciated but is not required
-
-Though this software uses pugixml (v1.10), a XML file parser under MIT license
-I have not written any code in the src/pugixml folder
-credits go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
-
-
 If you haven't downloaded War Evolved on GitHub,
 you still can find it there https://github.com/zermingore/warevolved
 to make sure you have the latest version
@@ -88,3 +79,13 @@ but please report any bug, feature request, ...
 
 
 Have Fun and Thank You for downloading / playing
+
+
+License
+-------
+Source code license: GPL 3.0
+Assets license: CC-BY-SA 2.0
+
+This software uses the pugixml library, a XML file parser
+The code in the lib/pugixml folder is under its own license (MIT)
+Credits for pugixml go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
