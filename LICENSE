@@ -1,0 +1,6 @@
+Source code license: GPL 3.0
+Assets (found in resources/ folder) license: CC-BY-SA 2.0
+
+This software uses the pugixml library, a XML file parser
+The code in the lib/pugixml folder is under its own license (MIT)
+Credits for pugixml go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
