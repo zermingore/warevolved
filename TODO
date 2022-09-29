@@ -3,9 +3,10 @@
 #+STARTUP: content
 
 # NOTE:
-# - A task can be removed only on the master
+# - A task can be removed only on the main branch
 # - A task can be added or marked as done on any branch
 # - (Very) long term features are documented in the doc/think/concept file
+# - See the bug tracker on sourcehut https://todo.sr.ht/~jp_foss/war_evolved
 
 
 * TODO Misc
