@@ -2,10 +2,14 @@
 #+OPTIONS: ^:nil
 #+STARTUP: content
 
+# WARNING: This project is still under development but on sourcehut, no longer on github
+# See https://sr.ht/~jp_foss/war_evolved/
+
 # NOTE:
 # - A task can be removed only on the master
 # - A task can be added or marked as done on any branch
 # - (Very) long term features are documented in the doc/think/concept file
+# - See the bug tracker on sourcehut https://todo.sr.ht/~jp_foss/war_evolved
 
 
 * TODO Misc

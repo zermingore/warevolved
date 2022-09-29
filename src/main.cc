@@ -1,7 +1,8 @@
 /** \mainpage War Evolved
  * War Evolved is a simple 2D tactical RPG\n
- * https://github.com/zermingore/warevolved\n
+ * Repository URL: https://sr.ht/~jp_foss/war_evolved/\n
  * Please report any bug, feature request, ...
+ * at: https://todo.sr.ht/~jp_foss/war_evolved
  *
  * \file
  * \date September 15 2010
