@@ -79,8 +79,6 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle>& battle)
 
     EventsProcessor::notifyFrame();
   }
-
-  WARNING("Quitting War Evolved");
 }
 
 

@@ -89,9 +89,9 @@ void Game::run()
   }
   game::Status::resumeState();
 
-  // Drawing loop
-  GraphicsEngine::drawScene(battle);
+  GraphicsEngine::drawScene(battle); // Drawing loop
 
   // Exit request reached
   stop_events_listener = true;
+  WARNING("Quitting War Evolved");
 }
