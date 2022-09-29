@@ -22,11 +22,12 @@ The binary file (we) should be created at the project's root.
 If you experience any problem, you may
 - Run `./bootstrap --help`
 - Refer to the HELP text file at the root of the project.
-- Please, ask for help on Github
+- Fill in a ticket at https://todo.sr.ht/~jp_foss/war_evolved/
 
 
 To generate the documentation, at the root, run
 > doxygen
+
 
 
 Required packages
@@ -69,16 +70,18 @@ NOTE: The previous mentioned libraries (libX11, SFML, ...) must be installed in 
 
 Notes
 -----
-If you haven't downloaded War Evolved on GitHub,
-you still can find it there https://github.com/zermingore/warevolved
-to make sure you have the latest version
+If you haven't downloaded War Evolved on sourcehut, to make sure you have the latest version,
+you can find it there https://git.sr.ht/~jp_foss/war_evolved
 
 
 War Evolved is still under developpement (and not yet designed to be played)
 but please report any bug, feature request, ...
+Report any question or confusing stuff: These will probably also be experienced by other users.
+(Pull requests are welcome but not necessary.)
 
 
 Have Fun and Thank You for downloading / playing
+
 
 
 License
