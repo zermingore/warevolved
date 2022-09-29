@@ -1,3 +1,11 @@
+*WARNING*
+---------
+**This project here is only mirror of https://git.sr.ht/~jp_foss/war_evolved**
+**The development here on github is stalled and will probably switch in Read Only at some point.**
+**The development of War Evolved continues on sourcehut. See you there!**
+
+
+
 War Evolved is a simple 2D tactical RPG
 
 To build the project, the following are required:
@@ -22,7 +30,7 @@ The binary file (we) should be created at the project's root.
 If you experience any problem, you may
 - Run `./bootstrap --help`
 - Refer to the HELP text file at the root of the project.
-- Please, ask for help on Github
+- Please, ask for help on **sourcehut** or per mail (see the AUTHORS file)
 
 
 To generate the documentation, at the root, run
@@ -69,13 +77,14 @@ NOTE: The previous mentioned libraries (libX11, SFML, ...) must be installed in 
 
 Notes
 -----
-If you haven't downloaded War Evolved on GitHub,
-you still can find it there https://github.com/zermingore/warevolved
+If you haven't downloaded War Evolved on sourcehut,
+you still can find it there https://git.sr.ht/~jp_foss/war_evolved
 to make sure you have the latest version
+Please **DO NOT** clone / develop on github
 
 
 War Evolved is still under developpement (and not yet designed to be played)
-but please report any bug, feature request, ...
+but please report (at https://todo.sr.ht/~jp_foss/war_evolved/) any bug, feature request, ...
 
 
 Have Fun and Thank You for downloading / playing
