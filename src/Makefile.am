@@ -4,10 +4,14 @@ bin_PROGRAMS = $(top_srcdir)/we
 __top_srcdir__we_LDADD  = ${abs_top_builddir}/lib/libpugixml.a
 __top_srcdir__we_LDADD += -lstdc++fs # filesystem
 
+# setting the __top_srcdir__we_CXXFLAGS variable
+__top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
+
 
 # Different main() if testing or not
 if UNIT_TESTS
   __top_srcdir__we_SOURCES = ${abs_top_builddir}/tests/unit/main.cc
+  __top_srcdir__we_CXXFLAGS += -I${abs_top_builddir}/tests/unit/lib/
 else
   __top_srcdir__we_SOURCES = main.cc
 endif
@@ -96,9 +100,6 @@ __top_srcdir__we_SOURCES +=          \
 
 
 # ------------------------------------ Compiler configuration ------------------------------------ #
-# setting the __top_srcdir__we_CXXFLAGS variable
-__top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
-
 # Release flags:
 # -s -O3 -DNDEBUG # -Ofast
 

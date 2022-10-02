@@ -79,6 +79,7 @@ AC_ARG_ENABLE(
      yes)
        unit_tests=true
        AC_CONFIG_LINKS([tests/unit/main.cc:tests/unit/main.cc])
+       AC_CONFIG_LINKS([tests/unit/lib/doctest.h:tests/unit/lib/doctest.h])
        ;;
      no)
        unit_tests=false
