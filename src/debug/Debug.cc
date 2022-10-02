@@ -25,7 +25,10 @@ void Debug::init()
 {
   try
   {
-    std::filesystem::rename(LOG_FILENAME, LOG_FILENAME_OLD);
+    if (std::filesystem::exists(LOG_FILENAME))
+    {
+      std::filesystem::rename(LOG_FILENAME, LOG_FILENAME_OLD);
+    }
   }
   catch (std::filesystem::filesystem_error& e)
   {
