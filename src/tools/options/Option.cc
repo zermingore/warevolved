@@ -5,7 +5,6 @@
  * \brief Option class implementation
  */
 
-#include <debug/Debug.hh>
 #include <tools/options/Option.hh>
 #include <utility>
 
@@ -39,15 +38,5 @@ void Option::populateArguments(const std::string& arguments)
     end_arg = args.find(',');
   }
 
-  // Handle last argument
-  _arguments.emplace_back(args);
-
-
-  // Debug: Options + arguments print
-  // NOTICE("Option", _name, "arguments: ");
-  // for (const auto& arg: _arguments)
-  // {
-  //   std::cout << arg << " ";
-  // }
-  // std::cout << '\n';
+  _arguments.emplace_back(args); // Handle last argument
 }

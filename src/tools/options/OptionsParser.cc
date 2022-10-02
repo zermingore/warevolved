@@ -11,7 +11,6 @@
 #include <iomanip>
 #include <iostream>
 
-#include <debug/Debug.hh>
 #include <config/Settings.hh>
 #include <tools/options/Option.hh>
 
@@ -249,7 +248,7 @@ void OptionsParser::validArguments()
 
     if (!opt_valid)
     {
-      error_msg.append("\tUnsupported option: " + op + '\n');
+      error_msg.append("\tUnsupported option: [" + op + "]\n");
     }
   }
 
@@ -274,6 +273,6 @@ bool OptionsParser::optionExists(const std::string& option) const
   }
 
   // We should always find a given option
-  ERROR("[IMPLEMENTATION ERROR] Unknown option", option);
-  std::exit(1);
+  std::cerr << "[IMPLEMENTATION ERROR] Unknown option [" << option << "]\n";
+  std::exit(1); // std::unreachable(); in C++23 may be more accurate
 }

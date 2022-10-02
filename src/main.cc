@@ -18,8 +18,6 @@
 
 int main(int ac, const char **av)
 {
-  Debug::init();
-
   // Options parsing
   OptionsParser opt(ac, av);
   try
@@ -32,9 +30,11 @@ int main(int ac, const char **av)
   }
   catch (const ArgumentsException& e)
   {
-    ERROR("Invalid arguments:\n", e.what());
+    std::cerr << "Invalid arguments:\n" << e.what();
     return EXIT_FAILURE;
   }
+
+  Debug::init(); // Logging initialization
 
   // Launch the game
   Game game(opt);
