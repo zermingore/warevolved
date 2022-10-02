@@ -126,7 +126,7 @@ function parse_options()
         ;;
 
       -j|--parallel-build)
-        PARALLEL_BUILD="-j$(grep -c processor /proc/cpuinfo)"
+        PARALLEL_BUILD="-j$(nproc)"
         shift
         ;;
 
