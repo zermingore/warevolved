@@ -5,6 +5,7 @@
 
 
 # autoreconf && configure
+# $@: Arguments to forward to the configure script
 function _configure()
 {
   beginSection "CONFIGURE"
@@ -19,7 +20,7 @@ function _configure()
   popd # $ROOT_PROJECT
 
   pushd "$BUILD_DIR"
-    "${ROOT_PROJECT}/configure" --prefix="${ROOT_TESTS}"
+    "${ROOT_PROJECT}/configure" --prefix="${ROOT_TESTS}" "$@"
     ret_code=$?
     if [[ $ret_code -ne 0 ]]; then
       printError "Unable to configure"
@@ -59,5 +60,16 @@ function build_main()
     _configure
   fi
 
+  _standard_compilation
+}
+
+
+
+function build_main_with_unit_tests()
+{
+  rm -rf bin/ "$BUILD_DIR"
+  mkdir -p "$BUILD_DIR"
+
+  _configure --enable-unit-tests
   _standard_compilation
 }

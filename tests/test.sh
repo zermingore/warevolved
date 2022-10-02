@@ -1,10 +1,8 @@
 #!/bin/bash
+# NOTE: modern getopt and bash-compliant shell required
 
 set -E
 trap '[ "$?" -eq 123 ] && exit 123' ERR
-
-
-# NOTE: modern getopt and bash-compliant shell required
 
 set -o pipefail
 
@@ -47,12 +45,6 @@ BUILD_DIR=build
 . "${ROOT_TESTS}/utils/log.sh"
 . "${ROOT_TESTS}/utils/options_parser.sh"
 . "${ROOT_TESTS}/utils/build.sh"
-
-
-function build()
-{
-  build_main
-}
 
 
 
@@ -133,6 +125,23 @@ function integration_tests()
 
 
 
+function unit_tests()
+{
+  local ret_val=0
+  beginSection "UNIT TESTS"
+
+  ./we # Already pushd in the unit tests directory
+  if [[ $? -ne 0 ]]; then
+    printError "Failure running unit tests"
+    ret_val=1
+  fi
+
+  endSection
+  return $ret_val
+}
+
+
+
 function safe_mode()
 {
   local -r tmp_dir=$(mktemp -d)
@@ -172,7 +181,8 @@ function main()
     exit $?
   fi
 
-  build
+  build_main # autoreconf && make
+
   # Get the absolute path to the 'we' binary
   BIN_WE=$(find "${ROOT_TESTS}" -name we -type f -executable \
                 -exec readlink -f {} \;)
@@ -218,6 +228,18 @@ function main()
       printSuccess "[done]\n"
     fi
   done
+
+  # Unit tests (re-build from scratch required so far [different main()])
+  if [[ $RUN_ALL_TYPES -eq 1 || $RUN_UNIT -eq 1 ]]; then
+    build_main_with_unit_tests
+    local old_build_dir="${BUILD_DIR}"
+    BUILD_DIR="${BUILD_DIR}_unit_tests"
+    unit_tests
+    if [[ $? -ne 0 ]]; then
+      result=1
+    fi
+    BUILD_DIR="$old_build_dir"
+  fi
 
   exit $result
 }
