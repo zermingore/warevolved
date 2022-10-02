@@ -72,5 +72,24 @@ AC_CONFIG_LINKS([lib/pugixml/pugiconfig.hpp:lib/pugixml/pugiconfig.hpp])
 
 AC_ARG_VAR(WE_EXTRA_FLAGS, Compilation flags (for the sources only, not the libraries))
 
+AC_ARG_ENABLE(
+  [unit-tests],
+  [AC_HELP_STRING([--enable-unit-tests], [Build unit tests])],
+  [case "${enableval}" in
+     yes)
+       unit_tests=true
+       AC_CONFIG_LINKS([tests/unit/main.cc:tests/unit/main.cc])
+       ;;
+     no)
+       unit_tests=false
+       ;;
+     *)
+       AC_MSG_ERROR([Unexpected value ${enableval} for --unit-tests (expected true or false)])
+       ;;
+  esac],
+  [unit_tests=false]
+)
+AM_CONDITIONAL([UNIT_TESTS], [test x$unit_tests = xtrue])
+
 
 AC_OUTPUT

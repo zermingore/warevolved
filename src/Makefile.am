@@ -5,10 +5,16 @@ __top_srcdir__we_LDADD  = ${abs_top_builddir}/lib/libpugixml.a
 __top_srcdir__we_LDADD += -lstdc++fs # filesystem
 
 
+# Different main() if testing or not
+if UNIT_TESTS
+  __top_srcdir__we_SOURCES = ${abs_top_builddir}/tests/unit/main.cc
+else
+  __top_srcdir__we_SOURCES = main.cc
+endif
+
+
 # Source files
-__top_srcdir__we_SOURCES =               \
-main.cc                                  \
-\
+__top_srcdir__we_SOURCES +=              \
 graphics/GraphicsEngine.cc               \
 graphics/Context.cc                      \
 graphics/Properties.cc                   \
