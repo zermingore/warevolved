@@ -1,7 +1,7 @@
 #                        -*- Autoconf -*-
 
 
-AC_INIT([ms], [1.0])
+AC_INIT([ms],[1.0])
 
 AC_CONFIG_AUX_DIR([build-aux])
 
@@ -74,7 +74,7 @@ AC_ARG_VAR(WE_EXTRA_FLAGS, Compilation flags (for the sources only, not the libr
 
 AC_ARG_ENABLE(
   [unit-tests],
-  [AC_HELP_STRING([--enable-unit-tests], [Build unit tests])],
+  [AS_HELP_STRING([--enable-unit-tests],[Build unit tests])],
   [case "${enableval}" in
      yes)
        unit_tests=true
