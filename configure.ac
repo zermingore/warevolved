@@ -61,7 +61,7 @@ AC_MSG_ERROR([SFML Graphics headers not found]))
 AC_LANG_POP([C++])
 
 
-AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile tests/unit/Makefile])
+AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile])
 
 # Link or copy pugixml headers in the build folder
 AC_CONFIG_LINKS([lib/pugixml/pugixml.hpp:lib/pugixml/pugixml.hpp])

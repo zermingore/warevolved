@@ -4,21 +4,20 @@ bin_PROGRAMS = $(top_srcdir)/we
 __top_srcdir__we_LDADD  = ${abs_top_builddir}/lib/libpugixml.a
 __top_srcdir__we_LDADD += -lstdc++fs # filesystem
 
-# Setting the __top_srcdir__we_CXXFLAGS variable
 __top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
-
 
 # Different main() if testing or not
 if UNIT_TESTS
   __top_srcdir__we_SOURCES = ${abs_top_builddir}/tests/unit/main.cc
-  __top_srcdir__we_CXXFLAGS += -I${abs_top_builddir}/tests/unit/lib/
+#  __top_srcdir__we_CXXFLAGS += -I${abs_top_builddir}/tests/unit/lib/
 else
   __top_srcdir__we_SOURCES = main.cc
 endif
 
 
 # Source files
-__top_srcdir__we_SOURCES +=              \
+common_sources =                         \
+\
 graphics/GraphicsEngine.cc               \
 graphics/Context.cc                      \
 graphics/Properties.cc                   \
@@ -93,254 +92,237 @@ tools/options/OptionsParser.cc
 
 
 # Generated sources files
-__top_srcdir__we_SOURCES +=          \
+common_sources +=          \
   generated/enum_print/enum_print.cc
 
+__top_srcdir__we_SOURCES += ${common_sources}
 
 
-
-# ------------------------------------ Compiler configuration ------------------------------------ #
-# Release flags:
-# -s -O3 -DNDEBUG # -Ofast
-
-# Debug flags (no optimization, debug symbols, defines):
-__top_srcdir__we_CXXFLAGS += -O0 -g3 -ggdb3 -DDEBUG -DDEBUG_LEAKS # -Og: not clang compliant
-
+# ____________________________________ Compiler configuration ____________________________________ #
+release_flags = -s -O3 -DNDEBUG -Wno-inline # -Ofast
+debug_flags = -O0 -g3 -ggdb3 -DDEBUG # -Og: not clang compliant
+__top_srcdir__we_CXXFLAGS += ${debug_flags}
 
 # export GLIBCXX_FORCE_NEW
 
-
-__top_srcdir__we_CXXFLAGS += -Waddress-of-packed-member                     # Warn when the address of packed member of struct or union is taken.
-__top_srcdir__we_CXXFLAGS += -Waggressive-loop-optimizations                # Warn if a loop with constant number of iterations triggers undefined behavior.
-__top_srcdir__we_CXXFLAGS += -Wall                                          # Enable most warning messages.
-__top_srcdir__we_CXXFLAGS += -Walloc-zero                                   # Warn for calls to allocation functions that specify zero bytes.
-__top_srcdir__we_CXXFLAGS += -Walloca                                       # Warn on any use of alloca.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-double-fclose                       # Warn about code paths in which a stdio FILE can be closed more than once.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-double-free                         # Warn about code paths in which a pointer can be freed more than once.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-exposure-through-output-file        # Warn about code paths in which sensitive data is written to a file.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-file-leak                           # Warn about code paths in which a stdio FILE is not closed.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-free-of-non-heap                    # Warn about code paths in which a non-heap pointer is freed.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-malloc-leak                         # Warn about code paths in which a heap-allocated pointer leaks.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-null-argument                       # Warn about code paths in which NULL is passed to a must-not-be-NULL function argument.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-null-dereference                    # Warn about code paths in which a NULL pointer is dereferenced.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-possible-null-argument              # Warn about code paths in which a possibly-NULL value is passed to a must-not-be-NULL function argument.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-possible-null-dereference           # Warn about code paths in which a possibly-NULL pointer is dereferenced.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-stale-setjmp-buffer                 # Warn about code paths in which a longjmp rewinds to a jmp_buf saved in a stack frame that has returned.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-tainted-array-index                 # Warn about code paths in which an unsanitized value is used as an array index.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-too-complex                         # Warn if the code is too complicated for the analyzer to fully explore.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-unsafe-call-within-signal-handler   # Warn about code paths in which an async-signal-unsafe function is called from a signal handler.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-use-after-free                      # Warn about code paths in which a freed value is used.
-__top_srcdir__we_CXXFLAGS += -Wanalyzer-use-of-pointer-in-stale-stack-frame # Warn about code paths in which a pointer to a stale stack frame is used.
-__top_srcdir__we_CXXFLAGS += -Warith-conversion                             # Warn if conversion of the result of arithmetic might change the value even though converting the operands cannot.
-__top_srcdir__we_CXXFLAGS += -Wattribute-alias                              # Warn about type safety and similar errors and mismatches in declarations with alias attributes.  Same as -Wattribute-alias=.
-__top_srcdir__we_CXXFLAGS += -Wattribute-warning                            # Warn about uses of __attribute__((warning)) declarations.
-__top_srcdir__we_CXXFLAGS += -Wattributes                                   # Warn about inappropriate attribute usage.
-__top_srcdir__we_CXXFLAGS += -Wbool-compare                                 # Warn about boolean expression compared with an integer value different from true/false.
-__top_srcdir__we_CXXFLAGS += -Wbool-operation                               # Warn about certain operations on boolean expressions.
-__top_srcdir__we_CXXFLAGS += -Wbuiltin-declaration-mismatch                 # Warn when a built-in function is declared with the wrong signature.
-__top_srcdir__we_CXXFLAGS += -Wbuiltin-macro-redefined                      # Warn when a built-in preprocessor macro is undefined or redefined.
-__top_srcdir__we_CXXFLAGS += -Wcannot-profile                               # Warn when profiling instrumentation was requested, but could not be applied to a certain function.
-__top_srcdir__we_CXXFLAGS += -Wcast-align                                   # Warn about pointer casts which increase alignment.
-__top_srcdir__we_CXXFLAGS += -Wcast-align=strict                            # Warn about pointer casts which increase alignment.
-__top_srcdir__we_CXXFLAGS += -Wcast-function-type                           # Warn about casts between incompatible function types.
-__top_srcdir__we_CXXFLAGS += -Wcast-qual                                    # Warn about casts which discard qualifiers.
-__top_srcdir__we_CXXFLAGS += -Wcatch-value                                  # Warn about catch handlers of non-reference type.  Same as -Wcatch-value=.
-__top_srcdir__we_CXXFLAGS += -Wclass-conversion                             # Warn when a conversion function will never be called due to the type it converts to.
-__top_srcdir__we_CXXFLAGS += -Wclass-memaccess                              # Warn for unsafe raw memory writes to objects of class types.
-__top_srcdir__we_CXXFLAGS += -Wcomma-subscript                              # Warn about uses of a comma operator within a subscripting expression.
-__top_srcdir__we_CXXFLAGS += -Wcomments                                     # Synonym for -Wcomment.  Same as -Wcomment.
-__top_srcdir__we_CXXFLAGS += -Wconditionally-supported                      # Warn for conditionally-supported constructs.
-__top_srcdir__we_CXXFLAGS += -Wconversion                                   # Warn for implicit type conversions that may change a value.
-__top_srcdir__we_CXXFLAGS += -Wconversion-null                              # Warn for converting NULL from/to a non-pointer type.
-__top_srcdir__we_CXXFLAGS += -Wcoverage-mismatch                            # Warn in case profiles in -fprofile-use do not match.
-__top_srcdir__we_CXXFLAGS += -Wcpp                                          # Warn when a #warning directive is encountered.
-__top_srcdir__we_CXXFLAGS += -Wctor-dtor-privacy                            # Warn when all constructors and destructors are private.
-__top_srcdir__we_CXXFLAGS += -Wdangling-else                                # Warn about dangling else.
-__top_srcdir__we_CXXFLAGS += -Wdate-time                                    # Warn about __TIME__, __DATE__ and __TIMESTAMP__ usage.
-__top_srcdir__we_CXXFLAGS += -Wdelete-incomplete                            # Warn when deleting a pointer to incomplete type.
-__top_srcdir__we_CXXFLAGS += -Wdeprecated                                   # Warn if a deprecated compiler feature, class, method, or field is used.
-__top_srcdir__we_CXXFLAGS += -Wdeprecated-copy                              # Mark implicitly-declared copy operations as deprecated if the class has a user-provided copy operation.
-__top_srcdir__we_CXXFLAGS += -Wdeprecated-copy-dtor                         # Mark implicitly-declared copy operations as deprecated if the class has a user-provided copy operation or destructor.
-__top_srcdir__we_CXXFLAGS += -Wdeprecated-declarations                      # Warn about uses of __attribute__((deprecated)) declarations.
-__top_srcdir__we_CXXFLAGS += -Wdisabled-optimization                        # Warn when an optimization pass is disabled.
-__top_srcdir__we_CXXFLAGS += -Wdiv-by-zero                                  # Warn about compile-time integer division by zero.
-__top_srcdir__we_CXXFLAGS += -Wdouble-promotion                             # Warn about implicit conversions from "float" to "double".
-__top_srcdir__we_CXXFLAGS += -Wduplicated-branches                          # Warn about duplicated branches in if-else statements.
-__top_srcdir__we_CXXFLAGS += -Wduplicated-cond                              # Warn about duplicated conditions in an if-else-if chain.
-__top_srcdir__we_CXXFLAGS += -Wendif-labels                                 # Warn about stray tokens after #else and #endif.
-__top_srcdir__we_CXXFLAGS += -Wexpansion-to-defined                         # Warn if "defined" is used outside #if.
-__top_srcdir__we_CXXFLAGS += -Wextra                                        # Print extra (possibly unwanted) warnings.
-__top_srcdir__we_CXXFLAGS += -Wextra-semi                                   # Warn about semicolon after in-class function definition.
-__top_srcdir__we_CXXFLAGS += -Wfloat-conversion                             # Warn for implicit type conversions that cause loss of floating point precision.
-__top_srcdir__we_CXXFLAGS += -Wfloat-equal                                  # Warn if testing floating point numbers for equality.
-__top_srcdir__we_CXXFLAGS += -Wformat-contains-nul                          # Warn about format strings that contain NUL bytes.
-__top_srcdir__we_CXXFLAGS += -Wformat-diag                                  # Warn about GCC format strings with strings unsuitable for diagnostics.
-__top_srcdir__we_CXXFLAGS += -Wformat-extra-args                            # Warn if passing too many arguments to a function for its format string.
-__top_srcdir__we_CXXFLAGS += -Wformat-nonliteral                            # Warn about format strings that are not literals.
-__top_srcdir__we_CXXFLAGS += -Wformat-security                              # Warn about possible security problems with format functions.
-__top_srcdir__we_CXXFLAGS += -Wformat-signedness                            # Warn about sign differences with format functions.
-__top_srcdir__we_CXXFLAGS += -Wformat-truncation                            # Warn about calls to snprintf and similar functions that truncate output. Same as -Wformat-truncation=1.  Same as -Wformat-truncation=.
-__top_srcdir__we_CXXFLAGS += -Wformat-y2k                                   # Warn about strftime formats yielding 2-digit years.
-__top_srcdir__we_CXXFLAGS += -Wformat-zero-length                           # Warn about zero-length formats.
-__top_srcdir__we_CXXFLAGS += -Wframe-address                                # Warn when __builtin_frame_address or __builtin_return_address is used unsafely.
-__top_srcdir__we_CXXFLAGS += -Wfree-nonheap-object                          # Warn when attempting to free a non-heap object.
-__top_srcdir__we_CXXFLAGS += -Whsa                                          # Warn when a function cannot be expanded to HSAIL.
-__top_srcdir__we_CXXFLAGS += -Wif-not-aligned                               # Warn when the field in a struct is not aligned.
-__top_srcdir__we_CXXFLAGS += -Wignored-attributes                           # Warn whenever attributes are ignored.
-__top_srcdir__we_CXXFLAGS += -Wimplicit-fallthrough                         # Same as -Wimplicit-fallthrough=3 (or, in negated form, -Wimplicit-fallthrough=0).
-__top_srcdir__we_CXXFLAGS += -Winherited-variadic-ctor                      # Warn about C++11 inheriting constructors when the base has a variadic constructor.
-__top_srcdir__we_CXXFLAGS += -Winit-list-lifetime                           # Warn about uses of std::initializer_list that can result in dangling pointers.
-__top_srcdir__we_CXXFLAGS += -Winit-self                                    # Warn about variables which are initialized to themselves.
-__top_srcdir__we_CXXFLAGS += -Winline                                       # Warn when an inlined function cannot be inlined.
-__top_srcdir__we_CXXFLAGS += -Wint-in-bool-context                          # Warn for suspicious integer expressions in boolean context.
-__top_srcdir__we_CXXFLAGS += -Wint-to-pointer-cast                          # Warn when there is a cast to a pointer from an integer of a different size.
-__top_srcdir__we_CXXFLAGS += -Winvalid-memory-model                         # Warn when an atomic memory model parameter is known to be outside the valid range.
-__top_srcdir__we_CXXFLAGS += -Winvalid-offsetof                             # Warn about invalid uses of the "offsetof" macro.
-__top_srcdir__we_CXXFLAGS += -Winvalid-pch                                  # Warn about PCH files that are found but not used.
-__top_srcdir__we_CXXFLAGS += -Wliteral-suffix                               # Warn when a string or character literal is followed by a ud-suffix which does not begin with an underscore.
-__top_srcdir__we_CXXFLAGS += -Wlogical-not-parentheses                      # Warn when logical not is used on the left hand side operand of a comparison.
-__top_srcdir__we_CXXFLAGS += -Wlogical-op                                   # Warn when a logical operator is suspiciously always evaluating to true or false.
-__top_srcdir__we_CXXFLAGS += -Wlto-type-mismatch                            # During link time optimization warn about mismatched types of global declarations.
-__top_srcdir__we_CXXFLAGS += -Wmemset-elt-size                              # Warn about suspicious calls to memset where the third argument contains the number of elements not multiplied by the element size.
-__top_srcdir__we_CXXFLAGS += -Wmisleading-indentation                       # Warn when the indentation of the code does not reflect the block structure.
-__top_srcdir__we_CXXFLAGS += -Wmismatched-tags                              # Warn when a class is redeclared or referenced using a mismatched class-key.
-__top_srcdir__we_CXXFLAGS += -Wmissing-attributes                           # Warn about declarations of entities that may be missing attributes that related entities have been declared with.
-__top_srcdir__we_CXXFLAGS += -Wmissing-declarations                         # Warn about global functions without previous declarations.
-__top_srcdir__we_CXXFLAGS += -Wmissing-format-attribute                     # Same as -Wsuggest-attribute=format.
-__top_srcdir__we_CXXFLAGS += -Wmissing-include-dirs                         # Warn about user-specified include directories that do not exist.
-__top_srcdir__we_CXXFLAGS += -Wmissing-noreturn                             # Same as -Wsuggest-attribute=noreturn.
-__top_srcdir__we_CXXFLAGS += -Wmissing-profile                              # Warn in case profiles in -fprofile-use do not exist.
-__top_srcdir__we_CXXFLAGS += -Wmultichar                                    # Warn about use of multi-character character constants.
-__top_srcdir__we_CXXFLAGS += -Wmultiple-inheritance                         # Warn on direct multiple inheritance.
-__top_srcdir__we_CXXFLAGS += -Wmultistatement-macros                        # Warn about unsafe macros expanding to multiple statements used as a body of a clause such as if, else, while, switch, or for.
-__top_srcdir__we_CXXFLAGS += -Wnoexcept                                     # Warn when a noexcept expression evaluates to false even though the expression can't actually throw.
-__top_srcdir__we_CXXFLAGS += -Wnoexcept-type                                # Warn if C++17 noexcept function type will change the mangled name of a symbol.
-__top_srcdir__we_CXXFLAGS += -Wnon-template-friend                          # Warn when non-templatized friend functions are declared within a template.
-__top_srcdir__we_CXXFLAGS += -Wnon-virtual-dtor                             # Warn about non-virtual destructors.
-__top_srcdir__we_CXXFLAGS += -Wnonnull-compare                              # Warn if comparing pointer parameter with nonnull attribute with NULL.
-__top_srcdir__we_CXXFLAGS += -Wnormalized                                   # Same as -Wnormalized=nfc (or, in negated form, -Wnormalized=none).
-__top_srcdir__we_CXXFLAGS += -Wnull-dereference                             # Warn if dereferencing a NULL pointer may lead to erroneous or undefined behavior.
-__top_srcdir__we_CXXFLAGS += -Wodr                                          # Warn about some C++ One Definition Rule violations during link time optimization.
-__top_srcdir__we_CXXFLAGS += -Wold-style-cast                               # Warn if a C-style cast is used in a program.
-__top_srcdir__we_CXXFLAGS += -Wopenmp-simd                                  # Warn if a simd directive is overridden by the vectorizer cost model.
-__top_srcdir__we_CXXFLAGS += -Woverflow                                     # Warn about overflow in arithmetic expressions.
-__top_srcdir__we_CXXFLAGS += -Woverloaded-virtual                           # Warn about overloaded virtual function names.
-__top_srcdir__we_CXXFLAGS += -Wpacked                                       # Warn when the packed attribute has no effect on struct layout.
-__top_srcdir__we_CXXFLAGS += -Wpacked-bitfield-compat                       # Warn about packed bit-fields whose offset changed in GCC 4.4.
-__top_srcdir__we_CXXFLAGS += -Wpacked-not-aligned                           # Warn when fields in a struct with the packed attribute are misaligned.
-__top_srcdir__we_CXXFLAGS += -Wpedantic                                     # Issue warnings needed for strict compliance to the standard.
-__top_srcdir__we_CXXFLAGS += -Wpessimizing-move                             # Warn about calling std::move on a local object in a return statement preventing copy elision.
-__top_srcdir__we_CXXFLAGS += -Wplacement-new                                # Warn for placement new expressions with undefined behavior.  Same as -Wplacement-new=.
-__top_srcdir__we_CXXFLAGS += -Wpmf-conversions                              # Warn when converting the type of pointers to member functions.
-__top_srcdir__we_CXXFLAGS += -Wpointer-compare                              # Warn when a pointer is compared with a zero character constant.
-__top_srcdir__we_CXXFLAGS += -Wpragmas                                      # Warn about misuses of pragmas.
-__top_srcdir__we_CXXFLAGS += -Wprio-ctor-dtor                               # Warn if constructor or destructors with priorities from 0 to 100 are used.
-__top_srcdir__we_CXXFLAGS += -Wpsabi                                        # This option lacks documentation.
-__top_srcdir__we_CXXFLAGS += -Wredundant-decls                              # Warn about multiple declarations of the same object.
-__top_srcdir__we_CXXFLAGS += -Wredundant-move                               # Warn about redundant calls to std::move.
-__top_srcdir__we_CXXFLAGS += -Wredundant-tags                               # Warn when a class or enumerated type is referenced using a redundant class-key.
-__top_srcdir__we_CXXFLAGS += -Wregister                                     # Warn about uses of register storage specifier.
-__top_srcdir__we_CXXFLAGS += -Wreorder                                      # Warn when the compiler reorders code.
-__top_srcdir__we_CXXFLAGS += -Wrestrict                                     # Warn when an argument passed to a restrict-qualified parameter aliases with another argument.
-__top_srcdir__we_CXXFLAGS += -Wreturn-local-addr                            # Warn about returning a pointer/reference to a local or temporary variable.
-__top_srcdir__we_CXXFLAGS += -Wscalar-storage-order                         # Warn on suspicious constructs involving reverse scalar storage order.
-__top_srcdir__we_CXXFLAGS += -Wshadow                                       # Warn when one variable shadows another.  Same as -Wshadow=global.
-__top_srcdir__we_CXXFLAGS += -Wshadow-compatible-local                      # Same as -Wshadow=compatible-local.
-__top_srcdir__we_CXXFLAGS += -Wshadow-local                                 # Same as -Wshadow=local.
-__top_srcdir__we_CXXFLAGS += -Wshadow=compatible-local                      # Warn when one local variable shadows another local variable or parameter of compatible type.
-__top_srcdir__we_CXXFLAGS += -Wshadow=global                                # Warn when one variable shadows another (globally).  Same as -Wshadow.
-__top_srcdir__we_CXXFLAGS += -Wshadow=local                                 # Warn when one local variable shadows another local variable or parameter.
-__top_srcdir__we_CXXFLAGS += -Wshift-count-negative                         # Warn if shift count is negative.
-__top_srcdir__we_CXXFLAGS += -Wshift-count-overflow                         # Warn if shift count >= width of type.
-__top_srcdir__we_CXXFLAGS += -Wshift-negative-value                         # Warn if left shifting a negative value.
-__top_srcdir__we_CXXFLAGS += -Wshift-overflow                               # Warn if left shift of a signed value overflows.  Same as -Wshift-overflow=.
-__top_srcdir__we_CXXFLAGS += -Wsign-conversion                              # Warn for implicit type conversions between signed and unsigned integers.
-__top_srcdir__we_CXXFLAGS += -Wsign-promo                                   # Warn when overload promotes from unsigned to signed.
-__top_srcdir__we_CXXFLAGS += -Wsized-deallocation                           # Warn about missing sized deallocation functions.
-__top_srcdir__we_CXXFLAGS += -Wsizeof-array-argument                        # Warn when sizeof is applied on a parameter declared as an array.
-__top_srcdir__we_CXXFLAGS += -Wsizeof-pointer-div                           # Warn about suspicious divisions of two sizeof expressions that don't work correctly with pointers.
-__top_srcdir__we_CXXFLAGS += -Wstack-protector                              # Warn when not issuing stack smashing protection for some reason.
-__top_srcdir__we_CXXFLAGS += -Wstrict-null-sentinel                         # Warn about uncasted NULL used as sentinel.
-__top_srcdir__we_CXXFLAGS += -Wstrict-overflow                              # Warn about optimizations that assume that signed overflow is undefined.
-__top_srcdir__we_CXXFLAGS += -Wstring-compare                               # Warn about calls to strcmp and strncmp used in equality expressions that are necessarily true or false due to the length of one and size of the other argument.
-__top_srcdir__we_CXXFLAGS += -Wstringop-overflow                            # Warn about buffer overflow in string manipulation functions like memcpy and strcpy.  Same as -Wstringop-overflow=.
-__top_srcdir__we_CXXFLAGS += -Wstringop-truncation                          # Warn about truncation in string manipulation functions like strncat and strncpy.
-__top_srcdir__we_CXXFLAGS += -Wsubobject-linkage                            # Warn if a class type has a base or a field whose type uses the anonymous namespace or depends on a type with no linkage.
-__top_srcdir__we_CXXFLAGS += -Wsuggest-attribute=cold                       # Warn about functions which might be candidates for __attribute__((cold)).
-__top_srcdir__we_CXXFLAGS += -Wsuggest-attribute=const                      # Warn about functions which might be candidates for __attribute__((const)).
-__top_srcdir__we_CXXFLAGS += -Wsuggest-attribute=format                     # Warn about functions which might be candidates for format attributes.
-__top_srcdir__we_CXXFLAGS += -Wsuggest-attribute=malloc                     # Warn about functions which might be candidates for __attribute__((malloc)).
-__top_srcdir__we_CXXFLAGS += -Wsuggest-attribute=noreturn                   # Warn about functions which might be candidates for __attribute__((noreturn)).
-__top_srcdir__we_CXXFLAGS += -Wsuggest-attribute=pure                       # Warn about functions which might be candidates for __attribute__((pure)).
-__top_srcdir__we_CXXFLAGS += -Wsuggest-final-methods                        # Warn about C++ virtual methods where adding final keyword would improve code quality.
-__top_srcdir__we_CXXFLAGS += -Wsuggest-final-types                          # Warn about C++ polymorphic types where adding final keyword would improve code quality.
-__top_srcdir__we_CXXFLAGS += -Wsuggest-override                             # Suggest that the override keyword be used when the declaration of a virtual function overrides another.
-__top_srcdir__we_CXXFLAGS += -Wswitch-bool                                  # Warn about switches with boolean controlling expression.
-__top_srcdir__we_CXXFLAGS += -Wswitch-default                               # Warn about enumerated switches missing a "default:" statement.
-__top_srcdir__we_CXXFLAGS += -Wswitch-outside-range                         # Warn about switch values that are outside of the switch's type range.
-__top_srcdir__we_CXXFLAGS += -Wswitch-unreachable                           # Warn about statements between switch's controlling expression and the first case.
-__top_srcdir__we_CXXFLAGS += -Wsync-nand                                    # Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used.
-__top_srcdir__we_CXXFLAGS += -Wtautological-compare                         # Warn if a comparison always evaluates to true or false.
-__top_srcdir__we_CXXFLAGS += -Wterminate                                    # Warn if a throw expression will always result in a call to terminate().
-__top_srcdir__we_CXXFLAGS += -Wtrampolines                                  # Warn whenever a trampoline is generated.
-__top_srcdir__we_CXXFLAGS += -Wundef                                        # Warn if an undefined macro is used in an #if directive.
-__top_srcdir__we_CXXFLAGS += -Wuninitialized                                # Warn about uninitialized automatic variables.
-__top_srcdir__we_CXXFLAGS += -Wunknown-pragmas                              # Warn about unrecognized pragmas.
-__top_srcdir__we_CXXFLAGS += -Wunused-const-variable                        # Warn when a const variable is unused.  Same as -Wunused-const-variable=.
-__top_srcdir__we_CXXFLAGS += -Wunused-macros                                # Warn about macros defined in the main file that are not used.
-__top_srcdir__we_CXXFLAGS += -Wunused-parameter                             # Warn when a function parameter is unused.
-__top_srcdir__we_CXXFLAGS += -Wunused-result                                # Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value.
-__top_srcdir__we_CXXFLAGS += -Wuseless-cast                                 # Warn about useless casts.
-__top_srcdir__we_CXXFLAGS += -Wvarargs                                      # Warn about questionable usage of the macros used to retrieve variable arguments.
-__top_srcdir__we_CXXFLAGS += -Wvector-operation-performance                 # Warn when a vector operation is compiled outside the SIMD.
-__top_srcdir__we_CXXFLAGS += -Wvirtual-inheritance                          # Warn on direct virtual inheritance.
-__top_srcdir__we_CXXFLAGS += -Wvirtual-move-assign                          # Warn if a virtual base has a non-trivial move assignment operator.
-__top_srcdir__we_CXXFLAGS += -Wvolatile                                     # Warn about deprecated uses of volatile qualifier.
-__top_srcdir__we_CXXFLAGS += -Wwrite-strings                                # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.  In C, similar warning, except that the conversion is of course not deprecated by the ISO C standard.
-__top_srcdir__we_CXXFLAGS += -Wzero-as-null-pointer-constant                # Warn when a literal '0' is used as null pointer.
-__top_srcdir__we_CXXFLAGS += -Wzero-length-bounds                           # Warn about accesses to interior zero-length array members.
-
-
-
-# ___________________________________________________ Configuration __________________________________________________ #
-__top_srcdir__we_CXXFLAGS += -Waligned-new=all                              # Warn even if 'new' uses a class member allocation function.
-__top_srcdir__we_CXXFLAGS += -Walloc-size-larger-than=1048576               # Warn for calls to allocation functions that attempt to allocate objects larger than the specified number of bytes.
-__top_srcdir__we_CXXFLAGS += -Warray-bounds=2                               # Warn if an array is accessed out of bounds.
-__top_srcdir__we_CXXFLAGS += -Walloca-larger-than=4096                      # Warn on unbounded uses of alloca, and on bounded uses of alloca whose bound can be larger than <number> bytes.
-__top_srcdir__we_CXXFLAGS += -Wattribute-alias=2                            # Warn about type safety and similar errors and mismatches in declarations with alias attributes.
-__top_srcdir__we_CXXFLAGS += -Wcatch-value=3                                # Warn about catch handlers of non-reference type.
-__top_srcdir__we_CXXFLAGS += -Wformat-overflow=2                            # Warn about function calls with format strings that write past the end of the destination region.
-__top_srcdir__we_CXXFLAGS += -Wformat-truncation=2                          # Warn about calls to snprintf and similar functions that truncate output.
-__top_srcdir__we_CXXFLAGS += -Wframe-larger-than=8192                       # Warn if a function's stack frame requires in excess of <byte-size>.
-__top_srcdir__we_CXXFLAGS += -Wimplicit-fallthrough=5                       # Warn when a switch case falls through.
-__top_srcdir__we_CXXFLAGS += -Wlarger-than=2048                             # Warn if an object's size exceeds <byte-size>.
-__top_srcdir__we_CXXFLAGS += -Wformat=2                                     # Warn about printf/scanf/strftime/strfmon format string anomalies.
-__top_srcdir__we_CXXFLAGS += -Wnormalized=nfc                               # Warn about non-normalized Unicode strings.
-__top_srcdir__we_CXXFLAGS += -Wplacement-new=2                              # Warn for placement new expressions with undefined behavior.
-__top_srcdir__we_CXXFLAGS += -Wshift-overflow=2                             # Warn if left shift of a signed value overflows.
-__top_srcdir__we_CXXFLAGS += -Wstack-usage=8192                             # Warn if stack usage might exceed <byte-size>.
-__top_srcdir__we_CXXFLAGS += -Wstrict-aliasing=3                            # Warn about code which might break strict aliasing rules.
-__top_srcdir__we_CXXFLAGS += -Wstrict-overflow=5                            # Warn about optimizations that assume that signed overflow is undefined.
-__top_srcdir__we_CXXFLAGS += -Wstringop-overflow=4                          # Under the control of Object Size type, warn about buffer overflow in string manipulation functions like memcpy and strcpy.
-__top_srcdir__we_CXXFLAGS += -Wunused-const-variable=2                      # Warn when a const variable is unused.
-__top_srcdir__we_CXXFLAGS += -Wvla-larger-than=0                            # Warn on unbounded uses of variable-length arrays, and on bounded uses of variable-length arrays whose bound can be larger than <number> bytes. <number> bytes.
+common_warnings  = -Waddress-of-packed-member                     # Warn when the address of packed member of struct or union is taken.
+common_warnings += -Waggressive-loop-optimizations                # Warn if a loop with constant number of iterations triggers undefined behavior.
+common_warnings += -Wall                                          # Enable most warning messages.
+common_warnings += -Walloc-zero                                   # Warn for calls to allocation functions that specify zero bytes.
+common_warnings += -Walloca                                       # Warn on any use of alloca.
+common_warnings += -Wanalyzer-double-fclose                       # Warn about code paths in which a stdio FILE can be closed more than once.
+common_warnings += -Wanalyzer-double-free                         # Warn about code paths in which a pointer can be freed more than once.
+common_warnings += -Wanalyzer-exposure-through-output-file        # Warn about code paths in which sensitive data is written to a file.
+common_warnings += -Wanalyzer-file-leak                           # Warn about code paths in which a stdio FILE is not closed.
+common_warnings += -Wanalyzer-free-of-non-heap                    # Warn about code paths in which a non-heap pointer is freed.
+common_warnings += -Wanalyzer-malloc-leak                         # Warn about code paths in which a heap-allocated pointer leaks.
+common_warnings += -Wanalyzer-null-argument                       # Warn about code paths in which NULL is passed to a must-not-be-NULL function argument.
+common_warnings += -Wanalyzer-null-dereference                    # Warn about code paths in which a NULL pointer is dereferenced.
+common_warnings += -Wanalyzer-possible-null-argument              # Warn about code paths in which a possibly-NULL value is passed to a must-not-be-NULL function argument.
+common_warnings += -Wanalyzer-possible-null-dereference           # Warn about code paths in which a possibly-NULL pointer is dereferenced.
+common_warnings += -Wanalyzer-stale-setjmp-buffer                 # Warn about code paths in which a longjmp rewinds to a jmp_buf saved in a stack frame that has returned.
+common_warnings += -Wanalyzer-tainted-array-index                 # Warn about code paths in which an unsanitized value is used as an array index.
+common_warnings += -Wanalyzer-too-complex                         # Warn if the code is too complicated for the analyzer to fully explore.
+common_warnings += -Wanalyzer-unsafe-call-within-signal-handler   # Warn about code paths in which an async-signal-unsafe function is called from a signal handler.
+common_warnings += -Wanalyzer-use-after-free                      # Warn about code paths in which a freed value is used.
+common_warnings += -Wanalyzer-use-of-pointer-in-stale-stack-frame # Warn about code paths in which a pointer to a stale stack frame is used.
+common_warnings += -Warith-conversion                             # Warn if conversion of the result of arithmetic might change the value even though converting the operands cannot.
+common_warnings += -Wattribute-alias                              # Warn about type safety and similar errors and mismatches in declarations with alias attributes.  Same as -Wattribute-alias=.
+common_warnings += -Wattribute-warning                            # Warn about uses of __attribute__((warning)) declarations.
+common_warnings += -Wattributes                                   # Warn about inappropriate attribute usage.
+common_warnings += -Wbool-compare                                 # Warn about boolean expression compared with an integer value different from true/false.
+common_warnings += -Wbool-operation                               # Warn about certain operations on boolean expressions.
+common_warnings += -Wbuiltin-declaration-mismatch                 # Warn when a built-in function is declared with the wrong signature.
+common_warnings += -Wbuiltin-macro-redefined                      # Warn when a built-in preprocessor macro is undefined or redefined.
+common_warnings += -Wcannot-profile                               # Warn when profiling instrumentation was requested, but could not be applied to a certain function.
+common_warnings += -Wcast-align                                   # Warn about pointer casts which increase alignment.
+common_warnings += -Wcast-align=strict                            # Warn about pointer casts which increase alignment.
+common_warnings += -Wcast-function-type                           # Warn about casts between incompatible function types.
+common_warnings += -Wcast-qual                                    # Warn about casts which discard qualifiers.
+common_warnings += -Wcatch-value                                  # Warn about catch handlers of non-reference type.  Same as -Wcatch-value=.
+common_warnings += -Wclass-conversion                             # Warn when a conversion function will never be called due to the type it converts to.
+common_warnings += -Wclass-memaccess                              # Warn for unsafe raw memory writes to objects of class types.
+common_warnings += -Wcomma-subscript                              # Warn about uses of a comma operator within a subscripting expression.
+common_warnings += -Wcomments                                     # Synonym for -Wcomment.  Same as -Wcomment.
+common_warnings += -Wconditionally-supported                      # Warn for conditionally-supported constructs.
+common_warnings += -Wconversion                                   # Warn for implicit type conversions that may change a value.
+common_warnings += -Wconversion-null                              # Warn for converting NULL from/to a non-pointer type.
+common_warnings += -Wcoverage-mismatch                            # Warn in case profiles in -fprofile-use do not match.
+common_warnings += -Wcpp                                          # Warn when a #warning directive is encountered.
+common_warnings += -Wctor-dtor-privacy                            # Warn when all constructors and destructors are private.
+common_warnings += -Wdangling-else                                # Warn about dangling else.
+common_warnings += -Wdate-time                                    # Warn about __TIME__, __DATE__ and __TIMESTAMP__ usage.
+common_warnings += -Wdelete-incomplete                            # Warn when deleting a pointer to incomplete type.
+common_warnings += -Wdeprecated                                   # Warn if a deprecated compiler feature, class, method, or field is used.
+common_warnings += -Wdeprecated-copy                              # Mark implicitly-declared copy operations as deprecated if the class has a user-provided copy operation.
+common_warnings += -Wdeprecated-copy-dtor                         # Mark implicitly-declared copy operations as deprecated if the class has a user-provided copy operation or destructor.
+common_warnings += -Wdeprecated-declarations                      # Warn about uses of __attribute__((deprecated)) declarations.
+common_warnings += -Wdisabled-optimization                        # Warn when an optimization pass is disabled.
+common_warnings += -Wdiv-by-zero                                  # Warn about compile-time integer division by zero.
+common_warnings += -Wdouble-promotion                             # Warn about implicit conversions from "float" to "double".
+common_warnings += -Wduplicated-branches                          # Warn about duplicated branches in if-else statements.
+common_warnings += -Wduplicated-cond                              # Warn about duplicated conditions in an if-else-if chain.
+common_warnings += -Wendif-labels                                 # Warn about stray tokens after #else and #endif.
+common_warnings += -Wexpansion-to-defined                         # Warn if "defined" is used outside #if.
+common_warnings += -Wextra                                        # Print extra (possibly unwanted) warnings.
+common_warnings += -Wextra-semi                                   # Warn about semicolon after in-class function definition.
+common_warnings += -Wfloat-conversion                             # Warn for implicit type conversions that cause loss of floating point precision.
+common_warnings += -Wfloat-equal                                  # Warn if testing floating point numbers for equality.
+common_warnings += -Wformat-contains-nul                          # Warn about format strings that contain NUL bytes.
+common_warnings += -Wformat-diag                                  # Warn about GCC format strings with strings unsuitable for diagnostics.
+common_warnings += -Wformat-extra-args                            # Warn if passing too many arguments to a function for its format string.
+common_warnings += -Wformat-nonliteral                            # Warn about format strings that are not literals.
+common_warnings += -Wformat-security                              # Warn about possible security problems with format functions.
+common_warnings += -Wformat-signedness                            # Warn about sign differences with format functions.
+common_warnings += -Wformat-truncation                            # Warn about calls to snprintf and similar functions that truncate output. Same as -Wformat-truncation=1.  Same as -Wformat-truncation=.
+common_warnings += -Wformat-y2k                                   # Warn about strftime formats yielding 2-digit years.
+common_warnings += -Wformat-zero-length                           # Warn about zero-length formats.
+common_warnings += -Wframe-address                                # Warn when __builtin_frame_address or __builtin_return_address is used unsafely.
+common_warnings += -Wfree-nonheap-object                          # Warn when attempting to free a non-heap object.
+common_warnings += -Whsa                                          # Warn when a function cannot be expanded to HSAIL.
+common_warnings += -Wif-not-aligned                               # Warn when the field in a struct is not aligned.
+common_warnings += -Wignored-attributes                           # Warn whenever attributes are ignored.
+common_warnings += -Wimplicit-fallthrough                         # Same as -Wimplicit-fallthrough=3 (or, in negated form, -Wimplicit-fallthrough=0).
+common_warnings += -Winherited-variadic-ctor                      # Warn about C++11 inheriting constructors when the base has a variadic constructor.
+common_warnings += -Winit-list-lifetime                           # Warn about uses of std::initializer_list that can result in dangling pointers.
+common_warnings += -Winit-self                                    # Warn about variables which are initialized to themselves.
+common_warnings += -Winline                                       # Warn when an inlined function cannot be inlined.
+common_warnings += -Wint-in-bool-context                          # Warn for suspicious integer expressions in boolean context.
+common_warnings += -Wint-to-pointer-cast                          # Warn when there is a cast to a pointer from an integer of a different size.
+common_warnings += -Winvalid-memory-model                         # Warn when an atomic memory model parameter is known to be outside the valid range.
+common_warnings += -Winvalid-offsetof                             # Warn about invalid uses of the "offsetof" macro.
+common_warnings += -Winvalid-pch                                  # Warn about PCH files that are found but not used.
+common_warnings += -Wliteral-suffix                               # Warn when a string or character literal is followed by a ud-suffix which does not begin with an underscore.
+common_warnings += -Wlogical-not-parentheses                      # Warn when logical not is used on the left hand side operand of a comparison.
+common_warnings += -Wlogical-op                                   # Warn when a logical operator is suspiciously always evaluating to true or false.
+common_warnings += -Wlto-type-mismatch                            # During link time optimization warn about mismatched types of global declarations.
+common_warnings += -Wmemset-elt-size                              # Warn about suspicious calls to memset where the third argument contains the number of elements not multiplied by the element size.
+common_warnings += -Wmisleading-indentation                       # Warn when the indentation of the code does not reflect the block structure.
+common_warnings += -Wmismatched-tags                              # Warn when a class is redeclared or referenced using a mismatched class-key.
+common_warnings += -Wmissing-attributes                           # Warn about declarations of entities that may be missing attributes that related entities have been declared with.
+common_warnings += -Wmissing-declarations                         # Warn about global functions without previous declarations.
+common_warnings += -Wmissing-format-attribute                     # Same as -Wsuggest-attribute=format.
+common_warnings += -Wmissing-include-dirs                         # Warn about user-specified include directories that do not exist.
+common_warnings += -Wmissing-noreturn                             # Same as -Wsuggest-attribute=noreturn.
+common_warnings += -Wmissing-profile                              # Warn in case profiles in -fprofile-use do not exist.
+common_warnings += -Wmultichar                                    # Warn about use of multi-character character constants.
+common_warnings += -Wmultiple-inheritance                         # Warn on direct multiple inheritance.
+common_warnings += -Wmultistatement-macros                        # Warn about unsafe macros expanding to multiple statements used as a body of a clause such as if, else, while, switch, or for.
+common_warnings += -Wnoexcept                                     # Warn when a noexcept expression evaluates to false even though the expression can't actually throw.
+common_warnings += -Wnoexcept-type                                # Warn if C++17 noexcept function type will change the mangled name of a symbol.
+common_warnings += -Wnon-template-friend                          # Warn when non-templatized friend functions are declared within a template.
+common_warnings += -Wnon-virtual-dtor                             # Warn about non-virtual destructors.
+common_warnings += -Wnonnull-compare                              # Warn if comparing pointer parameter with nonnull attribute with NULL.
+common_warnings += -Wnormalized                                   # Same as -Wnormalized=nfc (or, in negated form, -Wnormalized=none).
+common_warnings += -Wnull-dereference                             # Warn if dereferencing a NULL pointer may lead to erroneous or undefined behavior.
+common_warnings += -Wodr                                          # Warn about some C++ One Definition Rule violations during link time optimization.
+common_warnings += -Wold-style-cast                               # Warn if a C-style cast is used in a program.
+common_warnings += -Wopenmp-simd                                  # Warn if a simd directive is overridden by the vectorizer cost model.
+common_warnings += -Woverflow                                     # Warn about overflow in arithmetic expressions.
+common_warnings += -Woverloaded-virtual                           # Warn about overloaded virtual function names.
+common_warnings += -Wpacked                                       # Warn when the packed attribute has no effect on struct layout.
+common_warnings += -Wpacked-bitfield-compat                       # Warn about packed bit-fields whose offset changed in GCC 4.4.
+common_warnings += -Wpacked-not-aligned                           # Warn when fields in a struct with the packed attribute are misaligned.
+common_warnings += -Wpedantic                                     # Issue warnings needed for strict compliance to the standard.
+common_warnings += -Wpessimizing-move                             # Warn about calling std::move on a local object in a return statement preventing copy elision.
+common_warnings += -Wplacement-new                                # Warn for placement new expressions with undefined behavior.  Same as -Wplacement-new=.
+common_warnings += -Wpmf-conversions                              # Warn when converting the type of pointers to member functions.
+common_warnings += -Wpointer-compare                              # Warn when a pointer is compared with a zero character constant.
+common_warnings += -Wpragmas                                      # Warn about misuses of pragmas.
+common_warnings += -Wprio-ctor-dtor                               # Warn if constructor or destructors with priorities from 0 to 100 are used.
+common_warnings += -Wpsabi                                        # This option lacks documentation.
+common_warnings += -Wredundant-decls                              # Warn about multiple declarations of the same object.
+common_warnings += -Wredundant-move                               # Warn about redundant calls to std::move.
+common_warnings += -Wredundant-tags                               # Warn when a class or enumerated type is referenced using a redundant class-key.
+common_warnings += -Wregister                                     # Warn about uses of register storage specifier.
+common_warnings += -Wreorder                                      # Warn when the compiler reorders code.
+common_warnings += -Wrestrict                                     # Warn when an argument passed to a restrict-qualified parameter aliases with another argument.
+common_warnings += -Wreturn-local-addr                            # Warn about returning a pointer/reference to a local or temporary variable.
+common_warnings += -Wscalar-storage-order                         # Warn on suspicious constructs involving reverse scalar storage order.
+common_warnings += -Wshadow                                       # Warn when one variable shadows another.  Same as -Wshadow=global.
+common_warnings += -Wshadow-compatible-local                      # Same as -Wshadow=compatible-local.
+common_warnings += -Wshadow-local                                 # Same as -Wshadow=local.
+common_warnings += -Wshadow=compatible-local                      # Warn when one local variable shadows another local variable or parameter of compatible type.
+common_warnings += -Wshadow=global                                # Warn when one variable shadows another (globally).  Same as -Wshadow.
+common_warnings += -Wshadow=local                                 # Warn when one local variable shadows another local variable or parameter.
+common_warnings += -Wshift-count-negative                         # Warn if shift count is negative.
+common_warnings += -Wshift-count-overflow                         # Warn if shift count >= width of type.
+common_warnings += -Wshift-negative-value                         # Warn if left shifting a negative value.
+common_warnings += -Wshift-overflow                               # Warn if left shift of a signed value overflows.  Same as -Wshift-overflow=.
+common_warnings += -Wsign-conversion                              # Warn for implicit type conversions between signed and unsigned integers.
+common_warnings += -Wsign-promo                                   # Warn when overload promotes from unsigned to signed.
+common_warnings += -Wsized-deallocation                           # Warn about missing sized deallocation functions.
+common_warnings += -Wsizeof-array-argument                        # Warn when sizeof is applied on a parameter declared as an array.
+common_warnings += -Wsizeof-pointer-div                           # Warn about suspicious divisions of two sizeof expressions that don't work correctly with pointers.
+common_warnings += -Wstack-protector                              # Warn when not issuing stack smashing protection for some reason.
+common_warnings += -Wstrict-null-sentinel                         # Warn about uncasted NULL used as sentinel.
+common_warnings += -Wstrict-overflow                              # Warn about optimizations that assume that signed overflow is undefined.
+common_warnings += -Wstring-compare                               # Warn about calls to strcmp and strncmp used in equality expressions that are necessarily true or false due to the length of one and size of the other argument.
+common_warnings += -Wstringop-overflow                            # Warn about buffer overflow in string manipulation functions like memcpy and strcpy.  Same as -Wstringop-overflow=.
+common_warnings += -Wstringop-truncation                          # Warn about truncation in string manipulation functions like strncat and strncpy.
+common_warnings += -Wsubobject-linkage                            # Warn if a class type has a base or a field whose type uses the anonymous namespace or depends on a type with no linkage.
+common_warnings += -Wsuggest-attribute=cold                       # Warn about functions which might be candidates for __attribute__((cold)).
+common_warnings += -Wsuggest-attribute=const                      # Warn about functions which might be candidates for __attribute__((const)).
+common_warnings += -Wsuggest-attribute=format                     # Warn about functions which might be candidates for format attributes.
+common_warnings += -Wsuggest-attribute=malloc                     # Warn about functions which might be candidates for __attribute__((malloc)).
+common_warnings += -Wsuggest-attribute=noreturn                   # Warn about functions which might be candidates for __attribute__((noreturn)).
+common_warnings += -Wsuggest-attribute=pure                       # Warn about functions which might be candidates for __attribute__((pure)).
+common_warnings += -Wsuggest-final-methods                        # Warn about C++ virtual methods where adding final keyword would improve code quality.
+common_warnings += -Wsuggest-final-types                          # Warn about C++ polymorphic types where adding final keyword would improve code quality.
+common_warnings += -Wsuggest-override                             # Suggest that the override keyword be used when the declaration of a virtual function overrides another.
+common_warnings += -Wswitch-bool                                  # Warn about switches with boolean controlling expression.
+common_warnings += -Wswitch-default                               # Warn about enumerated switches missing a "default:" statement.
+common_warnings += -Wswitch-outside-range                         # Warn about switch values that are outside of the switch's type range.
+common_warnings += -Wswitch-unreachable                           # Warn about statements between switch's controlling expression and the first case.
+common_warnings += -Wsync-nand                                    # Warn when __sync_fetch_and_nand and __sync_nand_and_fetch built-in functions are used.
+common_warnings += -Wtautological-compare                         # Warn if a comparison always evaluates to true or false.
+common_warnings += -Wterminate                                    # Warn if a throw expression will always result in a call to terminate().
+common_warnings += -Wtrampolines                                  # Warn whenever a trampoline is generated.
+common_warnings += -Wundef                                        # Warn if an undefined macro is used in an #if directive.
+common_warnings += -Wuninitialized                                # Warn about uninitialized automatic variables.
+common_warnings += -Wunknown-pragmas                              # Warn about unrecognized pragmas.
+common_warnings += -Wunused-const-variable                        # Warn when a const variable is unused.  Same as -Wunused-const-variable=.
+common_warnings += -Wunused-macros                                # Warn about macros defined in the main file that are not used.
+common_warnings += -Wunused-parameter                             # Warn when a function parameter is unused.
+common_warnings += -Wunused-result                                # Warn if a caller of a function, marked with attribute warn_unused_result, does not use its return value.
+common_warnings += -Wuseless-cast                                 # Warn about useless casts.
+common_warnings += -Wvarargs                                      # Warn about questionable usage of the macros used to retrieve variable arguments.
+common_warnings += -Wvector-operation-performance                 # Warn when a vector operation is compiled outside the SIMD.
+common_warnings += -Wvirtual-inheritance                          # Warn on direct virtual inheritance.
+common_warnings += -Wvirtual-move-assign                          # Warn if a virtual base has a non-trivial move assignment operator.
+common_warnings += -Wvolatile                                     # Warn about deprecated uses of volatile qualifier.
+common_warnings += -Wwrite-strings                                # In C++, nonzero means warn about deprecated conversion from string literals to 'char *'.  In C, similar warning, except that the conversion is of course not deprecated by the ISO C standard.
+common_warnings += -Wzero-as-null-pointer-constant                # Warn when a literal '0' is used as null pointer.
+common_warnings += -Wzero-length-bounds                           # Warn about accesses to interior zero-length array members.
 
 
 
-# Advance Debug
-# __top_srcdir__we_CXXFLAGS += -DDEBUG_XML
-# __top_srcdir__we_CXXFLAGS += -DDEBUG_XML_FULL
-# __top_srcdir__we_CXXFLAGS += -DDEBUG_PERFS
-
-
-__top_srcdir__we_CXXFLAGS += ${WE_EXTRA_CXXFLAGS}               # Append user-defined flags (for instance -Wno-unknown-warning-option compiling with clang)
-
-
+# --------------------------------------------------- Configuration -------------------------------------------------- #
+common_warnings += -Waligned-new=all                              # Warn even if 'new' uses a class member allocation function.
+common_warnings += -Walloc-size-larger-than=1048576               # Warn for calls to allocation functions that attempt to allocate objects larger than the specified number of bytes.
+common_warnings += -Warray-bounds=2                               # Warn if an array is accessed out of bounds.
+common_warnings += -Walloca-larger-than=4096                      # Warn on unbounded uses of alloca, and on bounded uses of alloca whose bound can be larger than <number> bytes.
+common_warnings += -Wattribute-alias=2                            # Warn about type safety and similar errors and mismatches in declarations with alias attributes.
+common_warnings += -Wcatch-value=3                                # Warn about catch handlers of non-reference type.
+common_warnings += -Wformat-overflow=2                            # Warn about function calls with format strings that write past the end of the destination region.
+common_warnings += -Wformat-truncation=2                          # Warn about calls to snprintf and similar functions that truncate output.
+common_warnings += -Wframe-larger-than=8192                       # Warn if a function's stack frame requires in excess of <byte-size>.
+common_warnings += -Wimplicit-fallthrough=5                       # Warn when a switch case falls through.
+common_warnings += -Wlarger-than=2048                             # Warn if an object's size exceeds <byte-size>.
+common_warnings += -Wformat=2                                     # Warn about printf/scanf/strftime/strfmon format string anomalies.
+common_warnings += -Wnormalized=nfc                               # Warn about non-normalized Unicode strings.
+common_warnings += -Wplacement-new=2                              # Warn for placement new expressions with undefined behavior.
+common_warnings += -Wshift-overflow=2                             # Warn if left shift of a signed value overflows.
+common_warnings += -Wstack-usage=8192                             # Warn if stack usage might exceed <byte-size>.
+common_warnings += -Wstrict-aliasing=3                            # Warn about code which might break strict aliasing rules.
+common_warnings += -Wstrict-overflow=5                            # Warn about optimizations that assume that signed overflow is undefined.
+common_warnings += -Wstringop-overflow=4                          # Under the control of Object Size type, warn about buffer overflow in string manipulation functions like memcpy and strcpy.
+common_warnings += -Wunused-const-variable=2                      # Warn when a const variable is unused.
+common_warnings += -Wvla-larger-than=0                            # Warn on unbounded uses of variable-length arrays, and on bounded uses of variable-length arrays whose bound can be larger than <number> bytes. <number> bytes.
 
 #  --all-warnings             This switch lacks documentation
 #  --extra-warnings           This switch lacks documentation
 #
-
 
 #  Included in -Wall -Wextra -Wpedantic combo
 #  ------------------------------------------
@@ -384,14 +366,11 @@ __top_srcdir__we_CXXFLAGS += ${WE_EXTRA_CXXFLAGS}               # Append user-de
 # -Wvolatile-register-var      Warn when a register variable is declared volatile.
 # -Wtrigraphs                  Warn if trigraphs are encountered that might affect the meaning of the program.
 
-
-
 # Note:
 # -W is deprecated: use -Wextra
 # -Wunreachable-code seems to have been removed
 # Clang has a -Weverything not g++
 # -Wnon-virtual-dtor is activated by -Weffc++ (unfortunately the latest gives too many false-positives so far)
-
 
 # Deactivated warnings
 # -Wsystem-headers            Do not suppress warnings from system headers
@@ -422,3 +401,34 @@ __top_srcdir__we_CXXFLAGS += ${WE_EXTRA_CXXFLAGS}               # Append user-de
 # Deactivated warnings (unsure about the relevance in this context)
 # -Wpadded                    Warn when padding is required to align structure members
 # -Wstack-usage=4096          Warn if stack usage might be larger than specified amount
+
+
+
+# Advance Debug (custom macros)
+# common_warnings += -DDEBUG_LEAKS
+# common_warnings += -DDEBUG_XML
+# common_warnings += -DDEBUG_XML_FULL
+# common_warnings += -DDEBUG_PERFS
+
+__top_srcdir__we_CXXFLAGS += ${common_warnings}
+__top_srcdir__we_CXXFLAGS += ${WE_EXTRA_CXXFLAGS} # Append user-defined flags (for instance -Wno-unknown-warning-option compiling with clang)
+
+
+
+# ___________________________________________ Unit Tests _________________________________________ #
+# It would probably be better to separate unit tests build, for instance in tests/unit/Makefile.am
+# So far, I cannot properly handle SUBDIRS without copy-pasting the sources / compilation flags
+#SUBDIRS = ../tests/unit/
+check_PROGRAMS = ${top_srcdir}/unit_tests_suite
+TESTS = ${check_PROGRAMS} # Bind with `make check`
+
+__top_srcdir__unit_tests_suite_LDADD = ${__top_srcdir__we_LDADD}
+
+__top_srcdir__unit_tests_suite_CXXFLAGS  = -I${abs_top_builddir}/../tests/unit/ -I ${abs_top_builddir}/lib/ -I${srcdir}/../tests/unit/lib/
+__top_srcdir__unit_tests_suite_CXXFLAGS += ${common_warnings}
+__top_srcdir__unit_tests_suite_CXXFLAGS += ${WE_EXTRA_CXXFLAGS}
+
+__top_srcdir__unit_tests_suite_SOURCES =   \
+  ${common_sources}                        \
+  ${top_builddir}/tests/unit/lib/doctest.h \
+  ${top_builddir}/tests/unit/main.cc
