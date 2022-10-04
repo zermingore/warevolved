@@ -1,5 +1,4 @@
 #!/bin/bash
-# NOTE: modern getopt and bash-compliant shell required
 
 set -E
 trap '[ "$?" -eq 123 ] && exit 123' ERR
@@ -7,10 +6,10 @@ trap '[ "$?" -eq 123 ] && exit 123' ERR
 set -o pipefail
 
 
-VERSION=0.1.0
+VERSION=0.2.0
 
 # Program options
-OPTIONS=hjnrsvi
+OPTIONS=hjnrsviu
 OPTIONS_LONG=\
 help,\
 version,\
@@ -19,9 +18,10 @@ no-configure,\
 parallel-build,\
 no-configure,\
 random-seed:,\
-smoke,\
-regression,\
 integration,\
+regression,\
+smoke,\
+unit,\
 tests:
 
 
@@ -32,6 +32,7 @@ RUN_ALL_TYPES=1
 RUN_SMOKE=0
 RUN_REGRESSION=0
 RUN_INTEGRATION=0
+RUN_UNIT=0
 RANDOM_SEED=$(shuf -i 0-4294967296 -n 1)
 SAFE_MODE=0
 
@@ -118,23 +119,6 @@ function integration_tests()
       printSuccess "[done]\n"
     fi
   done
-
-  endSection
-  return $ret_val
-}
-
-
-
-function unit_tests()
-{
-  local ret_val=0
-  beginSection "UNIT TESTS"
-
-  ./we # Already pushd in the unit tests directory
-  if [[ $? -ne 0 ]]; then
-    printError "Failure running unit tests"
-    ret_val=1
-  fi
 
   endSection
   return $ret_val
@@ -231,14 +215,9 @@ function main()
 
   # Unit tests (re-build from scratch required so far [different main()])
   if [[ $RUN_ALL_TYPES -eq 1 || $RUN_UNIT -eq 1 ]]; then
+    beginSection "UNIT TESTS"
     build_main_with_unit_tests
-    local old_build_dir="${BUILD_DIR}"
-    BUILD_DIR="${BUILD_DIR}_unit_tests"
-    unit_tests
-    if [[ $? -ne 0 ]]; then
-      result=1
-    fi
-    BUILD_DIR="$old_build_dir"
+    endSection "UNIT TESTS"
   fi
 
   exit $result

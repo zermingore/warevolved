@@ -6,16 +6,9 @@ __top_srcdir__we_LDADD += -lstdc++fs # filesystem
 
 __top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
 
-# Different main() if testing or not
-if UNIT_TESTS
-  __top_srcdir__we_SOURCES = ${abs_top_builddir}/tests/unit/main.cc
-#  __top_srcdir__we_CXXFLAGS += -I${abs_top_builddir}/tests/unit/lib/
-else
-  __top_srcdir__we_SOURCES = main.cc
-endif
+__top_srcdir__we_SOURCES = main.cc # Different main() if testing or not
 
 
-# Source files
 common_sources =                         \
 \
 graphics/GraphicsEngine.cc               \
@@ -418,7 +411,6 @@ __top_srcdir__we_CXXFLAGS += ${WE_EXTRA_CXXFLAGS} # Append user-defined flags (f
 # ___________________________________________ Unit Tests _________________________________________ #
 # It would probably be better to separate unit tests build, for instance in tests/unit/Makefile.am
 # So far, I cannot properly handle SUBDIRS without copy-pasting the sources / compilation flags
-#SUBDIRS = ../tests/unit/
 check_PROGRAMS = ${top_srcdir}/unit_tests_suite
 TESTS = ${check_PROGRAMS} # Bind with `make check`
 
