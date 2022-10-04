@@ -1,6 +1,5 @@
 #                        -*- Autoconf -*-
 
-
 AC_INIT([ms],[1.0])
 
 AC_CONFIG_AUX_DIR([build-aux])
@@ -8,13 +7,11 @@ AC_CONFIG_AUX_DIR([build-aux])
 # forcing c++2a usage (must be before AC_PROG_CXX)
 CXXFLAGS="$CXXFLAGS -std=c++2a -pthread"
 
-
-if [[ -n "$SFML_PATH" ]]
-then
-CPPFLAGS="$CPPFLAGS -I$SFML_PATH -I$SFML_PATH/include/"
+if [[ -n "$SFML_PATH" ]]; then
+  CPPFLAGS="$CPPFLAGS -I$SFML_PATH -I$SFML_PATH/include/"
 fi
 
-# Automake.
+
 AM_INIT_AUTOMAKE([subdir-objects color-tests -Wall -Werror foreign])
 
 # By default, let "make" hide the compilation command and display a
@@ -24,6 +21,7 @@ AM_SILENT_RULES([yes])
 # Checks for programs.
 # clang++ is no longer fully supported (as some g++ specific flags are used)
 # one can use clang++ deactivating these specific flags in src/Makefile.am
+# or using $WE_EXTRA_CXXFLAGS to override $CXXFLAGS
 AC_PROG_CXX([g++ clang++])
 
 
@@ -63,7 +61,7 @@ AC_MSG_ERROR([SFML Graphics headers not found]))
 AC_LANG_POP([C++])
 
 
-AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile]) # check/Makefile
+AC_CONFIG_FILES([Makefile lib/Makefile src/Makefile tests/unit/Makefile])
 
 # Link or copy pugixml headers in the build folder
 AC_CONFIG_LINKS([lib/pugixml/pugixml.hpp:lib/pugixml/pugixml.hpp])

@@ -4,7 +4,7 @@ bin_PROGRAMS = $(top_srcdir)/we
 __top_srcdir__we_LDADD  = ${abs_top_builddir}/lib/libpugixml.a
 __top_srcdir__we_LDADD += -lstdc++fs # filesystem
 
-# setting the __top_srcdir__we_CXXFLAGS variable
+# Setting the __top_srcdir__we_CXXFLAGS variable
 __top_srcdir__we_CXXFLAGS = -I${abs_top_builddir}/lib/
 
 

@@ -1,5 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest.h>
+#include <lib/doctest.h>
 
 #include <tools/options/OptionsParser.hh>
 
@@ -28,6 +28,7 @@ TEST_CASE("Arguments")
     try
     {
       opt.parse();
+      // FAIL
     }
     catch (const ArgumentsHelpVersionException&)
     {
@@ -42,6 +43,7 @@ TEST_CASE("Arguments")
     try
     {
       opt.parse();
+      // FAIL
     }
     catch (const ArgumentsException&)
     {
