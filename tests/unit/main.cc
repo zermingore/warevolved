@@ -11,44 +11,21 @@ TEST_CASE("Arguments")
   {
     const char* argv[2] = { "prog_name", "--help" };
     OptionsParser opt{2, argv};
-    try
-    {
-      opt.parse();
-    }
-    catch (const ArgumentsHelpVersionException&)
-    {
-      // Expecting an "arguments help version exception"
-    }
+    CHECK_THROWS_AS(opt.parse(), const ArgumentsHelpVersionException&);
   }
 
   SUBCASE("version")
   {
     const char* argv[2] = { "prog_name", "--version" };
     OptionsParser opt{2, argv};
-    try
-    {
-      opt.parse();
-      // FAIL
-    }
-    catch (const ArgumentsHelpVersionException&)
-    {
-      // Expecting an "arguments help version exception"
-    }
+    CHECK_THROWS_AS(opt.parse(), const ArgumentsHelpVersionException&);
   }
 
   SUBCASE("Invalid argument")
   {
     const char* argv[2] = { "prog_name", "--lol" };
     OptionsParser opt{2, argv};
-    try
-    {
-      opt.parse();
-      // FAIL
-    }
-    catch (const ArgumentsException&)
-    {
-      // Expecting an "arguments exception"
-    }
+    CHECK_THROWS_AS(opt.parse(), const ArgumentsException&);
   }
 
   SUBCASE("No argument")
