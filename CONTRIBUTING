@@ -6,6 +6,9 @@ In order for a Pull Request to be accepted:
 - The documentation should be updated
 - The coding style should be respected
 
+Note: An issue tracker is available on Sourcehut, feel free to create tickets.
+https://todo.sr.ht/~jp_foss/war_evolved
+
 
 
 Getting started
@@ -23,6 +26,8 @@ get in touch with the maintainer.
 
 Pull Request
 ------------
+You may send your patches at ~jp_foss/war_evolved@lists.sr.ht
+
 Before submitting a Pull Request, feel free to add your name/nickname
 in the AUTHORS file.
 
@@ -52,6 +57,6 @@ CXX=clang++ WE_EXTRA_CXXFLAGS=-Wno-unknown-warning-option ./bootstrap
 
 
 
-In any case, feel free to contact the maintainer on github.
+In any case, feel free to contact the maintainer (check the AUTHORS file).
 
 Thank you!
