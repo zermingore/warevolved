@@ -29,7 +29,7 @@ void EventsProcessor::process()
 
     // Waiting for the new frame, signaled by the Graphics Engine
     std::unique_lock<std::mutex> lock(_lock);
-    _cv_new_frame.wait(lock);
+    _cvNewFrame.wait(lock);
 
     // process KeyManager events queue
     if (   !game::Status::processInput(input)
@@ -44,5 +44,5 @@ void EventsProcessor::process()
 
 void EventsProcessor::notifyFrame()
 {
-  _cv_new_frame.notify_one();
+  _cvNewFrame.notify_one();
 }

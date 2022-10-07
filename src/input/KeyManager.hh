@@ -79,13 +79,13 @@ public:
 private:
   /// Hardware / logical keys mapping
   inline static
-  std::multimap<const sf::Keyboard::Key, const e_key> _keys_mapping;
+  std::multimap<const sf::Keyboard::Key, const e_key> _keysMapping;
 
-  /// Events mapping
-  inline static std::map<const e_key, const e_input> _events_mapping;
+  /// Events mapping keyboard input / logical key
+  inline static std::map<const e_key, const e_input> _eventsMapping;
 
   /// Current inputs (high level keys)
-  inline static ThreadSafeQueue<e_input> _active_inputs;
+  inline static ThreadSafeQueue<e_input> _activeInputs;
 
   /// Pointer on the replay manager to add keys to a replay being created
   inline static std::shared_ptr<ReplayManager> _replay;

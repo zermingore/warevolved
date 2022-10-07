@@ -172,7 +172,6 @@ public:
   static void setThisThreadName(const std::string& name);
 
 
-
 private:
   /**
    * \brief Prints every argument to the console and to the log

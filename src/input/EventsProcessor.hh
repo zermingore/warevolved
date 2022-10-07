@@ -10,6 +10,7 @@
 
 # include <condition_variable>
 # include <memory>
+
 # include <SFML/Window/Event.hpp>
 
 
@@ -38,10 +39,8 @@ public:
 
 
 private:
-  inline static std::mutex _lock;                      ///< Lock between frames
-
-  /// New frame notification
-  inline static std::condition_variable _cv_new_frame;
+  inline static std::mutex _lock; ///< Lock between frames
+  inline static std::condition_variable _cvNewFrame; ///< New frame notification
 };
 
 
