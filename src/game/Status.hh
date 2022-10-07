@@ -122,17 +122,20 @@ private:
 
 
   /// Prevent from getting a State not fully built/destroyed
-  static std::mutex _lock;
+  inline static std::mutex _lock;
 
   /// States stack: storing a pointer to the state and its (more specific) type
-  static std::stack<std::pair<e_state, std::unique_ptr<State>>> _states;
+  inline static std::stack<std::pair<e_state, std::unique_ptr<State>>> _states;
 
   /// Global State handling inputs accessible everywhere
-  static std::shared_ptr<State> _globalState;
+  inline static std::shared_ptr<State> _globalState;
 
-  static std::shared_ptr<Battle> _battle; ///< pointer on Battle
-  static Coords _selectedCell; ///< coordinates of the selected cell
-  static Coords _selectedUnitPosition; ///< current selected Unit's coordinates
+  inline static std::shared_ptr<Battle> _battle; ///< pointer on Battle
+
+  inline static Coords _selectedCell; ///< coordinates of the selected cell
+
+  ///< current selected Unit's coordinates
+  inline static Coords _selectedUnitPosition;
 };
 
 

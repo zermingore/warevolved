@@ -76,19 +76,19 @@ public:
   static e_input popEvent();
 
 
-
 private:
   /// Hardware / logical keys mapping
-  static std::multimap<const sf::Keyboard::Key, const e_key> _keys_mapping;
+  inline static
+  std::multimap<const sf::Keyboard::Key, const e_key> _keys_mapping;
 
   /// Events mapping
-  static std::map<const e_key, const e_input> _events_mapping;
+  inline static std::map<const e_key, const e_input> _events_mapping;
 
   /// Current inputs (high level keys)
-  static ThreadSafeQueue<e_input> _active_inputs;
+  inline static ThreadSafeQueue<e_input> _active_inputs;
 
   /// Pointer on the replay manager to add keys to a replay being created
-  static std::shared_ptr<ReplayManager> _replay;
+  inline static std::shared_ptr<ReplayManager> _replay;
 };
 
 

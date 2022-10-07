@@ -9,15 +9,9 @@
 #   include <sys/prctl.h>
 # endif
 
-#include <debug/Debug.hh>
-
 #include <filesystem>
 
-
-
-// Debug::_log definition
-std::unique_ptr<std::ofstream> Debug::_log;
-std::map<std::string, bool> Debug::_printedOnce;
+#include <debug/Debug.hh>
 
 
 

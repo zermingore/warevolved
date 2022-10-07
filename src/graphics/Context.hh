@@ -9,12 +9,10 @@
 #ifndef CORE_CONTEXT_HH_
 # define CORE_CONTEXT_HH_
 
-# include <memory>
-
-class Settings;
-
 
 namespace graphics {
+
+
 
 /**
  * \class Context
@@ -49,7 +47,7 @@ private:
 };
 
 
-} // namespace graphics
 
+} // namespace graphics
 
 #endif /* !CORE_CONTEXT_HH_ */

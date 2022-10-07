@@ -16,13 +16,6 @@
 namespace debug {
 
 
-// Static attributes definition
-Coords OSD::_dataPosition;
-std::vector<std::shared_ptr<sf::Drawable>> OSD::_drawables;
-unsigned int OSD::_fontSize = 20;
-std::mutex OSD::_lock;
-
-
 
 void OSD::addStr(const std::string& str, const std::string& description)
 {

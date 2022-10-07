@@ -14,7 +14,6 @@
 # include <vector>
 # include <type_traits>
 
-
 # include <common/using.hh>
 
 
@@ -86,14 +85,14 @@ private:
   static void addText(const std::string& str);
 
 
-  static unsigned int _fontSize; ///< Text font size
-  static Coords _dataPosition;   ///< Coordinates where to display data
+  inline static unsigned int _fontSize; ///< Text font size
+  inline static Coords _dataPosition;   ///< Coordinates where to display data
 
   /// List of items to display
-  static std::vector<std::shared_ptr<sf::Drawable>> _drawables;
+  inline static std::vector<std::shared_ptr<sf::Drawable>> _drawables;
 
   /// Prevent parallel push and clear
-  static std::mutex _lock;
+  inline static std::mutex _lock;
 };
 
 

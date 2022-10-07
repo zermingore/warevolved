@@ -11,9 +11,12 @@
 # include <map>
 # include <cstddef>
 
-class Terrain;
+# include <game/Terrain.hh>
+
+
 enum class e_terrain;
 enum class e_unit;
+
 
 
 /**
@@ -48,7 +51,7 @@ public:
 private:
   // not const: Terrain needs the ResourcesManager (static) initialization
   /// Mapping Terrain identifier -> Terrain
-  static std::map<e_terrain, const Terrain> _terrains;
+  inline static std::map<e_terrain, const Terrain> _terrains;
 };
 
 

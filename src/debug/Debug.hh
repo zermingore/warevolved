@@ -188,10 +188,10 @@ private:
   static void logTime();
 
 
-  static std::unique_ptr<std::ofstream> _log; ///< log file
+  inline static std::unique_ptr<std::ofstream> _log; ///< log file
 
   /// Track already displayed strings
-  static std::map<std::string, bool> _printedOnce;
+  inline static std::map<std::string, bool> _printedOnce;
 };
 
 

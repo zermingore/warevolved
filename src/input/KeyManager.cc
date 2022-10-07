@@ -7,17 +7,11 @@
 
 #include <input/KeyManager.hh>
 
+#include <utility>
+
 #include <debug/Debug.hh>
 #include <input/EventManager.hh>
 #include <input/ReplayManager.hh>
-#include <utility>
-
-
-// Static members definition
-std::multimap<const sf::Keyboard::Key, const e_key> KeyManager::_keys_mapping;
-std::map<const e_key, const e_input> KeyManager::_events_mapping;
-ThreadSafeQueue<e_input> KeyManager::_active_inputs;
-std::shared_ptr<ReplayManager> KeyManager::_replay;
 
 
 

@@ -12,10 +12,6 @@
 #include <debug/Debug.hh>
 
 
-long unsigned int Random::_randomSeed;
-std::unique_ptr<std::mt19937> Random::_generator;
-
-
 
 void Random::init(const OptionsParser& options_parser)
 {

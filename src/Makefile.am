@@ -13,7 +13,6 @@ common_sources =                         \
 \
 graphics/GraphicsEngine.cc               \
 graphics/Context.cc                      \
-graphics/Properties.cc                   \
 graphics/Sprite.cc                       \
 \
 resources/ResourcesManager.cc            \

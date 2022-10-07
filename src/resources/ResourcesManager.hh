@@ -103,16 +103,17 @@ private:
 # endif
 
   /// Images files list (name [identifier] -> image file name)
-  static std::map<std::string, std::string> _images;
+  inline static std::map<std::string, std::string> _images;
 
   /// Textures list (name [identifier] -> pointer on the Texture)
-  static std::map<std::string, std::shared_ptr<graphics::Texture>> _textures;
+  inline static
+  std::map<std::string, std::shared_ptr<graphics::Texture>> _textures;
 
   /// Fonts list (name [identifier] -> font file name)
-  static std::map<std::string, std::shared_ptr<resources::Font>> _fonts;
+  inline static std::map<std::string, std::shared_ptr<Font>> _fonts;
 
   /// map categories names matching e_resource_type
-  static std::map<e_resource_type, std::string> _typeNames;
+  inline static std::map<e_resource_type, std::string> _typeNames;
 };
 
 } // namespace resources

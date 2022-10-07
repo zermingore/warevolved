@@ -12,15 +12,6 @@
 #include <debug/Debug.hh>
 
 
-unsigned int Settings::_depth;
-unsigned int Settings::_stencil;
-unsigned int Settings::_antiAliasing;
-
-bool Settings::_fullScreen;
-
-const std::vector<std::size_t> Settings::_version = {0, 1, 0};
-
-
 
 void Settings::setFullScreen(bool fullScreen)
 {

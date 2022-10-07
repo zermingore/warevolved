@@ -21,13 +21,6 @@
 namespace resources {
 
 
-// Static Variables definition
-std::map<std::string, std::string> ResourcesManager::_images;
-std::map<std::string, std::shared_ptr<Font>> ResourcesManager::_fonts;
-std::map<e_resource_type, std::string> ResourcesManager::_typeNames;
-std::map<std::string, std::shared_ptr<graphics::Texture>>
-  ResourcesManager::_textures;
-
 
 // default resources paths
 const std::string DEFAULT_IMAGE_PATH = "resources/defaults/image.png";

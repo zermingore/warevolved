@@ -16,10 +16,6 @@
 #include <input/KeyManager.hh>
 
 
-std::mutex EventsProcessor::_lock;
-std::condition_variable EventsProcessor::_cv_new_frame;
-
-
 
 void EventsProcessor::process()
 {

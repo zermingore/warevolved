@@ -20,14 +20,6 @@
 namespace game {
 
 
-// Static class attributes definition
-std::stack<std::pair<e_state, std::unique_ptr<State>>> Status::_states;
-std::shared_ptr<Battle> Status::_battle;
-Coords Status::_selectedCell;
-Coords Status::_selectedUnitPosition;
-std::mutex Status::_lock;
-
-
 
 e_state Status::state()
 {

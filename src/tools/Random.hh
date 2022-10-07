@@ -57,8 +57,8 @@ public:
 
 
 private:
-  static long unsigned int _randomSeed; ///< Random generator seed
-  static std::unique_ptr<std::mt19937> _generator;
+  inline static long unsigned int _randomSeed; ///< Random generator seed
+  inline static std::unique_ptr<std::mt19937> _generator;
 };
 
 

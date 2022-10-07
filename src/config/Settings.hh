@@ -100,18 +100,18 @@ private:
 
 
   // graphic settings
-  static unsigned int _depth;        ///< Depth buffer size
-  static unsigned int _stencil;      ///< Stencil buffer size
-  static unsigned int _antiAliasing; ///< Anti aliasing level
+  inline static unsigned int _depth;        ///< Depth buffer size
+  inline static unsigned int _stencil;      ///< Stencil buffer size
+  inline static unsigned int _antiAliasing; ///< Anti aliasing level
 
   // generic settings
-  static bool _fullScreen; ///< Notify if we're running in full screen
+  inline static bool _fullScreen; ///< Notify if we're running in full screen
 
-  static const unsigned int _sfmlMajor = 2; ///< SFML major version (x.*)
-  static const unsigned int _sfmlMinor = 1; ///< SFML minor version (*.x)
+  inline static const unsigned int _sfmlMajor = 2; ///< SFML major version (x.*)
+  inline static const unsigned int _sfmlMinor = 1; ///< SFML minor version (*.x)
 
   /// Game's version (major, minor, bugfix)
-  static const std::vector<std::size_t> _version;
+  inline static const std::vector<std::size_t> _version = {0, 1, 0};
 };
 
 

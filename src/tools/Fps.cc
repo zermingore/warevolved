@@ -15,13 +15,6 @@
 
 namespace tools {
 
-// Static attributes definition
-std::array<double, Fps::_nbFrames> Fps::_lastFramesDuration = {};
-double Fps::_computationTimeSum = 0;
-size_t Fps::_currentIndex = 0;
-bool Fps::_firstBurst = true;
-double Fps::_fps = 0;
-
 
 void Fps::updateFps(double last_frame_duration)
 {
@@ -50,6 +43,7 @@ void Fps::updateFps(double last_frame_duration)
 
   debug::OSD::addPod(_fps, "FPS");
 }
+
 
 
 } // namespace tools
