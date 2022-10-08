@@ -419,7 +419,7 @@ __top_srcdir__unit_tests_suite_CXXFLAGS  = -I${abs_top_builddir}/../tests/unit/ 
 __top_srcdir__unit_tests_suite_CXXFLAGS += ${common_warnings}
 __top_srcdir__unit_tests_suite_CXXFLAGS += ${WE_EXTRA_CXXFLAGS}
 
-__top_srcdir__unit_tests_suite_SOURCES =   \
-  ${common_sources}                        \
-  ${top_builddir}/tests/unit/lib/doctest.h \
+__top_srcdir__unit_tests_suite_SOURCES =           \
+  ${common_sources}                                \
+  ${top_builddir}/tests/unit/lib/doctest/doctest.h \
   ${top_builddir}/tests/unit/main.cc
