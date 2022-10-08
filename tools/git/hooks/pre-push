@@ -3,6 +3,6 @@
 tests/test.sh --safe-mode
 tools/check_headers.sh src/
 
-if [ git branch --show-current | grep -E "^clean$|^master$" ]; then
+if git branch --show-current | grep -E "^clean$|^master$"; then
   tools/libs_updater.sh
 fi
