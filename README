@@ -1,7 +1,7 @@
 *WARNING*
 ---------
-**This project here is only mirror of https://git.sr.ht/~jp_foss/war_evolved**
-**The development here on github is stalled and will probably switch in Read Only at some point.**
+**This project here is only a (probably outdated) mirror of https://git.sr.ht/~jp_foss/war_evolved**
+**The development here on github is stalled and may switch in Read Only at some point.**
 **The development of War Evolved continues on sourcehut. See you there!**
 
 
@@ -30,11 +30,12 @@ The binary file (we) should be created at the project's root.
 If you experience any problem, you may
 - Run `./bootstrap --help`
 - Refer to the HELP text file at the root of the project.
-- Please, ask for help on **sourcehut** or per mail (see the AUTHORS file)
+- Fill in a ticket at https://todo.sr.ht/~jp_foss/war_evolved/
 
 
 To generate the documentation, at the root, run
 > doxygen
+
 
 
 Required packages
@@ -77,17 +78,19 @@ NOTE: The previous mentioned libraries (libX11, SFML, ...) must be installed in 
 
 Notes
 -----
-If you haven't downloaded War Evolved on sourcehut,
-you still can find it there https://git.sr.ht/~jp_foss/war_evolved
-to make sure you have the latest version
-Please **DO NOT** clone / develop on github
+If you haven't downloaded War Evolved on sourcehut, to make sure you have the latest version,
+you can find it there https://git.sr.ht/~jp_foss/war_evolved
 
+Please **DO NOT** clone / fork / develop from github
 
 War Evolved is still under developpement (and not yet designed to be played)
 but please report (at https://todo.sr.ht/~jp_foss/war_evolved/) any bug, feature request, ...
+Report any question or confusing stuff: These will probably also be experienced by other users.
+(Pull requests are welcome but not necessary.)
 
 
 Have Fun and Thank You for downloading / playing
+
 
 
 License
@@ -95,6 +98,10 @@ License
 Source code license: GPL 3.0
 Assets license: CC-BY-SA 2.0
 
-This software uses the pugixml library, a XML file parser
-The code in the lib/pugixml folder is under its own license (MIT)
+This software uses the pugixml library, a XML file parser.
+The code in the lib/pugixml folder is under its own license (MIT).
 Credits for pugixml go to Arseny Kapoulkine (https://github.com/zeux/pugixml)
+
+This software uses the doctest C++ testing framework.
+The code in the tests/unit/lib/ folder is under its own license (MIT).
+Credits for doctest go to Viktor Kirilov (https://github.com/doctest/doctest)

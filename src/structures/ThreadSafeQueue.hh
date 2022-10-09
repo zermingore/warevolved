@@ -12,6 +12,7 @@
 # include <mutex>
 # include <condition_variable>
 
+
 /**
  * \class ThreadSafeQueue
  * \brief Thread safe queue, wrapper over the std::queue
@@ -79,9 +80,9 @@ public:
 
 
 private:
-  std::queue<T> _queue;                  ///< std queue containing the elements
-  std::mutex _lock;                      ///< lock the queue while written
-  std::condition_variable _cv_not_empty; ///< prevent pop when empty
+  std::queue<T> _queue;                ///< std queue containing the elements
+  std::mutex _lock;                    ///< lock the queue while written
+  std::condition_variable _cvNotEmpty; ///< prevent pop when empty
 };
 
 

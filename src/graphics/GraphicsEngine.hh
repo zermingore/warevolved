@@ -16,6 +16,8 @@
 # include <SFML/Window/Event.hpp>
 
 # include <graphics/graphic_types.hh>
+# include <game/TerrainsHandler.hh>
+
 
 class Map;
 class Cell;
@@ -25,7 +27,9 @@ class Interface;
 class TerrainsHandler;
 
 
+
 namespace graphics {
+
 
 
 /**
@@ -154,11 +158,14 @@ private:
   static void screenshot();
 
 
-  static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
-  static bool _exit;           ///< true: got request to quit
-  static bool _takeScreenshot; ///< true when a screenshot is requested
-  static std::unique_ptr<TerrainsHandler> _terrainsHandler; ///< Terrains list
+  inline static std::unique_ptr<sf::RenderWindow> _window; ///< graphics window
+  inline static bool _exit;           ///< true: got request to quit
+  inline static bool _takeScreenshot; ///< true when a screenshot is requested
+
+  /// Terrains list
+  inline static std::unique_ptr<TerrainsHandler> _terrainsHandler;
 };
+
 
 
 } // namespace graphics

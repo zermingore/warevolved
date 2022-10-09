@@ -16,6 +16,7 @@
 namespace graphics {
 
 
+
 /**
  * \class Properties
  * \brief Graphics properties of the Map (cell sizes, grid thickness, ...)
@@ -66,26 +67,6 @@ public:
   static auto gridOffsetY() { return _gridOffsetY; }
 
   /**
-   * \brief cell width setter.
-   * \param width cell width in pixels.
-   */
-  static void setCellWidth(component width) { _cellWidth = width; }
-
-  /**
-   * \brief cell height setter.
-   * \param height cell height in pixels.
-   */
-  static void setCellHeight(component height) { _cellHeight = height; }
-
-  /**
-   * \brief grid thickness setter.
-   * \param thickness of the grid in pixels.
-   */
-  static void setGridThickness(component thickness) {
-    _gridThickness = thickness;
-  }
-
-  /**
    * \brief offset of the grid (from the left border of the window) setter.
    * \param grid_offset_x offset.
    */
@@ -103,15 +84,26 @@ public:
 
 
 private:
-  /// \todo These are not const because they will be modifyable later
-  static component _cellWidth;     ///< Map cells width in pixels
-  static component _cellHeight;    ///< Map cells height in pixels
-  static component _gridThickness; ///< Thickness of the grid
-  static component _gridOffsetX;   ///< X offset (from the window left border)
-  static component _gridOffsetY;   ///< Y offset (from the window top border)
+  ///< Map cells width in pixels
+  inline static const component _cellWidth{64};
 
-  static component _inventoryCellWidth;  ///< Inventory cell width in pixels
-  static component _inventoryCellHeight; ///< Inventory cell width in pixels
+  ///< Map cells height in pixels
+  inline static const component _cellHeight{64};
+
+  ///< Inventory cell width in pixels
+  inline static const component _inventoryCellWidth{_cellWidth / 4};
+
+  ///< Inventory cell width in pixels
+  inline static const component _inventoryCellHeight{_cellHeight / 4};
+
+  ///< Thickness of the grid
+  inline static const component _gridThickness{5};
+
+  ///< X offset (from the window left border)
+  inline static component _gridOffsetX{0};
+
+  ///< Y offset (from the window top border)
+  inline static component _gridOffsetY{0};
 };
 
 

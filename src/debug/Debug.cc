@@ -9,15 +9,9 @@
 #   include <sys/prctl.h>
 # endif
 
-#include <debug/Debug.hh>
-
 #include <filesystem>
 
-
-
-// Debug::_log definition
-std::unique_ptr<std::ofstream> Debug::_log;
-std::map<std::string, bool> Debug::_printedOnce;
+#include <debug/Debug.hh>
 
 
 
@@ -25,7 +19,10 @@ void Debug::init()
 {
   try
   {
-    std::filesystem::rename(LOG_FILENAME, LOG_FILENAME_OLD);
+    if (std::filesystem::exists(LOG_FILENAME))
+    {
+      std::filesystem::rename(LOG_FILENAME, LOG_FILENAME_OLD);
+    }
   }
   catch (std::filesystem::filesystem_error& e)
   {

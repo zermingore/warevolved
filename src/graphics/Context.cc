@@ -15,7 +15,9 @@
 #include <X11/Xlib.h> // Must be included after SMFL includes
 
 
+
 namespace graphics {
+
 
 
 Context::Context(const bool fullscreen)

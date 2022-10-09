@@ -3,16 +3,13 @@
 set -E
 trap '[ "$?" -eq 123 ] && exit 123' ERR
 
-
-# NOTE: modern getopt and bash-compliant shell required
-
 set -o pipefail
 
 
-VERSION=0.1.0
+VERSION=0.2.0
 
 # Program options
-OPTIONS=hjnrsvi
+OPTIONS=hjnrsviu
 OPTIONS_LONG=\
 help,\
 version,\
@@ -21,9 +18,10 @@ no-configure,\
 parallel-build,\
 no-configure,\
 random-seed:,\
-smoke,\
-regression,\
 integration,\
+regression,\
+smoke,\
+unit,\
 tests:
 
 
@@ -34,6 +32,7 @@ RUN_ALL_TYPES=1
 RUN_SMOKE=0
 RUN_REGRESSION=0
 RUN_INTEGRATION=0
+RUN_UNIT=0
 RANDOM_SEED=$(shuf -i 0-4294967296 -n 1)
 SAFE_MODE=0
 
@@ -47,12 +46,6 @@ BUILD_DIR=build
 . "${ROOT_TESTS}/utils/log.sh"
 . "${ROOT_TESTS}/utils/options_parser.sh"
 . "${ROOT_TESTS}/utils/build.sh"
-
-
-function build()
-{
-  build_main
-}
 
 
 
@@ -172,7 +165,8 @@ function main()
     exit $?
   fi
 
-  build
+  build_main # autoreconf && make
+
   # Get the absolute path to the 'we' binary
   BIN_WE=$(find "${ROOT_TESTS}" -name we -type f -executable \
                 -exec readlink -f {} \;)
@@ -218,6 +212,13 @@ function main()
       printSuccess "[done]\n"
     fi
   done
+
+  # Unit tests (re-build from scratch required so far [different main()])
+  if [[ $RUN_ALL_TYPES -eq 1 || $RUN_UNIT -eq 1 ]]; then
+    beginSection "UNIT TESTS"
+    build_main_with_unit_tests
+    endSection "UNIT TESTS"
+  fi
 
   exit $result
 }

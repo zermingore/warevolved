@@ -26,6 +26,7 @@ config.status
 *.am.user*
 
 # Testing
+unit_tests_suite*
 tests/build
 tests/bin
 tests/we_replay_test_*

@@ -20,7 +20,6 @@
 #include <game/Player.hh>
 #include <game/Status.hh>
 #include <game/Terrain.hh>
-#include <game/TerrainsHandler.hh>
 #include <graphics/Properties.hh>
 #include <graphics/Sprite.hh>
 #include <graphics/graphic_types.hh>
@@ -33,12 +32,6 @@
 namespace graphics {
 
 const sf::Color GRID_COLOR(202, 124, 0);
-
-// Static Variables definition
-std::unique_ptr<RenderWindow> GraphicsEngine::_window;
-bool GraphicsEngine::_takeScreenshot;
-bool GraphicsEngine::_exit;
-std::unique_ptr<TerrainsHandler> GraphicsEngine::_terrainsHandler;
 
 
 
@@ -79,8 +72,6 @@ void GraphicsEngine::drawScene(const std::shared_ptr<Battle>& battle)
 
     EventsProcessor::notifyFrame();
   }
-
-  WARNING("Quitting War Evolved");
 }
 
 

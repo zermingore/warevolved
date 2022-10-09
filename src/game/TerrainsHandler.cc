@@ -13,8 +13,6 @@
 #include <graphics/graphic_types.hh>
 
 
-std::map<e_terrain, const Terrain> TerrainsHandler::_terrains;
-
 
 void TerrainsHandler::initialize()
 {

@@ -45,6 +45,10 @@ function _help()
          "-s|--smoke" "Run the smoke tests (exclude other non specified types)"
 
   printf "    %-${longest_opt}s%s\n"\
+         "-u|--unit"\
+         "Run the unit tests (exclude other non specified types)"
+
+  printf "    %-${longest_opt}s%s\n"\
          "--tests=TEST1,TEST2" "Run the specified tests cases only"
 
   echo
@@ -126,7 +130,7 @@ function parse_options()
         ;;
 
       -j|--parallel-build)
-        PARALLEL_BUILD="-j$(grep -c processor /proc/cpuinfo)"
+        PARALLEL_BUILD="-j$(nproc)"
         shift
         ;;
 
@@ -155,6 +159,12 @@ function parse_options()
       -s|--smoke)
         RUN_ALL_TYPES=0
         RUN_SMOKE=1
+        shift
+        ;;
+
+      -u|--unit)
+        RUN_ALL_TYPES=0
+        RUN_UNIT=1
         shift
         ;;
 

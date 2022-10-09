@@ -1,7 +1,7 @@
 #!/bin/bash
 
-
 . "${ROOT_TESTS}/utils/log.sh"
+
 
 
 # autoreconf && configure
@@ -60,4 +60,22 @@ function build_main()
   fi
 
   _standard_compilation
+}
+
+
+
+function build_main_with_unit_tests()
+{
+  make "$PARALLEL_BUILD" -C "$BUILD_DIR" WE_EXTRA_CXXFLAGS=-Werror check
+  local ret_code=$?
+  if [[ $ret_code -ne 0 ]]; then
+    printError "Make check error"
+
+    echo "Log: "
+    cat "${BUILD_DIR}"/src/test-suite.log
+    echo
+    echo "Trying to reproduce" # Should be the same as the log, but with colors
+    "${ROOT_PROJECT}/unit_tests_suite"
+    exit $ret_code
+  fi
 }

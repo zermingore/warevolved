@@ -183,7 +183,7 @@ function main()
   echo "Any erroneous header will be listed here:" >> $FAILED_LIST
   cp -a "$1"/. "${TMP_SRC}"
 
-  local -r nb_core=$((2 * $(grep -c processor /proc/cpuinfo)))
+  local -r nb_core=$((2 * $(nproc)))
   echo "Checking headers in $1"
 
   # Run the checks themselves

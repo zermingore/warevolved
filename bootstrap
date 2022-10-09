@@ -31,7 +31,7 @@ function main()
   "${root_dir}/configure" $CONFIGURE_FLAGS || exit $?
 
   if [[ -z $NO_BUILD ]]; then
-    make -j$(grep -c processor /proc/cpuinfo) || exit $?
+    make -j$(nproc) || exit $?
   fi
   popd # "$BUILD_DIR"
 }
